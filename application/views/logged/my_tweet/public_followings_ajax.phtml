@@ -1,0 +1,31 @@
+ <?php #pr($arr_followers);//pr($arr_tweets[0]['data']);
+if(count($arr_followings)){
+	foreach($arr_followings as $key=> $val){
+		
+			
+		
+		$profile_image_filename = get_profile_image($val['i_accepter_id'],'thumb');
+		$profile_link = getTwitterProfileLink($val['s_tweet_id']);
+		
+?>
+
+ <div class="tweets-blog">
+           <div class="top-part">
+                
+                <div class="tweeter-thumb" style="background:url(<?php echo $profile_image_filename;?>) no-repeat center;width:36px; height:36px;" ></div>
+                <?php /*?><img src="images/tweeter-thumb.jpg" alt="profile img" width="36" height="36" class="tweeter-thumb"><?php */?>
+                <div class="tweet-container">
+                  <h2><span><?=$val['s_profile_name']?></span> <a href="<?=$profile_link?>"><?=$val['s_tweet_id']?></a></h2>
+                  <p class="date-time"><?=getShortDate($val['dt_created_on'],5)?></p>
+                  <p><?=nl2br(my_substr($val['s_about_me'], 160))?></p>
+                </div>
+                <div class="clr"></div>
+            </div>
+            <div class="clr"></div>
+</div>
+ <?php }
+     }
+?>
+                                      
+
+                                  

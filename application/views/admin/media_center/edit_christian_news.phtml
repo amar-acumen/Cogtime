@@ -1,0 +1,263 @@
+<div class="clr"></div>
+<!--navigation section start -->
+<?php include(APPPATH."views/layouts/admin/admin_nav.phtml");?>
+<!--navigation section end -->
+<!-- CONTENT SECTION -->
+<style>
+    #bkbtn{ background-color: #FFC600;
+   
+    border: 0 none;
+    color: #313131;
+    cursor: pointer;
+    font-family: Arial,sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+    height: 28px;
+    line-height: 28px;
+    margin: 0;
+    outline: medium none;
+    padding: 0 0 0 18px;
+    text-align: center;
+    width: 160px;
+    }
+</style>
+<script>
+$(document).ready(function(){
+    $('#bkbtn').click(function(){
+        window.location = '<?= admin_base_url().'0/media_article.html' ?>';
+        
+    });
+})
+</script>
+<div id="content_section">
+      <div id="container">
+            <!--<div id="top_corner">&nbsp;</div> -->
+            <div id="mid_content">
+                  <div class="page_heading left">
+                        <div class="left"><img src="../images/icons/login.png" alt="" /> Edit Media Article</div>
+                        <div class="right"><button id="bkbtn">Back to Article List</button></div>
+              </div>
+                  <div class="clr"></div>
+<?//pr($news_info)?>
+                  <div id="right_container">
+                        <div class="arrow_btm"></div>
+                        <div class="content_area frm_box frm_box2">
+                              <form id="edit_news_frm" action="" method="post" enctype="multipart/form-data" onsubmit="return edit_news_()">
+                                  <div class="lable01">Title :</div>
+                                  <div class="field02">
+                                        <input name="txt_title" type="text" value="<?=$news_info['s_title']?>"/>
+                                  </div>
+                                  <div id="err_title" class="error-message"></div>
+                                  <div class="clr"></div>
+                                  
+                                  <div class="lable01">Category :</div>
+                                  <div class="field01" style="margin-bottom:8px;">
+                                          <select name="category" id="category" style="width:412px;">
+                                          <?php
+                                            foreach($categories as $cat) :
+                                          ?>
+                                                <option value="<?=$cat['id']?>" <?=($cat['id']==$news_info['i_category'])? 'selected="selected"':''?> ><?=$cat['s_cat_name']?></option>
+                                               
+                                          <?php
+                                          endforeach;
+                                          ?>
+                                          </select>
+                                          <script type="text/javascript">
+                                            $(document).ready(function(arg) {
+                                                //$("#category").msDropDown();
+                                                //$("#category").hide();
+                                                //$('#category').css("width", "412px"); 
+                                            })
+                                          </script>
+                                  </div>
+                                  <div id="err_category" class="error-message"></div>
+                                  <div class="clr"></div>
+                                  
+                                  <div class="lable02">Description :</div>
+                                  <div class="field02" style="width:820px; margin-bottom:6px;">
+                                       <textarea id="elm1" name="txtarea_desc" class="elml" rows="" cols="" style="width:820px; min-height:400px;"><?=$news_info['s_desc']?></textarea>
+                                  </div>
+                                  <div id="err_desc" class="error-message"></div>
+                                  <div class="clr"></div>
+                                  
+                                  <div class="lable02">Upload Image :</div>
+                                  <div class="field02" style="width:820px; margin-bottom:6px;">
+                                       <input type="file" name="adv_image">
+                                       <?php  if($news_info['s_image'] != ''){ ?>
+                                       <img src="<?= base_url() . 'uploads/media_center_article/' . getThumbName($news_info['s_image'], 'thumb')?>" />
+                                       <?php } ?>     
+                                  </div>
+                                  <div id="err_adv_image" class="error-message"></div>
+                                  <div class="clr"></div>
+                                  
+                                  <div class="lable01">Tags :</div>
+                                  <div class="field01">
+                                        <input name="tags" type="text" />
+                                  </div>
+                                  <!--<div id="err_url" class="error-message"></div>-->
+                                  <div class="clr"></div>
+                                  
+                                  <div class="lable01">Is Feature:</div>
+                                  <div class="field01" style="margin-bottom:8px;">
+                                          <select name="top_story" id="topStory" style="width:412px;">
+                                                <option value="1" <?=($news_info['i_is_top_story']==1)? 'selected="selected"':''?>>Yes</option>
+                                                <option value="0" <?=($news_info['i_is_top_story']==0)? 'selected="selected"':''?>>No</option>
+                                          </select>
+                                          <script type="text/javascript">
+                                            $(document).ready(function(arg) {
+                                                //$("#topStory").msDropDown();
+                                                //$("#topStory").hide();
+                                                //$('#topStory').css("width", "412px"); 
+                                            })
+                                          </script>
+                                  </div>
+                                  <div class="error-message"></div>
+                                  <div class="clr"></div>
+								  
+								  
+								  
+								  
+								  <div class="lable01">In home:</div>
+                                  <div class="field01" style="margin-bottom:8px;">
+                                          <select name="is_feature_home" id="is_feature_home" style="width:412px;">
+                                                <option value="1" <?=($news_info['i_is_feature_home']==1)? 'selected="selected"':''?>>Yes</option>
+                                                <option value="0" <?=($news_info['i_is_feature_home']==0)? 'selected="selected"':''?>>No</option>
+                                          </select>
+                                          <script type="text/javascript">
+                                            $(document).ready(function(arg) {
+                                                //$("#topStory").msDropDown();
+                                                //$("#topStory").hide();
+                                                //$('#topStory').css("width", "412px"); 
+                                            })
+                                          </script>
+                                  </div>
+                                  <div class="error-message"></div>
+                                  <div class="clr"></div>
+								 
+								  
+								  <div id="div_adv_image_featured" style="<?php echo ($news_info['i_is_feature_home']==1)?"":"display:none;"?>">
+								  <div class="lable02">Upload Image :</div>
+                                  <div class="field02" style="width:820px; margin-bottom:6px;">
+                                      <input type="file" name="adv_image_featured" value="<?=$news_info['s_image_featured'] ?>">
+									   <?php 
+									   if ($news_info['i_is_feature_home'] ==1)
+									   {
+									   ?>
+                                       <img src="<?= base_url() . 'uploads/media_center_article_featured_home/' . getThumbName($news_info['s_image_featured'], 'thumb')?>" />
+                                       <input type="hidden" value="<?= $news_info['s_image_featured'] ?>" name="is_adv_img_ft">
+                                       <?php
+									   }
+									   ?>
+									   <div>[resolution: 1000 X 500 ]</div>
+									   </div>
+                                  <div id="err_adv_image_featured" class="error-message"></div>
+                                  <div class="clr"></div>
+								  </div>
+								  
+                                  
+                                  <div class="lable01">&nbsp;</div>
+                                  <div class="field01">
+                                  <input type="hidden" id="i_news_id" name="i_news_id" value="<?=$news_info['id']?>">
+                                  <input type="hidden" id="current_page" name="current_page" value="<?=$current_page?>">
+                                  
+                                        <input name="" type="submit" class="btn"  value="Update"/><input name="" type="reset" class="btn"  value="Cancel" onclick="window.location=admin_base_url+<?=$current_page?>+'/media_article.html'"/>
+                                  </div>
+                              </form>
+                              <div class="clr"></div>
+                        </div>
+                  </div>
+                  <div class="clr"></div>
+            </div>
+            
+            
+            <div class="clr"></div>
+</div>
+
+
+<!-- /CONTENT SECTION -->
+
+
+<script type="text/javascript">
+
+$(document).ready(function(arg) {
+    
+    // for AJAX page-submission...
+   
+    
+    
+    optionsArrEdit = {
+        beforeSubmit:  showBusyScreen,  // pre-submit callback 
+        success:       validateEditFrm, // post-submit callback 
+        url:        admin_base_url + "media_center/edit_christian_news/post_edit_data"
+    }; 
+    
+	
+	$("#is_feature_home").change(function(){
+		if ($(this).val() == 1)
+		{
+			$("#div_adv_image_featured").css("display","block");
+		}
+		else
+		{
+			$("#div_adv_image_featured").css("display","none");
+		}
+	});
+	
+    
+});
+//---------------------------------- edit ----------------------------------------
+
+function edit_news_()
+{
+    tinyMCE.triggerSave(false,true);
+    $('#edit_news_frm').ajaxSubmit(optionsArrEdit);
+    return false;
+}
+function validateEditFrm(data)
+{
+    
+    var data = JSON.parse(data);
+
+    showUIMsg(data.msg);
+    hideBusyScreen();
+
+     $('.error-message').each(function(i){
+            $(this).attr('style','display:none');
+        });
+        
+    if(data.result=='failure') 
+    {
+       
+        
+        for ( var id in data.arr_messages ){
+            
+            if( $('#err_'+id) != null ) {
+                $('#err_'+id).html(data.arr_messages[id]);
+                $('#err_'+id).css('display', 'block');
+
+            }
+        }
+        
+    }
+    else {  //success
+        
+         //hideBusyScreen();
+
+         $('#edit_news_frm')[0].reset();
+         var current_page = $('#current_page').val();
+         
+         window.location.href = admin_base_url+current_page+'/media_article.html';
+         
+       
+    }
+
+}
+
+//---------------------------------- end edit ----------------------------------------
+
+
+
+
+</script>
+
+

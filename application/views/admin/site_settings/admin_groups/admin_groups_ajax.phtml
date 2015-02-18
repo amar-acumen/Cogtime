@@ -1,0 +1,52 @@
+<table width="100%" border="0" cellspacing="0" cellpadding="0" class="admin-table">
+  <tr>
+  <th align="center" valign="middle" height="30" width="100">Date Created</th>
+  <th align="left" valign="middle" height="30" width="640">Group Name</th>
+  <th align="left" valign="middle" height="30" width="100">No. of Users</th>
+  <th align="center" valign="middle" height="30" class="last" width="260">Actions</th>
+</tr>
+  <?php 
+			
+	   if( count($info_arr) ) :
+
+			   foreach($info_arr as $info) : 
+				
+				  $id = $info['id'];
+				  $s_name = $info['s_name'];
+                  $status = $info['i_status'];
+                  $date_created = getShortDate($info['dt_created_on'],5);
+	
+	?>                             
+  
+  
+                <tr>
+                            <td align="center" valign="top"><?php echo $date_created;?></td>
+                            <td align="left" valign="top"><?php echo $s_name;?></td>
+                            <td align="left" valign="top"><?=$info['total_member']?></td>
+                            <td align="center" valign="middle" class="last"  >
+                            <input type="hidden" id="db_id" value="<?php echo $id;?>" />
+                            <input name="" title="View Members" type="button" class="view-button" onclick="window.location='<?=admin_base_url()?>admin-group/<?=$info['id']?>/view-members'" />
+                            <input name="" title="Edit" type="button" class="edit-button"  value="" onclick="return edit_group_(<?php echo $id;?>)"/>
+                            <input name="" title="Delete" type="button" class="delete-button"  value="" onclick="return delete_confirm_(<?php echo $id;?>);"/>
+                            <input name="" title="Enable" type="button" class="btn-03" id="status<?php echo $id;?>"  value="<?php echo ($status=='1')? 'Disable' : 'Enable'; ?>" onclick="return status_change(<?php echo $id;?> , <?=$info['i_status']?>)"/>
+                            <input name="" title="Privileges" type="button" class="btn-03"  value="Privileges" onclick="return edit_group_priviledges(<?php echo $id;?>)"/>
+                            </td>
+                           </tr>
+	<?php
+                 endforeach;
+                 
+		   else :	// i.e. no records exists...
+	  ?>
+		  <tr>
+			  <td style="text-align:center;" height="80" colspan="20">No data available!!!</td>
+		  </tr>
+	  <?php
+		   endif;
+	  ?>
+  
+</table>
+<div class="paging_box" >
+            <ul><?= $page_links ?></ul>
+</div>	
+
+                  

@@ -1,0 +1,284 @@
+ <!--prayer request box start -->
+ 
+<?php //pr($arr_prayer_request);
+if(count($arr_prayer_request)){
+	foreach($arr_prayer_request as $key=> $val){
+		
+		$IMG = base_url().'uploads/prayer_wall_photos/'.getThumbName($val['s_image_name'],'mid');
+		$DESC = my_substr(html_entity_decode(htmlspecialchars_decode($val['s_description']),ENT_QUOTES,'utf-8'),230);
+		$s_subject = htmlspecialchars_decode($val['s_subject']);
+		
+?>
+                       
+      <!--manage my prayer request box start -->
+      <div class="prayer-wall-dotted-box">
+          <div class="prayer-wall-image">
+          
+          <div  title="member" style="background:url(<?=$IMG?>) no-repeat center;width:286px; height:142px;"></div>
+          </div>
+          <div class="right-panel commit-content" id="commit-content<?=$val['id']?>">
+              <p class="quoted-text"><a href="<?=base_url()?>prayer-wall/<?=$val['id']?>/prayer-wall-request-detail.html"><?=$s_subject?></a></p>
+              <p class="quoted-text">
+                   <a href="<?=base_url()?>prayer-wall/<?=$val['id']?>/prayer-wall-request-detail.html"><?=nl2br($DESC)?></a>
+                  <span>Updated on: <?=get_time_elapsed($val['dt_insert_date'])?></span>
+              </p>
+               <h2 class="name"><?=$val['s_profile_name']?></h2>
+                <p class="place"><?=$val['s_country']?></p>
+                <p class="date-time"><span style="margin-right: 2px;">From: </span><?=getShortDateWithTime($val['dt_start_date'], 9)?></p> 
+                <p class="date-time"><span style="margin-right: 18px;">To:</span><?=getShortDateWithTime($val['dt_end_date'], 9)?></p>
+                
+                <?=($val['isExpired'] == 'Y')?'<span class="expired">Expired</span>':''?>
+          </div>
+          <!--Edit My Commitment form start -->
+              <div class="commit-form small-right comment-for-pray-form" id="comment-for-pray-form<?=$val['id']?>">
+              <!--minimize link start -->
+              <div class="minimize" title="Minimize" onclick="show_edit_prayer(<?=$val['id']?>)">&nbsp;</div>
+              <!--minimize link end -->
+                  <h2>Edit My Prayer Request</h2>
+                   <form id="editprayer_<?=$val['id']?>" action="<?=base_url().'logged/prayer_wall/edit_prayer_request_ajax'?>" onsubmit="return false;" method="post" >
+                                        <!--left side start  -->
+                                        <div class="left-side" style="width:655px;">
+                                        <label>Request Type:</label>
+                                        <div class="field01" style=" width:165px; float:left; margin-left:10px; margin-bottom:10px;">
+                                            <select name="request_type" id="request_type<?=$val['id']?>" style="width:212px;">
+                                            	
+                                                  <option value="-1" >Select</option>
+                                                  <option value="1" <?=($val['e_request_type'] == 'Emergency')?'selected="selected"':'';?>>Emergency</option>
+                                                  <option value="2"  <?=($val['e_request_type'] == 'On Going')?'selected="selected"':'';?>>On Going</option>
+                                            </select>
+                                            <span id="err_request_type<?=$val['id']?>" class="error-message"></span>  
+                                        </div>
+                                            
+                                        <div class="clr"></div>
+                                        
+                                          <label>Title:</label>
+                                            <div class="field01" style=" width:165px; float:left; margin-left:10px; margin-bottom:10px;"> <input type="text" name="s_subject<?=$val['id']?>"  id="s_subject<?=$val['id']?>" value="<?=$val['s_subject']?>" style=" width:235px;"/>
+                                           <span id="err_s_subject<?=$val['id']?>" class="error-message"></span>  
+                                          </div>
+                                         <div class="clr"></div>
+                                        <label>Subject:</label>
+                                        <div class="clr"></div>
+                                        <textarea onblur="if(this.value=='')this.value='Max 300 Characters';" onfocus="if(this.value=='Max 300 Characters')this.value='';" name="ta_edit_desc" class="big-textarea" id="ta_edit_desc<?=$val['id']?>" onKeyDown="limitText(this.form.ta_edit_desc,this.form.countdown,300, <?=$val['id']?>);" 
+onKeyUp="limitText(this.form.ta_edit_desc,this.form.countdown,300, <?=$val['id']?>);" style="height:50px; width:300px;"><?=$DESC?></textarea>
+<p><span id="text_count<?=$val['id']?>"><?=strlen($DESC)?></span> Characters</p> 
+				
+                						 <!--right side start -->
+                                        <div class="right" style="width:325px;">
+                                        	 <label class="small">From:</label>
+                                        
+                                            <div class="field04" style="width:157px; float:left; margin-bottom:10px;">
+                                                  <input style="width:125px; float:left; margin-right:4px; "   type="text"  value="<?=$val['dt_start_date']?>" name="date_to1" id="date_to1<?=$val['id']?>"  readonly="readonly"/>
+                                                  <img src="images/icons/cal.png" alt="" class="right" onclick="$(this).prev().focus()" style="cursor:pointer; " />
+										  <script type="text/javascript">
+                                            $(document).ready(function(arg) {
+                                              
+                                              <?php /*?>$.datepicker.setDefaults($.datepicker.regional['<?=get_current_language()?>']);
+                                              $('#date_to1<?=$val['id']?>').datetimepicker({
+                                                    dateFormat : 'yy-mm-dd',
+                                                    minDate: new Date(<?=(date('Y'))?>, <?=(date('m')-1)?>, <?=(date('d'))?> ,  0, 00),
+													controlType: 'select',
+				   										    stepMinute: 15
+                                              });<?php */?>
+                                               
+											  $(function(){
+												 var inputDate = $("#date_to1<?=$val['id']?>");
+												 var changeYearButtons = function() {
+													setTimeout(function() {
+													   $('.NextYrClass').remove();
+													   $('.PrevYrClass').remove();
+													   var widgetHeader = inputDate.datepicker("widget").find(".ui-datepicker-header");
+													   //you can opt to style up these simple buttons tho
+													   var prevYrBtn = $('<button title="PrevYr" class="PrevYrClass"></button>');
+													   prevYrBtn.bind("click", function() {
+														$.datepicker._adjustDate(inputDate, -1, 'Y');
+													   });
+													   var nextYrBtn = $('<button title="NextYr" class="NextYrClass"> </button>');
+													   nextYrBtn.bind("click", function() {
+														$.datepicker._adjustDate(inputDate, +1, 'Y');
+													 
+													   });
+													   prevYrBtn.appendTo(widgetHeader);
+													   nextYrBtn.appendTo(widgetHeader);
+											  
+												  }, 0);
+												 };
+											  
+											  		$("#date_to1<?=$val['id']?>").datetimepicker({
+															beforeShow: changeYearButtons,
+															onChangeMonthYear: changeYearButtons,
+															dateFormat : 'yy-mm-dd',
+												  			minDate: new Date(<?=(date('Y'))?>, <?=(date('m')-1)?>, <?=(date('d'))?> ,  0, 00),
+															controlType: 'select',
+															stepMinute: 15
+														   });
+														
+											  });          
+                                            <?php /*?>  $('#date_end1<?=$val['id']?>').datetimepicker({
+                                                    dateFormat : 'yy-mm-dd',
+                                                    minDate: new Date(<?=(date('Y'))?>, <?=(date('m')-1)?>, <?=(date('d'))?>, 0, 00),
+													controlType: 'select',
+				   									stepMinute: 15
+                                              });
+                                              $.timepicker.setDefaults($.timepicker.regional['en']);<?php */?>
+											  
+											  $(function(){
+												 var inputDate = $("#date_end1<?=$val['id']?>");
+												 var changeYearButtons = function() {
+													setTimeout(function() {
+													   $('.NextYrClass').remove();
+													   $('.PrevYrClass').remove();
+													   var widgetHeader = inputDate.datepicker("widget").find(".ui-datepicker-header");
+													   //you can opt to style up these simple buttons tho
+													   var prevYrBtn = $('<button title="PrevYr" class="PrevYrClass"></button>');
+													   prevYrBtn.bind("click", function() {
+														$.datepicker._adjustDate(inputDate, -1, 'Y');
+													   });
+													   var nextYrBtn = $('<button title="NextYr" class="NextYrClass"></button>');
+													   nextYrBtn.bind("click", function() {
+														$.datepicker._adjustDate(inputDate, +1, 'Y');
+													 
+													   });
+													   prevYrBtn.appendTo(widgetHeader);
+													   nextYrBtn.appendTo(widgetHeader);
+											  
+												  }, 0);
+												 };
+											  
+											  		$("#date_end1<?=$val['id']?>").datetimepicker({
+															beforeShow: changeYearButtons,
+															onChangeMonthYear: changeYearButtons,
+															dateFormat : 'yy-mm-dd',
+												  			minDate: new Date(<?=(date('Y'))?>, <?=(date('m')-1)?>, <?=(date('d'))?> ,  0, 00),
+															controlType: 'select',
+															stepMinute: 15
+														   });
+														
+											  });
+                
+                                            });
+                                        </script>
+                                                 <span id="err_date_to1<?=$val['id']?>" class="error-message"></span>  
+                                            </div>
+                                        
+                                           <?php /*?> <label class="small" style="padding-left:10px;">Time:</label>
+                                            <div class="field01" style=" width:220px; float:left; margin-right:15px; margin-bottom:10px;">
+                                                 <input name="txt_from_time" id="txt_from_time<?=$val['id']?>" type="text" style="width:55px;" value="<?=$val['start_time']?>" />
+                                                 <span style="margin-left:5px; font-size: 11px;font-style: italic;">(24-hour format ex : HH:MM)</span><span id="err_from_time<?=$val['id']?>" class="error-message"></span> 
+                                              
+                                            </div> <?php */?>   
+                                          
+                                            <div class="clr"></div>
+                                         
+                                            <label class="small" >To:</label>
+                                           
+                                            <div class="field04" style="width:175px; float:left;">
+                                                  <input style="width:125px; float:left; margin-right:4px;"   type="text"  value="<?=$val['dt_end_date']?>" name="date_end1" id="date_end1<?=$val['id']?>"  readonly="readonly" />
+                                                  <img src="images/icons/cal.png" alt="" onclick="$(this).prev().focus()" style="cursor:pointer; float:left;" />
+                                                 
+                                                  <span id="err_date_end1<?=$val['id']?>" class="error-message"></span>  
+                                            </div>
+                                          <?php /*?>  <label class="small" style="padding-left:10px;">Time:</label>
+                                            <div class="field01" style=" width:220px; float:left; margin-right:15px;">
+                                                  <input name="txt_to_time" id="txt_to_time<?=$val['id']?>" type="text" style="width:55px;" value="<?=$val['end_time']?>" />
+                                                   <span style="margin-left:5px; font-size: 11px;font-style: italic;">(24-hour format ex : HH:MM)</span>
+                                                  <span id="err_to_time<?=$val['id']?>" class="error-message"></span>  
+                                            </div><?php */?>
+                                            
+                                        </div>
+                                         <!--right side start -->
+										<span id="err_edit_desc<?=$val['id']?>" class="error-message"></span> 
+										
+                                        
+                                        
+                                        
+                                        <div class="clr"></div>
+                                        <div style="padding:10px 0 0; width:0px;">
+                                        
+                                          <input type="button" onclick="return show_photo_popup(<?=$val['id']?>)" class="blue-small-button" value="Edit Photo" name="" />  <span id="err_image_msg<?=$val['id']?>" class="error-message"></span>
+                                          
+                                          <img id="uploaded_edit_img<?=$val['id']?>" src="<?=$IMG?>" alt="" style="display: block;"width="150px" height="100px" />
+                                   		 <p id="photo_edit_name<?=$val['id']?>" style=" width:265px;"><?=$val['s_image_name']?></p>
+                                        </div>
+                                        
+                                        </div>
+                                        <!--left side end  -->
+                                        
+                                        <input name="hd_edit_image_name" id="hd_edit_image_name<?=$val['id']?>" type="hidden" value="<?=$val['s_image_name']?>"/>
+                                        
+                                         
+                                        <!--right side end -->
+                                        <div class="clr"></div>
+                                        <input name="post" type="button" value="Update" class="blue-small-button" onclick ="edit_prayer(<?=$val['id']?>)" />
+                                    </form>
+                  <div class="clr"></div>
+              </div>
+          <!--Edit My Commitment form end -->
+          <div class="clr"></div>
+          
+          <ul class="article-comment-block">
+              <li class="first"><a href="javascript:void(0);" class="testimony-open-close" onclick="view_testimony(<?=$val['id']?>)">Testimony</a></li> 
+             
+             
+              <li><a href="javascript:void(0);" class="commitment-open-close" onclick="view_commits(<?=$val['id']?>)" >Commitments <span id="total_commits<?=$val['id']?>">(<?=$val['total_commitments']?>)</span></a></li>
+              
+              
+              <li class="right">
+                  <ul>
+                      
+                      <?php if($val['testimony'] != 1 && $val['isExpired'] == 'Y'){?>
+                      		<li id="add_testimony_<?=$val['id']?>" class="first"><a  href="javascript:void(0);" class="add-testimony-btn" onclick="show_testimony(<?=$val['id']?>)">Add Testimony</a></li>
+                            <li id="edit_prayer_req_<?=$val['id']?>"><a href="javascript:void(0);" class="edit-my-commitment-btn" onclick="show_edit_prayer(<?=$val['id']?>)">Edit My Prayer Request</a></li>
+                      		<li><a href="javascript:void(0);" onclick="delete_confirm_(<?=$val['id']?>)">Delete</a></li>
+                      <?php }
+					  		else{
+					   ?>
+                       		<li  class="first"><a href="javascript:void(0);" class="edit-my-commitment-btn" onclick="show_edit_prayer(<?=$val['id']?>)">Edit My Prayer Request</a></li>
+                      		<li><a href="javascript:void(0);"  onclick="delete_confirm_(<?=$val['id']?>)">Delete</a></li>
+                       <?php } ?>
+                      
+                      
+                  </ul>
+              </li>
+          </ul>
+          
+          <!--add testimony start -->
+          <div class="commit-form add-testimony" id="add-testimony<?=$val['id']?>">
+          <div class="minimize" title="Minimize" onclick="show_testimony(<?=$val['id']?>)">&nbsp;</div>
+              <h2>Add Testimony</h2>
+              <form id="add_testimony_frm<?=$val['id']?>" action="" method="post" enctype="multipart/form-data">
+                  <label class="normal">Comment:</label>
+                  <textarea onblur="if(this.value=='')this.value='Max 500 Characters';" onfocus="if(this.value=='Max 500 Characters')this.value='';" rows="" cols="" name="ta_testimony" class="full-textarea" id="ta_testimony<?=$val['id']?>" onKeyDown="limitText(this.form.ta_testimony,this.form.countdown,500);" 
+onKeyUp="limitText(this.form.ta_testimony,this.form.countdown,500);">Max 500 Characters</textarea>
+                  <div class="clr"></div>
+                  <input name="post" type="button" value="Post" class="post-btn post-btn2" onclick="add_testimony(<?=$val['id']?>)" />
+              </form>
+              <div class="clr"></div>
+          </div>
+          <!--add testimony end -->
+          
+          <div class="testimony-container" id="testimony-container<?=$val['id']?>">
+             <div class="minimize" title="Minimize" onclick="view_testimony(<?=$val['id']?>)">&nbsp;</div>
+              <h2 class="title">View Testimony</h2>
+              <!--testimony start -->
+              <DIV id ="testimony_content_<?=$val['id']?>"> </DIV>
+              <!--testimony end -->
+          </div>
+          
+            <div class="commitment-container" id="commitment-container<?=$val['id']?>">
+            <div class="minimize" title="Minimize" onclick="view_commits(<?=$val['id']?>)">&nbsp;</div>
+                <h2 class="title">View Commitments</h2>
+                <DIV id ="commitment_content_<?=$val['id']?>">
+                <!--commitment start -->
+                
+                <!--commitment end -->
+                </DIV>
+            </div>
+      </div>
+      <!--manage my prayer request box end -->
+ 
+<?php 
+	}
+}
+?>
+ <!--prayer request box end -->
+ 

@@ -1,0 +1,85 @@
+<div class="view-books-container" id="bibleContent_list">
+
+                            <?php
+                            #pr($bible_data);exit;
+                            if($bible_data)
+                            {
+								$testament	= 1;
+								$color		= 0;
+								$colorcode		= "";
+                                foreach($bible_data as $bibleval)
+                                {
+										
+										
+										if($testament==1)	
+										{
+											if($bibleval['s_testament']=='Old Testament')
+												$no_of_book	=	40;
+											else if($bibleval['s_testament']=='New Testament')
+											{
+												$no_of_book	=	28;
+												$color		= 0;
+											}
+										?> 
+										<h2 class="title"><?php echo $bibleval['s_testament'] ?></h2>
+										<ul>
+										<?php
+											
+										}
+										
+										$color++;
+										if($bibleval['s_testament']=='Old Testament')
+										{
+											if($color==6)
+												$colorcode	= 'color1';
+											else if($color==18)
+												$colorcode	= 'color2';
+											else if($color==19)
+												$colorcode	= 'color3';
+											else if($color==20)
+												$colorcode	= 'color2';
+											else if($color==23)
+												$colorcode	= 'color4';
+											else if($color==28)
+											{
+												$colorcode	= '';
+											}
+										}
+										else if($bibleval['s_testament']=='New Testament')
+										{
+											if($color==1)
+												$colorcode	= 'color3';
+											else if($color==5)
+												$colorcode	= '';
+											else if($color==6)
+												$colorcode	= 'color2';
+											else if($color==19)
+												$colorcode	= 'color4';
+											else if($color==27)
+												$colorcode	= '';
+										}
+										?>
+                                         <li class="<?php echo $colorcode?>"><a href="<?php echo base_url()?>holy-place/bible/<?php echo my_url($bibleval['s_book_name'])?>/chapters">
+                                         <?php echo $bibleval['s_book_name'] ?>
+                                         </a>
+                                         </li>
+                           			 <?php
+                                     	$testament++;
+										
+									 	if($testament==$no_of_book)
+										{
+											echo '</ul><div class="clr"></div>';
+											$testament	= 1;
+										}
+										
+                                	}
+									
+                            }
+                            ?>
+</div>
+
+                    
+
+                            
+                            
+

@@ -1,0 +1,91 @@
+<div class="profile-tab">
+      <div class="photo-section">
+          <?php $img = get_profile_image($public_arr_profile_info['id'], 'main'); //pr($public_arr_profile_info);?>
+           <div style="background:url(<?=$img?>) no-repeat center;width:144px; height:144px;" title="member" ></div>
+         	 
+      </div>
+      
+      <?php 
+	  		$relation_arr = CheckUserRelation($public_arr_profile_info['id']);
+			
+	  ?>
+      <div class="content-section">
+          <h2><?=$public_arr_profile_info['s_profile_name']?> <span style="font-size:17px;">[<?=check_user_online_hlpr($public_arr_profile_info['id'], 'public', $relation_arr); ?>]</span></h2>
+          <h3><?=get_user_address_info($public_arr_profile_info['id'])?></h3>
+          <table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+              <td align="left" valign="top" class="first"><span>Languages I Speak</span></td>
+              <td align="center" valign="top" class="second"><span>:</span></td>
+              <td align="left" valign="top"><?=$public_arr_profile_info['s_languages']?></td>
+            </tr>
+            <tr>
+              <td align="left" valign="top" class="first"><span>About Me</span></td>
+              <td align="center" valign="top" class="second"><span>:</span></td>
+              <td align="left" valign="top"><?=nl2br($public_arr_profile_info['s_about_me'])?></td>
+            </tr>
+            <tr>
+              <td align="left" valign="top" class="first"><span>My Church Name</span></td>
+              <td align="center" valign="top" class="second"><span>:</span></td>
+              <td align="left" valign="top"><?=$public_arr_profile_info['s_church_name']?></td>
+            </tr>
+            <tr>
+              <td align="left" valign="top" class="first"><span>Church Location</span></td>
+              <td align="center" valign="top" class="second"><span>:</span></td>
+              <td align="left" valign="top"><?=get_church_address_info($public_arr_profile_info['id'])?></td>
+            </tr>
+            <tr>
+              <td align="left" valign="top" class="first"><span>Church Phone</span></td>
+              <td align="center" valign="top" class="second"><span>:</span></td>
+              <td align="left" valign="top"><?=$public_arr_profile_info['s_church_phone']?></td>
+            </tr>
+            <tr>
+              <td align="left" valign="top" class="first"><span>Denomination</span></td>
+              <td align="center" valign="top" class="second"><span>:</span></td>
+              <td align="left" valign="top"> 	<?=$public_arr_profile_info['s_name']?></td>
+            </tr>
+          </table>
+    
+      </div>
+       <div class="clr"></div>
+       <ul class="special-link">
+                                        	<?php if($own_profile == 'false'):?>
+                                            <li><a href="javascript:void(0);">Send A Message</a></li>
+                                           
+											<?php endif;
+											
+											if($if_already_friend == 'false') :?>
+                                            	<li><a href="javascript:void(0);" id="invite_friend_<?=($public_arr_profile_info['id'])?>" onclick="invite_friend_('<?=encrypt($public_arr_profile_info['id'])?>')">Send Friend Request</a></li>
+                                            <?php elseif($display_becomefriend == 'false'):?>
+                                            	<li><a href="javascript:void(0);" id="invite_friend_<?=($public_arr_profile_info['id'])?>" onclick="invite_friend_('<?=encrypt($public_arr_profile_info['id'])?>')" >Re-send Friend Request</a></li>
+                                            <?php endif; ?>
+                                            
+                                           <?php if($if_already_netpals == 'false') :?>
+                                            	<li><a id="invite_netpal_<?= $public_arr_profile_info['id']?>"  href="javascript:void(0);" onclick="invite_netpals_(<?php echo $public_arr_profile_info['id'];?>)">Invite As Netpal</a></li>
+                                            <?php elseif($display_becomenetpals == 'false'):?>
+                                            	<li><a d="invite_netpal_<?= $public_arr_profile_info['id']?>"  href="javascript:void(0);" onclick="invite_netpals_(<?php echo $public_arr_profile_info['id'];?>)" >Reinvite As NetPal</a></li>
+                                            <?php endif; ?>
+                                            
+                                             <?php ## prayer partner
+											 if($is_hit_frm_pp){  
+												 if($prayer_partner['display_becomeprayer_partner'] == 'false'): ?>
+													<li> <a  href="javascript:void(0);" id="invite_prayer_partner_<?=($public_arr_profile_info['id'])?>" onclick="invite_prayer_partner_('<?=encrypt($public_arr_profile_info['id'])?>','<?=$prayer_partner['display_becomeprayer_partner']?>')">Re-send Partner Request</a></li>
+												  
+																								
+											  <?php elseif($prayer_partner['display_alreadyprayer_partner'] == 'true'):?>
+													<li><a href="javascript:void(0);"> Already Your Partner </a></li>
+											  
+											 
+											 <?php elseif($prayer_partner['is_available']=='false') : ?>
+													<li><a href="javascript:void(0);">Not Available as Partner</a></li>
+													 
+											  
+											  <?php else: ?>
+											 <li> <a  href="javascript:void(0);" id="invite_prayer_partner_<?=($public_arr_profile_info['id'])?>" onclick="invite_prayer_partner_('<?=encrypt($public_arr_profile_info['id'])?>','<?=$prayer_partner['display_becomeprayer_partner']?>')">Invite As Partner</a></li>
+											  
+											  <?php endif;
+											 }
+											  ?>
+                                             
+                                            
+                                        </ul>
+</div>

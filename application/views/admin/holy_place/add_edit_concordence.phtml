@@ -1,0 +1,92 @@
+
+<div class="clr"></div>
+<!-- CONTENT SECTION -->
+<!--navigation section start -->
+<?php include(APPPATH."views/layouts/admin/admin_nav.phtml");?>
+<!--navigation section end -->
+<div id="content_section">
+      <div id="container">
+            <!--<div id="top_corner">&nbsp;</div> -->
+            <div id="mid_content">
+                  <div class="page_heading left">
+                  
+                  
+                 
+                  
+                  <?php $s_mode = ($mode =='add')?'Add New':'Edit';?>
+                        <div class="left"><img src="<?=base_url()?>images/icons/login.png" alt="" /><?=$s_mode?> Concordence</div>
+                  </div>
+                  <div class="clr"></div>
+                  <div id="right_container">
+                        <div class="arrow_btm"></div>
+                        <div class="content_area frm_box">
+                              
+                              
+                               <form name="frm_adv" action="" method="post" enctype="multipart/form-data">
+                                  <div class="lable01"><span class="red-mark">* </span> Fruit Name :</div>
+                                  <div class="field01">
+                                        <select name="txt_fruit">
+                                        	<option value="-1">Select</option>
+                                            	<?php $option_id=$posted['0']['i_fruit_id'];?>
+                                                <?=makeOptionFruit($option_id);?>
+                                                
+                                        </select>
+                                  </div>
+                                  <?php //$show_title_err = (form_error('txt_title') != '')?' style="display:block;"':''; ?>
+                                   <div class="error-message" ><?php echo $error_fruit; ?></div>
+                                  <div class="clr"></div>
+                                  
+                                  
+                                  
+                                  
+                                  <div class="lable01"><span class="red-mark">* </span> Book Name :</div>
+                                  <div class="field01">
+                                        <input name="book_name"  id="book_name" type="text" size="52" value="<?=$posted['0']['s_book_name']; ?>" />
+                                  </div>
+                                  <?php //$show_file_err = (form_error('file_photo') != '' || $error_file_photo != '')?' style="display:block; margin-left:3px;"':''; ?>
+                                   <div class="error-message" ><?php echo $error_book_name; ?></div>
+                                  <div class="clr"></div>          
+                                  
+                                  <div class="lable01"><span class="red-mark">* </span> Chapter No. :</div>
+                                  <div class="field01">
+                                        <input name="chapter_no"  id="chapter_no" type="text" size="52" value="<?=$posted['0']['bible_chapter_no']; ?>" />
+                                  </div>
+                                  <?php //$show_file_err = (form_error('file_photo') != '' || $error_file_photo != '')?' style="display:block; margin-left:3px;"':''; ?>
+                                   <div class="error-message" ><?php echo $error_chapter_no; ?></div>
+                                  <div class="clr"></div>      
+                                  
+                               <div class="lable01"><span class="red-mark">* </span> Verse No. :</div>
+                                  <div class="field01">
+                                        <input name="verse_no"  id="verse_no" type="text" size="52" value="<?= $posted['0']['bible_verse_no']; ?>" />
+                                  </div>
+                                  <?php //$show_file_err = (form_error('file_photo') != '' || $error_file_photo != '')?' style="display:block; margin-left:3px;"':''; ?>
+                                   <div class="error-message" ><?php echo $error_verse_no; ?></div>
+                                  <div class="clr"></div>   
+                                  
+                                 
+                                  
+                                  
+                                
+                                  <div class="lable01">&nbsp;</div>
+                                  <div class="field01" style="margin-top:10px;">
+                                       <?php if($mode == 'add'): 
+                                            $current_page=0;
+                                       ?>
+                                            <input name="" type="submit" class="btn"  value="Add"/>
+                                   <?php else :?>
+                                            <input name="" type="submit" class="btn"  value="Update"/>
+                                    <?php endif;?>
+                                        <input name="" type="reset" class="btn"  value="Cancel" onclick="window.location='<?=admin_base_url().'holy-place/concordence.html'?>'"/>
+                                        </div>
+                              </form>
+                              <div class="clr"></div>
+                        </div>
+                        
+                  </div>
+                  <div class="clr"></div>
+            </div>
+            <!--<div id="bot_corner">&nbsp;</div> -->
+      </div>
+      <div class="clr"></div>
+</div>
+<!-- /CONTENT SECTION -->

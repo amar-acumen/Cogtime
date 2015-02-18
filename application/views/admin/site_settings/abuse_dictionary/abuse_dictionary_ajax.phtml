@@ -1,0 +1,40 @@
+<table width="70%" border="0" align="center" cellpadding="0" cellspacing="0" class="admin-table">
+  <tr>
+    <th align="left" valign="middle" height="30" width="85%">Word</th>
+    <th align="center" valign="middle" height="30" class="last"  width="9%">Actions</th>
+  </tr>
+  <?php 
+						  
+	   if( count($info_arr) ) :
+
+			   foreach($info_arr as $info) : 
+				
+				  $id = $info['id'];
+				  $s_word = $info['s_word'];
+	
+	?>
+  
+                <tr>
+                  <td align="left" valign="top"><?=$s_word?></td>
+                  <td align="center" valign="middle" class="last" >
+                  <input name="" title="Edit" type="button" class="edit-button"  value="" onclick="edit_abuse_(<?=$id?>);"/>
+                  <input name="" title="Delete" type="button" class="delete-button"  value="" onclick="delete_confirm_(<?= $id ?>);"/>
+                  </td>
+                </tr>
+		<?php
+                 endforeach;
+                 
+		   else :	// i.e. no records exists...
+	  ?>
+		  <tr>
+			  <td style="text-align:center;" height="80" colspan="20">No data available!!!</td>
+		  </tr>
+	  <?php
+		   endif;
+	  ?>
+  
+</table>
+<div class="paging" style=" margin-right: 292px;">
+           <ul><?= $page_links ?></ul>
+</div>
+                  

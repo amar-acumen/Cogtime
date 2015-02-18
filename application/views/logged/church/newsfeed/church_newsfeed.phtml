@@ -1,0 +1,459 @@
+<?php
+
+if( is_array($result_arr) && count($result_arr) ) :
+
+	foreach($result_arr as $k=>$feed) :
+
+		include(APPPATH.'views/logged/church/newsfeed/church_single_newsfeed.phtml');
+
+	?>
+
+		<script language="javascript">
+
+		$(function(){
+
+			
+
+                        $('.wal-minus').click(function(){
+
+				$(this).parents('.comments-number').slideUp('fast');
+
+			})
+
+		});
+
+		</script>
+
+	<?php	
+
+	endforeach; ?>
+	<div class="view_more" id="show_more_feeds_div" style="display:none;"><a href="javascript:void(0);" id="show_more_feeds_link" page_value="<?= $current_page_1 ?>" onclick="show_more_feeds($(this).attr('page_value'))">[view more] </a> </div>
+<?php 
+else :
+
+?>
+
+
+
+<?php
+
+endif;
+
+?>
+
+<input type="hidden" id="current_page_1" name="current_page_1" value="<?=$current_page_1?>" />
+
+
+
+<script type="text/javascript">
+
+    //$.noConflict();
+
+$(document).ready(function() {
+
+      // alert('ok');
+
+       //  $('#myvideo_big_thumb_1').click(function(){
+
+$('[id^="myvideo_big_thumb_1_"]').live('click', function(){ 
+
+    console.log($(this));
+
+//alert($(this).attr('media_id'));
+
+  showLoading(); 
+
+  var media_id =  $(this).attr('media_id');
+
+  $.ajax({
+
+		type: 'post',
+
+		url: base_url+'logged/church_wall/get_video/',
+
+		data: ({'media_id' : media_id ,'width':447 ,'height':358}),
+
+
+
+		dataType: 'json',
+
+		success: function (data, status) {
+
+			if(data.result=='success') {
+
+				hideLoading();
+
+			   $('#myvideo_first_thumb_'+media_id).html(data.s_image_source.html);
+
+			   $('#myvideo_first_thumb_'+media_id).attr('i_media_id',data.i_media_id);
+
+			}
+
+		},
+
+		error: function (data, status, e) {
+
+			hideLoading();
+
+			showUIMsg('Some error occurred. Please try again.');
+
+		}
+
+	});
+
+});
+
+ //setTimeout(function(){ alert('dd'); }, 3000);
+
+// setTimeout(function(){ $('[id^="myvideo_big_thumb_1_"]').trigger('click'); }, 3000);
+
+  $('[id^="myvideo_big_thumb_1_"]').trigger('click');
+
+$(window).scroll(function(){
+ 
+        var scrollTop = $(window).scrollTop();
+        var windowHeight = $(window).height();
+        var docuHeight = $(document).height();
+		var page=$('#show_more_feeds_link').attr('page_value');
+		var total=<?=$no_of_result?>;
+		  if(scrollTop + windowHeight == docuHeight){
+		  if(page<total)
+		  {
+			show_more_feeds(page);
+		  }
+		  
+		  }
+ });
+
+});
+
+
+
+var base_url='<?=base_url()?>';
+
+function windowLike(window_id,like_val)
+
+{
+
+
+
+	showUILoader_nodialog('<img src="'+base_url+'images/loading_big.gif" width="50"/> ');
+
+	$.ajax({
+
+		type: "POST",
+
+		url: base_url+"logged/church_wall/like_word",
+
+		data: "window_id="+window_id+"&like_val="+like_val,
+
+		dataType:"json",
+
+		success: function(json_response){
+
+				if(json_response.status)
+
+				{
+
+					$('#like_'+window_id).html(json_response.like);
+
+				}
+
+			hideUILoader_nodialog();
+
+		}
+
+	});
+
+
+
+}
+
+
+
+$(document).ready(function(){
+
+  $('.bxslider').bxSlider();
+
+  
+
+  //Isotope
+
+  isotope();
+
+$(".comment").click(function(){
+
+
+
+  $(".comment-reply-pan").slideUp(function(){isotope();});
+
+  $(this).parent('div').parent('div').next(".comment-reply-pan").slideToggle(function(){isotope();});
+
+  
+
+});  
+
+});
+
+function show_hidden(feed_id)
+{
+    $('#edit-post-box'+feed_id).slideToggle(function(){isotope();});
+}
+
+function isotope()
+
+{
+
+	var $container = $('.timeline-main');
+
+      
+
+  $container.isotope({
+
+	itemSelector: '.timeline-part'
+
+  });
+
+}
+
+var ajax_comment_post=null;
+
+function post_comment(id) 
+
+		{
+
+		showUILoader_nodialog('<img src="'+base_url+'images/loading_big.gif" width="50"/> ');
+
+		if(ajax_comment_post!=null) {
+
+			ajax_comment_post.abort();
+
+		}
+
+		ajax_comment_post = $.ajax({
+
+			
+
+			url: base_url+'logged/church_wall/post_comment/'+id,
+
+			dataType: 'json',
+
+			data: {'message': $('#feed_comment_box_'+id).val()},
+
+			type: 'post',
+
+	
+
+			success: function (data, status) {
+
+				if(data.success == 'true'){
+
+				  $('#feed_comment_box_'+id).val('');
+
+				  $('#comment_'+id).html(data.html);
+
+				  $('.comments-number-mid').append(data.com);
+
+				}
+
+				else{
+
+					$('#feed_comment_box_'+id).val('');
+
+				}
+
+				//$('.wal-minus').trigger('click');
+
+				$('.comment-reply-pan').slideUp(function(){isotope();});
+
+				hideUILoader_nodialog();
+
+				showUIMsg(data.msg);
+
+			},
+
+			error: function(data, status, e) {
+
+				hideUILoader_nodialog();
+
+				showUIMsg("Error!");
+
+				
+
+			}
+
+		});
+
+}
+
+
+
+
+
+//delete post
+
+function delete_(id)
+
+{
+
+  
+
+  $('#i_del_post_id').val(id);
+
+  show_dialog('delete-post');
+
+}
+
+
+
+var ajax_delete_post = null;	
+
+function delete_post() 
+
+{
+
+		var id = $('#i_del_post_id').val();
+
+		showUILoader_nodialog('<img src="'+base_url+'images/loading_big.gif" width="50"/> ');
+
+		if(ajax_delete_post!=null) {
+
+			ajax_delete_post.abort();
+
+		}
+
+		ajax_delete_post = $.ajax({
+
+			
+
+			url: base_url+'logged/church_wall/delete_post/'+ id,
+
+			dataType: 'json',
+
+			data: {'newsfeed_id':id},
+
+			type: 'post',
+
+	
+
+			success: function (data, status) {
+
+				
+
+				if(data.result == 'success'){
+
+					
+
+					hide_dialog('delete-post');
+
+					hideUILoader_nodialog();
+
+				    showUIMsg(data.msg);
+
+					
+
+					window.location.reload();
+
+				}
+
+				
+
+			},
+
+			error: function(data, status, e) {
+
+				hideUILoader_nodialog();
+
+				showUIMsg("Error!");
+
+				
+
+			}
+
+		});
+
+}
+
+function restrict_carrige(e)
+{
+	if(e.keyCode == 13){
+		carriage_count++;
+	}
+	if(e.keyCode == 13 && carriage_count >10){
+		return false;
+	}
+}
+
+function limitTextarea(limitField, limitCount, limitNum) {
+	if (limitField.value.length > limitNum) {
+		limitField.value = limitField.value.substring(0, limitNum);
+	} 
+}
+function show_photo(obj,type)
+{
+	if(type=='photo')
+	{
+		$(obj).parent().parent().children('.upload-video').hide("slow",function(){isotope();});
+		$(obj).parent().parent().children('.upload-audio').hide("slow",function(){isotope();});
+		$(obj).parent().parent().children('.upload-image').show("slow",function(){isotope();});
+		$(obj).parent().parent().children('.camera-ico').children('span').addClass('active');
+		$(obj).parent().parent().children('.video-ico,.audio-ico').children('span').removeClass('active');
+	}
+	else if(type=='video')
+	{
+		$(obj).parent().parent().children('.upload-video').show("slow",function(){isotope();});
+		$(obj).parent().parent().children('.upload-audio').hide("slow",function(){isotope();});
+		$(obj).parent().parent().children('.upload-image').hide("slow",function(){isotope();});
+		$(obj).parent().parent().children('.video-ico').children('span').addClass('active');
+		$(obj).parent().parent().children('.camera-ico,.audio-ico').children('span').removeClass('active');
+	}
+	else if(type=='audio')
+	{
+		$(obj).parent().parent().children('.upload-video').hide("slow",function(){isotope();});
+		$(obj).parent().parent().children('.upload-audio').show("slow",function(){isotope();});
+		$(obj).parent().parent().children('.upload-image').hide("slow",function(){isotope();});
+		$(obj).parent().parent().children('.audio-ico').children('span').addClass('active');
+		$(obj).parent().parent().children('.video-ico,.camera-ico').children('span').removeClass('active');
+	}
+	
+}
+/*function show_photo(obj)
+{
+	$('.upload-video').show();
+	$('.upload-audio').hide();
+	$('.upload-image').hide();
+	$('.video-ico').children('span').addClass('active');
+	$('.camera-ico,.audio-ico').children('span').removeClass('active');
+
+}
+function show_photo(obj)
+{
+
+}
+$('.upload-video').hide();$('.upload-audio').show();$('.upload-image').hide();$('.audio-ico').children('span').addClass('active');$('.video-ico,.camera-ico').children('span').removeClass('active');*/
+var ajax_req_feeds = null;
+    function show_more_feeds(page) {
+        if (ajax_req_feeds != null) {
+            ajax_req_feeds.abort();
+        }
+        showUILoader_nodialog('<img src="'+base_url+'images/loading_big.gif" width="50"/> ');
+        ajax_req_feeds = $.ajax({
+            type: 'get',
+            url: base_url + 'logged/church_wall/newsfeed_pagination_show_more/<?= $_SESSION['logged_church_id'] ?>' + '/' + page,
+            dataType: 'json',
+            success: function(data, status) {
+
+                hideUILoader_nodialog();
+                if (data.html != '') {
+                    $('.timeline-main').isotope( 'insert', $(data.html) );
+					//isotope();
+					
+                    $('#show_more_feeds_link').attr('page_value', data.current_page);
+                }
+                
+
+
+            }	// end of success function...
+        });
+    }
+</script>

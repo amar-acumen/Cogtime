@@ -1,0 +1,18 @@
+                <?php //pr($im_arr);
+						if(count($im_arr)){
+							foreach($im_arr as $key=> $val){
+								$relation_arr = CheckUserRelation($val['post_owner_user_id']);
+								$chat_unique_username =   $this->session->userdata('display_username');
+								//get_unique_username_by_id($val['post_owner_user_id']);
+								
+								$chat_display_name = get_unique_chatname_by_id($val['post_owner_user_id']);
+								#'<?=$chat_display_name
+				?>
+                  <li >
+                  <a href="javascript:void(0)" chatwith="<?=$val['post_owner_user_id']?>" onclick="javascript:chatWith('<?=$chat_display_name?>', <?=$val['post_owner_user_id']?>)" ><?=check_user_online_hlpr($val['post_owner_user_id'], 'public', $relation_arr, true); ?>&nbsp; <?=$val['s_first_name'].' '.$val['s_last_name']?><span class=""  id="going_chat_<?=$chat_unique_username?>" ></span></a>
+                  </li>
+                  
+               <?php
+							}
+						}
+			   ?>

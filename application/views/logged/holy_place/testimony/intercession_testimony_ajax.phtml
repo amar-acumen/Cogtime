@@ -1,0 +1,48 @@
+<?php
+
+#pr($arr_testimony);
+if(count($arr_testimony))
+{
+    foreach($arr_testimony as $testimony)
+    {
+		$s_subject = html_entity_decode(htmlspecialchars_decode($testimony['s_subject']),ENT_QUOTES,'utf-8');
+?>
+
+<!--testimonial start -->
+<div class="prayer-wall-dotted-box equal-padding">
+
+    <!--my comment for the pray start -->
+        <div class="my-comment-for-pray commit-content">
+            <p class="quoted-text">
+                <?php echo nl2br($testimony['testimony_desc'])?>
+            </p>
+            
+        </div> 
+    <!--my comment for the pray end -->
+    <div class="commitment-prayer-for">
+        <?php /*?><p class="name">Pray For: <span><?=$testimony['posted_by']?></span> </p><?php */?>
+        
+         <p class="quoted-text"><a href="<?=base_url()?>e-intercession/<?=$testimony['id']?>/e-intercession-request-detail.html"><?=($s_subject)?></a></p> 
+        <p class="quoted-text">
+            <a href="<?=base_url()?>e-intercession/<?=$testimony['prayer_wall_req_id']?>/e-intercession-request-detail.html"><?=nl2br(my_substr($testimony['intercession_desc'],250))?></a> 
+            <span class="place" style="color: #011F31; font-size: 14px; margin-top: 2px;">Location: <?=$testimony['country'].' '.$testimony['s_state']?></span>
+            <span>Updated on: <?=get_time_elapsed($testimony['intercession_insert_date'])?></span> 
+            
+        </p>
+        <p class="date-time">From: <span><?=getShortDateWithTime($testimony['intercession_start_date'], 9)?></span> | To: <span><?=getShortDateWithTime($testimony['prayer_req_end_date'], 9)?></span></p>
+        
+    </div>    
+</div>
+<!--testimonial end -->
+<?php
+    }// endforeach
+}
+else
+{
+?>
+<div class="view_more" style="text-align: center;">
+<p class="blue_bold12" style="font-size:14px;">No Testimony.</p>
+</div>
+<?php
+}   //endif
+?>

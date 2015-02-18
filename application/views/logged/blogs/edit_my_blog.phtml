@@ -1,0 +1,221 @@
+<?php include(APPPATH."views/layouts/logged_header.phtml");?>
+            <!-- NAVIGATION SECTION -->
+      <?php include(APPPATH."views/layouts/nav.phtml");?>
+      <!-- /NAVIGATION SECTION -->
+      </div>
+</div>
+<!-- /HEADER SECTION -->
+<div class="clr"></div>
+
+<!-- CONTENT SECTION -->
+<div id="content_section">
+      <div id="container">
+            <!--<div id="mid_content"> -->
+                  <!-- latest news -->
+                 <?php include(APPPATH ."views/layouts/latest_news.phtml");?>
+                  <!-- /latest news -->
+                  <div class="clr"></div>
+                  <!-- main container -->
+                  <div id="main_container">
+                        <!-- left container -->
+                        <?php include(APPPATH."views/layouts/leftbar.phtml");?>
+                        <!-- /left container -->
+                        <!-- mid container -->
+                        <div id="mid_container">
+                        
+                            
+                            <div class="link-div">
+                                  <ul>
+                                    <li><a href="search-blogs.html"><span>Search All Blogs</span></a> </li>
+                                    <li><a href="most-popular-blogs.html"><span>Most Popular</span></a> </li>
+                                </ul>
+                                <div class="clr"></div>
+                              </div>
+                        
+                        
+                        
+                            <div class="page_heading">
+                            
+                            <div class="left" style="padding: 3px 0px;">
+                                <img src="images/icons/icon1.png" alt="" />
+                                Edit Blog
+                            </div>
+                            
+                            
+                            </div>
+                            <div class="blog-container">
+                            
+                            
+                            <!--post article -->
+                            <div class="nw-blog-article">
+                                 
+                            
+                            <div class="div_content tweet-textarea2" style="padding-top: 15px;">
+
+                                 <div class="" style="padding:10px 0px;">
+                                 
+  									<input type="hidden" name="blog_id" id="blog_id" value="<?=$blog_id?>" />                               
+                                     
+                                    <form id="editBlogFrm" action="<?php echo base_url()?>logged/my_blog/add_blog" method="post" class="wall-comment-form" onsubmit="return edit_blog_();">
+                                    <label class="white-text">Blog Title:</label>
+                                        <div class="text-field-bg">
+                                        <input name="blog_title" id="blog_title" type="text"  onfocus="if(this.value=='Type title here')this.value='';" onblur="if(this.value=='')this.value='Type title here';" value="<?php echo $blogdata[0]['s_title']?>" style="width: 460px;"/>
+                                        <span class="error-message" id="err_blog_title"></span>
+                                        </div>
+                                        <div class="clr"></div>
+                                        <label class="white-text">Description:</label>
+                                        <div class="wall-comment-blog-box">
+                                          <textarea name="blog_desc" id="blog_desc" cols="" rows="" onfocus="if(this.value=='Max 500 Characters')this.value='';" onblur="if(this.value=='')this.value='Max 500 Characters';" ><?php echo $blogdata[0]['s_description']?></textarea>
+                                          
+                                        </div><span class="error-message" id="err_blog_desc"></span>
+                                        <div class="clr"></div>
+                                      <input name="" type="submit" class="wall-comment-submit-nw " value="Update" onclick="" />
+                                    </form>
+                                 </div>
+                            </div> 
+                            
+                            </div>
+                            <!--/post article -->
+                            </div>
+                            
+                                                           
+                        </div>
+
+                                                            
+                              
+                                    
+                  <!-- /mid container -->
+                        <!-- right container -->
+                        <?php include(APPPATH."views/layouts/rightbar.phtml");?>
+                        <!-- /right container -->
+                  </div>
+                  <!-- /main container -->
+                  <div class="clr"></div>
+            <!--</div> -->
+      </div>
+      <div class="clr"></div>
+</div>
+<!-- /CONTENT SECTION -->
+<div class="clr"></div>
+
+
+<?php include(APPPATH."views/layouts/footer.phtml");?>
+<?php include(APPPATH."views/logged/blocks/common_popup.phtml");?>
+
+
+
+<script type="text/javascript">
+
+
+//-------------------------------------- edit blog ----------------------------------
+function edit_blog_()
+{
+
+    // for AJAX page-submission...
+    optionsArr = { 
+        beforeSubmit:  showBusyScreen,  // pre-submit callback 
+        success:       validateFrm // post-submit callback 
+    }; 
+ 
+    frm_obj = $('#editBlogFrm');
+    $(frm_obj).ajaxSubmit(optionsArr);
+    
+    return false; 
+}
+
+// validate ajax-submission...
+function validateFrm(data)
+{
+    
+    var result_obj = JSON.parse(data);
+       
+    if(result_obj.result==true) {
+
+        showUIMsg(result_obj.msg);
+        $('#editBlogFrm')[0].reset();
+        
+        
+    //window.location.href="create-video-album.html";
+window.location.href="my-blog.html";
+        //location.reload();
+        
+    
+    }
+
+    $('.error-message').each(function(i){
+        $(this).attr('style','display:none');
+    });
+    $('div[id^=err_]').html(''); 
+    
+    if(result_obj.result==false) {
+    
+        
+        $('.error-message').each(function(i){
+            $(this).attr('style','display:none');
+        });
+        
+        
+        for ( var id in result_obj.arr_messages ){
+            //alert(data.arr_messages[id]);
+            if( $('#err_'+id) != null ) {
+                $('#err_'+id).html(result_obj.arr_messages[id]);
+                $('#err_'+id).css('display', 'block');
+            }
+        }
+    
+    
+    
+    }
+    
+    // hide busy-screen...
+    hideBusyScreen();
+}
+//-------------------------------------- end of edit blog ----------------------------------
+
+
+  
+
+    
+$(document).ready(function () {
+
+ //counting the left characters in comment
+    
+     function limitChars(textid, limit, infodiv)
+     {
+      var text = $('#'+textid).val(); 
+      var textlength = text.length;
+      if(textlength > limit)
+      {
+      $('#'+textid).val(text.substr(0,limit));
+       return false;
+      }
+      else
+      {
+      
+       return true;
+      }
+     }
+    
+    
+    
+
+    
+    $(function(){
+        $('#blog_desc').keyup(function(){
+            limitChars('blog_desc', 500, '');
+        });
+    });
+    
+
+    
+    //// just to show correct no. of chracters left while the page is loaded...
+
+    limitChars('blog_desc',500, '');
+    
+ 
+});    
+    
+
+</script>
+
+

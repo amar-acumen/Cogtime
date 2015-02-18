@@ -1,0 +1,15 @@
+<!-- advertisement -->
+<?php 
+if(count($advertisement_detail)){
+?>
+<div class="advt">
+<?php 
+  $IMG_THUMB_PATH = base_url() ."uploads/advertisements/";
+  $name=getThumbName($advertisement_detail[0]['s_image'],'main'); 
+  $IMG_THUMB = $IMG_THUMB_PATH . $name; ;
+?>
+<img src="<?=$IMG_THUMB?>" alt="" width="200" height="200" onclick="window.open('<?=$advertisement_detail[0]['s_url']?>')"/>
+<br />
+                                    Advertisement</div>
+<!-- /advertisement -->
+<?php } ?>

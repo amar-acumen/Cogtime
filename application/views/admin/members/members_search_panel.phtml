@@ -1,0 +1,53 @@
+<script type="text/javascript">
+$(document).ready(function(arg) {
+ $('#frm_search').submit(function(){ 
+						
+						var datatosend=$("#frm_search").serialize();
+						
+					     	showBusyScreen();
+							//alert(datatosend);
+							
+							$.ajax({
+							   type: "POST",
+							   url: admin_base_url+"members/members/ajax_pagination/",
+							   data: datatosend,
+							   success: function(data){
+								  
+								  hideBusyScreen(); 
+								   $('#table_content').html(data);
+							       
+								
+								 
+							   }
+							 });	 
+					   
+						
+				});
+ 
+ });
+ </script>
+
+
+<div class="filter">
+            <span class="filter-by">Filter By &raquo;</span>
+            <form name="frm_search" id="frm_search" onsubmit="return false;" action="" method="post" class="filter-search">
+                <label style="width:51px;">Name :</label>
+                <input type="text" name="txt_name" id="txt_name" />
+                <label>Email :</label>
+                <input type="text" name="txt_email" id="txt_email" />
+                <br class="clr" />
+                
+                <label>Country :</label>
+                <input type="text" name="txt_country" id="txt_country" />
+                
+                <label style="width:33px;">State :</label>
+                <input type="text" id="txt_state" name="txt_state" />
+                
+                <label>City :</label>
+                <input type="text" id="txt_city" name="txt_city" />
+                
+                <input type="hidden" value="Y" name="search_basic" id="search_basic"  />
+       			<input name="" type="submit" value="GO" class="go" />
+            </form>  
+            <div class="clr"></div>
+</div>

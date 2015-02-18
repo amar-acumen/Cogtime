@@ -1,0 +1,430 @@
+<?php include(APPPATH."views/layouts/logged_header.phtml");?>
+            <!-- NAVIGATION SECTION -->
+      <?php include(APPPATH."views/layouts/nav.phtml");?>
+      <!-- /NAVIGATION SECTION -->
+      </div>
+</div>
+<!-- /HEADER SECTION -->
+<div class="clr"></div>
+
+<!-- CONTENT SECTION -->
+<div id="content_section">
+      <div id="container">
+
+            <div id="mid_content">
+                  <!-- latest news -->
+                  <?php include(APPPATH ."views/layouts/latest_news.phtml");?>
+                  <!-- /latest news -->
+                  <div class="clr"></div>
+                  <!-- main container -->
+                  <div id="main_container">
+                    <?php include(APPPATH."views/layouts/leftbar.phtml");?>
+                    
+                        <!-- mid container -->
+                        <div id="mid_container">
+                         <div style=" margin-top:-33px; margin-bottom:5px">
+                              <div class="page_heading" style="position:relative; top:33px; width:300px">
+                               <div class="left"><!--<img src="images/icons/ring.png" alt="" /> Rings - --><div class="pro_photo_new" style="background:URL('<?=get_ring_photo_by_id($ring_detail_arr['0']['id'])?>') no-repeat center; width:73px; height:72px; background-color:#fff" onclick="location.href='<?=base_url()?>rings/<?=$ring_detail_arr['0']['id']?>/ring-home.html'"></div><?=$ring_detail_arr[0]['s_ring_name']?> </div>
+                                </div>
+                              <input type="button" style=" background:none repeat scroll 0 0 #013D62; width:112px;margin-left:380px; margin-bottom:5px;" value="Back to My Rings" onclick="window.location='<?=base_url()?>my-ring.html'" class="sml_btn" />
+                            </div>
+                        <!--sub page links -->
+                        
+                               <?php 
+							   
+							   include("ring_home_menu.phtml");
+							   ?>
+                            <!--/sub page links -->
+                        
+						<div class="page_heading">
+                         <?php /*?> <div class="left"><!--<img src="images/icons/ring.png" alt="" />-->  Rings - < <?=$ring_detail_arr[0]['s_ring_name']?> ></div><?php */?>
+                       </div>
+                              <p class="nw-ring-heading"><img alt="" src="images/icons/netpal_rqust.png" /> Approve Join Requests </p>
+                              <div class="arrow_btm"></div>
+                              <div class="div_content" style=" margin-top:0px;">
+                              
+                              
+                              
+                                <div id="listingContent">
+                                	<?php echo $listingContent;?>
+                                </div>
+                                <?php if($no_of_result  == 0):?>
+                                <div class="shade_box_01" style="padding-top:5px;"><div  class="shade_norecords" style="width:260px;"><p class="blue_bold12">No Request.</p></div></div>
+                                <?php endif;?>	
+                                <?php if($no_of_result > $pagination_per_page): ?>
+                                
+                                <div class="view_more" id="show_more_feeds_div"><a href="javascript:void(0);" id="show_more_feeds_link" page_value="<?=$current_page_1?>" onclick="show_more_feeds($(this).attr('page_value'))">[view more] </a> </div>
+                                <?php endif; ?>
+                              </div>
+
+
+							  <p class="nw-ring-heading"><img alt="" src="images/icons/netpal_rcev.png" />  Invitations Sent (Pending Acceptance)</p>
+                              <div class="arrow_btm"></div>
+                              <div class="div_content" style=" margin-top:0px;">
+                                <div id="listingContentPendingInvitaion">
+                                	<?php echo $listingContentForPendingInvitaion;?>
+                                </div>
+                                <?php if($no_of_result_for_inv  == 0):?>
+                                <div class="shade_box_01" style="padding-top:5px;"><div  class="shade_norecords" style="width:260px;"><p class="blue_bold12">No Invitaion.</p></div></div>
+                                <?php endif;?>	
+                                <?php if($no_of_result_for_inv > $pagination_per_page): ?>
+                                
+                                <div class="view_more" id="show_more_inv_div"><a href="javascript:void(0);" id="show_more_inv_link" page_value="<?=$current_page_1?>" onclick="show_more_inv($(this).attr('page_value'))">[view more] </a> </div>
+                                <?php endif; ?>
+                              </div>
+                        </div>
+                        <!-- /mid container -->
+                        <!-- right container -->
+                          <?php include(APPPATH."views/layouts/rightbar.phtml");?>
+                        <!-- /right container -->
+                  </div>
+                  <!-- /main container -->
+                  <div class="clr"></div>
+            </div>
+            <div id="bot_corner">&nbsp;</div>
+      </div>
+      <div class="clr"></div>
+</div>
+<!-- /CONTENT SECTION -->
+<div class="clr"></div>
+<!-- FOOTER SECTION -->
+<?php include(APPPATH."views/layouts/footer.phtml");?>
+<?php include(APPPATH."views/logged/blocks/common_popup.phtml");?>
+<!-- /FOOTER SECTION -->
+
+<?php include(APPPATH."views/logged/ring/comments/my_ring_post_comment_lightbox.phtml");?>
+<?php /*?>VIEW COMMENTS<?php */?>
+
+<div class="lightbox view_comments_div " style="width:650px;">
+      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="<?=base_url()?>images/close.png" alt="" /></a></div>
+      <div class="top">
+            <div>&nbsp;</div>
+      </div>
+      <div class="mid" >
+            <div class="heading" style="margin-bottom:0px;">
+                  <div class="left">
+                        <h4><img src="<?=base_url()?>images/icons/cmnt.png" alt="" /> View Comments </h4>
+                  </div>
+            </div>
+            <div id="comment_html"></div>
+
+            
+      </div>
+      <div class="bot">
+            <div>&nbsp;</div>
+      </div>
+</div>
+<?php /*?>VIEW COMMENTS<?php */?>
+
+<?php /*?>LIKED LIGHT BOX <?php */?>
+<div class="lightbox liked_by_div" style="width:500px;">
+      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="<?=base_url()?>images/close.png" alt="" /></a></div>
+      <div class="top">
+            <div>&nbsp;</div>
+      </div>
+      <div class="mid" style="height:299px;">
+            <div class="heading" style="margin-bottom:0px;">
+                  <div class="left">
+                        <h4><img src="<?=base_url()?>images/icons/thumb_up.png" alt="" /> Liked by </h4>
+                  </div>
+            </div>
+            <div id="liked_html"></div>
+      </div>
+      <div class="bot">
+            <div>&nbsp;</div>
+      </div>
+</div>
+<?php /*?>LIKED LIGHT BOX <?php */?>
+
+<!-- confirm delete popup-->
+<div class="lightbox delete-page-popup" style="width: 400px; left: 296px;">
+      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="<?=base_url()?>images/close.png" alt="" /></a></div>
+      <div class="top"><div>&nbsp;</div></div>
+      <div class="mid">
+            <div class="heading" style="margin-bottom:0px;">
+                  <div class="left">
+                        <h4>Delete Member</h4>
+                  </div>
+            </div>
+               <div class="shade_box_white" style="padding:8px 0px;">
+               <div style="padding-bottom:10px;">
+               <p class="center-text" style="line-height:23px; color:#494949;">Do you really want to remove this member?</p>
+               </div>
+               <form action="" method="post" enctype="multipart/form-data">
+                  <input type="hidden" name="i_del_id" id="i_del_id" value="" />
+                 <input name="" type="button" value="Yes" class="btn" style="margin-left:105px;" onClick="delete_member_()"/>
+                    <input name="" type="button" value="No" class="btn" onclick="hide_dialog()"/>
+               </form>   
+               <div class="clr"></div>
+            </div>
+            
+      </div>
+      <div class="bot"><div>&nbsp;</div></div>
+</div>
+<!-- end of delete pop up -->
+
+
+<script type="text/javascript">
+function delete_confirm_(id)
+{
+    $('#i_del_id').val(id);
+     
+    show_dialog('delete-page-popup');
+}
+
+
+function delete_member_()
+{
+    id= $('#i_del_id').val();
+    
+    
+    
+    
+    $.ajax({
+        url : base_url+"logged/ring_members/delete_member",
+        type : "post",
+        data : ({'table_id':id}),
+        dataType : 'json',
+        success : function(data)
+        {
+            
+            showUIMsg(data.msg);
+            hide_dialog();
+            window.location=document.URL;
+        }
+    });
+}
+
+
+
+
+
+var ajax_req_feeds = null;
+function show_more_feeds(page) {
+	if(ajax_req_feeds!=null) {
+		ajax_req_feeds.abort();
+	}
+	showUILoader_nodialog();
+	ajax_req_feeds = $.ajax({
+		type: 'get',
+		url: base_url+'logged/ring_home/ring_home_join_request_listing_AJAX/<?php echo $ringid?>/'+'/'+page,
+		dataType: 'json',
+
+		success: function (data, status) {
+
+			hideUILoader_nodialog();
+			if(data.html!='') {
+				$('#listingContent').append(data.html);
+				$('#show_more_feeds_link').attr('page_value', data.current_page);
+			}
+			else {
+				$('#listingContent').append('<div class="view_more" style="text-align: center;"><p class="blue_bold12" style="font-size:14px;">No request.</p></div>');
+				$('#show_more_feeds_div').hide();
+			}
+            
+            if(data.view_more==false)
+            {
+                
+                $('#invitaion_rec').append('<div class="view_more" style="text-align: center;"><p class="blue_bold12" style="font-size:14px;">No request.</p></div>');
+                $('#show_more_feeds_div').hide();
+            }
+			
+			
+		}	// end of success function...
+	});
+}
+
+
+
+var ajax_req_feeds_inv = null;
+function show_more_inv(page) {
+	if(ajax_req_feeds_inv!=null) {
+		ajax_req_feeds_inv.abort();
+	}
+	showUILoader_nodialog();
+	ajax_req_feeds_inv = $.ajax({
+		type: 'get',
+		url: base_url+'logged/ring_home/ring_home_pending_invitaion_listing_AJAX/<?php echo $ringid?>/'+'/'+page,
+		dataType: 'json',
+
+		success: function (data, status) {
+
+			hideUILoader_nodialog();
+			if(data.html!='') {
+				$('#listingContentPendingInvitaion').append(data.html);
+				$('#show_more_inv_link').attr('page_value', data.current_page);
+			}
+			else {
+				$('#listingContentPendingInvitaion').append('<div class="view_more" style="text-align: center;"><p class="blue_bold12" style="font-size:14px;">No invitation.</p></div>');
+				$('#show_more_inv_div').hide();
+			}
+            
+            if(data.view_more==false)
+            {
+                
+                $('#invitaion_rec').append('<div class="view_more" style="text-align: center;"><p class="blue_bold12" style="font-size:14px;">No invitation.</p></div>');
+                $('#show_more_inv_div').hide();
+            }
+			
+			
+		}	// end of success function...
+	});
+}
+
+
+
+function acceptDeclineInvitation(ringid, uid, id, type)
+{
+	if(type=='accept')
+	{
+		$.ajax({
+			type: 'get',
+			url: base_url+'logged/ring_home/accept_req/'+ringid+'/'+uid+'/'+id+'/',
+			dataType: 'json',
+	
+			success: function (data) {
+				showUIMsg(data.msg);
+					if(data.html!='') {
+						$('#listingContent').html(data.html);
+						$('#show_more_feeds_link').attr('page_value', data.current_page);
+					}
+					else {
+						$('#listingContent').html('<div class="view_more" style="text-align: center;"><p class="blue_bold12" style="font-size:14px;">No More ring.</p></div>');
+						$('#show_more_feeds_div').hide();
+					}
+					
+					if(data.view_more==false)
+					{
+						
+						$('#invitaion_rec').html('<div class="view_more" style="text-align: center;"><p class="blue_bold12" style="font-size:14px;">No More Event.</p></div>');
+						$('#show_more_feeds_div').hide();
+					}
+			}	// end of success function...
+		});
+	}
+	else if(type=='decline')
+	{
+		$.ajax({
+			type: 'get',
+			url: base_url+'logged/ring_home/decline_req/'+ringid+'/'+uid+'/'+id+'/',
+			dataType: 'json',
+	
+			success: function (data) {
+				showUIMsg(data.msg);
+				if(data.html!='') {
+						$('#listingContent').html(data.html);
+						$('#show_more_feeds_link').attr('page_value', data.current_page);
+					}
+					else {
+						$('#listingContent').html('<div class="view_more" style="text-align: center;"><p class="blue_bold12" style="font-size:14px;">No More ring.</p></div>');
+						$('#show_more_feeds_div').hide();
+					}
+					
+					if(data.view_more==false)
+					{
+						
+						$('#invitaion_rec').html('<div class="view_more" style="text-align: center;"><p class="blue_bold12" style="font-size:14px;">No More Event.</p></div>');
+						$('#show_more_feeds_div').hide();
+					}
+			}	// end of success function...
+		});
+	}
+}
+
+function acceptRingInvitation(i_u_id,i_ring_id, id)
+ {
+	 //alert('#accept_'+id);
+		 
+	 showUILoader_nodialog('<img src="'+base_url+'images/loading_big.gif" width="50"/> ');
+		$.ajax({
+			
+			url: base_url +'all/accept_invitation/'+i_u_id+'/'+i_ring_id+'/1',
+			dataType: 'json',
+			type: 'post',
+	
+			success: function (data) {
+				//hide_dialog();
+				 $('#accept_'+id).attr('style','display: none;');
+				hideUILoader_nodialog();
+				showUIMsg(data.msg);
+			},
+			error: function(data, status, e) {
+				hideUILoader_nodialog();
+				showUIMsg("Error!");
+				
+			}
+		});
+				 
+		 
+  }
+  
+ function DeclineInvitation(i_u_id,i_ring_id, id)
+ {
+	 //alert('#accept_'+id);
+	 showUILoader_nodialog('<img src="'+base_url+'images/loading_big.gif" width="50"/> ');
+	$.ajax({
+			
+			url: base_url +'logged/ring_home/decline_ring_invitation/'+i_u_id+'/'+i_ring_id+'/home',
+			dataType: 'json',
+			type: 'post',
+	
+			success: function (data) {
+				//hide_dialog();
+					
+					$('#listingContentPendingInvitaion').html('');
+				
+					if(data.listingContentForPendingInvitaion!='') {
+					$('#listingContentPendingInvitaion').append(data.listingContentForPendingInvitaion);
+					$('#show_more_inv_link').attr('page_value', data.current_page);
+					}
+					else {
+						$('#listingContentPendingInvitaion').append('<div class="view_more" style="text-align: center;"><p class="blue_bold12" style="font-size:14px;">No Invitaion.</p></div>');
+						$('#show_more_inv_div').hide();
+					}
+					
+					if(data.view_more==false)
+					{
+						
+						$('#invitaion_rec').append('<div class="view_more" style="text-align: center;"><p class="blue_bold12" style="font-size:14px;">No more invitaion.</p></div>');
+						$('#show_more_inv_div').hide();
+					}
+				
+				hideUILoader_nodialog();
+				showUIMsg(data.msg);
+			},
+			error: function(data, status, e) {
+				hideUILoader_nodialog();
+				showUIMsg("Error!");
+				
+			}
+		});
+				 
+		 
+  }
+ function resendInvite(i_u_id,i_invited_id, ring_id,mode)
+ {
+	 //alert('#accept_'+id);
+		 
+	 showUILoader_nodialog('<img src="'+base_url+'images/loading_big.gif" width="50"/> ');
+		$.ajax({
+			
+			url: base_url +'all/resend_invitation/'+i_u_id+'/'+i_invited_id+'/'+ring_id+'/'+mode,
+			dataType: 'json',
+			type: 'post',
+	
+			success: function (data) {
+				//hide_dialog();
+				 //$('#accept_'+id).attr('style','display: none;');
+				hideUILoader_nodialog();
+				showUIMsg(data.msg);
+			},
+			error: function(data, status, e) {
+				hideUILoader_nodialog();
+				showUIMsg("Error!");
+				
+			}
+		});
+				 
+		
+  }
+</script>

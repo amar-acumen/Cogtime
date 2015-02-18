@@ -1,0 +1,142 @@
+
+<div class="clr"></div>
+<!-- CONTENT SECTION -->
+<!--navigation section start -->
+<?php include(APPPATH."views/layouts/admin/admin_nav.phtml");?>
+<!--navigation section end -->
+<div id="content_section">
+      <div id="container">
+            <!--<div id="top_corner">&nbsp;</div> -->
+            <div id="mid_content">
+                  <div class="page_heading left">
+                  <?php $mode = ($mode =='add')?'Add':'Edit';?>
+                        <div class="left"><img src="../images/icons/login.png" alt="" /> Homepage Banners &raquo; <?=$mode?></div>
+                  </div>
+                  <div class="clr"></div>
+                  <div id="right_container">
+                        <div class="arrow_btm"></div>
+                        <div class="content_area frm_box">
+                        	  <form name="frm_add_edit_banner" id="frm_add_edit_banner" action="" method="post" enctype="multipart/form-data">
+                                  
+                                  <div class="lable01"><span class="red-mark">* </span> Banner Title :</div>
+                                  <div class="field01">
+                                        <input name="txt_banner_title" id="txt_banner_title" type="text" value="<?= $posted['s_title']; ?>" maxlength="30" style="margin:0px;" />
+                                  <div class="clr"></div>
+                                  <span>(Max 30 characters.)</span>
+                                  </div>
+                                 
+                                  <?php $show_banner = (form_error('txt_banner_title') != '')?'style="display:block;"':''; ?>
+                                  <div class="error-message" <?=$show_banner?>><?php echo form_error('txt_banner_title'); ?></div>
+                                  <div class="clr"></div>
+                                  
+                                  
+                                  <div class="lable01"><span class="red-mark">* </span> Banner Text : </div>
+                                  <div class="field01">
+                                        <textarea name="txta_banner_desc"  id ="txta_banner_desc" cols="" rows="" class="small" maxlength=""><?= get_unformatted_string_edit($posted['s_desc']);?></textarea>
+                                        
+                                    <div class="clr"></div>
+                                  <span>(Max 200 characters.)</span>
+                                  </div>
+                                  <?php $show_desc = (form_error('txta_banner_desc') != '')?'style="display:block;"':''; ?>
+                                  <div class="error-message" <?=$show_desc?>><?php echo form_error('txta_banner_desc'); ?></div>
+                                  
+                                  <div class="clr"></div>
+                                  
+                                  <div class="lable01"><span class="red-mark">* </span> URL :</div>
+                                  <div class="field01">
+                                        <input name="txt_banner_url" id="txt_banner_url" type="text" value="<?= $posted['s_url']; ?>" />
+                                  </div>
+                                  <?php $show_url = (form_error('txt_banner_url') != '')?'style="display:block;"':''; ?>
+                                  <div class="error-message" <?=$show_url?>><?php echo form_error('txt_banner_url'); ?></div>
+                                  <div class="clr"></div>
+                                  
+                                  
+                                  <div class="lable01"><span class="red-mark">* </span> Banner Image : </div>
+                                  <div class="field01">
+                                    <input name="banner_image" id="banner_image" type="file" size="52" />
+                                    <div class="clr"></div>
+									<span>(Note: Required dimension 1900 X 521)</span> 
+                                    <?php $show_image = ($file_error_banner_image!= '')?'style="padding-left:5px; padding-top:7px;display:block;"':'style="padding-left:5px; padding-top:7px;"'; ?>  
+									<div class="error-message" <?=$show_image?>><?php echo $file_error_banner_image; ?> </div>
+                                  </div>
+                                  <div class="clr"></div>
+                                   <?php #echo $posted['s_image'];
+									if($posted['s_image']!== "")
+									{
+										$IMG_THUMB_PATH = base_url() ."uploads/homepage_banner/";
+										$name=getThumbName($posted['s_image'],'thumb'); 
+										$IMG_THUMB = $IMG_THUMB_PATH . $name;
+										?>
+										<div class="lable01"></div>
+										<?php if($name != ""): ?> <img src="<?= $IMG_THUMB ?>" width="400" height="100" /><?php endif;?> 	<input type="hidden" name="h_image" value="<?=$posted['s_image'] ?>" />
+									<?php }
+									
+									else {?>
+                                    	 
+                                         <div class="lable01"></div>
+                                  		 <input type="image" alt="no image" src="../images/no-image.gif" name="no image" />
+                                 		 <div class="clr"></div>
+                                    
+                					<?php } ?>
+                
+                                  <div class="clr"></div>
+                                  
+                                  
+                                  <div class="lable01"> </div>
+                                  <div class="field01" style="margin-top:15px;">
+                                  <?php if($mode == 'Add'): ?>
+                                        <input name="" type="submit" class="btn"  value="Create"/>
+                                   <?php else :?>
+                                    	<input name="" type="submit" class="btn"  value="Update"/>
+                                    <?php endif;?>
+                                        <input name="" type="reset" class="btn"  value="Cancel" onclick="window.location='<?=admin_base_url().'site_settings/hp-banners.html'?>'"/>
+                                  </div>
+                              </form>
+                              <div class="clr"></div>
+                        </div>
+                  </div>
+                  <div class="clr"></div>
+            </div>
+            <!--<div id="bot_corner">&nbsp;</div> -->
+      </div>
+      <div class="clr"></div>
+</div>
+<!-- /CONTENT SECTION -->
+<script type="text/javascript">
+$(document).ready(function () {
+
+ //counting the left characters in comment
+	
+	 function limitChars(textid, limit, infodiv)
+	 {
+	  var text = $('#'+textid).val(); 
+	  var textlength = text.length;
+	 // alert(textlength);
+	  //alert(limit);
+	  if(textlength > limit)
+	  {
+	  $('#'+textid).val(text.substr(0,limit));
+		   return false;
+	  }
+	  else
+	  {
+	   return true;
+	  }
+	 }
+	
+	
+	
+	$(function(){
+		$('#txta_banner_desc').keyup(function(){
+			limitChars('txta_banner_desc', 200, 'charlimitinfo');
+		});
+    });
+	
+	
+
+	
+	//// just to show correct no. of chracters left while the page is loaded...
+	limitChars('txta_banner_desc',200, 'charlimitinfo');
+ 
+});
+</script>

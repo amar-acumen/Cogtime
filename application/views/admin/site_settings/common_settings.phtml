@@ -1,0 +1,208 @@
+<div class="clr"></div>
+<!-- CONTENT SECTION -->
+<!--navigation section start -->
+<?php include(APPPATH."views/layouts/admin/admin_nav.phtml");?>
+<!--navigation section end -->
+<div id="content_section">
+      <div id="container">
+            <!--<div id="top_corner">&nbsp;</div> -->
+            <div id="mid_content">
+                  <div class="page_heading left">
+                        <div class="left"><img src="../images/icons/login.png" alt="" /> Common Settings</div>
+                  </div>
+                  <div class="clr"></div>
+                  <div id="right_container">
+                        <div class="arrow_btm"></div>
+                         <form name="user_alerts" id="user_alerts" method="post"  onsubmit="return false;" >  
+                        <div class="content_area frm_box">
+                              <div class="lable01">eTrade Listing Cost ($) :</div>
+                              <div class="field01">
+                                    <input name="i_etrade_listing_cost" type="text"  value="<?=$posted['i_etrade_listing_cost']?>" />
+                              </div>
+                              <div class="error-message" id="err_i_etrade_listing_cost"></div>
+                              <div class="clr"></div>
+                              <div class="lable01"> eSwap Listing Cost ($) :</div>
+                              <div class="field01">
+                                    <input name="i_eswap_listing_cost" type="text"  value="<?=$posted['i_eswap_listing_cost']?>" />
+                              </div>
+                              <div class="error-message" id="err_i_eswap_listing_cost"></div>
+                              <div class="clr"></div>
+                              <div class="lable01"> Max Freebies Request Per Month :</div>
+                              <div class="field01">
+                                    <input name="i_max_efreebie" type="text"   value="<?=$posted['i_max_efreebie']?>" />
+                              </div>
+                              <div class="error-message" id="err_i_max_efreebie"></div>
+                              <div class="clr"></div>
+                              <div class="lable01"> No. of Prayer Partner User Can Have :</div>
+                              <div class="field01">
+                                    <input name="i_max_prayer_partner" type="text"   value="<?=$posted['i_max_prayer_partner']?>" />
+                              </div>
+                              <div class="error-message" id="err_i_max_prayer_partner"></div>
+                              <div class="clr"></div>
+                              <div class="lable01"> Prayer Partner Suggestion Count :</div>
+                              <div class="field01">
+                                    <input name="i_max_prayer_partner_sugg" type="text"  value="<?=$posted['i_max_prayer_partner_sugg']?>" />
+                              </div>
+                              <div class="error-message" id="err_i_max_prayer_partner_sugg"></div>
+                              <div class="clr"></div>
+                              <!--<div class="lable01"> Prayer Partner Reminder Interval (month) :</div>
+                              <div class="field01">
+                                    <input name="" type="text"   value="3"/>
+                              </div>
+                              <div class="error-message">* Required Field</div>
+                              <div class="clr"></div>-->
+                              <div class="lable01"> Max No. of Ring Creation Count :</div>
+                              <div class="field01">
+                                    <input name="i_max_ring" type="text"  value="<?=$posted['i_max_ring']?>"  />
+                              </div>
+                              <div class="error-message" id="err_i_max_ring"></div>
+                              <div class="clr"></div>
+                              <div class="lable01"> Prayer Request Deletion Interval (month) :</div>
+                              <div class="field01">
+                                    <input name="i_clear_prayer_request" type="text" value="<?=$posted['i_clear_prayer_request']?>"/>
+                              </div>
+                              <div class="error-message" id="err_i_clear_prayer_request"></div>
+                              <div class="clr"></div>
+                              
+                              
+                              <div class="lable01"> Max No. of Commitments per Prayer Request :</div>
+                              <div class="field01">
+                                    <input name="i_max_commitement" type="text" value="<?=$posted['i_max_commitement']?>" />
+                              </div>
+                              <div class="error-message" id="err_i_max_commitement"></div>
+                              <div class="clr"></div>
+                              
+                              <div class="lable01"> Max No. of Prayer Group :</div>
+                              <div class="field01">
+                                    <input name="i_max_prayer_grp" type="text" value="<?=$posted['i_max_prayer_grp']?>" />
+                              </div>
+                              <div class="error-message" id="err_i_max_prayer_grp"></div>
+                              <div class="clr"></div>
+                              
+                              
+                              
+                              <div class="lable01"> Max. No. of Ring Members :</div>
+                              <div class="field01">
+                                    <input name="i_max_ring_member" type="text" value="<?=$posted['i_max_ring_member']?>" />
+                              </div>
+                              <div class="error-message" id="err_i_max_ring_member"></div>
+                              <div class="clr"></div>
+                             <!-- <div class="lable01"> Max. No. of Chat Room Members :</div>
+                              <div class="field01">
+                                    <input name="" type="text" value="50" />
+                              </div>
+                              <div class="error-message">* Required Field</div>
+                              <div class="clr"></div>-->
+                              <div class="lable01"> Max. No. Video User Can Upload :</div>
+                              <div class="field01">
+                                    <input name="i_max_video_upload" type="text" value="<?=$posted['i_max_video_upload']?>"  />
+                              </div>
+                              <div class="error-message" id="err_i_max_video_upload"></div>
+                              <div class="clr"></div>
+                              <div class="lable01"> Max. No. of Audio User Can Upload :</div>
+                              <div class="field01">
+                                    <input name="i_max_audio_upload" type="text" value="<?=$posted['i_max_audio_upload']?>" />
+                              </div>
+                              <div class="error-message" id="err_i_max_audio_upload"></div>
+                              <div class="clr"></div>
+                              <div class="lable01"> Prayer wall refresh frequency (sec) :</div>
+                             <div class="field01">
+                                    <select name="i_prayer_wall_refresh_frequency" id="category" style="width:412px; margin-bottom:5px;">
+                                     <option value="-1">select</option>
+                                     <?php $i=5; 
+									 		while($i<=60){
+									  ?>
+                                            <option value="<?=$i?>" <?=($posted['i_prayer_wall_refresh_frequency'] == $i)? 'selected="selected"':''?> ><?=$i?></option>
+                                            
+                                      <?php  $i= $i+5;
+									  	} 
+									  ?>
+                                      </select>
+                                     
+                              </div>
+                              <div class="error-message" id="err_i_prayer_wall_refresh_frequency"></div>
+                              <div class="clr"></div>
+                             <!-- <div class="lable01"> No of RSS item in RSS Feed :</div>
+                              <div class="field01">
+                                    <input name="" type="text" value="20" />
+                              </div>
+                              <div class="error-message">* Required Field</div>
+                               <div class="clr"></div> 
+                               <div class="lable01"> User Password Expires Every :</div>
+                              <div class="field01">
+                                    <select name="category" id="pass-expire" style="width:412px; margin-bottom:5px;">
+                                            <option>6 Months</option>
+                                            <option>12 Months</option>
+                                      </select>
+                                      <script type="text/javascript">
+                                        $(document).ready(function(arg) {
+                                            $("#pass-expire").msDropDown();
+                                            $("#pass-expire").hide();
+											$('#pass-expire').css("width", "412px"); 
+                                        })
+                                    </script>
+                              </div>
+                              <div class="error-message">* Required Field</div>
+                               <div class="clr"></div>-->
+                              <div class="lable01"> </div>
+                              <div class="field01">
+                                    <input name="" type="submit" class="btn"  value="Save" />
+                                    <input name="" type="button" class="btn"  value="Cancel" />
+                              </div>
+                              <div class="clr"></div>
+                        </div>
+                        </form>
+                  </div>
+                  <div class="clr"></div>
+            </div>
+            <!--<div id="bot_corner">&nbsp;</div> -->
+      </div>
+      <div class="clr"></div>
+</div>
+<!-- /CONTENT SECTION -->
+
+<script type="text/javascript">
+$(document).ready(function(arg) {
+	
+
+ $('#user_alerts').submit(function(){
+						
+				  var datatosend=$("#user_alerts").serialize();
+				 // alert(datatosend);
+				  showBusyScreen();
+											  
+					  $.ajax({
+						 type: "POST",
+						 url: base_url+"admin/site_settings/settings/edit_info",
+						 data: datatosend,
+						 dataType: 'json',
+						 success: function(data){
+							
+							if(data.success==false) 
+							{
+								
+						
+								$('.error-message').each(function(i){
+									$(this).attr('style','display:none');
+								});
+								
+								
+								for ( var id in data.arr_messages ){
+									//alert('#err_'+id);
+									if( $('#err_'+id) != null ) {
+										$('#err_'+id).html(data.arr_messages[id]);
+										$('#err_'+id).css('display', 'block');
+									}
+								}
+						
+								
+							}
+							
+							hideBusyScreen(); 
+							showUIMsg(data.msg);
+						 }
+					   });	 
+				});
+ 
+ });
+</script>

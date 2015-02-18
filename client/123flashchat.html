@@ -1,0 +1,91 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<style>
+html, body { height:100%; }
+</style> 
+<title>COGTIME CHAT</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="description" content="Chat, 123 Flash Chat, Html Chat, Ajax Chat, iPhone Chat, gPhone Chat, android Chat, mobile Chat by 123 Flash Chat"/>
+<meta name="keywords" content="Chat, 123 Flash Chat, Html Chat, Ajax Chat, iPhone Chat, gPhone Chat, android Chat, mobile Chat by 123 Flash Chat" />
+<!--<link rel="shortcut icon" href="favicon.ico" type="image/ico" />
+--><script language="javascript" src="123flashchat.js"></script>
+</head>
+<body topmargin="0" bottommargin="0" leftmargin="0" rightmargin="0">
+<div align="center" id="123flashchat_div" style="height:100%">
+<script language="javascript">
+		var parameters="";
+		var swfWidth;
+		var swfHeight;
+		if(urlLink==undefined)
+		{
+			var urlLink;
+			try
+			{
+					urlLink=window.location.href;
+			}
+			catch(e)
+			{
+				try
+				{
+					urlLink=document.URL;
+				}
+				catch(e)
+				{
+					urlLink="";
+				}
+			}
+		}
+		if(urlLink.indexOf("?")!=-1)
+		{
+			parameters=urlLink.substring(urlLink.indexOf("?")+1);
+		}
+		if(parameters.indexOf("width") != -1 && parameters.indexOf("height") != -1)
+		{
+			var widthS = parameters.substring(parameters.indexOf("width") + 6 );
+			if(widthS.indexOf("&") != -1)
+
+			{
+			 	swfWidth = widthS.substring(0, widthS.indexOf("&"));
+
+			}
+			else
+			{
+				swfWidth = widthS;
+			}
+			
+			var heightS = parameters.substring(parameters.indexOf("height") + 7 );
+			if(heightS.indexOf("&") != -1)
+
+			{
+			 	swfHeight = heightS.substring(0, heightS.indexOf("&"));
+
+			}
+			else
+			{
+				swfHeight = heightS;
+			}
+		}
+		else
+		{
+			swfWidth = "100%";
+			swfHeight = "100%";
+		}
+		var urlValue="123flashchat.swf";
+		if(parameters.length>0)
+		{
+			if(urlValue.indexOf("?")!=-1)
+			{
+				urlValue+="&"+parameters;
+			}
+			else
+			{
+				urlValue+="?"+parameters;
+			}
+		}
+		openSWF(urlValue,swfWidth,swfHeight);
+</script>
+</div>
+</body>
+</html>
+<!-- Powered by 123 Flash Chat - http://www.123flashchat.com -->

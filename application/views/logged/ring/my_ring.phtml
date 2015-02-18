@@ -1,0 +1,274 @@
+<?php include(APPPATH . "views/layouts/logged_header.phtml"); ?>
+<!-- NAVIGATION SECTION -->
+<?php include(APPPATH . "views/layouts/nav.phtml"); ?>
+<!-- /NAVIGATION SECTION -->
+</div>
+</div>
+<!-- /HEADER SECTION -->
+<div class="clr"></div>
+
+<!-- CONTENT SECTION -->
+<div id="content_section">
+    <div id="container">
+        <!--<div id="mid_content"> -->
+        <!-- latest news -->
+        <?php include(APPPATH . "views/layouts/latest_news.phtml"); ?>
+        <!-- /latest news -->
+        <div class="clr"></div>
+        <!-- main container -->
+        <div id="main_container">
+            <!-- left container -->
+            <?php include(APPPATH . "views/layouts/leftbar.phtml"); ?>
+            <!-- /left container -->
+            <!-- mid container -->
+            <div id="mid_container">
+                <div class="page_heading">
+                    <div class="left"><img src="images/icons/ring.png" alt="" onClick="location.href='<?=base_url()?>my-ring.html'" /> Rings </div>
+                                                    <!--<p class="rings-joined">Rings I have Joined / Created</p>-->
+                    <?php /* ?><div class="right"><input name="" type="button" value="Create Ring"  class="evnt_btn"  onclick="window.location='create-my-ring.html'"/></div><?php */ ?>
+                </div>
+                <!--sub page links -->
+                <div class="link-div" style="margin-top:-2px;">
+                    <ul>
+                        <li><a href="my-ring.html" class="<?php echo ($page_name == 'my-ring') ? 'current' : ''; ?>"><span>My Ring</span> </a> </li>
+                        <li><a href="search-ring.html" class="<?php echo ($page_name == 'search-ring') ? 'current' : ''; ?>"><span>Browse  &amp;  Search Ring</span> </a> </li>
+                           <?php 
+                                 $logged_user_id = intval(decrypt($this->session->userdata('user_id')));
+                                 $frnd_number = get_friend_number_by_id($logged_user_id);
+                                 if($frnd_number <= 0){
+                                 
+                                ?>
+                                          <li><a href="javascript:void(0)" onclick="show_dialog('ring-pop')" class="<?php echo ($page_name=='create-my-ring')? 'current':'';?>"><span>Create Ring</span> </a> </li>
+                                          <?php
+                                 }else if($frnd_number > 0){
+                                          ?>
+                                          <li><a href="create-my-ring.html" class="<?php echo ($page_name=='create-my-ring')? 'current':'';?>"><span>Create Ring</span> </a> </li>
+                                 <?php } ?>
+                        <li><a href="approve-join-request.html" class="<?php echo ($page_name == 'approve-join-request') ? 'current' : ''; ?>"><span>Ring Requests</span></a> </li>
+                    </ul>
+                    <div class="clr"></div>
+                </div>
+                <!--/sub page links -->
+
+                <!-- <div class="page_heading">
+                     <div class="left"><img src="images/icons/ring.png" alt="" /> My Rings </div>
+                                                     <p class="rings-joined">Rings I have Joined / Created</p>
+                <?php /* ?><div class="right"><input name="" type="button" value="Create Ring"  class="evnt_btn"  onclick="window.location='create-my-ring.html'"/></div><?php */ ?>
+                 </div>
+                -->
+
+
+
+
+                <div class="blog-container" style=" margin-top:0px;" id="listingContent">
+                    <?php echo $listingContent; ?>
+                </div>
+
+                <?php if ($no_of_result == 0):
+                    ?>
+                    <div class="shade_box_01" style="padding-top:5px;"><div  class="shade_norecords" style="width:260px;"><p class="blue_bold12">No Ring.</p></div></div>
+                <?php endif; ?>	
+                <?php if ($no_of_result > $pagination_per_page): ?>
+                    <div class="view_more" id="show_more_feeds_div"><a href="javascript:void(0);" id="show_more_feeds_link" page_value="<?= $current_page_1 ?>" onclick="show_more_feeds($(this).attr('page_value'))">[view more] </a> </div>
+                <?php endif; ?>
+
+            </div>
+            <!--sub page links -->
+
+            <!-- /mid container -->
+            <!-- right container -->
+            <?php include(APPPATH . "views/layouts/rightbar.phtml"); ?>
+            <!-- /right container -->
+        </div>
+    </div>
+    <!-- /main container -->
+    <div class="clr"></div>
+    <!--</div> -->
+</div>
+<div class="clr"></div>
+</div>
+<!-- /CONTENT SECTION -->
+<div class="clr"></div>
+
+
+<!-- confirm delete ring-->
+<div class="lightbox delete-ring" style="width: 400px; left: 296px;">
+    <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="<?= base_url() ?>images/close.png" alt="" /></a></div>
+    <div class="top"><div>&nbsp;</div></div>
+    <div class="mid">
+        <div class="heading" style="margin-bottom:0px;">
+            <div class="left">
+                <h4>Delete Ring</h4>
+            </div>
+        </div>
+        <div class="shade_box_white" style="padding:8px 0px;">
+            <div style="padding-bottom:10px;">
+                <p class="center-text" style="line-height:23px; color:#494949;">
+                    There are active members in this ring and if you delete all post, comments and active members under this ring will be deleted. Are you sure you want to delete this ring anyway?
+                </p>
+            </div>
+            <form action="" method="post" id="delfrm">
+                <input type="hidden" name="i_del_id" id="i_del_id" value="" />
+                <input name="" type="button" value="Yes" class="btn" style="margin-left:105px;" onClick="deleteRing()"/>
+                <input name="" type="button" value="No" class="btn" onclick="hide_dialog()"/>
+            </form>   
+            <div class="clr"></div>
+        </div>
+
+    </div>
+    <div class="bot"><div>&nbsp;</div></div>
+</div>
+
+<div class="lightbox delete-ring-inactive" style="width: 400px; left: 296px;">
+    <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="<?= base_url() ?>images/close.png" alt="" /></a></div>
+    <div class="top"><div>&nbsp;</div></div>
+    <div class="mid">
+        <div class="heading" style="margin-bottom:0px;">
+            <div class="left">
+                <h4>Delete Ring</h4>
+            </div>
+        </div>
+        <div class="shade_box_white" style="padding:8px 0px;">
+            <div style="padding-bottom:10px;">
+                <p class="center-text" style="line-height:23px; color:#494949;">
+                    Are you sure you want to delete this ring?
+                </p>
+            </div>
+            <form action="" method="post" id="delfrm">
+                <input type="hidden" name="i_del_id" id="i_del_id" value="" />
+                <input name="" type="button" value="Yes" class="btn" style="margin-left:105px;" onClick="deleteRing()"/>
+                <input name="" type="button" value="No" class="btn" onclick="hide_dialog()"/>
+            </form>   
+            <div class="clr"></div>
+        </div>
+
+    </div>
+    <div class="bot"><div>&nbsp;</div></div>
+</div>
+<!-- confirm delete ring-->
+
+
+<!-- confirm delete ring-->
+<div class="lightbox leave-ring" style="width: 400px; left: 296px;">
+    <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="<?= base_url() ?>images/close.png" alt="" /></a></div>
+    <div class="top"><div>&nbsp;</div></div>
+    <div class="mid">
+        <div class="heading" style="margin-bottom:0px;">
+            <div class="left">
+                <h4>Leave Ring</h4>
+            </div>
+        </div>
+        <div class="shade_box_white" style="padding:8px 0px;">
+            <div style="padding-bottom:10px;">
+                <p class="center-text" style="line-height:23px; color:#494949;">
+                    Do you really want to leave the ring?
+                </p>
+            </div>
+            <form action="" method="post" id="leavefrm">
+                <input type="hidden" name="i_leave_id" id="i_leave_id" value="" />
+                <input name="" type="button" value="Yes" class="btn" style="margin-left:105px;" onClick="leaveRing()"/>
+                <input name="" type="button" value="No" class="btn" onclick="hide_dialog()"/>
+            </form>   
+            <div class="clr"></div>
+        </div>
+
+    </div>
+    <div class="bot"><div>&nbsp;</div></div>
+</div>
+<!-- confirm delete ring-->
+
+<?php include(APPPATH . "views/layouts/footer.phtml"); ?>
+<?php include(APPPATH . "views/logged/blocks/common_popup.phtml"); ?>
+
+<script type="text/javascript">
+
+    var ajax_req_feeds = null;
+    function show_more_feeds(page) {
+        if (ajax_req_feeds != null) {
+            ajax_req_feeds.abort();
+        }
+        showUILoader_nodialog();
+        ajax_req_feeds = $.ajax({
+            type: 'get',
+            url: base_url + 'logged/my_ring/generate_ring_listing_AJAX/' + '/' + page,
+            dataType: 'json',
+            success: function(data, status) {
+
+                hideUILoader_nodialog();
+                if (data.html != '') {
+                    $('#listingContent').append(data.html);
+                    $('#show_more_feeds_link').attr('page_value', data.current_page);
+                }
+                else {
+                    $('#listingContent').append('<div class="view_more" style="text-align: center;"><p class="blue_bold12" style="font-size:14px;">No More Event.</p></div>');
+                    $('#show_more_feeds_div').hide();
+                }
+
+                if (data.view_more == false)
+                {
+
+                    $('#invitaion_rec').append('<div class="view_more" style="text-align: center;"><p class="blue_bold12" style="font-size:14px;">No More Event.</p></div>');
+                    $('#show_more_feeds_div').hide();
+                }
+
+
+            }	// end of success function...
+        });
+    }
+
+
+    function deleteRing()
+    {
+        showUILoader_nodialog();
+        $.ajax({
+            type: 'post',
+            url: base_url + 'logged/my_ring/deletering/',
+            data: $('#delfrm').serialize(),
+            dataType: 'json',
+            success: function(data) {
+                hideUILoader_nodialog();
+                hide_dialog();
+                if (data.html != '') {
+                    $('#listingContent').html(data.html);
+                    $('#show_more_feeds_link').attr('page_value', data.current_page);
+                }
+                else {
+                    $('#listingContent').html('<div class="view_more" style="text-align: center;"><p class="blue_bold12" style="font-size:14px;">No More Event.</p></div>');
+                    $('#show_more_feeds_div').hide();
+                }
+
+
+                showUIMsg(data.msg);
+            }	// end of success function...
+        });
+    }
+
+
+
+    function leaveRing()
+    {
+        showUILoader_nodialog();
+        $.ajax({
+            type: 'post',
+            url: base_url + 'logged/my_ring/leavering/',
+            data: $('#leavefrm').serialize(),
+            dataType: 'json',
+            success: function(data) {
+                hideUILoader_nodialog();
+                hide_dialog();
+                if (data.html != '') {
+                    $('#listingContent').html(data.html);
+                    $('#show_more_feeds_link').attr('page_value', data.current_page);
+                }
+                else {
+                    $('#listingContent').html('<div class="view_more" style="text-align: center;"><p class="blue_bold12" style="font-size:14px;">No More Event.</p></div>');
+                    $('#show_more_feeds_div').hide();
+                }
+                showUIMsg(data.msg);
+            }	// end of success function...
+        });
+    }
+
+</script>
+
+

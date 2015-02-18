@@ -1,0 +1,124 @@
+<table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" bgcolor="#e9f3f5" style="font-family:Arial, Helvetica, sans-serif; font-size:13px; line-height:19px;">
+  <tr>
+    <td align="left" style="background:#013D62; border-bottom:5px solid #62C3BC; padding:15px 0 15px 20px;"><img src="http://cogtime.com/images/logo.png" alt= ""></td>
+  </tr>
+  <tr style="border-top:1px solid #ffffff;">
+    <td style="padding-top:10px; padding-bottom:10px;">&nbsp;</td>
+  </tr>
+ 
+  <tr>
+  <td style="padding:15px;">
+  <?php if($s_type=="e_friend_request_received"){?>
+  <p> Dear <?=$i_accepter_id?>,<br/><?=$i_requester_id?> has sent you a friend request.</p><p>To visit the friend request, please log in to <a href="http://cogtime.com">http://cogtime.com</a></p>
+  <p>Best Regards,<br/>COGTIME Team</p>
+  <?php }
+  else if($s_type=="friend_request_accepted"){?>
+  <p> Dear <?=$i_accepter_id?>,<br/><?=$i_requester_id?> accepted your friend request.</p><p>To visit <?=$i_requester_id?>'s profile , please log in to <a href="http://cogtime.com">http://cogtime.com</a></p>
+  <p>Best Regards,<br/>COGTIME Team</p>
+<?php }
+  else if($s_type=="friend_request_decline"){?>
+  <p> Dear <?=$i_accepter_id?>,<br/><?=$i_requester_id?>  has declined your friend request for this time. But you can always send him/her new friend request at any point of time later following the same procedure.</p><p>To visit your profile , please log in to <a href="http://cogtime.com">http://cogtime.com</a></p>
+  <p>Best Regards,<br/>COGTIME Team</p>
+<?php }
+  else if($s_type=="netpal"){?>
+  <p> Dear <?=$i_accepter_id?>,<br/><?=$i_requester_id?> has sent you a Netpal request.</p><p>To visit the Netpal request, please log in to <a href="http://cogtime.com">http://cogtime.com</a></p>
+  <p>Best Regards,<br/>COGTIME Team</p>
+   <?php }
+  else if($s_type=="netpal_request_accepted"){?>
+  <p> Dear <?=$i_accepter_id?>,<br/><?=$i_requester_id?> has accepted your Netpal request.</p><p>To visit <?=$i_requester_id?>'s profile , please log in to <a href="http://cogtime.com">http://cogtime.com</a></p>
+  <p>Best Regards,<br/>COGTIME Team</p>
+  <?php }
+  else if($s_type=="netpal_request_decline"){?>
+  <p> Dear <?=$i_accepter_id?>,<br/><?=$i_requester_id?>  has declined your Netpal request for this time. But you can always send him/her new Netpal request at any point of time later following the same procedure.</p><p>To visit your profile , please log in to <a href="http://cogtime.com">http://cogtime.com</a></p>
+  <p>Best Regards,<br/>COGTIME Team</p>
+  <?php }
+  else if($s_type=="prayer_p"){?>
+  <p> Dear <?=$i_accepter_id?>,<br/><?=$i_requester_id?> has sent you a Prayer Partner request.</p><p>To visit the Prayer Partner  request, please log in to <a href="http://cogtime.com">http://cogtime.com</a></p>
+  <p>Best Regards,<br/>COGTIME Team</p>
+   <?php }
+  else if($s_type=="prayer_p_request_accepted"){?>
+  <p> Dear <?=$i_accepter_id?>,<br/><?=$i_requester_id?> has accepted your Prayer Partner request.</p><p>To visit <?=$i_requester_id?>'s profile , please log in to <a href="http://cogtime.com">http://cogtime.com</a></p>
+  <p>Best Regards,<br/>COGTIME Team</p>
+   <?php }
+  else if($s_type=="prayer_p_request_decline"){?>
+  <p> Dear <?=$i_accepter_id?>,<br/><?=$i_requester_id?>  has declined your Prayer Partner request for this time. But you can always send him/her new Prayer Partner request at any point of time later following the same procedure.</p><p>To visit your profile , please log in to <a href="http://cogtime.com">http://cogtime.com</a></p>
+  <p>Best Regards,<br/>COGTIME Team</p>
+  <?php }
+  else if($s_type=="e_photo_comments_received"){?>
+  <p> Dear <?=$i_accepter_id?>,<br/><?=$i_requester_id?>  has commented on your photo "<?=$s_title?>".</p><p>To view the comment, please log in to <a href="http://cogtime.com">http://cogtime.com</a></p>
+  <p>Best Regards,<br/>COGTIME Team</p>
+  <?php }
+  else if($s_type=="e_audio_comments_received"){?>
+  <p> Dear <?=$i_accepter_id?>,<br/><?=$i_requester_id?>  has commented on your audio "<?=$s_title?>".</p><p>To view the comment, please log in to <a href="http://cogtime.com">http://cogtime.com</a></p>
+  <p>Best Regards,<br/>COGTIME Team</p>
+  <?php }
+  else if($s_type=="e_video_comments_received"){?>
+  <p> Dear <?=$i_accepter_id?>,<br/><?=$i_requester_id?>  has commented on your video "<?=$s_title?>".</p><p>To view the comment, please log in to <a href="http://cogtime.com">http://cogtime.com</a></p>
+  <p>Best Regards,<br/>COGTIME Team</p>
+  <?php }
+  else if($s_type=="e_blog_comments_received"){?>
+  <p> Dear <?=$i_accepter_id?>,<br/><?=$i_requester_id?>  has commented on your Blog.</p><p>To view the comment, please log in to <a href="http://cogtime.com">http://cogtime.com</a></p>
+  <p>Best Regards,<br/>COGTIME Team</p>
+  <?php }
+  else if($s_type=="e_ring_posts_received"){?>
+  <p> Dear <?=$i_accepter_id?>,<br/><?=$i_requester_id?>  has Posted on Ring "<?=$Ring_name?>".</p><p>To view the Post, please log in to <a href="http://cogtime.com">http://cogtime.com</a></p>
+  <p>Best Regards,<br/>COGTIME Team</p>
+  <?php }
+  else if($s_type=="e_ring_comments_received"){?>
+  <p> Dear <?=$i_accepter_id?>,<br/><?=$i_requester_id?>  has Commented on a post in Ring "<?=$Ring_name?>".</p><p>To view the comment, please log in to <a href="http://cogtime.com">http://cogtime.com</a></p>
+  <p>Best Regards,<br/>COGTIME Team</p>
+   <?php }
+  else if($s_type=="e_event_comments_received"){?>
+  <p> Dear <?=$i_accepter_id?>,<br/><?=$i_requester_id?>  has Commented on event "<?=$event_name?>".</p><p>To view the comment, please log in to <a href="http://cogtime.com">http://cogtime.com</a></p>
+  <p>Best Regards,<br/>COGTIME Team</p>
+  <?php }
+  else if($s_type=="e_prayer_grp_invitation"){?>
+  <p> Dear <?=$i_accepter_id?>,<br/><?=$i_requester_id?>  has invited you to his/her Prayer Group "<?=$group_name?>".</p><p>To accept or decline the Invitation, please log in to <a href="http://cogtime.com">http://cogtime.com</a></p>
+  <p>Best Regards,<br/>COGTIME Team</p>
+  <?php }
+  else if($s_type=="prayer_group_joining"){?>
+  <p> Dear <?=$i_accepter_id?>,<br/><?=$i_requester_id?>  has sent you a join request for  Prayer Group "<?=$group_name?>".</p><p>To accept or decline the request, please log in to <a href="http://cogtime.com">http://cogtime.com</a></p>
+  <p>Best Regards,<br/>COGTIME Team</p>
+  <?php }
+  else if($s_type=="e_message_received"){?>
+  <p> Dear <?=$i_accepter_id?>,<br/>You have received a message from <?=$i_requester_id?> in COGTIME.</p><p>To view the message, please log in to <a href="http://cogtime.com">http://cogtime.com</a></p>
+  <p>Best Regards,<br/>COGTIME Team</p>
+  <?php }
+  else if($s_type=="e_prayer_commit_received"){?>
+  <p> Dear <?=$i_accepter_id?>,<br/><?=$i_requester_id?>  has Committed to your Prayer Request "<?=$prayer_name?>".</p><p>To view the Commitment, please log in to <a href="http://cogtime.com">http://cogtime.com</a></p>
+  <p>Best Regards,<br/>COGTIME Team</p>
+   <?php }
+  else if($s_type=="e_tweet_comments_received"){?>
+  <p> Dear <?=$i_accepter_id?>,<br/><?=$i_requester_id?> has replied on your tweet in COGTIME.</p><p>To view the reply, please log in to <a href="http://cogtime.com">http://cogtime.com</a></p>
+  <p>Best Regards,<br/>COGTIME Team</p>
+  <?php }
+  else if($s_type=="e_retweet"){?>
+  <p> Dear <?=$i_accepter_id?>,<br/><?=$i_requester_id?> has retweeted your tweet in COGTIME.</p><p>To view the tweet, please log in to <a href="http://cogtime.com">http://cogtime.com</a></p>
+  <p>Best Regards,<br/>COGTIME Team</p>
+   <?php }
+  else if($s_type=="e_prayer_grp_request_accepted"){?>
+  <p> Dear <?=$i_accepter_id?>,<br/><?=$i_requester_id?> has accepted your prayer group joining request.You are now a member of "<?=$group_name?>".</p><p>To visit Prayer Group , please log in to <a href="http://cogtime.com">http://cogtime.com</a></p>
+  <p>Best Regards,<br/>COGTIME Team</p>
+   <?php }
+  else if($s_type=="e_prayer_grp_request_declined"){?>
+  <p> Dear <?=$i_accepter_id?>,<br/><?=$i_requester_id?>  has declined your Prayer group joining request for this time. But you can always send new Prayer group joining request to "<?=$group_name?>" at any point of time later following the same procedure.</p><p>To visit your profile , please log in to <a href="http://cogtime.com">http://cogtime.com</a></p>
+  <p>Best Regards,<br/>COGTIME Team</p>
+  <?php }
+  else if($s_type=="e_prayer_grp_chat_invitation"){?>
+  <p> Dear <?=$i_accepter_id?>,<br/><?=$i_requester_id?> has invited you to his/her prayer room "<?=$group_name?>".</p><p>To Accept or decline the invitation , please log in to <a href="http://cogtime.com">http://cogtime.com</a></p>
+  <p>Best Regards,<br/>COGTIME Team</p>
+ <?php } else{?> 
+ <p> Dear Friend, I would like to invite you to join me at COGTime, the most exciting place for believers to hang out, visit the Prayer Wall, join a Prayer Group, find a Prayer Partner, create a Ring and much more! You have a unique gift and the Kingdom needs you now - than ever before!</p><p> I look forward to connecting with you in COGTime!  '.$newArr["s_first_name"].' '.$newArr["s_last_name"].'</p><p><a href="http://cogtime.com">http://cogtime.com</a></p>
+	<?php }?>
+	</td>
+</tr>
+  <tr>
+    <td align="center" valign="middle" style="background:#A8A7A7; padding:15px;"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td align="left" valign="middle" style="color:#d3edfd; font-family:Arial, Helvetica, sans-serif; font-size:12px;"> <a href="http://acumencs.com/drandpt-arabic/contact-us/" style="color:#d3edfd; text-decoration:none;"></a></td>
+        
+        <td align="right" style="color:#013d62; font-family:Arial, Helvetica, sans-serif; font-size:12px; text-align="center" ">© All Rights Reserved<span style="color:#525252;"><strong> COGTIME 2014  </strong></span></td>
+      </tr>
+    </table></td>
+  </tr>
+</table>

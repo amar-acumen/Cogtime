@@ -1,0 +1,57 @@
+<?php
+if($bible_library)
+{
+	?>
+    <ul class="right-marked" id="library_ul">
+    <?php
+	foreach($bible_library as $val)
+	{
+		?>
+		<li>
+			<span class="icon">
+            <?php
+			if($val['rowtype']=='note')
+				$image	= 'images/note-small.gif';
+			else if($val['rowtype']=='bkmark')
+				$image	= 'images/bookmark-small.gif';
+			else if($val['rowtype']=='hilits')
+			{
+				$image	= $val['images'];
+			}
+			?>
+            <img src="<?php echo $image?>" alt="Note"></span>
+			<div class="content">
+				<p class="title-text">
+                <?php
+				if($val['i_page_bookmark']>0)
+				{
+					echo "Page bookmark ";
+					?>
+                    <span style="font-size:10px; float:right; color:#999999; font-style:italic;"><?php echo getShortDate($val['created_date'],5);?></span>
+                    </p>
+                    <p><a href="javascript:void(0);" onclick="gotoVerse('<?php echo $val['vid']?>');"><?php echo $val['book_name'].' '.$val['chapter'].':'.$val['i_verses']?></a></p>
+                    <?php
+				}
+				else
+				{
+				?>
+                <a href="javascript:void(0);" onclick="gotoVerse('<?php echo $val['vid']?>');"><?php echo $val['book_name'].' '.$val['chapter'].':'.$val['i_verses']?></a>
+                <span style="font-size:10px; float:right; color:#999999; font-style:italic;"><?php echo getShortDate($val['created_date'],5);?></span>
+                </p>
+				<p><?php echo $val['s_note']?></p>
+                <?php
+				}
+				?>
+			</div>
+		</li>
+		<?php
+	}
+	?>
+    </ul>
+    <?php
+}
+else
+{
+	?><div style="width:100%; text-align:center; padding-top:20px;">No results</div><?php
+}
+?>

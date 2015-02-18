@@ -1,0 +1,1071 @@
+<?php include(APPPATH."views/layouts/logged_header.phtml");?>
+            <!-- NAVIGATION SECTION -->
+      <?php include(APPPATH."views/layouts/nav.phtml");?>
+      <!-- /NAVIGATION SECTION -->
+      </div>
+</div>
+<div class="clr"></div>
+
+<!-- CONTENT SECTION -->
+
+
+
+
+    <? include "media_center_nav.phtml" ?>
+
+<div id="content_section">
+      <div id="container">
+          <div class="top-page-heading">
+          <h2 class="landing-title">Media center</h2>
+          <div class="landing-input">
+		  <form name="user_frms" id="user_frms" method="post" action="<?= base_url() . 'logged/christian_news/search_news' ?>"  onsubmit="return true;" >
+		  <input type="text" name="search_keyword_val" value="<?php echo $search_keyword_val?>" placeholder="Type Keywords separated by comma">
+		  <input name="" type="submit" value="Deactivate"  class="btn" style="display:none;"/>
+		  </form>
+		  </div>
+	  <div class="clr"></div>
+           </div>
+          <div class="media-center-left">
+               
+                <h3 class="featured-heading">FEATURED</h3>
+                <div class="read-slide">
+                    <div id="ei-slider" class="ei-slider">
+                    <?
+                    if($featured)
+					{
+					?>
+                    <ul class="ei-slider-large">
+					
+                    	<? foreach($featured as $val) 
+						{
+							$IMG = base_url() . 'uploads/media_center_article/' . getThumbName($val['s_image'], 'mid_FO');					
+							if(is_file(BASEPATH.'../uploads/media_center_article/' . getThumbName($val['s_image'], 'mid_FO')))
+							{
+						?>
+						<li>
+						
+                            <img src="<?=$IMG?>" alt="image06"/>
+                            <div class="ei-title">
+                                <h2><a href="<?= base_url().$val['id']."/".my_url($val['cat_name'])."/christian-news-details/".my_url($val['s_title']).".html"?>" title="<?=$val['s_title']?>"><?=$val['s_title']?></a></h2>
+                            </div>
+                        </li>
+                        <? } 
+						}?>
+                    </ul><!-- ei-slider-large -->
+                    
+                    <ul class="ei-slider-thumbs">
+                     <li class="ei-slider-element"></li>
+					<? 
+						$i = 0;
+						foreach($featured as $val) 
+						{
+					
+					?>
+                       
+                        <li><a href="javascript:void(0)"></a></li>
+					<? 
+						$i++;
+						} 
+					?>	
+                    </ul><!-- ei-slider-thumbs -->
+					<? 
+					
+					} 
+					?>
+                </div><!-- ei-slider -->
+                    
+                </div>
+                 <?
+                 
+                    $query = $this->db->get_where('cg_christian_news_cat', array('id' => 1));
+                                        foreach ($query->result() as $row)
+                                            {
+                                               $is_hidden_cat1 =  $row->is_hidden;
+                                            }
+                                          if($is_hidden_cat1 == 0){  
+                                            
+                 
+				if($cat1_article)
+				{
+				?>
+                <h3 class="story-heading"><a class="article_category" href="<?php echo base_url().'christian_news/category/1' ?>"><?php echo my_substr($cat_name['1'],15)?></a><a href="<?php echo base_url().'christian_news/category/1' ?>">View all</a></h3>
+                <div class="panel-main">
+                    <div class="panel-left">
+                    <? $IMG = base_url() . 'uploads/media_center_article/' . getThumbName($cat1_article[0]['s_image'], 'mid' )?>
+                                   
+                                 <?php
+                                                          if(is_file(BASEPATH.'../uploads/media_center_article/' . getThumbName($cat1_article[0]['s_image'], 'mid' )))
+                                                                             {
+                                                          ?>   
+                        <div style=" background:url('<?=$IMG?>') no-repeat center; width:348px; height:195px;"></div>
+                           
+                                      <?php } 
+                                      else if($cat1_article[0]['s_feed_url'] != ''  ) {
+                                        // echo 'dd';
+                                                                                 ?>
+                                                        
+                                                                                     <?php
+                                                                                     $first_img = '';
+                                                                                    ob_start();
+                                                                                    ob_end_clean();
+                                                                                    $output = preg_match_all('/<img.+src=[\'"]([^\'"]+)[\'"].*>/i', $cat1_article[0]['s_desc'], $matches);
+                                                                                    $first_img = $matches[1][0];
+                                                                                     
+                                                                                     $size = getimagesize($first_img); 
+                                                                                 
+                                                                           
+                                                                     if( $first_img != '' && $size['0'] >= 348 && $size['1'] >=195)          
+                                                                     {    
+                                                                            
+echo $img[1];                                                               
+                                                        ?>
+                                                        
+                                                        <div style=" background:url('<?php
+                                                             
+                                                        
+                                                        echo $first_img; ?>') no-repeat center; width:348px; height:195px;  " class="div_back_pic"></div>
+                                   <?php 
+                                   }else {
+                                       echo '';
+                                   }
+                                      }else {
+                                          
+                                      } 
+                                      
+                                      
+                                      ?>
+                        <h4><a href="<?= base_url().$cat1_article[0]['id']."/".my_url($cat1_article[0]['cat_name'])."/christian-news-details/".my_url($cat1_article[0]['s_title']).".html"?>" class="article_category" title="<?=$cat1_article[0]['s_title']?>"><?=my_substr($cat1_article[0]['s_title'],50)?></a></h4>
+                        <p><?=my_substr(strip_tags(get_unformatted_string_edit($cat1_article[0]['s_desc'])),320)?></p>
+                    
+                    </div>
+					
+                    <div class="panel-right">
+					
+                    <? 
+					$i=0;
+					foreach($cat1_article as $val) 
+					{	
+						$i++;
+						if($i == 1)
+							continue;
+						
+							$IMG = base_url() . 'uploads/media_center_article/' . getThumbName($val['s_image'], 'thumb');
+							?>
+							<div class="story-panel">
+								<h4><a href="<?= base_url().$val['id']."/".my_url($val['cat_name'])."/christian-news-details/".my_url($val['s_title']).".html"?>" title="<?=$val['s_title']?>"><?=my_substr($val['s_title'],40)?></a></h4>
+								<div class="story-thumb">
+                                                                    
+                                                                      <!-------------------new add 8-1-2015------------------------------>
+                                                        <?php
+                                                          if(is_file(BASEPATH.'../uploads/media_center_article/' . getThumbName($val['s_image'], 'thumb')))
+                                                                             {
+                                                          ?>
+                                                                  <!-------------------------------------------------->
+								<div class="pic div_back_pic" style=" background:url('<?=$IMG?>') no-repeat center; width:98px, height:75px;  "></div>
+                                                                
+									<!--------new add 8-1-2015---------------->
+                                                                             <?php } 
+                                                                             
+                                                                              else if($val['s_feed_url'] != ''  ) {
+                                        // echo 'dd';
+                                                                                 ?>
+                                                        
+                                                                                     <?php
+                                                                                     $first_img = '';
+                                                                                    ob_start();
+                                                                                    ob_end_clean();
+                                                                                    $output = preg_match_all('/<img.+src=[\'"]([^\'"]+)[\'"].*>/i', $val['s_desc'], $matches);
+                                                                                    $first_img = $matches[1][0];
+                                                                                     
+                                                                                      
+                                                                                 
+                                                                           
+                                                                     if( $first_img != '')          
+                                                                     {    
+                                                                             
+echo $img[1];                                                               
+                                                        ?>
+                                                        
+                                                        <div style=" background:url('<?php
+                                                             
+                                                        
+                                                        echo $first_img; ?>') no-repeat center; width:98px, height:75px; background-size:cover; " class="div_back_pic"></div>
+                                   <?php 
+                                   }else {
+                                       echo '';
+                                   }
+                                      }else {
+                                          
+                                      } 
+                                                                             
+                                                                             
+                                                                             ?>
+                                                                        <!------------------------->
+									<p><?=my_substr(strip_tags(get_unformatted_string_edit($val['s_desc'])),120)?></p>
+									<div class="clr"></div>
+								</div>                           
+							</div>
+						<? 
+						
+					 }
+					 ?>
+					 </div>
+                    <div class="clr"></div>
+                </div>
+                <? } 
+                }
+                ?>
+		<!-------------------cat1 end-------------------------->		
+                <?
+                
+                $query = $this->db->get_where('cg_christian_news_cat', array('id' => 2));
+                                        foreach ($query->result() as $row)
+                                            {
+                                               $is_hidden_cat2 =  $row->is_hidden;
+                                            }
+                                          if($is_hidden_cat2 == 0){  
+				
+				if($cat2_article)
+				{
+				$i=0;
+				?>
+                  <h3 class="blog-icon"><a class="article_category" href="<?php echo base_url().'christian_news/category/2' ?>"><?php echo my_substr($cat_name['2'],15)?></a><a href="<?php echo base_url().'christian_news/category/2' ?>">View all</a></h3>
+                  
+                  <div class="panel-main">
+                    <div class="panel-left">
+                        
+                    <? $IMG = base_url() . 'uploads/media_center_article/' . getThumbName($cat2_article[0]['s_image'], 'mid' )?>
+                      <?php
+                                                          if(is_file(BASEPATH.'../uploads/media_center_article/' . getThumbName($cat2_article[0]['s_image'], 'mid' )))
+                                                                             {
+                                                          ?>   
+                        <div style=" background:url('<?=$IMG?>') no-repeat center; width:348px; height:195px;"></div>
+                                   <?php } 
+                                     else if($cat2_article[0]['s_feed_url'] != ''  ) {
+                                        // echo 'dd';
+                                                                                 ?>
+                                                        
+                                                                                     <?php
+                                                                                     $first_img = '';
+                                                                                    ob_start();
+                                                                                    ob_end_clean();
+                                                                                    $output = preg_match_all('/<img.+src=[\'"]([^\'"]+)[\'"].*>/i', $cat2_article[0]['s_desc'], $matches);
+                                                                                    $first_img = $matches[1][0];
+                                                                                     
+                                                                                     $size = getimagesize($first_img);
+                                                                                  //   pr($size);
+                                                                                 
+                                                                           
+                                                                     if( $first_img != ''  && $size['0'] >= 348 && $size['1'] >=195 )          
+                                                                     {    
+                                                                             
+echo $img[1];                                                               
+                                                        ?>
+                                                        
+                                                        <div style=" background:url('<?php
+                                                             
+                                                        
+                                                        echo $first_img; ?>') no-repeat center; width:348px; height:195px; " class="div_back_pic"></div>
+                                   <?php 
+                                   }else {
+                                       echo '';
+                                   }
+                                      }else {
+                                          
+                                      } 
+                                   
+                                   
+                                   ?>
+                                   
+                        <h4><a href="<?= base_url().$cat2_article[0]['id']."/".my_url($cat2_article[0]['cat_name'])."/christian-news-details/".my_url($cat2_article[0]['s_title']).".html"?>" class="article_category" title="<?=$cat2_article[0]['s_title']?>"><?=my_substr($cat2_article[0]['s_title'],30)?></a></h4>
+                        <div class="blog-date"><?=getShortDate($val['dt_posted_on'],4)?> by <?=$val['admin_name']?></div>         
+                        <div class="blog-quick-list">
+                            <ul>
+                                <li class="blog-comment"><a href="javascript:void(0);"><?=$val['total_comments']?> Comments</a></li>
+                                <li class="blog-view"><a href="javascript:void(0);"><?=$val['i_view_count']?> Views</a></li>
+                            </ul>
+                         </div>
+                       <p><?=my_substr(strip_tags(get_unformatted_string_edit($cat2_article[0]['s_desc'])),320)?></p>
+                    
+                    </div>
+                    <div class="panel-right">
+                     <? foreach($cat2_article as $val) 
+						{
+						$i++;
+						if($i == 1)
+							continue;
+						$IMG = base_url() . 'uploads/media_center_article/' . getThumbName($val['s_image'], 'thumb');
+						?>
+                        <div class="story-panel">
+                            <h4><a href="<?= base_url().$val['id']."/".my_url($val['cat_name'])."/christian-news-details/".my_url($val['s_title']).".html"?>" title="<?=$val['s_title']?>"><?=$val['s_title']?></a></h4>
+                            <div class="story-thumb">
+                                                   <!-------------------add on 8-1-2015---------------------->
+                                                      <?php
+                                                          if(is_file(BASEPATH.'../uploads/media_center_article/' . getThumbName($val['s_image'], 'thumb')))
+                                                                             {
+                                                          ?>
+                                                <!-------------------------------------------->
+							<div style=" background:url('<?=$IMG?>') no-repeat center;width:98px, height:75px;  " class="div_back_pic"></div>
+                                                        <!---------------------------------------->
+                                                            <?php
+                                                                             } else if($val['s_feed_url'] != ''  ) {
+                                                                                 ?>
+                                                        
+                                                                                     <?php
+                                                                                     $first_img = '';
+                                                                                    ob_start();
+                                                                                    ob_end_clean();
+                                                                                    $output = preg_match_all('/<img.+src=[\'"]([^\'"]+)[\'"].*>/i', $val['s_desc'], $matches);
+                                                                                    $first_img = $matches[1][0];
+                                                                                     
+                                                                                     
+                                                                                 
+                                                                           
+                                                                     if( $first_img != '')          
+                                                                     {    
+                                                                             
+echo $img[1];                                                               
+                                                        ?>
+                                                        
+                                                        <div style=" background:url('<?php
+                                                             
+                                                        
+                                                        echo $first_img; ?>') no-repeat center;width:98px, height:75px; background-size:cover; " class="div_back_pic"></div>
+                                   <?php 
+                                   }else {
+                                       echo '';
+                                   }
+                                      }else {
+                                          
+                                      } ?>
+                                                        <!------------------------------------------>
+                                <div class="blog-date"><?=getShortDate($val['dt_posted_on'],4)?> by <?=$val['admin_name']?></div>
+                       
+                        <div class="blog-quick-list">
+                            <ul>
+                                <li class="blog-comment"><a href="javascript:void(0);"><?=$val['total_comments']?> Comments</a></li>
+                                <li class="blog-view"><a href="javascript:void(0);"><?=$val['i_view_count']?> Views</a></li>
+                            </ul>
+                         </div>
+                                <p id='con2'><?=my_substr(strip_tags(get_unformatted_string_edit($val['s_desc'])),80)?></p>
+                                <div class="clr"></div>
+                            </div>                           
+                        </div>
+                       <? } ?>
+                    </div>
+                    <div class="clr"></div>
+                </div>
+               <? } 
+               }
+               ?>   
+               
+		<!-------------------cat2 end-------------------------->	   
+			   
+			   
+                     <?
+                      $query = $this->db->get_where('cg_christian_news_cat', array('id' => 3));
+                                        foreach ($query->result() as $row)
+                                            {
+                                               $is_hidden_cat3 =  $row->is_hidden;
+                                            }
+                                          if($is_hidden_cat3 == 0){  
+                     
+                     
+					if($cat3_article)
+					{
+					?>
+					<h3 class="mission-icon"><a class="article_category" href="<?php echo base_url().'christian_news/category/3' ?>"><?php echo my_substr($cat_name['3'],30)?></a><a href="<?php echo base_url().'christian_news/category/3' ?>">View all</a></h3>
+                     <? foreach($cat3_article as $val) 
+						{
+						$IMG = base_url() . 'uploads/media_center_article/' . getThumbName($val['s_image'], 'thumb_1');
+						?>
+                     <div class="mission-panel">
+					 <?php
+			   
+			   if(is_file(BASEPATH.'../uploads/media_center_article/' . getThumbName($val['s_image'], 'thumb_1')))
+			   {
+			   ?>
+                        <div style=" background:url('<?=$IMG?>') no-repeat center;width:200px, height:138px; " class="div_back_pic_mid"></div>
+					<?php }
+                                        else if($val['s_feed_url'] != ''  ) {
+                                                                                 ?>
+                                                        
+                                                                                     <?php
+                                                                                     $first_img = '';
+                                                                                    ob_start();
+                                                                                    ob_end_clean();
+                                                                                    $output = preg_match_all('/<img.+src=[\'"]([^\'"]+)[\'"].*>/i', $val['s_desc'], $matches);
+                                                                                    $first_img = $matches[1][0];
+                                                                                     
+                                                                                     
+                                                                                 
+                                                                           
+                                                                     if( $first_img != '')          
+                                                                     {    
+                                                                             
+echo $img[1];                                                               
+                                                        ?>
+                                                        
+                                                        <div style=" background:url('<?php
+                                                             
+                                                        
+                                                        echo $first_img; ?>') no-repeat center;width:98px, height:75px; background-size:cover; " class="div_back_pic"></div>
+                                   <?php 
+                                   }else {
+                                       echo '';
+                                   }
+                                      }else {
+                                          
+                                      }
+                                        
+                                        ?>	
+                         <div class="mission-right">
+                              <h4><a href="<?= base_url().$val['id']."/".my_url($val['cat_name'])."/christian-news-details/".my_url($val['s_title']).".html"?>" title="<?=$val['s_title']?>"><?=my_substr($val['s_title'],65)?></a></h4>
+                                <div class="blog-date"><?=getShortDate($val['dt_posted_on'],4)?> by <?=$val['admin_name']?></div>         
+                        <div class="blog-quick-list">
+                            <ul>
+                                <li class="blog-comment"><a href="javascript:void(0);"><?=$val['total_comments']?> Comments</a></li>
+                                <li class="blog-view"><a href="javascript:void(0);"><?=$val['i_view_count']?> Views</a></li>
+                            </ul>
+                         </div>
+                                <p><?=my_substr(strip_tags(get_unformatted_string_edit($val['s_desc'])),350)?></p>
+                         </div>
+                         <div class="clr"></div>                         
+                     </div>
+                     <? }
+					 } 
+                                         
+                                         }?>
+                                         
+                               <!-----------------cat3 end---------------------------------------->          
+                                         
+                      
+                    <?
+                    
+                                     $query = $this->db->get_where('cg_christian_news_cat', array('id' => 4));
+                                        foreach ($query->result() as $row)
+                                            {
+                                               $is_hidden_cat4 =  $row->is_hidden;
+                                            }
+                                          if($is_hidden_cat4 == 0){  
+                    
+                    
+                    
+					if($cat4_article)
+					{
+					$IMG = base_url() . 'uploads/media_center_article/' . getThumbName($cat4_article[0]['s_image'], 'smallthumb');
+					$i=0;
+					?>
+                     <div class="faith-part">
+                    
+                         <div class="faith-left">
+                             <h3 class="faithbook-icon"><a class="article_category" href="<?php echo base_url().'christian_news/category/4' ?>"><?php echo my_substr($cat_name['4'],15)?></a></h3>
+                             <div class="part-pic">
+                                 
+                                                        <!-------------------new add 8-1-2015------------------------------>
+                                                        <?php
+                                                          if(is_file(BASEPATH.'../uploads/media_center_article/' . getThumbName($cat4_article[0]['s_image'], 'smallthumb')))
+                                                                             {
+                                                          ?>
+                                                                  <!-------------------------------------------------->
+                                 
+								<div style=" background:url('<?=$IMG?>') no-repeat center;width:75px, height:53px; " class="div_back_pic_new"></div>
+                                                                
+                                                                <!------------------------->
+                                                             <?php   } 
+                                                             else if($cat4_article[0][s_feed_url] != ''  ) {
+                                                                                 ?>
+                                                        
+                                                                                     <?php
+                                                                                     $first_img = '';
+                                                                                    ob_start();
+                                                                                    ob_end_clean();
+                                                                                    $output = preg_match_all('/<img.+src=[\'"]([^\'"]+)[\'"].*>/i', $cat4_article[0]['s_desc'], $matches);
+                                                                                    $first_img = $matches[1][0];
+                                                                                     
+                                                                                     
+                                                                                 
+                                                                           
+                                                                     if( $first_img != '')          
+                                                                     {    
+                                                                             
+echo $img[1];                                                               
+                                                        ?>
+                                                        
+                                                        <div style=" background:url('<?php
+                                                             
+                                                        
+                                                        echo $first_img; ?>') no-repeat center;width:98px, height:75px; background-size:cover; " class="div_back_pic"></div>
+                                   <?php 
+                                   }else {
+                                       echo '';
+                                   }
+                                      }else {
+                                          
+                                      }
+                                                             
+                                                             ?>
+                                                                <!-------------------->
+                                 
+                                 <span><a href="<?= base_url().$cat4_article[0]['id']."/".my_url($cat4_article[0]['cat_name'])."/christian-news-details/".my_url($cat4_article[0]['s_title']).".html"?>" title="<?=$val['s_title']?>"><?=my_substr(strip_tags(get_unformatted_string_edit($cat4_article[0]['s_title'])),30)?></a></span>
+                            </div>
+                             <div class="clr"></div>
+                             <ul class="faith-list">
+                                <? 
+								foreach($cat4_article as $val) 
+								{
+									$i++;
+									if($i == 1)
+										continue;
+								?>
+                                 <li><a href="<?= base_url().$val['id']."/".my_url($val['cat_name'])."/christian-news-details/".my_url($val['s_title']).".html"?>" title="<?=$val['s_title']?>"><?=$val['s_title']?></a></li>
+                                  <? 
+								  } 
+								  ?>                                  
+                             </ul>
+                         </div>
+                      
+                         
+                   
+                     <? } 
+                     }?> 
+                     <!----------------cat 4 end-------------------------------------->
+                     
+                     <?
+				
+                          $query = $this->db->get_where('cg_christian_news_cat', array('id' => 5));
+                                        foreach ($query->result() as $row)
+                                            {
+                                               $is_hidden_cat5 =  $row->is_hidden;
+                                            }
+                                          if($is_hidden_cat5 == 0){ 
+                     
+                     
+					if($cat5_article)
+					{
+					$IMG = base_url() . 'uploads/media_center_article/' . getThumbName($cat5_article[0]['s_image'], 'smallthumb');
+					$i=0;
+					?>
+					
+                         <div class="faith-left">
+                             <h3 class="society-icon-bottom"><a  class="article_category" href="<?php echo base_url().'christian_news/category/5' ?>"><?php echo my_substr($cat_name['5'],15)?></a></h3>
+                             <div class="part-pic">
+                                         <!-------------------new add 8-1-2015------------------------------>
+                                                        <?php
+                                                          if(is_file(BASEPATH.'../uploads/media_center_article/' . getThumbName($cat5_article[0]['s_image'], 'smallthumb')))
+                                                                             {
+                                                          ?>
+                                                                  <!-------------------------------------------------->
+                                 <div style=" background:url('<?=$IMG?>') no-repeat center;width:75px, height:53px; " class="div_back_pic_new"></div>
+                                                                <!-------------------------------->
+                                                                             <?php } 
+                                                                             else if($cat5_article[0][s_feed_url] != ''  ) {
+                                                                                 ?>
+                                                        
+                                                                                     <?php
+                                                                                     $first_img = '';
+                                                                                    ob_start();
+                                                                                    ob_end_clean();
+                                                                                    $output = preg_match_all('/<img.+src=[\'"]([^\'"]+)[\'"].*>/i', $cat5_article[0]['s_desc'], $matches);
+                                                                                    $first_img = $matches[1][0];
+                                                                                     
+                                                                                     
+                                                                                 
+                                                                           
+                                                                     if( $first_img != '')          
+                                                                     {    
+                                                                             
+echo $img[1];                                                               
+                                                        ?>
+                                                        
+                                                        <div style=" background:url('<?php
+                                                             
+                                                        
+                                                        echo $first_img; ?>') no-repeat center;width:98px, height:75px; background-size:cover; " class="div_back_pic"></div>
+                                   <?php 
+                                   }else {
+                                       echo '';
+                                   }
+                                      }else {
+                                          
+                                      }
+                                                                             
+                                                                             ?>
+                                                                <!----------------------------------->
+                                 
+                                 <span><a href="<?= base_url().$cat5_article[0]['id']."/".my_url($cat5_article[0]['cat_name'])."/christian-news-details/".my_url($cat5_article[0]['s_title']).".html"?>" title="<?=$val['s_title']?>"><?=my_substr(strip_tags(get_unformatted_string_edit($cat5_article[0]['s_title'])),30)?></a></span>
+                            </div>
+                             <div class="clr"></div>
+                             <ul class="faith-list">
+                             <? 
+								foreach($cat5_article as $val) 
+								{
+									$i++;
+									if($i == 1)
+										continue;
+								?>
+                                 <li><a href="<?= base_url().$val['id']."/".my_url($val['cat_name'])."/christian-news-details/".my_url($val['s_title']).".html"?>" title="<?=$val['s_title']?>"><?=$val['s_title']?></a></li>
+                                <? 
+								  } 
+								  ?>                            
+                             </ul>
+                         </div>
+                         <? 
+						}
+                                                
+                                                }
+                                                ?>
+                                                <!------------cat5 end------------------------->
+                                                <?
+                                                 $query = $this->db->get_where('cg_christian_news_cat', array('id' => 6));
+                                        foreach ($query->result() as $row)
+                                            {
+                                               $is_hidden_cat6 =  $row->is_hidden;
+                                            }
+                                          if($is_hidden_cat6 == 0){ 
+                     
+                                                
+                                                
+						if($cat6_article)
+						{ 
+						$i=0;
+						$IMG = base_url() . 'uploads/media_center_article/' . getThumbName($cat6_article[0]['s_image'], 'smallthumb');
+						?>
+                         <div class="faith-right">
+                              <h3 class="grow-icon"><a class="article_category" href="<?php echo base_url().'christian_news/category/6' ?>" ><?php echo my_substr($cat_name['6'],15)?></a></h3>
+                             <div class="part-pic">
+                                         <!-------------------new add 8-1-2015------------------------------>
+                                                        <?php
+                                                          if(is_file(BASEPATH.'../uploads/media_center_article/' . getThumbName($cat6_article[0]['s_image'], 'smallthumb')))
+                                                                             {
+                                                          ?>
+                                                                  <!-------------------------------------------------->
+                                 <div style=" background:url('<?=$IMG?>') no-repeat center;width:75px, height:53px; " class="div_back_pic_new"></div>
+                                                                  <!-------------------------->
+                                                                             <?php 
+                                                                             }
+                                                                             else if($cat6_article[0]['s_feed_url'] != ''  ) {
+                                                                                 ?>
+                                                        
+                                                                                     <?php
+                                                                                     $first_img = '';
+                                                                                    ob_start();
+                                                                                    ob_end_clean();
+                                                                                    $output = preg_match_all('/<img.+src=[\'"]([^\'"]+)[\'"].*>/i', $cat6_article[0]['s_desc'], $matches);
+                                                                                    $first_img = $matches[1][0];
+                                                                                     
+                                                                                     
+                                                                                 
+                                                                           
+                                                                     if( $first_img != '')          
+                                                                     {    
+                                                                             
+echo $img[1];                                                               
+                                                        ?>
+                                                        
+                                                        <div style=" background:url('<?php
+                                                             
+                                                        
+                                                        echo $first_img; ?>') no-repeat center;width:98px, height:75px; background-size:cover; " class="div_back_pic"></div>
+                                   <?php 
+                                   }else {
+                                       echo '';
+                                   }
+                                      }else {
+                                          
+                                      }
+                                                                             
+                                                                             
+                                                                           ?>
+                                                                  <!------------------------------->
+                                 <span><a href="<?= base_url().$cat6_article[0]['id']."/".my_url($cat6_article[0]['cat_name'])."/christian-news-details/".my_url($cat6_article[0]['s_title']).".html"?>" title="<?=$val['s_title']?>"><?=my_substr(strip_tags(get_unformatted_string_edit($cat6_article[0]['s_title'])),30)?></a></span>
+                            </div>
+                             <div class="clr"></div>
+                             <ul class="faith-list">
+                                  <? 
+								foreach($cat6_article as $val) 
+								{
+									$i++;
+									if($i == 1)
+										continue;
+								?>
+                                 <li><a href="<?= base_url().$val['id']."/".my_url($val['cat_name'])."/christian-news-details/".my_url($val['s_title']).".html"?>" title="<?=$val['s_title']?>"><?=$val['s_title']?></a></li>
+                                <? 
+								  } 
+								  ?>                           
+                             </ul>
+                             
+                         </div>
+                          <? 
+						}
+                                                
+                                                }
+						?>
+                                                <!----------end cat 6-------------->
+                        	  </div>			 
+                     </div>
+             <div class="media-center-right">
+                 <?php
+                      if(count($advertisementmedia_detail)){ 
+                          ?>
+                 <div class="advertisment">
+                     <?php 
+  $IMG_THUMB_PATH = base_url() ."uploads/media_center_advertisement/";
+  $name=getThumbName($advertisementmedia_detail[0]['s_image'],'main'); 
+  $IMG_THUMB = $IMG_THUMB_PATH . $name; ;
+?>
+<img src="<?=$IMG_THUMB?>" alt="" width="250" height="250" onclick="window.open('<?=$advertisementmedia_detail[0]['s_url']?>')"/>
+
+                     
+                      
+<!--                     <img src="images/left-ad1.png" alt="Advertisment" width="250" height="250" onclick="location.href='www.google.com'">-->
+                 </div>
+                  <?php
+                      }
+                  ?>
+              <div>
+               <? 
+              
+                $query = $this->db->get_where('cg_christian_news_cat', array('id' => 11));
+                                        foreach ($query->result() as $row)
+                                            {
+                                               $is_hidden_cat11 =  $row->is_hidden;
+                                            }
+                                          if($is_hidden_cat11 == 0){ 
+               
+               
+				if($cat11_article)
+				{
+				?>
+                                <h3 class="devotional"><a class="article_category" href="<?php echo base_url().'christian_news/category/11' ?>" title="<?php echo $cat_name['11']?>"><?php echo my_substr($cat_name['11'],15)?></a></h3>
+                <?
+					foreach($cat11_article as $val) 
+					{
+						$IMG = base_url() . 'uploads/media_center_article/' . getThumbName($val['s_image'], 'thumb');
+						?>
+						  
+							
+						  <div class="dev-main">
+							  <div></div>	
+                                                          
+                                                                  <!-------------------new add 8-1-2015------------------------------>
+                                                        <?php
+                                                          if(is_file(BASEPATH.'../uploads/media_center_article/' . getThumbName($val['s_image'], 'thumb')))
+                                                                             {
+                                                          ?>
+                                                                  <!-------------------------------------------------->
+							  <div class="div_back_pic_104" style=" background:url('<?=$IMG?>') no-repeat center;width:104px, height:104px; "></div>
+                                                                             <?php }
+                                                                             else if($val[s_feed_url] != ''  ) {
+                                                                                 ?>
+                                                        
+                                                                                     <?php
+                                                                                     $first_img = '';
+                                                                                    ob_start();
+                                                                                    ob_end_clean();
+                                                                                    $output = preg_match_all('/<img.+src=[\'"]([^\'"]+)[\'"].*>/i', $val['s_desc'], $matches);
+                                                                                    $first_img = $matches[1][0];
+                                                                                     
+                                                                                     
+                                                                                 
+                                                                           
+                                                                     if( $first_img != '')          
+                                                                     {    
+                                                                             
+echo $img[1];                                                               
+                                                        ?>
+                                                        
+                                                        <div style=" background:url('<?php
+                                                             
+                                                        
+                                                        echo $first_img; ?>') no-repeat center;width:104px, height:104px; background-size:cover;  " class="div_back_pic"></div>
+                                   <?php 
+                                   }else {
+                                       echo '';
+                                   }
+                                      }else {
+                                          
+                                      }
+                                                                             
+                                                                             
+                                                                             ?>
+							  
+							  <div class="pic-right">
+								  <h4><a href="<?= base_url().$val['id']."/".my_url($val['cat_name'])."/christian-news-details/".my_url($val['s_title']).".html"?>" title="<?=$val['s_title']?>"><?=my_substr(strip_tags(get_unformatted_string_edit($val['s_title'])),15)?></a></h4>
+								  <p><?=my_substr(strip_tags(get_unformatted_string_edit($val['s_desc'])),80)?></p>
+							  </div>
+							  <div class="clr"></div>
+						  </div>
+                  
+                  <? 
+				 
+				  }
+				  ?>
+                  
+              </div>
+              <? } 
+              
+              }
+              ?>
+              <!------------------cat 11 end-------------------------------->
+              <?
+              $query = $this->db->get_where('cg_christian_news_cat', array('id' => 7));
+                                        foreach ($query->result() as $row)
+                                            {
+                                               $is_hidden_cat7 =  $row->is_hidden;
+                                            }
+                                          if($is_hidden_cat7 == 0){ 
+              
+              
+			if($cat7_article)
+			{
+			
+			?>
+              <div>
+                  <h3 class="voice"><a class="article_category" href="<?php echo base_url().'christian_news/category/7' ?>" title="<?= $cat_name['7']; ?>"><?php echo my_substr($cat_name['7'],15)?></a></h3> 
+               	<? foreach($cat7_article as $val) 
+					{
+					$IMG = base_url() . 'uploads/media_center_article/' . getThumbName($val['s_image'], 'thumb');
+					?>   
+               <div class="dev-main">
+			           <!-------------------new add 8-1-2015------------------------------>
+                                                        <?php
+                                                          if(is_file(BASEPATH.'../uploads/media_center_article/' . getThumbName($val['s_image'], 'thumb')))
+                                                                             {
+                                                          ?>
+                                                                  <!-------------------------------------------------->
+			   <div class="div_back_pic_104" style=" background:url('<?=$IMG?>') no-repeat center;width:104px, height:104px; "></div>
+                                                                             <?php }
+                                                                             
+                                                                             else if($val[s_feed_url] != ''  ) {
+                                                                                 ?>
+                                                        
+                                                                                     <?php
+                                                                                     $first_img = '';
+                                                                                    ob_start();
+                                                                                    ob_end_clean();
+                                                                                    $output = preg_match_all('/<img.+src=[\'"]([^\'"]+)[\'"].*>/i', $val['s_desc'], $matches);
+                                                                                    $first_img = $matches[1][0];
+                                                                                     
+                                                                                     
+                                                                                 
+                                                                           
+                                                                     if( $first_img != '')          
+                                                                     {    
+                                                                             
+echo $img[1];                                                               
+                                                        ?>
+                                                        
+                                                        <div style=" background:url('<?php
+                                                             
+                                                        
+                                                        echo $first_img; ?>') no-repeat center;width:104px, height:104px; background-size:cover; " class="div_back_pic"></div>
+                                   <?php 
+                                   }else {
+                                       echo '';
+                                   }
+                                      }else {
+                                          
+                                      }
+                                                                             
+                                                                             ?>
+                
+                      <div class="pic-right">
+                          <h4><a href="<?= base_url().$val['id']."/".my_url($val['cat_name'])."/christian-news-details/".my_url($val['s_title']).".html"?>" title="<?=$val['s_title']?>"><?=my_substr(strip_tags(get_unformatted_string_edit($val['s_title'])),15)?></a></h4>
+                          <p><?=my_substr(strip_tags(get_unformatted_string_edit($val['s_desc'])),80)?></p>
+                      </div>
+                      <div class="clr"></div>
+                  </div>
+             
+                <? } ?>   
+              </div>
+              <? } 
+              }
+              ?>
+              <!----------------------cat 7 end------------------------------------>
+              <?
+                   $query = $this->db->get_where('cg_christian_news_cat', array('id' => 8));
+                                        foreach ($query->result() as $row)
+                                            {
+                                               $is_hidden_cat8 =  $row->is_hidden;
+                                            }
+                                          if($is_hidden_cat8 == 0){ 
+              
+			if($cat8_article)
+			{
+			
+			?>
+              <div>
+                  <h3 class="shout"><a class="article_category" href="<?php echo base_url().'christian_news/category/8' ?>" title="<?= $cat_name['8'] ?>"><?php echo my_substr($cat_name['8'],15)?></a></h3> 
+                  	<? foreach($cat8_article as $val) 
+					{
+					$IMG = base_url() . 'uploads/media_center_article/' . getThumbName($val['s_image'], 'thumb');
+					?>   
+                  <div class="dev-main">
+                              <!-------------------new add 8-1-2015------------------------------>
+                                                        <?php
+                                                          if(is_file(BASEPATH.'../uploads/media_center_article/' . getThumbName($val['s_image'], 'thumb')))
+                                                                             {
+                                                          ?>
+                                                                  <!-------------------------------------------------->
+				  <div class="div_back_pic_104" style=" background:url('<?=$IMG?>') no-repeat center;width:104px, height:104px; "></div>
+                                                                             <?php }
+                                                                             
+                                                                             else if($val[s_feed_url] != ''  ) {
+                                                                                 ?>
+                                                        
+                                                                                     <?php
+                                                                                     $first_img = '';
+                                                                                    ob_start();
+                                                                                    ob_end_clean();
+                                                                                    $output = preg_match_all('/<img.+src=[\'"]([^\'"]+)[\'"].*>/i', $val['s_desc'], $matches);
+                                                                                    $first_img = $matches[1][0];
+                                                                                     
+                                                                                     
+                                                                                 
+                                                                           
+                                                                     if( $first_img != '')          
+                                                                     {    
+                                                                             
+echo $img[1];                                                               
+                                                        ?>
+                                                        
+                                                        <div style=" background:url('<?php
+                                                             
+                                                        
+                                                        echo $first_img; ?>') no-repeat center;width:104px, height:104px; background-size:cover; " class="div_back_pic"></div>
+                                   <?php 
+                                   }else {
+                                       echo '';
+                                   }
+                                      }else {
+                                          
+                                      }
+                                                                             
+                                                                             
+                                                                             ?>
+                      
+                      <div class="pic-right">
+                          <h4><a href="<?= base_url().$val['id']."/".my_url($val['cat_name'])."/christian-news-details/".my_url($val['s_title']).".html"?>" title="<?=$val['s_title']?>"><?=my_substr(strip_tags(get_unformatted_string_edit($val['s_title'])),15)?></a></h4>
+                          <p><?=my_substr(strip_tags(get_unformatted_string_edit($val['s_desc'])),80)?></p>
+                      </div>
+                      <div class="clr"></div>
+                  </div> 
+				  <? } ?>  
+                  
+              </div>
+               <? } 
+               }
+               ?>  
+               
+               <!-------------------cat 8 end------------------>
+               <?php
+               
+                $query = $this->db->get_where('cg_christian_news_cat', array('id' => 9));
+                                        foreach ($query->result() as $row)
+                                            {
+                                               $is_hidden_cat9 =  $row->is_hidden;
+                                            }
+                                          if($is_hidden_cat9 == 0){ 
+			if($cat9_article)
+			{
+			
+			?>
+              <div>
+                  <h3 class="review"><a class="article_category" href="<?php echo base_url().'christian_news/category/9' ?>" title="<?= $cat_name['9'] ?>"><?php echo my_substr($cat_name['9'],15)?></a></h3> 
+                  	<?php foreach($cat9_article as $val) 
+					{
+					$IMG = base_url() . 'uploads/media_center_article/' . getThumbName($val['s_image'], 'mid');
+					?>
+                  <div class="review-section">
+                       <h4><a href="<?= base_url().$val['id']."/".my_url($val['cat_name'])."/christian-news-details/".my_url($val['s_title']).".html"?>" title="<?=$val['s_title']?>"><?=my_substr(strip_tags(get_unformatted_string_edit($val['s_title'])),20)?></a></h4>
+                          <p><?=my_substr(strip_tags(get_unformatted_string_edit($val['s_desc'])),80)?></p>
+                      
+                  </div>
+                 <?php } ?>  
+                 
+              </div>              
+          <?php } 
+                                         
+          }?>
+               <!-------cat 9 end------------------->
+               <?php
+                $query = $this->db->get_where('cg_christian_news_cat', array('id' => 12));
+                                        foreach ($query->result() as $row)
+                                            {
+                                               $is_hidden_cat12 =  $row->is_hidden;
+                                            }
+                                          if($is_hidden_cat12 == 0){
+               
+			if($cat12_article)
+			{
+                           // pr($cat12_article);
+			
+			?>
+              <div>
+                  <h3 class="news-heading"><a class="article_category" href="<?php echo base_url().'christian_news/category/12' ?>" title="<?= $cat_name['12'] ?>"><?php echo my_substr($cat_name['12'],15)?></a></h3> 
+                  	<?php foreach($cat12_article as $val) 
+					{
+					$IMG = base_url() . 'uploads/media_center_article/' . getThumbName($val['s_image'], 'mid');
+					?>
+                  <div class="review-section">
+                       <h4><a href="<?= base_url().$val['id']."/".my_url($val['cat_name'])."/christian-news-details/".my_url($val['s_title']).".html"?>" title="<?=$val['s_title']?>"><?=my_substr(strip_tags(get_unformatted_string_edit($val['s_title'])),20)?></a></h4>
+                          <p><?=my_substr(strip_tags(get_unformatted_string_edit($val['s_desc'])),80)?></p>
+                      
+                  </div>
+                 <?php } ?>  
+                 
+              </div>              
+          <?php } 
+                                          }
+          ?>
+               <!--------cat 12 end------------------->
+                  
+          </div>
+          <div class="clr"></div>
+          </div>
+       
+      </div>
+      <div class="clr"></div>
+</div>
+
+
+<!-- /CONTENT SECTION -->
+<div class="clr"></div>
+
+<?php include(APPPATH."views/layouts/footer.phtml");?>
+
+
+
+
+
+
+
+
+<!--view comment div-->
+
+
+<!--/view comment div-->
+<!-- /lightbox SECTION -->
+
+<?php //include(APPPATH."views/logged/blocks/common_popup.phtml");?>
+
+
+<script type="text/javascript">
+            $(function() {
+                $('#ei-slider').eislideshow({
+					animation			: 'center',
+					autoplay			: true,
+					slideshow_interval	: 3000,
+					titlesFactor		: 0
+                });
+            });
+        </script>
+ <script type="text/javascript">
+$(function(){
+	$('#navigation_vert').naviDropDown({
+		dropDownWidth: '200px',
+		orientation: 'vertical'
+	});
+});
+</script>

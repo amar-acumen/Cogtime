@@ -1,0 +1,65 @@
+<input type="hidden" id="current_page" value="<?=$current_page?>">
+
+<table width="100%" border="0" cellspacing="0" cellpadding="0" class="admin-table">
+                              <tr>
+                                            <th align="left" valign="middle" height="30" width="80">Posted On</th>
+                                            <?php /*?><th align="left" valign="middle" height="30" width="70">By Admin ID</th>
+                                            <?php */?>
+                                            <th align="left" valign="middle" height="30" width="180">Article Title</th>
+                                            <th align="left" valign="middle" height="30" width="150">Publisher</th>
+                                            <th align="left" valign="middle" height="30" width="300">Description</th>
+                                            <th align="center" valign="middle" height="30" width="30">Likes</th>
+                                            <th align="center" valign="middle" height="30" width="40">Comments </th>
+                                            <th align="center" valign="middle" height="30" class="last">Actions</th>
+                                          </tr>
+                              
+<?php
+//pr($result_arr);
+if(count($result_arr)) {
+    foreach($result_arr as $magazine)
+    {
+?>
+                              <tr>
+                                <td align="left" valign="top"><?= getShortDateWithTime($magazine['dt_posted_on'],7)?></td>
+                            <!--    <td align="left" valign="top">MB475821</td>
+                            -->
+                                <td align="left" valign="top"><?=my_substr($magazine['s_title'],50)?></td>
+                                <td align="left" valign="top"><?=$magazine['s_publisher']?></td>
+                                <td align="left" valign="top"><?=my_substr(strip_tags(get_unformatted_string_edit($magazine['s_description'])),80)?></td>
+                                
+                                
+                                <td align="center" valign="top"><a id="like_<?=$magazine['id']?>" href="javascript:void(0);" onclick="return show_people_like(<?=$magazine['id']?>);"><?=$magazine['total_likes']?></a></td>
+                                
+                                <td align="center" valign="top"><a id="comment_<?=$magazine['id']?>" href="javascript:void(0);" onclick="return show_comments(<?=$magazine['id']?>);"><?=$magazine['total_comments']?></a></td>
+                                
+                                <td align="center" valign="middle" class="last">
+                                <input name="" title="Edit" type="button" class="edit-button"  value="" onclick="window.location='<?=admin_base_url()?><?=$current_page?>/<?=$magazine['id']?>/edit-article.html'" style="margin-left: 40px;"/>
+                                <input name="" title="Delete" type="button" class="delete-button"  value="" onclick="return confirm_delete_(<?=$magazine['id']?>)"/>
+                                </td>
+                              </tr>
+<?php
+    }
+}
+else
+{
+?>
+                            <tr>
+                                <td style="text-align:center;" height="80" colspan="20">No data available!!!</td>
+                             </tr>
+<?php
+}
+?>
+                       
+                            
+                            </table>
+
+<?php
+
+if($page_links) :
+?>         
+<div class="paging">
+            <ul><?= $page_links ?></ul>
+</div>        
+<?php
+endif;
+?>                              

@@ -1,0 +1,56 @@
+
+
+<!-- CONTENT SECTION -->
+<div id="content_section">
+	<?php
+		# include navigation-panel file...
+		include_once(APPPATH ."views/admin/panels/navigation_menu.phtml");
+	?>
+    <div id="container">
+        <h2><?= $heading; ?></h2>
+        <div class="clr"></div>
+        <form id="frm_add_edit_banner" name="frm_add_edit_banner" method="post" action="" enctype="multipart/form-data">
+            <div class="frm_box">
+            	<div class="lable01"><span class="error_txt">* </span>Banner Title</div>
+                <div class="fld01">
+                <input type="text" id="txt_banner_title" name="txt_banner_title" value="<?= $posted['s_title']; ?>">
+				<?php echo form_error('txt_banner_title'); ?></div>
+                <div class="lable01"><span class="error_txt">* </span>Brief Description</div>
+                
+                <div class="fld01"> 
+                <textarea id="txta_banner_desc" name="txta_banner_desc" ><?= get_unformatted_string_edit($posted['s_desc']);?></textarea> <?php echo form_error('txta_banner_desc'); ?>
+                <span id="charlimitinfo" style=" float:left; color:#67645D; font-size:12px; width:400px;">400 <?php echo 'characters Left'; ?></span>
+                
+                </div>
+                <div class="lable01"><span class="error_txt">* </span>URL</div>
+                <div class="fld01"><input type="text" id="txt_banner_url" name="txt_banner_url" value="<?= $posted['s_url']; ?>"><?php echo form_error('txt_banner_url'); ?></div> 
+                <div class="lable01"><span class="error_txt">* </span>Upload Image</div>
+                <div class="fld01"><input type="file" size="51" id="banner_image" name="banner_image">
+                	<span>( <?= "Preferred dimension 1050X400" ?> )</span>
+				<?php echo $file_error_banner_image; ?></div>
+				
+                
+                <?php
+				if($posted['s_image']!=="")
+				{
+					$IMG_THUMB_PATH = base_url() ."uploads/homepage_banner/";
+					$name=getThumbName($posted['s_image'],'thumb'); 
+					$IMG_THUMB = $IMG_THUMB_PATH . $name;
+					?>
+					<div class="lable01"></div>
+                    <div class="fld01"><?php if($name != ""): ?> <img src="<?= $IMG_THUMB ?>" width="400" height="100" /><?php endif;?>  </div>		<input type="hidden" name="h_image" value="<?=$posted['s_image'] ?>" />
+				<?php }	?>
+                
+                <div class="lable01"></div>
+                <div class="fld01">
+                 <input type="submit" value="Update" class="blue_btn" name="">
+                 <input type="reset" value="Cancel" class="grey_btn" name="" onclick="window.location='<?= admin_base_url() ?>site_settings/manage-hp-banner.html'" >
+                </div>
+               
+            </div>
+             </form> 
+            
+       <div class="clr"></div>
+    </div>
+</div>
+<!-- /CONTENT SECTION -->

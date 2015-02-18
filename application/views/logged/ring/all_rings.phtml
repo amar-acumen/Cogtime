@@ -1,0 +1,172 @@
+<?php include(APPPATH."views/layouts/logged_header.phtml");?>
+            <!-- NAVIGATION SECTION -->
+      <?php include(APPPATH."views/layouts/nav.phtml");?>
+      <!-- /NAVIGATION SECTION -->
+      </div>
+</div>
+<!-- /HEADER SECTION -->
+<div class="clr"></div>
+
+<!-- CONTENT SECTION -->
+<div id="content_section">
+      <div id="container">
+
+            <div id="mid_content">
+                  <!-- latest news -->
+                  <?php include(APPPATH ."views/layouts/latest_news.phtml");?>
+                  <!-- /latest news -->
+                  <div class="clr"></div>
+                  <!-- main container -->
+                  <div id="main_container">
+                    <?php include(APPPATH."views/layouts/leftbar.phtml");?>
+                    
+                        <!-- mid container -->
+                        <div id="mid_container">
+                        <div class="page_heading">
+                                <div class="left"><img src="images/icons/ring.png" alt="" /> Rings </div>
+								<!--<p class="rings-joined">Rings I have Joined / Created</p>-->
+                                <?php /*?><div class="right"><input name="" type="button" value="Create Ring"  class="evnt_btn"  onclick="window.location='create-my-ring.html'"/></div><?php */?>
+                            </div>
+                        <!--sub page links -->
+                               <?php //include("ring_home_menu.phtml");?>
+                        <!--/sub page links -->
+                        
+<?php /*?><div style="margin-top: 0;" class="link-div">
+                                  <ul>
+                                    <li><a href="<?php echo base_url()?>my-ring.html"><span>My Ring</span></a> </li>
+                                    <li><a href="<?php echo base_url()?>search-ring.html"><span>Browse  &  Search Ring</span></a> </li>
+                                </ul>
+                              <div class="clr"></div>
+                         </div><?php */?>
+                         
+                         		  <!--sub page links -->
+                                    <div class="link-div" style="margin-top:-2px;">
+                                        <ul>
+                                          <li><a href="my-ring.html" class="<?php echo ($page_name=='my-ring')? 'current':'';?>"><span>My Ring</span> </a> </li>
+                                          <li><a href="search-ring.html" class="<?php echo ($page_name=='search-ring')? 'current':'';?>"><span>Browse  &amp;  Search Ring</span> </a> </li>
+                                          <?php 
+                                 $logged_user_id = intval(decrypt($this->session->userdata('user_id')));
+                                 $frnd_number = get_friend_number_by_id($logged_user_id);
+                                 if($frnd_number <= 0){
+                                 
+                                ?>
+                                          <li><a href="javascript:void(0)" onclick="show_dialog('ring-pop')" class="<?php echo ($page_name=='create-my-ring')? 'current':'';?>"><span>Create Ring</span> </a> </li>
+                                          <?php
+                                 }else if($frnd_number > 0){
+                                          ?>
+                                          <li><a href="create-my-ring.html" class="<?php echo ($page_name=='create-my-ring')? 'current':'';?>"><span>Create Ring</span> </a> </li>
+                                 <?php } ?>
+                                      </ul>
+                                      <div class="clr"></div>
+                                    </div>
+                                  <!--/sub page links -->
+                              <!--<div class="page_heading" style="margin-bottom: 10px;">
+                                    <div class="left">
+                                        <img src="images/icons/ring.png" alt="" style="padding-top:4px;">
+                                        <span style="font-size: 19px;">Rings</span> 
+                                    </div>
+                                    
+                              </div>-->
+                              
+                              <div class="div_content" style=" margin-top:0px;">
+                              
+                                    <div id="listingContent" class="blog-container">
+                                        <?php echo $listingContent;?>
+                                    </div>
+                                    
+
+                                    <?php if($no_of_result  == 0):?>
+                                    <div class="shade_box_01" style="padding-top:5px;"><div  class="shade_norecords" style="width:260px;"><p class="blue_bold12">No Ring.</p></div></div>
+                                    <?php endif;?>    
+                                    <?php if($no_of_result > $pagination_per_page): ?>
+                                    
+                                    <div class="view_more" id="show_more_feeds_div"><a href="javascript:void(0);" id="show_more_feeds_link" page_value="<?=$current_page_1?>" onclick="show_more_feeds($(this).attr('page_value'))">[view more] </a> </div>
+                                    <?php endif; ?>
+
+                              </div>
+                        </div>
+                        <!-- /mid container -->
+                        <!-- right container -->
+                          <?php include(APPPATH."views/layouts/rightbar.phtml");?>
+                        <!-- /right container -->
+                  </div>
+                  <!-- /main container -->
+                  <div class="clr"></div>
+            </div>
+            <div id="bot_corner">&nbsp;</div>
+      </div>
+      <div class="clr"></div>
+</div>
+<!-- /CONTENT SECTION -->
+<div class="clr"></div>
+<!-- FOOTER SECTION -->
+<?php include(APPPATH."views/layouts/footer.phtml");?>
+<?php include(APPPATH."views/logged/blocks/common_popup.phtml");?>
+<!-- /FOOTER SECTION -->
+
+<?php include(APPPATH."views/logged/ring/comments/my_ring_post_comment_lightbox.phtml");?>
+
+
+
+
+<script type="text/javascript">
+
+var ajax_req_feeds = null;
+function show_more_feeds(page) {
+    if(ajax_req_feeds!=null) {
+        ajax_req_feeds.abort();
+    }
+    showUILoader_nodialog();
+    ajax_req_feeds = $.ajax({
+        type: 'get',
+        url: base_url+'logged/all_rings/generate_all_ring_listing_AJAX/'+page,
+        dataType: 'json',
+
+        success: function (data, status) {
+
+            hideUILoader_nodialog();
+            if(data.html!='') {
+                $('#listingContent').append(data.html);
+                $('#show_more_feeds_link').attr('page_value', data.current_page);
+            }
+            else {
+                $('#listingContent').append('<div class="view_more" style="text-align: center;"><p class="blue_bold12" style="font-size:14px;">No More ring.</p></div>');
+                $('#show_more_feeds_div').hide();
+            }
+            
+            if(data.view_more==false)
+            {
+                
+                $('#listingContent').append('<div class="view_more" style="text-align: center;"><p class="blue_bold12" style="font-size:14px;">No More Ring.</p></div>');
+                $('#show_more_feeds_div').hide();
+            }
+            
+            
+        }    // end of success function...
+    });
+}
+
+
+function joinRequest(ringnameId,ringid)
+{
+	$.ajax({
+		type: 'post',
+		url: '<?php echo base_url()?>logged/my_ring/add_join_request',
+		dataType: 'json',
+		data: 'ringid='+ringid,
+		success: function (data) {
+			
+			if(data.msg=='success')
+			{
+				$('#join_req_p_'+data.removeid).remove();
+				showUIMsg("Join request has been successfully send");
+			}
+			else if(data.msg=='error') 
+			{
+				$('#err_detail').html(data.err.err_detail);
+			}
+			
+		}	// end of success function...
+	});
+}
+</script>

@@ -1,0 +1,229 @@
+<?php include(APPPATH . "views/layouts/logged_header.phtml"); ?>
+<!-- NAVIGATION SECTION -->
+<?php include(APPPATH . "views/layouts/nav.phtml"); ?>
+<!-- /NAVIGATION SECTION -->
+</div>
+</div>
+<div class="clr"></div>
+<!-- CONTENT SECTION -->
+<div id="content_section">
+    <div id="container">
+        <div id="mid_content">
+            <!-- latest news -->
+            <?php include(APPPATH . "views/layouts/latest_news.phtml"); ?>
+            <!-- /latest news -->
+            <div class="clr"></div>
+            <div id="main_container"> 
+                <!-- left container -->
+                <?php include(APPPATH . "views/layouts/leftbar.phtml"); ?>
+                <!-- left container -->
+                <div id="mid_container">
+                    <div class="page_heading">
+                        <div class="left"><img src="images/icons/mic-16.png" alt=""  /> Ministers List</div>
+                        <!--<a href="javascript:void(0)" class="btn_post-link">Post</a>-->
+                    </div>
+
+              
+                    <!--page index start-->
+                    <ul class="page-index">
+                        <li> <a href="<?=base_url()?>minister-shout/all/minister-list.html" <?=($letter == 'all')?'class="select"':''?>> All</a></li>
+                        
+                        <?php 
+							   $alphas = range('a', 'z');
+								foreach($alphas as $value){
+						?>
+                        	 <li> <a href="<?=base_url()?>minister-shout/<?=$value?>/minister-list.html" <?=($letter == $value)?'class="select"':''?>> <?=$value?></a></li>
+						<?php	}
+						
+						?>
+                    </ul>
+                    <!--page index end-->
+                    
+                    <div class="arrow_btm"></div>
+                     <?php if ($no_of_result != 0): ?>
+                        <div id="shout_content">
+                            <?= $shout_content ?>
+                        </div>
+
+                    <?php   endif;
+						if ($no_of_result == 0): ?>
+                        <div class="view_more" style="text-align:center;padding-top: 20px;height: 30px;" id="no_project" >No Results.</div>
+                    <?php endif; ?>  
+
+
+                    <?php if ($no_of_result > $pagination_per_page): ?>
+
+                        <div class="custom_show view_more" id="show_more_div" style="width:475px;"><a href="javascript:void(0);" id="show_more_records_link" page_value="<?= $current_page_1 ?>" onclick="show_more_records($(this).attr('page_value'))">[view more] </a> </div>
+                    <?php endif; ?>  
+                </div>
+                <!-- /left container -->
+                <!-- right container -->
+                <?php include(APPPATH . "views/layouts/rightbar.phtml"); ?>
+                <!-- /right container -->
+            </div>
+            <!-- /main container -->
+            <div class="clr"></div>
+        </div>
+        <div id="bot_corner">&nbsp;</div>
+    </div>
+    <div class="clr"></div>
+</div>
+<!-- /CONTENT SECTION -->
+<div class="clr"></div>
+<!-- FOOTER SECTION -->
+<?php include(APPPATH . "views/layouts/footer.phtml"); ?>
+<?php include(APPPATH . "views/logged/blocks/common_popup.phtml"); ?>
+<!-- /FOOTER SECTION -->
+
+<script type="text/javascript">
+
+    var ajax_req_feeds = null;
+    function show_more_records(page) {
+
+        if (ajax_req_feeds != null) {
+            ajax_req_feeds.abort();
+        }
+        showUILoader_nodialog();
+        ajax_req_feeds = $.ajax({
+            type: 'get',
+            url: base_url + 'logged/media_center/minister_list_AJAX/<?=$letter?>/' + page,
+            dataType: 'json',
+            success: function(data, status) {
+                $('#show_more_div').remove();
+                hideUILoader_nodialog();
+                if (data.html != '') {
+
+                    //alert(data.cur_page+'dfdf');
+
+                    $('#shout_content').append(data.html);
+                    $('#show_more_records_link').attr('page_value', data.cur_page);
+                    $('#show_more_records_link').attr('onclick', '');
+                    $('#show_more_records_link').attr('onclick', 'show_more_records(' + data.cur_page + ')');
+                }
+                else {
+                    $('#shout_content').append('<div class="view_more " style="text-align: center;"><p class="blue_bold12" style="font-size:14px;">No More Results.</p></div>');
+                    $('#show_more_div').remove();
+                }
+
+                if (data.view_more == true)
+                {
+                    cur_page = data.cur_page;
+                    $('.shade_box_shade').append('<div class="custom_show view_more" id="show_more_div" style="width:475px;"><a href="javascript:void(0);" id="show_more_records_link" page_value="' + cur_page + '" onclick="show_more_records(' + cur_page + ')">[view more] </a> </div>');
+
+                }
+
+                if (data.view_more == false)
+                {
+
+                    $('#shout_content').append('<div class="view_more " style="text-align: center;" ><p class="blue_bold12" style="font-size:14px;">No More Results.</p></div>');
+                    $('#show_more_div').remove();
+                }
+
+
+            }	// end of success function...
+        });
+    }
+
+
+    function view_article_comments(id)
+    {
+
+        //$('#ms_comments'+id).css('display','none');
+        $('#ms_comments' + id).slideToggle('slow');
+
+        $.ajax({
+            type: "post",
+            url: base_url + "logged/media_center/viewShoutsComment",
+            dataType: "json",
+            data: ({'article_id': id}),
+            success: function(data)
+            {
+                if (data.des != '') {
+                    $('#comment_content' + id).html(base64_decode(data.des));
+                } else {
+                    $('#comment_content' + id).html('<div style="padding:8px 0px;" class="shade_box_white"><div class="txt_content01"><div style=" text-align:center;"><p>&nbsp;</p><p> No Comments.</p><p>&nbsp;</p></div></div></div>');
+
+                }
+                // hideUILoader_nodialog();
+            }
+        });
+    }
+
+    function show_post_comment(id) {
+
+        //$('#ms_write_comment'+id).css('display','none');
+        $('#ms_write_comment' + id).slideToggle('slow');
+    }
+
+
+    function postArticleComment(id, blog_id) {
+
+        $.ajax({
+            type: "POST",
+            url: base_url + 'logged/my_blog/add_blog_post_cmnts',
+            data: {'postcmnts_txt': $('#txt_comment' + id).val(),
+                'postcmnts_postid': id,
+                'comment_blog_id': blog_id
+            },
+            dataType: 'json',
+            success: function(data) {
+                showUIMsg(data.msg);
+                //hide_dialog();	
+                if (data.result == "success")
+                {
+                    $('#postcmnts_txt').val();
+
+                    var comments = $('#tot_comment' + id).html();
+                    comments++;
+                    $('#tot_comment' + id).html(comments);
+                    $('#ms_write_comment' + id).slideToggle('slow');
+                }
+            }
+
+        });
+    }
+
+</script>
+
+<script type="text/javascript">
+    function followUser(user_id, i_status)
+    {
+
+        var URL = base_url + 'logged/user_twitter_profile/follow_user/';
+        showUILoader_nodialog('<img src="' + base_url + 'images/loading_big.gif" width="50"/> ');
+        if (ajax_req != null) {
+            ajax_req.abort();
+        }
+        ajax_req = $.ajax({
+            type: 'POST',
+            url: URL,
+            dataType: 'json',
+            data: ({'user_id': user_id
+                , 'i_status': i_status
+
+            }),
+            success: function(data, status) {
+                var result_obj = data;
+                hideUILoader_nodialog();
+                if (result_obj.result == true) {
+                    showUIMsg(result_obj.msg);
+
+                    $('.follow_a' + user_id).html('');
+                    if (i_status == 'Unfollow') {
+                        $('.follow_a' + user_id).html('<img src="images/icons/bird2.png" alt="" /><a href="javascript:void(0);" class="blue_link" onclick="javascript:followUser(' + user_id + ' , \'follow\' )" ><strong>Follow Ministers Tweet</strong></a>')
+                    }
+                    else if (i_status == 'follow') {
+                        $('.follow_a' + user_id).html('<img src="images/icons/bird2.png" alt="" /><a href="javascript:void(0);" class="blue_link" onclick="javascript:followUser(' + user_id + ' , \'Unfollow\' )" ><strong>Unfollow Ministers Tweet</strong></a>')
+                    }
+
+                }
+
+            },
+            error: function(data, status, e) {
+                hideUILoader_nodialog();
+                showUIMsg(data.msg);
+            }
+        });
+    }
+
+</script>

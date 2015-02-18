@@ -1,0 +1,128 @@
+<?php include(APPPATH."views/layouts/logged_header.phtml");?>
+            <!-- NAVIGATION SECTION -->
+      <?php include(APPPATH."views/layouts/nav.phtml");?>
+      <!-- /NAVIGATION SECTION -->
+      </div>
+</div>
+<!-- /HEADER SECTION -->
+<div class="clr"></div>
+
+<!-- CONTENT SECTION -->
+<div id="content_section">
+      <div id="container">
+            <!--<div id="mid_content"> -->
+                  <!-- latest news -->
+                 <?php include(APPPATH ."views/layouts/latest_news.phtml");?>
+                  <!-- /latest news -->
+                  <div class="clr"></div>
+                  <!-- main container -->
+                  <div id="main_container">
+                        <!-- left container -->
+                        <?php include(APPPATH."views/layouts/leftbar.phtml");?>
+                        <!-- /left container -->
+                        <!-- mid container -->
+                        <div id="mid_container">
+                              <div class="page_heading etrade-nw-heading">
+							<div class="left"><img alt="" src="images/icons/etrade.png" /> Request Sent </div>
+							 <div class="right">
+                                        <input type="button" onclick="window.location='<?php echo base_url()?>etrade-home/create_product'" value="Add Product" style="padding-left:20px;" class="evnt_btn" />
+                                    </div>
+                          </div>
+							   <!--sub page links -->
+                              <?php include(APPPATH."views/logged/etrade/menu.phtml");?>
+                              <!--/sub page links -->
+							  
+							  <div class="ne-etrade-product">
+								<form method="" action="">
+								  <label class="subproduct">Product:</label>
+								  <input type="text" name="" class="buy-request-received-btn" style="width:372px;" />
+								  <input type="submit" name="" value="" class="buy-request-sent-btn" />
+								</form>
+						   	  </div>
+							   
+                            <div class="blog-container" style=" margin-top:0px; padding:0px;" id="listingContent">
+                                 <?php echo $listingContent?>
+                            </div>
+                            <?php if($no_of_result  == 0):?>
+                                <div class="pagination" style=" height:56px;">
+                                <div class="shade_box_01" style="padding-top:5px;"><div  class="shade_norecords" style="width:260px;"><p class="blue_bold12">No Product.</p></div></div>
+                                </div>
+                            <?php endif;?>	
+                            <?php if($no_of_result > $pagination_per_page): ?>
+                                    <div class="pagination" style=" height:56px;">
+                                    <div class="view_more" id="show_more_feeds_div"><a href="javascript:void(0);" id="show_more_feeds_link" page_value="<?=$current_page_1?>" onclick="show_more_record($(this).attr('page_value'))">[view more] </a> </div>
+                                    </div>
+                            <?php endif; ?>
+                            
+                        </div>
+                            <!--sub page links -->
+                                      
+                        <!-- /mid container -->
+                        <!-- right container -->
+                        <?php include(APPPATH."views/layouts/rightbar.phtml");?>
+                        <!-- /right container -->
+                        </div>
+                  </div>
+                  <!-- /main container -->
+                  <div class="clr"></div>
+            <!--</div> -->
+      </div>
+      <div class="clr"></div>
+</div>
+<!-- /CONTENT SECTION -->
+<div class="clr"></div>
+
+
+
+<?php include(APPPATH."views/layouts/footer.phtml");?>
+<?php include(APPPATH."views/logged/blocks/common_popup.phtml");?>
+
+<script type="text/javascript">
+var ajax_req_feeds = null;
+function show_more_record(page) {
+	
+	if(ajax_req_feeds!=null) {
+		ajax_req_feeds.abort();
+	}
+	showUILoader_nodialog();
+	ajax_req_feeds = $.ajax({
+		type: 'get',
+		url: base_url+'logged/e_trade/manage_sent_request_AJAX/'+page,
+		dataType: 'json',
+
+		success: function (data, status) {
+
+			hideUILoader_nodialog();
+			if(data.html!='') {
+				
+				//alert(data.cur_page+'dfdf');
+				$('#listingContent').append(data.html);
+				$('#show_more_feeds_link').attr('page_value', data.cur_page);
+				$('#show_more_feeds_link').attr('onclick','');
+				$('#show_more_feeds_link').attr('onclick','show_more_record('+data.cur_page+')');
+			}
+			else {
+				$('#listingContent').append('<div class="view_more" style="text-align: center;"><p class="blue_bold12" style="font-size:14px;">No More Records.</p></div>');
+				$('#show_more_feeds_div').remove();
+			}
+            
+            if(data.view_more==false)
+            {
+                
+                $('#listingContent').append('<div class="view_more" style="text-align: center;" ><p class="blue_bold12" style="font-size:14px;">No More Records.</p></div>');
+                $('#show_more_feeds_div').remove();
+            }
+		
+
+		}	// end of success function...
+	});
+}
+
+function goToSubCategoryList(id)
+{
+	$('#subcatid').val(id);
+	$('#frmSubcat').submit();
+}
+</script>
+
+

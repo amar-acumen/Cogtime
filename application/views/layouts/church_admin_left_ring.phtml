@@ -1,0 +1,44 @@
+<div class="activity-left">
+    <?php 
+ $page_location = $this->uri->segment(1);
+ $page_location1 = $this->uri->segment(2);
+ 
+    //echo 'ok';
+    ?>
+    	<ul class="left-list">
+            <?php
+            if(!($_SESSION['subadmin_role']==2 || $_SESSION['charch_super_admin'] =='yes') || $_SESSION['subadmin_role']==2){
+            ?>
+        <li><a <?php if($page_location == 'member_ring' || $page_location == 'church_rings'){  ?> class="active" <?php } ?> href="<?php echo base_url().'member_ring/'.$_SESSION['logged_church_id'];?>">Rings</a></li>  
+            <?php } else {?>
+          <li><a <?php if($page_location == 'church-ring-list' || $page_location == 'church_rings'){  ?> class="active" <?php } ?> href="<?php echo base_url().'church-ring-list';?>">Rings</a></li>  
+            <?php } ?>
+        <?php
+		if(subadmin_access('ring'))
+		{
+			?>
+			<li><a <?php if($page_location == 'create-church-ring'){  ?> class="active" <?php } ?> href="<?= base_url().'create-church-ring' ?>">Create ring</a></li>  
+			<?php
+		}
+        ?>
+           
+        <li><a <?php if($page_location == 'search_ring'){  ?> class="active" <?php } ?> href="<?= base_url().'search_ring' ?>">Search ring</a></li>
+        <li><a <?php if($page_location == 'ring_request'){  ?> class="active" <?php } ?> href="<?= base_url().'ring_request' ?>">Ring Requests</a></li>
+        <?php
+        if($_SESSION['charch_super_admin'] =='yes'){
+        ?>
+        <!--create ring category-->
+        <li><a <?php if($page_location == 'create_ring_category'){  ?> class="active" <?php } ?> href="<?= base_url().'create_ring_category' ?>">Create Ring Category</a></li>
+        <?php
+        }
+        if($this->router->fetch_class() == 'church_ring_home')
+        {
+            ?>
+            <li><a <?php if($this->router->fetch_method() == 'members'){  ?> class="active" <?php } ?> href="church-rings-members/<?php echo $ring_id?>">Ring Members</a></li>
+            <?php
+        }
+        ?>
+        
+<!--        -->
+        </ul>
+    </div>

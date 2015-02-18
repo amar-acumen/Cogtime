@@ -1,0 +1,74 @@
+Introduce: 
+The are two step to configure the flashscreen. At first, you need to configure client just do as follow step 1.
+Second, you need to configure the server do as step 2. 
+
+1 Add plugin
+1.1 Add necessary script
+Open the page 123flashchat.html, add follow script
+<script type="text/javascript" src="config/123flashchat_extension_lib.js"></script>
+<script type="text/javascript" src="config/extensions.js"></script>
+<script type="text/javascript" src="plugin/screenmsg/js/flashscreen.js"></script>
+Example like follows:
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+<title></title>
+...
+
+<script type="text/javascript" src="config/123flashchat_extension_lib.js"></script>
+<script type="text/javascript" src="config/extensions.js"></script>
+<script type="text/javascript" src="plugin/screenmsg/js/flashscreen.js"></script>
+</head>
+
+1.2 Configure plugin
+Under /plugin/screenmsg/js fold there is a config.js, you need modify the var flashscreen to you need, just like the example.
+Some important infomation is on that config.js file and you need read it anyway.
+
+2.Deploy flashscreen server
+We support two ways to apply the plugin in you chat with php and tomcat.
+2.1 PHP:
+2.1.1 First of all, you web path need support curl module.
+2.1.2 To deploy on php server, you need copy the two file config.php, flashscreen.php under /plugin/flashscreen/server fold to you web path which could be visited
+at the url that configured at config.js
+
+/*** sample code ***/
+var flashscreen = "http://<you website url>/screenmsg/server/flashscreen.php"; 
+/*** sample code ***/
+
+2.1.3 You maybe need to modify the config.php that you just copy with. Moify the two variable $updateCreditsAPI $customMessageAPI to you need. 
+please read 3.1
+
+
+//-------------------------------------------------------------
+//------------------------------------------------------------
+
+2.2 Tomcat:
+2.2.1 Copy the ChatPlugin.war under the fold plugin to you webapps fold and restart you tomcat server.
+Or maybe you have other J2EE server, you just do you need to deplay the ChatPlugin.war file.
+Under the project ChatPlugin, navigator to the fold ChatPlugins\WebRoot\WEB-INF\classes and open
+the server.properties, modify update-user-credits-api and custom-message-api to you need.
+How to change the two properties, please read 3.1
+
+
+3.FAQ
+3.1 how to configure API
+/*
+For example of the "http://localhost:35555/update-user-credits.api";
+http://localhost:35555 is the chat server, you may be need to modify the localhost to you chat server ip.
+And alse need change 35555 to the server port;
+
+change "http://localhost:35555/custommessage.api" just like follows
+
+To important, open the server.xml under CHAT_ROOT\server\etc\groups\default, find tag just like follows
+<data-api enable="On">
+<query-allow-access-from password="">
+<ip>*</ip>
+</query-allow-access-from>
+<push-allow-access-from password="">
+<ip>*</ip>
+</push-allow-access-from>
+</data-api>
+
+the data-api should be enabled, and the <ip> under query-allow-access-from need add you domain without limited
+<ip>*</ip> is not so scurity, you could modify like this <ip>127.0.0.1</ip>
+*/
+

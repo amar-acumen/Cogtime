@@ -1,0 +1,124 @@
+<meta charset="utf-8">
+
+<title>Cogtime Church</title>
+
+<link href="<?= base_url() ?>css/church_admin.css" rel="stylesheet" type="text/css">
+</head>
+
+
+
+<body>
+
+<div class="header">
+
+  <div class="container">
+
+      <?php
+
+      $user_id = intval(decrypt($this->session->userdata('user_id')));
+
+       $large_logo_img = get_church_logo_image($_SESSION['logged_church_id'], 'main', $church_arr[0]->ch_logo);
+
+       $user_name = get_user_name_by_id($user_id);
+
+      ?>
+
+    <h1><a href="javascript:void(0);"><img src="<?= $large_logo_img; ?>" alt="Church" width="259" height="40"></a></h1>
+
+    <div class="top-right">
+
+        <?php
+
+        
+
+        
+
+        ?>
+
+     
+
+     <div class="user-pic" style="background:url(<?= get_profile_image($user_id, 'thumb') ?>) no-repeat;" title="<?= $user_name ?>"></div>
+
+      <ul>
+
+          <li><a href="<?//= get_profile_url($user_id) ?><?=base_url()?>my-profile.html" class="user_active">Welcome <?= $user_name ?></a></li>
+
+        <li>| <a href="<?=base_url().'logout'?>">Logout</a></li>
+<br>
+ <li class="cogtime-toplogo"><a href="<?=base_url()?>" title="Cogtime"><img src="<?=base_url()?>images/cogtime-logo.png" width="102" height="25" alt="Cogtime"></a></li>
+      </ul>
+      <br>
+
+     
+
+    </div>
+
+    <div class="clear"></div>
+
+  </div>
+
+</div>
+
+
+
+<div class="container">
+
+    <?php 
+
+  $page_location = $this->uri->segment(1);
+
+  $page_location1 = $this->uri->segment(2);
+
+ 
+
+    //echo 'ok';
+
+    ?>
+
+	<div class="admin-menu">
+
+    	<ul>
+
+             <li><a  <?php if($page_location1 == 'church-wall'){  ?> class="active" <?php } ?> href="<?= base_url().''.$_SESSION['logged_church_id'].'/church-wall' ?>">Church wall</a></li>
+
+                <li><a <?php if($page_location == 'church'){  ?> class="active" <?php } ?> href="<?= get_church_dashboard_url_by_church_id($_SESSION['logged_church_id']) ?>">Dashboard</a></li>
+
+          <li><a <?php if($page_location == 'church_setting'){  ?> class="active" <?php } ?> href="<?= base_url().'church_setting' ?>">Manage site</a></li>
+
+          <li><a <?php if($page_location == 'church_member'){  ?> class="active" <?php } ?> href="<?php echo base_url().'church_member'?>">Members</a></li>
+
+          <li><a <?php if($page_location == 'church-subadmin'){  ?> class="active" <?php } ?> href="<?= base_url().'church-subadmin' ?>">Sub Admin</a></li>
+
+		 
+
+                  <?php
+
+            if(!($_SESSION['subadmin_role']==2 || $_SESSION['charch_super_admin'] =='yes')){
+
+            ?>
+
+        <li><a <?php if($page_location == 'member_ring' || $page_location == 'church_rings'){  ?> class="active" <?php } ?> href="<?php echo base_url().'member_ring/'.$_SESSION['logged_church_id'];?>">Rings</a></li>  
+
+            <?php } else {?>
+
+          <li><a  <?php if($page_location == 'church-ring-list' || $page_location == 'church_rings'){  ?> class="active" <?php } ?> href="<?php echo base_url().'church-ring-list';?>">Rings</a></li>  
+
+            <?php } ?>
+               
+            <li><a href="<?= base_url().$_SESSION['logged_church_id'].'/church-prayer-group.html' ?>" <?php if($page_location1 == 'church-prayer-group.html'){?> class="active" { ?> <?php } ?>>Prayer Groups</a></li>
+            <li><a href="<?= base_url().$_SESSION['logged_church_id'].'/church_activity_management' ?>" <?php if($page_location1 == 'church_activity_management'){?> class="active" { ?> <?php } ?>>Activity</a></li>
+
+            <li><a href="<?= base_url().'church_plugin' ?>" <?php if($page_location == 'church_plugin'){?> class="active" <?php } ?> >Church Plugin</a></li>
+
+        </ul>
+
+        
+
+    </div>
+
+    </div>
+
+
+
+</div>
+

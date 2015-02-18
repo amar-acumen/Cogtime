@@ -1,0 +1,16 @@
+<?php
+//pr($info_arr);
+foreach ($info_arr as $info){
+    $IMG = base_url()."uploads/user_photos/".getThumbName($info['s_photo'],'thumb');
+   //$IMG = base_url()."uploads/wall_photos/".getThumbName($photo_val,'thumb');
+?>
+<h2 class="cmnt_img_title"><?= strtoupper($info['s_title']) ?></h2>
+<div class="cmnt_img">
+    
+<img src="<?= $IMG ?>" height="200" width="200">
+</div>
+<?php } ?>
+<style>
+   .cmnt_img{ margin:26px 0 0 188px;} 
+   .cmnt_img_title{ margin:1px 0 0 183px; font-size: 22px; font-weight: bold; }
+</style>

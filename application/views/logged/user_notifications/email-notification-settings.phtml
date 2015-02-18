@@ -1,0 +1,227 @@
+<?php include(APPPATH."views/layouts/logged_header.phtml");?>
+            <!-- NAVIGATION SECTION -->
+      <?php include(APPPATH."views/layouts/nav.phtml");?>
+      <!-- /NAVIGATION SECTION -->
+      </div>
+</div>
+<!-- /HEADER SECTION -->
+<div class="clr"></div>
+<!-- CONTENT SECTION -->
+<div id="content_section">
+      <div id="container">
+            <div id="top_corner">&nbsp;</div>
+            <div id="mid_content">
+                  <!-- latest news -->
+                   <?php include(APPPATH ."views/layouts/latest_news.phtml");?>
+                  <!-- /latest news -->
+                  <div class="clr"></div>
+                  <!-- main container -->
+                  <div id="main_container">
+                        <!-- left container -->
+                        <?php include(APPPATH."views/layouts/leftbar.phtml");?>
+                        <!-- /left container -->
+                        <div id="mid_container">
+                              <div class="page_heading">
+                                    <div class="left"><img src="images/icons/msgg.png" alt="" />My Email Notification Settings </div>
+                              </div>
+                              <div class="arrow_btm"></div>
+                              <form name="user_alerts" id="user_alerts" method="post"  onsubmit="return false;" >  
+                                <div class="shade_box_01 email_settings">
+                                     
+                                      <h4>Friend Request</h4>
+                                      <div class="settings_div">
+                                            <p>
+                                                  <input name="txt_frnd_req_rec" id="txt_frnd_req_rec" type="checkbox" value="1"  <?=($arr_email_arr['e_friend_request_received'] == 'Y')?'checked="checked"':'';?>/>
+                                                  When I receive a friend request</p>
+                                            <p>
+                                                  <input name="txt_frnd_req_acpt" id="txt_frnd_req_acpt" type="checkbox" value="1" <?=($arr_email_arr['e_friend_request_accepted'] == 'Y')?'checked="checked"':'';?> />
+                                                  When my friend request gets accepted</p>
+                                            <p>
+                                                  <input name="txt_frnd_req_dec" id="txt_frnd_req_dec" type="checkbox" value="1"  <?=($arr_email_arr['e_friend_request_declined'] == 'Y')?'checked="checked"':'';?>/>
+                                                  When someone decline my friend request</p>
+                                      </div>
+                                      
+                                      <h4>My Netpals Request</h4>
+                                      <div class="settings_div">
+                                            <p>
+                                                  <input name="txt_netpal_req_rec" id="txt_netpal_req_rec" type="checkbox" value="1" <?=($arr_email_arr['e_net_pal_request_received'] == 'Y')?'checked="checked"':'';?> />
+                                                  When I receive a  netpals request</p>
+                                            <p>
+                                                  <input name="txt_netpal_req_acpt" id="txt_netpal_req_acpt" type="checkbox" value="1" <?=($arr_email_arr['e_net_pal_request_accepted'] == 'Y')?'checked="checked"':'';?> />
+                                                  When my netpals request gets accepted</p>
+                                           <p>
+                                                  <input name="txt_netpal_req_dec" id="txt_netpal_req_dec" type="checkbox" value="1" <?=($arr_email_arr['e_netpal_request_declined'] == 'Y')?'checked="checked"':'';?> />
+                                                  When someone decline my  netpals request</p>
+                                      </div>
+                                      
+                                      
+                                      <h4>My Prayer Partner Request</h4>
+                                      <div class="settings_div">
+                                            <p>
+                                                  <input name="txt_prayer_patner_req_rec" id="txt_prayer_patner_req_rec" type="checkbox" value="1" <?=($arr_email_arr['e_prayer_partner_request_received'] == 'Y')?'checked="checked"':'';?> />
+                                                  When I receive a  prayer partner request</p>
+                                            <p>
+                                                  <input name="txt_prayer_patner_req_acpt" id="txt_prayer_patner_req_acpt" type="checkbox" value="1" <?=($arr_email_arr['e_prayer_partner_my_request_accepted'] == 'Y')?'checked="checked"':'';?> />
+                                                  When my prayer partner request gets accepted</p>
+                                           <p>
+                                                  <input name="txt_prayer_patner_req_dec" id="txt_prayer_patner_req_dec" type="checkbox" value="1" <?=($arr_email_arr['e_prayer_partner_request_declined'] == 'Y')?'checked="checked"':'';?> />
+                                                  When someone decline my  prayer partner request</p>
+                                      </div>
+                                      
+                                       <h4>My Photo</h4>
+                                      <div class="settings_div">
+                                            <p>
+                                                  <input name="txt_photo_comments_rec" id="txt_photo_comments_rec" type="checkbox" value="1" <?=($arr_email_arr['e_photo_comments_received'] == 'Y')?'checked="checked"':'';?> />
+                                                  When my friend comment</p>
+                                      </div>
+                                      
+                                      <h4>My Audio</h4>
+                                      <div class="settings_div">
+                                            <p>
+                                                  <input name="txt_audio_comments_rec" id="txt_audio_comments_rec" type="checkbox" value="1" <?=($arr_email_arr['e_audio_comments_received'] == 'Y')?'checked="checked"':'';?> />
+                                                  When my friend comment</p>
+                                      </div>
+                                      
+                                      <h4>My Video</h4>
+                                      <div class="settings_div">
+                                            <p>
+                                                  <input name="txt_video_comments_rec" id="txt_video_comments_rec" type="checkbox" value="1" <?=($arr_email_arr['e_video_comments_received'] == 'Y')?'checked="checked"':'';?> />
+                                                  When my friend comment</p>
+                                      </div>
+                                      
+                                      
+                                    
+                                      <h4>My Messages</h4>
+                                      <div class="settings_div">
+                                            <p>
+                                                  <input name="txt_message_rec" id="txt_message_rec" type="checkbox" value="1" <?=($arr_email_arr['e_message_received'] == 'Y')?'checked="checked"':'';?> />
+                                                  When I receive a message </p>
+                                      </div>
+                                    
+                                     <h4>My Tweets</h4>
+                                     <div class="settings_div">
+                                          <p>
+                                                <input type="checkbox" value="1" name="txt_tweet_comments_received" id="txt_tweet_comments_received" <?=($arr_email_arr['e_tweet_comments_received'] == 'Y')?'checked="checked"':'';?> />
+                                                When someone posts reply on my post.</p>
+                                          <p>
+                                                <input type="checkbox" value="1" name="txt_retweet" id="txt_retweet" <?=($arr_email_arr['e_retweet'] == 'Y')?'checked="checked"':'';?> />
+                                                When someone retweet my post.</p>
+                                                
+                                     </div>
+                                    
+                                     <?php /*?><h4>My Events</h4>
+                                     <div class="settings_div">
+                                          <p>
+                                                <input type="checkbox" value="" name="">
+                                                When someone comment or support</p>
+                                     </div><?php */?>
+                                      <h4>My Blog</h4>
+                                     <div class="settings_div">
+                                             <p>
+                                                <input type="checkbox" value="1" name="txt_blog_comments_rec" id="txt_blog_comments_rec" <?=($arr_email_arr['e_blog_comments_received'] == 'Y')?'checked="checked"':'';?> />
+                                                When someone comment on articles of my blog </p>
+                                                
+                                         
+                                     </div>
+                                     
+                                     <h4>My Rings</h4>
+                                     <div class="settings_div">
+                                          <p>
+                                                <input type="checkbox" value="1" name="txt_ring_posts_rec" id="txt_ring_posts_rec" <?=($arr_email_arr['e_ring_posts_received'] == 'Y')?'checked="checked"':'';?> />
+                                                When someone posts on rings i have created/joined</p>
+                                          <p>
+                                                <input type="checkbox" value="1" name="txt_ring_comment_rec" id="txt_ring_comment_rec" <?=($arr_email_arr['e_ring_comments_received'] == 'Y')?'checked="checked"':'';?> />
+                                                When someone comment on post of rings i have created/joined</p>
+                                                
+                                         
+                                     </div>
+                                     
+                                      <h4>My Events</h4>
+                                      <div class="settings_div">
+                                            <p>
+                                                  <input name="txt_event_comments_rec" id="txt_event_comments_rec" type="checkbox" value="1" <?=($arr_email_arr['e_event_comments_received'] == 'Y')?'checked="checked"':'';?> />
+                                                  When someone comment on events i have created/joined</p>
+                                      </div>
+                                      
+                                      <h4>My Prayer Request</h4>
+                                      <div class="settings_div">
+                                            <p>
+                                                  <input name="txt_prayer_commit_received" id="txt_prayer_commit_received" type="checkbox" value="1" <?=($arr_email_arr['e_prayer_commit_received'] == 'Y')?'checked="checked"':'';?> />
+                                                  When someone commit on prayer request i have created</p>
+                                      </div>
+                                      
+                                      <h4>My Prayer Group </h4>
+                                      <div class="settings_div">
+                                            <p>
+                                                  <input name="txt_prayer_grp_invitation" id="txt_prayer_grp_invitation" type="checkbox" value="1" <?=($arr_email_arr['e_prayer_grp_invitation'] == 'Y')?'checked="checked"':'';?> />
+                                                  When someone invite me to his/her prayer group</p>
+                                                  
+                                            <p>
+                                                  <input name="txt_prayer_grp_joining_req" id="txt_prayer_grp_joining_req" type="checkbox" value="1" <?=($arr_email_arr['e_prayer_grp_joining_req'] == 'Y')?'checked="checked"':'';?> />
+                                                  When someone send me request to join my prayer group</p>      
+                                                  
+                                           <p>
+                                                  <input name="txt_prayer_grp_req_acpt" id="txt_prayer_grp_req_acpt" type="checkbox" value="1" <?=($arr_email_arr['e_prayer_grp_request_accepted'] == 'Y')?'checked="checked"':'';?> />
+                                                  When my prayer group request gets accepted</p>
+                                           <p>
+                                                  <input name="txt_prayer_grp_req_dec" id="txt_prayer_grp_req_dec" type="checkbox" value="1" <?=($arr_email_arr['e_prayer_grp_request_declined'] == 'Y')?'checked="checked"':'';?> />
+                                                  When someone decline my  prayer group request</p>
+                                                  
+                                            <p>
+                                                  <input name="txt_prayer_grp_chat_invitation" id="txt_prayer_grp_chat_invitation" type="checkbox" value="1" <?=($arr_email_arr['e_prayer_grp_chat_invitation'] == 'Y')?'checked="checked"':'';?> />
+                                                  When someone invite me to his/her prayer group chat room</p>
+                                      </div>
+                                      
+                                      
+                                                                     
+                                      
+                                      
+                                      <p>&nbsp;</p>
+                                      <input name="" type="submit" value="Update" class="btn bottom-button" />
+                                </div>
+                              </form>
+                        </div>
+                        <!-- /left container -->
+                        <!-- right container -->
+                       <?php include(APPPATH."views/layouts/rightbar.phtml");?>
+                        <!-- /right container -->
+                  </div>
+                  <!-- /main container -->
+                  <div class="clr"></div>
+            </div>
+            <div id="bot_corner">&nbsp;</div>
+      </div>
+      <div class="clr"></div>
+</div>
+<!-- /CONTENT SECTION -->
+<div class="clr"></div>
+<!-- FOOTER SECTION -->
+<?php include(APPPATH."views/layouts/footer.phtml");?>
+<!-- /FOOTER SECTION -->
+<?php include(APPPATH."views/logged/blocks/common_popup.phtml");?>
+
+
+<script type="text/javascript">
+$(document).ready(function(arg) {
+	
+
+ $('#user_alerts').submit(function(){ 
+						
+				  var datatosend=$("#user_alerts").serialize();
+				 // alert(datatosend);
+				  showBusyScreen();
+											  
+					  $.ajax({
+						 type: "POST",
+						 url: base_url+"logged/user_email_settings/update_info/",
+						 data: datatosend,
+						 dataType: 'json',
+						 success: function(data){
+							hideBusyScreen(); 
+							showUIMsg(data.msg);
+						 }
+					   });	 
+				});
+ 
+ });
+</script>

@@ -1,0 +1,408 @@
+<?php include(APPPATH . "views/layouts/logged_header.phtml"); ?>
+<!-- NAVIGATION SECTION -->
+<?php
+include(APPPATH . "views/layouts/nav.phtml");
+$max_file_size = $this->config->item('MAX_UP_FILE_SIZE');
+$max_file_size = $max_file_size * 1024 * 1024;
+?>
+<!-- /NAVIGATION SECTION -->
+</div>
+</div>
+<!-- /HEADER SECTION -->
+<div class="clr"></div>
+<!-- CONTENT SECTION -->
+<div id="content_section">
+    <div id="container">
+        <?php /* ?><div id="top_corner">&nbsp;</div><?php */ ?>
+        <div id="mid_content">
+            <!-- latest news -->
+            <?php include(APPPATH . "views/layouts/latest_news.phtml"); ?>
+            <!-- /latest news -->
+            <div class="clr"></div>
+            <!-- main container -->
+            <div id="main_container">
+                <!-- left container -->
+                <?php include(APPPATH . "views/layouts/leftbar.phtml"); ?>
+                <!-- /left container -->
+                <!-- mid container -->
+                <div id="mid_container">
+                    <!--my tweeter profile start -->    
+                    <div class="tweeter-profile">
+
+                        <?php
+                        include(APPPATH . "views/logged/my_tweet/search_panel.phtml");
+                        $logged_user_id = intval(decrypt($this->session->userdata('user_id')));
+                        $user_id = $public_profile_info['id'];
+                        $bg_img_name = get_tweet_bg_img_by_id($user_id);
+                        $bg_img_arr = explode('.', $bg_img_name);
+                        $bg_img_name = $bg_img_arr[0];
+                        $ext = $bg_img_arr[1];
+                        //print_r($bg_img_name);
+                        $img_url = base_url() . 'uploads/user_photos/' . $bg_img_name . '-big.' . $ext;
+                        if (empty($bg_img_name)) {
+                            ?>
+                            <?php //include(APPPATH . "views/logged/my_tweet/common_user_twiter_profile_part.phtml");  ?>
+                            <div style="background:url(images/tweeter-profile-bg.jpg) no-repeat 0 0;" class="tweeter-profile-header">
+                                <div class="follow-section" id="tweet_follow_status<?= $public_profile_info['id'] ?>">
+                                    <?php if ($is_follow == false && intval(decrypt($this->session->userdata('user_id'))) != $public_profile_info['id']) {
+                                        ?>
+                                        <span  class="follow-btn"><input name="Follow" type="button" value="Follow"  onclick="javascript:followUser(<?= $public_profile_info['id'] ?>, 'follow')"/></span>
+                                        <?php
+                                    } else if (intval(decrypt($this->session->userdata('user_id'))) != $public_profile_info['id']) {
+                                        #
+                                        ?>
+                                        <span class="follow-btn"><input name="Unfollow" type="button" value="Unfollow"  onclick="javascript:followUser(<?= $public_profile_info['id'] ?>, 'Unfollow')"/></span>
+
+                                        <?php
+                                    } else {
+                                        $img_css = 'style="margin-top:40px;"';
+                                    }
+                                    ?>
+                                </div> 
+                                <div class="clr"></div>
+                                <?php
+                                if ($logged_user_id == $user_id) {
+                                    ?>
+                                    <div class="edit_twtr_pic" style="display: none"><a href="javascript:void(0);" onclick="show_dialog('edit-bg-image');"><h3>Edit Background Image</h3></a></div>
+                                <?php } ?>
+                                <div class="img-thumb" <?= $img_css ?> >
+                                    <div style="background:url(<?= get_profile_image($public_profile_info['id'], 'thumb') ?>) no-repeat center;width:73px; height:73px;" title="tweeter profile pic" ></div>
+                                </div>
+                                <h2><?= $public_profile_info['s_profile_name'] ?></h2>
+                                <h3><?= $public_profile_info['s_tweet_id'] ?></h3>
+                            </div> 
+                        <?php } else { ?>
+                            <div style="background:url(<?php echo $img_url; ?>) no-repeat 0 0;" class="tweeter-profile-header">
+                                <div class="follow-section" id="tweet_follow_status<?= $public_profile_info['id'] ?>">
+                                    <?php if ($is_follow == false && intval(decrypt($this->session->userdata('user_id'))) != $public_profile_info['id']) {
+                                        ?>
+                                        <span  class="follow-btn"><input name="Follow" type="button" value="Follow"  onclick="javascript:followUser(<?= $public_profile_info['id'] ?>, 'follow')"/></span>
+
+
+                                        <?php
+                                    } else if (intval(decrypt($this->session->userdata('user_id'))) != $public_profile_info['id']) {
+                                        #
+                                        ?>
+
+                                        <span class="follow-btn"><input name="Unfollow" type="button" value="Unfollow"  onclick="javascript:followUser(<?= $public_profile_info['id'] ?>, 'Unfollow')"/></span>
+
+                                        <?php
+                                    } else {
+                                        $img_css = 'style="margin-top:40px;"';
+                                    }
+                                    ?>
+                                </div> 
+                                <div class="clr"></div>
+                                <?php
+                                if ($logged_user_id == $user_id) {
+                                    ?>
+                                    <div class="edit_twtr_pic" style="display: none"><a href="javascript:void(0);" onclick="show_dialog('edit-bg-image');"><h3>Edit Background Image</h3></a></div>
+                                <?php } ?>
+                                <div class="img-thumb" <?= $img_css ?> >
+                                    <div style="background:url(<?= get_profile_image($public_profile_info['id'], 'thumb') ?>) no-repeat center;width:73px; height:73px;" title="tweeter profile pic" ></div>
+                                </div>
+                                <h2><?= $public_profile_info['s_profile_name'] ?></h2>
+                                <h3><?= $public_profile_info['s_tweet_id'] ?></h3>
+                            </div> 
+                        <?php } ?>
+                        <!--tweeter header end --> 
+
+                        <!--tweeter page nav start --> 
+                        <div class="tweeter-nav">
+                            <ul>
+                                <li class="<?php echo ($home_menu == '1') ? 'select' : ''; ?>"><a href="<?= getTwitterProfileLink($public_profile_info['s_tweet_id']) ?>"><span id=""><?= $total_my_tweets ?></span><br />Chitter Tweets</a></li>
+                                <li class="<?php echo ($page_name == 'followings') ? 'select' : ''; ?>"><a href="<?= base_url() . 'user-twitter-profile/' . $public_profile_info['id'] . '/followings.html' ?>"><span id="count_total_following"><?= $total_following ?></span><br />Followings</a></li>
+                                <li class="last <?php echo ($page_name == 'followers') ? 'select' : ''; ?>"><a href="<?= base_url() . 'user-twitter-profile/' . $public_profile_info['id'] . '/followers.html' ?>"><span id="count_total_follower"><?= $total_followers ?></span><br />Followers</a></li>
+
+                            </ul>
+                            <div class="clr"></div>
+                        </div>
+                        <!--tweeter page nav end -->  
+                        <div id="user_tweet_contents"><?= $tweets_ajax_content ?></div>  
+                    </div>
+                    <!--my tweeter profile end -->  
+                    <?php if ($no_of_result == 0): ?>
+                        <div class="shade_box_01" style="padding-top:5px;" id="no_tweets"><div  class="shade_norecords" style="width:260px;"><p class="blue_bold12">No Chitters.</p></div></div>
+                    <?php endif; ?>	
+
+
+                    <?php if ($no_of_result > $pagination_per_page): ?>
+
+                        <div class="view_more" id="show_more_div"><a href="javascript:void(0);" id="show_more_tweets_link" page_value="<?= $current_page_1 ?>" onclick="show_more_tweets($(this).attr('page_value'))">[view more] </a> </div>
+                    <?php endif; ?>
+                    <input type="hidden" id="i_user_id" value="<?= $profile_id ?>" />
+                </div>
+                <!-- /mid container -->
+                <!-- right container -->
+                <?php include(APPPATH . "views/layouts/rightbar.phtml"); ?>
+                <!-- /right container -->
+            </div>
+            <!-- /main container -->
+            <div class="clr"></div>
+        </div>
+        <div id="bot_corner">&nbsp;</div>
+    </div>
+    <div class="clr"></div>
+    <form id="frmUploadTweetPhoto"  method="post" action="<?= base_url() . 'logged/my_photos/edit_twt_bg_img' ?>" onsubmit="return false;" enctype="multipart/form-data">
+        <div class="lightbox edit-bg-image" style="width:480px;">
+            <div class="close"><a href="javascript:void(0)" onclick="
+                    hide_dialog()"><img src="<?php echo base_url() ?>images/close.png" alt="" /></a></div>
+            <div class="top"><div>&nbsp;</div></div>
+            <div class="mid">
+                <div class="heading"><div class="left"><h4><img src="<?php echo base_url() ?>images/icons/photo.png" alt="" /> Upload  Photo </h4></div></div>
+                <div class="frm_box">
+                    <div class="lable01">Browse Photo:</div> 
+                    <div class="field01">                       
+                        <input type="file" name="s_photo" id="s_photo" />
+                        <span id="err_photo" class="error-message"></span>  
+                    </div>
+                    <div class="clr"></div>
+                    <center><input name="add_mphoto_btn" id="add_mphoto_btn" type="submit" value="Upload" class="btn" /></center>
+                </div>
+
+            </div>
+            <div class="bot"><div>&nbsp;</div></div>
+        </div>
+    </form>
+</div>
+<!-- /CONTENT SECTION -->
+<div class="clr"></div>
+<!-- FOOTER SECTION -->
+<?php include(APPPATH . "views/layouts/footer.phtml"); ?>
+<?php include(APPPATH . "views/logged/blocks/common_popup.phtml"); ?>
+
+<!-- /FOOTER SECTION -->
+<!--popup one start-->
+
+<!--popup one end-->
+
+<!-- /lightbox SECTION -->
+<script type="text/javascript">
+    var iamge_size;
+    var image_width;
+    var image_height;
+    $(document).ready(function() {
+        $("#searchTweeter").autofill({'value': "Type Keyword"});
+        //$("#ta_post_tweet").autofill({'value':"Compose New Tweet"});
+
+        $(".tweeter-profile-header").hover(
+                function() {
+                    $(".edit_twtr_pic").show();
+                },
+                function() {
+                    $(".edit_twtr_pic").hide();
+                }
+        );
+        var _URL = window.URL || window.webkitURL;
+        $('#s_photo').change(function() {
+            var f = this.files[0];
+            iamge_size = f.size || f.fileSize;
+            // alert(iamge_size);
+            var image, file;
+
+            if ((file = this.files[0])) {
+                image = new Image();
+                image.onload = function() {
+                    image_width = this.width;
+                    image_height = this.height;
+                    //alert("The image width is " + this.width + " and image height is " + this.height);
+                };
+                image.src = _URL.createObjectURL(file);
+            }
+        });
+        var options = {
+            beforeSubmit: showLoad_M, // pre-submit callback 
+            success: validateMultiFrm // post-submit callback 
+        };
+        $('#frmUploadTweetPhoto').submit(function() {
+            var max_file_size = '<?php echo $max_file_size; ?>';
+
+            if (iamge_size > max_file_size) {
+                $('#err_photo').html("Maximum file upload size is 2 MB");
+            }
+            else if (image_width < 700 || image_height < 600) {
+                $('#err_photo').html("Minimum image dimension is 700 X 600");
+            }
+            else
+            {
+                $('#err_photo').html('');
+                $(this).ajaxSubmit(options);
+                return false;
+            }
+
+        });
+    });
+    function showLoad_M()
+    {
+        $('#add_mphoto_btn').val('Uploading...');
+    }
+    function validateMultiFrm(data)
+    {
+        //alert( data);
+        var data = JSON.parse(data);
+        if (data.success == false)
+        {
+            $('.error-message').each(function(i) {
+                $(this).attr('style', 'display:none');
+            });
+
+            $('#add_mphoto_btn').val('Upload');
+
+            for (var id in data.arr_messages) {
+                //alert(data.arr_messages[id]);
+                if ($('#err_' + id) != null) {
+                    $('#err_' + id).html(data.arr_messages[id]);
+                    $('#err_' + id).css('display', 'block');
+                }
+            }
+        }
+        else {
+            // claering form
+            $('#frmUploadTweetPhoto')[0].reset();
+            //$('#select_album1').val($('options:first', '#select_album1').val());
+            $('#add_mphoto_btn').val('Upload');
+            hide_dialog();
+            //$('#album_div').html(data.html);
+            showUIMsg(data.msg);
+            location.reload();
+            //window.location.href= document.URL;
+        }
+        //hideLoading();
+    }
+</script>
+<script type="text/javascript">
+
+    var ajax_req_feeds = null;
+    function show_more_tweets(page) {
+
+        var i_user_id = $('#i_user_id').val();
+        if (ajax_req_feeds != null) {
+            ajax_req_feeds.abort();
+        }
+        showUILoader_nodialog();
+        ajax_req_feeds = $.ajax({
+            type: 'get',
+            url: base_url + 'logged/tweet_home/all_tweets_ajax_pagination/' + i_user_id + '/' + page,
+            dataType: 'json',
+            success: function(data, status) {
+
+                hideUILoader_nodialog();
+                if (data.html != '') {
+
+                    //alert(data.cur_page+'dfdf');
+                    $('#user_tweet_contents').append(data.html);
+                    $('#show_more_tweets_link').attr('page_value', data.cur_page);
+                    $('#show_more_tweets_link').attr('onclick', '');
+                    $('#show_more_tweets_link').attr('onclick', 'show_more_tweets(' + data.cur_page + ')');
+					show_video();
+                }
+                else {
+                    $('#user_tweet_contents').append('<div class="view_more" style="text-align: center;"><p class="blue_bold12" style="font-size:14px;">No More Chitters.</p></div>');
+                    $('#show_more_div').remove();
+                }
+
+                if (data.view_more == false)
+                {
+
+                    $('#user_tweet_contents').append('<div class="view_more" style="text-align: center;" ><p class="blue_bold12" style="font-size:14px;">No More Chitters.</p></div>');
+                    $('#show_more_div').remove();
+                }
+
+
+            }	// end of success function...
+        });
+    }
+
+    $(document).ready(function(arg) {
+
+
+        $('#frm_search').submit(function() {
+
+            var i_user_id = $('#i_user_id').val();
+            var datatosend = $("#frm_search").serialize();
+            showUILoader_nodialog('<img src="' + base_url + 'images/loading_big.gif" width="50"/> ');
+            $.ajax({
+                type: "POST",
+                url: base_url + 'logged/tweets/all_tweets_ajax_pagination/' + i_user_id,
+                data: datatosend,
+                dataType: 'json',
+                success: function(data) {
+                    $('#frm_search')[0].reset();
+
+                    if (data.html != '') {
+                        //alert( data.cur_page+' posting');
+                        $('#show_more_div').remove();
+                        $('#user_tweet_contents').html(data.html);
+                        $('#show_more_tweets_link').attr('page_value', data.cur_page);
+                        $('#show_more_tweets_link').attr('onclick', '');
+                        $('#show_more_tweets_link').attr('onclick', 'show_more_tweets(' + data.cur_page + ')');
+						$('[id^="myvideo_big_thumb_1_"]').trigger('click');
+                    }
+                    else {
+                        $('#user_tweet_contents').html('<div class="view_more" style="text-align: center;" ><p class="blue_bold12" style="font-size:14px;">No Chitters.</p></div>');
+                        $('#show_more_div').remove();
+                    }
+
+
+                    //alert(data.no_of_result- data.current_page);
+                    if (data.no_of_result == 0) {
+                        $('#show_more_div').remove();
+                    }
+                    else if (data.view_more == false)
+                    {
+                        //alert(1);
+                        $('#user_tweet_contents').append('<div class="view_more" style="text-align: center;"><p class="blue_bold12" style="font-size:14px;">No More Chitters.</p></div>');
+                        $('#show_more_div').remove();
+                    }
+                    else if ((data.no_of_result - data.cur_page != 0)) {
+                        //alert(2);
+
+                        $('#show_more_div').remove();
+                        $('#mid_container').append('<div class="view_more" id="show_more_div"><a href="javascript:void(0);" id="show_more_tweets_link" page_value="' + data.cur_page + '" onclick="show_more_tweets(' + data.cur_page + ')">[view more] </a> </div>');
+                    }
+
+                    hideUILoader_nodialog();
+                }
+            });
+        });
+    });
+
+
+</script>
+<script type="text/javascript">
+    function followUser(user_id, i_status)
+    {
+
+        var URL = base_url + 'logged/user_twitter_profile/follow_user/';
+        showUILoader_nodialog('<img src="' + base_url + 'images/loading_big.gif" width="50"/> ');
+        if (ajax_req != null) {
+            ajax_req.abort();
+        }
+        ajax_req = $.ajax({
+            type: 'POST',
+            url: URL,
+            dataType: 'json',
+            data: ({'user_id': user_id
+                , 'i_status': i_status
+
+            }),
+            success: function(data, status) {
+                var result_obj = data;
+                hideUILoader_nodialog();
+                if (result_obj.result == true) {
+                    showUIMsg(result_obj.msg);
+                    $('#tweet_follow_status' + result_obj.u_id).html(result_obj.action_txt);
+                    $('#count_total_follower').html(result_obj.total_follower);
+                }
+
+            },
+            error: function(data, status, e) {
+                hideUILoader_nodialog();
+                showUIMsg(data.msg);
+            }
+        });
+    }
+
+</script>
+
+

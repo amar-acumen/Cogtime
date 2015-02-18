@@ -1,0 +1,86 @@
+                                   <div id="5">
+                                     <div class="heading01"> 
+                                         <div class="left"><h4><img src="images/icons/man2.png" alt=" " />  Skills</h4> </div>
+                                        <div class="right"><img src="images/icons/edit.png" alt=" " />  <a onclick="showDiv('5')" href="javascript:void(0);" class="white-link"><strong>Edit</strong></a></div>
+                                     </div>
+                                       <div class="shade_box_01 frm_box shade_box_blue" style="padding-bottom:17px;">
+                                        <?php
+                                           
+                                            $count=count($arr_profile_info['skill_arr']);
+                                            if ($count<2)
+                                                $count=2;
+                                          
+                                            for($i=0;$i<$count;$i++)    :
+                                        ?>
+                                        <div class="lable01">Skill <?php echo $i+1;?>:</div>  
+                                        <div class="field01"><?php echo isset($arr_profile_info['skill_arr'][$i]['s_name'])? $arr_profile_info['skill_arr'][$i]['s_name']:'';?></div> 
+                                        <div class="clr"></div>
+
+                                        <?php
+                                            endfor;
+                                        ?>
+                                       
+                                     </div>
+                                   </div>
+                                   <div id="jason5" style="display:none;"> 
+                                   <div class="heading01"> 
+                                         <div class="left"><h4><img src="images/icons/man2.png" alt=" " />  Skills</h4> </div>
+                                     </div>
+                                   <form id="frmManageSkillProfile"  method="post" action="modify-my-profile-skill-info-ajax" onsubmit="return modify_my_skill_profile_ajax()" enctype="multipart/form-data">
+                                   <div class="shade_box_01 frm_box shade_box_blue" style="padding-bottom:17px;">
+                                   
+                                    <?php
+                                        for($i=0;$i<$count;$i++)    :
+                                            $close_div_val=$i+1;
+                                        
+                                        $db_skill_id=isset($arr_profile_info["skill_arr"][$i]["id"])? $arr_profile_info["skill_arr"][$i]['id']: '0';
+                                            
+                                        
+                                   ?>
+                                   <!------------------------skill div----------------------------->
+                                   <div id="<?php echo "skill_div_".$close_div_val;?>"> 
+                                        <?php
+                                            if($i>1)
+                                            {
+                                                echo "<a class='close' href='javascript:void(0);' onclick=\"closeExtraSkillDiv(this)\" ><img src='images/icons/close.png' alt=''></a>";
+                                            }
+                                        ?>
+                                        <div class="lable01">Skill <?php echo $i+1;?>:</div>  
+                                        <div class="field01">
+                                            <input name="txt_skill[]" type="text" style="width:230px;" value="<?php echo isset($arr_profile_info['skill_arr'][$i]['s_name']) ? $arr_profile_info['skill_arr'][$i]['s_name'] : '';?>" /> 
+                                        </div> 
+                                        <div class="clr"></div>
+                                        <input type="hidden" name="skill_db_id[]" id="dbId" value="<?php echo $db_skill_id;?>">
+
+                                   </div>  
+                                   <!------------------------/skill div----------------------------->
+                                   
+                                   <?php
+                                    endfor;
+                                   ?>
+                                   <div id="extra_skill_divs"></div>  
+
+                                         
+                                        <input type="hidden" name="total_skill_divs" id="skill_div_h" value="<?php echo $count;?>" />
+                                        <div class="lable01">&nbsp;</div>  
+                                        <div class="field01" style="text-align:right;width:250px;"> 
+                                             <a href="javascript:void(0);"  class="blue_link" onClick="add_extra_skill_div()"><strong>Add More..</strong></a>
+                                        </div> 
+                                        
+                                        <div class="clr"></div>
+                                         <div class="lable01">&nbsp;</div>  
+                                        <div class="field01">
+                                        <input type="hidden" name="is_basic_submitted" id="is_basic_submitted" value="Y" />
+                                         <input name="" type="submit" value="Save"  class="btn" onclick="closeDiv('5')"  />
+                                         <input name="" type="button" value="Cancel"  class="btn" onclick="closeSkillDiv()"/>
+                                        </div> 
+                                        <div class="clr"></div>
+                                     </div>
+                                     
+                                    <?php /*?> //////////// NEW FIELD(S) [BEGIN] //////////// <?php */?>
+                                    <input type="hidden" name="actual_skill_divs" id="actual_skill_divs" value="<?= count($arr_profile_info['skill_arr']) ?>" />
+                                    <input type="hidden" name="deleted_skill_ids" id="deleted_skill_divs" value="" />
+                                    <input type="hidden" name="skill_div_id_order"  id="skill_div_id_order" value="<?= count($arr_profile_info['skill_arr']) ?>" />
+                                    <?php /*?> //////////// NEW FIELD(S) [END] //////////// <?php */?>
+                                     </form>
+                                  </div>

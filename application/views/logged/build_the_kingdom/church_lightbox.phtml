@@ -1,0 +1,13 @@
+ 						<?php
+                            # if map longitude-latitude data available...
+                            if (strtolower($geodata['status']) == 'ok') :
+                                ?>
+                                <div class="map">
+                                    <?php 
+                                      echo $mapshow->printGMapsJS();
+                                      echo $mapshow->showCustomMap(false,$id); 
+                                    ?>
+                                </div>
+                                <?php
+                            endif;
+                            ?>

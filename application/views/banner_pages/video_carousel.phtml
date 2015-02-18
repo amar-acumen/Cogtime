@@ -1,0 +1,220 @@
+<div class="video-gallery">
+              <h3><img src="images/icons/video.png" alt="video" width="32" height="32">Media Center</h3>
+            <div class="loader">
+                <div class="video-holder" style="background-color:#fff;">
+                
+                 <?php 
+                    
+                        $img_path = base_url()."uploads/media_center_videos/".getThumbName($videos[0]['s_video_thumb'],'bigthumb');
+                            
+                    ?>
+                    <input type="hidden" id="hd_main_video" value="<?=$videos[0]['id']?>" />
+                    <!--video one start -->
+                    <div class="video-box view main_video_outer_div">
+                        <div id="main_video" style="background-color:#000;">
+                        	<?php echo $image_source['html']?>
+                        </div>
+                        <div class="video-text">
+                            <h3 id="title"><?=$videos[0]['s_title']?></h3>
+                            <h2 id="category" style="color: #548FBA; font-size: 15px; font-family: AlexandriaFLFRegular; margin-bottom: 4px;"><?=$videos[0]['cat_name']?></h2>
+                            <p id="posted_on"><?=getShortDate($videos[0]['dt_posted_on'],5)?></p>
+                            <p id="desc"><?=nl2br($videos[0]['s_desc'])?></p>
+                        </div>
+                    </div>
+                    <!--video one end -->
+                
+               <div class="clr"></div>
+                </div>
+            </div><!--loader end-->
+                <!--bottom scrolling thum start -->
+                <div id="gallery-container">
+                    <div id="carousel">
+                    
+                    <?php 
+                    
+                        foreach($videos as $video)
+                        {
+                            $img_path = base_url()."uploads/media_center_videos/".getThumbName($video['s_video_thumb'],'bigthumb');
+                    ?>
+                   
+                        <!--thumb one start -->
+                        <div class="thumb-box" media_id="<?=$video['id']?>">
+                            <div class="thumb-bg">
+                                <a href="javascript:void(0);">
+                                    <img src="<?=$img_path?>" alt="video thumb" width="220" height="156">
+                                    <div class="play"><img src="images/play.png" alt="play" width="220" height="156"></div>
+                                </a>
+                            </div>
+                            <span class="text"><?=my_substr($video['s_title'],20)?> - <?=get_HMS_from_sec($video['t_duration'])?></span>
+                        </div>
+                        <!--thumb one end -->
+                    <?php
+                        }
+                    
+                    ?>
+                        
+      <? /*                  <!--thumb two start -->
+                        <div class="thumb-box">
+                            <div class="thumb-bg">
+                                <a href="javascript:void(0);">
+                                    <img src="images/thumb-2.jpg" alt="video thumb" width="220" height="156">
+                                    <div class="play"><img src="images/play.png" alt="play" width="220" height="156"></div>
+                                </a>
+                            </div>
+                            <span class="text">Video Topic Name Title - 2 mins 33 secs.</span>
+                        </div>
+                        <!--thumb two end -->
+                        
+                        <!--thumb three start -->
+                        <div class="thumb-box">
+                            <div class="thumb-bg">
+                                <a href="javascript:void(0);">
+                                    <img src="images/thumb-3.jpg" alt="video thumb" width="220" height="156">
+                                    <div class="play"><img src="images/play.png" alt="play" width="220" height="156"></div>
+                                </a>
+                            </div>
+                            <span class="text">Video Topic Name Title - 2 mins 33 secs.</span>
+                        </div>
+                        <!--thumb three end -->
+                        
+                        <!--thumb four start -->
+                        <div class="thumb-box">
+                            <div class="thumb-bg">
+                                <a href="javascript:void(0);">
+                                    <img src="images/thumb-4.jpg" alt="video thumb" width="220" height="156">
+                                    <div class="play"><img src="images/play.png" alt="play" width="220" height="156"></div>
+                                </a>
+                            </div>
+                            <span class="text">Video Topic Name Title - 2 mins 33 secs.</span>
+                        </div>
+                        <!--thumb four end -->
+      */ ?>
+                    </div>
+                    <div class="featured-video-control">
+                        <p>Featured<br>Videos</p>
+                        <div class="btn-bg">
+                        </div>
+                        <a href="javascript:void(0);" id="ui-carousel-next"><span>next</span></a>
+                        <a href="javascript:void(0);" id="ui-carousel-prev"><span>prev</span></a>  
+                    </div>
+                </div>
+                <!--bottom scrolling thum end-->
+            
+          </div>                
+                
+<script type="text/javascript">
+jQuery(function($) {
+    
+    //$( "#carousel" ).rcarousel( "append", $jQueryElements );
+    
+        /*$('.video-box').each(function(index){
+        $(this).attr('id',index);
+        $('div.thumb-box').eq(index).attr('id',index);
+        });*/
+        
+        $( "#carousel ").rcarousel({
+            margin: 25
+        });
+        
+        $( "#ui-carousel-next" )
+            .add( "#ui-carousel-prev");
+        
+    
+        $('video').click(function(){
+        $.each($('video'), function () {
+            this.pause();
+        });
+        });
+    
+                
+    var thumb_id;        
+    $('div.thumb-box').live('click',function(){
+        $('div.play').css('display','none');
+        $(this).find('div.play').css('display','block');
+        thumb_id = $(this).attr('id');
+        $('.video-box').removeClass('view');
+        $('div.video-box').each(function(){
+            if($(this).attr('id')==thumb_id)        
+                $(this).addClass('view');        
+        });
+        });
+    });
+
+
+$(document).ready(function() {
+
+
+//$('.thumb-box').click(function(){ 
+$('.thumb-box').live('click', function(){ 
+//alert('clicked');
+  showAJAXLoader('loader'); 
+  
+
+
+  var media_id =  $(this).attr('media_id');
+  $.ajax({
+  type: 'post',
+  url: base_url+'banner_pages/media_center/get_media/',
+  data: ({'media_id' : media_id ,'width':560 ,'height':345}),
+
+  dataType: 'json',
+  success: function (data, status) {
+   if(data.result=='success') {
+       
+    hideAJAXLoader('loader');
+    //hideUILoader();
+
+      $('#main_video').html(data.s_image_source.html);
+      
+      $('#title').html(data.title);
+      $('#category').html(data.category);
+      $('#posted_on').html(data.posted_on);
+      $('#desc').html(data.desc);
+      $('.main_video_outer_div').show();
+      
+   }
+  },
+  error: function (data, status, e) {
+   hideAJAXLoader('loader');
+   showUIMsg('Some error occurred. Please try again.');
+  }
+ });
+});
+  //$('[id^="thumb_box_"]').trigger('click');
+  
+});
+
+
+
+$(document).ready(function() {
+
+
+/*$('.main_video_outer_div').click(function(){ 
+
+  showLoading(); 
+
+  var media_id =  $('#hd_main_video').val();
+  $.ajax({
+  type: 'post',
+  url: base_url+'banner_pages/media_center/get_media/',
+  data: ({'media_id' : media_id ,'width':560 ,'height':345}),
+
+  dataType: 'json',
+  success: function (data, status) {
+   if(data.result=='success') {
+       
+    hideLoading();
+      $('#main_video').html(data.s_image_source.html);
+      
+   }
+  },
+  error: function (data, status, e) {
+   hideLoading();
+   showUIMsg('Some error occurred. Please try again.');
+  }
+ });
+});
+ $('.main_video_outer_div').trigger('click');*/
+  
+});
+</script>

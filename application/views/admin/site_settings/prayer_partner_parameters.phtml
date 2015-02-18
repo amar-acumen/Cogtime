@@ -1,0 +1,84 @@
+
+
+<div class="clr"></div>
+<!-- CONTENT SECTION -->
+<!--navigation section start -->
+<?php
+include(APPPATH . "views/layouts/admin/admin_nav.phtml");
+//pr($result_arr);
+$update = $_REQUEST['update'];
+?>
+<!--navigation section end -->
+<div id="content_section">
+    <div id="container">
+        <!--<div id="top_corner">&nbsp;</div> -->
+        <div id="mid_content">
+            <div class="page_heading left">
+                <div class="left"><img src="../images/icons/login.png" alt="" />Set Prayer Partner Qualification Parameters</div>
+            </div>
+            <div class="clr"></div>
+            <div id="right_container"> <?php #pr($posted);      ?>
+                <div class="arrow_btm"></div>
+                <form id="frm_rset_pwd"  method="post" action="<?= admin_base_url() . 'site_settings/prayer_partner_parameters/update_prayer_partner_qualification_parameters' ?>" enctype="multipart/form-data">
+                    <div class="content_area frm_box">
+                        <?php
+                        if ($update) {
+                            ?>
+                            <div class="blue_div">Data saved successfully</div>
+                        <?php } ?>
+                        <div class="lable01">Minimum Months(After Registration):</div>
+                        <div class="field01">
+                            <input name="min_months" id="min_months" class="min_months" type="text" value="<?= $result_arr['min_months'] ?>" autocomplete="off" />
+                        </div>
+                        <div class="error-message"></div>
+                        <div class="clr"></div>
+                        <div class="lable01">Minimum Friends: </div>
+                        <div class="field01">
+                            <input name="min_friends" id="min_friends"  class="min_friends" type="text" value="<?= $result_arr['min_friends'] ?>" />
+                        </div>                       
+                        <div class="error-message"></div>
+                        <div class="clr"></div>
+
+                        <div class="lable01">Minimum Prayer Groups: </div>
+                        <div class="field01">
+                            <input name="min_prayer_grps" id="min_prayer_grps"  class="min_prayer_grps" type="text" value="<?= $result_arr['min_prayer_grps'] ?>" />
+                        </div>                       
+                        <div class="error-message"></div>
+                        <div class="clr"></div>
+
+                        <div class="lable01">Minimum Rings: </div>
+                        <div class="field01">
+                            <input name="min_rings" id="min_rings"  class="min_rings" type="text" value="<?= $result_arr['min_rings'] ?>" />
+                        </div>                       
+                        <div class="error-message"></div>
+                        <div class="clr"></div>
+
+                        <div class="lable01">Minimum Prayer Commitments: </div>
+                        <div class="field01">
+                            <input name="min_pr_cmtmnts" id="min_pr_cmtmnts" class="min_pr_cmtmnts" type="text" value="<?= $result_arr['min_pr_comttmnts'] ?>" />
+                        </div>                       
+                        <div class="error-message"></div>
+                        <div class="clr"></div>
+
+                        <div class="lable01">Terms & Conditions File: </div>
+                        <div class="field01">
+                            <input name="c_file_name" id="c_file_name" class="c_file_name" readonly="true" type="text" value="<?= $result_arr['t_c_file_name'] ?>" /><br>
+                            <input name="min_intros" id="min_intros"  class="min_intros" type="file" />
+                        </div>                       
+                        <div class="error-message"></div>
+                        <div class="clr"></div>
+                        <div class="lable01"> </div>
+                        <div class="field01">
+                            <input name="" type="submit" class="btn"  value="Submit" />
+                        </div>
+                        <div class="clr"></div>
+                    </div>
+                </form>
+            </div>
+            <div class="clr"></div>
+        </div>
+        <!--<div id="bot_corner">&nbsp;</div> -->
+    </div>
+    <div class="clr"></div>
+</div>
+<!-- /CONTENT SECTION --

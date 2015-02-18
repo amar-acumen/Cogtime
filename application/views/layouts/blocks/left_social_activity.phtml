@@ -1,0 +1,565 @@
+ <!--Social Activity start -->
+
+<div class="menu-box">
+
+      <div class="nw-heading">
+
+             <div class="left">
+
+                    <h4><img src="images/icons/social-activity.png" alt="Social Activity"/>Social Activity</h4>
+
+              </div>
+
+              <div class="minus right exp-col020" style="display:none;"><img src="images/icons/nw-minus.png" alt="" class="plus-minus2"/></div>
+
+              <div class="plus right exp-col020"><img src="images/icons/nw-plus.png" alt="" class="plus-minus2"/></div>
+
+      </div>
+
+      
+
+      <div class="nw-content" id="switchdiv020" style="display:none;">
+
+          <ul>
+
+                <li><a href="tweets.html" class="<?php echo ($page_name=='my-tweets' || $page_name == 'tweets')?'select':'';?>">My Chitter Tweets</a></li>
+
+                <li><a href="<?php echo base_url()?>my-blog.html" class="<?php echo ($page_name=='my-blog')?'select':'';?>">My Blog</a></li>
+
+                <li><a href="approve-join-request.html" class="<?php echo ($page_name=='approve-join-request')?'select':'';?>">My Rings </a> <?php if($arr_profile_info['ring_notification_count'] != 0) { ?><span class="notification" id="ring_not" onclick="window.location='approve-join-request.html'" style="position:absolute; margin-left:-170px; margin-top:5px;"><?=$arr_profile_info['ring_notification_count']?></span><?php } ?></li>
+
+                
+
+                <li><a href="my-events.html" class="<?php echo ($page_name=='my-events')?'select':'';?>">My Events</a></li>
+
+               <?php /*?> <li class="last"><a href="browse-chat-room.html" class="<?php echo ($page_name=='browse-chat-room')?'select':'';?>">Chat Rooms</a></li><?php */?>
+
+          </ul>
+
+          
+
+          
+
+      </div>
+
+      <br class="clr" />
+
+</div>
+
+ <!--Social Activity end -->
+
+ 
+
+<!--Holy place start -->
+
+<div class="menu-box">
+
+      <div class="nw-heading">
+
+             <div class="left">
+
+                    <h4><img src="images/icons/icon24.png" alt="Social Activity"/>Holy Zone</h4>
+
+              </div>
+
+              <div class="minus right exp-col024" style="display:none;"><img src="images/icons/nw-minus.png" alt="" class="plus-minus2"/></div>
+
+              <div class="plus right exp-col024"><img src="images/icons/nw-plus.png" alt="" class="plus-minus2"/></div>
+
+      </div>
+
+      
+
+      <div class="nw-content" id="switchdiv024" style="display:none;">
+
+     
+
+          <ul>
+
+                <li><a href="my-prayer-partners.html" class="<?php echo ($page_name=='my-prayer-partners')?'select':'';?>">My Prayer Partners</a></li>
+
+                <li><a href="<?php echo base_url()?>prayer-group.html" class="<?php echo ($page_name=='prayer-group')?'select':'';?>">My Prayer Groups <?php if($arr_profile_info['prayergrp_notification_count'] != 0) { ?><span class="notification" id="pryergrp_not"><?=$arr_profile_info['prayergrp_notification_count']?></span><?php } ?></a></li>
+
+                <li><a href="manage-my-commitments.html" class="<?php echo ($page_name=='manage-my-commitments')?'select':'';?>">My Prayer Commitments</a></li>
+
+                <li><a href="manage-my-prayer-request.html" class="<?php echo ($page_name=='manage-my-prayer-request')?'select':'';?>">My Prayer Requests </a></li>
+
+      
+
+          </ul>
+
+          
+
+          
+
+      </div>
+
+      <br class="clr" />
+
+</div>
+
+ <!--Holy place end -->
+
+ 
+
+ 
+
+<!--chat rooms start -->
+
+<div class="menu-box">
+
+      <div class="nw-heading">
+
+             <div class="left">
+
+                    <h4><img src="images/icons/coment.png" alt="Social Activity"/>Chat Rooms</h4>
+
+              </div>
+
+              <div class="minus right exp-col025" style="display:none;"><img src="images/icons/nw-minus.png" alt="" class="plus-minus2"/></div>
+
+              <div class="plus right exp-col025"><img src="images/icons/nw-plus.png" alt="" class="plus-minus2"/></div>
+
+      </div>
+
+      
+
+      <div class="nw-content" id="switchdiv025" style="display:none;">
+
+          <ul>
+
+            	<li><a href="my-chat-rooms.html" class="<?php echo ($page_name=='my-chat-rooms')?'select':'';?>">My Rooms</a></li>
+
+                <li><a href="browse-chat-room.html" class="<?php echo ($page_name=='browse-chat-room')?'select':'';?>">Public Rooms</a></li>
+
+                <li><a href="private-chat-room.html" class="<?php echo ($page_name=='private-chat-room')?'select':'';?>">Private Rooms </a></li>
+
+                <li><a href="prayer-chat-room.html" class="<?php echo ($page_name=='prayer-chat-room')?'select':'';?>">Prayer Rooms<?php if($arr_profile_info['prayer_room_notification_count'] != 0) { ?><span class="notification" id="prayerRoom_not"><?=$arr_profile_info['prayer_room_notification_count']?></span><?php } ?></a></li>
+
+                <li><a href="ring-chat-room.html" class="<?php echo ($page_name=='ring-chat-room')?'select':'';?>">Rings</a></li>
+
+      
+
+          </ul>
+
+          
+
+          
+
+      </div>
+
+      <br class="clr" />
+
+</div>
+
+ <!--chat rooms end -->
+
+ 
+
+ <!------Church section-------->
+
+ <div class="menu-box">
+
+      <div class="nw-heading">
+
+             <div class="left">
+
+                    <h4><img src="images/icons/church-icon.png" alt="Your Church"/>Your Church</h4>
+
+              </div>
+
+              <div class="minus right exp-col030" style="display:none;"><img src="images/icons/nw-minus.png" alt="" class="plus-minus2"/></div>
+
+              <div class="plus right exp-col030"><img src="images/icons/nw-plus.png" alt="" class="plus-minus2"/></div>
+
+      </div>
+
+      
+
+      <div class="nw-content" id="switchdiv030" style="display:none;">
+
+          <ul>
+
+              <?php
+
+              $user_id = intval(decrypt($this->session->userdata('user_id')));
+
+
+
+              $sql_churchmember = "SELECT *,ch.id AS chid FROM cg_church AS ch,cg_church_member AS chm WHERE ch.id=chm.church_id 
+              AND chm.is_approved=1 AND chm.member_id='".$user_id."'";
+
+              $query_churchmember = $this->db->query($sql_churchmember);
+              $numrowmember = $query_churchmember->num_rows();
+              //pr($numrowmember);
+              $result_churchmember = $query_churchmember->result();
+
+              $query = $this->db->get_where('cg_church_admin', array('ch_admin_id' => $user_id));
+              $result = $query->result();
+              //pr($result);
+
+              $numrow_superadmin = $query->num_rows();
+              if($numrow_superadmin>0)
+              {
+                  
+                     //$_SESSION['charch_super_admin'] = 'yes';
+                     //$_SESSION['logged_church_id'] = $result[0]->ch_id;
+                  ?>
+
+                    <li><a href="<?= $result[0]->ch_sp_url; ?>" class="" id="" ><?= $result[0]->ch_name; ?><img src="<?= base_url() ?>images/icons/crown.png" alt="" class="add-new-church"/> </a></li>
+                  <?php
+                 
+              }
+              if(count($result_churchmember)>0 )
+              {
+				
+                //$_SESSION['logged_church_id'] = $result_churchmember[0]->chid;
+                //if($result_churchmember[0]->role == 2)
+                  //$_SESSION['subadmin_access'] = $result_churchmember[0]->access;
+
+                foreach ($result_churchmember as $row){
+                  $church_wall_url = base_url().$result_churchmember[0]->chid.'/church-wall';
+                ?>
+
+                    <li><a href="<?= $church_wall_url; ?>" class="" id="" ><?= $row->s_name; ?><img src="<?= base_url() ?>images/man-24-16.png" alt="" class="add-new-church"/> </a></li>
+                <?php 
+                }
+                ?>    
+<!--                    <li>
+                        <div class="mid" style="display:  none;">
+                            <div class="mood-message-haeding">
+                                <h4>Search church &  join</h4>
+                              </div>
+                                 <div class="shade_box_white" style="padding:8px 0px;">
+                                     <input type="text" name="churchemail" id="churchemail" placeholder="Enter church email id">
+                                     <div class="error" id="error2" style="color: red;"></div>
+                                     <div class="success1" id="success2" style="color: green;"></div>
+                                   
+
+                                   <input name="" type="button" value="Find" class="btn" onclick="search_church()" />
+                               
+
+                              </div>
+                             
+
+                        </div>
+                    </li>-->
+<?php
+//echo $numrow_superadmin;
+if($numrow_superadmin == 0){
+?>
+<!----------------------------add new------------------------------------------>
+<li><a href="javascript:void(0)" class="" id="ch_vr1" onclick="$('.v-code').slideToggle();">Create Church Space<img src="images/icons/plus-ico-ch.png" alt="" class="add-new-church"/></a></li>
+ <div class="v-code" style="display: none;">
+                   
+
+                        <div class="top"><div>&nbsp;</div></div>
+                        <div class="mid">
+                            <div class="mood-message-haeding">
+                                <h4>Enter your verification code</h4>
+                              </div>
+                                 <div class="shade_box_white" style="padding:8px 0px;">
+                                     <input type="text" name="vcode" id="vcode">
+                                     <div class="error" id="error1" style="color: red;"></div>
+                                     <div class="success1" id="success1" style="color: green;"></div>
+                                   
+
+                                   <input name="" type="button" value="Verify" class="btn" onclick="church_verify()" />
+                               
+
+                              </div>
+                             
+
+                        </div>
+                        <div class="bot"><div>&nbsp;</div></div>
+                  </div>
+<!------------------------------------------------------------------------------>
+<?php
+}
+?>
+                <?php
+
+              } 
+			  if($numrow_superadmin==0 && count($result_churchmember)==0)   
+			  {
+			  ?>
+<li><a href="javascript:void(0)" class="" id="ch_vr2" onclick="$('.v-code').slideToggle();">Create Church Space<img src="images/icons/plus-ico-ch.png" alt="" class="add-new-church"/></a></li>
+                    <!------------vf------------------------------>
+                        <div class="v-code" style="display: none;">
+                   
+
+                        <div class="top"><div>&nbsp;</div></div>
+                        <div class="mid">
+                            <div class="mood-message-haeding">
+                                <h4>Enter your verification code</h4>
+                              </div>
+                                 <div class="shade_box_white" style="padding:8px 0px;">
+                                     <input type="text" name="vcode" id="vcode">
+                                     <div class="error" id="error1" style="color: red;"></div>
+                                     <div class="success1" id="success1" style="color: green;"></div>
+                                   
+
+                                   <input name="" type="button" value="Verify" class="btn" onclick="church_verify()" />
+                               
+
+                              </div>
+                             
+
+                        </div>
+                        <div class="bot"><div>&nbsp;</div></div>
+                  </div>
+				  </li>
+                                  
+                                    <li>
+                                        <div class="mid" style="display: none;">
+                            <div class="mood-message-haeding">
+                                <h4>Search church &  join</h4>
+                              </div>
+                                 <div class="shade_box_white" style="padding:8px 0px;">
+                                     <input type="text" name="churchemail" id="churchemail" placeholder="Enter church email id">
+                                     <div class="error" id="error2" style="color: red;"></div>
+                                     <div class="success1" id="success2" style="color: green;"></div>
+                                   
+
+                                   <input name="" type="button" value="Find" class="btn" onclick="search_church()" />
+                               
+
+                              </div>
+                             
+
+                        </div>
+                    </li>
+			  <?php
+			  }			  
+                
+
+              ?>
+
+          </ul>
+
+          
+
+          
+
+      </div>
+
+      <br class="clr" />
+
+      
+
+      
+
+      
+
+      
+
+      
+
+</div>
+ <div id="table_contents"></div>
+
+ <!---------end church section------------>
+
+ <script type="text/javascript">
+ 
+ function search_church(){
+     var churchemail = $('#churchemail').val();
+      var chkeml=churchemail.match(/^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/);
+          if(churchemail == ''){
+              $('#error2').css('display','block').html('Please enter church email id');
+               var flag1 = 0;
+          }else if(chkeml==null){
+              $('#error2').css('display','block').html('Please enter valid church email id');
+               var flag1 = 0;
+          }else{
+             $('#error2').css('display','none');  
+              var flag1 = 1;
+          }
+          
+          if(flag1 == 1){
+              $.ajax({
+          url : base_url+'base_controller/find_member_church_by_email',
+          type : 'post',
+          data : ({'email_id' : churchemail,}),
+          success : function(data)
+          {
+              hideBusyScreen();
+              //alert(data)
+              $('#table_contents').html(data);
+          //window.location.href="<?= admin_base_url() ?>help_center/help_center";
+          }
+      }); 
+          }
+ }
+ function show_space(){
+ alert('ok')
+ }
+ </script>
+
+ 
+
+ 
+
+ <!----------verification pop up ------------------------>
+
+ 
+
+ 
+
+ 
+
+ <script type='text/javascript'>
+
+     $(document).ready(function(){
+
+         $('#ch_vr').click(function(){
+
+             $('.v-code').slideToggle();
+
+         })
+
+         
+
+     });
+
+ function  church_verify(){
+
+     var vcode = $('#vcode').val().trim();
+
+     if(vcode == ''){
+
+         $('#error1').css('display','block').html('Please enter verification code');
+
+     }
+
+     else{
+
+         $('#error1').css('display','none');
+
+          showBusyScreen();
+
+                $.ajax({
+
+                    type: "POST",
+
+                    url: base_url + "base_controller/verify_church_code/",
+
+                    data: ({'vcode':vcode}),
+
+                    dataType: 'json',
+
+                    success: function(data) {
+
+                        
+
+                        
+
+                        hideBusyScreen();
+
+                        if(data.msg == 'Error!'){
+
+                           $('#error1').css('display','block').html('Your Verification code is wrong or your church is not approved by admin'); 
+
+                        }
+
+                        else if(data.msg == 'ok'){
+
+                            $('#success1').css('display','block').html('Church space created successfully..')
+
+                           location.reload();  
+
+                        }
+
+                        else if(data.msg == 'err'){
+
+                            $('#error1').css('display','block').html('Church space already created..');   
+
+                        }else if(data.msg == 'err1'){
+
+                            $('#error1').css('display','block').html('Validation code has been expired');
+
+                        }
+
+
+
+                        
+
+
+
+                    }
+
+                });
+
+//        / alert('ok')
+
+            
+
+         }
+
+     }
+
+     
+
+$(function() {
+
+	$('.exp-col030')
+
+		.unbind('click')
+
+		.click(function () {
+
+			var index = $('.exp-col030').index($(this));
+
+			$('#switchdiv030').slideToggle('slow');
+
+			$('.exp-col030').not(':eq(' + index + ')').show();
+
+			$(this).hide();
+
+                           setTimeout(function(){
+
+                        if($('#switchdiv030').css('display') == 'block'){
+
+                           $.cookie("Your-Church", '1');  
+
+                        }
+
+                      else  if($('#switchdiv030').css('display') == 'none'){
+
+                          $.cookie("Your-Church", '0');    
+
+                        }
+
+                        }, 1000);
+
+		});
+
+                 var value = $.cookie('Your-Church');
+
+                if(value == 1){
+
+                      $('#switchdiv030').css('display','block');
+
+                       //$.removeCookie('Personal')
+
+                      $('.minus:eq(7)').show();
+
+                       $('.plus:eq(7)').hide();
+
+                    }
+
+                     if(value == 0){
+
+                      $('#switchdiv030').css('display','none');
+
+                      $('.minus:eq(7)').hide();
+
+                       $('.plus:eq(7)').show();
+
+                    }
+
+});
+
+ 
+
+ </script>

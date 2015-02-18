@@ -1,0 +1,164 @@
+<?php
+	if( $this->session->userdata('loggedin') =='' || $this->session->userdata('loggedin')==false){
+		include(APPPATH ."views/layouts/header.phtml");
+	   	include(APPPATH."views/layouts/slider_nav.phtml");
+     }
+     else{
+         
+		 include(APPPATH ."views/layouts/logged_header.phtml");
+		 include(APPPATH."views/layouts/nav.phtml");?>
+		  <!-- /NAVIGATION SECTION -->
+      		</div>
+		</div>
+ <?php  }?>
+<!-- /HEADER SECTION -->
+<div id="content_section" style="margin-top:8px;">
+      <div id="container">
+      		<!-- main container -->
+            <div class="landing-page">
+            	<div class="top-left">
+                    <h2 class="landing-title blue">Upcoming Events</h2>  
+                </div>
+                
+                
+                 <DIV id="table_content">
+						<?=$result_content?>
+                 </DIV>
+                
+            	           	<?php if($no_of_result  == 0):?>
+                                <div class="shade_box_01" style="padding-top:5px;"><div  class="shade_norecords" style="width:495px;"><p class="blue_bold12">No Event.</p></div></div>
+                            <?php endif;?>	
+                            
+                            
+                            <?php if($no_of_result > $pagination_per_page): ?>
+                                    
+                                    <div class="view_more" id="show_more_feeds_div"><a href="javascript:void(0);" id="show_more_feeds_link" page_value="<?=$current_page_1?>" onclick="show_more_feeds($(this).attr('page_value'))">[view more] </a> </div>
+                            <?php endif; ?>
+                
+                <div class="clr"></div>
+            </div>     
+            <!-- /main container -->
+      </div>
+      <div class="clr"></div>
+</div>
+<!-- /CONTENT SECTION -->
+<?php
+	# include footer file...
+	include_once(APPPATH ."views/layouts/footer.phtml");
+	
+?>
+<!-- /lightbox SECTION -->
+
+<div class="lightbox view_comments_div" style="width:650px;">
+      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="images/close.png" alt="" /></a></div>
+      <div class="top">
+            <div>&nbsp;</div>
+      </div>
+      <div class="mid">
+            <div class="heading" style="margin-bottom:0px;">
+                  <div class="left">
+                        <h4><img src="images/icons/cmnt.png" alt="" /> View Comments </h4>
+                  </div>
+            </div>
+               <div id="comment_html"></div>
+      </div>
+      <div class="bot">
+            <div>&nbsp;</div>
+      </div>
+</div>
+
+<!--POST COMMENT LIGHTBOX -->
+<div class="lightbox comment_div" style="width:540px;">
+      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="images/close.png" alt="" /></a></div>
+      <div class="top">
+            <div>&nbsp;</div>
+      </div>
+      <div class="mid">
+     
+            <div class="heading">
+                  <div class="left">
+                        <h4><img src="images/icons/coment.png" alt="" /> Post Comment </h4>
+                  </div>
+            </div>
+            <div class="frm_box">
+                  <p>
+                    <textarea  class="feed_comment_box" cols="" rows="" style="width:486px; height:100px; margin-bottom:10px;"></textarea>
+                  </p>
+                  	<input type="hidden" name="i_event_id" id="i_event_id" value=""/>
+                  <p>
+                    <input class="submit-green" id="post_comment_button" type="button"  style="margin-top:15px;" value="Post" name="" onclick="post_comment();" />
+                  </p>
+                  
+            </div>
+      </div>
+      <div class="bot">
+            <div>&nbsp;</div>
+      </div>
+</div> 
+<!--POST COMMENT LIGHTBOX -->
+
+
+<div class="lightbox post_feedback_div" style="width:540px;">
+      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="images/close.png" alt="" /></a></div>
+      <div class="top">
+            <div>&nbsp;</div>
+      </div>
+      <div class="mid">
+            <div class="heading">
+                  <div class="left">
+                        <h4><img src="images/icons/feedback.png" alt="" /> Post Feedback </h4>
+                  </div>
+            </div>
+            <div class="frm_box">
+                 
+               
+                      <p>  <textarea  class="feedback_box" style="width:486px; height:100px; margin-bottom:10px;"></textarea></p>
+             		
+                    	<input type="hidden" name="i_feedback_event_id" id="i_feedback_event_id" value=""/>
+                        
+                       <p> <input name="" type="button" value="Post"  class="btn" onclick="send_feedback()"/></p>
+             </div>
+      </div>
+      <div class="bot">
+            <div>&nbsp;</div>
+      </div>
+</div>
+
+<script type="text/javascript">
+
+
+var ajax_req_feeds = null;
+function show_more_feeds(page) {
+	if(ajax_req_feeds!=null) {
+		ajax_req_feeds.abort();
+	}
+	showUILoader_nodialog();
+	ajax_req_feeds = $.ajax({
+		type: 'get',
+		url: base_url+'events/ajax_pagination/'+page,
+		dataType: 'json',
+
+		success: function (data, status) {
+
+			hideUILoader_nodialog();
+			if(data.html!='') {
+				$('#table_content').append(data.html);
+				$('#show_more_feeds_link').attr('page_value', data.current_page);
+			}
+			else {
+				$('#table_content').append('<div class="view_more" style="text-align: center;"><p class="blue_bold12" style="font-size:14px;">No More Event.</p></div>');
+				$('#show_more_feeds_div').hide();
+			}
+            
+            if(data.view_more==false)
+            {
+                
+                $('#table_content').append('<div class="view_more" style="text-align: center;"><p class="blue_bold12" style="font-size:14px;">No More Event.</p></div>');
+                $('#show_more_feeds_div').hide();
+            }
+			
+			
+		}	// end of success function...
+	});
+}
+</script>

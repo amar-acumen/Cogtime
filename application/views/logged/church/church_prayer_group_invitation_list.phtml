@@ -1,0 +1,202 @@
+<!-- header -->
+<?php	include(APPPATH ."views/layouts/church_logged_header.phtml");?>
+<!-- CONTENT SECTION -->
+<?php //pr($church_arr); ?>
+<div class="container">
+  <div class="main-page">
+    <h3 class="page-heading">Prayer Group</h3>
+    <?php include(APPPATH ."views/logged/church/church_prayer_group_left_panel.phtml");?>
+    
+    <?php
+    
+   /* if(subadmin_access('prayer_group'))
+        {
+            ?>
+    <div class="activity-left">
+    	<ul class="left-list">
+            <li><a href="<?=base_url().''.$_SESSION['logged_church_id']?>/create-prayer-group" class="<?php echo ($active_menu == 'create_group')?'active':'';?>">Create Prayer Group</a></li>
+        </ul></div>
+           <?php
+        }*/
+           ?> 
+            
+    <div class="activity-right">
+      <div>
+        <div class="invite-prayer pull-left">
+          <h4 class="page-heading">Invitation Sent</h4>
+          <?php //pr($invitation_list)?>
+          <span>
+          <label class="sel-box-grp" style="width:115px;">Filter by Group Name: </label>
+          <select  id="notif_grp_sent_by" class="prayer-selt" onchange="get_Grouped_notificationlist_sent()">
+            <option value="-1">Select</option>
+            <?php							   		if(count($all_grp_arr)){										foreach($all_grp_arr as $k=> $val){							   ?>
+            <option value="<?=$val->id?>">
+            <?=$val->s_group_name?>
+            </option>
+            <?php										}									}							  ?>
+          </select>
+          </span> <br class="clr"/>
+		  <ul class="prayermember-ul">
+			<DIV id="grp_post_list_sent" style="margin-top: 10px;"><?=$request_sent?></DIV>
+          </ul>
+		  <?php if ($no_of_result == 0):
+		?>
+			<div class="shade_box_01" style="padding-top:5px;"><div  class="shade_norecords" style="width:260px;"><p class="blue_bold12"></p></div></div>
+		<?php endif; ?>
+		<?php if ($no_of_result > $pagination_per_page): ?>
+             <div class="view_more" id="show_more_feeds_div"><a href="javascript:void(0);" class="see-more" title="See More" id="show_more_feeds_link" page_value="<?= $current_page_1 ?>" onclick="show_more_feeds($(this).attr('page_value'))">View more</a></div>
+		<?php endif; ?>
+        </div>
+        <div class="invite-prayer pull-right">
+          <h4 class="page-heading">Invitation Received</h4>
+          <?php //pr($invitation_list)?>
+          <span>
+          <label class="sel-box-grp" style="width:115px;">Filter by Group Name: </label>
+          <select  id="notif_grp_recv_by" class="prayer-selt" onchange="get_Grouped_notificationlist_recv()">
+            <option value="-1">Select</option>
+            <?php							   		if(count($all_grp_arr)){										foreach($all_grp_arr as $k=> $val){							   ?>
+            <option value="<?=$val->id?>">
+            <?=$val->s_group_name?>
+            </option>
+            <?php										}									}							  ?>
+          </select>
+          </span> <br class="clr"/>
+		  <ul class="prayermember-ul">
+			  <DIV id="grp_post_list_recv" style="margin-top: 10px;"><?=$request_recv?></DIV>
+		  </ul>
+        </div>
+      </div>
+    </div>
+    <div class="clear"></div>
+  </div>
+</div>
+<!-- /CONTENT SECTION -->
+<div class="clr"></div>
+<!-- FOOTER SECTION -->
+<?php include(APPPATH."views/layouts/church_footer.phtml");?>
+<!-- /FOOTER SECTION -->
+<script type="text/javascript">
+    function acceptDecline_PrayerGroup_Invitation(grp_id, uid, id,i_user_id,type) {
+        //var base_url = '<?=base_url()?>';
+        if (type == 'accept') {
+            $.ajax({
+                type: 'get',
+                url: base_url + 'logged/church_prayer_group/accept_req/' + grp_id + '/' + uid + '/' + id + '/'+i_user_id+'/1',
+                dataType: 'json',
+                success: function(data) {
+                    showUIMsg(data.msg);
+                    $('#payer_member_' + id).hide();
+                }
+            });
+        } else if (type == 'decline') {
+            $.ajax({
+                type: 'get',
+                url: base_url + 'logged/church_prayer_group/decline_req/' + grp_id + '/' + uid + '/' + id + '/'+i_user_id+'/1',
+                dataType: 'json',
+                success: function(data) {
+                    showUIMsg(data.msg);
+                    $('#payer_member_' + id).hide();
+                }
+            });
+        }
+    }
+	
+	function get_Grouped_notificationlist_sent(){
+
+	
+
+	var notif_grp_by = $('#notif_grp_sent_by').val();
+
+	
+
+	showUILoader_nodialog();
+
+	 $.ajax({
+
+		type: 'get',
+
+		url: base_url+'logged/church_prayer_group/get_pending_groups_requests_sent/'+0+'/'+notif_grp_by,
+
+		dataType: 'json',
+
+		success: function (data, status) {
+
+
+
+			hideUILoader_nodialog();
+
+			$('#grp_post_list_sent').html('');
+
+			$('#grp_post_list_sent').html(data.grp_html);
+
+		}	// end of success function...
+
+	});
+
+	
+
+}
+
+
+function get_Grouped_notificationlist_recv(){
+
+	
+
+	var notif_grp_by = $('#notif_grp_recv_by').val();
+
+	
+
+	showUILoader_nodialog();
+
+	 $.ajax({
+
+		type: 'get',
+
+		url: base_url+'logged/church_prayer_group/get_pending_groups_requests_recieved/'+0+'/'+notif_grp_by,
+
+		dataType: 'json',
+
+
+
+		success: function (data, status) {
+
+
+
+			hideUILoader_nodialog();
+
+			$('#grp_post_list_recv').html('');
+
+			$('#grp_post_list_recv').html(data.grp_html);
+
+		}	// end of success function...
+
+	});
+}
+
+var ajax_req_feeds = null;
+function show_more_feeds(page) {
+        if (ajax_req_feeds != null) {
+            ajax_req_feeds.abort();
+        }
+        showUILoader_nodialog();
+        ajax_req_feeds = $.ajax({
+            type: 'get',
+            url: base_url + 'logged/church_members/generate_member_listing_AJAX/'+ page,
+            dataType: 'json',
+            success: function(data, status) {
+
+                hideUILoader_nodialog();
+                if (data.html != '') {
+                    $('#grp_post_list_sent').append(data.html);
+                    $('#show_more_feeds_link').attr('page_value', data.current_page);
+                }
+                else {
+                    $('#grp_post_list_sent').append('<div class="view_more" style="text-align: center;"><p class="blue_bold12" style="font-size:14px;">No more member to display.</p></div>');
+                    $('#show_more_feeds_div').hide();
+                }
+
+
+            }	// end of success function...
+        });
+    }
+</script>

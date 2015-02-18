@@ -1,0 +1,402 @@
+<link rel="stylesheet" type="text/css" href="<?php echo  base_url()?>css/jquery.multiselect.css" />
+<link rel="stylesheet" type="text/css" href="<?php echo  base_url()?>css/jquery.multiselect.filter.css" />
+<link rel="stylesheet" type="text/css" href="<?php echo  base_url()?>css/prettify.css" />
+<!--<link rel="stylesheet" type="text/css" href="<?php echo  base_url()?>css/jquery-ui.css" />-->
+<script type="text/javascript" src="<?php echo  base_url()?>js/jquery.multiselect.js"></script>
+<script type="text/javascript" src="<?php echo  base_url()?>js/jquery.multiselect.filter.js"></script>
+<script type="text/javascript" src="<?php echo  base_url()?>js/prettify.js"></script>
+<script type="text/javascript" src="<?php echo  base_url()?>js/jquery.ui.datepicker.js"></script>
+<script type="text/javascript" src="<?php echo  base_url()?>js/jquery-ui-timepicker-addon.js"></script>
+<script type="text/javascript">
+$(function(){
+		$("#friendSlct").multiselect().multiselectfilter();	
+		$("#ringselect").multiselect().multiselectfilter();
+		$("#netpalselect").multiselect().multiselectfilter();
+		$("#ppselect").multiselect().multiselectfilter();	
+		$("#pgselect").multiselect().multiselectfilter();
+		$("#frndinv").multiselect().multiselectfilter();	
+		$("#netpalinv").multiselect().multiselectfilter();
+		$("#ppinv").multiselect().multiselectfilter();
+		$("#pginv").multiselect().multiselectfilter();
+		
+	
+	});
+	
+</script>
+<?php include(APPPATH . "views/layouts/logged_header.phtml"); ?>
+<!-- NAVIGATION SECTION -->
+<?php include(APPPATH . "views/layouts/nav.phtml"); ?>
+<!-- /NAVIGATION SECTION -->
+</div>
+</div>
+<!-- /HEADER SECTION -->
+<style>
+.Member-display { 
+	 height:185px !important;
+	 width:245px !important; 
+	 margin:4px 0 !important; 
+	 border: 1px solid #D3D3D3;}
+</style>
+<div class="clr"></div>
+<div id="content_section">
+    <div id="container">
+        <div id="top_corner">&nbsp;</div>
+        <div id="mid_content">
+            <!-- latest news -->
+            <?php include(APPPATH . "views/layouts/latest_news.phtml"); ?>
+            <!-- /latest news -->
+            <div class="clr"></div>
+            <!-- main container -->
+            <div id="main_container">
+                <!-- left container -->
+                <?php include(APPPATH . "views/layouts/leftbar.phtml"); ?>
+                <!-- /left container -->
+                <div id="mid_container">
+					
+                     <div class="page_heading etrade-nw-heading">
+                        <div class="left"><img alt="" src="images/icons/coment.png" /><?=($mode != '')?$mode:'Create'?> Chat Room </div>
+                        <div class="right">
+                            <ul class="my-mail">
+                                <li><input type="button" value="Create Your Own Private Room" onclick="window.location='create-chat-room.html'" class="compose_btn compose-msg-link"/></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <?php include(APPPATH . "views/logged/chat/chat_menu.phtml"); ?>
+                 
+                   
+                    <p style="padding-left:8px;" class="blue_bold12"><?php /* ?><a href="javascript:void();">Top Category</a> »
+                  <a href="javascript:void();">Home</a> » <?php */ ?>
+                        <?php if ($parent_category_name != '') { ?>
+                            <a href="javascript:void();"><?= $parent_category_name ?></a>
+                            <?php
+                        } else if ($category_name != '') {
+                            ?>
+                            <a href="javascript:void();"><?= $category_name ?></a>
+                        <?php } ?>
+                    </p>
+                    <div class="arrow_btm"></div>
+                    <div class="inbox_div frm_box">
+                         <form id="frm_add"  method="post"  onsubmit="return post_frm_ajax();" enctype="multipart/form-data"> 
+                            <div class="lable01">Chat Room Name:</div>
+                            <div class="field01">
+                                <input type="text" name="room_name" id="room_name" style="width:230px;" value="<?=$chat_details['name']?>"/>
+                                <span id="err_room_name" class="error-message"></span>
+                            </div>
+                            <br class="clear"/>
+                           <div class="lable01">From:</div>
+                                  <div class="field01">
+                                    <input style="width:150px; float:left;"   type="text"  value="" name="date_to1" id="date_to1"  readonly="readonly" class="amount-input cal_class"/>
+                                    <img src="images/icons/cal.png" alt="" class="cal_img right" onclick="$(this).prev().focus()" style="cursor:pointer; " />
+                                  <span class="error-message" id="err_date_to1"></span>
+                                  </div>
+                                  
+                                 <div class="clr"></div>
+                                 <script type="text/javascript">
+                                     $(function(){
+                                                     var inputDate = $("#date_to1");
+                                                     var changeYearButtons = function() {
+                                                      setTimeout(function() {
+                                                         $('.NextYrClass').remove();
+                                                         $('.PrevYrClass').remove();
+                                                         var widgetHeader = inputDate.datepicker("widget").find(".ui-datepicker-header");
+                                                         //you can opt to style up these simple buttons tho
+                                                         var prevYrBtn = $('<button title="PrevYr" class="PrevYrClass"> </button>');
+                                                         prevYrBtn.bind("click", function() {
+                                                        $.datepicker._adjustDate(inputDate, -1, 'Y');
+                                                         });
+                                                         var nextYrBtn = $('<button title="NextYr" class="NextYrClass"></button>');
+                                                         nextYrBtn.bind("click", function() {
+                                                        $.datepicker._adjustDate(inputDate, +1, 'Y');
+                                                       
+                                                         });
+                                                         prevYrBtn.appendTo(widgetHeader);
+                                                         nextYrBtn.appendTo(widgetHeader);
+                                                    
+                                                      }, 0);
+                                                     };
+                                                    
+                                                      $("#date_to1").datetimepicker({
+                                                          beforeShow: changeYearButtons,
+                                                          onChangeMonthYear: changeYearButtons,
+                                                          dateFormat : 'yy-mm-dd',
+                                                            timezone: "+0100" ,
+                                                           minDate: new Date(<?=(date('Y'))?>, <?=(date('m')-1)?>, <?=(date('d'))?> ,  0, 00),
+                                                           controlType: 'select',
+                                                               stepMinute: 15
+                                                           });
+                                                        
+                                                    });
+                                 </script>
+                           <?php /*?> <div class="lable01">Category:</div>
+                            <div class="field01">
+                                   <select name="sel_cat" id="sel_cat" class="cha cate">
+                                  <option value="-1">Select</option>
+                                  <?=makeOptionChatCategory()?>
+                                  </select>
+                             
+                                <span id="err_sel_cat" class="error-message"></span>
+                            </div><?php */?>
+                              <div class="lable01">Invite Member:</div>
+								 <div class="field01" style="">
+                                
+                                 <?php
+								 if($mode=='Create')
+								 	{ 
+								 		echo get_invitation('chat');
+									}
+								else
+									{
+										//pr($chat_invited);
+										echo get_invitation('chat',$chat_invited);	
+									}
+								 ?>
+                                 
+                             
+                                 </div>
+								
+                                 <?php //pr($contacts); 
+								 /*if(count($contacts)){
+								  		foreach($contacts as $key => $val){
+											
+											$profile_image = get_profile_image($val['user_id'],'thumb');*/
+											
+											
+								  ?>
+									 <!-- <div class="mem-list">
+										 <input  type="checkbox" value="<?//=encrypt($val['user_id'])?>" id="chkmember<?//=$val['user_id']?>" name="chkmember<?//=$val['user_id']?>" /><div style=" margin-left:20px;"> <?//=$val['s_first_name']?></div>
+                                      <?php /*?>  <div class="" style="background:url(<?php echo $profile_image;?>) no-repeat center;width:60px; height:60px;  border: 3px solid #666666; float: right;" ></div><?php */?>-->
+                                        
+									 <!-- </div>-->
+                                 <?php /*		}
+								 		}*/
+								  ?>
+								
+                                
+                            
+                             <div class="lable01"></div>
+                             <div class="field01"><span id="err_invitation" class="error-message"><?=$invitation?></span></div>
+                            <br class="clear"/>
+                            <div class="lable01"></div>
+                            <div class="field01"><input type="button"  onclick="invite_chat_member()" class="btn save_btn invite-cht" value="<?=($mode != '')?'Update':'Create'?>" /></div>
+                            <br class="clear"/>
+                        </form>
+                    </div>
+
+
+
+                </div>
+                <!-- /left container -->
+                <!-- right container -->
+                <?php include(APPPATH . "views/layouts/rightbar.phtml"); ?>
+                <!-- /right container -->
+            </div>
+            <!-- /main container -->
+            <div class="clr"></div>
+        </div>
+        <div id="bot_corner">&nbsp;</div>
+    </div>
+    <div class="clr"></div>
+</div>
+
+<!-- /CONTENT SECTION -->
+<div class="clr"></div>
+
+
+
+<?php include(APPPATH . "views/layouts/footer.phtml"); ?>
+<?php include(APPPATH . "views/logged/blocks/common_popup.phtml"); ?>
+
+
+<!-- /FOOTER SECTION -->
+
+<script type="text/javascript">
+
+function invite_chat_member() {
+	showBusyScreen();
+
+	/*var csv_friend_ids = '';
+	var csv_netpal_ids = '';
+	var csv_pp_ids = '';
+	i = 0;
+	$(function() {
+		
+		//console.log(a);
+		$(':checkbox:checked').each(function(i){
+			if($(this).attr('id').substr(0, 9) == 'frnds') {
+				csv_friend_ids += $(this).val()+',';
+			}
+		});
+	});
+	csv_friend_ids = csv_friend_ids.substring(0, csv_friend_ids.length-1);
+	$(function() {
+		$(':checkbox:checked').each(function(i){
+			if($(this).attr('id').substr(0, 9) == 'netpal') {
+				csv_netpal_ids += $(this).val()+',';
+			}
+		});
+	});
+	csv_netpal_ids = csv_netpal_ids.substring(0, csv_netpal_ids.length-1);
+	$(function() {
+		$(':checkbox:checked').each(function(i){
+			if($(this).attr('id').substr(0, 9) == 'pp') {
+				csv_pp_ids += $(this).val()+',';
+			}
+		});
+	});
+	csv_pp_ids = csv_pp_ids.substring(0, csv_pp_ids.length-1);*/
+	if(ajax_req!=null) {
+		ajax_req.abort();
+	}
+
+	
+	 $('#err_send_recepients').attr('style','margin-left:10px;display:none'); 
+	 $('.error-message').attr('style','display:none');
+	 
+	 var frnds=$('#frndinv').val();
+	 var netpals=$('#netpalinv').val();
+	 var pp=$('#ppinv').val();
+	 var URL = '';
+	 if(frnds == null)
+	{
+		frnds=0;
+		//alert(frnds);
+	}
+	var netpals=$('#netpalinv').val();
+	if(netpals == null)
+	{
+		netpals=0;
+		//alert(netpals);
+	}
+	var pp=$('#ppinv').val();
+	if(pp == null)
+	{
+		pp=0;
+		//alert(pp);
+	}
+	 if('<?=$mode?>' == 'Edit')
+	 	URL = base_url+'logged/browse_chat_room/edit_room/<?=$chat_details['room_id']?>';
+	 else
+	 	URL = base_url+'logged/browse_chat_room/add_room/';
+	 
+	 ajax_req = $.ajax({
+		type: 'POST',
+		url:URL,
+	
+		dataType: 'json',
+		data: ({'frnds': frnds,
+				'netpal': netpals,
+				 'pp': pp,
+				'room_name': $('#room_name').val() , 
+				'sel_cat': $('#sel_cat').val(),
+                                'date_to1':$('#date_to1').val()
+				}),
+		success: function (json_response)  {
+			
+			
+				if(json_response.success==true)
+				  {
+					   showUIMsg(json_response.msg);
+					  /* $(function() {
+								(':checkbox:checked').each(function(i){
+									if($(this).attr('id').substr(0, 9) == 'frnds') {
+										$(this).attr('checked', false);
+									}
+								});
+							});
+							$(function() {
+								(':checkbox:checked').each(function(i){
+									if($(this).attr('id').substr(0, 9) == 'netpal') {
+										$(this).attr('checked', false);
+									}
+								});
+							});
+							$(function() {
+								(':checkbox:checked').each(function(i){
+									if($(this).attr('id').substr(0, 9) == 'pp') {
+										$(this).attr('checked', false);
+									}
+								});
+							});*/
+						
+						window.location.href = base_url+ 'my-chat-rooms.html';
+							
+				  }
+				  else
+				  {
+					   if(json_response.success==false) 
+					   {
+				  
+							  for ( var id in json_response.arr_messages )
+							  {
+								 if( $('#err_'+id) != null ) 
+								   {
+									   
+										   $('#err_'+id).html(json_response.arr_messages[id]);
+										   $('#err_'+id).attr('style','display:block; ');
+									  
+								}
+							}
+						  
+						}
+				 
+
+				  }
+	  
+			
+			 hideBusyScreen();
+		},
+		error: function (data, status, e) {
+			hideBusyScreen();
+		}
+	});
+}
+
+
+    function generateSubcat(id) {
+        showUILoader_nodialog();
+        $.ajax({
+            type: 'get',
+            url: '<?= base_url() ?>logged/browse_chat_room/generateSubCat' + '/' + id,
+            dataType: 'json',
+            success: function(data, status) {
+                hideUILoader_nodialog();
+                $('#sub_cat').html(data.html);
+                $('#sub_cat').attr('style', 'display:block;');
+            }	// end of success function...
+        });
+    }
+    $(document).ready(function(arg) {
+        $('#frm_search').submit(function() {
+
+            var datatosend = $("#frm_search").serialize();
+            showBusyScreen();
+            //alert(datatosend);
+            $.ajax({
+                type: "POST",
+                url: base_url + 'logged/browse_chat_room/all_chat_rooms_ajax_pagination/',
+                data: datatosend,
+                dataType: 'json',
+                success: function(data) {
+                    hideBusyScreen();
+                    if (data.html != '') {
+                        $('#content_div').html(data.html);
+                        $('#show_more_feeds_link').attr('page_value', data.current_page);
+                    }
+                    else {
+                        $('#content_div').append('<div class="view_more" style="text-align: center;"><p class="blue_bold12" style="font-size:14px;">No More Chat Room.</p></div>');
+                        $('#show_more_feeds_div').hide();
+                    }
+
+                    if (data.view_more == false)
+                    {
+
+                        $('#content_div').append('<div class="view_more" style="text-align: center;"><p class="blue_bold12" style="font-size:14px;">No More Chat Room.</p></div>');
+                        $('#show_more_feeds_div').hide();
+                    }
+                }
+            });
+        });
+
+    });
+</script>
+

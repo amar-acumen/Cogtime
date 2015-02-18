@@ -1,0 +1,906 @@
+
+
+<?php include(APPPATH ."views/layouts/church_logged_header.phtml");?>
+
+<!-- NAVIGATION SECTION -->
+
+<?php //include(APPPATH . "views/layouts/nav.phtml"); ?>
+
+<!-- /NAVIGATION SECTION -->
+
+</div>
+
+</div>
+
+<!-- /HEADER SECTION -->
+
+<div class="clr"></div>
+
+
+
+<!-- CONTENT SECTION -->
+
+<div class="container">
+
+    <div class="main-page">
+    <h3 class="page-heading">Ring</h3>
+        <div id="mid_content">
+            <!-- latest news -->
+            <?php //include(APPPATH . "views/layouts/church_admin_left_ring.phtml"); ?>
+            <!-- /latest news -->
+            <div class="clr"></div>
+            <!-- main container -->
+            <div>
+                <?php include(APPPATH . "views/layouts/church_admin_left_ring.phtml") ?>
+                <!-- left container -->
+                <div class="activity-right">
+                   
+                    <div>
+                        <div class="page_heading">
+
+                            <div class="left" style="font-size:17px;"><!--<img src="images/icons/ring.png" alt="" /> Rings - --><div class="pro_photo_new" style="background:URL('<?=get_church_ring_logo_by_id($ring_detail_arr['0']['id'])?>') no-repeat center; width:73px; height:72px; background-color:#fff" onclick="location.href='<?=base_url()?>church_rings/<?=$ring_detail_arr['0']['id']?>/ring-home.html'"></div>  <?= $ring_detail_arr[0]['s_ring_name'] ?> </div>
+
+                            <div class="right">
+
+                            	<input type="button" style="margin-top:0; margin-bottom:5px;" value="Back to My Rings" onclick="page_log()" class="back-btn" />
+
+                            </div>
+
+                            <div class="clear"></div>
+
+                        </div>
+
+                    </div>
+                    <div class="blog-container" style="padding-top:0;">
+
+
+
+                        <!--my blog start -->
+
+                        <div class="blog">
+
+                            <div class="right cat-name-adjust new-adj">
+
+                                <div class="right-cat-list"><span class="left-cat-gap-one"><?= $ring_detail_arr[0]['s_category_name'] ?></span><span class="left-cat-gap"><?= get_church_ring_category_name_by_id($ring_detail_arr[0]['i_sub_category_id']) ?></span></div>
+
+                                <div class="left-cat-list" style="margin-top:7px;"><img src="images/category.png" class="cat_icons" alt="" /></div>
+
+                            </div>
+
+                            <p class="time-posted">Created on <?= getShortDate($ring_detail_arr[0]['dt_created_on'], 5) ?> | Owner : <a href="#"><?= $ring_detail_arr[0]['s_owner_name'] ?></a></p>
+
+                            <div class="clr"></div>
+
+
+                            <?php
+
+                            if (in_array($ring_detail_arr[0]['id'], $pending_join_req_arr)) {
+
+                                ?>
+
+
+                                <p style="float:right;" class="first" id="join_req_p_<?php echo $ring_detail_arr[0]['id'] ?>"><img src="images/icons/ring2.png" alt="" class="icon-img" /><a href="javascript:void(0)"  onclick="acceptRingInvitation('<?php echo $this->session->userdata('user_id') ?>', '<?php echo encrypt($ring_detail_arr[0]['id']) ?>', '<?php echo encrypt($ring_detain_arr[0]['i_user_id']); ?>')">Accept Invitation</a></p>
+
+                                <br/>
+
+                                <?php
+
+                            } else if (in_array($profile_id, $ring_members) && $profile_id != $ring_detail_arr[0]['i_user_id']) {
+
+                                ?> 
+
+                                <p style="float:right;" class="first" id="leave_ring"> <img src="images/icons/leave-2.png" alt="" class="icon-img" /> <a  href="javascript:void(0);" onclick="$('#i_leave_id').val('<?php echo encrypt($ring_detail_arr[0]['id']) ?>');
+
+                                            show_dialog('leave-ring');">Leave</a></p>
+
+                                <br/>
+
+                                <?php
+
+                            } else if ((!in_array($profile_id, $ring_members) && $profile_id != $ring_detail_arr[0]['i_user_id'])) {
+
+                                ?> 
+
+                                <p style="float:right;" class="first" id="join_req_p_<?php echo $ring_detail_arr[0]['id'] ?>"><img src="images/icons/ring2.png" alt="" class="icon-img" /> <a href="javascript:void(0);"  onclick="joinRequest('ring_name_<?php echo $ring_detail_arr[0]['id'] ?>', '<?php echo encrypt($ring_detail_arr[0]['id']) ?>');">Join Ring</a></p>
+
+                                <br/>
+
+
+
+                                <?php
+
+                            }
+
+                            ?>
+
+
+                            <?php
+
+                            $RING_IMG = base_url() . "uploads/church_ring_logos/" . getThumbName($ring_detail_arr[0]['s_logo'], 'thumb');
+
+                            ?>
+
+                            <!--<p> <a href="javascript:void(0);"><img src="<?= $RING_IMG ?>" alt="" class="pro_photo" /></a></p>-->
+
+                            <p style="margin-top:8px;"><?= nl2br($ring_detail_arr[0]['s_description']) ?></p>
+
+                            <div class="clr"></div>
+
+
+
+                            <div class="clr"></div>
+
+                        </div>
+
+                        <!--my blog end -->
+
+
+
+                        <!--post article -->
+
+                        <?php
+
+                        //pr($ring_detail_arr[0]);echo intval(decrypt($this->session->userdata('user_id'))).' ---';
+
+                        if (in_array(intval(decrypt($this->session->userdata('user_id'))), $ring_members) || intval(decrypt($this->session->userdata('user_id'))) == $ring_detail_arr[0]['i_user_id']) {
+
+                            ?>
+
+                            <div class="nw-blog-article">
+
+                                <h3 class="page-heading">Post in Ring</h3>
+
+
+
+                                <form action="" method="post" class="create-ring">
+
+                                    <label class="lable01">Title:</label>
+
+                                    <div class="field03">
+
+                                        <input type="text" value="Type title here" onblur="if (this.value == '')
+
+                                                        this.value = 'Type title here';" onfocus="if (this.value == 'Type title here')
+
+                                                                    this.value = '';" id="txt_title" name="txt_title" style="width:98%;" />
+
+                                        <span id="err_title" class="error-message"></span>
+
+                                    </div>
+
+                                    
+
+                                    <div class="clr"></div>
+
+                                    <label class="lable01">Description:</label>
+
+                                    <div class="field03">
+
+                                        <textarea onblur="if (this.value == '')
+
+                                                        this.value = 'Max 500 Characters';" onfocus="if (this.value == 'Max 500 Characters')
+
+                                                                    this.value = '';" rows="" cols="" id="txt_ring_post" name="txt_ring_post" onkeypress="return restrict_carrige_event(event);" style="height:200px;">Max 500 Characters</textarea>
+
+                                        <p class="sub-note"><span id="text_count">0</span> Characters</p>
+
+                                        <span id="err_post_message" class="error-message"></span>
+
+                                    </div>
+
+                                    
+
+                                    
+
+                                    <div class="clr"></div>
+
+                                     <label class="lable01">&nbsp;</label>
+
+                                    <input type="button" onclick="post_on_church_ring(<?= $ring_detail_arr[0]['id'] ?>);
+
+                                                cls();" value="Post" class="post-btn" name="" />
+
+                                </form>
+
+
+
+                            </div>
+
+
+
+                            <script type="text/javascript">
+
+                                var carriage_count = 0;
+
+                                $(document).ready(function() {
+
+                                    var count = 0;
+
+                                    function limitChars(textid, limit, infodiv)
+
+                                    {
+
+
+
+                                        var text = $('#' + textid).val();
+
+
+
+                                        if (text == '') {
+
+                                            count = 0;
+
+                                        }
+
+
+
+
+
+
+
+                                        if (count == 0)
+
+                                        {
+
+                                            //alert (carriage_count)
+
+                                            var textlength = 0;
+
+                                        }
+
+                                        else
+
+                                        {
+
+                                            var textlength = text.length;
+
+                                        }
+
+                                        $('#text_count').html(textlength);
+
+                                        if (textlength > limit)
+
+                                        {
+
+                                            $('#' + textid).val(text.substr(0, limit));
+
+                                            return false;
+
+                                        }
+
+                                        else
+
+                                        {
+
+                                            return true;
+
+                                        }
+
+
+
+                                    }
+
+
+
+
+
+                                    $(function() {
+
+                                        $('#txt_ring_post').keyup(function() {
+
+                                            count = 1;
+
+                                            limitChars('txt_ring_post', 500, '');
+
+                                        });
+
+                                        $('#txt_ring_post').keydown(function() {
+
+                                            count = 1;
+
+                                            limitChars('txt_ring_post', 500, '');
+
+                                        });
+
+                                    });
+
+
+
+
+
+                                    //// just to show correct no. of chracters left while the page is loaded...
+
+                                    limitChars('txt_ring_post', 500, '');
+
+
+
+
+
+                                });
+
+                                function restrict_carrige_event(e)
+
+                                {
+
+                                    if (e.keyCode == 13) {
+
+                                        carriage_count++;
+
+                                        //console.log(carriage_count);
+
+                                    }
+
+                                    /*if(e.keyCode == 8){
+
+                                     carriage_count--;
+
+                                     }*/
+
+                                    if (e.keyCode == 13 && carriage_count > 10) {
+
+                                        return false;
+
+                                        //e.preventDefault();
+
+                                    }
+
+                                }
+
+                                function cls()
+
+                                {
+
+                                    $('#text_count').html('0');
+
+                                }
+
+                            </script>
+
+                            <?php
+
+                        }
+
+                        ?>
+
+                        <!--/post article -->
+
+
+
+                        <!--my blog articles start -->
+
+                        <div class="my-article">
+
+                        <h3 class="page-heading">Ring Posts</h3>
+
+                         
+
+                            <div class="clr"></div>
+
+                            <?php
+
+//if($ring_detail_arr[0]['i_user_id'] !=intval(decrypt($this->session->userdata('user_id'))))
+
+                            $member = check_member_by_church_ring_id($ring_detail_arr[0]['id'], intval(decrypt($this->session->userdata('user_id'))));
+
+                            if ($member == true || $ring_detail_arr[0]['i_user_id'] == intval(decrypt($this->session->userdata('user_id')))) {
+
+                                ?>
+
+                                <DIV id="ring_post"><?= $ring_post_ajax_content ?></DIV>
+
+                            <?php } else { ?>
+
+                                <h2>You need to join this ring to see the posts.</h2>
+
+                            <?php } ?>
+
+                            <?php if ($no_of_result == 0): ?>
+
+                                <div class="shade_box_01" style="padding-top:5px;" id="no_ring_posts"><div  class="shade_norecords"><p class="blue_bold12">No Posts.</p></div></div>
+
+                            <?php endif; ?>	
+
+
+
+
+
+                            <?php
+
+                            //echo $no_of_result.' pag'. $pagination_per_page;
+
+                            if ($no_of_result > $pagination_per_page):
+
+                                ?>
+      <div class="clr"></div>
+
+                                <div  id="show_more_div" class="view-more-ring"><a href="javascript:void(0);" id="show_more_posts_link" page_value="<?= $current_page_1 ?>" onclick="show_more_posts($(this).attr('page_value'))" class="view-more-btn">view more </a> </div>
+
+<?php endif; ?>
+
+
+
+                            <input type="hidden" id="ring_id" value="<?= $ring_detail_arr[0]['id'] ?>" />
+
+                        </div>
+
+                        <!--my blog articles end -->
+
+
+
+                    </div>
+
+
+
+                </div>
+
+
+
+<div class="clr"></div>
+
+                <!-- /left container -->
+
+                <!-- right container -->
+
+ 
+
+                <!-- /right container -->
+
+            </div>
+
+            <!-- /main container -->
+
+             
+
+            <div class="clr"></div>
+
+        </div>
+
+        <div id="bot_corner">&nbsp;</div>
+
+    </div>
+
+    <div class="clr"></div>
+
+</div>
+
+<!-- /CONTENT SECTION -->
+
+<div class="clr"></div>
+
+<!-- FOOTER SECTION -->
+
+<?php include(APPPATH."views/layouts/church_footer.phtml");?> 
+
+<?php include(APPPATH . "views/logged/blocks/common_popup.phtml"); ?>
+
+<!-- /FOOTER SECTION -->
+
+
+
+<?php include(APPPATH . "views/logged/ring/comments/my_ring_post_comment_lightbox.phtml"); ?>
+
+<?php /* ?>VIEW COMMENTS<?php */ ?>
+
+
+
+<div class="lightbox view_comments_div " style="width:650px;">
+
+    <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="<?= base_url() ?>images/close.png" alt="" /></a></div>
+
+    <div class="top">
+
+        <div>&nbsp;</div>
+
+    </div>
+
+    <div class="mid" >
+
+        <div class="heading" style="margin-bottom:0px;">
+
+            <div class="left">
+
+                <h4><img src="<?= base_url() ?>images/icons/cmnt.png" alt="" /> View Comments </h4>
+
+            </div>
+
+        </div>
+
+        <div id="comment_html"></div>
+
+
+
+
+
+    </div>
+
+    <div class="bot">
+
+        <div>&nbsp;</div>
+
+    </div>
+
+</div>
+
+<?php /* ?>VIEW COMMENTS<?php */ ?>
+
+
+
+<?php /* ?>LIKED LIGHT BOX <?php */ ?>
+
+<div class="lightbox liked_by_div" style="width:500px;">
+
+    <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="<?= base_url() ?>images/close.png" alt="" /></a></div>
+
+    <div class="top">
+
+        <div>&nbsp;</div>
+
+    </div>
+
+    <div class="mid" style="height:299px;">
+
+        <div class="heading" style="margin-bottom:0px;">
+
+            <div class="left">
+
+                <h4><img src="<?= base_url() ?>images/icons/thumb_up.png" alt="" /> Liked by </h4>
+
+            </div>
+
+        </div>
+
+        <div id="liked_html"></div>
+
+    </div>
+
+    <div class="bot">
+
+        <div>&nbsp;</div>
+
+    </div>
+
+</div>
+
+<?php /* ?>LIKED LIGHT BOX <?php */ ?>
+
+
+
+
+
+<script type="text/javascript">
+
+
+
+    var ajax_req_feeds = null;
+
+    function show_more_posts(page) {
+
+       // alert('ok')
+
+
+
+        var i_ring_id = $('#ring_id').val();
+
+        if (ajax_req_feeds != null) {
+
+            ajax_req_feeds.abort();
+
+        }
+
+        showUILoader_nodialog();
+
+        ajax_req_feeds = $.ajax({
+
+            type: 'get',
+
+            url: base_url + 'logged/church_ring_home/all_ring_post_ajax_pagination/' + i_ring_id + '/' + page,
+
+            dataType: 'json',
+
+            success: function(data, status) {
+
+
+
+                hideUILoader_nodialog();
+
+                if (data.html != '') {
+
+
+
+                    //alert(data.cur_page+'dfdf');
+
+                    $('#ring_post').append(data.html);
+
+                    $('#show_more_posts_link').attr('page_value', data.cur_page);
+
+                    $('#show_more_posts_link').attr('onclick', '');
+
+                    $('#show_more_posts_link').attr('onclick', 'show_more_posts(' + data.cur_page + ')');
+
+                }
+
+                else {
+
+                    $('#ring_post').append('<div class="view_more" style="text-align: center;"><p class="blue_bold12" style="font-size:14px;">No More Post.</p></div>');
+
+                    $('#show_more_div').remove();
+
+                }
+
+
+
+                if (data.view_more == false)
+
+                {
+
+
+
+                    $('#blog-container').append('<div class="view_more" style="text-align: center;"><p class="blue_bold12" style="font-size:14px;">No More Post.</p></div>');
+
+                    $('#show_more_div').remove();
+
+                }
+
+
+
+
+
+            }	// end of success function...
+
+        });
+
+    }
+
+
+
+
+
+    function joinRequest(ringnameId, ringid)
+
+    {
+
+        $.ajax({
+
+            type: 'post',
+
+            url: '<?php echo base_url() ?>logged/church_ring/add_join_request',
+
+            dataType: 'json',
+
+            data: 'ringid=' + ringid,
+
+            success: function(data) {
+
+
+
+                if (data.msg == 'success')
+
+                {
+
+                    $('#join_req_p_' + data.removeid).remove();
+
+                    showUIMsg("Join request has been successfully send");
+
+                }
+
+                else if (data.msg == 'error')
+
+                {
+
+                    $('#err_detail').html(data.err.err_detail);
+
+                }
+
+
+
+            }	// end of success function...
+
+        });
+
+    }
+
+
+
+    function leaveRing()
+
+    {
+
+        showUILoader_nodialog();
+
+        $.ajax({
+
+            type: 'post',
+
+           // url: base_url + 'my-ring.html',
+
+		   url: base_url+'logged/church_ring/leavering/',
+
+            data: $('#leavefrm').serialize(),
+
+            dataType: 'json',
+
+            success: function(data) {
+
+                hideUILoader_nodialog();
+
+                hide_dialog();
+
+
+
+                $('#leave_ring').hide();
+
+
+
+                showUIMsg(data.msg);
+
+				//window.location.href="<?=base_url()?>my-ring.html";
+
+                                location.reload();
+
+            }	// end of success function...
+
+        });
+
+    }
+
+
+
+</script>
+
+
+
+
+
+
+
+
+
+<!-- confirm delete ring-->
+
+<div class="lightbox leave-ring" style="width: 400px; left: 296px;">
+
+    <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="<?= base_url() ?>images/close.png" alt="" /></a></div>
+
+    <div class="top"><div>&nbsp;</div></div>
+
+    <div class="mid">
+
+        <div class="heading" style="margin-bottom:0px;">
+
+            <div class="left">
+
+                <h4>Leave Ring</h4>
+
+            </div>
+
+        </div>
+
+        <div class="shade_box_white" style="padding:8px 0px;">
+
+            <div style="padding-bottom:10px;">
+
+                <p class="center-text" style="line-height:23px; color:#494949;">
+
+                    Do you really want to leave the ring?
+
+                </p>
+
+            </div>
+
+            <form action="" method="post" id="leavefrm">
+
+                <input type="hidden" name="i_leave_id" id="i_leave_id" value="" />
+
+                <input name="" type="button" value="Yes" class="btn" style="margin-left:105px;" onClick="leaveRing()"/>
+
+                <input name="" type="button" value="No" class="btn" onclick="hide_dialog()"/>
+
+            </form>   
+
+            <div class="clr"></div>
+
+        </div>
+
+
+
+    </div>
+
+    <div class="bot"><div>&nbsp;</div></div>
+
+</div>
+
+<!-- confirm delete ring-->
+
+<script type="text/javascript">
+
+    function acceptRingInvitation(i_u_id, i_ring_id, id)
+
+    {
+
+
+
+
+
+        showUILoader_nodialog('<img src="' + base_url + 'images/loading_big.gif" width="50"/> ');
+
+        $.ajax({
+
+            url: base_url + 'all/accept_invitation/' + i_u_id + '/' + i_ring_id + '/1',
+
+            dataType: 'json',
+
+            type: 'post',
+
+            success: function(data) {
+
+                //hide_dialog();
+
+                // $('#accept_'+id).attr('style','display: none;');
+
+                hideUILoader_nodialog();
+
+                showUIMsg(data.msg);
+
+                window.location.href = "<?= base_url() ?>my-ring.html";
+
+            },
+
+            error: function(data, status, e) {
+
+                hideUILoader_nodialog();
+
+                showUIMsg("Error!");
+
+
+
+            }
+
+        });
+
+
+
+
+
+    }
+function page_log(){
+<?php
+if($_SESSION['charch_super_admin'] == 'yes'){
+  $loc =   base_url().'church-ring-list';
+}else{
+    $loc =   base_url().'member_ring/'.$_SESSION['logged_church_id'];
+}
+?>
+//alert('dd')
+window.location.href="<?=$loc ?>";
+}
+function del_ring_commnt(id,post_id){
+     showUILoader_nodialog('<img src="' + base_url + 'images/loading_big.gif" width="50"/> ');
+      $.ajax({
+				type: 'post',
+			   // url: base_url+'logged/prayer_group/generate_friend_search_listing_AJAX/'+group_id,
+				url: base_url+'logged/church_ring_home/delete_ring_post_comment',
+				dataType: 'json',
+				data: {'id':id,'post_id':post_id 
+					   },
+			   success: function (data) {
+				  
+						hideUILoader_nodialog();
+                                                //alert(data.msg)
+						   //showUIMsg(json_response.msg);
+                                                   //alert(data.cmnt);
+						//window.location.href = base_url+ '<?=$_SESSION['logged_church_id']?>/church-prayer-group';
+						if(data.msg == 'ok'){	
+                                          //location.reload();
+                                          
+                                          $("#ring-cmnt"+id).hide();
+                                          $(".comments_div"+post_id).html('Comments  ('+data.cmnt+')');
+                                      }else{
+                                          showUIMsg('Error...');
+                                      }
+					  
+					  }
+					  });
+}
+</script> 
+
+<link href="<?= base_url().'css/church.css' ?>" rel="stylesheet" type="text/css" />

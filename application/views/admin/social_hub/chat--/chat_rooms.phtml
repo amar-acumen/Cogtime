@@ -1,0 +1,191 @@
+<div class="clr"></div>
+<!--navigation section start -->
+<?php include(APPPATH."views/layouts/admin/admin_nav.phtml");?>
+<div id="content_section">
+      <div id="container">
+            <div id="mid_content">
+                  <div class="page_heading left">
+                        <div class="left"><img src="../images/icons/login.png" alt="" /> Chat Rooms</div>
+                  </div>
+                  <div class="clr"></div>
+                  <div id="right_container">
+                        <div class="arrow_btm"></div>
+                        <div class="content_area">
+                            <!--filter section start -->
+                            <div class="filter">
+                                <span class="filter-by">Filter By &raquo;</span>
+                                  <form name="frm_search" id="frm_search" action="" method="post" onsubmit="return false;"  class="filter-search">
+                                    <?php /*?><label>Category :</label>
+                                    <div class="field01" style="float:left;">
+                                        <select name="category" id="category3" style="width:150px;">
+                                                <option>category 1</option>
+                                                <option>category 2</option>
+                                          </select>
+                                          <script type="text/javascript">
+                                            $(document).ready(function(arg) {
+                                                $("#category3").msDropDown();
+                                                $("#category3").hide();
+                                                $('#category3').css("width", "150px"); 
+                                            })
+                                        </script>
+                                  </div><?php */?>
+                                    <label>Chat Room Title :</label>
+                                    <input type="text" name="txt_chat_room_name" id="txt_chat_room_name" />
+                                    <input type="hidden" value="Y" name="search_basic" id="search_basic"  />
+                                    <input name="" type="submit" value="GO" class="go" />
+                                </form>  
+                                <div class="clr"></div>
+                            </div>
+                            <!--filter section end -->
+                        
+                            <h4>Chat Rooms</h4>
+                            <div class="right" style="margin-bottom:14px;"><input name="" type="button" value="Add Chat Room"  class="evnt_btn1" onclick="return show_dialog('add-chat-room')"/></div>
+                        
+                            <div class="clr"></div>
+                        	<DIV id="table_content">
+							  <?=$result_content?>
+                            </DIV>
+                            
+                            
+                        	<div class="clr"></div>
+                        </div>
+                  </div>
+                  <div class="clr"></div>
+            </div>
+      </div>
+      <div class="clr"></div>
+</div>
+<!-- /CONTENT SECTION -->
+
+<!--popup one start-->
+<div class="lightbox delete-page-popup" style="width:500px;">
+      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="../images/close.png" alt="" /></a></div>
+      <div class="top"><div>&nbsp;</div></div>
+      <div class="mid">
+            <div class="heading" style="margin-bottom:0px;">
+                  <div class="left">
+                        <h4>Delete Chat Room</h4>
+                  </div>
+            </div>
+               <div class="shade_box_white">
+               <p class="center-text">Do you really want to delete this Chat Room?</p>
+               <form action="" method="post" enctype="multipart/form-data">
+               		<input name="" type="button" value="Yes" class="btn" style="margin-left:146px;" onclick="delete_()"/>
+                    <input type="hidden" id="i_del_id" />
+                    <input name="" type="button" value="No" class="btn" onclick="hide_dialog()"/>
+               </form>   
+               <div class="clr"></div>
+            </div>
+            
+      </div>
+      <div class="bot"><div>&nbsp;</div></div>
+</div>
+<!--popup one end-->
+
+<!--add chat room popup -->
+<div class="lightbox add-chat-room" style="width:500px;">
+      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog();clear_all_error_msg();"><img src="../images/close.png" alt="" /></a></div>
+      <div class="top"><div>&nbsp;</div></div>
+      <div class="mid">
+            <div class="heading" style="margin-bottom:0px;">
+                  <div class="left">
+                        <h4>Add Chat Room</h4>
+                  </div>
+            </div>
+            <div class="shade_box_white">
+           		<div class="content_area frm_box2">
+                        	 <form id="frm_add"  method="post"  onsubmit="return post_frm_ajax();" enctype="multipart/form-data"> 
+                                  <div class="lable01">Title :</div>
+                                  <div class="field01">
+                                        <input name="txt_title" id="txt_title" type="text" />
+                                  </div>
+                                  <div class="error-message" id="err_title"></div>
+                                  <div class="clr"></div>
+                                  <div class="lable01">Description : </div>
+                                  <div class="field01">
+                                        <textarea class="lightbox-textarea" name="txt_desc" onKeyDown="limitText(this.form.txt_desc,this.form.countdown,500);" 
+onKeyUp="limitText(this.form.txt_desc,this.form.countdown,500);" id="txt_desc" style="height:145px;"></textarea>
+										
+										
+                                        
+                                  </div>
+                                  <div class="error-message" id="err_desc"></div>
+                                  <div class="clr"></div>
+                                  
+                                  <div class="lable01">Max Members :</div>
+                                  <div class="field01">
+                                        <input name="txt_max_user" id="txt_max_user" type="text" />
+                                  </div>
+                                  <div class="error-message" id="err_max_user"></div>
+                                  <div class="clr"></div>
+                                  <div class="lable01">&nbsp;</div>
+                                  <div class="field01">
+                                        <input name="" type="submit" class="btn"  value="Add"/>
+                                        <input name="" type="reset" class="btn"  value="Cancel" onclick="clear_all_error_msg();hide_dialog();"/>
+                                  </div>
+                              </form>
+                              <div class="clr"></div>
+                        </div>
+           
+           
+           
+           
+            </div>
+      </div>
+      <div class="bot"><div>&nbsp;</div></div>
+</div>
+<!--add chat room popup end -->
+
+
+<!--edit chat room popup -->
+<div class="lightbox edit-chat-room" style="width:500px;">
+      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog();clear_all_error_msg();"><img src="../images/close.png" alt="" /></a></div>
+      <div class="top"><div>&nbsp;</div></div>
+      <div class="mid">
+            <div class="heading" style="margin-bottom:0px;">
+                  <div class="left">
+                        <h4>Edit Chat Room</h4>
+                  </div>
+            </div>
+            <div class="shade_box_white">
+           		<div class="content_area frm_box2">
+                        	  <form action="" method="post" enctype="multipart/form-data">
+                                  <div class="lable01">Title :</div>
+                                  <div class="field01">
+                                        <input name="txt_edit_title" id="txt_edit_title" type="text" />
+                                  </div>
+                                  <div class="error-message" id="err_edit_title"></div>
+                                  <div class="clr"></div>
+                                  <div class="lable01">Description : </div>
+                                  <div class="field01">
+                                        <textarea class="lightbox-textarea" name="limitedtextarea" onKeyDown="limitText(this.form.limitedtextarea,this.form.countdown,500);" 
+onKeyUp="limitText(this.form.limitedtextarea,this.form.countdown,500);" id="txt_edit_desc" style="height:145px;"></textarea>
+										<br class="clr" />
+										
+                                  </div>
+                                  <div class="error-message" id="err_edit_desc"></div>
+                                  <div class="clr"></div>
+                                  <div class="lable01">Max Members :</div>
+                                  <div class="field01">
+                                        <input name="txt_edit_max_user" id="txt_edit_max_user" type="text" />
+                                  </div>
+                                  <div class="error-message" id="err_edit_max_user"></div>
+                                  <div class="clr"></div>
+                                  <div class="lable01">&nbsp;</div>
+                                  <div class="field01">
+                                        <input name="i_edit_id" id="i_edit_id" type="hidden" value=""/>
+                                        <input name="" type="button" class="btn"  value="Update" onclick="return update();"/>
+                                        <input name="" type="reset" class="btn"  value="Cancel" onclick="clear_all_error_msg();hide_dialog();"/>
+                                  </div>
+                              </form>
+                              <div class="clr"></div>
+                        </div>
+           
+           
+           
+           
+            </div>
+      </div>
+      <div class="bot"><div>&nbsp;</div></div>
+</div>
+<!--edit chat room popup end -->

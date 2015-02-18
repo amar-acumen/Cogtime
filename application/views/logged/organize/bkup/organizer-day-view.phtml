@@ -1,0 +1,279 @@
+<?php include(APPPATH."views/layouts/logged_header.phtml");?>
+            <!-- NAVIGATION SECTION -->
+      <?php include(APPPATH."views/layouts/nav.phtml");?>
+      <!-- /NAVIGATION SECTION -->
+      </div>
+
+<div class="clr"></div>
+<!-- CONTENT SECTION -->
+<div id="content_section">
+      <div id="container">
+            <div id="top_corner">&nbsp;</div>
+            <div id="mid_content">
+                  <!-- latest news -->
+                  <?php include(APPPATH."views/layouts/latest_news.phtml");?>
+                  <!-- /latest news -->
+                  <div class="clr"></div>
+                  <!-- main container -->
+                  <div id="main_container">
+                        <!-- left container -->
+                        <div id="left_container01">
+                              <div class="page_heading"><?php //echo getShortDate($selected_date,'7')?>
+                                    <div class="left"><img src="images/icons/calender2.png" alt=""  /> Organizer - </div>
+                                    <ul class="day-month-view">
+                                    	<li class="select"><a href="organizer/<?=$selected_date?>/organizer-day-view.html">Day View</a></li> 
+                                    	<li class="no-bg"><a href="organize-calender-view.html">Month View</a></li>
+                                    </ul>
+                              </div>
+                              <!--todays entry section start -->
+                              <div class="todays-entry-block">
+                              	  <!--date calender start -->	
+                                  <DIV id="left_cal">
+                              	  <div class="date-calender">
+                                  		<div class="date-calender-inside"   >
+                                        <?php 
+										 	$d_year = date('Y',mktime(0, 0, 0, $selected_month ,$selected_day, $selected_year));
+											$d_month = date('m',mktime(0, 0, 0, $selected_month ,$selected_day, $selected_year));
+											$d_day = date('d',mktime(0, 0, 0, $selected_month ,$selected_day, $selected_year));
+											
+										?>
+                                        <a href="javascript:void(0);" class="prev" onclick="show_cal_contents(<?=$d_year?>, <?=$d_month?>, <?=$d_day?>, 'prev')"></a>
+                                        
+                                        	<ul class="dates jcarousel-skin-tango calendar_sec" >
+                                            	<li month_value="<?=$selected_month?>" year_value="<?=$selected_year?>" day_value="<?=$selected_day?>">
+                                                	<p class="month" ><?=getMonthName(date('m',mktime(0, 0, 0, $this->session->userdata('month')  ,$this->session->userdata('day'), $this->session->userdata('year'))))?></p> 
+                                                    <p class="day" ><?=date('d',mktime(0, 0, 0, $this->session->userdata('month')  ,$this->session->userdata('day'), $this->session->userdata('year')))?></p> 
+                                                    <p class="year" ><?=date('Y',mktime(0, 0, 0, $this->session->userdata('month')  ,$this->session->userdata('day'), $this->session->userdata('year')))?></p>
+                                                </li>
+                                                
+                                            </ul>
+                                            
+                                        <a href="javascript:void(0);" class="next" onclick="show_cal_contents(<?=$this->session->userdata('year')?>,<?=$this->session->userdata('month')?>  ,<?=$this->session->userdata('day')?> , 'next')"></a>
+                                            
+                                        </div>
+                                  </div>
+                                  </DIV>
+                                  
+                                  
+                                  <!--date calender end -->
+                                  <h2 class="todays-entry">Today&acute;s Entry</h2>
+                                  <!--note, todo list tab section start -->
+                                  <div class="note-todo-block">
+                                  		<ul class="note-todo-tab">
+                                        	<li><a href="javascript:void(0);">
+                                            	<img src="images/icons/note_plus.png" alt="note" width="32" height="32"><span>Add New Note</span></a>
+                                            </li>
+                                            <li><a href="javascript:void(0);">
+                                            	<img src="images/icons/note_plus1.png" alt="todo" width="35" height="32"><span>Add New ToDo List</span></a>
+                                            </li>
+                                        </ul>
+                                        
+                                        <div class="note-todo-content-box" >
+                                        	<!--note from start -->
+                                            <div class="note-todo-inside">
+                                            	<span class="top-arrow"></span>
+                                                <div class="note-todo-content">
+                                                	<form id="frmAddNote"  method="post" action="<?=base_url().'logged/organizer_day_view/add_note_ajax'?>" onsubmit="return false;"  enctype="multipart/form-data" class="note-todo-form">
+                                                    
+                                                    	<label>Add Note :</label>
+                                                        <div class="textarea1">
+                                                        <textarea rows="" cols="" name="txt_desc" id="txt_desc"></textarea>
+                                                        </div>
+                                                        <span id="err_desc" class="error-message" style="margin-left: 130px;margin-top: -8px;"></span> 
+                                                        
+                                                        <div class="clr"></div>
+                                                        <label>Time :</label>
+                                                        
+                                                        <div class="time-selectbox-container"> 
+                                                             <select name="s_time" id="s_time" class="time-selectbox">
+                                                                   <option value="-1">Select</option>
+                                                                   <?=makeOption_time()?>
+                                                              </select>
+                                                                                                              
+                                                        </div>
+                                                        <span id="err_time" class="error-message" style="margin-left: 130px;margin-top: -8px;"></span> 									
+                                                        <input type="hidden" id="hd_date" name="hd_date" value="<?=getShortDate($selected_date,'8')?>"/>					
+                                                        <div class="clr"></div>
+                                                        <label>&nbsp;</label>
+                                                        <input name="Add" type="submit" value="Add" class="btn"/>
+                                                        <input name="cancel" type="button" value="Cancel" class="btn" onclick="clearFrmAdd('frmAddNote')" />
+                                                    </form>
+                                                    
+                                                    
+                                                    <div class="clr"></div>
+                                                </div>
+                                            </div>
+                                            <!--note from end -->
+                                            
+                                            <!--todo from start -->
+                                            <div class="note-todo-inside">
+                                            	<span class="top-arrow arrow2"></span>
+                                                <div class="note-todo-content">
+                                                	<form id="frmAddTodolist"  method="post" action="<?=base_url().'logged/organizer_day_view/add_todo_ajax'?>" onsubmit="return false;" enctype="multipart/form-data" class="note-todo-form">
+                                                    	<label>Add Todo List :</label>
+                                                        <div class="textarea1">
+                                                        <textarea rows="" cols=""  name="ta_todo_desc" id="ta_todo_desc"></textarea>	
+                                                        
+                                                        </div>
+                                                        <span id="err_todo_desc" class="error-message" style="margin-left: 130px;
+    margin-top: -9px;"></span>
+                                                        <div class="clr"></div>
+                                                        
+                                                        <label>Start Time :</label>
+                                                        <div class="time-selectbox-container"> 
+                                                         <select class="time-selectbox" name="todo_strt_frm" id="todo_strt_frm" onchange="generateEndtime($(this).val())">
+                                                            <option value="-1">Select</option>
+                                                            <?=makeOption_time()?>
+                                                        </select>
+                                                    
+                                                       <?php /*?> <span id="err_todo_strt_frm" class="error-message"></span> <?php */?>
+                                                        </div>
+                                                        
+                                                <DIV id="add_to_do_end_time" style="display:none;">
+                                                 <label class="left-gap">End Time :</label>
+                                                 <div class="time-selectbox-container"> 
+                                                   <select name="todo_end_frm" id="todo_end_frm" class="time-selectbox">
+                                                     <?php /*?><option value="-1">Select</option><?php */?>
+                                                     <?=makeOption_time()?>
+                                                    </select>
+                                            		</div>
+                                                </DIV>
+                                             
+        <span id="err_todo_strt_frm" class="error-message" style="margin-left: 130px;margin-top: -8px;"></span> 														
+    	<span id="err_todo_end_frm" class="error-message" style="margin-left: 374px;margin-top: -19px;"></span>
+                                                        <div class="clr"></div>
+                                                        
+                                                        <label>Remind Me :</label>
+                                                        <div class="time-selectbox-container"> 
+                                                           
+                                                       <select name="todo_rem_time" id="todo_rem_time" class="time-selectbox">
+                                                       <option value="-1">Select</option>
+                                                       <option value="00:15">15 Minutes</option>
+                                                       <option value="00:30">30 Minutes</option>
+                                                       <option value="00:45">45 Minutes</option> 
+                                                       <option value="01:00">1 Hour</option>
+                                                       <option value="02:00">2 Hours</option>
+                                                      
+                                                     
+                                                       </select>
+                                                       <span class="blue12"><strong>Back</strong></span>
+                                                       
+                                                            
+                                                        </div>
+                                                        
+                                                        <span id="err_todo_rem_time" class="error-message" style="margin-left: 130px;margin-top: -8px;"></span>
+                                                         <input type="hidden" id="hd_tododate" name="hd_tododate" value="<?=getShortDate($selected_date,'8')?>"/>
+                                                        <div class="clr"></div>
+                                                        <label>&nbsp;</label>
+                                                        <input name="Add" type="submit" value="Add" class="add_org btn" />
+                                                        <input name="cancel" type="button" value="Cancel" class="btn" onclick="clearFrmAdd('frmAddTodolist')" />
+                                                    </form>
+                                                    <div class="clr"></div>
+                                                </div>
+                                            </div>
+                                            <!--todo from end -->
+                                        </div>
+                                  </div>
+                                  <!--note, todo list tab section end -->
+                              </div>
+                              <!--todays entry section end -->
+                             <div class="clr"></div> 
+                             <div  id="content_div">
+                              	 <?= $result_content?>
+                        	</div>
+                              
+                              
+                        </div>
+                        
+                        <!-- /left container -->
+                        <!-- right container -->
+                        <?php include(APPPATH."views/layouts/rightbar.phtml");?>
+                        <!-- /right container -->
+                  </div>
+                  
+                  
+                  <!-- /main container -->
+                  <div class="clr"></div>
+            </div>
+            <div id="bot_corner">&nbsp;</div>
+      </div>
+      <div class="clr"></div>
+</div>
+<!-- /CONTENT SECTION -->
+<div class="clr"></div>
+<!-- FOOTER SECTION -->
+<?php include(APPPATH."views/layouts/footer.phtml");?>
+<?php include(APPPATH."views/logged/blocks/common_popup.phtml");?>
+
+
+
+<!-- /FOOTER SECTION -->
+<script type="text/javascript">
+$(document).ready(function(){
+/*	$('.dates').jcarousel({
+    	wrap: 'circular'
+		
+});
+
+	
+	function getNextDate(carousel, state)
+	{
+		//alert(carousel + '  '+ State ) buttonPrevCallback: getNextDate
+    	var current_slide = carousel.first;//$("#currentImg").html(carousel.first);  
+		//alert('month li .jcarousel-item-'+current_slide+'-horizontal');
+		alert($('.calendar_sec li.jcarousel-item-'+current_slide+'-horizontal ').attr('day_value'));
+		
+		var day = $('.calendar_sec li.jcarousel-item-'+current_slide+'-horizontal ').attr('day_value');
+		var month = $('.calendar_sec li.jcarousel-item-'+current_slide+'-horizontal ').attr('month_value');
+		var year = $('.calendar_sec li.jcarousel-item-'+current_slide+'-horizontal ').attr('year_value');
+		
+		day--;
+		
+		
+				
+		alert(month+' df '+day+' day '+year);
+		
+		     showUILoader_nodialog('<img src="'+base_url+'images/loading_big.gif" width="50"/> ');
+			  $.ajax({
+					 type: "POST",
+					 url: base_url+'logged/organizer_day_view/slider_ajax_list'+'/'+year+'/'+month+'/'+day,
+					 dataType: 'json',
+					 success: function(data,status){
+						 $('#content_div').html(data.html);
+						 hideUILoader_nodialog();
+					 }
+			   });	 
+		
+		
+		//$('#hd_all_month').val($('#month-select li.jcarousel-item-'+current_slide+'-horizontal').val());
+	}
+
+
+*/
+
+
+});
+
+
+function show_cal_contents(year,month,day,s_type){
+	
+	showUILoader_nodialog('<img src="'+base_url+'images/loading_big.gif" width="50"/> ');
+		$.ajax({
+			   type: "POST",
+			   url: base_url+'logged/organizer_day_view/slider_ajax_list'+'/'+year+'/'+month+'/'+day+'/'+s_type,
+			   dataType: 'json',
+			   success: function(data,status){
+				   
+				  // alert(data.selected_date);
+				   $('#left_cal').html(data.cal_html);
+				   $('#hd_date').val(data.selected_date);
+				   $('#hd_tododate').val(data.selected_date);
+				   $('#content_div').html(data.html);
+				   hideUILoader_nodialog();
+				   
+				   //window.location = document.URL;
+			   }
+		 });	 
+}
+
+</script>

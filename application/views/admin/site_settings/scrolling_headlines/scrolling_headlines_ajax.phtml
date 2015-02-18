@@ -1,0 +1,60 @@
+<table width="100%" border="0" cellspacing="0" cellpadding="0" class="admin-table">
+    <tr>
+      <th align="center" valign="middle" height="30" width="100">Date Created</th>
+      <th align="left" valign="middle" height="30" width="400">Headlines</th>
+      <th align="left" valign="middle" height="30" width="280">Feed URL</th>
+      <th align="center" valign="middle" height="30" class="last" width="90">Actions</th>
+    </tr>
+    <tr>
+  <?php 
+						  
+	   if( count($info_arr) ) :
+              $ROW = 0;
+			  $last = count($info_arr);
+			   foreach($info_arr as $info) : 
+					
+				  
+				  $id = $info['id'];
+				  $s_title = $info['s_title'];
+				  $s_url = $info['s_url'];
+				 $s_status = ($info['i_status'] == 1)?'HIDE':'SHOW';	   
+				  $CSS = ($ROW == $last )?'class="last"':'';
+	
+	?>
+    			
+  				<tr>
+                            <td align="center" valign="top"><?=getShortDateWithTime($info['dt_created_on'],7)?></td>
+                            <td align="left" valign="top"><?=$s_title?></td>
+                            <td align="left" valign="top"><a href="<?=$s_url?>" target="_blank"><?=$s_url?></a></td>
+                            <td align="center" valign="middle" <?=$CSS?>>
+                            <input name="" title="Edit" type="button" class="edit-button"  value="" onclick="edit_headlines(<?=$id?>); "/>
+                            <input name="" title="Delete" type="button" class="delete-button"  value="" onclick="delete_confirm_(<?= $id ?>);"/>
+
+						 <?php if($info['i_status'] == 1){ ?>
+                            		<span id="<?=$info['id']?>_status"><input  title="Show" type="button" class="btn-01" onclick="javascript:changeStatus(<?php echo $info['id'] ?> , 2 , <?php echo $info['i_status'] ?>)"  value="<?=$s_status?>"/></span>
+						<?php 
+                            } 
+                            else if($info['i_status'] == 2){?>
+                                <span id="<?=$info['id']?>_status"><input title="Show" type="button" class="btn-01" onclick="javascript:changeStatus(<?php echo $info['id'] ?> , 1 , <?php echo $info['i_status'] ?>)"  value="<?=$s_status?>"/></span>
+                        
+                        <?php }?>
+
+                            </td>
+                          </tr>
+                
+		<?php
+				 $ROW++;
+                 endforeach;
+                 
+		   else :	// i.e. no records exists...
+	  ?>
+		  <tr>
+			  <td style="text-align:center;" height="80" colspan="20">No data available!!!</td>
+		  </tr>
+	  <?php
+		   endif;
+	  ?>
+  
+</table>
+
+                  

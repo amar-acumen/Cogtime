@@ -1,0 +1,177 @@
+<?php include(APPPATH."views/layouts/logged_header.phtml");?>
+<!-- NAVIGATION SECTION -->
+      <?php include(APPPATH."views/layouts/nav.phtml");?>
+<!-- /NAVIGATION SECTION -->
+</div>
+</div>
+<!-- /HEADER SECTION -->
+<div class="clr"></div>
+<!-- CONTENT SECTION -->
+<div id="content_section">
+      <div id="container">
+		<!-- latest news -->
+		  <?php include(APPPATH."views/layouts/latest_news.phtml");?>
+		<!-- /latest news -->
+		<div class="clr"></div>
+		<!-- main container -->
+        <div id="main_container">
+			<!-- left container -->
+			  <?php include(APPPATH."views/layouts/leftbar.phtml");?>
+			<!-- /left container -->
+			<!-- mid container -->
+			<div id="mid_container">
+				<div class="page_heading etrade-nw-heading">
+					<div class="left"><img alt="" src="images/icons/outbox1.png" />Sent Items </div>
+					<div class="right">
+                    	<ul class="my-mail">
+                        	<li><input type="button" value="Compose Message" class="compose_btn compose-msg-link"/></li>
+                        </ul>
+                    </div>
+				</div>
+                
+                <!--Compose Message start-->
+                	<?php include(APPPATH."views/logged/message_box/compose-msg-box.phtml");?>	
+                <!--Compose Message end-->
+                <div class="link-div">
+                    <ul>
+                    <li><a href="my-msg-inbox.html"><span class="nw-etrade">Inbox</span></a> </li>
+                     <li><a href="my-msg-trashbox.html"><span class="nw-etrade">Trash</span></a> </li>
+                    </ul>
+                    	<div class="clr"></div>
+               		</div>
+                
+                
+				<!--<div class="arrow_btm"></div>-->
+                <form name="frm_search" id="frm_search" class="filter-search" onsubmit="return false;" method="post" >
+				<div class="ne-etrade-product">
+					<table width="100%" border="0" cellspacing="0" cellpadding="0" class="msg-filter-inbox">
+                      <tr>
+                        <td align="left" class="subproduct" >Filter by Date</td>
+                        <td align="left">
+                        	<input type="text" class="date-inbox date-inbox-icon buy-request-received-btn" id="dt_sent" name="dt_sent" />
+                           	
+									<script type="text/javascript">
+                                          $(document).ready(function(arg) {
+                                              $.datepicker.setDefaults($.datepicker.regional['']);
+                                              //$("#dt_sent").datepicker($.datepicker.regional['en']);
+                          						$("#dt_sent").datepicker({dateFormat:'yy-dd-mm'});
+                                          });
+                                    </script>
+                        </td>
+                         <td align="left" class="subproduct" > To </td>
+                        <td align="left"><input type="text" id="txt_from" name="txt_from" class="date-inbox" /></td>
+                        <input type="hidden" id="search_basic" name="search_basic" value="Y" />
+                        <td><input type="submit" class="buy-request-sent-btn" value=""/></td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                      </tr>
+                       
+                    </table>
+				</div>
+                </form>
+                <div class="profile-frd less-width" style="margin-top:9px;">
+                    <h4>Message</h4>
+                    <ul class="my-msg-action">
+                    <li class="trash">
+                    	<a href="javascript:void(0)" onclick="javascript:delete_checked_messages();"> 
+                        	Delete
+                        </a>
+                    </li>
+                    
+                    <li class="select-all-msg"><a href="javascript:void(0)" onclick="javascript:checkAll_messages();">Select All</a></li>
+                        
+                    
+                    </ul>
+                </div>
+                
+                <div class="prfile-list-main-box">
+                	<ul class="mail-list">
+                    	<DIV id="result_div">
+								<?=$result_content?>
+                         </DIV>
+                    </ul>
+                    
+                </div>
+				
+			</div>
+			<!-- mid container -->
+			<!-- right container -->
+			 <?php include(APPPATH."views/layouts/rightbar.phtml");?>
+			<!-- /right container -->
+		</div>
+		<!-- main container -->
+      </div>
+      <div class="clr"></div>
+</div>
+<!-- /CONTENT SECTION -->
+<div class="clr"></div>
+<!-- FOOTER SECTION -->
+ <?php include(APPPATH."views/layouts/footer.phtml");?>
+<!-- /FOOTER SECTION -->
+<!--popup one start-->
+<div class="lightbox delete-msg-popup delete-post" style="width:245px;">
+      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="<?=base_url()?>images/close.png" alt="" /></a></div>
+      <div class="top"><div>&nbsp;</div></div>
+      <div class="mid">
+            <div class="heading" style="margin-bottom:0px;">
+                  <div class="left">
+                        <h4>Delete Selected Messages</h4>
+                  </div>
+            </div>
+               <div class="shade_box_white" style="padding:8px 0px;">
+               <div style="padding-bottom:10px;">
+               <p class="center-text" style="line-height:23px; color:#494949;">Do you really want to delete these messages?</p>
+               </div>
+               <form action="" method="post" enctype="multipart/form-data">
+               		 <input type="hidden" name="i_del_id" id="i_del_id" value="" />
+               		<input name="" type="button" value="Yes" class="popup-yes"  onClick="delete_messages()"/>
+                    <input name="" type="button" value="No" class="popup-no" onclick="hide_dialog()"/>
+               </form>   
+               <div class="clr"></div>
+            </div>
+            
+      </div>
+      <div class="bot"><div>&nbsp;</div></div>
+</div>
+<!--popup one end-->
+
+
+
+
+<script type="text/javascript">
+$(document).ready(function(arg) {
+  $('#frm_search').submit(function(){ 
+	var datatosend=$("#frm_search").serialize();
+	showBusyScreen();
+								
+		$.ajax({
+		   type: "POST",
+		   url: base_url+"logged/my_msg_outbox/outbox_ajax_pagination/",
+		   data: datatosend,
+		   success: function(data){
+			  
+			  hideBusyScreen(); 
+			   $('#result_div').html(data);
+		   }
+		 });	 
+						
+	});
+	
+		
+  $('.my-compose-minus').click(function(){
+	  $(this).parents('.my-compose-section').slideUp('slow');
+  });
+	  
+  $('.compose-msg-link').click(function(){
+	  $('.my-compose-section').slideToggle();
+  });
+ 
+ });
+ 
+ var ticker_holder = $('.bargaining').get(0);
+	var ticker_text = $('.ticker').get(0);
+	var ticker_pos = ticker_text.parentNode.offsetWidth;
+	
+	var ticker_data = $(ticker_holder).html();
+	$(ticker_text).parent().html('<marquee scrollamount="3" scrolldelay="20">' + ticker_data + '</marquee>');
+</script>

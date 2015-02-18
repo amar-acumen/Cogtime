@@ -1,0 +1,1018 @@
+<?php include(APPPATH ."views/layouts/church_logged_header.phtml");?>
+
+            <!-- NAVIGATION SECTION -->
+
+      <?php //include(APPPATH."views/layouts/nav.phtml");?>
+
+      <!-- /NAVIGATION SECTION -->
+
+      </div>
+
+</div>
+
+<!-- /HEADER SECTION -->
+
+<div class="clr"></div>
+
+
+
+<!-- CONTENT SECTION -->
+
+<div class="container">
+
+      <div class="main-page">
+
+       <h3 class="page-heading">Rings</h3>
+
+            <!--<div id="mid_content"> -->
+
+                  <!-- latest news -->
+
+                <?php include(APPPATH . "views/layouts/church_admin_left_ring.phtml"); ?>
+
+        <!-- /latest news -->
+
+        
+
+          <div class="activity-right">
+          
+          <div class="category-setting-main">
+          	<h3>Create Categories</h3>
+                <div class="cat-add"><input type="text" id="cat_nam" name="cat_nam"> <input type="button" value="Add" onclick="add_cat()"></div>
+                
+                <div class="category-table">
+                	<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <thead>
+    <tr>
+      <th width="8%">S no.</th>
+      <th width="70%" align="left">Category Name</th>
+      <th width="22%">Action</th>
+    </tr>
+    </thead>
+    <tbody>
+        <?php 
+        $query = $this->db->query(' select * from cg_church_ring_category where i_parent_category = 0 order by dt_created_on DESC');
+        $i= 1;
+foreach ($query->result() as $row){
+        ?>
+      <!----------------------------------------->  
+    <tr>
+      <td><?= $i ?></td>
+      <td class="textleft"><?= $row->s_category_name; ?></td>
+      <td><a href="javascript:void(0);" class="edit" title="Edit" onclick="show_dialog('edit_cat<?= $row->id ?>')">Edit</a> <a href="javascript:void(0);" class="delete" title="Delete" onclick="show_dialog('del_cat<?= $row->id; ?>')">Delete</a></td>
+    </tr>
+    <!--------------------------------------->
+    <!------------delete pop------------------->
+     <div  class="lightbox del_cat<?= $row->id ?>">
+      <div class="close"><a onclick="hide_dialog()" href="javascript:void(0)"><img alt="" src="<?= base_url() ?>images/close.png"></a></div>
+      <div class="top"><div>&nbsp;</div></div>
+      <div class="mid">
+            <div style="margin-bottom:0px;" class="heading">
+                  <div class="left">
+                        <h4>Delete category</h4>
+                  </div>
+            </div>
+               <div style="padding:8px 0px;" class="shade_box_white">
+               <div style="padding-bottom:10px;">
+               <p style="line-height:23px; color:#494949; font-size:16px; text-align:center;" class="center-text">
+                  Do you want to delete this category ?
+               </p>
+               </div>
+               <form id="delfrm" method="post" action=""></form>
+                  <input type="hidden" value="" id="i_del_id" name="i_del_id">
+                 <input type="button" onclick="delete_ring_cat(<?=$row->id ?>)"  class="post-btn pull-left" value="Yes" name="">
+                 <input type="button" onclick="hide_dialog()" class="cancel-btn" value="No" name="">
+                  
+               <div class="clr"></div>
+            </div>
+            
+      </div>
+      <div class="bot"><div>&nbsp;</div></div>
+</div>
+    <!--------------------------------->
+    <!------------------edit cat------------------------------->
+    <div  class="lightbox edit_cat<?= $row->id ?>">
+      <div class="close"><a onclick="hide_dialog()" href="javascript:void(0)"><img alt="" src="<?= base_url() ?>images/close.png"></a></div>
+      <div class="top"><div>&nbsp;</div></div>
+      <div class="mid">
+            <div style="margin-bottom:0px;" class="heading">
+                  <div class="left">
+                        <h4>Edit category</h4>
+                  </div>
+            </div>
+               <div style="padding:8px 0px;" class="shade_box_white">
+               <div style="padding-bottom:10px;">
+               <p style="line-height:23px; color:#494949; font-size:16px; text-align:center;" class="center-text">
+                  Do you want to edit this category ?
+               </p>
+               <input type="text" id="edit_cat_nam<?=$row->id ?>" name="edit_cat_nam" value="<?= $row->s_category_name; ?>">
+               <input type="button" onclick="edit_ring_cat(<?=$row->id ?>)"  class="post-btn pull-left" value="Update" name="">
+                 <input type="button" onclick="hide_dialog()" class="cancel-btn" value="cancel" name="">
+               </div>
+                   
+                   
+               </div></div></div>
+    
+    <!------------------------------------->
+    <?php
+    $i++;
+}
+    ?>
+    </tbody>
+  
+</table>
+
+                </div>
+          </div>
+          
+          
+          <div class="category-setting-main">
+          	<h3>Add Sub Categories</h3>
+            	<div class="create-ring">
+                	<label class="lable01">Category: </label>
+                    <div class="field03">
+                        <select id="select_cat">
+                            <option value="-1">select</option>
+                            <?php 
+                            foreach ($query->result() as $row){
+                            ?>
+                            <option value="<?= $row->id ?>"><?= $row->s_category_name; ?></option>
+                                <?php
+                            }
+                                ?>
+<!--                            <option>Category Name</option>
+                            <option>Category Name</option>
+                            <option>Category Name</option>
+                            <option>Category Name</option>
+                            <option>Category Name</option>
+                            <option>Category Name</option>
+                            <option>Category Name</option>-->
+                        </select>
+                    </div>
+                    <div class="clr"></div>
+                    <label class="lable01">Add Subcat: </label>
+                    <div class="field03">
+                        <input type="text" id="sub_cat_name" name="sub_cat_name">
+                    </div>
+                    <div class="clr"></div>
+                    <label class="lable01">&nbsp;</label>
+                    <div class="field03">
+                        <input type="submit" class="btn" value="Create" id="" name="" onclick="add_sub_cat()">
+                    </div>
+                    <div class="clr"></div>
+
+                </div>
+                
+                <div class="category-table">
+                	<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <thead>
+      
+    <tr>
+      <th width="8%">S no.</th>
+      <th width="35%" align="left">Category Name</th>
+      <th width="35%" align="left">Sub Category Name</th>
+      <th width="22%">Action</th>
+    </tr>
+    
+    
+    </thead>
+    <tbody>
+        <?php 
+//        echo  $lower_limit = 10;
+//        echo  $upper_limit = $page+10;
+      $query = $this->db->query('select * from cg_church_ring_category where  i_parent_category!= 0 order by dt_created_on DESC  ');
+      $numrow = $query->num_rows();
+      $i = 1;
+                            foreach ($query->result() as $row){
+                                $query1 = $this->db->query('select * from cg_church_ring_category where  id = "'.$row->i_parent_category.'" ');
+                                 $result1 = $query1->result();
+                                
+      ?>
+    <tr>
+      <td><?= $i; ?></td>
+      <td class="textleft"><?= $result1[0]->s_category_name ?></td>
+      <td class="textleft"><?= $row->s_category_name?></td>
+      <td><a href="javascript:void(0);" class="edit" title="Edit" onclick="show_dialog('edit_sub_cat<?= $row->id ?>')">Edit</a> <a href="javascript:void(0);" class="delete" title="Delete" onclick="show_dialog('del_sub_cat<?= $row->id ?>')">Delete</a></td>
+     <!------------delete pop------------------->
+     <div  class="lightbox del_sub_cat<?= $row->id ?>">
+      <div class="close"><a onclick="hide_dialog()" href="javascript:void(0)"><img alt="" src="<?= base_url() ?>images/close.png"></a></div>
+      <div class="top"><div>&nbsp;</div></div>
+      <div class="mid">
+            <div style="margin-bottom:0px;" class="heading">
+                  <div class="left">
+                        <h4>Delete Subcategory</h4>
+                  </div>
+            </div>
+               <div style="padding:8px 0px;" class="shade_box_white">
+               <div style="padding-bottom:10px;">
+               <p style="line-height:23px; color:#494949; font-size:16px; text-align:center;" class="center-text">
+                  Do you want to delete this Subcategory ?
+               </p>
+               </div>
+               <form id="delfrm" method="post" action=""></form>
+                  <input type="hidden" value="" id="i_del_id" name="i_del_id">
+                 <input type="button" onclick="delete_ring_sub_cat(<?=$row->id ?>)"  class="post-btn pull-left" value="Yes" name="">
+                 <input type="button" onclick="hide_dialog()" class="cancel-btn" value="No" name="" >
+                  
+               <div class="clr"></div>
+            </div>
+            
+      </div>
+      <div class="bot"><div>&nbsp;</div></div>
+</div>
+    <!--------------------------------->
+     <!------------------edit cat------------------------------->
+    <div  class="lightbox edit_sub_cat<?= $row->id ?>">
+      <div class="close"><a onclick="hide_dialog()" href="javascript:void(0)"><img alt="" src="<?= base_url() ?>images/close.png"></a></div>
+      <div class="top"><div>&nbsp;</div></div>
+      <div class="mid">
+            <div style="margin-bottom:0px;" class="heading">
+                  <div class="left">
+                        <h4>Edit category</h4>
+                  </div>
+            </div>
+               <div style="padding:8px 0px;" class="shade_box_white">
+               <div style="padding-bottom:10px;">
+               <p style="line-height:23px; color:#494949; font-size:16px; text-align:center;" class="center-text">
+                  Do you want to edit this Subcategory ?
+               </p>
+               <input type="text" id="edit_subcat_nam<?=$row->id ?>" name="edit_subcat_nam" value="<?= $row->s_category_name; ?>">
+               <?php 
+               $query2 = $this->db->query(' select * from cg_church_ring_category where i_parent_category = 0 order by dt_created_on DESC');
+               
+               ?>
+               <select id="edit-select-subcat<?=$row->id ?>" style="display:  none;">
+                            <option value="-1">select</option>
+                            <?php 
+                            foreach ($query2->result() as $row1){
+                            ?>
+                            <option value="<?= $row1->id ?>" <?php if($row1->id == $row->i_parent_category){ ?> selected="" <?php } ?>><?= $row1->s_category_name; ?></option>
+                                <?php
+                            }
+                                ?>
+<!--                            <option>Category Name</option>
+                            <option>Category Name</option>
+                            <option>Category Name</option>
+                            <option>Category Name</option>
+                            <option>Category Name</option>
+                            <option>Category Name</option>
+                            <option>Category Name</option>-->
+                        </select>
+               <input type="button" onclick="edit_ring_sub_cat(<?=$row->id ?>)"  class="post-btn pull-left" value="Update" name="">
+                 <input type="button" onclick="hide_dialog()" class="cancel-btn" value="cancel" name="">
+               </div>
+                   
+                   
+               </div></div></div>
+    
+    <!------------------------------------->
+    
+    
+    
+    
+    </tr>
+    <?php 
+    $i++;
+                            }
+                            //$this->load->library('pagination');
+
+//$config['base_url'] = base_url().'create_ring_category';
+//$config['total_rows'] = $numrow;
+//$config['per_page'] = 10;
+//$config['num_links'] = 2;
+//$config['use_page_numbers'] = TRUE;
+//$config['page_query_string'] = TRUE;
+//$this->pagination->initialize($config);
+//
+//echo $this->pagination->create_links();
+    ?>
+    </tbody>
+  
+</table>
+
+                </div>
+          </div>
+          
+          </div>
+
+        <div class="clr"></div>
+
+                  </div>
+
+                  <!-- /main container -->
+
+                  
+
+            <!--</div> -->
+
+      </div>
+
+      <div class="clr"></div>
+
+</div>
+
+<!-- /CONTENT SECTION -->
+
+<div class="clr"></div>
+
+
+
+
+
+
+
+
+
+<?php include(APPPATH."views/layouts/church_footer.phtml");?>
+
+<?php //include(APPPATH."views/logged/blocks/common_popup.phtml");?>
+
+
+
+<script type="text/javascript">
+
+function add_cat(){
+    var cat_nam = $('#cat_nam').val();
+    if(cat_nam == ''){
+        showUIMsg("Please input category name");
+    }else {
+         showUIMsg("wait...........");
+        $.ajax({
+
+			type: 'post',
+
+			url: base_url+'logged/church_ring/add_ring_cat/',
+
+			dataType: 'json',
+
+			data: {'cat_nam':cat_nam},
+
+			success: function (data, status) {
+                            if(data.status == 'ok'){
+                                showUIMsg(data.msg);
+                                location.reload();
+                            }
+                            if(data.status == 'error'){
+                                showUIMsg(data.msg);
+                            }
+                            
+                        }
+                        
+            })
+        
+        
+        
+        
+        
+    }
+}
+function add_sub_cat(){
+    var select_cat = $('#select_cat').val();
+    var sub_cat_name = $('#sub_cat_name').val();
+    if(select_cat == '-1'){
+        showUIMsg("Please select parent category");
+    }else if(sub_cat_name == ''){
+        showUIMsg("Please input Subcategory name");
+    }else{
+        showUIMsg("wait...........");
+        $.ajax({
+
+			type: 'post',
+
+			url: base_url+'logged/church_ring/add_ring_sub_cat/',
+
+			dataType: 'json',
+
+			data: {'select_cat':select_cat , 'sub_cat_name':sub_cat_name},
+
+			success: function (data, status) {
+                            if(data.status == 'ok'){
+                                showUIMsg(data.msg);
+                                location.reload();
+                            }
+                            if(data.status == 'error'){
+                                showUIMsg(data.msg);
+                            }
+                            
+                        }
+                        
+            }) 
+    }
+}
+function delete_ring_cat(id){
+     showUIMsg("wait...........");
+        $.ajax({
+
+			type: 'post',
+
+			url: base_url+'logged/church_ring/del_ring_cat/',
+
+			dataType: 'json',
+
+			data: {'id':id },
+
+			success: function (data, status) {
+                            if(data.status == 'ok'){
+                                showUIMsg(data.msg);
+                                location.reload();
+                            }
+                            if(data.status == 'error'){
+                                showUIMsg(data.msg);
+                            }
+                            
+                        }
+                        
+            }) 
+}
+function edit_ring_cat(id){
+    var edit_cat_nam = $('#edit_cat_nam'+id).val();
+    showUIMsg("waiting....");  
+    if(edit_cat_nam == ''){
+    showUIMsg("Please enter some text");    
+    }else {
+    
+        $.ajax({
+
+			type: 'post',
+
+			url: base_url+'logged/church_ring/edit_ring_cat/',
+
+			dataType: 'json',
+
+			data: {'id':id , 'edit_cat_nam':edit_cat_nam },
+
+			success: function (data, status) {
+                            if(data.status == 'ok'){
+                                showUIMsg(data.msg);
+                                location.reload();
+                            }
+                            if(data.status == 'error'){
+                                showUIMsg(data.msg);
+                            }
+                            
+                        }
+                        
+            }) 
+        }
+}
+function delete_ring_sub_cat(id){
+   showUIMsg("wait...........");
+        $.ajax({
+
+			type: 'post',
+
+			url: base_url+'logged/church_ring/del_ring_sub_cat/',
+
+			dataType: 'json',
+
+			data: {'id':id },
+
+			success: function (data, status) {
+                            if(data.status == 'ok'){
+                                showUIMsg(data.msg);
+                                location.reload();
+                            }
+                            if(data.status == 'error'){
+                                showUIMsg(data.msg);
+                            }
+                            
+                        }
+                        
+            })  
+}
+function edit_ring_sub_cat(id){
+    var edit_subcat_nam = $('#edit_subcat_nam'+id).val();
+    var select_subcat = $('#edit-select-subcat'+id).val();
+    //alert(select_subcat);
+    if(edit_subcat_nam == ''){
+         showUIMsg("Please enter subcategory name..");
+    }else if(select_subcat == '-1'){
+        showUIMsg("Please select  parent category ..");
+    }else{
+        
+        showUIMsg("wait...........");
+        $.ajax({
+
+			type: 'post',
+
+			url: base_url+'logged/church_ring/edit_ring_sub_cat/',
+
+			dataType: 'json',
+
+			data: {'id':id, 'edit_subcat_nam':edit_subcat_nam,'parent_cat_id':select_subcat },
+
+			success: function (data, status) {
+                            if(data.status == 'ok'){
+                                showUIMsg(data.msg);
+                                location.reload();
+                            }
+                            if(data.status == 'error'){
+                                showUIMsg(data.msg);
+                            }
+                            
+                        }
+                        
+            }) 
+        
+        
+        
+    }
+}
+//var ajax_req_feeds = null;
+//
+//function show_more_feeds(page) {
+//
+//	if(ajax_req_feeds!=null) {
+//
+//		ajax_req_feeds.abort();
+//
+//	}
+//
+//	showUILoader_nodialog();
+//
+//	ajax_req_feeds = $.ajax({
+//
+//		type: 'get',
+//
+//		url: base_url+'logged/church_ring/generate_ring_search_listing_AJAX'+'/'+page,
+//
+//		dataType: 'json',
+//
+//
+//
+//		success: function (data, status) {
+//
+//
+//
+//			hideUILoader_nodialog();
+//
+//			if(data.html!='') {
+//
+//				$('#listingContent').append(data.html);
+//
+//				$('#show_more_feeds_link').attr('page_value', data.cur_page);
+//
+//				$('#show_more_feeds_link').attr('onclick','');
+//
+//				$('#show_more_feeds_link').attr('onclick','show_more_feeds('+data.cur_page+')');
+//
+//			}
+//
+//			else {
+//
+//				$('#listingContent').append('<div class="view_more" style="text-align: center;"><p class="blue_bold12" style="font-size:14px;">No more result.</p></div>');
+//
+//				$('#show_more_feeds_div').remove();
+//
+//			}
+//
+//            
+//
+//            if(data.view_more==false)
+//
+//            {
+//
+//				
+//
+//                $('#listingContent').append('<div class="view_more" style="text-align: center;"><p class="blue_bold12" style="font-size:14px;">No more result.</p></div>');
+//
+//                $('#show_more_feeds_div').remove();
+//
+//            }
+//
+//			
+//
+//			
+//
+//		}	// end of success function...
+//
+//	});
+//
+//}
+//
+//
+//
+//
+//
+//function searchRing()
+//
+//{
+//
+//	//showUILoader_nodialog();
+//
+//	if($('#searchtxt').val()=='' && $('#category').val()=='')
+//
+//	{
+//
+//		showUIMsg("Please provide atleast one criteria");
+//
+//	}else if($('#searchtxt').val() !=''  && $('#searchtxt').val().length < 3) {
+//
+//		showUIMsg("Please give atleast three letters text in Ring field");
+//
+//	}
+//
+//	else
+//
+//	{
+//
+//		//alert($('#frmSearch').serialize());
+//
+//		$.ajax({
+//
+//			type: 'post',
+//
+//			url: base_url+'logged/church_ring/generate_ring_search_listing_AJAX/',
+//
+//			dataType: 'json',
+//
+//			data: $('#frmSearch').serialize(),
+//
+//			success: function (data, status) {
+//
+//				
+//
+//				var txtboxVal	= $('#searchtxt').val();
+//
+//				$('#searchtitle').html('Search Results');/* for "'+txtboxVal+'"*/
+//
+//				if(data.formpost==1)
+//
+//					$('#search_rst_div').show();
+//
+//					
+//
+//				hideUILoader_nodialog();
+//
+//				
+//
+//				if(data.html!='') {
+//
+//							//alert( data.cur_page+' posting');
+//
+//							$('#show_more_feeds_div').remove();
+//
+//							$('#listingContent').html(data.html);
+//
+//							$('#show_more_feeds_link').attr('page_value', data.current_page);
+//
+//							$('#show_more_feeds_link').attr('onclick','');
+//
+//							$('#show_more_feeds_link').attr('onclick','show_more_feeds('+data.current_page+')');
+//
+//						}
+//
+//						else {
+//
+//							$('#listingContent').html('<div class="view_more" style="text-align: center;"><p class="blue_bold12" style="font-size:14px;">No result.</p></div>');
+//
+//							$('#show_more_feeds_div').remove();
+//
+//						}
+//
+//						
+//
+//						//alert(data.no_of_result+' --- cp : '+data.current_page+' dif: '+(data.no_of_result - data.current_page)+'  '+data.view_more );
+//
+//						//alert(data.no_of_result- data.current_page);
+//
+//						if(data.no_of_result == 0){
+//
+//							$('#show_more_feeds_div').remove();
+//
+//						}
+//
+//						else if(data.view_more==false)
+//
+//						{
+//
+//							//alert(1);
+//
+//							$('#listingContent').append('<div class="view_more" style="text-align: center;"><p class="blue_bold12" style="font-size:14px;">No More result.</p></div>');
+//
+//							$('#show_more_feeds_div').remove();
+//
+//						}
+//
+//						else if((data.no_of_result - data.current_page != 0) && data.view_more!=false){
+//
+//						
+//
+//							//alert(2);
+//
+//							$('#show_more_div').remove();
+//
+//							$('#mid_container').append('<div class="view_more" id="show_more_feeds_div"><a href="javascript:void(0);" id="show_more_feeds_link" page_value="'+data.current_page+'" onclick="show_more_feeds('+data.current_page+')">[view more]  </a> </div>');
+//
+//						}
+//
+//				
+//
+//				
+//
+//				
+//
+//			/*	if(data.html!='') {
+//
+//					$('#show_more_feeds_div').remove();
+//
+//					$('#listingContent').html(data.html);
+//
+//					$('#show_more_feeds_link').attr('page_value', data.current_page);
+//
+//				}
+//
+//				else {
+//
+//					$('#listingContent').html('<div class="view_more" style="text-align: center;"><p class="blue_bold12" style="font-size:14px;">No Search Result.</p></div>');
+//
+//					$('#show_more_feeds_div').remove();
+//
+//				}
+//
+//				
+//
+//				if(data.view_more==false)
+//
+//				{
+//
+//					
+//
+//					$('#invitaion_rec').html('<div class="view_more" style="text-align: center;"><p class="blue_bold12" style="font-size:14px;">No More Search Result.</p></div>');
+//
+//					$('#show_more_feeds_div').remove();
+//
+//				}
+//
+//				else if(data.view_more==true)
+//
+//				{
+//
+//					
+//
+//					$('#mid_container').append('<div class="pagination" style=" height:56px;"><div class="view_more" id="show_more_feeds_div"><a href="javascript:void(0);" id="show_more_feeds_link" page_value="'+data.current_page+'" onclick="show_more_feeds('+data.current_page+')">[view more] </a> </div></div>');
+//
+//					//$('#show_more_feeds_div').show();
+//
+//				}
+//
+//				*/
+//
+//				
+//
+//				
+//
+//			}	// end of success function...
+//
+//		});
+//
+//	}
+//
+//}
+//
+//
+//
+//
+//
+//
+//
+//function searchCat(val,catname)
+//
+//{
+//
+//	showUILoader_nodialog();
+//
+//	$.ajax({
+//
+//		type: 'post',
+//
+//		url: base_url+'logged/church_ring/generate_ring_search_listing_AJAX/0',
+//
+//		dataType: 'json',
+//
+//		data: "category="+val,
+//
+//		success: function (data, status) {
+//
+//			var txtboxVal	= catname;
+//
+//			$('#searchtitle').html('Search Results for "'+txtboxVal+'"');
+//
+//			
+//
+//			hideUILoader_nodialog();
+//
+//
+//
+//			if(data.html!='') {
+//
+//				$('#listingContent').html(data.html);
+//
+//				$('#show_more_feeds_link').attr('page_value', data.current_page);
+//
+//			}
+//
+//			else {
+//
+//				$('#listingContent').html('<div class="view_more" style="text-align: center;"><p class="blue_bold12" style="font-size:14px;">No More Search Result.</p></div>');
+//
+//				$('#show_more_feeds_div').hide();
+//
+//			}
+//
+//            
+//
+//            if(data.view_more==false)
+//
+//            {
+//
+//                
+//
+//                $('#invitaion_rec').html('<div class="view_more" style="text-align: center;"><p class="blue_bold12" style="font-size:14px;">No More Search Result.</p></div>');
+//
+//                $('#show_more_feeds_div').hide();
+//
+//            }
+//
+//			
+//
+//			
+//
+//		}	// end of success function...
+//
+//	});
+//
+//}
+//
+//
+//
+//
+//
+////'ringid='+ringid,
+//
+//
+//
+//function joinRequest(ringnameId,ringid,member)
+//
+//{
+//
+//	$.ajax({
+//
+//		type: 'post',
+//
+//		url: '<?php echo base_url()?>logged/church_ring/add_join_request',
+//
+//		dataType: 'json',
+//
+//		data: { ringid: ringid, member: member},
+//
+//		success: function (data) {
+//
+//			
+//
+//			if(data.msg=='success')
+//
+//			{
+//
+//				$('#join_req_p_'+data.removeid).remove();
+//
+//				showUIMsg("Join request has been successfully send");
+//
+//			}
+//
+//			else if(data.msg=='error') 
+//
+//			{
+//
+//				$('#err_detail').html(data.err.err_detail);
+//
+//                                showUIMsg("This ring contains maximum number of members..you can't join here");
+//
+//			}
+//
+//			
+//
+//		}	// end of success function...
+//
+//	});
+//
+//}
+//
+//
+//
+// function generateSubcat(id) {
+//
+//        showUILoader_nodialog();
+//
+//        $.ajax({
+//
+//            type: 'get',
+//
+//            url: '<?= base_url() ?>logged/church_ring/generateSubCat' + '/' + id,
+//
+//            dataType: 'json',
+//
+//            success: function(data, status) {
+//
+//                hideUILoader_nodialog();
+//
+//                $('#sub_cat').html(data.html);
+//
+//                $('#sub_cat').attr('style', 'display:block;');
+//
+//            }	// end of success function...
+//
+//        });
+//
+//    }
+//
+//function acceptRingInvitation(i_u_id,i_ring_id, id)
+//
+// {
+//
+//	 
+//
+//		 
+//
+//	 showUILoader_nodialog('<img src="'+base_url+'images/loading_big.gif" width="50"/> ');
+//
+//		$.ajax({
+//
+//			
+//
+//			url: base_url +'logged/church_ring/accept_invitation/'+i_u_id+'/'+i_ring_id+'/1',
+//
+//			dataType: 'json',
+//
+//			type: 'post',
+//
+//	
+//
+//			success: function (data) {
+//
+//				//hide_dialog();
+//
+//				// $('#accept_'+id).attr('style','display: none;');
+//
+//                                 if(data.msg == 'error'){
+//
+//                                    showUIMsg("This ring contains maximum number of members..you can't join here");
+//
+//                                    }
+//
+//                                    else{
+//
+//				hideUILoader_nodialog();
+//
+//				showUIMsg(data.msg);
+//
+//				window.location.href="<?=base_url()?>member_ring/<?= $_SESSION['logged_church_id']; ?>";
+//
+//                            }
+//
+//			},
+//
+//			error: function(data, status, e) {
+//
+//				hideUILoader_nodialog();
+//
+//				showUIMsg("Error!");
+//
+//				
+//
+//			}
+//
+//		});
+//
+//				 
+//
+//		 
+//
+//  }
+//
+//$(document).ready(function(){
+//
+//
+//
+//$('#searchtxt').keydown(function(e){
+//
+//    if (e.keyCode == 13) {
+//
+//        e.preventDefault();
+//
+//        return false;
+//
+//    }
+//
+//   //alert('d') 
+//
+//});
+//
+//});
+
+</script>
+
+
+<script type="text/javascript" src="<?= base_url() ?>js/lightbox.js"></script>
+
+

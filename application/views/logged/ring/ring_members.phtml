@@ -1,0 +1,343 @@
+<?php include(APPPATH."views/layouts/logged_header.phtml");?>
+            <!-- NAVIGATION SECTION -->
+      <?php include(APPPATH."views/layouts/nav.phtml");?>
+      <!-- /NAVIGATION SECTION -->
+      </div>
+</div>
+<!-- /HEADER SECTION -->
+<div class="clr"></div>
+
+<!-- CONTENT SECTION -->
+<div id="content_section">
+      <div id="container">
+
+            <div id="mid_content">
+                  <!-- latest news -->
+                  <?php include(APPPATH ."views/layouts/latest_news.phtml");?>
+                  <!-- /latest news -->
+                  <div class="clr"></div>
+                  <!-- main container -->
+                  <div id="main_container">
+                    <?php include(APPPATH."views/layouts/leftbar.phtml");?>
+                    
+                        <!-- mid container -->
+                        <div id="mid_container">
+                         <div style=" margin-top:-33px; margin-bottom:5px">
+                              <div class="page_heading" style="position:relative; top:33px; width:300px">
+                                <div class="left"><!--<img src="images/icons/ring.png" alt="" /> Rings - --><div class="pro_photo_new" style="background:URL('<?=get_ring_photo_by_id($ring_detail_arr['0']['id'])?>') no-repeat center; width:73px; height:72px; background-color:#fff" onclick="location.href='<?=base_url()?>rings/<?=$ring_detail_arr['0']['id']?>/ring-home.html'"></div> <?=$ring_detail_arr[0]['s_ring_name']?> </div>
+                                </div>
+                              <input type="button" style=" background:none repeat scroll 0 0 #013D62; width:112px;margin-left:380px; margin-bottom:5px;" value="Back to My Rings" onclick="window.location='<?=base_url()?>my-ring.html'" class="sml_btn" />
+                            </div>
+                        <!--sub page links -->
+                        <!--       <div class="link-div" style="margin-top:-2px;">
+                                  <ul>
+                                    <li><a href="rings/<?= $ring_detail_arr[0]['id']?>/ring-home.html" class="<?php echo ($page_name=='ring-home')?'current':'';?>"><span>Ring Home</span> </a> </li>
+                                    <li><a href="javascript:void(0)" class="current"><span>Ring Members</span> </a> </li>
+                                    <li><a href="javascript:void(0)" class="<?php echo ($page_name=='event-invitations-received')?'current':'';?>"><span>Ring Approval</span></a> </li>
+                                    <li><a href="javascript:void(0)" class="<?php echo ($page_name=='event-invitations-received')?'current':'';?>"><span>Invite Member</span></a> </li>
+                                    <li><a href="javascript:void(0)" class="<?php echo ($page_name=='event-invitations-received')?'current':'';?>"><span>Ring Chat</span></a> </li>
+                                    
+                                </ul>
+                                <div class="clr"></div>
+                              </div>
+                              -->
+                              <?php include("ring_home_menu.phtml")?>
+                        <!--/sub page links -->
+                        
+
+                             <div class="page_heading">
+                                   <?php /*?><div class="left"><!--<img src="images/icons/ring.png" alt="" />-->  Rings - < <?=$ring_detail_arr[0]['s_ring_name']?> ></div>
+                <?php */?>
+                              </div>
+                                <!--<p class="nw-ring-heading"> Ring Members</p>
+-->                              <div class="arrow_btm"></div>
+                   
+                              <div id="ring_members" class="div_content" style=" margin-top:0px;">
+                                
+                                <?=$ring_members?>
+                              </div><!--div_container-->
+                              <?php
+                              //echo $current_page;
+                              //echo "view more: ".$view_more;
+                              //echo "current_page : ".$current_page;
+                              if($view_more)
+                              {
+                              ?>
+                              <div id="show_more_feeds_div" class="view_more">
+<a id="show_more_feeds_link" onclick="show_more_members($(this).attr('page_value'))" page_value="<?php echo $current_page?>" href="javascript:void(0);">[view more] </a>
+</div>
+                              <?php
+                              }
+                              ?>
+                              
+                              
+                              
+                              
+                        </div>
+                        
+                        
+                        <!-- /mid container -->
+                        <!-- right container -->
+                          <?php include(APPPATH."views/layouts/rightbar.phtml");?>
+                        <!-- /right container -->
+                  </div>
+                  <!-- /main container -->
+                  <div class="clr"></div>
+            </div>
+            <div id="bot_corner">&nbsp;</div>
+      </div>
+      <div class="clr"></div>
+</div>
+<!-- /CONTENT SECTION -->
+<div class="clr"></div>
+<!-- FOOTER SECTION -->
+<?php include(APPPATH."views/layouts/footer.phtml");?>
+<?php include(APPPATH."views/logged/blocks/common_popup.phtml");?>
+<!-- /FOOTER SECTION -->
+
+<?php include(APPPATH."views/logged/ring/comments/my_ring_post_comment_lightbox.phtml");?>
+<?php /*?>VIEW COMMENTS<?php */?>
+
+<div class="lightbox view_comments_div " style="width:650px;">
+      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="<?=base_url()?>images/close.png" alt="" /></a></div>
+      <div class="top">
+            <div>&nbsp;</div>
+      </div>
+      <div class="mid" >
+            <div class="heading" style="margin-bottom:0px;">
+                  <div class="left">
+                        <h4><img src="<?=base_url()?>images/icons/cmnt.png" alt="" /> View Comments </h4>
+                  </div>
+            </div>
+            <div id="comment_html"></div>
+
+            
+      </div>
+      <div class="bot">
+            <div>&nbsp;</div>
+      </div>
+</div>
+<?php /*?>VIEW COMMENTS<?php */?>
+
+<?php /*?>LIKED LIGHT BOX <?php */?>
+<div class="lightbox liked_by_div" style="width:500px;">
+      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="<?=base_url()?>images/close.png" alt="" /></a></div>
+      <div class="top">
+            <div>&nbsp;</div>
+      </div>
+      <div class="mid" style="height:299px;">
+            <div class="heading" style="margin-bottom:0px;">
+                  <div class="left">
+                        <h4><img src="<?=base_url()?>images/icons/thumb_up.png" alt="" /> Liked by </h4>
+                  </div>
+            </div>
+            <div id="liked_html"></div>
+      </div>
+      <div class="bot">
+            <div>&nbsp;</div>
+      </div>
+</div>
+<?php /*?>LIKED LIGHT BOX <?php */?>
+
+
+<div class="lightbox liked_by_div" style="width:500px;">
+      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="images/close.png" alt="" /></a></div>
+      <div class="top">
+            <div>&nbsp;</div>
+      </div>
+      <div class="mid">
+            <div class="heading" style="margin-bottom:0px;">
+                  <div class="left">
+                        <h4><img src="images/icons/thumb_up.png" alt="" /> Liked by </h4>
+                  </div>
+            </div>
+               <div class="shade_box_white" style="padding:8px 0px;">
+                  <div class="user_div"> 
+                      <a href="javascript:void(0);"><img src="images/man.png" alt=""/></a>
+                      <a href="javascript:void(0);" class="blue_link">Alex Brown</a>
+                        
+                  </div>
+                   <div class="user_div"> 
+                      <a href="javascript:void(0);"><img src="images/man1.png" alt=""/></a>
+                      <a href="javascript:void(0);" class="blue_link">George Swift</a>
+                        
+                  </div>
+                    <div class="clr"></div>
+            </div>
+            
+      </div>
+      <div class="bot">
+            <div>&nbsp;</div>
+      </div>
+</div>
+<div class="lightbox view_comments_div" style="width:650px;">
+      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="images/close.png" alt="" /></a></div>
+      <div class="top">
+            <div>&nbsp;</div>
+      </div>
+      <div class="mid">
+            <div class="heading" style="margin-bottom:0px;">
+                  <div class="left">
+                        <h4><img src="images/icons/cmnt.png" alt="" /> View Comments </h4>
+                  </div>
+            </div>
+               <div class="shade_box_white" style="padding:8px 0px;">
+                  <div class="txt_content01"> <a href="javascript:void(0);"><img src="images/man.png" alt="" class="pro_photo" /></a>
+                        <div class="left_div01" style="width:545px;">
+                            <!--  <p class="blue_bold12 right"><a  href="javascript:void(0);">[ commit ]</a>-->
+                              <p class="blue_bold12"><a  href="javascript:void(0);">Alex Brown</a></p>
+                              
+                              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eius
+                                    tempor Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed </p>
+                                 <p>Date Posted: HH:MM DD/MM/YYYY</p>
+                        </div>
+                        <div class="clr"></div>
+                  </div>
+            </div>
+            <div class="shade_box_white" style="padding:8px 0px;">
+                  <div class="txt_content01"> <a href="javascript:void(0);"><img src="images/man1.png" alt="" class="pro_photo" /></a>
+                        <div class="left_div01" style="width:545px;">
+                              <p class="blue_bold12 right"><a  href="javascript:void(0);">[ Delete ]</a>
+                              </p><p class="blue_bold12"><a  href="javascript:void(0);">George Swift</a></p>
+                              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eius
+                                    tempor Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed </p>
+                              <p>Date Posted: HH:MM DD/MM/YYYY</p>
+                        </div>
+                        <div class="clr"></div>
+                  </div>
+            </div>
+      </div>
+      <div class="bot">
+            <div>&nbsp;</div>
+      </div>
+</div>
+<div class="lightbox comment_div" style="width:540px;">
+      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="images/close.png" alt="" /></a></div>
+      <div class="top">
+            <div>&nbsp;</div>
+      </div>
+      <div class="mid">
+            <div class="heading">
+                  <div class="left">
+                        <h4><img src="images/icons/coment.png" alt="" /> Post Comment </h4>
+                  </div>
+            </div>
+            <div class="frm_box">
+                 
+               
+                      <p>  <textarea name="" cols="" rows="" style="width:500px; height:100px;"></textarea></p>
+             
+                       <p> <input name="" type="button" value="Post"  class="btn"/></p>
+             </div>
+      </div>
+      <div class="bot">
+            <div>&nbsp;</div>
+      </div>
+</div>
+
+
+
+<!-- confirm delete popup-->
+<div class="lightbox delete-page-popup" style="width: 400px; left: 296px;">
+      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="<?=base_url()?>images/close.png" alt="" /></a></div>
+      <div class="top"><div>&nbsp;</div></div>
+      <div class="mid">
+            <div class="heading" style="margin-bottom:0px;">
+                  <div class="left">
+                        <h4>Delete Member</h4>
+                  </div>
+            </div>
+               <div class="shade_box_white" style="padding:8px 0px;">
+               <div style="padding-bottom:10px;">
+               <p class="center-text" style="line-height:23px; color:#494949;">Do you really want to remove this member?</p>
+               </div>
+               <form action="" method="post" enctype="multipart/form-data">
+                  <input type="hidden" name="i_del_id" id="i_del_id" value="" />
+                 <input name="" type="button" value="Yes" class="btn" style="margin-left:105px;" onClick="delete_member_()"/>
+                    <input name="" type="button" value="No" class="btn" onclick="hide_dialog()"/>
+               </form>   
+               <div class="clr"></div>
+            </div>
+            
+      </div>
+      <div class="bot"><div>&nbsp;</div></div>
+</div>
+<!-- end of delete pop up -->
+
+
+<script type="text/javascript">
+function delete_confirm_(id)
+{
+    $('#i_del_id').val(id);
+     
+    show_dialog('delete-page-popup');
+}
+
+
+function delete_member_()
+{
+    id= $('#i_del_id').val();
+    
+    
+    
+    
+    $.ajax({
+        url : base_url+"logged/ring_members/delete_member",
+        type : "post",
+        data : ({'table_id':id}),
+        dataType : 'json',
+        success : function(data)
+        {
+            
+            showUIMsg(data.msg);
+            hide_dialog();
+            window.location=document.URL;
+        }
+    });
+}
+
+
+
+
+
+var ajax_req_feeds = null;
+function show_more_members(page) {
+    
+    if(ajax_req_feeds!=null) {
+        ajax_req_feeds.abort();
+    }
+    
+    showUILoader_nodialog();
+    ajax_req_feeds = $.ajax({
+        type: 'get',
+        url: base_url+'logged/ring_members/ring_members_ajax_pagination/<?=$ring_id?>/'+page,
+        dataType: 'json',
+
+        success: function (data, status) {
+//alert(data.current_page);
+            hideUILoader_nodialog();
+            if(data.html!='') {
+                $('#ring_members').append(data.html);
+                $('#show_more_feeds_link').attr('page_value', data.cur_page);
+                $('#show_more_feeds_link').attr('onclick','');
+                $('#show_more_feeds_link').attr('onclick','show_more_members('+data.cur_page+')');
+            }
+            else {
+                $('#ring_members').append('<div class="view_more" style="text-align: center;"><p class="blue_bold12" style="font-size:14px;">No more member.</p></div>');
+                $('#show_more_feeds_div').hide();
+            }
+            if(data.view_more==false)
+            {
+                $('#ring_members').append('<div class="view_more" style="text-align: center;"><p class="blue_bold12" style="font-size:14px;">No more member.</p></div>');
+                $('#show_more_feeds_div').hide();
+            }
+            
+           
+
+        }    // end of success function...
+    });
+}
+
+
+
+</script>

@@ -1,0 +1,72 @@
+<div class="grey-flying-div">
+    <!--inside grey start -->
+    <?php
+	#pr($note_arr);
+	if($note_arr)
+	{
+		$bordercounter	= count($note_arr);
+		$i_border	=	0;
+		foreach($note_arr as $key=>$bookval)
+		{
+			$i_border++;
+		?>
+			<div class="container_002">
+				<h2><?php echo $key?></h2>
+                <?php
+				$bordercounter1	= count($bookval);
+				$i_border1	=	0;
+				foreach($bookval as $verse_val)
+                {
+					$i_border1++;
+                ?>
+                	<div class="note_detail">
+                        <span class="yellow-box"><?php echo $verse_val['chapter'].':'.$verse_val['verses_no']?></span>
+                    <div class="contents" onclick="gotoVerse('<?php echo $verse_val['verses_id']?>');"><?php echo $verse_val['s_text']?></div>
+                    
+                    <div class="clr"></div>
+                    <?php
+                    if($showeditdelete==1)
+                    {
+                    ?>
+                      <ul class="article-comment-block">
+                      <li style="background:none !important;"><a onclick="show_dialog('delete_bkmark'); $('#deleteBkmarkId').val('<?php echo encrypt($verse_val['bk_id'])?>')" href="javascript:void(0);">Delete</a></li>
+                     </ul>
+                     <?php
+                     }
+					else
+					{
+					?>
+                    	<div class="clr"></div>
+                        <?php
+						#echo $bordercounter .'>'. $i_border;
+						if($bordercounter1 > $i_border1)
+						{
+						?>
+                        <div style="border-bottom:dashed #8B8B8B 1px; height:10px;"></div>
+                    	<?php 
+						}
+					}
+                    ?>
+                    </div>
+                <?php 
+				}
+				?>
+			</div>
+            <?php 
+            if($bordercounter > $i_border)
+			{
+			?>
+            	<div style="border-bottom: 1px dashed #EEEEEE;margin-bottom:20px;"></div>
+            <?php
+			}
+		
+		}
+	}
+	else
+	{
+		?><div class="inside-grey-container"><div class="contents">No Records</div></div><?php
+	}
+    ?>
+    <!--inside grey end -->
+    
+</div>

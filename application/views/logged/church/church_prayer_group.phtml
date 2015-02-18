@@ -1,0 +1,232 @@
+<!-- header -->
+<?php
+	include(APPPATH ."views/layouts/church_logged_header.phtml");
+?>
+
+<!-- CONTENT SECTION -->
+<?php //pr($church_list); ?>
+<div class="container">
+  
+  <div class="main-page">
+  	<h3 class="page-heading">Prayer Group<span class="prayer-tab"><a href="<?=base_url().''.$_SESSION['logged_church_id']?>/request.html">Prayer Group Request</a>
+                <?php                          
+                if(subadmin_access('prayer_group'))
+        {
+            ?>                                              
+        <a href="<?=base_url().''.$_SESSION['logged_church_id']?>/create-prayer-group">Create Prayer Group</a><?php } ?>
+<!--<a href="<? //base_url().''.$_SESSION['logged_church_id']?>/church-prayer-group">Prayer Groups</a>--><?php if(!subadmin_access('prayer_group')) {?><a href="<?=base_url().''.$_SESSION['logged_church_id']?>/search-and-join-church-prayer-group">Search and Join Prayer Group</a><?php } ?></span></h3>
+    <?php //include(APPPATH ."views/logged/church/church_prayer_group_left_panel.phtml");?>
+    <div>
+		
+        <ul class="prayer-notification">
+        	<li>
+            	<span><?=get_prayer_group_count_by_church($church_list[0]->i_owner_id)?></span>
+                Prayer Groups
+            </li>
+            
+            <li>
+            	<span><?=get_prayer_group_member_count_by_church($church_list[0]->i_owner_id)?></span>
+                Groups Member
+            </li>
+            
+            <li>
+            	<span><?=get_prayer_group_post_count_by_church($church_list[0]->i_owner_id)?></span>
+                Posts
+            </li>
+        </ul>
+        <div class="clear"></div>
+        <div class="payer-notification">
+                          
+						<div class="notification-list-box">
+                        	<h4 class="page-heading">Notification</h4>
+                            <span style="float:right;">
+                            <label style="width:115px;" class="short-by-prayer-selt">Filter by Group Name: </label>
+                            <select style="width:200px;" class="prayer-selt " id="notif_grp_by" onchange="get_Grouped_notificationlist()">
+                                <option value="-1">Select</option>
+                                                    <?php 
+                                                    if(count($grp_arr)){
+                                                        foreach ($grp_arr as $val){
+                                                    ?>
+                                                               <option value="<?= $val->id; ?>"><?= $val->s_group_name ?></option>
+<!--                                                              <option value="49">pray for all</option>
+                                                              <option value="52">pray to pray</option>-->
+                                                    <?php } 
+                                                    }
+                                                    ?>
+                                                          </select>
+                            </span>
+                        
+							<ul class="notification-ul">
+								
+                                <div id="grp_post_list"><?=$notification_listing?>
+<!--<li><img alt="" src="http://192.168.1.34/cogtime/images/man-24-16.png">William Funderbunk joined <a href="http://192.168.1.34/cogtime/prayer-group-details/49/pray-for-all.html">pray for all</a> on December 11, 2014 at 11:05  </li>
+
+
+<li><img alt="" src="http://192.168.1.34/cogtime/images/man-24-16.png">William Funderbunk joined <a href="http://192.168.1.34/cogtime/prayer-group-details/49/pray-for-all.html">pray for all</a> on December 11, 2014 at 11:05  </li>
+
+
+
+<li class="notifical"><img alt="" src="http://192.168.1.34/cogtime/images/man-24-16.png">William Funderbunk has sent you request to join your prayer group <a href="http://192.168.1.34/cogtime/prayer-group-details/49/pray-for-all.html">pray for all</a> on December 11, 2014 at 11:05 
+<br>
+</li>
+
+
+<li class="notifical"><img alt="" src="http://192.168.1.34/cogtime/images/man-24-16.png">William Funderbunk has sent you request to join your prayer group <a href="http://192.168.1.34/cogtime/prayer-group-details/49/pray-for-all.html">pray for all</a> on December 11, 2014 at 11:05 
+<br>
+</li>
+
+<li><img alt="" src="http://192.168.1.34/cogtime/images/man-24-16.png">William Funderbunk joined <a href="http://192.168.1.34/cogtime/prayer-group-details/49/pray-for-all.html">pray for all</a> on December 11, 2014 at 11:04  </li>
+
+
+
+<li class="notifical"><img alt="" src="http://192.168.1.34/cogtime/images/man-24-16.png">William Funderbunk has sent you request to join your prayer group <a href="http://192.168.1.34/cogtime/prayer-group-details/49/pray-for-all.html">pray for all</a> on December 11, 2014 at 11:04 
+<br>
+</li>
+
+<li><img alt="" src="http://192.168.1.34/cogtime/images/man-24-16.png">Arif Hossain joined <a href="http://192.168.1.34/cogtime/prayer-group-details/50/jesus-pray.html">jesus pray</a> on December 11, 2014 at 11:02  </li>-->
+
+</div>
+                                                            <?php
+                                                           // pr();
+                                                 //echo// count($notification_listing);              
+                                              if(empty($result_arr)): ?>
+                        			<div class="view_more" style="text-align:center;">No Notifications.</div>
+                     			 <?php endif; ?>  
+								   
+							</ul>
+						</div>
+					  
+					  </div>
+        <div class="prayer-comment-box">
+       <h4 class="page-heading"> Prayer Groups</h4>
+       	  <label class="short-by-prayer-selt soting-label">Sort by: </label>
+                            <select class="prayer-selt sorting-select" id="ordr_by" onchange="getSortedGrpList()">
+                                <option value="-1">Select</option>
+                                <option value="1" >Date</option>
+                                <option value="2" >A-Z</option>
+                            </select>
+                           <br class="clr" />
+            <div class="invitaion-table-02">
+            	<table width="100%" border="0" cellspacing="0" cellpadding="0" id="grp_list">
+   
+	  <?php /* 
+		if(!empty($church_list)){
+			foreach($church_list as $church)
+			{
+	  ?>
+      <tr>
+      <td><?php if($church_admin){?><img alt="" src="images/crown.png"><?php }else {?><img alt="" src="images/man-24-16.png"><?}?>   <a href="<?=base_url()?>church-prayer-group/<?=$church->id?>"><?=$church->s_group_name?></a><span class="count-02"><?=$church->members?></span>
+	  <p>Denomination- <?= getDenominationNameById($church->i_denomination_id) ?> | <?php if($church_admin){?>Created on- <?php echo getShortDate($church->dt_created_on,5);}else {?>Joined on- <?php echo getShortDate($church->dt_joined_on,5);}?>   </p>
+	  </td>
+      </tr>
+	  <?php
+			}
+		}else
+		{	?>
+		<tr>
+      <td><p>No Prayer Groups Found.</p></td>
+      </tr>
+		<?
+}		*/
+
+	  ?>
+	 <?=$group_listing?>
+</table>
+
+            </div>       
+            
+        </div>
+
+    </div>
+    <div class="clear"></div>
+    
+    
+  </div>
+</div>
+
+<!-- /CONTENT SECTION -->
+<div class="clr"></div>
+<!-- FOOTER SECTION -->
+<?php include(APPPATH."views/layouts/church_footer.phtml");?>
+<!-- /FOOTER SECTION -->
+<script type="text/javascript">
+var base_url="<?=base_url()?>";
+function getSortedGrpList(){
+	
+	var sort_val = $('#ordr_by').val();
+	//var grp_val = $('#grp_by').val();
+	
+	showUILoader_nodialog();
+	 $.ajax({
+		type: 'get',
+		url: base_url+'logged/church_prayer_group/groups_ajax_listing/'+0+'/<?=$_SESSION['logged_church_id']?>/'+sort_val,
+		dataType: 'json',
+
+		success: function (data, status) {
+
+			hideUILoader_nodialog();
+			$('#grp_list').html(data.grp_html);
+		}	// end of success function...
+	});
+	
+}
+function deleteGroup()
+    {
+        hide_dialog();
+        showBusyScreen();
+        $.ajax({
+            type: 'POST',
+            url: base_url + 'logged/church_prayer_group/delete_prayer_group/',
+            dataType: 'json',
+            data: ({'gr_id': $('#i_del_id').val()}),
+            success: function(data, status) {
+                hideBusyScreen();
+                showUIMsg(data.msg);
+                $('#grp_list').html(data.html);
+
+            }
+        });
+    }
+function leaveGroup()
+    {
+        hide_dialog();
+        showBusyScreen();
+        $.ajax({
+            type: 'POST',
+            url: base_url + 'logged/church_prayer_group/leave_prayer_group/',
+            dataType: 'json',
+            data: ({'gr_id': $('#i_lev_id').val()}),
+            success: function(data, status) {
+                hideBusyScreen();
+                showUIMsg(data.msg);
+                $('#grp_list').html(data.html);
+
+            }
+        });
+    }
+    function get_Grouped_notificationlist(){
+	
+	var notif_grp_by = $('#notif_grp_by').val();
+       // alert(notif_grp_by);
+	
+	showUILoader_nodialog();
+	 $.ajax({
+		type: 'get',
+		url: base_url+'logged/church_prayer_group/notifications_ajax_pagination/'+0+'/'+notif_grp_by,
+		dataType: 'json',
+
+		success: function (data, status) {
+
+			hideUILoader_nodialog();
+                           if(data.html == ''){
+                              $('#grp_post_list').html('No Notification..'); 
+                           }
+                           else{
+			$('#grp_post_list').html('');
+			$('#grp_post_list').html(data.html);
+                    }
+		}	// end of success function...
+	});
+	
+}
+</script>

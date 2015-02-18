@@ -1,0 +1,164 @@
+<?php include(APPPATH."views/layouts/logged_header.phtml");?>
+            <!-- NAVIGATION SECTION -->
+      <?php include(APPPATH."views/layouts/nav.phtml");?>
+      <!-- /NAVIGATION SECTION -->
+      </div>
+</div>
+<div class="clr"></div>
+
+<!-- CONTENT SECTION -->
+
+<div id="content_section">
+      <div id="container">
+          <div class="top-page-heading">
+          <h2 class="landing-title">Media center</h2>
+          <div class="landing-input"><input type="text" name="" value="" placeholder="Search Keywords"></div>
+	  <div class="clr"></div>
+           </div>
+          
+          <div class="media-center-banner">
+              <!-- Place somewhere in the <body> of your page -->
+<div id="slider" class="flexslider">
+  <ul class="slides">
+  
+	<? 
+	foreach($is_feature_home_news as $val) 
+	{
+		$IMG = base_url() . 'uploads/media_center_article_featured_home/' . getThumbName($val['s_image_featured'], 'main');
+		
+					
+		//$detail_url	= base_url().$val['id']."/".$article[0]['cat_name']."/watch-detail/".my_url($val['s_title']).".html";
+		$detail_url	= base_url().$val['id']."/".my_url($val['cat_name'])."/christian-news-details/".my_url($val['s_title']).".html";
+		
+	?>
+    <li>
+	<div style="background:url(<?=$IMG?>) center; width:999px; height:408px;">&nbsp;
+   </div> 
+	  <div class="caption-text">
+          <h3>Featured Article </h3>
+          <a href="<?php echo $detail_url;?>"><h4><?=$val['s_title']?></h4></a>
+          <a href="<?php echo $detail_url;?>"><p><?=nl2br(get_unformatted_string_edit(substr($val['s_desc'],0,200)))?></p></a>
+          
+      </div>
+    </li>
+	<? 
+	} 
+	?>
+	
+	
+	<? 
+	foreach($is_feature_home_video as $val) 
+	{
+		$IMG = base_url() . 'uploads/media_center_video_featured_home/' . getThumbName($val['s_image_featured'], 'main');
+		$detail_url	= base_url().$val['id']."/".my_url($val['cat_name'])."/watch-detail/".my_url($val['s_title']).".html";
+	?>
+	
+    <li>
+      <div style="background:url(<?=$IMG?>) center; width:999px; height:408px;">&nbsp;
+   	  </div> 
+      <div class="caption-text">
+         <h3>Featured Watch </h3>
+          <a href="<?php echo $detail_url;?>"><h4><?=$val['s_title']?></h4></a>
+          <a href="<?php echo $detail_url;?>"><p><?=nl2br(get_unformatted_string_edit(substr($val['s_desc'],0,200)))?></p></a>
+          
+      </div>
+	  
+    </li>
+	
+	<?php } ?>
+	
+	<? 
+	foreach($is_feature_home_listen as $val) 
+	{
+		$IMG = base_url() . 'uploads/media_center_listen_featured_home/' . getThumbName($val['s_image_featured'], 'main');
+		$detail_url = base_url()."listen-detail/".my_url($val['id']).'/'.my_url($val['s_title']).".html";
+	?>
+	
+    <li>
+      <div style="background:url(<?=$IMG?>) center; width:999px; height:408px;">&nbsp;
+   	  </div> 
+      <div class="caption-text">
+          <h3>Featured Listen </h3>
+          <a href="<?php echo $detail_url;?>"><h4><?=$val['s_title']?></h4></a>
+          <a href="<?php echo $detail_url;?>"><p><?=nl2br(get_unformatted_string_edit(substr($val['s_desc'],0,200)))?></p></a>
+	  </div>
+    </li>
+ 
+ 	<?php } ?>
+ 
+    <!-- items mirrored twice, total of 12 -->
+  </ul>
+</div>
+<div id="carousel-mdia" class="flexslider">
+  <ul class="slides">
+    <li>
+        <span class="read-media">&nbsp;</span>
+      <h5 onclick="window.location='<?=base_url().'christian-news/read.html'?>';" style="cursor:pointer;">Read</h5>
+      <!--<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur id tempor justo, ut facilisis arcu.  </p>-->
+    </li>
+    <li>
+      <span class="watch-media">&nbsp;</span>
+      <h5 onclick="window.location='<?=base_url().'watch.html'?>';" style="cursor:pointer;">watch</h5>
+      <!--<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur id tempor justo, ut facilisis arcu.  </p>-->
+    </li>
+    <li>
+      <span class="listen-media">&nbsp;</span>
+      <h5 onclick="window.location='<?=base_url().'listen.html'?>';" style="cursor:pointer;">listen</h5>
+      <!--<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur id tempor justo, ut facilisis arcu.  </p>-->
+    </li>
+    <!-- items mirrored twice, total of 12 -->
+  </ul>
+</div>
+              
+          </div>
+          <div class="ad-list">
+              <ul>
+                  <li><a href="javascript:void(0);"><img src="images/ad-1.png" alt="Advertsment" width="300" height="250"></a></li>
+                  <li><a href="javascript:void(0);"><img src="images/ad-2.png" alt="Advertsment" width="300" height="250"></a></li>
+                  <li class="no-margin"><a href="javascript:void(0);"><img src="images/ad-3.png" alt="Advertsment" width="300" height="250"></a></li>
+                  
+              </ul>
+              
+          </div>
+      </div>
+      <div class="clr"></div>
+</div>
+
+
+<!-- /CONTENT SECTION -->
+<div class="clr"></div>
+
+<?php include(APPPATH."views/layouts/footer.phtml");?>
+
+
+
+ <script type="text/javascript">
+ $(window).load(function() {
+  // The slider being synced must be initialized first
+  $('#carousel-mdia').flexslider({
+    animation: "slide",
+    controlNav: false,
+    animationLoop: false,
+    slideshow: false,
+    itemWidth: 238,
+    itemMargin: 0,
+    asNavFor: '#slider'
+  });
+ 
+  $('#slider').flexslider({
+    animation: "slide",
+    controlNav: false,
+    animationLoop: false,
+    slideshow: false,
+    sync: "#carousel-mdia"
+  });
+});
+ </script>
+ 
+ 
+ <?php /*?><?php $IMG = base_url() . 'uploads/media_center_article/' . getThumbName($featured['s_image'], 'main');?>
+      <img src="<?=$IMG?>" />
+      <div class="caption-text">
+          <h3>Featured Article </h3>
+          <h4><?=$featured['s_title']?></h4>
+          <p><? #my_substr(strip_tags(get_unformatted_string_edit($featured[0]['s_desc'])),80)?></p><?php */?>

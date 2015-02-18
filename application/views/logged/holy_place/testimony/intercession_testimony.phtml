@@ -1,0 +1,411 @@
+<?php include(APPPATH."views/layouts/logged_header.phtml");?>
+            <!-- NAVIGATION SECTION -->
+      <?php include(APPPATH."views/layouts/nav.phtml");?>
+      <!-- /NAVIGATION SECTION -->
+      </div>
+</div>
+<div class="clr"></div>
+
+<!-- CONTENT SECTION -->
+<div id="content_section">
+      <div id="container">
+      
+            <!--<div id="mid_content"> -->
+                  <!-- latest news -->
+                <h2 class="main-title" style="font-size:20px;">Testimony</h2>
+                  <!-- /latest news -->
+                  <div class="clr"></div>
+                  <!-- main container -->
+                  <div id="main_container">
+                        <!--buttons section start -->
+                        <div class="tab_content">
+                            <ul class="prayer-wall-links">
+                             <li><a href="prayer-wall-testimony.html" class="prayer-testimony">Prayer wall</a></li>
+                              <li class="select"><a href="javascript:void(0)" class="e-testimony"><span class="e_italic">e</span>Intercession</a></li>
+                              
+                            </ul>
+                            
+                            <!--<a href="javascript:void(0);" class="search-testimony">Search Testimony</a>
+                            -->
+                            <div class="testimonial-filter">
+                             <label>Filter By:</label>
+                             <select id="search_options" name="search_options" style="float: right;" onchange="return search_()">
+                                <option value="view_all">Show All</option>
+                                <option value="my_commitment">My Commitments</option>
+                            </select>
+                            </div>
+                             
+                            <div class="clr"></div>
+                                <!--search form start -->
+                                <div class="frm_box search-testimony-form">
+                                 <!--minimize link start -->
+                                    <div class="minimize testi-minimize" title="Minimize">&nbsp;</div>
+                                <!--minimize link end -->
+                                    <!--<form id="search_frm" action="" method="post" enctype="multipart/form-data" onsubmit="return search_frm_post();">
+                                    <input type="hidden" name="if_posted" id="if_posted" value="y">
+                                      <div class="lable01" style=" width:100px;">Location:</div>
+                                      <div class="field04">
+
+                                            <input type="text" name="txt_location" id="txt_location" style="width: 247px;">
+                                      </div>
+                                      <div class="clr"></div>
+                                      <div class="lable01" style=" width:100px;">&nbsp;</div>
+                                      <div class="field04" style="width: 357px;">
+                                      <span style="color: #004084;font-weight: normal;font-size: 11px;font-style: italic;">(note : please use ',' (comma) between places)</span>
+                                      
+                                      </div>
+
+                                      <div class="clr"></div>
+                                      
+
+                                      
+                                      
+                                      
+                                      
+                                      
+                                      
+                                      
+                                       
+                                            <div class="lbl01" style=" width:38px; margin-left: 58px;line-height: 28px;"> From:</div>
+                                       
+                                      <div class="lable01" style=" width:40px;">Date:</div>
+                                      <div class="field04">
+                                            <input style="width:170px;"   type="text"  value="" name="date_from" id="date_from" />
+                                            <img src="images/icons/cal.png" alt="" onclick="$(this).prev().focus()" style="cursor:pointer; " />
+                                            <script type="text/javascript">
+                                                    $(document).ready(function(arg) {
+                                                        $.datepicker.setDefaults($.datepicker.regional['']);
+                                                        $("#date_from").datepicker($.datepicker.regional['en']);
+                        
+                                                    });
+                                                </script>
+                                      </div>
+                                      
+                                      
+                                      <div class="lable01" style=" width:100px;">Time:</div>
+                                      <div class="field04">
+                                            
+                                            <div class="lbl01" style=" width:165px;">
+                                                  <input type="text" name="txt_time_from" value=""> 
+                                                  <span style="font-weight: normal;font-size: 11px;font-style: italic;">(24-hour format ex : HH:MM)</span>
+                                            </div>
+                                      </div>
+                                      
+                                      
+                                      
+                                      <div class="clr"></div>
+                                      
+                                      <div class="lbl01" style=" width:38px; margin-left: 58px;line-height: 28px;"> To:</div>
+                                      
+                                      
+                                      <div class="lable01" style=" width:40px;">Date:</div>
+                                      <div class="field04">
+                                            <input style="width:170px;"   type="text"  value="" name="date_to" id="date_to"  />
+                                            <img src="images/icons/cal.png" alt="" onclick="$(this).prev().focus()" style="cursor:pointer; " />
+                                            <script type="text/javascript">
+                                                    $(document).ready(function(arg) {
+                                                        $.datepicker.setDefaults($.datepicker.regional['']);
+                                                        $("#date_to").datepicker($.datepicker.regional['en']);
+                        
+                                                    });
+                                                </script>
+                                      </div>
+                                      
+                                      
+                                      <div class="lable01" style=" width:100px;">Time</div>
+                                      <div class="field04">
+                                            
+                                            <div class="lbl01" style=" width:165px;">
+                                                  <input type="text" name="txt_time_to" value="">
+                                                  <span style="font-weight: normal;font-size: 11px;font-style: italic;">(24-hour format ex : HH:MM)</span>
+                                            </div>
+                                      </div>
+                                      
+                                      
+                                      
+                                      <div class="clr"></div>
+                                      <div class="lable01" style=" width:100px;">&nbsp;</div>
+                                      <div class="field04">
+                                            <input name="" type="submit" value="Search"  class="btn"/>
+                                      </div>
+                                      <div class="clr"></div>
+                                    </form>                            
+                                    -->
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    </div>
+                                <!--search form end -->
+                        </div>
+                        <div class="clr"></div>
+                        <!--buttons section end -->
+                        
+                        <div class="" id="view_div">
+                            <div id="testimony_list" class="testimonial-box select">
+                            <?=$prayer_req_ajax_content?>
+                            <!--testimonial start -->
+                         <?/*   <div class="prayer-wall-dotted-box equal-padding">
+                            
+                                <!--my comment for the pray start -->
+                                    <div class="my-comment-for-pray commit-content">
+                                        <p class="quoted-text">
+                                            This is my wall and I'm posting my status message here. This is my wall I'm posting my status message here. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eius tempor Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eius tempor 
+                                        </p>
+                                        <p class="date-time">From: <span>12.06.2013</span> at <span>10:32 AM</span></p> 
+                                        <p class="date-time">To: <span>12.07.2013</span> at <span>10:32 AM</span></p>
+                                    </div> 
+                                <!--my comment for the pray end -->
+                                <div class="commitment-prayer-for">
+                                    <p class="name">Pray For: <span>Alex Abramovich</span> <span class="place">UK</span></p>
+                                    <p class="quoted-text">
+                                        <a href="prayer-wall-request-detail.php">This is my wall and I'm posting my status message here. This is my wall I'm posting my status message here. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eius tempor Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eius tempor</a> 
+                                        <span>Updated on: May 1, 2011 12:26 PM</span> 
+                                    </p>
+                                    <p class="date-time">From: <span>12.06.2013</span> at <span>10:32 AM</span></p> 
+                                    <p class="date-time">To: <span>12.07.2013</span> at <span>10:32 AM</span></p>
+                                </div>    
+                            </div>
+                            <!--testimonial end -->
+                            <!--testimonial start -->
+                            <div class="prayer-wall-dotted-box equal-padding">
+                            
+                                <!--my comment for the pray start -->
+                                    <div class="my-comment-for-pray commit-content">
+                                        <p class="quoted-text">
+                                            This is my wall and I'm posting my status message here. This is my wall I'm posting my status message here. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eius tempor Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eius tempor 
+                                        </p>
+                                        <p class="date-time">From: <span>12.06.2013</span> at <span>10:32 AM</span></p> 
+                                        <p class="date-time">To: <span>12.07.2013</span> at <span>10:32 AM</span></p>
+                                    </div> 
+                                <!--my comment for the pray end -->
+                                <div class="commitment-prayer-for">
+                                    <p class="name">Pray For: <span>Alex Abramovich</span> <span class="place">UK</span></p>
+                                    <p class="quoted-text">
+                                        <a href="prayer-wall-request-detail.php">This is my wall and I'm posting my status message here. This is my wall I'm posting my status message here. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eius tempor Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eius tempor</a> 
+                                        <span>Updated on: May 1, 2011 12:26 PM</span> 
+                                    </p>
+                                    <p class="date-time">From: <span>12.06.2013</span> at <span>10:32 AM</span></p> 
+                                    <p class="date-time">To: <span>12.07.2013</span> at <span>10:32 AM</span></p>
+                                </div>    
+                            </div>
+                            <!--testimonial end -->
+                            <!--pagination start -->
+                              <div class="article-pagination no-brdr">
+                                  <ul>
+                                      <li class="previous"><a href="javascript:void(0);">Previous</a></li>
+                                      <li><a href="javascript:void(0);">1</a></li>
+                                      <li><a href="javascript:void(0);">2</a></li>
+                                      <li><a href="javascript:void(0);">3</a></li>
+                                      <li><a href="javascript:void(0);">4</a></li>
+                                      <li><a href="javascript:void(0);">5</a></li>
+                                      <li><a href="javascript:void(0);">6</a></li>
+                                      <li class="next"><a href="javascript:void(0);">Next</a></li>
+                                  </ul>
+                              </div>
+                            <!--pagination end -->
+                            </div>*/?>
+                            
+                            
+                            
+                            
+                            
+                            
+                       <? /*     <div class="testimonial-box">
+                            <!--testimonial start -->
+                            <div class="prayer-wall-dotted-box equal-padding">
+                            
+                                <!--my comment for the pray start -->
+                                    <div class="my-comment-for-pray commit-content">
+                                        <p class="quoted-text">
+                                            This is my wall and I'm posting my status message here. This is my wall I'm posting my status message here. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eius tempor Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eius tempor 
+                                        </p>
+                                        <p class="date-time">From: <span>12.06.2013</span> at <span>10:32 AM</span></p> 
+                                        <p class="date-time">To: <span>12.07.2013</span> at <span>10:32 AM</span></p>
+                                    </div> 
+                                <!--my comment for the pray end -->
+                                <div class="commitment-prayer-for">
+                                    <p class="name">Pray For: <span>Alex Abramovich</span> <span class="place">UK</span></p>
+                                    <p class="quoted-text">
+                                        <a href="prayer-wall-request-detail.php">This is my wall and I'm posting my status message here. This is my wall I'm posting my status message here. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eius tempor Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eius tempor</a> 
+                                        <span>Updated on: May 1, 2011 12:26 PM</span> 
+                                    </p>
+                                    <p class="date-time">From: <span>12.06.2013</span> at <span>10:32 AM</span></p> 
+                                    <p class="date-time">To: <span>12.07.2013</span> at <span>10:32 AM</span></p>
+                                </div>    
+                            </div>
+                            <!--testimonial end -->
+                            <!--testimonial start -->
+                            <div class="prayer-wall-dotted-box equal-padding">
+                            
+                                <!--my comment for the pray start -->
+                                    <div class="my-comment-for-pray commit-content">
+                                        <p class="quoted-text">
+                                            This is my wall and I'm posting my status message here. This is my wall I'm posting my status message here. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eius tempor Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eius tempor 
+                                        </p>
+                                        <p class="date-time">From: <span>12.06.2013</span> at <span>10:32 AM</span></p> 
+                                        <p class="date-time">To: <span>12.07.2013</span> at <span>10:32 AM</span></p>
+                                    </div> 
+                                <!--my comment for the pray end -->
+                                <div class="commitment-prayer-for">
+                                    <p class="name">Pray For: <span>Alex Abramovich</span> <span class="place">UK</span></p>
+                                    <p class="quoted-text">
+                                        <a href="prayer-wall-request-detail.php">This is my wall and I'm posting my status message here. This is my wall I'm posting my status message here. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eius tempor Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eius tempor</a> 
+                                        <span>Updated on: May 1, 2011 12:26 PM</span> 
+                                    </p>
+                                    <p class="date-time">From: <span>12.06.2013</span> at <span>10:32 AM</span></p> 
+                                    <p class="date-time">To: <span>12.07.2013</span> at <span>10:32 AM</span></p>
+                                </div>    
+                            </div>
+                            <!--testimonial end -->
+                            <!--pagination start -->
+                              <div class="article-pagination no-brdr">
+                                  <ul>
+                                      <li class="previous"><a href="javascript:void(0);">Previous</a></li>
+                                      <li><a href="javascript:void(0);">1</a></li>
+                                      <li><a href="javascript:void(0);">2</a></li>
+                                      <li><a href="javascript:void(0);">3</a></li>
+                                      <li><a href="javascript:void(0);">4</a></li>
+                                      <li><a href="javascript:void(0);">5</a></li>
+                                      <li><a href="javascript:void(0);">6</a></li>
+                                      <li class="next"><a href="javascript:void(0);">Next</a></li>
+                                  </ul>
+                              </div>
+                            <!--pagination end -->
+                            </div>
+                            */ ?>
+
+                          </div>
+                          <!--end of testimony_list-->
+                          <?php
+                            if($view_more)
+                            {
+                            ?>
+                            <div class="view_more" id="show_more_testimony_div"><a href="javascript:void(0);" id="show_more_testimony" page_value="<?=$current_page?>" onclick="show_more_testimonies($(this).attr('page_value'))">[view more] </a> </div>        
+                            <?php
+                            }
+                            ?>
+                  
+                  </div>
+                  <!-- /main container -->
+                  <div class="clr"></div>
+            <!--</div> -->
+      </div>
+      <div class="clr"></div>
+</div>
+<!-- /CONTENT SECTION -->
+<div class="clr"></div>
+
+
+<?php include(APPPATH."views/layouts/footer.phtml");?>
+
+
+<!-- /lightbox SECTION -->
+
+<?php include(APPPATH."views/logged/blocks/common_popup.phtml");?>
+
+<?php include(APPPATH."views/logged/videos/comments/my_video_post_comment_lightbox.phtml");?>
+
+
+<script type="text/javascript">
+var ajax_req_feeds = null;
+function show_more_testimonies(page) {
+    if(ajax_req_feeds!=null) {
+        ajax_req_feeds.abort();
+    }
+    showUILoader_nodialog();
+    ajax_req_feeds = $.ajax({
+        type: 'get',
+        url: base_url+'logged/intercession_testimony/intercession_testimony_ajax_pagination/'+page,
+        dataType: 'json',
+
+        success: function (data, status) {
+    //alert(data.view_more);
+            hideUILoader_nodialog();
+            if(data.html!='') {
+               
+                $('#testimony_list').append(data.html);
+                $('#show_more_testimony').attr('page_value', data.cur_page);
+            }
+            else {
+                $('#testimony_list').append('<div class="section01" style="padding-top:5px;"><div  class="shade_norecords" style="width:260px;"><p class="blue_bold12">No Videos.</p></div></div>');
+                $('#show_more_testimony_div').hide();
+            }
+            if(data.view_more==false)
+            {
+                $('#testimony_list').append('<div class="section01" style="padding-top:5px;"><div  class="shade_norecords" style="width:530px;"><p class="blue_bold12">No More Testimony.</p></div></div>');
+                $('#show_more_testimony_div').hide();
+            }
+           
+
+        }    // end of success function...
+    });
+}
+</script>
+<script type="text/javascript">
+//------------------------------ search ------------------------------------------
+$(document).ready(function(){
+     optionsArr = { 
+        beforeSubmit:  showBusyScreen,  // pre-submit callback 
+        success:       validateFrm, // post-submit callback 
+        url:        base_url + "logged/intercession_testimony/intercession_testimony_ajax_pagination"
+    }; 
+});
+
+
+function search_frm_post()
+{
+    $('#search_frm').ajaxSubmit(optionsArr);
+    
+    return false;
+}
+
+function validateFrm(data)
+{
+   hideBusyScreen();
+   var res = JSON.parse(data);
+  
+   $('#show_more_testimony_div').remove();
+        $('#testimony_list').html(res.html);
+        if(res.view_more)
+        {
+            //$('#show_more_testimony').attr('page_value', res.cur_page);
+            $('#testimony_list').parent().append('<div class="view_more" id="show_more_testimony_div"><a href="javascript:void(0);" id="show_more_testimony" page_value="'+res.cur_page+'" onclick="show_more_testimonies($(this).attr(\'page_value\'))">[view more] </a> </div>');
+        }
+        else
+        {
+            
+        }
+}
+//------------------------------- /search -----------------------------------------
+
+function search_()
+{
+    showBusyScreen();
+    val = $('#search_options').val();
+   
+    
+    $.ajax({
+        url : base_url+'logged/intercession_testimony/intercession_testimony_ajax_pagination',
+        type : 'post',
+        data : ({'key_word':val,'if_posted':'y'}),
+        dataType : 'json',
+        success : function(data)
+        {
+            hideBusyScreen();
+            $('#show_more_testimony_div').remove();
+            $('#testimony_list').html(data.html);
+            if(data.view_more)
+            {
+                $('#view_div').append('<div class="view_more" id="show_more_testimony_div"><a href="javascript:void(0);" id="show_more_testimony" page_value="'+data.cur_page+'" onclick="show_more_testimonies($(this).attr(\'page_value\'))">[view more] </a> </div>');
+            }
+        }
+    });
+    
+}
+
+
+
+</script>
+

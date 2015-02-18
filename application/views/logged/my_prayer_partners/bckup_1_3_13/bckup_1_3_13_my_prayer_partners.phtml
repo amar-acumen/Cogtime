@@ -1,0 +1,212 @@
+<?php include(APPPATH."views/layouts/logged_header.phtml");?>
+            <!-- NAVIGATION SECTION -->
+      <?php include(APPPATH."views/layouts/nav.phtml");?>
+      <!-- /NAVIGATION SECTION -->
+      </div>
+</div>
+<!-- /HEADER SECTION -->
+<div class="clr"></div>
+
+<!-- CONTENT SECTION -->
+<div id="content_section">
+      <div id="container">
+            <!--<div id="mid_content"> -->
+                  <!-- latest news -->
+                 <?php include(APPPATH ."views/layouts/latest_news.phtml");?>
+                  <!-- /latest news -->
+                  <div class="clr"></div>
+                  <!-- main container -->
+                  <div id="main_container">
+                        <!-- left container -->
+                        <?php include(APPPATH."views/layouts/leftbar.phtml");?>
+                        <!-- /left container -->
+                        <!-- mid container -->
+                        <div id="mid_container">
+                              <div class="page_heading">
+                                    <div class="left"><img src="images/icons/flower.png" alt="" /> My Prayer Partners </div>
+                                    <div class="right"></div>
+                              </div>
+                              
+                              
+                            <?php if($is_want_prayer_partner == 'Y') {?>  
+                            
+                            		<!--sub page links -->
+                                    <div class="link-div">
+                                        <ul>
+                                          <li><a href="prayer-partner-request.html"><span>Prayer Partner Requests</span></a></li>
+                                          <li><a href="search-invite-prayer-partner.html"><span>Search  &amp;  Invite Prayer Partners</span></a></li>
+                                      </ul>
+                                      <div class="clr"></div>
+                                    </div>
+                                    <!--/sub page links -->
+                                    
+                                   <!--< <div class="arrow_btm"></div>
+                                    div class="section01" style="margin-bottom:1px;">
+                                        <div class="txt_content" style="padding:10px 0px;">
+                                              <div class="heading02"><img src="images/icons/search.png" alt="" style="margin-right:3px;" /> 
+                                              <a  href="search-invite-prayer-partner.html" class="blue_link">Search New Prayer Partner</a> </div>
+                                              <div class="clr"></div>
+                                        </div>
+                                  </div>-->
+                                    <DIV id="my_friends">
+                                          <?=$friends_result_content?>
+                                    </DIV>
+                            <?php } else{
+							?>  
+                                      <div class="div_content" style=" margin-top:0px;">
+                                  
+                                  
+                                  
+                                        <!--You are not yet enlisted to Prayer Partner Zone section start -->
+                                        <div class="shade_box_blue" style="padding-top:5px;"> 
+                                             <div class="txt_content">
+                                                 You are not yet enlisted to Prayer Partner Zone. To enlist yourself please click on the button below 
+                                                 <a href="javascript:void(0);" onclick="return show_dialog('enlist-as-prayer-partner')" class="enlist-prayer-partner">Enlist as Prayer Partner</a>
+                                             </div>
+                                         </div>
+                                         <!--You are not yet enlisted to Prayer Partner Zone section end -->
+                                         
+                                         
+                                  </div>
+                            
+                         	<?php }?>
+                        </div>                   
+                        <!-- /mid container -->
+                        <!-- right container -->
+                        <?php include(APPPATH."views/layouts/rightbar.phtml");?>
+                        <!-- /right container -->
+                  </div>
+                  <!-- /main container -->
+                  <div class="clr"></div>
+            <!--</div> -->
+      </div>
+      <div class="clr"></div>
+</div>
+<!-- /CONTENT SECTION -->
+<div class="clr"></div>
+<?php include(APPPATH."views/layouts/footer.phtml");?>
+<?php include(APPPATH."views/logged/blocks/common_popup.phtml");?>
+
+
+
+
+<!-- /lightbox SECTION -->
+<div class="lightbox enlist-as-prayer-partner" style="width:480px;">
+      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="images/close.png" alt="" /></a></div>
+      <div class="top">
+            <div>&nbsp;</div>
+      </div>
+      <div class="mid">
+            <div class="heading">
+                  <div class="left">
+                        <h4>Confirmation Message</h4>
+                  </div>
+            </div>
+           <p class="bold-text">Are you sure you want to enlist yourself as Prayer Partner?</p>
+           
+           <form enctype="multipart/form-data" method="post" action="" >
+            <input class="btn" type="button" style="margin-left:146px;" value="Yes" name="" onclick="enlist_()">
+            <input class="btn" type="button" onclick="hide_dialog()" value="No" name="">
+           </form>
+      </div>
+      <div class="bot">
+            <div>&nbsp;</div>
+      </div>
+</div>
+
+
+<div class="lightbox write_prayer_point" style="width:480px;">
+      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="images/close.png" alt="" /></a></div>
+      <div class="top">
+            <div>&nbsp;</div>
+      </div>
+      <div class="mid">
+   
+            <div class="heading">
+                  <div class="left">
+                        <h4>Write Prayer Points</h4>
+                  </div>
+            </div>
+           <p> <textarea id="text_area_prayer_point" name="textarea_prayer_pt" cols="" rows="" style="width:440px; height:100px;"></textarea></p>
+           <p style="padding-bottom:8px;" class="blue12">You Should write date along with prayer points</p>
+           <input type="hidden" id="dbId" value="0">
+           <p><input id="save_points" name="" type="button" value="Save" class="btn" onclick="write_prayer_partner_()" /></p>
+          
+      </div>
+      <div class="bot">
+            <div>&nbsp;</div>
+      </div>
+</div>
+
+<div class="lightbox read_prayer_pt" style="width:480px;">
+      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="images/close.png" alt="" /></a></div>
+      <div class="top">
+            <div>&nbsp;</div>
+      </div>
+      <div class="mid">
+            <div class="heading">
+                  <div class="left">
+                        <h4>Read Prayer Points</h4>
+                  </div>
+            </div>
+            <div id="prayer_points">
+          
+           </div>
+           <p>&nbsp;</p>
+
+           <p><input name="" type="button" value="Close" onclick="hide_dialog()" class="btn" /></p>
+      </div>
+      <div class="bot">
+            <div>&nbsp;</div>
+      </div>
+</div>
+
+
+<div class="lightbox user_status_change" style="width:550px;">
+    <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="images/close.png" alt="" /></a></div>
+    <div class="top"><div>&nbsp;</div></div>
+    <div class="mid">
+        <div class="heading"><div class="left"><h4> Change your Online Status  </h4></div></div>
+           <div class="frm_box">
+             <div class="lable01">Status:</div> 
+             <div class="field01">  
+             <select name="status" id="status" style="width:260px;">
+                 <option>Online</option> <option>Offline</option>  <option>Invisible</option><option>Away, Do not disturb</option>
+            </select>
+            <script type="text/javascript">
+                $(document).ready(function(arg) {
+                    $("#status").msDropDown();
+                    $("#status").hide();
+                })
+            </script> </div>
+             <div class="clr"></div>
+             <div class="lable01">Status Message:</div> 
+             <div class="field01"><input name="" type="text" /> </div>
+             <div class="clr"></div>
+            
+             <div class="lable01">&nbsp;</div> 
+             <div class="field01"><input name="" type="button" value="Change" class="btn" /></div>
+             <div class="clr"></div>
+           </div>
+    </div>
+    <div class="bot"><div>&nbsp;</div></div>
+</div>
+
+<div class="lightbox remove_div" style="width:550px;">
+    <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="images/close.png" alt="" /></a></div>
+    <div class="top"><div>&nbsp;</div></div>
+    <div class="mid">
+        <div class="heading"><div class="left"><h4> Reason for Removal </h4></div></div>
+           <div class="frm_box">
+           
+             <div class="lable01" style="width:100px;">Reason :</div> 
+             <div class="field01"> <textarea name="" cols="" rows="" style="width:320px; height:100px;"></textarea></div>
+             <div class="clr"></div>
+            
+             <div class="lable01" style="width:100px;">&nbsp;</div> 
+             <div class="field01"><input name="" type="button" value="Remove" class="btn" /></div>
+             <div class="clr"></div>
+           </div>
+    </div>
+    <div class="bot"><div>&nbsp;</div></div>
+</div>

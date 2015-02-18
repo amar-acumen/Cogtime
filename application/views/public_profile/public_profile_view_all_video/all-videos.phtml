@@ -1,0 +1,337 @@
+<?php
+    if( $this->session->userdata('loggedin') =='' || $this->session->userdata('loggedin')==false){
+        include(APPPATH ."views/layouts/header.phtml");
+           include(APPPATH."views/layouts/slider_nav.phtml");
+     }
+     else{
+         
+         include(APPPATH ."views/layouts/logged_header.phtml");
+         include(APPPATH."views/layouts/nav.phtml");?>
+          <!-- /NAVIGATION SECTION -->
+              </div>
+        </div>
+ <?php  }?>
+<!-- /HEADER SECTION -->
+<div class="clr"></div>
+<!-- CONTENT SECTION -->
+<div id="content_section">
+<div id="container">
+  <div id="top_corner">&nbsp;</div>
+  <div id="mid_content"> 
+     <!-- latest news -->
+   <?php #include(APPPATH ."views/layouts/latest_news.phtml");?>
+    <!-- /latest news -->
+    <div class="clr"></div>
+    <!-- main container -->
+    <div id="main_container"> 
+      <!-- left container -->
+       <?php include(APPPATH."views/layouts/leftbar.phtml");?>
+      <!-- left container -->
+      <div id="mid_container">
+	  	
+      <?php /*?>  <div style="margin-left:412px; margin-bottom:5px;">
+		  <input type="button" style=" background:none repeat scroll 0 0 #013D62;" value="Back" onclick="window.location='<?=get_profile_url($public_arr_profile_info['id'])?>'" class="sml_btn" />
+        </div><?php */?>
+        
+        <div >
+
+                        <form name="frm_preserve_search" method="post" enctype="multipart/form-data" action="<?= $_SERVER['HTTP_REFERER'] ?>">
+                            <input type="hidden" name="IS_PRESERVE_SEARCH" id="IS_PRESERVE_SEARCH" value="Y" />
+                            <h1 class="profile-name"><?= $public_arr_profile_info['s_profile_name'] ?>'s Videos  <?php
+                        $relation_arr = CheckUserRelation($public_arr_profile_info['id']);
+                        //pr($relation_arr);
+                        ?><span class="pro-offline" style="float:none">
+                           <?= check_user_online_hlpr($public_arr_profile_info['id'], 'public', $relation_arr); ?>
+                        </span> </h1>
+                            <input type="submit" class="sml_btn" name="reload_search" value="Back"  style=" background:none repeat scroll 0 0 #013D62;margin-left:412px; margin-bottom:5px;"  />
+                        </form>
+                    </div>
+        <div class="pd-box">
+            <ul class="dp-list">
+            <li><a href="javascript:void(0)" class="select"><?php /*?><?=$public_arr_profile_info['s_profile_name']?> Videos<?php */?></a></li>
+          </ul>
+          <br class="clr" />
+        </div>
+        <div class="prfile-list-main-box"> 
+			<?php /*?><h1><?=$public_arr_profile_info['s_profile_name']?> </h1>
+			<?php  $relation_arr = CheckUserRelation($public_arr_profile_info['id']);	?>
+			<span class="pro-offline">
+				<?=check_user_online_hlpr($public_arr_profile_info['id'], 'public', $relation_arr); ?>
+			</span>
+			<br class="clr"/><?php */?>
+		
+          <!--Profile start-->
+          <div class="prfile-sec-content-box  select-display" >
+           <?php /*?> <h2>
+            Profile
+            </h2><?php */?>
+            <div class="profile-sml-sec">
+				 <?php $img = get_profile_image($public_arr_profile_info['id'], 'main');?>
+                            <div  class="prfile-sec-photo" style=" background:URL('<?=$img?>')no-repeat center;width:100px; height:100px;" title="member" ></div>
+                            
+                            <div class="prfile-sec-content-box-right">
+                                <table width="100%" cellspacing="0" cellpadding="0" border="0" class="pro-table">
+                                 <tr>
+                                    <td valign="top" align="left"><span>Date of Birth: </span></td>
+                                    <td valign="top" align="left"><?=($public_arr_profile_info['dt_dob'] != '0000-00-00')?getShortDate($public_arr_profile_info['dt_dob'],5):'';?></td>
+                                  </tr>
+                                  <tr>
+                                    <td valign="top" align="left" ><span>Website:</span></td>
+                                    <td valign="top" align="left"><a href="<?=$public_arr_profile_info['../s_website']?>" target="_blank"><?=$public_arr_profile_info['s_website']?></a></td>
+                                  </tr>
+                                 <?php /*?> <?php $p_url = get_profile_url($public_arr_profile_info['id'], $public_arr_profile_info['s_profile_name']); ?>
+                                  <tr>
+                                    <td valign="top" align="left" ><span>Profile URL:</span></td>
+                                    <td valign="top" align="left"><a href="<?=$p_url?>" target="_blank"><?=$p_url?></a></td>
+                                  </tr><?php */?>
+                                </table>
+                             </div>
+                  <br class="clear"/>
+              </div>
+          </div>
+		    <!--Profile start--> 
+			
+		<ul class="profile-msg-send">
+					  <?php if($own_profile == 'false' && $show_msg):?>
+                      <li><a class="send-pro-message" href="javascript:void(0);" <?php /*?>onclick="show_dialog('send_message_div');"<?php */?>>Send A Message</a></li>
+                     
+                      <?php  endif;
+                      
+                      if($if_already_friend == 'false') :?>
+                          <li><a href="javascript:void(0);" id="invite_friend_<?=($public_arr_profile_info['id'])?>" onclick="invite_friend_('<?=encrypt($public_arr_profile_info['id'])?>')">Send Friend Request</a></li>
+                      <?php elseif($display_becomefriend == 'false'):?>
+                          <li><a href="javascript:void(0);" id="invite_friend_<?=($public_arr_profile_info['id'])?>" onclick="invite_friend_('<?=encrypt($public_arr_profile_info['id'])?>')" >Re-send Friend Request</a></li>
+                      <?php endif; ?>
+                      
+                     <?php if($if_already_netpals == 'false') :?>
+                          <li><a id="invite_netpal_<?= $public_arr_profile_info['id']?>"  href="javascript:void(0);" onclick="invite_netpals_(<?php echo $public_arr_profile_info['id'];?>)">Invite As Netpal</a></li>
+                      <?php elseif($display_becomenetpals == 'false'):?>
+                          <li><a d="invite_netpal_<?= $public_arr_profile_info['id']?>"  href="javascript:void(0);" onclick="invite_netpals_(<?php echo $public_arr_profile_info['id'];?>)" >Reinvite As NetPal</a></li>
+                      <?php endif; ?>
+                      
+                       <?php ## prayer partner
+                       if($is_hit_frm_pp){  
+                           if($prayer_partner['display_becomeprayer_partner'] == 'false'): ?>
+                              <li> <a  href="javascript:void(0);" id="invite_prayer_partner_<?=($public_arr_profile_info['id'])?>" onclick="invite_prayer_partner_('<?=encrypt($public_arr_profile_info['id'])?>','<?=$prayer_partner['display_becomeprayer_partner']?>')">Re-send Partner Request</a></li>
+                            
+                                                                          
+                        <?php elseif($prayer_partner['display_alreadyprayer_partner'] == 'true'):?>
+                              <li><a href="javascript:void(0);"> Already Your Partner </a></li>
+                        
+                       
+                       <?php elseif($prayer_partner['is_available']=='false') : ?>
+                              <li><a href="javascript:void(0);">Not Available as Partner</a></li>
+                               
+                        
+                        <?php else: ?>
+                       <li> <a  href="javascript:void(0);" id="invite_prayer_partner_<?=($public_arr_profile_info['id'])?>" onclick="invite_prayer_partner_('<?=encrypt($public_arr_profile_info['id'])?>','<?=$prayer_partner['display_becomeprayer_partner']?>')">Invite As Partner</a></li>
+                        
+                        <?php endif;
+                       }
+                        ?>
+                       
+                      
+        </ul>
+		
+		<div class="new-wl">
+			<div class="comments-number">
+                                              
+			     <div class="comments-number-mid">
+				  <div class="heading">
+						<div class="left">
+							  <h4><img alt="" src="images/icons/cmnt2.png" class="cmnt" /> Send A Message</h4>
+							  <img src="images/minus-white.png" alt="" class="wal-minus" />
+						</div>
+				  </div>
+				  
+					
+				  
+					<table width="100%" cellspacing="0" cellpadding="0" border="0" class="profile-msg-table" >
+                         <tr>
+                            <td valign="middle" align="left">To: </td>
+                            <td valign="top" align="left"><?=$public_arr_profile_info['s_profile_name']?></td>
+                          </tr>
+                          <tr>
+                            <td valign="middle" align="left">Subject: </td>
+                            <td valign="top" align="left"><input type="text" class="profile-txt-width"  id="subject" name="subject" /></td>
+                          </tr>
+                          <tr>
+                            <td valign="top" align="left">body:</td>
+                            <td valign="top" align="left"><textarea class="profile-txt-width"  name="message" id="message"></textarea></td> 
+                            
+                          </tr>
+                          <tr style="">
+                          <td valign="top" align="left">&nbsp;&nbsp;</td>
+                          <td class="error_msg" id="err_send_message" style=" margin-left:138px;"></td>
+                          </tr>
+                         
+                          <tr>
+                            <td></td>
+                            <td><input type="button"  class="yellow-btn" value="Send" onclick="send_message_from_public_profile()" /></td>
+                          </tr>
+                        <input type="hidden" id="recipent_id" value="<?=encrypt($public_arr_profile_info['id'])?>" />
+                      </table>
+				</div>
+                                             
+			</div>
+		</div>
+        
+        <!-- My Video Albums  start-->
+        <div class="profile-frd">
+			<h4>Video Albums</h4>
+			
+		</div>
+		<div class="pro-container">
+			<div class="pro-slider-section">
+				<div class="pro-video-section">
+            	 <div id="album"><?= $result_album_content?></div>
+			</div>
+				<br class="clr"/>
+			 <?php 
+             if($album_no_of_result > 10): ?>
+                    
+                    <div class="more-pro-view-all view_more" id="show_more_album_feeds_div"><a href="javascript:void(0);" id="show_more_album_feeds_link" page_value="<?=$album_current_page?>" onclick="show_more_album_feeds($(this).attr('page_value'))">[view more] </a> </div>
+            <?php endif; ?>
+			</div>
+		</div>
+		
+		<!-- My Video Albums  end-->
+		<br class="clear"/>
+         <!-- My videos  start-->
+        <div class="profile-frd">
+			<h4>videos</h4>
+			
+		</div>
+		
+       <div class="pro-video-section">
+            	<div id="video"><?= $result_video_content?></div>
+		</div>
+		 <?php if($video_no_of_result > 10): ?>
+              <div class="view_more more-pro-view-all" id="show_more_video_feeds_div"><a href="javascript:void(0);" id="show_more_video_feeds_link" page_value="<?=$video_current_page?>" onclick="show_more_video_feeds($(this).attr('page_value'))">[view more] </a> </div>
+          <?php endif; ?>
+		<!-- My videos  end-->
+		
+        </div>
+        
+      </div>
+      
+      <!-- right container -->
+      <?php include(APPPATH."views/layouts/rightbar.phtml");?>
+      <!-- right container --> 
+      
+    </div>
+    <!-- main container --> 
+  </div>
+  
+
+  <div class="clr"></div>
+</div>
+<!-- /CONTENT SECTION -->
+<div class="clr"></div>
+<!-- FOOTER SECTION -->
+<?php include_once(APPPATH ."views/layouts/footer.phtml"); ?>
+<!-- /FOOTER SECTION --> 
+
+
+<script type="text/javascript">
+
+var ajax_req_album_feeds = null;
+function show_more_album_feeds(page) {
+    if(ajax_req_album_feeds!=null) {
+        ajax_req_album_feeds.abort();
+    }
+    showUILoader_nodialog();
+    ajax_req_album_feeds = $.ajax({
+        type: 'get',
+        url: base_url+'public_profile_view_all_video/album_pagination_show_more/<?=$profile_id?>'+'/'+page,
+        dataType: 'json',
+
+        success: function (data, status) {
+            
+            //alert(data.current_page);
+            hideUILoader_nodialog();
+            if(data.html!='') {
+                $('#album').append(data.html);
+                $('#show_more_album_feeds_link').attr('page_value', data.current_page);
+            }
+            else {
+                $('#album').append('<div class="view_more" style="text-align: center;"><p class="blue_bold12" style="font-size:14px;">No more albums to display.</p></div><div class="clr"></div>');
+                $('#show_more_album_feeds_div').hide();
+            }
+            if(data.view_more==false)
+            {
+                $('#album').append('<div class="view_more" style="text-align: center;"><p class="blue_bold12" style="font-size:14px;">No more albums to display.</p></div><div class="clr"></div>');
+                $('#show_more_album_feeds_div').hide();
+            }
+       
+        }    // end of success function...
+    });
+}
+</script>
+
+
+<script type="text/javascript">
+
+var ajax_req_video_feeds = null;
+function show_more_video_feeds(page) {
+    if(ajax_req_video_feeds!=null) {
+        ajax_req_video_feeds.abort();
+    }
+    showUILoader_nodialog();
+    ajax_req_video_feeds = $.ajax({
+        type: 'get',
+        url: base_url+'public_profile_view_all_video/video_pagination_show_more/<?=$profile_id?>'+'/'+page,
+        dataType: 'json',
+
+        success: function (data, status) {
+            
+            
+            hideUILoader_nodialog();
+            if(data.html!='') {
+                $('#video').append(data.html);
+                $('#show_more_video_feeds_link').attr('page_value', data.current_page);
+            }
+            else {
+                $('#video').append('<div class="view_more" style="text-align: center;"><p class="blue_bold12" style="font-size:14px;">No more videos to display.</p></div>');
+                $('#show_more_video_feeds_div').hide();
+            }
+            if(data.view_more==false)
+            {
+                $('#video').append('<div class="view_more" style="text-align: center;"><p class="blue_bold12" style="font-size:14px;">No more videos to display.</p></div>');
+                $('#show_more_video_feeds_div').hide();
+            }
+       
+        }    // end of success function...
+    });
+}
+</script>
+
+
+<script language="javascript">
+$(document).ready(function() {
+
+//  $('#myvideo_big_thumb_1').click(function(){
+$('[id^="myvideo_big_thumb_1_"]').click(function(){ 
+//alert($(this).attr('media_id'));
+  var media_id =  $(this).attr('media_id');
+  $.ajax({
+        type: 'post',
+        url: base_url+'logged/video_details/get_media/',
+        data: ({'media_id' : media_id ,'width':472 ,'height':378}),
+
+        dataType: 'json',
+        success: function (data, status) {
+            if(data.result=='success') {
+               $('#myvideo_first_thumb_'+media_id).html(data.s_image_source.html);
+               $('#myvideo_first_thumb_'+media_id).attr('i_media_id',data.i_media_id);
+            }
+        },
+        error: function (data, status, e) {
+            showUIMsg('Some error occurred. Please try again.');
+        }
+    });
+});
+  $('[id^="myvideo_big_thumb_1_"]').trigger('click');
+});
+</script>
+</div>

@@ -1,0 +1,100 @@
+<?php if($is_post_=='1') {?>
+<div class="arrow_btm"></div>
+<div class="div_content" style=" margin-top:0px;">
+    <div class="shade_box_blue" style="padding-top:5px; margin-bottom: 0;">
+        <div class="page_heading_01">
+            <div class="left" style="padding-left:10px;"> Search Result</div>
+        </div>   
+    </div>              
+            <?php
+                       // pr($search_result_netpals);
+                    if(count($search_result_netpals) >0){  
+                        
+                        foreach($search_result_netpals as $r)   :
+                            //echo "id : ".$r['id'];   
+                            /*$address=array();
+                            if(isset($r['s_country_name']) && $r['s_country_name']!='')
+                                $address['country'] = $r['s_country_name'];
+                            if(isset($r['s_state']) && $r['s_state']!='')
+                                $address['state'] = $r['s_state'];
+                            if(isset($r['s_city']) && $r['s_city']!='')
+                                $address['city'] = $r['s_city'];
+                            $add=implode(', ',$address);*/
+							$add=get_user_address_info($r['user_id']);
+                            $img = get_profile_image($r['user_id'],$size ='thumb');
+                            
+                           // $profile_link = get_profile_url($r['user_id'],$r['s_displayname']);
+							
+							 if($r['already_added_netpal'] == 'true' || $r['if_already_friend'] == 'true'){
+							   $profile_link = get_profile_url($r['user_id'],$r['s_displayname']);
+							}else
+							{
+							   $profile_link = get_public_profile_url($r['user_id'],$r['s_displayname']); 
+							}
+                            
+                            
+    ?>
+                                    <div class="shade_box_blue" style="padding-top:5px;">
+                                          <div class="txt_content compact-box"> 
+                                          <a href="<?= $profile_link;?>">
+                                          
+                                          <div class="pro_photo2" style="background:url(<?php echo $img;?>) no-repeat center;width:60px; height:60px;"></div>
+                                          </a>
+                                                <div class="left_div01">
+                                                      <p class="blue_bold12"><a href="<?= $profile_link;?>"><?php echo $r['s_displayname']?></a></p>
+                                                      <p class="location"><?php echo $add;?></p>
+                                                      <p class="light-grey">Denomination: <?php echo $r['s_denomination'];?> </p>
+                                                </div>
+                                                <div class="right_div02">
+                                                      <p class="add-remove-friend"><img src="images/icons/invite.png" alt="" /> 
+                                      <?php
+                                      if($r['netpals_request_already_sent']=='true')
+                                      {
+                                      ?>
+                                                      <a id="invite_netpal_<?= $r['user_id']?>"  href="javascript:void(0);" onclick="invite_netpals_(<?php echo $r['user_id'];?>)">Reinvite As NetPal</a>
+                                                      
+                                      <?php
+                                      }
+                                      elseif($r['already_added_netpal']=='true')
+                                      {
+                                      ?>
+                                      Already connected
+                                      <?php
+                                      }
+                                      else
+                                      {
+                                      ?>
+                                       <a id="invite_netpal_<?= $r['user_id']?>"  href="javascript:void(0);" onclick="invite_netpals_(<?php echo $r['user_id'];?>)">Invite As NetPal</a>
+                                       <?php
+                                      }
+                                       ?>
+                                      
+                                      </p>
+                                                </div>
+                                                <div class="clr"></div>
+                                          </div>
+                                    </div>
+                    <?php
+                            
+                          endforeach; 
+        
+					}else if($is_post_ == '1'){
+							  echo '<div class="shade_box_blue" style="padding-top:5px;"><div  class="shade_norecords" style="width: 285px;"><p class="blue_bold12">No NetPal Record.</p></div></div>';
+						  }
+       ?>
+</div>
+ <?php 
+
+    if($page_links){ ?>
+        <div class="pagination">
+        
+            <div class="left">Viewing Page <?=$current_loaded_page_no?> of <?=$total_pages?> </div>
+            
+            <div class="right">
+                   <ul class="small-paging">
+                    <?=$page_links?> 
+                    </ul>
+            </div>
+        </div>
+        <?php  }?>
+<?php } ?>

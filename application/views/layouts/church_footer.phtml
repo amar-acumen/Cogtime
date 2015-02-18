@@ -1,0 +1,28 @@
+<div id="footer_section">
+  <div id="footer">
+    <p> <a href="javascript:void(0);">Site Map</a>| <a href="javascript:void(0);">About Us</a>| <a href="javascript:void(0);">Mission and Vision</a>| <a href="http://cogtime.com/cms/7/privacy-policy.html">Privacy Policy</a>| <a href="javascript:void(0);">FAQ</a>| <a href="javascript:void(0);">Volunteers</a>| <a href="javascript:void(0);">Contact Us</a>  </p>
+    <p class="copyright">&copy; All Rights Reserved COGTIME 2015</p>
+     <figure class="cogtime-logo"><a href="javavscript:void(0);"><img src="images/cogtime-logo.png" width="122" height="30" alt="Cogtime"></a></figure>
+  </div>
+</div>
+
+<script type="text/javascript">
+/***********************************Equal  Height**********************************/
+
+function equalHeight(group) {
+ var tallest = 0;
+ group.each(function() {
+  var thisHeight = $(this).height();
+  if(thisHeight > tallest) {
+   tallest = thisHeight;
+  }
+ });
+ group.height(tallest);
+}
+
+
+/***********************************Equal Height End**********************************/
+equalHeight($(".equal-height"));
+</script>
+</body>
+</html>

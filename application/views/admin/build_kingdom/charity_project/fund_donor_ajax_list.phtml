@@ -1,0 +1,26 @@
+<?php
+//pr($donor_list);
+	
+	if(count($donor_list)){
+		
+		foreach($donor_list as $k=>$val){
+			$profile_image = get_profile_image($val['post_owner_user_id'],'thumb');
+?>
+    
+   	<div class="member-block">
+        <div class="member-pic" style="background:url(<?php echo $profile_image;?>) no-repeat center;width:73px; height:73px;" ></div>
+        <h3><?=$val['s_profile_name']?></h3>
+        <h4><?=get_user_country_info($val['post_owner_user_id'])?></h4>
+        <h5><?=round($val['f_amount'],2)?>$</h5>
+	</div>
+      
+<?php
+		}
+?>
+ <div class="clr"></div>
+<?php
+	}
+	else{
+		 echo '<div style="margin-top: 190px; text-align: center;"><strong>No Fund Donors yet.</strong></div>';
+	}
+?>

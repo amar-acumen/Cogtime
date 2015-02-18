@@ -1,0 +1,64 @@
+<div class="clr"></div>
+<!-- CONTENT SECTION -->
+<!--navigation section start -->
+<?php include(APPPATH . "views/layouts/admin/admin_nav.phtml"); ?>
+<!--navigation section end -->
+
+<!--=================================== content_section ============================================-->
+<div id="content_section">
+    <div id="container">
+
+        <div id="mid_content">
+		 </div>
+		 </div>
+		
+            <div class="page_heading left">
+                <div class="left"><img src="<?= base_url() ?>images/icons/login.png" alt="" /> Prayer Councillor</div>
+				<div class="right"><a title="Add New" class="add-button" href="<?php echo base_url().'admin/holy-place/add-prayercouncillor'?>">Add New</a>
+            </div>
+            <div class="clr"></div>
+            <div id="right_container">
+                <div class="arrow_btm"></div>
+
+                <div class="content_area">
+                    
+
+                    <div id="table_content">
+                        <?= $result_content ?>
+                    </div>
+
+
+
+                    <div class="clr"></div>
+                </div>
+            </div>
+            <div class="clr"></div>
+        </div>
+        <!--<div id="bot_corner">&nbsp;</div> -->
+    </div>
+    <div class="clr"></div>
+</div>
+<!--============================== /content_section =========================================-->
+
+<script type="text/javascript">
+function deleteGroup()
+    {
+        hide_dialog();
+        showBusyScreen();
+		var base_url = '<?=base_url()?>';
+        $.ajax({
+            type: 'POST',
+            url: base_url + 'admin/holy_place/prayer_councillor/delete_prayer_councillor/',
+            dataType: 'json',
+            data: ({'gr_id': $('#i_del_id').val()}),
+            success: function(data, status) {
+                hideBusyScreen();
+                showUIMsg(data.msg);
+                $('#table_content').html(data.html);
+				//window.reload();
+				window.location = base_url + 'admin/holy-place/prayer_councillor.html';
+            }
+        });
+    }
+	
+</script>

@@ -1,0 +1,46 @@
+<!DOCTYPE html> <html lang="en"> <head> <script type="text/javascript" src="js/jquery-1.8.2.min.js"></script> <script type="text/javascript">
+            function okClick()
+            {
+                var value = document.getElementById("my_vote_credits_value").value;
+        		if (null != window.parent)
+        		{
+        		    window.parent.topcmm.trackEvent("SeatExtension", "PopupInputCreditsClickOkBtn");
+        			window.parent.onUserGetSeatCreditsInputEnd(value);
+        			window.parent.topcmm.closeCustomPopupView();
+        			window.parent.onUserGetSeatCreditsInputCancel();
+        		}
+            }
+            
+            function getSeatCancel()
+            {
+                if (null != window.parent)
+        		{
+                    window.parent.topcmm.trackEvent("SeatExtension", "PopupInputCreditsClickCancelBtn");
+        			window.parent.onUserGetSeatCreditsInputCancel();
+        			window.parent.topcmm.closeCustomPopupView();
+        		}
+            }
+            
+            function init()
+            {
+                $("#topcmm-123flashchat-ti").text(bid_for_front_sofa_content);
+                $("#topcmm-123flashchat-confirm").val(btn_confirm);
+                $("#topcmm-123flashchat-cancel").val(btn_cancel);
+            }
+            
+            function loadJS()
+            {
+               var lange = window.navigator.language;
+               var langurl = "lang/lang-" + lange + ".js";
+               $.getScript(langurl)
+               .done(function(script, textStatus) {
+                   init();
+               })
+               .fail(function(jqxhr, settings, exception) {
+                   $.getScript("lang/lang-en-US.js")
+                   .done(function(script, textStatus) {
+                       init();
+                   });
+               }); 
+             }
+        </script> </head> <body style="margin:0px; overflow: hidden;" onload="loadJS()"> <div id="modal" style="width: 284px; height: 126px; position: absolute;"> <div id="content" style="height: 50%; width: 100%;"> <p style="text-align: center; font-family: tahoma; font-size: 12px; margin-top: 15px; margin-left: 25px; width: 230px;" id="topcmm-123flashchat-ti"></p> <p style="height: 32px; margin-top: -10px; margin-bottom: 10px;"><input type="text" id="my_vote_credits_value" style="margin-left: 70px; margin-top: 12px;"></p> </div> <div class="topcmm-123flashchat-btn" style="margin-top: 8px;"> <input id="topcmm-123flashchat-confirm" type="button" value="confirm" style="float: left; margin-left: 60px;" onclick="okClick();"> <input id="topcmm-123flashchat-cancel" type="button" value="cancel" style="margin-right: 60px; float: right;" onclick="getSeatCancel();"> </div> </div> </body> </html>

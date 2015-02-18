@@ -1,0 +1,116 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>123 Flash Chat Version 9.9 Demo</title>
+<link rel="shortcut icon" href="favicon.ico" type="image/ico" />
+<link href="css/common.css" rel="stylesheet" type="text/css" />
+<link href="css/pages.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+<div class="header">
+  <div class="header-top"></div>
+  <div class="header-main">
+    <div class="header-main-logo"><a href="http://www.123flashchat.com/" target="_blank"><img src="img/header-logo.png" width="180" height="60" alt="123 Flash Chat logo" border="0"/></a></div>
+    <div class="header-main-version">Version 9.9</div>
+    <div class="header-top-nav">
+        <ul>
+        <li><a href="http://www.123flashchat.com/" target="_blank">Home</a></li>
+        <li><a href="admin-panel.html">Admin Panel</a></li>
+        <li><a href="avatar-chat.html">Various Chat Clients</a>
+        <ul>
+			<li><a href="avatar-chat.html" id="eee">Avatar Chat Demo</a></li>
+			<li><a href="live-show.html">Live Show Demo</a></li>
+			<li><a href="lite-client.html">Lite Chat Demo</a></li>
+			<li><a href="banner-chat.html" id="ggg">Banner Chat Demo</a></li>
+		</ul>
+		</li>
+        <li><a href="publish-chat.html">Publish Chat</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="header-nav">
+    <div class="header-nav-content">
+      <ul>
+        <li class="header-nav-content-line"></li>
+        <li><a href="index.html">Standard Chat Demo</a></li>
+        <li class="header-nav-content-line"></li>
+        <li><a href="html-chat.html">HTML5 Chat Demo</a></li>
+        <li class="header-nav-content-line"></li>
+        <li><a href="advanced-demo.html">Advanced Demo</a></li>
+        <li class="header-nav-content-line"></li>
+        <li><a href="integration.html">Integration</a></li>
+        <li class="header-nav-content-line"></li>
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="main">
+  <div class="main-introduce">
+  	<div class="main-introduce-background">
+    	<div class="main-introduce-content"><img src="img/header-feature-overview.png" width="310" height="200" />
+        <h1>Introduction</h1>
+        <p>HTML5 chat client works well either on the mobile, tablet or PC, with snappier performance and fast loading speed, with or without Flash player support.<br />
+          The major advantage is that you can use the same URL for both PC-based and Mobile Phone-based Web sites and both groups of users can get the layout and content that best fit their devices.<br />
+          It supports multiple browsers on desktop: IE8, IE9, IE10, Windows 8-style UI IE10, Firefox, Chrome, Safari, and multiple devices like iPhone, iPad, iPod, Android phones as well. </p>
+        </div>
+        </div>
+    </div>
+    <div class="main-content">
+      <div class="main-content-block">
+        <div class="main-content-block-title">
+          <div class="main-content-block-title-line"></div>
+        <h2 class="main-content-block-title-text">HTML5 Chat Demo</h2>
+        </div>
+        <div class="main-content-block-content_html5">
+          <div class="main-content-block-content_html5-info">
+            <form action="" method="get">
+            <p><span class="main-content-block-content-text">Demo Link:</span><span class="content-info-input-background">
+              <input id="demoLink" name="demoLink" size="50" type="text" class="content-info-input" readonly />
+            </span></p>
+            <p class="main-content-block-content-text-2">You can visit this address by using desktop browser, and also the same as iphone, ipad, Android browsers.</p>
+            </form>
+          </div>
+          <div class="main-content-block-content_html5-chat-block">
+          	<iframe width="988" scrolling="no" height="643" frameborder="0" vspale="0" src="htmlchat/123flashchat.html" noresize="" name="htmlchat" marginwidth="0" marginheight="0" framespacing="0" border="0">      	
+          </iframe>
+          </div>
+        </div>
+      </div>
+      <div class="footer">
+        <div class="footer-top">
+          <span class="footer-top-line"></span>
+          <span class="footer-top-white">
+            <span class="footer-top-gray"></span>
+          </span>
+          <div class="footer-nav"><a href="http://www.123flashchat.com/" target="_blank">Home</a> |    <a href="http://www.123flashchat.com/quickstart.html" target="_blank">Quick Start</a> |    <a href="http://www.123flashchat.com/chat_server_help_intro.html" target="_blank">User Manual</a> |    <a target="_blank" href="mailto:support@123flashchat.com">Email Support</a> |    <a href="http://www.123flashchat.com/support.html" target="_blank">Online Support</a> |    <a href="http://www.123flashchat.com/faq.html" target="_blank">FAQ</a> |    <a href="http://www.123flashchat.com/buy.html" target="_blank">Get The Full Version</a> |    <a href="http://www.123flashchat.com/host.html" target="_blank">Chat Hosting</a> |    <a href="http://www.123flashchat.com/update.html?v=9.9" target="_blank">Check Update</a> |    <a href="123flashchat-roomlist.html" target="_blank">Chat Rooms</a></div>
+        </div>
+        <div class="footer-copyright"><a href="http://www.topcmm.com" target="_blank">Powered by TopCMM Software Ltd.</a> <img src="img/twitter.png" width="16" height="16" /><a href="http://twitter.com/123flashchat" target="_blank">Follow us on Twitter</a> <img src="img/facebook.png" width="16" height="16" /><a href="http://www.facebook.com/pages/123flashchat/262142403796209" target="_blank">Like us on Facebook</a></div>
+      </div>
+    </div>
+</div>
+	<script language="javascript">
+				var demoLinkElement=document.getElementById("demoLink");
+				demoLinkElement.onclick = function()
+				{
+					this.focus();
+					this.select();
+				}
+				var currentURL=window.location.href;
+		 		var demoLink=currentURL.replace('html-chat.html','htmlchat/123flashchat.html');
+		 		demoLinkElement.value=demoLink;
+		 		
+	</script>
+	<script type="text/javascript">
+	  var _gaq = _gaq || [];
+	  _gaq.push(['_setAccount', 'UA-1907790-18']);
+	  _gaq.push(['_trackPageview']);
+	  (function() {
+	    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	  })();
+	</script>	
+</body>
+</html>

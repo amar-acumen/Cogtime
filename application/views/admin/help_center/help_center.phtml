@@ -1,0 +1,234 @@
+<div class="clr"></div>
+<!--navigation section start -->
+<?php include(APPPATH."views/layouts/admin/admin_nav.phtml");?>
+<!--navigation section end -->
+<!-- CONTENT SECTION -->
+<div id="content_section">
+      <div id="container">
+            <!--<div id="top_corner">&nbsp;</div> -->
+            <div id="mid_content">
+                  <div class="page_heading left">
+                        <div class="left"><img src="../images/icons/login.png" alt="" /> Help Center</div>
+                  </div>
+                  <div class="clr"></div>
+                  <div id="right_container">
+                        <div class="arrow_btm"></div>
+                        <div class="content_area">
+                            <!--filter section start -->
+                            <div class="filter">
+                            <span class="filter-by">Filter By &raquo;</span>
+                                <form id="search_frm" action="" method="post" enctype="multipart/form-data" class="filter-search" onsubmit="return search_()">
+                                    <label>Help Center Title :</label><input id="txt_search_title" name="txt_search_title" type="text" />
+								   <label>Posted By :</label><input type="text" id="txt_uploaded_by" name="txt_uploaded_by">
+									   
+										
+										<label style="">Posted on</label>
+										
+										<input type="text"  value="" name="create_time" id="create_time"   class="date-field"/>
+										<img src="../images/icons/cal.png" alt="" onclick="$(this).prev().focus()" class="calender" style="margin-right:35px;" />
+										<script type="text/javascript">
+											  $(document).ready(function(arg) {
+											  
+												  $.datepicker.setDefaults($.datepicker.regional['']);
+												  $("#create_time").datepicker($.datepicker.regional['en']);
+
+											  });
+										</script> 
+										  <div class="clr"></div>
+										 <label style="margin-top:9px">Category :</label>
+										 <select name="video-cat" id="video-cat" style="float:left;margin:9px 15px;">
+										 <option value="-1">  - - - - - - </option>
+										 <?php
+                                                                                // pr($categories);
+                                                                                   foreach($categories as $cat) :
+                                                                                 ?>
+                                                                                       <option value="<?=$cat['id']?>" ><?=$cat['cat_name']?></option>
+
+                                                                                 <?php
+                                                                                 endforeach;
+                                          ?>
+										 </select>
+										 
+                                    <input name="" type="submit" value="GO" class="go" style="margin-top:9px" />
+                                    &nbsp;&nbsp;<a href="javascript:void(0)" onclick="return show_all_();" style="margin-top:9px">Show all</a>
+                                </form> 
+                                <div class="clr"></div>
+                            </div>
+                            <!--filter section end -->
+                        
+                            <h4>List of Help Article</h4>
+                            <div class="right" style="margin-bottom:14px;"><input name="" type="button" value="Add Help Article"  class="evnt_btn1" onclick="window.location=admin_base_url+'add_help_center.html'"/></div>
+                        
+                        
+                        <div class="clr"></div>
+                        
+                        <DIV id="table_contents">
+                        <?=$content;?>
+                        </DIV>
+                        
+                        
+                        
+                        
+                        <div class="clr"></div>
+                        </div>
+                  </div>
+                  <div class="clr"></div>
+            </div>       
+            <!--<div id="bot_corner">&nbsp;</div> -->
+      </div>
+      <div class="clr"></div>
+</div>
+<input type="hidden" id="news_id" value="">
+<input type="hidden" id="comment_news_id" value="">
+
+
+<!-- /CONTENT SECTION -->
+
+
+
+<!--popup one start-->
+<div class="lightbox delete-page-popup" style="width:500px;">
+      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="../images/close.png" alt="" /></a></div>
+      <div class="top"><div>&nbsp;</div></div>
+      <div class="mid">
+            <div class="heading" style="margin-bottom:0px;">
+                  <div class="left">
+                        <h4>Delete Christian News</h4>
+                  </div>
+            </div>
+               <div class="shade_box_white">
+               <p class="center-text">Do you really want to delete this news?</p>
+               <form action="" method="post" enctype="multipart/form-data">
+               <input type="hidden" id="i_del_id" value="">
+                       <input name="" type="button" value="Yes" class="btn" style="margin-left:146px;" onclick="return delete_()"/>
+                    <input name="" type="button" value="No" class="btn" onclick="hide_dialog()"/>
+               </form>   
+               <div class="clr"></div>
+            </div>
+            
+      </div>
+      <div class="bot"><div>&nbsp;</div></div>
+</div>
+<!--popup one end-->
+
+<!--popup view comment start-->
+<div class="lightbox comments-popup" style="width:600px;">
+      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="../images/close.png" alt="" /></a></div>
+      <div class="top"><div>&nbsp;</div></div>
+      <div class="mid">
+            <div class="heading" style="margin-bottom:0px;">
+                  <div class="left">
+                        <h4>View Comments</h4>
+                  </div>
+            </div>
+               <div class="shade_box_white" style="height:400px; overflow:auto">
+               <DIV id="comment_html">
+               <?=$result?>
+               </DIV>
+
+               <div class="clr"></div>
+            </div>
+            
+      </div>
+      <div class="bot"><div>&nbsp;</div></div>
+</div>
+<!--popup view comment end-->
+
+<!--popup liked by start-->
+<div class="lightbox liked-by" style="width:750px;">
+      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="../images/close.png" alt="" /></a></div>
+      <div class="top"><div>&nbsp;</div></div>
+      <div class="mid">
+            <div class="heading" style="margin-bottom:0px;">
+                  <div class="left">
+                        <h4>Liked By</h4>
+                  </div>
+            </div>
+               <div class="shade_box_white" style="height:400px; overflow:auto">
+               <DIV id="liked_html">
+               <?=$result?>
+               </DIV>
+                     
+               <div class="clr"></div>
+            </div>
+            
+      </div>
+      <div class="bot"><div>&nbsp;</div></div>
+</div>
+<!--popup liked by end-->
+
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+
+/***************************************/
+function confirm_delete_help_article(id){
+    showBusyScreen();
+   $.ajax({
+          url : admin_base_url+'help_center/help_center/delete_help_article',
+          type : 'post',
+          data : ({'id' : id,}),
+          success : function(data)
+          {
+              hideBusyScreen();
+             // $('#table_contents').html(data);
+          window.location.href="<?= admin_base_url() ?>help_center/help_center";
+          }
+      }); 
+}
+/***************************************/
+function search_()
+  {
+      showBusyScreen();
+     
+		var title = $('#txt_search_title').val();
+      var uploaded_by = $('#txt_uploaded_by').val();
+	  var create_time = $('#create_time').val();
+	  var category = $('#video-cat').val();
+	  var featured = $('#video-f').val();
+	  
+	  
+      $.ajax({
+          url : admin_base_url+'help_center/help_center/help_center_listing_ajax',
+          type : 'post',
+          data : ({'title' : title, 'uploaded_by' : uploaded_by,'create_time':create_time,'category':category,}),
+          success : function(data)
+          {
+              hideBusyScreen();
+              $('#table_contents').html(data);
+          }
+      });
+      return false;
+  }
+  
+
+
+
+function show_all_()
+  {
+      $('#search_frm')[0].reset();
+      showBusyScreen();
+      $.ajax({
+          url : admin_base_url+'help_center/help_center/help_center_listing_ajax/0',
+          type : 'post',
+          success : function(data)
+          {
+              hideBusyScreen();
+              $('#table_contents').html(data);
+          }
+      });
+  }
+  
+  
+  
+ 
+
+</script>

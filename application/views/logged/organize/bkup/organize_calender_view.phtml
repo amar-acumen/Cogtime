@@ -1,0 +1,171 @@
+<?php include(APPPATH."views/layouts/logged_header.phtml");?>
+            <!-- NAVIGATION SECTION -->
+      <?php include(APPPATH."views/layouts/nav.phtml");?>
+      <!-- /NAVIGATION SECTION -->
+      </div>
+
+<div class="clr"></div>
+
+<!-- CONTENT SECTION -->
+
+<div id="content_section">
+      <div id="container">
+            <div id="top_corner">&nbsp;</div>
+            <div id="mid_content">
+                  <!-- latest news -->
+                  <?php include(APPPATH."views/layouts/latest_news.phtml");?>
+                  <!-- /latest news -->
+                  <div class="clr"></div>
+                  <!-- main container -->
+                  <div id="main_container">
+                      
+                        <!-- left container -->
+                        <div id="left_container01">
+                        	<div class="page_heading">
+                                  <div class="left"><img src="images/icons/calender2.png" alt=""  /> Organizer - </div>
+                                  <ul class="day-month-view">
+                                      <li><a href="organizer/<?=date('Y').'/'.date('m').'/'.date('d')?>/organizer-day-view.html">Day View</a></li> 
+                                      <li class="no-bg select"><a href="organize-calender-view.html">Month View</a></li>
+                                  </ul>
+                            </div>
+                            <!--todays entry section start -->
+                            <div class="todays-entry-block">
+                            
+                            	<!--date month year selection block start -->
+                                <div class="choose-calendar-block">
+                                	<p>Choose Month:</p> 
+                                    
+                                    <div class="month-year-container">
+                                    	<div class="month-year-block month">
+                                    		<ul id="month-select" class="jcarousel-skin-tango">
+                                            	<?=makeListMonth(date('m'))?>
+                                                
+                                        	</ul>
+                                        </div>
+                                    </div>
+                                    <p>Choose Year:</p> 
+                                    <div class="month-year-container">
+                                    	<div class="month-year-block year">
+                                    		<ul id="year-select" class="jcarousel-skin-tango">
+                                            	<?=makeListYear(date('Y'))?>
+                                        	</ul>
+                                        </div>
+                                    </div>
+                                   
+                                  
+                                   <form name="chng_calendar" id="chng_calendar"  method="post" onsubmit="return false;"  >
+                                     <input type="hidden" id="hd_all_month" />
+                                     <input type="hidden" id="hd_all_year" />
+                                    
+                                     <input name="Refresh" type="submit" value="Refresh" class="refresh-btn">
+                                   </form>
+                                </div>
+                                <!--date month year selection block end --> 
+                            
+                            	<!--calender start -->
+                                <div class="big-calender">
+                                 <?php include( APPPATH . 'views/logged/organize/right_event_calendar.phtml' );?>
+
+                                   <div class="clr"></div>
+                                   <ul class="legends">
+                                       <li><img src="images/icons/add_note.png" alt="note" width="16" height="16">&raquo; Note</li>
+                                       <li><img src="images/icons/add_list.png" alt="todo" width="16" height="16">&raquo; To-Do List</li>
+                                       <li><img src="images/icons/add_event.png" alt="event" width="13" height="17">&raquo; Event</li>
+                                   </ul>
+                                   <div class="clr"></div>
+                                </div>
+                                <!--calender end -->
+                            
+                            
+                            </div>
+                            <!--todays entry section end -->
+                        </div>
+                          
+                        <!-- /left container -->
+                        <!-- right container -->
+                       <?php include(APPPATH."views/layouts/rightbar.phtml");?>
+                        <!-- /right container -->
+                  </div>
+                  <!-- /main container -->
+                  <div class="clr"></div>
+            </div>
+            <div id="bot_corner">&nbsp;</div>
+      </div>
+      <div class="clr"></div>
+</div>
+<div class="clr"></div>
+<!-- /CONTENT SECTION -->
+<div class="clr"></div>
+
+
+<?php include(APPPATH."views/layouts/footer.phtml");?>
+<?php include(APPPATH."views/logged/blocks/common_popup.phtml");?>
+
+
+<!-- /lightbox SECTION -->
+<script type="text/javascript">
+
+$(document).ready(function(){
+	$('#month-select').jcarousel({
+    	wrap: 'circular',
+		itemVisibleInCallback: getCurrentSlide
+    });
+	
+	
+	function getCurrentSlide(carousel, state)
+	{
+		//alert(carousel + '  '+ State )
+    	var current_slide = carousel.first;//$("#currentImg").html(carousel.first);  
+		//alert('#month-select li.jcarousel-item-'+current_slide+'-horizontal');
+		//alert($('#month-select li.jcarousel-item-'+current_slide+'-horizontal').val());
+		$('#hd_all_month').val($('#month-select li.jcarousel-item-'+current_slide+'-horizontal').val());
+	}
+
+
+//	alert('li.jcarouselindex'.val());
+	$('#year-select').jcarousel({
+    	wrap: 'circular',
+		itemVisibleInCallback: getCurrentYear
+    });
+	
+	function getCurrentYear(carousel, state)
+	{
+		//alert(carousel + '  '+ State )
+    	var current_year = carousel.first;//$("#currentImg").html(carousel.first);  
+		//alert('#year-select li.jcarousel-item-'+current_year+'-horizontal');
+		//alert($('#year-select li.jcarousel-item-'+current_year+'-horizontal').val());
+		$('#hd_all_year').val($('#year-select li.jcarousel-item-'+current_year+'-horizontal').val());
+	}
+	
+});
+
+$(document).ready(function(arg) {
+	
+
+ $('#chng_calendar').submit(function(){ 
+			
+
+		  var user_id = <?php echo intval(decrypt($this->session->userdata('user_id')));?> ;
+		  var year = $("#hd_all_year").val();
+		  var month = $("#hd_all_month").val();
+		  
+		  showBusyScreen();
+		  
+		  
+			  $.ajax({
+					 type: "POST",
+					 url: base_url+'base_controller/show_event_calendar/'+user_id+'/'+year+'/'+month+'/'+1,
+					 success: function(data,status){
+						 $('#calender').html(data);
+						 hideBusyScreen();
+						 
+						}
+			   });	 
+	
+		});
+ 
+
+
+});
+</script>
+

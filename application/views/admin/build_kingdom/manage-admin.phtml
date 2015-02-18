@@ -1,0 +1,45 @@
+
+
+<div class="clr"></div>
+<!-- CONTENT SECTION -->
+<!--navigation section start -->
+<?php include(APPPATH."views/layouts/admin/admin_nav.phtml");?>
+<!--navigation section end -->
+<div id="content_section">
+      <div id="container">
+            <!--<div id="top_corner">&nbsp;</div> -->
+            <div id="mid_content">
+                  <div class="page_heading left">
+                        <div class="left"><img src="../images/icons/login.png" alt="" /> Manage Admin</div>
+                  </div>
+                  <div class="clr"></div>
+                  <div id="right_container"> <?php #pr($posted);?>
+                        <div class="arrow_btm"></div>
+                        <form id="frm_rset_pwd"  method="post" action="<?=admin_base_url().'site-settings/manage-admin.html'?>" enctype="multipart/form-data">
+                        <div class="content_area frm_box">
+                        <div class="blue_div"><?=show_msg('success_msg');?></div>
+                              <div class="lable01"><span class="red-mark">* </span> Email:</div>
+                              <div class="field01">
+                                    <input name="txt_email" id="txt_email" type="text" value="<?=$txt_email?>" autocomplete="off" />
+                              </div>
+                              <?php $show_old_p_err = (form_error('txt_email'))?'style="display:block;"':''; ?>
+                              <div class="error-message" <?=$show_old_p_err?>><?php echo form_error('txt_email'); ?></div>
+                              <div class="clr"></div>
+                              
+                             
+                              <div class="lable01"> </div>
+                              <div class="field01">
+                                    <input name="" type="submit" class="btn"  value="Submit" />
+                                    <input name="" type="button" class="btn"  value="Cancel" onclick="window.location='<?=admin_base_url()?>dashboard.html'" />
+                              </div>
+                              <div class="clr"></div>
+                        </div>
+                        </form>
+                  </div>
+                  <div class="clr"></div>
+            </div>
+            <!--<div id="bot_corner">&nbsp;</div> -->
+      </div>
+      <div class="clr"></div>
+</div>
+<!-- /CONTENT SECTION --

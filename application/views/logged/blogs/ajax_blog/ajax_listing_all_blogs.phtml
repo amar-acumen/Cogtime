@@ -1,0 +1,44 @@
+
+                    
+
+                                                           
+                                                           
+                              <?php
+                             if(count($all_blogs_arr))
+                              {
+                                    //pr($popular_blogs);  
+                                    $counter = 0;
+                                    foreach($all_blogs_arr as $blogs) :
+                                    $counter++;
+                                    $profile_link = get_profile_url($blogs['i_user_id'],$val['user_name']);
+                               ?>
+                               <div class="blog">
+
+                                          <h2 style="max-height : 60px; overflow: hidden;"><a style="font-size: 16px; color: #096AA7;" href="<?php echo 'blog/'.$blogs['id'].'/detail.html'?>"><?php echo my_substr($blogs['s_title'],140)?></a></h2>
+                                          <p class="time-posted" style="font-size: 12px;  margin: 10px 0;">created <?=get_time_elapsed_blog($blogs['dt_created_on'])?> by <a href="<?= $profile_link?>" style="color: #62C3BC;"><?php echo $blogs['user_name']?></a> 
+                                          </p>
+                                          <p style="height: 80px; overflow: hidden;"><?php echo my_substr(nl2br($blogs['s_description']),350) ?></p>
+                                          
+                                          
+                                          
+                                          
+                                          
+                                          <ul class="article-comment-block article-comment-block2">
+                                                <li class="first">Total articles : <?=$blogs['total_articles']?> </li> 
+                                                <li> <span>Total comments : <?=$blogs['total_comments']?></span></li>
+                                                <li> <span>Total views : <?php echo $blogs['i_view_count']?></span></li>
+                                          </ul>
+                                          
+                                          
+                                          
+                                          
+                                          
+<?php /*?>                                        <p style="font-size: 12px; color: #004084;">Total comments : <?=$blogs['total_comments']?></p>
+                                          <p style="font-size: 12px; color: #004084;">Created on : <?=getShortDate($blogs['dt_created_on'],5)?></p>
+                                        <?php */?>
+                                   
+                               </div>
+                               <?php  
+                                endforeach;
+                              }
+                              ?>

@@ -1,0 +1,18 @@
+
+                                
+                               <?php //pr($prod_data);
+									if(count($prod_data)){
+										foreach($prod_data as $k=> $val){
+								?>
+								<tr>
+									<td><?=round($val['f_amount'],2)?></td>
+									<td><a href="javascript:void(0);"><?=$val['s_card_holder_name']?></a></td>
+									<td><?=getshortdate($val['dt_created_on'],5)?></td>
+								</tr>
+                                
+                                <?php 
+										}
+									}
+								?>
+                            
+                            

@@ -1,0 +1,493 @@
+
+<div class="clr"></div>
+<!-- CONTENT SECTION -->
+<!--navigation section start -->
+<?php include(APPPATH."views/layouts/admin/admin_nav.phtml");?>
+<!--navigation section end -->
+<div id="content_section">
+      <div id="container">
+            <!--<div id="top_corner">&nbsp;</div> -->
+            <div id="mid_content">
+                  <div class="page_heading left">
+                  <?php $mode = ($mode =='add')?'Add':'Edit';?>
+                        <div class="left"><img src="<?=base_url()?>images/icons/login.png" alt="" /><?=$mode?> Event</div>
+                  </div>
+                  <div class="clr"></div>
+                  <div id="right_container">
+                        <div class="arrow_btm"></div>
+                        <div class="content_area frm_box">
+                        	  
+                              
+                               <form name="frm_adv" action="" method="post" enctype="multipart/form-data">
+                                  <div class="lable01"><span class="red-mark">* </span> Title :</div>
+                                  <div class="field01">
+                                        <input name="txt_title"  id="txt_title" type="text" value="<?= $posted['s_title']; ?>" />
+                                  </div>
+                                  <?php $show_title_err = (form_error('txt_title') != '')?' style="display:block;"':''; ?>
+                                   <div class="error-message" <?=$show_title_err?>><?php echo form_error('txt_title'); ?></div>
+                                  <div class="clr"></div>
+                                  
+                                  <div class="lable01">Venue :</div>
+                                  
+                                      <div class="second-lavel" style="width:416px;">
+                                      	  <div class="lable02" style="width:104px;"><span class="red-mark">* </span> Street :</div>	
+                                          <div class="field02">
+                                                <input name="txt_add"  id="txt_add" type="text" value="<?= $posted['s_address']; ?>" />
+                                          </div>
+                                          <?php $show_txt_add = (form_error('txt_add') != '')?' style="display:block;"':''; ?>
+                                          <div class="error-message" <?=$show_txt_add?>><?php echo form_error('txt_add'); ?></div>
+                                          <div class="clr"></div>
+                                          
+                                          
+                                          <div class="lable02" style="width:104px;"><span class="red-mark">* </span> City :</div>	
+                                          <div class="field02">
+                                                <input name="txt_city" id="txt_city" type="text" value="<?= $posted['s_city']; ?>" />
+                                          </div>
+                                          <?php $show_txt_city = (form_error('txt_city') != '')?' style="display:block;"':''; ?>
+                                           <div class="error-message" <?=$show_txt_city?>><?php echo form_error('txt_city'); ?></div>
+                                          <div class="clr"></div>
+                                          <div class="lable02" style="width:104px;"><span class="red-mark">* </span> State :</div>	
+                                          <div class="field02">
+                                                <input id="txt_state" name="txt_state" type="text" value="<?= $posted['s_state']; ?>" />
+                                          </div>
+                                          <?php $show_txt_state = (form_error('txt_state') != '')?' style="display:block;"':''; ?>
+                                          <div class="error-message" <?=$show_txt_state?>><?php echo form_error('txt_state'); ?></div>
+                                          
+                                          
+                                          <div class="clr"></div>
+                                          
+                                           <div class="lable02" style="width:104px;"><span class="red-mark">* </span> Postcode :</div>	
+                                          <div class="field02">
+                                                <input id="txt_postcode" name="txt_postcode" type="text" value="<?= $posted['s_postcode']; ?>" />
+                                          </div>
+                                          <?php $show_txt_postcode = (form_error('txt_postcode') != '')?' style="display:block;"':''; ?>
+                                          <div class="error-message" <?=$show_txt_postcode?>><?php echo form_error('txt_postcode'); ?></div>
+                                          
+                                          <div class="clr"></div>
+                                          
+                                          
+                                          <div class="lable02" style="width:104px;"><span class="red-mark">* </span> Country :</div>	
+                                          <div class="field02">
+                                                <select name="country" id="country" style="width:297px; margin-bottom:6px;">
+                                                   <option value="-1">Select</option>
+                                                   <?=makeOptionCountryNew('',encrypt($posted['i_country_id']));?>
+                                                   
+                                                </select>
+                                                <script type="text/javascript">
+                                                    $(document).ready(function(arg) {
+                                                        $("#country").msDropDown();
+                                                        $("#country").hide();
+                                                        $('#country').css("width", "297px"); 
+                                                    })
+                                                </script>
+                                          </div>
+                                          <?php $show_country = ($error_country != '')?' style="display:block; margin-top: -2px;"':'style="margin-top: -2px;"'; ?>
+                                           <div class="error-message" <?=$show_country?>><?php echo $error_country; ?></div>
+                                          <div class="clr"></div>
+                                      </div>
+                                  <div class="clr"></div>
+                                  
+                                  
+                                  
+                                  
+                                  <div class="lable01"><span class="red-mark">* </span> Start Date :</div>
+                                  <input type="text"  value="<?=$posted['dt_start_date']?>" name="date_to1" id="date_to1"  readonly="readonly" class="date-field"/>
+                                      <img src="<?=base_url()?>images/icons/cal.png" alt="" onclick="$(this).prev().focus()" class="calender" />
+                                      <script type="text/javascript">
+										$(document).ready(function(arg) {
+											$.datepicker.setDefaults($.datepicker.regional['']);
+											$("#date_to1").datepicker($.datepicker.regional['en']);
+										});
+                                      </script>
+                                      
+                                    <div class="lable01" style="width:146px;"><span class="red-mark">* </span>Start Time :</div>
+                                     
+                                       <div class="field03">
+                                       <select class="select-box nw-select-box" name="todo_strt_frm" id="todo_strt_frm" onchange="generateEndtime($(this).val())" style="width:102px;border: 1px solid #D3D3D3; height:20px;">
+                                       
+                                       
+                                      
+									  
+                                    	<option value="-1">Select</option>
+                                      	<?php if($mode !='Add'){?>
+                                        <?=makeOption_time('00:00', 15, $posted['start_time'])?>
+                          				<?php }else{ ?>
+                                        
+                                        <?=makeOption_time()?>
+                                        <?php }?> 
+                                    </select>
+                       <?php /*?>             <script type="text/javascript">
+                                                    $(document).ready(function(arg) {
+														
+                                                        $("#todo_strt_frm").msDropDown();
+                                                        $("#todo_strt_frm").hide();
+                                                        $('#todo_strt_frm').css("width", "297px");
+													
+                                                    })
+                                                </script><?php */?>
+                                    </div> 
+                                    
+                                  <!--<div class="lable01" style="width: 87px;"><span class="red-mark">* </span> Time :</div> 
+                                  <div class="field01" style="width:163px;">
+                                        <input name="txt_venue_time" id="txt_venue_time" value="<?#$posted['start_time']?>" type="text" style="width:151px;" />
+                                  </div> -->
+                                  <?php $show_date_to  = (form_error('date_to1') != '')?' style="display:block;"':''; ?>
+                                   <div class="error-message" <?=$show_date_to?> ><?php echo form_error('date_to1'); ?></div>  
+                                  <div class="clr"></div> 
+                                 <?php $show_txt_venue_time  = ($err_todo_strt_frm != '')?' style=" margin-left:249px;display:block; margin-top:-25px;"':'style=" margin-left:249px;margin-top:-25px;"'; ?> 
+                                  <div class="error-message"  <?=$show_txt_venue_time?>><?php echo $err_todo_strt_frm; ?></div> 
+                                  
+                                   <?php $CSS2 = ($mode == 'Add')?'style="display:none" ':'' ?> 
+                                   
+                                   <span id="add_to_do_end_time" <?=$CSS2?>> 
+                                  <div class="lable01"><span class="red-mark">* </span> End Date :</div>
+                                  <input type="text"  value="<?=$posted['dt_end_date']?>" name="date_end" id="date_end"  readonly="readonly" class="date-field"/>
+                                      <img src="<?=base_url()?>images/icons/cal.png" alt="" onclick="$(this).prev().focus()" class="calender" />
+                                      <script type="text/javascript">
+										$(document).ready(function(arg) {
+											$.datepicker.setDefaults($.datepicker.regional['']);
+											$("#date_end").datepicker($.datepicker.regional['en']);
+										});
+                                      </script>
+                                  <div class="lable01" style="width:146px;"><span class="red-mark">* </span>End Time :</div>
+                                     
+                                       <div class="field03">
+                                       
+                                       <select name="todo_end_frm" id="todo_end_frm" class="select-box nw-select-box" style="width:102px;border: 1px solid #D3D3D3; height:20px">
+                                    <!-- <option value="-1">Select</option>-->
+                                     <?php if($mode !='Add'){?>
+                                     
+                                     <?=makeOption_time('00:00',15,$posted['end_time'])?>
+                                     <?php } ?>
+                                    </select>
+                                    <?php /*?> <script type="text/javascript">
+                                                    $(document).ready(function(arg) {
+                                                        $("#todo_end_frm").msDropDown();
+                                                        $("#todo_end_frm").hide();
+                                                        $('#todo_end_frm').css("width", "297px"); 
+														
+                                                    })
+                                                </script><?php */?>
+                                    </div> 
+                                      <?php //$show_date_to  = (form_error('date_end') != '')?' style="display:block;"':''; ?>
+                                   <div class="error-message" ><?php echo $err_todo_end_frm; ?></div>  
+                                    <div class="clr"></div>
+                                    <?php $show_txt_venue_time  = (form_error('todo_end_frm') != '')?' style=" margin-left:249px;display:block; margin-top:-25px;"':'style=" margin-left:249px;margin-top:-25px;"'; ?> 
+                                  <div class="error-message"  <?=$show_txt_venue_time?>><?php echo form_error('todo_end_frm'); ?></div>  
+                                    </span>
+                                    <div class="clr"></div>
+                                    <!--<div class="lable01"> Remind me : </div>
+                                     <div class="field03">
+                                   <select name="todo_rem_time" id="todo_rem_time" style="width:124px;" >
+                                   <?php #if($mode =='Add'|| $posted['rem_time']=='00:00'){?>
+                                   <option value="-1">Select</option>
+                                   <option value="00:15">15 Minutes</option>
+                                   <option value="00:30">30 Minutes</option>
+                                   <option value="00:45">45 Minutes</option> 
+                                   <option value="01:00">1 Hour</option>
+                                   <option value="02:00">2 Hours</option>
+                                  
+<?php # }else{ ?>
+									
+                                    <?php #$rem_time=array('15 minutes'=>'00:15', '30 minutes'=> '00:30', '45 minutes'=>'00:45','1 Hour'=>'01:00','2 Hours'=>'02:00');?>
+                                   <?php /*foreach ($rem_time as $key=>$value) {
+    if ($value == $posted["rem_time"])
+        echo '<option value="'.$value.'" selected>'.$key.'</option>';
+    else
+        echo '<option value="'.$value.'">'.$key.'</option>';
+		
+}*/?>
+<?php //}?>
+                                   </select>
+                                    <script type="text/javascript">
+                                                    $(document).ready(function(arg) {
+                                                        $("#todo_rem_time").msDropDown();
+                                                        $("#todo_rem_time").hide();
+                                                        $('#todo_rem_time').css("width", "297px"); 
+                                                    })
+                                                </script>
+                                   <span class="blue12">Before the Start Time</span>
+                                   </div>-->
+                                    <div class="error-message" ><?php echo $err_todo_rem_time; ?></div>
+                                   <div class="clr"></div>
+                                  <div class="lable01"> Description : </div>
+                                  <div class="field01">
+                                        <textarea name="txt_desc" id="txt_desc" cols="" rows="" class="small"  style="height:180px; width:410px;"><?=get_unformatted_string_edit(br2nl($posted['s_desc']))?></textarea>
+                                  </div>
+                                  
+                                  <?php $show_desc  = (form_error('txt_desc') != '')?' style="display:block; margin-top:-1px;"':'style="margin-top:-1px;"'; ?>
+                                   <div class="error-message" <?=$show_desc?>><?php echo form_error('txt_desc'); ?></div>
+                                  <div class="clr"></div>
+                                  <?php /*?><div class="lable01">Privacy :</div>
+                                  <div class="field02" style="margin-bottom:12px;">
+                                  	   <select name="privacy" id="privacy" style="width:412px;">
+                                           <option>Public</option>
+                                           <option>Only For Friends</option>
+                                           <option>Both</option>
+                                        </select>
+                                        <script type="text/javascript">
+                                            $(document).ready(function(arg) {
+                                                $("#privacy").msDropDown();
+                                                $("#privacy").hide();
+                                                $('#privacy').css("width", "412px"); 
+                                            })
+                                        </script>
+                                        
+                                  </div>
+                                  <div class="clr"></div>
+								  
+<?php */?>                        
+								   <div class="lable01"><span class="red-mark">* </span> Main Image : </div>
+                                  <div class="field01" style="margin-top:3px;">
+                                    <input name="adv_image_1" id="adv_image_1" type="file" size="52" /> 
+                                    <div class="clr"></div>
+                                  </div>
+                                  <?php $show_image_err_1 = ($file_error_adv_image_1 != '')?'style="display:block;"':''; ?>
+                                  <div class="error-message" <?=$show_image_err_1?>><?php echo $file_error_adv_image_1; ?></div>
+                                  <div class="clr"></div>
+                                 <?php //echo $posted['s_image'];
+									if($posted['s_image_1'] !== "")
+									{
+										$IMG_THUMB_PATH = base_url() ."uploads/events_photo/";
+										$name=getThumbName($posted['s_image_1'],'mid'); 
+										$IMG_THUMB = $IMG_THUMB_PATH . $name;
+										?>
+                                         <?php if($mode != 'Add'): ?>
+											<div class="lable01"></div>
+                                         <?php endif;?>
+										<?php if($name != ""): ?> <img  class="div_image" src="<?= $IMG_THUMB ?>" width="119" height="131" /><?php endif;?> 	<input type="hidden" name="h_image_1" value="<?=$posted['s_image_1'] ?>" />
+									<?php }
+									
+									else {?>
+                                    	 
+                                         <div class="lable01"></div>
+                                  		 <input type="image" alt="no image" src="../images/no-image.gif" name="no image">
+                                 		 <div class="clr"></div>
+                                    
+                					<?php } ?>
+                                                                       <div class="clr"></div>     
+                                    
+                                    
+<div class="lable01">Event Image 2 : </div>
+                                  <div class="field01">
+                                    <input name="adv_image_2" id="adv_image_2" type="file" size="52" /> 
+                                    <div class="clr"></div>
+                                  </div>
+                                  <?php $show_image_err_2 = ($file_error_adv_image_2 != '')?'style="display:block; margin-top:1px;"':''; ?>
+                                  <div class="error-message" <?=$show_image_err_2?>><?php echo $file_error_adv_image_2; ?></div>
+                                  <div class="clr"></div>
+                                 <?php //echo $posted['s_image'];
+									if($posted['s_image_2'] !== "")
+									{
+										$IMG_THUMB_PATH = base_url() ."uploads/events_photo/";
+										$name=getThumbName($posted['s_image_2'],'mid'); 
+										$IMG_THUMB = $IMG_THUMB_PATH . $name;
+										?>
+										 <?php if($mode != 'Add'): ?>
+											<div class="lable01"></div>
+                                         <?php endif;?>
+										<?php if($name != ""): ?> <img class="div_image" src="<?= $IMG_THUMB ?>" width="119" height="131" /><?php endif;?> 	<input type="hidden" name="h_image_2" value="<?=$posted['s_image_2'] ?>" />
+									<?php }
+									
+									else {?>
+                                    	 
+                                         <div class="lable01"></div>
+                                  		 <input type="image" alt="no image" src="../images/no-image.gif" name="no image">
+                                 		 <div class="clr"></div>
+                                    
+                					<?php } ?>
+                                   <div class="clr"></div>       
+                                    
+                                    
+                                  <div class="lable01">Event Image 3 : </div>
+                                  <div class="field01">
+                                    <input name="adv_image_3" id="adv_image_3" type="file" size="52" /> 
+                                    <div class="clr"></div>
+                                  </div>
+                                  <?php $show_image_err_3 = ($file_error_adv_image_3 != '')?'style="display:block;"':''; ?>
+                                  <div class="error-message" <?=$show_image_err_3?>><?php echo $file_error_adv_image_3; ?></div>
+                                  <div class="clr"></div>
+                                 <?php //echo $posted['s_image'];
+									if($posted['s_image_3'] !== "")
+									{
+										$IMG_THUMB_PATH = base_url() ."uploads/events_photo/";
+										$name=getThumbName($posted['s_image_3'],'mid'); 
+										$IMG_THUMB = $IMG_THUMB_PATH . $name;
+										?>
+										 <?php if($mode != 'Add'): ?>
+											<div class="lable01"></div>
+                                         <?php endif;?>
+										<?php if($name != ""): ?> <img class="div_image" src="<?= $IMG_THUMB ?>" width="119" height="131" /><?php endif;?> 	<input type="hidden" name="h_image_3" value="<?=$posted['s_image_3'] ?>" />
+									<?php }
+									
+									else {?>
+                                    	 
+                                         <div class="lable01"></div>
+                                  		 <input type="image" alt="no image" src="../images/no-image.gif" name="no image">
+                                 		 <div class="clr"></div>
+                                    
+                					<?php } ?>
+                                     <div class="clr"></div>     
+                                    
+                                     <div class="lable01">Event Image 4 : </div>
+                                  <div class="field01">
+                                    <input name="adv_image_4" id="adv_image_4" type="file" size="52" /> 
+                                    <div class="clr"></div>
+                                  </div>
+                                  <?php $show_image_err_4 = ($file_error_adv_image_4 != '')?'style="display:block;"':''; ?>
+                                  <div class="error-message" <?=$show_image_err_4?>><?php echo $file_error_adv_image_4; ?></div>
+                                  <div class="clr"></div>
+                                 <?php //echo $posted['s_image'];
+									if($posted['s_image_4'] !== "")
+									{
+										$IMG_THUMB_PATH = base_url() ."uploads/events_photo/";
+										$name=getThumbName($posted['s_image_4'],'mid'); 
+										$IMG_THUMB = $IMG_THUMB_PATH . $name;
+										?>
+										 <?php if($mode != 'Add'): ?>
+											<div class="lable01"></div>
+                                         <?php endif;?>
+										<?php if($name != ""): ?> <img class="div_image" src="<?= $IMG_THUMB ?>" width="119" height="131" /><?php endif;?> 	<input type="hidden" name="h_image_4" value="<?=$posted['s_image_4'] ?>" />
+									<?php }
+									
+									else {?>
+                                    	 
+                                         <div class="lable01"></div>
+                                  		 <input type="image" alt="no image" src="../images/no-image.gif" name="no image">
+                                 		 <div class="clr"></div>
+                                    
+                					<?php } ?>
+                                     <div class="clr"></div>     
+                                    
+                                     <div class="lable01">Event Image 5 : </div>
+                                  <div class="field01">
+                                    <input name="adv_image_5" id="adv_image_5" type="file" size="52" /> 
+                                    <div class="clr"></div>
+                                  </div>
+                                  <?php $show_image_err_5 = ($file_error_adv_image_5 != '')?'style="display:block;"':''; ?>
+                                  <div class="error-message" <?=$show_image_err_5?>><?php echo $file_error_adv_image_5; ?></div>
+                                  <div class="clr"></div>
+                                 <?php //echo $posted['s_image'];
+									if($posted['s_image_5'] !== "")
+									{
+										$IMG_THUMB_PATH = base_url() ."uploads/events_photo/";
+										$name=getThumbName($posted['s_image_5'],'mid'); 
+										$IMG_THUMB = $IMG_THUMB_PATH . $name;
+										?>
+										 <?php if($mode != 'Add'): ?>
+											<div class="lable01"></div>
+                                         <?php endif;?>
+										<?php if($name != ""): ?> <img class="div_image" src="<?= $IMG_THUMB ?>" width="119" height="131" /><?php endif;?> 	<input type="hidden" name="h_image_5" value="<?=$posted['s_image_5'] ?>" />
+									<?php }
+									
+									else {?>
+                                    	 
+                                         <div class="lable01"></div>
+                                  		 <input type="image" alt="no image" src="../images/no-image.gif" name="no image">
+                                 		 <div class="clr"></div>
+                                    
+                					<?php } ?>
+                                  
+                                  
+                                  <div class="clr"></div>          
+								
+                                  <div class="lable01">&nbsp;</div>
+                                  <div class="field01" style="margin-top:10px;">
+                                       <?php if($mode == 'Add'): ?>
+                                        	<input name="" type="submit" class="btn"  value="Add"/>
+                                   <?php else :?>
+                                    		<input name="" type="submit" class="btn"  value="Update"/>
+                                    <?php endif;?>
+                                        <input name="" type="reset" class="btn"  value="Cancel" onclick="window.location='<?=admin_base_url().'social_hub/events.html'?>'"/>
+                                        </div>
+                              </form>
+                              <div class="clr"></div>
+                        </div>
+                        
+                  </div>
+                  <div class="clr"></div>
+            </div>
+            <!--<div id="bot_corner">&nbsp;</div> -->
+      </div>
+      <div class="clr"></div>
+</div>
+<!-- /CONTENT SECTION -->
+<script type="text/javascript">
+
+function generateEndtime(start_time)
+{
+	 var id = $('#i_list_id').val();
+	
+	 showUILoader_nodialog('<img src="'+base_url+'images/loading_big.gif" width="50"/> ');
+  
+		 $.ajax({
+			 type: "get",
+			 url: admin_base_url+'social_hub/events/generate_end_time_list/'+start_time,
+			 dataType:"json",
+			 success: function(json_response){
+				 
+				  if(json_response.success == true) {
+					   showUIMsg(json_response.msg);
+						
+						//hide_dialog('edit_list');
+						
+						$('#todo_end_frm').html('');
+						$('#todo_end_frm').html(json_response.sel_html);
+						$('#add_to_do_end_time').attr('style','display:block;');
+						$('#add_to_do_end_time').show();
+						//$('#end_time_select').show();
+						hideUILoader_nodialog();
+				  }
+				  else {
+					   
+					  // alert(json_response.success +' al '+ 2+ ' id: '+ id);
+					   $('#add_to_do_end_time').attr('style','display:none;');
+					   hideUILoader_nodialog();
+					  //showUIMsg('Some error occurred. Please try again.');
+				  }
+			  },
+			  error: function(){
+				 hideUILoader();
+				 //hide_dialog('edit_list');
+				  showUIMsg('Some error occurred. Please try again.');
+			  }
+		  });	 
+}
+
+function generateEndtime_edit(start_time , id)
+{
+	  showUILoader_nodialog('<img src="'+base_url+'images/loading_big.gif" width="50"/> ');
+  
+		 $.ajax({
+			 type: "get",
+			 url: admin_base_url+'social_hub/events/generate_end_time_list/'+start_time,
+			 dataType:"json",
+			 success: function(json_response){
+				 
+				 
+				  if(json_response.success == true) {
+					   showUIMsg(json_response.msg);
+						//alert(json_response.success+ 1);
+						//hide_dialog('edit_list');
+						
+						$('#edit_todo_end_frm_'+id).html('');
+						$('#edit_todo_end_frm_'+id).html(json_response.sel_html);
+						$('#edit_end_time_div_'+id).attr('style','display:block;');
+						hideUILoader_nodialog();
+				  }
+				  else if(json_response.success == false) {
+					   //alert(json_response.success +' al '+ 2+ ' id: '+ id);
+					   $('#edit_end_time_div_'+id).attr('style','display:none;');
+					   hideUILoader_nodialog();
+					   // showUIMsg('Some error occurred. Please try again.');
+				  }
+			  },
+			  error: function(){
+				 hideUILoader();
+				 //hide_dialog('edit_list');
+				  showUIMsg('Some error occurred. Please try again.');
+			  }
+		  });	 
+}
+
+</script>

@@ -1,0 +1,35 @@
+<?php
+#pr($result_arr_feedback,1);
+if (!empty($result_arr_feedback) && count($result_arr_feedback)) {
+    foreach ($result_arr_feedback as $key => $val) {
+
+        $name = $val['s_profile_name'];
+        $IMG = get_profile_image($val['i_user_id'], 'thumb', $val['s_profile_photo']);
+        $comment_txt = $val['s_contents'];
+
+        if ($val['if_already_friend'] == 'true' || $val['already_added_netpal'] == 'true') {
+            $profile_link = get_profile_url($val['i_user_id'], $val['s_profile_name']);
+        } else {
+            $profile_link = get_public_profile_url($val['i_user_id'], $val['s_profile_name']);
+        }
+        ?>                            
+        <!--comment start -->
+        <div class="txt_content01 pre-border-bottom">
+            <a href="<?= $profile_link ?>"><div class="pro_photo" style="background:url(<?php echo $IMG; ?>) no-repeat center;width:60px; height:60px;" ></div></a>
+            <div class="pre-time-left_div01a">
+                
+                <p class="blue_bold12">
+                    <a  href="<?= $profile_link ?>"><?= $name ?></a>
+                </p>
+                <p><?= $val['s_message'] ?></p>
+                 <?php if (get_time_elapsed($val['dt_created_on']) != '') { ?>
+                    <p class="date-time">Updated on: <?= get_time_elapsed($val['dt_created_on']) ?></p>
+                <?php } ?>
+            </div>
+            <div class="clr"></div>
+        </div>
+        <!--comment end -->
+    <?php
+    }
+}
+?>

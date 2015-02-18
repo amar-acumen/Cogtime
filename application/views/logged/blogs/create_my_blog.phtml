@@ -1,0 +1,331 @@
+<?php include(APPPATH."views/layouts/logged_header.phtml");?>
+            <!-- NAVIGATION SECTION -->
+      <?php include(APPPATH."views/layouts/nav.phtml");?>
+      <!-- /NAVIGATION SECTION -->
+      </div>
+</div>
+<!-- /HEADER SECTION -->
+<div class="clr"></div>
+
+<!-- CONTENT SECTION -->
+<div id="content_section">
+      <div id="container">
+            <!--<div id="mid_content"> -->
+                  <!-- latest news -->
+                 <?php include(APPPATH ."views/layouts/latest_news.phtml");?>
+                  <!-- /latest news -->
+                  <div class="clr"></div>
+                  <!-- main container -->
+                  <div id="main_container">
+                        <!-- left container -->
+                        <?php include(APPPATH."views/layouts/leftbar.phtml");?>
+                        <!-- /left container -->
+                        <!-- mid container -->
+                        <div id="mid_container">
+                        
+                            
+                            <div class="link-div">
+                                  <ul>
+                                    <li><a href="search-blogs.html"><span>Search All Blogs</span></a> </li>
+                                    <li><a href="most-popular-blogs.html"><span>Most Popular</span></a> </li>
+                                </ul>
+                                <div class="clr"></div>
+                              </div>
+                        
+                        
+                        
+                            <div class="page_heading">Create Blog</div>
+                            
+                           
+                            <div class="div_content wall-comment tweet-textarea2" style="padding-top: 15px;">
+                           <?/*?>    <div class="white-bold" style="padding-left:10px;">Create Blog</div>
+                           <?*/?>
+                                 <div class="txt_content" style="padding:10px 0px;">
+                                 
+  <input type="hidden" name="blog_id" id="blog_id" value="<?=$blog_id?>">                               
+                                  <!--<input name="" type="text"  onfocus="if(this.value=='Type title here')this.value='';" onblur="if(this.value=='')this.value='Type title here';" value="Type title here"/>
+                                     <textarea name="" cols="" rows="" onfocus="if(this.value=='Type body here')this.value='';" onblur="if(this.value=='')this.value='Type body here';" >Type body here</textarea> -->
+                                     
+                                     
+                                    <form id="createBlogFrm" action="<?php echo base_url()?>logged/my_blog/add_blog" method="post" class="wall-comment-form" onsubmit="return create_blog_();">
+                                        <div class="text-field-bg">
+                                        <input name="blog_title" id="blog_title" type="text"  onfocus="if(this.value=='Type title here')this.value='';" onblur="if(this.value=='')this.value='Type title here';" value="Type title here"/>
+                                        <span class="error-message" id="err_blog_title"></span>
+                                        </div>
+                                        <div class="clr"></div>
+                                        <div class="wall-comment-box" style="height: 98px;">
+                                          <textarea name="blog_desc" id="blog_desc" cols="" rows="" onfocus="if(this.value=='Max 500 Characters')this.value='';" onblur="if(this.value=='')this.value='Max 500 Characters';" >Max 500 Characters</textarea>
+                                          
+                                        </div><span class="error-message" id="err_blog_desc"></span>
+                                        <div class="clr"></div>
+                                      <input name="" type="submit" class="wall-comment-submit" value="Create" onclick="" />
+                                    </form>
+                                     <!--<div style="text-align:right;"><input name="" type="button" value="Post" class="btn" /></div> -->
+                                 </div>
+                            </div> 
+                            
+                            
+                                                           
+                        </div>
+
+                                                            
+                              
+                                    
+                  <!-- /mid container -->
+                        <!-- right container -->
+                        <?php include(APPPATH."views/layouts/rightbar.phtml");?>
+                        <!-- /right container -->
+                  </div>
+                  <!-- /main container -->
+                  <div class="clr"></div>
+            <!--</div> -->
+      </div>
+      <div class="clr"></div>
+</div>
+<!-- /CONTENT SECTION -->
+<div class="clr"></div>
+
+
+<?php include(APPPATH."views/layouts/footer.phtml");?>
+<?php include(APPPATH."views/logged/blocks/common_popup.phtml");?>
+
+
+
+<!-- /lightbox SECTION -->
+<div class="lightbox search_audio" style="width:550px;">
+    <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="images/close.png" alt="" onclick="empty('txt_search_blog_title')"/></a></div>
+    <div class="top"><div>&nbsp;</div></div>
+    <div class="mid">
+        <div class="heading"><div class="left"><h4><img src="images/icons/search1.png" alt="" /> Search</h4></div></div>
+           <div class="frm_box">
+             <div class="lable01">Title:</div> 
+             <div class="field01"><input name="txt_search_blog_title" id="txt_search_blog_title" type="text" /></div>
+             <div class="clr"></div>
+           
+             
+             <div class="lable01">&nbsp;</div> 
+             <input type="hidden" name="if_posted" value="y">
+             <div class="field01"><input name="" type="button" value="Search" class="btn" onclick="return search_blog_title_()" /></div>
+             <div class="clr"></div>
+           </div>
+    </div>
+    <div class="bot"><div>&nbsp;</div></div>
+</div>
+
+
+
+<div class="lightbox edit_blog_div" style="width:550px;">
+    <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="images/close.png" alt="" /></a></div>
+    <div class="top"><div>&nbsp;</div></div>
+    <div class="mid">
+        <div class="heading"><div class="left"><h4><img src="images/icons/icon1.png" alt="" /> Edit Blog Page Title </h4></div></div>
+           <div class="frm_box">
+             <div class="lable01">Title:</div> 
+             <div class="field01"><input name="blogtitle" id="blogtitle" type="text" value="<?php echo $blogdata[0]['s_title']?>" /> </div>
+             <div class="clr"></div>
+      
+             <div class="lable01">&nbsp;</div> 
+             <div class="field01"><input name="" type="button" value="Save" class="btn" onclick="addblog();" /></div>
+             <div class="clr"></div>
+           </div>
+    </div>
+    <div class="bot"><div>&nbsp;</div></div>
+</div>
+
+
+<div class="lightbox view_comments_div" style="width:650px;">
+      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="images/close.png" alt="" /></a></div>
+      <div class="top">
+            <div>&nbsp;</div>
+      </div>
+      <div class="mid">
+            <div class="heading" style="margin-bottom:0px;">
+                  <div class="left">
+                        <h4><img src="images/icons/cmnt.png" alt="" /> View Comments </h4>
+                  </div>
+            </div>
+            <div id="comment_html"></div> 
+            
+      </div>
+      <div class="bot">
+            <div>&nbsp;</div>
+      </div>
+</div>
+
+
+<div class="lightbox comment_div" style="width:540px;">
+      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="images/close.png" alt="" /></a></div>
+      <div class="top">
+            <div>&nbsp;</div>
+      </div>
+      <div class="mid">
+            <div class="heading">
+                  <div class="left">
+                        <h4><img src="images/icons/coment.png" alt="" /> Post Comment </h4>
+                  </div>
+            </div>
+            <div class="frm_box">
+                    <form action="<?php echo base_url()?>logged/my_blog/add_blog_post_cmnts" method="post" id="postcmnts_frm">
+                        <input type="hidden" name="postcmnts_postid" id="postcmnts_postid" value="" />
+                      <p>  <textarea name="postcmnts_txt" id="postcmnts_txt" cols="" rows="" style="width:486px; height:100px; margin-bottom:10px;"></textarea>
+                              <span id="err_postcmnts_txt"></span>
+                      </p>
+                       <p> <input name="postcmnts_btn" id="postcmnts_btn" type="button" value="Post"  class="btn"/></p>
+                      </form>
+             </div>
+      </div>
+      <div class="bot">
+            <div>&nbsp;</div>
+      </div>
+</div>
+
+
+
+
+
+
+<!-- confirm delete album popup-->
+<div class="lightbox delete-page-popup" style="width: 400px; left: 296px;">
+      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="<?=base_url()?>images/close.png" alt="" /></a></div>
+      <div class="top"><div>&nbsp;</div></div>
+      <div class="mid">
+            <div class="heading" style="margin-bottom:0px;">
+                  <div class="left">
+                        <h4>Delete article</h4>
+                  </div>
+            </div>
+               <div class="shade_box_white" style="padding:8px 0px;">
+               <div style="padding-bottom:10px;">
+               <p class="center-text" style="line-height:23px; color:#494949;">Do you really want to delete the article?</p>
+               </div>
+               <form action="" method="post" enctype="multipart/form-data">
+                  <input type="hidden" name="i_del_id" id="i_del_id" value="" />
+                 <input name="" type="button" value="Yes" class="btn" style="margin-left:105px;" onClick="delete_article_()"/>
+                    <input name="" type="button" value="No" class="btn" onclick="hide_dialog()"/>
+               </form>   
+               <div class="clr"></div>
+            </div>
+            
+      </div>
+      <div class="bot"><div>&nbsp;</div></div>
+</div>
+<!-- end of delete pop up -->
+
+
+
+
+<script type="text/javascript">
+
+
+//-------------------------------------- create blog ----------------------------------
+function create_blog_()
+{
+
+    // for AJAX page-submission...
+    optionsArr = { 
+        beforeSubmit:  showBusyScreen,  // pre-submit callback 
+        success:       validateFrm // post-submit callback 
+    }; 
+ 
+    frm_obj = $('#createBlogFrm');
+    $(frm_obj).ajaxSubmit(optionsArr);
+    
+    return false; 
+}
+
+// validate ajax-submission...
+function validateFrm(data)
+{
+    
+    var result_obj = JSON.parse(data);
+       
+    if(result_obj.result==true) {
+
+        showUIMsg(result_obj.msg);
+        $('#createBlogFrm')[0].reset();
+        
+        
+    //window.location.href="create-video-album.html";
+window.location.href="my-blog.html";
+        //location.reload();
+        
+    
+    }
+
+    $('.error-message').each(function(i){
+        $(this).attr('style','display:none');
+    });
+    $('div[id^=err_]').html(''); 
+    
+    if(result_obj.result==false) {
+    
+        
+        $('.error-message').each(function(i){
+            $(this).attr('style','display:none');
+        });
+        
+        
+        for ( var id in result_obj.arr_messages ){
+            //alert(data.arr_messages[id]);
+            if( $('#err_'+id) != null ) {
+                $('#err_'+id).html(result_obj.arr_messages[id]);
+                $('#err_'+id).css('display', 'block');
+            }
+        }
+    
+    
+    
+    }
+    
+    // hide busy-screen...
+    hideBusyScreen();
+}
+//-------------------------------------- end of create blog ----------------------------------
+
+$(document).ready(function () {
+
+ //counting the left characters in comment
+    
+     function limitChars(textid, limit, infodiv)
+     {
+      var text = $('#'+textid).val(); 
+      var textlength = text.length;
+      if(textlength > limit)
+      {
+      $('#'+textid).val(text.substr(0,limit));
+       return false;
+      }
+      else
+      {
+      
+       return true;
+      }
+     }
+    
+    
+    
+
+    
+    $(function(){
+        $('#blog_desc').keyup(function(){
+            limitChars('blog_desc', 500, '');
+        });
+    });
+    
+
+    
+    //// just to show correct no. of chracters left while the page is loaded...
+    
+    limitChars('blog_desc',500, '');
+    
+ 
+});
+  
+
+    
+    
+    
+
+</script>
+
+

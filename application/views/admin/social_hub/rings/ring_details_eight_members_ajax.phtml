@@ -1,0 +1,24 @@
+
+                               <?php
+                               //pr($ring_user_arr);
+                                   if(count($ring_user_arr)){
+                                      
+                                     foreach( array_slice($ring_user_arr,0,8) as $key => $val){
+                                        
+                                         $img = get_profile_image($val['user_joined_id'], 'thumb'); 
+                                         
+                               ?>
+                                    <div class="member-block">
+                                      <div class="member-pic" style="background:url(<?=$img?>) no-repeat center;width:73px; height:73px; margin-left: 9px;" ></div>
+                                        <?php /*?><img src="../images/man1.png" alt="pic" width="73" height="73" class="member-pic" /><?php */?>
+                                        <h3><?=$val['s_profile_name']?></h3>
+                                        <h4><?=$val['s_country_name']?></h4>
+                                        <a href="javascript:void(0);" class="remove" onclick="remove_member_confirm(<?php echo $val['table_id']?>,'<?=$val['s_profile_name']?>','<?=$img?>','no_popup')">Remove from Ring</a>
+                                    </div>
+                               <?php 
+                                     }
+                                   }
+                               ?>
+                               
+                                <div class="clr"></div>
+                                <a href="javascript:void(0);" onclick="return show_all_members_popup_();" class="show-all">Show All</a>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<load>
+    <prerequisites>
+        <resource>template/topcmm-123flashchat-main-roomlist.html</resource>
+        <resource>template/topcmm-123flashchat-signin-register.html</resource>
+    </prerequisites>
+    <templates>
+        <resource>template/topcmm-123flashchat-main-chat.html</resource>
+        <resource>template/topcmm-123flashchat-chat-room-template.html</resource>
+        <resource>template/topcmm-123flashchat-change-avatar-panel.html</resource>
+        <resource>template/topcmm-123flashchat-row-item-template.html</resource>
+        <resource>template/topcmm-123flashchat-message-box.html</resource>
+    </templates>
+</load>

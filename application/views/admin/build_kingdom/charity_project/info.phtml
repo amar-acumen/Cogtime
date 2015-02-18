@@ -1,0 +1,149 @@
+<div class="clr"></div>
+<!-- CONTENT SECTION -->
+<!--navigation section start -->
+<?php include(APPPATH."views/layouts/admin/admin_nav.phtml");?>
+<!--navigation section end -->
+
+<div id="content_section">
+      <div id="container">
+            <div id="mid_content">
+                  <div class="page_heading left">
+                        <div class="left"><img src="../images/icons/login.png" alt="" /> Information Requested On < <?=$project_info['s_title']?> ></div>
+                        <div class="right">
+                      	<a href="<?=admin_base_url()?>charity-projects.html">Back</a>
+                        </div>
+                  </div>
+                  <div class="clr"></div>
+                  <div id="right_container">
+                        <div class="arrow_btm"></div>
+                        <div class="content_area">
+                            <!--filter section start -->
+                            <div class="filter">
+                                <span class="filter-by">Filter By &raquo;</span>
+                                
+                                <script type="text/javascript">
+								  $(document).ready(function(arg) {
+								   $('#frm_search').submit(function(){ 
+										  var datatosend=$("#frm_search").serialize();
+											  showBusyScreen();
+											  $.ajax({
+												 type: "POST",
+												 url: admin_base_url+"build_kingdom/charity_projects/info_ajax_pagination/<?=$project_info['id']?>",
+												 data: datatosend,
+												 success: function(data){
+													hideBusyScreen(); 
+													 $('#table_content').html(data);
+												 }
+											   });	 
+														 
+										});
+								   
+								   });
+								   </script>
+								   
+											   
+								  <form name="frm_search" id="frm_search" action="" method="post"  class="filter-search" onsubmit="return false;" style="width:900px;" >
+										<label style="width:92px;">Posted By :</label>
+										<input type="text" id="txt_title" name="txt_title"/>
+										  <input type="hidden" value="Y" name="search_basic" id="search_basic"  />
+										  <input name="" type="submit" value="GO" class="go" />
+								  </form>  
+                                
+                                <div class="clr"></div>
+                            </div>
+                            <!--filter section end -->
+                        
+                            <h4>Information Requests</h4>
+                            <div class="clr"></div>
+                            <DIV id="table_content" style="margin-top:5px;">
+							  <?=$result_content?>
+                            </DIV>
+                            
+                        	<div class="clr"></div>
+                        </div>
+                  </div>
+                  <div class="clr"></div>
+            </div>
+      </div>
+      <div class="clr"></div>
+</div>
+<!-- /CONTENT SECTION -->
+
+
+<!--popup one start-->
+<div class="lightbox delete-page-popup" style="width:500px;">
+      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="../images/close.png" alt="" /></a></div>
+      <div class="top"><div>&nbsp;</div></div>
+      <div class="mid">
+            <div class="heading" style="margin-bottom:0px;">
+                  <div class="left">
+                        <h4>Delete Project</h4>
+                  </div>
+            </div>
+               <div class="shade_box_white" style="padding:8px 0px;">
+               <p class="center-text">Do you really want to delete this project?</p>
+               		 <input type="hidden" name="i_del_id" id="i_del_id" value="" />
+               		<input name="" type="button" value="Yes" class="btn" style="margin-left:146px;" onClick="delete_()"/>
+                    <input name="" type="button" value="No" class="btn" onclick="hide_dialog()"/>
+               <div class="clr"></div>
+            </div>
+            
+      </div>
+      <div class="bot"><div>&nbsp;</div></div>
+</div>
+<!--popup one end-->
+
+<!--popup donated by start-->
+<div class="lightbox donors" style="width:750px;">
+      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="../images/close.png" alt="" /></a></div>
+      <div class="top"><div>&nbsp;</div></div>
+      <div class="mid">
+            <div class="heading" style="margin-bottom:0px;">
+                  <div class="left">
+                        <h4>Donors</h4>
+                  </div>
+            </div>
+               <div class="shade_box_white" style="height:400px; overflow:auto" id="fund_donor_content">
+               		
+            </div>
+      </div>
+      <div class="bot"><div>&nbsp;</div></div>
+</div>
+<!--popup donated by end-->
+
+<!--popup skill donation start-->
+<div class="lightbox skill-donations" style="width:750px;">
+      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="../images/close.png" alt="" /></a></div>
+      <div class="top"><div>&nbsp;</div></div>
+      <div class="mid">
+            <div class="heading" style="margin-bottom:0px;">
+                  <div class="left">
+                        <h4>Skill Donations</h4>
+                  </div>
+            </div>
+               <div class="shade_box_white" style="height:400px; overflow:auto" id="skill_donor_content">
+               		
+               </div>
+      </div>
+      <div class="bot"><div>&nbsp;</div></div>
+</div>
+<!--popup skill donation end-->
+
+<!--popup project details start-->
+<div class="lightbox project-details" style="width:700px;">
+      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="../images/close.png" alt="" /></a></div>
+      <div class="top"><div>&nbsp;</div></div>
+      <div class="mid">
+            <div class="heading" style="margin-bottom:0px;">
+                  <div class="left">
+                        <h4>Welfare Project One</h4>
+                  </div>
+            </div>
+               <div class="shade_box_white product" id="project_content">
+					
+               </div>
+            
+      </div>
+      <div class="bot"><div>&nbsp;</div></div>
+</div>
+<!--popup project details end-->

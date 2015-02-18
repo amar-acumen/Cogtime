@@ -1,0 +1,118 @@
+<script type="text/javascript">
+function pausePlayers(playing_id) { 
+  
+   <?php
+	foreach($arr_albums_audios as $val):
+	?>
+		
+		   if(<?=$val['id']?> != playing_id) { jwplayer("myElement_"+<?=$val['id']?>).pause(true); }
+	<?php
+ 		endforeach;
+	?>
+};
+
+$(function(){
+<?php 
+    if(count($arr_albums_audios)){
+		foreach($arr_albums_audios as $val):
+       // $ID = 'm1'. $val['id'];
+		$audio_filename = base_url()."uploads/user_audio_files/".$val['s_audio_file_name'];
+?>
+	
+    jwplayer("myElement_<?=$val['id']?>").setup({
+        file: "<?=$audio_filename?>",
+        image: "<?=$audio_filename?>",
+		height: 30,
+        //width: 472,
+        events:{
+		  onPlay: function() {
+		    	pausePlayers(<?=$val['id']?>);
+			 //jwplayer('container3').stop();
+		  }
+		}
+
+    });
+	
+<?php
+    	endforeach;
+	}
+?>
+});
+</script>
+
+<div class="div_content" style=" margin-top:0px;">
+<?php //pr($arr_albums_audios) ?>
+<?php 
+	if(count($arr_albums_audios)){
+		
+		foreach($arr_albums_audios as $val):
+			 $audio_filename = base_url()."uploads/user_audio_files/".$val['s_audio_file_name'];
+?>
+                <div class="shade_box_01">
+                	
+                    <div class="left_div02" style="width:300px;">
+                           <p class="blue_bold12"><img src="images/icons/audio_icon.png" alt="" /><strong> <a href="javascript:void(0);"><?=$val['s_title']?></a></strong></p>
+                           <p class="light_blue12"><?=$val['s_artist']?>, <?=$val['s_genre']?><?php /*?>, <?=$val['s_sound_track_album']?><?php */?></p>
+                          <p style="margin-left: 17px;"><?=$val['s_desc']?></p>
+                    </div>
+                    	
+                       
+                    <div class="right_div02">
+                 		<select name="album_<?=$val['id']?>" id="album_<?=$val['id']?>" style="width:162px; margin-bottom:10px;" onchange="javascript:change_album(<?=$val['id']?>, <?=$val['i_id_audio_album']?>)">
+                             <option value="move">Move to another Album </option>
+                             <?php if(count($all_audio_albums)):
+								 		foreach($all_audio_albums as $photo_album):
+							 ?>
+                             <option value="<?=$photo_album['id']?>"><?=$photo_album['s_name']?></option>
+                             <?php   
+							 			endforeach;	
+							 		endif;
+							 ?>
+                             
+                          </select>
+                           <div class="box01" style="width: 132px;">
+                            <p class="date-time"> Uploaded on :<?=getShortDate($val['dt_created_on'],5)?></p>
+                            <p class="add-remove-friend">
+                                <img src="images/icons/edit.png" alt="" /> <a  href="javascript:void(0);" onclick="edit_audio(<?=$val['id']?>)">Edit </a>  &nbsp;      
+                                <img src="images/icons/delete.png" alt="" /> <a  href="javascript:void(0);" onclick="delete_confirm_(<?=$val['id']?> , <?=$val['i_id_audio_album']?>)">Delete</a>
+                              
+                            </p>
+                            
+                           
+                        </div>
+                         <p style="margin-right:4px;"> <?=$val['image_rank']?></p>
+                         
+                    </div>
+                      <div class="clr"></div>
+                     <div  class="audio-player audio-player-div">
+                                    <a id="m1<?=$val['id']?>" class="audio " href="<?=$audio_filename?>"><?=$val['s_title']?>(mp3/ogg)</a>
+                                    <div id="myElement_<?=$val['id']?>" class="">Loading the player...</div>
+                     </div>   
+                    
+                    <div class="clr"></div>
+                 </div>
+		
+                 
+  <?php 
+		endforeach; 
+      ?>  
+ <?php 
+	}
+	else{
+		echo '<div class="shade_box_01" style="padding-top:5px;"><div  class="shade_norecords" style="width: 250px;"><p class="blue_bold12">No Audios.</p></div></div>';
+	}
+?>
+<input type="hidden" id="current_page" value="<?=$current_page_1?>" />
+<?php if($page_links){ ?>
+<div class="pagination">
+<div class="left">Viewing Page <?=$current_loaded_page_no?> of <?=$total_pages?> </div>
+<div class="right">
+       <ul class="small-paging">
+        <?=$page_links?> 
+        </ul>
+</div>
+</div>
+<?php } ?>                
+                 
+</div>
+

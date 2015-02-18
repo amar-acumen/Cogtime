@@ -1,0 +1,47 @@
+<div id="member-list">
+	<div id="member_result_div">
+    	<?php echo $listingContent; ?>
+	</div
+			<div class="clear"></div>
+		<?php if ($no_of_result == 0):
+		?>
+			<div class="shade_box_01" style="padding-top:5px;"><div  class="shade_norecords" style="width:260px;"><p class="blue_bold12">No Member Found.</p></div></div>
+		<?php endif; ?>
+		<?php if ($no_of_result > $pagination_per_page): ?>
+             <div class="view_more" id="show_more_feeds_div"><a href="javascript:void(0);" class="see-more" title="See More" id="show_more_feeds_link" page_value="<?= $current_page_1 ?>" onclick="show_more_feeds($(this).attr('page_value'))">See more</a></div>
+		<?php endif; ?>
+            
+       
+    </div>
+    
+    
+  </div>
+<script type="text/javascript">
+var ajax_req_feeds = null;
+function show_more_feeds(page) {
+        if (ajax_req_feeds != null) {
+            ajax_req_feeds.abort();
+        }
+        showUILoader_nodialog();
+        ajax_req_feeds = $.ajax({
+            type: 'get',
+            url: base_url + 'logged/church_members/generate_member_listing_AJAX/'+ page,
+            dataType: 'json',
+            success: function(data, status) {
+
+                hideUILoader_nodialog();
+                if (data.html != '') {
+                    $('#member_result_div').append(data.html);
+                    $('#show_more_feeds_link').attr('page_value', data.current_page);
+                }
+                else {
+                    $('#member_result_div').append('<div class="view_more" style="text-align: center;"><p class="blue_bold12" style="font-size:14px;">No more member to display.</p></div>');
+                    $('#show_more_feeds_div').hide();
+                }
+
+
+            }	// end of success function...
+        });
+    }
+
+</script>

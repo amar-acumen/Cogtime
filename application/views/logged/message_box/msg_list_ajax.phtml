@@ -1,0 +1,398 @@
+<?php
+#pr($result_arr); 
+
+if (is_array($result_arr) && $no_of_result > 0) {
+    foreach ($result_arr as $message) {
+
+        $PROF_IMG = get_profile_image($message['i_sender_id'], 'thumb');
+        $is_read = $message['i_is_unread'];
+        $CSS = ($is_read == 1) ? 'class="unread"' : 'class="read"';
+        ?>        		
+
+
+        <li <?= $CSS ?> value="<?= $message['id'] ?>" >
+            <div class="check-box-section"><input type="checkbox" name="chk_mail" id="chk_mail<?= $message['id'] ?>" value="<?= $message['id'] ?>" /></div>
+            <div class="mail-box-section">
+                <a href="javascript:void(0);"><div class="pro_photo2" style="background:url(<?= $PROF_IMG ?>) no-repeat center;width:60px; height:60px;" ></div></a>
+
+                <?php
+                #all the checkings.. 
+                $check_notification_message_type = array('contact_request', 'prayer_partner_request', 'net_pal_request', 'etrade_send_request', 'etrade_accept_join_request', 'etrade_request_shipped', 'etrade_decline_join_request', 'efreebie_send_request', 'eswap_decline_join_request', 'eswap_accept_join_request', 'eswap_send_request', 'efreebie_decline_join_request', 'efreebie_accept_join_request');
+
+                $check_normal_message_type = array('normal', 'contact_accept', 'contact_rejected', 'contact_deleted', 'prayer_partner_accept', 'prayer_partner_rejected', 'net_pal_accept', 'net_pal_rejected', 'net_pal_deleted', 'prayer_partner_deleted', 'event_invitations_request', 'ring_join_request', 'ring_join_request_from_normal_user', 'ring_leave', 'prayer_group_invitation', 'prayer_group_chat_room_invitation', 'prayer_post_modified', 'prayer_group_joining');
+
+
+                $check_no_response_message_type = array('video_comment', 'photo_comment', 'audio_comment', 'todo_reminder_im_mail', 'event_comment', 'ring_accept_join_request', 'ring_deny_join_request', 'ring_comments_notification', 'ring_post_notification', 'blog_comment', 'tweet_comment', 'retweet', 'prayer_r_commit', 'prayer_group_accept_join_request', 'prayer_group_deny_join_request', 'prayer_group_join_request_accepted_by_owner', 'user_chat_room_invitation', 'ring_delete', 'ring_member_delete','prayer_group_delete','event_rsvp_received');
+
+                if (in_array($message['s_type'], $check_notification_message_type)) {
+                    ?>
+                    <div class="my-mail-txt">
+                        <p style="width:94%;"><a href="javascript:void(0)" class="my-sub"><strong><?= ($message['s_subject'] != '') ? $message['s_subject'] : 'No Subject.' ?></strong></a></p>
+                        <ul class="short-info">
+                            <li>From: <?= $message['s_first_name'] . ' ' . $message['s_last_name'] ?></li>
+                            <li>On: <?= getShortDateWithTime($message['dt_created_on'], 6) ?></li>
+                        </ul>
+                        <div class="my-msg-body">
+                            <?= $message['s_message'] ?>
+
+
+                            <?php
+                            if ($message['ended'] == '0') {
+                                if ($message['s_type'] == 'prayer_partner_request') {
+                                    $type = 1;
+                                    $invitation_type = 'prayer_partner_request';
+                                } else if ($message['s_type'] == 'contact_request') {
+                                    $type = 1;
+                                    $invitation_type = 'contact_request';
+                                } else if ($message['s_type'] == 'net_pal_request') {
+                                    $type = 1;
+                                    $invitation_type = 'net_pal_request';
+                                } else if ($message['s_type'] == 'etrade_send_request') {
+                                    $type = 2;
+                                    $invitation_type = 'etrade_send_request';
+                                } else if ($message['s_type'] == 'etrade_send_request') {
+                                    $type = 2;
+                                    $invitation_type = 'etrade_send_request';
+                                }
+                                if ($type == 1) {
+                                    ?>
+                                    <ul class="my-msg-reply">
+                                        <li class="my-msg-accpt"><a href="javascript:void(0)" id="btn_<?= $invitation_type ?>_accept_<?php echo ($message['id']); ?>" onclick="javascript:invitation_accept_<?= $invitation_type ?>_reject('<?php echo ($message['id']); ?>', '<?php echo ($message['i_sender_id']); ?>', 'accept')" >Accept</a></li>
+                                        <li class="my-msg-decline" id="btn_<?= $invitation_type ?>_reject_<?php echo ($message['id']); ?>" onclick="javascript:invitation_accept_<?= $invitation_type ?>_reject('<?php echo ($message['id']); ?>', '<?php echo ($message['i_sender_id']); ?>', 'reject')"><a href="javascript:void(0)" >Refuse</a></li>
+                                    </ul>
+                                    <?php
+                                }
+
+                                if ($type == 2) {
+                                    ?>
+                                    <ul class="my-msg-reply">
+                                        <li class="my-msg-accpt"><a href="javascript:void(0)" id="btn_<?= $invitation_type ?>_accept_<?php echo ($message['id']); ?>" onclick="tradeAcceptDeny(<?= $request_id ?>, 'accept', <?= $product_id ?>)" >Accept</a></li>
+                                        <li class="my-msg-decline" id="btn_<?= $invitation_type ?>_reject_<?php echo ($message['id']); ?>" onclick="tradeAcceptDeny(<?= $request_id ?>, 'deny', <?= $product_id ?>)"><a href="javascript:void(0)" >Refuse</a></li>
+                                    </ul>
+
+                <?php
+                }
+            }
+            ?>
+
+                            <!-- reply section-->
+
+
+                        </div>
+                    </div>
+            <?php
+        } elseif (in_array($message['s_type'], $check_normal_message_type)) {
+
+            $sender_name = my_url($message['s_name']);
+            $sender_profile_url = get_profile_url($message['i_sender_id']);
+
+            #pr( $message);
+            ?>
+
+                    <div class="my-mail-txt">
+                        <p style="width:94%;"><a href="javascript:void(0)" class="my-sub"><strong><?= ($message['s_subject'] != '') ? $message['s_subject'] : 'No Subject.' ?></strong></a></p>
+                        <ul class="short-info">
+                            <li>From: <?= $message['s_first_name'] . ' ' . $message['s_last_name'] ?></li>
+                            <li>On: <?= getShortDateWithTime($message['dt_created_on'], 6) ?></li>
+                        </ul>
+                        <div class="my-msg-body">
+            <?= $message['s_message'] ?>
+
+                            <!-- reply section-->
+                            <div class="my-reply-section">
+                                <table width="100%" border="0" cellspacing="5" cellpadding="0">
+                                    <tr>
+                                        <td align="left" valign="top">Subject</td>
+                                        <td><input type="text" id="subject<?= $message['id'] ?>" name="subject" value="RE: <?= ($message['s_subject'] != '') ? $message['s_subject'] : 'No Subject.' ?>"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td align="left" valign="top">Message</td>
+                                        <td><textarea rows="5" cols="5" class="my-reply-body-textarea" id="message<?= $message['id'] ?>" name="message" ><?= "\n\r\n\r\n\r\n\r\n\r" . $message['s_first_name'] . ' ' . $message['s_last_name'] . '  <' . get_useremail_by_id($message['i_sender_id']) . '> wrote: ' ?><?= "\n" . substrws(br2nl($message['s_message']), 26) ?></textarea></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td  align="left">
+                                            <input type="button" id="btn_submit" value="Send" class="yellow-btn" onclick="reply_message(<?= $message['id'] ?>);" />
+                                            <input  type="hidden"  value="<?= $message['i_sender_id'] ?>" id="reply_user<?= $message['id'] ?>" name="reply_user" />
+                                        </td>
+
+                                    </tr>
+                                </table>
+
+                            </div>
+                            <!-- reply section-->
+
+                            <!-- forward section-->
+                            <div class="my-reply-section" id="forward-msg-div<?= $message['id'] ?>">
+            <?php
+            $forward_msg = "---------- Forwarded message ----------\nFrom: " . get_useremail_by_id($message['i_sender_id']) . " <" . $message['s_displayname'] . ">\nDate: " . getShortDateWithTime($message['dt_created_on'], 6) . "\nSubject: " . substrws($message['s_subject'], 25) . "\nTo: " . get_username_by_id($message['i_receiver_id']) . "";
+            ?>
+
+                                <table width="100%" border="0" cellspacing="5" cellpadding="0">
+                                    <tr>
+                                        <td align="left" valign="top">To</td>
+                                        <td>
+                                            <div class="ui-widget"><input id="frwd_user_name" name="frwd_user_name" type="text" size="50" /></div>
+                                        </td>
+                                    <input  type="hidden"  value="" id="chkfmember" name="chkfmember" />
+                                    </tr>
+                                    <tr> <td align="left" valign="top"></td><td style="margin-left: 195px;" class="error_msg" id="err_frwd_recepients"></td></tr>
+                                    <tr>
+                                        <td align="left" valign="top">Subject</td>
+                                        <td><input type="text" id="frwd_subject<?= $message['id'] ?>" name="subject" value="<?= ($message['s_subject'] != '') ? $message['s_subject'] : 'No Subject.' ?>"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td align="left" valign="top">Message</td>
+                                        <td><textarea rows="5" cols="5" class="my-reply-body-textarea" id="frwd_message<?= $message['id'] ?>" name="message" ><?= $forward_msg ?><?= "\n\r" . br2nl($message['s_message']) ?></textarea></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td  align="left">
+                                            <input type="button" id="btn_submit" value="Send" class="yellow-btn" onclick="forwardMessage(<?= $message['id'] ?>)" />
+                                            <input  type="hidden"  value="<?= $message['i_sender_id'] ?>" id="reply_user<?= $message['id'] ?>" name="reply_user" />
+                                        </td>
+
+                                    </tr>
+                                </table>
+
+                            </div>
+                            <!-- forward section-->
+
+
+            <?php if ($message['s_type'] == 'normal' && $sent_msgs != 'true') { ?>                                 
+                                <ul class="my-msg-reply">
+                                    <li><a href="javascript:void(0)" class="rlp-btn" >Reply</a></li>     
+                                    <li><a href="javascript:void(0)" class="frwd-btn" >Forward</a></li>     
+                                </ul>
+                            <?php } ?>
+
+            <?php if ($message['s_type'] == 'event_invitations_request' && $message['ended'] == '0') {
+                ?>
+                                <ul class="my-msg-reply">
+                                    <li class="my-msg-accpt"><a href="javascript:void(0)"  onclick="hide_button($(this));
+                                                                    send_rsvp(<?= $message['i_referred_media_id'] ?>)" >Send RSVP</a></li>
+                                </ul>
+                            <?php
+                            } else if ($message['s_type'] == 'ring_join_request' && $message['ended'] == '0') {
+                                ?>
+
+                                <ul class="my-msg-reply">
+                                    <li class="my-msg-accpt"><a href="javascript:void(0)" onclick="hide_button($(this));
+                                                                    acceptRingInvitation('<?= $this->session->userdata('user_id') ?>', '<?= encrypt($message['i_referred_media_id']) ?>')"  >Join</a></li>
+                                </ul>
+                            <?php
+                            } else if ($message['s_type'] == 'ring_join_request_from_normal_user' && $message['ended'] == '0') {
+                                ?>
+
+                                <ul class="my-msg-reply">
+                                    <li class="my-msg-accpt"><a href="javascript:void(0)" onclick="hide_button($(this));
+                                                                    acceptDeclineInvitation('<?= encrypt($message['i_referred_media_id']) ?>', '<?= encrypt($message['i_sender_id']) ?>', '<?= encrypt($message['id']) ?>', 'accept')" >Accept</a></li>
+                                    <li class="my-msg-decline"><a href="javascript:void(0)" onclick="hide_button($(this));
+                                                                    acceptDeclineInvitation('<?= encrypt($message['i_referred_media_id']) ?>', '<?= encrypt($message['i_sender_id']) ?>', '<?= encrypt($message['id']) ?>', 'decline')" >Decline</a></li>
+                                </ul>
+            <?php
+            } else if ($message['s_type'] == 'prayer_group_invitation' && $message['ended'] == '0') {
+                ?>
+
+                                <ul class="my-msg-reply">
+                                    <li class="my-msg-accpt"><a href="javascript:void(0)"  onclick="hide_button($(this));
+                                                                    acceptDecline_PrayerGroup_Invitation('<?= $message['i_referred_media_id'] ?>', '<?= $message['i_sender_id'] ?>', '<?= $message['id'] ?>', 'accept')" >Accept</a></li>
+                                    <li class="my-msg-decline"><a href="javascript:void(0)"  onclick="hide_button($(this));
+                                                                    acceptDecline_PrayerGroup_Invitation('<?= $message['i_referred_media_id'] ?>', '<?= $message['i_sender_id'] ?>', '<?= $message['id'] ?>', 'decline')" >Decline</a></li>
+                                </ul>
+                <?php /* }
+                  else if($message['s_type']=='prayer_group_chat_room_invitation' && $message['ended']=='0'){ ?>
+                  <input type="button" class="btn" onclick="join_PrayerGroup_Chat_Invitation('<?=$message['i_referred_media_id']?>','<?=$message['i_receiver_id']?>','<?=$message['id']?>','accept')" value="Join"  style="margin-right:5px;" /> */ ?>
+                                <?php
+                                } else if ($message['s_type'] == 'prayer_group_joining' && $message['ended'] == '0') {
+                                    ?>
+
+                                <ul class="my-msg-reply">
+                                    <li class="my-msg-accpt"><a href="javascript:void(0)"  onclick="hide_button($(this));
+                                                                    acceptDecline_PrayerGroup_Invitation('<?= $message['i_referred_media_id'] ?>', '<?= $message['i_sender_id'] ?>', '<?= $message['id'] ?>', 'joining_req_accept_by_owner')" >Accept</a></li>
+                                    <li class="my-msg-decline"><a href="javascript:void(0)"  onclick="hide_button($(this));
+                                                                    acceptDecline_PrayerGroup_Invitation('<?= $message['i_referred_media_id'] ?>', '<?= $message['i_sender_id'] ?>', '<?= $message['id'] ?>', 'decline')">Decline</a></li>
+                                </ul>
+                                <?php
+                            }
+                            ?>
+
+
+                        </div>
+                    </div>
+                            <?php
+                        } elseif (in_array($message['s_type'], $check_no_response_message_type)) {
+                            ?>
+
+
+                    <div class="my-mail-txt">
+                        <p style="width:94%;"><a href="javascript:void(0)" class="my-sub"><strong><?= ($message['s_subject'] != '') ? $message['s_subject'] : 'No Subject.' ?></strong></a></p>
+                        <ul class="short-info">
+                            <li>From: <?= $message['s_first_name'] . ' ' . $message['s_last_name'] ?></li>
+                            <li>On: <?= getShortDateWithTime($message['dt_created_on'], 6) ?></li>
+                        </ul>
+                        <div class="my-msg-body">
+            <?= $message['s_message'] ?>
+                        </div>
+                    </div>
+
+        <?php }
+        ?>
+
+            </div>
+            <br class="clr"/>
+        </li>
+
+
+
+
+
+    <?php } ?>
+    <script type="text/javascript">
+        $('.my-sub').click(function() {
+            $(this).parent().next().next().slideToggle();
+            if ($(this).parent().parent().parent().parent().hasClass("unread")) {
+                $(this).parent().parent().parent().parent().removeClass('unread');
+                $(this).parent().parent().parent().parent().addClass('read');
+                var id = $(this).parent().parent().parent().parent().attr('value');
+                $.post(base_url + "logged/mymessages/update_msg_status/" + id, function() {
+                });
+            }
+
+        });
+
+        $('.rlp-btn').click(function() {
+            $(this).parent().parent().prev().prev().slideToggle();
+            if ($(this).parent().parent().prev().css('display') == "block") {
+                $(this).parent().parent().prev().slideToggle();
+            }
+        });
+
+        $('.frwd-btn').click(function() {
+            //console.log($(this).parent().parent().prev());
+            $(this).parent().parent().prev().slideToggle();
+            if ($(this).parent().parent().prev().prev().css('display') == "block") {
+                $(this).parent().parent().prev().prev().slideToggle();
+            }
+        });
+
+    </script>
+<?php
+} else {
+
+    echo '<tr ><td class="fst_td" ></td><td  colspan="4" style="text-align:center"><div class="shade_norecords" style="width: 260px;"><p class="blue_bold12">No Messages.</p></div></td></tr>';
+}
+?>
+
+<input type="hidden" id="current_page" name="current_page" value="<?= $current_page ?>"  />
+<?php if ($page_links) { ?>
+    <div class="pagination">
+        <div class="left">Viewing Page <?= $current_loaded_page_no ?> of <?= $total_pages ?> </div>
+        <div class="right">
+            <ul class="small-paging">
+    <?= $page_links ?> 
+            </ul>
+        </div>
+    </div>
+<?php } ?>
+
+<?php 
+if(empty($result_arr)){
+?>
+
+<?php } ?>
+<script type="text/javascript">
+//alert('ok')
+/**************12-17-2014*************************/
+ $('.my-compose-minus').click(function(){
+	  $(this).parents('.my-compose-section').slideUp('slow');
+  });
+	  
+  $('.compose-msg-link').click(function(){
+	  $('.my-compose-section').slideToggle();
+  });
+ 
+/********************************************/
+
+    function hide_button(obj) {
+
+        $(obj).parent().parent().hide();
+    }
+    $(function() {
+
+        function split(val) {
+            return val.split(/,\s*/);
+        }
+        function extractLast(term) {
+            return split(term).pop();
+        }
+
+        $('#frwd_user_name')
+                // don't navigate away from the field on tab when selecting an item
+                .bind("keydown", function(event) {
+                    if (event.keyCode === $.ui.keyCode.TAB &&
+                            $(this).data("autocomplete").menu.active) {
+                        event.preventDefault();
+                    }
+                })
+                .autocomplete({
+                    source: function(request, response) {
+                        $.ajax({
+                            url: '<?php echo base_url(); ?>logged/compose_msg/suggest_frwd_friends',
+                            dataType: "json",
+                            data: {
+                                q: extractLast(request.term)
+                            },
+                            dataFilter: function(data) {
+                                return data;
+                            },
+                            success: function(data) {
+                                response($.map(data, function(item) {
+                                    return {
+                                        label: item.label,
+                                        value: item.value,
+                                        user_id: item.id
+                                    }
+                                }));
+                            }
+                        });
+                    },
+                    search: function() {
+                        // custom minLength
+                        var term = extractLast(this.value);
+                        if (term.length < 2) {
+                            return false;
+                        }
+                    },
+                    focus: function() {
+                        // prevent value inserted on focus
+                        return false;
+                    },
+                    select: function(event, ui) {
+                        var terms = split(this.value);
+                        // remove the current input
+                        terms.pop();
+                        // add the selected item
+                        terms.push(ui.item.value);
+                        // add placeholder to get the comma-and-space at the end
+                        terms.push("");
+                        this.value = terms.join(", ");
+                        var userids = $('#chkfmember').val()
+                        $('#chkfmember').val(userids + ui.item.user_id + ",");
+                        return false;
+                    }
+                }).data("autocomplete")._renderItem = function(ul, item) {
+              
+            return $("<li></li>")
+                    .data("item.autocomplete", item)
+                    .append("<a>" + item.label + "</a>")
+                    .appendTo(ul);
+               
+        };
+
+
+
+
+    });
+
+</script>

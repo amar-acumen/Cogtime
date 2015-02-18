@@ -1,0 +1,12 @@
+#div_recaptcha{
+    width:500px;
+    font-size:12px; font-family:Arial, Helvetica, sans-serif;
+}
+#recaptcha_image{
+    padding:2px; background:#f9f9f9;
+    border:1px solid #e0e0e0;
+    width:300px;
+    height:57px;
+    margin-bottom:20px;
+    margin-right:15px;
+}

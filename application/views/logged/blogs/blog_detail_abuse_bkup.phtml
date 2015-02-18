@@ -1,0 +1,727 @@
+<?php include(APPPATH."views/layouts/logged_header.phtml");?>
+            <!-- NAVIGATION SECTION -->
+<?php include(APPPATH."views/layouts/nav.phtml");?>
+      <!-- /NAVIGATION SECTION -->
+      </div>
+</div>
+<!-- /HEADER SECTION -->
+<div class="clr"></div>
+
+<!-- CONTENT SECTION -->
+<div id="content_section">
+      <div id="container">
+            <!--<div id="mid_content"> -->
+                  <!-- latest news -->
+                 <?php include(APPPATH ."views/layouts/latest_news.phtml");?>
+                  <!-- /latest news -->
+                  <div class="clr"></div>
+                  <!-- main container -->
+                  <div id="main_container">
+                        <!-- left container -->
+                        <?php include(APPPATH."views/layouts/leftbar.phtml");?>
+                        <!-- /left container -->
+                        <!-- mid container -->
+                        <div id="mid_container">
+                        
+                            
+                            <div class="link-div" style="margin-top: 0;">
+                                  <ul>
+                                    <li><a href="my-blog.html"><span>My Blog</span></a> </li>
+                                    <li><a href="search-blogs.html"><span>Search All Blogs</span></a> </li>
+                                    <li><a href="most-popular-blogs.html"><span>Most Popular</span></a> </li>
+                                </ul>
+                                <div class="clr"></div>
+                              </div>
+                        
+                        
+                        
+                        
+                        
+                        
+                            <!--blog -->
+                            <div class="blog-container">
+                            
+                            <!--my blog start -->
+                            <div class="blog">
+                                
+                                
+                                <?php
+                                if(count($blogdata)!=0)
+                                {
+                                    //pr($blogdata,1);
+                                    $profile_link = get_profile_url($blogdata[0]['i_user_id'],$blogdata[0]['s_profile_name']);
+                                    echo "<h2>".$blogdata[0]['s_title']."</h2>";
+                                    
+
+                                    
+                                ?>
+                                
+                                <p class="time-posted">created <?php echo get_time_elapsed_blog($blogdata[0]['dt_created_on'])?> by <a href="<?= $profile_link?>"><?php echo $blogdata[0]['s_profile_name']?></a></P>
+                               
+                                <p> <?php echo nl2br($blogdata[0]['s_description'])?></p>
+                                
+                                
+                                <ul class="article-comment-block">
+                                        <li class="first">Articles (<span id='articles'><a href="javascript:void(0)"><?=$blogdata[0]['total_articles']?></a></span>)</li> 
+                                        <li>Comments (<span id='comments'><a href="javascript:void(0)"><?=$blogdata[0]['total_comments']?></a></span>)</li>
+                                </ul>
+                                <div class="clr"></div>
+                                
+                                <?php
+                                }
+                                ?>
+                                </div>
+                               
+                            <!--sub page links -->
+                                                            
+                              
+                             <div id="blogpost" <?php echo $style=(count($blogdata)>0)?'style="display:block;"':'style="display:none;"' ;?> > 
+                            
+                            <?php if($blogdata[0]['i_user_id'] == intval(decrypt($this->session->userdata('user_id')))){ 
+							?>  
+                            <!--/sub page links -->
+                            <div class="arrow_btm"></div>
+                            <div class="nw-blog-article" style="padding-top: 15px;">
+                              <h2 class="post-new-article-heading">Post New Article</h2>
+                                 <div class="" style="padding:10px 0px;">
+                                 
+  									<input type="hidden" name="blog_id" id="blog_id" value="<?=$blog_id?>" />                               
+                                  
+                                     
+                                    <form action="" method="post" class="wall-comment-form">
+                                    	<label class="white-text">Article Title:</label>
+                                        <div class="text-field-bg">
+                                        <input name="blogpost_title" id="blogpost_title" type="text"  onfocus="if(this.value=='Type title here')this.value='';" onblur="if(this.value=='')this.value='Type title here';" value="Type title here" style="width: 460px;"/>
+                                        
+                                        </div>
+                                        <span class="error-message" id="err_add_blogposttitle"></span>
+                                        <div class="clr"></div>
+                                        
+                                        <label class="white-text">Description:</label>
+                                        <div class="wall-comment-blog-box">
+                                          <textarea name="blogpost_desc" id="blogpost_desc" cols="" rows="" onfocus="if(this.value=='Max 500 Characters')this.value='';" onblur="if(this.value=='')this.value='Max 500 Characters';" >Max 500 Characters</textarea>
+                                          
+                                        </div>
+                                        <span class="error-message" id="err_add_blogpostdesc"></span>
+                                        <div class="clr"></div>
+                                      <input name="" type="button" class="wall-comment-submit-nw " value="Post" onclick="addBlogPost()" />
+                                    </form>
+                                 </div>
+                            </div>
+                            <script type="text/javascript">
+							
+							
+							  $(document).ready(function () {
+							  
+							   //counting the left characters in comment
+								  
+								   function limitChars(textid, limit, infodiv)
+								   {
+									var text = $('#'+textid).val(); 
+									var textlength = text.length;
+									if(textlength > limit)
+									{
+									$('#'+textid).val(text.substr(0,limit));
+									 return false;
+									}
+									else
+									{
+									
+									 return true;
+									}
+								   }
+								  
+								  
+								  
+								  $(function(){
+									  $('#blogpost_desc').keyup(function(){
+										  limitChars('blogpost_desc', 500, '');
+									  });
+								  });
+								  
+								  $(function(){
+									  $('#edit_blogpost_desc').keyup(function(){
+										  limitChars('edit_blogpost_desc', 500, '');
+									  });
+								  });
+								  
+								  $(function(){
+									  $('#blog_desc').keyup(function(){
+										  limitChars('blog_desc', 500, '');
+									  });
+								  });
+								  
+							  
+								  
+								  //// just to show correct no. of chracters left while the page is loaded...
+								  limitChars('blogpost_desc',500, '');
+								  limitChars('edit_blogpost_desc',500, '');
+								  limitChars('blog_desc',500, '');
+								  
+							   
+							  });
+							</script>
+                            
+                            <?php } ?>
+                             <div class="page_heading_01">
+                                <div class="left" style="font-weight: normal; font-size: 19px;"><img src="images/icons/icon1.png" alt="" /> Blog Articles</div>
+                                <?php /*?>    <div class="right">
+                                
+      <img src="images/icons/search.png" alt="" /> <a href="javascript:void(0);"  onclick="return show_dialog('search_audio')" class="blue_link"><strong>Search</strong></a>                                
+                          
+                                  </div>
+                                <?php */?>
+                            </div>
+                            <div class="arrow_btm"></div>
+                            
+                            
+                            
+                            
+                            <div id="total_ajax_res">
+                                <div id="blogpostlist" class="my-article" style="margin-top: 15px;">
+                                <?php echo $listingContent;?>
+                                  </div>
+                            </div>
+                            
+                            
+                            
+                            
+                           <input type="hidden" id="current_page" name="current_page" value="<?=$current_page?>"  />
+                            <?php if($no_of_result  == 0):?>
+                            <div id="no_article" class="shade_box_01" style="padding-top:5px;"><div  class="shade_norecords" style="width:260px;"><p class="blue_bold12">No Article Post.</p></div></div>
+                            <?php endif;?>    
+                            
+                            
+                            <?php if($no_of_result > $pagination_per_page): ?>
+                            <div class="" id="show_more_feeds_div"><a class="view-more-btn" href="javascript:void(0);" id="show_more_feeds_link" page_value="<?=$current_page_1?>" onclick="show_more_feeds($(this).attr('page_value'))">[view more] </a> </div>
+                            <?php endif; ?>
+                            </div>
+                            </div>
+                            <!--blog container-->
+                        </div>                   
+                        <!-- /mid container -->
+                        <!-- right container -->
+                        <?php include(APPPATH."views/layouts/rightbar.phtml");?>
+                        <!-- /right container -->
+                  </div>
+                  <!-- /main container -->
+                  <div class="clr"></div>
+            <!--</div> -->
+      </div>
+      <div class="clr"></div>
+</div>
+<!-- /CONTENT SECTION -->
+<div class="clr"></div>
+
+
+<?php include(APPPATH."views/layouts/footer.phtml");?>
+<?php include(APPPATH."views/logged/blocks/common_popup.phtml");?>
+
+
+
+<!-- /lightbox SECTION -->
+<div class="lightbox search_audio" style="width:550px;">
+    <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="images/close.png" alt="" onclick="empty('txt_search_blog_title')"/></a></div>
+    <div class="top"><div>&nbsp;</div></div>
+    <div class="mid">
+        <div class="heading"><div class="left"><h4><img src="images/icons/search1.png" alt="" /> Search</h4></div></div>
+           <div class="frm_box">
+             <div class="lable01">Title:</div> 
+             <div class="field01"><input name="txt_search_blog_title" id="txt_search_blog_title" type="text" /></div>
+             <div class="clr"></div>
+           
+             
+             <div class="lable01">&nbsp;</div> 
+             <input type="hidden" name="if_posted" value="y" />
+             <div class="field01"><input name="" type="button" value="Search" class="btn" onclick="return search_blog_title_()" /></div>
+             <div class="clr"></div>
+           </div>
+    </div>
+    <div class="bot"><div>&nbsp;</div></div>
+</div>
+
+
+
+<div class="lightbox edit_blog_div" style="width:550px;">
+    <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="images/close.png" alt="" /></a></div>
+    <div class="top"><div>&nbsp;</div></div>
+    <div class="mid">
+        <div class="heading"><div class="left"><h4><img src="images/icons/icon1.png" alt="" /> Edit Blog Page Title </h4></div></div>
+           <div class="frm_box">
+             <div class="lable01">Title:</div> 
+             <div class="field01"><input name="blog_title" id="blog_title" type="text" value="<?php echo $blogdata[0]['s_title']?>" /><span class="error-message" id="err_blog_title"></span> </div>
+              
+             <div class="clr"></div>
+             
+             <div class="lable01">Description:</div> 
+             <div class="field01"><textarea name="blog_desc" id="blog_desc" style="height: 80px" cols="" rows="" onfocus="if(this.value=='Max 500 Characters')this.value='';" onblur="if(this.value=='')this.value='Max 500 Characters';" ><?php echo $blogdata[0]['s_description']?></textarea> </div>
+             
+             <div class="clr"></div>
+      
+             <div class="lable01">&nbsp;</div> 
+             <div class="field01"><input name="" type="button" value="Save" class="btn" onclick="addblog();" /></div>
+             <div class="clr"></div>
+           </div>
+    </div>
+    <div class="bot"><div>&nbsp;</div></div>
+</div>
+
+<div class="lightbox blog_edit_div" style="width:550px;">
+    <div class="close"><a href="javascript:void(0)" onclick="hide_dialog();clear_all_error_msg()"><img src="images/close.png" alt="" /></a></div>
+    <div class="top"><div>&nbsp;</div></div>
+    <div class="mid">
+        <div class="heading"><div class="left"><h4><img src="images/icons/icon1.png" alt="" /> Edit Article  </h4></div></div>
+           <div class="frm_box">
+           
+           <form action="<?php echo base_url()?>logged/my_blog/edit_blog_post_detail" method="post" name="editBlogPostfrm" id="editBlogPostfrm">
+                   <input type="hidden" name="post_id" id="post_id"  value="" />
+                
+                 <div class="lable01" style="width:110px;">Title:</div> 
+                 <div class="field01">
+                <input name="edit_blogpost_title" id="edit_blogpost_title" type="text" style="width:330px;" /> 
+                <span class="error-message" id="err_blogposttitle"></span>
+                </div>
+                 <div class="clr"></div>
+                   <div class="lable01" style="width:110px;">Description:</div> 
+                 <div class="field01">
+                 <textarea name="edit_blogpost_desc" id="edit_blogpost_desc" cols="" rows="" style=" height:200px; width:330px;"></textarea>
+                 <span class="error-message" id="err_blogpostdesc"></span>
+                 </div>
+                 
+                 <div class="clr"></div>
+                 <div class="lable01" style="width:110px;">&nbsp;</div> 
+                 <div class="field01"><input name="" type="button" value="Post" class="btn" id="editBlogPostBtn" /></div>
+                 <div class="clr"></div>
+           </form>
+           </div>
+    </div>
+    <div class="bot"><div>&nbsp;</div></div>
+</div>
+
+
+
+
+<!-- confirm delete album popup-->
+<div class="lightbox delete-page-popup" style="width:auto; left: 296px;">
+      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="<?=base_url()?>images/close.png" alt="" /></a></div>
+      <div class="top"><div>&nbsp;</div></div>
+      <div class="mid">
+            <div class="heading" style="margin-bottom:0px;">
+                  <div class="left">
+                        <h4>Delete article</h4>
+                  </div>
+            </div>
+               <div class="shade_box_white" style="padding:8px 0px;">
+               <div style="padding-bottom:10px;">
+               <p class="center-text" style="line-height:23px; color:#494949;">Do you really want to delete the article?</p>
+               </div>
+               <form action="" method="post" enctype="multipart/form-data">
+                  <input type="hidden" name="i_del_id" id="i_del_id" value="" />
+                 <input name="" type="button" value="Yes" class="popup-yes" style="margin-left:105px;" onClick="delete_article_()"/>
+                    <input name="" type="button" value="No" class="popup-no" onclick="hide_dialog()"/>
+               </form>   
+               <div class="clr"></div>
+            </div>
+            
+      </div>
+      <div class="bot"><div>&nbsp;</div></div>
+</div>
+<!-- end of delete pop up -->
+
+
+<script type="text/javascript">
+var ajax_req_feeds = null;
+function addblog()
+{
+    var bTitle    = $('#blog_title').val();
+    var bDesc    = $('#blog_desc').val();
+    
+    $.ajax({
+                type: "POST",
+                url: '<?php echo base_url()?>logged/my-blog/add_blog',
+                data: ({'blog_title':bTitle,'blog_desc':bDesc}),
+                success: function(msg){
+                    showUIMsg(msg.msg);
+                    if(msg.result==true)
+                    {
+                        $('#blogpost').show();
+                        $('#place_blog_name').html(msg.blog_title);
+                        hide_dialog();    
+                    }
+                    else
+                    {
+                        
+                        $('.error-message').each(function(i){
+                            $(this).attr('style','display:none');
+                        });
+                        for ( var id in msg.arr_messages ){
+                            if( $('#err_'+id) != null ) {
+                                $('#err_'+id).html(msg.arr_messages[id]);
+                                $('#err_'+id).css('display', 'block');
+                            }
+                        }
+                    }
+                },
+                dataType: 'json'
+            });
+}
+
+
+function addBlogPost()
+{
+    var bPostTitle    = $('#blogpost_title').val();
+    var bPostDesc    = $('#blogpost_desc').val();
+    $.ajax({
+                type: "POST",
+                url: '<?php echo base_url()?>logged/my_blog/add_blog_post_detail',
+                data: 'blogposttitle='+bPostTitle+'&blogpostdesc='+bPostDesc+'&blogid=<?php echo $blogdata[0]['blogid']?>',
+                success: function(msg){
+                    
+                     $('.error-message').each(function(i){
+                        $(this).attr('style','display:none');
+                    });
+                    
+                    if(msg.result=='error')
+                    {
+                        for (var i in msg.msg) 
+                        { 
+                            $('#'+i).html(msg.msg[i]); 
+                            $('#'+i).attr('style','display:block');
+                        };
+                    }
+                    else if(msg.result=='success')
+                    {
+                        $('#show_more_feeds_div').hide();
+                        showUIMsg(msg.msg);
+                        $('#blogpostlist').html(msg.content);
+                        $('#blogpost_title').val('Type title here');
+                        $('#blogpost_desc').val('Max 500 Charaters');
+                        $('#no_article').hide();
+                        
+                        var articles = $('#articles').html();
+                        
+                        articles++;
+
+                        $('#articles').html(articles);
+                        
+                        if(msg.view_more==true)
+                        {
+                            
+                            $('#total_ajax_res').append('<div class="view_more" id="show_more_feeds_div"><a href="javascript:void(0);" id="show_more_feeds_link" page_value="'+msg.current_page+'" onclick="show_more_feeds('+msg.current_page+')">[view more] </a> </div>');
+                        }
+                            
+                    }
+                },
+                dataType: 'json'
+            });
+}
+
+
+
+</script>
+
+<script type="text/javascript">
+
+function show_more_feeds(page) {
+    
+    if(ajax_req_feeds!=null) {
+        ajax_req_feeds.abort();
+    }
+    
+    showUILoader_nodialog();
+    ajax_req_feeds = $.ajax({
+        type: 'get',
+        url: base_url+'logged/my_blog/blog_detail_AJAX/<?=$blogdata[0]['blogid']?>'+'/1/'+page,
+        dataType: 'json',
+
+        success: function (data, status) {
+//alert(data.current_page);
+            hideUILoader_nodialog();
+            if(data.html!='') {
+                $('#blogpostlist').append(data.html);
+                $('#show_more_feeds_link').attr('page_value', data.current_page);
+                $('#show_more_feeds_link').attr('onclick','');
+                $('#show_more_feeds_link').attr('onclick','show_more_feeds('+data.current_page+')');
+            }
+            else {
+                $('#blogpostlist').append('<div class="view_more" style="text-align: center;"><p class="blue_bold12" style="font-size:14px;">No more blog post.</p></div>');
+                $('#show_more_feeds_div').hide();
+            }
+            if(data.view_more==false)
+            {
+                $('#blogpostlist').append('<div class="view_more" style="text-align: center;"><p class="blue_bold12" style="font-size:14px;">No more blog post.</p></div>');
+                $('#show_more_feeds_div').hide();
+            }
+        }    // end of success function...
+    });
+}
+
+
+function showEdit(title,desc,id)
+{
+    $('#post_id').val(base64_decode(id));
+    $('#edit_blogpost_title').val(base64_decode(title));
+    $('#edit_blogpost_desc').val(base64_decode(desc));
+    show_dialog('blog_edit_div');
+}
+
+
+  
+function updateBlogPost(i_blog_postid){
+	$.ajax({
+	type: "POST",
+	url: $('#editBlogPostfrm'+i_blog_postid).attr('action'),
+	data: $('#editBlogPostfrm'+i_blog_postid).serialize()+'&blogid=<?php echo $blogdata[0]['blogid']?>',
+	success: function(data){
+		clear_all_error_msg();
+			if(data.result=='error')
+			{
+				for (var i in data.msg) 
+				{ 
+					$('#'+i).html(data.msg[i]); 
+					$('#'+i).attr('style','display:block;margin-left:125px;'); 
+				};
+			}
+			else if(data.result=='success')	
+			{
+				$('.wal-minus').trigger('click');
+				$('#blogpostlist').html(data.content);
+				showUIMsg(data.msg);
+			}
+		},
+	dataType: 'json'
+	});
+	
+}
+    
+    
+    
+    
+/*************************************************************************************
+*********************************SHOW COMMENTS JS****************************************
+**************************************************************************************/
+
+function ShowAddCommentDiv(postId)
+{
+    $('#postcmnts_postid').val(postId);
+    show_dialog('comment_div');
+}
+
+function add_comment_post(i_blog_postid){
+   $.ajax({
+	  type: "POST",
+	  url: $('#postcmnts_frm'+i_blog_postid).attr('action'),
+	  data: $('#postcmnts_frm'+i_blog_postid).serialize(),
+	  dataType: 'json',
+	  success: function(data){
+			  showUIMsg(data.msg);
+			  if(data.result=="success")
+			  {
+				  $('#postcmnts_txt'+i_blog_postid).val();
+				  $('.noOfCmnts_'+i_blog_postid).html(data.html);
+				  reset_('postcmnts_frm'+i_blog_postid);
+				  $('.wal-minus').trigger('click');
+			  }
+		  }
+	  
+	  });
+}
+function show_comments(i_blog_post_id)
+{
+		 
+	 showUILoader_nodialog('<img src="'+base_url+'images/loading_big.gif" width="50"/> ');
+		$.ajax({
+			
+			url: base_url +'logged/my_blog/NEW_fetch_comment_blogPost/'+i_blog_post_id,
+			dataType: 'json',
+			type: 'post',
+	
+			success: function (data, status) {
+				$('#blog_post_comment_div'+i_blog_post_id).html(data.html_data);
+				hideUILoader_nodialog();
+				showUIMsg(data.msg);
+			},
+			error: function(data, status, e) {
+				hideUILoader_nodialog();
+				showUIMsg("Error!");
+				
+			}
+		});
+				 
+		 
+  }
+  
+/*************************************************************************************
+*********************************END OF SHOW COMMENTS JS****************************************
+**************************************************************************************/
+
+function base64_decode (data) {
+    var b64 = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
+    var o1, o2, o3, h1, h2, h3, h4, bits, i = 0, ac = 0, dec = "", tmp_arr = [];
+
+    if (!data) {
+        return data;
+    }
+
+    data += '';
+
+    do {  // unpack four hexets into three octets using index points in b64
+        h1 = b64.indexOf(data.charAt(i++));
+        h2 = b64.indexOf(data.charAt(i++));
+        h3 = b64.indexOf(data.charAt(i++));
+        h4 = b64.indexOf(data.charAt(i++));
+
+        bits = h1<<18 | h2<<12 | h3<<6 | h4;
+
+        o1 = bits>>16 & 0xff;
+        o2 = bits>>8 & 0xff;
+        o3 = bits & 0xff;
+
+        if (h3 == 64) {
+            tmp_arr[ac++] = String.fromCharCode(o1);
+        } else if (h4 == 64) {
+            tmp_arr[ac++] = String.fromCharCode(o1, o2);
+        } else {
+            tmp_arr[ac++] = String.fromCharCode(o1, o2, o3);
+        }
+    } while (i < data.length);
+
+    dec = tmp_arr.join('');
+    dec = this.utf8_decode(dec);
+
+    return dec;
+}
+
+
+function utf8_decode ( str_data ) {
+    var tmp_arr = [], i = 0, ac = 0, c1 = 0, c2 = 0, c3 = 0;
+    
+    str_data += '';
+    
+    while ( i < str_data.length ) {
+        c1 = str_data.charCodeAt(i);
+        if (c1 < 128) {
+            tmp_arr[ac++] = String.fromCharCode(c1);
+            i++;
+        } else if ((c1 > 191) && (c1 < 224)) {
+            c2 = str_data.charCodeAt(i+1);
+            tmp_arr[ac++] = String.fromCharCode(((c1 & 31) << 6) | (c2 & 63));
+            i += 2;
+        } else {
+            c2 = str_data.charCodeAt(i+1);
+            c3 = str_data.charCodeAt(i+2);
+            tmp_arr[ac++] = String.fromCharCode(((c1 & 15) << 12) | ((c2 & 63) << 6) | (c3 & 63));
+            i += 3;
+        }
+    }
+
+    return tmp_arr.join('');
+}
+
+
+function search_blog_title_()
+{
+    var blog_id = $('#blog_id').val();
+    var title = $('#txt_search_blog_title').val();
+
+    
+//alert(blog_id+" : "+title);
+    
+    $.ajax({
+        url : base_url+"logged/my_blog/blog_detail_AJAX/"+blog_id+"/1",
+        type : "post",
+        dataType : 'json',
+        data : ({'blog_id':blog_id,"title":title,"if_posted" : 'y'}),
+        success : function(data)
+                {
+                    //alert("success");   
+                    //alert(data.html);
+                    if(data.html=='')
+                    {
+                        $('#blogpostlist').html('<div class="shade_box_01" style="padding-top:5px;"><div  class="shade_norecords" style="width:260px;"><p class="blue_bold12">No Article Post.</p></div></div>');
+                    }
+                    else
+                    {
+                        $('#blogpostlist').html(data.html);
+                        
+                    }
+                     hide_dialog(); 
+                     $('#txt_search_blog_title').attr('value',''); 
+                    
+                }
+    });
+}
+
+function empty(id)
+{
+    $('#'+id).attr('value','');
+}
+
+
+//-------------- delete ------------------
+function deleted_article_id_(article_id)
+{
+    $('#i_del_id').val(article_id);
+}
+function delete_article_()
+{
+    var id = $('#i_del_id').val();
+    
+    $.ajax({
+        url : base_url+"logged/my_blog/delete_article",
+        type : "post",
+        dataType : 'json',
+        data : ({'article_id':id}),
+        success : function(data)
+                {
+                    //alert("success");   
+                    //alert(data.html);
+                    showUIMsg(data.msg);
+                    /*$('#show_more_feeds_link').attr('page_value', data.current_page);
+
+                    $('#show_more_feeds_link').attr('onclick','');
+                    $('#show_more_feeds_link').attr('onclick','show_more_feeds('+data.current_page+')');
+                    if(data.html=='')
+                    {
+                        $('#blogpostlist').html('<div class="shade_box_01" style="padding-top:5px;"><div  class="shade_norecords" style="width:260px;"><p class="blue_bold12">No Article Post.</p></div></div>');
+                    }
+                    else
+                    {
+                        $('#blogpostlist').html(data.html);
+                        
+                        
+                    }
+                    if(data.view_more==false)
+                    {
+                        
+                        $('#show_more_feeds_div').hide();
+                    }*/
+                    
+                     hide_dialog(); 
+                     window.location.reload();
+                      
+                    
+                }
+    });
+}
+
+
+
+
+
+
+
+function reset_(form_id)
+{
+    $('#'+form_id)[0].reset();
+}
+
+function clear_all_error_msg()
+{
+    $('.error-message').each(function(i){
+        $(this).attr('style','display:none');
+    });
+}
+</script>
+
+

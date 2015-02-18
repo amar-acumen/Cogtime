@@ -1,0 +1,59 @@
+<script type="text/javascript">
+    //$.noConflict();
+$(document).ready(function() {
+      // alert('ok');
+       //  $('#myvideo_big_thumb_1').click(function(){
+$('[id^="myvideo_big_thumb_1_"]').live('click', function(){ 
+    console.log($(this));
+//alert($(this).attr('media_id'));
+  showLoading(); 
+  var media_id =  $(this).attr('media_id');
+  $.ajax({
+		type: 'post',
+		url: base_url+'logged/my_wall/get_video/',
+		data: ({'media_id' : media_id ,'width':329 ,'height':212}),
+
+		dataType: 'json',
+		success: function (data, status) {
+			if(data.result=='success') {
+				hideLoading();
+			   $('#myvideo_first_thumb_'+media_id).html(data.s_image_source.html);
+			   $('#myvideo_first_thumb_'+media_id).attr('i_media_id',data.i_media_id);
+			}
+		},
+		error: function (data, status, e) {
+			hideLoading();
+			showUIMsg('Some error occurred. Please try again.');
+		}
+	});
+});
+ //setTimeout(function(){ alert('dd'); }, 3000);
+// setTimeout(function(){ $('[id^="myvideo_big_thumb_1_"]').trigger('click'); }, 3000);
+  $('[id^="myvideo_big_thumb_1_"]').trigger('click');
+
+});
+</script>
+<?php
+//pr($result_arr);
+if( is_array($result_arr) && count($result_arr) ) :
+	foreach($result_arr as $feed) :
+		include(APPPATH.'views/newsfeed/my_profile_single_feed.phtml');
+	?>
+		<script language="javascript">
+		$(function(){
+			
+                        $('.wal-minus').click(function(){
+				$(this).parents('.comments-number').slideUp('fast');
+			})
+		});
+		</script>
+	<?php	
+	endforeach;
+else :
+?>
+
+<?php
+endif;
+?>
+<input type="hidden" id="current_page_1" name="current_page_1" value="<?=$current_page_1?>" />
+

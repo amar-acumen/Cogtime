@@ -1,0 +1,230 @@
+<?php include(APPPATH."views/layouts/logged_header.phtml");?>
+            <!-- NAVIGATION SECTION -->
+      <?php include(APPPATH."views/layouts/nav.phtml");?>
+      <!-- /NAVIGATION SECTION -->
+      </div>
+</div>
+<!-- /HEADER SECTION -->
+<div class="clr"></div>
+<!-- CONTENT SECTION -->
+<div id="content_section">
+      <div id="container">
+            <div id="mid_content">
+                 
+                 
+                  <!-- main container -->
+                  <div class="main-prayer-group">
+                      <!--buttons section start -->
+                     <div class="page_heading_01 grey">
+                       <div class="left"><?=$prayer_detail_arr['s_group_name']?></div>
+					</div>
+                        
+                      
+                      <div class="clr"></div>
+                      <ul class="back-prayer-option">
+									<li><a href="<?=base_url().'prayer-group.html'?>">Back to Prayer Group</a></li>
+						</ul>
+                      <!--buttons section end -->
+					  
+					  <!--payer notification start-->
+					  <div class="main-payer-section">
+                      <div class="payer-notification">
+						<div class="nw-right-heading"> 
+                           <div class="left"><h4>Create Prayer Room</h4></div>
+                        </div>
+						
+						<div class="notification-list-box">
+							<div class="Create-Prayer-box">
+								<div class="Prayer-Room">Prayer Room Name:</div>
+								<input type="text" name="txt_room_name" id="txt_room_name" class="amount-input prayer-No-input">
+                                 <div class="error-message" id="err_room_name" style=" margin-top: -5px;margin-left:130px;"></div>
+								 <div class="clr"></div>
+                                 
+                                <?php /*?> <div class="Prayer-Room">Prayer Room Password:</div>
+								<input type="password" name="txt_room_password" id="txt_room_password" class="amount-input prayer-No-input">
+                                 <div class="error-message" id="err_room_password" style="margin-top:-5px; margin-left:130px;"></div>
+								 <div class="clr"></div><?php */?>
+                                 
+                                 <div class="Prayer-Room">From:</div>
+								  <input style="width:150px; float:left;"   type="text"  value="" name="date_to1" id="date_to1"  readonly="readonly" class="amount-input cal_class"/>
+                                  <img src="images/icons/cal.png" alt="" class="cal_img right" onclick="$(this).prev().focus()" style="cursor:pointer; " />
+                                 <div class="error-message" id="err_date_to1" style="margin-top:-5px; margin-left:130px;"></div>
+								 <div class="clr"></div>
+
+                                 
+<!--                                 <div class="Prayer-Room">To:</div>
+								 <input type="text"  value="" name="date_end1" id="date_end1"  readonly="readonly" class="amount-input cal_class "/>
+                                  <img src="images/icons/cal.png" alt="" class="cal_img right" onclick="$(this).prev().focus()" style="cursor:pointer; " />
+                                 <div class="error-message" id="err_date_end1" style="margin-top:-5px; margin-left:130px;"></div>
+								 <div class="clr"></div>-->
+
+
+								<div class="Prayer-Room">Start Time :</div>
+                                <select class="select-box nw-select-box" name="todo_strt_frm" id="todo_strt_frm" onchange="generateEndtime($(this).val())">
+                                    <option value="-1">Select</option>
+                                    <?= makeOption_time() ?>
+                                </select>
+
+	                             <div class="error-message" id="err_todo_strt_frm" style="margin-top:-5px; margin-left:130px;"></div>
+								 <div class="clr"></div>
+
+<!--                                <span id="add_to_do_end_time"  >
+                                    <div class="Prayer-Room">End Time :</div>
+                                    <select name="todo_end_frm" id="todo_end_frm" class="select-box nw-select-box">
+                                        <?php /* ?><option value="-1">Select</option><?php */ ?>
+                                        <?= makeOption_time() ?>
+                                    </select>
+                                </span>
+
+                                <div class="error-message" id="err_todo_end_frm" style="margin-top:-5px; margin-left:130px;"></div>
+								 <div class="clr"></div>-->
+
+                             
+                                 
+                                 
+                                 <script type="text/javascript">
+											  
+											$(function(arg){
+                                                                                            var dateToday = new Date(); 
+                                                                        $.datepicker.setDefaults($.datepicker.regional['']);
+                                                                       $("#date_to1").datepicker({
+                                                                                            regional: 'en',
+                                                                                            dateFormat: 'yy-mm-dd',
+                                                                                            minDate: dateToday
+                                                                                        });
+                                                                                        });
+											   
+											  $(function(){
+												 var inputDate = $("#date_end1");
+												 var changeYearButtons = function() {
+													setTimeout(function() {
+													   $('.NextYrClass').remove();
+													   $('.PrevYrClass').remove();
+													   var widgetHeader = inputDate.datepicker("widget").find(".ui-datepicker-header");
+													   //you can opt to style up these simple buttons tho
+													   var prevYrBtn = $('<button title="PrevYr" class="PrevYrClass"></button>');
+													   prevYrBtn.bind("click", function() {
+														$.datepicker._adjustDate(inputDate, -1, 'Y');
+													   });
+													   var nextYrBtn = $('<button title="NextYr" class="NextYrClass"></button>');
+													   nextYrBtn.bind("click", function() {
+														$.datepicker._adjustDate(inputDate, +1, 'Y');
+													 
+													   });
+													   prevYrBtn.appendTo(widgetHeader);
+													   nextYrBtn.appendTo(widgetHeader);
+											  
+												  }, 0);
+												 };
+											  
+											  		$("#date_end1").datepicker({
+															beforeShow: changeYearButtons,
+															onChangeMonthYear: changeYearButtons,
+															dateFormat : 'yy-mm-dd'
+												  			//timezone: "+0100" ,
+															// minDate: new Date(<?=(date('Y'))?>, <?=(date('m')-1)?>, <?=(date('d'))?> ,  0, 00),
+															 //controlType: 'select',
+																//   stepMinute: 15
+														   });
+														
+											  });
+											   
+											   
+												
+                                                </script>
+                                 
+                                 
+                                 
+                                 
+								 <div class="mem-invite-Room">Invite Member:</div>
+								 
+								 <div class="Member-display">
+                                 <?php if(count($prayer_member_arr)){
+								  		foreach($prayer_member_arr as $key => $val){
+											
+											$profile_image = get_profile_image($val['post_owner_user_id'],'thumb');
+											
+											
+								  ?>
+									  <div class="mem-list">
+										 <input  type="checkbox" checked="checked"  value="<?=encrypt($val['post_owner_user_id'])?>" id="chkmember<?=$val['post_owner_user_id']?>" name="chkmember<?=$val['post_owner_user_id']?>">
+                                        <div class="" style="background:url(<?php echo $profile_image;?>) no-repeat center;width:60px; height:60px;  border: 3px solid #666666; float: right;" ></div>
+                                        
+									  </div>
+                                 <?php 		}
+								 		}
+								  ?>
+								 </div>
+								 <div style="margin-left: 10px;" class="error-message" id="err_send_recepients"></div>
+								 <div class="clr"></div>
+                                 <input type="hidden" id="group_id" value="<?=$prayer_group_id?>" />
+								 <input type="button" class="yellow-btn margin-auto" value="invite" name="" onclick="invite_chat_member()">
+                                 
+							
+							</div>
+						</div>
+					  
+					  </div>
+                      
+                      
+					  <!--prayer wall eight start -->
+                      <?php include(APPPATH.'views/logged/holy_place/prayer_group/group_member_list.phtml');?>
+                      <!--prayer wall eight end  -->                     
+					  </div>
+					 
+					  <!--payer notification end-->
+                      
+                  	  <div class="clr"></div> 
+                  </div>
+                  <!-- /main container -->
+                 
+            </div>
+      </div>
+      <div class="clr"></div>
+</div>
+<!-- /CONTENT SECTION -->
+<div class="clr"></div>
+<!-- FOOTER SECTION -->
+<?php include(APPPATH."views/layouts/footer.phtml");?>
+<!-- /FOOTER SECTION -->
+
+<script>
+function generateEndtime(start_time)
+{
+	 var id = $('#i_list_id').val();
+	 showUILoader_nodialog('<img src="'+base_url+'images/loading_big.gif" width="50"/> ');
+  
+		 $.ajax({
+			 type: "get",
+			 url: base_url+'logged/organizer_day_view/generate_end_time_list/'+start_time,
+			 dataType:"json",
+			 success: function(json_response){
+				 
+				  if(json_response.success == true) {
+					   showUIMsg(json_response.msg);
+						
+						//hide_dialog('edit_list');
+						
+						$('#todo_end_frm').html('');
+						$('#todo_end_frm').html(json_response.sel_html);
+						$('#add_to_do_end_time').attr('style','display:block;');
+						$('#add_to_do_end_time').show();
+						//$('#end_time_select').show();
+						hideUILoader_nodialog();
+				  }
+				  else {
+					   
+					  // alert(json_response.success +' al '+ 2+ ' id: '+ id);
+					   $('#add_to_do_end_time').attr('style','display:none;');
+					   hideUILoader_nodialog();
+					  //showUIMsg('Some error occurred. Please try again.');
+				  }
+			  },
+			  error: function(){
+				 hideUILoader();
+				 //hide_dialog('edit_list');
+				  showUIMsg('Some error occurred. Please try again.');
+			  }
+		  });	 
+}
+</script>

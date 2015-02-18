@@ -1,0 +1,123 @@
+<div class="clr"></div>
+<!-- CONTENT SECTION -->
+<!--navigation section start -->
+<?php include(APPPATH."views/layouts/admin/admin_nav.phtml");?>
+<!--navigation section end -->
+<div id="content_section">
+      <div id="container">
+            <!--<div id="top_corner">&nbsp;</div> -->
+            <div id="mid_content">
+                  <div class="page_heading left">
+                        <div class="left"><img src="../images/icons/login.png" alt="" /> Soundcloud API  Settings</div>
+                  </div>
+                  <div class="clr"></div>
+                  <div id="right_container">
+                        <div class="arrow_btm"></div>
+                         <form name="user_alerts" id="user_alerts" method="post"  onsubmit="return false;" >  
+                        <div class="content_area frm_box">
+                              
+                              <div class="lable01"> Client ID :</div>
+                              <div class="field01">
+                                    <input name="client_id" type="text" value="<?=$posted['client_id']?>"  />
+                              </div>
+                              <div class="error-message" id="err_client_id"></div>
+                              <div class="clr"></div>
+                              <div class="lable01">Client Secret :</div>
+                              <div class="field01">
+                                    <input name="client_secret" type="text" value="<?=$posted['client_secret'] ?>" />
+                              </div>
+                              <div class="error-message" id="err_client_secret"></div>
+                              <div class="clr"></div>
+                             <div class="lable01">User id :</div>
+                              <div class="field01">
+                                    <input name="user_id" type="text" value="<?=$posted['api_user_id'] ?>" />
+                              </div>
+                              <div class="error-message" id="err_user_id"></div>
+                              <div class="clr"></div>
+                              <div class="clr"></div>
+                             <!-- <div class="lable01"> No of RSS item in RSS Feed :</div>
+                              <div class="field01">
+                                    <input name="" type="text" value="20" />
+                              </div>
+                              <div class="error-message">* Required Field</div>
+                               <div class="clr"></div> 
+                               <div class="lable01"> User Password Expires Every :</div>
+                              <div class="field01">
+                                    <select name="category" id="pass-expire" style="width:412px; margin-bottom:5px;">
+                                            <option>6 Months</option>
+                                            <option>12 Months</option>
+                                      </select>
+                                      <script type="text/javascript">
+                                        $(document).ready(function(arg) {
+                                            $("#pass-expire").msDropDown();
+                                            $("#pass-expire").hide();
+											$('#pass-expire').css("width", "412px"); 
+                                        })
+                                    </script>
+                              </div>
+                              <div class="error-message">* Required Field</div>
+                               <div class="clr"></div>-->
+                              <div class="lable01"> </div>
+                              <div class="field01">
+                                    <input name="" type="submit" class="btn"  value="Save" />
+                                    <input name="" type="button" class="btn"  value="Cancel" />
+                              </div>
+                              <div class="clr"></div>
+                        </div>
+                        </form>
+                  </div>
+                  <div class="clr"></div>
+            </div>
+            <!--<div id="bot_corner">&nbsp;</div> -->
+      </div>
+      <div class="clr"></div>
+</div>
+<!-- /CONTENT SECTION -->
+
+<script type="text/javascript">
+$(document).ready(function(arg) {
+	
+
+ $('#user_alerts').submit(function(){
+						
+				  var datatosend=$("#user_alerts").serialize();
+				 // alert(datatosend);
+				  showBusyScreen();
+											  
+					  $.ajax({
+						 type: "POST",
+						 url: base_url+"admin/media_center/api_settings/edit_info",
+						 data: datatosend,
+						 dataType: 'json',
+						 success: function(data){
+							
+							if(data.success==false) 
+							{
+								
+						
+								$('.error-message').each(function(i){
+									$(this).attr('style','display:none');
+                                                                       // alert(i)
+								});
+								
+								
+								for ( var id in data.arr_messages ){
+									//alert('#err_'+id);
+									if( $('#err_'+id) != null ) {
+                                                                           // alert('#err_'+id);
+										$('#err_'+id).html(data.arr_messages[id]);
+										$('#err_'+id).css('display', 'block');
+									}
+								}
+						
+								
+							}
+							
+							hideBusyScreen(); 
+							showUIMsg(data.msg);
+						 }
+					   });	 
+				});
+ 
+ });
+</script>

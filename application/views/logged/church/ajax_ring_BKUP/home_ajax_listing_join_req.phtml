@@ -1,0 +1,52 @@
+<div class="div_content" style=" margin-top:0px;">
+
+							<?php
+							
+							if($ringdata)
+							{
+								#pr($ringdata);
+								foreach($ringdata as $ring_inv_val)
+								{
+									$LOGO	= get_profile_image($ring_inv_val['invitedid'],'thumb');
+									$ring_detail_link	= base_url().'rings/'.$ring_inv_val['ringid'].'/ring-home.html';
+							?>
+                              
+                               <div class="shade_box_01" style="padding-top:5px;">
+                                    <div class="txt_content"> <a href="javascript:void(0);"><div class="pro_photo_new" style="background:URL('<?=get_ring_photo_by_id($ring_inv_val['ringid'])?>') no-repeat center; width:73px; height:72px; background-color:#fff"></div></a>
+                                          <div class="left_div01" style="width:260px;">
+                                               
+                                                <p><strong><?=$ring_inv_val['s_ring_name']?></strong></p>
+                                                 <p class="blue_bold12">
+												<?php
+													if($ring_inv_val['if_already_friend'] == 'true' || $ring_inv_val['already_added_netpal'] == 'true'){
+													$profile_link = get_profile_url($ring_inv_val['invitedid'],$ring_inv_val['s_profile_name']);
+													}else
+													{
+													$profile_link = get_profile_url_prayer_partner($ring_inv_val['invitedid'],$ring_inv_val['s_profile_name']);
+													}										
+												?>
+												<a href="<?php echo $profile_link?>"><?php echo $ring_inv_val['s_profile_name']?></a></p>
+                                                <p style="padding-bottom:0px;">Requested On: <?php echo getShortDate($ring_inv_val['dt_created_on'],5)?> </p>
+                                                <p><?php echo my_substr($ring_inv_val['s_request_detail'],55)?></p>
+												 
+                                          </div>
+                                            <div style="width:150px;" class="right_div02">
+                                                  <p style=""> 
+                                                        <img src="images/icons/icon-19.png" alt="" /> 
+                                                         <a href="javascript:void(0);" class="blue_link" onclick="acceptDeclineInvitation('<?php echo encrypt($ring_inv_val['ringid'])?>','<?php echo encrypt($ring_inv_val['invitedid'])?>','<?php echo encrypt($ring_inv_val['id'])?>','accept')">Accept</a>  
+                                                         &nbsp;  &nbsp;  <img src="images/icons/dec.png" alt="" /> 
+                                                         <a  href="javascript:void(0);" class="blue_link" onclick="acceptDeclineInvitation('<?php echo encrypt($ring_inv_val['ringid'])?>','<?php echo encrypt($ring_inv_val['invitedid'])?>','<?php echo encrypt($ring_inv_val['id'])?>','decline')">Decline</a></p>
+                                                 </div>
+                                          <div class="clr"></div>
+                                    </div>
+                              </div>
+                              <?php
+								}
+							}
+							?>
+</div>
+<input type="hidden" id="current_page" name="current_page" value="<?=$current_page_1?>"  />                     
+
+                            
+                            
+

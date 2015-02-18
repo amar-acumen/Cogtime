@@ -1,0 +1,72 @@
+ <div class="arrow_btm"></div>
+    <div class="div_content" style=" margin-top:0px;">
+        <?php //pr($result_arr);
+				if(count($result_arr) >0):
+					foreach($result_arr as $key=>$val):	
+						
+						$name = $val['s_displayname'];
+						$country_name = get_country_name_by_id($val['i_country_id']);
+						$add = array();
+						if(!empty($val['s_city']))
+							$add['city']=$val['s_city'];
+						if(!empty($val['s_state']))
+							$add['state']=$val['s_state'];
+						if(!empty($country_name))    
+							$add['country']=$country_name;
+						
+						
+						$address = implode(', ',$add);
+						$img = get_profile_image($val['i_accepter_id'], 'thumb');	
+						$user_id =$val['i_accepter_id'];
+                        
+                        //$profile_link = get_profile_url($val['i_accepter_id'],$val['s_displayname']);
+						//$profile_link = get_public_profile_url($val['user_id'],$val['s_displayname']); 
+						 if($val['if_already_friend'] == 'true' || $val['already_added_netpal'] == 'true'){
+							$profile_link = get_profile_url($val['user_id'],$val['s_displayname']);
+						}else
+						{
+						   $profile_link = get_public_profile_url($val['user_id'],$val['s_displayname']); 
+						}
+		
+		?> 
+        
+        
+         <div class="shade_box_blue" style="padding-top:5px;" id="sent_request_<?=$user_id?>"> 
+             <div class="txt_content compact-box">
+                 <a href="<?= $profile_link;?>"><div class="pro_photo2" style="background:url(<?=$img?>) no-repeat center;width:60px; height:60px;" ></div><!--<img src="images/alex.jpg" alt="" class="pro_photo2" />--></a>
+                  <div class="left_div01">
+                        <p class="blue_bold12"><a href="<?= $profile_link;?>"><?=$name?></a></p>
+                        <p class="location"><?=$address?></p>
+                        <p class="date-time">Connected Since : <?=getShortDateWithTime($val['dt_created_on'],6)?> </p>
+                  </div>
+                   <div class="right_div02">
+                        <p class="add-remove-friend"><img src="images/icons/frnd_request.png" alt="" /> <a  href="javascript:void(0);" id="invite_friend_<?=($val['i_accepter_id'])?>" onclick="invite_friend_('<?=encrypt($val['id'])?>')">Re-send Friend Request</a></p>
+                        <p class="add-remove-friend"><img src="images/icons/close.png" alt="" /> <a  href="javascript:void(0);" id="cancel_friend_<?=($user_id)?>" onclick="cancel_friend_('<?=$user_id?>')">Cancel</a></p>
+                    </div>
+                  <div class="clr"></div>
+               </div>
+       </div>
+       <?php 
+	    		endforeach;
+				
+		?>
+        <?php if($page_links){ ?>
+        <div class="pagination">
+        
+        <div class="left">Viewing Page <?=$current_loaded_page_no?> of <?=$total_pages?> </div>
+        
+        <div class="right">
+               <ul class="small-paging">
+                <?=$page_links?> 
+                </ul>
+        </div>
+        </div>
+		<?php  }?>
+        <?php
+				else:
+					echo '<div class="shade_box_blue" style="padding-top:5px;"><div  class="shade_norecords"><p class="blue_bold12">No Friend Request Sent.</p></div></div>';
+				endif;
+	   ?>
+       
+  </div>
+ 

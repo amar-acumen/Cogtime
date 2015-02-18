@@ -1,0 +1,168 @@
+<div class="div_content" style=" margin-top:0px;">
+
+							<?php
+						//pr($prod_data);
+							  $logged_user_id = intval(decrypt($this->session->userdata('user_id')));
+							  $user_info = get_primary_user_info($logged_user_id);
+									//pr($user_info);
+							if($prod_data)
+							{
+								foreach($prod_data as $product)
+								{
+									$LOGO	= base_url().'uploads/e_trade_product/'.getThumbName($product['s_image'],'thumb');
+									//$ring_detail_link	= base_url().'rings/'.$product['ringid'].'/ring-home.html';
+									$CSS = ($product['i_user_id']==intval(decrypt($this->session->userdata('user_id'))))?
+												'style=" border-bottom:1px solid #DDDDDD;  margin-bottom:10px !important;"':'';
+									
+							?>
+							  <div class="ne-etrade-product-category-list" <?=$CSS?> >
+									<div class="thumb">
+                                    	<div class="img_div" style="background:url(<?php echo $LOGO?>) no-repeat center #fff;" onclick="window.location='<?php echo base_url()?>etrade/<?php echo $product['id']?>/detail.html'"></div>
+                                    </div>
+									<div class="thumb-right">
+                                    	<?php
+										if($product['i_user_id']!=intval(decrypt($this->session->userdata('user_id'))))
+										{
+										?>
+										<?php /*?><ul class="pro-categorylist">
+											<li><a href="<?php echo base_url()?>etrade/<?php echo $product['id']?>/detail" ><?php echo $product['s_category_name']?></a></li>
+											<li>I</li><li>
+											</li><li><a href="javascript:void(0)">Similar Products</a></li>
+										</ul><?php */?>
+                                        <?php
+										}
+										else
+										{
+											?>
+                                            <ul class="pro-categorylist">
+                                                <li><a href="javascript:void(0)" onclick="show_dialog('delete-product');$('#i_prod_id').val('<?php echo $product['id']?>');">Delete</a></li>
+                                                <li>I</li><li>
+                                                </li><li><a href="<?php echo base_url()?>etrade/<?php echo $product['id']?>/edit-product">Edit</a></li>
+											</ul>
+                                            <?php
+										}
+										?>
+										<br class="clear"/>
+									
+										<div class="heading-etrade"><strong><?php echo $product['product_id']?></strong></div>
+										<div class="heading-etrade" style="cursor:pointer;" onclick="window.location='<?php echo base_url()?>etrade/<?php echo $product['id']?>/detail.html'"><?php echo $product['s_name']?></div>
+										<p class="attribute1">
+										 <?php echo substr($product['s_attribute1'],0,100)?>
+										</p>
+                                       
+									</div>
+									<ul class="ne-etrade-breadcrumb2">
+											<li>Condition: <?php echo ($product['i_condition']==1)?'New':'Old'?></li>
+											<li>Stock: <?php echo $product['i_stock']?></li>
+											<li>Unit Price: $<?php echo $product['f_unit_price']?> 
+                                            <a class="view-shipping-free" href="javascript:void(0);" onclick="showShippingFee('<?php echo $product['id']?>')">View Shipping Fee</a>
+											<!--slide view shipping free-->
+												<div class="slide-view-shipping-free attribute1" id="shippingfee_<?php echo $product['id']?>">
+													<p><strong> Local Shipping Fee :</strong> <?php echo get_price($product['f_local_shipping_cost'])?></p>
+													<p><strong> International Shipping Fee :</strong> <?php echo get_price($product['f_international_shipping_cost'])?></p>
+												</div>
+											<!--slide view shipping free-->
+											</li>
+											<li>Posted On: <?php echo getShortDate($product['dt_insert_time'],5)?></li>
+											<li>Seller From: <?=get_user_address_info($product['i_user_id'])?></li>
+											<li>
+												Seller Rating : 
+												<?php
+												$avgrate	= round((($product['f_rate_for_seller_item']+$product['f_rate_for_seller_communication']+$product['f_rate_for_seller_time'])/3),1);
+												echo show_rating($avgrate);
+												?>
+											</li>
+									</ul>
+							<!--Quantity Section-->
+                            <!--Quantity Section-->
+							  <p class="attribute1">
+								<strong> Details: </strong><?php echo substrws($product['s_description'],70)?>
+                              </p>
+                                <br class="clr"/>
+                                <a class="view_more" href="<?php echo base_url()?>etrade/<?php echo $product['id']?>/detail.html">Read More</a>
+                                
+                                
+							   </div>
+                            
+                            <?php
+                            if($product['i_user_id']!=intval(decrypt($this->session->userdata('user_id'))))
+							{
+							?>
+								<div class="ne-etrade-quantity-section" id="req_buy_<?php echo $product['id']?>">
+								
+									  <div class="ne-etrade-product">
+                                      	<form action="" method="" id="frmReq<?php echo $product['id']?>">
+                                         <input type="hidden" name="id" value="<?php echo encrypt($product['id'])?>" />
+                                         <label class="subproduct subproduct-width"> Quantity :</label>
+                                         <input class="reqqty_txt" type="text" name="qty" value=""  />
+                                          <input type="button" class=" change-request-btn-margin yellow-btn" value="Request to Buy" name="" onclick="sendRequest($(this),'<?php echo $product['id']?>')" />
+                                         
+                                         <a href="javascript:void(0);" class="change-contact-det" onclick="showContactSection('<?php echo $product['id']?>');">Update contact detalis</a>
+                                         <br class="clear"/>
+                                         <div class="changes-contact-section" id="contact-section_<?php echo $product['id']?>">
+                                             <label class="subproduct subproduct-width"> Email :</label>
+                                             <input type="text" name="email" value="<?=$user_info['s_email']?>" style="float:left; width:257px; margin-right:5px;" />
+                                              <br class="clear"/>
+                                             <label class="subproduct subproduct-width"> Phone :</label>
+                                             <input type="text" name="phone" value="<?=$user_info['s_mobile']?>" style="float:left; width:257px; margin-right:5px;" />
+                                              <br class="clear"/>
+                                         </div>
+                                         <br class="clear"/>
+                                        
+                                         </form>
+								 		<br class="clr"/>
+								 	  <?php /*?><p class="attribute1" >Accepting International Sell <a class="error_txt disclaimer-link" href="javascript:void(0)" onclick="showDisclaimer('<?php echo $product['id']?>');">Read Disclaimer</a></p>
+									  <div class="read-disclaimer attribute1" id="disclaimer_<?php echo $product['id']?>"> 
+										  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec velit odio, pulvinar eu tincidunt id,
+										  tincidunt eu mauris. Aliquam ac tortor massa, sit amet interdum libero. Pellentesque arcu est, venenatis ut convallis nec, 
+										  sollicitudin eget nisl. Suspendisse hendrerit luctus nibh, quis faucibus arcu pretium sit amet. Pellentesque dui enim, imperdiet 
+										  in accumsan eu, interdum sed neque. Quisque vitae magna eget metus ultricies facilisis. Donec malesuada sagittis fringilla. 
+										  Phasellus blandit nisi congue urna vestibulum adipiscing.
+									  </div><?php */?>
+							  		</div>
+								</div>
+                            <?php
+							}
+							?>
+							
+                            <?php
+								}
+							}
+							?>
+</div>
+<input type="hidden" id="current_page" name="current_page" value="<?=$current_page_1?>"  />                     
+
+                            
+<script type="text/javascript">
+$(function(){
+		
+			
+			
+			
+	});
+function sendRequest(obj,id)
+{
+	$.ajax({
+			"type":'post',
+			"data":$('#frmReq'+id).serialize(),
+			"dataType":'json',
+			"url":'<?php base_url()?>logged/e_trade/sendrequest',
+			"success": function(data)
+						{
+							if(data.success==false)
+							{
+								showUIMsg(data.msg);
+							}
+							else
+							{
+								obj.prev().prev().slideUp();
+								$('#frmReq'+id+' .reqqty_txt').val('');
+								showUIMsg(data.msg);
+							}
+						}
+		
+		});
+}
+
+</script>                          
+

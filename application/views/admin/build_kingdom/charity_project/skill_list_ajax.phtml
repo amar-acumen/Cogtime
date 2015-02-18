@@ -1,0 +1,85 @@
+<table width="100%" border="0" cellspacing="0" cellpadding="0" class="admin-table">
+     
+      <tr>
+        <th align="left" valign="middle" height="30" width="250">Donor's Name</th>
+        <th align="left" valign="middle" height="30" width="250">Skill Offered</th>
+        <th align="left" valign="middle" height="30" width="250">Period (date to date)</th>
+        <th align="center" valign="middle" height="30" class="last" width="105">Actions</th>
+      </tr>
+      <?php #pr($info_arr);
+	  		if(count($info_arr)){
+				foreach($info_arr as $key=>$info){
+				
+				/*if($info['e_status'] == 'accepted')
+					$status = 'Suspended';
+				else if($info['e_status'] == 'pending' || $info['e_status'] == 'suspended')
+					$status = 'Approved';*/
+				$css = "";
+				if($info['e_status'] == 'accepted'){
+					$status = 'Approved';
+					$css = "blue_btn";
+				}
+				else if($info['e_status'] == 'pending' ){	
+					$status = 'Pending';
+					$css = "orange_btn";
+				}
+				else if($info['e_status'] == 'suspended'){
+					$status = 'Suspended';
+					$css = "new_red_btn";
+				}
+				
+	  ?>
+      
+      <tr id="req_row_<?=$info['s_id']?>">
+        <td align="left" valign="top"><?=$info['s_profile_name']?></td>
+        <td align="left" valign="top"><?=$info['s_skill_name']?></td>
+        <td align="left" valign="top"><?=getShortDate($info['d_start_date'],5)?> to <?=getShortDate($info['d_end_date'],5)?></td>
+        
+        <td align="center" valign="middle" class="last">
+        
+        <?php /*?><input name="" title="Edit" type="button" class="edit-button"  value="" onclick="return show_dialog('edit-skill')"/><?php */?>
+        <input name="" title="Edit" type="button" class="dwnld-button"  value="" onclick="window.location='<?=admin_base_url().'build_kingdom/charity_projects/downloadResume/'.$info['s_id']?>'"/>
+        <input name="" title="Delete" type="button" class="delete-button"  value="" onclick="ShowDonationDelete(<?php echo $info['s_id'] ?>);"/>
+        
+        <?php if($info['e_status'] == 'pending'){ ?>
+               
+                <span id="<?=$info['s_id']?>_status">
+                <input name="" title="Approved" type="button" class="btn-03 <?=$css?>"  onclick="javascript:show_suspend_popup(<?php echo $info['s_id'] ?> , 'accepted' , '<?php echo $info['e_status'] ?>','<?=$info['id']?>')"  value="<?=$status?>"/>
+                </span>
+		<?php 
+            } 
+            else if($info['e_status'] == 'accepted'){?>
+                <span id="<?=$info['s_id']?>_status">
+                <input name="" title="Suspended" type="button" class="btn-03 <?=$css?>"  onclick="javascript:show_suspend_popup(<?php echo $info['s_id'] ?> , 'suspended' , '<?php echo $info['e_status'] ?>' ,'<?=$info['id']?>')"  value="<?=$status?>"/>
+                </span>
+        
+        <?php }
+			else if($info['e_status'] == 'suspended'){
+		?>
+        	 <span id="<?=$info['s_id']?>_status">
+                <input name="" title="Approved" type="button" class="btn-03 <?=$css?>"  onclick="javascript:show_suspend_popup(<?php echo $info['s_id'] ?> , 'accepted' , '<?php echo $info['e_status'] ?>' ,'<?=$info['id']?>')"  value="<?=$status?>"/>
+             </span>
+        <?php
+			}
+		 ?>
+        </td>
+      </tr>
+      
+      <?php 
+				}
+			}
+		else{
+	?>
+		 <tr>
+			  <td style="text-align:center;" height="80" colspan="20">No data available!!!</td>
+		 </tr>
+	
+	<?php
+		}
+	?>
+      
+ </table>
+ 
+ <div class="paging">
+            <ul><?= $page_links ?></ul>
+</div>

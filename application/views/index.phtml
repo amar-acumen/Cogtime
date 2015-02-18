@@ -1,0 +1,178 @@
+<?php
+ 	include(APPPATH ."views/layouts/header.phtml");
+	
+	# include banner file...
+	include(APPPATH ."views/layouts/banner.phtml");
+?>
+
+<!-- CONTENT SECTION  A-->
+<!-- CONTENT SECTION -->
+<div id="content_section">
+    <div id="container">
+    	<!--know about cogtime start -->
+    	<div class="know-about">
+        	<h2>Know About Cogtime</h2>
+            <!--container -->
+            <div class="know-about-container">
+            
+            <?php  $VID_IMG = base_url()."uploads/hp_cms_video/".getThumbName($hp_cms_content['s_video_image_2'],'bigthumb'); ?>
+                  
+                  <div class="cogtime-video" id="myvideo_first_thumb" style="background:url() no-repeat center;" i_media_id="<?=$i_media_id?>"></div>
+                <div  id="myvideo_big_thumb_1" media_id="<?=$hp_cms_content['id']?>">
+                	 <?php /*?><img src="images/play-icon.png" id="play_video" alt="Play" class="play-icon" /><?php */?>
+               </div> 
+            
+            
+            <p><?php echo nl2br($hp_cms_content['s_content_1']);?></p>
+            </div>
+            <!--container end -->
+        </div>
+    	<!--know about cogtime end -->
+        
+        <!--upcoming events -->
+        <div class="upcoming-events">
+        <h2>Upcoming Events</h2>
+        <!--container -->
+        <div class="upcoming-events-container">
+        	<ul>
+            	<?php
+						if(count($hp_events) > 0)
+						{
+							foreach($hp_events as $val){
+								$title = my_substr(html_entity_decode(htmlspecialchars_decode($val['s_title']),ENT_QUOTES,'utf-8'), 68);
+								$desc = my_substr(html_entity_decode(htmlspecialchars_decode($val['s_desc']),ENT_QUOTES,'utf-8'), 74);
+								$detail_url = get_events_detail_url($val['id']);
+								
+								$IMG_THUMB_PATH = base_url() ."uploads/events_photo/";
+								$name=getThumbName($val['s_image_1'],'thumb'); 
+								$IMG_THUMB = $IMG_THUMB_PATH . $name;
+				?>
+            
+            					<li><img src="<?=$IMG_THUMB?>" alt="prayer meeting" />
+                    <div class="events-container-inside">
+                        <p class="title"><a href="<?=$detail_url?>"><?=$title?></a></p>
+                        <p class="date" style="color:#000 !important; font-size:13px;"><?=getShortDate($val['dt_start_time'], 9)?></p>
+                        <p><?=$desc?></p>
+                    </div>
+                </li>
+                
+                <?php 
+						 }
+					  }
+					  else{
+						  
+						  echo '<div style="margin-top:125px; margin-left:95px;"><p>No Upcoming Events.</p></div>';
+					  }
+				
+				?>
+            </ul>
+           <?php 
+		   if(count($hp_events) > 0){
+		   ?> 
+            <a href="<?=base_url().'upcoming-events.html'?>" class="view-all" style="color:#000;">view all..</a>
+            <?php }?>
+        </div>
+        <!--container end -->
+        </div>
+        <!--upcoming events end -->
+        
+        <!--what people say start-->
+        <div class="people-say">
+        	<h2>What People Say!</h2>
+            <div class="people-say-container">
+                  <?php  $VID_IMG = base_url()."uploads/hp_cms_video/".getThumbName($hp_cms_content['s_video_image'],'bigthumb'); ?>
+                  
+                  <div class="cogtime-video" id="myvideo_thumb" style="background:url() no-repeat center;" i_media_id="<?=$i_media_id?>"></div>
+                <div  id="myvideo_big_thumb" media_id="<?=$hp_cms_content['id']?>">
+                	 <?php /*?><img src="images/play-icon.png" id="play_video" alt="Play" class="play-icon" /><?php */?>
+               </div> 
+             
+               <?php /*?> <iframe frameborder="0" width="338" height="190" src="<?= $hp_cms_content['s_video_url'] ?>"></iframe><?php */?>
+               <p> <?php echo  nl2br($hp_cms_content['s_content_2']);?></p>
+            </div>
+        </div>
+        <!--what people say end -->
+    </div>
+</div>
+<!-- /CONTENT SECTION -->
+<div class="clr"></div>
+
+<!-- /CONTENT SECTION -->
+  
+  
+<?php
+	include(APPPATH ."views/layouts/footer.phtml");
+?>
+
+<!--videos posts  -->      
+<script language="javascript">
+  $(document).ready(function() {
+
+  $('#myvideo_big_thumb').click(function(){
+	showLoading();
+	var media_id = $('#myvideo_big_thumb').attr('media_id');
+	//alert(media_id);
+	$.ajax({
+		  type: 'post',
+		  url:base_url+'index/get_media/',
+		  data: ({'media_id' : media_id ,'width':329 ,'height':190}),
+  
+		  dataType: 'json',
+		  success: function (data, status) {
+			  if(data.result=='success') {
+				  hideLoading();
+				  //alert(data.i_media_id);
+				  //alert(data.s_image_source.html);
+				 $('#myvideo_thumb').html(data.s_image_source.html);
+				 $('#myvideo_thumb').attr('i_media_id',data.i_media_id);
+			  }
+			  
+			  
+		  },
+		  error: function (data, status, e) {
+			  hideLoading();
+			  showUIMsg('Some error occurred. Please try again.');
+			  
+		  }
+	  });
+	
+  
+  });
+  
+  $('#myvideo_big_thumb_1').click(function(){
+	showLoading();
+	var media_id = $('#myvideo_big_thumb_1').attr('media_id');
+	//alert(media_id);
+	$.ajax({
+		  type: 'post',
+		  url:base_url+'index/know_about_cogtime_video/',
+		  data: ({'media_id' : media_id ,'width':310 ,'height':190}),
+  
+		  dataType: 'json',
+		  success: function (data, status) {
+			  if(data.result=='success') {
+				  hideLoading();
+				  //alert(data.i_media_id);
+				  //alert(data.s_image_source.html);
+				 $('#myvideo_first_thumb').html(data.s_image_source.html);
+				 $('#myvideo_first_thumb').attr('i_media_id',data.i_media_id);
+			  }
+			  
+			  
+		  },
+		  error: function (data, status, e) {
+			  hideLoading();
+			  showUIMsg('Some error occurred. Please try again.');
+			  
+		  }
+	  });
+	
+  
+  });
+  
+ $('#myvideo_big_thumb').trigger('click');
+ $('#myvideo_big_thumb_1').trigger('click');
+  
+  });
+</script>
+<!--videos posts  -->	

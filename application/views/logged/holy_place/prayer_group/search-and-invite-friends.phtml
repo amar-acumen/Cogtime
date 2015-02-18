@@ -1,0 +1,313 @@
+<link rel="stylesheet" type="text/css" href="<?php echo  base_url()?>css/jquery.multiselect.css" />
+<link rel="stylesheet" type="text/css" href="<?php echo  base_url()?>css/jquery.multiselect.filter.css" />
+<link rel="stylesheet" type="text/css" href="<?php echo  base_url()?>css/prettify.css" />
+<link rel="stylesheet" type="text/css" href="<?php echo  base_url()?>css/jquery-ui-1.8.2.custom.css" />
+<script type="text/javascript" src="<?php echo  base_url()?>js/jquery.multiselect.js"></script>
+<script type="text/javascript" src="<?php echo  base_url()?>js/jquery.multiselect.filter.js"></script>
+<script type="text/javascript" src="<?php echo  base_url()?>js/prettify.js"></script>
+<script type="text/javascript">
+$(function(){
+		$("#friendSlct").multiselect().multiselectfilter();	
+		$("#ringselect").multiselect().multiselectfilter();
+		$("#netpalselect").multiselect().multiselectfilter();
+		$("#ppselect").multiselect().multiselectfilter();	
+		$("#pgselect").multiselect().multiselectfilter();
+		$("#frndinv").multiselect().multiselectfilter();	
+		$("#netpalinv").multiselect().multiselectfilter();
+		$("#ppinv").multiselect().multiselectfilter();
+		$("#ringinv").multiselect().multiselectfilter();
+		
+	
+	});
+	
+</script>
+<?php include(APPPATH."views/layouts/logged_header.phtml");?>
+            <!-- NAVIGATION SECTION -->
+      <?php include(APPPATH."views/layouts/nav.phtml");?>
+      <!-- /NAVIGATION SECTION -->
+      </div>
+</div>
+<!-- /HEADER SECTION -->
+<div class="clr"></div>
+<!-- CONTENT SECTION -->
+<div id="content_section">
+      <div id="container">
+            <div id="mid_content">
+                 
+                 
+                  <!-- main container -->
+                  <div class="main-prayer-group">
+                      <!--buttons section start -->
+                     <div class="arrow_btm"></div>
+                      
+                     <div class="page_heading_01 grey">
+                            	<div class="left"><?=$prayer_detail_arr['s_group_name']?></div>
+                     </div>
+                      
+                      <div class="clr"></div>
+                      <ul class="back-prayer-option">
+									<li><a href="<?=base_url().'prayer-group.html'?>">Back to Prayer Group</a></li>
+						</ul>
+                      <!--buttons section end -->
+					  
+					  <!--payer notification start-->
+					  <div class="main-payer-section">
+                     <?php /*?> <h2 class="resend-inv"><img src="images/mail-refresh.png" alt="resend" />- Invitation sent</h2><?php */?>
+                      <div class="payer-notification">
+						<div class="nw-right-heading">
+                           <div class="left"><h4>Invite Partner From </h4></div>
+                        </div>
+						
+						<div class="notification-list-box">
+                       
+							<form  method="" action="">
+								<div class="pra-search-friends">
+									<!--<span class="pra-search-friends-span"><input type="checkbox" id="frnd_typ1"  name="chk_type[]" value="1" class="pra-search-friends-check"/>Friends </span>
+									<span class="pra-search-friends-span"><input type="checkbox" name="chk_type[]" id="frnd_typ2" value="1" class="pra-search-friends-check"/>Net Pals </span>
+									<span class="pra-search-friends-span"><input type="checkbox" name="chk_type[]" id="frnd_typ3" value="1" class="pra-search-friends-check"/>Prayer Partner</span>
+                                    <input type="hidden" name="" id="hd_submit" value="Y"  />-->
+                                   	<?php
+										$invited=array();
+									 	$invited=get_invitation_by_group_id($prayer_detail_arr['id']);
+										#pr($invited);
+									?>
+                                     <?php
+									 if(count($invited)) 
+									 {
+									 	echo get_invitation_prayer_group('prayer_group',$prayer_detail_arr['id'],$invited);
+                                     }
+									 else
+									 {
+										 echo get_invitation_prayer_group('prayer_group',$prayer_detail_arr['id']);
+									 }
+									 ?>
+								</div>
+                                <div class="clr"></div>
+                                <!--<div class="user-txt-nw">User Name:</div>
+                                    <input type="text" class="Card-Holder-Name" name="txt_name" id="txt_name">-->
+								<div class="clr"></div>
+								<input type="button" name="" value="SEND INVITATION" class="yellow-btn" onclick="searchFriend();" style="margin-top:20px" />
+								
+							</form>
+                            
+                            
+						</div>
+                          
+                          <!--<div class="" style="display:none;" id="data_div">
+                                <div class="nw-right-heading">
+                                         <div class="left"><h4>Search List </h4></div>
+                                </div>
+                                    <div class="notification-list-box">
+                                        <ul class="prayermember-ul">
+									<DIV id="listingContent"><?=$listingContent?></DIV>	
+                                   </ul>
+                                   </div>					
+                          </div>
+                         
+                         
+                         </div>
+					                      -->
+                      <input type="hidden" id="current_group_id" value="<?=$prayer_group_id?>" />
+                      <!--prayer wall eight start -->
+                      <?php //include(APPPATH.'views/logged/holy_place/prayer_group/group_member_list.phtml');?>
+                      <!--prayer wall eight end  -->
+                      
+					  </div>
+                      
+                              
+					  <!--payer notification end-->
+                      
+                  	  <div class="clr"></div> 
+                  </div>
+                  <!-- /main container -->
+                 
+            </div>
+      </div>
+      <div class="clr"></div>
+</div>
+<!-- /CONTENT SECTION -->
+<div class="clr"></div>
+<!-- FOOTER SECTION -->
+<?php include(APPPATH."views/layouts/footer.phtml");?>
+<?php include(APPPATH."views/logged/blocks/common_popup.phtml");?>
+
+<script type="text/javascript">
+
+var ajax_req_feeds = null;
+function show_more_feeds(page) {
+	
+	var group_id = $('#current_group_id').val();
+   
+    if(ajax_req_feeds!=null) {
+        ajax_req_feeds.abort();
+    }
+    showUILoader_nodialog();
+    ajax_req_feeds = $.ajax({
+        type: 'get',
+        url: base_url+'logged/prayer_group/generate_friend_search_listing_AJAX/'+group_id+'/'+page,
+        dataType: 'json',
+
+        success: function (data, status) {
+
+            hideUILoader_nodialog();
+            if(data.html!='') {
+                $('#listingContent').append(data.html);
+                $('#show_more_feeds_link').attr('page_value', data.cur_page);
+                $('#show_more_feeds_link').attr('onclick','');
+                $('#show_more_feeds_link').attr('onclick','show_more_feeds('+data.cur_page+')');
+            }
+            else {
+                $('#listingContent').append('<div class=" view_more" style="text-align: center;"><p class="blue_bold12" style="font-size:14px;">No more result.</p></div>');
+                $('#show_more_feeds_div').remove();
+            }
+            
+            if(data.view_more==false)
+            {
+                
+                $('#listingContent').append('<div class=" view_more" style="text-align: center;"><p class="blue_bold12" style="font-size:14px;">No more result.</p></div>');
+                $('#show_more_feeds_div').remove();
+            }
+            
+            
+        }    // end of success function...
+    });
+}
+
+
+function searchFriend()
+{
+   
+    /*var checked_frnds = $('input[id="frnds"]:checked').length > 0;
+	var checked_netpal = $('input[id="netpal"]:checked').length > 0;
+	var checked_pp = $('input[id="pp"]:checked').length > 0;
+	var checked_ring = $('input[id="ringuser"]:checked').length > 0;
+
+	//var username =  $('#txt_name').val();
+		var csv_friend_ids = '';
+	var csv_netpal_ids = '';
+	var csv_pp_ids = '';
+	var csv_ring_ids = '';
+	i = 0;
+	$(function() {
+		$(':checkbox:checked').each(function(i){
+			if($(this).attr('id').substr(0, 9) == 'frnds') {
+				csv_friend_ids += $(this).val()+',';
+			}
+		});
+	});
+	csv_friend_ids = csv_friend_ids.substring(0, csv_friend_ids.length-1);
+	$(function() {
+		$(':checkbox:checked').each(function(i){
+			if($(this).attr('id').substr(0, 9) == 'netpal') {
+				csv_netpal_ids += $(this).val()+',';
+			}
+		});
+	});
+	csv_netpal_ids = csv_netpal_ids.substring(0, csv_netpal_ids.length-1);
+	$(function() {
+		$(':checkbox:checked').each(function(i){
+			if($(this).attr('id').substr(0, 9) == 'pp') {
+				csv_pp_ids += $(this).val()+',';
+			}
+		});
+	});
+	csv_pp_ids = csv_pp_ids.substring(0, csv_pp_ids.length-1);
+	$(function() {
+		
+		$(':checkbox:checked').each(function(i){
+			if($(this).attr('id').substr(0, 9) == 'ringuser') {
+			var a=$(this).parent('li').parent('ul').find('#ringid').val();
+			
+			
+				csv_ring_ids += $(this).val()+'_'+a+',';
+			}
+		});
+	});
+	csv_ring_ids = csv_ring_ids.substring(0, csv_ring_ids.length-1);*/
+	var group_id = $('#current_group_id').val();
+	var frnds=$('#frndinv').val();
+	if(frnds == null)
+	{
+		frnds=0;
+		//alert(frnds);
+	}
+	var netpals=$('#netpalinv').val();
+	if(netpals == null)
+	{
+		netpals=0;
+		//alert(netpals);
+	}
+	var pp=$('#ppinv').val();
+	if(pp == null)
+	{
+		pp=0;
+		//alert(pp);
+	}
+	var ring=$('#ringinv').val();
+    if(frnds == null && netpals == null && pp == null  &&  ring == null )
+    {
+        showUIMsg("Please select atleast one friend or netpal or prayer partner or ring user.");
+        return false;
+    }
+    else
+    {
+		
+      showUILoader_nodialog('<img src="'+base_url+'images/loading_big.gif" width="50"/> ');  
+        $.ajax({
+            type: 'post',
+           // url: base_url+'logged/prayer_group/generate_friend_search_listing_AJAX/'+group_id,
+			url: base_url+'logged/prayer_group/send_invitation/'+group_id,
+            dataType: 'json',
+            data: {'frnd_type1':frnds,
+                   'frnd_type2':netpals,
+                   'frnd_type3':pp,
+				   'frnd_type4':ring
+				   //'txt_name': $('#txt_name').val(),
+				   //'hd_submit': $('#hd_submit').val()
+				   },
+           success: function (json_response) {
+			   if(json_response.success==true)
+				  {
+					   showUIMsg(json_response.msg);
+					window.location.href = base_url+ 'prayer-group.html';
+							
+				  }
+                
+                /*$('#data_div').show();
+                if(data.html!='') {
+                            
+                            $('#show_more_feeds_div').remove();
+                            $('#listingContent').html(data.html);
+                            $('#show_more_feeds_link').attr('page_value', data.cur_page);
+                            $('#show_more_feeds_link').attr('onclick','');
+                            $('#show_more_feeds_link').attr('onclick','show_more_feeds('+data.cur_page+')');
+                        }
+                        else {
+                            $('#listingContent').html('<div class=" view_more" style="text-align: center;"><p class="blue_bold12" style="font-size:14px;">No result.</p></div>');
+                            $('#show_more_feeds_div').remove();
+                        }
+                        
+                        if(data.no_of_result == 0){
+                            $('#show_more_feeds_div').remove();
+                        }
+                        else if(data.view_more==false)
+                        {
+                            //alert(1);
+                            $('#listingContent').append('<div class=" view_more" style="text-align: center;"><p class="blue_bold12" style="font-size:14px;">No More result.</p></div>');
+                            $('#show_more_feeds_div').remove();
+                        }
+                        else if((data.no_of_result - data.cur_page != 0) && data.view_more!=false){
+                        
+                            //alert(2);
+                            $('#show_more_div').remove();
+                            $('.main-payer-section').after('<div class="custom_show view_more" id="show_more_feeds_div"><a href="javascript:void(0);" id="show_more_feeds_link" page_value="'+data.cur_page+'" onclick="show_more_feeds('+data.cur_page+')">[view more]  </a> </div>');
+                        }
+                
+                hideUILoader_nodialog();*/
+                
+            }    // end of success function...
+        });
+    }
+}
+</script>
+</div>

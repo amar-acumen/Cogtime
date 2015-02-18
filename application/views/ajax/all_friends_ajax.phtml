@@ -1,0 +1,18 @@
+
+	<?php if(count($friends_arr)) { 
+            foreach($friends_arr as $k=> $friends){
+                $img = get_profile_image($friends['user_id']);
+				$CSS = (($k+1) % 7 == 0)?'style="clear:both;"':'';
+    ?>
+        <li <?=$CSS?> <?=$CSS_ajax?>>
+            <a href="javascript:void(0)">
+            <img class="pro_photo3"  src="<?php echo $img;?>"  alt="friend" width="60" height="60"  />
+            <span><?php echo $friends['s_displayname']?></span>
+            </a>
+        </li>
+        
+        
+    <?php 	$CSS_ajax = '';
+			}
+        } 
+    ?>

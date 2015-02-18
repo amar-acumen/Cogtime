@@ -1,0 +1,32 @@
+<?php 
+if(count($arr_tweets)){
+	foreach($arr_tweets as $key=> $val){
+		
+		$profile_image_filename = get_profile_image($val['i_user_id'],'thumb');
+		$profile_link = get_profile_url($val['i_user_id'],$val['s_profile_name']);
+?>
+
+<div class="shade_box_01" style="padding-top:5px;"> 
+ <div class="txt_content">
+      <a href="<?=$profile_link?>"><div class="pro_photo2" style="background:url(<?php echo $profile_image_filename;?>) no-repeat center;width:60px; height:60px;" ></div></a>
+      <div class="left_div01" style="width:365px;">
+      <p class="blue_bold12"><a  href="<?=$profile_link?>"><?=$val['s_profile_name']?></a></p>
+     
+     
+     
+               <?php if(get_time_elapsed($val['dt_created_on']) != '') {?>  <p class="date-time"><?=get_time_elapsed($val['dt_created_on'])?>  &nbsp;<img src="images/icons/heart.png" alt="" /></p> <?php } ?>
+    <p><?=nl2br($val['s_tweet_text'])?></p>
+     
+      </div>
+      <div class="clr"></div>
+      
+  </div>
+ <?php /*?> <div class="light_heading"> 
+   <div class="left"><a href="javascript:void(0);"  onclick="return show_dialog('view_teeter_reply_div')">View Replies</a> </div>
+   <div class="right"><a href="javascript:void(0);" onclick="return show_dialog('teeter_reply_div')">Reply</a>     &nbsp; |   &nbsp;   <a href="javascript:void(0);">Undo Favorite</a>   &nbsp;   | &nbsp;   <a href="javascript:void(0);">Retweet</a>   </div> 
+ </div><?php */?>
+</div>
+<?php }
+     }
+?>
+                                    

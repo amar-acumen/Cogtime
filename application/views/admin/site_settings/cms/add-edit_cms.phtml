@@ -1,0 +1,81 @@
+
+
+<div class="clr"></div>
+<!-- CONTENT SECTION -->
+<!--navigation section start -->
+<?php include(APPPATH."views/layouts/admin/admin_nav.phtml");?>
+<!--navigation section end -->
+<div id="content_section">
+      <div id="container">
+            <!--<div id="top_corner">&nbsp;</div> -->
+            <div id="mid_content">
+                  <div class="page_heading left">
+                  <?php $btn_name = ($mode =='add')?'Add':'Update';
+                        if($mode == "add"){?>
+                          <div class="left"><img src="../images/icons/login.png" alt="" />Add CMS Page</div>
+                        
+                   <?php }
+				   		else{
+				   ?>   
+                   		<div class="left"><img src="../images/icons/login.png" alt="" />CMS Page &raquo; Edit</div>
+                   <?php }?>
+                  </div>
+                  <div class="clr"></div>
+                  <div id="right_container">
+                        <div class="arrow_btm"></div>
+                        <div class="content_area frm_box frm_box2">
+                        	  <form name="frm_cms_<?=$mode?>" id="frm_cms_<?=$mode?>" action="" onsubmit="return post_frm_ajax_<?=$mode?>(); return false;" method="post" enctype="multipart/form-data">
+                                  <div class="lable02"><span class="red-mark">* </span>Title :</div>
+                                  <div class="field02">
+                                        <input name="txt_title" id="txt_title" type="text" value="<?= $posted['s_title']; ?>" maxlength="20" style="margin:0px;" />
+                                   <div class="clr"></div>
+                                  <span>(Max 20 characters.)</span>
+                                  </div>
+                                  <div class="error-message" id="err_title"></div>
+                                  <div class="clr"></div>
+                                  
+                                  <div class="lable02" style="margin-bottom:10px;"><span class="red-mark">* </span> Appears In :</div>
+                                  <div class="field02">
+                                        <select name="category" id="category" style="width:412px;">
+                                        		<option value="-1">Select</option>
+                                                <option value="logged" <?php echo $selected =($posted["e_show_in_logged_in_page"]=='yes')?'selected':''?>>Logged Section</option>
+                                                <option value="non_logged" <?php echo $selected =($posted["e_show_in_non_logged_in_page"]=='yes')?'selected':''?>>Public Section</option>
+                                                <option value="both" <?php echo $selected =($posted["e_both"]=='yes')?'selected':''?>>Both</option>
+                                          </select>
+                                          <script type="text/javascript">
+                                            $(document).ready(function(arg) {
+                                                $("#category").msDropDown();
+                                                $("#category").hide();
+                                                $('#category').css("width", "412px"); 
+                                            })
+                                        </script>
+                                  </div>
+                                 <div class="error-message" id="err_category"></div>
+                                 <div class="clr"></div>
+                                  
+                                  <div class="lable02"><span class="red-mark">* </span> Content :</div>
+                                  <div class="field02" style="width:820px; margin-bottom:6px;">
+                                       <textarea id="elm1" name="elm1" class="elm1" rows="" cols="" style="width:820px; min-height:400px;"><?= $posted['s_page_content']; ?></textarea>
+                                  </div>
+                                  <div class="error-message" id="err_elm1"></div>
+                                  <div class="clr"></div>
+                                  
+                                  <div class="lable01"> </div>
+                                  <div class="field01">
+                                  		<input name="" id="i_edit_id" type="hidden"   value="<?=$posted['id']?>"/>
+                                  		<input name="is_submitted" id="is_submitted" type="hidden"   value="Y"/>
+                                        <input name="" type="submit" class="btn"  value="<?=$btn_name?>"/>
+                                        <input name="" type="reset" class="btn"  value="Cancel" onclick="window.location='<?=admin_base_url().'site_settings/cms-pages.html'?>'"/>
+                                  </div>
+                              </form>
+                              <div class="clr"></div>
+                        </div>
+                        
+                  </div>
+                  <div class="clr"></div>
+            </div>
+            <!--<div id="bot_corner">&nbsp;</div> -->
+      </div>
+      <div class="clr"></div>
+</div>
+<!-- /CONTENT SECTION -->

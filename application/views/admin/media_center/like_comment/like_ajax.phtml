@@ -1,0 +1,23 @@
+<?php
+//pr($result,1);
+if(count($result))
+{
+    foreach($result as $res)
+    {
+        $profile_image = get_profile_image($res['i_liked_user_id'],'thumb');
+        $profile_displayname = $res['s_profile_name'];
+
+?>
+    <div class="member-block">
+                <img src="<?=$profile_image?>" alt="pic" width="73" height="73" class="member-pic" />
+                <h3><?=my_substr($profile_displayname,10)?></h3>
+                <h4><?=$res['s_country_name']?></h4>
+                <a href="javascript:void(0);" class="remove" onclick="return remove_like_(<?=$res['id']?>)">Remove</a>
+    </div>
+<?php
+    }
+}else
+{
+    echo '<div class="shade_box_white"  style="padding: 12px 0px 12px 4px;"><p class="blue_bold12" style="margin-left: 315px; margin-top: 150px;">No Like.</p></div>';
+}
+?>

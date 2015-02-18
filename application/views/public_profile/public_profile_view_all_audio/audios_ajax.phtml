@@ -1,0 +1,148 @@
+
+                                <?php
+                                
+                                    if(count($audio_result_arr))
+                                    {
+                                        $counter = 0;
+                                        foreach($audio_result_arr as $audio) :
+                                            $counter++;
+                                            
+											$comments_array = $audio['comments_arr'];
+                                ?>
+                                
+                                <li>
+                                	
+                                    <a href="public-profile-audio/<?=$profile_id?>/album/<?=$audio['id']?>/audio-details.html" class="title-audio"><?=$audio['s_title']?></a>
+                                    <p class="upload-date">uploaded on : <?=getShortDate($audio['dt_created_on'],5)?></p>
+                                    <br class="clr"/>
+                                    <p><?=$audio['s_artist'].", "?><?php if($audio['s_genre_id']==0)
+									{
+										echo $audio['s_genre'];
+									}
+									else
+									{
+										echo get_genre_name_by_id($audio['s_genre_id']);
+									}
+									?><?php echo ", "?></p>
+                                    
+                                    <p><?=$audio['s_sound_track_album']?></p>
+                                    <p> <?=$audio['s_desc']?></p>
+                                    
+                                    <div class="audio-player">
+                                         <div id="myElement_<?=$audio['id']?>">Loading the player...</div>
+                                    </div>
+                                </li>
+        
+
+                              <!--thumb one end -->
+    							<script type="text/javascript">
+								<!--
+								$(function(){
+								<?php
+										$audio_filename = base_url()."uploads/user_audio_files/".$audio['s_audio_file_name'];
+								?>
+								   jwplayer("myElement_<?=$audio['id']?>").setup({
+										file: "<?=$audio_filename?>",
+										image: "<?=$audio_filename?>",
+										height: 30,
+										width: 440
+									});
+								});
+								
+								//-->
+								</script>
+   
+                            <?php
+                                        endforeach;
+                                    }
+							
+                                    else{
+          echo '<div class="shade_box_blue" style="padding-top:5px; "><div  class="shade_norecords" style="width:225px; "><p class="blue_bold12" style="margin-top:80px;">No Audios.</p></div></div>';
+                                    }
+                            ?>
+                            
+                        
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+ <script type="text/javascript">
+function show_audio_details_lightbox(i_audio_id,i_user_id) {
+ 
+ showUILoader_nodialog();
+ $.ajax({
+  type: 'get',
+  url: base_url+'public_profile/fetch_audio_details/'+i_audio_id+'/'+i_user_id,
+  dataType: 'json',
+
+  success: function (data, status) {
+   $('#audio_lightbox_html').html(data.html_data);
+   /*$(function(){
+   $("#ml"+i_audio_id).mb_miniPlayer({
+    width:295,
+    inLine:false
+   });
+   });*/
+   //$('.audio').mb_miniPlayer_changeFile('http://www.miaowmusic.com/mp3/Miaow-04-Lismore.mp3',false,'Lismore (mp3)');
+   show_dialog('audio-details');
+   //alert(data.html_data);
+   hideUILoader_nodialog(); 
+  } // end of success function...
+ });
+}
+</script>
+<script type="text/javascript">
+
+var ajax_audio_req_post = null; 
+function post_audio_comment(id) 
+{
+  //var id=$('#i_photo_id').val();
+  
+//alert($('.newfancy_comment_box'+id).val() + ' new ' + id);
+  
+  //showUILoader_nodialog('<img src="'+base_url+'images/loading_big.gif" width="50"/> ');
+  if(ajax_audio_req_post!=null) {
+   ajax_audio_req_post.abort();
+  }
+  ajax_audio_req_post = $.ajax({
+   
+   url: base_url+'public_profile/post_audio_comment_ajax/'+ id,
+   dataType: 'json',
+   data: {'message': $('#audio_comment_box'+id).val()},
+   type: 'post',
+ 
+   success: function (data, status) {
+    //hideUILoader();
+    if(data.success == 'true'){
+        $('.comment-container').show();
+   $('.no_comments').hide();
+   /* $("#m1"+id).mb_miniPlayer({
+   width:295,
+   inLine:false
+  });*/
+   $('#audio_comment_box'+id).val('');
+      $('#audio_comments_html').html(data.html);
+    }
+    
+ //hideBusyScreen();
+   // hideUILoader_nodialog();
+    showUIMsg(data.msg);
+   },
+   error: function(data, status, e) {
+    //hideLoading();
+    //hideUILoader_nodialog();
+    //hideUILoader('');
+    showUIMsg("Error!");
+    
+   }
+  });
+}
+// Post comments on a feed //
+</script>                           
+                           
+                            
+                            
+                       

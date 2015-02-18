@@ -1,0 +1,165 @@
+<?php
+  include(APPPATH ."views/layouts/church_logged_header.phtml");
+  
+?>
+<link rel="stylesheet" type="text/css" href="<?php echo  base_url()?>css/jquery.multiselect.css" />
+<link rel="stylesheet" type="text/css" href="<?php echo  base_url()?>css/jquery.multiselect.filter.css" />
+<link rel="stylesheet" type="text/css" href="<?php echo  base_url()?>css/prettify.css" />
+<link rel="stylesheet" type="text/css" href="<?php echo  base_url()?>css/church_admin.css" />
+<!--<link rel="stylesheet" type="text/css" href="<?php echo  base_url()?>css/jquery-ui.css" />-->
+<script type="text/javascript" src="<?php echo  base_url()?>js/jquery.multiselect.js"></script>
+<script type="text/javascript" src="<?php echo  base_url()?>js/jquery.multiselect.filter.js"></script>
+<script type="text/javascript" src="<?php echo  base_url()?>js/prettify.js"></script>
+<!-- /HEADER SECTION -->
+<div class="clr"></div>
+
+<!-- CONTENT SECTION -->
+<div class="container">
+    <div class="main-page">
+        <!--<div id="mid_content"> -->
+        <!-- latest news -->
+       
+                    <h3 class="page-heading">Rings</h3>
+               
+        <?php //include(APPPATH . "views/layouts/latest_news.phtml"); ?>
+         <?php include(APPPATH . "views/layouts/church_admin_left_ring.phtml"); ?>
+        <!-- /latest news -->
+        <div class="activity-right">
+        <!-- main container -->
+        <div id="main_container">
+            <!-- left container -->
+            <?php //include(APPPATH . "views/layouts/leftbar.phtml"); ?>
+            <!-- /left container -->
+            <!-- mid container -->
+            <div id="mid_container">
+                
+                <div class="blog-container" style=" margin-top:0px;" id="listingContent">
+                    <?php echo $listingContent; ?>
+                </div>
+
+                <?php if ($no_of_result == 0):
+                    ?>
+                    <div class="shade_box_01" style="padding-top:5px;"><div  class="shade_norecords" style="width:260px;"><p class="blue_bold12">No Ring.</p></div></div>
+                <?php endif; ?>	
+                <?php if ($no_of_result > $pagination_per_page): ?>
+                    <div class="view_more" id="show_more_feeds_div"><a href="javascript:void(0);" id="show_more_feeds_link" page_value="<?= $current_page_1 ?>" onclick="show_more_feeds($(this).attr('page_value'))">[view more] </a> </div>
+                <?php endif; ?>
+
+            </div>
+            <!--sub page links -->
+
+            <!-- /mid container -->
+            <!-- right container -->
+            <?php //include(APPPATH . "views/layouts/rightbar.phtml"); ?>
+            <!-- /right container -->
+        </div>
+        <div>
+        <div class="clear"></div>
+    </div>
+    <!-- /main container -->
+    <div class="clr"></div>
+    <!--</div> -->
+</div>
+<div class="clr"></div>
+</div>
+<!-- /CONTENT SECTION -->
+<div class="clr"></div>
+
+
+
+</div>
+<?php include(APPPATH."views/layouts/church_footer.phtml");?>
+<?php //include(APPPATH . "views/logged/blocks/common_popup.phtml"); ?>
+
+<script type="text/javascript">
+
+    var ajax_req_feeds = null;
+    function show_more_feeds(page) {
+        if (ajax_req_feeds != null) {
+            ajax_req_feeds.abort();
+        }
+        showUILoader_nodialog();
+        ajax_req_feeds = $.ajax({
+            type: 'get',
+            url: base_url + 'logged/church_ring/generate_ring_listing_AJAX/' + '/' + page,
+            dataType: 'json',
+            success: function(data, status) {
+
+                hideUILoader_nodialog();
+                if (data.html != '') {
+                    $('#listingContent').append(data.html);
+                    $('#show_more_feeds_link').attr('page_value', data.current_page);
+                }
+                else {
+                    $('#listingContent').append('<div class="view_more" style="text-align: center;"><p class="blue_bold12" style="font-size:14px;">No More Event.</p></div>');
+                    $('#show_more_feeds_div').hide();
+                }
+
+                if (data.view_more == false)
+                {
+
+                    $('#invitaion_rec').append('<div class="view_more" style="text-align: center;"><p class="blue_bold12" style="font-size:14px;">No More Event.</p></div>');
+                    $('#show_more_feeds_div').hide();
+                }
+
+
+            }	// end of success function...
+        });
+    }
+
+
+    function deleteRing()
+    {
+        showUILoader_nodialog();
+        $.ajax({
+            type: 'post',
+            url: base_url + 'logged/church_ring/deletering/',
+            data: $('#delfrm').serialize(),
+            dataType: 'json',
+            success: function(data) {
+                hideUILoader_nodialog();
+                hide_dialog();
+                if (data.html != '') {
+                    $('#listingContent').html(data.html);
+                    $('#show_more_feeds_link').attr('page_value', data.current_page);
+                }
+                else {
+                    $('#listingContent').html('<div class="view_more" style="text-align: center;"><p class="blue_bold12" style="font-size:14px;">No More Event.</p></div>');
+                    $('#show_more_feeds_div').hide();
+                }
+
+
+                showUIMsg(data.msg);
+            }	// end of success function...
+        });
+    }
+
+
+
+    function leaveRing()
+    {
+        showUILoader_nodialog();
+        $.ajax({
+            type: 'post',
+            url: base_url + 'logged/my_ring/leavering/',
+            data: $('#leavefrm').serialize(),
+            dataType: 'json',
+            success: function(data) {
+                hideUILoader_nodialog();
+                hide_dialog();
+                if (data.html != '') {
+                    $('#listingContent').html(data.html);
+                    $('#show_more_feeds_link').attr('page_value', data.current_page);
+                }
+                else {
+                    $('#listingContent').html('<div class="view_more" style="text-align: center;"><p class="blue_bold12" style="font-size:14px;">No More Event.</p></div>');
+                    $('#show_more_feeds_div').hide();
+                }
+                showUIMsg(data.msg);
+            }	// end of success function...
+        });
+    }
+
+</script>
+
+

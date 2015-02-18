@@ -1,0 +1,58 @@
+               		<table width="100%" border="0" cellspacing="0" cellpadding="0" class="product-img">
+                      <tr>
+                        <td align="center" valign="middle" height="248" width="248">
+                        
+                        <?php $LOGO	= base_url().'uploads/e_trade_product/'.getThumbName($info['s_image'],'big');?>
+                        	<img src="<?=$LOGO?>" alt="galaxy note" width="219" height="166" />
+                        </td>
+                      </tr>
+                    </table>
+					<div class="product-details">
+						<h5><?php echo $info['product_id']?></h5> 
+                        <h3><?php echo $info['s_name']?></h3>
+                        <h3><?php echo $info['s_brand']?></h3>
+                        <!--<h4><span>Mobile Phone</span> &raquo; <span>Smart Phone</span></h4>-->
+                        <h4><?php echo $info['s_brand']?></h4>
+                        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="product-table">
+                          <tr>
+                            <td><?php echo $info['s_attribute1']?></td>
+                          </tr>
+                           <tr>
+                            <td><?php echo $info['s_attribute2']?></td>
+                          </tr>
+                          <tr>
+                            <td><strong>Condition</strong> : <?php echo ($info['i_condition']==1)?'New':'Old'?> Product</td>
+                          </tr>
+                          <tr>
+                            <td height="20"><strong>Stock</strong> : <?php echo $info['i_stock']?></td>
+                          </tr>
+                          <tr>
+                            <td height="20"><strong>Unit Price ($)</strong> : <?=$info['f_unit_price']?></td>
+                          </tr>
+                          <tr>
+                            <td height="20"><strong>Local Shipping Fee ($)</strong> : <?php echo get_price($info['f_local_shipping_cost'])?></td>
+                          </tr>
+                          <tr>
+                            <td height="20"><strong>International Shipping Fee ($)</strong> : <?php echo get_price($info['f_international_shipping_cost'])?></td>
+                          </tr>
+                          <tr>
+                            <td height="20"><strong>Posted On</strong> : <?php echo getShortDate($info['dt_insert_time'],5)?></td>
+                          </tr>
+                         <!-- <tr>
+                            <td height="20"><strong>Seller From</strong></td>
+                            <td>:</td>
+                            <td>India</td>
+                          </tr>
+                          <tr>
+                            <td height="20"><strong>Seller Rating</strong></td>
+                            <td>:</td>
+                            <td></td>
+                          </tr>-->
+                        </table>
+					</div>
+                    <div class="clr"></div>
+					<div class="details">
+                        <p class="title">Details:</p>
+                    	<?php echo $info['s_description']?> 
+                    </div>
+               <div class="clr"></div>

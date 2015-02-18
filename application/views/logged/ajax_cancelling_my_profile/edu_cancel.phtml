@@ -1,0 +1,141 @@
+<div class="shade_box_01 frm_box shade_box_blue" style="padding-bottom:17px;">
+                  
+                  <?php
+                      
+                      //$count=count($arr_profile_info['education_arr']);
+                      $count=count($arr_profile_info['education_arr']);
+                      if ($count==0)
+                        $count=1;
+                       
+                      for($i=0;$i<$count;$i++)   :
+                      
+                      
+
+                  
+                  ?>
+                  <!------------------------edu div----------------------------->
+                  <div id="<?php echo (($i>0)? 'edu_div_'.($i+1):'edu_div_1')?>"> 
+                  <?php 
+                       if($i>0 && $i<$count)
+                       {
+                           $j= $i+1;
+                              
+                  echo "<h4 class='sepration'></h4><a class='close' href='javascript:void(0);' style='margin:5px;' onclick=\"closeExtraEduDiv(this)\" ><img src='images/icons/close.png' alt=''></a>";
+                       }
+                  ?>
+                     <div class="lable01">School/College:</div>  
+                      <div class="field01">
+                      <input name="txt_school_name[]"  type="text" style="width:230px;" value="<?=isset($arr_profile_info["education_arr"][$i]["s_school_name"])? $arr_profile_info["education_arr"][$i]["s_school_name"]: '' ?>" />
+                      <span class="err_msg" id="err_school_name"></span>
+                      
+                      <!--<a href="javascript:void();" ><img src="images/icons/close.png" alt=""></a>-->
+                      </div> 
+                      <div class="clr"></div>
+                      <div class="lable01">Country:</div>  
+                      <div class="field01">
+                      <? /*<input name="txt_school_country[]" type="text" value="<?=isset($arr_profile_info["education_arr"][$i]["s_school_country"])? $arr_profile_info["education_arr"][$i]["s_school_country"]: '' ?>" style="width:230px;" /> */?>
+                      
+                      
+                      <select name="txt_school_country[]" class="txt_country_edu" style="width:238px; margin-bottom:6px;">
+                         <option value="-1">---</option>
+                         <?=makeOptionCountryNew('',encrypt($arr_profile_info["education_arr"][$i]["s_school_country"]));?>
+                     
+                     </select>
+                      <span class="err_msg" id="err_school_country"></span>
+                      </div> 
+                      <div class="clr"></div> 
+                      <div class="lable01">State:</div>  
+                      <div class="field01">
+<!--                      <input name="txt_school_state[]" type="text" value="<?#=isset($arr_profile_info["education_arr"][$i]["s_school_state"])? $arr_profile_info["education_arr"][$i]["s_school_state"]: '' ?>" style="width:230px;" />
+
+-->   
+					<select name="txt_sstate[]" id="txt_sstate_<?=$i+1?>" onchange="showEduCity(this.value,<?=$i+1?>)">
+                        <option value="-1">---</option>
+						<?php $cwhere	= " i_country_id='".$arr_profile_info["education_arr"][$i]["s_school_country"]."'";?>
+                        <?=makeOptionState($cwhere, encrypt($arr_profile_info['education_arr'][$i]["s_school_state"]));?>     					</select>
+                   <span class="err_msg" id="err_school_state"></span>
+                      </div> 
+                      <div class="clr"></div>
+                       <div class="lable01">City:</div>  
+                      <div class="field01">
+<!--                      <input name="txt_school_city[]" type="text" value="<?#=isset($arr_profile_info["education_arr"][$i]["s_school_city"])? $arr_profile_info["education_arr"][$i]["s_school_city"]: '' ?>" style="width:230px;" />-->
+					<select name="txt_scity[]" id="txt_scity_<?=$i+1?>">
+                     	<option value="-1">---</option>
+						<?php $cwhere1	= " i_state_id='".$arr_profile_info["education_arr"][$i]["s_school_state"]."'";?>
+                        <?=makeOptionCity($cwhere1,encrypt($arr_profile_info["education_arr"][$i]["s_school_city"]));?> 
+                    </select>
+                   <span class="err_msg" id="err_school_city"></span>
+                      </div> 
+                      <div class="clr"></div>
+                      
+                      
+                      
+                      
+                      <div class="lable01">Class Year:</div>  
+                      <div class="field01">
+                      <input name="txt_school_year[]" type="text"  value="<?=isset($arr_profile_info["education_arr"][$i]["i_class_year"])? $arr_profile_info["education_arr"][$i]["i_class_year"]: '' ?>" style="width:230px;"/>
+                      <span class="err_msg" id="err_school_year"></span>
+                      </div> 
+                      <div class="clr"></div>
+                      
+                      <div class="lable01">Degree:</div>  
+                      <div class="field01">
+                      <input name="txt_school_degree[]" type="text" value="<?=isset($arr_profile_info["education_arr"][$i]["s_degree"])? $arr_profile_info["education_arr"][$i]['s_degree']: '' ?>"  style="width:230px;"/>
+                      <span class="err_msg" id="err_school_degree"></span>
+                      </div> 
+                      <!-- <div class="clr"></div>
+                      
+                      <?php /*?><DIV id="div_more_edu">
+                          <div class="fld01">
+                              <input name="article_photos[]" type="file"  size="51"/>
+                          </div>
+                      </DIV><?php */?>
+                      
+                      
+                      <div class="lable01">&nbsp;</div>  
+                      -->
+                      <input type="hidden" name="db_id[]" id="dbId" value="<?php echo isset($arr_profile_info["education_arr"][$i]["id"])? $arr_profile_info["education_arr"][$i]['id']: ''?>">
+                      
+                      <!------------------------/edu div----------------------------->
+                      </div> 
+                      <script type="text/javascript">
+                      $(document).ready(function(arg) {
+                          //$(".txt_country_edu").msDropDown();
+                          //$(".txt_country_edu").hide();
+                          //$('#txt_country').css("width", "20px"); 
+                      })
+                      </script> 
+                      <?php
+                         
+                          endfor;
+                      ?>
+                      
+                      <div id="add_more_edu_div">
+                      </div>
+                      
+                      <div class="clr"></div>
+                      <div class="lable01">&nbsp;</div>  
+                      <input type="hidden" name= "total_edu_divs" id="edu_div_h" value="<?php echo $count;?>" />
+                      <div class="field01" style="text-align:right; width:250px;"> 
+                      
+<!--                           <a href="javascript:void(0);"  class="blue_link" id="add_mor_edu" onclick="add_extra_edu_div();"><strong>Add More..</strong></a>-->
+                           
+                      </div> 
+                      <div class="clr"></div>
+                      
+                      
+                       <div class="lable01">&nbsp;</div>  
+                      <div class="field01">
+                      <input type="hidden" name="is_basic_submitted" id="is_basic_submitted" value="Y" />
+                      
+                       <input name="" type="submit" value="Save"  class="btn"  />
+                       <input name="" type="button" value="Cancel"  class="btn" onclick="closeEduDiv()"/>
+                       </div> 
+                      <div class="clr"></div>
+                   </div>
+                   
+                    <?php /*?> //////////// NEW FIELD(S) [BEGIN] //////////// <?php */?>
+                    <input type="hidden" name="actual_edu_divs" id="actual_edu_divs" value="<?= count($arr_profile_info['education_arr']) ?>" />
+                    <input type="hidden" name="deleted_edu_ids" id="deleted_edu_divs" value="" />
+                    <input type="hidden" name="edu_divs_id_order" id="edu_divs_id_order" value="<?= count($arr_profile_info['education_arr']) ?>" />
+                    <?php /*?> //////////// NEW FIELD(S) [END] //////////// <?php */?>

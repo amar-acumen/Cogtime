@@ -1,0 +1,108 @@
+
+
+<div class="clr"></div>
+<!-- CONTENT SECTION -->
+<!--navigation section start -->
+<?php include(APPPATH."views/layouts/admin/admin_nav.phtml");?>
+<!--navigation section end -->
+<div id="content_section">
+      <div id="container">
+            <!--<div id="top_corner">&nbsp;</div> -->
+            <div id="mid_content">
+                  <div class="page_heading left">
+                  <?php $btn_name = ($mode =='add')?'Add':'Update';
+                        if($mode == "add"){?>
+                          <div class="left"><img src="../images/icons/login.png" alt="" />Add Language</div>
+                        
+                   <?php }
+				   		else{
+				   ?>   
+                   		<div class="left"><img src="../images/icons/login.png" alt="" />Language &raquo; Edit</div>
+                   <?php }?>
+                  </div>
+                  <div class="clr"></div>
+                  <div id="right_container">
+                        <div class="arrow_btm"></div>
+                        <div class="content_area frm_box frm_box2">
+                        	  <form name="frm_lang_<?=$mode?>" id="frm_lang_<?=$mode?>" action=""   method="post" onsubmit="return <?=$mode?>_lang_form();" >
+                                  <div class="lable02"><span class="red-mark">* </span>Title :</div>
+                                  <div class="field02">
+                                        <input name="txt_title" id="txt_title" type="text" value="<?= $posted['s_language']; ?>" maxlength="20" style="margin:0px;" />
+                                   <div class="clr"></div>
+                                  <span>(Max 20 characters.)</span>
+                                  </div>
+                                  <div class="error-message" id="err_title"></div>
+                                  <div class="clr"></div>
+                                  
+                                  <div class="lable01"> </div>
+                                  <div class="field01">
+                                  		<input name="" id="i_edit_id" type="hidden"   value="<?=$posted['id']?>"/>
+                                  		<input name="is_submitted" id="is_submitted" type="hidden"   value="Y"/>
+                                        <input name="" type="submit" class="btn"  value="<?=$btn_name?>"/>
+                                        <input name="" type="reset" class="btn"  value="Cancel" onclick="window.location='<?=admin_base_url().'site_settings/languages.html'?>'"/>
+                                  </div>
+                              </form>
+                              <div class="clr"></div>
+                        </div>
+                        
+                  </div>
+                  <div class="clr"></div>
+            </div>
+            <!--<div id="bot_corner">&nbsp;</div> -->
+      </div>
+      <div class="clr"></div>
+</div>
+<!-- /CONTENT SECTION -->
+<script type="">
+$(document).ready(function(arg){
+
+var lang_title=$('#txt_title').val();
+var edit_id=$('#i_edit_id').val();
+optionArr={
+		beforeSubmit:  showBusyScreen,  // pre-submit callback 
+        success:       validateFrm, // post-submit callback 
+		url:		admin_base_url + "site_settings/add-language.html"
+}
+optionArray={
+		beforeSubmit:  showBusyScreen,  // pre-submit callback 
+        success:       validateFrm, // post-submit callback 
+		url:		admin_base_url + "site_settings/edit-language/"+edit_id
+}
+});
+function add_lang_form()
+{
+
+	$("#frm_lang_add").ajaxSubmit(optionArr);
+	
+		return false;
+	}
+
+function edit_lang_form()
+{
+$("#frm_lang_edit").ajaxSubmit(optionArray);
+		return false;
+}
+
+function validateFrm(data)
+		{	
+		var data = JSON.parse(data);
+			if(data.success == true)
+			{
+				showUIMsg(data.msg);
+				hideBusyScreen();
+				
+			}
+			else{
+			for ( var id in data.arr_messages ){
+			//alert('#err_'+id);
+			if( $('#err_'+id) != null ) {
+				$('#err_'+id).html(data.arr_messages[id]);
+				$('#err_'+id).css('display', 'block');
+			}
+		}
+			showUIMsg(data.msg);
+				hideBusyScreen();
+			}
+			window.location.href=admin_base_url + "site-settings/languages.html";
+		}
+</script>

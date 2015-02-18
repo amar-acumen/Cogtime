@@ -1,0 +1,163 @@
+<div class="clr"></div>
+<!-- CONTENT SECTION -->
+<!--navigation section start -->
+<?php include(APPPATH."views/layouts/admin/admin_nav.phtml");?>
+<!--navigation section end -->
+<div id="content_section">
+      <div id="container">
+            <!--<div id="top_corner">&nbsp;</div> -->
+            <div id="mid_content">
+                  <div class="page_heading left">
+                        <div class="left"><img src="../images/icons/login.png" alt="" />Media Center landing page text Settings</div>
+                  </div>
+                  <div class="clr"></div>
+                  <div id="right_container">
+                        <div class="arrow_btm"></div>
+                         <form name="user_alerts" id="user_alerts" method="post"  onsubmit="return false;" >  
+                        <div class="content_area frm_box">
+                              
+                            <div class="lable01"> Read Text<span style="color: red">*</span> :</div>
+                              <div class="field01">
+                                  <textarea cols="20" rows="50" placeholder="maximum text allowed 100" maxlength="100" name="read_text" class="media_landing_text1"><?= $posted['read'] ?></textarea>
+                              </div>
+                              <div class="error-message" id="err_read_text"></div>
+                              <div class="clr"></div>
+                              <div class="lable01">Watch Text<span style="color: red">*</span> :</div>
+                              <div class="field01">
+                                  <textarea cols="20" rows="50" placeholder="maximum text allowed 100" maxlength="100" name="watch_text" class="media_landing_text2"><?= $posted['watch'] ?></textarea>
+                              </div>
+                              <div class="error-message" id="err_watch_text"></div>
+                              <div class="clr"></div>
+                             <div class="lable01">Listen Text<span style="color: red">*</span> :</div>
+                              <div class="field01">
+                                  <textarea cols="20" rows="50" placeholder="maximum text allowed 100" maxlength="100" name="listen_text" class="media_landing_text3"><?= $posted['listen'] ?></textarea>
+                              </div>
+                              <div class="error-message" id="err_listen_text"></div>
+                              <div class="clr"></div>
+                              <div class="clr"></div>
+                             <!-- <div class="lable01"> No of RSS item in RSS Feed :</div>
+                              <div class="field01">
+                                    <input name="" type="text" value="20" />
+                              </div>
+                              <div class="error-message">* Required Field</div>
+                               <div class="clr"></div> 
+                               <div class="lable01"> User Password Expires Every :</div>
+                              <div class="field01">
+                                    <select name="category" id="pass-expire" style="width:412px; margin-bottom:5px;">
+                                            <option>6 Months</option>
+                                            <option>12 Months</option>
+                                      </select>
+                                      <script type="text/javascript">
+                                        $(document).ready(function(arg) {
+                                            $("#pass-expire").msDropDown();
+                                            $("#pass-expire").hide();
+											$('#pass-expire').css("width", "412px"); 
+                                        })
+                                    </script>
+                              </div>
+                              <div class="error-message">* Required Field</div>
+                               <div class="clr"></div>-->
+                              <div class="lable01"> </div>
+                              <div class="field01">
+                                    <input name="" type="submit" class="btn"  value="Save" />
+                                    <input name="" type="button" class="btn"  value="Cancel" />
+                              </div>
+                              <div class="clr"></div>
+                        </div>
+                        </form>
+                  </div>
+                  <div class="clr"></div>
+            </div>
+            <!--<div id="bot_corner">&nbsp;</div> -->
+      </div>
+      <div class="clr"></div>
+</div>
+<!-- /CONTENT SECTION -->
+
+<script type="text/javascript">
+$(document).ready(function(arg) {
+	
+
+ $('#user_alerts').submit(function(){
+						
+				  var datatosend=$("#user_alerts").serialize();
+				 // alert(datatosend);
+				  showBusyScreen();
+											  
+					  $.ajax({
+						 type: "POST",
+						 url: base_url+"admin/media_center/mediacenter_landing_page_text/edit_info",
+						 data: datatosend,
+						 dataType: 'json',
+						 success: function(data){
+							
+							if(data.success==false) 
+							{
+								
+						
+								$('.error-message').each(function(i){
+									$(this).attr('style','display:none');
+                                                                       
+                                                                       // alert(i)
+								});
+								
+								
+								for ( var id in data.arr_messages ){
+									//alert('#err_'+id);
+									if( $('#err_'+id) != null ) {
+                                                                           // alert('#err_'+id);
+										$('#err_'+id).html(data.arr_messages[id]);
+										$('#err_'+id).css('display', 'block');
+									}
+								}
+						
+								
+							}
+                                                        if(data.success==true){
+                                                            window.location.href='<?= admin_base_url()?>0/mediacenter_landing_page_text.html';
+                                                        }
+							 
+							hideBusyScreen(); 
+							showUIMsg(data.msg);
+						 }
+					   });	 
+				});
+ 
+ });
+ 
+ $(document).ready(function(){
+ $('.media_landing_text1').keypress(function(){
+    // var ind = $(this).index();
+    var limit = parseInt($('.media_landing_text1').attr('maxlength'));
+     var text = $('.media_landing_text1').val();
+     var chars = text.length; 
+     //alert(ind)
+    if(limit <= chars){
+        alert('maximum text allowed 100');
+    }
+    //alert(limit)
+ });
+ $('.media_landing_text2').keypress(function(){
+    // var ind = $(this).index();
+    var limit = parseInt($('.media_landing_text2').attr('maxlength'));
+     var text = $('.media_landing_text2').val();
+     var chars = text.length; 
+     //alert(ind)
+    if(limit <= chars){
+        alert('maximum text allowed 100');
+    }
+    //alert(limit)
+ });
+ $('.media_landing_text3').keypress(function(){
+    // var ind = $(this).index();
+    var limit = parseInt($('.media_landing_text3').attr('maxlength'));
+     var text = $('.media_landing_text3').val();
+     var chars = text.length; 
+     //alert(ind)
+    if(limit <= chars){
+        alert('maximum text allowed 100');
+    }
+    //alert(limit)
+ });
+ });
+</script>

@@ -1,0 +1,431 @@
+<?php include(APPPATH."views/layouts/logged_header.phtml");?>
+            <!-- NAVIGATION SECTION -->
+      <?php include(APPPATH."views/layouts/nav.phtml");?>
+      <!-- /NAVIGATION SECTION -->
+      </div>
+</div>
+<div class="clr"></div>
+
+<!-- CONTENT SECTION -->
+<div id="content_section">
+      <div id="container">
+      
+            <!--<div id="mid_content"> -->
+                  <!-- latest news -->
+                 <?php include(APPPATH ."views/layouts/latest_news.phtml");?>
+                  <!-- /latest news -->
+                  <div class="clr"></div>
+                  <!-- main container -->
+                  <div id="main_container">
+                  
+                        <!-- left container -->
+                        <?php include(APPPATH."views/layouts/leftbar.phtml");?>
+                        <!-- /left container -->
+                        <!-- mid container -->
+                        <div id="mid_container">
+                          <div class="page_heading">
+                              <div class="left" style="padding:3px 0"><img src="images/icons/video.png" alt="" /> Videos </div>
+                              </div>
+                             <!--sub page links -->
+                             
+                             
+                              <div class="link-div" style="margin-top: 0;">
+                                  <ul>
+                                    <li><a href="manage-video-album.html"><span>Manage My Video Albums</span></a> </li>
+                                    <li><a href="create-video-album.html"><span>Create Video Album</span></a> </li>
+                                    <li><a href="javascript:void(0)" onclick="return show_dialog('upload_video');"><span>Upload Video</span></a> </li>
+                                </ul>
+                                <div class="clr"></div>
+                                
+                              </div>
+                              
+                              
+                              <div class="page_heading">
+                              <div class="left" style="padding:3px 0"><img src="images/icons/video.png" alt="" /> My Albums (<?=$total_albums?>) </div>
+                              </div>
+                              <!--/sub page links -->
+                            <div class="arrow_btm"></div>
+                            <div id="videos_albums">
+                                <?= $result_arr;?>
+
+                            </div>
+                             <div class="page_heading">
+                                <div class="left"><img src="images/icons/video1.png" alt="" /> My Videos (<?=$total_videos?>)</div>
+                                 <div class="right">
+                                    <img alt="" src="images/icons/search.png" /> <a class="blue_link art-search" href="javascript:void(0);"><strong>Search</strong></a>
+                                </div>
+                                  <div class="clr"></div>
+                            </div>
+                            
+                            
+                            <div class="section01 art-search-section">
+                                <form id="frm_search" onsubmit="return false;" method="post" >
+                                <label class="lable-txt-nw">Name</label>
+                                <input type="text" class="Card-Holder-Name" name="txt_title" />
+                                 <br class="clear"/>
+                                <div class="lable-txt-input"> 
+                                    <input type="submit" class="yellow-btn float-right" value="Search" name="" />
+                                </div>
+                                 <br class="clear"/>
+                                 <input type="hidden" value="Y" name="search_basic" />
+                                 </form>
+                            </div>
+                            <div class="arrow_btm"></div>
+                            <div id="all_videos" class="div_content" style=" margin-top:0px;">
+                                <?= $result_arr1;?>
+                            </div>
+                            
+                            <?php 
+                                if($no_of_result==0) {
+                            ?>
+                            
+                            
+                            <div class="section01" style="padding-top:5px;" id="no_tweets"><div  class="shade_norecords" style="width:260px;"><p class="blue_bold12">No Videos.</p></div></div>
+                            
+                            
+                            <?php
+                                }
+                            ?>
+                            
+                            
+                            
+                            
+                            
+                            <?php 
+                                if($no_of_result!=0 && $no_of_result>$pagination_per_page_all_videos ) {
+                            ?>
+                            <div class="view_more" id="show_more_albums_div"><a href="javascript:void(0);" id="show_more_albums" page_value="<?=$current_page_1?>" onclick="show_more_feeds($(this).attr('page_value'))">[view more] </a> </div>        
+                            <?php }
+                            
+                            ?>                
+                            
+
+                        </div>                   
+                        <!-- /mid container -->
+                        <!-- right container -->
+                        <?php include(APPPATH."views/layouts/rightbar.phtml");?>
+                        <!-- /right container -->
+                  </div>
+                  <!-- /main container -->
+                  <div class="clr"></div>
+            <!--</div> -->
+      </div>
+      <div class="clr"></div>
+</div>
+<!-- /CONTENT SECTION -->
+<div class="clr"></div>
+
+
+<?php include(APPPATH."views/layouts/footer.phtml");?>
+
+
+<!-- /lightbox SECTION -->
+
+<?php include(APPPATH."views/logged/blocks/common_popup.phtml");?>
+
+<div class="lightbox upload_video" style="width:550px;">
+      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog();form_reset_('uploadVideoFrm');clr_all_err_()"><img src="images/close.png" alt="" /></a></div>
+      <div class="top">
+            <div>&nbsp;</div>
+      </div>
+      <div class="mid">
+            <div class="heading">
+                  <div class="left">
+                        <h4><img src="images/icons/video1.png" alt="" /> Upload Video </h4>
+                  </div>
+                 
+            </div>
+            <div class="frm_box">
+            <form id="uploadVideoFrm" action="<?php echo base_url()?>logged/my_videos/upload_individual_video" method="post" enctype="multipart/data" onsubmit="return upload_video_()">
+                  <div class="lable01">Title:</div>
+                  <div class="field01">
+                        <input name="txt_title" type="text" />
+                        <span id="err_txt_title" class="error-message"></span>
+                  </div>
+                  <div class="clr"></div>
+                  
+                  <div class="lable01">Description:</div>
+                  <div class="field01">
+                        <textarea name="txtarea_desc_video" id="txtarea_desc_video" cols="" rows="" style="height:80px;" maxlength="250"></textarea>
+                        <span id="err_txtarea_desc_video" class="error-message"></span>
+                         <span style="font-size:11px; font-style:italic; line-height:13px;" >
+                                      (Max 250 characters.)
+                                      </span>
+
+                  </div>
+                  <div class="clr"></div>
+                  
+                  
+               <!--   <div class="lable01">Artist:</div>
+                  <div class="field01">
+                        <input name="txt_artist" type="text" />
+                        <span id="err_txt_artist" class="error-message"></span>
+                  </div>
+                  <div class="clr"></div>
+                  <div class="lable01">Genre:</div>
+                  <div class="field01">
+                        <input name="txt_genre" type="text" />
+                        <span id="err_txt_genre" class="error-message"></span>
+                  </div>
+                  <div class="clr"></div>
+               -->
+                  <div class="lable01">Video URL:</div>
+                  <div class="field01">
+                        <input name="txt_video_track_album" type="text" />
+                        <span id="err_txt_video_track_album" class="error-message"></span>
+                  </div>
+				  <ul class="video-logo" style=" margin-left: 80px;" >
+					<li><img src="<?=base_url()?>/images/YouTube.png"title="YouTube" alt="YouTube"></li>
+					<li><img src="<?=base_url()?>/images/Vimeo.png"title="Vimeo" alt="Vimeo"></li>
+					<li><img src="<?=base_url()?>/images/DailyMotion.png"title="DailyMotion" alt="DailyMotion"></li>
+					<li><img src="<?=base_url()?>/images/Viadeo.png"title="Viadeo" alt="Viadeo"></li>
+					</ul>
+                  <div class="clr"></div>
+                  
+                  
+                  <div class="lable01">Select Album:</div>
+                  <div class="field01">
+                    <select name="select_album1" id="select_album1" style="width:260px;">
+                    <?php
+                    
+                    if(count($album_names))
+                    {
+                        
+                    
+                    ?>
+                        
+                        <option value="-1"> Select</option>
+                              <?php
+                              foreach($album_names as $name)
+                              {
+                                  echo "<option value='".$name['id']."'>".$name['s_name']."</option>";
+                              }
+                    }
+                    else
+                    {
+                        echo "<option value='-1' disabled>Please create an album first.</option>";
+                    }
+                              ?>
+                              
+                        </select>
+                        <span id="err_select_album1" class="error-message"></span>
+                       
+                  </div>
+                  <div class="clr"></div>
+           
+                  <div class="lable01">&nbsp;</div>
+                  <div class="field01">
+                        <input name="" type="submit" value="Upload" class="btn" />
+
+                  </div>
+                  <div class="clr"></div>
+            
+            </form>
+            </div>
+      </div>
+      <div class="bot">
+            <div>&nbsp;</div>
+      </div>
+</div>
+
+
+
+
+<script type="text/javascript">
+$(function(){
+	$('.art-search').click(function(){
+		
+	   $('.art-search-section').stop(true, true).slideToggle('slow');
+	});
+
+})
+	
+var ajax_req_feeds = null;
+function show_more_feeds(page) {
+    if(ajax_req_feeds!=null) {
+        ajax_req_feeds.abort();
+    }
+    showUILoader_nodialog();
+    ajax_req_feeds = $.ajax({
+        type: 'get',
+        url: base_url+'logged/my_videos/my_videos_ajax_pagination/'+page,
+        dataType: 'json',
+
+        success: function (data, status) {
+    //alert(data.view_more);
+            hideUILoader_nodialog();
+            if(data.html!='') {
+               
+                $('#all_videos').append(data.html);
+                $('#show_more_albums').attr('page_value', data.current_page);
+            }
+            else {
+                $('#all_videos').append('<div class="section01" style="padding-top:5px;"><div  class="shade_norecords" style="width:260px;"><p class="blue_bold12">No Videos.</p></div></div>');
+                $('#show_more_albums_div').hide();
+            }
+            if(data.view_more==false)
+            {
+                $('#all_videos').append('<div class="section01" style="padding-top:5px;"><div  class="shade_norecords" style="width:260px;"><p class="blue_bold12">No More Video.</p></div></div>');
+                $('#show_more_albums_div').hide();
+            }
+            
+            /*$('.htr').css('display','none');
+            $('#'+m).css('display', 'table-row'); 
+            $('#'+m+' td').html(data);*/
+
+        }    // end of success function...
+    });
+}
+
+$(document).ready(function(arg) {
+	$('#frm_search').submit(function() {
+
+		var datatosend = $("#frm_search").serialize();
+		showUILoader_nodialog('<img src="' + base_url + 'images/loading_big.gif" width="50"/> ');
+		$.ajax({
+			type: "POST",
+			url: base_url + 'logged/my_videos/my_videos_ajax_pagination/',
+			data: datatosend,
+			dataType: 'json',
+			success: function(data) {
+				
+				$('#all_videos').html('');
+				$('#show_more_albums').hide();
+				  
+				  if(data.html != ''){
+					  $('#no_tweets').hide();
+					  $('#all_videos').html(data.html);
+				  }
+				  else{
+					  $('#no_tweets').remove();
+					  $('#all_videos').append('<div id="no_tweets" style="padding-top:5px;" class="section01"><div style="width:260px;" class="shade_norecords"><p class="blue_bold12">No Videos.</p></div></div>')
+				  }
+				  if(data.view_more==true)
+				  {
+					   $('#all_videos').append('<div class="view_more" id="show_more_albums_div"><a href="javascript:void(0);"id="show_more_albums_link" page_value="'+data.current_page+'" onclick="show_more_feeds('+data.current_page+')">[view more] </a></div>');
+				  }
+					
+				  if (data.html != '' && data.view_more == false)
+				  {
+  
+					  $('#all_videos').append('<div class="view_more" style="text-align: center;"><p class="blue_bold12" style="font-size:14px;">No More Videos.</p></div>');
+					  $('#show_more_albums_div').hide();
+				  }
+				hideUILoader_nodialog();
+			}
+		});
+	});
+
+});
+
+
+</script>
+
+<script language="javascript">
+$(document).ready(function() {
+
+/*
+$('[id^="video_"]').click(function(){ 
+
+  showLoading(); 
+
+  var media_id =  $(this).attr('media_id');
+  $.ajax({
+  type: 'post',
+  url: base_url+'logged/my_videos/get_media/',
+  data: ({'media_id' : media_id ,'width':122 ,'height':82}),
+
+  dataType: 'json',
+  success: function (data, status) {
+   if(data.result=='success') {
+       
+    hideLoading();
+      $('#res_video_'+media_id).html(data.s_image_source.html);
+   }
+  },
+  error: function (data, status, e) {
+   hideLoading();
+   showUIMsg('Some error occurred. Please try again.');
+  }
+ });
+});
+  $('[id^="video_"]').trigger('click');
+  */
+});
+</script>
+
+<script type="text/javascript">
+function del_video_()
+{
+    var cur_page = $('#show_more_albums').attr('page_value');
+    var ids='';
+    var j=0;
+    $("input:checkbox").each(function(i){
+        if($(this).is(":checked")){
+       //alert($this.attr("id"));
+       if($(this).attr('id').substr(0, 10) == 'del_video_') {
+        j++;
+        ids += $(this).val()+",";
+        }
+    }
+    });
+    var csv_mail_ids = ids.substring(0, ids.length-1);
+    
+    $.ajax({
+        url : base_url+"logged/my_videos/delete_video",
+        type : "post",
+        dataType : 'json',
+        data : {"video_ids" : csv_mail_ids, "current_page":cur_page},
+        success : function(data)
+                {
+                    
+                    showUIMsg(data.msg);
+                    $('#all_videos').html(data.html);
+                    
+                    
+                }
+    });
+}
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function () {
+
+
+ //counting the left characters in comment
+    
+     function limitChars(textid, limit, infodiv)
+     {
+      var text = $('#'+textid).val(); 
+      var textlength = text.length;
+      if(textlength > limit)
+      {
+      $('#'+textid).val(text.substr(0,limit));
+       return false;
+      }
+      else
+      {
+      
+       return true;
+      }
+     }
+    
+    
+    
+    $(function(){
+        $('#txtarea_desc_video').keyup(function(){
+            limitChars('txtarea_desc_video', 250, '');
+        });
+    });
+    
+    
+    
+
+    
+    //// just to show correct no. of chracters left while the page is loaded...
+    limitChars('txtarea_desc_video',250, '');
+    
+ 
+});
+</script>

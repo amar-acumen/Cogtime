@@ -1,0 +1,196 @@
+<div class="clr"></div>
+<!--navigation section start -->
+<?php include(APPPATH."views/layouts/admin/admin_nav.phtml");?>
+<!--navigation section end -->
+<!-- CONTENT SECTION -->
+<div id="content_section">
+      <div id="container">
+            <!--<div id="top_corner">&nbsp;</div> -->
+            
+            
+            <div id="mid_content">
+                  <div class="page_heading left">
+                        <div class="left"><img src="../images/icons/login.png" alt="" />  Videos</div>
+                  </div>
+                  <div class="clr"></div>
+                  <div id="right_container">
+                        <div class="arrow_btm"></div>
+                        <div class="content_area">
+                              <!--filter section start -->
+                            <div class="filter">
+                                <span class="filter-by">Filter By &raquo;</span>
+                                <form id="search_frm" action="" method="post" enctype="multipart/form-data" class="filter-search" onsubmit="return search_()">
+                                    <label>Video Title :</label><input id="txt_search_title" name="txt_search_title" type="text" />
+								   <label>Uploaded By :</label><input type="text" id="txt_uploaded_by" name="txt_uploaded_by">
+									   
+										
+										<label style="">Uploaded on</label>
+										
+										<input type="text"  value="" name="create_time" id="create_time"   class="date-field"/>
+										<img src="../images/icons/cal.png" alt="" onclick="$(this).prev().focus()" class="calender" style="margin-right:35px;" />
+										<script type="text/javascript">
+											  $(document).ready(function(arg) {
+											  
+												  $.datepicker.setDefaults($.datepicker.regional['']);
+												  $("#create_time").datepicker($.datepicker.regional['en']);
+
+											  });
+										</script> 
+										  <div class="clr"></div>
+										 <label style="margin-top:9px">Category :</label>
+										 <select name="audio-cat" id="audio-cat" style="float:left;margin:9px 15px;">
+										 <option value="-1">  - - - - - - </option>
+										 <?=makeOptionSubCategoryMc('video')?>
+										 </select>
+										 <label style="margin-top:9px">Featured/Non-Featured :</label>
+										 <select name="audio-f" id="audio-f" style="float:left;margin:9px 15px;">
+										 <option value="-1">  - - - - - - </option>
+										 <option value='1'>Featured</option>
+										 <option value='0'>Non-Featured</option>
+										 </select>
+                                    <input name="" type="submit" value="GO" class="go" style="margin-top:9px" />
+                                    &nbsp;&nbsp;<a href="javascript:void(0)" onclick="return show_all_();" style="margin-top:9px">Show all</a>
+                                </form>  
+                                <div class="clr"></div>
+                            </div>
+                            <!--filter section end -->
+                            <!--filter section end -->
+                        
+                            <h4>List of Video(s)</h4>
+                            <div class="right" style="margin-bottom:14px;"><input name="" type="button" value="Add New Video" class="evnt_btn1" onclick="window.location=admin_base_url+'add-new-videos.html'"/></div>
+                        
+                        
+                        <div class="clr"></div>
+                        <DIV id="table_contents">
+                            <?=$content?>
+                        </DIV>
+                        
+                        
+                        
+                        
+                        <div class="clr"></div>
+                        </div>
+                  </div>
+                  <div class="clr"></div>
+            </div>
+            
+            
+                     
+            <!--<div id="bot_corner">&nbsp;</div> -->
+      </div>
+      <div class="clr"></div>
+</div>
+
+
+<!-- /CONTENT SECTION -->
+
+
+
+
+
+<!--popup one start-->
+<div class="lightbox delete-page-popup" style="width:500px;">
+      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="../images/close.png" alt="" /></a></div>
+      <div class="top"><div>&nbsp;</div></div>
+      <div class="mid">
+            <div class="heading" style="margin-bottom:0px;">
+                  <div class="left">
+                        <h4>Delete The Video</h4>
+                  </div>
+            </div>
+               <div class="shade_box_white">
+               <p class="center-text">Do you really want to delete this video?</p>
+               <form action="" method="post" enctype="multipart/form-data">
+               <input type="hidden" id="i_del_id" name="i_del_id" value="">
+                       <input name="" type="button" value="Yes" class="btn" style="margin-left:146px;" onclick="return delete_()"/>
+                    <input name="" type="button" value="No" class="btn" onclick="hide_dialog()"/>
+               </form>   
+               <div class="clr"></div>
+            </div>
+            
+      </div>
+      <div class="bot"><div>&nbsp;</div></div>
+</div>
+<!--popup one end-->
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+
+
+function search_()
+  {
+      showBusyScreen();
+	  var title = $('#txt_search_title').val();
+      var uploaded_by = $('#txt_uploaded_by').val();
+	  var create_time = $('#create_time').val();
+	  var category = $('#audio-cat').val();
+	  var featured = $('#audio-f').val();
+      $.ajax({
+          url : admin_base_url+'media_center/media_center_landing_videos/video_listing_AJAX',
+          type : 'post',
+          data : ({'title' : title, 'uploaded_by' : uploaded_by,'create_time':create_time,'category':category,'featured':featured,'hd_val':1}),
+          success : function(data)
+          {
+              hideBusyScreen();
+              $('#table_contents').html(data);
+          }
+      });
+      return false;
+  }
+  
+
+function confirm_delete_(id)
+{
+  $('#i_del_id').val(id);
+  show_dialog('delete-page-popup');
+}
+
+function delete_()
+{
+    var id = $('#i_del_id').val();
+    var current_page = $('#current_page').val();
+    showBusyScreen();
+    $.ajax({
+          url : admin_base_url+'media_center/media_center_landing_videos/delete_video/'+current_page,
+          type : 'post',
+          data : ({'id' : id}),
+          dataType : 'json',
+          success : function(data)
+          {
+
+              showUIMsg(data.msg);
+              hideBusyScreen();
+              hide_dialog();
+              $('#table_contents').html(data.html);
+          }
+      });
+    
+}
+
+
+  function show_all_()
+  {
+      $('#search_frm')[0].reset();
+      showBusyScreen();
+      $.ajax({
+          url : admin_base_url+'media_center/media_center_landing_videos/video_listing_AJAX',
+          type : 'post',
+
+          success : function(data)
+          {
+              hideBusyScreen();
+              $('#table_contents').html(data);
+          }
+      });
+  }
+  
+
+
+
+</script>

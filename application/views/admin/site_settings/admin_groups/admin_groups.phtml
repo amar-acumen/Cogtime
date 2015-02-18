@@ -1,0 +1,300 @@
+<script type="text/javascript">
+$(document).ready(function(arg) {
+	
+
+$('#frm_search').submit(function(){ 
+						
+		var datatosend=$("#frm_search").serialize();
+		showBusyScreen();
+		//alert(datatosend);
+		$.ajax({
+		   type: "POST",
+		   url: admin_base_url+"site_settings/admin_groups/ajax_pagination/",
+		   data: datatosend,
+		   success: function(data){
+			  
+			  hideBusyScreen(); 
+			   $('#table_content').html(data);
+			   
+			
+			 
+		   }
+		 });	 
+});
+
+
+
+   $('#frm_priv').submit(function(){ 
+							
+			var datatosend=$("#frm_priv").serialize();
+			showUILoader_nodialog('<img src="<?= base_url() ?>images/loading_big.gif" width="50"/> ');
+			$.ajax({
+			   type: "POST",
+			   url: admin_base_url+"site_settings/admin_groups/edit_privileges/",
+			   data: datatosend,
+			   success: function(data){
+				 hide_dialog();
+				 hideUILoader_nodialog();
+				 showUIMsg(data.msg);
+			   }
+			 });	 
+	});
+ 
+});
+ 
+ 
+  function clear_box(mode){
+	  if(mode == 'add'){
+		  $('#addGroupForm')[0].reset();
+		  $('.error-message').hide();
+	  }else{
+		  $('#editGroupForm')[0].reset();
+		   $('.error-message').hide();
+		}
+  }
+  function edit_group_(id)
+  {
+	  
+	  $('#i_edit_id').val(id);
+		   showUILoader('<img src="<?= base_url() ?>images/loading_big.gif" width="50"/> ');
+		   $.ajax({
+			   type: "get",
+			   url: '<?=admin_base_url()?>site_settings/admin_groups/edit_group/'+id,
+			   dataType:"json",
+			   success: function(json_response){
+					if(json_response.result = 'success') {
+						
+						$('#prev_group_name').val('');
+						$('#prev_group_name').val(json_response.s_name);		
+					   // setTimeout(function(){hideUILoader('edit-admin-group')},1000);
+					   hideUILoader('edit-admin-group')
+					}
+					else {
+						//setTimeout(function(){hideUILoader()},1000);
+						hideUILoader('edit-admin-group')
+						showUIMsg('Some error occurred. Please try again.');
+					}
+				},
+				error: function(){
+					//setTimeout(function(){hideUILoader('edit-admin-group')},1000);
+					hideUILoader('edit-admin-group')
+					showUIMsg('Some error occurred. Please try again.');
+				}
+			});	 
+	  
+	  
+	  
+	  //show_dialog('edit-admin-group');
+	  //return false;
+  }
+    
+  function edit_group_priviledges(id)
+  {
+	  
+	  $('#hd_grp_id').val(id);
+		   showUILoader('<img src="<?= base_url() ?>images/loading_big.gif" width="50"/> ');
+		   $.ajax({
+			   type: "get",
+			   url: '<?=admin_base_url()?>site_settings/admin_groups/edit_privileges/'+id,
+			   dataType:"json",
+			   success: function(data){
+					if(data.result = 'success') {
+						$('#priv_content').html(data.html);		
+					    hideUILoader('set-privileges');
+					}
+					else {
+						hideUILoader('set-privileges')
+						showUIMsg('Some error occurred. Please try again.');
+					}
+				},
+				error: function(){
+					hideUILoader('set-privileges')
+					showUIMsg('Some error occurred. Please try again.');
+				}
+			});	 
+	  
+  }  
+    
+	 
+ </script>
+
+
+<div class="clr"></div>
+<!-- CONTENT SECTION -->
+<!--navigation section start -->
+<?php include(APPPATH."views/layouts/admin/admin_nav.phtml");?>
+<!--navigation section end -->
+<div id="content_section">
+      <div id="container">
+            
+            <div id="mid_content">
+                  <div class="page_heading left">
+                        <div class="left"><img src="../images/icons/login.png" alt="" /> Admin Groups</div>
+                        <div class="right"><input name="" type="button" value="Add New Group"  class="evnt_btn1" onclick="return show_dialog('add-admin-group')"/></div>
+                  </div>
+                  <div class="clr"></div>
+                  <div id="right_container">
+                        <div class="arrow_btm"></div>
+                        
+                        <div class="content_area">
+                        
+                        <div class="filter">
+                            <span class="filter-by">Filter By &raquo;</span>
+                            <form name="frm_search" id="frm_search" onsubmit="return false;" action="" method="post" class="filter-search">
+                            	<label>Group Name :</label>
+                                <input type="text" id="search_word" name="search_word"/>
+                                <input type="hidden" value="Y" name="search_basic" id="search_basic"  />
+       							<input name="" type="submit" value="GO" class="go" />
+                            </form>  
+                            <div class="clr"></div>
+                       </div>
+                          
+                       <DIV ID="table_content">
+                       <?=$result_content?>
+                       </DIV>
+                       
+
+                              
+                               
+                        <div class="clr"></div>
+                        </div>
+                  </div>
+                  <div class="clr"></div>
+            </div>
+            <!--<div id="bot_corner">&nbsp;</div> -->
+      </div>
+      <div class="clr"></div>
+</div>
+<!-- /CONTENT SECTION -->
+
+
+<!--popup one start-->
+<div class="lightbox delete-page-popup" style="width:500px;">
+      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="../images/close.png" alt="" /></a></div>
+      <div class="top"><div>&nbsp;</div></div>
+      <div class="mid">
+            <div class="heading" style="margin-bottom:0px;">
+                  <div class="left">
+                        <h4>Delete Admin Group</h4>
+                  </div>
+            </div>
+               <div class="shade_box_white" style="padding:8px 0px;">
+               <p class="center-text">Do you really want to delete the admin group?</p>
+               
+               		<input type="hidden" id="i_del_id" name="i_del_id" value="" />
+                    <input name="" type="button" value="Yes" class="btn" style="margin-left:146px;" onclick="return delete_();"/>
+                    <input name="" type="button" value="No" class="btn" onclick="hide_dialog()"/>
+             
+               <div class="clr"></div>
+            </div>
+            
+      </div>
+      <div class="bot"><div>&nbsp;</div></div>
+</div>
+<!--popup one end-->
+
+<!--popup add admin group start-->
+<div class="lightbox add-admin-group" style="width:500px;">
+      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="../images/close.png" alt="" /></a></div>
+      <div class="top"><div>&nbsp;</div></div>
+      <div class="mid">
+            <div class="heading" style="margin-bottom:0px;">
+                  <div class="left">
+                        <h4>Add New Group</h4>
+                  </div>
+            </div>
+               <div class="shade_box_white" style="padding:8px 0px;">
+               <div class="content_area frm_box2">
+                        	  <form id="addGroupForm" action="" method="post" enctype="multipart/form-data" onsubmit="return post_frm_ajax();">
+                                  <div class="lable01">Group Name :</div>
+                                  <div class="field01">
+                                        <input name="txt_group_name" type="text" />
+                                  </div>
+                                  <div class="error-message" id="err_group"></div>
+                                  <div class="clr"></div>
+                                  
+                                 
+                                  <div class="lable01"> </div>
+                                  <div class="field01">
+                                        <input name="" type="submit" class="btn"  value="Add"/><input name="" type="reset" class="btn"  value="Cancel" onclick="clear_box('add'); hide_dialog();"/>
+                                  </div>
+                              </form>
+                              <div class="clr"></div>
+                        </div>
+               <div class="clr"></div>
+            </div>
+            
+      </div>
+      <div class="bot"><div>&nbsp;</div></div>
+</div>
+<!--popup add admin group end-->
+<!--popup edit headlines start-->
+<div class="lightbox edit-admin-group" style="width:500px;">
+      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="../images/close.png" alt="" /></a></div>
+      <div class="top"><div>&nbsp;</div></div>
+      <div class="mid">
+            <div class="heading" style="margin-bottom:0px;">
+                  <div class="left">
+                        <h4>Edit Admin Group</h4>
+                  </div>
+            </div>
+               <div class="shade_box_white" style="padding:8px 0px;">
+               <div class="content_area frm_box2">
+                        	  <form id="editGroupForm" action="" method="post" enctype="multipart/form-data" onsubmit="return post_frm_edit_ajax();">
+                                  <div class="lable01">Group Name :</div>
+                                  <div class="field01">
+                                        <input name="txt_edit_group_name" id="prev_group_name" type="text" />
+                                  </div>
+                                  <div class="error-message" id="err_edit_group"></div>
+                                  <div class="clr"></div>
+                                  
+                                  <div class="lable01"> </div>
+                                  <div class="field01">
+                                        <input name="hidden_db_id" type="hidden" id="i_edit_id" value=""/>
+                                        <input name="" type="submit" class="btn"  value="Update"/>
+                                        <input name="" type="reset" class="btn"  value="Cancel" onclick="clear_box('edit'); hide_dialog();"/>
+                                  </div>
+                              </form>
+                              <div class="clr"></div>
+                        </div>
+               <div class="clr"></div>
+            </div>
+            
+      </div>
+      <div class="bot"><div>&nbsp;</div></div>
+</div>
+<!--popup edit headlines end-->
+<!--popup privileges start-->
+<div class="lightbox set-privileges" style="width:500px;">
+      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="../images/close.png" alt="" /></a></div>
+      <div class="top"><div>&nbsp;</div></div>
+      <div class="mid">
+            <div class="heading" style="margin-bottom:0px;">
+                  <div class="left">
+                        <h4>Set Privilege</h4>
+                  </div>
+            </div>
+               <div class="shade_box_white" style="padding:8px 0px;">
+               <div class="content_area privilege-set" style=" height:300px; overflow:auto">
+                            <form id="frm_priv" onsubmit="return false;" method="post" enctype="multipart/form-data">
+                                
+                                <DIV id="priv_content">
+								<?=makeAdminPrivileges('','')?>
+                                </DIV>
+                                <div class="clr"></div>  
+                                <div class="lable01"> </div>
+                                <div class="field01">
+                                  <input name="hd_grp_id" type="hidden" id="hd_grp_id" value=""/>
+                                  <input name="" type="submit" class="btn"  value="Update"/>
+                                  <input name="" type="reset" class="btn"  value="Cancel" onclick="hide_dialog()"/>
+                                </div>
+                              </form>
+                              <div class="clr"></div>
+                        </div>
+               <div class="clr"></div>
+            </div>
+            
+      </div>
+      <div class="bot"><div>&nbsp;</div></div>
+</div>
+<!--popup privileges end-->

@@ -1,0 +1,372 @@
+<div class="clr"></div>
+<!--navigation section start -->
+<?php include(APPPATH."views/layouts/admin/admin_nav.phtml");?>
+<!--navigation section end -->
+<div id="content_section">
+      <div id="container">
+            <div id="mid_content">
+                  <div class="page_heading left">
+                        <div class="left"><img src="../images/icons/login.png" alt=""/> Bible Quiz</div>
+                  </div>
+                  <div class="clr"></div>
+                  <div id="right_container">
+                        <div class="arrow_btm"></div>
+                        <div class="content_area">
+                        
+                        <div class="filter">
+                        	<span class="filter-by">Filter By &raquo;</span>
+                            <form id="frm_search" onsubmit="return false;" action="" method="post" class="filter-search">
+                            	<label>Question :</label>
+                                <input type="text" id="txt_question" name="txt_question" />
+                                <input type="hidden" value="Y" name="search_basic" id="search_basic"  />
+                                <input name="" type="submit" value="GO" class="go" />
+                            </form>  
+                            <div class="clr"></div>
+                        </div>
+                        <h4>Bible Quiz</h4><div class="right" style="margin-bottom:14px;"><input name="" type="button" value="Add Question"  class="evnt_btn1" 
+onclick="return show_dialog('add-question')"/></div>
+						
+                         <div class="clr"></div>
+                        <DIV id="table_content" style="margin-top:5px;">
+							  <?=$result_content?>
+                             </DIV>
+                        <div class="clr"></div>
+                        </div>
+                  </div>
+                  <div class="clr"></div>
+            </div>
+            <!--<div id="bot_corner">&nbsp;</div> -->
+      </div>
+      <div class="clr"></div>
+</div>
+<!-- /CONTENT SECTION -->
+
+<!--popup one start-->
+<div class="lightbox delete-page-popup" style="width:500px;">
+      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="../images/close.png" alt="" /></a></div>
+      <div class="top"><div>&nbsp;</div></div>
+      <div class="mid">
+            <div class="heading" style="margin-bottom:0px;">
+                  <div class="left">
+                        <h4>Delete Bible Quiz</h4>
+                  </div>
+            </div>
+               <div class="shade_box_white">
+               <p class="center-text">Do you really want to delete this Quiz?</p>
+               <form action="" method="post" enctype="multipart/form-data">
+               		<input type="hidden" name="i_del_id" id="i_del_id" value="" />
+               		<input name="" type="button" value="Yes" class="btn" style="margin-left:146px;" onClick="delete_()"/>
+                    <input name="" type="button" value="No" class="btn" onclick="hide_dialog()"/>
+               </form>   
+               <div class="clr"></div>
+            </div>
+            
+      </div>
+      <div class="bot"><div>&nbsp;</div></div>
+</div>
+<!--popup one end-->
+
+<!--popup one start-->
+<div class="lightbox view-question" style="width:500px;">
+      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="../images/close.png" alt="" /></a></div>
+      <div class="top"><div>&nbsp;</div></div>
+      <div class="mid">
+            <div class="heading" style="margin-bottom:0px;">
+                  <div class="left">
+                        <h4>Bible Quiz Answer</h4>
+                  </div>
+            </div>
+               <div class="shade_box_white">
+               <p class="center-text" id="txt_view_ans" style="color:#48535A; text-align:justify;"></p>
+               <div class="clr"></div>
+            </div>
+            
+      </div>
+      <div class="bot"><div>&nbsp;</div></div>
+</div>
+<!--popup one end-->
+
+
+<!--add question popup -->
+<div class="lightbox add-question" style="width:500px;">
+      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog();$('#add_quiz')[0].reset();$('.error-message').each(function(i){
+$(this).attr('style','display:none');});"><img src="../images/close.png" alt="" /></a></div>
+      <div class="top"><div>&nbsp;</div></div>
+      <div class="mid">
+            <div class="heading" style="margin-bottom:0px;">
+                  <div class="left">
+                        <h4>Add Question</h4>
+                  </div>
+            </div>
+            <div class="shade_box_white">
+           		<div class="content_area frm_box2">
+                        	  <form id="add_quiz" action="<?=admin_base_url()?>build_kingdom/bible_quiz/add_quiz" method="post" onsubmit=" return false;">
+                                  <div class="lable01">Question :</div>
+                                  <div class="field01">
+                                        <textarea id="txt_question" name="txt_question" style="width:337px;"></textarea>
+                                  </div>
+                                  <div class="error-message" id="err_question"></div>
+                                  <div class="clr"></div>
+                                  
+                                  <div class="lable01">Answer :</div>
+                                  <div class="field01">
+                                        <textarea id="txt_answer" name="txt_answer" style="width:337px;"></textarea>
+                                  </div>
+                                  <div class="error-message" id="err_answer"></div>
+                                  <div class="clr"></div>
+                                  
+                                  <div class="lable01">&nbsp;</div>
+                                  <div class="field01">
+                                        <input name="" type="submit" class="btn"  value="Add"/>
+                                        <input name="" type="reset" class="btn"  value="Cancel" onclick="hide_dialog();$('#add_quiz')[0].reset();$('.error-message').each(function(i){
+$(this).attr('style','display:none');
+	});"/>
+                                  </div>
+                              </form>
+                              <div class="clr"></div>
+                        </div>
+            </div>
+      </div>
+      <div class="bot"><div>&nbsp;</div></div>
+</div>
+<!--add question end -->
+
+<!--edit question popup -->
+<div class="lightbox edit-question" style="width:500px;">
+      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog();$('#edit_quiz')[0].reset();$('.error-message').each(function(i){
+$(this).attr('style','display:none');});"><img src="../images/close.png" alt="" /></a></div>
+      <div class="top"><div>&nbsp;</div></div>
+      <div class="mid">
+            <div class="heading" style="margin-bottom:0px;">
+                  <div class="left">
+                        <h4>Edit Question</h4>
+                  </div>
+            </div>
+            <div class="shade_box_white">
+           		<div class="content_area frm_box2">
+                        	  <form id="edit_quiz" action="<?=admin_base_url()?>build_kingdom/bible_quiz/edit_quiz" method="post" onsubmit="return false;">
+                                  <div class="lable01">Question :</div>
+                                  <div class="field01">
+                                       <textarea id="txt_edit_question" name="txt_edit_question" style="width:337px;"></textarea>
+                                  </div>
+                                  <div class="error-message" id="err_edit_question"></div>
+                                  <div class="clr"></div>
+                                  
+                                  <div class="lable01">Answer :</div>
+                                  <div class="field01">
+                                        <textarea id="txt_edit_ans" name="txt_edit_ans" style="width:337px;"></textarea>
+                                  </div>
+                                  <div class="error-message" id="err_edit_ans"></div>
+                                  <div class="clr"></div>
+                                  
+                                  <div class="lable01">&nbsp;</div>
+                                  <div class="field01">
+                                  		<input type="hidden" id="hd_edit_id" name="hd_edit_id" />
+                                        <input name="" type="submit" class="btn"  value="Update"/>
+                                        <input name="" type="reset" class="btn"  value="Cancel" onclick="hide_dialog();$('#edit_quiz')[0].reset();$('.error-message').each(function(i){
+$(this).attr('style','display:none');
+	});"/>
+                                  </div>
+                              </form>
+                              <div class="clr"></div>
+                        </div>
+            </div>
+      </div>
+      <div class="bot"><div>&nbsp;</div></div>
+</div>
+<!--edit question end -->
+
+
+<script type="text/javascript">
+
+$(document).ready(function(arg) {
+ $('#frm_search').submit(function(){ 
+			  var datatosend=$("#frm_search").serialize(); alert(datatosend);
+				  showBusyScreen();
+				  $.ajax({
+					 type: "POST",
+					 url: admin_base_url+"build_kingdom/bible_quiz/ajax_pagination/",
+					 data: datatosend,
+					 success: function(data){
+						hideBusyScreen(); 
+						 $('#table_content').html(data);
+					 }
+				   });	 
+	  });
+});
+
+
+
+function delete_quiz(file_id)
+{
+	//alert(file_id);
+	$('#i_del_id').val( file_id );
+	show_dialog('delete-page-popup');
+	//return false;
+}
+
+
+function delete_()
+{
+	  var selected_id = parseInt( $('#i_del_id').val() );
+		  //alert(selected_id);
+	  if( selected_id!=0 )
+	  {
+	  
+		  $.ajax({
+			type: 'get',
+			url: admin_base_url+'build_kingdom/bible_quiz/delete_quiz/'+ selected_id,
+			dataType: 'json',
+	
+			success: function (data, status) {
+				
+					hide_dialog();
+					if(data.success == true){
+						$('#req_row_'+selected_id).hide();
+						showUIMsg('Quiz deleted successfully.');
+					}
+				}	// end of success function...
+		});
+	  } else {
+	  
+		  var msg = "Sorry an error has occured, Please try again";
+		  showUIMsg(msg);
+		  hide_dialog();
+		  
+	  }
+}
+
+// adding / edit church
+function show_edit(id){
+	
+	$.ajax({
+			type: 'get',
+			url: admin_base_url+'build_kingdom/bible_quiz/edit_quiz/'+ id,
+			dataType: 'json',
+	
+			success: function (data, status) {
+				
+					
+					if(data.success == true){
+						$('#txt_edit_question').val(data.info.s_question);
+						$('#txt_edit_ans').val(data.info.s_answer);
+						$('#hd_edit_id').val(data.info.id)
+						
+						show_dialog('edit-question');
+					}
+				}	// end of success function...
+		});
+}
+
+function view_ans(id){
+	
+	$.ajax({
+			type: 'get',
+			url: admin_base_url+'build_kingdom/bible_quiz/view_quiz/'+ id,
+			dataType: 'json',
+	
+			success: function (data, status) {
+				
+					
+					if(data.success == true){
+						$('#txt_view_ans').html(data.info.s_answer);
+						show_dialog('view-question');
+					}
+				}	// end of success function...
+		});
+}
+
+
+$(document).ready(function() {
+
+	// for AJAX page-submission...
+    var options = { 
+        beforeSubmit:  show_loader_screen,  // pre-submit callback 
+        success:       validateAddFrm // post-submit callback 
+    }; 
+	
+	var options_edit = { 
+        beforeSubmit:  show_loader_screen,  // pre-submit callback 
+        success:       validateEditFrm // post-submit callback 
+    }; 
+	
+    // bind to the form's submit event 
+    $('#add_quiz').submit(function() { 
+        $(this).ajaxSubmit(options);
+        return false;
+    });
+	
+	$('#edit_quiz').submit(function() { 
+        $(this).ajaxSubmit(options);
+        return false;
+    });
+
+});
+
+function show_loader_screen(){
+	showUILoader_nodialog('<img src="'+base_url+'images/loading_big.gif" width="50"/> ');
+}
+
+// validate ajax-submission...
+function validateAddFrm(data)
+{
+	
+   var data = JSON.parse(data);//alert(data.html);
+   $('.error-message').each(function(i){
+			$(this).attr('style','display:none');
+	});
+	
+	if(data.success==false) 
+	{
+		for ( var id in data.arr_messages ){
+			//alert(data.arr_messages[id]);
+			if( $('#err_'+id) != null ) {
+				$('#err_'+id).html(data.arr_messages[id]);
+				$('#err_'+id).attr('style', 'display:block; margin-top: -4px;');
+			}
+		}
+	}
+	else {
+		  // clearing form
+		  $('#add_quiz')[0].reset();	
+		  hide_dialog();
+		  $('#table_content').html(data.html);
+		  showUIMsg(data.msg);
+	}
+	 
+	hideUILoader_nodialog();
+}
+
+
+// validate ajax-submission...
+function validateEditFrm(data)
+{
+	
+   var data = JSON.parse(data);//alert(data.html);
+   $('.error-message').each(function(i){
+			$(this).attr('style','display:none');
+	});
+	
+	if(data.success==false) 
+	{
+		for ( var id in data.arr_messages ){
+			//alert(data.arr_messages[id]);
+			if( $('#err_'+id) != null ) {
+				$('#err_'+id).html(data.arr_messages[id]);
+				$('#err_'+id).attr('style', 'display:block; margin-top: -4px;');
+				
+			}
+		}
+	}
+	else {
+		  // clearing form
+		  $('#edit_quiz')[0].reset();	
+		  hide_dialog();
+		  $('#table_content').html(data.html);
+		  showUIMsg(data.msg);
+	}
+	 
+	hideUILoader_nodialog();
+}
+
+</script>

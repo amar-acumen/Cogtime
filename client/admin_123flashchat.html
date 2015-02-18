@@ -1,0 +1,64 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<style>
+html, body { height:100%; }
+</style> 
+<title>123 Flash Chat Admin Panel</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="shortcut icon" href="favicon.ico" type="image/ico" />
+<script language="javascript" src="123flashchat.js"></script>
+</head>
+<body topmargin="0" bottommargin="0" leftmargin="0" rightmargin="0">
+<script language="javascript">
+		var parameters="";
+		if(urlLink==undefined)
+		{
+			var urlLink;
+			try
+			{
+					urlLink=window.location.href;
+			}
+			catch(e)
+			{
+				try
+				{
+					urlLink=document.URL;
+				}
+				catch(e)
+				{
+					urlLink="";
+				}
+			}
+		}
+		if(urlLink.indexOf("?")!=-1)
+		{
+			parameters=urlLink.substring(urlLink.indexOf("?")+1);
+		}
+		var urlValue="admin_123flashchat.swf";
+		if(parameters.length>0)
+		{
+			if(urlValue.indexOf("?")!=-1)
+			{
+				urlValue+="&"+parameters;
+			}
+			else
+			{
+				urlValue+="?"+parameters;
+			}
+		}
+		loading_bkground="false";
+		openSWF(urlValue,'100%','100%');
+</script>
+<noscript>
+	 <DIV id="flashchat">
+     <OBJECT classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,19,0" WIDTH="634" HEIGHT="476" id="topcmm_123flashchat">
+     <PARAM NAME=movie VALUE="admin_123flashchat.swf?loading_bkground=false">
+     <PARAM NAME=quality VALUE="high">
+     <PARAM NAME="menu" value="false">
+     <EMBED src="admin_123flashchat.swf?loading_bkground=false" quality=high menu=false WIDTH="100%" HEIGHT="100%" TYPE="application/x-shockwave-flash" PLUGINSPAGE="http://www.macromedia.com/go/getflashplayer" scale="noscale" name="topcmm_123flashchat" swLiveConnect="true"></EMBED>
+   	 </OBJECT>
+   </DIV>
+</noscript>
+</body>
+</html>

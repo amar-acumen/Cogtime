@@ -1,0 +1,395 @@
+<div class="clr"></div>
+<!--navigation section start -->
+<?php include(APPPATH."views/layouts/admin/admin_nav.phtml");?>
+<!--navigation section end -->
+<!-- CONTENT SECTION -->
+<div id="content_section">
+      <div id="container">
+            <!--<div id="top_corner">&nbsp;</div> -->
+            <div id="mid_content">
+                  <div class="page_heading left">
+                        <div class="left"><img src="../images/icons/login.png" alt="" />Daily Bible Verse</div>
+                  </div>
+                  <div class="clr"></div>
+                  <div id="right_container">
+                        <div class="arrow_btm"></div>
+                        <div class="content_area">
+                            
+                            <div>
+                            
+                            <?php 
+								if(count($published_rand_bible_verse)){
+							?>
+                            <h1 style="color:#005CA8; font-size:15px;">Published Verse</h1>
+                            <p class="green-title">Bible Verse : [ <a  href="read-bible-chapter-view.php"><?=$published_rand_bible_verse['s_book_name']?> <?=$published_rand_bible_verse['s_chapter'].':'.$published_rand_bible_verse['i_verses']?></a> ]</p>
+                            <p><?=$published_rand_bible_verse['s_text']?></p>
+                            <?php 
+								}
+							else {
+							?>
+                             <p class="green-title">No active verse, Please generate and publish.</p>
+                            <?php } 
+							?>
+                            </div>
+                            <div class="clr"></div>
+                            
+                            
+                          
+                            
+                          
+                            <div class="clr"></div>
+                            
+                      		<?php /*
+								if(count($rand_bible_verse)){
+							?>
+                            <div style="margin-top:30px;">
+                                                      
+                            <h1 style="color:#005CA8; font-size:15px;">Suggested Verse</h1>
+                            <p class="green-title">Bible Verse : [ <a  href="read-bible-chapter-view.php"><?=$rand_bible_verse['s_book_name']?> <?=$rand_bible_verse['s_chapter'].':'.$rand_bible_verse['i_verses']?></a> ]</p>
+                            <p><?=$rand_bible_verse['s_text']?></p>
+                            </div>
+                            <?php 
+								}*/
+							?>
+                            
+                          
+                            
+                            <!-- <p style="padding-top:15px;"> <input class="blue_btn" type="button" onclick="window.location=admin_base_url+'holy-place/1/daily-bible-verse.html'" value="Generate New Verse" name="" />-->
+                           <p style="padding-top:15px;"> <input class="blue_btn" type="button" onclick="javascript:show_suggested_verse()" value="Generate New Verse[Auto Suggest]" name="" />
+                           <?php 
+						  /* if($show_publish == true) {
+						   ?> 
+                           <input class="blue_btn mrg-left" type="button" onclick="javascript:add_verse_new()" value="Publish Verse" name="" />
+                           <?php }*/ ?>
+						   <input class="blue_btn" type="button" onclick="show_popup();" value="Generate New Verse Manually" name="" />
+                           </p>
+						   
+                        </div>
+						 <DIV id="table_content" style="width:985px;">
+                            <?=$result_content?>
+                            </DIV>
+                  </div>
+                  <div class="clr"></div>
+                  
+            </div><!--/mid_content-->
+            
+            <!--<div id="bot_corner">&nbsp;</div> -->
+      </div>
+      <div class="clr"></div>
+	  <div id="suggest_verse_popup" class="lightbox suggest_verse_popup" style="width:750px;">
+
+</div>
+ <div id="manual_verse_popup" class="lightbox manual_verse_popup" style="width:750px;">
+ <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="../images/close.png" alt="" /></a></div>
+      <div class="top"><div>&nbsp;</div></div>
+      <div class="mid">
+            <div class="heading" style="margin-bottom:0px;">
+                  <div class="left">
+                        <h4>Select Verse</h4>
+						<?php						//pr($result_arr);?>
+                  </div>
+            </div>
+               <div class="shade_box_white" style="height:400px; overflow:auto">
+			   <form name="add_verse" >
+               
+							    <div class="pop-content">  
+                                   <form name="manual-verses">
+	
+									<label>Book name:</label>
+									<select name="book-list" id="book-list" onchange="get_chapter_list($(this).val())">
+									<option value="-1">------</option>
+									<?=makeOptionBibleBook()?>
+									</select>
+									<label>Chapters:</label>
+									<select name="chapter-list" id="chapter-list" onchange="get_start_verse($(this).val())">
+										
+									</select>
+									
+									<label>Starting verse:</label>
+									<select name="start-verse-list" id="start-verse-list" onchange="get_end_verse($(this).val())">
+										
+									</select>
+									<label>Ending verse:</label>
+									<select name="end-verse-list" id="end-verse-list" onchange="change_preview($(this).val())">
+									<option value="-1">---</option>
+									</select>
+									</form>
+																	
+                                    </div>
+									<div class="clr"></div>
+                              <div id="preview-verse" style=" displsy:none;padding-top:38px;"></div>
+							  <div id="verse-button">
+							    <input type="button" value="Add Verse" id="add_verse" class="blue_btn" style="margin-top:10px;" onclick="add_manual_verse()">
+								</div>
+            </div>
+							   
+							 
+               </form>        
+               <div class="clr"></div>
+			
+            
+      </div>
+      <div class="bot"><div>&nbsp;</div></div>
+</div>
+</div>
+
+
+
+<style>
+.blue_btn {
+  background-attachment:scroll;
+  background-color:#005CA8;
+  background-image:none;
+  background-position:0 0;
+  background-repeat:repeat repeat;
+  color:#FFFFFF !important;
+}
+.mrg-left{
+	margin-left:8px;
+}
+</style>
+
+<!-- /CONTENT SECTION -->
+
+
+<script type="text/javascript">
+
+function add_verse_new()
+{ 
+	showBusyScreen();
+    $.ajax({
+        url : admin_base_url+'holy_place/daily_bible_verse/add/',
+        type : 'post',
+        data : ({'s_book_name':'<?=$rand_bible_verse['s_book_name']?>',
+		 		 's_chapter': '<?=$rand_bible_verse['s_chapter']?>',
+				 'i_verses': '<?=$rand_bible_verse['i_verses']?>',
+				 's_text': '<?=$rand_bible_verse['s_text']?>'}),
+        dataType : 'json',
+        success : function(data)
+        {
+            window.location = admin_base_url+'holy-place/2/daily-bible-verse.html';
+			//$('#table_content').html(data.response);
+        }
+    });
+    
+}
+
+function show_suggested_verse()
+    {
+        //var ring_id = $('#ring_id').val();
+
+        $.ajax({
+            url: admin_base_url + 'holy_place/daily_bible_verse/ajax_suggest_verse',
+            type: 'post',
+            dataType: 'json',
+            success: function(data)
+            {
+
+                $('#suggest_verse_popup').html(data.response);
+				
+
+
+            }
+        });
+		
+		show_dialog('suggest_verse_popup');
+	}
+	
+	function delete_(id,page,status)
+{
+    //var id = $('#h_del_intercession_id').val();
+   // var current_page = $('#h_current_page').val();
+   showBusyScreen();
+    $.ajax({
+        url : admin_base_url+'holy_place/daily_bible_verse/delete_verse/'+page,
+        type : 'post',
+        data : ({'id':id,'status':status}),
+        dataType : 'json',
+        success : function(data)
+        {
+           
+			
+			if(data.result=='success')
+			{
+			showUIMsg('deleted successfully!!');
+            $('#table_content').html(data.response);
+			}
+			else{
+			
+			showUIMsg(data.msg);
+			}
+			 hideBusyScreen();
+        }
+    });
+    
+}
+function displayOrderAJAX(recordId, status)
+{
+	var selected_language = $('#sel_lang').val();
+	var URL = admin_base_url + 'holy_place/daily_bible_verse/maintain_displayorder_ajax/';
+	
+	// loading part...
+	showBusyScreen();
+	
+	// AJAX action started...
+	if(ajax_req!=null) {
+		ajax_req.abort();
+	}
+	ajax_req = $.ajax({
+		type: 'POST',
+		url: URL,
+		data: {'status' : status, 'rid' : recordId},
+
+		success: function (data, status) {
+
+			hideBusyScreen();
+			
+			$('#table_content').html(data);
+
+		}	// end of success function...
+	});
+	// AJAX action end...
+	
+}
+
+
+function get_chapter_list(chap)
+{
+ showUILoader('<img src="<?= base_url() ?>images/loading_big.gif" width="50"/> ');
+	var options="<option value='-1'>---</option>";
+                $('#chapter-list').html('');
+				  $('#chapter-list').html(options);
+				$('#start-verse-list').html('');
+				$('#start-verse-list').html(options);
+				$('#end-verse-list').html('');
+				$('#end-verse-list').html(options);
+				$('#preview-verse').html('');
+				$('#verse-button').hide();
+	  $.ajax({
+            url: admin_base_url + 'holy_place/daily_bible_verse/ajax_get_chapter',
+            type: 'post',
+			data:({'book':chap}),
+            dataType: 'json',
+            success: function(data)
+            {
+				  $('#chapter-list').html('');
+				    $('#chapter-list').html(data.response);
+hideUILoader();
+            }
+        });
+}
+function get_start_verse(chap)
+{
+showUILoader('<img src="<?= base_url() ?>images/loading_big.gif" width="50"/> ');
+	var options="<option value='-1'>---</option>";
+	$('#start-verse-list').html('');
+				$('#start-verse-list').html(options);
+				$('#end-verse-list').html('');
+				$('#end-verse-list').html(options);
+				$('#preview-verse').html('');
+				$('#verse-button').hide();
+	  $.ajax({
+            url: admin_base_url + 'holy_place/daily_bible_verse/ajax_get_start_verse',
+            type: 'post',
+			data:({'chapter':chap}),
+            dataType: 'json',
+            success: function(data)
+            {
+				$('#start-verse-list').html('');
+                $('#start-verse-list').html(data.response);
+				
+		hideUILoader();
+
+            }
+        });
+}
+function get_end_verse(verse)
+{
+	showUILoader('<img src="<?= base_url() ?>images/loading_big.gif" width="50"/> ');
+	  $.ajax({
+            url: admin_base_url + 'holy_place/daily_bible_verse/ajax_get_end_verse',
+            type: 'post',
+			data:({'verse':verse,'chap':$('#chapter-list').val(),'book':$("#book-list").val()}),
+            dataType: 'json',
+            success: function(data)
+            {
+				
+                $('#end-verse-list').html(data.response);
+				$('#preview-verse').html('');
+				$('#preview-verse').html(data.html);
+				$('#verse-button').show();
+				hideUILoader();
+            }
+        });
+}
+
+function change_preview(end_verse)
+{
+showUILoader('<img src="<?= base_url() ?>images/loading_big.gif" width="50"/> ');
+$.ajax({
+            url: admin_base_url + 'holy_place/daily_bible_verse/ajax_change_verse_preview',
+            type: 'post',
+			data:({'verse':end_verse,'start_verse':$('#start-verse-list').val(),'chap':$('#chapter-list').val(),'book':$("#book-list").val()}),
+            dataType: 'json',
+            success: function(data)
+            {
+				
+               
+				$('#preview-verse').html('');
+				$('#preview-verse').html(data.html);
+hideUILoader();
+            }
+        });
+}
+
+function show_popup()
+{
+$('#book-list').val('-1');
+var options="<option value='-1'>---</option>";
+$('#chapter-list').html('');
+$('#chapter-list').html(options);
+$('#start-verse-list').html('');
+$('#start-verse-list').html(options);
+$('#end-verse-list').html('');
+$('#end-verse-list').html(options);
+$('#preview-verse').html('');
+$('#verse-button').hide();
+show_dialog('manual_verse_popup');
+}
+
+
+function add_manual_verse()
+{
+showUILoader('<img src="<?= base_url() ?>images/loading_big.gif" width="50"/> ');
+
+    $.ajax({
+        url : admin_base_url+'holy_place/daily_bible_verse/add_manual_verse/',
+        type : 'post',
+        data : ({'s_book_name':$('#book-list option:selected').text(),
+		 		 's_chapter': $('#chapter-list').val(),
+				 'start_verse': $('#start-verse-list').val(),
+				 'end_verse': $('#end-verse-list').val(),
+				 's_verse':$('#start-verse-list option:selected').text(),
+				  'e_verse':$('#end-verse-list option:selected').text(),
+				  'i_chapter':$('#chapter-list option:selected').text()
+				 }),
+        dataType : 'json',
+        success : function(data)
+        {
+			if(data.success == true)
+			{
+			
+			hideUILoader('manual_verse_popup');
+			
+			showUIMsg(data.msg);
+			window.location = admin_base_url+'holy-place/2/daily-bible-verse.html';
+			}
+            //window.location = admin_base_url+'holy-place/2/daily-bible-verse.html';
+			//$('#table_content').html(data.response);
+        }
+    });
+}
+</script>
+
+
+

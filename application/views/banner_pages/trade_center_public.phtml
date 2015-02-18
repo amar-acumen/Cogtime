@@ -1,0 +1,213 @@
+<?php
+	if( ($this->session->userdata('loggedin') !='' || $this->session->userdata('loggedin')!=false ) && $this->session->userdata('is_admin') != 1){
+		
+		 include(APPPATH ."views/layouts/logged_header.phtml");
+		 include(APPPATH."views/layouts/nav.phtml");?>
+		  <!-- /NAVIGATION SECTION -->
+      		</div>
+		</div>
+		
+		
+   <?php  }
+     else{
+         
+		include(APPPATH ."views/layouts/header.phtml");
+	   	include(APPPATH."views/layouts/slider_nav.phtml");
+  }?>
+<!-- CONTENT SECTION -->
+<div class="clr"></div><!-- CONTENT SECTION -->
+
+<div id="content_section" style="margin-top:8px;">
+      <div id="container">
+      		<!-- main container -->
+            
+            
+             <?php if(count($contents))
+                        {
+                            foreach($contents as $r)
+                            {
+                                if($r['s_keyword']=='tc_main')
+                                {
+                                    $content['main_title']=$r['s_title'];
+                                    $content['main_desc']=nl2br($r['s_desc']);
+                                }
+                                else if($r['s_keyword']=='tc_eTrade')
+                                {
+                                    $content['eTrade_desc'] = nl2br($r['s_desc']);
+                                }
+                                else if($r['s_keyword']=='tc_eSwap')
+                                {
+                                    $content['eSwap_desc'] = nl2br($r['s_desc']);
+                                }
+                                else if($r['s_keyword']=='tc_eFreebie')
+                                {
+                                    $content['eFreebie_desc'] = nl2br($r['s_desc']);
+                                }
+                                else if($r['s_keyword']=='tc_eActivities')
+                                {
+                                    $content['eActivities_desc'] = nl2br($r['s_desc']);
+                                }
+                                else if($r['s_keyword']=='tc_productListingCredit')
+                                {
+                                    $content['productListingCredit_desc'] = nl2br($r['s_desc']);
+                                }
+                        
+                            }
+                        }
+                        
+        ?> 
+            
+            
+            
+            <div class="landing-page">
+            	<div class="top-left" style="overflow: hidden;">
+                    <h2 class="landing-title"><?=$content['main_title']?></h2>  
+                    <p><?=$content['main_desc']?></p>
+                </div>
+                <div class="top-right">
+                <img src="images/trade-center-3.jpg" alt="Trade Center" />
+                </div>
+                <div class="clr"></div>
+                <!--bottom link section start -->
+                
+                 <?php
+                    if($this->session->userdata('loggedin')!='')
+                    {
+                        $destination = "window.location='etrade-home.html'";
+                        
+                    }
+                    else
+                    {
+                        $url = base64_encode(base_url().'etrade-home.html');
+                        $destination = "return show_login_popup('".$url."')";
+                    }
+                    
+                    ?>
+                <div class="link-section">
+                	<!--box one start -->
+                    <div class="link-box" onclick="<?=$destination?>">
+                    	<div class="link-box-in">
+                        	<div class="main-img">
+                        		<img src="images/e-trade.png" alt="eTrade"/>
+                            </div>
+                            <h3>eTrade</h3>
+                            <p><?=$content['eTrade_desc']?></p>
+                        </div>
+                    </div>
+                    <!--box one end -->
+                       <?php
+                    if($this->session->userdata('loggedin')!='')
+                    {
+                        $destination = "window.location='eswap-home.html'";
+                        
+                    }
+                    else
+                    {
+                        $url = base64_encode(base_url().'eswap-home.html');
+                        $destination = "return show_login_popup('".$url."')";
+                    }
+                    
+                    ?>
+                    <!--box two start -->
+                    <div class="link-box" onclick="<?=$destination?>">
+                    	<div class="link-box-in">
+                        	<div class="main-img">
+                        		<img src="images/e-swap.png" alt="eSwap"/>
+                            </div>
+                            <h3>eSwap</h3>
+                            <p><?=$content['eSwap_desc']?></p>
+                        </div>
+                    </div>
+                    <!--box two end -->
+                       <?php
+                    if($this->session->userdata('loggedin')!='')
+                    {
+                        $destination = "window.location='efreebie-home.html'";
+                        
+                    }
+                    else
+                    {
+                        $url = base64_encode(base_url().'efreebie-home.html');
+                        $destination = "return show_login_popup('".$url."')";
+                    }
+                    
+                    ?>
+                    
+                    <!--box three start -->
+                    <div class="link-box" onclick="<?=$destination?>">
+                    	<div class="link-box-in">
+                        	<div class="main-img">
+                        		<img src="images/e-freebie.png" alt="eFreebie"/>
+                            </div>
+                            <h3>eFreebie</h3>
+                            <p><?=$content['eFreebie_desc']?></p>
+                        </div>
+                    </div>
+                    <!--box three end -->
+                    
+                     <?php
+                    if($this->session->userdata('loggedin')!='')
+                    {
+                        $destination = "window.location='trade-activities.html'";
+                        
+                    }
+                    else
+                    {
+                        $url = base64_encode(base_url().'trade-activities.html');
+                        $destination = "return show_login_popup('".$url."')";
+                    }
+                    
+                    ?>
+                    
+                    <!--box four start -->
+                    <div class="link-box" onclick="<?=$destination?>">
+                    	<div class="link-box-in">
+                        	<div class="main-img">
+                        		<img src="images/trade-activities.png" alt="Trade Activities"/>
+                            </div>
+                            <h3>Trade Activities</h3>
+                            <p><?=$content['eActivities_desc']?></p>
+                        </div>
+                    </div>
+                    <!--box four end -->
+                    <?php
+                    if($this->session->userdata('loggedin')!='')
+                    {
+                        $destination = "window.location='buy-product-listing-credit.html'";
+                        
+                    }
+                    else
+                    {
+                        $url = base64_encode(base_url().'buy-product-listing-credit.html');
+                        $destination = "return show_login_popup('".$url."')";
+                    }
+                    
+                    ?>
+                    <!--box five start -->
+                    <div class="link-box no-bg" onclick="<?=$destination?>">
+                    	<div class="link-box-in">
+                        	<div class="main-img">
+                        		<img src="images/purchase-product.png" alt="Product Listing Credit" />
+                            </div>
+                            <h3>Product Listing Credit</h3>
+                            <p><?=$content['productListingCredit_desc']?></p>
+                        </div>
+                    </div>
+                    <!--box five end -->
+                    <div class="clr"></div>
+                </div>
+                <!--bottom link section end -->
+            </div>     
+           <!-- /main container -->
+      </div>
+      <div class="clr"></div>
+</div>
+<!-- /CONTENT SECTION -->  
+  
+<?php
+	# include footer file...
+	include_once(APPPATH ."views/layouts/footer.phtml");
+?>
+<!--login popup start -->
+
+<!--login popup end -->

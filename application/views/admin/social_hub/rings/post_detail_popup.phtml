@@ -1,0 +1,10 @@
+<div class="pop-content first">	
+
+                       
+                       <div class="posted-by" style="background:url(<?=get_profile_image($post_info['i_user_id'],'thumb')?>) no-repeat center;width:73px; height:73px; margin-left: 9px;" ></div>
+                       <div class="right-panel">
+                            <h5><?=$post_info['s_post_title']?></h5>
+                            <h6>Posted <?=get_time_elapsed_blog($post_info['dt_created_on'])?> by <strong><?=get_username_by_id($post_info['i_user_id'])?></strong> </h6>
+                            <p><?=nl2br($post_info['s_post_description'])?></p>
+                       </div>
+</div>

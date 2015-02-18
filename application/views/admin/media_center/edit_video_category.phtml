@@ -1,0 +1,134 @@
+<div class="clr"></div>
+<!--navigation section start -->
+<?php include(APPPATH."views/layouts/admin/admin_nav.phtml");?>
+<!--navigation section end -->
+<!-- CONTENT SECTION -->
+<div id="content_section">
+      <div id="container">
+            <!--<div id="top_corner">&nbsp;</div> -->
+            <div id="mid_content">
+                  <div class="page_heading left">
+                        <div class="left"><img src="../images/icons/login.png" alt="" /> Edit Media Video Category</div>
+              </div>
+                  <div class="clr"></div>
+<?//pr($news_info)?>
+                  <div id="right_container">
+                        <div class="arrow_btm"></div>
+                        <div class="content_area frm_box frm_box2">
+                              <form id="edit_news_frm" action="" method="post" enctype="multipart/form-data" onsubmit="return edit_news_()">
+                                  <div class="lable01">Title :</div>
+                                  <div class="field02">
+                                        <input name="s_name" type="text" value="<?=$news_info['s_name']?>"/>
+                                  </div>
+                                  <div id="err_title" class="error-message"></div>
+                                  <div class="clr"></div>
+                                  
+                                  
+								  
+                                  
+                                  <div class="lable01">&nbsp;</div>
+                                  <div class="field01">
+                                  <input type="hidden" id="i_news_id" name="i_news_id" value="<?=$news_info['id']?>">
+                                  <input type="hidden" id="current_page" name="current_page" value="<?=$current_page?>">
+                                  
+                                        <input name="" type="submit" class="btn"  value="Update"/><input name="" type="reset" class="btn"  value="Cancel" onclick="window.location=admin_base_url+<?=$current_page?>+'/media_video_category.html'"/>
+                                  </div>
+                              </form>
+                              <div class="clr"></div>
+                        </div>
+                  </div>
+                  <div class="clr"></div>
+            </div>
+            
+            
+            <div class="clr"></div>
+</div>
+
+
+<!-- /CONTENT SECTION -->
+
+
+<script type="text/javascript">
+
+$(document).ready(function(arg) {
+    
+    // for AJAX page-submission...
+   
+    
+    
+    optionsArrEdit = {
+        beforeSubmit:  showBusyScreen,  // pre-submit callback 
+        success:       validateEditFrm, // post-submit callback 
+        url:        admin_base_url + "media_center/edit_video_category/post_edit_data"
+    }; 
+    
+	
+	$("#is_feature_home").change(function(){
+		if ($(this).val() == 1)
+		{
+			$("#div_adv_image_featured").css("display","block");
+		}
+		else
+		{
+			$("#div_adv_image_featured").css("display","none");
+		}
+	});
+	
+    
+});
+//---------------------------------- edit ----------------------------------------
+
+function edit_news_()
+{
+    tinyMCE.triggerSave(false,true);
+    $('#edit_news_frm').ajaxSubmit(optionsArrEdit);
+    return false;
+}
+function validateEditFrm(data)
+{
+    
+    var data = JSON.parse(data);
+
+    showUIMsg(data.msg);
+    hideBusyScreen();
+
+     $('.error-message').each(function(i){
+            $(this).attr('style','display:none');
+        });
+        
+    if(data.result=='failure') 
+    {
+       
+        
+        for ( var id in data.arr_messages ){
+            
+            if( $('#err_'+id) != null ) {
+                $('#err_'+id).html(data.arr_messages[id]);
+                $('#err_'+id).css('display', 'block');
+
+            }
+        }
+        
+    }
+    else {  //success
+        
+         //hideBusyScreen();
+
+         $('#edit_news_frm')[0].reset();
+         var current_page = $('#current_page').val();
+         
+         window.location.href = admin_base_url+current_page+'/media_video_category.html';
+         
+       
+    }
+
+}
+
+//---------------------------------- end edit ----------------------------------------
+
+
+
+
+</script>
+
+

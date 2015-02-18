@@ -1,0 +1,291 @@
+<?php
+	if( ($this->session->userdata('loggedin') !='' || $this->session->userdata('loggedin')!=false ) && $this->session->userdata('is_admin') != 1){
+		
+		 include(APPPATH ."views/layouts/logged_header.phtml");
+		 include(APPPATH."views/layouts/nav.phtml");?>
+		  <!-- /NAVIGATION SECTION -->
+      		</div>
+		</div>
+		
+		
+   <?php  }
+     else{
+         
+		include(APPPATH ."views/layouts/header.phtml");
+	   	include(APPPATH."views/layouts/slider_nav.phtml");
+  }?>
+     
+<!-- /HEADER SECTION -->
+<div class="clr"></div><!-- CONTENT SECTION -->
+
+<link href="http://code.google.com/apis/maps/documentation/javascript/examples/default.css" rel="stylesheet" type="text/css" />
+<?php /*?><script type="text/javascript" src="//maps.googleapis.com/maps/api/js?sensor=false"></script><?php */?>
+<!-- CONTENT SECTION -->
+<div id="content_section" style="margin-top:8px;">
+      <div id="container">
+      		<!-- main container -->
+           
+            <div class="landing-page">
+             <div style="margin-left:920px;">
+                     <input type="submit" class="sml_btn" name="reload_search" value="Back"  style=" background:none repeat scroll 0 0 #013D62;"  onclick="window.location='<?= $_SERVER['HTTP_REFERER'] ?>'"/>
+                    </div>
+            	 <?php //pr($event_info);
+				   		
+					 			$event_info = $event_info[0];	
+								$id= $event_info['id'];	
+								$title = my_substr(html_entity_decode(htmlspecialchars_decode($event_info['s_title']),ENT_QUOTES,'utf-8'), 68);
+								$desc = html_entity_decode(htmlspecialchars_decode($event_info['s_desc']),ENT_QUOTES,'utf-8');
+								$country = get_country_name_by_id($event_info['i_country_id']);
+								$address = $event_info['s_address'].', '.$event_info['s_city'].', '.$event_info['s_state'].', '.$country;
+								$IMG_THUMB_PATH = base_url() ."uploads/events_photo/";
+								$main_name=getThumbName($event_info['s_image_1'],'mid_FO'); 
+								$MAIN_IMG_THUMB = $IMG_THUMB_PATH . $main_name;
+								
+								$name_5 =getThumbName($event_info['s_image_5'],'mid_FO'); 
+								$IMG_THUMB_5 = $IMG_THUMB_PATH . $name_5;
+								
+								$name_2=getThumbName($event_info['s_image_2'],'mid_FO'); 
+								$IMG_THUMB_2 = $IMG_THUMB_PATH . $name_2;
+								
+								$name_3=getThumbName($event_info['s_image_3'],'mid_FO'); 
+								$IMG_THUMB_3 = $IMG_THUMB_PATH . $name_3;
+								
+								$name_4=getThumbName($event_info['s_image_4'],'mid_FO'); 
+								$IMG_THUMB_4 = $IMG_THUMB_PATH . $name_4;
+								 $logged_user_id = intval(decrypt($this->session->userdata('user_id')));
+								
+									
+					?>
+                
+                <div class="full-text">
+                    <h3><?=$title?></h3>
+                    <p class="venue"><strong>Venue:</strong> <?=$address?></p>
+                    <p class="time"><strong>Time:</strong> <?=getShortDateWithTime($event_info['dt_start_time'], 6)?></p>
+                </div>
+                <!--event start -->
+                     <div class="shade_box_01">
+                        
+                        <!--content section start -->
+                        <div class="upcoming-content">
+                        	    <div class="event-image-big" style="background:url(<?=$MAIN_IMG_THUMB?>) no-repeat center;max-width:180px; max-height:180px; cursor:pointer; " title="upcoming event"  ></div>
+                        		<!--right part -->
+                                <div class="right_div02">
+                                    <div class="box01">
+                                        <p>Created On:</p>
+                                        <p class="date-time"><?=getShortDate($event_info['dt_created_on'],5)?></p>
+                                    </div>
+                                    <?php /*?> <p style="margin-right:8px;" class="add-remove-friend"><img src="images/icons/send.png" alt="" /> <a  href="javascript:void(0);" onclick="return show_dialog('login-box')">Send RSVP</a></p><?php */?>
+                                     
+                                    
+                                  <?php 
+										if($this->session->userdata('loggedin')):
+								   ?>
+									 <p style="margin-right:8px;" class="add-remove-friend"><?php if((show_event_rsvp($event_info['id']) == TRUE) && $event_info['i_host_id'] !=  $logged_user_id) { ?><span id="send_rsvp_<?=$event_info['id']?>"><img src="<?=base_url()?>images/icons/send.png" alt="" /> <a  href="javascript:void(0);" onclick="send_rsvp(<?=$event_info['id']?>)">Send RSVP</a></span><?php } ?></p>
+								  <?php
+										else:
+								   ?>
+								     <p class="add-remove-friend" style="margin-right:8px;"><img alt="" src="images/icons/send.png" /> <a onclick="show_login_popup('<?=base64_encode(my_current_url())?>')" href="javascript:void(0);">Send RSVP</a></p>
+								  <?php
+										endif;
+								   ?>   
+                                     
+                                    <div class="google-map">
+                                  <?php
+										  # if map longitude-latitude data available...
+										  if( strtolower($geodata['status'])=='ok' ) :
+									 ?>
+									   <div class="map" id="map_canvas" style="height:300px;;width:300px;">
+										  <?php
+												  echo $mapshow->printGMapsJS();
+												  echo $mapshow->showMap(false);
+										  ?>
+									   </div>
+									 <?php
+										  endif;
+									 ?>
+                                </div>
+                                </div>
+                                <!--/right part -->
+                        	    
+                                <p><?=nl2br($desc)?></p>
+                                
+                                <div class="image-section">
+                                	<a href="javascript:void(0);" class="image-thumb" onclick="return open_zoom_lightbox(1,<?=$id?>)"><img alt="upcoming event" src="<?=$MAIN_IMG_THUMB?>" width="180" height="180" /></a>
+                                   <?php  if($event_info['s_image_2'] != ''){?>
+                                    <a href="javascript:void(0);" class="image-thumb" onclick="return open_zoom_lightbox(2,<?=$id?>)"><img alt="upcoming event" src="<?=$IMG_THUMB_2?>" width="180" height="180" /></a>
+                                    <?php } ?>
+                                    
+                                    <?php  if($event_info['s_image_3'] != ''){?>
+                                    <a href="javascript:void(0);" class="image-thumb" onclick="return open_zoom_lightbox(3,<?=$id?>)"><img alt="upcoming event" src="<?=$IMG_THUMB_3?>" width="180" height="180" /></a>
+                                    <?php } ?>
+                                    
+                                    <?php  if($event_info['s_image_4'] != ''){?>
+                                    <a href="javascript:void(0);" class="image-thumb" onclick="return open_zoom_lightbox(4,<?=$id?>)"><img alt="upcoming event" src="<?=$IMG_THUMB_4?>" width="180" height="180" /></a>
+                                    <?php } ?>
+                                    
+                                    <?php  if($event_info['s_image_5'] != ''){?>
+                                    <a href="javascript:void(0);" class="image-thumb no-mrgn" onclick="return open_zoom_lightbox(5,<?=$id?>)"><img alt="upcoming event" src="<?=$IMG_THUMB_5?>" width="180" height="180" /></a>
+                                    <?php }?>
+                                </div>
+                        </div> 
+                        <!--content section end --> 
+					   <?php 
+                          if($this->session->userdata('loggedin')):
+                       ?>
+                        <br class="clear"/>
+                        <div class="report-abuse">
+                              <a class="link-report" href="javascript:void(0);">Report abuse</a>
+                              <div class="text-section" style="margin-left:1%; width:95%;">
+                                  <form id="frm_report_abuse" onSubmit="return false;">
+                                      <textarea rows="5" cols="5" id="txt_abuse_profile_text"></textarea>
+                                      <input type="button" class="yellow-btn" value="Send" onclick="report_abuse_profile()"/>
+                                  </form>
+                              </div>
+                          </div>
+                        <?php endif;?>
+                        <!--comment section start -->
+                        <div class="comment-section">
+                        	<h2 class="comment-support">Comment  &amp;   Support :</h2>
+                            <form action="" method="post" enctype="multipart/form-data" class="comment-form">
+                            	<div class="textarea-div">
+                                	<textarea id="feed_comment_box_<?=$id?>" ></textarea>
+                                </div>
+                                <div class="clr"></div>
+                             
+                              <?php 
+						 		if($this->session->userdata('loggedin')):
+							 ?>
+                             <input name="" type="button" value="Post" class="submit-btn" onclick="post_events_comment_ajax(<?=$id?>)" />
+                             <?php 
+							 	else:
+							 ?>
+                                
+                             <input name="" type="button" value="Post" class="submit-btn"   onclick="return show_login_popup('<?=base64_encode(my_current_url())?>')" />
+                             <?php endif;?>
+                            </form>
+                            
+                            
+                            
+                            <div class="clr"></div>
+                            <?php if($comments_content != ''){ ?>
+                            <h2 class="comment-support">View Comments :</h2>
+                            
+                            <?php }?>
+                           	<DIV id="comment_div"><?=$comments_content?></DIV>
+                             
+                            
+                            
+                            <?php if($no_comments > $pagination_per_page): ?>
+                                    
+                                    <div class="view_more" id="show_more_feeds_div"><a href="javascript:void(0);" id="show_more_feeds_link" page_value="<?=$current_page?>" onclick="show_more_feeds($(this).attr('page_value'))">[view more] </a> </div>
+                            <?php endif; ?>
+                            
+                            <input type="hidden" id="i_curr_event_id" value="<?=$i_event_id?>" />
+                        </div>
+                        <!--comment section end --> 
+                         
+                         
+                     </div>
+                <!--event end -->
+                        
+                <div class="clr"></div>
+                
+            </div>     
+            <!-- /main container -->
+      </div>
+      <div class="clr"></div>
+</div>
+<!-- /CONTENT SECTION -->
+<?php
+	# include footer file...
+	include_once(APPPATH ."views/layouts/footer.phtml");
+	
+?>
+
+
+<script type="text/javascript">
+
+var ajax_req_feeds = null;
+function show_more_feeds(page) {
+	
+	var event_id = $('#i_curr_event_id').val();
+	if(ajax_req_feeds!=null) {
+		ajax_req_feeds.abort();
+	}
+	showUILoader_nodialog();
+	ajax_req_feeds = $.ajax({
+		type: 'get',
+		url: base_url+'events/comments_ajax_pagination/'+event_id+'/'+page,
+		dataType: 'json',
+
+		success: function (data, status) {
+			
+
+			hideUILoader_nodialog();
+			if(data.html!='') {
+				
+				//alert(data.cur_page+'dfdf');
+				$('#comment_div').append(data.html);
+				$('#show_more_feeds_link').attr('page_value', data.cur_page);
+				$('#show_more_feeds_link').attr('onclick','');
+				$('#show_more_feeds_link').attr('onclick','show_more_feeds('+data.cur_page+')');
+			}
+			else {
+				$('#comment_div').append('<div class="view_more" style="text-align: center;"><p class="blue_bold12" style="font-size:14px;">No More Comments.</p></div>');
+				$('#show_more_feeds_div').remove();
+			}
+            
+            if(data.view_more==false)
+            {
+                
+                $('#comment_div').append('<div class="view_more" style="text-align: center;"><p class="blue_bold12" style="font-size:14px;">No More Comments.</p></div>');
+                $('#show_more_feeds_div').remove();
+            }
+			
+			
+		}	// end of success function...
+	});
+}
+</script>
+
+<script type="text/javascript">
+
+// show zoom window...
+function open_zoom_lightbox(image_no , id ) {
+	//alert(image_no);
+	var url = base_url + 'events/zoom_photo/'+image_no+'/'+id+'?width=800&height=536';
+	tb_show('zoom_img', url);
+}
+
+function report_abuse_profile(){
+	
+	  if($('#txt_abuse_profile_text').val() == ''){
+		  showUIMsg('Please provide reason.');
+		  return false;
+	  }
+	  showUILoader_nodialog();
+	  $.ajax({
+		  type: 'post',
+		  url: base_url + 'public_profile/abuseMedia/'+<?= $event_info['id'] ?>+'/event',
+		  data: {'s_reason':$('#txt_abuse_profile_text').val()},
+		  dataType: 'json',
+		  success: function(data, status) {
+			  
+			  showUIMsg(data.msg);
+			  $('#txt_abuse_profile_text').val('');
+			  $('.link-report').trigger('click');
+			  hideUILoader_nodialog();
+		  }	// end of success function...
+	  });
+  }
+
+$(document).ready(function() {
+
+ 
+  $('.link-report').click(function(){
+	  //alert('hi');
+	  $('.text-section').stop(true, true).slideToggle('slow');
+  });
+ 
+});
+</script>

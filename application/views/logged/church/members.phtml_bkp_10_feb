@@ -1,0 +1,97 @@
+<?php
+	include(APPPATH ."views/layouts/church_logged_header.phtml");
+	pr($member_arr);
+?>
+
+<!-- CONTENT SECTION -->
+<div class="container">
+  
+  <div class="main-page">
+  	<div class="member-find-main">
+    <!--<div class="members-main">
+    	<select name="member_id" id="member_id" tabindex="1">
+			<option>All Members (28,694)</option>
+            <option>All Members (28,694)</option>
+            <option>All Members (28,694)</option>
+		</select>
+    </div>-->
+    <div class="search-main">
+	<form name="search_frm" id="search_frm" method="POST" action="">
+    <input type="text" placeholder="Find a member" name="search_data" id="search_data" value="">
+       <input type="button" name="search_btn" id="search_btn" onclick="return search_result('<?=$member_arr[0]->church_id?>');">
+	   <input id="search_basic" type="hidden" name="search_basic" value="Y">
+	</form>  
+    </div>
+    <!--<a href="javascript:void(0);" class="add-button" title="Add People">Add People</a>-->
+    <div class="clear"></div>
+    </div>
+    
+    <div id="member-list">
+	<div id="comment_result_div">
+    	
+			
+			
+			 <?php if ($no_of_result > 3): ?>
+             <div class="view_more" id="show_more_feeds_div"><a href="javascript:void(0);" id="show_more_feeds_link" page_value="<?= $current_page_1 ?>" onclick="show_more_feeds($(this).attr('page_value'))">[view more] </a> </div>
+
+           
+			<?php endif; ?>
+            
+        
+    </div>
+    
+    
+  </div>
+<!-- /CONTENT SECTION -->
+<div class="clr"></div>
+<!-- FOOTER SECTION -->
+<?php include(APPPATH."views/layouts/church_footer.phtml");?>
+<!-- /FOOTER SECTION -->
+<script type="text/javascript">
+function search_result(cid) {
+var base_url = '<?php echo base_url(); ?>';
+showUILoader_nodialog('<img src="'+base_url+'images/loading_big.gif" width="50"/> ');
+var search_data = $('#search_data').val();
+$.ajax({
+  url: base_url+'logged/church_members/members_search_result/',
+  type: 'POST',
+  data: {search_data:search_data,cid:cid},
+  success: function(data) {
+  //alert(data);
+	//called when successful
+	$('#member-list').html(data);
+	$('#search_data').val(search_data);
+	hideUILoader_nodialog();
+  }
+});
+}
+
+var ajax_req_feeds = null;
+function show_more_feeds(page) {
+        if (ajax_req_feeds != null) {
+            ajax_req_feeds.abort();
+        }
+        showUILoader_nodialog();
+        ajax_req_feeds = $.ajax({
+            type: 'get',
+            url: base_url + 'logged/church_members/church_member_pagination_show_more/<?= $member_arr[0]->church_id ?>' + '/' + page,
+            dataType: 'json',
+            success: function(data, status) {
+
+                hideUILoader_nodialog();
+                if (data.html != '') {
+                    $('#member_result_div').append(data.html);
+                    $('#see_more_members_link').attr('page_value', data.current_page);
+                }
+                else {
+                    $('#member_result_div').append('<div class="view_more" style="text-align: center;"><p class="blue_bold12" style="font-size:14px;">No more posts to display.</p></div>');
+                    $('#see_more_members_link').hide();
+                }
+
+
+            }	// end of success function...
+        });
+    }
+</script>
+
+

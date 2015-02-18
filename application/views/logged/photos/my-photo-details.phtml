@@ -1,0 +1,201 @@
+<script type="text/javascript">
+
+var ajax_req_feeds = null;
+function show_more_feeds(page) {
+	
+	var current_media_id = $('#current_media_id').val();
+	if(ajax_req_feeds!=null) {
+		ajax_req_feeds.abort();
+	}
+	showUILoader_nodialog();
+	ajax_req_feeds = $.ajax({
+		type: 'get',
+		url: base_url+'logged/my_photo_album_details/comments_ajax_pagination/'+current_media_id+'/'+page,
+		dataType: 'json',
+
+		success: function (data, status) {
+
+			hideUILoader_nodialog();
+			if(data.html!='') {
+				$('#comment_result_div').append(data.html);
+				$('#show_more_feeds_link').attr('page_value', data.current_page);
+			}
+			else {
+				$('#comment_result_div').append('<div class="view_more" style="text-align: center;"><p class="blue_bold12" style="font-size:14px;">No more comments.</p></div>');
+				$('#show_more_feeds_div').hide();
+			}
+			
+		}	// end of success function...
+	});
+}
+</script>
+<?php include(APPPATH."views/layouts/logged_header.phtml");?>
+<!-- NAVIGATION SECTION -->
+      <?php include(APPPATH."views/layouts/nav.phtml");?>
+<!-- /NAVIGATION SECTION -->
+<div class="clr"></div>
+<!-- CONTENT SECTION -->
+<div id="content_section">
+      <div id="container">
+            <div id="top_corner">&nbsp;</div>
+            <div id="mid_content">
+                  <!-- latest news -->
+                  <?php include(APPPATH ."views/layouts/latest_news.phtml");?>
+                  <!-- /latest news -->
+                  <div class="clr"></div>
+                  <!-- main container -->
+                  <div id="main_container">
+                        <!-- left container -->
+                        <?php include(APPPATH ."views/layouts/leftbar.phtml");?>
+                        <!-- /left container -->
+                        
+                        <!-- mid container -->
+                        <div id="mid_container">
+                        <div class="page_heading">
+                                <div class="left"><img src="images/icons/photo.png" alt="" /> Photos</div>
+                            </div>
+                        <!--sub page links -->
+                              <div class="link-div" style="margin-top:0px;">
+                                  <ul>
+                                    <li><a href="my-photos.html"><span>My Photos</span> </a> </li>
+                                    <li><a href="manage-my-photo.html"><span>Manage My Photo Albums</span> </a> </li>
+                                    <li><a href="create-photo-album.html"><span>Create Photo Album</span></a></li>
+                                    <li><a href="javascript:void(0);" onclick="return show_dialog('upload_photo')"><span>Upload Photo</span></a></li>
+                                </ul>
+                                <div class="clr"></div>
+                              </div>
+                        <!--/sub page links -->
+                        
+                        
+                        	<div class="page_heading_01">
+                            	<div class="left"><img src="images/icons/photo.png" alt="" /><?=$arr_photo_detail['s_title']?></div>
+                            </div>
+                             <?php //pr($arr_photo_detail);?>
+                            <div class="arrow_btm"></div>
+                            <div class="section01 section02">
+                            	
+                                <p class="date-time">Uploaded on : <?=getShortDate($arr_photo_detail['dt_created_on'],5)?></p>
+                                 <?php $IMG = base_url()."uploads/user_photos/".getThumbName($arr_photo_detail['s_photo'],'mid'); ?>
+                                	
+                                    	<a href="javascript:void(0);"><div style="background:url(<?=$IMG?>) no-repeat center;width:472px; height:378px; cursor:pointer; "  title="Album" ></div></a>
+                                   
+                                
+                            	
+                                    <p><?=$arr_photo_detail['s_description']?></p>
+                                
+                                    <div class="light_heading"> 
+                                       <div class="left"><a href="javascript:void(0);"   onclick="return show_people_liked(<?=$arr_photo_detail['id']?>); " id="liked_by_<?=$arr_photo_detail['id']?>">Liked by (<?=count_photo_like_link($arr_photo_detail['id'],'photo')?>)</a></div>
+                                       
+                                  <?php if((show_photo_like_link($arr_photo_detail['id'],'photo') == TRUE) ) { 
+                                  ?>
+                                          <div class="right"><a href="javascript:void(0);" onclick="open_zoom_lightbox(<?=$arr_photo_detail['id']?>)"><img alt="" src="images/icons/zoom.png" />Zoom</a> &nbsp; &nbsp; <a href="javascript:void(0);" id="like_count_<?=$arr_photo_detail['id']?>" onClick="windowLike(<?=$arr_photo_detail['id']?>,'Like')">Like</a>  </div>                
+                                 <?php } 
+                                      else{ 
+                                 ?>
+                                          <div class="right"><a href="javascript:void(0);" onclick="open_zoom_lightbox(<?=$arr_photo_detail['id']?>)"><img alt="" src="images/icons/zoom.png" />Zoom</a> &nbsp; &nbsp; <a href="javascript:void(0);" id="like_count_<?=$arr_photo_detail['id']?>" >Like</a> </div>
+                                    
+                                 <?php }?>
+                                       
+                                        
+                                   </div>
+                            </div>
+                            
+                            <div class="div_content aud-wall-comment">
+                                    <div class="postheading">
+                                          <div class="left">
+                                                <h4> Post Comment</h4>
+                                          </div>
+                                    </div>
+                                    <form action="" method="post" class="wall-comment-form">
+                                        
+                                        	<!--text div start -->
+                                            <div class="write-text write-text2">
+                                           <p><textarea  class="feed_comment_box" id="feed_comment_box_<?=$arr_photo_detail['id']?>" name="" cols="" rows="" style="width:796px; height:100px; margin-bottom:10px;"></textarea></p>
+            <input type="hidden" name="i_photo_id" id="i_photo_id" value="<?=$arr_photo_detail['id']?>"/>
+        	
+                                        	</div>
+                                            <!--text div end -->
+                                       <input name="" id="post_comment_button" type="button" value="Post"  class="wall-comment-submit-nw " onclick="post_comment();"/>
+                                    </form>
+                              </div>
+                              
+                              <div class="div_content">
+                                    <div class="heading">
+                                          <div class="left">
+                                                <h4><img class="icon-img" src="images/icons/cmmnt.png" alt="" /> View Comments</h4>
+                                          </div>
+                                    </div>
+                                    <div id="comment_result_div"><?=$comments_list_html?></div>
+                                    <?php if($no_of_result == 0): ?>
+                                    	<div id="no_comments_div" class="view_more" style="text-align: center;"><p class="blue_bold12" style="font-size:14px;">No comments.</p></div>
+                                     <?php endif; ?>
+
+                                    
+                                    <?php  if($no_of_result > 2): ?>
+                                    
+                                    <div class="view_more" id="show_more_feeds_div"><a href="javascript:void(0);" id="show_more_feeds_link" page_value="<?=$current_page_1?>" onclick="show_more_feeds($(this).attr('page_value'))">[view more] </a> </div>
+                                    <?php endif; ?>
+                                    
+                                 
+                              </div>
+                              
+                              <input type="hidden" name="current_media_id" id="current_media_id" value="<?=$i_media_id?>" />
+                            
+                             
+                            
+                            
+                            
+                        </div>
+                        <!-- /mid container -->
+                        <!-- right container -->
+                       <?php include(APPPATH ."views/layouts/rightbar.phtml");?>
+                        <!-- /right container -->
+                  </div>
+                  <!-- /main container -->
+                  <div class="clr"></div>
+            </div>
+            <div id="bot_corner">&nbsp;</div>
+      </div>
+      <div class="clr"></div>
+</div>
+<!-- /CONTENT SECTION -->
+<div class="clr"></div>
+<!-- FOOTER SECTION -->
+ <?php include(APPPATH ."views/layouts/footer.phtml");?>
+<!-- /FOOTER SECTION -->
+
+
+<!-- /lightbox SECTION -->
+<?php include(APPPATH."views/logged/photos/blocks/upload_photo_popup_photo_detail_page.phtml");?>
+<?php include(APPPATH."views/logged/blocks/common_popup.phtml");?>
+
+<?php /*?>LIKED LIGHT BOX <?php */?>
+<div class="lightbox liked_by_div" style="width:500px;">
+      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="<?=base_url()?>images/close.png" alt="" /></a></div>
+      <div class="top">
+            <div>&nbsp;</div>
+      </div>
+      <div class="mid" style="height:299px;">
+            <div class="heading" style="margin-bottom:0px;">
+                  <div class="left">
+                        <h4><img src="<?=base_url()?>images/icons/thumb_up.png" alt="" /> Liked by </h4>
+                  </div>
+            </div>
+            <div id="liked_html"></div>
+      </div>
+      <div class="bot">
+            <div>&nbsp;</div>
+      </div>
+</div>
+<?php /*?>LIKED LIGHT BOX <?php */?>
+
+
+
+<script type="text/javascript">
+// show zoom window...
+function open_zoom_lightbox(id ) {
+	var url = base_url + 'logged/my_photo_album_details/zoom_large_photo/'+id+'?width=800&height=536';
+	tb_show('zoom_img', url);
+}
+</script>
+

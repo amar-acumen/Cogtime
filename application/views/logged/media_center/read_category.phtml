@@ -1,0 +1,213 @@
+<?php include(APPPATH."views/layouts/logged_header.phtml");?>
+            <!-- NAVIGATION SECTION -->
+      <?php include(APPPATH."views/layouts/nav.phtml");?>
+      <!-- /NAVIGATION SECTION -->
+      </div>
+</div>
+<div class="clr"></div>
+<script>
+function goBack() {
+    window.history.back()
+}
+</script>
+
+<? include "media_center_nav.phtml" ?>
+    
+
+
+<!-- CONTENT SECTION -->
+
+<div id="content_section">
+      <div id="container">
+          <div class="top-page-heading">
+          <h2 class="landing-title">Media center</h2>
+          <div class="landing-input">
+		  <form name="user_frms" id="user_frms" method="post" action="<?= base_url() . 'logged/christian_news/search_news' ?>"  onsubmit="return true;" >
+		  <input type="text" name="search_keyword_val" value="<?php echo $search_keyword_val?>" placeholder="Type Keywords separated by comma">
+		  <input name="" type="submit" value="Deactivate"  class="btn" style="display:none;"/>
+		  </form>
+		  </div>
+          <a href="javascript:void(0)" class="media-back" onclick="goBack()">Back</a>
+	  <div class="clr"></div>
+           </div>
+          <div class="media-center-left">
+               
+                <h3 class="prelibrary-icon">
+				<?php echo $article[0]['cat_name']?></h3>
+                <? foreach($article as $val)
+				{
+                ?>
+					<div class="textsearch-pan">
+					<?php
+					//echo '===='.$is_video;
+					if($is_video=='y')
+						{$detail_url	= base_url().$val['id']."/".my_url($val['cat_name'])."/watch-detail/".my_url($val['s_title']).".html";
+						$IMG = base_url() . 'uploads/media_center_videos/' . getThumbName($val['s_video_thumb'], 'bigthumb');
+					}
+					if($is_news=='y') 
+					{
+						$detail_url	= base_url().$val['id']."/".my_url($val['cat_name'])."/christian-news-details/".my_url($val['s_title']).".html";
+						if($val['s_image'] != Null)
+						{
+						$IMG = base_url() . 'uploads/media_center_article/' . getThumbName($val['s_image'], 'mid' );}
+						else
+						{
+						$IMG ='';
+						}
+		
+					}
+					
+					if($is_audio=='y') 
+						$detail_url	= base_url()."listen-detail/".$val['id']."/".my_url($val['s_title']).".html";	
+						
+						
+					?>
+                    	<h4><a href="<?php echo $detail_url?>"><?=$val['s_title']?></a></h4>
+						<?php if($IMG != ''):?>
+                        <a href="<?=$detail_url?>"><img src="<?php echo $IMG?>" alt="Image" width="222" height="157"></a>
+						<?php endif;?>
+                                                <!---------------------------->
+                                                <?php 
+                                                $this->load->helper('text');
+                                               $string = word_limiter(get_unformatted_string_edit($val['s_desc']), 65);
+                                                ?>
+                                                <!-------------------------------->
+                        <p style="line-height:19px;"><?=strip_tags($string,"<img><p></p>")?></p>
+                        <div class="blog-links">
+                        	<div class="blog-date"><?=getShortDate($val['dt_posted_on'],4)?> by <?=$val['admin_name']?></div>
+                            <div class="blog-quick-list">
+                            <ul>
+                                <li class="blog-comment"><a href="javascript:void(0);"><?=$val['total_comments']?> Comments</a></li>
+                                <li class="blog-view"><a href="javascript:void(0);"><?=$val['i_view_count']?> Views</a></li>
+                            </ul>
+                         </div>
+                         <div class="clear"></div>
+                        </div>
+                                     
+                        	<ul class="library-tag-list">
+								<li>Tags</li>
+								<? $arr_tags	= explode(',',$val['s_tags'])?>
+								<?php
+                                                                   //echo count($arr_tags);
+                                                               // pr($arr_tags);
+								foreach($arr_tags as $tagval)
+								{
+									?>
+                                                                        <li><a href="javascript:void(0);"><?= $tagval ?></a></li>
+									<?php
+								}
+								?>
+                
+							</ul>
+                                                                <?php 
+                                                                
+                                                               
+                                                                 ?>
+							<div class="clear"></div>
+                    </div>
+              <? }?>
+              
+             
+                         
+             </div>
+            <div class="media-center-right">
+			 <div>
+                 
+				  <?php
+				  if($is_news=='y')
+				  {
+				  ?>
+				   <h3 class="may-like-icon">You May Like</h3>
+				  <?php
+				  foreach($right_content as $val)
+				  {
+					$IMG = base_url() . 'uploads/media_center_article/' . getThumbName($val['s_image'], 'thumb');
+					if($val['s_image']=='')
+					{
+					$IMG='images/library7.png';
+					}
+				  ?>
+				  
+                  <div class="dev-main">
+                      <div class="pic-left"><a href="<?= base_url().$val['id']."/".my_url($val['cat_name'])."/christian-news-details/".my_url($val['s_title']).".html"?>"><img src="<?php echo $IMG?>" alt="Library" width="104px" style="display:block;"></a></div>
+                      <div class="pic-right">
+                          <h4><a href="<?= base_url().$val['id']."/".my_url($val['cat_name'])."/christian-news-details/".my_url($val['s_title']).".html"?>" title="<?=$val['s_title']?>"><?= htmlspecialchars_decode(my_substr($val['s_title'],15))?></a></h4>
+                          <p><?=my_substr(strip_tags(get_unformatted_string_edit($val['s_desc'])),60)?></p>
+                         	 <ul class="green-comment">
+                             	<li><a href="javascript:void(0);">Liked by</a><span> (<?php echo $val['total_likes']?>)</span></li>
+                             </ul>
+                      </div>
+                      <div class="clr"></div>
+                  </div>
+                  
+                  <?php
+				  }
+				  }
+				  ?>
+                  
+              </div>
+                
+                <!------------------------------>
+                <?php
+                      if(count($advertisementmedia_detail)){
+                          
+                          $j = count($advertisementmedia_detail);
+                          for($i=0;$i<$j;$i++){
+                               $IMG_THUMB_PATH = base_url() ."uploads/media_center_advertisement/";
+  $name=getThumbName($advertisementmedia_detail[$i]['s_image'],'main'); 
+  $IMG_THUMB = $IMG_THUMB_PATH . $name; ;
+                          ?>
+                    <div class="advertisment"><img src="<?=$IMG_THUMB?>" alt="" width="250" height="250" onclick="window.open('<?=$advertisementmedia_detail[$i]['s_url']?>')"/></div>
+
+                      <?php 
+                          }
+                      
+                          } ?>
+                
+                <!---------------------------->
+<!--              <div class="advertisment"><img src="images/ad5.png" alt="Advertisment" width="250" height="250"></div>
+              <div class="advertisment"><img src="images/ad6.png" alt="Advertisment" width="250" height="250"></div>
+              <div class="advertisment"><img src="images/ad7.png" alt="Advertisment" width="250" height="250"></div>-->
+			</div>
+          <div class="clr"></div>
+          </div>
+      <div class="clr"></div>
+</div>
+
+
+<!-- /CONTENT SECTION -->
+<div class="clr"></div>
+
+<?php include(APPPATH."views/layouts/footer.phtml");?>
+
+
+
+
+
+
+
+
+<!--view comment div-->
+
+
+<!--/view comment div-->
+<!-- /lightbox SECTION -->
+
+<?php //include(APPPATH."views/logged/blocks/common_popup.phtml");?>
+
+
+<script type="text/javascript">
+$(function(){
+	$('#navigation_vert').naviDropDown({
+		dropDownWidth: '200px',
+		orientation: 'vertical'
+	});
+});
+
+$(document).ready(function(){
+   $('.wp-post-image').css('display','block');
+    $('.wp-post-image').css('float','left');
+     $('.wp-post-image').css('height','157px');
+      $('.wp-post-image').css('width','222px');
+});
+</script>

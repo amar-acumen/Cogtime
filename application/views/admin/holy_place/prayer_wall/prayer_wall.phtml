@@ -1,0 +1,449 @@
+<div class="clr"></div>
+<!--navigation section start -->
+<?php include(APPPATH."views/layouts/admin/admin_nav.phtml");?>
+<!--navigation section end -->
+<!-- CONTENT SECTION -->
+<div id="content_section">
+      <div id="container">
+            <!--<div id="top_corner">&nbsp;</div> -->
+            <div id="mid_content">
+                  <div class="page_heading left">
+                        <div class="left"><img src="../images/icons/login.png" alt="" /> Prayer Wall</div>
+                  </div>
+                  <div class="clr"></div>
+                  <div id="right_container">
+                        <div class="arrow_btm"></div>
+                        <div class="content_area">
+                            <!--filter section start -->
+                            <div class="filter">
+                                <span class="filter-by">Filter By &raquo;</span>
+                                
+                                
+                                <form id="search_frm" action="" method="post" enctype="multipart/form-data" class="filter-search" onsubmit="return form_post();" style="width:900px;">
+                                    <label>Country :</label>
+                                    <div class="field01" style="float:left;">
+                                          <select name="country" id="country" style="width:179px; margin-right:49px">
+                                                <option value="-1">Select</option>
+                                                <?=makeOptionCountry('',$country);?>
+                                                
+                                          </select>
+                                          <script type="text/javascript">
+                                            $(document).ready(function(arg) {
+                                                //$("#country").msDropDown();
+                                                //$("#country").hide();
+                                                //$("#country").css("width", "179px"); 
+                                            })
+                                          </script>
+                                    </div>
+                                    <label>State :</label><input type="text" name="txt_state" id="txt_state" value="<?=$state?>"/>
+                                    <label>City :</label><input type="text" name="txt_city" id="txt_city" value="<?=$city?>"/>
+                                    <div class="clr"></div>
+                                    <label>Duration : Start date:</label>
+                                    <input type="text"  value="<?=$date_from?>" name="date_to1" id="date_to1"  readonly="readonly" class="date-field"/>
+                                          <img src="../images/icons/cal.png" alt="" onclick="$(this).prev().focus()" class="calender"/>
+                                          <script type="text/javascript">
+                                                $(document).ready(function(arg) {
+                                                    $.datepicker.setDefaults($.datepicker.regional['']);
+                                                    $("#date_to1").datepicker($.datepicker.regional['en']);
+                        
+                                                });
+                                           </script>
+                                            
+                                    <label>End Date :</label>        
+                                    <input type="text"  value="<?=$date_to?>" name="date_to2" id="date_to2"  readonly="readonly" class="date-field"/>
+                                          <img src="../images/icons/cal.png" alt="" onclick="$(this).prev().focus()" class="calender" style="margin-right:40px;"/>
+                                          <script type="text/javascript">
+                                                $(document).ready(function(arg) {
+                                                    $.datepicker.setDefaults($.datepicker.regional['']);
+                                                    $("#date_to2").datepicker($.datepicker.regional['en']);
+                                                });
+                                          </script>
+                                    <label>Posted By :</label><input type="text" name="posted_by" id="posted_by" value="<?=$posted_by?>"/>
+                                    
+                                    <input type="hidden" id="if_posted" name="if_posted" value="y" />
+                                    <input name="" type="submit" value="GO" class="go" />
+                                    
+                                    <a href="javascript:void(0)" onclick="return show_all()" style="margin-left: 10px;">Show all</a>
+                                </form>  
+                                
+
+                                
+                                
+                                <div class="clr"></div>
+                            </div>
+                            <!--filter section end -->
+                            <!--<h4>Prayer Wall</h4>-->
+                            <div class="clr"></div>
+                            
+                            <DIV id="table_content">
+                            <?=$result_content?>
+                            </DIV>
+                            
+                            
+                            
+                            <div class="clr"></div>
+                        </div>
+                  </div>
+                  <div class="clr"></div>
+                  
+            </div><!--/mid_content-->
+            
+            <!--<div id="bot_corner">&nbsp;</div> -->
+      </div>
+      <div class="clr"></div>
+</div>
+
+
+<!-- /CONTENT SECTION -->
+
+
+
+<!--popup one start-->
+<div class="lightbox delete-page-popup" style="width:500px;">
+      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="../images/close.png" alt="" /></a></div>
+      <div class="top"><div>&nbsp;</div></div>
+      <div class="mid">
+            <div class="heading" style="margin-bottom:0px;">
+                  <div class="left">
+                        <h4>Delete Prayer Wall</h4>
+                  </div>
+            </div>
+               <div class="shade_box_white">
+               <p class="center-text">Do you really want to delete this Prayer Wall?</p>
+               <form action="" method="post" enctype="multipart/form-data">
+               <input type="hidden" id="h_del_prayer_wall_id" value="">
+                       <input name="" type="button" value="Yes" class="btn" style="margin-left:146px;" onclick="return delete_prayer_wall()"/>
+                    <input name="" type="button" value="No" class="btn" onclick="hide_dialog()"/>
+               </form>   
+               <div class="clr"></div>
+            </div>
+            
+      </div>
+      <div class="bot"><div>&nbsp;</div></div>
+</div>
+<!--popup one end-->
+
+<!--popup detailed-descriptions start-->
+<?/*
+<div class="lightbox detailed-descriptions_pre" style="width:700px;">
+      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="../images/close.png" alt="" /></a></div>
+      <div class="top"><div>&nbsp;</div></div>
+      <div class="mid">
+            <div class="heading" style="margin-bottom:0px;">
+                  <div class="left">
+                        <h4>Prayer Wall</h4>
+                  </div>
+            </div>
+               <div class="shade_box_white product">
+                       
+                    <div class="product-details full">
+                        <h3><span>Posted By:</span> <span id="prayer_posted_by"></span></h3>
+                    </div>
+                    <div class="clr"></div>
+                    <div class="details">
+                        <p class="title">Description:</p>
+                        <p id="prayer_desc"></p> 
+                    </div>
+               <div class="clr"></div>
+            </div>
+            
+      </div>
+      <div class="bot"><div>&nbsp;</div></div>
+</div>
+*/?>
+<!--popup detailed-descriptions end-->
+
+
+
+<!--popup detailed-descriptions start-->
+<div class="lightbox detailed-descriptions" style="width:700px;">
+      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="../images/close.png" alt="" /></a></div>
+      <div class="top"><div>&nbsp;</div></div>
+      <div class="mid">
+            <div class="heading" style="margin-bottom:0px;">
+                  <div class="left">
+                        <h4>Prayer Wall</h4>
+                  </div>
+            </div>
+
+                       
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <div class="prayer-wall-dotted-box" style="padding: 10px 0px 0px;">
+                        <div class="prayer-wall-image" style="width: auto; float: left;">
+                            
+                            <p id="s_image_name" title="banner" style="background:url() no-repeat center; width:286px; height:142px;border: 1px solid #DCDCDC; float: left; "></p>
+                        </div>
+                        <div class="right-panel" style="float: right; width: 378px;">
+                            <p class="quoted-text" id="prayer_desc" style="background: url('../images/quote.png') no-repeat scroll 0 0 transparent; color: #48535A; font-size: 12px; line-height: 19px; margin-bottom: 7px; padding: 0 0 0 27px;">
+                            </p>
+                            <span style="color: #62C3BC; display: block; font-size: 12px; line-height: 16px; padding-top: 4px; padding-left: 27px;">Updated on: <span id="uploaded_on"></span></span>
+                            
+                            <h2 class="name" id="prayer_posted_by" style="color: #013D62; font-size: 16px; font-weight: bold; line-height: 22px; padding: 0 0 0 27px;"></h2>
+                            
+                            <p class="place" id="s_country" style=" color: #013D62; font-size: 12px; line-height: 16px; padding: 0 0 0 27px;"></p>
+                            
+                            <p class="date-time" id="date_from" style="color: #011F31; font-size: 12px; line-height: 20px; padding: 0 0 0 27px;"></p>
+                            
+                            <p class="date-time" id="date_to" style="color: #011F31; font-size: 12px; line-height: 10px; padding: 0 0 0 27px;"></p>
+                            
+                        </div>
+                    
+                    
+              
+                    
+               <div class="clr"></div>
+            </div>
+            
+      </div>
+      <div class="bot"><div>&nbsp;</div></div>
+</div>
+<!--popup detailed-descriptions end-->
+
+<!--popup detailed-testimony start-->
+<div class="lightbox detailed-testimony" style="width:500px;">
+      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="../images/close.png" alt="" /></a></div>
+      <div class="top"><div>&nbsp;</div></div>
+      <div class="mid">
+            <div class="heading" style="margin-bottom:0px;">
+                  <div class="left">
+                        <h4>Prayer Wall Testimony</h4>
+                  </div>
+            </div>
+               <div class="shade_box_white product">
+                     
+                    <div class="details">
+                        <p class="title">Message:</p>
+                        <p><textarea id="txtarea_testimony" name="txtarea_testimony" cols="" rows="" style="height:120px;width:465px"></textarea></p> 
+                    </div>
+               <div class="clr"></div>
+               <input type="hidden" id="h_prayer_testimony_id" value="">
+               <input type="hidden" id="h_prayer_wall_id" value="">
+               
+
+                        <input id="add_edit_btn" type="button" value="" class="btn" onclick="post_testimony()" style="margin-top: 5px;"/>
+               
+            </div>
+            
+      </div>
+      <div class="bot"><div>&nbsp;</div></div>
+</div>
+<!--popup detailed-testimony end-->
+
+
+
+
+
+<script type="text/javascript">
+$(document).ready(function(){
+     optionsArr = { 
+        beforeSubmit:  showBusyScreen,  // pre-submit callback 
+        success:       validateFrm, // post-submit callback 
+        url:        admin_base_url + "holy_place/prayer_wall/prayer_wall/prayer_wall_ajax_pagination"
+    }; 
+});
+
+
+function form_post()
+{
+    $('#search_frm').ajaxSubmit(optionsArr);
+    
+    return false;
+}
+
+function validateFrm(data)
+{
+    
+   hideBusyScreen();
+        $('#table_content').html(data);
+
+
+}
+
+
+function show_desc_(id)
+{
+    $('#prayer_posted_by').html('');
+    $('#prayer_desc').html('');
+    //$('#s_image_name').attr('src','');
+    $('#s_image_name').attr('style','');
+  
+    $('#s_country').html('');
+    $('#date_from').html('');
+    $('#date_to').html('');
+    $('#uploaded_on').html('');
+    
+    showBusyScreen();
+    $.ajax({
+       url : admin_base_url+'holy_place/prayer_wall/prayer_wall/show_desc' ,
+       type : 'post',
+       data : ({'id':id}),
+       dataType : 'json',
+       success : function(data)
+       {
+
+           $('#prayer_posted_by').html(data.res.posted_by);
+           $('#prayer_desc').html(data.res.s_description);
+           //$('#s_image_name').attr('src',data.res.s_image_name);
+           $('#s_image_name').attr('style','background:url('+data.res.s_image_name+') no-repeat center; width:288px; height:144px;border: 1px solid #DCDCDC; float: left;');
+
+           $('#s_country').html(data.res.s_country_name);
+           $('#date_from').html('From : '+data.res.dt_start_date);
+           $('#date_to').html('To : '+data.res.dt_end_date);
+           $('#uploaded_on').html(data.res.dt_insert_date);
+           
+           
+           show_dialog('detailed-descriptions');
+       }
+       
+    });
+}
+
+
+function show_testimony_(id)
+{
+    //showBusyScreen();
+    $('#h_prayer_wall_id').val(id);
+    $('#txtarea_testimony').attr('value','');
+    //alert(id);
+    
+    $.ajax({
+       url : admin_base_url+'holy_place/prayer_wall/prayer_wall/show_testimony' ,
+       type : 'post',
+       data : ({'id':id}),
+       dataType : 'json',
+       success : function(data)
+       {
+           $('#add_edit_btn').attr('value',data.mode);
+           if(data.mode=='Update')
+            {
+                $('#txtarea_testimony').val(data.contents);
+                $('#h_prayer_testimony_id').attr('value',data.html.id);
+                $('#h_prayer_wall_id').attr('value',data.html.i_prayer_req_id);
+            }
+            show_dialog('detailed-testimony');
+       }
+       
+    });
+}
+
+
+function post_testimony()
+{
+    var mode = $('#add_edit_btn').attr('value');
+    var prayer_wall_id = $('#h_prayer_wall_id').val();
+    
+    var testimony_id = $('#h_prayer_testimony_id').val();
+    
+    
+    var message = $('#txtarea_testimony').val();
+    
+        $.ajax({
+        url : admin_base_url+'holy_place/prayer_wall/prayer_wall/post_testimony',
+        type : 'post',
+        data : ({'prayer_wall_id':prayer_wall_id,'mode':mode,'message':message,'testimony_id':testimony_id}),
+        dataType : 'json',
+        success : function(data)
+        {
+
+            
+            showUIMsg(data.msg);
+            if(data.result=='success')
+            {
+                $('#testimony_'+prayer_wall_id).attr('value','Edit Testimony');
+                hide_dialog();
+            }
+        }
+    });
+    
+}
+
+function change_status_(id,status)
+{
+    
+    //var status = $('#status_'+id).attr('status');
+    showBusyScreen();
+        $.ajax({
+        url : admin_base_url+'holy_place/prayer_wall/prayer_wall/change_status/',
+        type : 'post',
+        data : ({'id':id,'status':status}),
+        dataType : 'json',
+        success : function(data)
+        {
+            hideBusyScreen();
+            if(data.status==2)
+                var now_status = 'Enable';
+            else
+                var now_status = 'Disable';
+        
+        
+        //alert(data.status);
+            $('#status_'+id).attr('value',now_status);
+            $('#status_'+id).attr('onclick','');
+            
+            $('#status_'+id).attr('status',data.status);
+            $('#status_'+id).attr('onClick','return change_status_('+id+','+data.status+')');
+          
+
+        }
+    });
+}
+
+function confirm_delete_(id)
+{
+    $('#h_del_prayer_wall_id').val(id);
+    show_dialog('delete-page-popup');
+}
+
+function delete_prayer_wall()
+{
+    var id=$('#h_del_prayer_wall_id').val();
+    var current_page = $('#h_current_page').val();
+    showBusyScreen();
+        $.ajax({
+        url : admin_base_url+'holy_place/prayer_wall/prayer_wall/delete_prayer_wall/'+current_page,
+        type : 'post',
+        data : ({'id':id}),
+        dataType : 'json',
+        success : function(data)
+        {
+            
+            $('#table_content').html(data.html);
+            hide_dialog();
+            hideBusyScreen();
+           
+
+        }
+    });
+    
+}
+
+function show_all()
+{
+    showBusyScreen();
+    //$('#search_frm')[0].reset();
+    $('#country').val('');
+    $('#txt_state').val('');
+    $('#txt_city').val('');
+    $('#date_to1').val('');
+    $('#date_to2').val('');
+    $('#posted_by').val('');
+     $.ajax({
+        url : admin_base_url + 'holy_place/prayer_wall/prayer_wall/show_all',
+        dataType : 'json',
+        success : function(data)
+        {
+            $('#table_content').html(data.html);
+            hideBusyScreen();
+        }
+    });
+}
+</script>
+
+
+

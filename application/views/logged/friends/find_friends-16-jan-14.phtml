@@ -1,0 +1,135 @@
+<?php include(APPPATH."views/layouts/logged_header.phtml");?>
+<!-- NAVIGATION SECTION -->
+      <?php include(APPPATH."views/layouts/nav.phtml");?>
+<!-- /NAVIGATION SECTION -->
+
+
+<div class="clr"></div>
+<!-- CONTENT SECTION -->
+<div id="content_section">
+      <div id="container">
+            <div id="top_corner">&nbsp;</div>
+            <div id="mid_content">
+                  <!-- latest news -->
+                 <?php include(APPPATH ."views/layouts/latest_news.phtml");?>
+                  <!-- /latest news -->
+                  <div class="clr"></div>
+                  <!-- main container -->
+                  <div id="main_container">
+                        <!-- left container -->
+                        <?php include(APPPATH."views/layouts/leftbar.phtml");?>
+                        <!-- /left container -->
+                        <!-- left container -->
+                        <div id="mid_container">
+                         <!--sub page links -->
+                              <div class="link-div" style="margin-top:0px;">
+                              	<ul>
+                                	<li><a href="my-friends.html" class="<?php echo ($page_name=='my-friends')?'current':'';?>"><span>My Friends</span></a> </li>
+                                    <li><span><img src="images/greynew-pipe.png"/></span></li>
+                                	<li><a href="friend-request.html" class="<?php echo ($page_name=='friend-request')?'current':'';?>"><span>Friend Request</span></a> </li>
+                                    <li><span><img src="images/greynew-pipe.png"/></span></li>
+                                    <li><a href="search-invite-friends.html" class="<?php echo ($page_name=='search-invite-friends')?'current':'';?>"><span>Search  &amp;  Invite Friends</span></a> </li>
+                                    <li><span><img src="images/greynew-pipe.png"/></span></li>
+                                    <li><a href="find-friends.html" class="<?php echo ($page_name=='find-friends')?'current':'';?>"><span>Find Friends</span></a> </li>
+                                </ul>
+                                <div class="clr"></div>
+                              </div>
+                        <!--/sub page links -->
+                        
+                        
+                              <div class="page_heading">
+                                    <div class="left"><img src="images/icons/search_frnd.png" alt="" /> Search &amp; Invite Friends</div>
+                                
+                              </div>
+                              <div class="arrow_btm"></div>
+                              
+                              <div class="frm_box shade_box_blue" style="padding-bottom:17px;">
+                              <div>
+								<?php $handler->handle_request($_POST);?>
+                              </div>
+                                 	<form id="frm_Search_friends"  method="post" action=""  enctype="multipart/form-data" onsubmit="return false;">
+                                        <div class="lable02">Friends Email Id:</div>
+                                        <div class="field01">
+                                              <textarea name="frnds_mailid" id="frnds_mailid"></textarea>
+                                        </div>  
+                                        <div class="clr"></div>
+                                        <div class="lable02">Last Name:</div>
+                                        <div class="field01">
+                                              <input name="txt_lname" type="text" id="txt_lname" value="<?=$this->session->userdata('s_lname');?>" style="width:258px;"/>
+                                        </div>
+                                        <div class="clr"></div>
+                                        
+                                        <div class="clr"></div>
+                                        <div class="lable02">&nbsp;</div>
+                                        <div class="field01">
+                                             <input name="search_basic" id="search_basic" type="hidden" value="Y"/>
+                                              <input name="" type="submit" value="Send"  class="btn"/>
+                                        </div>
+                                        <div class="clr"></div>
+                                   </form>
+                              </div>
+                              
+                    	
+                        </div>
+                        <!-- /left container -->
+                        <!-- right container -->
+                        <?php include(APPPATH."views/layouts/rightbar.phtml");?>
+                        <!-- /right container -->
+                  </div>
+                  <!-- /main container -->
+                  <div class="clr"></div>
+            </div>
+            <div id="bot_corner">&nbsp;</div>
+      </div>
+      <div class="clr"></div>
+</div>
+<!-- /CONTENT SECTION -->
+<div class="clr"></div>
+<!-- FOOTER SECTION -->
+<?php include(APPPATH."views/layouts/footer.phtml");?>
+</div>
+<!-- /FOOTER SECTION -->
+<script type="text/javascript">
+<!--	
+	var ticker_holder = $('.bargaining').get(0);
+	var ticker_text = $('.ticker').get(0);
+	var ticker_pos = ticker_text.parentNode.offsetWidth;
+	
+	var ticker_data = $(ticker_holder).html();
+	$(ticker_text).parent().html('<marquee scrollamount="3" scrolldelay="20">' + ticker_data + '</marquee>');
+	
+	$('#sub-nav').hover
+	(
+	function() { $('marquee', this).get(0).stop();  },
+	function() { $('marquee', this).get(0).start(); }
+	); 
+//-->
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(arg) {
+ 
+ $('#frm_Search_friends').submit(function(){ 
+      
+      var datatosend=$("#frm_Search_friends").serialize();
+      
+       showBusyScreen();
+       //alert(datatosend);
+       $.ajax({
+          type: "POST",
+          url: base_url+"logged/my_friends/send_invitation",
+          data: datatosend,
+          success: function(data){
+              hideBusyScreen(); 
+			  showUIMsg(data.msg);
+          }
+        });  
+        
+      
+    });
+ 
+ });
+ 
+
+</script>

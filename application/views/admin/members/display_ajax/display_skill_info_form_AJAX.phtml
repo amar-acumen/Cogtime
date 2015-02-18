@@ -1,0 +1,43 @@
+<div class="lavel-01">  
+    <!--title section -->
+    <div class="sec-title">
+        <span class="title-left"></span>
+        <div class="title-body"><h2>Skill</h2></div>
+        <span class="title-right"></span>
+    </div>
+    <!--/title section -->
+    <!--detail section -->
+    <div class="sec-detail">
+        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="member-table text-table" id="member_skill_details">
+        
+            <?php 
+            $count= count($result['skill_arr']);
+           
+            $skill_no=0; 
+            if($count==0)
+                $count=2;
+                
+                for($i=0;$i<$count;$i++)    :
+                
+                
+                $skill_no++;
+            ?>
+            
+            <tr>
+              <td align="left" valign="top" height="25" width="180" class="label">Skill <?php echo $skill_no;?></td>
+              <td align="left" valign="top" width="20" class="label">:</td>
+              <td align="left" valign="top" ><?php echo $result['skill_arr'][$i]['s_name'];?></td>
+            </tr>
+            
+            <?php
+            endfor;
+            ?>
+            
+            <tr>
+              <td align="left" valign="bottom" height="40" colspan="2">&nbsp;</td>
+              <td align="left" valign="bottom"><a href="javascript:void(0);" class="edit-btn-other" onclick="show_edit_part_AJAX('skills')">Edit</a></td>
+            </tr>
+        </table>
+    </div>
+    <!--/detail section -->
+</div>

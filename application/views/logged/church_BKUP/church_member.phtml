@@ -1,0 +1,181 @@
+<?php
+	include(APPPATH ."views/layouts/church_admin_header.phtml");
+?>
+<script language="javascript">
+$(document).ready(function() {
+
+    // for AJAX page-submission...
+    var options = { 
+        beforeSubmit:  showLoad,  // pre-submit callback 
+        success:       validateFrm // post-submit callback 
+    }; 
+ 
+    // bind to the form's submit event 
+    $('#importfrm').submit(function() {
+        $(this).ajaxSubmit(options);
+        return false;
+        
+    });
+
+});
+
+function showLoad()
+{
+ // $('#photo_album_btn').attr('disabled','disabled');
+    showUIMsg();
+  $('#product_create_btn').val('Creating...');
+  
+}
+
+
+// validate ajax-submission...
+function validateFrm(data)
+{
+    //alert( data);
+    var data = JSON.parse(data);
+
+    id=data.photo_id;
+
+    if(data.success==false) 
+    {
+        $('.error-message').each(function(i){
+            $(this).attr('style','display:none');
+        });
+        
+        //$('#photo_album_btn').attr('disabled','');
+        $('#product_create_btn').val('Create');
+        $('#photo_loading').html('');
+
+        for ( var id in data.arr_messages ){
+            //alert(data.arr_messages[id]);
+            if( $('#'+id) != null ) {
+                $('#'+id).html(data.arr_messages[id]);
+                $('#'+id).css('display', 'block');
+            }
+        }
+
+        showUIMsg(data.msg);
+    }
+    else {
+        
+        showUIMsg(data.msg);        
+        $('#csv').val('');
+        
+    }
+    $('#sp_add_loading').html('');
+    //hideLoading();
+                
+}
+
+
+function approvedMember(id)
+{
+    $.ajax({
+        type: 'post',
+        url: base_url+'logged/church/approve_member/',
+        dataType: 'json',
+        data:'mid='+id,
+        success: function (data, status) {
+
+            hideUILoader_nodialog();
+            if(data.success) {
+                $('#approve_'+id).html('Approved');  
+                $('#approve_'+id).removeAttr('onclick');
+            }   // end of success function...
+        }
+    });
+}
+
+</script>
+<!-- CONTENT SECTION -->
+<?php //pr($church_arr); ?>
+
+<div class="container-body">
+   <?php
+	include(APPPATH ."views/layouts/church_admin_left.phtml");
+?>
+    <div class="right-panel">
+    <h2>Members</h2>
+    <!--<div class="vector-search">
+        <label>Search :</label>
+        <input type="text" >
+    </div>-->
+    <div class="vector-search">
+        <form style="width:412px;" name="importfrm" id="importfrm" action="<?=base_url().'logged/church/import_member_csv'?>" method="post"  onsubmit="return false;" enctype="multipart/form-data">
+        <label>Import Csv :</label>
+        <input type="file" name="csv" id="csv">
+        <span id="err_csv" class="error-message"></span> 
+        <input type="submit" value="Import" class="post-btn">
+        </form>
+    </div>
+    <div class="spacer"></div>
+    <div class="right-box">
+
+            <?php
+            if($member_arr)
+            {
+             ?>
+             <ul>
+                <li class="head">
+                <span class="sl">S no.</span>
+                <span class="name">Name</span>
+                 <span class="joind-on">Joined on</span>
+                <span class="email">Email</span>
+                <span class="tel">Tel</span>
+                <!--<span class="fileapprove">File approved/<br>Not Approved</span>-->
+                <span class="action">Action</span>
+                </li>
+                <?php
+                $i = 1;
+                foreach ($member_arr as $member) {
+                    ?>
+                     <li class="">
+                    <span class="sl"><?php echo $i++; ?></span>
+                    <span class="name"><?php echo $member->s_first_name.' '.$member->s_last_name?></span>
+                     <span class="joind-on"><?php echo getShortDate($member->created_date,3)?></span>
+                    <span class="email"><?php echo $member->s_email?></span>
+                    <span class="tel"><?php echo $member->s_moblie_no?></span>
+                    <span class="action">
+                        <?php
+                        if($member->is_approved==0)
+                        {
+                            ?>
+                            <a href="javascript:void(0);" id="approve_<?php echo $member->mid?>" onclick="approvedMember('<?php echo $member->mid?>');">Not approved</a>
+                            <?php
+                        }
+                        else
+                        {
+                            echo "Approved";
+                        }
+                        ?>
+                        
+                        <!--<a href="#">Delete</a>-->
+                    </span>
+                    </li>
+                    <?php
+                }
+                ?>
+            </ul>
+
+             <?php   
+            }
+            ?>
+            
+        <div class="spacer"></div>
+        
+     
+
+    </div>
+    
+     
+    
+    </div>
+    
+    </div>
+<!-- /CONTENT SECTION -->
+<div class="clr"></div>
+<!-- FOOTER SECTION -->
+<?php include(APPPATH."views/layouts/church_footer.phtml");?>
+<!-- /FOOTER SECTION -->
+
+

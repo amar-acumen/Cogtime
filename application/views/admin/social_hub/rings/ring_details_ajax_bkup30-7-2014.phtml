@@ -1,0 +1,44 @@
+<table width="100%" border="0" cellspacing="0" cellpadding="0" class="admin-table">
+                          <tr>
+                            <th align="left" valign="middle" height="30" width="70">Date posted</th>
+                            <th align="left" valign="middle" height="30" width="225">Title</th>
+                            <th align="left" valign="middle" height="30" width="500">Description</th>
+                            <th align="left" valign="middle" height="30" width="100">Posted By</th>
+                            <th align="center" valign="middle" height="30" class="last">Actions</th>
+                          </tr>
+                          
+                          
+                             <?php
+								# pr($info_arr);
+									if(count($info_arr)){
+									foreach($info_arr as $key=> $info){
+										
+										$desc =  my_substr(strip_tags($info['s_post_description']),172);
+								?>
+                          <tr>
+                            <td align="left" valign="top" height="34"><?=getShortDate($info['dt_created_on'],5)?></td>
+                            <td align="left" valign="top"><a href="javascript:void(0);" onclick="return show_post_dialog(<?=$info['id']?>)"><?=my_substr($info['s_post_title'], 70)?></a></td>
+                            <td align="left" valign="top"><?=$desc?></td>
+                            <td align="left" valign="top"><?=$info['s_profile_name']?></td>
+                            <td align="center" valign="middle" class="last">
+                            <input name="" title="Edit" type="button" class="edit-button"  value="" onclick="return edit_ring_post(<?=$info['id']?>)"/>
+                            <input name="" title="Delete" type="button" class="delete-button"  value="" onclick="return delete_ring_confirm(<?=$info['id']?>)"/>
+                            </td>
+                          </tr>
+                          
+                              <?php	}
+								  }
+								  else{
+							  ?>
+								   <tr>
+										<td style="text-align:center;" height="80" colspan="20">No data available!!!</td>
+								   </tr>
+							  
+							  <?php
+								  }
+							  ?>
+</table>
+
+<div class="paging">
+            <ul><?= $page_links ?></ul>
+</div>	

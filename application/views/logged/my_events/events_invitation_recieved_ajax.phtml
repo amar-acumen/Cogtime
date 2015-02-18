@@ -1,0 +1,123 @@
+ <div class="div_content" style=" margin-top:0px;">
+   <?php //pr($arr_events);
+		  if(count($arr_events) > 0){
+		  //$i=1;
+			  foreach($arr_events as $val){
+				  $title = $val['s_title'];
+				  $desc = my_substr(html_entity_decode(htmlspecialchars_decode($val['s_desc']),ENT_QUOTES,'utf-8'), 285);
+				  $country = get_country_name_by_id($val['i_country_id']);
+				  $address = $val['s_address'].', '.$val['s_city'].', '.$val['s_state'].', '.$country;
+				  $detail_url = get_events_detail_url($val['id']);
+				 
+				  $profile_img = get_profile_image($val['event_owner_id'], 'thumb');  
+				  
+				  $IMG_THUMB_PATH = base_url() ."uploads/events_photo/";
+				  $main_name=getThumbName($val['s_image_1'],'mid_FO'); 
+				  $MAIN_IMG_THUMB = $IMG_THUMB_PATH . $main_name;
+				  
+				  if($val['if_already_friend'] == 'true' || $val['already_added_netpal'] == 'true'){
+				  	$profile_link = get_profile_url($val['event_owner_id'],$val['s_profile_name']);
+				  }else
+				  {
+					 $profile_link = get_public_profile_url($val['event_owner_id'],$val['s_profile_name']); 
+				  }
+				  
+				  $IMG_THUMB_PATH = base_url() ."uploads/events_photo/";
+				  $main_name=getThumbName($val['s_image_1'],'thumb'); 
+				  $MAIN_IMG_THUMB = $IMG_THUMB_PATH . $main_name;
+				  
+				  
+								
+   ?>   				  
+                         <div class="blog-container">
+                            
+                                 <div class="blog">
+                                      <h2><a href="<?=$detail_url?>"><?=$title?></a></h2>
+                                      <p class="time-posted">Created on <?=getShortDateWithTime($val['dt_created_on'],6)?> by: <a href="<?=$profile_link?>"><?=$val['s_profile_name']?></a></p>
+                                      
+                                      <!--event block highlighted start -->
+                                      <div class="event-schidule">
+                                      	<p style="font-weight: normal;"><span>Venue:</span> <?=$address?></p>
+                                        <p style="font-weight: normal;"><span>Time:</span> <?=getShortDateWithTime($val['dt_start_time'], 6)?></p>
+                                      </div>
+                                      <!--event block highlighted end -->
+                                      <div class="pro_photo2" style="background:url(<?=$MAIN_IMG_THUMB?>) no-repeat center;width:60px; height:60px;" ></div>
+                                      <p><?=nl2br($desc)?></p> 
+                                      
+                                      
+                                      <div class="clr"></div>
+                                      <ul class="article-comment-block article-comment-block2">
+                                       <li class="first"><img src="images/icons/cmt.png" alt="" class="icon-img" height="16" width="16" /> <a href="javascript:void(0);"  class="blue_link">Comments</a></li> 
+                                       <li><img src="images/icons/cmmnt.png" alt="" width="16" height="16" class="icon-img" /> <a href="javascript:void(0);"  class="blue_link comments_div<?=$val['id']?>"  onclick="return show_comments(<?=$val['id']?>)">Comments (<?=$val['total_comments']?>)</a></li>
+                                         <?php if((show_event_rsvp($val['id']) == TRUE) ) { 
+									   ?>
+                                      <li  id="send_rsvp_<?=$val['id']?>"><img src="images/icons/send.png" alt=""  class="icon-img" height="16" width="16"/> <a href="javascript:void(0);" class="blue_link" onclick="send_rsvp(<?=$val['id']?>)">Send RSVP</a></li>
+                                      <?php } ?>  
+                                      </ul>
+									  
+									  
+									  <div class="new-wl">
+											<!--comment section start-->
+											<div  class="comments-number content-width" >
+                                              
+                                                  <div class="comments-number-mid">
+													  <div class="heading">
+															<div class="left">
+																  <h4><img alt="" src="images/no.png" class="cmnt" /> Post Comment </h4>
+																  <img class="wal-minus" alt="" src="images/minus-white.png" />
+															</div>
+													  </div>
+													  
+														<div class="txt_content01"> 
+														
+														<textarea name="feed_comment_box_<?=$val['id']?>" id="feed_comment_box_<?=$val['id']?>" class="wal-comment-textarea" cols="" rows=""></textarea>
+														<input type="button" value="Post" class="yellow-btn" onclick="post_comment(<?=$val['id']?>);" />
+														<div class="clr"></div>
+														</div>
+												</div>
+											</div>
+											<!--comment section end-->
+											<!--comment section start-->
+											 <div  class="comments-number content-width" >
+                                          
+                                              <div class="comments-number-mid">
+                                                  <div class="heading">
+                                                        <div class="left">
+                                                              <h4><img class="cmnt" src="images/icons/cmnt2.png" alt="" /><span  class="comments_div<?=$val['id']?>">  Comments (<?=$val['total_comments']?>) </span></h4>
+                                                              <img class="wal-minus" alt="" src="images/minus-white.png" />
+                                                        </div>
+                                                  </div>
+                                                  <DIV ID="post_comment_div<?=$val['id']?>"></DIV>
+                                            </div>
+                                         
+                                        </div>
+											<!--comment section end-->
+									  </div>
+									  									  
+                                      <div class="clr"></div>
+                                  </div>
+                            
+                            </div>
+                                   
+                          <script type="text/javascript">
+							$(function(){
+							$('.article-comment-block li').click(function(){
+								$('.new-wl > .comments-number').css('display','none');
+									var index= $(this).index();
+									//alert(index);
+									$(this).parent().next('.new-wl').children('.comments-number').filter(':eq('+ index +')').slideDown('slow');
+								});
+								$('.wal-minus').click(function(){
+									$(this).parents('.comments-number').slideUp('fast');
+								});
+							
+							});
+						</script>
+         
+                                   
+    <?php 
+			 	 }
+			 }
+	?>       
+ </div>
+<input type="hidden" id="current_page" name="current_page" value="<?=$current_page_1?>"  />

@@ -1,0 +1,279 @@
+<table width="100%" border="0" cellspacing="0" cellpadding="0" class="admin-table">
+      <tr>
+        <th align="left" valign="middle" height="30" width="72">Request Date</th>
+        <th align="left" valign="middle" height="30" width="100">Name</th>
+        <th align="left" valign="middle" height="30" width="45">Sender(email)</th>
+        <th align="left" valign="middle" height="30" width="150">request type</th>
+        <th align="left" valign="middle" height="30" width="180">Massage</th>
+<!--        <th align="left" valign="middle" height="30" width="100">Mobile</th>-->
+        <th align="center" valign="middle" height="30" width="200" class="last">Actions</th>
+        <th align="center" valign="middle" height="30" width="80" class="last">Status</th>
+      </tr>
+      <?php
+      
+      if(count($info_arr)):
+            //echo "current page : ".$current_page." ";
+            $now_page = round(($current_page/$pagination_per_page)+1); 
+           // echo "in admin_members_ajax.phtml : now_page = ".$now_page;
+           // pr($info_arr);
+            $i= 0;
+            foreach($info_arr as $info)    :
+                $id             = $info['id'];
+                $req_joined    = getShortDate($info['dt_created_on'],3);  
+                $name           = $info['user_name'];
+                $email = $info['user_email'];
+                $s_type = $info['s_type'];
+                $s_message = $info['s_message'];
+                $i_is_deleted = $info['i_is_deleted'];
+                if($i_is_deleted != 1)
+                {
+//               
+
+        ?>
+      <tr id="deltd<?= $id; ?>">
+          <td align="left" valign="top"><?php echo $req_joined;?></td>
+        <td align="left" valign="top"><?php echo $name;?></td>
+        <td align="left" valign="top"><?php echo $email;?></td>
+        <td align="left" valign="top"><?php echo  $s_type;?></td>
+        <td align="left" valign="top"><?php echo $s_message;?></td>
+<!--        <td align="left" valign="top"><?php// echo $mobile;?></td>-->
+        <td align="center" valign="middle" class="top">
+<!--            <input type="hidden" value="<?php echo $id;?>" class="id_dtc" >-->
+            
+<!--        <input name="" title="View Details" type="button" class="view-button"  value="" onclick="window.location='<?=admin_base_url()?>members/member_details/index/<?php //echo $id;?>/<?php //echo $now_page;?>'"/>-->
+             <?php  if($info['i_status'] == 2 && $s_type != 'report' ) { ?><span>Denied</span> <?php } 
+            else  if($info['i_status'] == 1 && $s_type != 'report'){
+            ?>
+             <span>Accepted</span>
+             <?php
+             }  else if($s_type != 'Report abuse Request') {
+                 
+             
+             ?>
+             <span id="sta<?= $id ?>"> <input type="button" class="btn-04 accpt_img"  value="Accept" id="accp_<?= $id ?>"><input type="button" class="btn-04 delete-button"  value="Deny" id="<?= $id ?>"> <!--<img src="images/icons/accept.png"  class="accpt_img" style="float: left;margin:0 0 0 22px;"><img src="images/fe/cross-icon.gif" id="accp_" class="delete-button" id="" style="float: left;margin:0 0 0 22px;">--></span>
+             <?php } ?>
+            
+<!--        <input name="" title="Enable" type="button" class="btn-03" id="status<?php //echo $id;?>"  value="<?php //echo $status;?>" onclick="return status_change(<?php //echo $id;?>)"/>
+        <input name="" title="Set As Minister" type="button" class="btn-04" id="is_minister<?php //echo $id;?>" value="<?php// echo $is_minister;?>" onclick="return change_is_minister(<?php// echo $id;?>)" />
+        
+      <input  title="Reset Password" type="button" class="btn-04" onclick="javascript:resetPassword(<?php// echo $id ?>)"  value="Reset Password"/>
+	  <input  title="View Posts" type="button" class="btn-04" onclick="window.location='members/members_post/index/'"  value="View Posts"/>-->
+        </td>
+        <td align="center" valign="middle" class="last" > <img src="<?= base_url() ?>images/delete.png" id="del_<?= $id ?>" class="del_img" style="float: left;margin:0 0 0 39px;"></td>
+      </tr>
+      <?php
+                }
+ 
+     ?>
+      
+ <?php
+ 
+ 
+      $i++;
+      endforeach;
+     
+								 else :	// i.e. no records exists...
+                                                                     
+              
+							?>
+								<tr>
+									<td style="text-align:center;" height="80" colspan="20">No data available!!!</td>
+								</tr>
+							<?php
+								 endif;
+//                                                                 
+                                                          /*         $query = $this->db->get('cg_admin_messages');
+                                                                   $array = array();
+                                                                // pr($query->result());
+                              foreach ($query->result() as $row)
+                                                    {
+                                                  
+                                                   $array[] = $row->i_is_deleted; 
+                                                    }
+                                                 // pr($array);
+                                                    if (count(array_unique($array)) == 1 && $array[0] == 'true')
+                                                      {
+                                                       echo '<tr>';
+                                                       echo '<td style="text-align:center;" height="80" colspan="20">No data available!!!</td>';
+                                                       echo '</tr>';
+                                                      }*/
+							?>
+      <script>
+          $(document).ready(function(){
+               $('.accpt_img').live('click',function(){
+          
+           var current_id =  $(this).attr('id');
+           var id = current_id.split("_");
+         var id = id[1];
+         //alert(id)
+         // alert(current_id);
+          // var current_id =$('.id_dtc:eq('+current_index+')').val();
+          
+           //
+           //alert(current_index);
+         //  alert(current_id);
+            var URL = '<?php echo admin_base_url()?>' +'site_settings/inbox/status_accept/'+current_id;
+		showBusyScreen();
+		if(ajax_req!=null) {
+			ajax_req.abort();
+		}
+		ajax_req = $.ajax({
+			type: 'POST',
+			url:URL,
+			dataType: 'json',
+//			data: ({ 'record_id' : id
+//				 }),
+			success: function (data, status) {
+							var result_obj = data;
+                                                  // alert(current_id)
+                                                       // var url = ''+'admin/site-settings/ring/messages.html' 
+                                                   //   window.location.replace(url);
+                                                    
+							hideBusyScreen();
+							if(result_obj.result=='success' ) {
+								showUIMsg(result_obj.msg);
+                                                                $('#sta'+id+'').html('Accepted');
+                                                                //$('#but'+current_id+'').hide();
+                                                                //
+//
+ //
+//location.href(result_obj.redirect);
+								//$('#'+result_obj.u_id+'_status').html(result_obj.action_txt);
+                                                                //alert(result_obj.redirect)
+							}
+							else if(result_obj.result==false ){
+							    showUIMsg(result_obj.msg);
+                                                           // location.href(result_obj.redirect);
+                                                            //alert(result_obj.redirect)
+							}
+					},
+			error: function (data, status, e) {
+								hideBusyScreen();
+								showUIMsg(data.msg);
+			}
+		});
+       }); 
+//
+          /*---------------------Accept------------------------------------*/
+          
+          /*--------admin del-----------*/
+          $('.del_img').live('click',function(){
+              
+               var current_id =  $(this).attr('id');
+           var id = current_id.split("_");
+         var id = id[1];
+         
+         
+            var URL = '<?php echo admin_base_url()?>' +'site_settings/inbox/admin_del/'+id;
+		showBusyScreen();
+		if(ajax_req!=null) {
+			ajax_req.abort();
+		}
+		ajax_req = $.ajax({
+			type: 'POST',
+			url:URL,
+			dataType: 'json',
+//			data: ({ 'record_id' : id
+//				 }),
+			success: function (data, status) {
+							var result_obj = data;
+                                                  // alert(current_id)
+                                                       // var url = ''+'admin/site-settings/ring/messages.html' 
+                                                   //   window.location.replace(url);
+                                                    
+							hideBusyScreen();
+							if(result_obj.result=='success' ) {
+								showUIMsg(result_obj.msg);
+                                                                $('#deltd'+id+'').hide();
+                                                                //$('#but'+current_id+'').hide();
+                                                                //
+//
+ //
+//location.href(result_obj.redirect);
+								//$('#'+result_obj.u_id+'_status').html(result_obj.action_txt);
+                                                                //alert(result_obj.redirect)
+							}
+							else if(result_obj.result==false ){
+							    showUIMsg(result_obj.msg);
+                                                           // location.href(result_obj.redirect);
+                                                            //alert(result_obj.redirect)
+							}
+					},
+			error: function (data, status, e) {
+								hideBusyScreen();
+								showUIMsg(data.msg);
+			}
+		});
+         
+          });
+          /*--------admin del-----------*/
+          
+          
+          
+           $('.delete-button').live('click',function(){
+          
+           var current_id = $(this).attr('id');
+          
+          // var current_id =$('.id_dtc:eq('+current_index+')').val();
+          
+           //
+           //alert(current_index);
+         //  alert(current_id);
+            var URL = '<?php echo admin_base_url()?>' +'site_settings/inbox/status/'+current_id;
+		showBusyScreen();
+		if(ajax_req!=null) {
+			ajax_req.abort();
+		}
+		ajax_req = $.ajax({
+			type: 'POST',
+			url:URL,
+			dataType: 'json',
+//			data: ({ 'record_id' : id
+//				 }),
+			success: function (data, status) {
+							var result_obj = data;
+                                                   //  alert(current_id)
+                                                       // var url = ''+'admin/site-settings/ring/messages.html' 
+                                                   //   window.location.replace(url);
+                                                    
+							hideBusyScreen();
+							if(result_obj.result=='success' ) {
+								showUIMsg(result_obj.msg);
+                                                                $('#sta'+current_id+'').html('Denied');
+                                                                //$('#but'+current_id+'').hide();
+                                                                //
+//
+ //
+//location.href(result_obj.redirect);
+								//$('#'+result_obj.u_id+'_status').html(result_obj.action_txt);
+                                                                //alert(result_obj.redirect)
+							}
+							else if(result_obj.result==false ){
+							    showUIMsg(result_obj.msg);
+                                                           // location.href(result_obj.redirect);
+                                                            //alert(result_obj.redirect)
+							}
+					},
+			error: function (data, status, e) {
+								hideBusyScreen();
+								showUIMsg(data.msg);
+			}
+		});
+       }); 
+          
+      });
+              
+          
+     
+      </script>
+      <style>
+          .delete-button{
+              margin-left: 0px;
+          };
+          
+          
+      </style>
+    </table>
+    <div class="paging"><ul><?= $page_links?></ul></div>
+    
+   

@@ -1,0 +1,443 @@
+<?php
+
+	include(APPPATH ."views/layouts/church_logged_header.phtml");
+
+	//pr($church_activity_feed_comments);
+
+?>
+
+
+
+<!-- CONTENT SECTION -->
+
+<div class="container">
+
+  <?php
+
+  $page_location = $this->uri->segment(1);
+
+  $page_location1 = $this->uri->segment(2);
+
+  ?>
+
+  <div class="main-page">
+
+  	<h3 class="page-heading">Activity</h3>
+
+    <div class="activity-left">
+
+    	<ul class="left-list">
+
+        <li><a href="<?= base_url().$_SESSION['logged_church_id'].'/church_activity_management' ?>"  <?php if($page_location1 == 'church_activity_management') { ?> class="active" <?php } ?>>Manage Comments</a></li>        
+
+        <li><a href="<?= base_url().'ring_request' ?>">Ring requests & invitations </a></li>
+
+       
+
+        <li><a href="<?= base_url().'church_members' ?>">Community Members</a></li>
+
+        </ul>
+
+    </div>
+	<?//=pr($church_admin);?>
+    <div class="activity-right">
+	<?php $members=get_member_by_id($_SESSION['logged_church_id']);
+		//pr($members);?>
+		<form name="" class="search-main-ring">
+	<h4>Search By:</h4>
+    <div class="user-part">
+    <label>User:</label> <select id="members" name="members">
+	<option value='-1'>--select---</option>
+	<?php foreach($members as $k=>$v){ ?>
+			 <?=get_username_by_id($v->member_id)?>
+			<option value="<?=$v->member_id?>" <?=get_viewed($feed->id,$v->member_id)?> ><?=get_username_by_id($v->member_id)?></option> 
+		 <?php }?>
+		 <option value="<?=$church_admin->ch_admin_id?>"><?=get_username_by_id($church_admin->ch_admin_id)?></option>
+			</select>
+       </div>
+       
+       <div class="date-colm"><label>Date:</label><input style="" type="text"  value="" name="date_to" id="date_to"  /></div>
+        <div class="date-colm"><label>Content:</label><input type="text" name="content" id="content"></div>
+			<input type="button" onclick="search_result()" value="Search" class="post-btn"></form>
+	<?php 
+
+	
+
+	/*if($church_activity_feed_comments) { 
+
+	foreach($church_activity_feed_comments As $church_activity_feed_comment) { 
+
+			$data_arr = json_decode($church_activity_feed_comment->feedtitle);
+
+			//pr($data_arr);
+
+	//pr($data_arr->photo);
+
+	if ( $church_activity_feed_comment->post_type == 1 ) {
+
+	?>
+
+    	<div class="activity-comment-box" id="wall_activity-comment-box<?php echo $church_activity_feed_comment->id; ?>">
+
+        	<h4 style="font-size:14px;"><a href="javascript:void(0);"><?php echo $church_activity_feed_comment->member_name; ?></a> Posted a Comment on a wall post.</h4>
+
+            <div class="timeline-part">
+
+        	<p style="padding-left:0;"><?php echo $data_arr->message; ?></p>
+
+			<?php if(!empty($data_arr->photo) && count($data_arr->photo) < 2){
+
+			//echo 'I'.count($data_arr->photo);
+
+			//pr($data_arr->photo);
+
+			foreach($data_arr->photo as $key=>$photo_val){
+
+			$IMG = base_url()."uploads/church_wall/".getThumbName($photo_val,'big');
+
+			?>
+
+            <figure><img src="<?=$IMG?>" alt="Prayer" width="477" height="244"></figure>
+
+			<?php }
+
+			} else if(!empty($data_arr->photo) && count($data_arr->photo) > 2){?>
+
+			<ul class="bxslider">
+
+				<?php
+
+			foreach($data_arr->photo as $key=>$photo_val){
+
+			$IMG = base_url()."uploads/church_wall/".getThumbName($photo_val,'big');
+
+			?>
+
+			<li><img src="<?=$IMG?>" alt="Prayer" ></li>
+
+			<?php 
+
+			}
+
+			?>
+
+			</ul>
+
+			<?php }?>
+
+			<div class="comment-text">
+
+            	<textarea style="font-family: 'GibsonRegular'; color:#878d91; font-size:13px; height:30px;" name="wall_comment_txt" id="wall_comment_txt_<?php echo $church_activity_feed_comment->id; ?>" class="comment_message" height="20" width="40"><?php echo $church_activity_feed_comment->s_contents; ?></textarea> 
+
+				<input type="button" name="save_comment" id="save_comment_<?php echo $church_activity_feed_comment->id; ?>" value="SAVE" onclick="javascript:save_comments('<?php echo $church_activity_feed_comment->id; ?>','<?php echo $church_activity_feed_comment->post_type; ?>');" style="display:none;"/>
+
+           
+
+			</div>
+
+            <div class="edit-review"> <a href="javascript:comments_edit('<?php echo $church_activity_feed_comment->id; ?>','<?php echo $church_activity_feed_comment->post_type; ?>');" style="width:60px;">Edit</a> <a style="margin-right:0;" href="javascript:remove_comments('<?php echo $church_activity_feed_comment->id; ?>','<?php echo $church_activity_feed_comment->post_type; ?>');">Remove</a></div>
+
+        </div>
+
+		</div>
+
+		<?php } 
+
+		else if ( $church_activity_feed_comment->post_type == 2 ) { ?>
+
+        <div class="activity-comment-box" id="ring_activity-comment-box<?php echo $church_activity_feed_comment->id; ?>">
+
+        	<h4 style="font-size:14px;"><a href="javascript:void(0);"><?php echo $church_activity_feed_comment->member_name; ?></a> Posted a Comment on a Ring.</h4>
+
+            <h5 style="font-size:13px;">Ring Name: <span><?php echo $church_activity_feed_comment->feedtitle; ?></span></h5>
+
+             <div class="comment-text">
+
+            	<textarea style="font-family: 'GibsonRegular'; font-size:12px;" name="ring_comment_txt" id="ring_comment_txt<?php echo $church_activity_feed_comment->id; ?>" class="comment_message" height="20" width="40"><?php echo $church_activity_feed_comment->s_contents; ?></textarea> 
+
+				<input type="button" name="ring_save_comment" id="ring_save_comment_<?php echo $church_activity_feed_comment->id; ?>" value="SAVE" onclick="javascript:save_comments('<?php echo $church_activity_feed_comment->id; ?>','<?php echo $church_activity_feed_comment->post_type; ?>');" style="display:none;"/> 
+
+            </div>
+
+            
+
+            <div class="edit-review"> <a href="javascript:comments_edit('<?php echo $church_activity_feed_comment->id; ?>','<?php echo $church_activity_feed_comment->post_type; ?>');">Edit</a>  <a style="margin-right:0;" href="javascript:remove_comments('<?php echo $church_activity_feed_comment->id; ?>','<?php echo $church_activity_feed_comment->post_type; ?>');">Remove</a></div>
+
+        </div>
+
+        <?php } 
+
+		} } else { 
+
+		echo '<div class="activity-comment-box"><h4> No records found. </h4></div>';
+
+		}*/
+
+		?>
+		<div class="result">
+		<?=$church_activity_feed_comments?>
+		</div>
+        <?php if($current_page_1 <= $no_of_result):?>
+		<div class="view_more" id="show_more_feeds_div" ><a href="javascript:void(0);" id="show_more_feeds_link" page_value="<?= $current_page_1 ?>" onclick="show_more_feeds($(this).attr('page_value'))">[view more] </a> </div>
+	<?php endif;?>
+
+        <!--<div class="activity-comment-box">
+
+        	<h4><a href="javascript:void(0);">John Smith</a> Posted a Comment on a Prayer Group.</h4>
+
+            <h5>Prayer Group Name: <span>Prayer for Jesus</span></h5>
+
+             <div class="comment-text">
+
+            	Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley book. 
+
+            </div>
+
+            
+
+            <div class="edit-review"> <a href="javascript:void(0);">Edit</a> |  <a href="javascript:void(0);">Remove</a></div>
+
+        </div>-->
+
+        
+
+        
+
+        
+
+        
+
+
+
+    </div>
+
+    <div class="clear"></div>
+
+    
+
+    
+
+  </div>
+
+</div>
+
+<!-- /CONTENT SECTION -->
+
+<div class="clr"></div>
+
+<!-- FOOTER SECTION -->
+
+<?php include(APPPATH."views/layouts/church_footer.phtml");?>
+
+<!-- /FOOTER SECTION -->
+
+<script type="text/javascript">
+
+$(document).ready(function(){
+
+  $('.bxslider').bxSlider();
+
+  $("#date_to").datepicker({
+		dateFormat: 'yy-mm-dd',
+     });
+
+});
+
+function comments_edit(id,post_type) {
+
+	//$('#comment_text_'+user_id).attr("readonly",false,"important");
+
+	showUILoader_nodialog('<img src="'+base_url+'images/loading_big.gif" width="50"/> ');
+
+	if (post_type == 1) { 
+
+		$('#wall_comment_txt_'+id).focus();
+
+		$('#save_comment_'+id).show();
+
+	} else { 
+
+		$('#ring_comment_txt'+id).focus();
+
+		$('#ring_save_comment_'+id).show();
+
+	}
+
+	hideUILoader_nodialog();
+
+}
+
+function save_comments(id,post_type) {
+
+var base_url = '<?php echo base_url(); ?>';
+
+showUILoader_nodialog('<img src="'+base_url+'images/loading_big.gif" width="50"/> ');
+
+var wall_comment = '';
+
+var ring_comment = '';
+
+if (post_type == 1) {
+
+var wall_comment = $('#wall_comment_txt_'+id).val();
+
+} else { 
+
+var ring_comment = $('#ring_comment_txt'+id).val();
+
+}
+
+$.ajax({
+
+  url: base_url+'logged/church_activity_management/save_comment/',
+
+  type: 'POST',
+
+  data : {id:id,wall_comment:wall_comment,ring_comment:ring_comment,post_type:post_type},
+
+  success: function(data) {
+
+	if (post_type == 1) { 
+
+		$('#save_comment_'+id).hide();
+
+	} else {
+
+		$('#ring_save_comment_'+id).hide();
+
+	}
+
+	hideUILoader_nodialog();
+
+	//showUIMsg(data.msg);
+
+  }
+
+});
+
+
+
+}
+
+
+
+function remove_comments(id,post_type) {
+
+var base_url = '<?php echo base_url(); ?>';
+
+if(confirm('Are you sure to delete this comment?')){
+
+$.ajax({
+
+  url: base_url+'logged/church_activity_management/remove_comments/',
+
+  type: 'POST',
+
+  data : {id:id,post_type:post_type},
+
+  success: function(response) {
+
+	if (post_type == 1) {
+
+		$('#wall_activity-comment-box'+id).remove();
+
+	} else {
+
+		$('#ring_activity-comment-box'+id).remove();
+
+	}
+
+  }
+
+});
+
+}
+
+else {
+
+	return false;
+
+}
+
+
+
+}
+
+var ajax_req_feeds = null;
+    function show_more_feeds(page) {
+        if (ajax_req_feeds != null) {
+            ajax_req_feeds.abort();
+        }
+        showUILoader_nodialog('<img src="'+base_url+'images/loading_big.gif" width="50"/> ');
+        ajax_req_feeds = $.ajax({
+            type: 'get',
+            url: base_url + 'logged/church_activity_management/comments_pagination_show_more/<?= $_SESSION['logged_church_id'] ?>' + '/' + page,
+            dataType: 'json',
+            success: function(data, status) {
+
+                hideUILoader_nodialog();
+                if (data.html != '') {
+                    //$('.timeline-main').isotope( 'insert', $(data.html) );
+					//isotope();
+					$('.result').append(data.html);
+                    $('#show_more_feeds_link').attr('page_value', data.current_page);
+                }
+			else
+			{
+				$('.result').append('<div class="activity-comment-box"><h4> No records found. </h4></div>');
+				 $('#show_more_feeds_link').css('display','none');
+			}
+                
+
+
+            }	// end of success function...
+        });
+    }
+	
+function search_result() {
+	var base_url = '<?php echo base_url(); ?>';
+	
+	var member=$('#members').val();
+	var date=$('#date_to').val();
+	var content=$('#content').val();
+	if(member == '-1' && date == '' && content == '')
+	{
+		showUIMsg('Please enter some criteria.');
+	}
+	else
+	{
+	showUILoader_nodialog('<img src="'+base_url+'images/loading_big.gif" width="50"/> ');
+	$.ajax({
+	  url: base_url+'logged/church_activity_management/comment_search_result/',
+	  type: 'POST',
+	  dataType: 'json',
+	  data: {'member':member,'date':date,'content':content},
+	  success: function(data) {
+	  
+		//called when successful
+		if(data.html != '')
+		{
+		//alert(data.no_of_result);
+		$('.result').html('');
+		$('.result').html(data.html);
+		$('#show_more_feeds_link').attr('page_value',data.cur_page);
+		$('#show_more_feeds_link').css('display','block');
+		}
+		else
+		{
+			$('.result').html('');
+			$('.result').html('<div class="activity-comment-box"><h4> No records found. </h4></div>');
+			$('#show_more_feeds_link').css('display','none');
+		}
+		//$('#search_data').val(search_data);
+		hideUILoader_nodialog();
+	  }
+	});
+	}
+}
+</script>
+
+
+
+
+

@@ -1,0 +1,107 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="Description" content="123 Flash Chat,Live Show" />
+<meta name="Keywords" content="Chat,123 Flash Chat,Live Show" />
+<link rel="shortcut icon" href="favicon.ico" type="image/ico" />
+<title>123 Flash Chat Live Show</title>
+<style>
+			html, body{ height:100%; }
+			body { margin:0; padding:0; overflow:hidden; }
+</style>
+</head>
+<body>
+		<script language="javascript">
+				function getUrlParameterValueByName(str,name){var value="";var indexOfName=str.indexOf("?"+name+"=");if(indexOfName==-1){indexOfName=str.indexOf("&"+name+"=");}if(indexOfName!=-1){var lengthOfName=(name.length+1);var tempStr=str.substring(indexOfName+1);var indexOfAnd=tempStr.indexOf("&");if(indexOfAnd!=-1){value=tempStr.substring(lengthOfName,indexOfAnd);}else{value=tempStr.substring(lengthOfName);}}
+return value;}
+		function cssInclude(urlStr){document.write('<link rel="stylesheet" id="css_123flashchat" type="text/css" href="',urlStr,'"\/>');}
+		try{var urlLink=window.location.href;}catch(e){try{urlLink=document.URL;}catch(e){urlLink="";}}
+		try
+		{
+			var init_room_123flashchat=getUrlParameterValueByName(urlLink,"init_room");
+			if(init_room_123flashchat=="")
+			{
+				init_room_123flashchat="1";
+			}
+			var init_skin=getUrlParameterValueByName(urlLink,"init_skin");
+			if(init_skin=="")
+			{
+				init_skin="bubble.css";
+			}
+			var init_host_123flashchat =getUrlParameterValueByName(urlLink,"init_host");
+			if(init_host_123flashchat=="")
+			{
+				 init_host_123flashchat = "*";
+			}
+    	var init_port_123flashchat = getUrlParameterValueByName(urlLink,"init_port");
+    	if(init_port_123flashchat=="")
+			{
+				 init_port_123flashchat = "51127";
+			}
+      var init_host_s_123flashchat =getUrlParameterValueByName(urlLink,"init_host_s");
+      if(init_host_s_123flashchat=="")
+			{
+				 init_host_s_123flashchat = "*";
+			}
+      var init_port_s_123flashchat = getUrlParameterValueByName(urlLink,"init_port_s");
+      if(init_port_s_123flashchat=="")
+			{
+				 init_port_s_123flashchat = "51128";
+			}
+      var init_host_h_123flashchat =getUrlParameterValueByName(urlLink,"init_host_h");
+      if(init_host_h_123flashchat=="")
+			{
+				 init_host_h_123flashchat = "*";
+			}
+      var init_port_h_123flashchat = getUrlParameterValueByName(urlLink,"init_port_h");
+    	 if(init_port_h_123flashchat=="")
+			{
+				 init_port_h_123flashchat = "35555";
+			}
+      var init_group_123flashchat = getUrlParameterValueByName(urlLink,"init_group");
+      if(init_group_123flashchat=="")
+			{
+				 init_group_123flashchat = "default";
+			}
+      var http_root_123flashchat = getUrlParameterValueByName(urlLink,"init_root");
+      if(http_root_123flashchat=="")
+			{
+				 http_root_123flashchat = "liveshow";
+			}
+		}
+		catch(e)
+		{
+				var	init_room_123flashchat="1";
+			 	var init_skin="bubble.css";
+				var init_host_123flashchat = "*";
+        var init_port_123flashchat = "51127";
+        var init_host_s_123flashchat = "*";
+        var init_port_s_123flashchat = "51128";
+        var init_host_h_123flashchat = "*"
+        var init_port_h_123flashchat = "35555"
+        var init_group_123flashchat = "default";
+        var http_root_123flashchat = "liveshow";
+		}
+		</script>
+        <!--123 Flash Chat Live Show Code Begin -->
+        <div id="live_show_123flashchat" align="left" style="width:100%; height:100%;">
+			<script language="javascript">
+				cssInclude("liveshow/css/"+init_skin);
+			</script>
+            <div id="loading_123flashchat" align="center">
+                <div class="loading-indicator_123flashchat">
+                    <div class="loading_main_123flashchat">
+                        <a href="http://www.123flashchat.com" class="logo" title="123 Flash Chat" target="_blank">
+                            <img src="liveshow/images/123flashchat_logo.gif" alt="123 Flash Chat" style="cursor:point">
+                        </a>
+                    </div>
+                    <div class="loading_main_123flashchat"><img src="liveshow/images/loading_image.gif"></div>
+                </div>
+            </div>
+            <script language="javascript" src="liveshow/js/123flashchat_liveshow.js"></script>
+            <script language="javascript" src="liveshow/123flashchat_liveshow_core.js"></script>     
+        </div>
+        <!--123 Flash Chat Live Show Code End -->
+</body>
+</html>

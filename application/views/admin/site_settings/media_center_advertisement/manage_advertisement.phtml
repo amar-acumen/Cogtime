@@ -1,0 +1,127 @@
+<script type="text/javascript">
+  function changeStatus(id,i_status ,cur_status)
+	{
+		var URL = '<?php echo admin_base_url()?>' +'site_settings/media_center_advertisement/change_status/';
+		showBusyScreen();
+		if(ajax_req!=null) {
+			ajax_req.abort();
+		}
+		ajax_req = $.ajax({
+			type: 'POST',
+			url:URL,
+			dataType: 'json',
+			data: ({ 'record_id' : id
+				   	 ,'i_status' : i_status
+					 ,'cur_status' : cur_status
+				 }),
+			success: function (data, status) {
+							var result_obj = data;
+							hideBusyScreen();
+							if(result_obj.result=='success' && result_obj.redirect == false ) {
+								showUIMsg(result_obj.msg);
+								$('#'+result_obj.u_id+'_status').html(result_obj.action_txt);
+							}
+							else if(result_obj.result==false && result_obj.redirect == true){
+							    showUIMsg(result_obj.msg);
+							}
+					},
+			error: function (data, status, e) {
+								hideBusyScreen();
+								showUIMsg(data.msg);
+			}
+		});
+	}
+        
+        function delete_confirm(id)
+	{
+		//var URL = '<?php //echo admin_base_url()?>' +'site_settings/media_center_advertisement/delete_information/';
+		showBusyScreen();
+                
+		 $.ajax({
+            url : admin_base_url+'site_settings/media_center_advertisement/delete_information/',
+            type : 'post',
+            dataType : 'json',
+            data : ({'id':id}),
+            success : function (data)
+            {
+               // hideUILoader('comments-popup');
+                //$('#del_commitmen'+id).hide();
+                 window.location.href = '<?= base_url() ?>admin/site-settings/media_center_advertisement';
+                
+            }
+        }); 
+	}
+</script>
+<div class="clr"></div>
+<!-- CONTENT SECTION -->
+<!--navigation section start -->
+<?php include(APPPATH."views/layouts/admin/admin_nav.phtml");?>
+<!--navigation section end -->
+<!-- CONTENT SECTION -->
+<div id="content_section">
+      <div id="container">
+            <!--<div id="top_corner">&nbsp;</div> -->
+            <div id="mid_content">
+                  <div class="page_heading left">
+                        <div class="left"><img src="../images/icons/login.png" alt="" />Media Center Advertisement</div>
+                        <div class="right">
+                        <input name="" type="button" value="Add New Ad"  class="evnt_btn1" onclick="window.location='<?=admin_base_url().'site_settings/media_center_advertisement/add-advertisement.html'?>'"/>
+                        <input name="" type="button" value="media center banner"  class="evnt_btn1" onclick="window.location='<?=admin_base_url().'site_settings/media_center_advertisement/add-mediabanner.html'?>'"/>
+                        </div>
+                  </div>
+                  <div class="clr"></div>
+                  <div id="right_container">
+                        <div class="arrow_btm"></div>
+                        <div class="content_area">
+                        
+                        <div class="filter">
+                        	<span class="filter-by">Filter By &raquo;</span>
+                             <?php include(APPPATH.'views/admin/site_settings/media_center_advertisement/advertisement_search.phtml');?>  
+                            <div class="clr"></div>
+                        </div>
+                        
+                        
+                        
+            		  <DIV id="table_content">
+						<?=$result_content?>
+                      </DIV>
+                              
+                        <div class="clr"></div>
+                        </div>
+                       
+                  </div>
+                  <div class="clr"></div>
+            </div>
+            <!--<div id="bot_corner">&nbsp;</div> -->
+      </div>
+      <div class="clr"></div>
+</div>
+<!-- /CONTENT SECTION -->
+
+
+
+
+
+
+<!--popup one start-->
+<div class="lightbox delete-page-popup" style="width:500px;">
+      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="../images/close.png" alt="" /></a></div>
+      <div class="top"><div>&nbsp;</div></div>
+      <div class="mid">
+            <div class="heading" style="margin-bottom:0px;">
+                  <div class="left">
+                        <h4>Delete Advertisement</h4>
+                  </div>
+            </div>
+               <div class="shade_box_white" style="padding:8px 0px;">
+               <p class="center-text">Do you really want to delete this advertisement?</p>
+               		 <input type="hidden" name="i_del_id" id="i_del_id" value="" />
+               		<input name="" type="button" value="Yes" class="btn" style="margin-left:146px;" onClick="delete_()"/>
+                    <input name="" type="button" value="No" class="btn" onclick="hide_dialog()"/>
+               <div class="clr"></div>
+            </div>
+            
+      </div>
+      <div class="bot"><div>&nbsp;</div></div>
+</div>
+<!--popup one end-->

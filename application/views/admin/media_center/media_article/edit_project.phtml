@@ -1,0 +1,111 @@
+<div class="clr"></div>
+<!--navigation section start -->
+<?php include(APPPATH."views/layouts/admin/admin_nav.phtml");?>
+<!--navigation section end -->
+<!-- CONTENT SECTION -->
+<div id="content_section">
+      <div id="container">
+            <!--<div id="top_corner">&nbsp;</div> -->
+            <div id="mid_content">
+                  <div class="page_heading left">
+                        <div class="left"><img src="../images/icons/login.png" alt="" /> Christan Project &raquo; Edit Project</div>
+                  </div>
+                  <div class="clr"></div>
+                  <div id="right_container">
+                        <div class="arrow_btm"></div>
+                        <div class="content_area frm_box frm_box2">
+                               <form id="frm_add" action="" method="post" enctype="multipart/form-data" onsubmit="return add_new_article_()">
+                                  <div class="lable01">Title :</div>
+                                  <div class="field02">
+                                        <input name="txt_title" id="txt_title" type="text" value="<?=$article_info[0]['s_title']?>"/>
+                                  </div>
+                                  <div id="err_title" class="error-message"></div>
+                                  <div class="clr"></div>
+                                  
+                                  <div class="lable02">Description :</div>
+                                  <div class="field02" style="width:820px; margin-bottom:6px;">
+                                       <textarea id="elm1" name="elm1" rows="" cols="" style="width:820px; min-height:400px;"><?=$article_info[0]['s_description']?></textarea>
+                                  </div>
+                                  <div id="err_desc" class="error-message"></div>
+                                  <div class="clr"></div>
+                                  
+                                  <div class="lable01">&nbsp;</div>
+                                  <div class="field01">
+                                  <input type="hidden" name="txt_id" value="<?=$article_info[0]['id']?>">
+
+                                        <input name="" type="submit" class="btn"  value="Update"/><input name="" type="reset" class="btn"  value="Cancel" onclick="window.location=admin_base_url+'<?=$current_page?>/chirstan-project.html'"/>
+                                  </div>
+                              </form>
+                              <div class="clr"></div>
+                        </div>
+                  </div>
+                  <div class="clr"></div>
+            </div>
+            <!--<div id="bot_corner">&nbsp;</div> -->
+      </div>
+      <div class="clr"></div>
+</div>
+<input type="hidden" id="current_page" value="<?=$current_page?>">
+
+<!-- /CONTENT SECTION -->
+
+
+
+<script type="text/javascript">
+
+ optionsArrAdd = {
+        beforeSubmit:  showBusyScreen,  // pre-submit callback 
+        success:       validateAddFrm, // post-submit callback 
+        url:        admin_base_url+'media_center/christian_project/edit_post_article'
+    }; 
+    
+ function validateAddFrm(data)
+{
+    
+    var data = JSON.parse(data);
+
+    showUIMsg(data.msg);
+    hideBusyScreen();
+
+     $('.error-message').each(function(i){
+            $(this).attr('style','display:none');
+        });
+        
+    if(data.result=='failure') 
+    {
+       
+        
+        for ( var id in data.error ){
+            
+            if( $('#'+id) != null ) {
+                $('#'+id).html(data.error[id]);
+                $('#'+id).css('display', 'block');
+
+            }
+        }
+        
+    }
+    else if(data.result=='success') {  //success
+        
+         //hideBusyScreen();
+
+         $('#frm_add')[0].reset();
+         var current_page = $('#current_page').val();
+         window.location.href = admin_base_url+current_page+'/chirstan-project.html';
+         
+       
+    }
+
+}
+    
+function add_new_article_()
+  {
+      tinyMCE.triggerSave(false,true);
+      $('#frm_add').ajaxSubmit(optionsArrAdd);
+      return false;
+  }
+  
+ 
+  
+
+</script>

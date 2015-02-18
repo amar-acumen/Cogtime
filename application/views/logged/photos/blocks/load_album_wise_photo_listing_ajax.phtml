@@ -1,0 +1,90 @@
+<div class="div_content" style=" margin-top:0px;">
+<?php //pr($arr_albums_photos) ?>
+<?php 
+	if(count($arr_albums_photos)){
+		
+		foreach($arr_albums_photos as $val):
+			 $IMG = base_url()."uploads/user_photos/".getThumbName($val['s_photo'],'thumb');
+			 $BIG_IMG = base_url()."uploads/user_photos/".getThumbName($val['s_photo'],'main');
+			 $photo_link = get_photo_detail_url($val['id'], $val['s_title']);
+
+?>
+                <div class="shade_box_blue">
+                    <div class="left_div02" style="width:300px;">
+                         <div class="left" style="width:135px;">
+                             <!-- <a href="javascript:void(0);"><img src="images/album.png" alt=""  style="float:none;" class="img_brd"/></a>-->
+                             
+                              <a href="<?=$photo_link?>"><div class="img_brd" style="background:url(<?=$IMG?>) no-repeat center;max-width:122px; max-height:82px; cursor:pointer; float:none; "  ></div></a>
+                              <p class="light_blue12" style="margin-top:7px; width:200px;">
+                              <?php if($val['is_profile_pic'] == 'true') :?>
+                               <?php /*?> <span> Already selected as Profile Photo.</span><?php */?>
+                                
+                              <?php elseif($val['is_profile_pic'] == 'false'):?>
+                              	 <input name="rd_set_profie_pic"  type="radio" value="" onclick="set_as_profile_pic(<?=$val['id']?>,<?=$val['i_photo_album_id']?>)"/><span class="profile_pic"> Set as Profile Photo</span>
+                              
+                              <?php endif; ?>
+                              
+                              </p>
+                         </div>
+                         <p class="blue_bold12"><strong><a href="<?=$photo_link?>"><?=$val['s_title']?></a></strong></p>
+                         <p><?=nl2br($val['s_description'])?></p>
+                    </div>	
+                       
+                    <div class="right_div02">
+                    <select name="album_<?=$val['id']?>" id="album_<?=$val['id']?>" style="width:162px; margin-bottom:10px;" onchange="javascript:change_album(<?=$val['id']?>, <?=$val['i_photo_album_id']?>)">
+                             <option value="move">Move to another Album </option>
+                             <?php if(count($all_photo_albums)):
+								 		foreach($all_photo_albums as $photo_album):
+							 ?>
+                             <option value="<?=$photo_album['id']?>"><?=$photo_album['s_name']?></option>
+                             <?php   
+							 			endforeach;	
+							 		endif;
+							 ?>
+                             
+                     </select>
+                        <?php /*?><script type="text/javascript">
+                            $(document).ready(function(arg) {
+                                $("#album_<?=$val['id']?>").msDropDown();
+                                $("#album_<?=$val['id']?>").hide();
+                            })
+                        </script><?php */?> 
+                           <div class="box01" style="width: 132px;">
+                            <p class="date-time">Uploaded on: <?=getShortDate($val['dt_created_on'],5)?></p>
+                            <p class="add-remove-friend">
+                                <img src="images/icons/edit.png" alt="" /> <a  href="javascript:void(0);" onclick="edit_photo(<?=$val['id']?>)">Edit </a>  &nbsp;      
+                                <img src="images/icons/delete.png" alt="" /> <a  href="javascript:void(0);" onclick="delete_confirm_(<?=$val['id']?> , <?=$val['i_photo_album_id']?>)">Delete</a>
+                            </p>
+                        </div>
+                        
+                        <p style="margin-right:4px;"><img src="images/icons/zoom.png" alt="" /> <a  href="javascript:void(0);" class="blue_link thickbox"  onclick="open_zoom_lightbox(<?=$val['id']?>)"><strong>Zoom</strong></a>   &nbsp;  &nbsp; 
+                      <!-- <a href="javascript:void(0);"><img src="images/up.png"  alt="" /></a><a href="javascript:void(0);"><img src="images/dwn.png" alt="" /></a>--><?=$val['image_rank']?> </p>
+                    </div>
+                    <div class="clr"></div>
+                 </div>
+
+                 
+  <?php 
+		endforeach; 
+      ?>  
+ <?php 
+	}
+	else{
+		echo '<div class="shade_box_01" style="padding-top:5px;"><div  class="shade_norecords" style="width: 250px;"><p class="blue_bold12">No Photos.</p></div></div>';
+	}
+?>
+<input type="hidden" id="current_page" value="<?=$current_page?>" />
+<?php /*
+if($page_links){ ?>
+<div class="pagination">
+<div class="left">Viewing Page <?=$current_loaded_page_no?> of <?=$total_pages?> </div>
+<div class="right">
+       <ul class="small-paging">
+        <?=$page_links?> 
+        </ul>
+</div>
+</div>
+<?php }*/
+ ?>                
+                 
+</div>

@@ -1,0 +1,214 @@
+<script type="text/javascript">
+ </script>
+
+
+<div class="clr"></div>
+<!-- CONTENT SECTION -->
+<!--navigation section start -->
+<?php include(APPPATH."views/layouts/admin/admin_nav.phtml");?>
+<!--navigation section end -->
+<div id="content_section">
+      <div id="container">
+            
+            <div id="mid_content">
+                  <div class="page_heading left">
+                        <div class="left"><img src="../images/icons/login.png" alt="" /> Reporting Abuse</div>
+                        
+                  </div>
+                  <div class="clr"></div>
+                  <div id="right_container">
+                        <div class="arrow_btm"></div>
+                        
+                        <div class="content_area">
+                        
+                        <div class="filter">
+                             <span class="filter-by">Filter By &raquo;</span>
+                            <form id="frm_search" onsubmit="return false;" method="post" enctype="multipart/form-data" class="filter-search">
+                            	<label>User Reporting :</label>
+                                <input type="text" name="txt_name" id="txt_name" />
+								<label>Abuser :</label>
+                                <input type="text" name="txt_abuser_name" id="txt_abuser_name" />
+								<label>Type :</label>
+                                <select name="category" style="width:100px">
+								<option value='-1' selected>----</option>
+								<option value="audio">Audio</option>
+								<option value="blog">Blog</option>
+								<option value="article">Blog Article</option>
+								<option value="tweet">Chitter</option>
+								<option value="photo">Photo</option>
+								<option value="prayer_wall">Prayer wall post</option>
+								<option value="ring">Ring Post</option>
+								<option value="user">User</option>
+								<option value="video">Video</option>
+								<option value="wall">Wall Post</option>
+								</select>
+								<div class="clr"></div>
+								<label>Date Between :</label>
+                                <input type="text" name="from_date" id="from_date" class="date-field"/>
+								 <img src="../images/icons/cal.png" alt="" onclick="$(this).prev().focus()" class="calender" style="margin-right:35px;" />
+								<script type="text/javascript">
+									$(document).ready(function(arg) {
+										$.datepicker.setDefaults($.datepicker.regional['']);
+										$("#from_date").datepicker($.datepicker.regional['en']);
+
+									});
+							  </script>
+								<label>To :</label>
+                                <input type="text" name="end_date" id="end_date" class="date-field"/>
+								 <img src="../images/icons/cal.png" alt="" onclick="$(this).prev().focus()" class="calender" style="margin-right:35px;" />
+								<script type="text/javascript">
+									$(document).ready(function(arg) {
+										$.datepicker.setDefaults($.datepicker.regional['']);
+										$("#end_date").datepicker($.datepicker.regional['en']);
+
+									});
+							  </script>
+                                <input name="" type="submit" value="GO" class="go" />
+                                <input type="hidden" id="search_basic" name="search_basic" value="Y" />
+                            </form>  
+                            <div class="clr"></div>
+                          </div>
+                          
+                        <!--tab section start -->
+                        <div class="tab-box">
+                        	<!--<div class="tab_content title-div">
+                            	<ul>
+                                	<li class="first select"><a href="javascript:void(0);">Photos</a></li>
+                                    <li><a href="javascript:void(0);">Audios</a></li>
+                                    <li><a href="javascript:void(0);">Videos</a></li>
+                                    <li><a href="javascript:void(0);">Profile</a></li>
+                                    <li class="noBg"><a href="javascript:void(0);">Events</a></li>
+                                </ul>
+                            </div>-->
+                            <div class="clr"></div>
+                            <div class="tab_details detail-div">
+                            
+                                <!--photo box -->
+                            	<div class="show lavel-01" id="photo_content">
+                                	<?=$photo_content?>
+                                </div>
+                                <!--/photo box -->
+                                <!--audio box -->
+                            	<?php /*<div class="lavel-01" id="audio_content">
+                                	<?=$audio_content?>
+                                </div>
+                                <!--/audio box -->
+                                <!--video box -->
+                            	<div class="lavel-01" id="video_content">
+                                	<?=$video_content?>
+                                </div>
+                                <!--/video box -->
+                                
+                                 <!--profile box -->
+                            	<div class="lavel-01"id="user_content">
+                                	<?=$user_content?>
+                                </div>
+                                <!--/profile box -->
+                                
+                                <!--Event box -->
+                            	<div class="lavel-01" id="event_content">
+                                	<?=$event_content?>
+                                </div>*/ ?>
+                                <!--/Event box -->
+                            	
+                            </div>
+                        </div>
+                        <!--tab section end -->
+                        
+                       
+					    <input type="hidden" name="hd_type" id="hd_type" value="photo" />
+                              
+                               
+                        <div class="clr"></div>
+                        </div>
+                  </div>
+                  <div class="clr"></div>
+            </div>
+            <!--<div id="bot_corner">&nbsp;</div> -->
+      </div>
+      <div class="clr"></div>
+</div>
+<!-- /CONTENT SECTION -->
+
+
+
+<script type="text/javascript">
+$(document).ready(function() {
+	$(".tab_content ul li a").click(function() {
+		$('.tab_content ul li').removeClass('select');
+		$(this).parent('li').addClass('select');
+		var index = jQuery('.tab_content ul li a').index(jQuery(this)); 
+		$('.tab_details > div').hide();
+		$('.tab_details > div').filter(':eq(' + index + ')').show();
+		
+		var type = '';
+		
+		if(index == 0)
+		   type = 'photo';
+		else if(index == 1)
+		   type = 'audio';
+		else if(index == 2)
+		   type = 'video';
+		else if(index == 3)
+		   type = 'user';
+		else if(index == 4)
+		   type = 'event';   
+		  
+		$('#hd_type').val(type);
+		
+  	});
+});
+
+function changeStatus(id,i_status,cur_status, ref_id, type){
+	
+	 $.ajax({
+			type: 'POST',
+			url:admin_base_url+'site_settings/reporting_abuse/change_status',
+			dataType: 'json',
+			data: ({ 'record_id' : id
+				   	 ,'i_status' : i_status
+					 ,'cur_status' : cur_status,
+					 'ref_id': ref_id,
+					 'type'  : type
+				 }),
+			success: function (data, status) {
+							
+							hideBusyScreen();
+							if(data.result== true) {
+								showUIMsg(data.msg);
+								$('#'+data.u_id+'_status').html(data.action_txt);
+							}
+							else if(data.result==false ){
+							    showUIMsg(data.msg);
+							}
+					},
+			error: function (data, status, e) {
+								hideBusyScreen();
+								showUIMsg(data.msg);
+			}
+		});
+}
+
+$(document).ready(function(arg) {
+	
+$('.banner-img').children('p').children('a').attr('href','javascript:void(0);');
+$('#frm_search').submit(function(){ 
+						
+	  var datatosend=$("#frm_search").serialize();
+	  showBusyScreen();
+	  //alert(datatosend);
+	  
+	  $.ajax({
+		 type: "POST",
+		 url: admin_base_url+"site_settings/reporting_abuse/ajax_pagination/"+$('#hd_type').val(),
+		 data: datatosend,
+		 success: function(data){
+			hideBusyScreen(); 
+			//alert('#'+$('#hd_type').val()+'_content');
+			 $('#txt_name').val('');
+			 $('#'+$('#hd_type').val()+'_content').html(data);
+		 }
+	   });	 
+});
+});
+</script>

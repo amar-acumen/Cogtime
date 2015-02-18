@@ -1,0 +1,140 @@
+<?php include(APPPATH."views/layouts/logged_header.phtml");?>
+            <!-- NAVIGATION SECTION -->
+      <?php include(APPPATH."views/layouts/nav.phtml");?>
+      <!-- /NAVIGATION SECTION -->
+      </div>
+</div>
+<!-- /HEADER SECTION -->
+<div class="clr"></div>
+<div id="content_section">
+      <div id="container">
+            <div id="top_corner">&nbsp;</div>
+            <div id="mid_content">
+                  <!-- latest news -->
+                  <?php include(APPPATH."views/layouts/latest_news.phtml");?>
+                  <!-- /latest news -->
+                  <div class="clr"></div>
+                  <!-- main container -->
+                  <div id="main_container">
+                        <div class="new-5aday"></div>
+						<div class="fiveday-title">Have you had your 5 a day ?</div>
+						<div class="clr"></div>
+						
+						<div class="fiveday-slider" id="slider1">
+							<ul class="fiveslider">
+                            <?php
+								if(count($five_fruits_arr)){
+                                          foreach($five_fruits_arr as $key=> $val){
+											  
+											if($val['s_image_name']== 'food4.png'){
+												$bg_img = 'fiveday-slider1.jpg';
+												$wrd = 'Peace';
+												$CSS = 'slider-section-box';
+											}
+											else if($val['s_image_name']== 'food1.png'){
+												$bg_img = 'fiveday-slider4.jpg';
+												$wrd = 'Love';
+												$CSS = 'slider-section-box4';
+											}
+											else if($val['s_image_name']== 'food9.png'){
+												$bg_img = 'fiveday-slider5.jpg';
+												$wrd = 'Kindness';
+												$CSS = 'slider-section-box5';
+											}
+											else if($val['s_image_name']== 'food5.png'){
+												$bg_img = 'fiveday-slider3.jpg';
+												$wrd = 'Faithfulness';
+												$CSS = 'slider-section-box3';
+											}
+											else if($val['s_image_name']== 'food7.png'){
+												$bg_img = 'fiveday-slider2.jpg';
+												$CSS = 'slider-section-box2';
+												$wrd = 'Joy';
+											}
+											else if($val['s_image_name']== 'food6.png'){
+												$bg_img = 'fiveday-slider9.jpg';
+												$wrd = 'Patience';
+												$CSS = 'slider-section-box9';
+											}
+											else if($val['s_image_name']== 'food8.png'){
+												$bg_img = 'fiveday-slider8.jpg';
+												$wrd = 'Self-Control';
+												$CSS = 'slider-section-box8';
+											}
+											else if($val['s_image_name']== 'food3.png'){
+												$bg_img = 'fiveday-slider7.jpg';
+												$wrd = 'Gentleness';
+												$CSS = 'slider-section-box7';
+											}
+											else if($val['s_image_name']== 'food2.png'){
+												$bg_img = 'fiveday-slider6.jpg';
+												$wrd = 'Goodness';
+												$CSS = 'slider-section-box6';
+											}
+							?>
+                            
+                            	<li>
+								<img src="images/<?=$bg_img?>" />
+								<div class="<?=$CSS?>">
+									<span class="five-item"><?=$wrd?></span>
+									<div class="clr"></div>
+									<span class="five-heading"><?=$val['s_book_name']?> <?=$val['bible_chapter_no']?>:<?=$val['bible_verse_no']?></span>
+									<div class="clr"></div>
+									<span class="five-content"><?=nl2br($val['s_verse'])?> </span>
+										<a href="#" class="bx-prev go-prev-top">&nbsp;</a>
+										<a  class="bx-next go-next-top" href="#">&nbsp;</a>
+								</div>
+							  
+							  </li>
+                            
+                            <?php 
+										  }
+								}
+							?>
+                            
+							 	
+                              
+							  
+							</ul>
+						</div>
+                       
+                  </div>
+                  <!-- /main container -->
+                  <div class="clr"></div>
+            </div>
+            <div id="bot_corner">&nbsp;</div>
+      </div>
+      <div class="clr"></div>
+</div>
+<!-- /CONTENT SECTION -->
+<div class="clr"></div>
+<!-- FOOTER SECTION -->
+</div>
+<!-- /CONTENT SECTION -->
+<div class="clr"></div>
+
+
+<?php include(APPPATH."views/layouts/footer.phtml");?>
+<?php include(APPPATH."views/logged/blocks/common_popup.phtml");?>
+<script type="text/javascript">
+$(document).ready(function() {
+	var fiveslid=$('.fiveslider').bxSlider({
+	
+	auto:true,
+	speed: 4000,
+	controls: false
+	});
+	
+	$('.go-prev-top').click(function(){
+		//alert('pre');
+		fiveslid.goToPreviousSlide();
+		return false;
+	});
+	
+	$('.go-next-top').click(function(){
+		//alert('next');
+		fiveslid.goToNextSlide();
+		return false;
+	});
+});
+</script>

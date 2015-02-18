@@ -1,0 +1,74 @@
+<!--Personal start -->
+<div class="menu-box">
+      <div class="nw-heading">
+           <div class="left">
+                <h4><img src="images/icons/personal.png" alt="Personal"/>Personal</h4>
+          </div>
+          <div class="minus right exp-col021" style="display:none;"><img src="images/icons/nw-minus.png" alt="" class="plus-minus2"/></div>
+          <div class="plus right exp-col021"><img src="images/icons/nw-plus.png" alt="" class="plus-minus2"/></div>
+    </div>
+      
+      <div class="nw-content" id="switchdiv021" style="display:none;">
+          <ul>
+              <li class="last"><a href="organizer-day-view.html" class="<?php echo ($page_name=='organizer-day-view')?'select':'';?>">Organizer</a></li>
+               <?php /*?><li class="last"><a href="my-chat-rooms.html" class="<?php echo ($page_name=='my-chat-rooms')?'select':'';?>">My Chat Rooms</a></li><?php */?>
+          </ul>
+      </div>
+      <br class="clr" />
+</div>
+<!--Personal end -->
+
+<!--messaage box-->
+<div class="menu-box">
+      <div class="nw-heading">
+           <div class="left">
+                <h4><img src="images/icons/mail_square_webtreatsetc.png" alt="Messages"/>Messages</h4>
+          </div>
+          <div class="minus right exp-col023" style="display:none;"><img src="images/icons/nw-minus.png" alt="" class="plus-minus2"/></div>
+          <div class="plus right exp-col023"><img src="images/icons/nw-plus.png" alt="" class="plus-minus2"/></div>
+    </div>
+      
+      <div class="nw-content" id="switchdiv023" style="display:none;">
+          <ul>
+              <li><a href="my-msg-inbox.html" class="<?php echo ($page_name=='my-msg-inbox')?'select':'';?>">Inbox (<span id="unread_msg_count"><?=($left_panel['total_unread_messages'] < 0 )?'0':$left_panel['total_unread_messages'];?></span>)</a></li>
+              <li><a href="my-msg-outbox.html" class="<?php echo ($page_name == 'my-msg-outbox')?'select':'';?>">Sent Items</a> </li>
+              <li><a href="my-msg-trashbox.html" class="<?php echo ($page_name == 'my-msg-trashbox')?'select':'';?>">Trash</a> </li>
+             
+          </ul>
+      </div>
+      <br class="clr" />
+</div>
+<!--messaage box-->
+
+
+
+
+<script type="text/javascript"> 
+// to show clock
+$(document).ready(function(arg) {
+
+//get_unread_msg();
+//setInterval(function(){get_unread_msg()},59000);
+});
+
+ 
+function get_unread_msg() {
+	//alert(1)
+	$.ajax({
+	   type: "post",
+	   url: '<?=base_url()?>logged/mymessages/get_unread_message',
+	   dataType:"json",
+	   success: function(json_response){
+
+			if(json_response.result = 'success') {
+				//alert(json_response.unread_msg_count);
+				$('#unread_msg_count').html(json_response.unread_msg_count);		
+			}
+			
+		},
+		error: function(){
+			//showUIMsg('Some error occurred. Please try again.');
+		}
+	});
+}
+</script>

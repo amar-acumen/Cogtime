@@ -1,0 +1,320 @@
+<div class="div_content" style=" margin-top:0px;">
+
+							<?php
+							//pr($prod_data);
+							if($prod_data)
+							{
+								$tmpid	= '';
+								foreach($prod_data as $product)
+								{
+									
+									
+									//pr($user_info);
+									$LOGO	= base_url().'uploads/e_trade_product/'.getThumbName($product['s_image'],'thumb');
+									$ring_detail_link	= base_url().'rings/'.$ringval['ringid'].'/ring-home.html';
+							?>
+									<div class="ne-etrade-product-category-list" style="border-bottom:1px solid #DDDDDD;  margin-bottom:10px;">
+									<div class="thumb">
+                                    	<div class="img_div" style="background:url(<?php echo $LOGO?>) no-repeat center #fff; " onclick="window.location='<?php echo base_url()?>etrade/<?php echo $product['id']?>/detail.html'"></div>
+                                    </div>
+									<div class="thumb-right" >
+                                    	<?php
+										if($product['i_user_id']!=intval(decrypt($this->session->userdata('user_id'))))
+										{
+										?>
+										<!--<ul class="pro-categorylist">
+											<li><a href="javascript:void(0)"><?php echo $product['s_category_name']?></a></li>
+											<li>I</li><li>
+											</li><li><a href="javascript:void(0)">Similar Products</a></li>
+										</ul>-->
+                                        <?php
+										}
+										else
+										{
+											?>
+                                            <ul class="pro-categorylist">
+                                                <li><a href="javascript:void(0)">Delete</a></li>
+                                                <li>I</li><li>
+                                                </li><li><a href="javascript:void(0)">Edit</a></li>
+											</ul>
+                                            <?php
+										}
+										?>
+										<br class="clear"/>
+									
+										<div class="heading-etrade"><strong><?php echo $product['product_id']?></strong></div>
+										<div class="heading-etrade" onclick="window.location='<?php echo base_url()?>etrade/<?php echo $product['id']?>/detail.html'" style="cursor:pointer;"><?php echo $product['s_name']?></div>
+										<p class="attribute1">
+											<?php echo substr($product['s_attribute1'],0,100)?>
+										</p>
+                                       
+									</div>
+									<!--<ul class="ne-etrade-breadcrumb2">
+											<li>Condition: <?php echo $product['s_name']?></li>
+											<li>Stock: <span id="stock_<?php echo $product['id']?>"><?php echo $product['i_stock']?></span></li>
+											<li>Unit Price: $<?php echo $product['f_unit_price']?> 
+                                            <a class="view-shipping-free" href="javascript:void(0);" onclick="showShippingFee('<?php echo $product['id']?>')">View Shipping Fee</a>
+											<!--slide view shipping free-->
+												<!--<div class="slide-view-shipping-free attribute1" id="shippingfee_<?php echo $product['id']?>">
+													<p><strong> Local Shipping Fee :</strong> <?php echo get_price($product['f_local_shipping_cost'])?></p>
+													<p><strong> International Shipping Fee :</strong> <?php echo get_price($product['f_international_shipping_cost'])?></p>
+												</div>-->
+											<!--slide view shipping free-->
+											<!--</li>
+											<li>Posted On: <?php echo $product['dt_insert_time']?></li>
+											<li>Seller From: <?php echo get_user_address_info($product['i_user_id'])?></li>
+											<li>
+												Seller Rating : 
+                                                <?php
+												$avgrate	= round((($product['f_rate_for_seller_item']+$product['f_rate_for_seller_communication']+$product['f_rate_for_seller_time'])/3),1);
+												echo show_rating($avgrate);
+												?>
+											</li>
+									</ul>-->
+                                   <!-- <p class="attribute1">
+                                      <strong> Details: </strong><?php echo substrws($product['s_description'],70)?>
+                                    </p>-->
+                                    
+                                    <?php
+									   $wh	= " AND p.id='".$product['id']."'";
+									   $arr_reqrcr	= get_requests($wh);
+									   
+									?>
+                                    <ul class="ne-etrade-breadcrumb2">
+                                    	<li ><a href="javascript:void(0);" class="total-req-li"><strong>Total Request:</strong> <?php echo count($arr_reqrcr);?></a></li>
+                                    </ul>
+                                    
+                                    
+                                    <br class="clr" />
+                                   <div id="req_rcv<?php echo $product['id']?>" style="display:none;" class="total-req-div">
+                                   <?php
+								      if(count($arr_reqrcr)){
+										   foreach($arr_reqrcr as $k=>$reqval)
+										   {
+											   $user_info = array();
+											   
+												$user_info  = get_primary_user_info($reqval['requid']);
+									?>
+										<div class="ne-etrade-quantity-section" id="rating_div_<?php echo $reqval['reqid']?>" style="border-bottom:none;  margin-bottom:0px;">
+									  <?php
+									  if($reqval['i_accept']==0)
+									  {
+									  ?>
+									  <div class="ne-etrade-product">
+									  <h3>Request # <?=$k+1?></h3>
+                                      <!-- send-request-quantity -->
+								 	  <p class="">Quantity Requested: <?php echo $reqval['req_qty']?></p>
+                                       <!--personal information start-->
+                                      <p style="padding-top:5px;"><strong>Buyer's Details:</strong></p>
+                                      <p class="">Address : <span><?php echo get_user_address_info($reqval['requid']);?></span></p>
+                                       <!--personal information start-->
+                                      <p class="">Requested On - <?php echo getShortDate($reqval['dt_req_date'],5)?></p>
+                                       <p></p>
+									  <ul class="ne-etrade-breadcrumb"  style="margin-left:-4px;">
+									  <li class="nw_rating_li">Buyer Rating : <?php echo show_rating($reqval['f_rate_for_buyer']);?>
+										</li>
+									  </ul>
+									  
+									   <p class="send-request-quantity color-txt">Accept to see Customer details</p>
+									  <ul class="ne-etrade-breadcrumb">
+										<li><img class="acpt" src="images/icons/accept.png" alt="" />
+                                        	<a href="javascript:void(0);" onclick="acceptDeny('<?php echo $reqval['reqid']?>','accept','<?php echo encrypt($reqval['id'])?>');">Accept</a>
+                                        </li>
+									<!--	<li>I</li>
+										<li><img class="acpt" src="images/icons/view.png" alt="" /><a href="javascript:void(0);">View</a></li>-->
+										<li>I</li>
+										<li><img class="acpt" src="images/icons/band.png" alt="" />
+                                        <a href="javascript:void(0);" onclick="acceptDeny('<?php echo $reqval['reqid']?>','deny','<?php echo encrypt($reqval['id'])?>');">Decline</a></li>
+									  </ul>
+									  <br class="clear" />
+							  		</div>
+									  <?php
+									  }
+									  else if($reqval['i_accept']==1)
+									  {
+										  ?>
+                                          <div class="ne-etrade-product">
+                                          <h3>Request # <?=$k+1?></h3>
+                                        
+                                          <p class="">Quantity Requested: <?php echo $reqval['req_qty']?></p>
+                                           <!--personal information start-->
+                                           <p style="padding-top:5px;"><strong>Buyer's Details:</strong></p>
+                                           <p>Name: <?php echo $user_info['s_first_name'].''.$user_info['s_last_name']?>, Address : <span><?php echo get_user_address_info($reqval['requid']);?></span></p>
+                                           <p>Email: <?php echo ($reqval['req_email']=='')?$user_info['s_email']:$reqval['req_email']?>
+                                           <?php 
+										   	if($reqval['s_phone']!=''){
+										   ?>
+                                           , Phone:  <?php echo ($reqval['s_phone']=='')?$user_info['s_mobile']:$reqval['s_phone']?><?php }?> </p>
+                                            <!--personal information start-->
+
+                                           <p class="">Accepted On - <?php echo getShortDate($reqval['dt_accept'],5)?></p>
+                                           <p></p>
+                                          <ul class="Item-list-req2" style="margin-left:-4px;">
+                                            
+                                                <li><label class="subproduct">Buyer Rating : </label>
+                                                <?php
+												echo show_rating($product['f_rate_for_buyer']);
+												?>
+                                                </li>
+										  </ul>
+                                         <br class="clear" />
+                                         
+									 	 <ul class="ne-etrade-breadcrumb" style="margin-left:-4px;">
+                                           <li><img class="acpt" src="images/icons/accept.png" alt="" /> <span>Request Accepted</span></li>
+                                            <li>I</li>
+                                            <?php
+                                            if($reqval['is_shipped']==0)
+									  		{
+											?>
+                                            <li>
+                                            	<img class="acpt" src="images/icons/car1.png" alt="" />
+                                            	<a href="javascript:void(0);" >Not Shipped</a>
+                                            </li>
+                                            <li><input type="button" value="Update" class="yellow-btn" style="height:20px; font-size:9px; padding:0;" onclick="shipped('<?php echo $reqval['reqid']?>')" /></li>
+											<?php
+											}
+											else
+											{
+											?>
+                                            <li><img class="acpt" src="images/icons/car1.png" alt="" />Shipped</li>
+											<?php
+											}
+											?>
+                                          </ul>
+									 
+										<br class="clear" />
+										<ul class="Item-list-req2" style="margin-left:-4px;">
+                                              
+                                           	<?php
+											if($info[0]['f_rate_for_buyer']==0)
+											{
+											?>
+											<li>
+                                            <label class="subproduct">Rate this Buyer:</label>
+                                                <select style="width: 80px;" id="rating<?php echo $product['reqid']?>" class="rating" name="item">
+                                                    <option value="1">1</option>
+                                                    <option value="2">2</option>
+                                                    <option value="3">3</option>
+                                                    <option value="4">4</option>
+                                                    <option value="5">5</option>
+                                                </select>
+                                            
+                                           <!-- <br class="clear" />
+                                            </li>
+                                            <li class="req-margin-bottom">-->
+                                            <input type="button" name="" value="Submit" onclick="giveRatingToBuyer('<?php echo $product['reqid']?>');" class="yellow-btn req-margin-left" />
+                                            </li> 
+											<?php
+											}
+											?>
+											</ul>
+									   <br class="clear" />
+							  			</div>
+                                          <?php
+									  }
+									  else if($reqval['i_accept']==2 )
+									  {
+										  ?>
+                                        <div class="ne-etrade-product">
+                                        <h3>Request # <?=$k+1?></h3>
+                                        <p style="padding-top:5px;"><strong>Buyer's Details:</strong></p>
+                                        <p class="">Address: <span><?php echo get_user_address_info($reqval['requid']);?></span></p>
+                                            <ul class="ne-etrade-breadcrumb">
+                                                 <li><img class="acpt" src="images/icons/band.png" alt="" /> <span>Request Declined</span></li>
+                                            </ul>
+                                        </div>
+                                        <?php
+									  }
+									  ?>
+						
+								</div>
+                                	<?php
+								   	    }
+										}
+								    ?>
+                                   </div>
+                               <?php
+								if($product['i_user_id']!=intval(decrypt($this->session->userdata('user_id'))))
+								{
+								?>
+                                <br class="clr"/>
+                                <a class="view_more" href="javascript:void(0);">Read More</a>
+                                <?php
+								}
+								?>
+							   </div>
+                            <?php
+								}
+							}
+							?>
+</div>
+<input type="hidden" id="current_page" name="current_page" value="<?=$current_page_1?>"  />                     
+
+                            
+<script type="text/javascript">
+$(function(){
+		
+		$('.disclaimer-link').click(function(){
+			$(this).parent('p').next('.read-disclaimer').slideToggle('fast');
+		});
+		
+		$('.total-req-li').click(function(){
+			$(this).parent().parent('ul').next().next('.total-req-div').slideToggle('slow');
+		});
+});
+
+
+function giveRatingToBuyer(id)
+{
+	
+	$.ajax({
+			"type":'post',
+			"data":'id='+id+'&rate='+$('#rating'+id).val(),
+			"dataType":'json',
+			"url":'<?php base_url()?>logged/e_trade/add_rate_for_buyer',
+			"success": function(data)
+						{
+							if(data.success==false)
+							{
+								showUIMsg(data.msg);
+							}
+							else
+							{
+								if(data.html!='')
+								{
+									$('#rating_div_'+id).html(data.html);
+								}
+								showUIMsg(data.msg);
+							}
+						}
+		
+		});
+}
+function shipped(id)
+{
+	//alert(id);
+	$.ajax({
+			"type":'post',
+			"data":'id='+id,
+			"dataType":'json',
+			"url":'<?php base_url()?>logged/e_trade/shipped',
+			"success": function(data)
+						{
+							if(data.success==false)
+							{
+								showUIMsg(data.msg);
+							}
+							else
+							{
+								if(data.html!='')
+								{
+									$('#rating_div_'+id).html(data.html);
+								}
+								showUIMsg(data.msg);
+							}
+						}
+		
+		});
+}
+</script>                          
+

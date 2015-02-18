@@ -1,0 +1,373 @@
+<?php include(APPPATH."views/layouts/logged_header.phtml");?>
+            <!-- NAVIGATION SECTION -->
+      <?php include(APPPATH."views/layouts/nav.phtml");?>
+      <!-- /NAVIGATION SECTION -->
+      </div>
+</div>
+<!-- /HEADER SECTION -->
+<div class="clr"></div>
+<!-- CONTENT SECTION -->
+<div id="content_section">
+      <div id="container">
+            <div id="top_corner">&nbsp;</div>
+            <div id="mid_content">
+                  <!-- latest news -->
+                  <?php include(APPPATH ."views/layouts/latest_news.phtml");?>
+                  <!-- /latest news -->
+                  <div class="clr"></div>
+                  <!-- main container -->
+                  <div id="main_container">
+                        <p style="padding-bottom:10px;">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do  tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. </p>
+                        <div class="arrow_btm"></div>
+                        <div class="frm_box shade_box_01" style="padding-bottom:20px;">
+                              <div class="page_heading_01">
+                                    <div class="left" style="margin-left:10px;"> <img src="images/icons/icn30.png" alt="" /> Daily Bible Reading Plan</div>
+                                     <div class="clr"></div>
+                              </div>
+                              <div class="lable05" style="width:200px;">
+                                    <input name="rd_plan_type"  type="radio" value="1" checked="checked" />
+                                    Fixed 12 Months Plan</div>
+                              <div class="clr"></div>
+                              <div class="lable01" style=" width:100px;">Start Date:</div>
+                              <div class="field02" style=" width:130px;">
+                                    <input style="width:100px;"   type="text"  value=" DD/MM/YYYY" name="date_to" id="date_to"  readonly="readonly"/>
+                                    <img src="images/icons/cal.png" alt="" onclick="$(this).prev().focus()" style="cursor:pointer; " />
+                                    <script type="text/javascript">
+                                            $(document).ready(function(arg) {
+                                                $.datepicker.setDefaults($.datepicker.regional['']);
+                                                $("#date_to").datepicker($.datepicker.regional['en']);
+                
+                                            });
+                                        </script>
+                              </div>
+                              <div class="lable01" style=" width:80px;">End Date:</div>
+                              <div class="field02">
+                                    <input style="width:100px;"   type="text"  value="DD/MM/YYYY " name="date_end" id="date_end"  readonly="readonly"/>
+                                    <img src="images/icons/cal.png" alt="" onclick="$(this).prev().focus()" style="cursor:pointer; " />
+                                    <script type="text/javascript">
+                                            $(document).ready(function(arg) {
+                                                $.datepicker.setDefaults($.datepicker.regional['']);
+                                                $("#date_end").datepicker($.datepicker.regional['en']);
+                
+                                            });
+                                        </script>
+                              </div>
+                              <div class="clr"></div>
+                              <div class="lable05">
+                                    <input name="rd_plan_type" type="radio" value="2" />
+                                    Read By Day</div>
+                              <div class="clr"></div>
+                              
+                              <ul class="paging" id="day_content">
+									<?=makeDaysList(1,10)?>
+                              </ul>
+                              <div class="clr"></div>
+                              <p>
+                                    <input name="" type="button" value="Activate"  class="btn" style="margin-right:20px; margin-left:17px; vertical-align:middle;" onclick="activate_plan()"/>
+                                    <img src="images/icons/cal2.png" alt="" /> <a href="javascript:void(0);" class="blue_link" onclick="return show_dialog('view_plan')"><strong>View plan</strong></a></p>
+                        </div>
+                        <input type="hidden" id="hd_selected_day" value="" />
+                        
+                        <div class="arrow_btm"></div>
+                        <div class="shade_box_01" style="padding:12px 0px;">
+                              <div class="page_heading_01">
+                                    <div class="left" style="margin-left:10px;">Viewing Verses from Book Name of Chapter 13</div>
+                              </div>
+                              <div class="txt_content06">
+                                    <div class="left_div01">
+                                          <p class="blue_bold12"> <a href="javascript:void(0);">Book Name 13:1</a></p>
+                                          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eius tempor Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+                                                sed do eius tempor. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eius tempor Lorem ipsum dolor sit amet,
+                                                consectetur adipisicing elit, sed do eius tempor  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eius tempor Lorem
+                                                ipsum dolor sit amet, consectetur adipisicing elit, sed do eius tempor. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do </p>
+                                    </div>
+                                    <div class="right_div02">
+                                          <p> <span class="action_icon"><img src="images/icons/plus.png" alt="" /> <a href="javascript:void(0);">Actions</a></span> <span class="action_icon" style="display:none;"><img src="images/icons/minus.png" alt="" /> <a href="javascript:void(0);">Actions</a></span> </p>
+                                          <div class="action_div" id="action_div">
+                                              <div>
+                                                  <p><a href="javascript:void(0);"  onclick="return show_dialog('add_note')">Add Note</a>  &nbsp;<img src="images/icons/icon27.png" alt="" /> </p>
+                                                  <p><a href="javascript:void(0);" onclick="return show_dialog('add_bookmark')"> Bookmark</a> &nbsp; <img src="images/icons/icn28.png" alt="" style=" margin-left:2px;" /></p>
+                                                    <p> <a href="javascript:void(0);" onclick="return show_dialog('add_bible_highlight')">Highlight</a> &nbsp; <img src="images/icons/icn29.png" alt="" style=" margin-left:1px;"/></p>
+                                             </div>
+                                                  
+                                              
+                                          </div>
+                                    </div>
+                                    <div class="clr"></div>
+                              </div>
+                        </div>
+                        <div class="shade_box_01" style="padding:12px 0px;">
+                              <div class="txt_content06">
+                                    <div class="left_div01">
+                                          <p class="blue_bold12"> <a href="javascript:void(0);">Book Name 13:1</a></p>
+                                          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eius tempor Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+                                                sed do eius tempor. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eius tempor Lorem ipsum dolor sit amet,
+                                                consectetur adipisicing elit, sed do eius tempor  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eius tempor Lorem
+                                                ipsum dolor sit amet, consectetur adipisicing elit, sed do eius tempor. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do </p>
+                                    </div>
+                                    <div class="right_div02">
+                                          <p> <span class="action_icon01"><img src="images/icons/plus.png" alt="" /> <a href="javascript:void(0);">Actions</a></span> <span class="action_icon01" style="display:none;"><img src="images/icons/minus.png" alt="" /> <a href="javascript:void(0);">Actions</a></span> </p>
+                                          <div class="action_div" id="action_div01">
+                                                <div>
+                                                  <p><a href="javascript:void(0);"  onclick="return show_dialog('add_note')">Add Note</a>  &nbsp;<img src="images/icons/icon27.png" alt="" /> </p>
+                                                  <p><a href="javascript:void(0);" onclick="return show_dialog('add_bookmark')"> Bookmark</a> &nbsp; <img src="images/icons/icn28.png" alt="" style=" margin-left:2px;" /></p>
+                                                    <p> <a href="javascript:void(0);" onclick="return show_dialog('add_bible_highlight')">Highlight</a> &nbsp; <img src="images/icons/icn29.png" alt="" style=" margin-left:1px;"/></p>
+                                             </div>
+                                          </div>
+                                    </div>
+                                    <div class="clr"></div>
+                              </div>
+                        </div>
+                        <div class="pagination">
+                              <div class="left">Viewing Page 1 of 10 </div>
+                              <div class="right"><a  href="javascript:void(0);" class="blue_link">&laquo; Previous</a> <a href="javascript:void(0);">1</a> <a href="javascript:void(0);">2</a> <a href="javascript:void(0);">3</a> <a href="javascript:void(0);">4</a> <a href="javascript:void(0);">5</a> <a  href="javascript:void(0);" class="blue_link">Next &raquo;</a></div>
+                        </div>
+                  </div>
+                  <!-- /main container -->
+                  <div class="clr"></div>
+            </div>
+            <div id="bot_corner">&nbsp;</div>
+      </div>
+      <div class="clr"></div>
+</div>
+<!-- /CONTENT SECTION -->
+<div class="clr"></div>
+<?php include(APPPATH."views/layouts/footer.phtml");?>
+<?php include(APPPATH."views/logged/blocks/common_popup.phtml");?>
+
+
+<div class="lightbox view_plan" style="width:850px;">
+      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="images/close.png" alt="" /></a></div>
+      <div class="top">
+            <div>&nbsp;</div>
+      </div>
+      <div class="mid">
+            <div class="heading" style="margin-bottom:0px;">
+                  <div class="left">
+                        <h4>View Plan</h4>
+                  </div>
+            </div>
+            <div class="view_plan_div">
+                  <table width="100%" border="0" cellspacing="0" cellpadding="0" class="table01">
+                        <tr>
+                              <th align="center">Day</th>
+                              <th align="center">Date</th>
+                              <th align="center">Start Chapter No.</th>
+                              <th align="center" class="last_td">End Chapter No.</th>
+                        </tr>
+                        <tr class="white_td">
+                              <td align="center">1</td>
+                              <td align="center">DD/MM/YYYY - Sunday</td>
+                              <td align="center" class="blue12">Book Name  Chapter No.</td>
+                              <td align="center" class="last_td blue12">Book Name  Chapter No.</td>
+                        </tr>
+                        <tr class="blue_td">
+                              <td align="center">2</td>
+                              <td align="center">DD/MM/YYYY - Sunday</td>
+                              <td align="center" class="blue12">Book Name  Chapter No.</td>
+                              <td align="center" class="last_td blue12">Book Name  Chapter No.</td>
+                        </tr>
+                        <tr class="white_td">
+                              <td align="center">3</td>
+                              <td align="center">DD/MM/YYYY - Sunday</td>
+                              <td align="center" class="blue12">Book Name  Chapter No.</td>
+                              <td align="center" class="last_td blue12">Book Name  Chapter No.</td>
+                        </tr>
+                        <tr class="blue_td">
+                              <td align="center">4</td>
+                              <td align="center">DD/MM/YYYY - Sunday</td>
+                              <td align="center" class="blue12">Book Name  Chapter No.</td>
+                              <td align="center" class="last_td blue12">Book Name  Chapter No.</td>
+                        </tr>
+                        <tr class="white_td">
+                              <td align="center">5</td>
+                              <td align="center">DD/MM/YYYY - Sunday</td>
+                              <td align="center" class="blue12">Book Name  Chapter No.</td>
+                              <td align="center" class="last_td blue12">Book Name  Chapter No.</td>
+                        </tr>
+                        <tr class="blue_td">
+                              <td align="center">6</td>
+                              <td align="center">DD/MM/YYYY - Sunday</td>
+                              <td align="center" class="blue12">Book Name  Chapter No.</td>
+                              <td align="center" class="last_td blue12">Book Name  Chapter No.</td>
+                        </tr>
+                        <tr class="white_td">
+                              <td align="center">7</td>
+                              <td align="center">DD/MM/YYYY - Sunday</td>
+                              <td align="center" class="blue12">Book Name  Chapter No.</td>
+                              <td align="center" class="last_td blue12">Book Name  Chapter No.</td>
+                        </tr>
+                        <tr class="blue_td">
+                              <td align="center">8</td>
+                              <td align="center">DD/MM/YYYY - Sunday</td>
+                              <td align="center" class="blue12">Book Name  Chapter No.</td>
+                              <td align="center" class="last_td blue12">Book Name  Chapter No.</td>
+                        </tr>
+                        <tr class="white_td">
+                              <td align="center">9</td>
+                              <td align="center">DD/MM/YYYY - Sunday</td>
+                              <td align="center" class="blue12">Book Name  Chapter No.</td>
+                              <td align="center" class="last_td blue12">Book Name  Chapter No.</td>
+                        </tr>
+                        <tr class="blue_td">
+                              <td align="center">10</td>
+                              <td align="center">DD/MM/YYYY - Sunday</td>
+                              <td align="center" class="blue12">Book Name  Chapter No.</td>
+                              <td align="center" class="last_td blue12">Book Name  Chapter No.</td>
+                        </tr>
+                  </table>
+                  
+            </div>
+            <div style="text-align:center;"><input name="" type="button" value="Close"  class="btn" onclick="hide_dialog()"/></div>
+      </div>
+      <div class="bot">
+            <div>&nbsp;</div>
+      </div>
+</div>
+
+
+<div class="lightbox add_bookmark" style="width:550px;">
+    <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="images/close.png" alt="" /></a></div>
+    <div class="top"><div>&nbsp;</div></div>
+    <div class="mid">
+        <div class="heading"><div class="left"><h4><img src="images/icons/bookmark.png" alt="" /> Add Bookmark         </h4></div></div>
+           <div class="frm_box">
+             <div class="lable01">Category:</div> 
+             <div class="field01"><input name="" type="text" /> </div>
+             <div class="clr"></div>
+              <div class="lable01">Reminder Code:</div> 
+             <div class="field01">
+              <input style="width:230px;"   type="text"  value=" DD/MM/YYYY" name="date_to" id="date_to"  readonly="readonly"/>
+            <img src="images/icons/cal.png" alt="" onclick="$(this).prev().focus()" style="cursor:pointer; " />
+            <script type="text/javascript">
+                    $(document).ready(function(arg) {
+                        $.datepicker.setDefaults($.datepicker.regional['']);
+                        $("#date_to").datepicker($.datepicker.regional['en']);
+
+                    });
+            </script>
+             </div>
+             <div class="clr"></div>
+             <div class="lable01">Comment:</div> 
+             <div class="field01"><textarea name="" cols="" rows="" style="height:80px;"></textarea> </div>
+             <div class="clr"></div>
+           
+             <div class="lable01">&nbsp;</div> 
+             <div class="field01"><input name="" type="button" value="Post" class="btn" /></div>
+             <div class="clr"></div>
+           </div>
+    </div>
+    <div class="bot"><div>&nbsp;</div></div>
+</div>
+
+<div class="lightbox add_bible_highlight" style="width:550px;">
+    <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="images/close.png" alt="" /></a></div>
+    <div class="top"><div>&nbsp;</div></div>
+    <div class="mid">
+        <div class="heading"><div class="left"><h4><img src="images/icons/icn27.png" alt="" /> Add Bible Highlight</h4></div></div>
+           <div class="frm_box">
+             <div class="lable01">Category:</div> 
+             <div class="field01"><input name="" type="text" /> </div>
+             <div class="clr"></div>
+             
+           
+             <div class="lable01">&nbsp;</div> 
+             <div class="field01"><input name="" type="button" value="Post" class="btn" /></div>
+             <div class="clr"></div>
+           </div>
+    </div>
+    <div class="bot"><div>&nbsp;</div></div>
+</div>
+
+<div class="lightbox add_note" style="width:550px;">
+    <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="images/close.png" alt="" /></a></div>
+    <div class="top"><div>&nbsp;</div></div>
+    <div class="mid">
+        <div class="heading"><div class="left"><h4><img src="images/icons/note_plus.png" alt="" /> Add Bible Note     </h4></div></div>
+           <div class="frm_box">
+             <div class="lable01">Category:</div> 
+             <div class="field01"><input name="" type="text" /> </div>
+             <div class="clr"></div>
+             <div class="lable01">Comment:</div> 
+             <div class="field01"><textarea name="" cols="" rows="" style="height:80px;"></textarea> </div>
+             <div class="clr"></div>
+           
+             <div class="lable01">&nbsp;</div> 
+             <div class="field01"><input name="" type="button" value="Post" class="btn" /></div>
+             <div class="clr"></div>
+           </div>
+    </div>
+    <div class="bot"><div>&nbsp;</div></div>
+</div>
+
+
+<script type="text/javascript">
+
+$(document).ready(function() {
+	$( "#date_to" ).datepicker({ minDate: new Date(2013, 3 - 1, 1) });
+});
+
+alert($('input[name=rd_plan_type]:checked').val());
+
+///if($('input[name=rd_plan_type]:checked').val() == 2){ 
+  function select_val(day_value){
+	  
+	  //alert(day_value);
+	  $('li[id^="li_day"] a').removeClass('active');
+	  $('#li_day'+day_value+' a').addClass('active');
+	  
+	  
+	  $('#hd_selected_day').val(day_value);
+	  
+  }
+//}
+
+function show_next(start_day, limit){
+	 
+	  $.ajax({
+			   type: "POST",
+			   url: base_url+'logged/my_daily_bible_reading_plan/generateNextDaySlot/'+start_day+'/'+limit,
+			   dataType: 'json',
+			   success: function(data,status){
+				   $('#day_content').html(data.sel_html);
+			   }
+		 });	 
+}
+
+function show_prev(start_day, limit){
+	 $.ajax({
+			   type: "POST",
+			   url: base_url+'logged/my_daily_bible_reading_plan/generateNextDaySlot/'+start_day+'/'+limit,
+			   dataType: 'json',
+			   success: function(data,status){
+				  
+				   $('#day_content').html(data.sel_html);
+				   
+				   //window.location = document.URL;
+			   }
+		 });	 
+}
+
+function activate_plan(){
+	var selected_day = $('#hd_selected_day').val();
+	var plan_type = $('input[name=rd_plan_type]:checked').val();
+	var date_to = $('#date_to').val();
+	var date_end = $('#date_end').val();
+	
+	$.ajax({
+			   type: "POST",
+			   url: base_url+'logged/my_daily_bible_reading_plan/generateReadingPlan',
+			   dataType: 'json',
+			   data :{'selected_day':selected_day
+			   		  ,'plan_type': plan_type
+					  ,'date_to': date_to
+					  ,'date_end' : date_end} ,
+			   success: function(data,status){
+				   //$('#day_content').html(data.sel_html);
+				   
+				   //window.location = document.URL;
+			   }
+		 });	 
+	
+}
+</script>

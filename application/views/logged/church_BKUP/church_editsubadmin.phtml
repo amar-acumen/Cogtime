@@ -1,0 +1,58 @@
+<?php
+	include(APPPATH ."views/layouts/church_admin_header.phtml");
+?>
+<script language="javascript">
+
+</script>
+<!-- CONTENT SECTION -->
+<?php //pr($church_arr); ?>
+
+<div class="container-body">
+   <?php
+	include(APPPATH ."views/layouts/church_admin_left.phtml");
+?>
+    <div class="right-panel">
+    <h2>Sub Admin</h2>
+    
+<div class="spacer"></div>
+    <div class="church-setting-main">
+        <h3>Edit Subadmin Access</h3>
+        
+        <div class="spacer"></div>
+        
+            <div class="add-member-main"><ul class="member-list">
+            <li>
+                
+                <div class="user-pic" style="background:url(<?= get_profile_image( $member_arr[0]->id, 'thumb') ?>) no-repeat;" title="<?= $user_name ?>"></div>
+                <div class="right-text"><h4><a href="javascript:void(0);"><?php echo  $member_arr[0]->s_first_name.' '.$member_arr[0]->s_last_name?></a></h4>
+                <!--<p class="designetion">CEO &amp; Founder at The Lazeez Hotel and Restaurant</p>
+                <p class="update-time">Added by Joe about 4 months ago</p></div>-->
+                <?php $accessarr = explode(',', $member_arr[0]->access);?>
+                <div class="assign-main">
+                    <form action="<?php echo base_url().'logged/church/church_addsubadmin'?>" method="post">
+                        <input type="hidden" name="subadminaccess" value="1">
+                        <input type="hidden" name="memberid" value="<?php echo $member_arr[0]->mid?>">
+
+                       <label><input type="checkbox" name="assign[]" value="wall" <?php if(in_array("wall", $accessarr)){echo 'checked';}?> > Community</label>
+                       <label><input type="checkbox" name="assign[]" value="prayergroup" <?php if(in_array("prayergroup", $accessarr)){echo 'checked';}?>> Prayer Group</label>
+                       <label><input type="checkbox" name="assign[]" value="ring" <?php if(in_array("ring", $accessarr)){echo 'checked';}?>> Rings</label>
+                        <input type="submit" value="Assign" class="post-btn">
+                    </form>    
+                </div>
+                
+            </li></div>
+           
+        <div class="spacer"></div>
+    </div>
+    
+    </div>
+    
+    </div>
+    <div class="clear"></div>
+<!-- /CONTENT SECTION -->
+<div class="clr"></div>
+<!-- FOOTER SECTION -->
+<?php include(APPPATH."views/layouts/church_footer.phtml");?>
+<!-- /FOOTER SECTION -->
+
+

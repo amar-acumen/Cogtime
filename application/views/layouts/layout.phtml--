@@ -1,0 +1,14 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<?php echo $header['header_html'];?>
+</head>
+<body>
+
+<?php flush(); ?>
+
+<?=$content?>
+
+</body>
+<?=$header['footer_html']?>
+</html>

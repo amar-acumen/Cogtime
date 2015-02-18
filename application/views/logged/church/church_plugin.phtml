@@ -1,0 +1,103 @@
+<?php
+	include(APPPATH ."views/layouts/church_admin_header.phtml");
+?>
+
+<!-- CONTENT SECTION -->
+<?php //pr($church_arr); ?>
+
+<div class="container-body">
+    <?php
+	//include(APPPATH ."views/layouts/church_admin_left.phtml");
+?>
+    <div class="right-panel">
+    <h2>Church Plugin</h2>
+    
+<div class="spacer"></div>
+<form method="POST" action="<?= base_url().'logged/church/add_church_data' ?>" id="gen_setting_form" enctype="multipart/form-data">
+    <div class="church-setting-main">
+  		<h3>General Site Setting</h3>
+          
+        <div class="form-main">
+          <label>Plugin Size: </label>
+          <select  class="time-selectbox" style="width:150px;" id="ch_plugin_size" name="ch_plugin_size" onchange="getPluginCode($(this))">
+            <option value="-1">Select size</option>
+            <option value="234-60">234x60</option>
+            <option value="240-400">240x400</option>
+            <option value="250-250">250x250</option>
+                
+          </select>
+                <span class="error-msg" id="error4">Required</span>
+        </div>
+        
+        
+        <div class="form-main">
+          <label>Plugin Text: </label>
+                <textarea id="plugin_text" readonly><?php echo htmlspecialchars_decode($church_arr[0]->church_plugin)?></textarea>
+                <div class="spacer"></div>
+                <label>&nbsp;</label>
+                <div id="plugin_sample"><?php echo htmlspecialchars_decode($church_arr[0]->church_plugin)?></div>
+                <div class="spacer"></div>
+                <span class="error-msg" id="error6">Required</span>
+        </div>
+
+ <div class="post-update"><input type="reset" value="Cancel" class="cancel-btn" onclick="location.href='<?php echo base_url().$church_arr[0]->ch_page_url?>'"></div>
+
+           
+        </div>
+<input type="hidden" name="c_id" value="<?= $church_arr[0]->id; ?>">
+<input type="hidden" name="chLogo" value="ch_logo"> 
+        
+        
+               
+            
+            
+
+        <div class="spacer"></div>
+       
+    </div>
+</form>
+</div>
+
+</div>
+
+<script type="text/javascript">
+$(document).ready(function(){
+
+});
+$(window).load(function(){
+  var src = $('#plugin_sample').find('img').attr('src');
+  var pieces = src.split(/[\s/]+/);
+  var lastelement = pieces[pieces.length-1];
+  var imgname = lastelement.split(/[\s.]+/);
+  $('#ch_plugin_size').val(imgname[0]);
+});
+ 
+
+function getPluginCode(obj)
+{
+    showUILoader_nodialog();
+    var val = obj.val();
+     $.ajax({
+       type: "get",
+       url: '<?=base_url()?>logged/church/get_church_code/'+val,
+       dataType:"json",
+       success: function(json_response){
+         
+          if(json_response.result = 'success') {
+            $('#plugin_text').html(json_response.churl);
+            $('#plugin_sample').html(json_response.churl);
+            
+            hideUILoader_nodialog();
+          }
+          else {
+             hideUILoader_nodialog();
+            showUIMsg('Some error occurred. Please try again.');
+          }
+        },
+        error: function(){
+         hideUILoader_nodialog();
+          showUIMsg('Some error occurred. Please try again.');
+        }
+      });  
+}
+</script>

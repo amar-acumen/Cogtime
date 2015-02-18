@@ -1,0 +1,82 @@
+<!--light box for image details start-->
+<div class="image-holder">
+<?php //pr($arr_photo_detail[0]);
+		//$photo_detail = $arr_photo_detail[0];
+		$IMG = base_url()."uploads/user_photos/".getThumbName($arr_photo_detail[0]['s_photo'],'mid');
+?>
+      	<div  style="background:url(<?=$IMG?>) no-repeat center;max-width:366px; max-height:220px; height:220px; width:366px; cursor:pointer;"  ></div>
+        </div>
+        <div class="item-details">
+        	 <h2><?=$arr_photo_detail[0]['s_title']?></h2>
+             <p><?=$arr_photo_detail[0]['s_description']?></p>
+        </div>      
+       <div class="light_heading">
+              <div class="left">Liked by (2)</div>
+              <div class="right"><a href="javascript:void(0);">Like</a></div>
+        </div>
+        <div class="clr"></div>
+        <div class="heading no-mrgn">
+        	<div class="left">
+            	<h4><img src="images/icons/coment.png" alt="" /> Post Comment </h4>
+            </div>
+        </div>
+        
+        <div class="frm_box" style="margin-bottom:12px;">
+        	<p><textarea  class="feed_comment_box" id="feed_comment_box_<?=$arr_photo_detail[0]['id']?>" name="" cols="" rows="" style="width:796px; height:100px; margin-bottom:10px;"></textarea></p>
+            <input type="hidden" name="i_photo_id" id="i_photo_id" value="<?=$arr_photo_detail[0]['id']?>"/>
+        	<p><input name="" id="post_comment_button" type="button" value="Post"  class="submit-green" onclick="post_comment();"/></p>
+        </div>
+        
+        
+          <div class="heading no-mrgn">
+        	<div class="left">
+            	<h4><img src="images/icons/thumb_up.png" alt="" /> Liked By </h4>
+            </div>
+        </div>
+        <div class="like-box">
+        	<div class="user_div"> 
+                <a href="javascript:void(0);"><img alt="" src="images/man.png"></a>
+                <a class="blue_link" href="javascript:void(0);">Alex Brown</a>
+            </div>
+            
+            <div class="user_div"> 
+                <a href="javascript:void(0);"><img alt="" src="images/man.png"></a>
+                <a class="blue_link" href="javascript:void(0);">Alex Brown</a>
+            </div>
+            
+            <div class="user_div"> 
+                <a href="javascript:void(0);"><img alt="" src="images/man.png"></a>
+                <a class="blue_link" href="javascript:void(0);">Alex Brown</a>
+            </div>
+            
+            <div class="user_div"> 
+                <a href="javascript:void(0);"><img alt="" src="images/man.png"></a>
+                <a class="blue_link" href="javascript:void(0);">Alex Brown</a>
+            </div>
+            
+            <div class="clr"></div>
+            <div class="pagination">
+                 <div class="right">
+                 	<a class="blue_link" href="javascript:void(0);">« Previous</a> 
+                    <a href="javascript:void(0);">1</a>  <a href="javascript:void(0);">2</a>  
+                    <a href="javascript:void(0);">3</a>  <a href="javascript:void(0);">4</a> 
+                    <a href="javascript:void(0);">5</a>  <a class="blue_link" href="javascript:void(0);">Next »</a>
+                 </div>
+            </div>
+                            
+                            
+        </div>
+        
+        <div class="heading no-mrgn">
+              <div class="left">
+                    <h4><img alt="" src="images/icons/cmnt.png"> View Comments </h4>
+              </div>
+        </div>
+        
+        <div id="comment_html">
+        <?=$comments_list?>
+        </div>
+
+
+        <div class="clr"></div>    
+<!--light box for image details end-->

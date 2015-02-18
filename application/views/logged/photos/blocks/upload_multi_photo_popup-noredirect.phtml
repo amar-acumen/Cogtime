@@ -1,0 +1,155 @@
+<script type="text/javascript">
+	<?php $timestamp = time();?>
+	$(function() {
+		  $('#file_upload').uploadify({
+			  'formData'     : {
+									'timestamp' : '<?php echo $timestamp;?>',
+									'token'     : '<?php echo md5('unique_salt' . $timestamp);?>'
+								},
+			 
+			  'swf'      : base_url +'uploadify/uploadify.swf',
+			  'uploader' : base_url +'uploadify/uploadify.php',
+			   // Put your options here
+			  'onSelect' : function(file) {
+				   $('#flash_uploaded_files').append('<input type="hidden" name="flash_uploaded_file[] " value="'+file.name+'" />')
+			  } 
+		  });
+	  });
+</script>
+
+<script language="javascript">
+<!--
+$(document).ready(function() {
+
+	// for AJAX page-submission...
+    var options = { 
+        beforeSubmit:  showLoad_M,  // pre-submit callback 
+        success:       validateMultiFrm // post-submit callback 
+    }; 
+ 
+    // bind to the form's submit event 
+    $('#frmUploadMultiPhoto').submit(function() {
+	
+        $(this).ajaxSubmit(options);
+		
+        return false;
+		
+    });
+
+});
+
+function showLoad_M()
+{
+ // $('#add_mphoto_btn').attr('disabled','disabled');
+  $('#add_mphoto_btn').val('Uploading...');
+  //$('#photo_loading').html('<img id="img_holder" src="<?//base_url()?>images/loading_small.gif" align="absmiddle" />');
+}
+
+
+// validate ajax-submission...
+function validateMultiFrm(data)
+{
+	//alert( data);
+	var data = JSON.parse(data);
+	if(data.success==false) 
+	{
+		$('.error-message').each(function(i){
+			$(this).attr('style','display:none');
+		});
+		
+		$('#add_mphoto_btn').val('Upload');
+
+		for ( var id in data.arr_messages ){
+			//alert(data.arr_messages[id]);
+			if( $('#err_'+id) != null ) {
+				$('#err_'+id).html(data.arr_messages[id]);
+				$('#err_'+id).css('display', 'block');
+			}
+		}
+	}
+	else {
+		  // claering form
+		  $('#frmUploadMultiPhoto')[0].reset();
+		  //$('#select_album1').val($('options:first', '#select_album1').val());
+		  $('#add_mphoto_btn').val('Upload');
+		  hide_dialog();
+		  $('#album_div').html(data.html);
+		  showUIMsg(data.msg);
+		  //window.location.href= document.URL;
+	}
+	//hideLoading();
+}
+function clear_box(){
+		  $('#frmUploadMultiPhoto')[0].reset();
+		  $('.error-message').hide();
+}
+-->
+</script>
+<form id="frmUploadMultiPhoto"  method="post" action="<?=base_url().'logged/organize_photo/add_multi_photo'?>" onsubmit="return false;" enctype="multipart/form-data">
+<div class="lightbox multiple_album" style="width:480px;">
+    <div class="close"><a href="javascript:void(0)" onclick="clear_box();hide_dialog()"><img src="images/close.png" alt="" /></a></div>
+    <div class="top"><div>&nbsp;</div></div>
+    <div class="mid">
+        <div class="heading"><div class="left"><h4><img src="images/icons/photo.png" alt="" /> Upload Multiple Photo </h4></div></div>
+               <div class="frm_box">
+                
+                 <div class="lable01">Browse Photo:</div> 
+                 <div class="field01">
+                 <div id="flash_uploaded_files">
+                 </div>
+                 <div id="queue"></div>
+				 <input type="file" name="file_upload" id="file_upload" />
+                 <span id="err_mphoto" class="error-message"></span>  
+                 
+                 </div>
+                 <div class="clr"></div>
+                 
+                 <div class="lable01">Select Album:</div> 
+                 <div class="field01"> 
+                 <select name="select_malbum1" id="select_malbum1" style="width:260px;">
+                 		
+                        <?php /*?><option value="new_album">[New Album]</option><?php */?>
+                     <?php if(count($all_photo_albums)>0):
+					 		echo '<option value="-1">Select</option>';
+					 		foreach($all_photo_albums as $photo_album):
+								$sel = ($current_album_id == $photo_album['id'])?'selected ="selected"':'';
+					 ?>
+                     		<!--<option>[New Album]</option>-->
+                            <option value="<?=$photo_album['id']?>" <?=$sel?>><?=$photo_album['s_name']?></option>
+                     <?php 	endforeach;
+					 		else:
+								echo '<option value="0">No Albums available, Please create.</option>';
+					 		endif;?>
+                </select>
+                <script type="text/javascript">
+                    $(document).ready(function(arg) {
+                        $("#select_malbum1").msDropDown();
+                        $("#select_malbum1").hide();
+                    })
+                </script> 
+                <span id="err_malbum1" class="error-message err_adjustmnt" ></span> 
+                </div>
+                 <div class="clr"></div>
+                 
+                 <?php /*?><div class="lable01">New Album Name:</div> 
+                 <div class="field01">
+                 <input name="txt_malbum_name" id="txt_malbum_name" type="text" /> 
+                 <span id="err_malbum_name" class="error-message" ></span> 
+                 </div>
+                 <div class="clr"></div><?php */?>
+                 
+                 <div class="lable01">&nbsp;</div> 
+                 <div class="field01">
+                  <?php if(count($all_photo_albums)>0):?>
+                 	<input name="add_mphoto_btn" id="add_mphoto_btn" type="submit" value="Upload" class="btn" />
+                 <?php else:?>
+                 	<input name="cancel" type="button" value="Cancel" class="btn" onclick="clear_box();hide_dialog();" />
+                 <?php endif;?>
+                 </div>
+                 <div class="clr"></div>
+               </div>
+          
+    </div>
+    <div class="bot"><div>&nbsp;</div></div>
+</div>
+</form>

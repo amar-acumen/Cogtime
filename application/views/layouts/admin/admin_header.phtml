@@ -1,0 +1,15 @@
+<!-- HEADER SECTION -->
+<div id="header_section">
+      <div id="header">
+            <div id="logo"><a href="<?=admin_base_url().'index.html'?>"><img src="<?=base_url()?>images/logo.png" alt="COGTIME Xtian network" /></a></div>
+            
+            <?php if(($this->session->userdata('loggedin')!='' || $this->session->userdata('loggedin')!=false) && ($this->session->userdata('is_admin') ==1 || $this->session->userdata('is_admin') == 2) ){ ?>
+                <div id="header_right"> Welcome <?=$this->session->userdata('username')?> | <a href="<?=admin_base_url().'dashboard.html'?>">Dashboard</a> | <a href="<?=base_url().'sign-out'?>">Logout</a>
+				<br/>
+				<p style="color:#ffffff;"><b>Total members: <?=$total_user_main?> | online users: <?=$total_online_user_main?></b></p>
+                </div>
+            <?php }?>
+      </div>
+</div>
+<!-- /HEADER SECTION -->
+<div class="clr"></div>

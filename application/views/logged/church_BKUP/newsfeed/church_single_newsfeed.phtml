@@ -1,0 +1,149 @@
+<?php 
+$data_arr = json_decode($feed->data);
+if((($k+1)%2) != 0)
+{
+	$class="pull-left";
+}
+else
+{
+	$class="pull-right";
+}
+$feed->liked_by=like_count_display($feed->id,'cg_church_newsfeed_like','i_newsfeed_id');
+$feed->comment=count_feed_comment_link($feed->id,'cg_church_newsfeed_comments','i_feed_id');
+$profile_image = get_profile_image($data_arr->user_id,'thumb');
+$feed->comments=get_feed_comments($feed->id,'cg_church_newsfeed_comments','i_feed_id');
+?>
+<div class="timeline-part <?=$class?>">
+        	<div class="post-profile-pic"><img src="<?=$profile_image?>" alt="Image" width="49" height="49">
+            <span><a href="javavscript:void(0);"><?=get_username_by_id($data_arr->user_id)?></a>Updated on: <?=$feed->dt_created_on?></span></div>
+			<?php if(!empty($data_arr->message)) {?>
+			<p><?=$data_arr->message?></p>
+			<?php }?>
+			<?php if(!empty($data_arr->photo) && count($data_arr->photo) < 2){?>
+            <figure>
+			<?php
+			foreach($data_arr->photo as $key=>$photo_val){
+			$IMG = base_url()."uploads/church_wall/".getThumbName($photo_val,'big');
+			?>
+			<img src="<?=$IMG?>" alt="Prayer" >
+			<?php 
+			}
+			?>
+			</figure>
+			<?php } else if(!empty($data_arr->photo) && count($data_arr->photo) > 2){?>
+			<ul class="bxslider">
+				<?php
+			foreach($data_arr->photo as $key=>$photo_val){
+			$IMG = base_url()."uploads/church_wall/".getThumbName($photo_val,'big');
+			?>
+			<li><img src="<?=$IMG?>" alt="Prayer" ></li>
+			<?php 
+			}
+			?>
+			</ul>
+			<?php }?>
+			 <!--video play-->
+ 			   <?php if(!empty($data_arr->video) && count($data_arr->video)){ 
+			   ?>
+                <div class="video-image">
+                    <div  class="cogtime-video" id="myvideo_first_thumb_<?=$feed->id?>" style="background:url('') no-repeat center;;width:447px; height:358px;" ></div>
+                    <div id="myvideo_big_thumb_1_<?=$feed->id?>" media_id="<?=$feed->id?>"></div>
+                </div>
+                
+                
+               <?php 	
+			   		 }
+				?>
+               <!--video play--> 
+			   
+			   <!-- audio -->
+			   <?php if(!empty($data_arr->audio)){?>
+				<figure>
+					<?=$data_arr->audio?>
+				</figure>
+			   <?php } ?>
+			   <!-- audio -->
+            <div class="light_heading">
+  <div class="left"> <a class="comment" href="javascript:void(0);">Comment (<span id="comment_<?=$feed->id?>"><?=$feed->comment?></span>)</a> &nbsp; |   &nbsp; <a href="javascript:void(0);" onclick="windowLike(<?=$feed->id?>,'Like');">Like (<span id="like_<?=$feed->id?>"><?=$feed->liked_by?></span>)</a></div>
+  
+</div>
+				<div class="comment-reply-pan">
+                            <form method="post" action="#">
+                                <label style="float:left;">Comment:</label><a style="float:right;color:#013d62; text-decoration:none;" onclick="$(this).parent('form').parent('.comment-reply-pan').slideUp(function(){isotope();});" href="javascript:void(0);">Hide[-]</a>
+                                <textarea cols="1" rows="1" name="message" id="feed_comment_box_<?=$feed->id?>"></textarea>
+                                <input type="button" name="post" value="Post" onclick="post_comment(<?=$feed->id?>);">
+                                <div class="clear"></div>
+                            </form>
+							<div class="comments-number-mid content-width">
+							<?php
+							if($feed->comment != 0)
+							{
+							foreach($feed->comments as $com){?>
+                            <div id="comment_content_div<?=$com['id']?>"><div class="txt_content01 comments-number-content"> 
+					 			<a href="javascript:void(0);"><div class="pro_photo" style="background:url(<?=get_profile_image($com['i_user_id'],'thumb')?>) no-repeat center;width:48px; height:48px; float:left; margin-right:10px;"></div></a>
+									<div class="left-nw-wal">
+										  <p class="blue_bold12"><a href="javascript:void(0);"><?=get_username_by_id($com['i_user_id'])?></a></p>
+										  <p><?=$com['s_contents']?></p>
+											 <p class="read-more">Updated on: <?=getShortDateWithTime($com['dt_created_on'],6)?></p>
+									</div>
+									<div class="clr"></div>
+							  </div></div>
+							  <?php }
+							  } ?>
+                      </div>
+                        </div>
+        </div>  
+        
+   <!--  <div class="timeline-part pull-right">
+        	<div class="post-profile-pic"><img src="images/sam-pic.jpg" alt="Image" width="49" height="49">
+          <span><a href="javavscript:void(0);">Sam</a>Updated on: 2:40</span></div>
+            <p>Hear from heaven, even from your dwelling-place, their prayer request, and maintain their cause, and forgive those who have sinned against you. Now, O my God, let, I urge you, your eyes be open, and let your ears be attentive, to the prayer request that is made in this place. Please grant it according to your will.</p>
+        <figure><img src="images/church-pic.jpg" alt="Prayer" width="478" height="370"></figure>
+            <div class="light_heading">
+  <div class="left"> <a>Comment (0)</a> &nbsp; |   &nbsp; <a href="javascript:void(0);">Like (0)</a></div>
+  
+</div>
+        </div>
+        
+        <div class="timeline-part pull-left">
+        	<div class="post-profile-pic"><img src="images/sam-pic.jpg" alt="Image" width="49" height="49">
+          <span><a href="javavscript:void(0);">Sam</a>Updated on: 2:40</span></div>
+            <p>A Haitian man prays during an outdoor Mass in front of the destroyed presidential palace in downtown Port-au-Prince.</p>
+        <figure><img src="images/hand.jpg" alt="Prayer" width="477" height="403"></figure>
+            <div class="light_heading">
+  <div class="left"> <a>Comment (0)</a> &nbsp; |   &nbsp; <a href="javascript:void(0);">Like (0)</a></div>
+  
+</div>
+        </div>
+        
+        <div class="timeline-part pull-right">
+        	<div class="post-profile-pic"><img src="images/sam-pic.jpg" alt="Image" width="49" height="49">
+          <span><a href="javavscript:void(0);">Sam</a>Updated on: 2:40</span></div>
+            <p>A new survey conducted by a Christian-based retailer finds that one-quarter of praying Americans believe all their prayers will be answered.</p>
+        <figure><img src="images/baby.jpg" alt="Prayer" width="478" height="370"></figure>
+            <div class="light_heading">
+  <div class="left"> <a>Comment (0)</a> &nbsp; |   &nbsp; <a href="javascript:void(0);">Like (0)</a></div>
+  
+</div>
+        </div>        
+        <div class="timeline-part pull-left">
+        	<div class="post-profile-pic"><img src="images/sam-pic.jpg" alt="Image" width="49" height="49">
+          <span><a href="javavscript:void(0);">Sam</a>Updated on: 2:40</span></div>
+            <p>A new survey conducted by a Christian-based retailer finds that one-quarter of praying Americans believe all their prayers will be answered.</p>
+        <figure><img src="images/baby.jpg" alt="Prayer" width="478" height="370"></figure>
+            <div class="light_heading">
+  <div class="left"> <a>Comment (0)</a> &nbsp; |   &nbsp; <a href="javascript:void(0);">Like (0)</a></div>
+  
+</div>
+        </div>
+        
+        <div class="timeline-part pull-right">
+        	<div class="post-profile-pic"><img src="images/sam-pic.jpg" alt="Image" width="49" height="49">
+          <span><a href="javavscript:void(0);">Sam</a>Updated on: 2:40</span></div>
+            
+        <figure><img src="images/quote.jpg" alt="Prayer" width="479" height="244"></figure>
+            <div class="light_heading">
+  <div class="left"> <a>Comment (0)</a> &nbsp; |   &nbsp; <a href="javascript:void(0);">Like (0)</a></div>
+  
+</div>
+        </div>-->

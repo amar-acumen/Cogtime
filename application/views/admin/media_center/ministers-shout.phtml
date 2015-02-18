@@ -1,0 +1,118 @@
+<div class="clr"></div>
+<!--navigation section start -->
+<?php include(APPPATH."views/layouts/admin/admin_nav.phtml");?>
+<!--navigation section end -->
+<div id="content_section">
+      <div id="container">
+            <div id="mid_content">
+                  <div class="page_heading left">
+                        <div class="left"><img src="../images/icons/login.png" alt=""/> Minister Shouts</div>
+                  </div>
+                  <div class="clr"></div>
+                  <div id="right_container">
+                        <div class="arrow_btm"></div>
+                        <div class="content_area">
+                        
+                        <div class="filter">
+                        	<span class="filter-by">Filter By &raquo;</span>
+                            <form name="frm_search" id="frm_search" action="" method="post" onsubmit="return false;" class="filter-search">
+                            	<label>Title :</label><input type="text" name="txt_blog_title" id="txt_blog_title"  />
+                                <label>Minister Name :</label><input type="text" name="txt_name" id="txt_name" />
+                                <input type="hidden" name="search_basic" id="search_basic" value="Y" />
+                                <input name="" type="submit" value="GO" class="go" />
+                                 &nbsp;&nbsp;<a href="javascript:void(0)" onclick="return show_all_();" >Show all</a>
+                            </form>  
+                            <div class="clr"></div>
+                        </div>
+                        <h4>Minister Shouts</h4><div class="right" style="margin-bottom:14px;">
+                        <?php /*?><input name="" type="button" value="Add Your Shout"  class="evnt_btn1" onclick="window.location='add-your-shout.html'"/><?php */?></div>
+                        
+                        <div class="clr"></div>
+                        <DIV id="table_content">
+                        <?=$content;?>
+                        </DIV>
+                        
+                        <div class="clr"></div>
+                        </div>
+                  </div>
+                  <div class="clr"></div>
+            </div>
+            <!--<div id="bot_corner">&nbsp;</div> -->
+      </div>
+      <div class="clr"></div>
+</div>
+<!-- /CONTENT SECTION -->
+<div class="clr"></div>
+
+
+<!--popup one start-->
+<div class="lightbox delete-page-popup" style="width:500px;">
+      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="../images/close.png" alt="" /></a></div>
+      <div class="top"><div>&nbsp;</div></div>
+      <div class="mid">
+            <div class="heading" style="margin-bottom:0px;">
+                  <div class="left">
+                        <h4>Delete Minister's Shouts</h4>
+                  </div>
+            </div>
+               <div class="shade_box_white">
+               <p class="center-text">Do you really want to delete this shout?</p>
+               <form action="" method="post" enctype="multipart/form-data">
+               		<input type="hidden" name="i_del_id" id="i_del_id" value="" />
+               		<input name="" type="button" value="Yes" class="btn" style="margin-left:146px;" onClick="delete_()"/>
+                    <input name="" type="button" value="No" class="btn" onclick="hide_dialog()"/>
+               </form>   
+               <div class="clr"></div>
+            </div>
+            
+      </div>
+      <div class="bot"><div>&nbsp;</div></div>
+</div>
+<!--popup one end-->
+
+<!--popup view article start-->
+<div class="lightbox article-popup" style="width:600px;">
+      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="../images/close.png" alt="" /></a></div>
+      <div class="top"><div>&nbsp;</div></div>
+      <div class="mid">
+            <div class="heading" style="margin-bottom:0px;">
+                  <div class="left">
+                        <h4>View Shout</h4>
+                  </div>
+            </div>
+               <div class="shade_box_white">
+               		<div class="pop-content first">	
+                       <img id="img_article_post_by" src="" alt="posteb by" width="73" height="73" class="posted-by" />
+                       <div class="right-panel">
+                            <h5 id="article_title"></h5>
+                            <h6>Posted by <strong id="article_user_name"></strong> on <span id="article_posted_on"></span></h6>
+                            <p id="article_desc"></p>
+                       </div>
+                    </div>
+               <div class="clr"></div>
+            </div>
+            
+      </div>
+      <div class="bot"><div>&nbsp;</div></div>
+</div>
+<!--popup view article end-->
+
+<script type="text/javascript">
+ function show_all_()
+  {
+      $('#frm_search')[0].reset();
+      showBusyScreen();
+      $.ajax({
+          url : admin_base_url+'media_center/minister_shouts/minister_shout_listing_ajax',
+          type : 'post',
+		  data : {'type':'all'},
+
+          success : function(data)
+          {
+              hideBusyScreen();
+              $('#table_content').html(data);
+          }
+      });
+  }
+</script>
+

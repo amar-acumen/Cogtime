@@ -1,0 +1,38 @@
+ <div class="prfile-sec-content-box " >
+                        <h2>
+                       Skills
+                        </h2>
+                        <div class="profile-sml-sec">
+                         <?php $img = get_profile_image($public_arr_profile_info['id'], 'main');?>
+                            <div  class="prfile-sec-photo" style=" background:URL('<?=$img?>')no-repeat center;width:100px; height:100px;" title="member" ></div>
+                            <div class="prfile-sec-content-box-right">
+							<table width="100%" cellspacing="0" cellpadding="0" border="0" class="pro-table">
+                                                          
+                                <?php #pr($user_education_arr);
+                                        if(count($user_skill_arr) > 0):
+                                            foreach($user_skill_arr as $key=>$val):
+                                ?>
+                                  
+                                   <tr>
+                                    <td valign="top" align="left" width="100">Skills:</td>
+                                    <td valign="top" align="left"><?=$val['s_name']?></td>
+                                  </tr>
+                                
+                             <?php
+                                        endforeach;
+                                        else :
+                             ?>
+                                   <tr>
+                                    <td valign="top" align="left" width="100">Skills:</td>
+                                    <td valign="top" align="left"></td>
+                                  </tr>
+                                
+                             <?php 
+                                    endif;
+                             ?>
+                             </table>
+  </div>
+    <br class="clear"/>
+</div>
+</div>
+                  

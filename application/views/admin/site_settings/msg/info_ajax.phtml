@@ -1,0 +1,161 @@
+			<table width="100%" border="0" cellspacing="0" cellpadding="0" class="admin-table">
+                              <tr>
+                                <th align="left" valign="middle" height="30" width="80">Date Posted</th>
+                                <th align="left" valign="middle" height="30" width="120">Posted By</th>
+                                <th align="left" valign="middle" height="30" width="200">Request Information</th>
+                                 
+                                <?php
+                                if(array_key_exists("request_type",$info_arr[0]) && $info_arr[0]['request_type'] == 'church'  ){
+                                ?>
+                                <th align="left" valign="middle" height="30" width="200">Action</th>
+                                <?php
+                                }
+                                ?>
+                              </tr>
+                           <?php 
+						//pr($info_arr);
+						  	 if( count($info_arr) ) :
+				                           $i = 0;
+							 foreach($info_arr as $info) : 
+							  	
+								$title = html_entity_decode(htmlspecialchars_decode($info['s_project_name']),ENT_QUOTES,'utf-8');
+								$desc =  (html_entity_decode(htmlspecialchars_decode($info['s_information']),ENT_QUOTES,'utf-8'));
+						  ?>
+                              
+                              
+                              
+                              <tr>
+                                <td align="left" valign="top"><?=getShortDate($info['dt_created_on'],5)?></td>
+                                <td align="left" valign="top"><?=get_username_by_id($info['i_user_id'])?> < <a href="mailto:<?=get_useremail_by_id($info['i_user_id'])?>"><?=get_useremail_by_id($info['i_user_id'])?> </a>></td>
+                                <td align="left" valign="top"><?=$desc?></td>
+                                 <?php
+                                if(array_key_exists("request_type",$info_arr[$i]) && $info_arr[$i]['request_type'] == 'church' && $info_arr[$i]['s_status'] == 0   ){
+                                $id=$info_arr[$i]['id'];
+                                    ?>
+                                            <input type="hidden"  value="<?= $id; ?>" class="accept_ch">
+                                            <td align="left" valign="top" id="sta<?= $id ?>">Accept &nbsp;<img src="<?= base_url() ?>images/icons/accept.png" class="accpt_img">&nbsp;&nbsp; Deny&nbsp;<img src="<?= base_url() ?>images/fe/cross-icon.gif" class="deny_img"><!--<input type="button" name="accept" value="deny">--></td>
+                                <?php
+                                }
+                                else if(array_key_exists("request_type",$info_arr[$i]) && $info_arr[$i]['request_type'] == 'church' && $info_arr[$i]['s_status'] == 1   ){
+                                ?>
+                                <td align="left" valign="top">Already accepted</td>
+                                <?php
+                                }
+                                else if(array_key_exists("request_type",$info_arr[$i]) && $info_arr[$i]['request_type'] == 'church' && $info_arr[$i]['s_status'] == 2   )
+                                {
+                                ?>
+                                 <td align="left" valign="top">denied</td>
+                                 <?php
+                                }
+                                 ?>
+                              </tr>
+                            <?php
+                            $i++;
+                             endforeach;
+                             
+								 else :	// i.e. no records exists...
+							?>
+								<tr>
+									<td style="text-align:center;" height="80" colspan="20">No data available!!!</td>
+								</tr>
+							<?php
+								 endif;
+							?>
+ </table>
+<script>
+    $(document).ready(function(){
+       $('.accpt_img').live('click',function(){
+           var current_index = $('.accpt_img').index(this);
+          
+           var current_id =$('.accept_ch:eq('+current_index+')').val();
+      var URL = '<?php echo admin_base_url()?>' +'build_kingdom/churches/status/'+current_id;
+		showBusyScreen();
+		if(ajax_req!=null) {
+			ajax_req.abort();
+		}
+		ajax_req = $.ajax({
+			type: 'POST',
+			url:URL,
+			dataType: 'json',
+//			data: ({ 'record_id' : id
+//				 }),
+			success: function (data, status) {
+							var result_obj = data;
+                                                       // alert(current_id)
+                                                       // var url = ''+'admin/site-settings/ring/messages.html' 
+                                                   //   window.location.replace(url);
+                                                    
+							hideBusyScreen();
+							if(result_obj.result=='success' ) {
+								showUIMsg(result_obj.msg);
+                                                                $('#sta'+current_id+'').html('Already accepted');
+                                                                 //location.href(result_obj.redirect);
+								//$('#'+result_obj.u_id+'_status').html(result_obj.action_txt);
+                                                                //alert(result_obj.redirect)
+							}
+							else if(result_obj.result==false ){
+							    showUIMsg(result_obj.msg);
+                                                           // location.href(result_obj.redirect);
+                                                            //alert(result_obj.redirect)
+							}
+					},
+			error: function (data, status, e) {
+								hideBusyScreen();
+								showUIMsg(data.msg);
+			}
+		});
+       }); 
+       
+       $('.deny_img').live('click',function(){
+           var current_index = $('.deny_img').index(this);
+          
+           var current_id =$('.accept_ch:eq('+current_index+')').val(); 
+           
+           var URL = '<?php echo admin_base_url()?>' +'build_kingdom/churches/status_deny/'+current_id;
+		showBusyScreen();
+		if(ajax_req!=null) {
+			ajax_req.abort();
+		}
+		ajax_req = $.ajax({
+			type: 'POST',
+			url:URL,
+			dataType: 'json',
+//			data: ({ 'record_id' : id
+//				 }),
+			success: function (data, status) {
+							var result_obj = data;
+                                                       // alert(current_id)
+                                                       // var url = ''+'admin/site-settings/ring/messages.html' 
+                                                   //   window.location.replace(url);
+                                                    
+							hideBusyScreen();
+							if(result_obj.result=='success' ) {
+								showUIMsg(result_obj.msg);
+                                                                $('#sta'+current_id+'').html('Deny');
+                                                                 //location.href(result_obj.redirect);
+								//$('#'+result_obj.u_id+'_status').html(result_obj.action_txt);
+                                                                //alert(result_obj.redirect)
+							}
+							else if(result_obj.result==false ){
+							    showUIMsg(result_obj.msg);
+                                                           // location.href(result_obj.redirect);
+                                                            //alert(result_obj.redirect)
+							}
+					},
+			error: function (data, status, e) {
+								hideBusyScreen();
+								showUIMsg(data.msg);
+			}
+		});
+           
+           
+           
+           
+       });
+    });
+  //alert('ok')                                                                                                                                                                      
+ </script>
+
+<div class="paging" >
+            <ul><?= $page_links ?></ul>
+</div>	

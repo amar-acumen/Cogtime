@@ -1,0 +1,41 @@
+<?php
+
+//pr($album_result_arr);
+?>
+                   
+                        
+                        <?php
+                            $counter = 0;
+                            if(count($album_result_arr))
+                            {
+                                foreach($album_result_arr as $album) : 
+                                $counter++;
+                                $IMG = base_url()."uploads/user_audio_album_photos/".getThumbName($album['s_image_name'],'thumb');
+									$audios_link = get_public_profile_audios_url($album['i_user_id'],$album['id']);
+                    
+					    ?>
+                    
+                            <li>
+                                <a href="public-profile-audio/<?=$profile_id?>/album/<?=$album['id']?>/audios">
+                                  <div class="album-cover" style="height: 60px; width: 60px"><div  style="background:url(<?=$IMG?>) no-repeat center;height:60px; width:60px; cursor:pointer;" class="pro_photo3" ></div></div>
+                                <span><?php echo substr($album['s_name'],0,10)?></span>
+                                <p class="track-number"><?php echo $album['total_audio']?> Audio(s)</p>
+                                </a>
+                            </li>
+					
+                        <?php
+                                endforeach;
+                            }
+                        ?>
+                        
+                        
+               
+                            <?php /*if($counter>5)    :?>
+                            <div class="view_more"><a class="blue_link" href="javascript:void(0);">[view more] </a> </div>
+                            <div class="clr"></div>
+                            <?php
+                            endif;
+                            */?>
+                            
+                           
+                        

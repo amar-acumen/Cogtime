@@ -1,0 +1,76 @@
+ <table width="100%" border="0" cellspacing="0" cellpadding="0" class="admin-table">
+                           <tr>
+                            <th align="left" valign="middle" height="30" width="80">Created On</th>
+                            <th align="left" valign="middle" height="30" width="130">Event Title</th>
+                            <th align="left" valign="middle" height="30" width="90">Created By</th>
+                            <th align="left" valign="middle" height="30" width="80">Venue</th>
+                            <th align="left" valign="middle" height="30" width="70">Date/ Time</th>
+                            <th align="left" valign="middle" height="30" width="280">Description</th>
+                            <th align="center" valign="middle" height="30" width="65">No. of Interested Members</th>
+                            <th align="center" valign="middle" height="30" class="last" width="94">Actions</th>
+                          </tr>
+                          <?php 
+						 // pr($info_arr);
+						  	 if( count($info_arr) ) :
+				   
+							 foreach($info_arr as $info) : 
+							  
+							   
+								$id = $info['id'];
+								$title = my_substr($info['s_title'], 38);
+								$desc =  my_substr(html_entity_decode(htmlspecialchars_decode($info['s_desc']),ENT_QUOTES,'utf-8'), 97);
+								
+								$url = $info['s_url'];
+								$s_name = $info['s_name'];
+								$country_name = get_country_name_by_id($info['i_country_id']);
+								$s_status = ($info['i_status'] == 1)?'HIDE':'SHOW';	  
+								$detail_url = get_events_detail_url($info['id']); 
+						  
+						  ?>
+                          
+                          
+                          
+                          <tr>
+                            <td align="left" valign="top"><?=getShortDate($info['dt_created_on'],5)?></td>
+                            <td align="left" valign="top"><a href="<?=$detail_url?>" target="_blank" ><?=$title?></a></td>
+                            <td align="left" valign="top"><?=$s_name?></td>
+                            <td align="left" valign="top"><?=$country_name?></td>
+                            <td align="left" valign="top"><?=getShortDateWithTime($info['dt_start_time'],7)?></td>
+                            <td align="left" valign="top"><?=$desc?></td>
+                            <td align="center" valign="top">-</td>
+                            <td align="center" valign="middle" class="last">
+                              
+                             <input name="" title="Edit" type="button" class="edit-button"  value="" onclick="window.location='<?= admin_base_url() ?>social_hub/events/edit_info/<?= $id;?>'"/>
+                            <input name="" title="Delete" type="button" class="delete-button"  value="" onclick="delete_confirm_(<?= $id ?>);"/>
+                            <?php if($info['i_status'] == 1){ ?>
+                            		<span id="<?=$info['id']?>_status"><input  title="Show" type="button" class="btn-01" onclick="javascript:changeStatus(<?php echo $info['id'] ?> , 2 , <?php echo $info['i_status'] ?>)"  value="<?=$s_status?>"/></span>
+                            <?php 
+							    } 
+								else if($info['i_status'] == 2){?>
+                                	<span id="<?=$info['id']?>_status"><input title="Show" type="button" class="btn-01" onclick="javascript:changeStatus(<?php echo $info['id'] ?> , 1 , <?php echo $info['i_status'] ?>)"  value="<?=$s_status?>"/></span>
+                            
+                            <?php }?>
+                            
+                            
+                            
+                            </td>
+                          </tr>
+                          
+                          
+                                   
+					  <?php
+                             endforeach;
+                             
+                           else :	// i.e. no records exists...
+                      ?>
+                          <tr>
+                              <td style="text-align:center;" height="80" colspan="20">No data available!!!</td>
+                          </tr>
+                      <?php
+                           endif;
+                      ?>
+                              </table>
+	
+<div class="paging" >
+            <ul><?= $page_links ?></ul>
+</div>	

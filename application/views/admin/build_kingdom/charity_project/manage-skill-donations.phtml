@@ -1,0 +1,307 @@
+<div class="clr"></div>
+<!-- CONTENT SECTION -->
+<!--navigation section start -->
+<?php include(APPPATH."views/layouts/admin/admin_nav.phtml");?>
+<!--navigation section end -->
+
+<div id="content_section">
+      <div id="container">
+            <div id="mid_content">
+                  <div class="page_heading left">
+                        <div class="left"><img src="../images/icons/login.png" alt="" /> Manage Skill Donations for &lt;<?=$project_info['s_title']?>&gt;</div>
+                        <div class="right"><a href="<?=admin_base_url()?>charity-projects.html">Back</a></div>
+                  </div>
+                  <div class="clr"></div>
+                  <div id="right_container">
+                        <div class="arrow_btm"></div>
+                        <div class="content_area">
+                            <!--filter section start -->
+                            <?php include(APPPATH."views/admin/build_kingdom/charity_project/project_donor_search.phtml");?>
+                            <!--filter section end -->
+                        
+                            <h4>Manage Skill Donations</h4>
+                            <div class="clr"></div>
+                             <DIV id ="skill_chart">
+                             	<table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                      <tr>
+                                            <td align="left" style="width:181px;" valign="top">
+                                            	<table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                                    <tr>
+                                                          <td style="height:26px; width:142px;">&nbsp;</td>
+                                                    </tr>
+                                                    <tr>
+                                                          <td class="blue_back_line" style=" border-left:1px solid #f0f0f0;"><div>&nbsp;</div></td>
+                                                    </tr>
+                                                    
+                                                    <?php #pr($project_info);
+														if(count($project_info['skill'])){
+															
+															foreach($project_info['skill'] as $key=> $p_val){
+													?>
+                                                        <tr>
+                                                              <td align="left" class="white_td_line" style=" border-left:1px solid #d9d9d9; padding-left:10px;"><div><?=$p_val['s_name']?> (<?=$p_val['i_total_manpower_req']?>)</div>
+                                                              </td>
+                                                             
+                                                             
+                                                        </tr>
+                                                    <?php 
+															}
+														}
+													?>
+                                                    
+                                                    
+                                              </table>	
+                                            
+                                            </td>
+                                            <td align="left" valign="top">
+                                            	<div class="scroll_div" style="width:629px;">
+                                                      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                                      <tr class="blue_back"> 
+													  <?php 
+															 if(count($calendar_arr)){
+																foreach($calendar_arr as $c_val){
+																	 $CSS = ($c_val['day_name'] == 'Sun')?'class="red_txt"':'';
+													   ?>
+                                                                  <th align="center" <?=$CSS?>><?=$c_val['day_name']?></th>
+                                                       <?php       }
+																}
+													   ?>
+                                                       </tr>
+                                                       
+                                                       <tr class="blue_back">
+                                                       
+                                                       <?php 
+															 if(count($calendar_arr)){
+																foreach($calendar_arr as $c_val){
+																	 $CSS = ($c_val['day_name'] == 'Sun')?'class="red_txt"':'';
+													   ?>
+                                                                  <td align="center"><?=$c_val['day']?><br /><?=$c_val['month']?><br /><?=$c_val['year']?></td>
+                                                       <?php       }
+																}
+													   ?>
+                                                            </tr>
+                                                       
+                                                       
+                                                    
+                                                   <?php //pr($project_info['skill']);
+												   		if(count($project_info['skill'])){
+															foreach($project_info['skill'] as $key=> $p_val){
+													?>
+                                                       
+                                                            <tr>
+                                                            <?php #pr($calendar_arr);
+																  if(count($calendar_arr)){
+																	foreach($calendar_arr as $c_val){
+																		 
+																		 $CSS = ($c_val['day_name'] == 'Sun')?'class="red_txt"':'';
+																		  
+																		  $is_sufficient = checkSufficientSkillPerDay($p_val['s_name'], $p_val['i_project_id'], $c_val['dt']); 
+																		  
+																		   //echo 'required: '.$p_val['i_total_manpower_req'];
+																			  
+																			if($c_val['dt'] <= $p_val['dt_end_date'] && $c_val['dt'] >= $p_val['dt_start_date']){
+																				
+																				if($is_sufficient >= $p_val['i_total_manpower_req']){
+																					$div_css = 'blue_td';
+																				}
+																				else if($is_sufficient < $p_val['i_total_manpower_req'] && $is_sufficient != 0){
+																					$div_css ='yellow_td';
+																				}
+																				else if($is_sufficient == 0){
+																					$div_css = 'red_td';
+																				}
+																			 
+																			  //$div_css = ($is_sufficient >= $p_val['i_total_manpower_req'])?'blue_td':'red_td';
+																			}
+																			else{
+																				
+																				$div_css = '';
+																			}
+																		   
+																	#red_td 	 blue_td dt_end_date dt
+																		 
+													   		?>
+                                                                  <td align="center" onClick="showDonorList('<?=$c_val['dt']?>','<?=$p_val['s_name']?>')"><div class="<?=$div_css?>">&nbsp; </div></td>
+                                                                  
+                                                                  
+                                                                 
+                                                             <?php       }
+																}
+													  		 ?>
+                                                            </tr>
+                                                        <?php 
+															}
+														}
+													?>
+                                                            
+                                                            
+                                                      </table>
+                                                </div>
+                                            </td>
+                                           
+                                            
+                                      </tr>
+                                        <tr>
+                                          <td align="center">&nbsp;</td>
+                                          <td colspan="2" valign="top" style="height:30px;"><img src="../images/blue_dot.png" alt="" /> Full   &nbsp; &nbsp; 
+                                          <img src="../images/yellow_dot.png" alt="" />  Partially Fulfilled
+                                          &nbsp; &nbsp; 
+                                          <img src="../images/red_dot.png" alt="" /> Vacant
+                                          </td>
+                                    </tr>
+                                   
+                                </table>
+							 </DIV>
+                                
+                            <div class="clr"></div> 
+                            <DIV ID="table_content"><?=$skill_list?></DIV>
+                        	<div class="clr"></div>
+                        </div>
+                  </div>
+                  <div class="clr"></div>
+            </div>
+      </div>
+      <div class="clr"></div>
+</div>
+<!-- /CONTENT SECTION -->
+
+<!--popup one start-->
+<div class="lightbox delete-page-popup" style="width:500px;">
+      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="../images/close.png" alt="" /></a></div>
+      <div class="top"><div>&nbsp;</div></div>
+      <div class="mid">
+            <div class="heading" style="margin-bottom:0px;">
+                  <div class="left">
+                        <h4>Delete Skill Donation</h4>
+                  </div>
+            </div>
+               <div class="shade_box_white">
+               <p class="center-text">Do you really want to delete this Donation?</p>
+               <form action="" method="post" enctype="multipart/form-data">
+               		 <input type="hidden" name="i_donation_id" id="i_donation_id" value="" />
+               		<input name="" type="button" value="Yes" class="btn" style="margin-left:146px;" onClick="deleteDonation()"/>
+                    <input name="" type="button" value="No" class="btn" onclick="hide_dialog()"/>
+               </form>   
+               <div class="clr"></div>
+            </div>
+            
+      </div>
+      <div class="bot"><div>&nbsp;</div></div>
+</div>
+<!--popup one end-->
+
+
+<!--popup one start-->
+<div class="lightbox Suspend-page-popup" style="width:500px;">
+      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="../images/close.png" alt="" /></a></div>
+      <div class="top"><div>&nbsp;</div></div>
+      <div class="mid">
+            <div class="heading" style="margin-bottom:0px;">
+                  <div class="left">
+                        <h4>Suspend Skill Donation</h4>
+                  </div>
+            </div>
+               <div class="shade_box_white">
+               <p class="center-text" id="suspend-text">Are you sure you want to suspend this donation ?</p>
+               <form action="" method="post" enctype="multipart/form-data">
+               		<input name="" type="button" value="Yes" class="btn" style="margin-left:146px;" id="suspend_button" />
+                    <input name="" type="button" value="No" class="btn" onclick="hide_dialog()"/>
+               </form>   
+               <div class="clr"></div>
+            </div>
+            
+      </div>
+      <div class="bot"><div>&nbsp;</div></div>
+</div>
+<!--popup one end-->
+
+
+<!--popup one start-->
+<div class="lightbox approve-page-popup" style="width:500px;">
+      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="../images/close.png" alt="" /></a></div>
+      <div class="top"><div>&nbsp;</div></div>
+      <div class="mid">
+            <div class="heading" style="margin-bottom:0px;">
+                  <div class="left">
+                        <h4>Approve Skill Donation</h4>
+                  </div>
+            </div>
+               <div class="shade_box_white">
+               <p class="center-text" id="suspend-text">Are you sure you want to approve this donation ?</p>
+               <form action="" method="post" enctype="multipart/form-data">
+               		<input name="" type="button" value="Yes" class="btn" style="margin-left:146px;" id="approve_button" />
+                    <input name="" type="button" value="No" class="btn" onclick="hide_dialog()"/>
+               </form>   
+               <div class="clr"></div>
+            </div>
+            
+      </div>
+      <div class="bot"><div>&nbsp;</div></div>
+</div>
+<!--popup one end-->
+
+
+
+<!--popup edit skill-->
+<div class="lightbox edit-skill" style="width:500px;">
+      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="../images/close.png" alt="" /></a></div>
+      <div class="top"><div>&nbsp;</div></div>
+      <div class="mid">
+            <div class="heading" style="margin-bottom:0px;">
+                  <div class="left">
+                        <h4>Edit Skill</h4>
+                  </div>
+            </div>
+               <div class="shade_box_white" style="padding:8px 0px;">
+               <div class="content_area frm_box2">
+                        	  <form action="" method="post" enctype="multipart/form-data">
+                                  
+                                  <div class="lable01">Skill  :</div>
+                                  <div class="field01" style="margin-bottom:8px;">
+                                        <select name="skill2" id="skill2" style="width:348px;">
+                                                <option>Skill 1</option>
+                                                <option>Skill 2</option>
+                                          </select>
+                                  </div>
+                                  <div class="error-message">* Required Field</div>
+                                  <div class="clr"></div>
+                                  
+                                  <div class="lable01"> </div>
+                                  <div class="field01">
+                                        <input name="" type="button" class="btn"  value="Update"/><input name="" type="reset" class="btn"  value="Cancel" onclick="window.location=''"/>
+                                  </div>
+                              </form>
+                              <div class="clr"></div>
+                        </div>
+               <div class="clr"></div>
+            </div>
+            
+      </div>
+      <div class="bot"><div>&nbsp;</div></div>
+</div>
+<!--/popup edit skill -->
+
+
+
+<script>
+
+function show_suspend_popup(id, i_status ,cur_status, project_id){
+	$('#suspend_button').attr('onClick', '');
+	if(cur_status == 'pending'){ //alert(1);
+		 //$('#approve_button').attr('onClick', 'javascript:changeStatus('+id +', "accepted" , "'+cur_status+'",'+project_id+')');
+		 //show_dialog('approve-page-popup');
+		 changeStatus(id, "accepted" , cur_status,project_id);
+	}
+	else if(cur_status == 'suspended')
+	{//alert(2);
+		//$('#approve_button').attr('onClick', 'javascript:changeStatus('+id +', "accepted" , "'+cur_status+'",'+project_id+')');
+		//show_dialog('approve-page-popup');
+		changeStatus(id, "accepted" , cur_status,project_id);
+	}
+	else
+	{
+		$('#suspend_button').attr('onClick', 'javascript:changeStatus('+id +', "suspended" , "'+cur_status+'",'+project_id+')');
+		show_dialog('Suspend-page-popup');
+	}
+}
+</script>

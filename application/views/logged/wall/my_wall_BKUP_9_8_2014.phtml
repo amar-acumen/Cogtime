@@ -1,0 +1,404 @@
+<?php include(APPPATH . "views/layouts/logged_header.phtml"); ?>
+<!-- NAVIGATION SECTION -->
+<?php include(APPPATH . "views/layouts/nav.phtml"); ?>
+<!-- /NAVIGATION SECTION -->
+</div>
+</div>
+
+
+<!-- /HEADER SECTION -->
+<div class="clr"></div>
+
+<!-- CONTENT SECTION -->
+<div id="content_section">
+    <div id="container"> 
+        <!--<div id="mid_content"> -->
+        <!-- latest news -->
+        <?php include(APPPATH . "views/layouts/latest_news.phtml"); ?>
+        <!-- /latest news -->
+        <div class="clr"></div>
+        <!-- main container -->
+        <div id="main_container">
+            <!-- left container -->
+            <?php include(APPPATH . "views/layouts/leftbar.phtml"); ?>
+            <!-- /left container -->
+            <!-- mid container -->
+            <div id="mid_container"> <?php //pr($latest_intercession);       ?>
+                <div class="my-wall-section">
+                    <p class="green-title">Bible Verse : [ <a  href="read-bible-chapter-view.php"><?= $rand_bible_verse['s_book_name'] ?> <?= $rand_bible_verse['bible_chapter_no'] . ':' . $rand_bible_verse['bible_verse_no'] ?></a> ]</p>
+                    <p><?= $rand_bible_verse['s_verse'] ?></p>
+                </div>
+                <div class="my-wall-section">
+                    <p><span class="green-title">E-Intercession :</span> </p>
+                    <div class="right-panel">
+                        <p class="quoted-text" ><a href="<?= base_url() ?>e-intercession/<?= $latest_intercession[0]['id'] ?>/e-intercession-request-detail.html"><?= html_entity_decode(htmlspecialchars_decode($latest_intercession[0]['s_subject']), ENT_QUOTES, 'utf-8') ?></a></p>
+                        <p class="quoted-text" style="padding:0px; background:none; margin-bottom:5px;">
+                            <a href="<?= base_url() ?>e-intercession/<?= $latest_intercession[0]['id'] ?>/e-intercession-request-detail.html">  <?= my_substr(html_entity_decode(htmlspecialchars_decode($latest_intercession[0]['s_description']), ENT_QUOTES, 'utf-8'), 291); ?></a>
+                            <span>Posted on: <?= get_time_elapsed($latest_intercession[0]['dt_insert_date']) ?></span>  
+                        </p>
+
+                        <p class="intercession-home" style="color: #013D62;font-size: 12px;line-height: 16px;"><strong><?= get_country_name_by_id($latest_intercession[0]['i_country_id']) ?></strong></p>
+                        <p> <span class="intercession-home" style="color: #011F31;font-size: 12px;line-height: 16px;">From:  <?= getShortDateWithTime($latest_intercession[0]['dt_start_date'], 6) ?></span><span class="intercession-home" style="color: #011F31;font-size: 12px;line-height: 16px;"> To:  <?= getShortDateWithTime($latest_intercession[0]['dt_end_date'], 6) ?></span></p>
+                    </div>
+
+                </div>
+                <?php
+                if (count($latest_emergency_intercession)) {
+                    $P_CSS = ($show_PC == true) ? '' : 'style="display:none;"';
+                    ?>
+
+                    <DIV id="prayer_click_section" <?= $P_CSS ?>>
+                        <div class="right show-txt exp-col026" ><span style="vertical-align:middle;">Hide <img src="images/icons/nw-minus.png" alt="" class="plus-minus2" /></span></div>
+                        <div class="right show-txt exp-col026" style="display:none;"><span>Show <img src="images/icons/nw-plus.png" alt="" class="plus-minus2" /> </span></div>       
+                        <div class="clear"></div><br />
+
+                        <div class="my-wall-section prayer-click-sec" id="switchdiv026">
+                            <?php
+                            $IMG = base_url() . 'uploads/prayer_wall_photos/' . getThumbName($latest_emergency_intercession[0]['s_image_name'], 'mid_thumb');
+                            $DESC = html_entity_decode(htmlspecialchars_decode($latest_emergency_intercession[0]['s_description']), ENT_QUOTES, 'utf-8');
+                            ?>
+
+                            <div class="">
+                                <span class="green-title">Prayer Click :</span>
+
+                                <br class="clr" style="margin-bottom: 10px;"/>
+                                <a href="javascript:void(0);"><div  title="prayer" style="background:url(<?= $IMG ?>) no-repeat center;width:150px; height:74px;" class="pro_photo3"></div></a>
+                                <div>
+
+                                    <p style="margin-bottom:10px;" class="prayr_click"><?= html_entity_decode(htmlspecialchars_decode($latest_emergency_intercession[0]['s_subject']), ENT_QUOTES, 'utf-8') ?></p>
+                                    <p style="margin-bottom:10px;" class="prayr_click"><?= $DESC ?></p>
+                                    <p class="blue_bold12 name-heading prayr_click">Started on: <?= get_time_elapsed($latest_emergency_intercession[0]['dt_insert_date']) ?></p>
+
+                                    <p class="blue_bold12 name-heading prayr_click" style="float:right; cursor:pointer; margin-right:10px;" onclick="hide_prayerClick(<?= $latest_emergency_intercession[0]['id'] ?>)"><strong>Skip</strong></p>
+                                </div>
+                                <div class="clr"></div>
+                                <div class="light_heading liquid">
+                                    <ul>
+                                        <li class="left">No. of commitments (<span id="total_commitments"><?= $total_commits ?></span>)</li>
+
+                                        <?php if (!$isCommitExists) { ?>
+                                            <li><a class="right" href="javascript:void(0);" onclick="prayerClickCommit(<?= $latest_emergency_intercession[0]['id'] ?>)" id="prayerClickCommit">Commit</a></li>
+                                        <?php } ?>
+                                    </ul>
+                                    <div class="clr"></div>
+
+
+                                    <div class="clr"></div>
+                                </div>
+                                <div class="clr"></div>
+                            </div>
+
+                        </div>
+                    </DIV>
+                    <?php
+                }
+                ?> 
+
+                <div class="section01"> <img src="images/food.png" alt="" /> <a href="five-a-day.html"  class="big-grey-text"><strong>Have you had your "FIVE" a day ?</strong></a>
+                    <div class="clr"></div>
+                </div>
+
+
+
+                <?php
+                include(APPPATH . "views/newsfeed/newsfeed_post_.phtml");
+                ?>
+
+                <div class="div_content">
+                    <div class="nwheading">
+                        <div class="left">
+                            <h4>My Wall Messages &amp; Comments</h4>
+                        </div>
+                    </div>
+                    <div id="comment_result_div"><?= $result_newsfeed_content ?></div>
+                    <?php if ($no_of_result > 4): ?>
+
+                        <div class="view_more" id="show_more_feeds_div"><a href="javascript:void(0);" id="show_more_feeds_link" page_value="<?= $current_page_1 ?>" onclick="show_more_feeds($(this).attr('page_value'))">[view more] </a> </div>
+                    <?php endif; ?>
+                </div>
+                <div class="div_content">
+                    <div class="nwheading">
+                        <div class="left">
+                            <h4>My Prayer Requests &amp; Commitments</h4>
+                        </div>
+                    </div>
+                    <div id="prayer_result_div"><?= $prayer_req_ajax_content ?></div>
+                    <?php if ($prayer_no_of_result > 4): ?>
+
+                        <div class="view_more" id="show_more_prayer_div"><a href="javascript:void(0);" id="show_more_prayer_link" page_value="<?= $prayer_current_page ?>" onclick="show_more_prayer($(this).attr('page_value'))">[view more] </a> </div>
+                    <?php endif; ?>
+
+                </div>
+                <div class="div_content">
+                    <div class="nwheading">
+                        <div class="left">
+                            <h4>My CoGTime Project Contributions</h4>
+                        </div>
+
+                    </div>
+                    <div class="div_content" id="switchdiv04" style=" margin-top:0;">
+                        <?php
+                        if (is_array($my_projects)) {
+                            foreach ($my_projects as $project) {
+                                ?>
+                                <div class="project_box">
+                                    <p class="blue_bold12"><a href="javascript:void(0);"><?= $project['project'] ?></a></p>
+                                    <p><?= my_substr(html_entity_decode(htmlspecialchars_decode($project['description']), ENT_QUOTES, 'utf-8'), 97); ?> <a  href="<?= base_url() ?>suggest-projects/charity-project-home.html" class="blue_link">[read more]</a></p>
+                                </div>
+                                <?php
+                            }
+                        }
+                        ?>
+                        <!-- <div class="project_box">
+                               <p class="blue_bold12"><a href="javascript:void(0);">Good Friday Project</a></p>
+                               <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do  tempor 
+                                     ut labore et dolore magna aliqua. ... <a  href="charity-project-home.php" class="blue_link">[read more]</a></p>
+                         </div>-->
+                        <?php
+                        if ($my_project_count > 2) {
+                            ?>
+                            <div class="view_more"><a  href="<?= base_url() ?>view-my-projects.html" class="blue_link">[view more] </a> </div>
+                            <?php
+                        }
+                        ?>
+                    </div>
+                </div>
+                <input type="hidden" value="<?= $first_login ?>" name="is_first_login" id="is_first_login" />
+
+            </div>
+
+
+            <!-- /mid container -->
+            <!-- right container -->
+            <?php include(APPPATH . "views/layouts/rightbar.phtml"); ?>
+            <!-- /right container -->
+        </div>
+        <!-- /main container -->
+        <div class="clr"></div>
+        <!--</div> -->
+    </div>
+    <div class="clr"></div>
+</div>
+<!-- /CONTENT SECTION -->
+<div class="clr"></div>
+
+
+<?php include(APPPATH . "views/layouts/footer.phtml"); ?>
+
+<?php /* ?>POPUPS AND SCRIPTS<?php */ ?>
+
+<?php include(APPPATH . "views/logged/blocks/common_popup.phtml"); ?>
+
+<?php /* ?>delete confirm box for wall post <?php */ ?>
+<div class="lightbox delete-post" style="width:245px;">
+    <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="<?= base_url() ?>images/close.png" alt="" /></a></div>
+    <div class="top"><div>&nbsp;</div></div>
+    <div class="mid">
+        <div class="heading" style="margin-bottom:0px;">
+            <div class="left">
+                <h4>Delete Prayer Points</h4>
+            </div>
+        </div>
+        <div class="shade_box_white" style="padding:8px 0px;">
+            <div style="padding-bottom:10px;">
+                <p class="center-text" style="line-height:23px; color:#494949;">Do you really want to delete this post?</p>
+            </div>
+            <form action="" method="post" enctype="multipart/form-data">
+                <input type="hidden" name="i_del_partner_id" id="i_del_partner_id" value="" />
+                <input name="" type="button" value="Yes" class="popup-yes"  onClick="delete_post()"/>
+                <input name="" type="button" value="No" class="popup-no " onclick="hide_dialog()"/>
+            </form>   
+            <div class="clr"></div>
+        </div>
+
+    </div>
+    <div class="bot"><div>&nbsp;</div></div>
+</div>
+<div class="lightbox delete-page-popup" style="width:500px;">
+    <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="../images/close.png" alt="" /></a></div>
+    <div class="top"><div>&nbsp;</div></div>
+    <div class="mid">
+        <div class="heading" style="margin-bottom:0px;">
+            <div class="left">
+                <h4>Password Reset Notification</h4>
+            </div>
+        </div>
+        <div class="shade_box_white" style="padding:8px 0px;">
+            <p class="center-text">Your password has been reset.You can't sign in with this password again.Please reset your password now.</p>
+            <p></p>
+            <input type="hidden" id="i_del_id" name="i_del_id" value="" /> 
+            <input type="hidden" id="i_user_typ" name="i_user_typ" value="" />
+
+<!--            <input name="" type="button" value="Yes" class="btn" style="margin-left:146px;" onclick="return delete_();"/>-->
+            <center><input name="" type="button" value="Ok" class="btn okbtn" onclick="hide_dialog()"/></center>
+
+            <div class="clr"></div>
+        </div>
+
+    </div>
+    <div class="bot"><div>&nbsp;</div></div>
+</div>
+<?php
+$if_temp_pwd = is_temp_password_user($user_id);
+if ($if_temp_pwd == 1) {
+    change_temp_pwd_fld($user_id);
+}
+?>
+<!-- ------------------------------------------------- -->
+<script type="text/javascript">
+    $(document).ready(function() {
+        var check_first_login = $('#is_first_login').val();
+
+        if (check_first_login != '')
+        {
+            show_dialog('welcome');
+        }
+        var temp_pwd = '<?php echo $if_temp_pwd; ?>';
+        if (temp_pwd == 1)
+        {
+            show_dialog('delete-page-popup');
+        }
+
+        $('.okbtn').click(function() {
+            window.location = '<?php echo base_url(); ?>' + 'change-password.html';
+        });
+    });
+
+    var ajax_req_feeds = null;
+    function show_more_feeds(page) {
+        if (ajax_req_feeds != null) {
+            ajax_req_feeds.abort();
+        }
+        showUILoader_nodialog();
+        ajax_req_feeds = $.ajax({
+            type: 'get',
+            url: base_url + 'logged/my_wall/newsfeed_pagination_show_more/<?= $profile_id ?>' + '/' + page,
+            dataType: 'json',
+            success: function(data, status) {
+
+                hideUILoader_nodialog();
+                if (data.html != '') {
+                    $('#comment_result_div').append(data.html);
+                    $('#show_more_feeds_link').attr('page_value', data.current_page);
+                }
+                else {
+                    $('#comment_result_div').append('<div class="view_more" style="text-align: center;"><p class="blue_bold12" style="font-size:14px;">No more posts to display.</p></div>');
+                    $('#show_more_feeds_div').hide();
+                }
+
+
+            }	// end of success function...
+        });
+    }
+
+
+    var ajax_req_prayer = null;
+    function show_more_prayer(page) {
+        if (ajax_req_prayer != null) {
+            ajax_req_prayer.abort();
+        }
+        showUILoader_nodialog();
+        ajax_req_prayer = $.ajax({
+            type: 'get',
+            url: base_url + 'logged/my_wall/my_all_prayer_request_ajax_pagination/<?= $profile_id ?>' + '/' + page,
+            dataType: 'json',
+            success: function(data, status) {
+
+                hideUILoader_nodialog();
+                if (data.html != '') {
+                    $('#prayer_result_div').append(data.html);
+                    $('#show_more_prayer_link').attr('page_value', data.cur_page);
+                }
+                else {
+                    $('#prayer_result_div').append('<div class="view_more" style="text-align: center;"><p class="blue_bold12" style="font-size:14px;">No more posts to display.</p></div>');
+                    $('#show_more_prayer_div').hide();
+                }
+
+            }	// end of success function...
+        });
+    }
+
+
+    function show_commits(i_prayer_id) {
+        $('.new-wl > .comments-number').css('display', 'none');
+        $('.new-wl-right > .comments-number').css('display', 'none');
+        $('#commitment-container' + i_prayer_id).slideDown('slow');
+
+        showUILoader_nodialog('<img src="' + base_url + 'images/loading_big.gif" width="50"/> ');
+        $.ajax({
+            url: base_url + 'logged/my_wall/NEW_fetch_commit_prayer_request/' + i_prayer_id,
+            dataType: 'json',
+            type: 'post',
+            success: function(data, status) {
+
+                $('#commitment_content_' + i_prayer_id).html(data.html_data);
+                hideUILoader_nodialog();
+                showUIMsg(data.msg);
+            },
+            error: function(data, status, e) {
+                hideUILoader_nodialog();
+                showUIMsg("Error!");
+
+            }
+        });
+
+
+    }
+
+
+    function prayerClickCommit(id) {
+        showUILoader_nodialog('<img src="' + base_url + 'images/loading_big.gif" width="50"/> ');
+        $.ajax({
+            url: base_url + 'logged/e_intercession/commitPrayerClick/' + id,
+            dataType: 'json',
+            data: '',
+            type: 'post',
+            success: function(data, status) {
+                $('#total_commitments').html('');
+                $('#total_commitments').html(data.total_commits);
+                $('#prayerClickCommit').hide();
+                showUIMsg(data.msg);
+                hideUILoader_nodialog();
+            },
+            error: function(data, status, e) {
+                hideUILoader_nodialog();
+                showUIMsg("Error!");
+
+            }
+        });
+    }
+
+
+    function getPrayerClickCommit(id) {
+        $.ajax({
+            type: "post",
+            url: base_url + 'logged/e_intercession/getPrayerClickTotalCommit/' + id,
+            dataType: "json",
+            success: function(data) {
+                $('#total_commitments').html('');
+                $('#total_commitments').html(data.total_commits);
+            }
+        });
+    }
+
+    function hide_prayerClick(id) {
+        $.ajax({
+            type: "post",
+            url: base_url + 'logged/e_intercession/hide_prayerClick/' + id,
+            dataType: "json",
+            success: function(data) {
+                $('#prayer_click_section').hide();
+                showUIMsg('You have sucessfully skipped this prayer click and it will no more appear in your wall!');
+            }
+        });
+    }
+
+
+
+    $(document).ready(function(arg) {
+        getPrayerClickCommit('<?= $latest_emergency_intercession[0]['id'] ?>');
+        setInterval(function() {
+            getPrayerClickCommit('<?= $latest_emergency_intercession[0]['id'] ?>')
+        }, 59000);
+    });
+</script>

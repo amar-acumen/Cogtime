@@ -1,0 +1,324 @@
+<?php include(APPPATH."views/layouts/logged_header.phtml");?>
+            <!-- NAVIGATION SECTION -->
+      <?php include(APPPATH."views/layouts/nav.phtml");?>
+      <!-- /NAVIGATION SECTION -->
+      </div>
+</div>
+<!-- /HEADER SECTION -->
+<div class="clr"></div>
+<!-- CONTENT SECTION -->
+<div id="content_section">
+      <div id="container">
+            <div id="mid_content">
+                  <!-- latest news -->
+                  <?php include(APPPATH ."views/layouts/latest_news.phtml");?>
+                  <!-- /latest news -->
+                  <div class="clr"></div>
+                  <!-- main container -->
+                  <div id="main_container">
+                        <!-- left container -->
+                        <?php include(APPPATH."views/layouts/leftbar.phtml");?>
+                        <!-- /left container -->
+                        <!-- left container -->
+							  <div id="mid_container">
+                                  <div class="page_heading">
+                                    <div class="left"><img src="images/icons/charity-project.png" alt=""/> Giving</div>
+                                  </div>
+								<p style="font-size:13px; font-style:italic;"><?=nl2br($s_content)?></p>
+								<div class="nw-page_heading_01">
+                           		 <div class="left"><img src="<?=base_url()?>images/icons/donation-basket.png" alt=""/> Donation Basket <span style="float:right; margin-top:-5px;"><img src="images/info.png" title="Cogtime Donation"  /></span></div>
+								</div>
+								<div class="arrow_btm"></div>
+								<div class="frm_box shade_box_01" style="padding-bottom:17px;">
+							
+                                  <p class="p-txt">
+                                      Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do  tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.
+                                  
+                                  </p>
+                                    <form method="post" id="frm_common_donation" onsubmit="return false;">
+                                        <div class="lable-txt-nw" >Amount($): </div>
+                                          <input name="txt_amount" class="Card-Holder-Name" type="text"  />
+                                          <div class="clr"></div>
+                                          <div class="error-message-card1" id="err_amount" style="display:none"></div>
+                                          <div class="clr"></div>
+                                        
+                                         <div class="lable-txt-nw" > Card Holder Name:</div>
+                                         <input name="txt_card_holder" type="text"  class="Card-Holder-Name"/>
+                                          <div class="clr"></div>
+                                          <div id="err_card_holder" class="error-message-card1"  style="display:none"></div>
+                                      	  <div class="clr"></div>
+                                         
+                                         <div class="card-left">
+                                            <div class="lable-txt-nw" > Expiry Date:</div>
+                                            <div class="Expiry-Date-card">
+                                                  <div class="lbl01" style=" width:90px;">
+                                                        <select name="mnth" id="mnth" style="width:90px;" class="nw-select-box">
+                                                              <option value="-1">MM</option>
+                                                              <?=makeNewOptionMonth()?>
+                                                        </select>
+                                                  </div>
+                                                  <div class="lbl01"  style=" width:90px;">
+                                                        <select name="yr" id="yr" style="width:90px;" class="nw-select-box">
+                                                              <option value="-1">YYYY</option>
+                                                              <?=makePaypalOptionYear()?>
+                                                        </select>
+                                                  </div>
+                                                
+                                             </div>
+                                              <div class="clr"></div>
+                                             <div class="error-message-card-exp1" id="err_mnth" style="display:none"></div>
+                                         </div>
+                                         
+                                         <div class="card-right">
+                                              <div class="lbl01 txt-normal"  style=" width:40px; padding-top:1px;"> CVV: </div>
+                                                <input name="txt_cvv" type="text"  class="cvv"/>
+                                            	 <div class="clr"></div>
+                                              <div class="error-message-card-exp" id="err_cvv" style="display:none">*Required Field</div>
+                                          </div>
+                                     
+                                        <div class="clr"></div>
+                                        <div class="lable-txt-nw" > Card Type:</div>
+                                          <select name="txt_card_typ" id="yr" style="width:188px;" class="nw-select-box">
+                                          	   <option value="-1">Select</option>
+                                               <option value="Visa">Visa</option>
+                                               <option value="MasterCard">MasterCard</option>
+                                               <option value="Discover">Discover</option>
+                                               <option value="American Express">American Express</option>
+                                          </select>
+                                          <!-- Note: For direct payment only, American Express restricts direct card acceptance merchants in certain business categories. Merchants are required to accept the American Express Card Acceptance agreement in order to process American Express cards directly.-->
+
+                                          <div id="err_card_typ" class="error-message-card"  style="display:none"></div>
+                                        <div class="clr"></div>
+                                        
+                                        <div class="lable-txt-nw" > Card No.:</div>
+                                         <input name="txt_card_number" type="text"  class="amount-input Card-No-input"/>
+                                         <div class="clr"></div>
+                                         <div id="err_card_number" class="error-message-card-exp1" style="display:none"></div>
+                                         <div class="clr"></div>
+                                          
+                                        <div class="lable-txt-input" > 
+                                        <input name="" type="submit" value="Donate"  class="yellow-btn float-right"/>
+                                        </div>
+                                        <div class="clr"></div>
+                                    </form>
+                                    
+                               </div>
+							  
+							  <div class="nw-page_heading_01">
+                           		 <div class="left"><img src="<?=base_url()?>images/icons/donate-towards.png" alt=""/> Project Donations <span style="float:right; margin-top:-5px;"><img src="images/info.png" title="Tithe your fund towards the project"  /></span></div>
+							  </div>
+							  <div class="arrow_btm"></div>
+							  <div class="frm_box shade_box_01" style="padding-bottom:6px;">
+                                    
+                                <p class="p-txt">
+									Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do  tempor incididunt ut labore et dolore magna aliqua. 
+								
+								</p>
+                                   
+                                   <!-- <div class="lable01" style="width:112px;">&nbsp;</div>-->
+                                    <div class="field03">
+                                         <p>
+                                        
+                                         <input name="" type="submit" value="Cogtime Suggestions"  class="yellow-btn btn-float" onclick="window.location='<?=base_url()?>suggest-projects/charity-project-home.html'" />
+                                         <span class="or">OR</span> <input name="" type="submit" value="Search"  class="yellow-btn btn-float"  onclick="window.location='<?=base_url()?>search-project/charity-project-home.html'"/>
+                                       
+                                         </p>
+                                    </div> 
+                                    <div class="clr"></div>
+                              </div>
+                              
+                              
+                               <div class="nw-page_heading_01">
+                           		 <div class="left"><img src="<?=base_url()?>images/icons/donate-towards.png" alt=""/> Project Tithe  <span style="float:right; margin-top:-5px;"><img src="images/info.png" title="Tithe your skill towards the project"  /></span></div>
+							  </div>
+							  <div class="arrow_btm"></div>
+							  <div class="frm_box shade_box_01" style="padding-bottom:6px;">
+                                    
+                                <p class="p-txt">
+									Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do  tempor incididunt ut labore et dolore magna aliqua. 
+								
+								</p>
+                                   
+                                   <!-- <div class="lable01" style="width:112px;">&nbsp;</div>-->
+                                    <div class="field03">
+                                         <p>
+                                        
+                                         <input name="" type="submit" value="Cogtime Suggestions"  class="yellow-btn btn-float" onclick="window.location='<?=base_url()?>suggest-tithe-time-projects/charity-project-home.html'" />
+                                         <span class="or">OR</span> <input name="" type="submit" value="Search"  class="yellow-btn btn-float"  onclick="window.location='<?=base_url()?>search-tithe-time-project/charity-project-home.html'"/>
+                                       
+                                         </p>
+                                    </div> 
+                                    <div class="clr"></div>
+                              </div>
+							 
+							  
+							  <div class="nw-page_heading_01">
+                           		 <div class="left"><img src="<?=base_url()?>images/icons/prayer-icon.png"  alt=""/> Prayer Tithe
+                                 <span style="float:right; margin-top:-5px;"><img src="images/info.png" title="Tithe your prayer"  /></span></div>
+							</div>
+							<div class="arrow_btm"></div>
+							
+							
+                             <div class="frm_box shade_box_01" style="padding-bottom:17px;display: table;">
+                                    <p class="p-txt">
+									Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do  tempor incididunt ut labore et dolore magna aliqua. sed do  tempor incididunt ut labore et dolore magna aliqua. 
+								
+								</p>
+                                
+                                 <form method="post" id="frm_prayer_time"  action="<?=base_url().'tithe-prayer-time.html'?>" >
+                                    <div class="field03 blue_bold12 prayer-wall tithe-your-time" >
+                                    	<input name="search_typ" type="radio" value="prayer_wall" checked="checked"  />  Prayer Wall  &nbsp; &nbsp;
+                                    	<input name="search_typ" type="radio" value="eintercession_wall" />  eIntercession
+                                    </div>
+                                    <div class="clr"></div>
+                                    
+                                    <div class="lable-txt-nw">Between Dates: </div>
+                                   
+                                    <div>
+                                          <div class="field02" style=" width:130px;">
+                                          <input style="width:100px;" type="text"  value="" name="start_prayer_dt1" id="start_prayer_dt1"  readonly="readonly"/>
+                                          <img src="<?=base_url()?>images/icons/cal.png" alt="" onclick="$(this).prev().focus()" style="cursor:pointer; " />
+                                          </div>
+                                          <div class="lable-txt" style=" width:50px;">To:</div>
+                                          <div class="lable-txt" >
+                                              <input style="width:100px;" type="text"  value="" name="end_prayer_dt2" id="end_prayer_dt2"  readonly="readonly"/>
+                                              <img src="<?=base_url()?>images/icons/cal.png" alt="" onclick="$(this).prev().focus()" style="cursor:pointer; " />
+                                              
+                                          </div>
+                                    </div>
+                                    
+                                    <span onclick="setDefaultdates()" style="color:#004084; cursor:pointer; float:right; margin-right:25px; margin-top:5px;">Clear All</span>
+                                    <div class="clr"></div>
+                               <?php /*?>     
+                                    <div id="day_block" style="display:none;">
+                                        <div class="lable-txt-nw" > Day of Week:</div>
+                                        <div class="secttion-padding">
+                                              <table class="cal_table" border="0" cellspacing="0" cellpadding="0">
+                                                    <tr>
+                                                          <th class="nw-cal_table">S</th>
+                                                          <th class="nw-cal_table">M</th>
+                                                          <th class="nw-cal_table">T</th>
+                                                          <th class="nw-cal_table">W</th>
+                                                          <th class="nw-cal_table">T</th>
+                                                          <th class="nw-cal_table">F</th>
+                                                          <th class="nw-cal_table">S</th>
+                                                    </tr>
+                                                    <tr>
+                                                          <td valign="middle">
+                                                          <input name="chk_day[]" type="checkbox" value="'Sunday'"/>
+                                                          </td>
+                                                          <td valign="middle">
+                                                          <input name="chk_day[]" type="checkbox" value="'Monday'" />
+                                                          </td>
+                                                          <td valign="middle">
+                                                          <input name="chk_day[]" type="checkbox" value="'Tuesday'" />
+                                                          </td>
+                                                          <td valign="middle">
+                                                          <input name="chk_day[]" type="checkbox" value="'Wednesday'" />
+                                                          </td>
+                                                          <td valign="middle">
+                                                          <input name="chk_day[]" type="checkbox" value="'Thursday'" />
+                                                          </td>
+                                                          <td valign="middle">
+                                                          <input name="chk_day[]" type="checkbox" value="'Friday'" />
+                                                          </td>
+                                                          <td valign="middle">
+                                                          <input name="chk_day[]" type="checkbox" value="'Saturday'" />
+                                                          </td>
+                                         
+                                                    </tr>
+                                              </table>
+                                        </div>
+                                        <div class="clr"></div>
+                                    </div>
+                                    
+                                    
+                                    <div class="lable-txt-nw" > Prayer Time:</div>
+                                    <div class="prayer-time secttion-padding">
+                                         	<div class="lbl02"><input name="chk_time[]" type="checkbox" value="0" /> 0AM – 3AM</div>
+                                            <div class="lbl02"><input name="chk_time[]" type="checkbox" value="3" /> 3AM – 6AM</div>
+                                            <div class="lbl02"><input name="chk_time[]" type="checkbox" value="6" /> 6AM – 9AM</div>
+                                            <div class="lbl02"><input name="chk_time[]" type="checkbox" value="9" /> 9AM – 12PM</div>
+                                            <div class="lbl02"><input name="chk_time[]" type="checkbox" value="12" /> 12PM – 3PM</div>
+                                            <div class="lbl02"><input name="chk_time[]" type="checkbox" value="15" /> 3PM – 6PM</div>
+                                            <div class="lbl02"><input name="chk_time[]" type="checkbox" value="18" /> 6PM – 9PM</div>
+                                            <div class="lbl02"><input name="chk_time[]" type="checkbox" value="21" /> 9PM – 11PM</div>
+                                    </div>
+                                    <?php */?>
+                                   
+                                    <div class="secttion-padding">
+                                   <input type="hidden" value="Y" name="search_basic" id="search_basic"  />
+                                   <input name="" type="submit" value="Search"  class="yellow-btn float-right"/>
+                                      </div>    
+                                   </form>
+                                   
+                              </div>
+                             
+							  </div>
+                        <!-- /left container -->
+                        <!-- right container -->
+                        <?php include(APPPATH."views/layouts/rightbar.phtml");?>
+                        <!-- /right container -->
+						
+                  </div>
+                  <!-- /main container -->
+                  <div class="clr"></div>
+            </div>
+            <div id="bot_corner">&nbsp;</div>
+      </div>
+      <div class="clr"></div>
+</div>
+<!-- /CONTENT SECTION -->
+<div class="clr"></div>
+<!-- FOOTER SECTION -->
+
+<?php include(APPPATH."views/layouts/footer.phtml");?>
+<?php include(APPPATH."views/logged/blocks/common_popup.phtml");?>
+<!-- /FOOTER SECTION -->
+
+
+<script type="text/javascript">
+$(document).ready(function(arg) {
+	
+ $('#frm_common_donation').submit(function(){ 
+					
+				     var datatosend=$("#frm_common_donation").serialize(); 
+				     showUILoader_nodialog('<img src="'+base_url+'images/loading_big.gif" width="50"/> ');
+					 showDelayMsg('Please do not refresh , your card is processing...');
+					 						  
+					  $.ajax({
+						 type: "POST",
+						 url: base_url+'logged/build_the_kingdom/CommonDonation',
+						 data: datatosend,
+						 dataType: 'json',
+						 success: function(data){
+							 
+							 $('[class ^= "error-message-card"]').each(function(i){
+										$(this).attr('style','display:none');
+							 });
+							 
+							 hideDelayMsg();
+							 hideUILoader_nodialog();
+							 if(data.success ==false){
+								  
+								  for ( var id in data.arr_messages ){
+									  //alert(data.arr_messages[id]);
+									  if( $('#err_'+id) != null ) {
+										  $('#err_'+id).html(data.arr_messages[id]);
+										  $('#err_'+id).css('display', 'block');
+									  }
+								  }
+								 	showUIMsg(data.msg);
+							 }
+							 else{
+									 $('#frm_common_donation')[0].reset();
+									showUIMsg(data.msg);
+							 }
+								
+						 }
+					   });	 
+				});
+ 
+ });
+//});
+ </script>

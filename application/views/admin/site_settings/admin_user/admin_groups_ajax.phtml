@@ -1,0 +1,50 @@
+<table width="100%" border="0" cellspacing="0" cellpadding="0" class="admin-table">
+                              <tr>
+                                <th align="left" valign="middle" height="30" width="250">Admin ID</th>
+                                <th align="left" valign="middle" height="30" width="450">Name</th>
+                                <th align="center" valign="middle" height="30" class="last">Actions</th>
+                              </tr>
+                            
+  <?php 
+		#pr($info_arr);
+	   if( count($info_arr) ) :
+
+			   foreach($info_arr as $info) : 
+				
+				  $id = $info['id'];
+				  $s_name = $info['s_name'];
+                  $status = $info['i_status'];
+                  $date_created = getShortDate($info['dt_created_on'],5);
+	
+	?>                             
+                         <tr>
+                            <td align="left" valign="top"><?=$info['s_email']?></td>
+                            <td align="left" valign="top"><?= $s_name?></td>
+                            <td align="center" valign="middle" class="last">
+                            <input name="" title="Edit" type="button" class="edit-button"  value="" onclick="return edit(<?php echo $id;?>)"/>
+                            <input name="" title="Delete" type="button" class="delete-button"  value="" onclick="return delete_confirm_(<?php echo $id;?>);"/>
+                            
+                            <span id="prod_status_<?php echo $id;?>" >
+                            <input name="" title="Enable" type="button" class="btn-03" value="<?php echo ($status=='1')? 'Disable' : 'Enable'; ?>" onclick="return change_status(<?php echo $id;?> , <?=$info['i_status']?>)"/>
+                            </span>
+                              <input  title="Reset Password" type="button" class="btn-04" onclick="javascript:resetPassword(<?php echo $id ?>)"  value="Reset Password"/>
+                            </td>
+                          </tr>
+                             
+	<?php
+                 endforeach;
+                 
+		   else :	// i.e. no records exists...
+	  ?>
+		  <tr>
+			  <td style="text-align:center;" height="80" colspan="20">No data available!!!</td>
+		  </tr>
+	  <?php
+		   endif;
+	  ?>
+  
+</table>
+
+<div class="paging" >
+            <ul><?= $page_links ?></ul>
+</div>	

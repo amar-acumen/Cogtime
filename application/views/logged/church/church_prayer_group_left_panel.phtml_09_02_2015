@@ -1,0 +1,20 @@
+
+    <div class="activity-left">
+    	<ul class="left-list">
+		<? 
+        if(subadmin_access('prayer_group'))
+        {
+            ?>
+            <li><a href="<?=base_url().''.$_SESSION['logged_church_id']?>/create-prayer-group">Create Prayer Group</a></li> 
+		<? 
+        } 
+        else 
+        {
+            ?>		
+            <li><a href="<?=base_url().''.$_SESSION['logged_church_id']?>/request">Invitations</a></li>		
+		<?php } 
+        ?>
+		<li><a href="<?=base_url().''.$_SESSION['logged_church_id']?>/church-prayer-group" class="active">Prayer Groups</a></li>
+        </ul>
+    </div>
+    

@@ -1,0 +1,164 @@
+<?php
+//pr($my_album_videos_content);
+if(count($my_album_videos_content))
+{
+    foreach($my_album_videos_content as $v)
+    {
+        $IMG = base_url()."uploads/user_videos/".getThumbName($v['s_video_image'],'bigthumb');
+        $profile_link = get_video_url($v['id'],$v['s_title']);
+?>
+    <div class="shade_box_01">
+        <div class="left_div02 small">
+        
+        
+        
+        <a id="res_video_<?=$v['id']?>" href="<?= $profile_link?>">
+        <img src="<?=$IMG?>" alt=""  class="img_brd" style="margin-top: 2px;"/> 
+        </a>
+            <p class="blue_bold12"> <a href="<?=$profile_link?>"><strong><?php echo my_substr($v['s_title'],22)?></strong></a></p>
+            <p class="light_blue12"><?php echo my_substr($v['s_video_file_name'],32)?></p>
+            <p class="date-time"><?php //echo $v['dt_created_on']?></p>
+            
+            <p><?php echo substr($v['s_description'],0,100)?><?php if(strlen($v['s_description'])>100) echo "...";?></p>
+        </div>
+        
+        
+        
+        
+        
+         <div class="right_div02 small">
+                    <div class="box01" style="width: 132px;">
+                          <p class="date-time">Uploaded on :<?php echo getShortDate($v['dt_created_on'],5)?></p>
+                          
+                          <p> <img src="images/icons/edit.png" alt="" /> <a  href="javascript:void(0);" class="blue_link" onclick="return organize_edit_video_(<?= $v['id']?>)">Edit </a> &nbsp; <img src="images/icons/delete.png" alt="" /> <a  href="javascript:void(0);" class="blue_link" onclick="return delete_video_id_set_(<?= $v['id']?>);">Delete</a> </p>
+                    </div>
+         </div>
+        
+          <div class="clr"></div>
+        
+        
+        
+        
+        <div class="light_heading"> 
+             <div class="left"><a href="javascript:void(0);" class="comments_div<?=$v['id']?>"  onclick="return show_comments(<?=$v['id']?>)<?php /*?>show_dialog('view_comments_div')<?php */?>">Comments (<?=$v['total_comments']?>)</a> &nbsp; |   &nbsp; <a href="javascript:void(0);"   onclick="return show_people_liked(<?=$v['id']?>); " class="liked_by_<?=$v['id']?>">Liked by (<?=count_photo_like_link($v['id'],'video')?>)</a></div>
+             
+        <?php if((show_photo_like_link($v['id'],'video') == TRUE) ) { 
+        ?>
+                <div class="right"><a href="javascript:void(0);" >Comment</a> &nbsp; |   &nbsp; <a href="javascript:void(0);" id="like_count_<?=$v['id']?>" onClick="windowLike(<?=$v['id']?>,'Like')">Like</a>  </div>                
+       <?php } 
+               else{ 
+       ?>
+                 <div class="right"><a href="javascript:void(0);" >Comment</a> &nbsp; |   &nbsp; <a href="javascript:void(0);" id="like_count_<?=$v['id']?>" >Like</a> </div>
+          
+       <?php }?>
+             
+              
+         </div>
+         
+          <!-- slide section start -->
+            <div class="new-wl">
+            <!--comment section start-->
+                <div  class="comments-number content-width" >
+                  <div class="comments-number-mid">
+                      <div class="heading">
+                            <div class="left">
+                                  <h4><img class="cmnt" src="images/icons/cmnt2.png" alt="" /> <span class="comments_div<?=$v['id']?>">Comments (<?=$v['total_comments']?>)</span> </h4>
+                                  <img class="wal-minus" alt="" src="images/minus-white.png" />
+                            </div>
+                       </div>
+                       <DIV id="video_comment_div<?=$v['id']?>"></DIV>
+                    </div>
+                </div>
+            <!--comment section end-->	
+            <!--like by section start-->
+                <div  class="comments-number content-width" >
+                  <div class="comments-number-mid">
+                      <div class="heading">
+                            <div class="left">
+                                  <h4><img alt="" src="images/heart2.png" class="cmnt" /> <span class="liked_by_<?=$v['id']?>">Liked by (<?=count_photo_like_link($v['id'],'video')?>)</span> </h4>
+                                   <img class="wal-minus" alt="" src="images/minus-white.png" />
+                            </div>
+                      </div>
+                      
+                        <div class="shade_box_white" id="video_like_div<?=$v['id']?>">
+                        </div>
+                   </div>
+            	</div>
+            <!--like by section end-->
+                
+            </div>
+            <div class="new-wl-right">
+                <!--comment section start-->
+                <div  class="comments-number content-width" >
+                  <div class="comments-number-mid">
+                      <div class="heading">
+                            <div class="left">
+                                  <h4><img alt="" src="images/no.png" class="cmnt" />  Comment  </h4>
+                                  <img class="wal-minus" alt="" src="images/minus-white.png" />
+                            </div>
+                      </div>
+                      
+                      <div class="txt_content01 comments-number-content"> 
+                      <textarea class="wal-comment-textarea" id="feed_comment_box_<?=$v['id']?>"  cols="" rows=""></textarea>
+                      <input type="button" value="Post" class="yellow-btn" id="post_comment_button" onclick="post_comment(<?=$v['id']?>)" />
+                      <br class="clr" />
+                      </div>
+                </div>
+                </div>
+                <!--comment section end-->	
+            </div>
+          <!-- slide section end -->
+         
+         
+         
+     </div>
+		<script type="text/javascript">
+		$(function(){
+		//8-oct-2013
+			$('.left a').click(function(){
+				
+				var index=$(this).index();
+				$('.new-wl > .comments-number').css('display','none');
+				$('.new-wl-right > .comments-number').css('display','none');
+				$(this).parent().parent().next('.new-wl').children('.comments-number').filter(':eq('+ index +')').slideDown('slow');
+			})
+				
+				
+			$('.right a').click(function(){
+				var index=$(this).index();
+				$('.new-wl > .comments-number').css('display','none');
+				$('.new-wl-right > .comments-number').css('display','none');
+				$(this).parent().parent().next().next('.new-wl-right').children('.comments-number').filter(':eq('+ index +')').slideDown('slow');
+			
+			})
+			$('.wal-minus').click(function(){
+				$(this).parents('.comments-number').slideUp('fast');
+			
+			})
+		//8-oct-2013
+		});
+		</script>
+<?php    
+    }//endforeach
+}//endif
+
+else
+{
+            echo  '<div class="shade_box_01" style="padding-top:5px;"><div  class="shade_norecords" style="width:260px;"><p class="blue_bold12">No Video Albums.</p></div></div>';
+}
+?>
+
+<?php /*if($page_links){ ?>
+<div class="pagination">
+
+    <div class="left">Viewing Page <?=$current_loaded_page_no?> of <?=$total_pages?> </div>
+    
+    <div class="right">
+           <ul class="small-paging">
+            <?=$page_links?> 
+            </ul>
+    </div>
+</div>
+<?php  }*/
+?>
+

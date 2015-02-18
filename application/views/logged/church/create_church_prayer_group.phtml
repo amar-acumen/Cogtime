@@ -1,0 +1,178 @@
+<!-- header -->
+<?php
+	include(APPPATH ."views/layouts/church_logged_header.phtml");
+?>
+
+<!-- CONTENT SECTION -->
+<?php //pr($church_arr); ?>
+<div class="container">
+  
+  <div class="main-page">
+  	<h3 class="page-heading">Prayer Group</h3>
+   <?php include(APPPATH ."views/logged/church/church_prayer_group_left_panel.phtml");?>
+    <div class="activity-right">
+        <div class="activity-comment-box">
+                                <form id="add_prayer_grp"  action="" method="post" class="create-ring">
+                                    <div class="lable01"> Prayer Group Name:</div>
+                                    <div class="field03">
+                                    <input type="text" class="amount-input prayer-No-input" name="txt_group_name" id="txt_group_name" />
+                                    </div>
+                                    <div class="clr"></div>
+
+                                    <div class="lable01">Denomination:</div>
+                                    <div class="field03">
+                       <select  name="sel_denomination" id="sel_denomination" class="amount-input prayer-No-input" >
+                                        <option value="-1">Select</option>
+                                        <?= makeOptionDenomination() ?>
+                                    </select>
+                                    </div>
+                                    <div class="clr"></div>
+                                         <div class="lable01">Invite Partner From :</div>
+<div class="field03" >
+
+
+
+                                    <?php 
+                                    $members=get_invitation_member_list('' ,$_SESSION['logged_church_id']);
+                                    ?>
+                                            <select id="frndinv" multiple="multiple" style="width:370px" name="frndinv[]">
+									 <?php foreach($members as $k=>$v){ ?>
+									 <?=get_username_by_id($v->member_id)?>
+										<option value="<?=$v->member_id?>" ><?=get_username_by_id($v->member_id)?></option> 
+									 <?php }?>
+									 </select>
+                                         <span id="err_invite_frnd" class="error-message"></span> 
+
+                    
+
+                                    </div>
+                                    <div class="clr"></div>
+                                    <div class="lable01">&nbsp;</div>
+                                    <div class="field03">
+                                    <input type="button" class="btn" value="Create" id="create_bt" onclick="add_group()" />
+									</div>
+
+                                    <div class="notification-list-box similar_prayer_grp" id="main_div" style="width:630px; display:none;">
+                                        <h3 style="color:#2B629C; padding-bottom:15px; padding-top:15px;">Prayer group with similar name and denomination already exists, are you sure want to create this group?</h3>
+                                        <ul class="prayermember-ul">
+                                            <DIV id="srchContent"></DIV>
+                                        </ul>
+                                        <p style="color:#2B629C; padding-top:15px;">Thanks, I will create my own Group</p>
+                                        <input type="button" class="yellow-btn" value="Confirm" id="confirm_bt" onclick="add_group()" style="display:none;margin-top: 10px;" />
+                                    </div>
+                                </form>
+                            </div>
+
+
+    </div>
+    <div class="clear"></div>
+    
+    
+  </div>
+</div>
+
+<!-- /CONTENT SECTION -->
+<div class="clr"></div>
+<!-- FOOTER SECTION -->
+<?php include(APPPATH."views/layouts/church_footer.phtml");?>
+<!-- /FOOTER SECTION -->
+
+<script type="text/javascript">
+$(document).ready(function() {
+    $("#frndinv").multiselect().multiselectfilter();
+	// for AJAX page-submission...
+    var options = { 
+        beforeSubmit:  showLoading,  // pre-submit callback 
+        success:       validateFrm // post-submit callback 
+    }; 
+    // bind to the form's submit event 
+    $('#public_wall_post_form').submit(function() {
+        $(this).ajaxSubmit(options);
+        return false;
+		
+    });
+});
+
+
+function add_group(){
+      
+       if($('#txt_group_name').val() == ''){
+            showUIMsg('Please provide prayer group name!');
+            return false;
+       }
+	   if($('#sel_denomination').val() == '-1'){
+		   showUIMsg('Please provide prayer group denomination!');
+           return false;
+	   }
+       showUILoader_nodialog('<img src="'+base_url+'images/loading_big.gif" width="50"/> ');
+        var datatosend=$("#add_prayer_grp").serialize();
+      
+          $.ajax({
+             type: "POST",
+             url: base_url+'<?=$_SESSION['logged_church_id']?>/create-prayer-group.html',
+             data: datatosend,
+             dataType: 'json',
+             success: function(data){
+                  if(data.success == true){
+					  hideUILoader_nodialog();
+					  showUIMsg(data.msg);
+					  window.location = base_url+'<?=$_SESSION['logged_church_id']?>/church-prayer-group';
+				  }
+				  else{
+					  hideUILoader_nodialog();
+					  showUIMsg(data.msg);
+					  return false;
+				  }
+				  
+                  
+                  
+             }
+           });     
+}
+function validateFrm(jsondata)
+{return false;
+	//alert(jsondata.feed);
+	var data = JSON.parse(jsondata);
+	//alert(data.msg); alert(data.vid_msg);
+	if(data.success==false) 
+	{
+		hideLoading(); 
+		if(data.vid_msg == ''){
+			showUIMsg(data.msg);
+		}else{
+			showUIMsg(data.vid_msg);
+		}
+	}
+	else {
+		hideLoading(); 
+		/*$("#public_wall_post_form")[0].reset(); 
+		$('#all_photos').html('');
+		$('#hdnflds').html('');
+		$('.tab_content ul li').removeClass('select');
+		$('.tab_content ul li').first().addClass('select');
+		var index = 0;
+		
+		$('.tab_details > div').hide();
+		$('.tab_details > div').filter(':eq(' + index + ')').show();
+		$('.tab_details .sec-title').filter(':eq(' + index + ')').show();
+		$('.tab_details .sec-detail').filter(':eq(' + index + ')').show();
+		$('.tab_details .title-body').filter(':eq(' + index + ')').show();
+		$("#comment_result_div").html(base64_decode(data.feed)+$('#comment_result_div').html());
+                
+                $("#wallMsg").html('My Wall Messages &amp; Comments');
+                $("#noPost").html('');
+                
+		//$('[id^="myvideo_big_thumb_1_"]').trigger('click');
+		$('#text_count').html('');
+		$('#text_count').html('0');*/
+		
+		$("#public_wall_post_form")[0].reset(); 
+		$('#all_photos').html('');
+		$('#hdnflds').html('');
+		$('.upload-image,.upload-video,.upload-audio').hide();
+		showUIMsg(data.msg);		
+		//location.reload();
+		//window.location.href=g_controller_url;
+	}
+}
+</script>

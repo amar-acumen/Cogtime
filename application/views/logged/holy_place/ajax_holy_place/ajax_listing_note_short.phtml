@@ -1,0 +1,74 @@
+<?php
+#pr($note_arr,1);
+if($note_arr)
+{
+	?>
+    <ul class="right-marked" id="note_ul">
+    <?php
+	foreach($note_arr as $val)
+	{
+		?>
+		<li>
+			<span class="icon">
+            <?php
+			if($type=='note')
+				$image	= 'images/note-small.gif';
+			else if($type=='bkmark')
+				$image	= 'images/bookmark-small.gif';
+			else if($val['rowtype']=='hilits')
+			{
+				$image	= $val['images'];
+			}
+			?>
+            <img src="<?php echo $image?>" alt="Note">
+            </span>
+            <div class="content">
+                <p class="title-text">
+                <?php
+				if($val['i_page_bookmark']>0)
+				{
+					echo "Page bookmark ";
+				}
+				?>
+                	<a href="javascript:void(0);" onclick="gotoVerse('<?php echo $val['vid']?>');"><?php echo $val['book_name'].' '.$val['chapter'].':'.$val['i_verses']?></a>
+                    
+                    
+                    <?php
+					
+					if($type=='hilits')
+					{
+					?>
+                    	<a href="javascript:void(0);" class="delete-button" title="Delete" onclick="show_dialog('delete_hilits'); $('#deleteHilitsId').val('<?php echo encrypt($val['noteid'])?>');"></a>
+                    <?php
+					}
+					else if($type=='bkmark')
+					{
+					?>
+                    	<a href="javascript:void(0);" class="delete-button" title="Delete" onclick="show_dialog('delete_bkmark'); $('#deleteBkmarkId').val('<?php echo encrypt($val['noteid'])?>')"></a>
+                    <?php
+					}
+					else if($type=='note')
+					{
+					?>
+                    	<a href="javascript:void(0);" class="delete-button" title="Delete" onclick="show_dialog('delete_note'); $('#deletenoteid').val('<?php echo encrypt($val['noteid'])?>')"></a>
+                    	<a href="javascript:void(0);" class="edit-button" title="Edit" onclick="showEditNote('<?php echo encrypt($val['noteid'])?>');"></a>
+                    <?php
+					}
+					?>
+                </p>
+                <p><?php echo $val['s_note']?></p>
+            </div>
+		</li>
+		<?php
+	}
+	?>
+    </ul>
+    <?php
+}
+else
+{
+?>
+<div style="width:100%; text-align:center; padding-top:20px;">No Records</div>
+<?php
+}
+?>

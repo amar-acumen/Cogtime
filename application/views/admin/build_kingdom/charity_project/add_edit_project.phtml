@@ -1,0 +1,373 @@
+<script type="text/javascript">
+var  dateToday = new Date();	
+$(document).ready(function() {
+	$('.datepicker').datepicker({dateFormat : 'dd/mm/yy'});
+});
+
+
+var g_mindate = null;
+var g_maxdate = null;
+$(function() {
+	$( "#date_to1" ).datepicker({
+			defaultDate: "+1w",
+			changeMonth: true,
+			onSelect: function( selectedDate ) { 
+				$('.datepicker').datepicker({dateFormat : 'dd/mm/yy'});
+				$('.datepicker').datepicker( "option", "minDate", selectedDate );
+				$("[id^='datepicker']" ).datepicker( "option", "minDate", selectedDate );
+				g_mindate = selectedDate;
+			}
+	});
+	$( "#date_to2" ).datepicker({
+		defaultDate: "+1w",
+		changeMonth: true,
+		onSelect: function( selectedDate ) { 
+			$('.datepicker').datepicker({dateFormat : 'dd/mm/yy'});
+			$('.datepicker').datepicker( "option", "maxDate", selectedDate );
+			$("[id^='datepicker']" ).datepicker( "option", "maxDate", selectedDate );
+			g_maxdate = selectedDate;
+		}
+	});
+});
+
+</script>
+<?php
+	if($mode == 'edit'){
+?>
+<script type="text/javascript">
+$(document).ready(function() {
+	$('.datepicker').datepicker( "option", "minDate", '<?=$posted['dt_start_date']?>' );
+	$("[id^='datepicker']" ).datepicker( "option", "minDate", '<?=$posted['dt_start_date']?>' );
+	$('.datepicker').datepicker( "option", "maxDate", '<?=$posted['dt_end_date']?>' );
+	$("[id^='datepicker']" ).datepicker( "option", "maxDate", '<?=$posted['dt_end_date']?>' );
+});
+</script>
+<?php	
+	}
+
+?>
+
+<div class="clr"></div>
+<!-- CONTENT SECTION -->
+<!--navigation section start -->
+<?php include(APPPATH."views/layouts/admin/admin_nav.phtml");?>
+<!--navigation section end -->
+<div id="content_section">
+      <div id="container">
+            <!--<div id="top_corner">&nbsp;</div> -->
+            <div id="mid_content">
+                  <div class="page_heading left">
+                        <div class="left"><img src="../images/icons/login.png" alt="" /> <?=($mode == 'add')?'Add':'Edit'?> Charity Project</div>
+                  </div>
+                  <div class="clr"></div>
+                  <?php 
+				  			$form_name = ($mode == 'add')?'frm_project':'frm_edit_project';
+							$submit_method = ($mode == 'add')?'return post_frm_ajax();':'return post_frm_edit_ajax();';
+				  ?>
+                  
+                  
+                  <div id="right_container">
+                        <div class="arrow_btm"></div>
+                        <div class="content_area frm_box ">
+                        	  <form id="<?=$form_name?>" action="" method="post" enctype="" onsubmit=" <?=$submit_method?>">
+                                  <div class="lable01"><span class="red-mark">*</span> Project Title :</div>
+                                  <div class="field01">
+                                        <input name="txt_title" id="txt_title" type="text" value="<?=$posted['s_title']?>" />
+                                  </div>
+                                  
+                                   <div class="error-message" id="err_title"></div>
+                                  <div class="clr"></div>
+                                  
+                                      <div class="lable01">Location :</div>
+                                  
+                                      <div class="second-lavel">
+                                      
+                                          <div class="lable02"><span class="red-mark">*</span> Country :</div>	
+                                          <div class="field02">
+                                               <?php /*?><select name="sel_country" id="sel_country" style="width:285px; margin-bottom:6px;" value="<?=$posted['i_country_id']?>">
+                                                  <option value="-1">Select</option>
+                                                   <?=makeOptionCountry('',encrypt($posted['i_country_id']));?>
+                                                </select>
+                                                <?php */?>
+                                              <select name="sel_country" id="sel_country" style="width:285px; margin-bottom:6px;" onchange="showState(this.value);">
+                                                 <option value="-1">---</option>
+                                                 <?=makeOptionCountryNew('',encrypt($posted['i_country_id']));?>
+                                                 
+                                              </select>
+                                                
+                                          </div>
+                                          
+                                          <div class="error-message" id="err_country"></div>
+                                          <div class="clr"></div>
+                                          
+                                          <div class="lable02"><span class="red-mark">*</span> State :</div>	
+                                          <div class="field02">
+                                                <?php /*?><input name="txt_state" id="txt_state" type="text"  value="<?=$posted['s_state']?>"/><?php */?>
+                                                 <select name="txt_state" id="txt_state" style="width:285px; margin-bottom:6px;" onchange="showCity(this.value);">
+                                                   <option value="-1">---</option>
+                                                   <?=$state;?>
+                                                 
+                                                 </select>
+                                                
+                                          </div>
+                                          <div class="error-message" id="err_state"></div>
+                                          <div class="clr"></div>
+                                          
+                                          
+                                          <div class="lable02"><span class="red-mark">*</span> City :</div>	
+                                          <div class="field02">
+                                                <?php /*?><input name="txt_city" id="txt_city" type="text" value="<?=$posted['s_city']?>" /><?php */?>
+                                                
+                                               <select name="txt_city" id="txt_city" style="width:285px; margin-bottom:6px;">
+                                                 <option value="-1">---</option>
+                                                 <?=$city;?>
+                                              </select>
+                                          </div>
+                                          <div class="error-message" id="err_city"></div>
+                                          <div class="clr"></div>
+                                          
+                                      </div>
+                                 	  <div class="clr"></div>
+                                 
+                                 
+                                  <div class="lable01">Duration :</div>
+                                  <div class="second-lavel">
+                                  		<div class="lable02" style="width:95px;"><span class="red-mark">*</span> Start date :</div>
+                                        <input type="text"  value="<?=$posted['dt_start_date']?>" name="date_to1" id="date_to1"  readonly="readonly" class="date-field2 "/>
+                                        <img src="../images/icons/cal.png" alt="" onclick="$(this).prev().focus()" class="calender2" />
+										<script type="text/javascript">
+                                           $(document).ready(function(arg) {
+                                          	   $("#date_to1").datepicker({
+												   		minDate: dateToday,
+														dateFormat : 'dd/mm/yy'
+												});
+                                          });
+										   
+                                        </script>
+                                        
+                                        <div class="lable02" style="width:56px;"><span class="red-mark">*</span> To date :</div>
+                                        <input type="text" value="<?=$posted['dt_end_date']?>" name="date_to2" id="date_to2"  readonly="readonly" class="date-field2 "/>
+                                        <img src="../images/icons/cal.png" alt="" onclick="$(this).prev().focus()" class="calender2 noMargin" />
+										<script type="text/javascript">
+                                           $(document).ready(function(arg) {
+                                               $("#date_to2").datepicker({
+												   minDate: dateToday,
+												   dateFormat : 'dd/mm/yy'
+												  });
+                                            });
+                                        </script>
+                                  </div>
+                                  <div class="error-message" id="err_date_to1" ></div>
+                                  <div class="clr"></div>
+                                   
+                                  <div class="error-message"  id="err_date_to2"></div>
+                                   <div class="clr"></div>
+                                  
+                                  
+                                  <div class="lable01"><span class="red-mark">*</span> Description : </div>
+                                  <div class="field01">
+                                        <textarea  name="ta_description" id="ta_description" onKeyDown="limitText(this.form.ta_description,this.form.countdown,500);" 
+onKeyUp="limitText(this.form.ta_description,this.form.countdown,500);" style="height:130px;"><?=$posted['s_description']?></textarea>
+									 <div class="clr"></div>
+                                  <span>(Max 500 characters.)</span>	
+                                  </div>
+                                 <div class="error-message" id="err_description"></div>
+                                 <div class="clr"></div>
+                                  
+                                  
+                                  <div class="lable01"><span class="red-mark">*</span> Project Cost :</div>
+                                  <div class="field01">
+                                        <input name="txt_project_cost" id="txt_project_cost" type="text" value="<?=$posted['f_project_cost']?>" />
+                                  </div>
+                                  
+                                  <div class="error-message" id="err_project_cost"></div>
+                                  <div class="clr"></div>
+                                  
+                                  <?php if($mode == 'add'){
+								   ?>
+                                   		<div class="lable01"><span class="red-mark">*</span> Required Skills :</div>
+                                         
+                                        
+                                        <div class="field01">
+                                              <input name="txt_skill[]" type="text" value=""/>
+                                        </div>
+                                        <div class="error-message" id="err_skill_name_1"></div>
+                                        <div class="clr"></div>
+                                        
+                                        
+                                        <div class="lable01"><span class="red-mark">*</span> Required Manpower :</div>
+                                        <div class="field01">
+                                              <input name="txt_manpower[]" type="text" value=""/>
+                                        </div>
+                                        <div class="error-message" id="err_manpower_1"></div>
+                                        <div class="clr"></div>
+                                        
+                                        
+                                        <div>
+                                        <div class="lable01">Skill Required for :</div>
+                                        <div class="second-lavel">
+                                              <div class="lable02" style="width:95px;"><span class="red-mark">*</span> From date :</div>
+                                              <input type="text" value="" name="skill_date_from[]" id=""  readonly="readonly" class="date-field2 datepicker"/>
+                                              <img src="../images/icons/cal.png" alt="" onclick="$(this).prev().focus()" class="calender2" />
+                                              
+                                              
+                                              <div class="lable02" style="width:56px;"><span class="red-mark">*</span> To date :</div>
+                                              <input type="text"  value="" name="skill_date_to[]" id=""  readonly="readonly" class="date-field2 datepicker"/>
+                                              <img src="../images/icons/cal.png" alt="" onclick="$(this).prev().focus()" class="calender2 noMargin" />
+                                          
+                                              <div class="clr"></div>
+                                              
+                                              
+                                             
+                                        </div>
+                                        <div class="error-message" id="err_skill_date_from_1" ></div>
+                                        <div class="clr"></div> 
+                                        
+                                         <div class="error-message" id="err_skill_date_to_1" ></div>
+                                         </div>
+                                  		
+                                  <?php 
+								   		}
+								  			$skill_count = 0;
+											
+											
+											if(count($skill_info)){
+												foreach($skill_info as $key=>$s_val){
+													$skill_count++;
+								  ?>
+                                 
+                                  
+                                  <div id="skill_block_<?=$skill_count?>">
+                                  		 <?php if($key != 0){ ?>
+                                          <div class="close_extra_div" style="text-align:right;margin-right: 170px; margin-top:10px;"><a class="close" href="javascript:void(0);" onClick="removeExtraSkillDiv(<?=$s_val['id']?>, <?=$key+1?>)"><img src="<?= base_url()?>images/icons/close.png" alt="" ></a></div>
+                                          <?php } ?>
+                                  
+                                        <div class="lable01">Required Skills :</div>
+                                         
+                                        
+                                        <div class="field01">
+                                              <input name="txt_skill[]" type="text" value="<?=$s_val['s_name']?>"/>
+                                        </div>
+                                        <div class="error-message" id="err_skill_name_1"></div>
+                                        <div class="clr"></div>
+                                        
+                                        <div class="lable01"> <?php if($key == 0){ ?><span class="red-mark">*</span><?php } ?> Required Manpower :</div>
+                                        <div class="field01">
+                                              <input name="txt_manpower[]" type="text" value="<?=$s_val['i_total_manpower_req']?>"/>
+                                        </div>
+                                        <div class="error-message" id="err_manpower_1"></div>
+                                        <div class="clr"></div>
+                                        
+                                      
+                                        <div id="skill_container_div_<?=$skill_count?>" >
+                                        <div class="lable01">Skill Required for :</div>
+                                        <div class="second-lavel">
+                                              <div class="lable02" style="width:95px;"> <?php if($key == 0){ ?><span class="red-mark">*</span> <?php } ?>From date :</div>
+                                              <input type="text" value="<?=getShortDate($s_val['dt_start_date'],3)?>" name="skill_date_from[]" id=""  readonly="readonly" class="date-field2 datepicker"/>
+                                              <img src="../images/icons/cal.png" alt="" onclick="$(this).prev().focus()" class="calender2" />
+                                              <script type="text/javascript">
+                                                 $(document).ready(function(arg) {
+                                                    // $.datepicker.setDefaults($.datepicker.regional['']);
+                                                     //$("#skill_date_from<?=$skill_count?>").datepicker($.datepicker.regional['en']);
+                                                 });
+                                              </script>
+                                              
+                                              <input type="hidden" name="dbid[]" value="<?=$s_val['id']?>" />
+                                              <div class="lable02" style="width:56px;"><?php if($key == 0){ ?><span class="red-mark">*</span> <?php } ?>To date :</div>
+                                              <input type="text"  value="<?=getShortDate($s_val['dt_end_date'],3)?>" name="skill_date_to[]" id=""  readonly="readonly" class="date-field2 datepicker"/>
+                                              <img src="../images/icons/cal.png" alt="" onclick="$(this).prev().focus()" class="calender2 noMargin" />
+                                          
+                                              <div class="clr"></div>
+                                              
+                                              
+                                             
+                                        </div>
+                                        <div class="error-message" id="err_skill_date_from_1" ></div>
+                                        <div class="clr"></div> 
+                                        
+                                         <div class="error-message" id="err_skill_date_to_1" ></div>
+                                         </div>
+                                   </div>
+                                   
+                                   <?php	} 
+								   		}
+								   ?>
+                                   
+                                   
+                                   <div class="clr"></div>
+                                   <div id="add_more_skill_container"></div>
+                                  <div class="second-lavel" style="margin-left: 285px; margin-top:10px;">
+                                    <a href="javascript:void(0);" class="add-more" onClick="return admin_add_extra_skill_div()">Add More Skill</a></div>
+                                     <div class="clr"></div>
+                                   
+                                   
+                                   
+                                   <input type="hidden" name="total_skill_divs" id="h_skill" value="<?=$skill_count?>" />
+                                   <input type="hidden" name="project_id" id="project_id" value="<?=$project_id?>"  />
+                                   
+                                  
+                                  <div class="lable01">&nbsp;</div>
+                                  <div class="field01">
+                                        <?php if($mode == 'Add'): ?>
+                                        	<input name="" type="submit" class="btn"  value="Add"/>
+                                   <?php else :?>
+                                    		<input name="" type="submit" class="btn"  value="Update"/>
+                                    <?php endif;?>
+                                        <input name="" type="reset" class="btn"  value="Cancel" onclick="window.location='<?=admin_base_url().'charity-projects.html'?>'"/>
+                                        
+                                        <input type="hidden" name="deleted_work_ids" id="deleted_work_divs" value="" />
+                                  </div>
+                              </form>
+                              <div class="clr"></div>
+                        </div>
+                  </div>
+                  <div class="clr"></div>
+            </div>
+            <!--<div id="bot_corner">&nbsp;</div> -->
+      </div>
+      <div class="clr"></div>
+</div>
+<!-- /CONTENT SECTION -->
+
+
+<div id="skill_html" style="display:none;">
+	<div class="copy_html_div">
+		  
+          <div class="close_extra_div" style="text-align:right;margin-right: 170px; margin-top:10px;"><a class="close" href="javascript:void(0);" onClick="removeExtraSkillDiv('hide_only')" ><img src="<?= base_url()?>images/icons/close.png" alt="" ></a></div>
+      
+          <div class="lable01">Required Skills :</div>
+          <div class="field01">
+                <input name="txt_skill[]" type="text" value="<?=$posted['']?>"/>
+          </div>
+          <div class="error-message skill_name_err" ></div>
+          <div class="clr"></div>
+          
+          <div class="lable01"><span class="red-mark">*</span> Required Manpower :</div>
+          <div class="field01">
+                <input name="txt_manpower[]" type="text" value=""/>
+          </div>
+          <div class="error-message" id="err_manpower_1"></div>
+          <div class="clr"></div>
+        
+        
+          <div class="lable01">Skill Required for :</div>
+          <div class="second-lavel">
+                <div class="lable02">From date :</div>
+                <input type="text" value="" name="skill_date_from[]" id=""  readonly="readonly" class="date-field2  html_frm_date"/>
+                <img src="../images/icons/cal.png" alt="" onclick="$(this).prev().focus()" class="calender2" />
+               
+                <div class="lable02" style="width:54px;">To date :</div>
+                <input type="text"  value="" name="skill_date_to[]" id=""  readonly="readonly" class="date-field2  html_to_date"/>
+                <img src="../images/icons/cal.png" alt="" onclick="$(this).prev().focus()" class="calender2 noMargin" />
+                
+                <div class="clr"></div>
+                
+          </div>
+          <div class="error-message skill_from_date_err"  ></div>
+          <div class="clr"></div> 
+          
+           <div class="error-message skill_to_date_err" ></div>
+           </div>
+           <input type="hidden" name="db_id[]" id="dbId" value=""  />
+     </div>
+</div>

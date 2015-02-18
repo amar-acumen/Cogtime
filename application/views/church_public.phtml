@@ -1,0 +1,83 @@
+<?php
+	include(APPPATH ."views/layouts/church_header.phtml");
+?>
+
+<!-- CONTENT SECTION -->
+<?php //pr($church_arr); 
+$open_time = json_decode($church_arr[0]->ch_open_time);
+$close_time = json_decode($church_arr[0]->ch_close_time);
+//pr($open_time);
+//pr($close_time);exit;
+//pr($ser_arr);
+?>;
+</div>
+<div class="container">
+  <div class="church-left">
+    <div class="church-service">
+      <h3>Services Today</h3>
+      <ul>
+          <?php 
+          if(!empty($ser_arr)){
+              foreach ($ser_arr as $val){
+          ?>
+        <li><span><?= $val->c_start_time; ?></span><?= $val->c_des; ?></li>
+          <?php 
+              }
+              } else{?> 
+               <li>no service found</li>             
+              <?php } ?>
+       
+      </ul>
+    </div>
+    <div class="church-time">The Church is open 
+<ul class="ch-notification">
+	<?php foreach ($open_time As $openkey => $openval) { ?>
+	<li><?= $openkey; ?> from <?= $openval; ?> - <?= $close_time->$openkey; ?></li>
+	<?php } ?>
+    </ul>
+	</div>
+  </div>
+  <div class="church-right">
+    <h3><?= $church_arr[0]->w_heading; ?> <?= $church_arr[0]->s_name; ?></h3>
+    <p><?= $church_arr[0]->w_des; ?> </p>
+     <ul class="church-gallery">
+        <?php
+                 $img1 = get_church_land_image1($church_arr[0]->id, 'main', $church_arr[0]->img1);
+                 $img2 = get_church_land_image2($church_arr[0]->id, 'main', $church_arr[0]->img2);
+                 $img3 = get_church_land_image3($church_arr[0]->id, 'main', $church_arr[0]->img3);
+                 $img4 = get_church_land_image4($church_arr[0]->id, 'main', $church_arr[0]->img4)
+                 ?>
+              <?php 
+              if(!empty($church_arr[0]->img1)){
+              
+              ?>
+        <li style="background:url(<?= $img1 ?>) top center no-repeat;"><?php if(!empty($church_arr[0]->img1_des)) { ?><span><?php  echo $church_arr[0]->img1_des;  ?></span><?php } ?></li>
+         <?php
+              }
+              if(!empty($church_arr[0]->img2)){
+         ?>
+      <li style="background:url(<?= $img2 ?>) top center no-repeat;" class="noRightMargin"><?php  if(!empty($church_arr[0]->img2_des)){ ?><span> <?php  echo $church_arr[0]->img2_des;  ?></span><?php } ?></li>
+      <?php
+              }
+              if(!empty($church_arr[0]->img3)){
+              
+      ?>
+      <li style="background:url(<?= $img3 ?>) top center no-repeat;"><?php if(!empty($church_arr[0]->img3_des)){ ?><span><?php echo $church_arr[0]->img3_des;  ?></span><?php } ?></li>
+      <?php
+              }if(!empty($church_arr[0]->img4)){
+      ?>
+      <li style="background:url(<?= $img4 ?>) top center no-repeat;" class="noRightMargin"><?php if(!empty($church_arr[0]->img4_des)){ ?><span> <?php echo $church_arr[0]->img4_des;  ?></span><?php } ?></li>
+      <?php 
+              }
+      ?>
+    </ul>
+  </div>
+  <div class="clear"></div>
+</div>
+<!-- /CONTENT SECTION -->
+<div class="clr"></div>
+<!-- FOOTER SECTION -->
+<?php include(APPPATH."views/layouts/church_footer.phtml");?>
+<!-- /FOOTER SECTION -->
+
+

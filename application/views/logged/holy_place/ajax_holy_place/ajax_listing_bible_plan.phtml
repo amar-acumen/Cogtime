@@ -1,0 +1,37 @@
+<?php 
+	if($readingplan)
+	{
+		?>
+		<table width="100%" border="0" cellspacing="0" cellpadding="0" class="view-plan-table">
+		<tr>
+		<th scope="col" width="47">Day</th>
+		<th scope="col" width="80">Date</th>
+		<th scope="col" width="260">Old Testanment</th>
+		<th scope="col" class="last">New Testanment</th>
+		</tr>
+		<?php 
+		#pr($readingplan);
+		foreach($readingplan as $plan)
+		{
+		?>
+		<tr>
+		<td align="center" valign="middle"><?php echo $plan['i_day']?></td>
+		<td align="center" valign="middle"><?php echo $plan['dt_date']?></td>
+		<td align="left" valign="middle">&nbsp;&nbsp;Start: 
+        <span class="start" onclick="gotoVerse('<?php echo $plan['i_verse_no_from']?>')" style="cursor:pointer;">
+			<?php echo $plan['s_book_name_from']?> <?php echo $plan['s_chapter_from']?>:<?php echo $plan['i_verse_from']?>
+        </span> 
+        	End: <span onclick="gotoVerse('<?php echo $plan['i_verse_no_till']?>')" style="cursor:pointer;">
+				<?php echo $plan['s_book_name_till']?> <?php echo $plan['s_chapter_till']?>:<?php echo $plan['i_verse_till']?>
+                </span></td>
+		<td align="left" valign="middle" class="last">&nbsp;&nbsp;Start: <span class="start" onclick="gotoVerse('<?php echo $plan['i_verse_no_from_n']?>')" style="cursor:pointer;">
+         <?php echo $plan['s_book_name_from_n']?> <?php echo $plan['s_chapter_from_n']?>:<?php echo $plan['i_verse_from_n']?></span> 
+        End: <span onclick="gotoVerse('<?php echo $plan['i_verse_no_till_n']?>')" style="cursor:pointer;"><?php echo $plan['s_book_name_till_n']?> <?php echo $plan['s_chapter_till_n']?>:<?php echo $plan['i_verse_till_n']?></span></td>
+		</tr>
+		<?php
+		}
+	?>
+	</table>
+<?php
+}
+?>

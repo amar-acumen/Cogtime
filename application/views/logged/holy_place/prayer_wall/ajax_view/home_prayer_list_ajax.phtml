@@ -1,0 +1,98 @@
+ 					  
+<?php
+//pr($arr_prayer_request); 
+
+if (count($arr_prayer_request)) {
+    $i = 1;
+    foreach ($arr_prayer_request as $key => $val) {
+
+        $IMG = base_url() . 'uploads/prayer_wall_photos/' . getThumbName($val['s_image_name'], 'mid');
+        $DESC = my_substr(htmlspecialchars_decode($val['s_description']), 95);
+
+        $s_subject = my_substr(htmlspecialchars_decode($val['s_subject']), 45);
+
+        $SHORT_DESC = ($val['s_description']);
+
+        $CSS = ($i % 4 == 0) ? 'no-right-mrgn' : '';
+        $twit_id = getTwitterUsernameById($val['i_user_id']);
+
+        $prayer_detail = base_url() . "prayer-wall/" . $val['id'] . "/prayer-wall-request-detail.html";
+        $TWEET_TEXT = 'Prayer Request by ' . $twit_id . ': <a href="' . $prayer_detail . '">' . $SHORT_DESC . '</a>';
+
+        $align = ($i % 4 == 0 || $i % 3 == 0) ? 'ryt_align' : 'left_align';
+
+        //$TWEET_TEXT = $SHORT_DESC;
+        ?>           
+
+
+        <!--prayer wall one start -->
+        <div class="prayer-wall-box <?= $CSS ?>" >
+         <!-- <img src="images/prayer-wall-1.jpg" alt="prayer wall"  />-->
+            <a class="link-detail" href="<?= base_url() ?>prayer-wall/<?= $val['id'] ?>/prayer-wall-request-detail.html"><div  class="wall-img" title="prayer wall" style="background:url(<?= $IMG ?>) no-repeat center; height:142px;"></div>
+
+                <p class="quoted-text" style="height:10px;"><?= $s_subject ?></p>
+                <p class="quoted-text" style="height:72px;">
+                    <?= $DESC ?>
+                    <span style="height:16px;">Updated on: <?= get_time_elapsed($val['dt_insert_date']) ?></span>
+                </p></a>
+            <h2 class="name"><?= $val['s_profile_name'] ?></h2>
+            <p class="place" style="height:15px;"><?= $val['s_country'] ?></p>
+            <p class="date-time"><span style="margin-right: 2px;">From: </span><?= getShortDateWithTime($val['dt_start_date'], 9) ?></p> 
+            <p class="date-time"><span style="margin-right: 18px;">To:</span><?= getShortDateWithTime($val['dt_end_date'], 9) ?></p>
+
+            <input type="hidden" id="ta_post_tweet_<?= $val["id"] ?>" value="<?= base64_encode($TWEET_TEXT) ?>" />
+            <div class="commitments">
+                <p>Commitments <span>(<?= $val['total_commitments'] ?>)</span></p>
+                <a class="tweet pop-tweet" href="javascript:void(0);"  onclick="show_tweetpopup(<?= $val['id'] ?>, '<?= $align ?>')"><?php /* ?>tweet_prayer_request(<?=$val['id']?>)<?php */ ?>Tweet</a>
+                <!--highlights start -->
+                <div class="floating-popup add-highlight floating-top" id="floating_tweet_popup<?= $val['id'] ?>" style="width:242px;">
+                    <div class="title">
+                        Tweet Prayer Request
+                        <a href="javascript:void(0);" class="close" title="Close" onclick="close_floating_tweet_popup(<?= $val['id'] ?>)"></a>
+                    </div>
+                    <div class="write-tweet" style="padding: 9px 17px; background:#CFCFCF; width:207px;">
+                        <form id="" method="post" action="">
+                            <?php /* ?><span class="tweet-top-curve"></span><?php */ ?>
+                            <div class="tweet-mid-curve"><textarea onblur="if (this.value == '')
+                                                this.value = 'Max 140 Characters';" onfocus="if (this.value == 'Max 140 Characters')
+                                                            this.value = '';" name="ta_post_tweet" id="ta_each_post_tweet_<?= $val["id"] ?>" class="tweet-comment-box" autocomplete="off" role="textbox" style="display: inline-block; height: 82px; width:200px;" onKeyDown="TweetlimitText(this.form.ta_post_tweet, this.form.countdown, 140);" 
+                                                                   onKeyUp="TweetlimitText(this.form.ta_post_tweet, this.form.countdown, 140);" >Max 140 Characters</textarea></div>
+
+                                <!--<input type="hidden" id="hd_tweet_id" value="">-->
+                            <input type="hidden" id="hidden_inputbox_<?= $val["id"] ?>" />
+                            <?php /* ?> <span class="tweet-bot-curve"></span><?php */ ?>
+                            <input type="button" class="tweetSubmit" value="Cancel" name="Cancel" style="display: inline;" onclick="close_floating_tweet_popup(<?= $val["id"] ?>);" />
+                            <input type="button" onclick="tweet_prayer_request(<?= $val["id"] ?>)" class="tweetSubmit" value="Tweet" name="" style="display: inline;" />
+                        </form>
+
+
+                        <div class="clr"></div>
+                    </div>
+                </div>
+                <!--highlights end -->
+            </div>
+
+        </div> 
+        <script type="text/javascript">
+            $(document).ready(function(arg) {
+                $('#ta_each_post_tweet_<?= $val["id"] ?>').triggeredAutocomplete({
+                    hidden: '#hidden_inputbox_<?= $val["id"] ?>',
+                    source: "<?php echo base_url() ?>logged/tweet_home/show_connections/",
+                    trigger: "@"
+
+                });
+                $('.pop-tweet').click(function() {
+                    clearInterval(clear_interval);
+                });
+            });
+
+        </script> 
+
+        <!--prayer wall one end  -->
+
+
+        <?php
+        $i++;
+    }
+}
+?>

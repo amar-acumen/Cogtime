@@ -1,0 +1,105 @@
+<?php
+	include(APPPATH ."views/layouts/church_logged_header.phtml");
+	//pr($member_arr);
+?>
+
+<!-- CONTENT SECTION -->
+<div class="container">
+  
+  <div class="main-page">
+  	<div class="member-find-main">
+    <!--<div class="members-main">
+    	<select name="member_id" id="member_id" tabindex="1">
+			<option>All Members (28,694)</option>
+            <option>All Members (28,694)</option>
+            <option>All Members (28,694)</option>
+		</select>
+    </div>-->
+    <div class="member-sc-main">
+    <div class="search-main">
+	<form name="search_frm" id="search_frm" method="POST" action="">
+    <input type="text" placeholder="Find a member" name="search_data" id="search_data" value="">
+       <input type="button" name="search_btn" id="search_btn" onclick="return search_result();">
+	   <input id="search_basic" type="hidden" name="search_basic" value="Y">
+	</form>
+    
+    </div>
+    <ul class="alphabate-filter">
+	<?php for ($i=65; $i<=90; $i++) { ?>
+	<li><a href="javascript:void(0);" id="search_by_alphabet_<?php echo chr($i); ?>" onclick="search_result('<?php echo chr($i); ?>');"><?php echo chr($i); ?></a></li>
+	<?php } ?>
+	</ul>
+	<div class="clear"></div></div>
+    
+    <div id="member-list">
+	<ul class="member-list" id="member_result_div">
+    	<?php echo $listingContent; ?>
+	</ul>
+		<div class="clear"></div>
+		<?php if ($no_of_result == 0):
+		?>
+			<div class="shade_box_01" style="padding-top:5px;"><div  class="shade_norecords" style="width:260px;"><p class="blue_bold12">No Member Found.</p></div></div>
+		<?php endif; ?>
+		<?php if ($no_of_result > $pagination_per_page): ?>
+             <div class="view_more" id="show_more_feeds_div"><a href="javascript:void(0);" class="see-more" title="See More" id="show_more_feeds_link" page_value="<?= $current_page_1 ?>" onclick="show_more_feeds($(this).attr('page_value'))">See more</a></div>
+		<?php endif; ?>
+            
+
+    
+  </div>
+<!-- /CONTENT SECTION -->
+<div class="clr"></div>
+<!-- FOOTER SECTION -->
+<?php include(APPPATH."views/layouts/church_footer.phtml");?>
+<!-- /FOOTER SECTION -->
+<script type="text/javascript">
+function search_result(serach_alphabet) {
+var base_url = '<?php echo base_url(); ?>';
+var search_data = $('#search_data').val();
+showUILoader_nodialog('<img src="'+base_url+'images/loading_big.gif" width="50"/> ');
+$.ajax({
+  url: base_url+'logged/church_members/members_search_result/',
+  type: 'POST',
+  data: {search_data:search_data,serach_alphabet:serach_alphabet},
+  success: function(data) {
+  //alert('#search_by_alphabet_'+serach_alphabet);
+	//called when successful	$('#search_by_alphabet_'+serach_alphabet).removeAttr('class','active');
+	$('#member_result_div').html(data);		$('a[id^=search_by_alphabet_]').removeClass('active');	$('#search_by_alphabet_'+serach_alphabet).attr('class','active');
+	$('#show_more_feeds_link').attr('page_value', 1);	
+	$('#search_data').val(search_data);
+	hideUILoader_nodialog();
+  }
+});
+}
+
+var ajax_req_feeds = null;
+function show_more_feeds(page) {
+        if (ajax_req_feeds != null) {
+            ajax_req_feeds.abort();
+        }
+        showUILoader_nodialog();
+        ajax_req_feeds = $.ajax({
+            type: 'get',
+            url: base_url + 'logged/church_members/generate_member_listing_AJAX/'+ page,
+            dataType: 'json',
+            success: function(data, status) {
+
+                hideUILoader_nodialog();
+                if (data.html != '') {
+                    $('#member_result_div').append(data.html);
+                    $('#show_more_feeds_link').attr('page_value', data.current_page);
+                }
+                else {
+                    $('#member_result_div').append('<div class="view_more" style="text-align: center;"><p class="blue_bold12" style="font-size:14px;">No more member to display.</p></div>');
+                    $('#show_more_feeds_div').hide();
+                }
+
+
+            }	// end of success function...
+        });
+    }
+
+</script>
+
+
+</div>

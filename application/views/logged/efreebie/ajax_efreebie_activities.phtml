@@ -1,0 +1,35 @@
+								
+                                <?php //pr($prod_data);
+										if(count($prod_data)){
+											foreach($prod_data as $k=> $val){
+												
+												$LOGO	= base_url().'uploads/e_trade_product/'.getThumbName($val['s_image'],'thumb');
+												 if($s_type == 'etrade' && $val['my_bid'] == 'No' ){
+													$activity_status = ($val['i_remain_stock'] <= $val['i_stock'])?'Under Offer':'On Sale'; 													
+												 }
+												 elseif($s_type == 'eswap' || $s_type == 'efreebie' )
+												 	$activity_status = ($val['my_bid'] == 'No')?'On Sale':'';
+												
+												
+								?>
+                                <div class="etrade-section">
+                                    <div class="left"><div class="img_div" style="background:url(<?php echo $LOGO?>) no-repeat center #fff; height:67px; width:72px;" onclick="window.location='<?php echo base_url()?><?=$s_type?>/<?php echo $product['id']?>/detail.html'"></div></div>
+                                    <div class="right">
+                                        <ul class="leftsize">
+                                            <li><a href="<?php echo base_url().$s_type?>/<?php echo $val['pid']?>/detail.html"><?=$val['product_id']?> </a></li>
+                                            <li><a href="<?php echo base_url().$s_type?>/<?php echo $val['pid']?>/detail.html"><?=$val['s_name']?> </a></li>
+                                        
+                                        </ul>
+                                        <ul class="rightsize">
+                                            <li><a href="<?php echo base_url()?><?=$s_type?>/<?php echo $product['id']?>/detail.html"><?=($val['my_bid'] == 'No')?$activity_status:'My Bids'?></a></li>
+                                            <li>Requested On: <?=getShortDate($val['dt_req_date'],5)?></li>
+                                            <!--<li><a href="#"><img alt="" src="images/icons/view1.png"  />View Trading Details</a></li>
+                                            -->
+                                        </ul>
+                                    </div>
+                                </div>
+                                
+                                   <?php
+								}
+							}
+					?>

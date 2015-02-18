@@ -1,0 +1,71 @@
+                <?php //pr($result_arr);
+					if( is_array($result_arr) && $no_of_result > 0 ) 
+					 {
+						foreach($result_arr as $message) 
+						{
+							
+						   $PROF_IMG = get_profile_image($message['i_receiver_id'] , 'thumb');
+						   $is_read = $message['i_is_unread'];
+						   //$CSS = ($is_read == 1)?'class="unread"':'class="read"';
+				?>        
+                     
+            	<li class="read" value="<?=$message['id']?>">
+                  <div class="check-box-section"><input type="checkbox" class="check-box" name="chk_mail" id="chk_mail<?=$message['id']?>" value="<?=$message['id']?>"/></div>
+                  <div class="mail-box-section">
+                        <a href="javascript:void(0);"><div class="pro_photo2" style="background:url(<?=$PROF_IMG?>) no-repeat center;width:60px; height:60px;" ></div></a>
+                      <div class="my-mail-txt">
+                          <p style="width:94%;"><a href="javascript:void(0)" class="my-sub"><strong><?=($message['s_subject'] != '')?$message['s_subject']:'No Subject.'?></strong></a></p>
+                          <ul class="short-info">
+                              <li>To: <?=$message['s_displayname']?></li>
+                              <li>On: <?=getShortDateWithTime($message['dt_created_on'],6)?></li>
+                          </ul>
+                          <div class="my-msg-body">
+                              <p><?=trim($message['s_message'])?></p>
+                          
+                          </div>
+                          
+                         
+                      </div>
+                      
+                  </div>
+                  <br class="clr"/>
+                  </li>
+            	 
+            <?php 		}
+			?>
+            	      <script type="text/javascript">
+						$('.my-sub').click(function(){
+							$(this).parent().next().next().slideToggle();
+								if($(this).parent().parent().parent().parent().hasClass("unread")) {
+								$(this).parent().parent().parent().parent().removeClass('unread');
+								$(this).parent().parent().parent().parent().addClass('read');
+								var id = $(this).parent().parent().parent().parent().attr('value'); 
+								/*$.post( base_url+"logged/my_msg_outbox/update_msg_status/"+id, function() {
+								});*/
+							}
+						 });
+							
+						$('.rlp-btn').click(function(){
+							$(this).parent().parent().prev().slideToggle();
+						});
+						</script>
+			<?php    } else {
+					  
+					
+					   echo '<tr ><td class="fst_td" ></td><td  colspan="4" style="text-align:center"><div class="shade_norecords" style="width:260px;"><p class="blue_bold12">No Sent Messages.</p></div></td></tr>';
+				  }
+			 ?>
+                             
+                                  
+</table>
+<input type="hidden" id="current_page" name="current_page" value="<?=$current_page?>"  />
+<?php if($page_links){?>
+<div class="pagination">
+<div class="left">Viewing Page <?=$current_loaded_page_no?> of <?=$total_pages?> </div>
+<div class="right">
+       <ul class="small-paging">
+        <?=$page_links?> 
+        </ul>
+</div>
+</div>
+<?php } ?>

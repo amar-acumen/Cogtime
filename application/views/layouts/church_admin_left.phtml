@@ -1,0 +1,35 @@
+ <div class="left-panel equal-height">
+
+    	<div class="left-list">
+
+        <ul>
+
+             <?php 
+
+ $page_location = $this->uri->segment(1);
+
+ $page_location1 = $this->uri->segment(2);
+
+ 
+
+    //echo 'ok';
+
+    ?>
+
+        	<li><a <?php if($page_location == 'church_member'){  ?> class="active" <?php } ?> href="<?php echo base_url().'church_member'?>">Members</a></li><!-- class="active"-->
+
+            <li><a <?php if($page_location == 'church_setting'){  ?> class="active" <?php } ?> href="<?= base_url().'church_setting' ?>">Manage site</a></li>
+
+            <li><a <?php if($page_location == 'church-subadmin'){  ?> class="active" <?php } ?> href="<?= base_url().'church-subadmin' ?>">Sub Admin</a></li>
+
+<!--            <li><a href="<?php echo base_url().'church_setting'?>">Landing page content</a></li>-->
+
+            <!--<li><a href="#">Privacy settings</a></li>-->
+
+        </ul>
+
+        
+
+        </div>
+
+    </div>

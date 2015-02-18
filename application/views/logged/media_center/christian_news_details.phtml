@@ -1,0 +1,225 @@
+<script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
+
+<?php include(APPPATH."views/layouts/logged_header.phtml");?>
+            <!-- NAVIGATION SECTION -->
+      <?php include(APPPATH."views/layouts/nav.phtml");?>
+      <!-- /NAVIGATION SECTION -->
+      </div>
+</div>
+<div class="clr"></div>
+<script type="text/javascript">var switchTo5x=true;</script>
+<script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
+<script type="text/javascript">stLight.options({publisher: "1140be46-4a8c-4f57-81dc-3021d996c71d", doNotHash: false, doNotCopy: false, hashAddressBar: false});</script>
+
+ <? include "media_center_nav.phtml" ?>
+<!-- CONTENT SECTION -->
+<script>
+function goBack() {
+    window.history.back()
+}
+</script>
+<div id="content_section">
+      <div id="container">
+          <div class="top-page-heading">
+          <h2 class="landing-title">Media center</h2>
+         
+          <div class="landing-input">
+		  <form name="user_frms" id="user_frms" method="post" action="<?= base_url() . 'logged/christian_news/search_news' ?>"  onsubmit="return true;" >
+		  <input type="text" name="search_keyword_val" value="<?php echo $search_keyword_val?>" placeholder="Type Keywords separated by comma">
+		  <input name="" type="submit" value="Deactivate"  class="btn" style="display:none;"/>
+		  </form>
+		  </div>
+          <a href="javascript:void(0)" class="media-back" onclick="goBack()">Back</a>
+	  <div class="clr"></div>
+           </div>
+          <div class="media-center-left">
+               
+                <h3 class="news-heading"><?=$detail_content['cat_name']?></h3>
+                <div class="top-text-list">
+                <h4 class="sub-text"> <?=$detail_content['s_title']?></h4>
+                
+                 <div class="blog-date"><?=getShortDateWithTime($detail_content['dt_posted_on'],7)?> by <?=$detail_content['admin_name']?></div>
+                       
+                        <div class="blog-quick-list">
+                            <ul>
+                                <li class="blog-comment"><a href="javascript:void(0);"><?=$detail_content['total_comments']?> Comments</a></li>
+                                <li class="blog-view"><a href="javascript:void(0);"><?=$detail_content['i_view_count']?> Views</a></li>
+                            </ul>
+                         </div>
+              </div>
+			  
+			  <div class="clear"></div>
+               <div class="video-details">
+                             <?php
+                            // echo $ogimage;
+                             $url = base_url().'uploads/media_center_article/';
+                             if($ogimage != $url){ ?>
+			 <img src="<?php echo $ogimage;?>" />
+                         <?php
+                             }
+                        else {
+
+                            }
+                         ?>
+                         
+			   </div>
+			  <div class="clear"></div>
+			  
+              <div class="news-details-text">
+				
+              	 <p><?=nl2br(get_unformatted_string_edit($detail_content['s_desc']))?></p>
+                 
+                <div class="clear"></div>
+                <ul class="tag-list">
+                
+				<?php
+				$tags = explode(",",$detail_content['s_tags']);
+				foreach($tags as $tagval)
+				{
+				?>
+                <li><a href="javascript:void(0);"><?php echo $tagval?></a></li>
+                <?php
+				}
+				?>
+                </ul>
+                <div class="clear"></div>
+              </div>
+              
+              <div class="share-button">
+			  
+<span class='st_facebook_hcount' displayText='Facebook'></span>
+<span class='st_twitter_hcount' displayText='Tweet'></span>
+              <!--<a href="javascript:void(0);"><img src="images/fb-share.png" alt="Facebook Share" width="176" height="36"></a>
+               <a href="javascript:void(0);"><img src="images/twitter-share.png" alt="Twitter" width="164" height="36"></a>-->
+              </div>
+              
+              <div class="newscomment-panel">
+                <h4 id="comment-box">COMMENT ON THIS ARTICLE</h4>
+				<div id="comment-pan">
+                <div class="post-box-panel">
+                        <div class="postpic"><img src="images/no-profile-pic.jpg" alt="Profile" width="74" height="74"></div>
+                        <div class="posttxt">
+							<form action="" id="comment_frm" onsubmit="return false;">
+							 
+									<textarea id="txtarea_comment<?=$news_id?>" name="" cols="" rows="" class="txtarea01" placeholder="Add a Comment..."></textarea>
+							  
+									<input class="postbtn" type="submit" value="Post" name="" onclick="return comment_(<?=$news_id?>,'logged/christian_news/comment_news')">
+							  
+							  </form>
+                        	
+                        </div>
+                        <div class="clear"></div>
+                </div>
+				<div id="comentList">
+					<?php echo $comments?>
+				</div>
+                </div>
+			</div>
+			</div>
+             <div class="media-center-right">
+                                
+              <div>
+                  <h3 class="may-like-icon">You May Like</h3>
+				  <?php
+				  foreach($right_content as $val)
+				  {
+					$IMG = base_url() . 'uploads/media_center_article/' . getThumbName($val['s_image'], 'thumb');
+				  ?>
+                  <div class="dev-main">
+                      <div class="pic-left"><a href="<?= base_url().$val['id']."/".my_url($val['cat_name'])."/christian-news-details/".my_url($val['s_title']).".html"?>">
+                              <?php if(!empty($val['s_image'])){ ?>
+                              <img src="<?php echo $IMG?>" alt="Library" width="104px" style="display:block;">
+                              <?php }?>
+                              
+                          </a></div>
+                      <div class="pic-right">
+                          <h4>
+                              <?php
+                              if(!empty($val['s_image'])){
+                              ?>
+                              <a href="<?= base_url().$val['id']."/".my_url($val['cat_name'])."/christian-news-details/".my_url($val['s_title']).".html"?>"><?=my_substr($val['s_title'],10)?></a>
+                              <?php
+                              }else{
+                              ?>
+                              <a href="<?= base_url().$val['id']."/".my_url($val['cat_name'])."/christian-news-details/".my_url($val['s_title']).".html"?>"><?=my_substr($val['s_title'],20)?></a>
+                              <?php } ?>
+                          </h4>
+                          <p><?=my_substr(strip_tags(get_unformatted_string_edit($val['s_desc'])),40)?></p>
+                         	 <ul class="green-comment">
+                             	<li><a href="javascript:void(0);">Liked by</a><span> (<?php echo $val['total_likes']?>)</span></li>
+                             </ul>
+                      </div>
+                      <div class="clr"></div>
+                  </div>
+                  
+                  <?php
+				  }
+				  ?>
+                  
+              </div>
+                 <!------------------------------------>
+                 <?php
+                      if(count($advertisementmedia_detail)){ 
+                          //echo 'll';
+                          $j = count($advertisementmedia_detail);
+                          for($i=0;$i<$j;$i++){
+                               $IMG_THUMB_PATH = base_url() ."uploads/media_center_advertisement/";
+  $name=getThumbName($advertisementmedia_detail[$i]['s_image'],'main'); 
+  $IMG_THUMB = $IMG_THUMB_PATH . $name; ;
+                          ?>
+                    <div class="right-ad"><img src="<?=$IMG_THUMB?>" alt="" width="250" height="250" onclick="window.open('<?=$advertisementmedia_detail[$i]['s_url']?>')"/></div>
+<!--              <div class="advertisment"><img src="images/ad2.png" alt="Advertisment" width="250" height="250"></div>
+              <div class="advertisment"><img src="images/ad3.png" alt="Advertisment" width="250" height="250"></div>
+              <div class="advertisment"><img src="images/ad4.png" alt="Advertisment" width="250" height="250"></div>-->
+                      <?php 
+                          }
+                      
+                          } ?>
+                 <!---------------->
+<!--                <div class="right-ad"><img src="images/left-ad1.png" alt="Advertisment" width="250" height="250"></div>
+              <div class="right-ad"><img src="images/left-ad2.png" alt="Advertisment" width="250" height="250"></div>
+              
+              <div class="right-ad"><img src="images/left-ad3.png" alt="Advertisment" width="250" height="250"></div>-->
+              
+                            
+          </div>
+          <div class="clr"></div>
+          </div>
+      <div class="clr"></div>
+</div>
+
+
+<!-- /CONTENT SECTION -->
+<div class="clr"></div>
+
+<?php include(APPPATH."views/layouts/footer.phtml");?>
+
+
+
+
+
+
+
+
+<!--view comment div-->
+
+
+<!--/view comment div-->
+<!-- /lightbox SECTION -->
+
+<?php //include(APPPATH."views/logged/blocks/common_popup.phtml");?>
+
+ <script type="text/javascript">
+$(function(){
+	$('#navigation_vert').naviDropDown({
+		dropDownWidth: '200px',
+		orientation: 'vertical'
+	});
+});
+
+$( "#comment-box" ).click(function() {
+$( "#comment-pan" ).slideToggle( "slow", function() {
+// Animation complete.
+});
+});
+</script>

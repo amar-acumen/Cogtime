@@ -1,0 +1,149 @@
+<?php include(APPPATH."views/layouts/logged_header.phtml");?>
+            <!-- NAVIGATION SECTION -->
+      <?php include(APPPATH."views/layouts/nav.phtml");?>
+      <!-- /NAVIGATION SECTION -->
+      </div>
+</div>
+<div class="clr"></div>
+<script>
+function goBack() {
+    window.history.back()
+}
+</script>
+
+<? include "media_center_nav.phtml" ?>
+    
+
+
+<!-- CONTENT SECTION -->
+
+<div id="content_section">
+      <div id="container">
+          <div class="top-page-heading">
+          <h2 class="landing-title">Media center</h2>
+          <div class="landing-input">
+		  <form name="user_frms" id="user_frms" method="post" action="<?= base_url() . 'logged/christian_news/search_news' ?>"  onsubmit="return true;" >
+		  <input type="text" name="search_keyword_val" value="<?php echo $search_keyword_val?>" placeholder="Search Keywords">
+		  <input name="" type="submit" value="Deactivate"  class="btn" style="display:none;"/>
+		  </form>
+		  </div>
+          <a href="javascript:void(0)" class="media-back" onclick="goBack()">Back</a>
+	  <div class="clr"></div>
+           </div>
+          <div class="media-center-left">
+               
+                <h3 class="prelibrary-icon">
+				Search Result</h3>
+                <? foreach($article as $val)
+				{
+                ?>
+					<div class="textsearch-pan">
+					<?php
+					//echo '===='.$is_video;
+					if($val['type']==3)
+					{
+						$detail_url	= base_url().$val['id']."/".my_url($val['s_cat_name'])."/watch-detail/".my_url($val['s_title']).".html";
+						$icon_img = "overcomers-icon.png";
+					}
+					
+					if($val['type']==1)
+					{
+						$detail_url	= base_url().$val['id']."/".my_url($val['s_cat_name'])."/christian-news-details/".my_url($val['s_title']).".html";
+						$icon_img = "news-icon.png";
+					}
+					if($val['type']==2) 
+					{
+						$detail_url	= base_url()."listen-detail/".$val['id']."/".my_url($val['s_title']).".html";
+						$icon_img = "music-icon.png";	
+					}	
+						
+					?>
+                    	
+						<h4><img src="images/<?php echo $icon_img;?>" style="padding-right:10px; vertical-align:middle;"><a href="<?php echo $detail_url?>"><?=$val['s_title']?></a></h4>
+                        <p style="line-height:19px;"><?=substr(strip_tags(get_unformatted_string_edit($val['s_desc'])),0,350)?>...</p>
+                        <div class="blog-links">
+                        	<div class="blog-date"><?=getShortDate($val['dt_posted_on'],4)?> by <?=$val['admin_name']?></div>
+                            <div class="blog-quick-list">
+                            <ul>
+                                <li class="blog-comment"><a href="javascript:void(0);"><?=$val['total_comments']?> Comments</a></li>
+                                <li class="blog-view"><a href="javascript:void(0);"><?=$val['i_view_count']?> Views</a></li>
+                            </ul>
+                         </div>
+                         <div class="clear"></div>
+                        </div>
+                        	<ul class="library-tag-list">
+								<li>Tags</li>
+								<? $arr_tags	= explode(',',$val['s_tags'])?>
+								<?php
+								foreach($arr_tags as $tagval)
+								{
+									?>
+									<li><a href="javascript:void(0);"><?= $tagval ?>,</a></li>
+									<?
+								}
+								?>
+                
+							</ul>
+							<div class="clear"></div>
+                    </div>
+              <? }?>
+              
+             
+                         
+             </div>
+           <?php
+           
+                      if(count($advertisementmedia_detail)){ 
+                           $j = count($advertisementmedia_detail);
+                      
+                          ?>
+            <div class="media-center-right">
+                <?php 
+                for($i=0;$i<$j;$i++){
+                     $IMG_THUMB_PATH = base_url() ."uploads/media_center_advertisement/";
+  $name=getThumbName($advertisementmedia_detail[$i]['s_image'],'main'); 
+  $IMG_THUMB = $IMG_THUMB_PATH . $name; ;
+                ?>
+                <div class="advertisment"><img src="<?=$IMG_THUMB?>" alt="Advertisment" width="250" height="250" onclick="window.open('<?=$advertisementmedia_detail[$i]['s_url']?>')"></div>
+<!--              <div class="advertisment"><img src="images/ad6.png" alt="Advertisment" width="250" height="250"></div>
+              <div class="advertisment"><img src="images/ad7.png" alt="Advertisment" width="250" height="250"></div>-->
+	         <?php
+                }
+                 ?>		
+            </div>
+                      <?php } ?>
+          <div class="clr"></div>
+          </div>
+      <div class="clr"></div>
+</div>
+
+
+<!-- /CONTENT SECTION -->
+<div class="clr"></div>
+
+<?php include(APPPATH."views/layouts/footer.phtml");?>
+
+
+
+
+
+
+
+
+<!--view comment div-->
+
+
+<!--/view comment div-->
+<!-- /lightbox SECTION -->
+
+<?php //include(APPPATH."views/logged/blocks/common_popup.phtml");?>
+
+
+<script type="text/javascript">
+$(function(){
+	$('#navigation_vert').naviDropDown({
+		dropDownWidth: '200px',
+		orientation: 'vertical'
+	});
+});
+</script>

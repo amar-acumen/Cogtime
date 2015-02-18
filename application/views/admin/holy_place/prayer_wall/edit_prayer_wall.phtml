@@ -1,0 +1,322 @@
+<div class="clr"></div>
+<!--navigation section start -->
+<?php include(APPPATH."views/layouts/admin/admin_nav.phtml");?>
+<!--navigation section end -->
+<!-- CONTENT SECTION -->
+<div id="content_section">
+      <div id="container">
+            <!--<div id="top_corner">&nbsp;</div> -->
+            
+            
+            <div id="mid_content">
+                  <div class="page_heading left">
+                  
+                  
+                 
+                  
+                 
+                        <div class="left"><img src="<?=base_url()?>images/icons/login.png" alt="" />Edit Prayer Wall</div>
+                  </div>
+                  <div class="clr"></div>
+                  <div id="right_container">
+                        <div class="arrow_btm"></div>
+                        <div class="content_area frm_box">
+
+                              
+                               <form id="frm_adv" name="frm_adv" action="" method="post" enctype="multipart/form-data">
+                                  
+                                  
+                                  <div class="lable01"><span class="red-mark">* </span> Request type :</div>
+                                    <div class="field01">
+                                        <select name="req_type" id="req_type">
+                                            <option value="-1">Select</option>
+                                            <option value="On Going" <?=($posted['e_request_type']=='On Going')? 'selected="selected"':''?>>On Going</option>
+                                            <option value="Emergency" <?=($posted['e_request_type']=='Emergency')? 'selected="selected"':''?>>Emergency</option>
+                                        </select>
+                                    </div>
+                                     <?php $req_type  = ($error_req_type != '')?' style="display:block; margin-top:-1px;"':'style="margin-top:-1px;"'; ?>
+                                   <div class="error-message" <?=$req_type?>><?php echo $error_req_type; ?></div>
+                                  <div class="clr"></div> 
+                                  
+                                  
+                                  
+                                  
+                                  <div class="lable01"><span class="red-mark">* </span>Start Date :</div>
+                                  <input type="text"  value="<?=$posted['dt_start_date']?>" name="date_to1" id="date_to1"  readonly="readonly" class="date-field"/>
+                                      <img src="<?=base_url()?>images/icons/cal.png" alt="" onclick="$(this).prev().focus()" class="calender" />
+                                      <script type="text/javascript">
+                                        $(document).ready(function(arg) {
+                                            //$.datepicker.setDefaults($.datepicker.regional['']);
+                                            //$("#date_to1").datepicker($.datepicker.regional['en']);
+                                            dateToday = new Date(); 
+                                            $("#date_to1").datepicker({minDate: dateToday});
+                                        });
+                                      </script>
+                                      
+                                    
+                                  <div class="lable01" style="width: 87px;"><span class="red-mark">* </span>Start Time :</div> 
+                                  <div class="field01" style="width:250px;">
+                                        <input name="txt_start_time" id="txt_start_time" value="<?=$posted['s_start_time']?>" type="text" style="width:151px;" /><span style="margin-left: 5px;">(eg. 21:30)</span>
+                                  </div> 
+                                  <?php $show_date_to1  = (form_error('date_to1') != '')?' style="display:block;width: 220px; float: left;"':''; ?>
+                                   <div class="error-message" <?=$show_date_to1?> ><?php echo form_error('date_to1'); ?></div>  
+                                  <div class="clr"></div> 
+                                 <?php $show_txt_start_time  = (form_error('txt_start_time') != '')?' style=" margin-left:249px;display:block;"':'style=" margin-left:249px;margin-top:-25px;"'; ?> 
+                                  <div class="error-message"  <?=$show_txt_start_time?>><?php echo form_error('txt_start_time'); ?></div>  
+                                  
+                                  
+                                  
+                                  
+                                  
+                                  
+                                  <div class="lable01"><span class="red-mark">* </span>End Date :</div>
+                                  <input type="text"  value="<?=$posted['dt_end_date']?>" name="date_to2" id="date_to2"  readonly="readonly" class="date-field"/>
+                                      <img src="<?=base_url()?>images/icons/cal.png" alt="" onclick="$(this).prev().focus()" class="calender" />
+                                      <script type="text/javascript">
+                                        $(document).ready(function(arg) {
+                                            //$.datepicker.setDefaults($.datepicker.regional['']);
+                                            //$("#date_to2").datepicker($.datepicker.regional['en']);
+                                            dateToday = new Date(); 
+                                            $("#date_to2").datepicker({minDate: dateToday});
+                                        });
+                                      </script>
+                                      
+                                    
+                                  <div class="lable01" style="width: 87px;"><span class="red-mark">* </span>End Time :</div> 
+                                  <div class="field01" style="width:250px;">
+                                        <input name="txt_end_time" id="txt_end_time" value="<?=$posted['s_end_time']?>" type="text" style="width:151px;" /><span style="margin-left: 5px;">(eg. 21:30)</span>
+                                  </div> 
+                                  <?php $show_date_to2  = (form_error('date_to2') != '')?' style="display:block;"':''; ?>
+                                   <div class="error-message" <?=$show_date_to2?> ><?php echo form_error('date_to2'); ?></div>  
+                                  <div class="clr"></div> 
+                                 <?php $show_txt_end_time  = (form_error('txt_end_time') != '')?' style=" margin-left:249px;display:block;"':'style=" margin-left:249px;margin-top:-25px;"'; ?> 
+                                  <div class="error-message"  <?=$show_txt_end_time?>><?php echo form_error('txt_end_time'); ?></div>  
+                             
+                                  
+                                  
+                                   <div class="lable01"><span class="red-mark">* </span>Prayer Subject : </div>
+                                  <div class="field01">
+                                        <input type="text" name="s_subject" value="<?=get_unformatted_string_edit($posted['s_subject'])?>" />
+                                  </div>
+                                  
+                                  <?php $s_subject  = (form_error('s_subject') != '')?' style="display:block; margin-top:-1px;"':'style="margin-top:-1px;"'; ?>
+                                   <div class="error-message" <?=$s_subject?>><?php echo form_error('s_subject'); ?></div>
+                                   
+                                  <div class="clr"></div>
+                                  
+                                  
+                                  
+                                  
+                                  
+                                  <div class="lable01"><span class="red-mark">* </span>Prayer Description : </div>
+                                  <div class="field01">
+                                        <textarea name="txt_desc" id="txt_desc" cols="" rows="" class="small"  style="height:100px; width:410px;"><?=get_unformatted_string_edit(br2nl($posted['s_description']))?></textarea>
+                                  </div>
+                                  
+                                  <?php $show_desc  = (form_error('txt_desc') != '')?' style="display:block; margin-top:-1px;"':'style="margin-top:-1px;"'; ?>
+                                   <div class="error-message" <?=$show_desc?>><?php echo form_error('txt_desc'); ?></div>
+                                   
+                                  <div class="clr"></div>
+                                  <div class="lable01"></div>(Maximum characters: 500) 
+                                  <?php /*?><div class="lable01">Privacy :</div>
+                                  <div class="field02" style="margin-bottom:12px;">
+                                         <select name="privacy" id="privacy" style="width:412px;">
+                                           <option>Public</option>
+                                           <option>Only For Friends</option>
+                                           <option>Both</option>
+                                        </select>
+                                        <script type="text/javascript">
+                                            $(document).ready(function(arg) {
+                                                $("#privacy").msDropDown();
+                                                $("#privacy").hide();
+                                                $('#privacy').css("width", "412px"); 
+                                            })
+                                        </script>
+                                        
+                                  </div>
+                                  <div class="clr"></div>
+                                  
+<?php */?>                        
+                     
+                                  
+                                  
+                                  <div class="clr"></div>    
+                                  
+                                  
+                                  <div class="lable01">&nbsp;</div>
+                                      <div class="field01">
+                                      
+
+                                      
+                                          <input name="" type="button" value="Edit Photo"  class="sml_btn" onclick="return show_dialog('contact_div')"/> 
+                                          
+                                      </div>
+                                      <?php $show_img  = (form_error('hd_image_name') != '')?' style="display:block; margin-top:-1px;"':'style="margin-top:-1px;"'; ?>
+                                      <span id="err_photo" class="error-message" <?=$show_img?>><?php echo form_error('hd_image_name');?></span>  
+                                  <div class="clr"></div>
+                                  
+
+                                    <div class="lable01">&nbsp;</div>
+                                    <div class="field01" style="margin-top:10px;">
+
+                                       <img id="uploaded_img" src="<?=base_url().'uploads/prayer_wall_photos/'.getThumbName($posted['s_image_name'],'mid')?>" alt="" />    
+                                        
+                                    </div>
+                                  <div class="clr"></div> 
+                                  
+                                 
+                                   <input name="hd_image_name" id="hd_image_name" type="hidden"/>
+                                   
+                                   <span id="photo_name" style="float: left; margin: 5px 0 10px 278px;"></span>
+                                   <div class="clr"></div> 
+                                  
+                                        
+                                
+                                  <div class="lable01">&nbsp;</div>
+                                  <div class="field01" style="margin-top:10px;">
+                                       
+
+                                            <input name="" type="submit" class="btn"  value="Update"/>
+                                  
+                                        <input name="" type="reset" class="btn"  value="Cancel" onclick="window.location='<?=admin_base_url().'holy-place/'.$current_page.'/prayer-wall.html'?>'"/>
+                                        </div>
+                              </form>
+                              <div class="clr"></div>
+                        </div>
+                        
+                  </div>
+                  <div class="clr"></div>
+            </div>
+            
+            <!--/mid_content-->
+            
+            <!--<div id="bot_corner">&nbsp;</div> -->
+      </div>
+      <div class="clr"></div>
+</div>
+
+
+<!-- /CONTENT SECTION -->
+
+
+<div class="lightbox contact_div" style="width:900px; ">
+      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="../images/close.png" alt="" /></a></div>
+      <div class="top">
+            <div>&nbsp;</div>
+      </div>
+      <div class="mid">
+            <div class="heading" style="margin-bottom:0px;">
+                  <div class="left">
+                        <h4>Select from Prayer Wall Photos </h4>
+                  </div>
+            </div>
+               <div class="shade_box_white" style="padding:8px 0px;">
+                 
+                  
+                  <div id="contact_list" >
+                                   
+                                      <div class="selectRecipients" style="background-color: #FFF; width: 860px; height:430px;; max-height: 415px;border:none;">
+                                       <?php 
+                                          if(count($prayer_photo)):
+                                             $count_total = 1;
+                                             //pr($contact_arr);
+                                              foreach($prayer_photo as $key=>$val){
+                                                  
+                                                 
+                                                  $IMG = base_url()."uploads/prayer_wall_photos/".getThumbName($val['s_photo_name'],'mid_thumb'); 
+                                                  $CSS = ($count_total%5 == 0)?'no-right-mrgn':'';
+                                                        
+                                         ?>
+                                         <div class="image-block <?=$CSS?>" style="text-align:center;">
+                                             
+                                             <div style="background:url(<?=$IMG?>) center no-repeat; width:150px; height:100px; border: 3px solid #62C3BC; margin-bottom:5px; cursor:pointer;"  onclick="select_pic('<?=$val['id']?>')"></div>
+                                             <div class="clr"></div>
+                                             
+                                              <input type="radio" name="prayer_img_name" value="<?=$val['s_photo_name']?>" thumb="<?=base_url()."uploads/prayer_wall_photos/".getThumbName($val['s_photo_name'],'mid');?>" style=" float:none;" id="prayer_image_name_<?=$val['id']?>"/>
+                                             <?php /*?> <div class="inside">
+                                                
+                                                  <img alt="Prayer photo" src="<?=$IMG?>"><br/><br/><br/>
+                                                  
+                                              </div><?php */?>
+                                          </div>
+                                        
+                                            
+                                         <?php    $count_total++;    
+                                                     }
+                                                 endif; 
+                                         ?>
+                                              
+                                      </div> 
+                                </div>
+                    <div class="clr"></div>
+                    <br />
+                    <div style="text-align:right;"><input name="" type="button" value="Done" onclick="javascript:get_selected_photo();" class="btn"/></div>
+            </div>
+            
+      </div>
+      <div class="bot">
+            <div>&nbsp;</div>
+      </div>
+</div>
+
+
+
+
+<script type="text/javascript">
+
+
+function select_pic(photo_id){
+	$('#prayer_image_name_'+photo_id).attr('checked','checked');
+}
+ $(document).ready(function () {
+
+ //counting the left characters in comment
+    
+     function limitChars(textid, limit, infodiv)
+     {
+      var text = $('#'+textid).val(); 
+      var textlength = text.length;
+      if(textlength > limit)
+      {
+      $('#'+textid).val(text.substr(0,limit));
+       return false;
+      }
+      else
+      {
+      
+       return true;
+      }
+     }
+    
+    $(function(){
+        $('#txt_desc').keyup(function(){
+            limitChars('txt_desc', 500, '');
+        });
+    });
+    
+    
+    //// just to show correct no. of chracters left while the page is loaded...
+    
+    limitChars('txt_desc',500, '');
+
+ 
+});
+
+
+
+function get_selected_photo(){
+    var image_name = $('input[name=prayer_img_name]:checked').val();
+    var thumb = $('input[name=prayer_img_name]:checked').attr('thumb');
+    //alert($('input[name=prayer_img_name]:checked').val());
+    $('#hd_image_name').val(image_name);
+    $('#photo_name').html(image_name);
+    $('#uploaded_img').attr('src',thumb);
+    //$('#uploaded_img').attr('style','display:block;margin-left:278px');
+    hide_dialog();
+}
+
+
+</script>
+
+
+

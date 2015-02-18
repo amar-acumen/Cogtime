@@ -1,0 +1,100 @@
+ <?php #pr($arr_chat_rooms);
+		  if(count($arr_chat_rooms) > 0){
+		  //$i=1;
+			  foreach($arr_chat_rooms as $key => $val){
+						
+				  #&init_password=<?=$this->session->userdata('upassword')
+				  $CSS = ($key != 0 )?'style="padding-top:5px;"':'';
+                                /************************************************/  
+                                  $chat_room_id = $val['room_id'];
+//                                 
+//                                 
+                                  
+                                  $query = $this->db->get_where('cg_public_chat_room_timing', array('i_chat_room_id' => $chat_room_id));
+                                 $result = $query->result();
+                                // pr($result);
+                                 foreach ($query->result() as $row)
+                                    {
+                                     $start_time =   $row->dt_start_time;
+                                       $end_time = $row->dt_end_time;
+                                    }
+                                  
+                                 $time_breaker_st = explode(' ',$start_time);
+                                  $time_breaker_ed = explode(' ',$end_time); 
+                                  //echo $time_breaker_st[1];
+                               // pr($time_breaker_st);
+                                // $today = date('Y-m-d');
+                               $user_id = intval(decrypt($this->session->userdata('user_id')));
+                                 $query = $this->db->get_where('cg_users', array('id' => $user_id));
+                                 foreach ($query->result() as $row)
+                                    {
+                                        $time_zone = $row->s_time;
+                                    }
+                                    $nz_time = new DateTime(null, new DateTimezone($time_zone));
+                                   $today =  $nz_time->format('Y-m-d');
+                                    $time = $nz_time->format('H:i:s');
+//                             
+                                 /************start if************************/
+                                     if(!empty($result)){
+                                    if( ($today == $time_breaker_st[0] || strtotime($time_breaker_st[0]) > strtotime($today))  ){
+                                        
+                                        /************time condition ****************************/
+                                       
+//                                        echo strtotime($time_breaker_st[1]).'<br>';
+//                                        echo strtotime($time).'<br>';
+//                                        echo strtotime($time_breaker_ed[1]).'<br>';
+                                          ?>                                       
+                              <div class="shade_box_shade" <?=$CSS?>>
+                                    
+                                    <?php if($key == 0 && $current_page_1 == 0){ ?>
+                                      <div class="page_heading" id="chat_pg_heading" >
+                                            <div style="padding-left:10px;" class="left">List of Chat Rooms </div>
+                                      </div>
+                                    <?php } ?>       
+                               
+                                          <div class="txt_content">
+                                             <?php// echo strtotime($time_breaker_st[1]).'<br>';
+                                                   // echo strtotime($time).'<br>';
+                                                    //echo strtotime($time_breaker_ed[1]).'<br>' ;
+                                             ?>
+                                                <p class="add-remove-friend <?php if($today != $time_breaker_st[0]){ echo ' locklink';} ?><?php if(($today == $time_breaker_st[0]) && !(strtotime($time_breaker_st[1]) <= strtotime($time) && strtotime($time_breaker_ed[1]) >= strtotime($time)) ){ echo ' locklink';} ?>"><img alt="" src="images/icons/ring2.png" /> <a  href="javascript:void(0);" onclick="window.open('<?=base_url()?>client/123flashchat.html?init_room=<?=$val['room_id']?>&init_user=<?= $this->session->userdata('display_username') ?>',   '',   'bReplace= 0 resizable=0, location=1, width=630, height=450');    " target="">Join this Room</a>
+                                                    <span class="<?php if(($today != $time_breaker_st[0])){ echo'lockspan'; }?><?php if(($today == $time_breaker_st[0]) && !(strtotime($time_breaker_st[1]) <= strtotime($time) && strtotime($time_breaker_ed[1]) >= strtotime($time)) ){ echo ' lockspan';}  ?>"></span>
+                                                </p>
+                                              
+                                                <div class="<?php if(($today != $time_breaker_st[0])){ echo'tooltip'; }?><?php if(($today == $time_breaker_st[0]) && !(strtotime($time_breaker_st[1]) <= strtotime($time) && strtotime($time_breaker_ed[1]) >= strtotime($time)) ){ echo'tooltip'; }?>" style=" display: none;   width: 106px; text-align: center; float: right; margin: 25px -99px 0px 0px; padding-top: 8px; ">This chat room is not open at this time</div>
+                                              
+                                                
+                                                
+                                                <p> <img alt="" src="images/icons/cmnt_smal.png" /> <a class="blue_link" href="javascript:void(0);" ><strong><?=$val['name']?></strong></a><h5 style=" font-weight: normal">start time :<?=$start_time?> || End time : <?=$end_time ?></h5></p>
+                                                <?php /*?><p class="light_blue12">Sub Sub Category Name</p><?php */?>
+                                                <p>No. of people at this moment: <span class="blue12"><strong><?=$val['user_numbers']?></strong></span></p>
+                                                <p><?=nl2br($val['des'])?></p>
+                                          </div>
+                                          
+                                          
+                                      
+                               </div> 
+                                  
+    <?php 
+                                         
+                                        
+                                 /***********time condition end here*****************************/
+                                    }
+                                     }
+                         /*********end if****************************************/
+			 	 }
+			 }
+  ?>    
+                                    
+                                    
+ <input type="hidden" id="current_page" name="current_page" value="<?=$current_page_1?>"  />
+ <script type="text/javascript">
+ $(document).ready(function(){
+     $('.lockspan').click(function(){
+         var ind = $('.lockspan').index(this);
+      // alert(ind)
+         $('.tooltip:eq('+ind+')').toggle();
+     });
+ });
+ </script>
+ 

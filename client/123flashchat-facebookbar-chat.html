@@ -1,0 +1,91 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<title>123 Flash Chat Client</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="description" content="Chat, 123 Flash Chat, Html Chat, Ajax Chat, iPhone Chat, gPhone Chat, android Chat, mobile Chat by 123 Flash Chat"/>
+<meta name="keywords" content="Chat, 123 Flash  Chat, Html Chat, Ajax Chat, iPhone Chat, gPhone Chat, android Chat, mobile Chat by 123 Flash Chat" />
+<link rel="shortcut icon" href="favicon.ico" type="image/ico" />
+<script language="javascript" src="123flashchat.js"></script>
+</head>
+<body topmargin="0" bottommargin="0" leftmargin="0" rightmargin="0">
+<script language="javascript">
+	function getUrlParameterValueByName(str,name)
+	{
+	   var value="";
+	   var indexOfName = str.indexOf("?"+name+"=");
+	    if (indexOfName == -1)
+	    {
+		     indexOfName = str.indexOf("&"+name+"=");
+	    }
+	    if (indexOfName != -1)
+	    {
+		    var lengthOfName=(name.length+1);var tempStr=str.substring(indexOfName+1);
+		    var indexOfAnd=tempStr.indexOf("&");
+		    if(indexOfAnd!=-1)
+		    {
+				value=tempStr.substring(lengthOfName,indexOfAnd);
+		    }
+		    else
+		    {
+				value=tempStr.substring(lengthOfName);
+		    }
+	    }
+		return value;
+	}
+	try
+	{
+		var urlLink=window.location.href;
+	}
+	catch(e)
+	{
+		try
+		{
+			urlLink=document.URL;
+		}
+		catch(e)
+		{
+			urlLink="";
+		}
+	}
+	var webpath = urlLink.substring(0, urlLink.lastIndexOf("/") + 1)
+	var topcmm_123flashchat=true; 		
+	var topcmm_flashchat_init_host = getUrlParameterValueByName(urlLink,"init_host");
+	var topcmm_flashchat_init_port = getUrlParameterValueByName(urlLink,"init_port");
+
+	
+	var topcmm_flashchat_init_host_s = getUrlParameterValueByName(urlLink,"init_host_s");
+	var topcmm_flashchat_init_port_s = getUrlParameterValueByName(urlLink,"init_port_s");
+
+	
+	var topcmm_flashchat_init_host_h = getUrlParameterValueByName(urlLink,"init_host_h");
+	var topcmm_flashchat_init_port_h = getUrlParameterValueByName(urlLink,"init_port_h");
+
+	
+	var init_user = getUrlParameterValueByName(urlLink,"init_user");
+	var topcmm_flashchat_init_group = getUrlParameterValueByName(urlLink,"init_group");
+	var topcmm_flashchat_init_room = getUrlParameterValueByName(urlLink,"init_room");
+        
+        if (init_user && init_user !="")
+        {
+            var init_password = getUrlParameterValueByName(urlLink,"init_password");
+        }
+
+	var topcmm_flashchat_width = getUrlParameterValueByName(urlLink,"width");
+	if (topcmm_flashchat_width == "")
+	{
+		topcmm_flashchat_width = 779;
+               
+	}
+	
+	var topcmm_flashchat_height = getUrlParameterValueByName(urlLink,"height");
+	if (topcmm_flashchat_height == "")
+	{
+		topcmm_flashchat_height = 505;
+                 
+	}	
+</script>
+<script language="javascript" src="js/123facebookbar.js"></script> 
+</body>
+</html>
+<!-- Powered by 123 Flash Chat - http://www.123flashchat.com -->

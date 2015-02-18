@@ -1,0 +1,214 @@
+<!-- header -->
+<?php
+	include(APPPATH ."views/layouts/church_logged_header.phtml");
+?>
+
+<!-- CONTENT SECTION -->
+<?php //pr($church_arr); ?>
+<div class="container timeline-overflow">
+<?php /*if(decrypt($this->session->userdata('user_id')) == $church_admin->ch_admin_id)*/if(subadmin_access('wall')) { ?>
+  <div class="post-section">
+  	<div class="post-block">
+	 <form name="public_wall_post_form" id="public_wall_post_form"  method="post" class="wall-comment-form" enctype="multipart/form-data" action="<?=base_url().'logged/church_wall/post_his_church_wall'?>" onsubmit="return false;">
+    	<div class="profile-pic"><img src="images/profile-pic.png" alt="Profile Pic" width="82" height="77"></div>
+		<!-- wall message -->
+        <textarea placeholder="Post In Wall..." name="church_post_message" ></textarea>
+		<!-- wall message -->
+		 <!-- upload image div start  -->
+                <div class="upload-image" >
+				<a href="javascript:void(0);" onclick="$(this).parent('div').hide(); $('.camera-ico').children('span').removeClass('active');" style="float:right;color:#013d62">Hide[-]</a>
+                    <label  class="upload-img">Upload Image :</label>
+                    <input name="btn_upload" id="btn_upload" type="file" size="40" />
+                    <br class="clr"/>
+                    <div id="all_photos">
+                  
+                    </div>
+            
+                  <div id="hdnflds" >
+                  </div>
+                 
+                 </div>   
+                      
+                <!--upload image div end -->
+                
+                
+                
+               <!-- upload video div start -->
+                <div class="upload-video">
+				<a href="javascript:void(0);" onclick="$(this).parent('div').hide();$('.video-ico').children('span').removeClass('active');" style="float:right;color:#013d62">Hide[-]</a>
+                    <label  class="upload-img">Video Url :</label><div class="video-url"><input name="txt_video_url" id="txt_video_url" type="text" /></div>
+					<ul class="video-logo" >
+					<li><img src="<?=base_url()?>/images/YouTube.png"title="YouTube" alt="YouTube"></li>
+					<li><img src="<?=base_url()?>/images/Vimeo.png"title="Vimeo" alt="Vimeo"></li>
+					<li><img src="<?=base_url()?>/images/DailyMotion.png"title="DailyMotion" alt="DailyMotion"></li>
+					<li><img src="<?=base_url()?>/images/Viadeo.png"title="Viadeo" alt="Viadeo"></li>
+					</ul>
+                    <br class="clr"/>
+                    <div id="all_videos">
+                      <?php /*?><div class="view-thumb"><img src="images/photo-img01.jpg" alt="photo" width="60" height="60" /><a href="javascript:void(0);" class="remove" title="Remove Video"></a></div>
+                     <?php */?>
+                    </div>
+                    
+                     <div id="hdnvideoflds" >
+                     </div>
+                  
+                </div>
+               <!-- upload video div end -->
+			   
+			   <!-- upload video div start -->
+                <div class="upload-audio">
+				<a href="javascript:void(0);" onclick="$(this).parent('div').hide();$('.audio-ico').children('span').removeClass('active');" style="float:right;color:#013d62">Hide[-]</a>
+                    <p style="font-size:13px;padding-bottom:12px;color:'#333'">Audio Url(Put Soundcloud embeded code here) :</p><div class="video-url"><input name="txt_audio_url" id="txt_audio_url" type="text" /></div>
+                    <div id="all_videos">
+                      <?php /*?><div class="view-thumb"><img src="images/photo-img01.jpg" alt="photo" width="60" height="60" /><a href="javascript:void(0);" class="remove" title="Remove Video"></a></div>
+                     <?php */?>
+                    </div>
+                    
+                     <div id="hdnvideoflds" >
+                     </div>
+                  
+                </div>
+               <!-- upload video div end -->
+        <div class="attch-part"><label>Attach:</label><span>
+        <a href="javascript:void(0);" title="Upload Image" onclick="$('.upload-video').hide();$('.upload-audio').hide();$('.upload-image').show();$('.camera-ico').children('span').addClass('active');$('.video-ico,.audio-ico').children('span').removeClass('active');" class="camera-ico"><span>&nbsp;</span></a>
+        <a href="javascript:void(0);" title="Share Video" onclick="$('.upload-video').show();$('.upload-audio').hide();$('.upload-image').hide();$('.video-ico').children('span').addClass('active');$('.camera-ico,.audio-ico').children('span').removeClass('active');" class="video-ico"><span>&nbsp;</span></a>
+        <a href="javascript:void(0);" title="Share Audio" onclick="$('.upload-video').hide();$('.upload-audio').show();$('.upload-image').hide();$('.audio-ico').children('span').addClass('active');$('.video-ico,.camera-ico').children('span').removeClass('active');" class="audio-ico" ><span>&nbsp;</span></a>        
+        </span></div>
+        <div class="privacy-select">
+        <label><input type="radio" name="privacy" value="1" onclick="$('.privacy-drop').slideUp();">Private</label><label><input type="radio" name="privacy" value="2" onclick="$('.privacy-drop').slideUp();" checked>Public to all</label>
+         <label> <input type="radio" name="privacy" value="3" onclick="$('.privacy-drop').slideDown();">Public to selected Members</label></div>
+		<?php $members=get_member_by_id($_SESSION['logged_church_id']);
+		//pr($members);?>
+		<div class="privacy-drop" > <select id="meminv" multiple="multiple" name="meminv[]"><?php foreach($members as $k=>$v){ ?>
+									 <?=get_username_by_id($v->member_id)?>
+										<option value="<?=$v->member_id?>" ><?=get_username_by_id($v->member_id)?></option> 
+									 <?php }?></select></div>
+        <div class="post-update"><input type="submit" class="post-btn" value="Post"></div>
+		</form>
+    </div>	
+  </div>
+<?php } ?>
+<div class="timeline-main">
+  <?php if(!empty($result_newsfeed_content)){ ?>
+  <?= $result_newsfeed_content ?>
+  <?php } ?>           
+  
+</div>
+
+</div>
+
+<!-- /CONTENT SECTION -->
+<div class="clr"></div>
+<!-- FOOTER SECTION -->
+<?php include(APPPATH."views/layouts/church_footer.phtml");?>
+<!-- /FOOTER SECTION -->
+
+<div class="lightbox delete-post" style="width:450px;">
+    <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="<?= base_url() ?>images/close.png" alt="" /></a></div>
+    <div class="top"><div>&nbsp;</div></div>
+    <div class="mid">
+        <div class="heading" style="margin-bottom:0px;">
+            <div class="left">
+                <h4>Delete Prayer Points</h4>
+            </div>
+        </div>
+        <div class="shade_box_white" style="padding:8px 0px;">
+            <div style="padding-bottom:10px;">
+                <p class="center-text" style="line-height:18px; color:#3b3b3b; text-align:center;">Do you really want to delete this post?</p>
+            </div>
+            <form action="" method="post" enctype="multipart/form-data">
+                <input type="hidden" name="i_del_post_id" id="i_del_post_id" value="" />
+                <input name="" type="button" value="Yes" class="post-btn"  onClick="delete_post()"/>
+                <input name="" type="button" value="No" class="cancel-btn" onclick="hide_dialog()"/>
+            </form>   
+            <div class="clr"></div>
+        </div>
+
+    </div>
+    <div class="bot"><div>&nbsp;</div></div>
+</div>
+
+<script type="text/javascript">
+$(document).ready(function() {
+	// for AJAX page-submission...
+	//$('.privacy-drop').hide();
+    var options = { 
+        beforeSubmit:  showLoading,  // pre-submit callback 
+        success:       validateFrm // post-submit callback 
+    }; 
+    // bind to the form's submit event 
+    $('#public_wall_post_form').submit(function() {
+        $(this).ajaxSubmit(options);
+        return false;
+		
+    });
+	$("#meminv").multiselect().multiselectfilter();	
+	$(".meminv").multiselect().multiselectfilter();	
+});
+
+function validateFrm(jsondata)
+{
+	//alert(jsondata.feed);
+	var data = JSON.parse(jsondata);
+	//alert(data.msg); alert(data.vid_msg);
+	if(data.success==false) 
+	{
+		hideLoading(); 
+		if(data.vid_msg == ''){
+			showUIMsg(data.msg);
+		}else{
+			showUIMsg(data.vid_msg);
+		}
+	}
+	else {
+		hideLoading(); 
+		
+	
+		showUIMsg(data.msg);		
+		location.reload();
+		//window.location.href=g_controller_url;
+	}
+}
+
+function delete_(id)
+{
+  
+  $('#i_del_post_id').val(id);
+  show_dialog('delete-post');
+}
+
+var ajax_delete_post = null;  
+function delete_post() 
+{
+    var id = $('#i_del_post_id').val();
+    showUILoader_nodialog('<img src="'+base_url+'images/loading_big.gif" width="50"/> ');
+    if(ajax_delete_post!=null) {
+      ajax_delete_post.abort();
+    }
+    ajax_delete_post = $.ajax({
+      
+      url: base_url+'logged/church_wall/delete_post/'+ id,
+      dataType: 'json',
+      data: {'newsfeed_id':id},
+      type: 'post',
+  
+      success: function (data, status) {
+        
+        if(data.result == 'success'){
+          
+          hide_dialog('delete-post');
+          hideUILoader_nodialog();
+            showUIMsg(data.msg);
+          
+          window.location.reload();
+        }
+        
+      },
+      error: function(data, status, e) {
+        hideUILoader_nodialog();
+        showUIMsg("Error!");
+        
+      }
+    });
+}
+</script>

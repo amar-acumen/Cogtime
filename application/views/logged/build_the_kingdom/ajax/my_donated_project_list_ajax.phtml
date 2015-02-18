@@ -1,0 +1,326 @@
+ <?php //pr($result_arr);
+ 			if(is_array($result_arr) && count($result_arr)){
+				
+				foreach($result_arr as $key=>$val)
+				{
+  ?>
+                           <div class="project_box1" style=" background-color: #F2F2F2;margin-bottom: 25px;">
+                                  
+                                  <div class="shade_box_shade-inner">
+                                  <p class="blue_bold12"> <a href="javascript:void(0);"><?=$val['s_title']?> <?php /*?>(#23213)<?php */?></a></p>
+                                  <p class="location">Location: <?=get_cityname($val['s_city']).', '.get_statename($val['s_state']).', '
+								  .get_countryname($val['i_country_id']) ?></p>
+                                  <p class="nw-date-time nw-date-padding">Duration: <?=getShortDate($val['dt_start_date'],5)?> - <?=getShortDate($val['p_end_date'],5)?></p>
+                                  <p style="padding-bottom:10px;"><?=nl2br($val['s_description'])?></p>
+                                  
+                                
+                                  <ul class="Skill">
+                                    <?php
+											if(count($val['skill'])){
+												foreach($val['skill'] as $k => $s_val){
+									 ?>
+                                                <li><span class="suggest-project-skill">Skill Required: </span> <?=$s_val['s_name']?> <br/>  <span class="suggest-project-skill">Duration:</span> <?=getShortDate($s_val['dt_start_date'],5)?> to <?=getShortDate($s_val['dt_end_date'],5)?> </li>
+								   <?php 		
+                                              }
+                                          }
+                                    ?>   
+                                  </ul>
+                                    <a class="view-time-donors" href="javascript:void(0)" onclick="showTimeDonor(<?=$val['project_id']?>)" >View time donors</a> 
+                                     <div class="clr"></div>
+                                    <div class="view-time-donors-content" id="time_donor_<?=$val['project_id']?>">
+                                        
+                                        
+                                         <?php
+													if(count($val['skill_donor_list'])){
+														foreach($val['skill_donor_list'] as $d_val){
+															
+															$profile_image = get_profile_image($d_val['post_owner_user_id'],'thumb');
+															if($d_val['if_already_friend'] == 'true' || $d_val['already_added_netpal'] == 'true'){
+																	  $profile_link = get_profile_url($d_val['post_owner_user_id'],$d_val['s_profile_name']);
+																}else
+																{
+																   $profile_link = get_public_profile_url($d_val['post_owner_user_id'],$d_val['s_profile_name']); 
+																}
+											 ?>
+                                              <div class="" >
+                                                <div class="view-section"> 
+                                                     <a href="<?=$profile_link?>"> <div class="pro_photo3" style="background:url(<?php echo $profile_image;?>) no-repeat center;width:60px; height:60px;" ></div></a>
+                                                      <div class="view-left">
+                                                            <p><a href="javascript:void(0);"><?=$d_val['s_profile_name']?></a></p>
+                                                            <p class="donation-date">Donation Date From: <?=getShortDate($d_val['d_start_date'],5)?> to <?=getShortDate($d_val['d_end_date'],5)?> </p>
+                                                            <p class="donation-date">Skill: <?=$d_val['s_skill_name']?></p>
+                                                      </div>
+                                                      <div class="clr"></div>
+                                                </div>
+                                              </div>
+                                              <?php 	}
+													}
+													else{
+											 ?>
+                                             <div class="" >
+                                              		<div class="view-section" style="border-bottom:none;"> 
+                                                      <div class="view-left" style="margin-left:175px;">
+                                                            <p><strong>No Donors yet.</strong></p>
+                                                      </div>
+                                                      <div class="clr"></div>
+                                                	</div>
+                                              </div>
+                                             
+                                             <?php 
+													}
+											 ?>
+                                    </div>
+                              </div>       
+                                
+                                  <div class="clr"></div>
+                                  
+                                  <div class="inbox_div_blue01" style="padding-bottom:5px;">
+                                        <div class="project-cost-section" >
+                                              <p class="left">Project Cost: $<?=$val['f_project_cost']?></p>
+                                              <p class="right">Donations till date: $<?=round($val['donation_amt'],2)?></p>
+                                        </div>
+                                        <ul class="donate">
+                                            <li><a href="javascript:void(0);" onclick="toggleProjectMenu(<?=$val['project_id']?>,'fund')" id="fund_<?=$val['project_id']?>" >Donate</a></li>
+                                            <li><a href="javascript:void(0);" onclick="toggleProjectMenu(<?=$val['project_id']?>,'donors')" id="donors_<?=$val['project_id']?>">Donors</a></li>
+                                            <li><a href="javascript:void(0);" onclick="toggleProjectMenu(<?=$val['project_id']?>,'info')" id="info_<?=$val['project_id']?>">Request more Information</a></li>
+                                            <?php /*?><li><a href="javascript:void(0);"  onclick="toggleProjectMenu(<?=$val['project_id']?>,'time')" id="time_<?=$val['project_id']?>">Tithe your Time</a></li><?php */?>
+                                        </ul>
+                                        <div class="clr"></div>
+                                        <div class="donate-time-donors-content">
+                                            <div class="donate-section-box" id="fund_donate_<?=$val['project_id']?>">
+                                             <form method="post" id="frm_project_donation<?=$val['project_id']?>" >
+                                                <div class="frm_box">
+         
+                                                    <div class="lable-txt-nw" >Amount($): </div>
+                                           <input name="txt_amount" id="txt_amount" type="text" class="amount-input amout-input "/>
+                                                    <span id="err_amount_<?=$val['project_id']?>" class="error-message"  style="display:none"></span>
+                                                    <div class="clr"></div>
+                                                    
+                                                    <div class="lable-txt-nw" > Card Holder Name:</div>
+                                                    <input name="txt_card_holder" type="text" class="amount-input amout-input "/>
+                                                    <span id="err_card_holder_<?=$val['project_id']?>" class="error-message"  style="display:none"></span>
+                                                    <div class="clr"></div>
+                                                    
+                                                    <div class="lable-txt-nw" >  Card No.:</div>
+                                                    <input name="txt_card_number" type="text" class="amount-input amout-input "/>
+                                                     <span id="err_card_number_<?=$val['project_id']?>" class="error-message" style="display:none"></span>
+                                                    <div class="clr"></div>
+                                                    
+                                                    <div class="lable-txt-nw" >  Expiry Date:</div>
+                                                    <div class="amount-input amout-input">
+                                                          <div class="lbl01" style=" width:90px;">
+                                                                <select name="mnth" id="mnth" style="width:90px;">
+                                                                      <option value="-1">MM</option>
+                                                          			   <?=makeNewOptionMonth()?>
+                                                                </select>
+                                                                
+                                                          </div>
+                                                          <div class="lbl01"  style=" width:90px;">
+                                                                <select name="yr" id="yr" style="width:90px;">
+                                                                      <option value="-1">YYYY</option>
+                                                          			  <?=makePaypalOptionYear()?>
+                                                                </select>
+                                                          </div>
+                                                          
+                                                          
+                                                    </div>
+                                                    <span id="err_mnth_<?=$val['project_id']?>" class="error-message"  style="display:none"></span>
+                                                    <div class="clr"></div>
+                                                    
+                                                    <div class="lable-txt-nw"> CVV: </div>
+                                                    <input name="txt_cvv" type="text" class="amount-input amout-input "/>
+                                                    <span id="err_cvv_<?=$val['project_id']?>" class="error-message"  style="display:none"></span>
+                                                    <div class="clr"></div>
+                                                    
+                                                    <div class="lable-txt-nw" > Card Type:</div>
+                                                      <select name="txt_card_typ" id="yr" style="width:188px;">
+                                                           <option value="-1">Select</option>
+                                                           <option value="Visa">Visa</option>
+                                                           <option value="MasterCard">MasterCard</option>
+                                                           <option value="Discover">Discover</option>
+                                               				<option value="American Express">American Express</option>
+                                                      </select>
+                                                      <span id="err_card_typ_<?=$val['project_id']?>" class="error-message"  style="display:none"></span>
+                                                    <div class="clr"></div>
+                                                    
+                                                   
+                                                  <div class="lable-txt-nw" >&nbsp;</div>
+                                                    <div class="amount-input amout-input">
+                                                       <p><input name="chk_dntDisclosed" type="checkbox" value="1" /> Click here if you do not want your name disclosed</p>
+                                                      <p> <input name="chk_aid" type="checkbox" value="1" /> Gift Aid My Donation</p>
+                                                    </div>
+                                                    <div class="clr"></div>
+                                                    
+                                                    <input type="hidden" name="hd_project_id" value="<?=$val['project_id']?>" />
+                                                  <input name="" type="button" value="Pay"  class="yellow-btn float-right" onclick="donateFundToProject(<?=$val['project_id']?>)"/>
+                                                    
+                                                    <div class="clr"></div>
+                                              </div>
+                                             </form>
+                                            </div>
+                                            <div class="donate-section-box" id="donors_donate_<?=$val['project_id']?>">
+                                            <?php
+													if(count($val['fund_donor_list'])){
+														foreach($val['fund_donor_list'] as $f_val){
+															
+															$profile_image = get_profile_image($f_val['post_owner_user_id'],'thumb');
+															if($d_val['if_already_friend'] == 'true' || $f_val['already_added_netpal'] == 'true'){
+																	  $profile_link = get_profile_url($f_val['post_owner_user_id'],$f_val['s_profile_name']);
+																}else
+																{
+																   $profile_link = get_public_profile_url($f_val['post_owner_user_id'],$f_val['s_profile_name']); 
+																}
+											 ?>
+                                                <div class="view-section"> 
+                                                     <a href="<?=$profile_link?>"> <div class="pro_photo3" style="background:url(<?php echo $profile_image;?>) no-repeat center;width:60px; height:60px;" ></div></a>
+                                                      <div class="view-left">
+                                                            <p><a href="javascript:void(0);"><?=$f_val['s_profile_name']?></a></p>
+                                                            <p class="donation-date">Donation Date : <?=getShortDate($d_val['donation_dt'],5)?> </p>
+                                                            <p class="donation-date">Amount: $<?=round($f_val['f_amount'],2)?></p>
+                                                      </div>
+                                                      <div class="clr"></div>
+                                                </div>
+                                              <?php 	}
+													}
+													else{
+											 ?>
+                                              <div class="view-section" style="border-bottom:none;"> 
+                                                      <div class="view-left" style="margin-left:175px;">
+                                                            <p><strong>No Donors yet.</strong></p>
+                                                      </div>
+                                                      <div class="clr"></div>
+                                                </div>
+                                             
+                                             <?php 
+													}
+											 ?>
+                                                
+                                            </div>
+                                            <div class="donate-section-box" id="info_donate_<?=$val['project_id']?>">
+                                            
+                                               <div class="frm_box">
+                                                     <p> 
+                                                     <textarea name="ta_query<?=$val['project_id']?>" id="ta_query<?=$val['project_id']?>" cols="" rows="" class="requset-information"></textarea>
+                                                     </p>
+                                                     <div class="clr"></div>
+                                                     <input name="" type="button" value="Request"  class="yellow-btn" onclick="send_project_query(<?=$val['project_id']?>,'<?=$val['s_title']?>')"/>
+                                                     <div class="clr"></div>
+                                               </div>
+                                            
+                                            </div>
+                                       		<?php /*?><div class="donate-section-box" id="time_donate_<?=$val['project_id']?>">
+                                            
+                                                <div class="frm_box">
+                                                      <div class="shade_box_white01">
+                                                          
+                                                          <div class="lable-txt-nw"> <input name="" type="checkbox" value="" class="nw-check-box" />   Skill: </div>
+                                                           
+                                                                  <input name="" type="text"  class="amount-input amout-input "  value="Skill 1" readonly="readonly"/>
+                                                                 
+                                                            <div class="clr"></div>
+                                                            <div class="lable-txt-nw">Description: </div>
+                                                          
+                                                                  <textarea name="" cols="" rows="" class="amount-input amout-input"></textarea>
+                                                           
+                                                            <div class="clr"></div>
+                                                            <div class="lable-txt-nw" >From:</div>
+                                                            <div class="amount-input amout-input" style="width:120px;">
+                                                                  <input style="width:90px;"   type="text"  value=" DD/MM/YYYY" name="date_to1" id="date_to1"  readonly="readonly"/>
+                                                                  <img src="images/icons/cal.png" alt="" onclick="$(this).prev().focus()" style="cursor:pointer; " />
+                                                                  <script type="text/javascript">
+                                                            $(document).ready(function(arg) {
+                                                                $.datepicker.setDefaults($.datepicker.regional['']);
+                                                                $("#date_to1").datepicker({
+                                                                      dateFormat : 'dd/mm/yy',
+                                                                  });
+                                                              
+                                                            });
+                                                        </script>
+                                                            </div>
+                                                            <div class="lable01" style=" width:42px;">To:</div>
+                                                            <div class="field04" style="width:120px;">
+                                                                  <input style="width:90px;"   type="text"  value=" DD/MM/YYYY" name="date_to21" id="date_to21"  readonly="readonly"/>
+                                                                  <img src="images/icons/cal.png" alt="" onclick="$(this).prev().focus()" style="cursor:pointer; " />
+                                                                  <script type="text/javascript">
+                                                            $(document).ready(function(arg) {
+                                                                $.datepicker.setDefaults($.datepicker.regional['']);
+                                                                $("#date_to21").datepicker({
+                                                                    dateFormat : 'dd/mm/yy',
+                                                                });
+                                                            
+                                                            });
+                                                        </script>
+                                                            </div>
+                                                            <div class="clr"></div>
+                                                      </div>
+                                                      <div class="shade_box_white01" style=" margin-bottom:10px;">
+                                                          <div class="lable01" style="width:10px;"><input name="" type="checkbox" value="" /></div>  
+                                                          <div class="lable01" style="width:87px;">Skill: </div>
+                                                            <div class="field03 blue_bold12" style="width:350px;" >
+                                                                  <input name="" type="text"  style="width:322px;"  value="Skill 2" readonly="readonly"/>
+                                                            </div>
+                                                            <div class="clr"></div>
+                                                            <div class="lable01" style="width:112px;">Description: </div>
+                                                            <div class="field03" style="width:350px;" >
+                                                                  <textarea name="" cols="" rows="" style="width:322px; height:65px;"></textarea>
+                                                            </div>
+                                                            <div class="clr"></div>
+                                                            <div class="lable01" style=" width:112px;">From:</div>
+                                                            <div class="field04" style="width:120px;">
+                                                                  <input style="width:90px;"   type="text"  value=" DD/MM/YYYY" name="date_to31" id="date_to31"  readonly="readonly"/>
+                                                                  <img src="images/icons/cal.png" alt="" onclick="$(this).prev().focus()" style="cursor:pointer; " />
+                                                                  <script type="text/javascript">
+                                                            $(document).ready(function(arg) {
+                                                                $.datepicker.setDefaults($.datepicker.regional['']);
+                                                                $("#date_to31").datepicker({
+                                                                    dateFormat : 'dd/mm/yy',
+                                                                });
+                                    
+                                                            });
+                                                        </script>
+                                                            </div>
+                                                            <div class="lable01" style=" width:42px;">To:</div>
+                                                            <div class="field04" style="width:120px;">
+                                                                  <input style="width:90px;"   type="text"  value=" DD/MM/YYYY" name="date_to41" id="date_to41"  readonly="readonly"/>
+                                                                  <img src="images/icons/cal.png" alt="" onclick="$(this).prev().focus()" style="cursor:pointer; " />
+                                                                  <script type="text/javascript">
+                                                            $(document).ready(function(arg) {
+                                                                $.datepicker.setDefaults($.datepicker.regional['']);
+                                                                $("#date_to41").datepicker({
+                                                                    dateFormat : 'dd/mm/yy',
+                                                                });
+                                    
+                                                            });
+                                                        </script>
+                                                            </div>
+                                                            <div class="clr"></div>
+                                                      </div>
+                                                       <div class="lable01" style="width:112px;">Upload CV:</div> 
+                                                     <div class="field03" style="width:350px;"><input name="" type="file" />  </div>
+                                                     <div class="clr"></div>
+                                                      <div class="lable01" style="width:112px;">&nbsp;</div>
+                                                      <div class="field03" style="width:350px;" >
+                                                            <input name="" type="button" value="Post"  class="btn"/>
+                                                      </div>
+                                                      <div class="clr"></div>
+                                                      <div class="lable01" style="width:112px;">&nbsp;</div>
+                                                      <div class="field03" style="width:350px;" >
+                                                          Your time contribution is subject to approval by project owner.
+                                                      </div>
+                                                      <div class="clr"></div>
+                                                </div>
+                                            
+                                            
+                                            </div><?php */?>
+                                        
+                                        </div>
+                                       
+                                      
+                                        <div class="clr"></div>
+                                  </div>
+                                  
+                            </div>
+ <?php 
+				}
+			}
+  ?>

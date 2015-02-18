@@ -1,0 +1,319 @@
+     
+ <?php  if(count($note_list)){
+								   		 	
+		foreach($note_list as $key=> $not_val){
+								   			
+			  //if($not_val['t_time'] == $com_time){
+   ?>
+	<?php /*?><p>Note: <a href="javascript:void(0);" class="blue_link"  onclick="return edit_note(<?=$not_val['id']?>);"><?=my_substr($not_val['s_description'],20)?></a></p><?php */?>
+    
+      <!--note block start -->
+      <div class="note-todo-event note" style="margin-bottom:15px;">
+            <div class="angle"></div>
+            <div class="content-area">
+                <div class="show">
+                    <p class="title">Note:</p>
+                    <p><?=nl2br($not_val['s_description'])?></p>
+                    <ul class="time">
+                        <li>Note Time: <span><?=getShortDateWithTime($not_val['t_time'],4)?></span></li>
+                    </ul>
+                    <div class="clr"></div>
+                </div>
+                <div class="edit">
+                    <form id="frmEditNote_<?=$not_val['id']?>"  method="post" action="<?=base_url().'logged/organizer_day_view/edit_note_ajax'?>" onsubmit="return false;" class="note-todo-form">
+                        <label>Note :</label>
+                        <div class="textarea1">
+                        <textarea rows="" cols="" name="txt_edit_desc" id="txt_edit_desc_<?=$not_val['id']?>" onKeyDown="limitText(this.form.txt_edit_desc,this.form.countdown,500);" 
+onKeyUp="limitText(this.form.txt_edit_desc,this.form.countdown,500);"  ></textarea>
+                         
+                        </div>
+                        <span id="err_edit_desc_<?=$not_val['id']?>" class="error-message"></span>
+                        <div class="clr"></div>
+                        <label>Time :</label>
+                        
+                        <div class="time-selectbox-container"> 
+                            <select name="s_edit_time_<?=$not_val['id']?>" id="s_edit_time_<?=$not_val['id']?>" class="time-selectbox">
+                                 <option value="-1">Select</option>
+                                 <?=makeOption_time()?>
+                            </select>
+                            
+                        </div>
+                        <span id="err_edit_time_<?=$not_val['id']?>" class="error-message" style="margin-top: 5px;"></span>
+                        
+                        <input type="hidden" id="hd_edit_date_<?=$not_val['id']?>" name="hd_edit_date_<?=$not_val['id']?>" value="<?=$not_val['d_date']?>"/>
+                        <div class="clr"></div>
+                        
+                        <label>&nbsp;</label>
+                        <input name="Edit" type="submit" value="Save" class="btn" onclick="edit_note_ajax(<?=$not_val['id']?>)" />
+                        <input name="Edit" type="button" value="Cancel" class="btn cancel-now" onclick="clear_edit_note_box(<?=$not_val['id']?>); noteCancelBtn('note_', <?=$not_val['id']?>);" />
+                       <?php /*?> <input name="" type="submit" value="Update" class="btn" />
+                        <input name="" type="button" value="Remove" class="btn" onclick="remove_note()"/><?php */?>
+                    </form>
+                    
+                    
+                </div>
+                <div class="edit-delete" id="note_<?=$not_val['id']?>">
+                    <a href="javascript:void(0);" class="edit-this edit-note" onclick="edit_note(<?=$not_val['id']?>)"><span>Edit</span></a>
+                    <a href="javascript:void(0);" class="remove-this cancel-note" onclick="remove_note(<?=$not_val['id']?>)"><span>Delete</span></a>
+                </div>
+            </div>
+            <div class="clr"></div>
+      </div>  
+      <!--note block end -->
+    
+<?php 		//}
+		  }
+	   }
+ ?>  
+
+<?php #pr($todo_list);
+	if(count($todo_list)){
+		foreach($todo_list as $key=> $list_val){
+	
+?>
+  
+  	<?php
+		if($list_val['s_type_to_do'] == 'to_do'){
+			
+	?>
+  	  <!--todo block start -->
+      <div class="note-todo-event todo" style="margin-bottom:15px;">
+            <div class="angle"></div>
+            <div class="content-area">
+                <div class="show">
+                    <p class="title">ToDo List:</p>
+                    <p><?=nl2br($list_val['s_description'])?></p>
+                    
+                    <ul class="time">
+                        <li>Start Time: <span><?=getShortDateWithTime($list_val['t_start_time'],4)?></span></li>
+                        <li>End Time: <span><?=getShortDateWithTime($list_val['t_end_time'],4)?></span></li>
+                        <li>Remind Me: <span><?=$list_val['t_remind_time']?></span></li>
+                    </ul>
+                    <div class="clr"></div>
+                </div>
+                <div class="edit">
+                <form  id="frmEditTodolist_<?=$list_val['id']?>"  method="post" action="<?=base_url().'logged/organizer_day_view/edit_todo_ajax'?>" onsubmit="return false;" enctype="multipart/form-data" class="note-todo-form">
+                    <label>Todo List :</label>
+                    <div class="textarea1">
+                    <textarea rows="" cols="" name="ta_edit_todo_desc" id="ta_edit_todo_desc_<?=$list_val['id']?>" onKeyDown="limitText(this.form.ta_edit_todo_desc,this.form.countdown,500);" 
+onKeyUp="limitText(this.form.ta_edit_todo_desc,this.form.countdown,500);"  ></textarea>
+                     
+                    </div>
+                    <span id="err_edit_todo_desc_<?=$list_val['id']?>" class="error-message"></span> 
+                    <div class="clr"></div>
+                    
+                    <label>Start Time :</label>
+                    <div class="time-selectbox-container"> 
+                       <select class="time-selectbox" name="edit_todo_strt_frm_<?=$list_val['id']?>" id="edit_todo_strt_frm_<?=$list_val['id']?>" style="width:150px;" onchange="generateEndtime_edit($(this).val(), <?=$list_val['id']?>)">
+                              <option value="-1">Select</option>
+                              <?=makeOption_time()?>
+                       </select>
+                    </div>
+                    
+                    <div id="edit_end_time_div_<?=$list_val['id']?>">
+                    <label class="left-gap">End Time :</label>
+                    <div class="time-selectbox-container"> 
+                        <select name="edit_todo_end_frm_<?=$list_val['id']?>" id="edit_todo_end_frm_<?=$list_val['id']?>" class="time-selectbox">
+                               <?php /*?><option value="-1">Select</option><?php */?>
+                                <?=makeOption_time()?>
+                        </select>
+                    </div>
+                    </div>
+                    <span id="err_edit_todo_strt_frm_<?=$list_val['id']?>" class="error-message"></span> 
+                    <span id="err_edit_todo_end_frm_<?=$list_val['id']?>" class="error-message"></span> 
+                    
+                    <div class="clr"></div>
+                    
+                    <label>Remind Me :</label>
+                    <div class="time-selectbox-container"> 
+                        <select name="edit_todo_rem_time_<?=$list_val['id']?>" id="edit_todo_rem_time_<?=$list_val['id']?>" class="time-selectbox">
+                               <option value="-1">Select</option>
+                               <option value="00:15:00">15 Minutes</option>
+                               <option value="00:30:00">30 Minutes</option>
+                               <option value="00:45:00">45 Minutes</option> 
+                               <option value="01:00:00">1 Hour</option>
+                               <option value="02:00:00">2 Hours</option>
+                              
+                             
+                        </select>
+                        <span class="blue12"><strong>Back</strong></span>
+                    </div>
+                    <span id="err_edit_todo_rem_time_<?=$list_val['id']?>" class="error-message"></span> 
+                    <input type="hidden" id="hd_edit_tododate_<?=$list_val['id']?>" name="hd_edit_tododate_<?=$list_val['id']?>" value="<?=getShortDate($selected_date,'8')?>"/>
+                 
+                    <div class="clr"></div>
+                    <label>&nbsp;</label>
+                  
+                    <input name="" type="submit" value="Save" class="btn" onclick="edit_list_ajax(<?=$list_val['id']?>)" />
+                    <input name="" type="button" value="Cancel" class="btn cancel-now" />
+                </form>
+                
+                
+                </div>
+                <div class="edit-delete" id="list_<?=$list_val['id']?>">
+                    <a href="javascript:void(0);" class="edit-this edit-note" onclick="return edit_list(<?=$list_val['id']?>);"><span>Edit</span></a>
+                    <a href="javascript:void(0);" class="remove-this" onclick="remove_list(<?=$list_val['id']?>)" ><span>Delete</span></a>
+                </div>
+            </div>
+            <div class="clr"></div>
+      </div>
+      <!--todo block end -->
+     <?php 
+		}
+		else {
+	 ?>
+        <!--event block start -->
+            <div class="note-todo-event event">
+                  <div class="angle"></div>
+                  <div class="content-area">
+                      <p class="title">Event: Prayer Meeting</p>
+                      <p><?=nl2br($list_val['s_description'])?></p>
+                      <ul class="time">
+                          <li>Event Time: <span><?=getShortDateWithTime($list_val['t_start_time'], 4)?></span></li>
+                      </ul>
+                      <div class="clr"></div>
+                  </div>
+                  <div class="clr"></div>
+            </div>
+        <!--event block end -->
+     <?php } ?>
+  
+<?php 	
+		}
+	 }
+?>      
+      
+<?php 
+	if(count($events_list)){
+		foreach($events_list as $key=> $event_val){
+	
+?>      
+    <!--event block start -->
+    <div class="note-todo-event event">
+          <div class="angle"></div>
+          <div class="content-area">
+              <p class="title">Event:</p>
+              <p><?=nl2br($event_val['s_desc'])?></p>
+              <ul class="time">
+                  <li>Event Time: <span><?=getShortDateWithTime($event_val['dt_start_time'], 4)?></span></li>
+              </ul>
+              <div class="clr"></div>
+          </div>
+          <div class="clr"></div>
+    </div>
+    <!--event block end -->
+    
+<?php 	
+		}
+	 }
+?>    
+
+<?php /*?><table width="100%" border="0" cellspacing="0" cellpadding="0" class="table02">
+                               
+                               
+                                <tr class="blue_td">
+                                      <th align="center" style="width:80px;">Hour</th>
+                                      <th align="left">Reminder</th>
+                                      <th align="left" class="last_td" style="width:140px;">&nbsp;</th>
+                                </tr>
+                                
+                                <?php 
+								
+									$day = $selected_date;
+
+									$startTime = date(strtotime($day." 00:00"));
+									$endTime = date(strtotime($day." 23:45"));
+									
+									$timeDiff = round(($endTime - $startTime)/60/60);
+									
+									$startHour = date("G", $startTime);
+									$endHour = $startHour + $timeDiff; 
+									
+									for ($i=$startHour; $i < $endHour; $i++)
+									{
+										for ($j = 0; $j <= 45; $j+=15)
+										{
+												
+										  $time = str_pad($i, 2, '0', STR_PAD_LEFT).":".str_pad($j, 2, '0', STR_PAD_LEFT)."<br/>";
+										  $com_time = str_pad($i, 2, '0', STR_PAD_LEFT).":".str_pad($j, 2, '0', STR_PAD_LEFT).":00";
+										 
+									?>			
+									  <tr class="blue_td">
+                                      <td align="center" valign="top"><?=$time?></td>
+                                      <td align="left" valign="top" class="alarm">
+                                    <?php if(count($note_list)){
+								   		 	foreach($note_list as $key=> $not_val){
+								   			
+												if($not_val['t_time'] == $com_time){
+								     ?>
+                                      <p>Note: <a href="javascript:void(0);" class="blue_link"  onclick="return edit_note(<?=$not_val['id']?>);"><?=my_substr($not_val['s_description'],20)?></a></p>
+                                  <?php 		}
+											}
+										 }
+								   ?>  
+								   <?php 
+								   		if(count($todo_list)){
+                                       		foreach($todo_list as $key=> $list_val){
+                                        
+                                        		if($list_val['t_start_time'] == $com_time ){
+                                   ?>
+                                      <p>To-Do-List: <a href="javascript:void(0);" class="blue_link"  onclick="return edit_list(<?=$list_val['id']?>);"><?=my_substr($list_val['s_description'],20)?></a></p>
+                                  <?php 		}
+											}
+										 }
+								   ?>  
+                                        
+                                        <!--<p>Event: <a href="javascript:void(0);" class="blue_link"  onclick="return show_dialog('edit_event')">Event Title Goes Here</a></p>-->
+                                        </td>
+                                      <td align="left" valign="top" class="last_td">
+                                      	<p><img src="images/icons/add_note.png" alt="" /> <a href="javascript:void(0);" class="blue_link"  onclick="return add_note('<?=$com_time?>')">Add Note</a></p>
+                                        <p><img src="images/icons/add_list.png" alt="" /> <a href="javascript:void(0);" class="blue_link"  onclick="return add_list('<?=$com_time?>')">Add To-Do-List</a></p>
+                                        <!--<p><img src="images/icons/add_event.png" alt="" /> <a href="javascript:void(0);" class="blue_link"  onclick="return show_dialog('add_event')">Add Event</a></p>-->
+                                      </td>
+                                </tr>				
+								 <?php
+											}
+									}
+								
+								 ?>
+                                 
+                                 
+                                  <tr class="blue_td">
+                                      <td align="center" valign="top">24:00</td>
+                                      <td align="left" valign="top" class="alarm">
+                                    <?php if(count($note_list)){
+								   		 	foreach($note_list as $key=> $not_val){
+								   			
+												if($not_val['t_time'] == '24:00:00'){
+								     ?>
+                                       <p>Note: <a href="javascript:void(0);" class="blue_link"  onclick="return edit_note(<?=$not_val['id']?>);"><?=my_substr($not_val['s_description'],20)?></a></p>
+                                     <?php 		}
+											}
+										 }
+								   ?> 
+                                    <?php 
+								   		if(count($todo_list)){
+                                       		foreach($todo_list as $key=> $list_val){
+                                        
+                                        		if($list_val['t_start_time'] == '24:00:00' ){
+                                   ?> 
+                                       <p>To-Do-List: <a href="javascript:void(0);" class="blue_link"  onclick="return edit_list(<?=$list_val['id']?>);"><?=my_substr($list_val['s_description'],20)?></a></p>
+                                        
+                                    <?php 		}
+											}
+										 }
+								   ?> 
+                                        <!--<p>Event: <a href="javascript:void(0);" class="blue_link"  onclick="return show_dialog('edit_event')">Event Title Goes Here</a></p>-->
+                                        </td>
+                                      <td align="left" valign="top" class="last_td">
+                                      	<p><img src="images/icons/add_note.png" alt="" /> <a href="javascript:void(0);" class="blue_link"  onclick="return add_note('24:00:00')">Add Note</a></p>
+                                        <p><img src="images/icons/add_list.png" alt="" /> <a href="javascript:void(0);" class="blue_link"  onclick="return add_list('24:00:00')">Add To-Do-List</a></p>
+                                        <!--<p><img src="images/icons/add_event.png" alt="" /> <a href="javascript:void(0);" class="blue_link"  onclick="return show_dialog('add_event')">Add Event</a></p>-->
+                                      </td>
+                                </tr>		
+                                 
+                                
+                                <?php  ?>
+                                
+                               
+                          </table><?php */?>

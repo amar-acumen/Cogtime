@@ -1,0 +1,143 @@
+.MainBackground      ---------主背景框-VBox
+
+.InnerBackground    ----------次背景框（除去banner与bottom的框体）-VBox
+
+.UserListBackground   --------用户列表面板与房间列表的背景框 --VBox
+
+
+.RoleAdmin---------|
+.RoleGuest---------|----------每种样式对应每种等级用户在用户列表中的显示 --Label
+.RoleModerator-----|
+.RoleSpeaker-------|
+
+
+.CurrentChatRoom    ----------显示在房间列表中 对应的 当前房间的样式 --Label
+
+.InputAsisstBackground    ----工具栏背景框 --HBox
+
+.InputPanel   ----------------输入框的背景 --TextArea
+
+.InputPanelText   ------------输入框组件的样式 --TextField
+
+.TopBar   --------------------右上角menuBar的右半部分 --HBox
+
+.TopBar2   -------------------右上角menuBar的左半部分 ---HBox
+
+.UserList --------------------用户列表与房间列表中列表 ---List
+
+.AvilableOption   ------------弹出框中列表的样式(预定义消息，切换背景，发送声音，用户菜单) -- List
+
+MessagePanel  ----------------消息面板 --Canvas
+
+.MessagePanelBackgroundNames --消息样式集 
+
+.Bubble-------------|
+.PointLine----------|
+.PointRect----------|
+.Serene-------------|---------具体样式
+.GradientRect-------|
+.Orkut--------------|
+
+
+ScrollBar --------------------滚动条 --ScrollBar
+
+.ChatWindowToggleButtonBar ---房间Tab面板的样式 --ToggleButtonBar
+
+.ExpressTab ------------------房间Tab按钮的样式 --Button
+
+TabBar -----------------------TabBar的全局样式（options中使用） --TabBar
+
+.SelectedTabTextStyle --------选中的Tab按钮的样式 --Buttoon
+
+.UserListTabBar --------------用户列表与房间列表上的TabBar的样式 --Buttoon
+
+.ExpressTab2------------------用户列表与房间列表上Tab按钮的样式 --Buttoon
+
+.SelectedUserListTabTextStyle--用户列表与房间列表上Tab按钮的被选中样式 --Buttoon
+
+.blink -----------------------Tab闪动的第一帧 --Buttoon
+
+.blinkOver -------------------Tab闪动的第二帧 --Buttoon
+
+.TabCloseButton --------------房间Tab上的关闭按钮 --Buttoon
+
+.PagingPreviousButton --------房间Tab上的左移按钮 --Buttoon
+
+.PagingNextButton ------------房间Tab上的右移按钮 --Buttoon
+
+.PagingBlackPreviousButton ---分页的左移按钮（预定义消息） --Buttoon
+
+.PagingBlackNextButton -------分页的右移按钮（预定义消息） --Buttoon
+
+.AddButton -------------------添加按钮（预定义消息） --Buttoon
+
+.ReduceButton ----------------删除按钮（预定义消息） --Buttoon
+
+Button -----------------------全局按钮样式 --Buttoon
+
+ComboBox ---------------------全局下拉菜单  --ComboBox 
+
+PopUpButton-------------------全局弹出菜单按钮（如：工具栏上的按钮） --Buttoon
+
+.textInput--------------------编辑用户资料菜单中的输入框样式 --TextInput
+
+.muteButton ------------------静音按钮 --Buttoon
+
+.muteStatus ------------------关禁闭用户在用户列表中的样式 --Label
+
+.unmuteStatus ----------------普通用户在用户列表中的样式 --Label
+
+.scrollButton ----------------滚屏按钮 --Buttoon
+
+.clearScreenButton -----------清屏按钮 --Buttoon
+
+.viewHistoryButton -----------历史记录按钮 --Buttoon
+
+.AvatarButton ----------------用户列表中的编辑用户按钮 --Buttoon
+
+.AvatarLargeButton -----------标记用户面板中头像按钮 --Buttoon
+
+.textButton ------------------发送按钮，换行按钮，弹出面板中按钮 --Buttoon
+
+.ComboTextInput --------------下拉菜单中文本的样式 --TextInput
+
+.IconButton ------------------头像和表情面板中的按钮 --Buttoon
+
+.FontButton ------------------文本样式按钮 --Buttoon
+
+.EmotionButton ---------------Emotion按钮 --Buttoon
+
+.LinkButton ------------------文本按钮 --Buttoon
+
+.HideButton ------------------只有选区  没有样式的按钮    （制作时 可以忽略） --Buttoon
+
+.AVButton --------------------用户列表中的AV按钮 --Buttoon
+
+Box --------------------------全局的box组件 --Box 
+
+Panel  -----------------------全局的panel组件 --Panel  
+
+Alert  -----------------------弹出提示框 --Alert  
+
+.AletTextFormat  -------------弹出提示框中的文本 --Label
+
+ToolTip  ---------------------小提示 --ToolTip  
+
+TitleWindow  -----------------弹出窗口 --TitleWindow  
+
+TextArea ---------------------全局的文本框 --TextArea 
+
+.popUpWindowTitle  -----------弹出窗口的标题 --Tabel
+
+.optionViewStack  ------------option面板中每一个项目样式 --ViewStack
+
+.inputTypeButtonBar ----------文本和handwriting切换按钮面板 --ToggleButtonBar
+
+.textModeButton --------------文本按钮 --Button
+
+.HandWritingModeButton -------handwriting按钮 --Button
+
+.AccordionHeaderMask  --------hack的东西 用于遮挡Accordion的header（自定义颜色 ，和InnerBackground背景色相同即可） --Canvas
+
+.ConfirmKick  ----------------确认按钮   用于提示框中 --Image
+

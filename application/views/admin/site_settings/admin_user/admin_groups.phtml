@@ -1,0 +1,398 @@
+<script type="text/javascript">
+$(document).ready(function(arg) {
+	
+
+$('#frm_search').submit(function(){ 
+						
+	  var datatosend=$("#frm_search").serialize();
+	  showBusyScreen();
+	  //alert(datatosend);
+	  $.ajax({
+		 type: "POST",
+		 url: admin_base_url+"site_settings/admin_user/ajax_pagination/<?=$grpid?>/",
+		 data: datatosend,
+		 success: function(data){
+			
+			hideBusyScreen(); 
+			 $('#table_content').html(data);
+			 
+		  
+		   
+		 }
+	   });	 
+});
+
+
+$('#add_frm').submit(function(){ 
+							
+	var datatosend=$("#add_frm").serialize();
+	showUILoader_nodialog('<img src="<?= base_url() ?>images/loading_big.gif" width="50"/> ');
+	$.ajax({
+	   type: "POST",
+	   url: admin_base_url+"site_settings/admin_user/add/"+'<?=$grpid?>',
+	   data: datatosend,
+	   dataType: "json",
+	   success: function(data){
+		   
+		 if(data.success == false) 
+		 {
+			  
+			  $('.error-message').each(function(i){
+				  $(this).attr('style','display:none');
+			  });
+			  
+			  for ( var id in data.arr_messages ){
+				  //alert('#err_'+id);
+				  if( $('#err_'+id) != null ) {
+					  $('#err_'+id).html(data.arr_messages[id]);
+					  $('#err_'+id).css('display', 'block');
+				  }
+			  }
+			  hideUILoader_nodialog();
+			  
+		 }
+		 else{
+			 
+			$('#add_frm')[0].reset();
+			$('#table_content').html(data.html) ;
+			hide_dialog();
+			hideUILoader_nodialog();
+			showUIMsg(data.msg);
+		 }
+	   }
+	 });	 
+});
+
+
+$('#edit_frm').submit(function(){ 
+							
+	var datatosend=$("#edit_frm").serialize();
+	var usr_id  = $('#i_edit_id').val();
+	showUILoader_nodialog('<img src="<?= base_url() ?>images/loading_big.gif" width="50"/> ');
+	$.ajax({
+	   type: "POST",
+	   url: admin_base_url+"site_settings/admin_user/edit/"+usr_id,
+	   data: datatosend,
+	   dataType: "json",
+	   success: function(data){
+		   
+		 if(data.success == false) 
+		 {
+			  
+			  $('.error-message').each(function(i){
+				  $(this).attr('style','display:none');
+			  });
+			  
+			  for ( var id in data.arr_messages ){
+				  //alert('#err_'+id);
+				  if( $('#err_'+id) != null ) {
+					  $('#err_'+id).html(data.arr_messages[id]);
+					  $('#err_'+id).css('display', 'block');
+				  }
+			  }
+			  hideUILoader_nodialog();
+			  
+		 }
+		 else{
+			$('#edit_frm')[0].reset();
+			$('#table_content').html(data.html) ;
+			hide_dialog();
+			hideUILoader_nodialog();
+			showUIMsg(data.msg);
+		 }
+	   }
+	 });	 
+});
+	
+	
+ 
+});
+ 
+ 
+  function clear_box(mode){
+	  if(mode == 'add'){
+		  $('#add_frm')[0].reset();
+		  $('.error-message').hide();
+	  }else{
+		  $('#edit_frm')[0].reset();
+		   $('.error-message').hide();
+		}
+  }
+  function edit(id)
+  {
+	  
+	  $('#i_edit_id').val(id);
+		   showUILoader('<img src="<?= base_url() ?>images/loading_big.gif" width="50"/> ');
+		   $.ajax({
+			   type: "get",
+			   url: '<?=admin_base_url()?>site_settings/admin_user/edit/'+id,
+			   dataType:"json",
+			   success: function(data){
+					if(data.result = 'success') {
+					   $('#edit_content').html(data.html);
+					   hideUILoader('edit-new-user')
+					}
+					else {
+						hideUILoader('edit-new-user')
+						showUIMsg('Some error occurred. Please try again.');
+					}
+				},
+				error: function(){
+					hideUILoader('edit-new-user')
+					showUIMsg('Some error occurred. Please try again.');
+				}
+			});	 
+	  
+	  
+	  
+	  //show_dialog('edit-admin-group');
+	  //return false;
+  }
+  
+   function resetPassword(id)
+	{
+		var URL = admin_base_url+"site_settings/admin_user/reset_password/";
+		showBusyScreen();
+		
+		$.ajax({
+			type: 'POST',
+			url:URL,
+			dataType: 'json',
+			data: ({ 'record_id' : id
+				 }),
+			success: function (data, status) {
+							var result_obj = data;
+							hideBusyScreen();
+							if(result_obj.result=='success' && result_obj.redirect == false ) {
+								showUIMsg(result_obj.msg);
+							}
+							else if(result_obj.result==false && result_obj.redirect == true){
+							    showUIMsg(result_obj.msg);
+							}
+					},
+			error: function (data, status, e) {
+								hideBusyScreen();
+								showUIMsg(data.msg);
+			}
+		});
+	}
+
+
+function confirm_delete_(file_id)
+{
+	//alert(file_id);
+	$('#i_del_id').val( file_id );
+	show_dialog('delete-page-popup');
+	//return false;
+}
+
+
+function delete_()
+{
+		var selected_id = parseInt( $('#i_del_id').val() );
+		//alert(selected_id);
+   	var URL = '<?=admin_base_url()?>site_settings/admin_user/delete/';
+   $.ajax({
+		type: 'POST',
+		url:URL,
+		dataType: 'json',
+		data: ({ 'id' : selected_id
+			 }),
+		success: function (data, status) {
+				hide_dialog();
+				showUIMsg('Deleted successfully.');
+				$('#table_content').html(data.html);
+				//hideBusyScreen(); 
+		}
+	});
+}
+
+function change_status(id,i_status)
+{
+	var URL = '<?=admin_base_url()?>site_settings/admin_user/change_status/';
+	showBusyScreen();
+	if(ajax_req!=null) {
+		ajax_req.abort();
+	}
+	ajax_req = $.ajax({
+		type: 'POST',
+		url:URL,
+		dataType: 'json',
+		data: ({ 'id' : id
+				 ,'status' : i_status
+			 }),
+		success: function (data, status) {
+			
+				showUIMsg('Status changed successfully.');
+				$('#prod_status_'+id).html(data.action_html);
+				hideBusyScreen(); 
+		}
+	});
+}
+
+
+</script>
+
+<div class="clr"></div>
+<!-- CONTENT SECTION -->
+<!--navigation section start -->
+<?php include(APPPATH."views/layouts/admin/admin_nav.phtml");?>
+<!--navigation section end -->
+<div id="content_section">
+      <div id="container">
+            <div id="mid_content">
+                  <div class="page_heading left">
+                        <div class="left"><img src="../images/icons/login.png" alt="" /> Members of Group : <?=$grp_arr['s_name']?></div>
+                        <div class="right"><a class="back-page" href="site_settings/admin-groups.html">Back to Group Listing</a></div>
+                  </div>
+                  <div class="clr"></div>
+                  <div id="right_container">
+                        <div class="arrow_btm"></div>
+                        <div class="content_area">
+                            <!--filter section start -->
+                            <div class="filter">
+                                <span class="filter-by">Filter By &raquo;</span>
+                                <form name="frm_search" id="frm_search" onsubmit="return false;" action="" method="post" class="filter-search">
+                                    <label>Group Name :</label>
+                                    <div class="field01" style="float:left;">
+                                        <select name="category" id="category3" style="width:150px;">
+                                                   <option value="-1">select</option>
+                                                   <?=makeAdminGroup()?>
+                                          </select>
+                                         
+                                    </div>
+                                    <label style="margin-left:5px;">ADMIN ID :</label><input type="text" name="txt_email" />
+                                    <label>Name :</label><input type="text" name="txt_name" />
+                                    <input type="hidden" value="Y" name="search_basic" id="search_basic"  />
+                                   <input name="" type="submit" value="GO" class="go" />
+                                </form>  
+                                <div class="clr"></div>
+                            </div>
+                            <!--filter section end -->
+                        
+                            <div class="right" style="margin-bottom:14px;"><input name="" type="button" value="Add New User"  class="evnt_btn1" onclick="return show_dialog('add-new-user')"/></div>
+                        	
+                            <div class="clr"></div>
+                            <DIV id="table_content"><?=$result_content?></DIV>
+                        	<div class="clr"></div>
+                        </div>
+                  </div>
+                  <div class="clr"></div>
+            </div>
+      </div>
+      <div class="clr"></div>
+</div>
+<!-- /CONTENT SECTION -->
+
+
+<!--popup one start-->
+<div class="lightbox delete-page-popup" style="width:500px;">
+      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="../images/close.png" alt="" /></a></div>
+      <div class="top"><div>&nbsp;</div></div>
+      <div class="mid">
+            <div class="heading" style="margin-bottom:0px;">
+                  <div class="left">
+                        <h4>Delete Member</h4>
+                  </div>
+            </div>
+               <div class="shade_box_white" style="padding:8px 0px;">
+               <p class="center-text">Do you really want to delete member?</p>
+               <form action="" method="post" enctype="multipart/form-data">
+               		<input type="hidden" id="i_del_id" name="i_del_id" value="" />
+                    <input name="" type="button" value="Yes" class="btn" style="margin-left:146px;" onclick="return delete_();"/>
+                    <input name="" type="button" value="No" class="btn" onclick="hide_dialog()"/>
+             
+               </form>   
+               <div class="clr"></div>
+            </div>
+            
+      </div>
+      <div class="bot"><div>&nbsp;</div></div>
+</div>
+<!--popup one end-->
+
+<!--popup add new user start-->
+<div class="lightbox add-new-user" style="width:500px;">
+      <div class="close"><a href="javascript:void(0)" onclick="$('#add_frm')[0].reset();hide_dialog();"><img src="../images/close.png" alt="" /></a></div>
+      <div class="top"><div>&nbsp;</div></div>
+      <div class="mid">
+            <div class="heading" style="margin-bottom:0px;">
+                  <div class="left">
+                        <h4>Add New User</h4>
+                  </div>
+            </div>
+               <div class="shade_box_white" style="padding:8px 0px;">
+               <div class="content_area frm_box2">
+                        	  <form action="" id="add_frm" onsubmit="return false;" method="post" enctype="multipart/form-data">
+                                  <div class="lable01">ADMIN ID :</div>
+                                  <div class="field01">
+                                        <input name="txt_g_email" type="text" autocomplete="off" />
+                                  </div>
+                                  <div class="error-message" id="err_g_email"></div>
+                                  <div class="clr"></div>
+                                  
+                                  <div class="lable01">Name :</div>
+                                  <div class="field01">
+                                        <input name="txt_name" type="text" />
+                                  </div>
+                                  <div class="error-message" id="err_name"></div>
+                                  <div class="clr"></div>
+                                  
+                                  <div class="lable01">Password  :</div>
+                                  <div class="field01">
+                                        <input name="txt_g_password" type="password"  autocomplete="off"/>
+                                  </div>
+                                  <div class="error-message" id="err_g_password"></div>
+                                  <div class="clr"></div>
+                                  
+                                  <div class="lable01">Select Group  :</div>
+                                  <div class="field01" style="margin-bottom:8px;">
+                                        <select name="category" id="category" style="width:348px;">
+                                                <option value="-1">select</option>
+                                                <?=makeAdminGroup()?>
+                                          </select>
+                                        
+                                  </div>
+                                  <div class="error-message" id="err_category"></div>
+                                  <div class="clr"></div>
+                                  
+                                  <div class="lable01"> </div>
+                                  <div class="field01">
+                                        <input name="" type="submit" class="btn"  value="Add"/>
+                                        <input name="" type="reset" class="btn"  value="Cancel" onclick="clear_box('add');hide_dialog();"/>
+                                  </div>
+                              </form>
+                              <div class="clr"></div>
+                        </div>
+               <div class="clr"></div>
+            </div>
+            
+      </div>
+      <div class="bot"><div>&nbsp;</div></div>
+</div>
+<!--popup add new user end-->
+<!--popup edit user start-->
+<div class="lightbox edit-new-user" style="width:500px;">
+      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="../images/close.png" alt="" /></a></div>
+      <div class="top"><div>&nbsp;</div></div>
+      <div class="mid">
+            <div class="heading" style="margin-bottom:0px;">
+                  <div class="left">
+                        <h4>Edit User</h4>
+                  </div>
+            </div>
+               <div class="shade_box_white" style="padding:8px 0px;">
+               <div class="content_area frm_box2">
+                        	  <form action="" id="edit_frm" onsubmit="return false;" method="post" enctype="multipart/form-data">
+                                 <DIV id="edit_content"></DIV>
+                                 <input  type="hidden" id="i_edit_id" />
+                              </form>
+                              <div class="clr"></div>
+                        </div>
+               <div class="clr"></div>
+            </div>
+            
+      </div>
+      <div class="bot"><div>&nbsp;</div></div>
+</div>
+<!--popup edit user end-->

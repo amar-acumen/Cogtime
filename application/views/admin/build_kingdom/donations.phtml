@@ -1,0 +1,158 @@
+<div class="clr"></div>
+<!--navigation section start -->
+<?php include(APPPATH."views/layouts/admin/admin_nav.phtml");?>
+<!--navigation section end -->
+<!-- CONTENT SECTION -->
+
+<div id="content_section">
+      <div id="container">
+            <div id="mid_content">
+                  <div class="page_heading left">
+                        <div class="left"><img src="../images/icons/login.png" alt="" />  Donations</div>
+                  </div>
+                  <div class="clr"></div>
+                  <div id="right_container">
+                        <div class="arrow_btm"></div>
+                        <div class="content_area">
+                            <!--filter section start -->
+                            <div class="filter">
+                                <span class="filter-by">Filter By &raquo;</span>
+                                <form action="" method="post" enctype="multipart/form-data" class="filter-search">
+                                    <label>User Name :</label><input type="text"/>
+                                    <input name="" type="button" value="GO" class="go" />
+                                </form>  
+                                <div class="clr"></div>
+                            </div>
+                            <!--filter section end -->
+                            
+                            <!--tab section start -->
+                            <div class="tab-box">
+                                <div class="tab_content title-div">
+                                    <ul>
+                                        <li class="first select" id="common"><a href="javascript:void(0);" onClick="show_donations('common')">Donation Busket</a></li>
+                                        <li id="fund"><a href="javascript:void(0);" onClick="show_donations('fund')">Fund Donation towards Projects</a></li>
+                                        <li id="skill" class="noBg"><a href="javascript:void(0);" onClick="show_donations('skill')">Skill Donation towards Projects</a></li>
+                                       <!-- <li class="noBg" id="prayer"><a href="javascript:void(0);" onClick="show_donations('prayer')">Donation through Prayers</a></li>-->
+                                    </ul>
+                                </div>
+                                <div class="clr"></div>
+                                <div class="tab_details detail-div">
+                                    <!--Donation Busket box -->
+                                    <div class="show lavel-01" id="common_donation_content">
+                                        <?=$common_donation_content?>       
+                                    </div>
+                                    <!--/Donation Busket box -->
+                                    <!--Donation towards Projects box -->
+                                    <div class="lavel-01" id="fund_donation_content">
+                                    	 <?=$fund_donation_content?>       
+                                    </div>
+                                    <!--/Donation towards Projects box -->
+                                    
+                                      <!--Donation towards Projects box -->
+                                    <div class="lavel-01" id="skill_donation_content">
+                                    	 <?=$skill_donation_content?>       
+                                    </div>
+                                    <!--/Donation towards Projects box -->
+                                    
+                                    <!--Donation through Prayers box -->
+                                    <div class="lavel-01" id="prayer_donation_content">
+                                    	<?=$prayer_donation_content?>    
+                                    </div>
+                                    <!--/Donation through Prayers box -->
+                                </div>
+                            </div>
+                            <!--tab section end -->
+                        
+                        	<div class="clr"></div>
+                        </div>
+                  </div>
+                  <div class="clr"></div>
+            </div>
+      </div>
+      <div class="clr"></div>
+</div>
+<!-- /CONTENT SECTION -->
+
+<!--popup one start-->
+<div class="lightbox delete-product" style="width:500px;">
+      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="../images/close.png" alt="" /></a></div>
+      <div class="top"><div>&nbsp;</div></div>
+      <div class="mid">
+            <div class="heading" style="margin-bottom:0px;">
+                  <div class="left">
+                        <h4>Delete Donation</h4>
+                  </div>
+            </div>
+               <div class="shade_box_white">
+               <p class="center-text">Do you really want to delete this Donation?</p>
+               <form action="" method="post" enctype="multipart/form-data">
+               		<input name="" type="button" value="Yes" class="btn" style="margin-left:146px;"/>
+                    <input name="" type="button" value="No" class="btn" onclick="hide_dialog()"/>
+               </form>   
+               <div class="clr"></div>
+            </div>
+            
+      </div>
+      <div class="bot"><div>&nbsp;</div></div>
+</div>
+<!--popup one end-->
+
+<!--popup edit donation busket status -->
+<div class="lightbox edit-status" style="width:500px;">
+      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="../images/close.png" alt="" /></a></div>
+      <div class="top"><div>&nbsp;</div></div>
+      <div class="mid">
+            <div class="heading" style="margin-bottom:0px;">
+                  <div class="left">
+                        <h4>Edit Status</h4>
+                  </div>
+            </div>
+               <div class="shade_box_white" style="padding:8px 0px;">
+               <div class="content_area frm_box2">
+                        	  <form action="" method="post" enctype="multipart/form-data">
+                                  
+                                  <div class="lable01">Status  :</div>
+                                  <div class="field01" style="margin-bottom:8px;">
+                                        <select name="status" id="status" style="width:348px;">
+                                                <option>Completed</option>
+                                                <option>Pending</option>
+                                          </select>
+                                        
+                                  </div>
+                                  <div class="error-message">* Required Field</div>
+                                  <div class="clr"></div>
+                                  
+                                  <div class="lable01"> </div>
+                                  <div class="field01">
+                                        <input name="" type="button" class="btn"  value="Update"/><input name="" type="reset" class="btn"  value="Cancel" onclick="window.location=''"/>
+                                  </div>
+                              </form>
+                              <div class="clr"></div>
+                        </div>
+               <div class="clr"></div>
+            </div>
+            
+      </div>
+      <div class="bot"><div>&nbsp;</div></div>
+</div>
+<!--/popup edit donation busket status -->
+
+<!--popup project details start-->
+<div class="lightbox project-details" style="width:700px;">
+      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="../images/close.png" alt="" /></a></div>
+      <div class="top"><div>&nbsp;</div></div>
+      <div class="mid">
+            <div class="heading" style="margin-bottom:0px;">
+                  <div class="left">
+                        <h4>Welfare Project One</h4>
+                  </div>
+            </div>
+               <div class="shade_box_white product" id="project_content">
+					
+               </div>
+            
+      </div>
+      <div class="bot"><div>&nbsp;</div></div>
+</div>
+<!--popup project details end-->
+

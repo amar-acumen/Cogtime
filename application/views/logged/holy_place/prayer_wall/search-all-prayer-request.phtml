@@ -1,0 +1,217 @@
+<?php include(APPPATH."views/layouts/logged_header.phtml");?>
+            <!-- NAVIGATION SECTION -->
+      <?php include(APPPATH."views/layouts/nav.phtml");?>
+      <!-- /NAVIGATION SECTION -->
+      </div>
+</div>
+<!-- /HEADER SECTION -->
+<div class="clr"></div>
+<!-- CONTENT SECTION -->
+<div id="content_section">
+      <div id="container">
+            <div id="mid_content">
+                  <!-- latest news -->
+                   <h2 class="main-title">Search Results <?=($no_of_result  >0 )? '('.$no_of_result.')':'' ?></h2>
+                  <!-- /latest news -->
+                  <div class="clr"></div>
+                  <!-- main container -->
+                  <div id="main_container">
+                        <!--buttons section start -->
+                        <ul class="prayer-wall-links">
+                          <li <?=($page_name == 'prayer-wall-home')?'class="select"':''?>><a href="prayer-wall-home.html" class="prayer-wall">Prayer wall home</a></li>
+                          <li <?=($page_name == 'manage-my-prayer-request')?'class="select"':''?>><a href="manage-my-prayer-request.html" class="prayer-request">My prayer request</a></li>
+                          <li <?=($page_name == 'manage-my-commitments')?'class="select"':''?>><a href="manage-my-commitments.html" class="my-commitments">My Commitments</a></li>
+                        </ul>
+                       
+                        <!--buttons section end -->
+                        
+                        <!--search prayer wall, create prayer request tab start -->
+                        
+                        	<ul class="search-create-btn-holder top-gap">
+                              <li><a href="javascript:void(0);"  onclick="open_search_prayer_wall()" >Search Prayer Wall</a></li>
+                              <li><a href="javascript:void(0);" onclick="open_create_prayer_wall()">Create new prayer request</a></li>
+                           </ul>
+                            <div class="clr"></div>
+                        	
+                            
+                            <div class="search-create-form-container">
+                            	<!--search form start -->
+                                <?php include(APPPATH ."views/logged/holy_place/prayer_wall/prayer_wall_search_panel.phtml");?>
+                                <!--search form end -->
+                                
+                                 <!--create new prayer request start -->
+								  <?php include(APPPATH ."views/logged/holy_place/prayer_wall/create_prayer_request.phtml");?>
+                                 <!--create new prayer request start -->
+                            </div>
+                       
+                        <!--search prayer wall, create prayer request tab end -->
+                        
+					<DIV id="req_content_div"><?=$prayer_req_ajax_content?></DIV>                       
+                        
+                  </div>
+                  <!-- /main container -->
+                  <!--pagination start -->
+                         <div class="clr"></div> 
+                          <?php if($no_of_result  == 0):?>
+                                <div class="shade_box_01" style="padding-top:5px;" id="no_tweets"><div  class="shade_norecords" style="width:520px;;"><p class="blue_bold12">No Prayer Request.</p></div></div>
+                            <?php endif;?>	
+                           
+                            
+                            <?php if($no_of_result > $pagination_per_page): ?>
+                                    
+                                    <div class="view_more" id="show_more_div"><a href="javascript:void(0);" id="show_more_tweets_link" page_value="<?=$current_page_1?>" onclick="show_more_records($(this).attr('page_value'))">[view more] </a> </div>
+                            <?php endif; ?>
+                  <!--pagination end -->
+                  
+            </div>
+      </div>
+      <div class="clr"></div>
+</div>
+<!-- /CONTENT SECTION -->
+<div class="clr"></div>
+<!-- FOOTER SECTION -->
+<?php include(APPPATH."views/layouts/footer.phtml");?>
+<?php include(APPPATH."views/logged/blocks/common_popup.phtml");?>
+<!-- /FOOTER SECTION -->
+
+
+
+
+
+<script type="text/javascript">
+
+$(document).ready(function () {
+
+
+ //counting the left characters in comment
+     function limitChars(textid, limit, infodiv)
+     {
+      var text = $('#'+textid).val(); 
+      var textlength = text.length;
+      if(textlength > limit)
+      {
+      $('#'+textid).val(text.substr(0,limit));
+       return false;
+      }
+      else
+      {
+      
+       return true;
+      }
+     }
+    
+    
+    $(function(){
+        $('#ta_desc').keyup(function(){
+            limitChars('ta_desc', 300, '');
+        });
+    });
+    
+    
+    //// just to show correct no. of chracters left while the page is loaded...
+    limitChars('ta_desc',300, '');
+    
+
+});
+</script>
+
+<script type="text/javascript">
+
+var ajax_req_feeds = null;
+function show_more_records(page) {
+	
+	if(ajax_req_feeds!=null) {
+		ajax_req_feeds.abort();
+	}
+	showUILoader_nodialog();
+	ajax_req_feeds = $.ajax({
+		type: 'get',
+		url: base_url+'logged/prayer_wall/search_all_prayer_request_ajax_pagination/'+page,
+		dataType: 'json',
+
+		success: function (data, status) {
+
+			hideUILoader_nodialog();
+			if(data.html!='') {
+				
+				//alert(data.cur_page+'dfdf');
+				$('#req_content_div').append(data.html);
+				$('#show_more_tweets_link').attr('page_value', data.cur_page);
+				$('#show_more_tweets_link').attr('onclick','');
+				$('#show_more_tweets_link').attr('onclick','show_more_records('+data.cur_page+')');
+			}
+			else {
+				$('#req_content_div').append('<div class="view_more" style="text-align: center;" id="no_result_div"><p class="blue_bold12" style="font-size:14px;">No More Prayer Request.</p></div>');
+				$('#show_more_div').remove();
+			}
+			//alert(data.view_more);
+            
+            if(data.view_more==false)
+            {
+                $('#no_result_div').remove();
+                $('#req_content_div').append('<div class="view_more" style="text-align: center;" id="no_result_div" ><p class="blue_bold12" style="font-size:14px;">No More Prayer Request.</p></div>');
+                $('#show_more_div').remove();
+            }
+		
+
+		}	// end of success function...
+	});
+}
+
+$(document).ready(function(arg) {
+	
+
+
+
+ $('#frm_Search').submit(function(){ 
+			
+		 // var i_user_id = $('#i_user_id').val();			
+		  var datatosend=$("#frm_Search").serialize();
+		   showUILoader_nodialog('<img src="'+base_url+'images/loading_big.gif" width="50"/> ');
+			  $.ajax({
+					 type: "POST",
+					 url: base_url+'logged/prayer_wall/all_prayer_request_ajax_pagination/',
+					 data: datatosend,
+					 dataType : 'json',
+					 success: function(data){
+						//$('#frm_Search')[0].reset();
+						
+						if(data.html!='') {
+							//alert( data.cur_page+' posting');
+							$('#show_more_div').remove();
+							$('#req_content_div').html(data.html);
+							$('#show_more_tweets_link').attr('page_value', data.cur_page);
+							$('#show_more_tweets_link').attr('onclick','');
+							$('#show_more_tweets_link').attr('onclick','show_more_records('+data.cur_page+')');
+						}
+						else {
+							$('#req_content_div').html('<div class="view_more" style="text-align: center;" ><p class="blue_bold12" style="font-size:14px;">No Prayer Request.</p></div>');
+							$('#show_more_div').remove();
+						}
+						
+						
+						//alert(data.no_of_result- data.current_page);
+						if(data.no_of_result == 0){
+							$('#show_more_div').remove();
+						}
+						else if(data.view_more==false )
+						{
+							//alert(1);
+							$('#req_content_div').append('<div class="view_more" style="text-align: center;"><p class="blue_bold12" style="font-size:14px;">No More Prayer Request.</p></div>');
+							$('#show_more_div').remove();
+						}
+						else if((data.no_of_result - data.cur_page != 0)){
+							//alert(2);
+							
+							$('#show_more_div').remove();
+							$('#mid_container').append('<div class="view_more" id="show_more_div"><a href="javascript:void(0);" id="show_more_tweets_link" page_value="'+data.cur_page+'" onclick="show_more_records('+data.cur_page+')">[view more] </a> </div>');
+						}
+						
+						hideUILoader_nodialog();
+					 }
+			   });	 
+	
+	});
+});
+ 
+</script>

@@ -1,0 +1,197 @@
+<div class="clr"></div>
+<!--navigation section start -->
+<?php include(APPPATH."views/layouts/admin/admin_nav.phtml");?>
+<!--navigation section end -->
+<!-- CONTENT SECTION -->
+<div id="content_section">
+      <div id="container">
+            <!--<div id="top_corner">&nbsp;</div> -->
+            <div id="mid_content">
+                  <div class="page_heading left">
+                        <div class="left"><img src="../images/icons/login.png" alt="" /> Build The Kingdom &raquo; Landing page contents</div>
+                  </div>
+                  <div class="clr"></div>
+                  <div id="right_container">
+                        <div class="arrow_btm"></div>
+                        <div class="content_area frm_box frm_box2">
+                        
+                        <?php if(count($res))
+                        {
+                            foreach($res as $r)
+                            {
+                                if($r['s_keyword']=='buildkindom_main')
+                                {
+                                    $content['main_title']=$r['s_title'];
+                                    $content['main_desc']=$r['s_desc'];
+                                }
+                                if($r['s_keyword']=='buildkindom_givin')
+                                {
+                                    $content['givin_desc'] = $r['s_desc'];
+                                }
+                                if($r['s_keyword']=='buildkindom_prayer_partner')
+                                {
+                                    $content['pp_desc'] = $r['s_desc'];
+                                }
+                                if($r['s_keyword']=='buildkindom_charity_project')
+                                {
+                                    $content['cp_desc'] = $r['s_desc'];
+                                }
+                                if($r['s_keyword']=='buildkindom_salvation')
+                                {
+                                    $content['salvation_desc'] = $r['s_desc'];
+                                }
+                                if($r['s_keyword']=='buildkindom_bible_quiz')
+                                {
+                                    $content['bible_quiz'] = $r['s_desc'];
+                                }
+								if($r['s_keyword']=='buildkindom_find_church')
+                                {
+                                    $content['find_church'] = $r['s_desc'];
+                                }
+                        
+                            }
+                        }
+                        
+                        ?> 
+                        
+                        <form id="bk_landing_frm" action="" method="post" enctype="multipart/form-data" onsubmit="return form_post()">
+                                  <!--<h2>Introduction Section</h2> -->
+                                  <div class="lable02">Title :</div>
+                                  <div class="field02">
+                                        <input name="txt_title" type="text" value="<?=$content['main_title']?>"/>
+                                  </div>
+                                  <div id="err_tc_title" class="error-message"></div>
+                                  <div class="clr"></div>
+                                  <div class="lable02">Introduction : </div>
+                                  <div class="field02">
+                                        <textarea name="txtarea_desc" cols="" rows="" style="height: 144px;"><?=$content['main_desc']?></textarea>
+                                  </div>
+                                  
+                                  <div class="clr"></div>
+                                  
+                                  <h2>Giving</h2>
+                                  <div class="lable02">Content : </div>
+                                  <div class="field02">
+                                        <textarea name="txtarea_givin" cols="" rows="" class="small" style="height: 88px;"><?=$content['givin_desc']?></textarea>
+                                  </div>
+                                  <div class="clr"></div>
+                                  
+                                  <h2>Prayer Partners Zone</h2>
+                                  <div class="lable02">Content : </div>
+                                  <div class="field02">
+                                        <textarea name="txtarea_pp" cols="" rows="" class="small" style="height: 88px;"><?=$content['pp_desc']?></textarea>
+                                  </div>
+                                  <div class="clr"></div>
+                                  <h2>Charity Projects</h2>
+                                  <div class="lable02">Content : </div>
+                                  <div class="field02">
+                                        <textarea name="txtarea_cp" cols="" rows="" class="small" style="height: 88px;"><?=$content['cp_desc']?></textarea>
+                                  </div>
+                                  <div class="clr"></div>
+                                  <h2>Salvation Prayer</h2>
+                                  <div class="lable02">Content : </div>
+                                  <div class="field02">
+                                        <textarea name="txtarea_salvation" cols="" rows="" class="small" style="height: 88px;"><?=$content['salvation_desc']?></textarea>
+                                  </div>
+                                  <div class="clr"></div>
+                                  <h2>Find a Church</h2>
+                                  <div class="lable02">Content : </div>
+                                  <div class="field02">
+                                        <textarea name="txtarea_find_church" cols="" rows="" class="small" style="height: 88px;"><?=$content['find_church']?></textarea>
+                                  </div>
+                                  <div class="clr"></div>
+                                  
+                                  <h2>Bible Quiz</h2>
+                                  <div class="lable02">Content : </div>
+                                  <div class="field02">
+                                        <textarea name="txtarea_bible_quiz" cols="" rows="" class="small" style="height: 88px;"><?=$content['bible_quiz']?></textarea>
+                                  </div>
+                                  <div class="clr"></div>
+                                  
+                                  <div class="lable02"> </div>
+                                  <div class="field02">
+                                        <input name="" type="submit" class="btn"  value="Update" />
+                                        <input name="" type="reset" class="btn"  value="Reset" onclick="return clear_box()"/>
+                                  </div>
+                              </form>
+                        
+                            
+                              
+                              <div class="clr"></div>
+                        </div>
+                  </div>
+                  <div class="clr"></div>
+            </div>
+            <!--<div id="bot_corner">&nbsp;</div> -->
+      </div>
+      <div class="clr"></div>
+</div>
+
+
+<!-- /CONTENT SECTION -->
+
+
+<script type="text/javascript">
+$(document).ready(function(arg) {
+    
+    // for AJAX page-submission...
+    optionsArr = {
+        beforeSubmit:  showBusyScreen,  // pre-submit callback 
+        success:       validateFrm, // post-submit callback 
+        url:        admin_base_url + "build_kingdom/build_kingdom_landing_page/post_data"
+    }; 
+});
+function form_post()
+{
+    
+    $('#bk_landing_frm').ajaxSubmit(optionsArr);
+    
+    return false;
+    
+    //var values = $('#trade_center_landing_frm').serialize();
+    
+}
+// validate ajax-submission...
+function validateFrm(data)
+{
+    
+    var data = JSON.parse(data);
+hideBusyScreen();
+showUIMsg(data.msg);
+
+     $('.error-message').each(function(i){
+            $(this).attr('style','display:none');
+        });
+        
+    if(data.result=='failure') 
+    {
+       
+        
+        for ( var id in data.arr_messages ){
+            
+            if( $('#err_'+id) != null ) {
+                $('#err_'+id).html(data.arr_messages[id]);
+                $('#err_'+id).css('display', 'block');
+
+                //$('#err_'+id).attr('style','margin-left: 12px;');
+            }
+        }
+        
+    }
+    else {
+        
+         
+       
+    }
+
+}
+
+function clear_box(){
+      
+          $('#bk_landing_frm')[0].reset();
+          $('.error-message').hide();
+      
+  }
+
+
+</script>

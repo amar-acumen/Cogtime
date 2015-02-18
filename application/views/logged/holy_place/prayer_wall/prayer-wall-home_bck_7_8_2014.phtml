@@ -1,0 +1,216 @@
+<?php include(APPPATH."views/layouts/logged_header.phtml");?>
+            <!-- NAVIGATION SECTION -->
+      <?php include(APPPATH."views/layouts/nav.phtml");?>
+      <!-- /NAVIGATION SECTION -->
+      </div>
+</div>
+<!-- /HEADER SECTION -->
+<div class="clr"></div>
+<!-- CONTENT SECTION -->
+<div id="content_section">
+      <div id="container">
+            <div id="mid_content">
+                  <!-- latest news -->
+                   <h2 class="main-title">Prayer Wall</h2>
+                  <!-- /latest news -->
+                  <div class="clr"></div>
+                  <!-- main container -->
+                  <div id="main_container">
+                      <!--buttons section start -->
+                      <?php include(APPPATH ."views/logged/holy_place/prayer_wall/prayer_wall_menu.phtml");?>
+                      <div class="clr"></div>
+                      <!--buttons section end -->
+                      
+                         <div class="search-create-form-container">
+                          <!--search form start -->
+                          <?php include(APPPATH ."views/logged/holy_place/prayer_wall/prayer_wall_search_panel.phtml");?>
+                          <!--search form end -->
+                          
+                          <!--create new prayer request start -->
+                          <?php include(APPPATH ."views/logged/holy_place/prayer_wall/create_prayer_request.phtml");?>
+                          <!--create new prayer request start -->
+                       
+                              
+                          </div>
+                          
+                          <div class="clr"></div>
+                          
+                          <DIV class="whole">
+                          <DIV id= "prayer_content_div" ><?=$prayer_req_ajax_content?></DIV>
+                          <?php if($no_of_result == 0){?>
+                          <div class="shade_box_01" style="padding-top:5px;" id="no_tweets"><div  class="shade_norecords" style="width:520px;;"><p class="blue_bold12">No Ongoing Prayer Request.</p></div></div>                        
+                          <?php }?>
+                          </DIV>
+                   
+                  	  <div class="clr"></div> 
+                  </div>
+                  <!-- /main container -->
+                  <!--pagination start -->
+                    <div class="clr"></div> 
+                   
+                    <div class="article-pagination no-brdr" style=" height:35px;">
+                    	<a href="view-all-prayer-request.html" class="view-all-request">View all prayer request</a>
+                       	
+                       		<?php if($total_records > $pagination_per_page){?>
+                                 <ul>
+                                    <li class="previous"><a href="javascript:void(0);" id="prev_link"  onclick="show_more_records(<?=$prev_page_1?>,'prev');" >Previous</a></li>
+                                    <li class="next"><a href="javascript:void(0);" id="next_link" onclick="show_more_records(<?=$next_page_1?> ,'next');">Next</a></li>
+                                </ul>
+                            <?php } ?>
+                            <input type="hidden" id="curr_page_value" value="<?=$current_page_1?>" />
+                            <input type="hidden" id="next_page_value" value="<?=$next_page_1?>" />
+                            <input type="hidden" id="prev_page_value" value="<?=$prev_page_1?>" />
+                           
+                        
+                    </div>
+                  <!--pagination end -->
+            </div>
+      </div>
+      <div class="clr"></div>
+</div>
+<!-- /CONTENT SECTION -->
+<div class="clr"></div>
+<?php include(APPPATH."views/layouts/footer.phtml");?>
+<?php include(APPPATH."views/logged/blocks/common_popup.phtml");?>
+
+
+<?php /*?><div class="lightbox tweet_div" style="width:335px;">
+     <div class="close"><a onclick="hide_dialog('tweet_div'); $('#ta_post_tweet').val('Max 140 Characters');" href="javascript:void(0)"><img alt="" src="images/close.png"></a></div>
+    <div class="top"><div>&nbsp;</div></div>
+    <div class="mid">
+	<div class="floating-popup add-note" style="width:314px;">
+      <div class="title">Tweet Prayer Request</div>
+               
+                <div class="write-tweet" style="padding: 9px 17px; background:#CFCFCF; width:290px;">
+                                	<form id="prayer_tweet_frm" method="post" action="">
+                                        <div class="tweet-mid-curve"><textarea onblur="if(this.value=='')this.value='Max 140 Characters';" onfocus="if(this.value=='Max 140 Characters')this.value='';" name="ta_post_tweet" id="ta_post_tweet" class="tweet-comment-box" autocomplete="off" role="textbox" style="display: inline-block; height: 55px; width:266px;">Max 140 Characters</textarea></div>
+                                            
+                                         <input type="hidden" id="hd_tweet_id" value="">
+                                         <input type="hidden" id="hidden_inputbox" />
+                                        <input type="button" class="tweetSubmit" value="Cancel" name="Cancel" style="display: inline;" onclick="hide_dialog('tweet_div'); $('#ta_post_tweet').val('Max 140 Characters');">
+                                        <input type="button" onclick="tweet_prayer_request()" class="tweetSubmit" value="Tweet" name="" style="display: inline;">
+                                    </form>
+                     
+      
+                                    <div class="clr"></div>
+                                </div>
+                       </div>
+               
+            </div>
+             
+          <div class="bot"><div>&nbsp;</div></div>
+</div><?php */?>
+
+<style>
+.whole {
+    background: blue;
+    color: #fff;
+    position: relative;
+}
+</style>
+
+
+<script type="text/javascript">
+
+$(document).ready(function(arg) {
+	get_new_records();
+	
+
+	//setTimeout(function(){show_more_records()},118000);
+	
+	// adding auto sliding code
+	//autoSlider()
+	$(window).load(function(){
+		setInterval(function(){get_new_records()},300000);
+    	setInterval(function(){autoSlider()},<?=$page_refresh_time?>);
+	});
+});
+
+function TweetlimitText(limitField, limitCount, limitNum) {
+	if (limitField.value.length > limitNum) {
+		limitField.value = limitField.value.substring(0, limitNum);
+	} 
+}
+
+
+// adding auto sliding code
+function autoSlider(){
+	
+	/*value = '1002px';
+   
+	   $('.whole').animate({ "right": "1002px" },  {duration: <?=$page_refresh_time?>,
+		specialEasing: {
+		width: "linear",
+		height: "easeOutBounce"
+		}}); */
+	$('#next_link').trigger('click');
+	//$('#prayer_content_div').show("slide", { direction: "left" }, 2000);
+	
+	//$( '#prayer_content_div' ).animate("slide", { "left": "+=50px" }, "slow" );
+}
+
+
+var ajax_req_feeds = null;
+function show_more_records(page, type) {
+	
+	if(ajax_req_feeds!=null) {
+		ajax_req_feeds.abort();
+	}
+	//showUILoader_nodialog('<img src="'+base_url+'images/loading_big.gif" width="50"/> ');
+	showAJAXLoader('whole');
+
+	  /*  $('.whole').animate({ "right": "0px" },  {duration: 7000,
+		specialEasing: {
+		width: "linear",
+		height: "easeOutBounce"
+		}});*/
+	
+	ajax_req_feeds = $.ajax({
+		type: 'get',
+		url: base_url+'logged/prayer_wall/home_prayer_request_ajax_pagination/'+page+'/'+type,
+		dataType: 'json',
+
+		success: function (data, status) {
+
+			
+			if(data.html!='') {
+				
+				//alert(data.cur_page+'dfdf');
+				
+				$('#prayer_content_div').html(data.html);
+			
+			}
+			$('#curr_page_value').val(data.cur_page);
+			$('#prev_page_value').val(data.prev_page_1);
+			$('#next_page_value').val(data.next_page_1);
+			
+			$('#prev_link').attr('onclick','');
+			$('#prev_link').attr('onclick',"show_more_records("+data.prev_page_1+", 'prev')");
+			
+			$('#next_link').attr('onclick','');
+			$('#next_link').attr('onclick',"show_more_records("+data.next_page_1+", 'next')");
+			//alert(data.no_of_result);
+			//hideUILoader_nodialog();	
+			hideAJAXLoader('whole');
+
+		}	// end of success function...
+	});
+}
+
+function get_new_records(page) {
+	 $.ajax({
+		type: 'get',
+		url: base_url+'logged/prayer_wall/home_prayer_request_ajax_pagination/',
+		dataType: 'json',
+
+		success: function (data, status) {
+				$('#curr_page_value').val(data.cur_page);
+				$('#prev_page_value').val(data.prev_page_1);
+				$('#next_page_value').val(data.next_page_1);
+				$('#prayer_content_div').html(data.html);
+			
+			}	// end of success function...
+	});
+}
+//$('#show_more_tweets_link').trigger('click');
+</script>

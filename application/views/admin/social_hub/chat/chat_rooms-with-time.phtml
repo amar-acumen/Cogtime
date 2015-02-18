@@ -1,0 +1,413 @@
+<div class="clr"></div>
+<!--navigation section start -->
+<?php include(APPPATH."views/layouts/admin/admin_nav.phtml");?>
+<div id="content_section">
+      <div id="container">
+            <div id="mid_content">
+                  <div class="page_heading left">
+                        <div class="left"><img src="../images/icons/login.png" alt="" /> Chat Rooms</div>
+                  </div>
+                  <div class="clr"></div>
+                  <div id="right_container">
+                        <div class="arrow_btm"></div>
+                        <div class="content_area">
+                            <!--filter section start -->
+                            <div class="filter">
+                                <span class="filter-by">Filter By &raquo;</span>
+                                  <form name="frm_search" id="frm_search" action="" method="post" onsubmit="return false;"  class="filter-search">
+                                    <?php /*?><label>Category :</label>
+                                    <div class="field01" style="float:left;">
+                                        <select name="category" id="category3" style="width:150px;">
+                                                <option>category 1</option>
+                                                <option>category 2</option>
+                                          </select>
+                                          <script type="text/javascript">
+                                            $(document).ready(function(arg) {
+                                                $("#category3").msDropDown();
+                                                $("#category3").hide();
+                                                $('#category3').css("width", "150px"); 
+                                            })
+                                        </script>
+                                  </div><?php */?>
+                                    <label>Chat Room Title :</label>
+                                    <input type="text" name="txt_chat_room_name" id="txt_chat_room_name" />
+                                    <input type="hidden" value="Y" name="search_basic" id="search_basic"  />
+                                    <label>Created By :</label><input type="text" id="txt_username" name="txt_username">
+                                   
+                                    <div class="clr"></div>
+                                    <label style="width:90px;">Created on</label>
+                                    
+                                    <input type="text"  value="" name="create_time" id="create_time"   class="date-field"/>
+                                    <img src="../images/icons/cal.png" alt="" onclick="$(this).prev().focus()" class="calender" style="margin-right:35px;" />
+                                    <script type="text/javascript">
+                                          $(document).ready(function(arg) {
+										  
+                                              $.datepicker.setDefaults($.datepicker.regional['']);
+                                              $("#create_time").datepicker($.datepicker.regional['en']);
+
+                                          });
+                                    </script> 
+                                            
+                                   
+                                    
+                                    <input name="" type="submit" value="GO" class="go" />
+                                </form>  
+                                <div class="clr"></div>
+                            </div>
+                            <!--filter section end -->
+                        
+                            <h4>Chat Rooms</h4>
+                            <div class="right" style="margin-bottom:14px;"><input name="" type="button" value="Add Chat Room"  class="evnt_btn1" onclick="return show_dialog('add-chat-room')"/></div>
+                        
+                            <div class="clr"></div>
+                        	<DIV id="table_content">
+							  <?=$result_content?>
+                            </DIV>
+                            
+                            
+                        	<div class="clr"></div>
+                        </div>
+                  </div>
+                  <div class="clr"></div>
+            </div>
+      </div>
+      <div class="clr"></div>
+</div>
+<!-- /CONTENT SECTION -->
+
+<!--popup one start-->
+<div class="lightbox delete-page-popup" style="width:500px;">
+      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="../images/close.png" alt="" /></a></div>
+      <div class="top"><div>&nbsp;</div></div>
+      <div class="mid">
+            <div class="heading" style="margin-bottom:0px;">
+                  <div class="left">
+                        <h4>Delete Chat Room</h4>
+                  </div>
+            </div>
+               <div class="shade_box_white">
+               <p class="center-text">Do you really want to delete this Chat Room?</p>
+               <form action="" method="post" enctype="multipart/form-data">
+               		<input name="" type="button" value="Yes" class="btn" style="margin-left:146px;" onclick="delete_()"/>
+                    <input type="hidden" id="i_del_id" />
+                    <input name="" type="button" value="No" class="btn" onclick="hide_dialog()"/>
+               </form>   
+               <div class="clr"></div>
+            </div>
+            
+      </div>
+      <div class="bot"><div>&nbsp;</div></div>
+</div>
+<!--popup one end-->
+
+<!--add chat room popup -->
+<div class="lightbox add-chat-room" style="width:500px;">
+      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog();clear_all_error_msg();"><img src="../images/close.png" alt="" /></a></div>
+      <div class="top"><div>&nbsp;</div></div>
+      <div class="mid">
+            <div class="heading" style="margin-bottom:0px;">
+                  <div class="left">
+                        <h4>Add Chat Room</h4>
+                  </div>
+            </div>
+            <div class="shade_box_white">
+           		<div class="content_area frm_box2">
+                        	 <form id="frm_add"  method="post"  onsubmit="return post_frm_ajax();" enctype="multipart/form-data"> 
+                                  <div class="lable01">Title :</div>
+                                  <div class="field01">
+                                        <input name="txt_title" id="txt_title" type="text" />
+                                  </div>
+                                  <div class="error-message" id="err_title"></div>
+                                  <div class="clr"></div>
+                                  <div class="lable01">Description : </div>
+                                  <div class="field01">
+                                        <textarea class="lightbox-textarea" name="txt_desc" onKeyDown="limitText(this.form.txt_desc,this.form.countdown,500);" 
+onKeyUp="limitText(this.form.txt_desc,this.form.countdown,500);" id="txt_desc" style="height:145px;"></textarea>
+										
+										
+                                        
+                                  </div>
+                                  <div class="error-message" id="err_desc"></div>
+                                  <div class="clr"></div>
+                                  
+                                  <div class="lable01">Category : </div>
+                                  <div class="field01">
+                                  <select style="width:350px;" name="sel_cat" id="sel_cat">
+                                  <option value="-1"></option>
+                                  <?=makeOptionChatCategory()?>
+                                  </select>
+                                  </div>
+                                  <div class="error-message" id="err_cat"></div>
+                                  <div class="clr"></div>
+
+
+                                  <div class="lable01">From:</div>
+                                  <div class="field01">
+                                    <input style="width:150px; float:left;"   type="text"  value="" name="date_to1" id="date_to1"  readonly="readonly" class="amount-input cal_class"/>
+                                    <img src="images/icons/cal.png" alt="" class="cal_img right" onclick="$(this).prev().focus()" style="cursor:pointer; " />
+                                  </div>
+                                  <div class="error-message" id="err_date_to1"></div>
+                                 <div class="clr"></div>
+                                                 
+                                <div class="lable01">To:</div>
+                                  <div class="field01">
+                                  <input type="text"  value="" name="date_end1" id="date_end1"  readonly="readonly" class="amount-input cal_class "/>
+                                  <img src="images/icons/cal.png" alt="" class="cal_img right" onclick="$(this).prev().focus()" style="cursor:pointer; " />
+                                  </div>
+                                 
+                                  <div class="error-message" id="err_date_end1"></div>
+                                 <div class="clr"></div>
+                                 
+                                 
+                                  <script type="text/javascript">
+                        
+                                                  $(function(){
+                                                     var inputDate = $("#date_to1");
+                                                     var changeYearButtons = function() {
+                                                      setTimeout(function() {
+                                                         $('.NextYrClass').remove();
+                                                         $('.PrevYrClass').remove();
+                                                         var widgetHeader = inputDate.datepicker("widget").find(".ui-datepicker-header");
+                                                         //you can opt to style up these simple buttons tho
+                                                         var prevYrBtn = $('<button title="PrevYr" class="PrevYrClass"> </button>');
+                                                         prevYrBtn.bind("click", function() {
+                                                        $.datepicker._adjustDate(inputDate, -1, 'Y');
+                                                         });
+                                                         var nextYrBtn = $('<button title="NextYr" class="NextYrClass"></button>');
+                                                         nextYrBtn.bind("click", function() {
+                                                        $.datepicker._adjustDate(inputDate, +1, 'Y');
+                                                       
+                                                         });
+                                                         prevYrBtn.appendTo(widgetHeader);
+                                                         nextYrBtn.appendTo(widgetHeader);
+                                                    
+                                                      }, 0);
+                                                     };
+                                                    
+                                                      $("#date_to1").datetimepicker({
+                                                          beforeShow: changeYearButtons,
+                                                          onChangeMonthYear: changeYearButtons,
+                                                          dateFormat : 'yy-mm-dd',
+                                                            timezone: "+0100" ,
+                                                           minDate: new Date(<?=(date('Y'))?>, <?=(date('m')-1)?>, <?=(date('d'))?> ,  0, 00),
+                                                           controlType: 'select',
+                                                               stepMinute: 15
+                                                           });
+                                                        
+                                                    });
+                                                     
+                                                    $(function(){
+                                                     var inputDate = $("#date_end1");
+                                                     var changeYearButtons = function() {
+                                                      setTimeout(function() {
+                                                         $('.NextYrClass').remove();
+                                                         $('.PrevYrClass').remove();
+                                                         var widgetHeader = inputDate.datepicker("widget").find(".ui-datepicker-header");
+                                                         //you can opt to style up these simple buttons tho
+                                                         var prevYrBtn = $('<button title="PrevYr" class="PrevYrClass"></button>');
+                                                         prevYrBtn.bind("click", function() {
+                                                        $.datepicker._adjustDate(inputDate, -1, 'Y');
+                                                         });
+                                                         var nextYrBtn = $('<button title="NextYr" class="NextYrClass"></button>');
+                                                         nextYrBtn.bind("click", function() {
+                                                        $.datepicker._adjustDate(inputDate, +1, 'Y');
+                                                       
+                                                         });
+                                                         prevYrBtn.appendTo(widgetHeader);
+                                                         nextYrBtn.appendTo(widgetHeader);
+                                                    
+                                                      }, 0);
+                                                     };
+                                                    
+                                                        $("#date_end1").datetimepicker({
+                                                          beforeShow: changeYearButtons,
+                                                          onChangeMonthYear: changeYearButtons,
+                                                          dateFormat : 'yy-mm-dd',
+                                                            timezone: "+0100" ,
+                                                           minDate: new Date(<?=(date('Y'))?>, <?=(date('m')-1)?>, <?=(date('d'))?> ,  0, 00),
+                                                           controlType: 'select',
+                                                               stepMinute: 15
+                                                           });
+                                                        
+                                                    });
+                                                     
+                                  </script>
+                                  
+                                  <div class="lable01">Max Members :</div>
+                                  <div class="field01">
+                                        <input name="txt_max_user" id="txt_max_user" type="text" />
+                                  </div>
+                                  <div class="error-message" id="err_max_user"></div>
+                                  <div class="clr"></div>
+                                  <div class="lable01">&nbsp;</div>
+                                  <div class="field01">
+                                        <input name="" type="submit" class="btn"  value="Add"/>
+                                        <input name="" type="reset" class="btn"  value="Cancel" onclick="clear_all_error_msg();hide_dialog();"/>
+                                  </div>
+                              </form>
+                              <div class="clr"></div>
+                        </div>
+           
+           
+           
+           
+            </div>
+      </div>
+      <div class="bot"><div>&nbsp;</div></div>
+</div>
+<!--add chat room popup end -->
+
+
+<!--edit chat room popup -->
+<div class="lightbox edit-chat-room" style="width:500px;">
+      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog();clear_all_error_msg();"><img src="../images/close.png" alt="" /></a></div>
+      <div class="top"><div>&nbsp;</div></div>
+      <div class="mid">
+            <div class="heading" style="margin-bottom:0px;">
+                  <div class="left">
+                        <h4>Edit Chat Room</h4>
+                  </div>
+            </div>
+            <div class="shade_box_white">
+           		<div class="content_area frm_box2">
+                        	  <form action="" method="post" enctype="multipart/form-data">
+                                  <div class="lable01">Title :</div>
+                                  <div class="field01">
+                                        <input name="txt_edit_title" id="txt_edit_title" type="text" />
+                                  </div>
+                                  <div class="error-message" id="err_edit_title"></div>
+                                  <div class="clr"></div>
+                                  <div class="lable01">Description : </div>
+                                  <div class="field01">
+                                        <textarea class="lightbox-textarea" name="limitedtextarea" onKeyDown="limitText(this.form.limitedtextarea,this.form.countdown,500);" 
+onKeyUp="limitText(this.form.limitedtextarea,this.form.countdown,500);" id="txt_edit_desc" style="height:145px;"></textarea>
+										<br class="clr" />
+										
+                                  </div>
+                                  <div class="error-message" id="err_edit_desc"></div>
+                                  <div class="clr"></div>
+                                  
+                                  <div class="lable01">Category : </div>
+                                  <div class="field01" id="chat_cat_div">
+                                  
+                                  </div>
+                                  <div class="error-message" id="err_edit_sel_cat"></div>
+                                  <div class="clr"></div>
+                                  
+                                   <div class="lable01">From:</div>
+                                  <div class="field01">
+                                    <input style="width:150px; float:left;"   type="text"  value="" name="edit_date_to1" id="edit_date_to1"  readonly="readonly" class="amount-input cal_class"/>
+                                    <img src="images/icons/cal.png" alt="" class="cal_img right" onclick="$(this).prev().focus()" style="cursor:pointer; " />
+                                  </div>
+                                  <div class="error-message" id="err_edit_date_to1"></div>
+                                 <div class="clr"></div>
+                                                 
+                                <div class="lable01">To:</div>
+                                  <div class="field01">
+                                  <input type="text"  value="" name="edit_date_end1" id="edit_date_end1"  readonly="readonly" class="amount-input cal_class "/>
+                                  <img src="images/icons/cal.png" alt="" class="cal_img right" onclick="$(this).prev().focus()" style="cursor:pointer; " />
+                                  </div>
+                                 
+                                  <div class="error-message" id="err_edit_date_end1"></div>
+                                 <div class="clr"></div>
+                                 
+                                 
+                                  <script type="text/javascript">
+                        
+                                                  $(function(){
+                                                     var inputDate = $("#edit_date_to1");
+                                                     var changeYearButtons = function() {
+                                                      setTimeout(function() {
+                                                         $('.NextYrClass').remove();
+                                                         $('.PrevYrClass').remove();
+                                                         var widgetHeader = inputDate.datepicker("widget").find(".ui-datepicker-header");
+                                                         //you can opt to style up these simple buttons tho
+                                                         var prevYrBtn = $('<button title="PrevYr" class="PrevYrClass"> </button>');
+                                                         prevYrBtn.bind("click", function() {
+                                                        $.datepicker._adjustDate(inputDate, -1, 'Y');
+                                                         });
+                                                         var nextYrBtn = $('<button title="NextYr" class="NextYrClass"></button>');
+                                                         nextYrBtn.bind("click", function() {
+                                                        $.datepicker._adjustDate(inputDate, +1, 'Y');
+                                                       
+                                                         });
+                                                         prevYrBtn.appendTo(widgetHeader);
+                                                         nextYrBtn.appendTo(widgetHeader);
+                                                    
+                                                      }, 0);
+                                                     };
+                                                    
+                                                      $("#edit_date_to1").datetimepicker({
+                                                          beforeShow: changeYearButtons,
+                                                          onChangeMonthYear: changeYearButtons,
+                                                          dateFormat : 'yy-mm-dd',
+                                                            timezone: "+0100" ,
+                                                           minDate: new Date(<?=(date('Y'))?>, <?=(date('m')-1)?>, <?=(date('d'))?> ,  0, 00),
+                                                           controlType: 'select',
+                                                               stepMinute: 15
+                                                           });
+                                                        
+                                                    });
+                                                     
+                                                    $(function(){
+                                                     var inputDate = $("#edit_date_end1");
+                                                     var changeYearButtons = function() {
+                                                      setTimeout(function() {
+                                                         $('.NextYrClass').remove();
+                                                         $('.PrevYrClass').remove();
+                                                         var widgetHeader = inputDate.datepicker("widget").find(".ui-datepicker-header");
+                                                         //you can opt to style up these simple buttons tho
+                                                         var prevYrBtn = $('<button title="PrevYr" class="PrevYrClass"></button>');
+                                                         prevYrBtn.bind("click", function() {
+                                                        $.datepicker._adjustDate(inputDate, -1, 'Y');
+                                                         });
+                                                         var nextYrBtn = $('<button title="NextYr" class="NextYrClass"></button>');
+                                                         nextYrBtn.bind("click", function() {
+                                                        $.datepicker._adjustDate(inputDate, +1, 'Y');
+                                                       
+                                                         });
+                                                         prevYrBtn.appendTo(widgetHeader);
+                                                         nextYrBtn.appendTo(widgetHeader);
+                                                    
+                                                      }, 0);
+                                                     };
+                                                    
+                                                        $("#edit_date_end1").datetimepicker({
+                                                          beforeShow: changeYearButtons,
+                                                          onChangeMonthYear: changeYearButtons,
+                                                          dateFormat : 'yy-mm-dd',
+                                                            timezone: "+0100" ,
+                                                           minDate: new Date(<?=(date('Y'))?>, <?=(date('m')-1)?>, <?=(date('d'))?> ,  0, 00),
+                                                           controlType: 'select',
+                                                               stepMinute: 15
+                                                           });
+                                                        
+                                                    });
+                                                     
+                                  </script>
+                                  
+                                  
+                                  <div class="lable01">Max Members :</div>
+                                  <div class="field01">
+                                        <input name="txt_edit_max_user" id="txt_edit_max_user" type="text" />
+                                  </div>
+                                  <div class="error-message" id="err_edit_max_user"></div>
+                                  <div class="clr"></div>
+                                  <div class="lable01">&nbsp;</div>
+                                  <div class="field01">
+                                        <input name="i_edit_id" id="i_edit_id" type="hidden" value=""/>
+                                        <input name="" type="button" class="btn"  value="Update" onclick="return update();"/>
+                                        <input name="" type="reset" class="btn"  value="Cancel" onclick="clear_all_error_msg();hide_dialog();"/>
+                                  </div>
+                              </form>
+                              <div class="clr"></div>
+                        </div>
+           
+           
+           
+           
+            </div>
+      </div>
+      <div class="bot"><div>&nbsp;</div></div>
+</div>
+<!--edit chat room popup end -->

@@ -1,0 +1,74 @@
+								  <input type="hidden" id="h_current_page" value="<?=$current_page?>" />
+                                <table width="100%" border="0" cellspacing="0" cellpadding="0" class="admin-table small">
+                                          <tr>
+                                            <th align="left" valign="middle" height="30" width="70">Listing Date</th>
+                                            <th align="left" valign="middle" height="30" width="200">Product Title</th>
+                                            <th align="left" valign="middle" height="30" width="80">Brand</th>
+                                            <th align="left" valign="middle" height="30" width="80">Category</th>
+                                            <th align="left" valign="middle" height="30" width="80">Sub-Category</th>
+                                            <th align="center" valign="middle" height="30" width="80">Unit Price($)</th>
+                                            <th align="left" valign="middle" height="30" width="80">Condition</th>
+                                            <th align="left" valign="middle" height="30" width="80">Is Promotional</th>
+                                            <th align="center" valign="middle" height="30" width="80">Stock in Hand</th>
+                                            <th align="center" valign="middle" height="30" width="80">Stock Traded</th>
+                                            <th align="left" valign="middle" height="30" width="80">Listed By</th>
+                                            <th align="left" valign="middle" height="30" width="80">Seller's Location</th>
+                                            <th align="center" valign="middle" height="30" width="80">Buy Request(s)</th>
+                                            <th align="center" valign="middle" height="30" width="200" class="last">Actions</th>
+                                          </tr>
+                                          
+                                          <?php
+											//pr($info_arr,1);
+												if(count($info_arr)){
+												foreach($info_arr as $key=> $info){
+												
+																 
+											?>
+                              
+                                          
+                                          <tr>
+                                            <td align="center" valign="top"><?=getShortDate($info['dt_insert_time'],5)?></td>
+                                            <td align="left" valign="top"><a href="javascript:void(0);" onclick="return get_details(<?=$info['id']?>)"><?=$info['s_name']?></a></td>
+                                            <td align="left" valign="top"><?=$info['s_brand']?></td>
+                                            <td align="left" valign="top"><?=get_main_category_name($info['i_category_id'])?></td>
+                                            <td align="left" valign="top"><?=$info['s_category_name']?></td>
+                                            <td align="center" valign="top">$ <?=$info['f_unit_price']?></td>
+                                            <td align="left" valign="top"><?=($info['i_condition'] == 1)?'New':'Old'?> Product</td>
+                                            <td align="left" valign="top">No</td>
+                                            <td align="center" valign="top"><?=$info['i_remain_stock']?></td>
+                                            <td align="center" valign="top"><?=$info['i_stock'] - $info['i_remain_stock']?></td>
+                                            <td align="left" valign="top"><?=get_username_by_id($info['i_user_id'])?></td>
+                                            <td align="left" valign="top"><?=get_user_address_info($info['i_user_id'])?></td>
+                                            <td align="center" valign="top"><?=get_total_requests(' AND p.id = '.$info['id'])?></td>
+                                            <td align="center" valign="middle" class="last">
+                                           <!-- <input name="" title="Edit" type="button" class="edit-button"  value="" onclick="window.location='edit-product-details.html'"/>-->
+                            				
+                                              <input name="" title="Delete" type="button" class="delete-button"  value="" onclick="return confirm_delete_(<?=$info['id']?>)"/>
+                                              <span id="prod_status_<?=$info['id']?>">
+                                <input  name="" title="Disable" type="button" class="btn-06"  value="<?=($info['i_isenabled']==2)? 'Enable':'Disable';?>" status="<?=$info['i_isenabled']?>" onclick="return change_status(<?=$info['id']?>,<?=$info['i_isenabled']?>)"/></span>
+                                            </td>
+                                          </tr>
+                                          
+                                         <?php    }
+												}
+												else{
+											?>
+												 <tr>
+													  <td style="text-align:center;" height="80" colspan="20">No data available!!!</td>
+												 </tr>
+											
+											<?php
+												}
+											?>
+										</table>
+                                        
+                                       <?php
+
+if($page_links) :
+?>         
+<div class="paging">
+            <ul><?= $page_links ?></ul>
+</div>        
+<?php
+endif;
+?>  

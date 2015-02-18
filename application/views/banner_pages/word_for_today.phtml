@@ -1,0 +1,220 @@
+<?php /*?><script type="text/javascript">
+	jQuery(function($) {
+		$('.video-box').each(function(index){
+		$(this).attr('id',index);
+		$('div.thumb-box').eq(index).attr('id',index);
+		});
+		
+		$( "#carousel ").rcarousel({
+			margin: 25
+		});
+		
+		$( "#ui-carousel-next" )
+			.add( "#ui-carousel-prev");
+		
+	
+		$('video').click(function(){
+		$.each($('video'), function () {
+    		this.pause();
+		});
+		});
+	
+				
+	var thumb_id;		
+	$('div.thumb-box').live('click',function(){
+		$('div.play').css('display','none');
+		$(this).find('div.play').css('display','block');
+		thumb_id = $(this).attr('id');
+		$('.video-box').removeClass('view');
+		$('div.video-box').each(function(){
+			if($(this).attr('id')==thumb_id)		
+				$(this).addClass('view');		
+		});
+		});
+	});
+$(document).ready(function() {
+	//auto fill start
+	$("#email").autofill({'value':"Email"});
+	$("#password").autofill({'value':"Password"});
+	//auto fill end
+});
+</script><?php */?>
+
+<?php
+	if( ($this->session->userdata('loggedin') !='' || $this->session->userdata('loggedin')!=false ) && $this->session->userdata('is_admin') != 1){
+		
+		 include(APPPATH ."views/layouts/logged_header.phtml");
+		 include(APPPATH."views/layouts/nav.phtml");?>
+		  <!-- /NAVIGATION SECTION -->
+      		</div>
+		</div>
+		
+		
+   <?php  }
+     else{
+         
+		include(APPPATH ."views/layouts/header.phtml");
+	   	include(APPPATH."views/layouts/slider_nav.phtml");
+  }?>
+<!-- CONTENT SECTION -->
+<div class="clr"></div><!-- CONTENT SECTION -->
+
+<div id="content_section" style="margin-top:8px;">
+      <div id="container">
+
+          
+          <div class="word-for-today">
+              <h3 class="title">Word for today</h3>
+              <DIV id="result">
+              <?=$content?>
+              </DIV>
+          </div>
+          
+          
+          <?php
+          if($view_more):
+          ?>
+           <div id="show_more_feeds_div" class="word-for-today"><div class="message-box">
+           <a id="show_more_feeds_link" href="javascript:void(0)" style="font-size: 14px; float: right;" onclick="more_words_for_today(<?=$current_page?>)">[view more]</a>
+           </div></div>
+           
+          <?php
+          endif;
+          ?>
+          
+          
+          
+
+          <!--video gallery start -->
+          <?php //include(APPPATH."views/banner_pages/video_carousel.phtml")?>
+          <!--video gallery end -->	
+      <!-- main container end-->  
+      </div>
+      <div class="clr"></div>
+</div>
+<!-- /CONTENT SECTION -->  
+  
+<?php
+	# include footer file...
+	include_once(APPPATH ."views/layouts/footer.phtml");
+?>
+<!--login popup start -->
+
+<!--login popup end -->
+
+<script type="text/javascript">
+function more_words_for_today(page) {
+    var ajax_req_feeds;
+    if(ajax_req_feeds!=null) {
+        ajax_req_feeds.abort();
+    }
+    
+    showUILoader_nodialog();
+    ajax_req_feeds = $.ajax({
+        type: 'get',
+        url: base_url+'banner_pages/media_center/word_for_today_listing_AJAX/'+page,
+        dataType: 'json',
+
+        success: function (data, status) {
+//alert(data.current_page);
+            hideUILoader_nodialog();
+            if(data.html!='') {
+                $('#result').append(data.html);
+                $('#show_more_feeds_link').attr('page_value', data.current_page);
+                $('#show_more_feeds_link').attr('onclick','');
+                $('#show_more_feeds_link').attr('onclick','more_words_for_today('+data.current_page+')');
+            }
+            else {
+                $('#result').append('<div class="view_more" style="text-align: center;"><p class="blue_bold12" style="font-size:14px;">No more Word For Today.</p></div>');
+                $('#show_more_feeds_div').hide();
+            }
+            if(data.view_more==false)
+            {
+                $('#result').append('<div class="view_more" style="text-align: center;"><p class="blue_bold12" style="font-size:14px;">No more Word For Today.</p></div>');
+                $('#show_more_feeds_div').hide();
+            }
+            
+            /*$('.htr').css('display','none');
+            $('#'+m).css('display', 'table-row'); 
+            $('#'+m+' td').html(data);*/
+
+        }    // end of success function...
+    });
+}
+function windowLike(window_id,like_val)
+{
+
+	showUILoader_nodialog('<img src="'+base_url+'images/loading_big.gif" width="50"/> ');
+	$.ajax({
+		type: "POST",
+		url: base_url+"banner_pages/media_center/like_word",
+		data: "window_id="+window_id+"&like_val="+like_val,
+		dataType:"json",
+		success: function(json_response){
+				if(json_response.status)
+				{
+					$('.liked_by_'+window_id).html(json_response.response_html);
+				}
+			hideUILoader_nodialog();
+		}
+	});
+
+}
+var ajax_comment_post = null;
+function post_comment(id) 
+{
+		showUILoader_nodialog('<img src="'+base_url+'images/loading_big.gif" width="50"/> ');
+		if(ajax_comment_post!=null) {
+			ajax_comment_post.abort();
+		}
+		ajax_comment_post = $.ajax({
+			
+			url: base_url+'banner_pages/media_center/post_comment/'+ id,
+			dataType: 'json',
+			data: {'message': $('#feed_comment_box_'+id).val()},
+			type: 'post',
+	
+			success: function (data, status) {
+				if(data.success == 'true'){
+				  $('#feed_comment_box_'+id).val('');
+				  $('.comments_div'+id).html(data.html);
+				}
+				else{
+					$('#feed_comment_box_'+id).val('');
+				}
+				$('.wal-minus').trigger('click');
+				hideUILoader_nodialog();
+				showUIMsg(data.msg);
+			},
+			error: function(data, status, e) {
+				hideUILoader_nodialog();
+				showUIMsg("Error!");
+				
+			}
+		});
+}
+function show_comments(i_newsfeed_id)
+  {
+		 
+	 showUILoader_nodialog('<img src="'+base_url+'images/loading_big.gif" width="50"/> ');
+		$.ajax({
+			
+			url: base_url +'banner_pages/media_center/NEW_fetch_comment_word/'+i_newsfeed_id,
+			dataType: 'json',
+			type: 'post',
+	
+			success: function (data, status) {
+				$('#word_comment_div'+i_newsfeed_id).html(data.html_data);
+				hideUILoader_nodialog();
+				showUIMsg(data.msg);
+			},
+			error: function(data, status, e) {
+				hideUILoader_nodialog();
+				showUIMsg("Error!");
+				
+			}
+		});
+				 
+		 
+  }
+</script>

@@ -1,0 +1,29 @@
+<?php #pr($result_arr);
+     if(!empty($result_arr) && count($result_arr)){
+            foreach($result_arr as $key=>$val){
+                
+                 $name = $val['s_profile_name'];
+                 $IMG = get_profile_image($val['i_user_id'],'thumb',$val['s_profile_photo']);
+                 $comment_txt = $val['s_contents'];
+                 $profile_link = get_profile_url($val['i_user_id'],$val['s_profile_name']);
+?>
+
+      <div class="txt_content01"> <a href="<?=$profile_link?>"><div class="pro_photo" style="background:url(<?php echo $IMG;?>) no-repeat center;width:60px; height:60px;" ></div></a>
+            <div class="left_div01a">
+                  <p class="blue_bold12"><a  href="<?=$profile_link?>"><?=$name?></a></p>
+                  <p><?=$val['s_contents']?></p>
+                 <?php if(get_time_elapsed($val['dt_created_on']) != '') {?>
+                  <p class="date-time">Updated on: <?=get_time_elapsed($val['dt_created_on'])?></p>
+                 <?php } ?>
+            </div>
+            <div class="clr"></div>
+    
+      </div>
+      
+
+<?php    } 
+    }else
+    {
+        echo '<div class="shade_box_blue" style="padding-top:5px; width: 630px;"><div  class="shade_norecords" style="width:400px;"><p class="blue_bold12">No Comments.</p></div></div>';
+    }
+?>

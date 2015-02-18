@@ -1,0 +1,282 @@
+
+<?php //pr($all_commits_info);
+
+	if(count($all_commits_info)){
+	foreach($all_commits_info as $val){
+		
+		$s_contents = html_entity_decode(htmlspecialchars_decode($val['s_contents']),ENT_QUOTES,'utf-8');
+		$prayer_desc = my_substr(html_entity_decode(htmlspecialchars_decode($val['prayer_desc']),ENT_QUOTES,'utf-8'), 325);
+		
+		$week_arr = explode(', ', $val['s_weekdays']);
+		$time_arr = explode(', ', $val['s_time']);
+	    //pr($time_arr);
+?>
+	<div class="prayer-wall-dotted-box">
+                        
+                        	<!--my comment for the pray start -->
+                                <div class="my-comment-for-pray commit-content" id="commit-content_<?=$val['s_type']?>_<?=$val['commits_id']?>">
+                                    <p class="quoted-text">
+                                        <?=nl2br($s_contents)?> 
+                                    </p>
+                                  
+                                    <p class="date-time">From: <span><?=getShortDate($val['dt_start_time'], 5)?></span> | To: <span><?=getShortDate($val['dt_end_time'], 5)?></span></p>
+                                </div> 
+                            <!--my comment for the pray end -->
+                            
+                            <!--Edit My Commitment form start -->
+                                <div class="commit-form comment-for-pray-form" id="comment-for-pray-form_<?=$val['s_type']?>_<?=$val['commits_id']?>">
+                                	<!--minimize link start -->
+                              		<div class="minimize" title="Minimize" onclick="show_edit_commitments('<?=$val['s_type']?>',<?=$val['commits_id']?>)">&nbsp;</div>
+                          			<!--minimize link end -->
+                                    <h2>Edit My Commitment</h2>
+                                    <form  id="edit_commit_<?=$val['s_type']?>_<?=$val['commits_id']?>" action="" method="post" enctype="multipart/form-data">
+                              <!--left side start  -->
+                              <div class="left-side" style="width:410px;">
+                              <label>Word of Encouragement:</label>
+                              <textarea onblur="if(this.value=='')this.value='Max 140 Characters';" onfocus="if(this.value=='Max 140 Characters')this.value='';" rows="" cols="" name="ta_commit_text" id="ta_commit_text_<?=$val['s_type']?>_<?=$val['commits_id']?>" class="big-textarea" onKeyDown="limitText(this.form.ta_commit_text,this.form.countdown,140);" 
+onKeyUp="limitText(this.form.ta_commit_text,this.form.countdown,140);" style="height: 36px; width:370px;" ><?=br2nl($s_contents)?></textarea>
+                              <span id="err_message_<?=$val['s_type']?>_<?=$val['commits_id']?>" class="error-message"></span> 
+                              </div>
+                              <!--left side end  -->
+                              
+                              <!--right side start -->
+                              <div class="right-side" style=" float:left; width:320px;">
+                                  <label class="small">From:</label>
+                                  <div class="field04" style="width:235px; float:left;">
+                                        <input style="width:170px; float:left; margin-right:4px; " type="text"  value="<?=getShortDate($val['dt_start_time'],11)?>" name="commit_date_to" id="commit_date_to_<?=$val['s_type']?>_<?=$val['commits_id']?>"  readonly="readonly"/>
+                                        <img src="images/icons/cal.png" alt="" onclick="$(this).prev().focus()" style="cursor:pointer; float:left;" />
+                                        <script type="text/javascript">
+                                            $(document).ready(function(arg) {
+                                               
+											
+											 <?php /*?> $.datepicker.setDefaults($.datepicker.regional['<?=get_current_language()?>']);
+                                              $('#commit_date_to_<?=$val['s_type']?>_<?=$val['commits_id']?>').datetimepicker({
+                                                    dateFormat : 'yy-mm-dd',
+                                                    minDate: new Date(<?=(date('Y'))?>, <?=(date('m')-1)?>, <?=(date('d'))?> ,  0, 00),
+													controlType: 'select',
+				   									stepMinute: 15
+                                              });
+                                                        
+                                              $('#commit_date_end_<?=$val['s_type']?>_<?=$val['commits_id']?>').datetimepicker({
+                                                    dateFormat : 'yy-mm-dd',
+                                                    minDate: new Date(<?=(date('Y'))?>, <?=(date('m')-1)?>, <?=(date('d'))?>, 0, 00),
+													controlType: 'select',
+				   									stepMinute: 15
+                                              });
+                                              $.timepicker.setDefaults($.timepicker.regional['en']);<?php */?>
+											  
+											  
+											  $(function(){
+												 var inputDate = $("#commit_date_to_<?=$val['s_type']?>_<?=$val['commits_id']?>");
+												 var changeYearButtons = function() {
+													setTimeout(function() {
+													   $('.NextYrClass').remove();
+													   $('.PrevYrClass').remove();
+													   var widgetHeader = inputDate.datepicker("widget").find(".ui-datepicker-header");
+													   //you can opt to style up these simple buttons tho
+													   var prevYrBtn = $('<button title="PrevYr" class="PrevYrClass"></button>');
+													   prevYrBtn.bind("click", function() {
+														$.datepicker._adjustDate(inputDate, -1, 'Y');
+													   });
+													   var nextYrBtn = $('<button title="NextYr" class="NextYrClass"> </button>');
+													   nextYrBtn.bind("click", function() {
+														$.datepicker._adjustDate(inputDate, +1, 'Y');
+													 
+													   });
+													   prevYrBtn.appendTo(widgetHeader);
+													   nextYrBtn.appendTo(widgetHeader);
+											  
+												  }, 0);
+												 };
+											  
+											  		$("#commit_date_to_<?=$val['s_type']?>_<?=$val['commits_id']?>").datepicker({
+															beforeShow: changeYearButtons,
+															onChangeMonthYear: changeYearButtons,
+															dateFormat : 'yy-mm-dd',
+												  			minDate: new Date(<?=(date('Y'))?>, <?=(date('m')-1)?>, <?=(date('d'))?> ,  0, 00),
+															//controlType: 'select',
+															//stepMinute: 15
+														   });
+														
+											  });
+											  
+											  $(function(){
+												 var inputDate = $("#commit_date_end_<?=$val['s_type']?>_<?=$val['commits_id']?>");
+												 var changeYearButtons = function() {
+													setTimeout(function() {
+													   $('.NextYrClass').remove();
+													   $('.PrevYrClass').remove();
+													   var widgetHeader = inputDate.datepicker("widget").find(".ui-datepicker-header");
+													   //you can opt to style up these simple buttons tho
+													   var prevYrBtn = $('<button title="PrevYr" class="PrevYrClass"></button>');
+													   prevYrBtn.bind("click", function() {
+														$.datepicker._adjustDate(inputDate, -1, 'Y');
+													   });
+													   var nextYrBtn = $('<button title="NextYr" class="NextYrClass"></button>');
+													   nextYrBtn.bind("click", function() {
+														$.datepicker._adjustDate(inputDate, +1, 'Y');
+													 
+													   });
+													   prevYrBtn.appendTo(widgetHeader);
+													   nextYrBtn.appendTo(widgetHeader);
+											  
+												  }, 0);
+												 };
+											  
+											  		$("#commit_date_end_<?=$val['s_type']?>_<?=$val['commits_id']?>").datepicker({
+															beforeShow: changeYearButtons,
+															onChangeMonthYear: changeYearButtons,
+															dateFormat : 'yy-mm-dd',
+												  			minDate: new Date(<?=(date('Y'))?>, <?=(date('m')-1)?>, <?=(date('d'))?> ,  0, 00),
+															//controlType: 'select',
+															//stepMinute: 15
+														   });
+														
+											  });
+												
+                                            });
+                                        </script>
+                                        
+                                        <span id="err_start_date_<?=$val['s_type']?>_<?=$val['commits_id']?>" class="error-message"></span> 
+                                  </div>
+                                  
+                                 <?php /*?> <label class="small">Time:</label>
+                                  <div class="field01" style=" width:200px; float:left; margin-right:15px; margin-bottom:10px;">
+                                       <input name="txt_commit_from_time" id="txt_commit_from_time_<?=$val['s_type']?>_<?=$val['commits_id']?>" type="text" style="width:55px;" value="<?=getShortDateWithTime($val['dt_start_time'],'8')?>"/>
+                                        <span style=" font-size: 10px;font-style: italic;">(24-hour format ex : HH:MM)</span> 
+                                       <span id="err_start_time_<?=$val['s_type']?>_<?=$val['commits_id']?>" class="error-message"></span> 
+                                  </div><?php */?>
+                                  
+                                  <div class="clr"></div>
+                                  
+                                  <label class="small">To:</label>
+                                  
+                                  <div class="field04" style="width:235px; float:left;">
+                                        <input style="width:170px; float:left; margin-right:4px;"   type="text"  value="<?=getShortDate($val['dt_end_time'],11) ?>" name="commit_date_end" id="commit_date_end_<?=$val['s_type']?>_<?=$val['commits_id']?>"  readonly="readonly"/>
+                                        <img src="images/icons/cal.png" alt="" onclick="$(this).prev().focus()" style="cursor:pointer; float:left;" />
+                                       
+                                        <span id="err_end_date_<?=$val['s_type']?>_<?=$val['commits_id']?>" class="error-message"></span> 
+                                  </div>
+                                  
+                                  <?php /*?><label class="small">Time:</label>
+                                  <div class="field01" style=" width:200px; float:left; margin-right:15px;">
+                                         <input name="txt_commit_to_time" id="txt_commit_to_time_<?=$val['s_type']?>_<?=$val['commits_id']?>" type="text" style="width:55px;" value="<?=getShortDateWithTime($val['dt_end_time'],'8')?>"/> 
+                                          <span style=" font-size: 10px;font-style: italic;">(24-hour format ex : HH:MM)</span>
+                                         <span id="err_end_time_<?=$val['s_type']?>_<?=$val['commits_id']?>" class="error-message"></span> 
+                                  </div><?php */?>
+                              </div>
+                              <!--right side end -->
+                              
+                                    <div id="day_block" style="float:left; margin-top:12px;">
+                                       <label> Day of Week:</label>
+                                        <div class="secttion-padding">
+                                              <table class="cal_table" border="0" cellspacing="0" cellpadding="0">
+                                                    <tr>
+                                                          <th class="nw-cal_table">S</th>
+                                                          <th class="nw-cal_table">M</th>
+                                                          <th class="nw-cal_table">T</th>
+                                                          <th class="nw-cal_table">W</th>
+                                                          <th class="nw-cal_table">T</th>
+                                                          <th class="nw-cal_table">F</th>
+                                                          <th class="nw-cal_table">S</th>
+                                                    </tr>
+                                                    <tr id="weekdays_tr<?=$val['s_type']?>_<?=$val['commits_id']?>">
+                                                          <td valign="middle">
+                                                          <input name="chk_day[]"  type="checkbox" value="Sunday" <?=(in_array('Sunday',$week_arr))?'checked="checked"':''?>  />
+                                                          </td>
+                                                          <td valign="middle">
+                                                          <input name="chk_day[]" type="checkbox" value="Monday" <?=(in_array('Monday',$week_arr))?'checked="checked"':''?> />
+                                                          </td>
+                                                          <td valign="middle">
+                                                          <input name="chk_day[]" type="checkbox" value="Tuesday" <?=(in_array('Tuesday',$week_arr))?'checked="checked"':''?>/>
+                                                          </td>
+                                                          <td valign="middle">
+                                                          <input name="chk_day[]" type="checkbox" value="Wednesday" <?=(in_array('Wednesday',$week_arr))?'checked="checked"':''?>/>
+                                                          </td>
+                                                          <td valign="middle">
+                                                          <input name="chk_day[]" type="checkbox" value="Thursday" <?=(in_array('Thursday',$week_arr))?'checked="checked"':''?>/>
+                                                          </td>
+                                                          <td valign="middle">
+                                                          <input name="chk_day[]" type="checkbox" value="Friday" <?=(in_array('Friday',$week_arr))?'checked="checked"':''?>/>
+                                                          </td>
+                                                          <td valign="middle">
+                                                          <input name="chk_day[]" type="checkbox" value="Saturday" <?=(in_array('Saturday',$week_arr))?'checked="checked"':''?>/>
+                                                          </td>
+                                                    </tr>
+                                              </table>
+                                            
+                                        </div>
+                                          <span id="err_chk_day<?=$val['s_type']?>_<?=$val['commits_id']?>" class="error-message err_new"></span> 
+                                        <div class="clr"></div>
+                                    </div>
+                              
+                              <div class="clr"></div>
+                              
+                              <DIV class="view-pray-time">
+                                    <label> Prayer Time: </label>
+                                    <div class="prayer-time secttion-padding time-list-adjust" id="time_tr<?=$val['s_type']?>_<?=$val['commits_id']?>">
+                                         	<div class="lbl02"><input name="chk_time[]" type="checkbox" value="00:00:00-03:00:00" <?=(in_array('00:00:00-03:00:00',$time_arr))?'checked="checked"':''?>/> 0:00 – 3:00</div>
+                                            <div class="lbl02"><input name="chk_time[]" type="checkbox" value="03:00:00-06:00:00" <?=(in_array('03:00:00-06:00:00',$time_arr))?'checked="checked"':''?> /> 3:00 – 6:00</div>
+                                            <div class="lbl02"><input name="chk_time[]" type="checkbox" value="06:00:00-09:00:00" <?=(in_array('06:00:00-09:00:00',$time_arr))?'checked="checked"':''?> /> 6:00 – 9:00</div>
+                                            <div class="lbl02"><input name="chk_time[]" type="checkbox" value="09:00:00-12:00:00" <?=(in_array('09:00:00-12:00:00',$time_arr))?'checked="checked"':''?>/> 9:00 – 12:00</div>
+                                            <div class="lbl02"><input name="chk_time[]" type="checkbox" value="12:00:00-15:00:00" <?=(in_array('12:00:00-15:00:00',$time_arr))?'checked="checked"':''?>/> 12:00 – 15:00</div>
+                                            <div class="lbl02"><input name="chk_time[]" type="checkbox" value="15:00:00-18:00:00" <?=(in_array('15:00:00-18:00:00',$time_arr))?'checked="checked"':''?>/> 15:00 – 18:00</div>
+                                            <div class="lbl02"><input name="chk_time[]" type="checkbox" value="18:00:00-21:00:00" <?=(in_array('18:00:00-21:00:00',$time_arr))?'checked="checked"':''?>/> 18:00 – 21:00</div>
+                                            <div class="lbl02"><input name="chk_time[]" type="checkbox" value="21:00:00-23:00:00" <?=(in_array('21:00:00-23:00:00',$time_arr))?'checked="checked"':''?>/> 21:00 – 23:00</div>
+                                </div>
+                                	  <span id="err_chk_time<?=$val['s_type']?>_<?=$val['commits_id']?>" class="error-message err_new"></span> 
+                                </DIV>
+                              
+                              <input type="hidden" id="prayer_id_<?=$val['s_type']?>_<?=$val['commits_id']?>" value="<?=$val['prayer_id']?>" />
+                              <input name="post" type="button" value="Update" class="post-btn" onclick="edit_commitments('<?=$val['s_type']?>',<?=$val['commits_id']?>)" />
+                          </form>
+                                    <div class="clr"></div>
+                                </div>
+                            <!--Edit My Commitment form end --> 
+                          <?php if($val['s_type'] == 'prayer_post'){ ?>
+                            <div class="commitment-prayer-for">
+                                <p class="name">Pray For: <span><?=$val['post_owner_name']?></span> 
+                                <span class="place"><?=get_user_country_info($val['post_owner_id'])?></span></p>
+                                <p class="quoted-text">
+                                    <a href="<?=base_url()?>prayer-wall/<?=$val['prayer_id']?>/prayer-wall-request-detail.html"><?=nl2br($prayer_desc)?></a> 
+                                    <span>Updated on: <?=get_time_elapsed($val['post_created_on'])?></span> 
+                                </p>
+                                
+                                
+                                 <p class="date-time">From: <span><?=getShortDateWithTime($val['post_start_date'], 9)?></span> | To: <span><?=getShortDateWithTime($val['post_end_date'], 9)?></span></p>
+                                <span class="notify-tag"><?=($val['s_type'] == 'intercession_post')?'<span class="e_italic">e</span>Intercession':'Personal Prayer Request';?></span>
+                            </div>    
+                           <?php } 
+						   else{?>
+                            
+                            <div class="commitment-prayer-for">
+                               
+                               
+                                <p class="quoted-text">
+                                    <a href="<?=base_url()?>e-intercession/<?=$val['prayer_id']?>/e-intercession-request-detail.html"><?=nl2br($prayer_desc)?></a> 
+                                    
+                                     <span style="color:#013D62; font-size:13px;">Location: <?=get_cityname($val['s_city']).', '.get_statename($val['s_state']).', '.$val['s_country']?></span>
+                                     <span>Updated on: <?=get_time_elapsed($val['post_created_on'])?></span> 
+                                     </p>
+                                <p></p>
+                                
+                                
+                                 <p class="date-time">From: <span><?=getShortDateWithTime($val['post_start_date'], 9)?></span> | To: <span><?=getShortDateWithTime($val['post_end_date'], 9)?></span></p>
+                                <span class="notify-tag"><?=($val['s_type'] == 'intercession_post')?'<span class="e_italic">e</span>Intercession':'Personal Prayer Request';?></span>
+                            </div>
+                            <?php } ?>
+                            <ul class="article-comment-block">
+                                <li class="right">
+                                    <ul>
+                                        <li class="first"><a href="javascript:void(0);" class="edit-my-commitment-btn" onclick="show_edit_commitments('<?=$val['s_type']?>',<?=$val['commits_id']?>)">Edit My Commitment</a></li>
+                                        <li><a href="javascript:void(0);" onclick="commitments_delete_confirm_(<?=$val['commits_id']?> , '<?=$val['s_type']?>')">Delete</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                            
+                        </div>
+<?php
+		}
+	}
+ ?>                       
+ 

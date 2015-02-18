@@ -1,0 +1,17 @@
+<div class="search-panel">
+           
+          <?php if($page_name  == 'followings' || $home_menu == 1 || $page_name  == 'followers' || $page_name == 'search-people' || $menu_name == 'search_trend'){ ?>
+            <p class="title" ><img src="images/icons/tweet.png" height="30px" style="margin-top: -4px;" /> <a href="tweets.html" style="text-decoration:none; margin-left:5px;">Chitter Home</a></p>
+            <?php  }
+			else{ ?>
+            <p class="title">Profile Summary</p>
+			<?php }?>
+            <div class="tweeter-search">
+            <span>Search People:</span>
+            <form action="<?=base_url().'search-people.html'?>" method="post" enctype="multipart/form-data" class="tweeter-search-form">
+                <input name="searchTweeter" type="text" id="searchTweeter" />
+                <input name="hd_search" id="hd_search" value="Y"  type="hidden"/>
+                <input name="" type="submit" value="" />
+            </form>
+           </div>
+</div>

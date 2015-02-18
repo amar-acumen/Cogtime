@@ -1,0 +1,254 @@
+<?php include(APPPATH."views/layouts/logged_header.phtml");?>
+            <!-- NAVIGATION SECTION -->
+      <?php include(APPPATH."views/layouts/nav.phtml");?>
+      <!-- /NAVIGATION SECTION -->
+      </div>
+</div>
+<style>
+.payer-member-name{ width:62%;}
+</style>
+<!-- /HEADER SECTION -->
+<div class="clr"></div>
+<!-- CONTENT SECTION -->
+<div id="content_section">
+      <div id="container">
+            <div id="mid_content">
+                 
+                 
+                  <!-- main container -->
+                  <div class="main-prayer-group">
+                      <!--buttons section start -->
+                     <div class="arrow_btm"></div>
+                      
+                     <div class="page_heading_01 grey">
+                            	<div class="left">Prayer Group Requests
+                                </div>
+                                 <a href="prayer-group.html" class="create-group2">Back</a>
+
+                     </div>
+                      <!--Create Prayer Group section-->  
+					  
+					  </div>
+					  <!--Create Prayer Group section-->   
+                        
+                      
+                      <div class="clr"></div>
+                      <!--buttons section end -->
+					  
+					  <!--payer notification start-->
+					  <div class="main-payer-section">
+                      
+                      <!--prayer wall eight start -->
+					 <div class="nw-prayer-group-panel">
+                		<div class="nw-right-heading">
+                     	 	<div class="left"><h4>Invitations Sent</h4></div>
+                 		</div>
+                        <div class="nw-prayer-group-main no-right-mrgn">
+                         
+                          <span>
+                            <label class="sel-box-grp" style="width:115px;">Filter by Group Name: </label>
+                            <select onchange="get_Grouped_notificationlist_sent()" id="notif_grp_sent_by" class="prayer-selt " style="width:300px;">
+                                <option value="-1">Select</option>
+                               <?php
+							   		if(count($my_grp_arr)){
+										foreach($my_grp_arr as $k=> $val){
+							   ?>
+                                <option value="<?=$val['id']?>"><?=$val['s_group_name']?></option>
+                              <?php
+										}
+									}
+							  ?>
+                            </select>
+                            </span>
+                           <br class="clr"/>
+                          
+                          	<ul class="prayermember-ul">
+                          	 	<DIV id="grp_post_list_sent" style="margin-top: 10px;"><?=$request_sent?></DIV>
+                            </ul>
+          					</div> 
+						</div>
+                        
+                        
+                        <div class="nw-prayer-group-panel pray-left-margin">
+                		<div class="nw-right-heading">
+                     	 	<div class="left"><h4>Invitations Received</h4></div>
+                 		</div>
+                        <div class="nw-prayer-group-main no-right-mrgn">
+                         
+                          <span>
+                            <label class="sel-box-grp" style="width:115px;">Filter by Group Name: </label>
+                            <select onchange="get_Grouped_notificationlist_recv()" id="notif_grp_recv_by" class="prayer-selt " style="width:300px;">
+                                <option value="-1">Select</option>
+                               <?php
+							   		if(count($all_grp_arr)){
+										foreach($all_grp_arr as $k=> $val){
+							   ?>
+                                <option value="<?=$val['id']?>"><?=$val['s_group_name']?></option>
+                              <?php
+										}
+									}
+							  ?>
+                            </select>
+                            </span>
+                           <br class="clr"/>
+                          
+                          	<ul class="prayermember-ul">
+                          	 	<DIV id="grp_post_list_recv" style="margin-top: 10px;"><?=$request_recv?></DIV>
+                            </ul>
+          					</div> 
+						</div>
+                      <!--prayer wall eight end  -->
+					  </div>
+                      
+                      
+                      
+					 
+					  <!--payer notification end-->
+                      
+                  	  <div class="clr"></div> 
+                  </div>
+                  <!-- /main container -->
+                 
+            </div>
+      </div>
+      <div class="clr"></div>
+</div>
+<!-- /CONTENT SECTION -->
+<div class="clr"></div>
+<!-- FOOTER SECTION -->
+<?php include(APPPATH."views/layouts/footer.phtml");?>
+<?php include(APPPATH."views/logged/blocks/common_popup.phtml");?>
+<!-- /FOOTER SECTION -->
+<style>
+.sel-box-grp{float: left;
+    font-size: 12px;
+    margin: 3px;}
+</style>
+
+<script type="text/javascript">
+
+var ajax_req_feeds = null;
+function show_more_records(page) {
+	
+	var group_id = '<?php echo $prayer_detail_arr['id']?>';
+	var notif_grp_by = $('#notif_grp_by').val();
+	
+	if(ajax_req_feeds!=null) {
+		ajax_req_feeds.abort();
+	}
+	showUILoader_nodialog();
+	ajax_req_feeds = $.ajax({
+		type: 'get',
+		url: base_url+'logged/prayer_group/notifications_ajax_pagination/'+page+'/'+notif_grp_by,
+		dataType: 'json',
+
+		success: function (data, status) {
+
+			hideUILoader_nodialog();
+			if(data.html!='') {
+				
+				//alert(data.cur_page+'dfdf');
+				$('#grp_post_list').append(data.html);
+				$('#show_more_records_link').attr('page_value', data.cur_page);
+				$('#show_more_records_link').attr('onclick','');
+				$('#show_more_records_link').attr('onclick','show_more_records('+data.cur_page+')');
+			}
+			else {
+				$('#grp_post_list').append('<div class="view_more " style="text-align: center;"><p class="blue_bold12" style="font-size:14px;">No More Notifications.</p></div>');
+				$('#show_more_div').remove();
+			}
+            
+            if(data.view_more==false)
+            {
+                
+                $('#grp_post_list').append('<div class="view_more " style="text-align: center;" ><p class="blue_bold12" style="font-size:14px;">No More Notifications.</p></div>');
+                $('#show_more_div').remove();
+            }
+		
+
+		}	// end of success function...
+	});
+}
+
+
+function getSortedGrpList(){
+	
+	var sort_val = $('#ordr_by').val();
+	var grp_val = $('#grp_by').val();
+	
+	showUILoader_nodialog();
+	 $.ajax({
+		type: 'get',
+		url: base_url+'logged/prayer_group/groups_ajax_listing/'+0+'/'+sort_val+'/'+grp_val,
+		dataType: 'json',
+
+		success: function (data, status) {
+
+			hideUILoader_nodialog();
+			$('#grp_list').html(data.grp_html);
+		}	// end of success function...
+	});
+	
+}
+
+
+function get_Grouped_notificationlist_sent(){
+	
+	var notif_grp_by = $('#notif_grp_sent_by').val();
+	
+	showUILoader_nodialog();
+	 $.ajax({
+		type: 'get',
+		url: base_url+'logged/prayer_group/get_pending_groups_requests_sent/'+0+'/'+notif_grp_by,
+		dataType: 'json',
+		success: function (data, status) {
+
+			hideUILoader_nodialog();
+			$('#grp_post_list_sent').html('');
+			$('#grp_post_list_sent').html(data.grp_html);
+		}	// end of success function...
+	});
+	
+}
+
+
+function get_Grouped_notificationlist_recv(){
+	
+	var notif_grp_by = $('#notif_grp_recv_by').val();
+	
+	showUILoader_nodialog();
+	 $.ajax({
+		type: 'get',
+		url: base_url+'logged/prayer_group/get_pending_groups_requests_recieved/'+0+'/'+notif_grp_by,
+		dataType: 'json',
+
+		success: function (data, status) {
+
+			hideUILoader_nodialog();
+			$('#grp_post_list_recv').html('');
+			$('#grp_post_list_recv').html(data.grp_html);
+		}	// end of success function...
+	});
+	
+}
+
+
+</script>
+
+<script type="text/javascript">
+  function delete_request(id)
+  {
+		showBusyScreen();
+		$.ajax({
+				type: 'POST',
+				url:base_url+'logged/prayer_group/delete_invitation_sent/',
+				dataType: 'json',
+				data: ({'gr_id': id }),
+				success: function (data, status) {
+							hideBusyScreen();
+							showUIMsg(data.msg);
+							$('#grp_post_list_sent').html(data.grp_html);
+				}
+			});
+  }
+</script>

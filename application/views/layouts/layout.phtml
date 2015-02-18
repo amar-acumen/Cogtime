@@ -1,0 +1,31 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<link rel="shortcut icon" type="image/x-icon" href="<?php echo base_url()?>images/favicon.ico" />
+<?php echo $header['header_html'];?>
+<!-- for Facebook -->
+<meta property="og:type" content="Site Xtian network" />
+<meta property="og:title" content="<?=$detail_content['s_title']?>" />
+<meta property="og:description" content="<?=$detail_content['s_title']?>" />
+<meta property="og:image" content="<?=$ogimage?>"/>
+<!--<meta property="og:image:type" content="image/png" />-->
+<meta property="og:url" content="<?=my_current_url()?>" />
+<meta property="og:site_name" content="COGTIME Xtian network" />
+<meta property="fb:app_id" content="1525976970966527"/>
+
+<!-- for Twitter -->
+<meta name="twitter:card" content="Site Xtian network" />
+<meta name="twitter:title" content="<?=$detail_content['s_title']?>" />
+<meta name="twitter:description" content="<?=$detail_content['s_title']?>" />
+<meta name="twitter:image" content="<?=$ogimage?>" />
+
+</head>
+<body>
+
+<?php flush(); ?>
+
+<?=$content?>
+
+</body>
+<?=$header['footer_html']?>
+</html>

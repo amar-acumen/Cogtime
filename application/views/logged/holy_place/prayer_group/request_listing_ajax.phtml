@@ -1,0 +1,36 @@
+
+                  <?php # pr($prayer_grp_info);
+				  		if(count($prayer_grp_info)){
+                          foreach($prayer_grp_info as $key=> $val):
+                           
+                           $detail_url = get_group_url($val['id'],$val['s_group_name']);
+						   $DATETEXT = ($val['is_owner'] == 'Y')?'Created on':'Joined on';
+						   $profile_image = get_profile_image($val['i_user_id'],'thumb');
+                  ?>
+                      <li>
+                                      <span class="payer-member-name">
+                                      
+                                      <div class="pro_photo3" style="background:url(<?php echo $profile_image;?>) no-repeat center;width:45px; height:45px; margin-top:4px;" ></div>
+                                          
+                                          <div class="">
+                                          	  <p>Group Name : <a href="javascript:void(0);"><?=($val['s_group_name'])?></a></p>
+                                              <p>Invitee Name : <a href="javascript:void(0);"><?=get_username_by_id($val['i_user_id'])?></a></p>
+                                              <p style="float:left;">Requested On- <?=getShortDate($val['dt_created_on'],5)?> </p>
+                                              <p style=" margin-left:415px; width:80px;"><img src="images/icons/dec.png" alt="" /> 
+                                                 <a  href="javascript:void(0);" class="blue_link" onclick="delete_request(<?=$val['rec_id']?>)">Delete</a></p></p>
+                                          </div>
+                                          
+                                      </span>          
+                                  </li>
+                      
+                   <?php  
+                          endforeach;
+                      }
+                      else
+                      {
+                          echo '<li><span class="payer-member-name">No Request.</span></li>';
+                      }
+                   ?>
+                   
+              
+              

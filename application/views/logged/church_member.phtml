@@ -1,0 +1,192 @@
+<?php
+	include(APPPATH ."views/layouts/church_admin_header.phtml");
+?>
+<script language="javascript">
+$(document).ready(function() {
+
+    // for AJAX page-submission...
+    var options = { 
+        beforeSubmit:  showLoad,  // pre-submit callback 
+        success:       validateFrm // post-submit callback 
+    }; 
+ 
+    // bind to the form's submit event 
+    $('#importfrm').submit(function() {
+        $(this).ajaxSubmit(options);
+        return false;
+        
+    });
+
+});
+
+function showLoad()
+{
+ // $('#photo_album_btn').attr('disabled','disabled');
+    showUIMsg();
+  $('#product_create_btn').val('Creating...');
+  
+}
+
+
+// validate ajax-submission...
+function validateFrm(data)
+{
+    //alert( data);
+    var data = JSON.parse(data);
+
+    id=data.photo_id;
+
+    if(data.success==false) 
+    {
+        $('.error-message').each(function(i){
+            $(this).attr('style','display:none');
+        });
+        
+        //$('#photo_album_btn').attr('disabled','');
+        $('#product_create_btn').val('Create');
+        $('#photo_loading').html('');
+
+        for ( var id in data.arr_messages ){
+            //alert(data.arr_messages[id]);
+            if( $('#'+id) != null ) {
+                $('#'+id).html(data.arr_messages[id]);
+                $('#'+id).css('display', 'block');
+            }
+        }
+
+        showUIMsg(data.msg);
+    }
+    else {
+        
+        showUIMsg(data.msg);        
+        $('#csv').val('');
+        
+    }
+    $('#sp_add_loading').html('');
+    //hideLoading();
+                
+}
+
+
+
+
+</script>
+<!-- CONTENT SECTION -->
+<?php //pr($church_arr); ?>
+
+<div class="container-body">
+   <?php
+	include(APPPATH ."views/layouts/church_admin_left.phtml");
+?>
+    <div class="right-panel">
+    <h2>Members</h2>
+    <div class="vector-search">
+        <label>Search :</label>
+        <input type="text" >
+    </div>
+    <div class="spacer"></div>
+    <div class="vector-search">
+        <form name="importfrm" id="importfrm" action="<?=base_url().'logged/church/import_member_csv'?>" method="post"  onsubmit="return false;" enctype="multipart/form-data">
+        <label>Import Csv :</label>
+        <input type="file" name="csv" id="csv">
+        <span id="err_csv" class="error-message"></span> 
+        <input type="submit" value="Import" class="post-btn">
+        </form>
+    </div>
+    <div class="spacer"></div>
+    <div class="right-box">
+
+            
+            <ul>
+            	<li class="head">
+                <span class="sl">S no.</span>
+                <span class="name">Name</span>
+                 <span class="joind-on">Joined on</span>
+                <span class="email">Email</span>
+                <span class="tel">Tel</span>
+                <!--<span class="fileapprove">File approved/<br>Not Approved</span>-->
+                <span class="action">Action</span>
+                </li>
+                            	<li>
+                <span class="sl">2</span>
+                <span class="name">Name</span>
+                 <span class="joind-on">12/1/2015</span>
+                <span class="email">test@gmail.com</span>
+                <span class="tel">033 545454</span>
+<!--                <span class="fileapprove"><input type="radio"><input type="radio"></span>-->
+                <span class="action"><!--<a href="#">Approved</a>--> <a href="#">Not approved</a><a href="#">Delete</a></span>
+                </li>
+                <li>
+                <span class="sl">2</span>
+                <span class="name">Name</span>
+                 <span class="joind-on">12/1/2015</span>
+                <span class="email">test@gmail.com</span>
+                <span class="tel">033 545454</span>
+<!--                <span class="fileapprove"><input type="radio"><input type="radio"></span>-->
+                <span class="action"><!--<a href="#">Approved</a>--> <a href="#">Not approved</a><a href="#">Delete</a></span>
+                </li>
+                <li>
+                <span class="sl">2</span>
+                <span class="name">Name</span>
+                 <span class="joind-on">12/1/2015</span>
+                <span class="email">test@gmail.com</span>
+                <span class="tel">033 545454</span>
+<!--                <span class="fileapprove"><input type="radio"><input type="radio"></span>-->
+                <span class="action"><!--<a href="#">Approved</a>--> <a href="#">Not approved</a><a href="#">Delete</a></span>
+                </li>
+                <li>
+                <span class="sl">2</span>
+                <span class="name">Name</span>
+                 <span class="joind-on">12/1/2015</span>
+                <span class="email">test@gmail.com</span>
+                <span class="tel">033 545454</span>
+<!--                <span class="fileapprove"><input type="radio"><input type="radio"></span>-->
+                <span class="action"><!--<a href="#">Approved</a>--> <a href="#">Not approved</a><a href="#">Delete</a></span>
+                </li>
+                <li>
+                <span class="sl">2</span>
+                <span class="name">Name</span>
+                 <span class="joind-on">12/1/2015</span>
+                <span class="email">test@gmail.com</span>
+                <span class="tel">033 545454</span>
+<!--                <span class="fileapprove"><input type="radio"><input type="radio"></span>-->
+                <span class="action"><!--<a href="#">Approved</a>--> <a href="#">Not approved</a><a href="#">Delete</a></span>
+                </li>
+                <li>
+                <span class="sl">2</span>
+                <span class="name">Name</span>
+                 <span class="joind-on">12/1/2015</span>
+                <span class="email">test@gmail.com</span>
+                <span class="tel">033 545454</span>
+<!--                <span class="fileapprove"><input type="radio"><input type="radio"></span>-->
+                <span class="action"><!--<a href="#">Approved</a>--> <a href="#">Not approved</a><a href="#">Delete</a></span>
+                </li>
+                <li>
+                <span class="sl">2</span>
+                <span class="name">Name</span>
+                 <span class="joind-on">12/1/2015</span>
+                <span class="email">test@gmail.com</span>
+                <span class="tel">033 545454</span>
+<!--                <span class="fileapprove"><input type="radio"><input type="radio"></span>-->
+                <span class="action"><!--<a href="#">Approved</a>--> <a href="#">Not approved</a><a href="#">Delete</a></span>
+                </li>
+            </ul>
+
+        <div class="spacer"></div>
+        
+     
+
+    </div>
+    
+     
+    
+    </div>
+    
+    </div>
+<!-- /CONTENT SECTION -->
+<div class="clr"></div>
+<!-- FOOTER SECTION -->
+<?php include(APPPATH."views/layouts/church_footer.phtml");?>
+<!-- /FOOTER SECTION -->
+
+

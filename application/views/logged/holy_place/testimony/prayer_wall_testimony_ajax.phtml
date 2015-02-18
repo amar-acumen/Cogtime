@@ -1,0 +1,88 @@
+<?php
+
+//pr($arr_testimony);
+if(count($arr_testimony))
+{
+    foreach($arr_testimony as $testimony)
+    {
+		$s_subject = htmlspecialchars_decode($testimony['s_subject']);
+?>
+
+<!--testimonial start -->
+<div class="prayer-wall-dotted-box equal-padding">
+
+    <!--my comment for the pray start -->
+        <div class="my-comment-for-pray commit-content">
+            <p class="quoted-text" id="testimony_desc_<?=$testimony['testimony_id']?>">
+                <?php echo nl2br($testimony['testimony_desc'])?>
+            </p>
+            
+        </div> 
+    <!--my comment for the pray end -->
+    <div class="commitment-prayer-for">
+        <p class="name">Pray For: <span><?=$testimony['posted_by']?></span> <?=get_countryname($testimony['country']).' '.get_statename($testimony['state'])?> <span></span> </p>
+        
+        <p class="quoted-text">
+            <a href="prayer-wall/<?=$testimony['prayer_wall_req_id']?>/prayer-wall-request-detail.html"><?=$s_subject?></a></p>
+        <p class="quoted-text">
+            <a href="prayer-wall/<?=$testimony['prayer_wall_req_id']?>/prayer-wall-request-detail.html"><?=nl2br(my_substr($testimony['prayer_req_desc'],250))?></a> 
+           <?php /*?> <span class="place" style="color: #011F31; font-size: 14px; margin-top: 2px;">Location: <?=$testimony['country'].' '.$testimony['state']?></span><?php */?>
+            <span style="margin-top: 1px;">Updated on: <?=get_time_elapsed($testimony['prayer_req_insert_date'])?></span> 
+            
+        </p>
+       
+            
+            <p class="date-time">From: <span><?=getShortDateWithTime($testimony['prayer_req_start_date'], 9)?></span> | To: <span><?=getShortDateWithTime($testimony['prayer_req_end_date'], 9)?></span></p>
+            
+            <?php if($testimony['owner_post']=='Y') {?>
+            
+
+            <ul class="article-comment-block">
+                
+                
+                <li class="right">
+                    <ul>
+                        <li class="first"><a href="javascript:void(0);" class="add-testimony-btn"  onclick="return show_edit_testimony(<?=$testimony['testimony_id']?>);">Edit Testimony</a></li>
+                       
+                    </ul>
+                </li>
+            </ul>
+            
+            
+<!--edit testimony start -->
+<div class="commit-form add-testimony edit_<?=$testimony['testimony_id']?>" style=" width: 923px;">
+    <h2>Edit Testimony</h2>
+    <form id="edit_frm_<?=$testimony['testimony_id']?>" action="" method="post" enctype="multipart/form-data" onsubmit="return post_edit_testimony(<?=$testimony['testimony_id']?>)">
+        <label class="normal">Message:</label>
+        <input type="hidden" id="h_testimony_id" name="h_testimony_id" value="<?=$testimony['testimony_id']?>" />
+        <textarea name="txt_area_msg" rows="" cols="" class="full-textarea" style="height: 70px;" onKeyDown="limitText(this.form.txt_area_msg,this.form.countdown,500);" 
+onKeyUp="limitText(this.form.txt_area_msg,this.form.countdown,500);" ><?=$testimony['testimony_desc']?></textarea>
+        <span id="err_message_msg_<?=$testimony['testimony_id']?>" class="error-message" style="display: none; margin-left: 70px;">* Required Field.</span>
+        <div class="clr"></div>
+        <input name="post" type="submit" value="Post" class="post-btn post-btn2" />
+    </form>
+    <div class="clr"></div>
+</div>
+<!--edit testimony end -->
+            
+            
+            
+            <?php } //-------------------------- end owner_post 
+            ?>
+            
+            
+    </div>    
+</div>
+<!--testimonial end -->
+<?php
+    }// endforeach
+}
+else
+{
+?>
+<div class="view_more" style="text-align: center;">
+<p class="blue_bold12" style="font-size:14px;">No Testimony.</p>
+</div>
+<?php
+}   //endif
+?>

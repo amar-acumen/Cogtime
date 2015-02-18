@@ -1,0 +1,59 @@
+<table width="100%" border="0" cellspacing="0" cellpadding="0" class="member-table text-table" id="member_edu_details">
+
+<?php 
+$count= count($result['education_arr']);
+    
+    if($count==0)
+        $count=1;
+    for($i=0;$i<$count;$i++)    :
+    
+        $country  = get_country_name_by_id($result["education_arr"][$i]["s_school_country"]);
+        $state    = $result["education_arr"][$i]["s_school_state"];
+        $city     = $result["education_arr"][$i]["s_school_city"];
+        
+        $edu_address=array();
+        if(!empty($country))    
+            $edu_address['country']=$country;
+        if(!empty($state))
+            $edu_address['state']=$state;
+        if(!empty($city))
+            $edu_address['city']=$city;
+        
+        $school_location = implode(', ',$edu_address);
+        
+
+?>
+
+    <tr>
+      <td align="left" valign="top" height="25" width="180" class="label">School/College</td>
+      <td align="left" valign="top" width="20" class="label">:</td>
+      <td align="left" valign="top" ><?php echo $result['education_arr'][$i]['s_school_name'];?></td>
+    </tr>
+    <tr>
+      <td align="left" valign="top" height="25" width="180" class="label">School Location</td>
+      <td align="left" valign="top" width="20" class="label">:</td>
+      <td align="left" valign="top" ><?php echo $school_location;?></td>      
+    </tr>
+    <tr>
+      <td align="left" valign="top" height="25" width="180" class="label">Class Year</td>
+      <td align="left" valign="top" width="20" class="label">:</td>
+      <td align="left" valign="top" ><?php echo $result['education_arr'][$i]['i_class_year'];?></td>
+    </tr>
+    <tr>
+      <td align="left" valign="top" height="25" width="180" class="label">Degree</td>
+      <td align="left" valign="top" width="20" class="label">:</td>
+      <td align="left" valign="top" ><?php echo $result['education_arr'][$i]['s_degree'];?></td>
+    </tr>
+    <tr><td>&nbsp;</td>
+        
+    </tr>
+    <?php 
+    
+    endfor;
+    ?>
+    
+    <tr>
+      <td align="left" valign="bottom" height="40" colspan="2">&nbsp;</td>
+      <td align="left" valign="bottom"><a href="javascript:void(0);" class="edit-btn-other" onclick="show_edit_part_AJAX('edu')">Edit</a></td>
+    </tr>
+</table>

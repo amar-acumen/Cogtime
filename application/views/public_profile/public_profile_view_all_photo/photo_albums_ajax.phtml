@@ -1,0 +1,28 @@
+
+                        <?php
+                            $counter = 0;
+                            if(count($album_result_arr))
+                            {
+                                foreach($album_result_arr as $album) : 
+                                $counter++;
+                                $IMG = base_url()."uploads/user_album_photos/".getThumbName($album['s_photo'],'thumb');
+									//$photos_link = get_public_profile_photos_url($album['i_user_id'],$album['id']);
+                        ?>
+                      
+                            <li style="width: 147px;">
+                               <?php /*?> <a href="<?=$photos_link?>"><?php */?>
+                                <div style=" border:3px solid #666666; height:82px; width: 122px;">
+                                <div  style="background:url(<?=$IMG?>) no-repeat center;max-width:122px; max-height:82px; height:82px; cursor:pointer;" ></div>
+                                </div>
+                                <span><?php echo substr($album['s_name'],0,20)?></span>
+                                <p><?php echo $album['total_photo']?> Photo(s)</p>
+                              <?php /*?>  </a><?php */?>
+                            </li>
+                        <?php
+                        
+                                endforeach;
+                            }
+                        ?>
+                        
+                            
+                      

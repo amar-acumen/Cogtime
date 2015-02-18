@@ -1,0 +1,41 @@
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="admin-table">
+                          <tr>
+                            <th align="left" valign="middle" height="30" width="800">Question</th>
+                            <th align="center" valign="middle" height="30" class="last">Actions</th>
+                          </tr>
+                          
+                           <?php
+							     //pr($info_arr);
+							  		if(count($info_arr)){
+										foreach($info_arr as $key=> $info){
+											
+											$s_question = $info['s_question'];
+											//$s_question =  my_substr(html_entity_decode(htmlspecialchars_decode($info['s_question']),ENT_QUOTES,'utf-8'), 100);
+
+												
+							  ?>
+                          <tr id="req_row_<?=$info['id']?>">
+                            <td align="left" valign="top"><?=$s_question?></td>
+                            <td align="center" valign="middle" class="last">
+                            <input name="" title="Edit" type="button" class="edit-button"  value="" onclick="show_edit(<?=$info['id']?>)"/>
+                            <input name="" title="Delete" type="button" class="delete-button"  value="" onclick="delete_quiz(<?=$info['id']?>)"/>
+                            <input name="" title="View Answer" type="button" class="btn-04"  value="View Answer" onclick="view_ans(<?=$info['id']?>)"/>
+                            </td>
+                          </tr>
+                          
+                           <?php
+										}
+									}
+										else{
+							?>
+								<tr>
+									<td style="text-align:center;" height="80" colspan="20">No data available!!!</td>
+								</tr>
+							<?php
+									}
+							?>
+                    </table>
+                    
+<div class="paging" >
+ <ul><?= $page_links ?></ul>
+</div>	

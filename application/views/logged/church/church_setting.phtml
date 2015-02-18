@@ -1,0 +1,971 @@
+<?php
+	include(APPPATH ."views/layouts/church_admin_header.phtml");
+?>
+
+<!-- CONTENT SECTION -->
+<?php //pr($church_arr); ?>
+
+<div class="container-body">
+    <?php
+	//include(APPPATH ."views/layouts/church_admin_left.phtml");
+?>
+    <div class="right-panel">
+    <h2>Church Setting</h2>
+    
+<div class="spacer"></div>
+<form method="POST" action="<?= base_url().'logged/church/add_church_data' ?>" id="gen_setting_form" enctype="multipart/form-data">
+    <div class="church-setting-main">
+		<h3>General Site Setting</h3>
+        <?php
+       //pr($church_arr);
+	 $open_time = json_decode($church_arr[0]->ch_open_time);
+	 //pr($open_time);
+	 $close_time = json_decode($church_arr[0]->ch_close_time);
+     $thumb_logo_img = get_church_logo_image($church_arr[0]->id, 'thumb', $church_arr[0]->ch_logo);
+     $thumb_cover_img = get_church_cover_image($church_arr[0]->id, 'thumb', $church_arr[0]->ch_cover);
+     $thumb_profile_img = get_church_profile_image($church_arr[0]->id, 'profile', $church_arr[0]->ch_profile_img)
+      ?>
+        <div class="form-main">
+        	<label>Upload Your logo: </label>
+                <input type="file" id="ch_logo" name="ch_logo" >
+                <span>(Preferred image size 260 X 40)</span>
+                <span class="show-upload"><img src="<?= $thumb_logo_img ?>"></span>
+                    
+                <?php
+                if($_SESSION['ch_logo_msg']!='')
+                {
+                  ?>
+                  <span class="error-msg" id="error1" style="display:block;"><?php echo $_SESSION['ch_logo_msg']?></span>
+                  <?php
+                  unset($_SESSION['ch_logo_msg']);
+                }
+                else
+                {
+                  ?>
+                  <span class="error-msg" id="error1">Required</span>
+                  <?php
+                }
+                ?>
+                
+        </div>
+        <div class="form-main">
+        	<label>Cover Picture: </label>
+                <input type="file" id="ch_cover" name="ch_cover" >
+                 <span>(Preferred image size 1300 X 400)</span>
+                 <span class="show-upload"><img src="<?= $thumb_cover_img ?>"></span>
+                    
+                <?php
+                if($_SESSION['ch_cover_msg']!='')
+                {
+                  ?>
+                  <span class="error-msg" id="error1" style="display:block;"><?php echo $_SESSION['ch_cover_msg']?></span>
+                  <?php
+                  unset($_SESSION['ch_cover_msg']);
+                }
+                else
+                {
+                  ?>
+                  <span class="error-msg" id="error5">Required</span>
+                  <?php
+                }
+                ?>
+                
+        </div>
+
+        <div class="form-main">
+          <label>Profile Picture: </label>
+                <input type="file" id="ch_profile_img" name="ch_profile_img" >
+                 <span>(Preferred image size 136 X 136)</span>
+                 <span class="show-upload"><img src="<?= $thumb_profile_img ?>"></span>
+                    
+                <?php
+                if($_SESSION['ch_profile_img_msg']!='')
+                {
+                  ?>
+                  <span class="error-msg" id="error1" style="display:block;"><?php echo $_SESSION['ch_profile_img_msg']?></span>
+                  <?php
+                  unset($_SESSION['ch_profile_img_msg']);
+                }
+                else
+                {
+                  ?>
+                  <span class="error-msg" id="error5">Required</span>
+                  <?php
+                }
+                ?>
+                
+        </div>
+
+<!--                 <div class="form-main">
+        	<label>Upload profile photo: </label>
+                <input type="file" id="ch_profile_img" name="ch_profile_img">
+                <span class="error-msg" id="error2">Required</span>
+                <span>(prefered image size 136 * 136)</span>
+        </div>-->
+        <div class="form-main">
+        	<label>Church Open / Close Time: </label>
+			
+            
+                <div> <table width="80%" border="0" cellspacing="0" cellpadding="0" class="church-close-time">
+  <thead>
+    <tr>
+      <th class="day-colum">Days</th>
+      <th>Open Time</th>
+      <th>Close Time</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td class="day-colum">Sunday</td>
+      <td><select class="time-selectbox" id="sun_ch_open" name="sun_ch_open" >
+                              <option value="-1">Select</option>
+                              <?php  
+                              $s_time = $open_time->sunday;
+                              if(!empty($s_time)){
+                                $s_time_new = $s_time; 
+                              }else{
+                                 $s_time_new = '';  
+                              } ?>
+                              <?=makeOption_time($start_time = '00:00', $i_gap = 15, $s_time_new)?>
+                       </select>
+					   <span class="error-msg" id="sun_ch_open_error">Required</span>
+					   </td>
+      <td> <select  id="sun_ch_close" name="sun_ch_close">
+               <option value="-1">Select</option>
+                               <?php /*?><option value="-1">Select</option><?php */?>
+                                    <?php  
+                              $s_time = $close_time->sunday;
+                              if(!empty($s_time)){
+                                $s_time_new = $s_time; 
+                              }else{
+                                 $s_time_new = '';  
+                              } ?>
+                                 <?=makeOption_time($start_time = '00:00', $i_gap = 15, $s_time_new)?>
+                        </select>
+                <span class="error-msg" id="sun_ch_close_error">Required</span></td>
+    </tr>
+	<tr>
+      <td class="day-colum">Monday</td>
+      <td><select class="time-selectbox" id="mon_ch_open" name="mon_ch_open" >
+                              <option value="-1">Select</option>
+                              <?php  
+                              $s_time = $open_time->monday;
+                              if(!empty($s_time)){
+                                $s_time_new = $s_time; 
+                              }else{
+                                 $s_time_new = '';  
+                              } ?>
+                              <?=makeOption_time($start_time = '00:00', $i_gap = 15, $s_time_new)?>
+                       </select>
+					   <span class="error-msg" id="mon_ch_open_error">Required</span>
+					   </td>
+      <td> <select  id="mon_ch_close" name="mon_ch_close">
+               <option value="-1">Select</option>
+                               <?php /*?><option value="-1">Select</option><?php */?>
+                                    <?php  
+                              $s_time = $close_time->monday;
+                              if(!empty($s_time)){
+                                $s_time_new = $s_time; 
+                              }else{
+                                 $s_time_new = '';  
+                              } ?>
+                                 <?=makeOption_time($start_time = '00:00', $i_gap = 15, $s_time_new)?>
+                        </select>
+                <span class="error-msg" id="mon_ch_close_error">Required</span></td>
+    </tr>
+	
+	<tr>
+      <td class="day-colum">Tuesday</td>
+      <td><select class="time-selectbox" id="tues_ch_open" name="tues_ch_open" >
+                              <option value="-1">Select</option>
+                              <?php  
+                              $s_time = $open_time->tuesday;
+                              if(!empty($s_time)){
+                                $s_time_new = $s_time; 
+                              }else{
+                                 $s_time_new = '';  
+                              } ?>
+                              <?=makeOption_time($start_time = '00:00', $i_gap = 15, $s_time_new)?>
+                       </select>
+					   <span class="error-msg" id="tues_ch_open_error">Required</span>
+					   </td>
+      <td> <select  id="tues_ch_close" name="tues_ch_close">
+               <option value="-1">Select</option>
+                               <?php /*?><option value="-1">Select</option><?php */?>
+                                    <?php  
+                              $s_time = $close_time->tuesday;
+                              if(!empty($s_time)){
+                                $s_time_new = $s_time; 
+                              }else{
+                                 $s_time_new = '';  
+                              } ?>
+                                 <?=makeOption_time($start_time = '00:00', $i_gap = 15, $s_time_new)?>
+                        </select>
+                <span class="error-msg" id="tues_ch_close_error">Required</span></td>
+    </tr>
+	
+	<tr>
+      <td class="day-colum">Wednesday</td>
+      <td><select class="time-selectbox" id="wed_ch_open" name="wed_ch_open" >
+                              <option value="-1">Select</option>
+                              <?php  
+                              $s_time = $open_time->wednesday;
+                              if(!empty($s_time)){
+                                $s_time_new = $s_time; 
+                              }else{
+                                 $s_time_new = '';  
+                              } ?>
+                              <?=makeOption_time($start_time = '00:00', $i_gap = 15, $s_time_new)?>
+                       </select>
+					   <span class="error-msg" id="wed_ch_open_error">Required</span>
+					   </td>
+      <td> <select  id="wed_ch_close" name="wed_ch_close">
+               <option value="-1">Select</option>
+                               <?php /*?><option value="-1">Select</option><?php */?>
+                                    <?php  
+                              $s_time = $close_time->wednesday;
+                              if(!empty($s_time)){
+                                $s_time_new = $s_time; 
+                              }else{
+                                 $s_time_new = '';  
+                              } ?>
+                                 <?=makeOption_time($start_time = '00:00', $i_gap = 15, $s_time_new)?>
+                        </select>
+                <span class="error-msg" id="wed_ch_close_error">Required</span></td>
+    </tr>
+	
+	<tr>
+      <td class="day-colum">Thursday</td>
+      <td><select class="time-selectbox" id="thurs_ch_open" name="thurs_ch_open" >
+                              <option value="-1">Select</option>
+                              <?php  
+                              $s_time = $open_time->thursday;
+                              if(!empty($s_time)){
+                                $s_time_new = $s_time; 
+                              }else{
+                                 $s_time_new = '';  
+                              } ?>
+                              <?=makeOption_time($start_time = '00:00', $i_gap = 15, $s_time_new)?>
+                       </select>
+					   <span class="error-msg" id="thurs_ch_open_error">Required</span>
+					   </td>
+      <td> <select  id="thurs_ch_close" name="thurs_ch_close">
+               <option value="-1">Select</option>
+                               <?php /*?><option value="-1">Select</option><?php */?>
+                                    <?php  
+                              $s_time = $close_time->thursday;
+                              if(!empty($s_time)){
+                                $s_time_new = $s_time; 
+                              }else{
+                                 $s_time_new = '';  
+                              } ?>
+                                 <?=makeOption_time($start_time = '00:00', $i_gap = 15, $s_time_new)?>
+                        </select>
+                <span class="error-msg" id="thurs_ch_close_error">Required</span></td>
+    </tr>
+	
+	<tr>
+      <td class="day-colum">Friday</td>
+      <td><select class="time-selectbox" id="fri_ch_open" name="fri_ch_open" >
+                              <option value="-1">Select</option>
+                              <?php  
+                              $s_time = $open_time->friday;
+                              if(!empty($s_time)){
+                                $s_time_new = $s_time; 
+                              }else{
+                                 $s_time_new = '';  
+                              } ?>
+                              <?=makeOption_time($start_time = '00:00', $i_gap = 15, $s_time_new)?>
+                       </select>
+					   <span class="error-msg" id="fri_ch_open_error">Required</span>
+					   </td>
+      <td> <select  id="fri_ch_close" name="fri_ch_close">
+               <option value="-1">Select</option>
+                               <?php /*?><option value="-1">Select</option><?php */?>
+                                    <?php  
+                              $s_time = $close_time->friday;
+                              if(!empty($s_time)){
+                                $s_time_new = $s_time; 
+                              }else{
+                                 $s_time_new = '';  
+                              } ?>
+                                 <?=makeOption_time($start_time = '00:00', $i_gap = 15, $s_time_new)?>
+                        </select>
+                <span class="error-msg" id="fri_ch_close_error">Required</span></td>
+    </tr>
+	
+	<tr>
+      <td class="day-colum">Saturday</td>
+      <td><select class="time-selectbox" id="sat_ch_open" name="sat_ch_open" >
+                              <option value="-1">Select</option>
+                              <?php  
+                              $s_time = $open_time->saturday;
+                              if(!empty($s_time)){
+                                $s_time_new = $s_time; 
+                              }else{
+                                 $s_time_new = '';  
+                              } ?>
+                              <?=makeOption_time($start_time = '00:00', $i_gap = 15, $s_time_new)?>
+                       </select>
+					   <span class="error-msg" id="sat_ch_open_error">Required</span>
+					   </td>
+      <td> <select  id="sat_ch_close" name="sat_ch_close">
+               <option value="-1">Select</option>
+                               <?php /*?><option value="-1">Select</option><?php */?>
+                                    <?php  
+                              $s_time = $close_time->saturday;
+                              if(!empty($s_time)){
+                                $s_time_new = $s_time; 
+                              }else{
+                                 $s_time_new = '';  
+                              } ?>
+                                 <?=makeOption_time($start_time = '00:00', $i_gap = 15, $s_time_new)?>
+                        </select>
+                <span class="error-msg" id="sat_ch_close_error">Required</span></td>
+    </tr>
+    
+  </tbody>
+</table>
+<div class="clear"></div>
+</div>
+       
+               
+        </div>
+        
+        
+        
+        
+        <div class="form-main">
+        	<label>Banner Heading: </label>
+                <input type="text" name="banner_heading" id="banner_heading" value="<?= $church_arr[0]->ch_banner_heading; ?>">
+                <span class="error-msg" id="error6">Required</span>
+        </div>
+        
+        
+        <div class="form-main2">
+        	<label>Description: </label>
+                <textarea maxlength="500" id="church_des" name="church_des"><?= $church_arr[0]->ch_details; ?></textarea>
+                  <span class="error-msg" id="error7">Required</span>
+                  <div class="clear"></div>
+                <span id="text_count">Characters left: 500</span>
+                <div class="clear"></div>
+                <script type="text/javascript">
+$(document).ready(function(){
+// $("#text_countt").html('500')
+$("#church_des").keyup(function(){
+$("#text_count").text("Characters left: " + (500 - $(this).val().length));
+});
+});
+</script>
+           
+        </div>
+<input type="hidden" name="c_id" value="<?= $church_arr[0]->id; ?>">
+<input type="hidden" name="chLogo" value="ch_logo"> 
+        
+        
+                <div class="post-update"><input type="button" value="Update" class="post-btn" id="gen_setting"> <input type="reset" value="Cancel" class="cancel-btn"></div>
+            
+            
+
+        <div class="spacer"></div>
+        <?php 
+       // pr();
+        //pr($_POST);
+        if(!empty($_GET['sta']) && $_GET['sta'] == 1 ){ ?>
+        <div class="sucess-msg">
+            Data update successfully....
+        </div>
+        <?php } ?>
+     
+
+    </div>
+</form>
+    
+    <div class="church-setting-main">
+		<h3>Please Add Daily Church Service</h3>
+        
+               <!---------------------------------------->
+               <form action="<?= base_url().'logged/church/add_service' ?>" method="POST" name="Service[]" class="church_serv_main">
+                 <div class="church_serv" id="first_elem">
+                     
+                     
+        <div class="form-main-service">
+        	<label> Start Time: </label>
+            <select  class="time-selectbox ch_open" name="ch_open[]">
+               <option value="-1">Select</option>
+                              
+                                 <?=makeOption_time()?>
+                        </select>
+                <span class="error-msg" id="error10">Required</span>
+        </div>
+             <div class="form-main-service">
+        	<label> End Time: </label>
+            <select  class="time-selectbox ch_close"  name="ch_close[]">
+               <option value="-1">Select</option>
+                              
+                                 <?=makeOption_time()?>
+                        </select>
+                <span class="error-msg" id="error11">Required</span>
+        </div>
+        
+        <div class="form-main-desc">
+        	<label>Description: </label>
+                <input type="Text" name="des[]" class="des">
+                <span class="error-msg" id="error12">Required</span>
+        </div>
+        <a href="javascript:void(0);" title="Add More" class="add-more"><img src="images/plus-ch.png" alt="image" width="20" height="20"></a>
+        <a href="javascript:void(0);" title="Remove" class="less-more" style="display: none;"><img src="images/minus-ch.png" alt="image" width="20" height="20"></a>
+        <div class="clear"></div>
+        
+        
+        <input type="hidden" value="<?= $church_arr[0]->id; ?>" name="ch_id">
+        </div>
+               </form> 
+        <!--**************************************************-->
+        
+        <div class="post-update"><input type="button" value="Update" class="post-btn" id="ch_service"> <input type="button" value="Cancel" class="cancel-btn"></div>
+
+        <div class="spacer"></div>
+        <?php 
+        if($_GET['ser'] && $_GET['ser'] == 1 ){
+        ?>
+        <div class="sucess-msg">
+            Data update successfully....
+        </div>
+        <?php } ?>
+        <div class="church-time-table">
+            	<table width="100%" border="0" cellspacing="0" cellpadding="0">
+                    <?php// pr($service_arr); ?>
+  
+    <thead>
+     
+      <th width="15%">Star Time</th>
+      <th width="14%">End Time</th>
+      <th width="54%" align="left">Description</th>
+      <th width="10%">Action</th>
+   </thead>
+   <?php
+       foreach ($service_arr as $val){
+   ?>
+    <tr>
+          <!------------------------------------------->
+    
+    <!--------------------------------------------------->
+        
+        
+        
+     
+      <td><?= $val->c_start_time ?></td>
+      <td><?= $val->c_end_time ?></td>
+      <td class="textleft"><?= $val->c_des ?></td>
+      <td><a class="edit_ser" href="javascript:void(0)" onclick="show_dialog('edt_service<?= $val->id ?>')" id="edt_ <?= $val->id ?>">Edit</a> | <a class="edit_del" href="javascript:void(0)" onclick="show_dialog('ser-delete<?= $val->id ?>');"  id="del_ <?= $val->id ?>">Delete</a></td>
+       
+
+      
+      
+      
+    </tr>
+   
+            <!----------------------pop up for delete------------------------------------> 
+      <div class="lightbox ser-delete<?= $val->id ?>" style="width: 400px; left: 100px;">
+      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="<?=base_url()?>images/close.png" alt="" /></a></div>
+      <div class="top"><div>&nbsp;</div></div>
+      <div class="mid">
+            <div class="heading" style="margin-bottom:0px;">
+                  <div class="left">
+                        <h4>Delete church service</h4>
+                  </div>
+            </div>
+               <div class="shade_box_white" style="padding:8px 0px;">
+               <div style="padding-bottom:10px;">
+               <p class="center-text" style="line-height:23px; color:#494949; font-size:16px; text-align:center;">
+                  Do you want to delete this church service ?
+               </p>
+               </div>
+               <form action="" method="post" id="delfrm">
+                  <input type="hidden" name="i_del_id" id="i_del_id" value="" />
+                 <input name="" type="button" value="Yes" class="post-btn" style="margin-left:105px;" onClick="delete_service(<?= $val->id ?>)"/>
+                 <input name="" type="button" value="No" class="cancel-btn" onclick="hide_dialog()"/>
+               </form>   
+               <div class="clr"></div>
+            </div>
+            
+      </div>
+      <div class="bot"><div>&nbsp;</div></div>
+</div>
+    <!---------------------------------------------->
+    <!----------------------------edit --------------------------------------->
+     <div class="lightbox lightdesign edt_service<?= $val->id ?>" style="width: 650px; left: 100px;">
+      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="<?=base_url()?>images/close.png" alt="" /></a></div>
+      <div class="top"><div>&nbsp;</div></div>
+      <div class="mid">
+            <div class="heading" style="margin-bottom:0px;">
+                  <div class="left">
+                        <h4>Edit church service</h4>
+                  </div>
+            </div>
+               <div class="shade_box_white" style="padding:8px 0px;">
+               <div style="padding-bottom:10px;">
+               <p class="center-text" style="line-height:23px; color:#494949;">
+                  Do you want to edit service  ?
+               </p>
+               </div>
+<!--               <form action="" method="post" id="delfrm">
+                  <input type="hidden" name="i_del_id" id="i_del_id" value="" />
+                 <input name="" type="button" value="Yes" class="btn" style="margin-left:105px;" onClick="edit_service(<?= $val->id ?>)"/>
+                 <input name="" type="button" value="No" class="btn" onclick="hide_dialog()"/>
+               </form>   -->
+<form action="" method="POST" name="edit_Service" id="church_serv_edit<?= $val->id ?>">
+                 <div class="church_serv_edit" id="first_elem_edit">
+                     
+                     
+        <div class="form-main-service_edit">
+        	<label> Start Time: </label>
+            <select  class="time-selectbox ch_open" name="edit_ch_open">
+               <option value="-1">Select</option>
+                              
+                                 <?=makeOption_time( $start_time = '00:00', $i_gap = 15, $val->c_start_time )?>
+                        </select>
+                <span class="error-msg" id="error10">Required</span>
+        </div>
+             <div class="lightform_edit">
+        	<label> End Time: </label>
+            <select  class="time-selectbox ch_close"  name="edit_ch_close">
+               <option value="-1">Select</option>
+                              
+                                 <?=makeOption_time($start_time = '00:00', $i_gap = 15,  $val->c_end_time)?>
+                        </select>
+                <span class="error-msg" id="error11">Required</span>
+        </div>
+        <div class="clear"></div>
+        <div class="form-main-description">
+        	<label>Description: </label>
+                <input type="Text" name="edit_des" class="des" value="<?= $val->c_des ?>">
+                <span class="error-msg" id="error12">Required</span>
+        </div>
+       
+        <div class="clear"></div>
+        
+        
+        <input type="hidden" value="<?= $church_arr[0]->id; ?>" name="ch_id">
+        <input type="hidden" value="<?= $val->id ?>" name="ser_id">
+        <input name="" type="button" value="Yes" class="post-btn" style="margin-left:83px;" onClick="edit_service(<?= $val->id ?>)"/>
+                 <input name="" type="button" value="No" class="cancel-btn" onclick="hide_dialog()"/>
+                
+        </div>
+     </form>
+               <div class="clr"></div>
+            </div>
+            
+      </div>
+      <div class="bot"><div>&nbsp;</div></div>
+</div>
+    <!-------------------------------------------------------------------------->
+       <?php } ?>
+    
+    
+    
+    
+   
+</table>
+            
+            
+   
+            
+        
+        
+        
+        </div>
+
+    </div>
+    
+    <div class="church-setting-main">
+		<h3>General Site Setting</h3>
+        
+                <form method="POST" action="<?= base_url().'logged/church/general_setting' ?>" id="g_setting" >
+        <div class="form-main">
+        	<label>Welcome Heading: </label>
+                <input type="text" maxlength="50" id="wel_hed" name="wel_hed" value="<?= $church_arr[0]->w_heading; ?>">
+                <span class="error-msg" id="error20">Required</span>
+        </div>
+                   
+        
+        <div class="form-main2">
+        	<label>Description: </label>
+                <textarea maxlength="300" id="wel_des" name="wel_des"> <?= $church_arr[0]->w_des; ?></textarea>
+           <span class="error-msg" id="error21">Required</span>
+        </div>
+                    <input type="hidden" value="<?=  $church_arr[0]->id; ?>" name="ch_id">
+                </form>
+        
+        
+                <div class="post-update"><input type="button" value="Update" class="post-btn" id="g_setting_bnt"> <input type="button" value="Cancel" class="cancel-btn"></div>
+            
+              <?php 
+        if($_GET['genS'] && $_GET['genS'] == 1 ){
+        ?>
+        <div class="sucess-msg">
+            Data update successfully....
+        </div>
+        <?php } ?>
+
+        <div class="spacer"></div>
+        
+     
+
+    </div>
+    
+     
+    
+    </div>
+    
+    </div>
+<script type="text/javascript">
+$(document).ready(function(){
+    $('.cancel-btn').click(function(){
+        location.reload();
+    });
+    
+    $('#gen_setting').click(function(){
+        //alert('d')
+        var ch_logo = $('#ch_logo').val();
+        //var ch_profile_img = $('#ch_profile_img').val();
+        var sun_ch_open = $('#sun_ch_open').val();
+        var sun_ch_close = $('#sun_ch_close').val();
+		var mon_ch_open = $('#mon_ch_open').val();
+        var mon_ch_close = $('#mon_ch_close').val();
+		var tues_ch_open = $('#tues_ch_open').val();
+        var tues_ch_close = $('#tues_ch_close').val();
+		var wed_ch_open = $('#wed_ch_open').val();
+        var wed_ch_close = $('#wed_ch_close').val();
+		var thurs_ch_open = $('#thurs_ch_open').val();
+        var thurs_ch_close = $('#thurs_ch_close').val();
+		var fri_ch_open = $('#fri_ch_open').val();
+        var fri_ch_close = $('#fri_ch_close').val();
+		var sat_ch_open = $('#sat_ch_open').val();
+        var sat_ch_close = $('#sat_ch_close').val();
+		
+        var ch_cover = $('#ch_cover').val();
+        var banner_heading = $('#banner_heading').val();
+        var church_des = $('#church_des').val();
+        var ch_logo_format =  ch_logo.substring(ch_logo.lastIndexOf('.') + 1).toLowerCase();
+      //  var ch_profile_img_format =  ch_profile_img.substring(ch_profile_img.lastIndexOf('.') + 1).toLowerCase();
+        var ch_cover_img_format = ch_cover.substring(ch_cover.lastIndexOf('.') + 1).toLowerCase();
+       // var ch_logo_format = ch_logo.match(/^(([a-zA-Z]:)|(\\{2}\w+)\$?)(\\(\w[\w].*))+(.jpeg|.JPEG|.gif|.GIF| .png|.PNG)$/);
+               // alert(ch_logo_format);
+              // alert(ch_logo);
+            if(ch_logo_format != 'jpg' && ch_logo_format != 'png' && ch_logo_format != 'gif' && ch_logo_format != 'bmp' && ch_logo != '' ){
+                //alert('j');
+              $('#error1').css('display','block').html('Please select a valid image file');
+                var flag1 = 0;  
+            }else{
+               $('#error1').css('display','none');
+               var flag1 = 1;
+            }
+            
+            
+//            if(ch_profile_img == ''){
+//                $('#error2').css('display','block').html('Please select a image file');
+//                var flag2 = 0;
+//            }else if(ch_profile_img_format != 'jpg' && ch_profile_img_format != 'png' && ch_profile_img_format != 'gif' && ch_profile_img_format != 'bmp'  ){
+//                //alert('j');
+//              $('#error2').css('display','block').html('Please select a valid image file');
+//                var flag2 = 0;  
+//            }else{
+//               $('#error2').css('display','none');
+//               var flag2 = 1;
+//            }
+            
+            var flagopen = 0;
+			
+            if(sun_ch_open == '-1'){
+                $('#sun_ch_open_error').css('display','block').html('Please select sunday church open time');
+                flagopen++;
+            }else{
+              $('#sun_ch_open_error').css('display','none');
+            }
+            if(sun_ch_close  == '-1'){
+                 $('#sun_ch_close_error').css('display','block').html('Please select sunday church close time');
+                flagopen++;
+                
+            }else if(sun_ch_open >= sun_ch_close  ){
+                 $('#sun_ch_close_error').css('display','block').html('Please enter valid end time');
+                flagopen++;
+            }else{
+                 $('#sun_ch_close_error').css('display','none');
+            }
+			
+			if(mon_ch_open == '-1'){
+                $('#mon_ch_open_error').css('display','block').html('Please select monday church open time');
+                flagopen++;
+            }else{
+              $('#mon_ch_open_error').css('display','none');
+            }
+            if(mon_ch_close == '-1'){
+                 $('#mon_ch_close_error').css('display','block').html('Please select monday church close time');
+                flagopen++;
+                
+            }else if(mon_ch_open >= mon_ch_close ){
+                 $('#mon_ch_close_error').css('display','block').html('Please enter valid end time');
+                flagopen++;
+            }else{
+                 $('#mon_ch_close_error').css('display','none');
+            }
+			
+			if(tues_ch_open == '-1'){
+                $('#tues_ch_open_error').css('display','block').html('Please select tuesday church open time');
+                flagopen++;
+            }else{
+              $('#tues_ch_open_error').css('display','none');
+            }
+            if(tues_ch_close == '-1'){
+                 $('#tues_ch_close_error').css('display','block').html('Please select tuesday church close time');
+                flagopen++;
+                
+            }else if(tues_ch_open >= tues_ch_close){
+                 $('#tues_ch_close_error').css('display','block').html('Please enter valid end time');
+                flagopen++;
+            }else{
+                 $('#tues_ch_close_error').css('display','none');
+            }
+			
+			if(wed_ch_open == '-1'){
+                $('#wed_ch_open_error').css('display','block').html('Please select wednesday church open time');
+                flagopen++;
+            }else{
+              $('#wed_ch_open_error').css('display','none');
+            }
+            if(wed_ch_close == '-1'){
+                 $('#wed_ch_close_error').css('display','block').html('Please select wednesday church close time');
+                flagopen++;
+                
+            }else if(wed_ch_open >= wed_ch_close ){
+                 $('#wed_ch_close_error').css('display','block').html('Please enter valid end time');
+                flagopen++;
+            }else{
+                 $('#wed_ch_close_error').css('display','none');
+            }
+			
+			if(thurs_ch_open == '-1'){
+                $('#thurs_ch_open_error').css('display','block').html('Please select thursday church open time');
+                flagopen++;
+            }else{
+              $('#thurs_ch_open_error').css('display','none');
+            }
+            if(thurs_ch_close   == '-1'){
+                 $('#thurs_ch_close_error').css('display','block').html('Please select thursday church close time');
+                flagopen++;
+                
+            }else if(thurs_ch_open >= thurs_ch_close ){
+                 $('#thurs_ch_close_error').css('display','block').html('Please enter valid end time');
+                flagopen++;
+            }else{
+                 $('#thurs_ch_close_error').css('display','none');
+            }
+			
+			if(fri_ch_open == '-1'){
+                $('#fri_ch_open_error').css('display','block').html('Please select friday church open time');
+                flagopen++;
+            }else{
+              $('#fri_ch_open_error').css('display','none');
+            }
+            if(fri_ch_close   == '-1'){
+                 $('#fri_ch_close_error').css('display','block').html('Please select friday church close time');
+                flagopen++;
+                
+            }else if(fri_ch_open >= fri_ch_close ){
+                 $('#fri_ch_close_error').css('display','block').html('Please enter valid end time');
+                flagopen++;
+            }else{
+                 $('#fri_ch_close_error').css('display','none');
+            }
+			
+			if(sat_ch_open == '-1'){
+                $('#sat_ch_open_error').css('display','block').html('Please select saturday church open time');
+                flagopen++;
+            }else{
+              $('#sat_ch_open_error').css('display','none');
+            }
+            if(sat_ch_close   == '-1'){
+                 $('#sat_ch_close_error').css('display','block').html('Please select saturday church close time');
+                flagopen++;
+                
+            }else if(sat_ch_open >= sat_ch_close ){
+                 $('#sat_ch_close_error').css('display','block').html('Please enter valid end time');
+                flagopen++;
+            }else{
+                 $('#sat_ch_close_error').css('display','none');
+            }
+			
+            //else if()
+            
+             if(ch_cover_img_format != 'jpg' && ch_cover_img_format != 'png' && ch_cover_img_format != 'gif' && ch_cover_img_format != 'bmp' && ch_cover != ''  ){
+                //alert('j');
+              $('#error5').css('display','block').html('Please select a valid image file');
+                var flag5 = 0;  
+            }else{
+               $('#error5').css('display','none');
+               var flag5 = 1;
+            }
+            
+            if(banner_heading == ''){
+                $('#error6').css('display','block').html('Please enter banner heading');
+                var flag6 = 0;
+            }else{
+                $('#error6').css('display','none');
+                var flag6 = 1;
+            }
+            if(church_des == ''){
+                $('#error7').css('display','block').html('Please enter church description');
+                var flag7 = 0;
+            }else{
+                $('#error7').css('display','none');
+                var flag7 = 1;
+            }
+        if(flag1 == 1  && flag5 == 1 && flag6 == 1 && flag7 == 1 && flagopen == 0){
+            $('#gen_setting_form').submit();
+        }
+        
+    });
+    
+   $('.add-more').live('click',function(){
+     
+      // var html_more = '<div class="church_serv"><div class="form-main-service"><label>Start Time:</label><select class="time-selectbox" style="width:150px" id="ch_close" name="ch_close"><option value="-1">Select</option><?=makeOption_time();?></select><span class="error-msg">Required</span></div><div class="form-main-service"><label> End Time: </label><select  class="time-selectbox" style="width:150px" id="ch_close" name="ch_close"><option value="-1">Select</option><?=makeOption_time();?></select><span class="error-msg">Required</span></div><div class="form-main-desc"><label>Description: </label><input type="Text"><span class="error-msg">Required</span> </div><a href="javascript:void(0)" title="Add More" class="add-more"><img src="images/plus.png" alt="image" width="20" height="20"></a><div class="clear"></div></div>';
+       
+    //  $(html_more).insertAfter( ".church_serv" );
+    $( "#first_elem" ).clone().appendTo( ".church_serv_main" );
+    
+     $('.church_serv').last().find('.less-more').show();
+        $('.church_serv').last().find('.add-more').hide();
+        
+   })
+    
+    $('.less-more').live('click',function(){
+     
+    $(this).parent('.church_serv').remove();
+    });
+    
+    $('#g_setting_bnt').click(function(){
+    var wel_hed = $('#wel_hed').val();
+    var wel_des = $('#wel_des').val();
+    if(wel_hed.trim() == ''){
+        $('#error20').css('display','block').html('Please enter heading');
+        var flag20 = 0;
+    }else{
+        $('#error20').css('display','none');
+        var flag20 = 1;
+    }
+    if(wel_des.trim() == ''){
+        $('#error21').css('display','block').html('Please enter welcome description'); 
+        var flag21 = 0;
+    }else{
+        $('#error21').css('display','none');
+        var flag21 = 1;
+    }
+    if(flag20 == 1 && flag21 == 1 ){
+        $('#g_setting').submit();
+    }
+})
+})
+
+$('#ch_service').live('click',function(){
+var ch_open = $('.ch_open').val();
+var ch_close = $('.ch_close').val();
+var des = $('.des').val();
+if(ch_open == '-1'){
+  $('#error10').css('display','block').html('Please select  open time');
+  var flag10 = 0;
+}else{
+   $('#error10').css('display','none');
+   var flag10 = 1;
+}
+if(ch_close == '-1'){
+  $('#error11').css('display','block').html('Please select  close time');
+  var flag11 = 0;
+}else{
+   $('#error11').css('display','none');
+   var flag11 = 1;
+}
+if(des == ''){
+    $('#error12').css('display','block').html('Please enter description');
+    var flag12 = 0;
+}
+else{
+    $('#error12').css('display','none');
+    var flag12 = 1;
+}
+if(flag10 == 1 && flag11 == 1 && flag12 == 1){
+    $('.church_serv_main').submit();
+}
+
+});
+
+
+
+
+</script>
+<!-- /CONTENT SECTION -->
+<div class="clr"></div>
+<!-- FOOTER SECTION -->
+<?php include(APPPATH."views/layouts/church_footer.phtml");?>
+<!-- /FOOTER SECTION -->
+
+<script type="text/javascript">
+/**************************delete service**********************************************************/
+function delete_service(id){
+   // alert('ok')
+   //var id = $(this).attr('id');
+   //alert(id)
+   showBusyScreen();
+   $.ajax({
+       
+       type: 'post',
+       url :'<?= base_url() ?>logged/church/del_service',
+       dataType: 'json',
+       data : {id:id},
+       success: function (data) {
+
+				if(data.success=='true')
+				{	
+				showUIMsg('delete successfully...');
+					location.reload(); 
+				}	
+				else
+				{
+					showUIMsg("something went wrong. Please try again.");
+				}
+				
+			}
+       
+   });
+}
+/****************************************************************************************/
+function edit_service(id){
+ showBusyScreen();
+ var datatosend=$("#church_serv_edit"+id).serialize();
+   $.ajax({
+    
+       type: 'post',
+       url :'<?= base_url() ?>logged/church/edit_service',
+       dataType: 'json',
+       data : datatosend,
+       success: function (data) {
+           // alert(data.success);
+				if(data.success=='true')
+				{	
+				showUIMsg('update successfully...');
+					location.reload(); 
+				}	
+				else
+				{
+					showUIMsg("something went wrong. Please try again.");
+				}
+				
+			}
+       
+   });
+
+
+}
+</script>
+<script type="text/javascript" src="<?= base_url() ?>js/lightbox.js"></script>

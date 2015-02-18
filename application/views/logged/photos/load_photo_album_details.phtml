@@ -1,0 +1,14 @@
+<div class="section01">
+<div class="audio_div">
+      <p class="blue_bold12">
+      <a href="javascript:void(0);"><?=$photo_album_detail_arr['s_name']?> <span style="font-size: 14px;">(<?=$photo_album_detail_arr['total_photo']?> Photos)</span></a></p>
+      <?php $IMG = base_url()."uploads/user_album_photos/".getThumbName($photo_album_detail_arr['s_photo'],'thumb');
+	  		$ALBUM_URL = get_photo_album_detail_url($photo_album_detail_arr['id'], $photo_album_detail_arr['s_name']);
+	   ?>
+      <p>
+      <div class="photo-div"><a href="javascript:void(0);"><div style="background:url(<?=$IMG?>) no-repeat center;width:122px; height:82px; cursor:pointer; "  title="Album" ></div></a></div>
+      <p><?=$photo_album_detail_arr['s_desc']?></p>
+      </p>
+</div>
+<div class="right light_heading" style="border-bottom:none; border-top:none;"><a href="javascript:void(0);" onclick="back_photo_albums()">Back</a></div>
+</div>

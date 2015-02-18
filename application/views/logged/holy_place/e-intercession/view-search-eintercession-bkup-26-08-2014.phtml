@@ -1,0 +1,347 @@
+<?php include(APPPATH."views/layouts/logged_header.phtml");?>
+            <!-- NAVIGATION SECTION -->
+      <?php include(APPPATH."views/layouts/nav.phtml");?>
+      <!-- /NAVIGATION SECTION -->
+      </div>
+</div>
+<!-- /HEADER SECTION -->
+<div class="clr"></div>
+<!-- CONTENT SECTION -->
+<div id="content_section">
+      <div id="container">
+            <div id="mid_content">
+                  <!-- latest news -->
+                  <?php //include(APPPATH ."views/layouts/latest_news.phtml");?>
+                  <!-- /latest news -->
+                  <div class="clr"></div>
+                  <!-- main container -->
+                  <div id="main_container">
+                        
+                        <!--E-Intercession top panel with search start -->
+                        <div class="search-create-prayer-container">
+                        	<h2 class="title"><span class="e_italic">e</span>Intercession</h2>
+                        	<ul class="search-create-intercession-btn-holder">
+                            	<li><a href="javascript:void(0);">Search <span class="e_italic">e</span>Intercession</a></li>
+                                <li id="bck_btn" style="display:none;"><a href="view-search-eintercession.html">Back</a></li>
+                            </ul>
+                            <div class="clr"></div>
+                            
+                            <div class="search-create-form-container">
+                            	<!--search form start -->
+                                 
+                                <div class="frm_box search-create-prayer-box">
+                                		<!--minimize link start -->
+                                     	 <div class="intercession-minimize " title="Minimize">&nbsp;</div>
+                                  		<!--minimize link end -->
+                                    <form id="frm_Search" action="" method="post" enctype="multipart/form-data" onsubmit="return false;">
+                                    
+                                      
+                                      <div class="lable01" style=" width:100px;">Location:</div>
+                                      <div class="field04">
+                                            <input name="txt_location" id="txt_location" type="text" style="width:470px;" />
+                                            <span style="font-weight: normal;font-size: 11px;font-style: italic;">(Note : Please use ',' (comma) between places.) </span> 
+                                      </div>
+                                      <div class="clr"></div>
+                                      
+                                       <div class="lable01" style=" width:100px;">From:</div>
+                                     
+                                      <div class="field04">
+                                            <input style="width:170px;"   type="text"  value="" name="srch_date_to" id="srch_date_to"  readonly="readonly"/>
+                                            <img src="images/icons/cal.png" alt="" onclick="$(this).prev().focus()" style="cursor:pointer; " />
+                                            <script type="text/javascript">
+											  $(document).ready(function(arg) {
+												 
+													
+													
+											$(function(){
+												 var inputDate = $("#srch_date_to");
+												 var changeYearButtons = function() {
+													setTimeout(function() {
+													   $('.NextYrClass').remove();
+													   $('.PrevYrClass').remove();
+													   var widgetHeader = inputDate.datepicker("widget").find(".ui-datepicker-header");
+													   //you can opt to style up these simple buttons tho
+													   var prevYrBtn = $('<button title="PrevYr" class="PrevYrClass"></button>');
+													   prevYrBtn.bind("click", function() {
+														$.datepicker._adjustDate(inputDate, -1, 'Y');
+													   });
+													   var nextYrBtn = $('<button title="NextYr" class="NextYrClass"> </button>');
+													   nextYrBtn.bind("click", function() {
+														$.datepicker._adjustDate(inputDate, +1, 'Y');
+													 
+													   });
+													   prevYrBtn.appendTo(widgetHeader);
+													   nextYrBtn.appendTo(widgetHeader);
+											  
+												  }, 0);
+												 };
+											  
+											  		$("#srch_date_to").datetimepicker({
+															beforeShow: changeYearButtons,
+															onChangeMonthYear: changeYearButtons,
+															dateFormat : 'yy-mm-dd',
+															controlType: 'select',
+															stepMinute: 15
+														   });
+														
+											  });
+													  
+													
+														
+											$(function(){
+												 var inputDate = $("#srch_date_end");
+												 var changeYearButtons = function() {
+													setTimeout(function() {
+													   $('.NextYrClass').remove();
+													   $('.PrevYrClass').remove();
+													   var widgetHeader = inputDate.datepicker("widget").find(".ui-datepicker-header");
+													   //you can opt to style up these simple buttons tho
+													   var prevYrBtn = $('<button title="PrevYr" class="PrevYrClass"></button>');
+													   prevYrBtn.bind("click", function() {
+														$.datepicker._adjustDate(inputDate, -1, 'Y');
+													   });
+													   var nextYrBtn = $('<button title="NextYr" class="NextYrClass"></button>');
+													   nextYrBtn.bind("click", function() {
+														$.datepicker._adjustDate(inputDate, +1, 'Y');
+													 
+													   });
+													   prevYrBtn.appendTo(widgetHeader);
+													   nextYrBtn.appendTo(widgetHeader);
+											  
+												  }, 0);
+												 };
+											  
+											  		$("#srch_date_end").datetimepicker({
+															beforeShow: changeYearButtons,
+															onChangeMonthYear: changeYearButtons,
+															dateFormat : 'yy-mm-dd',
+															controlType: 'select',
+															stepMinute: 15
+														   });
+														
+											  });
+				  
+											  });
+										  </script>
+                                      </div>
+                                      
+                                
+                                      
+                                      <div class="lable01" style=" width:49px;">To:</div>
+                                     
+                                      <div class="field04">
+                                            <input style="width:170px;"   type="text"  value="" name="srch_date_end" id="srch_date_end"  readonly="readonly"/>
+                                            <img src="images/icons/cal.png" alt="" onclick="$(this).prev().focus()" style="cursor:pointer; " />
+                                           
+                                      </div>
+                                
+                                      <div class="clr"></div>
+                                      
+                                      <div class="lable01" style=" width:100px;">&nbsp;</div>
+                                      <div class="field04" style="margin-left: 422px;">
+                                      		<input type="hidden" id="search_basic" name="search_basic" value="Y"/>
+                                            <input name="" type="submit" value="Search"  class="blue-small-button"/>
+                                      </div>
+                                      <div class="clr"></div>
+                                	</form>
+                                </div>
+                                <!--search form end -->
+                            </div>
+                        </div>
+                        <!--E-Intercession top panel with search end -->
+                        
+                        
+                        <DIV id="req_content_div"><?=$prayer_req_ajax_content?></DIV>
+                        
+                        
+                        
+                  </div>
+                  <!-- /main container -->
+                  <div class="clr"></div>
+                   <?php if($no_of_result  == 0):?>
+                        <div class="shade_box_01" style="padding-top:5px;" id="no_tweets"><div  class="shade_norecords" style="width:520px;;"><p class="blue_bold12">No e-Intercession.</p></div></div>
+                    <?php endif;?>	
+                   
+                    
+                    <?php if($no_of_result > $home_pagination_per_page): ?>
+                            
+                            <div class="view_more" id="show_more_div"><a href="javascript:void(0);" id="show_more_tweets_link" page_value="<?=$current_page_1?>" onclick="show_more_records($(this).attr('page_value'))">[view more] </a> </div>
+                    <?php endif; ?>
+                  
+            </div>
+      </div>
+      <div class="clr"></div>
+</div>
+<!-- /CONTENT SECTION -->
+<div class="clr"></div>
+<!-- FOOTER SECTION -->
+<?php include(APPPATH."views/layouts/footer.phtml");?>
+<?php include(APPPATH."views/logged/blocks/common_popup.phtml");?>
+<!-- /FOOTER SECTION -->
+
+<script type="text/javascript">
+
+var ajax_req_feeds = null;
+function show_more_records(page) {
+	
+	if(ajax_req_feeds!=null) {
+		ajax_req_feeds.abort();
+	}
+	showUILoader_nodialog();
+	ajax_req_feeds = $.ajax({
+		type: 'get',
+		url: base_url+'logged/e_intercession/all_request_ajax_pagination/'+page,
+		dataType: 'json',
+
+		success: function (data, status) {
+
+			hideUILoader_nodialog();
+			if(data.html!='') {
+				
+				//alert(data.cur_page+'dfdf');
+				$('#req_content_div').append(data.html);
+				$('#show_more_tweets_link').attr('page_value', data.cur_page);
+				$('#show_more_tweets_link').attr('onclick','');
+				$('#show_more_tweets_link').attr('onclick','show_more_records('+data.cur_page+')');
+			}
+			else {
+				$('#req_content_div').append('<div class="view_more" style="text-align: center;"><p class="blue_bold12" style="font-size:14px;">No More e-Intercession.</p></div>');
+				$('#show_more_div').remove();
+			}
+			//alert(data.view_more);
+            
+            if(data.view_more==false)
+            {
+               
+                $('#req_content_div').append('<div class="view_more" style="text-align: center;" ><p class="blue_bold12" style="font-size:14px;">No More e-Intercession.</p></div>');
+                $('#show_more_div').remove();
+            }
+		
+
+		}	// end of success function...
+	});
+}
+
+$(document).ready(function(arg) {
+	
+
+ $('#frm_Search').submit(function(){ 
+			
+		 // var i_user_id = $('#i_user_id').val();			
+		  var datatosend=$("#frm_Search").serialize();
+		   showUILoader_nodialog('<img src="'+base_url+'images/loading_big.gif" width="50"/> ');
+			  $.ajax({
+					 type: "POST",
+					 url: base_url+'logged/e_intercession/all_request_ajax_pagination/',
+					 data: datatosend,
+					 dataType : 'json',
+					 success: function(data){
+						//$('#frm_Search')[0].reset();
+						$('#bck_btn').show();
+						if(data.html!='') {
+							//alert( data.cur_page+' posting');
+							$('#show_more_div').remove();
+							$('#req_content_div').html(data.html);
+							$('#show_more_tweets_link').attr('page_value', data.cur_page);
+							$('#show_more_tweets_link').attr('onclick','');
+							$('#show_more_tweets_link').attr('onclick','show_more_records('+data.cur_page+')');
+						}
+						else {
+							$('#req_content_div').html('<div class="view_more" style="text-align: center;" ><p class="blue_bold12" style="font-size:14px;">No More e-Intercession.</p></div>');
+							$('#show_more_div').remove();
+						}
+						
+						
+						//alert(data.no_of_result- data.current_page);
+						if(data.no_of_result == 0){
+							$('#show_more_div').remove();
+						}
+						else if(data.view_more==false )
+						{
+							//alert(1);
+							$('#req_content_div').append('<div class="view_more" style="text-align: center;"><p class="blue_bold12" style="font-size:14px;">No More e-Intercession.</p></div>');
+							$('#show_more_div').remove();
+						}
+						else if((data.no_of_result - data.cur_page != 0)){
+							//alert(2);
+							
+							$('#show_more_div').remove();
+							$('#mid_container').append('<div class="view_more" id="show_more_div"><a href="javascript:void(0);" id="show_more_tweets_link" page_value="'+data.cur_page+'" onclick="show_more_records('+data.cur_page+')">[view more] </a> </div>');
+						}
+						
+						hideUILoader_nodialog();
+					 }
+			   });	 
+	
+	});
+});
+ 
+</script>
+
+<script>
+$(function() {
+/*var m= "2220 AUGY,2220 BAZOCHES-SUR-VESLES,2220 BRAINE,2220 BRENELLE";
+alert(m.replace(/[,]/g,"<br>"));*/
+
+$("#txt_location").autocomplete("<?php echo base_url();?>logged/prayer_wall/send_cities", {
+    width: 310,
+    selectFirst: true,
+    minChars: 3,
+    multiple: false,
+	multipleSeparator: "\n",
+	max: null,
+    //matchContains: false,
+    formatItem: formatItem
+   });
+   
+  
+ 
+   
+});
+	
+function formatItem(row) 
+{//console.log(row);
+ //var n=row[0].replace(/[,]/g,"\n"); console.log(n);	
+ if(row[0]!="No match found")
+  return  "<span style='font-size:11px; font-weight:normal; margin:0px; padding: 3px 5px ;cursor: pointer; display:block;'>" + row[0]+"</span>";
+ else
+  return " (<span style='font-size:11px;'>" +row[0]+"</span>)";
+}
+	
+var carriage_count = 0;
+function restrict_carrige(e)
+{
+	/*//if(e.keyCode == 13)
+	{
+		$.ajax({
+			type: 'post',
+			url: base_url+'logged/prayer_wall/getCarriageCount',
+			data: {'str':$('#ta_desc').val()},
+			dataType: 'json',
+	
+			success: function (data, status) {
+				
+					if(data.count > 1){
+						return false;
+					}
+				
+				}	// end of success function...
+		});
+	}*/
+	//alert($('#ta_desc').val().replace(/\r/g,"\r").replace(/\n/g,"\n"));
+
+	if(e.keyCode == 13){
+		carriage_count++;
+		console.log(carriage_count);
+	}
+	/*if(e.keyCode == 8){
+		carriage_count--;
+	}*/
+	if(e.keyCode == 13 && carriage_count >5){
+		return false;
+		//e.preventDefault();
+	}
+}
+
+
+</script>

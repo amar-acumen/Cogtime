@@ -1,0 +1,620 @@
+
+
+<table width="100%" border="0" cellspacing="0" cellpadding="0" class="admin-table">
+<?php if($type == 'wall'){?>
+      <tr>
+          <th align="left" valign="middle" height="30" width="50">SL</th>
+           <th align="left" valign="middle" height="30" width="600">Comments</th>
+        <th align="left" valign="middle" height="30" width="300">Comment by</th>
+        <th align="left" valign="middle" height="30" width="600">Posts</th>
+         
+<!--        <th align="left" valign="middle" height="30" width="600">Post by</th>-->
+       
+        <!--<th align="left" valign="middle" height="30" width="100">Name</th>
+        <th align="left" valign="middle" height="30" width="45">Gender</th>
+        <th align="left" valign="middle" height="30" width="150">Country, State &amp; City</th>-->
+        <th align="left" valign="middle" height="30" width="180">Location</th>
+        <th align="left" valign="middle" height="30" width="400">IP Address</th>
+        <th align="left" valign="middle" height="30" width="150">Date posted on</th>
+        <th align="center" valign="middle" height="30" width="80" class="last">Actions</th>
+      </tr>
+      <?php
+            //echo "current page : ".$current_page." ";
+            $now_page = round(($current_page/$pagination_per_page)+1);
+         //pr($info_arr,1);
+            if(count($info_arr))
+			{
+                 $j= $now_page - 1;
+                if($now_page > 1){  $i = $now_page+(9*$j); } else {$i=1;}
+            foreach($info_arr as $info)    :
+			$data_arr = json_decode($info['data']);
+                 /*$id             = $info['id'];
+                $date_joined    = getShortDate($info['dt_created_on'],3);  
+                $name           = $info['s_first_name'] .' '.$info['s_last_name'];
+                $gender_db      = $info['e_gender'];
+                
+                /*$address        = (isset($info['s_country']))? $info['s_country']: '';
+                $address       .= (isset($info['s_state']))? ', '.$info['s_state']: '';
+                $address       .= (isset($info['s_city']))? ', '.$info['s_city']: '';
+                */
+                
+               /* $add=array();
+                if(!empty($info['s_country']))    
+                    $add['country']=$info['s_country'];
+                if(!empty($info['s_state']))
+                    $add['state']=$info['s_state'];
+                if(!empty($info['s_city']))
+                    $add['city']=$info['s_city'];
+                
+                $address = implode(', ',$add);
+                
+                $email          = $info['s_email'];
+                $mobile         = $info['s_mobile'];
+                $status         = ($info['i_status']==1)? 'Disable' : 'Enable';
+                $gender         = ($gender_db=='M' || $gender_db=='m')? 'Male' : 'Female';
+                $is_minister    = ($info['is_minister']==0)? 'SET AS MINISTER' : 'UNSET MINISTER';*/
+
+        ?>
+      <tr>
+          <td align="left" valign="top"><?php echo $i; $i++; ?></td>
+          <td align="left" valign="top"><?php echo $info['s_contents']; ?></td>
+                <td align="left" valign="top"><?php echo get_username_by_id($info['i_user_id']); ?></td>
+        <td align="left" valign="top">
+           
+		<div>
+		<p><?=$data_arr->message?></p>
+		<?php if(!empty($data_arr->photo) && count($data_arr->photo)){ 
+			   			foreach($data_arr->photo as $key=>$photo_val):
+							
+							$IMG = base_url()."uploads/wall_photos/".getThumbName($photo_val,'thumb');
+			   ?>
+			   <img src="<?=$IMG?>" alt="image">
+		<?php endforeach;}?>			 
+			<?php if(!empty($data_arr->video) && count($data_arr->video)){ ?>
+			<?php
+			$url = $data_arr->video->url;
+preg_match(
+        '/[\\?\\&]v=([^\\?\\&]+)/',
+        $url,
+        $matches
+    );
+$id = $matches[1];
+ 
+$width = '320';
+$height = '240';
+echo '<object width="' . $width . '" height="' . $height . '"><param name="movie" value="http://www.youtube.com/v/' . $id . '&amp;hl=en_US&amp;fs=1?rel=0"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/' . $id . '&amp;hl=en_US&amp;fs=1?rel=0" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="' . $width . '" height="' . $height . '"></embed></object>';?>
+			    <?php /*<div class="video-image">
+                    <div  class="cogtime-video" id="myvideo_first_thumb_<?=$info['id']?>" style="background:url('') no-repeat center;;width:329px; height:212px;" ></div>
+                    <div id="myvideo_big_thumb_1_<?=$info['id']?>" media_id="<?=$info['id']?>"></div> 
+                </div>*/?>
+			<?php }	?>	
+</div>			
+		</td>
+<!--                <td align="left" valign="top"><?php //echo get_username_by_id($info['i_owner_id']); ?></td>-->
+                
+        <?php /*<td align="left" valign="top"><?php echo $name;?></td>
+        <td align="left" valign="top"><?php echo $gender;?></td>
+        <td align="left" valign="top"><?php echo $address;?></td>
+        <td align="left" valign="top"><?php echo $email;?></td>*/?>
+        <td align="left" valign="top">
+		<?php
+		if(isset($data_arr->wall_owner_id))
+		{
+		echo get_username_by_id($data_arr->wall_owner_id)."'s Wall";
+		}
+		else{
+		echo "Own Wall";
+		}
+		?>
+		</td>
+                <td align="center" valign="middle"><?= $info['u_ip'] ?></td>
+		<td align="center" valign="middle">
+		<?=getShortDateWithTime($info['dt_created_on'],7)?>
+		</td>
+        <td align="center" valign="middle" class="last">
+       <input name="" title="Delete" type="button" style="" class="delete-button"  value="" onclick="return del_com(<?php echo $info['id'];?>,'wall');"/>
+       <!----------------------------ip status checking & put ip-block or ip-unblock button added on 18-12-2014----------------------------------------->
+               <?php 
+             $query = $this->db->get_where('cg_user_ip', array('u_id' => $info['i_user_id'],'u_ip'=>$info['u_ip']));
+             foreach ($query->result() as $row)
+                {
+                    $status = $row->is_status;
+                }
+             ?>
+                      <?php
+                      if($status == 0){
+                      ?>
+       <input name="" title="Ip Block" type="button" style="" class="ip-button"  value="IP Block" onclick="return block_ip(<?php echo $info['i_user_id'];?>,'<?=$info['u_ip'] ?>');"/>
+                      <?php } elseif($status == 1){ ?>
+       <input name="" title="Ip Unblock" type="button" style="" class="unbip-button"  value="IP Unblock" onclick="return unblock_ip(<?php echo $info['i_user_id'];?>,'<?=$info['u_ip'] ?>');"/>
+                      <?php } ?>
+       <!----------------------------------------->
+        </td>
+      </tr>
+      <?php
+      
+      endforeach;
+      ?>
+    <?php }else{
+	?>
+	 <tr>
+       <td style="text-align:center;" height="80" colspan="20">No data available!!!</td>
+     </tr>
+	
+	<?php
+	}
+	
+}else if($type == 'ring'){?>
+<tr>
+      <th align="left" valign="middle" height="30" width="50">SL</th>  
+    <th align="left" valign="middle" height="30" width="200">Comment</th>
+        <th align="left" valign="middle" height="30" width="200">Comment by</th>
+    <th align="left" valign="middle" height="30" width="180">Post Title</th>
+        <!--<th align="left" valign="middle" height="30" width="100">Name</th>
+        <th align="left" valign="middle" height="30" width="45">Gender</th>-->
+        
+        <th align="left" valign="middle" height="30" width="150">Location</th>
+        <th align="left" valign="middle" height="30" width="400">IP Address</th>
+        
+        <th align="left" valign="middle" height="30" width="150">Date posted on</th>
+        <th align="center" valign="middle" height="30" width="80" class="last">Actions</th>
+       
+      </tr>
+      <?php
+            //echo "current page : ".$current_page." ";
+            $now_page = round(($current_page/$pagination_per_page)+1); 
+           // echo "in admin_members_ajax.phtml : now_page = ".$now_page;
+        // pr($info_arr);
+            if(count($info_arr))
+			{
+                  $j= $now_page - 1;
+                if($now_page > 1){  $i = $now_page+(9*$j); } else {$i=1;}
+            foreach($info_arr as $info)    :
+			//$data_arr = json_decode($info['data']);
+                 /*$id             = $info['id'];
+                $date_joined    = getShortDate($info['dt_created_on'],3);  
+                $name           = $info['s_first_name'] .' '.$info['s_last_name'];
+                $gender_db      = $info['e_gender'];
+                
+                /*$address        = (isset($info['s_country']))? $info['s_country']: '';
+                $address       .= (isset($info['s_state']))? ', '.$info['s_state']: '';
+                $address       .= (isset($info['s_city']))? ', '.$info['s_city']: '';
+                */
+                
+               /* $add=array();
+                if(!empty($info['s_country']))    
+                    $add['country']=$info['s_country'];
+                if(!empty($info['s_state']))
+                    $add['state']=$info['s_state'];
+                if(!empty($info['s_city']))
+                    $add['city']=$info['s_city'];
+                
+                $address = implode(', ',$add);
+                
+                $email          = $info['s_email'];
+                $mobile         = $info['s_mobile'];
+                $status         = ($info['i_status']==1)? 'Disable' : 'Enable';
+                $gender         = ($gender_db=='M' || $gender_db=='m')? 'Male' : 'Female';
+                $is_minister    = ($info['is_minister']==0)? 'SET AS MINISTER' : 'UNSET MINISTER';*/
+
+        ?>
+      <tr>
+          <td align="left" valign="top"><?php echo $i; $i++; ?></td>
+          <td align="left" valign="top"><?php 
+        $string = word_limiter($info['s_contents'], 10);
+        echo $string;?></td>
+        <td align="left" valign="top">
+                      <?php echo get_username_by_id($info['i_user_id']); ?>
+                </td>
+        <td align="left" valign="top">
+		<?=$info['s_post_title']?>
+		</td>
+        <?php /*<td align="left" valign="top"><?php echo $name;?></td>
+        <td align="left" valign="top"><?php echo $gender;?></td>
+        <td align="left" valign="top"><?php echo $address;?></td>*/?>
+        
+      
+        <td align="left" valign="top">
+		<?php
+		//echo get_ring_name_by_id($info['i_ring_id']);
+                echo $info['s_ring_name'];
+		?>
+		</td>
+                <td align="center" valign="middle"><?= $info['u_ip'] ?></td>
+                
+		<td align="center" valign="middle">
+		<?=getShortDateWithTime($info['dt_created_on'],7)?>
+		</td>
+        <td align="center" valign="middle" class="last">
+       <input name="" title="Delete" type="button" style="" class="delete-button"  value="" onclick="return del_com(<?php echo $info['id'];?>,'ring');"/>
+        </td>
+      </tr>
+      <?php
+      
+      endforeach;
+      ?>
+    <?php }else{
+	?>
+	 <tr>
+       <td style="text-align:center;" height="80" colspan="20">No data available!!!</td>
+     </tr>
+<?php }} else if($type == 'blog')
+{?>
+
+<tr>    
+    <th align="left" valign="middle" height="30" width="50">SL</th>
+        <th align="left" valign="middle" height="30" width="150">comment</th>
+        <!--<th align="left" valign="middle" height="30" width="100">Name</th>
+        <th align="left" valign="middle" height="30" width="45">Gender</th>-->
+        <th align="left" valign="middle" height="30" width="200">comment by</th>
+       
+         <th align="left" valign="middle" height="30" width="150">Post title</th>
+          <th align="left" valign="middle" height="30" width="600">Post Description</th>
+          <th align="left" valign="middle" height="30" width="400">IP Address</th>
+        <th align="left" valign="middle" height="30" width="150">Date posted on</th>
+        <th align="center" valign="middle" height="30" width="80" class="last">Actions</th>
+      </tr>
+      <?php
+            //echo "current page : ".$current_page." ";
+            $now_page = round(($current_page/$pagination_per_page)+1); 
+           // echo "in admin_members_ajax.phtml : now_page = ".$now_page;
+          // pr($info_arr);
+            if(count($info_arr))
+			{
+                 $j= $now_page - 1;
+                if($now_page > 1){  $i = $now_page+(9*$j); } else {$i=1;}
+            foreach($info_arr as $info)    :
+			//$data_arr = json_decode($info['data']);
+                 /*$id             = $info['id'];
+                $date_joined    = getShortDate($info['dt_created_on'],3);  
+                $name           = $info['s_first_name'] .' '.$info['s_last_name'];
+                $gender_db      = $info['e_gender'];
+                
+                /*$address        = (isset($info['s_country']))? $info['s_country']: '';
+                $address       .= (isset($info['s_state']))? ', '.$info['s_state']: '';
+                $address       .= (isset($info['s_city']))? ', '.$info['s_city']: '';
+                */
+                
+               /* $add=array();
+                if(!empty($info['s_country']))    
+                    $add['country']=$info['s_country'];
+                if(!empty($info['s_state']))
+                    $add['state']=$info['s_state'];
+                if(!empty($info['s_city']))
+                    $add['city']=$info['s_city'];
+                
+                $address = implode(', ',$add);
+                
+                $email          = $info['s_email'];
+                $mobile         = $info['s_mobile'];
+                $status         = ($info['i_status']==1)? 'Disable' : 'Enable';
+                $gender         = ($gender_db=='M' || $gender_db=='m')? 'Male' : 'Female';
+                $is_minister    = ($info['is_minister']==0)? 'SET AS MINISTER' : 'UNSET MINISTER';*/
+    // echo $info_arr["total_comments"] =    $this->get_total_comments_by_blog_id($info_arr['i_blog_id']);
+        ?>
+      <tr>
+           <td align="left" valign="top"><?php echo $i; $i++; ?></td>
+         <td align="left" valign="top">
+		<?=$info['s_comments']?>
+		</td>
+        <?php /*<td align="left" valign="top"><?php echo $name;?></td>
+        <td align="left" valign="top"><?php echo $gender;?></td>
+        <td align="left" valign="top"><?php echo $address;?></td>*/?>
+        <td align="left" valign="top"><?php echo get_username_by_id($info['i_user_id']); ?></td>
+        <td align="left" valign="top">
+		<?php
+		echo $info['s_post_title'];
+                //echo get_blog_comments_by_id($info['i_blog_id']);
+		?>
+		</td>
+                <td align="left" valign="top"><?= $info['s_post_description'] ?></td>
+                <td align="center" valign="middle"><?= $info['u_ip'] ?></td>
+		<td align="center" valign="middle">
+		<?=getShortDateWithTime($info['dt_posted_date'],7)?>
+		</td>
+        <td align="center" valign="middle" class="last">
+       <input name="" title="Delete" type="button" style="" class="delete-button"  value="" onclick="return del_com(<?php echo $info['id'];?>,'ring');"/>
+        </td>
+      </tr>
+      <?php
+      
+      endforeach;
+      ?>
+    <?php }else{
+	?>
+	 <tr>
+       <td style="text-align:center;" height="80" colspan="20">No data available!!!</td>
+     </tr>
+<?php }} else if($type == 'media'){?>
+      <tr>
+          <th align="left" valign="middle" height="30" width="50">SL</th>
+        <th align="left" valign="middle" height="30" width="600">Comment</th>
+        <th align="left" valign="middle" height="30" width="200">Commented By</th>
+        <th align="left" valign="middle" height="30" width="600">Media type</th>
+        <!--<th align="left" valign="middle" height="30" width="100">Name</th>
+        <th align="left" valign="middle" height="30" width="45">Gender</th>
+        <th align="left" valign="middle" height="30" width="150">Country, State &amp; City</th>
+        <th align="left" valign="middle" height="30" width="180">Location</th>-->
+        <th align="left" valign="middle" height="30" width="400">IP Address</th>
+        <th align="left" valign="middle" height="30" width="150">Date posted on</th>
+        <th align="center" valign="middle" height="30" width="80" class="last">Actions</th>
+      </tr>
+      <?php
+            //echo "current page : ".$current_page." ";
+            $now_page = round(($current_page/$pagination_per_page)+1); 
+           // echo "in admin_members_ajax.phtml : now_page = ".$now_page;
+         // pr($info_arr,1);
+            if(count($info_arr))
+			{
+                 $j= $now_page - 1;
+                if($now_page > 1){  $i = $now_page+(9*$j); } else {$i=1;}
+            foreach($info_arr as $info)    :
+			//$data_arr = json_decode($info['data']);
+                 /*$id             = $info['id'];
+                $date_joined    = getShortDate($info['dt_created_on'],3);  
+                $name           = $info['s_first_name'] .' '.$info['s_last_name'];
+                $gender_db      = $info['e_gender'];
+                
+                /*$address        = (isset($info['s_country']))? $info['s_country']: '';
+                $address       .= (isset($info['s_state']))? ', '.$info['s_state']: '';
+                $address       .= (isset($info['s_city']))? ', '.$info['s_city']: '';
+                */
+                
+               /* $add=array();
+                if(!empty($info['s_country']))    
+                    $add['country']=$info['s_country'];
+                if(!empty($info['s_state']))
+                    $add['state']=$info['s_state'];
+                if(!empty($info['s_city']))
+                    $add['city']=$info['s_city'];
+                
+                $address = implode(', ',$add);
+                
+                $email          = $info['s_email'];
+                $mobile         = $info['s_mobile'];
+                $status         = ($info['i_status']==1)? 'Disable' : 'Enable';
+                $gender         = ($gender_db=='M' || $gender_db=='m')? 'Male' : 'Female';
+                $is_minister    = ($info['is_minister']==0)? 'SET AS MINISTER' : 'UNSET MINISTER';*/
+
+        ?>
+      <tr>
+          <td align="left" valign="top"><?php echo $i; $i++; ?></td>
+          <td align="center" valign="middle"><?= $info['s_contents'] ?></td>
+          <td align="center" valign="middle"><?= get_username_by_id($info['i_user_id']);?></td>
+          <td align="center" valign="middle"><?php if($info['s_media_type']=="photo"){?><a href="javascript:void(0)" onclick="return show_media('<?=$info['i_media_id'] ?>','photo')">Image <?php } ?></a><?php if($info['s_media_type']=="audio"){ ?><a href="javascript:void(0)" onclick="return show_media('<?=$info['i_media_id'] ?>','audio')">Audio<?php } ?></a><?php if($info['s_media_type']=="video"){ ?><a href="javascript:void(0)" onclick="return show_media('<?=$info['i_media_id'] ?>','video')">Video</a><?php } ?></td>
+        <?php /*<td align="left" valign="top"><?php echo $name;?></td>
+        <td align="left" valign="top"><?php echo $gender;?></td>
+        <td align="left" valign="top"><?php echo $address;?></td>
+        <td align="left" valign="top"><?php echo $email;?></td>*/?>
+       <!-- <td align="left" valign="top">
+		<?php
+	/*	if(isset($data_arr->wall_owner_id))
+		{
+		echo get_username_by_id($data_arr->wall_owner_id)."'s Wall";
+		}
+		else{
+		echo "Own Wall";
+		}*/
+		?>
+		</td>-->
+          <td align="center" valign="middle"><?= $info['u_ip'] ?></td>
+		<td align="center" valign="middle">
+		<?=getShortDateWithTime($info['dt_created_on'],7)?>
+		</td>
+        <td align="center" valign="middle" class="last">
+       <input name="" title="Delete" type="button" style="" class="delete-button"  value="" onclick="return del_com(<?php echo $info['id'];?>,'media');"/>
+        </td>
+      </tr>
+      <?php
+      
+      endforeach;
+      ?>
+    <?php }else{
+	?>
+	 <tr>
+       <td style="text-align:center;" height="80" colspan="20">No data available!!!</td>
+     </tr>
+	
+	<?php }} else if($type == 'event'){?>
+      <tr>
+           <th align="left" valign="middle" height="30" width="50">SL</th>
+        <th align="left" valign="middle" height="30" width="600">Comment</th>
+        <!--<th align="left" valign="middle" height="30" width="100">Name</th>
+        <th align="left" valign="middle" height="30" width="45">Gender</th>
+        <th align="left" valign="middle" height="30" width="150">Country, State &amp; City</th>-->
+        <th align="left" valign="middle" height="30" width="180">Commented by</th>
+        <th align="left" valign="middle" height="30" width="150">Event </th>
+        <th align="left" valign="middle" height="30" width="150">Event Location</th>
+        <th align="left" valign="middle" height="30" width="400">IP Address</th>
+        <th align="left" valign="middle" height="30" width="180">Comment posted Date</th>
+        <th align="center" valign="middle" height="30" width="80" class="last">Actions</th>
+      </tr>
+      <?php
+      //die('d');
+            //echo "current page : ".$current_page." ";
+            $now_page = round(($current_page/$pagination_per_page)+1); 
+           // echo "in admin_members_ajax.phtml : now_page = ".$now_page;
+         //pr($info_arr,1);
+            if(count($info_arr))
+			{
+                 $j= $now_page - 1;
+                if($now_page > 1){  $i = $now_page+(9*$j); } else {$i=1;}
+            foreach($info_arr as $info)    :
+		
+                 /*$id             = $info['id'];
+                $date_joined    = getShortDate($info['dt_created_on'],3);  
+                $name           = $info['s_first_name'] .' '.$info['s_last_name'];
+                $gender_db      = $info['e_gender'];
+                
+                /*$address        = (isset($info['s_country']))? $info['s_country']: '';
+                $address       .= (isset($info['s_state']))? ', '.$info['s_state']: '';
+                $address       .= (isset($info['s_city']))? ', '.$info['s_city']: '';
+                */
+                
+               /* $add=array();
+                if(!empty($info['s_country']))    
+                    $add['country']=$info['s_country'];
+                if(!empty($info['s_state']))
+                    $add['state']=$info['s_state'];
+                if(!empty($info['s_city']))
+                    $add['city']=$info['s_city'];
+                
+                $address = implode(', ',$add);
+                
+                $email          = $info['s_email'];
+                $mobile         = $info['s_mobile'];
+                $status         = ($info['i_status']==1)? 'Disable' : 'Enable';
+                $gender         = ($gender_db=='M' || $gender_db=='m')? 'Male' : 'Female';
+                $is_minister    = ($info['is_minister']==0)? 'SET AS MINISTER' : 'UNSET MINISTER';*/
+
+        ?>
+      <tr>
+           <td align="left" valign="top"><?php echo $i; $i++; ?></td>
+        <td align="left" valign="top">
+		
+		<p><?=$info['s_contents']?></p>
+		
+		</td>
+        <?php /*<td align="left" valign="top"><?php echo $name;?></td>
+        <td align="left" valign="top"><?php echo $gender;?></td>
+        <td align="left" valign="top"><?php echo $address;?></td>
+        <td align="left" valign="top"><?php echo $email;?></td>*/?>
+      <td align="left" valign="top">
+		<?=get_username_by_id($info['i_user_id'])?>
+		</td>
+		<td align="center" valign="middle">
+		<?=$info['s_title']?>
+		</td>
+                <td align="center" valign="middle">
+		<?=$info['s_address']?>
+		</td>
+                <td align="center" valign="middle"><?= $info['u_ip'] ?></td>
+                <td align="center" valign="middle">
+		<?=getShortDateWithTime($info['dt_created_on'],7)?>
+		</td>
+        <td align="center" valign="middle" class="last">
+       <input name="" title="Delete" type="button" style="" class="delete-button"  value="" onclick="return del_com(<?php echo $info['id'];?>,'event');"/>
+        </td>
+      </tr>
+      <?php
+      
+      endforeach;
+      ?>
+    <?php }else{
+	?>
+	 <tr>
+       <td style="text-align:center;" height="80" colspan="20">No data available!!!</td>
+     </tr>
+	
+	<?php
+	}}
+        else if($type == 'prayer_wall'){?>
+      <tr>
+          <th align="left" valign="middle" height="30" width="50">SL</th>
+          <th align="left" valign="middle" height="30" width="600">Comment</th>
+        <th align="left" valign="middle" height="30" width="200">Commented by</th>
+        <!--<th align="left" valign="middle" height="30" width="100">Name</th>
+        <th align="left" valign="middle" height="30" width="45">Gender</th>
+        <th align="left" valign="middle" height="30" width="150">Country, State &amp; City</th>-->
+        <th align="left" valign="middle" height="30" width="180">Prayer Request Details</th>
+        <th align="left" valign="middle" height="30" width="400">IP Address</th>
+<!--         <th align="left" valign="middle" height="30" width="150">No. of commitment</th>-->
+        <th align="left" valign="middle" height="30" width="150">Date posted on</th>
+<!--        <th align="left" valign="middle" height="30" width="150">Start date</th>
+        <th align="left" valign="middle" height="30" width="150">End Date</th>-->
+        <th align="center" valign="middle" height="30" width="80" class="last">Actions</th>
+      </tr>
+      <?php
+            //echo "current page : ".$current_page." ";
+            $now_page = round(($current_page/$pagination_per_page)+1); 
+           // echo "in admin_members_ajax.phtml : now_page = ".$now_page;
+        // pr($info_arr,1);
+            if(count($info_arr))
+			{
+                $j= $now_page - 1;
+                if($now_page > 1){  $i = $now_page+(9*$j); } else {$i=1;}
+            foreach($info_arr as $info)    :
+		
+                 /*$id             = $info['id'];
+                $date_joined    = getShortDate($info['dt_created_on'],3);  
+                $name           = $info['s_first_name'] .' '.$info['s_last_name'];
+                $gender_db      = $info['e_gender'];
+                
+                /*$address        = (isset($info['s_country']))? $info['s_country']: '';
+                $address       .= (isset($info['s_state']))? ', '.$info['s_state']: '';
+                $address       .= (isset($info['s_city']))? ', '.$info['s_city']: '';
+                */
+                
+               /* $add=array();
+                if(!empty($info['s_country']))    
+                    $add['country']=$info['s_country'];
+                if(!empty($info['s_state']))
+                    $add['state']=$info['s_state'];
+                if(!empty($info['s_city']))
+                    $add['city']=$info['s_city'];
+                
+                $address = implode(', ',$add);
+                
+                $email          = $info['s_email'];
+                $mobile         = $info['s_mobile'];
+                $status         = ($info['i_status']==1)? 'Disable' : 'Enable';
+                $gender         = ($gender_db=='M' || $gender_db=='m')? 'Male' : 'Female';
+                $is_minister    = ($info['is_minister']==0)? 'SET AS MINISTER' : 'UNSET MINISTER';*/
+
+        ?>
+      <tr>
+          <td align="left" valign="top"><?php echo $i; $i++; ?></td>
+          <td align="left" valign="top">
+		
+		<p><?=$info['s_contents']?></p>
+		
+		</td>
+        <td align="left" valign="top">
+		
+		<p><?=get_username_by_id($info['i_user_id'])?></p>
+		
+		</td>
+        <?php /*<td align="left" valign="top"><?php echo $name;?></td>
+        <td align="left" valign="top"><?php echo $gender;?></td>
+        <td align="left" valign="top"><?php echo $address;?></td>
+        <td align="left" valign="top"><?php echo $email;?></td>*/?>
+      <td align="left" valign="top">
+		<?=$info["s_subject"]?>
+		</td>
+                <td align="center" valign="middle"><?= $info['u_ip'] ?></td>
+                              
+		<td align="center" valign="middle">
+		<?=getShortDateWithTime($info['dt_created_on'],7)?>
+		</td>
+                
+        <td align="center" valign="middle" class="last">
+       <input name="" title="Delete" type="button" style="" class="delete-button"  value="" onclick="return del_com(<?php echo $info['id'];?>,'prayer_wall');"/>
+        </td>
+      </tr>
+      <?php
+      
+      endforeach;
+      ?>
+    <?php }else{
+	?>
+	 <tr>
+       <td style="text-align:center;" height="80" colspan="20">No data available!!!</td>
+     </tr>
+	
+	<?php
+	}}
+        
+	?>	
+    </table>
+
+    <div class="paging"><ul><?= $page_links?></ul></div>
+    
+    <script>
+    
+    
+    </script>
+    
+    <style type="text/css">
+    .ip-button{ background:#ff0000; color:#fff; border:0; cursor:pointer; padding:0px 3px; font-size:12px; height:23px; display:block; font-weight:bold;}
+	 .unbip-button{ background:#8fc325; color:#fff; border:0; cursor:pointer; padding:0px 3px; font-size:12px; height:23px; display:block; font-weight:bold;}
+    </style>

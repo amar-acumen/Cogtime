@@ -1,0 +1,68 @@
+<script language="javascript">$(function(){    if("<?php echo $_SESSION['addsubadminmsg']?>" != '')    {        showUIMsg('<?php echo $_SESSION['addsubadminmsg']?>');        <?php unset($_SESSION['addsubadminmsg'])?>    }});</script>
+<div class="clr"></div>
+<!-- CONTENT SECTION -->
+<!--navigation section start -->
+<?php include(APPPATH . "views/layouts/admin/admin_nav.phtml"); ?>
+<!--navigation section end -->
+
+<!--=================================== content_section ============================================-->
+<div id="container">
+<div id="mid_content">
+<div class="page_heading left">
+                <div class="left"><img alt="" src="http://192.168.1.34/cogtime/images/icons/login.png"> Prayer Councillor</div>
+    <div class="clr"></div>
+            <div id="right_container">
+                <div class="arrow_btm"></div>
+
+                <div class="content_area">
+                    <div id="table_content">
+					<div class="clr"></div>
+					<h4>Add New Prayer Councilor</h4>
+					
+					<form action="<?php echo base_url().'admin/holy_place/prayer_councillor/add_prayer_councillor'?>" method="post">
+						<div class="frm_box"><label class="lable01">Search Prayer Councilor: </label>
+						<div class="field01"><input type="text" name="searchemail" value="<?php echo $searchemail?>" placeholder="Please Type Email" class="find-email"><input type="submit" value="Search" class="btn">
+						<span class="error-msg">Required</span></div>
+                        
+                        
+                        </div>
+						
+						</form>
+					
+       
+				<div class="clr"></div>	
+        <?php
+        if($member_arr[0] && $member_arr[0]['is_councillor'] != 1)
+        {
+		//pr($member_arr);
+            ?>
+            <div class="add-member-main"><ul class="member-list">
+            <li>
+                <div class="assign-main">
+                    <form action="<?php echo base_url().'admin/holy_place/prayer_councillor/add_prayer_councillor'?>" method="post">
+                        <input type="hidden" name="subadminaccess" value="1">
+                        <input type="hidden" name="memberid" value="<?php echo $member_arr[0]['id']?>">
+                       <input type="checkbox" name="assign" value="<?php echo $member_arr[0]['id']?>"><?php echo  $member_arr[0]['s_email']; ?>
+                        <input type="submit" value="Assign" class="btn">
+                    </form>    
+                </div>
+                
+            </li></ul></div>
+            <?php
+			}
+        ?>
+        
+        <div class="spacer"></div>
+    </div>
+    
+    </div>
+    
+    </div>
+	
+</div>
+<!--============================== /content_section =========================================-->
+</div>
+</div>
+<div class="clr"></div>
+
+

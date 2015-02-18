@@ -1,0 +1,40 @@
+<div class="link-div" style="margin-top:-2px;">
+  <ul>
+    <li><a href="rings/<?= $ring_detail_arr[0]['id']?>/ring-home.html" class="<?php echo ($page_name=='ring-home')?'current':'';?>"><span>Ring Posts</span> </a> </li>
+    
+    
+    <?php 
+	
+    if($ring_detail_arr[0]['i_user_id']==$profile_id)
+    {
+    ?>
+         
+            <li><a href="rings/<?= $ring_detail_arr[0]['id']?>/ring-approve-join-request.html" class="<?php echo ($page_name=='ring-approve-join-request')?'current':'';?>"><span>Ring Requests</span></a> </li>
+            <li><a href="rings/<?php echo $ring_detail_arr[0]['id']?>/invite-member.html" class="<?php echo ($page_name=='invite-member')?'current':'';?>"><span>Invite Member</span></a> </li>
+            
+    <?php
+    }
+    ?>
+    
+    
+    
+    
+    <?php 
+		$member_arr = getMembers_ring_bYID($ring_detail_arr[0]['id']); //pr($member_arr);
+		if(in_array($profile_id, $member_arr) ||  $ring_detail_arr[0]['i_user_id']==$profile_id){
+	  ?>
+         <li><a href="rings/<?php echo $ring_detail_arr[0]['id']?>/ring-members.html" class="<?php echo ($page_name=='ring-members')? 'current':'';?>" ><span>Ring Members</span> </a> </li>
+     <li><a onclick="window.open('<?=base_url()?>client/123flashchat.html?init_room=<?=$ring_detail_arr[0]['i_room_id']?>&init_user=<?= $this->session->userdata('display_username') ?>&init_password=<?=$this->session->userdata('upassword')?>',   'Cogtime Ring Chat',   'resizable=0, location=1, width=630, height=450'); return false;   "  href="javascript:void(0);" ><span>Ring Chat</span></a> </li>
+     
+     <?php } ?>
+    <?php /*?><li><a href="javascript:void(0)" class="<?php echo ($page_name=='event-invitations-received')?'current':'';?>"><span>Ring Chat</span></a> </li><?php */?>
+    
+</ul>
+<div class="clr"></div>
+</div>
+
+
+<?php
+//echo "profile_id : ".$profile_id." ring_owner_id : ".$ring_detail_arr[0]['i_user_id'];
+
+?>

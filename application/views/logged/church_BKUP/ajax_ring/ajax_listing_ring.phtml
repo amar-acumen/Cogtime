@@ -1,0 +1,119 @@
+<div class="div_content" style=" margin-top:0px;">
+
+    <?php
+   // pr($ringdata);
+    if ($ringdata) {
+        foreach ($ringdata as $ringval) {
+           $LOGO = base_url() . 'uploads/church_ring_logo/' . getThumbName($ringval['s_logo'], 'thumb');
+            $ring_detail_link = base_url() . 'church_rings/' . $ringval['ringid'] . '/ring-home.html';
+            $member_arr = getMembers_ring_bYID($ringval['ringid']);
+            ?>
+
+            <div class="blog">
+                <h2 class="nw-blg-heading">
+                    <a href="<?php echo $ring_detail_link ?>" id="ring_name_<?php echo $ringval['ringid'] ?>" ><div class="pro_photo_new" style="background:URL('<?=$LOGO?>') no-repeat center; width:73px; height:72px; background-color:#fff"></div><?php echo $ringval['s_ring_name'] ?> <img style="display: none;" src="<?php echo base_url() ?>images/icons/nw-search.png" /></a>
+                </h2>
+                <?php /* ?><h3 class="category new-cat-ring"><?php echo $ringval['s_category_name']?></h3><?php */ ?>
+                <div class="new-cat-ring cat-name-adjust">
+
+
+                    <div class="right-cat-list fnt-adj">
+                        <span class="left-cat-gap-one"><?php echo $ringval['s_category_name'] ?></span>
+                        <span class="left-cat-gap"><?= get_ring_category_name_by_id($ringval['i_sub_category_id']) ?></span>
+                    </div>
+                    <div class="right-cat-list"><img src="images/category.png" class="cat_icons" alt="" /></div>
+                </div>
+                <div class="clr"></div>
+                <p class="time-posted">
+                    created <?php echo getShortDate($ringval['dt_created_on'], 5) ?> by 
+                    <?php
+                    if ($ringval['if_already_friend'] == 'true' || $ringval['already_added_netpal'] == 'true') {
+                        $profile_link = get_profile_url($ringval['post_owner_user_id'], $ringval['s_profile_name']);
+                    } else {
+                        $profile_link = get_profile_url_prayer_partner($ringval['post_owner_user_id'], $ringval['s_profile_name']);
+                    }
+                    ?>
+                    <a href="<?php echo $profile_link ?>"><?php echo $ringval['owner_name'] ?></a> 
+                </p>
+
+                <p><?php echo my_substr($ringval['s_description'], 160) ?></p>
+                <div class="clr"></div>
+                <ul class="article-comment-block article-comment-block2">
+<!--                    <li class="first">Posts : <?php echo $ringval['post'] ?> </li> 
+                    <li> <span>Comments : <?php echo $ringval['cmt'] ?></span></li>
+                    <li> <span>Likes : <?php echo $ringval['lik'] ?></span></li>
+                    <li> <span>Members : <?php echo count($member_arr) ?></span></li>-->
+                    <li class="right">
+                        <ul>
+                            <?php
+                            $active_ring_users = get_active_church_ring_members_count($ringval['ringid']);
+                            if ($ringval['i_user_id'] == $this->i_profile_id) {
+                                ?>
+                                <li class="first"><a  href="<?php echo base_url() . 'church-ring/' . $ringval['ringid'] . '/edit.html' ?>">Edit</a></li>
+                                <?php
+                                if ($active_ring_users > 0) {
+                                    ?>
+                                    <li>
+                                        <a  href="javascript:void(0);" onclick="$('#i_del_id').val('<?php echo encrypt($ringval['ringid']) ?>');
+                                                            show_dialog('delete-ring');">Delete
+                                        </a>
+                                    </li>
+                                    <?php
+                                }  else {
+                                    ?>
+                                    <a  href="javascript:void(0);" onclick="$('#i_del_id').val('<?php echo encrypt($ringval['ringid']) ?>');
+                                                         show_dialog('delete-ring');">Delete
+                                    </a>
+                                    <?php } ?>
+                                    <?php
+                                } else {
+                                    ?>
+                                <li class="first"><img src="images/icons/leave-2.png" alt="" class="icon-img" /> <a  href="javascript:void(0);" onclick="$('#i_leave_id').val('<?php echo encrypt($ringval['ringid']) ?>');
+                                                    show_dialog('leave-ring');">Leave</a></li>
+                                <?php
+                            }
+                            ?>
+                        </ul>
+                    </li>
+                </ul>
+
+
+
+            </div>
+
+        <?php
+    }
+}
+?>
+</div>
+<input type="hidden" id="current_page" name="current_page" value="<?= $current_page_1 ?>"  />                     
+
+
+
+
+<div  class="lightbox delete-ring">
+    <div class="close"><a onclick="hide_dialog()" href="javascript:void(0)"><img alt="" src="http://cogtime.com/images/close.png"></a></div>
+    <div class="top"><div>&nbsp;</div></div>
+    <div class="mid">
+        <div style="margin-bottom:0px;" class="heading">
+            <div class="left">
+                <h4>Delete Ring</h4>
+            </div>
+        </div>
+        <div style="padding:8px 0px;" class="shade_box_white">
+            <div style="padding-bottom:10px;">
+                <p style="line-height:23px; color:#494949;" class="center-text">
+                    There are active members in this ring and if you delete all post, comments and active members under this ring will be deleted. Are you sure you want to delete this ring anyway?
+                </p>
+            </div>
+            <form id="delfrm" method="post" action="">
+                <input type="hidden" value="TkRRallXTjE=" id="i_del_id" name="i_del_id">
+                <input type="button" onclick="deleteRing()" style="margin-left:105px;" class="btn" value="Yes" name="">
+                <input type="button" onclick="hide_dialog()" class="btn" value="No" name="">
+            </form>   
+            <div class="clr"></div>
+        </div>
+
+    </div>
+    <div class="bot"><div>&nbsp;</div></div>
+</div>

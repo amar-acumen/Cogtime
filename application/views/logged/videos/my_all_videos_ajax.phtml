@@ -1,0 +1,131 @@
+<?php
+//pr($my_videos_content);
+
+if(count($my_videos_content) >0)
+{
+    foreach($my_videos_content as $videos):
+        $img = base_url().'uploads/user_videos/'.getThumbName($videos['s_video_image'],'bigthumb');
+        
+        $profile_link = get_video_url($videos['id'],$videos['s_title']);
+?>
+
+            <div class="shade_box_01">
+                <div class="left_div02">
+                <a href="<?= $profile_link?>" id="res_video_<?=$videos['id']?>" class="img_brd"><img src="<?php echo $img;?>" alt=""  class="img_brd" style="width: 122px; height:82px"/></a>
+              
+                    <p class="blue_bold12"> <a href="<?= $profile_link?>"><?php echo my_substr($videos['s_title'],40)?></a></p>
+                
+                    <p class="light_blue12"><?php echo $videos['s_video_file_name']?></p>
+                    <p class="date-time">Uploaded on : <?php echo getShortDate($videos['dt_created_on'],5)?></p>
+                    <p><?php echo substr($videos['s_description'],0,120)?><?php if(strlen($videos['s_description'])>120) echo "...";?></p>
+                </div>
+                
+            <div class="light_heading"> 
+             <div class="left"><a href="javascript:void(0);" class="comments_div<?=$videos['id']?>"  onclick="return show_comments(<?=$videos['id']?>)<?php /*?>show_dialog('view_comments_div')<?php */?>">Comments (<?=$videos['total_comments']?>)</a> &nbsp; |   &nbsp; <a href="javascript:void(0);"   onclick="return show_people_liked(<?=$videos['id']?>); " class="liked_by_<?=$videos['id']?>">Liked by (<?=count_photo_like_link($videos['id'],'video')?>)</a></div>
+             
+        <?php if((show_photo_like_link($videos['id'],'video') == TRUE) ) { 
+        ?>
+                <div class="right"><a href="javascript:void(0);" >Comment</a> &nbsp; |   &nbsp; <a href="javascript:void(0);" id="like_count_<?=$videos['id']?>" onClick="windowLike(<?=$videos['id']?>,'Like')">Like</a>  </div>                
+       <?php } 
+               else{ 
+       ?>
+                 <div class="right"><a href="javascript:void(0);" >Comment</a> &nbsp; |   &nbsp; <a href="javascript:void(0);" id="like_count_<?=$videos['id']?>" >Like</a> </div>
+          
+       <?php }?>
+             
+              
+         </div>
+		  <!-- slide section start -->
+            <div class="new-wl">
+            <!--comment section start-->
+                <div  class="comments-number content-width" >
+                  <div class="comments-number-mid">
+                      <div class="heading">
+                            <div class="left">
+                                  <h4><img class="cmnt" src="images/icons/cmnt2.png" alt="" /> <span class="comments_div<?=$videos['id']?>">Comments (<?=$videos['total_comments']?>)</span> </h4>
+                                  <img class="wal-minus" alt="" src="images/minus-white.png" />
+                            </div>
+                       </div>
+                       <DIV id="video_comment_div<?=$videos['id']?>"></DIV>
+                    </div>
+                </div>
+            <!--comment section end-->	
+            <!--like by section start-->
+                <div  class="comments-number content-width" >
+                  <div class="comments-number-mid">
+                      <div class="heading">
+                            <div class="left">
+                                  <h4><img alt="" src="images/heart2.png" class="cmnt" /> <span class="liked_by_<?=$videos['id']?>">Liked by (<?=count_photo_like_link($videos['id'],'video')?>)</span> </h4>
+                                   <img class="wal-minus" alt="" src="images/minus-white.png" />
+                            </div>
+                      </div>
+                      
+                        <div class="shade_box_white" id="video_like_div<?=$videos['id']?>">
+                        </div>
+                   </div>
+            	</div>
+            <!--like by section end-->
+                
+            </div>
+            <div class="new-wl-right">
+                <!--comment section start-->
+                <div  class="comments-number content-width" >
+                  <div class="comments-number-mid comment-box-manage">
+                      <div class="heading">
+                            <div class="left">
+                                  <h4><img alt="" src="images/no.png" class="cmnt" />  Comment  </h4>
+                                  <img class="wal-minus" alt="" src="images/minus-white.png" />
+                            </div>
+                      </div>
+                      
+                      <div class="txt_content01 comments-number-content"> 
+                      <textarea class="wal-comment-textarea" id="feed_comment_box_<?=$videos['id']?>"  cols="" rows=""></textarea>
+                      <input type="button" value="Post" class="yellow-btn" id="post_comment_button" onclick="post_comment(<?=$videos['id']?>)" />
+                      <br class="clr" />
+                      </div>
+                </div>
+                </div>
+                <!--comment section end-->	
+            </div>
+          <!-- slide section end -->
+	
+                
+      </div>
+
+		<script type="text/javascript">
+		$(function(){
+		//8-oct-2013
+			$('.left a').click(function(){
+				
+				var index=$(this).index();
+				$('.new-wl > .comments-number').css('display','none');
+				$('.new-wl-right > .comments-number').css('display','none');
+				$(this).parent().parent().next('.new-wl').children('.comments-number').filter(':eq('+ index +')').slideDown('slow');
+			})
+				
+				
+			$('.right a').click(function(){
+				var index=$(this).index();
+				$('.new-wl > .comments-number').css('display','none');
+				$('.new-wl-right > .comments-number').css('display','none');
+				$(this).parent().parent().next().next('.new-wl-right').children('.comments-number').filter(':eq('+ index +')').slideDown('slow');
+			
+			})
+			$('.wal-minus').click(function(){
+				$(this).parents('.comments-number').slideUp('fast');
+			
+			})
+		//8-oct-2013
+		});
+		</script>
+<?php    
+    endforeach;
+?>
+
+<?php    
+
+}
+else{
+            echo  '<div class="section01" style="padding-top:5px;"><div  class="shade_norecords" style="width:260px;"><p class="blue_bold12">No Videos.</p></div></div>';
+    }?>
+

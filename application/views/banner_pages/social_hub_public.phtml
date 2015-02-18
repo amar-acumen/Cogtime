@@ -1,0 +1,231 @@
+<?php
+	if( ($this->session->userdata('loggedin') !='' || $this->session->userdata('loggedin')!=false ) && $this->session->userdata('is_admin') != 1){
+		
+		 include(APPPATH ."views/layouts/logged_header.phtml");
+		 include(APPPATH."views/layouts/nav.phtml");?>
+		  <!-- /NAVIGATION SECTION -->
+      		</div>
+		</div>
+		
+		
+   <?php  }
+     else{
+         
+		include(APPPATH ."views/layouts/header.phtml");
+	   	include(APPPATH."views/layouts/slider_nav.phtml");
+  }?>
+<!-- CONTENT SECTION -->
+<div class="clr"></div><!-- CONTENT SECTION -->
+
+<div id="content_section" style="margin-top:8px;">
+      <div id="container">
+      
+      
+      
+        <?php if(count($contents))
+                        {
+                            foreach($contents as $r)
+                            {
+                                if($r['s_keyword']=='sh_main')
+                                {
+                                    $content['main_title']=$r['s_title'];
+                                    $content['main_desc']=nl2br($r['s_desc']);
+                                }
+                                else if($r['s_keyword']=='sh_tweet')
+                                {
+                                    $content['tweet_desc'] = nl2br($r['s_desc']);
+                                }
+                                else if($r['s_keyword']=='sh_blog')
+                                {
+                                    $content['blog_desc'] = nl2br($r['s_desc']);
+                                }
+                                else if($r['s_keyword']=='sh_rings')
+                                {
+                                    $content['rings_desc'] = nl2br($r['s_desc']);
+                                }
+                                else if($r['s_keyword']=='sh_events')
+                                {
+                                    $content['events_desc'] = nl2br($r['s_desc']);
+                                }
+                                else if($r['s_keyword']=='sh_chatRoom')
+                                {
+                                    $content['chatRoom_desc'] = nl2br($r['s_desc']);
+                                }
+                        
+                            }
+                        }
+                        
+        ?> 
+                        
+                        
+      	<div class="landing-page">
+            	<div class="top-left" style="overflow: hidden;">
+                    <h2 class="landing-title"><?=$content['main_title']?></h2>  
+                    <p><?=$content['main_desc']?></p>
+                </div>
+                <div class="top-right">
+                <img src="images/social-hub-2.jpg" alt="social hub" />
+                </div>
+                <div class="clr"></div>
+                <!--bottom link section start -->
+                
+                  <?php
+                    if($this->session->userdata('loggedin')!='')
+                    {
+                        $destination = "window.location='tweets.html'";
+                        
+                    }
+                    else
+                    {
+                        $url = base64_encode(base_url().'tweets.html');
+                        $destination = "return show_login_popup('".$url."')";
+                    }
+                    
+                    ?>
+                
+                
+                <div class="link-section">
+                	
+                    <!--box one start -->
+                    <div class="link-box" onclick="<?=$destination?>">
+                    	<div class="link-box-in">
+                        	<div class="main-img">
+                        		<img src="images/tweet.png" alt="Tweet"/>
+                            </div>
+                            <h3>Tweet</h3>
+                            <p><?=$content['tweet_desc']?></p>
+                        </div>
+                    </div>
+                    <!--box one end -->
+                    
+                    
+                    
+                    <?php
+                    if($this->session->userdata('loggedin')!='')
+                    {
+                        $destination = "window.location='blogs.html'";
+                        
+                    }
+                    else
+                    {
+                        $url = base64_encode(base_url().'blogs.html');
+                        $destination = "return show_login_popup('".$url."')";
+                    }
+                    
+                    ?>
+                    <!--box two start -->
+                    <div class="link-box" onclick="<?=$destination?>">
+                    	<div class="link-box-in">
+                        	<div class="main-img">
+                        		<img src="images/blog.png" alt="Blog" />
+                            </div>
+                            <h3>Blog</h3>
+                            <p><?=$content['blog_desc']?></p>
+                        </div>
+                    </div>
+                    <!--box two end -->
+                    
+                    
+                     <?php
+						if($this->session->userdata('loggedin')!='')
+						{
+							$destination = "window.location='rings.html'";
+							
+						}
+						else
+						{
+							$url = base64_encode(base_url().'rings.html');
+							$destination = "return show_login_popup('".$url."')";
+						}
+                    
+                    ?>
+                    
+                    
+                    
+                    <!--box three start -->
+                    <div class="link-box" onclick="<?=$destination?>">
+                    	<div class="link-box-in">
+                        	<div class="main-img">
+                        		<img src="images/rings.png" alt="Rings"/>
+                            </div>
+                            <h3>Rings</h3>
+                            <p><?=$content['rings_desc']?></p>
+                        </div>
+                    </div>
+                    <!--box three end -->
+                    
+                    
+                    <?php
+						if($this->session->userdata('loggedin')!='')
+						{
+							$destination = "window.location='upcoming-events.html'";
+							
+						}
+						else
+						{
+							$url = base64_encode(base_url().'upcoming-events.html');
+							$destination = "return show_login_popup('".$url."')";
+						}
+                    
+                    ?>
+                    
+                    
+                    
+                    <!--box four start -->
+                    <div class="link-box" onclick="<?=$destination?>">
+                    	<div class="link-box-in">
+                        	<div class="main-img">
+                        		<img src="images/events.png" alt="Events"/>
+                            </div>
+                            <h3>Events</h3>
+                            <p><?=$content['events_desc']?></p>
+                        </div>
+
+                    </div>
+                    <!--box four end -->
+                    
+                    <?php
+						if($this->session->userdata('loggedin')!='')
+						{
+							$destination = "window.location='browse-chat-room.html'";
+							
+						}
+						else
+						{
+							$url = base64_encode(base_url().'browse-chat-room.html');
+							$destination = "return show_login_popup('".$url."')";
+						}
+                    
+                    ?>
+                    
+                    
+                    
+                    <!--box five start -->
+                    <div class="link-box no-bg" onclick="<?=$destination?>">
+                    	<div class="link-box-in">
+                        	<div class="main-img">
+                        		<img src="images/chat-room.png" alt="Chat Room"/>
+                            </div>
+                            <h3>Chat Room</h3>
+                            <p><?=$content['chatRoom_desc']?></p>
+                        </div>
+                    </div>
+                    <!--box five end -->
+                    <div class="clr"></div>
+                </div>
+                <!--bottom link section end -->
+            </div>
+            
+            
+      </div>
+      <div class="clr"></div>
+</div>
+<!-- /CONTENT SECTION -->  
+  
+<?php
+	# include footer file...
+	include_once(APPPATH ."views/layouts/footer.phtml");
+?>
+<!--login popup start -->
+
+<!--login popup end -->

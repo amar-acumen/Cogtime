@@ -1,0 +1,481 @@
+<?php include(APPPATH."views/layouts/logged_header.phtml");?>
+            <!-- NAVIGATION SECTION -->
+      <?php include(APPPATH."views/layouts/nav.phtml");?>
+      <!-- /NAVIGATION SECTION -->
+      </div>
+</div>
+<div class="clr"></div>
+<!-- CONTENT SECTION -->
+<div id="content_section">
+      <div id="container">
+            <div id="top_corner">&nbsp;</div>
+            <div id="mid_content">
+                  <!-- latest news -->
+                  <?php include(APPPATH ."views/layouts/latest_news.phtml");?>
+                  <!-- /latest news -->
+                  <div class="clr"></div>
+                  <!-- main container -->
+                  <div id="main_container">
+                        <!-- left container -->
+                        <?php include(APPPATH."views/layouts/leftbar.phtml");?>
+                        <!-- /left container -->
+                        <!-- mid container -->
+                        
+                        <div id="mid_container">
+                        
+                        <div class="link-div" style="margin-top: 0;">
+                                  <ul>
+                                    <li><a href="my-videos.html"><span>My Videos</span></a> </li>
+                                    <li><a href="manage-video-album.html"><span>Manage My Video Albums</span></a> </li>
+                                    <li><a href="create-video-album.html"><span>Create Video Album</span></a> </li>
+                                    <li><a href="javascript:void(0)" onclick="return show_dialog('upload_video');"><span>Upload Video</span></a> </li>
+                                </ul>
+                                <div class="clr"></div>
+                                
+                        </div>
+                        
+                        <div class="new-wl">
+                            
+                            <!--like by section start-->
+                                <div  class="comments-number content-width" >
+                                  <div class="comments-number-mid">
+                                      <div class="heading">
+                                            <div class="left">
+                                                  <h4><img alt="" src="images/heart2.png" class="cmnt" /> <span class="liked_by_<?=$v['id']?>">Liked by (<?=count_photo_like_link($v['id'],'video')?>)</span> </h4>
+                                                   <img class="wal-minus" alt="" src="images/minus-white.png" />
+                                            </div>
+                                       </div>
+                                      
+                                        <div class="shade_box_white" id="video_like_div<?=$v['id']?>">
+                                        </div>
+                                   </div>
+                                </div>
+                            <!--like by section end-->
+                                
+                        </div>
+                        
+                            <div class="page_heading_01">
+                            <input type="hidden" id="video_id" value="<?= $video_info[0]['id']?>" />
+                                <div class="left"><img src="images/icons/video.png" alt="" /><?= $video_info[0]['s_title']?> </div>
+                            </div>
+                             
+                            <div class="arrow_btm"></div>
+                            <div class="section01 section02">
+                                
+                                <p class="light_blue12"><?= $video_info[0]['s_video_file_name']?></p>
+                                <p class="date-time"><?= $video_info[0]['dt_created_on']?></p>
+                                
+                      
+                        	    <div  class="res_video album-video" width="472" height="378" allowfullscreen></div>
+                                <p><?= $video_info[0]['s_description']?></p>
+                                
+                                <div class="light_heading"> 
+                                      <div class="left"><a onclick="return show_people_liked(<?=$video_info[0]['id']?>);" class="liked_by_<?=$video_info[0]['id']?>" href="javascript:void(0);">Liked by (<?=count_photo_like_link($video_info[0]['id'],'video')?>)</a></div>
+                                      
+										  <?php if((show_photo_like_link($video_info[0]['id'],'video') == TRUE) ) { 
+                                            ?>
+                                                    <div class="right"> <a href="javascript:void(0);" id="like_count_<?=$video_info[0]['id']?>" onClick="windowLike(<?=$video_info[0]['id']?>,'Like')">Like</a>  </div>                
+                                           <?php }
+                                                          else{ 
+                                           ?>
+                                                     <div class="right"> <a href="javascript:void(0);" id="like_count_<?=$video_info[0]['id']?>" >Like</a> </div>
+                                              
+                                           <?php }?>
+                                </div>
+                                
+                                <div class="new-wl">
+                                    <!--like by section start-->
+                                        <div  class="comments-number content-width" >
+                                          <div class="comments-number-mid">
+                                              <div class="heading">
+                                                    <div class="left">
+                                                          <h4><img alt="" src="images/heart2.png" class="cmnt" /> <span class="album_liked_by_<?=$video_info[0]['id']?>">Liked by (<?=count_photo_like_link($video_info[0]['id'],'video')?>)</span> </h4>
+                                                           <img class="wal-minus" alt="" src="images/minus-white.png" />
+                                                    </div>
+                                              </div>
+                                                <div class="shade_box_white" id="video_like_div<?=$video_info[0]['id']?>">
+                                                </div>
+                                           </div>
+                                        </div>
+                                    <!--like by section end-->
+            					</div>
+                            </div>
+                            
+                            <div class="div_content aud-wall-comment">
+                                    <div class="postheading">
+                                          <div class="left">
+                                                <h4><img alt="" class="icon-img" src="images/icons/coment.png" /> Post Comment</h4>
+                                          </div>
+                                    </div>
+                                    <input type="hidden" name="i_photo_id" id="i_photo_id" value="<?=$video_info[0]['id']?>" />
+                                    <form action="" method="post" class="wall-comment-form" onsubmit="return post_comment_detail();">
+                                        
+                                            <!--text div start -->
+                                            <div class="write-text write-text2">
+                                            <textarea name="txt_message" id="txt_message" cols="" rows=""  ></textarea>
+                                            </div>
+                                            <!--text div end -->
+                                        
+                                        <input name="post" type="submit" class="wall-comment-submit-nw " value="Post" />
+                                    </form>
+                              </div>
+                              
+                            <div class="div_content">
+                                    <div class="heading">
+                                          <div class="left">
+                                                <h4><img class="icon-img" src="images/icons/cmmnt.png" alt="" /> View Comments</h4>
+                                          </div>
+                                    </div>
+                                    
+                                    
+                                    <div id="view_comments">
+                                    <?= $comments_result_arr?>
+                                    </div>
+                                    
+                                
+                                    
+                                    <?php
+                                    if($no_of_result==0)
+                                    {
+                                    ?>
+                                    <div id="no_comments_main_tpl" class="shade_box_blue" style="padding-top:5px; width: 630px;"><div  class="shade_norecords" style="width:400px;"><p class="blue_bold12">No Comments.</p></div></div>
+                                    
+                                    <?php 
+                                    }
+                                    ?>
+                                    
+                              <?php 
+                              
+                              if($no_of_result!=0 && $no_of_result>$comments_pagination_per_page) {
+                            ?>
+                            <div class="view_more" id="show_more_albums_div"><a href="javascript:void(0);" id="show_more_comments" page_value="<?=$current_page?>" onclick="show_more_feeds($(this).attr('page_value'))">[view more] </a> </div>        
+                            <?php }
+                            
+                            ?>       
+                            
+                            
+                            <div class="view_more" id="show_more_albums_div_ajax" style="display: none;"><a href="javascript:void(0);" id="show_more_comments_ajax" page_value="" onclick="show_more_feeds($(this).attr('page_value'))">[view more] </a> </div>
+                            
+                            
+                                     
+                              </div>
+                            
+                             
+                            
+                            
+                            
+                        </div>
+                        <!-- /mid container -->
+                        <!-- right container -->
+                        <?php include(APPPATH."views/layouts/rightbar.phtml");?>
+                        <!-- /right container -->
+                  </div>
+                  <!-- /main container -->
+                  <div class="clr"></div>
+            </div>
+            <div id="bot_corner">&nbsp;</div>
+      </div>
+      <div class="clr"></div>
+</div>
+<!-- /CONTENT SECTION -->
+<div class="clr"></div>
+<!-- FOOTER SECTION -->
+<?php include(APPPATH."views/layouts/footer.phtml");?>
+<!-- /FOOTER SECTION -->
+
+
+<!-- /lightbox SECTION -->
+
+
+<div class="lightbox upload_video" style="width:550px;">
+      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog();form_reset_('uploadVideoFrm');clr_all_err_()"><img src="images/close.png" alt="" /></a></div>
+      <div class="top">
+            <div>&nbsp;</div>
+      </div>
+      <div class="mid">
+            <div class="heading">
+                  <div class="left">
+                        <h4><img src="images/icons/video1.png" alt="" /> Upload Video </h4>
+                  </div>
+            </div>
+            <div class="frm_box">
+            <form id="uploadVideoFrm" action="<?php echo base_url()?>logged/my_videos/upload_individual_video" method="post" enctype="multipart/data" onsubmit="return upload_video_()">
+                  <div class="lable01">Title:</div>
+                  <div class="field01">
+                        <input name="txt_title" type="text" />
+                        <span id="err_txt_title" class="error-message"></span>
+                  </div>
+                  <div class="clr"></div>
+                  
+                  <div class="lable01">Description:</div>
+                  <div class="field01">
+                        <textarea name="txtarea_desc_video" id="txtarea_desc_video" cols="" rows="" style="height:80px;" maxlength="500"></textarea>
+                        <span id="err_txtarea_desc_video" class="error-message"></span>
+                         <span style="font-size:11px; font-style:italic; line-height:13px;" >
+                                      (Max 500 characters.)
+                                      </span>
+
+                  </div>
+                  <div class="clr"></div>
+                  
+                  
+               <!--   <div class="lable01">Artist:</div>
+                  <div class="field01">
+                        <input name="txt_artist" type="text" />
+                        <span id="err_txt_artist" class="error-message"></span>
+                  </div>
+                  <div class="clr"></div>
+                  <div class="lable01">Genre:</div>
+                  <div class="field01">
+                        <input name="txt_genre" type="text" />
+                        <span id="err_txt_genre" class="error-message"></span>
+                  </div>
+                  <div class="clr"></div>
+               -->
+                  <div class="lable01">Video URL:</div>
+                  <div class="field01">
+                        <input name="txt_video_track_album" type="text" />
+                        <span id="err_txt_video_track_album" class="error-message"></span>
+                  </div>
+				  <ul class="video-logo" style=" margin-left: 80px;" >
+					<li><img src="<?=base_url()?>/images/YouTube.png"title="YouTube" alt="YouTube"></li>
+					<li><img src="<?=base_url()?>/images/Vimeo.png"title="Vimeo" alt="Vimeo"></li>
+					<li><img src="<?=base_url()?>/images/DailyMotion.png"title="DailyMotion" alt="DailyMotion"></li>
+					<li><img src="<?=base_url()?>/images/Viadeo.png"title="Viadeo" alt="Viadeo"></li>
+					</ul>
+                  <div class="clr"></div>
+                  
+                  
+                  <div class="lable01">Select Album:</div>
+                  <div class="field01">
+                    <select name="select_album1" id="select_album1" style="width:260px;">
+                    <?php
+                    
+                    if(count($album_names))
+                    {
+                        
+                    
+                    ?>
+                        
+                                <option value="-1"> Select</option>
+                             <!-- <option value="0">[New Album]</option>
+                             -->
+                              <?php
+                              foreach($album_names as $name)
+                              {
+                                  echo "<option value='".$name['id']."'>".$name['s_name']."</option>";
+                              }
+                    }
+                    else
+                    {
+                        echo "<option value='-1' disabled>Please create an album first.</option>";
+                    }
+                              ?>
+                              
+                        </select>
+                        <span id="err_select_album1" class="error-message"></span>
+                        <script type="text/javascript">
+                $(document).ready(function(arg) {
+                    //$("#select_album1").msDropDown();
+                    //$("#select_album1").hide();
+                })
+            </script>
+                  </div>
+                  <div class="clr"></div>
+            <!--      <div class="lable01">New Album Name:</div>
+                  <div class="field01">
+                        <input name="txt_nw_album" type="text" />
+                        <span id="err_txt_nw_album" class="error-message"></span>
+                  </div>
+                  <div class="clr"></div>
+            -->
+                  <div class="lable01">&nbsp;</div>
+                  <div class="field01">
+                        <input name="" type="submit" value="Upload" class="btn" />
+
+                  </div>
+                  <div class="clr"></div>
+            
+            </form>
+            </div>
+      </div>
+      <div class="bot">
+            <div>&nbsp;</div>
+      </div>
+</div>
+<div class="lightbox video_div" style="width:568px;">
+      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="images/close.png" alt="" /></a></div>
+      <div class="top">
+            <div>&nbsp;</div>
+      </div>
+      <div class="mid">
+            <div class="heading">
+                  <div class="left">
+                        <h4><img src="images/icons/video.png" width="28" height="28" alt="" /> Video Title </h4>
+                  </div>
+            </div>
+            <img src="images/video_player.jpg" alt="" /> </div>
+      <div class="bot">
+            <div>&nbsp;</div>
+      </div>
+</div>
+<input type="hidden" id="i_media_id" value="<?=$i_media_id?>" />
+<script type="text/javascript">
+<!--    
+    var ticker_holder = $('.bargaining').get(0);
+    var ticker_text = $('.ticker').get(0);
+    var ticker_pos = ticker_text.parentNode.offsetWidth;
+    
+    var ticker_data = $(ticker_holder).html();
+    $(ticker_text).parent().html('<marquee scrollamount="3" scrolldelay="20">' + ticker_data + '</marquee>');
+    
+    $('#sub-nav').hover
+    (
+    function() { $('marquee', this).get(0).stop();  },
+    function() { $('marquee', this).get(0).start(); }
+    ); 
+//-->
+</script>
+<script language="javascript">
+$(document).ready(function() {
+
+  showLoading(); 
+
+  var media_id =  $('#video_id').attr('value');
+  $.ajax({
+  type: 'post',
+  url: base_url+'logged/video_details/get_media/',
+  data: ({'media_id' : media_id ,'width':472 ,'height':378}),
+
+  dataType: 'json',
+  success: function (data, status) {
+   if(data.result=='success') {
+    hideLoading();
+      $('.res_video').html(data.s_image_source.html);
+   }
+  },
+  error: function (data, status, e) {
+   hideLoading();
+   showUIMsg('Some error occurred. Please try again.');
+  }
+ });
+
+ 
+
+  
+});
+</script>
+
+
+<script type="text/javascript">
+
+var ajax_req_feeds = null;
+function show_more_feeds(page) { 
+    var i_media_id=$('#i_media_id').val();
+    if(ajax_req_feeds!=null) {
+        ajax_req_feeds.abort();
+    }
+   showUILoader_nodialog('<img src="'+base_url+'images/loading_big.gif" width="50"/> ');
+    ajax_req_feeds = $.ajax({
+        type: 'get',
+        url: base_url+'logged/video_details/comments_ajax_pagination/'+i_media_id+'/'+page,
+        dataType: 'json',
+
+        success: function (data, status) {
+
+             hideUILoader_nodialog();
+		
+            if(data.html!='') {
+               
+                $('#view_comments').append(data.html);
+                $('#show_more_comments').attr('page_value', data.current_page);
+            }
+            else {
+                $('#view_comments').append('<div class="section01" style="padding-top:5px;"><div  class="shade_norecords" style="width:290px;"><p class="blue_bold12">No more comments.</p></div></div>');
+                $('#show_more_albums_div').hide();
+            }
+            
+        }    // end of success function...
+    });
+}
+
+
+var ajax_comment_post = null;    
+function post_comment_detail() 
+{
+        var id=$('#i_photo_id').val();
+        showUILoader_nodialog('<img src="'+base_url+'images/loading_big.gif" width="50"/> ');
+        if(ajax_comment_post!=null) {
+            ajax_comment_post.abort();
+        }
+        ajax_comment_post = $.ajax({
+            
+            url: base_url+'logged/video_details/post_comment/'+ id,
+            dataType: 'json',
+            data: {'message': $('#txt_message').val()},
+            type: 'post',
+    
+            success: function (data, status) {
+                
+                $('#show_more_albums_div').css({'display':'none'});
+                
+                if(data.success == 'true'){
+                    $('#no_comments_main_tpl').hide();
+                  showUIMsg(data.msg);
+                  if(data.no_of_result!= 0 && data.no_of_result>data.comments_pagination_per_page)
+                  {
+                      $('#show_more_comments').attr('page_value',data.current_page);
+                      $('#show_more_albums_div').css({'display':'block'});
+                  }
+                  
+                  $('#txt_message').attr('value','');
+                  $('#view_comments').html(data.html);
+                  
+                }
+                else{
+                    showUIMsg(data.msg);
+
+                }
+
+                hideUILoader_nodialog();
+                showUIMsg(data.msg);
+            },
+            error: function(data, status, e) {
+
+                hideUILoader_nodialog();
+                
+                showUIMsg("Error!");
+                
+            }
+        });
+        return false;
+}
+// Post comments on a feed //
+</script>
+
+<script type="text/javascript">
+		$(function(){
+		//8-oct-2013
+			$('.left a').click(function(){
+				
+				var index=$(this).index();
+				$('.new-wl > .comments-number').css('display','none');
+				$('.new-wl-right > .comments-number').css('display','none');
+				$(this).parent().parent().next('.new-wl').children('.comments-number').filter(':eq('+ index +')').slideDown('slow');
+			})
+				
+				
+			$('.right a').click(function(){
+				var index=$(this).index();
+				$('.new-wl > .comments-number').css('display','none');
+				$('.new-wl-right > .comments-number').css('display','none');
+				$(this).parent().parent().next().next('.new-wl-right').children('.comments-number').filter(':eq('+ index +')').slideDown('slow');
+			
+			})
+			$('.wal-minus').click(function(){
+				$(this).parents('.comments-number').slideUp('fast');
+			
+			})
+		//8-oct-2013
+		});
+		</script>

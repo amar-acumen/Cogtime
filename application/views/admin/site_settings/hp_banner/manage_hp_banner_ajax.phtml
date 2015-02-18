@@ -1,0 +1,62 @@
+       
+<table width="100%" border="0" cellspacing="0" cellpadding="0" class="admin-table">
+                          <tr>
+                            <th align="center" valign="middle" height="30" width="140">Banner Image</th>
+                            <th align="left" valign="middle" height="30" width="240">Title</th>
+                            <th align="left" valign="middle" height="30" width="470">Text</th>
+                            <th align="center" valign="middle" height="30" class="last"  width="30">Actions</th>
+                            <th>dsfd</th>
+                          </tr>
+                          
+                           <?php 
+						 if( count($info_arr) ) :
+						 
+							  $row = 1;
+							 
+							 foreach($info_arr as $info) : 
+							  
+							   $IMG_THUMB_PATH = base_url() ."uploads/homepage_banner/";
+							   $name=getThumbName($info['s_image'],'mini_thumb');
+							  //echo $name;
+								$IMG_THUMB = $IMG_THUMB_PATH . $name;
+								$id = $info['id'];
+								$title = $info['s_title'];
+								$desc =  html_entity_decode(htmlspecialchars_decode($info['s_desc']),ENT_QUOTES,'utf-8');
+								$image_rank= $info['image_rank'];
+								$url = $info['s_url'];
+								
+								 $SHOW = ($row > 6 )?'1':'2';
+										   
+						  
+			         ?>
+                          
+                          <tr>
+                            <td align="center" valign="middle" class="banner-img"><p style="background:url(<?=$IMG_THUMB?>) no-repeat center; width:110px; height:60px;border: 3px solid #DCDCDC; " title="banner"></p></td>
+                            <td align="left" valign="top"><?=$title ?></td>
+                            <td align="left" valign="top"><?= $desc ?> </td>
+                            <td align="center" valign="middle" class="last"><input name="" title="Edit" type="button" class="edit-button"  value="" onclick="window.location='<?= admin_base_url() ?>site_settings/hp_banners/edit_information/<?= $id;?>'"/>
+                           <?php if($SHOW == '1'){?>
+                                 <input name="" title="Delete" type="button" class="delete-button"  value="" onclick="delete_confirm_(<?= $id ?>);"/>
+                             <?php } ?>
+                            </td>
+                           
+                          </tr>
+                        
+                          
+                  <?php $row++;
+					   endforeach;
+					   
+					 else :	// i.e. no records exists...
+				?>
+					<tr>
+						<td style="text-align:center;" height="80" colspan="20">No data available!!!</td>
+					</tr>
+				<?php
+					 endif;
+				?>
+                        </table>
+	
+	<div class="paging_box" >
+				<ul><?= $page_links ?></ul>
+	</div>	
+	

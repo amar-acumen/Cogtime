@@ -1,0 +1,810 @@
+<?php include(APPPATH ."views/layouts/church_logged_header.phtml");?>
+
+            <!-- NAVIGATION SECTION -->
+
+      <?php //include(APPPATH."views/layouts/nav.phtml");?>
+
+      <!-- /NAVIGATION SECTION -->
+
+      </div>
+
+</div>
+
+<!-- /HEADER SECTION -->
+
+<div class="clr"></div>
+
+
+
+<!-- CONTENT SECTION -->
+
+<div class="container">
+
+      <div class="main-page">
+
+       <h3 class="page-heading">Rings</h3>
+
+            <!--<div id="mid_content"> -->
+
+                  <!-- latest news -->
+
+                <?php include(APPPATH . "views/layouts/church_admin_left_ring.phtml"); ?>
+
+        <!-- /latest news -->
+
+        
+
+          <div class="activity-right">
+
+                  <!-- main container -->
+
+                  <div id="main_container">
+
+                  <?php //include(APPPATH."views/layouts/leftbar.phtml");?>
+
+                        <div id="mid_container">
+
+                       
+
+                        <?php #echo $pagination_per_page.' -- '.$no_of_result ;?>
+
+                        	  <!--sub page links -->
+
+                              <div>
+
+<!--                                  <ul>
+
+                                    <li><a href="my-ring.html" class="<?php echo ($page_name=='my-ring')? 'current':'';?>"><span>My Ring</span> </a> </li>
+
+                                    <li><a href="search-ring.html" class="<?php echo ($page_name=='search-ring')? 'current':'';?>"><span>Browse  &amp;  Search Ring</span> </a> </li>
+
+                                      <?php 
+
+                                 $logged_user_id = intval(decrypt($this->session->userdata('user_id')));
+
+                                 $frnd_number = get_friend_number_by_id($logged_user_id);
+
+                                 if($frnd_number <= 0){
+
+                                 
+
+                                ?>
+
+                                          <li><a href="javascript:void(0)" onclick="show_dialog('ring-pop')" class="<?php echo ($page_name=='create-my-ring')? 'current':'';?>"><span>Create Ring</span> </a> </li>
+
+                                          <?php
+
+                                 }else if($frnd_number > 0){
+
+                                          ?>
+
+                                          <li><a href="create-my-ring.html" class="<?php echo ($page_name=='create-my-ring')? 'current':'';?>"><span>Create Ring</span> </a> </li>
+
+                                 <?php } ?>
+
+                                     <li><a href="approve-join-request.html" class="<?php echo ($page_name=='approve-join-request')?'current':'';?>"><span>Ring Requests</span></a> </li>
+
+                                </ul>-->
+
+                                <div class="clr"></div>
+
+                              </div>
+
+                            <!--/sub page links -->
+
+                        	
+
+                              <div class="create-ring">
+
+                                    <div>
+
+                                    <form method="post" id="frmSearch" name="frmSearch" action="<?php echo base_url()."logged/church_ring/search_ring"?>" >
+
+                                          <div class="lable01">Keyword:</div>
+
+                                          <div class="field03">
+
+                                                <input name="searchtxt" id="searchtxt" type="text"  value=""  autocomplete="off" />
+
+                                                <span id="err_txt" class="error-message"></span>
+
+                                                 <div class="sub-note">(Please provide atleast three letters keyword.)</div> 
+
+                                          </div>
+
+                                          <div class="clr"></div>
+
+                                         
+
+                                          <div class="lable01">Category:</div>
+
+                                          <div class="field03">
+
+                                                <select name="category" id="category" autocomplete="off"  onchange="generateSubcat($(this).val())">
+
+                                                      <option value="">Please Select Category</option>
+
+                                                      <?php echo $category?>
+
+                                                </select>
+
+                                                <span id="err_cat" class="error-message"></span> 
+
+                                                <!--<script type="text/javascript">
+
+                                        $(document).ready(function(arg) {
+
+                                            $("#category").msDropDown();
+
+                                            $("#category").hide();
+
+                                        })
+
+                                    </script>-->
+
+                                          </div>
+
+                                          <div class="clr"></div>
+
+                                          
+
+                                    
+
+                                    <DIV id="sub_cat" style="display:none;"></DIV>
+
+                                          
+
+                                    
+
+                                    <div class="field03" style="display: none;">
+
+                                        <input type="radio" name="rd_type" value="3" checked=""  /><span style="vertical-align: -1px" class="radio-text">Only rings</span>
+
+                                    </div>
+
+                                    <div class="clr"></div>
+
+                                          <div class="lable01">&nbsp;</div>
+
+                                          <div class="field03">
+
+                                          <input name="" type="button" value="Search" class="btn" onclick="searchRing();" />
+
+                                          </div>
+
+                                          <div class="clr"></div>
+
+                                         </form>
+
+                                    </div>
+
+                                    
+
+                                    <div class="clr"></div>
+
+                              </div>
+
+                              
+
+                             
+
+                               <?php /*?><form method="post" id="frmSearch" name="frmSearch" action="<?php echo base_url()."logged/my_ring/search_ring"?>" >
+
+                                       <p> Ring   <input name="searchtxt" id="searchtxt" type="text"  value="" style="width:260px;"  />
+
+                                          </p>
+
+                                          <p>
+
+                                          Category <select name="category" id="category" style="width:300px;">
+
+                                              <option value="">Please Select Category</option>
+
+                                              <?php echo $category?>
+
+                                          </select>
+
+                                          </p>
+
+                                          <p>
+
+                                          <input name="" type="button" value="Search" class="btn"  onclick="searchRing();"/>
+
+                                          </p>
+
+                                    </form><?php */?>
+
+                              
+
+                              <div class="clr"></div>
+
+                              
+
+                            <div style="display:none" id="search_rst_div">
+
+                            
+
+                             <h3 class="page-heading" id="searchtitle">Rings</h3>
+
+                              
+
+                            
+
+                              
+
+                             <div id="listingContent"  class="blog-container">
+
+                                   <?php echo $listingContent;?>
+
+                            </div>
+
+                            
+
+                            <?php #echo $pagination_per_page.' -- '.$no_of_result ;?>
+
+                            <?php 
+
+								 if($no_of_result > $pagination_per_page): ?>
+
+                                   <div class="pagination" style=" height:56px;"> 
+
+                                    <div class="view_more" id="show_more_feeds_div"><a href="javascript:void(0);" id="show_more_feeds_link" page_value="<?=$current_page_1?>" onclick="show_more_feeds($(this).attr('page_value'))">[view more] </a> </div>
+
+                            	 </div>
+
+							<?php endif; ?>
+
+                           
+
+                            
+
+                            </div>
+
+                        </div>
+
+                        <!-- right container -->
+
+                        <?php// include(APPPATH."views/layouts/rightbar.phtml");?>
+
+                        <!-- /right container -->
+
+                        </div>
+
+          </div>
+
+        <div class="clr"></div>
+
+                  </div>
+
+                  <!-- /main container -->
+
+                  <div class="clr"></div>
+
+            <!--</div> -->
+
+      </div>
+
+      <div class="clr"></div>
+
+</div>
+
+<!-- /CONTENT SECTION -->
+
+<div class="clr"></div>
+
+
+
+
+
+
+
+
+
+<?php include(APPPATH."views/layouts/church_footer.phtml");?>
+
+<?php //include(APPPATH."views/logged/blocks/common_popup.phtml");?>
+
+
+
+<script type="text/javascript">
+
+
+
+var ajax_req_feeds = null;
+
+function show_more_feeds(page) {
+
+	if(ajax_req_feeds!=null) {
+
+		ajax_req_feeds.abort();
+
+	}
+
+	showUILoader_nodialog();
+
+	ajax_req_feeds = $.ajax({
+
+		type: 'get',
+
+		url: base_url+'logged/church_ring/generate_ring_search_listing_AJAX'+'/'+page,
+
+		dataType: 'json',
+
+
+
+		success: function (data, status) {
+
+
+
+			hideUILoader_nodialog();
+
+			if(data.html!='') {
+
+				$('#listingContent').append(data.html);
+
+				$('#show_more_feeds_link').attr('page_value', data.cur_page);
+
+				$('#show_more_feeds_link').attr('onclick','');
+
+				$('#show_more_feeds_link').attr('onclick','show_more_feeds('+data.cur_page+')');
+
+			}
+
+			else {
+
+				$('#listingContent').append('<div class="view_more" style="text-align: center;"><p class="blue_bold12" style="font-size:14px;">No more result.</p></div>');
+
+				$('#show_more_feeds_div').remove();
+
+			}
+
+            
+
+            if(data.view_more==false)
+
+            {
+
+				
+
+                $('#listingContent').append('<div class="view_more" style="text-align: center;"><p class="blue_bold12" style="font-size:14px;">No more result.</p></div>');
+
+                $('#show_more_feeds_div').remove();
+
+            }
+
+			
+
+			
+
+		}	// end of success function...
+
+	});
+
+}
+
+
+
+
+
+function searchRing()
+
+{
+
+	//showUILoader_nodialog();
+
+	if($('#searchtxt').val()=='' && $('#category').val()=='')
+
+	{
+
+		showUIMsg("Please provide atleast one criteria");
+
+	}else if($('#searchtxt').val() !=''  && $('#searchtxt').val().length < 3) {
+
+		showUIMsg("Please give atleast three letters text in Ring field");
+
+	}
+
+	else
+
+	{
+
+		//alert($('#frmSearch').serialize());
+
+		$.ajax({
+
+			type: 'post',
+
+			url: base_url+'logged/church_ring/generate_ring_search_listing_AJAX/',
+
+			dataType: 'json',
+
+			data: $('#frmSearch').serialize(),
+
+			success: function (data, status) {
+
+				
+
+				var txtboxVal	= $('#searchtxt').val();
+
+				$('#searchtitle').html('Search Results');/* for "'+txtboxVal+'"*/
+
+				if(data.formpost==1)
+
+					$('#search_rst_div').show();
+
+					
+
+				hideUILoader_nodialog();
+
+				
+
+				if(data.html!='') {
+
+							//alert( data.cur_page+' posting');
+
+							$('#show_more_feeds_div').remove();
+
+							$('#listingContent').html(data.html);
+
+							$('#show_more_feeds_link').attr('page_value', data.current_page);
+
+							$('#show_more_feeds_link').attr('onclick','');
+
+							$('#show_more_feeds_link').attr('onclick','show_more_feeds('+data.current_page+')');
+
+						}
+
+						else {
+
+							$('#listingContent').html('<div class="view_more" style="text-align: center;"><p class="blue_bold12" style="font-size:14px;">No result.</p></div>');
+
+							$('#show_more_feeds_div').remove();
+
+						}
+
+						
+
+						//alert(data.no_of_result+' --- cp : '+data.current_page+' dif: '+(data.no_of_result - data.current_page)+'  '+data.view_more );
+
+						//alert(data.no_of_result- data.current_page);
+
+						if(data.no_of_result == 0){
+
+							$('#show_more_feeds_div').remove();
+
+						}
+
+						else if(data.view_more==false)
+
+						{
+
+							//alert(1);
+
+							$('#listingContent').append('<div class="view_more" style="text-align: center;"><p class="blue_bold12" style="font-size:14px;">No More result.</p></div>');
+
+							$('#show_more_feeds_div').remove();
+
+						}
+
+						else if((data.no_of_result - data.current_page != 0) && data.view_more!=false){
+
+						
+
+							//alert(2);
+
+							$('#show_more_div').remove();
+
+							$('#mid_container').append('<div class="view_more" id="show_more_feeds_div"><a href="javascript:void(0);" id="show_more_feeds_link" page_value="'+data.current_page+'" onclick="show_more_feeds('+data.current_page+')">[view more]  </a> </div>');
+
+						}
+
+				
+
+				
+
+				
+
+			/*	if(data.html!='') {
+
+					$('#show_more_feeds_div').remove();
+
+					$('#listingContent').html(data.html);
+
+					$('#show_more_feeds_link').attr('page_value', data.current_page);
+
+				}
+
+				else {
+
+					$('#listingContent').html('<div class="view_more" style="text-align: center;"><p class="blue_bold12" style="font-size:14px;">No Search Result.</p></div>');
+
+					$('#show_more_feeds_div').remove();
+
+				}
+
+				
+
+				if(data.view_more==false)
+
+				{
+
+					
+
+					$('#invitaion_rec').html('<div class="view_more" style="text-align: center;"><p class="blue_bold12" style="font-size:14px;">No More Search Result.</p></div>');
+
+					$('#show_more_feeds_div').remove();
+
+				}
+
+				else if(data.view_more==true)
+
+				{
+
+					
+
+					$('#mid_container').append('<div class="pagination" style=" height:56px;"><div class="view_more" id="show_more_feeds_div"><a href="javascript:void(0);" id="show_more_feeds_link" page_value="'+data.current_page+'" onclick="show_more_feeds('+data.current_page+')">[view more] </a> </div></div>');
+
+					//$('#show_more_feeds_div').show();
+
+				}
+
+				*/
+
+				
+
+				
+
+			}	// end of success function...
+
+		});
+
+	}
+
+}
+
+
+
+
+
+
+
+function searchCat(val,catname)
+
+{
+
+	showUILoader_nodialog();
+
+	$.ajax({
+
+		type: 'post',
+
+		url: base_url+'logged/church_ring/generate_ring_search_listing_AJAX/0',
+
+		dataType: 'json',
+
+		data: "category="+val,
+
+		success: function (data, status) {
+
+			var txtboxVal	= catname;
+
+			$('#searchtitle').html('Search Results for "'+txtboxVal+'"');
+
+			
+
+			hideUILoader_nodialog();
+
+
+
+			if(data.html!='') {
+
+				$('#listingContent').html(data.html);
+
+				$('#show_more_feeds_link').attr('page_value', data.current_page);
+
+			}
+
+			else {
+
+				$('#listingContent').html('<div class="view_more" style="text-align: center;"><p class="blue_bold12" style="font-size:14px;">No More Search Result.</p></div>');
+
+				$('#show_more_feeds_div').hide();
+
+			}
+
+            
+
+            if(data.view_more==false)
+
+            {
+
+                
+
+                $('#invitaion_rec').html('<div class="view_more" style="text-align: center;"><p class="blue_bold12" style="font-size:14px;">No More Search Result.</p></div>');
+
+                $('#show_more_feeds_div').hide();
+
+            }
+
+			
+
+			
+
+		}	// end of success function...
+
+	});
+
+}
+
+
+
+
+
+//'ringid='+ringid,
+
+
+
+function joinRequest(ringnameId,ringid,member)
+
+{
+
+	$.ajax({
+
+		type: 'post',
+
+		url: '<?php echo base_url()?>logged/church_ring/add_join_request',
+
+		dataType: 'json',
+
+		data: { ringid: ringid, member: member},
+
+		success: function (data) {
+
+			
+
+			if(data.msg=='success')
+
+			{
+
+				$('#join_req_p_'+data.removeid).remove();
+
+				showUIMsg("Join request has been successfully send");
+
+			}
+
+			else if(data.msg=='error') 
+
+			{
+
+				$('#err_detail').html(data.err.err_detail);
+
+                                showUIMsg("This ring contains maximum number of members..you can't join here");
+
+			}
+
+			
+
+		}	// end of success function...
+
+	});
+
+}
+
+
+
+ function generateSubcat(id) {
+
+        showUILoader_nodialog();
+
+        $.ajax({
+
+            type: 'get',
+
+            url: '<?= base_url() ?>logged/church_ring/generateSubCat' + '/' + id,
+
+            dataType: 'json',
+
+            success: function(data, status) {
+
+                hideUILoader_nodialog();
+
+                $('#sub_cat').html(data.html);
+
+                $('#sub_cat').attr('style', 'display:block;');
+
+            }	// end of success function...
+
+        });
+
+    }
+
+function acceptRingInvitation(i_u_id,i_ring_id, id)
+
+ {
+
+	 
+
+		 
+
+	 showUILoader_nodialog('<img src="'+base_url+'images/loading_big.gif" width="50"/> ');
+
+		$.ajax({
+
+			
+
+			url: base_url +'logged/church_ring/accept_invitation/'+i_u_id+'/'+i_ring_id+'/1',
+
+			dataType: 'json',
+
+			type: 'post',
+
+	
+
+			success: function (data) {
+
+				//hide_dialog();
+
+				// $('#accept_'+id).attr('style','display: none;');
+
+                                 if(data.msg == 'error'){
+
+                                    showUIMsg("This ring contains maximum number of members..you can't join here");
+
+                                    }
+
+                                    else{
+
+				hideUILoader_nodialog();
+
+				showUIMsg(data.msg);
+
+				window.location.href="<?=base_url()?>member_ring/<?= $_SESSION['logged_church_id']; ?>";
+
+                            }
+
+			},
+
+			error: function(data, status, e) {
+
+				hideUILoader_nodialog();
+
+				showUIMsg("Error!");
+
+				
+
+			}
+
+		});
+
+				 
+
+		 
+
+  }
+
+$(document).ready(function(){
+
+
+
+$('#searchtxt').keydown(function(e){
+
+    if (e.keyCode == 13) {
+
+        e.preventDefault();
+
+        return false;
+
+    }
+
+   //alert('d') 
+
+});
+
+});
+
+</script>
+
+
+
+
+

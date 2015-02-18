@@ -1,0 +1,100 @@
+			<table width="100%" border="0" cellspacing="0" cellpadding="0" class="admin-table">
+                              <tr>
+                                <th align="left" valign="middle" height="30" width="80">Date Posted</th>
+                                <th align="left" valign="middle" height="30" width="200">Project Title(ID)</th>
+                                <th align="left" valign="middle" height="30" width="120">Location</th>
+                                <th align="left" valign="middle" height="30" width="100">Duration</th>
+                                <th align="center" valign="middle" height="30" width="85">Project Cost</th>
+                                <th align="left" valign="middle" height="30" width="120">Required Skills</th>
+                                <th align="center" valign="middle" height="30" width="40">Donations ($)</th>
+                                <th align="center" valign="middle" height="30" width="40">Skill Donations</th>
+                                <th align="center" valign="middle" height="30" class="last">Actions</th>
+                              </tr>
+                           <?php 
+						#pr($info_arr);
+						  	 if( count($info_arr) ) :
+				   
+							 foreach($info_arr as $info) : 
+							  
+							   
+								$id = $info['id'];
+								$title = my_substr($info['s_title'], 38);
+								$desc =  my_substr(html_entity_decode(htmlspecialchars_decode($info['s_description']),ENT_QUOTES,'utf-8'), 97);
+								
+								$url = $info['s_url'];
+								$s_name = $info['s_name'];
+								$country_name = get_countryname($info['i_country_id']);
+								
+								$status = ($info['i_isopened'] == 1)?'CLOSE':'OPEN';	  
+								$detail_url = get_events_detail_url($info['id']); 
+								
+								$skill_arr = array();
+								$skill_str = '';
+								
+								if(count($info['skill'])){
+									foreach($info['skill'] as $k=>$s_val){
+										
+										array_push($skill_arr, $s_val['s_name']);
+									}
+								}
+								
+							
+								$skill_str = implode(',',$skill_arr);
+						  
+						  ?>
+                              
+                              
+                              
+                              <tr>
+                                <td align="left" valign="top"><?=getShortDate($info['dt_created_on'],5)?></td>
+                                <td align="left" valign="top"><a href="javascript:void(0);" onclick="return show_project_details(<?php echo $info['id'] ?> )"><?=$title?></a></td>
+                                <td align="left" valign="top"><?=get_cityname($info['s_city']).', '.get_statename($info['s_state']).', '.$country_name ?></td>
+                                <td align="left" valign="top"><?=getShortDate($info['dt_start_date'],5)?> to <?=getShortDate($info['dt_end_date'],5)?></td>
+                                <td align="center" valign="top"><?=$info['f_project_cost']?>$</td>
+                                <td align="left" valign="top"><?=$skill_str?></td>
+                                <td align="center" valign="top"><a href="javascript:void(0);" onclick="return show_project_fund_donor(<?php echo $info['id'] ?>)"><?=round($info['total_donation'],2)?>$</a></td>
+                                <td align="center" valign="top"><a href="javascript:void(0);" onclick="return show_project_skill_donor(<?php echo $info['id'] ?>)"><?=$info['total_skill_donated']?></a></td>
+                               
+                                <td align="center" valign="middle" class="last">
+                                <input name="" title="Edit" type="button" class="edit-button"  value="" onclick="window.location='<?=admin_base_url().'charity-projects/'.$info['id']?>/edit-charity-project.html'"/>
+                                
+                                <input name="" title="Delete" type="button" class="delete-button"  value="" onclick="delete_confirm_(<?= $id ?>);"/>
+                                
+                                
+                               <?php if($info['i_isopened'] == '2'){ ?>
+               
+                                        <span id="<?=$info['id']?>_status">
+                                        <input name="" title="Open" type="button" class="btn-01"  onclick="javascript:changeProjectStatus(<?php echo $info['id'] ?> , '1' , '<?php echo $info['i_isopened'] ?>')"  value="<?=$status?>"/>
+                                        </span>
+                                <?php 
+                                    } 
+                                    else if($info['i_isopened'] == '1'){?>
+                                        <span id="<?=$info['id']?>_status">
+                                        <input name="" title="Close" type="button" class="btn-01"  onclick="javascript:changeProjectStatus(<?php echo $info['id'] ?> , '2' , '<?php echo $info['i_isopened'] ?>')"  value="<?=$status?>"/>
+                                        </span>
+                                
+                                <?php }?>
+                                
+                                
+                                <input name="" title="Manage Skill Donations" type="button" class="btn-02"  value="Manage Skill Donations" onclick="window.location='<?=admin_base_url()?>charity-projects/<?=$info['id']?>/manage-skill-donations.html'"/>
+                                
+                                <input name="" title="Manage Skill Donations" type="button" class="btn-02"  value="Manage Requests" onclick="window.location='<?=admin_base_url()?>charity-projects/<?=$info['id']?>/requested-informations.html'"/>
+                                </td>
+                              </tr>
+                            <?php
+                             endforeach;
+                             
+								 else :	// i.e. no records exists...
+							?>
+								<tr>
+									<td style="text-align:center;" height="80" colspan="20">No data available!!!</td>
+								</tr>
+							<?php
+								 endif;
+							?>
+ </table>
+
+
+<div class="paging" >
+            <ul><?= $page_links ?></ul>
+</div>	

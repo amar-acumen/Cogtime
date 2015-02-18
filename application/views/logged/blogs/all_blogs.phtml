@@ -1,0 +1,141 @@
+<?php include(APPPATH."views/layouts/logged_header.phtml");?>
+            <!-- NAVIGATION SECTION -->
+      <?php include(APPPATH."views/layouts/nav.phtml");?>
+      <!-- /NAVIGATION SECTION -->
+      </div>
+</div>
+<!-- /HEADER SECTION -->
+<div class="clr"></div>
+
+<!-- CONTENT SECTION -->
+
+
+
+<div id="content_section">
+      <div id="container">
+            <div id="top_corner">&nbsp;</div>
+            <div id="mid_content">
+                  <!-- latest news -->
+                  <?php include(APPPATH ."views/layouts/latest_news.phtml");?>
+                  <!-- /latest news -->
+                  <div class="clr"></div>
+                  <!-- main container -->
+                  <div id="main_container">
+                   <!-- left container -->
+                        <?php include(APPPATH."views/layouts/leftbar.phtml");?>
+                        <!-- /left container -->
+
+                        <div id="mid_container">
+                        
+                        
+                        <div class="link-div" style="margin-top: 0;">
+                                  <ul>
+                                       <li><a href="blogs.html" class="current"><span>All Blogs</span></a> </li>
+                                    <li><a href="my-blog.html"><span>My Blog</span></a> </li>
+                                    <li><a href="search-blogs.html"><span>Search All Blogs</span></a> </li>
+                                    <li><a href="most-popular-blogs.html"><span>Most Popular</span></a> </li>
+                                    
+                                </ul>
+                              <div class="clr"></div>
+                         </div>
+                        
+                        
+                        
+                        
+                          
+                              
+                           
+                              <div style="margin: 10px 0 10px 0;">
+                                      <img alt="" src="images/icons/note.png" style="vertical-align:middle;"> 
+                                      <span style="font-size:19px; color:#004084"> Blogs </span>
+                                </div>
+                              <div id="blogs" class="blog-container" style="padding:0;border-bottom: none;">
+                                
+                                 <div id="all_blogs_list" class="my-article">
+                                 <?= $all_blogs?>
+                                 
+                                 
+                                 <?php
+                             // echo "view-more : ".$view_more;
+                                   if($view_more)
+                                        {
+                                    ?>
+                                    <div id="show_more_blogs_div"><a class="view-more-btn" href="javascript:void(0);" id="show_more_blogs" page_value="<?=$current_page_1?>" onclick="show_more_blogs($(this).attr('page_value'))">[view more] </a> </div>        
+                                    <?php
+                                        }
+                                    ?>
+                                 
+                                 </div>
+                                 
+                                 
+                                 
+                              
+                                    
+                                    <div class="clr"></div>
+                              </div>
+
+                              
+                              
+                        </div>
+                        <!-- /left container -->
+                        <!-- right container -->
+                        <?php include(APPPATH."views/layouts/rightbar.phtml");?>
+                        <!-- /right container -->
+                  </div>
+                  <!-- /main container -->
+                  <div class="clr"></div>
+            </div>
+            <div id="bot_corner">&nbsp;</div>
+      </div>
+      <div class="clr"></div>
+</div>
+<!-- /CONTENT SECTION -->
+<div class="clr"></div>
+
+
+<?php include(APPPATH."views/layouts/footer.phtml");?>
+
+<?php include(APPPATH."views/logged/blocks/common_popup.phtml");?>
+
+
+
+
+
+
+<script type="text/javascript">
+
+var ajax_req_feeds = null;
+function show_more_blogs(page) {
+    if(ajax_req_feeds!=null) {
+        ajax_req_feeds.abort();
+    }
+    showUILoader_nodialog();
+    ajax_req_feeds = $.ajax({
+        type: 'get',
+        url: base_url+'logged/my_blog/generate_all_blog_listing_AJAX/1/'+page,
+        dataType: 'json',
+
+        success: function (data, status) {
+    //alert(data.view_more);
+    
+            hideUILoader_nodialog();
+            if(data.html!='') {
+               
+                $('#all_blogs_list').append(data.html);
+                $('#show_more_blogs').attr('page_value', data.current_page);
+            }
+            else {
+                $('#mid_container').append('<div class="section01" style="padding-top:5px; background-color:#f2f2f2;border-top: 1px solid #FFFFFF;"><div  class="shade_norecords" style="width:260px;"><p class="blue_bold12">No Blogs.</p></div></div>');
+                $('#show_more_blogs_div').hide();
+            }
+            if(data.view_more==false)
+            {
+                $('#mid_container').append('<div class="section01" style="padding-top:5px; background-color:#f2f2f2; border-top: 1px solid #FFFFFF;"><div  class="shade_norecords" style="width:260px;"><p class="blue_bold12">No More Blog.</p></div></div>');
+                $('#show_more_blogs_div').hide();
+            }
+           
+        }    // end of success function...
+    });
+}
+</script>
+

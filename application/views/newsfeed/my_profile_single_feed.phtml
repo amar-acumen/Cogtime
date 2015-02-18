@@ -1,0 +1,671 @@
+<?php
+$data_arr = json_decode($feed['data']);
+//pr($data_arr,1);
+#echo count($data_arr->video); 
+# dump( $session_data );
+ $data_arr->wall_owner_id;
+$msg_id = $feed['id'];	
+ $data_arr->wall_owner_id;	 	 
+#echo ' ==> '.show_delete_link($msg_id);	
+//pr($feed);
+if( $feed['s_type'] == 'wall_post' ){
+	$user_primary_info = get_primary_user_info($data_arr->user_id);
+	$profile_image_filename = get_profile_image($data_arr->user_id,'thumb');
+	//$user_primary_info['s_picture'];
+	$profile_displayname = $user_primary_info['s_profile_name'];
+	$profile_url = $user_primary_info['s_profile_url'];
+	if($data_arr->wall_owner_id > 0  && $data_arr->wall_owner_id != ''){
+		  $wall_owner_name = get_username_by_id($data_arr->wall_owner_id);
+	}
+	$posting_user_name = get_username_by_id($data_arr->user_id);
+	$logged_user_id = intval(decrypt($this->session->userdata('user_id')));
+	
+?>
+
+<div class="txt_content01"> <a href="<?=$profile_url?>"><div class="pro_photo" style="background:url(<?php echo $profile_image_filename;?>) no-repeat center;width:60px; height:60px;" ></div><?php /*?><img src="images/alex.jpg" alt="" class="pro_photo" /><?php */?></a>
+          <div class="left_div01a">
+                <p class="blue_bold12"><a  href="<?=$profile_url?>"><?=$profile_displayname?></a></p>
+                
+                <?php if(($data_arr->wall_owner_id == $logged_user_id || $data_arr->user_id == $logged_user_id) && $data_arr->wall_owner_id != '' ){
+				 ?>
+                 	 <p class="blue_bold12" style="font-size:13px;"><?=$posting_user_name?> has posted on <?=($wall_owner_name)."'s wall."?></p>
+				 <?php    }
+				 ?>
+                <p><?=$data_arr->message?></p>
+               
+              <!-- image --> 
+               <?php if(!empty($data_arr->photo) && count($data_arr->photo)){ 
+			   			foreach($data_arr->photo as $key=>$photo_val):
+							
+							$IMG = base_url()."uploads/wall_photos/".getThumbName($photo_val,'mid');
+			   ?>
+                <div class="video-image">
+                     <div class="" style="background:url('<?=$IMG?>') no-repeat center;width:329px; height:212px;" ></div> 
+                </div>
+               <?php 	endforeach;
+			   		 }
+				?>
+              <!-- image -->
+               
+               <!--video play-->
+ 			   <?php if(!empty($data_arr->video) && count($data_arr->video)){ 
+			   ?>
+                <div class="video-image">
+                    <div  class="cogtime-video" id="myvideo_first_thumb_<?=$feed['id']?>" style="background:url('') no-repeat center;;width:329px; height:212px;" ></div>
+                    <div id="myvideo_big_thumb_1_<?=$feed['id']?>" media_id="<?=$feed['id']?>"></div> 
+                </div>
+                
+                
+               <?php 	
+			   		 }
+				?>
+               <!--video play--> 
+                
+                <?php if(get_time_elapsed($feed['dt_created_on']) != '') {?>
+                 <p class="date-time">Updated : <?=get_time_elapsed($feed['dt_created_on'])?></p>
+                <?php } ?>
+                
+          </div>
+          <input type="hidden" name="i_del_post_id" id="i_del_post_id" value="" />
+          <div class="clr"></div>
+          <div class="light_heading">
+                <div class="left"><a href="javascript:void(0);" class="comments_div<?=$feed['id']?>"  onclick="return show_comments(<?=$feed['id']?>)<?php /*?>show_dialog('view_comments_div')<?php */?>">Comments (<?php if($feed['total_comments']!=""){echo $feed['total_comments'];}else{ echo '0';}?>)</a> &nbsp; |   &nbsp; <a href="javascript:void(0);"   onclick="return show_people_liked(<?=$feed['id']?>); " class="liked_by_<?=$feed['id']?>">Liked by (<?=count_like_link($feed['id'])?>)</a></div>
+       
+	   
+	   
+       <?php if((show_like_link($msg_id) == TRUE) ) { 
+		?>
+                <div class="right"><?php if($data_arr->user_id == $logged_user_id):?><a href="javascript:void(0);" onClick="show_hidden('<?=$feed['id']?>')"  >Edit</a> &nbsp;| &nbsp;<?php endif;?><?php if($data_arr->user_id != $logged_user_id):?><a href="javascript:void(0);" >Report abuse</a> &nbsp;| &nbsp;<?php endif;?><a href="javascript:void(0);"  >Comment</a> &nbsp; |   &nbsp; <a href="javascript:void(0);" id="like_count_<?=$feed['id']?>" onClick="windowLike(<?=$feed['id']?>,'Like')">Like</a> &nbsp;   <?php if(show_delete_link($msg_id) == 'yes'){ ?> |  &nbsp; <a href="javascript:void(0);" onclick="delete_(<?=$feed['id']?>)">Delete</a><?php } ?> </div>                
+       <?php } 
+	   		else{ 
+	   ?>
+         <div class="right"><?php if($data_arr->user_id == $logged_user_id):?><a href="javascript:void(0);" onClick="show_hidden('<?=$feed['id']?>')" >Edit</a> &nbsp;| &nbsp;<?php endif;?><?php if($data_arr->user_id != $logged_user_id):?><a href="javascript:void(0);" >Report abuse</a>&nbsp; | &nbsp;<?php endif;?><a href="javascript:void(0);"  >Comment</a> &nbsp; |   &nbsp; <a href="javascript:void(0);" id="like_count_<?=$feed['id']?>" >Like</a> &nbsp;  <?php if(show_delete_link($msg_id) == 'yes'){ ?> |  &nbsp; <a href="javascript:void(0);" onclick="delete_(<?=$feed['id']?>)">Delete</a><?php } ?> </div>
+          
+       <?php }?>
+       </div>
+       
+       		<!-- slide section start -->
+              <div class="new-wl">
+                  <!--comment section start-->
+                  <div  class="comments-number content-width" id="post-comment-div<?=$feed['id']?>" >
+                    <div class="comments-number-mid content-width">
+                        <div class="heading">
+                              <div class="left">
+                                    <h4><img class="cmnt" src="images/icons/cmnt2.png" alt="" /> <span class="comments_div<?=$feed['id']?>">Comments (<?=$feed['total_comments']?>)</span> </h4>
+                                    <img class="wal-minus" alt="" src="images/minus-white.png" />
+                              </div>
+                            </div>
+                            <DIV id="comment_content_div<?=$feed['id']?>"></DIV>
+                      </div>
+                  </div>
+              	  <!--comment section end-->	
+                  <!--like by section start-->
+                  <div  class="comments-number content-width" id="post-like-div<?=$feed['id']?>">
+                    <div class="comments-number-mid">
+                        <div class="heading">
+                              <div class="left">
+                                    <h4><img alt="" src="images/heart2.png" class="cmnt" /> <span class="liked_by_<?=$feed['id']?>">Liked by (<?=count_like_link($feed['id'])?>) </span></h4>
+                                     <img class="wal-minus" alt="" src="images/minus-white.png" />
+                              </div>
+                        </div>
+                              <div class="shade_box_white" id="like_content_div<?=$feed['id']?>"></div>
+                      </div>
+                  </div>
+              	  <!--like by section end-->
+				  
+				  
+              </div>
+              
+                  <div class="new-wl-right">
+				  <?php if($data_arr->user_id == $logged_user_id):?>
+				  <!-- edit post section -->
+				   <div  class="comments-number content-width" id="edit-post-box<?=$feed['id']?>">
+                        <div class="comments-number-mid content-width ">
+                            <div class="heading">
+                                  <div class="left">
+                                        <h4><img alt="" src="images/no.png" class="cmnt" />  POST </h4>
+                                        <img class="wal-minus" alt="" src="images/minus-white.png" onClick="show_hidden('<?=$feed['id']?>')" />
+                                  </div>
+                            </div>
+                              <div class="txt_content01 comments-number-content content-width" id="post_content_<?=$feed['id']?>"> 
+                              
+                              <form name="public_wall_post_form_<?=$feed['id']?>" id="public_wall_post_form_<?=$feed['id']?>"  method="post" class="wall-comment-form" enctype="multipart/form-data"  onsubmit="edit_post_feed('<?=$feed['id']?>'); return false;" action="<?=base_url().'newsfeed/update_post_his_wall/'?>" >
+      <input type="hidden" id="wall_type" name="wall_type" value="my_wall" />
+	  <input type="hidden" id="post_id" name="post_id" value="<?=$feed['id']?>" />
+              <!--  text div start -->
+			   <div class=" comment-content nw-comment-content">
+                <div class="write-text">
+                <textarea name="wall_msg" id="wall_msg" cols="" rows="" onfocus="if(this.value=='Max 500 Characters')this.value='';" onblur="if(this.value=='')this.value='Max 500 Characters';" maxlength ="500" 
+                onKeyDown="limitTextarea(this.form.wall_msg,this.form.countdown,500);" 
+onKeyUp="limitTextarea(this.form.wall_msg,this.form.countdown,500);" onkeypress="return restrict_carrige(event);"  ><?php if($data_arr->message != ''){ echo $data_arr->message;} else echo"Max 500 Characters";?></textarea>
+ <p style=" clear:both; float:left"> <span id="text_count"><?=strlen($data_arr->message)?></span> Characters</p>
+                </div>
+               <!-- text div end  -->
+			   <div class="clr"></div>
+			      <div>
+				  <label>Photos</label>
+			   <?php if(!empty($data_arr->photo) && count($data_arr->photo)){ 
+			   			foreach($data_arr->photo as $key=>$photo_val):
+							
+							$IMG = base_url()."uploads/wall_photos/".getThumbName($photo_val,'thumb');
+			   ?>
+			
+			   <div id="div<?=$photo_val?>" style="display:block;">
+			   <div class="view-thumb" style="background:url(<?=$IMG?>) no-repeat center;max-width:60;height:60px;">
+			   <a href="javascript:void(0);" class="remove" onclick="javascript:delete_pic('<?=$photo_val?>','<?=$feed['id']?>');$(this).parent('div').parent('div').hide();"></a>
+			  
+			   </div>
+			  </div>
+			   <?php endforeach; 
+			   }?>
+			   <a href="javascript:void(0);" onClick="$('.upload-video').hide();$('.upload-image').show();">Add photo</a>
+			    <input type="hidden" name="del_img<?=$feed['id']?>" id="del_img<?=$feed['id']?>">
+			   </div>
+			   <!-- video-->
+			   			   <div class="clr"></div>
+						   <div style="padding-top:5px">
+						    <label>video</label>
+						    <?php if(!empty($data_arr->video) && count($data_arr->video)){ 
+							//$img = base_url().'uploads/user_videos/'.getThumbName($data_arr->video->image_name,'bigthumb');
+			   ?>
+			    <div id="div<?=$data_arr->video->image_name?>">
+			  <p> 
+			  <a href="<?=$data_arr->video->url?>" target="_blank">
+			   <?=$data_arr->video->url?>
+			   </a>
+			   <a href="javascript:void(0);" class="" onclick="$('.upload-image').hide();$('.upload-video').show();" style="text-decoration:underlined;padding-left:5px;color:red;">Change this video</a>
+			   </p>
+			   
+			  </div>
+<?php }else{?>
+<p> 
+			 <p>
+			   <a href="javascript:void(0);" class="" onclick="$('.upload-image').hide();$('.upload-video').show();" style="text-decoration:underlined;padding-left:5px;color:red;">Add video</a>
+			   </p>
+<?php }?>
+
+</div>
+			   </div>
+            <div class="tab_details comment-content nw-comment-content">
+            
+            <input type="hidden" id="public_wall_owner_id" name="public_wall_owner_id" value="<?=($this->session->userdata('user_id'))?>" />
+            
+            
+            <!--  text div start -->
+                <!--  <div class="write-text">
+                <textarea name="wall_msg" id="wall_msg" cols="" rows="" onfocus="if(this.value=='Max 500 Characters')this.value='';" onblur="if(this.value=='')this.value='Max 500 Characters';" maxlength ="500" 
+                onKeyDown="limitTextarea(this.form.wall_msg,this.form.countdown,500);" 
+onKeyUp="limitTextarea(this.form.wall_msg,this.form.countdown,500);" onkeypress="return restrict_carrige(event);"  >Max 500 Characters</textarea>
+ <p style=" clear:both; float:left"> <span id="text_count">0</span> Characters</p>
+                </div>-->
+               <!-- text div end  -->
+                
+               <!-- upload image div start  -->
+                <div class="upload-image" >
+				<a href="javascript:void(0);" onclick="$(this).parent('div').hide();" style="float:right;padding-right:22px;color:#013d62">Hide[-]</a>
+                    <label  class="upload-img">Upload Image :</label>
+                    <input name="btn_upload" id="btn_upload_<?=$feed['id']?>" type="file" size="40" />
+                    <br class="clr"/>
+					
+                    <div id="all_photos_<?=$feed['id']?>">
+                  
+                    </div>
+            
+                  <div id="hdnflds_<?=$feed['id']?>" >
+                  </div>
+                 
+                 </div>   
+                      
+                <!--upload image div end -->
+                
+                
+                
+               <!-- upload video div start -->
+                <div class="upload-video">
+				<a href="javascript:void(0);" onclick="$(this).parent('div').hide();" style="float:right;padding-right:22px;color:#013d62">Hide[-]</a>
+                    <label  class="upload-img">Video Url :</label><div class="video-url"><input name="txt_video_url" id="txt_video_url" type="text" value="<?=$data_arr->video->url?>"/></div>
+					<ul class="video-logo" >
+					<li><img src="<?=base_url()?>/images/YouTube.png"title="YouTube" alt="YouTube"></li>
+					<li><img src="<?=base_url()?>/images/Vimeo.png"title="Vimeo" alt="Vimeo"></li>
+					<li><img src="<?=base_url()?>/images/DailyMotion.png"title="DailyMotion" alt="DailyMotion"></li>
+					<li><img src="<?=base_url()?>/images/Viadeo.png"title="Viadeo" alt="Viadeo"></li>
+					</ul>
+                    <br class="clr"/>
+                    <div id="all_videos">
+                      <?php /*?><div class="view-thumb"><img src="images/photo-img01.jpg" alt="photo" width="60" height="60" /><a href="javascript:void(0);" class="remove" title="Remove Video"></a></div>
+                     <?php */?>
+                    </div>
+                    
+                     <div id="hdnvideoflds" >
+                     </div>
+                  
+                </div>
+               <!-- upload video div end -->
+               
+               
+            </div>
+            <div class="tab_content button-set type-text">
+              <!--  <ul>
+                    <li class="select"><a href="javascript:void(0);"><img src="images/nw-text-btn.png" alt="text" title="Write Text"  /></a></li>
+                    <li><a href="javascript:void(0);"><img src="images/nw-photo-btn.png" alt="photo" title="Upload Photo" onClick="$('.upload-video').hide();$('.upload-image').show();" /></a></li>
+                    <li><a href="javascript:void(0);"><img src="images/nw-video-btn.png" alt="video" title="Upload Video" onClick="$('.upload-image').hide();$('.upload-video').show();" /></a></li>
+                </ul>-->
+            </div>
+            
+            <input name="" type="submit" class="wall-comment-submit-nw " value="Post" />
+      </form>
+                              <br class="clr" />
+                              </div>
+                      </div>
+                  </div>
+				  <!-- edit post section -->
+				  
+				  <?php endif;?>
+                      <!--comment section start-->
+					  <!-- report abuse section start -->
+					   <?php if($data_arr->user_id != $logged_user_id):?>
+				  <div class="comments-number content-width" id="text-section-<?=$msg_id?>" style="display:none">
+					<form id="frm_report_abuse_<?=$msg_id?>" onSubmit="return false;">
+						<textarea rows="5" cols="5" id="txt_abuse_profile_text_<?=$msg_id?>" style="width:461px;margin-bottom:10px;"></textarea>
+						<input type="button" class="yellow-btn" value="Send" onclick="report_abuse_profile(<?=$msg_id?>)"/>
+					</form>
+				</div>
+				<?php endif;?>
+				<!--report abuse section end -->
+                      <div  class="comments-number content-width" id="post-comment-box<?=$feed['id']?>">
+                        <div class="comments-number-mid content-width comment-box-manage-profile">
+                            <div class="heading">
+                                  <div class="left">
+                                        <h4><img alt="" src="images/no.png" class="cmnt" />  Comment  </h4>
+                                        <img class="wal-minus" alt="" src="images/minus-white.png" />
+                                  </div>
+                            </div>
+                              <div class="txt_content01 comments-number-content content-width"> 
+                              <textarea  id="feed_comment_box_<?=$feed['id']?>" cols="" rows="" style="width:461px; height:100px; margin-bottom:10px;"></textarea>
+                              <input type="hidden" name="i_newsfeed_id" id="i_newsfeed_id" value=""/>
+                              <input class="yellow-btn" id="post_comment_button" type="button"  value="Post" name="" onclick="post_comment(<?=$feed['id']?>);" />
+                              
+                              <br class="clr" />
+                              </div>
+                      </div>
+                  </div>
+                  <!--comment section end-->	
+                  </div>
+				  
+            <!-- slide section end -->
+		</div>
+		
+         <script type="text/javascript">
+					$('.left a').click(function(){
+						var index=$(this).index();
+						$('.new-wl > .comments-number').css('display','none');
+						$('.new-wl-right > .comments-number').css('display','none');
+						$(this).parent().parent().next('.new-wl').children('.comments-number').filter(':eq('+ index +')').slideDown('slow');
+					})
+						
+					$('.right a').click(function(){
+						var index=$(this).index();
+						$('.new-wl > .comments-number').css('display','none');
+						$('.new-wl-right > .comments-number').css('display','none');
+						$(this).parent().parent().next().next('.new-wl-right').children('.comments-number').filter(':eq('+ index +')').slideDown('slow');
+					})
+						
+						
+					$('.wal-minus').click(function(){
+						$(this).parents('.comments-number').slideUp('fast');
+					})
+					</script>
+        
+
+
+<script type="text/javascript">
+//Fetching the followings.........
+  function show_comments(i_newsfeed_id)
+  {
+	  
+	$('.new-wl > .comments-number').css('display','none');
+	$('.new-wl-right > .comments-number').css('display','none');
+	$('#post-comment-div'+i_newsfeed_id).slideDown('slow');
+		 
+	 showUILoader('<img src="'+base_url+'images/loading_big.gif" width="50"/> ');
+		$.ajax({
+			
+			url: base_url +'logged/my_wall/NEW_fetch_comment_wallpost/'+i_newsfeed_id,
+			dataType: 'json',
+			type: 'post',
+	
+			success: function (data, status) {
+				//hideUILoader();
+				$('#comment_content_div'+i_newsfeed_id).html(data.html_data);
+				hideUILoader_nodialog();
+				showUIMsg(data.msg);
+			},
+			error: function(data, status, e) {
+				hideUILoader('view_comments_div');
+				showUIMsg("Error!");
+				
+			}
+		});
+				 
+		 
+  }
+  
+  function show_people_liked(i_newsfeed_id)
+  {
+	   
+	   $('.new-wl > .comments-number').css('display','none');
+	   $('.new-wl-right > .comments-number').css('display','none');
+	   $('#post-like-div'+i_newsfeed_id).slideDown('slow');
+	   
+	   showUILoader_nodialog('<img src="'+base_url+'images/loading_big.gif" width="50"/> ');
+		$.ajax({
+			
+			url: base_url +'logged/my_wall/new_fetch_likes_on_wallpost/'+i_newsfeed_id,
+			dataType: 'json',
+			type: 'post',
+	
+			success: function (data, status) {
+				$('#like_content_div'+i_newsfeed_id).html(data.html_data);
+				hideUILoader_nodialog();//('liked_by_div');
+				showUIMsg(data.msg);
+			},
+			error: function(data, status, e) {
+				hideUILoader_nodialog();
+				showUIMsg("Error!");
+				
+			}
+		});
+				 
+		 
+  }
+  
+  function report_abuse_profile(id)
+  {
+	if($('#txt_abuse_profile_text_'+id).val() == ''){
+		  showUIMsg('Please provide reason.');
+		  return false;
+	  }
+	  showUILoader_nodialog();
+	  $.ajax({
+		  type: 'post',
+		  url: base_url + 'public_profile/abuseMedia/'+id+'/wall',
+		  data: {'s_reason':$('#txt_abuse_profile_text_'+id).val(),'abuser':<?=$data_arr->user_id?>},
+		  dataType: 'json',
+		  success: function(data, status) {
+			  
+			  showUIMsg(data.msg);
+			  $('#txt_abuse_profile_text_'+id).val('');
+			  //$('.link-report').trigger('click');
+			  $("#text-section-"+id).css("display","none");
+			  hideUILoader_nodialog();
+		  }	// end of success function...
+	  });
+  }
+  
+  
+  function get_feed_details_id(f_id)
+  {
+	//alert(f_id);
+	
+	showUILoader('<img src="'+base_url+'images/loading_big.gif" width="50"/>');
+	 $.ajax({
+		  type: 'post',
+		  url: base_url + 'logged/my_wall/get_feed_by_id/'+f_id,
+		 // data: {'s_reason':$('#txt_abuse_profile_text_'+id).val(),'abuser':<?=$data_arr->user_id?>},
+		  dataType: 'json',
+		  success: function(data, status) {
+			  $('#post_content_'+f_id).html('');
+			  //$('.link-report').trigger('click');
+			  $('#post_content_'+f_id).html(data.content);
+			  //$("#text-section-"+id).css("display","none");
+			   $("#post_content_"+f_id).find("script").each(function(i) {
+                    eval($(this).text());
+                });
+			  hideUILoader_nodialog();
+		  }	// end of success function...
+	  });
+  }
+  $(function()
+{
+	/**---------------- Multiple Upload -------------------------*/
+	var feed="<?=$feed['id']?>";
+	
+	var btnUpload	= $('#btn_upload_'+feed);
+	var status	= $('#status');
+    var errMsg = $('#err_article_img_'+feed);
+	
+	var _temp_img_path = base_url +'uploads/wall_tmp/';
+	
+	var ajaxURL = base_url +'newsfeed/upload_multiple_img_AJAX';
+	
+        
+        
+	new AjaxUpload(btnUpload, {	action: ajaxURL,
+					name: 'uploadfile',
+					onSubmit: 	function(file, ext)
+							{
+							//alert(feed);
+								if (! (ext && /^(jpg|png|jpeg|gif|bmp)$/.test(ext)))
+								{
+									// extension is not allowed 
+									errMsg.html('* Seuls les fichiers JPG, PNG ou GIF sont acceptés.');
+									return false;
+								}
+                                errMsg.empty();
+								status.html('<div class="info_msg">Téléchargement ...</div>');
+								showLoading();
+							},
+					onComplete: 	function(file, response)
+							{
+								//On completion clear the status
+								var arr = Array();
+								//// alert( response );
+								arr = response.split('|@sep@|');
+								if(arr[0]==="ok")
+								{
+									var nm_wo_dot = arr[2].replace('.','');
+									var nm_w_sep = arr[2].replace('.', '|@SEP@|');
+									status.html('<div class="ok_msg">Upload de fichier avec succès ...</div>');
+                                    
+									var _temp_img = _temp_img_path + arr[1];
+									var radio_fld_id = arr[2].replace('.','');
+									/* <input id="'+ radio_fld_id +'" name="rdo_main_pic" type="radio" value="'+ nm_w_sep +'" class="radio_primary" />*/
+									
+									$('#all_photos_'+feed).append($('<div id="div'+ nm_wo_dot +'" ><div class="view-thumb"  style="background:url('+ _temp_img +')  no-repeat center;max-width:60; height:60;"><a href="javascript:void(0);" class="remove" onclick="javascript:delpic_edit(\''+ nm_w_sep +'\')"></a></div></div>'));
+																		
+									$('#'+ radio_fld_id).attr('checked', 'checked');
+									$("#clr_div").remove();
+									
+									$('<div id="clr_div" class="clr"></div>').appendTo('#all_photos');
+                                    
+									$('<input type="hidden" id="hid_'+ radio_fld_id +'" name="photo[]" />').appendTo('#hdnflds_'+feed).val(arr[2]);
+									
+									if( $('#all_photos_'+feed).css('display')=='none' ){
+										$('#all_photos_'+feed).show();
+									//appbtnUpload.hide();
+								                                    }
+                                                                            else
+                                                                            {
+                                                                                    status.html(arr[2]);
+                                                                            }
+								hideLoading();
+							}
+                                                      	
+					}
+                                        });
+					
+	/*------------------- Done ------------------*/
+
+
+
+
+
+
+
+
+});
+
+function delpic_edit(filename)
+{
+var feed="<?=$feed['id']?>";
+	var radioid	= filename.replace('|@SEP@|', '');
+	var radiolength	= $('input[name=rdo_main_pic]').length;
+	var selectedIndex	= $('input[name=rdo_main_pic]:checked').index('input[name=rdo_main_pic]') ;
+	
+	if(radiolength > 1)
+	{
+		if(selectedIndex==0)
+		{
+			selectedIndex	=	1;
+		}
+		else
+			selectedIndex	= selectedIndex-1;
+	}
+	
+	var status	= $('#status');
+	var btnuplad = $('#btn_upload_'+feed);
+	var delAJAXurl = base_url +'newsfeed/delete_tmp_image_AJAX/'+ filename.replace('|@SEP@|', '/') + '/extraparam/';
+	
+	$.get(delAJAXurl, function(msg){
+							   
+		if(msg === 'ok')
+		{
+			//selectedIndex	= selectedIndex-1;
+			if(selectedIndex!= -1)
+			{
+				$('input[name=rdo_main_pic]:eq('+selectedIndex+')').attr('checked', 'checked');
+			}
+			
+			$("#div"+filename.replace('|@SEP@|','')).remove();	
+			$("#hid_"+filename.replace('|@SEP@|','')).remove();
+			
+			//search_for_other();
+			
+			status.html('<div class="ok_msg">Image deleted successfully ...</div>');
+			btnuplad.show();
+		}
+		else
+		{
+			status.attr('class', 'ok');
+			status.html('<div class="err_msg">Image cannot be deleted!</div>');
+		}
+	});
+};  
+var i_image_del='';
+function delete_pic(image,feed)
+{
+
+ i_image_del=$('#del_img'+feed).val();
+ if(i_image_del != '')
+ {
+i_image_del+=','+image;
+}
+else
+{
+i_image_del+=image;
+}
+//$("#div"+image).css("display","none");
+
+//alert(i_image_del);
+$('#del_img'+feed).val('');
+$('#del_img'+feed).val(i_image_del);
+//$('#i_image_name_'+feed).val(image);
+//show_dialog('photo-popup');
+}
+function delete_post_pic()
+{
+hide_dialog();
+	var feed="<?=$feed['id']?>";
+	var image=$('#i_image_name_'+feed).val();
+	$.ajax({
+		  type: 'post',
+		  url: base_url + 'newsfeed/delete_post_pic/',
+		 data: {'f_id':feed,'image':image},
+		  dataType: 'json',
+		  success: function(data, status) {
+			  $('#post_content_'+f_id).html('');
+			  //$('.link-report').trigger('click');
+			  $('#post_content_'+f_id).html(data.content);
+			  //$("#text-section-"+id).css("display","none");
+			   $("#post_content_"+f_id).find("script").each(function(i) {
+                    eval($(this).text());
+                });
+			  hideUILoader_nodialog();
+		  }	// end of success function...
+	  });
+	
+}
+ function show_hidden(feed_id)
+ {
+$('.view-thumb').parent('div').show();
+$('#del_img'+feed_id).val('');
+}
+$(document).ready(function(){
+
+});
+function edit_post_feed(feed_id)
+{
+//alert('11');
+ 
+ var edit_feed = { 
+        beforeSubmit:  showLoading,  // pre-submit callback 
+        success:       validateFrmedit // post-submit callback 
+    }; 
+    // bind to the form's submit event 
+   // $('#public_wall_post_form_'+feed_id).submit(function() {
+        $('#public_wall_post_form_'+feed_id).ajaxSubmit(edit_feed);
+        return false;
+//});
+}
+function validateFrmedit(jsondata)
+{
+//alert('posted');
+	//alert(jsondata.feed);
+	var data = JSON.parse(jsondata);
+	//alert(data.msg); alert(data.vid_msg);
+	if(data.success==false) 
+	{
+		hideLoading(); 
+		if(data.vid_msg == ''){
+			showUIMsg(data.msg);
+			$('#text_count').html('0');
+		}else{
+			showUIMsg(data.vid_msg);
+		}
+	}
+	else {
+		hideLoading(); 
+		
+		showUIMsg(data.msg);	
+		location.reload();
+		//window.location.href=g_controller_url;
+	}
+}
+</script>
+
+<div class="lightbox delete-page-popup photo-popup" style="width: 245px;; left: 296px;">
+      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="<?=base_url()?>images/close.png" alt="" /></a></div>
+      <div class="top"><div>&nbsp;</div></div>
+      <div class="mid">
+            <div class="heading" style="margin-bottom:0px;">
+                  <div class="left">
+                        <h4>Delete Photo</h4>
+                  </div>
+            </div>
+               <div class="shade_box_white" style="padding:8px 0px;">
+               <div style="padding-bottom:10px;">
+               <p class="center-text" style="line-height:23px; color:#494949;">Do you really want to delete NetPal?</p>
+               </div>
+               <form action="" method="post" enctype="multipart/form-data" >
+				  <input type="hidden" name="i_image_name" id="i_image_name_<?=$feed['id']?>" value="" />
+                 <input name="" type="button" value="Yes" class="popup-yes" onClick="delete_post_pic()"/>
+                    <input name="" type="button" value="No" class="popup-no" onclick="hide_dialog()"/>
+               </form>   
+               <div class="clr"></div>
+            </div>
+            
+      </div>
+      <div class="bot"><div>&nbsp;</div></div>
+</div>
+<?php } ?>
+

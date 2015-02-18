@@ -1,0 +1,125 @@
+<!DOCTYPE html> <html><head> <title>Browser not supported</title> <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> <style>
+		html {
+			overflow: auto;
+			font: 75% "segoe ui",arial,sans-serif;
+		}
+
+		body {
+			background: url("img/browsernotsupported/not-supported-background.png") transparent;
+			color: #ECEDED;
+		}
+
+		html, body, #solutionFrame {
+			height: 100%;
+			min-height: 100%;
+			overflow-x: hidden;
+		}
+
+		html, body, body > div, h1, p, ul {
+			list-style: none outside none;
+			margin: 0px;
+			padding: 0px;
+		}
+
+		user agent stylesheet body {
+			display: block;
+			margin: 8px;
+		}
+
+		.popup {
+			background: #DDE0E2 repeat-x url(img/browsernotsupported/popup-gradient.png);
+			color: #4D5D6B;
+			border: 1px solid;
+			border-color: #364047;
+			border-color: rgba(255, 255, 255, 1);
+			border-radius: 5px;
+			box-shadow: 0 0 0 5px rgba(0, 0, 0, .3);
+			padding: 10px 10px 0 10px;
+			position: absolute;
+			left: 50%;
+			top: 50%;
+			margin: -210px;
+			width: 520px;
+			font-size: 16px;
+		}
+
+		.popup-title {
+			color: #3B454E;
+			font-size: 18px;
+			font-weight: normal;
+			cursor: default;
+			margin-top: -5px;
+		}
+
+		.popup-content {
+			padding-bottom: 12px;
+		}
+
+		.dialog-white-box {
+			color: #333;
+			background-color: #FFF;
+			border-radius: 4px;
+			border: 1px solid #79838E;
+			box-shadow: 0 1px 0 0 #fff;
+			padding: 20px 40px;
+			text-align: center;
+		}
+
+		.cardview li {
+			display: inline-block;
+			padding: 0;
+			margin: 0;
+			width: 100px;
+			float: left;
+		}
+
+		.bico-chrome a, .bico-firefox a, .bico-safari a, .bico-ie a {
+			display: inline-block;
+			width: 100px;
+			padding-top: 100px;
+			text-align: center;
+			background-image: url(img/browsernotsupported/supportedBrowsers.png);
+			background-repeat: no-repeat;
+			margin: 0;
+			text-decoration: none;
+			color: inherit;
+			font-size: 18px;
+			margin: 10px;
+		}
+
+		.bico-chrome a {
+			background-position: 10px 0px;
+		}
+
+		.bico-firefox a {
+			background-position: -120px 0px;
+		}
+
+		.bico-safari a {
+			background-position: -240px 0px;
+		}
+
+		.bico-ie a {
+			background-position: -370px 0px;
+			margin-left: 10px;
+		}
+
+		.dialog-icon {
+			background-image: url("img/browsernotsupported/warning.png");
+			background-repeat: no-repeat;
+			content: "";
+			height: 32px;
+			left: 20px;
+			position: absolute;
+			width: 32px;
+			margin-top: -5px;
+		}
+
+		/* Dialog styles */
+		.popup h3 {
+			margin: 16px 0;
+			font-size: 16px;
+			font-weight: normal;
+			padding-left: 52px;
+		}
+	</style> </head> <body> <div id="browserUnsupported" class="popup"> <div class="popup-title"> <span class="">Your browser is not supported</span> </div> <div class="popup-content"> <h3> <div class="dialog-icon"></div> To use 123 Flash Chat, we recommend using the latest version of:</h3> <div class="dialog-white-box"> <ul class="cardview"> <li class="bico-chrome"><a href="https://www.google.com/chrome" target="_blank">Chrome</a></li> <li class="bico-firefox"><a href="http://www.mozilla.org/firefox" target="_blank">Firefox</a></li> <li class="bico-safari"><a href="http://www.apple.com/safari" target="_blank">Safari</a></li> <li class="bico-ie"><a href="http://www.microsoft.com/ie" target="_blank">IE</a></li> </ul> <div style="clear: both"></div> </div> </div> </div> </body></html>

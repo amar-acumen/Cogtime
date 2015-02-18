@@ -1,0 +1,55 @@
+ <?php    
+            $city     = $result["s_city"];
+            $state    = $result["s_state"];
+            $country  = get_country_name_by_id($result["i_country_id"]);  
+            
+            $personal_address=array();
+           
+            if(!empty($city))
+                $personal_address['city']=$city;
+            if(!empty($state))
+                $personal_address['state']=$state;
+            if(!empty($country))    
+                $personal_address['country']=$country;
+            
+            
+            $address= implode(', ',$personal_address);
+             ?> 
+              
+              <tr>
+                <td colspan="3" align="left" valign="top" height="30" ><h3><?php echo $result['s_title'].' '.$result['s_profile_name'];?></h3></td>
+              </tr>
+              <tr>
+                <td align="left" valign="top" height="25" width="180" class="label">Location</td>
+                <td align="left" valign="top" width="20" class="label">:</td>
+                <td align="left" valign="top" ><?php echo $address;?></td>
+              </tr>                                                    
+              <tr>
+                <td align="left" valign="top" height="25" width="180" class="label">Date of Birth</td>
+                <td align="left" valign="top" width="20" class="label">:</td>
+                <td align="left" valign="top" ><?php if($result['dt_dob'] != "0000-00-00") echo getShortDateWithTime($result['dt_dob'],4);?></td>
+              </tr>
+              <tr>
+                <td align="left" valign="top" height="25" width="180" class="label">Want to be Prayer Partner</td>
+                <td align="left" valign="top" width="20" class="label">:</td>
+                <td align="left" valign="top" ><?php echo ($result['e_want_prayer_partner']=='N')? 'No':'Yes';?></td>
+              </tr>                            
+              <tr>
+                <td align="left" valign="top" height="25" width="180" class="label">Want to be Net Pal</td>
+                <td align="left" valign="top" width="20" class="label">:</td>
+                <td align="left" valign="top" ><?php echo $result['s_want_net_pal'];?></td>
+              </tr>
+              <tr>
+                <td align="left" valign="top" height="25" width="180" class="label">My Website</td>
+                <td align="left" valign="top" width="20" class="label">:</td>
+                <td align="left" valign="top" ><a href="javascript:void(0);"><?php echo $result['s_website'];?></a></td>
+              </tr>
+              <tr>
+                <td align="left" valign="top" height="25" width="180" class="label">My Profile URL</td>
+                <td align="left" valign="top" width="20" class="label">:</td>
+                <td align="left" valign="top" ><a href="http://www.cogtime.com/<?php echo $result['s_profile_url_suffix'];?>" target="_blank">www.cogtime.com/<?php echo $result['s_profile_url_suffix'];?></a></td>
+              </tr>
+              <tr>
+                <td align="left" valign="bottom" height="40" colspan="2">&nbsp;</td>
+                <td align="left" valign="bottom"><a href="javascript:void(0);" class="edit-btn" onclick="showPersonalEdit(this)">Edit</a></td>
+              </tr>

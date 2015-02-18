@@ -1,0 +1,76 @@
+ <div class="prfile-sec-content-box " >
+                        <h2>
+                        Education
+                        </h2>
+                        <div class="profile-sml-sec">
+                        
+                            <?php $img = get_profile_image($public_arr_profile_info['id'], 'main');?>
+                            <div  class="prfile-sec-photo" style=" background:URL('<?=$img?>')no-repeat center;width:100px; height:100px;" title="member" ></div>
+                            <div class="prfile-sec-content-box-right">
+            <?php #pr($user_education_arr);
+					if(count($user_education_arr) > 0):
+						foreach($user_education_arr as $key=>$val):
+						
+							  $address = array();
+							   
+							   if(!empty($val['s_school_city']))
+							   $address['s_school_city']=get_city_name_by_id($val['s_school_city']);
+			   
+							  if(!empty($val['s_school_state']))
+								 $address['s_school_state']=get_state_name_by_id($val['s_school_state']);
+							  
+							  if(!empty($val['s_school_country']))    
+								 $address['s_school_country']=get_country_name_by_id($val['s_school_country']);
+								 
+							  $address_str = implode(', ',$address);
+						
+			?>
+            
+            <table width="100%" cellspacing="0" cellpadding="0" border="0" class="pro-table">
+               <tr>
+                  <td valign="top" align="left" width="100">School/College:</td>
+                  <td valign="top" align="left"><?=$val['s_school_name']?></td>
+                </tr>
+                <tr>
+                  <td valign="top" align="left" >School Location: </td>
+                  <td valign="top" align="left"><?=$address_str?></td>
+                </tr>
+                <tr>
+                  <td valign="top" align="left" >Class Year: </td>
+                  <td valign="top" align="left"><?=$val['i_class_year']?></td>
+                </tr>
+                <tr>
+                  <td valign="top" align="left" >Degree: </td>
+                  <td valign="top" align="left"><?=$val['s_degree']?></td>
+                </tr>
+              </table>
+            <?php
+						endforeach;
+						else :
+			 ?>
+             <table width="100%" cellspacing="0" cellpadding="0" border="0" class="pro-table">
+               <tr>
+                  <td valign="top" align="left" width="100">School/College:</td>
+                  <td valign="top" align="left"></td>
+                </tr>
+                <tr>
+                  <td valign="top" align="left" >School Location: </td>
+                  <td valign="top" align="left"></td>
+                </tr>
+                <tr>
+                  <td valign="top" align="left" >Class Year: </td>
+                  <td valign="top" align="left"></td>
+                </tr>
+                <tr>
+                  <td valign="top" align="left" >Degree: </td>
+                  <td valign="top" align="left"></td>
+                </tr>
+              </table>
+            <?php
+					endif; 
+			?>
+      
+     </div>
+    <br class="clear"/>
+</div>
+</div> 

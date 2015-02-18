@@ -1,0 +1,394 @@
+<?php include(APPPATH."views/layouts/logged_header.phtml");?>
+<!-- NAVIGATION SECTION -->
+      <?php include(APPPATH."views/layouts/nav.phtml");?>
+<!-- /NAVIGATION SECTION -->
+<div class="clr"></div>
+<!-- CONTENT SECTION -->
+<div id="content_section">
+      <div id="container">
+            <div id="top_corner">&nbsp;</div>
+            <div id="mid_content">
+                  <!-- latest news -->
+                  <?php include(APPPATH ."views/layouts/latest_news.phtml");?>
+                  <!-- /latest news -->
+                  <div class="clr"></div>
+                  <!-- main container -->
+                  <div id="main_container">
+                  		<!-- left container -->
+                        <?php include(APPPATH."views/layouts/leftbar.phtml");?>
+                        <!-- /left container -->
+                        
+                        <div id="mid_container">
+                        
+                        	<!--sub page links -->
+                              <div class="link-div">
+                                  <ul>
+                                   
+                                    <li><a href="my-prayer-partners.html" class="<?php echo ($page_name=='my-prayer-partners')?'current':'';?>"><span>My Prayer Partners</span></a></li>
+                                          <li><span><img src="images/greynew-pipe.png"/></span></li>
+                                    <li><a href="prayer-partner-request.html" class="<?php echo ($page_name=='prayer-partner-request')?'current':'';?>"><span>Prayer Partner Requests</span></a></li>
+                                    <li><span><img src="images/greynew-pipe.png"/></span></li>
+                                    <li><a href="search-invite-prayer-partner.html" class="<?php echo ($page_name=='search-invite-prayer-partner')?'current':'';?>"><span>Search  &amp;  Invite Prayer Partners</span></a></li>
+                                </ul>
+                                <div class="clr"></div>
+                              </div>
+                              <!--/sub page links -->
+                              <div class="page_heading">
+                                    <div class="left"><img src="images/icons/icon25.png" alt="" /> Search & Invite Prayer Partner </div>
+                                    
+                              </div>
+                              <div class="arrow_btm"></div>
+                              <div class="frm_box shade_box_01" style="padding-bottom:17px;">
+                            
+							   <?php 
+                                      if($this->session->userdata('is_preserve_search')){
+                                ?>
+                                
+                                      <form id="frm_Search_prayer_partners"  method="post" action=""  enctype="multipart/form-data" onsubmit="return false;" name="frm_Search_prayer_partners">
+                                
+                                      <div class="page_heading_01">
+                                            <div class="left"><img src="images/icons/search.png" alt="" /> Search Partner  by</div>
+                                           <?php /*?> <div class="right error_txt" style="padding-right:10px;">You need to complete at least 2 fields to search</div><?php */?>
+                                             <div class="clr"></div>
+                                      </div>
+                                      
+                                      
+                                      <div class="lable02">First Name:</div>
+                                      <div class="field01">
+                                            <input name="txt_fname" id="txt_fname" type="text" value="<?=$this->session->userdata('s_fname');?>" style="width:258px;"/>
+                                      </div>
+                                      <div class="lable02">Last Name:</div>
+                                      <div class="field01">
+                                            <input name="txt_lname" id="txt_lname" type="text" value="<?=$this->session->userdata('s_lname');?>" style="width:258px;"/>
+                                      </div>
+                                      <div class="clr"></div>
+                                      <div class="lable02">Email ID:</div>
+                                      <div class="field01">
+                                            <input name="txt_email" id="txt_email" type="text" value="<?=$this->session->userdata('s_email');?>" style="width:258px;"/>
+                                      </div>
+                                      
+                                      <div class="clr"></div>
+                                      <div class="lable02">Language:</div>
+                                      <div class="field01">
+                                           <select name="language" id="language" style="width:269px;">
+                                                  <option value="-1" >Select</option>
+                                                  <?=makeNetpalLanguage($this->session->userdata('language'))?>
+                                            </select>
+                                      </div>
+                            <?php /*?>          <div class="lable02">Country:</div>
+                                      <div class="field01">
+                                             <select name="txt_country" id="txt_country"  style="width:269px;"/>
+                                           <option value="-1">Select</option>
+                                           <?=makeOptionCountry(get_country_id_by_name($this->session->userdata('s_country')));?>
+                                           </select>
+                                      </div>
+                                      <div class="clr"></div>
+                                      <div class="lable02">Location: </div>
+                                      <div class="field01">
+                                            <input name="txt_location" id="txt_location" type="text" value=""<?=$this->session->userdata('location')?>"" style="width:258px;"/>
+                                      </div>
+                                       <span style="font-weight: normal;font-size: 11px;font-style: italic;">(Note : Please use ',' (comma) between places.) </span> 
+                                      <?php */?>
+                                     <?php /*?> <div class="lable02">City:</div>
+                                      <div class="field01">
+                                            <input name="txt_city" id="txt_city" type="text" value="<?=$this->session->userdata('s_city');?>" style="width:258px;"/>
+                                      </div>
+                                      <div class="clr"></div><?php */?>
+                                      
+                                      <div class="lable02">Location: </div>
+                                      <div class="field01">
+                                            <input name="txt_location" id="txt_location" type="text" value="<?=$this->session->userdata('location')?>" style="width:258px;"/>
+                                      </div>
+                                      <div class="clr"></div>
+                                       <div style="font-weight: normal;font-size: 11px;font-style: italic; margin-left:124px;">(Note : Please use ',' (comma) between places.) </div> 
+                                      <div class="clr"></div>
+                                     
+                                      <div class="lable02"> Age Range: </div>
+                                      
+                                      <div class="field01"> 
+                                          <!-- <input name="txt_time" id="txt_time" type="text"  style="width:200px; "/>-->
+                                           <select style="width:115px;margin-right:5px;" name="age_from" id="age_from">
+                                                     <option value="-1">Min Age</option>
+                                                     <?=makeOptionNumber(18,80, 1,$this->session->userdata('s_age_from'))?>
+                                           </select>
+                                           <span class="spanned_left"> &nbsp; To  &nbsp;</span>
+                                           <select style="width:115px;" name="age_to" id="age_to">
+                                                     <option value="-1">Max Age</option>
+                                                     <?=makeOptionNumber(18,80, 1, $this->session->userdata('s_age_to'))?>
+                                          </select>
+                                           
+                                           
+                                           
+                                      </div>
+                                      <div class="lable02">Gender:</div>
+                                      <div class="field01">
+                                            <select name="gender" id="gender" style="width:269px;">
+                                                  <option value="-1" >Select</option>
+                                                  <option value="M" <?=($this->session->userdata('e_gender')== 'M')?'selected="selected"':'';?>>Male</option>
+                                                  <option value="F" <?=($this->session->userdata('e_gender')== 'F')?'selected="selected"':'';?>>Female</option>
+                                            </select>
+                                        <?php /*?>    <script type="text/javascript">
+                                          $(document).ready(function(arg) {
+                                              $("#gender").msDropDown();
+                                              $("#gender").hide();
+                                          })
+                                      </script><?php */?>
+                                      </div>
+                                      <div class="clr"></div>
+                                      <br />
+                                      <div class="lable02">Church:</div>
+                                      <div class="field01">
+                                            <input name="txt_church_name" id="txt_church_name" type="text" value="<?=$this->session->userdata('s_church_name');?>" style="width:258px;"/>
+                                      </div>
+                                      <div class="clr"></div>
+                                      <?php /*?><div class="lable02">Church Location:</div>
+                                      <div class="field01">
+                                            <input name="txt_c_address" id="txt_c_address" type="text"  style="width:190px;"/>
+                                      </div>
+                                      <div class="clr"></div><?php */?>
+                                      <div class="lable02">Denomination:</div>
+                                      <div class="field01">
+                                            <select name="denomination" id="denomination" style="width:269px;">
+                                                  <option value="-1">Select Denomination </option>
+                                                   <?=makeOptionDenomination(encrypt($this->session->userdata('s_denomination')))?>
+                                            </select>
+                                      
+                                      </div>
+                                      <div class="clr"></div>
+                                      <div class="lable02">&nbsp;</div>
+                                      <div class="field01">
+                                            <input name="search_basic" id="search_basic" type="hidden" value="Y"/>
+                                            <input name="" type="submit" value="Search"  class="btn"/>
+                                           <?php /*?> <input name="" type="button" value="Suggest"  class="btn"/><?php */?>
+                                      </div>
+                                     
+                                      <div class="clr"></div>
+                                     </form>
+                                <?php
+                                      }
+									  else{
+                                ?>
+                                	  <form id="frm_Search_prayer_partners"  method="post" action=""  enctype="multipart/form-data" onsubmit="return false;" name="frm_Search_prayer_partners">
+                                
+                                      <div class="page_heading_01">
+                                            <div class="left"><img src="images/icons/search.png" alt="" /> Search Partner  by</div>
+                                           <?php /*?> <div class="right error_txt" style="padding-right:10px;">You need to complete at least 2 fields to search</div><?php */?>
+                                             <div class="clr"></div>
+                                      </div>
+                                      
+                                      
+                                      <div class="lable02">First Name:</div>
+                                      <div class="field01">
+                                            <input name="txt_fname" id="txt_fname" type="text" value="" style="width:258px;" />
+                                      </div>
+                                      <div class="lable02">Last Name:</div>
+                                      <div class="field01">
+                                            <input name="txt_lname" id="txt_lname" type="text" value="" style="width:258px;"/>
+                                      </div>
+                                      <div class="clr"></div>
+                                      <div class="lable02">Email ID:</div>
+                                      <div class="field01">
+                                            <input name="txt_email" id="txt_email" type="text" value="" style="width:258px;"/>
+                                      </div>
+                                      
+                                      <div class="clr"></div>
+                                      <div class="lable02">Language:</div>
+                                      <div class="field01">
+                                           <select name="language" id="language" style="width:269px;">
+                                                  <option value="-1" >Select</option>
+                                                  <?=makeNetpalLanguage()?>
+                                            </select>
+                                      </div>
+                                     <?php /*?> <div class="lable02">Country:</div>
+                                      <div class="field01">
+                                             <select name="txt_country" id="txt_country"  style="width:269px;"/>
+                                           <option value="-1">Select</option>
+                                           <?=makeOptionCountry();?>
+                                           </select>
+                                      </div>
+                                      <div class="clr"></div>
+                                      <div class="lable02">State:</div>
+                                      <div class="field01">
+                                            <input name="txt_state" id="txt_state" type="text" value="" style="width:258px;"/>
+                                      </div>
+                                      <div class="lable02">City:</div>
+                                      <div class="field01">
+                                            <input name="txt_city" id="txt_city" type="text" value="" style="width:258px;"/>
+                                      </div><?php */?>
+                                      
+                                       <div class="lable02">Location: </div>
+                                      <div class="field01">
+                                            <input name="txt_location" id="txt_location" type="text" value=""<?=$this->session->userdata('location')?>"" style="width:258px;"/>
+                                      </div>
+                                      <div class="clr"></div>
+                                       <div style="font-weight: normal;font-size: 11px;font-style: italic; margin-left:124px;">(Note : Please use ',' (comma) between places.) </div> 
+                                      <div class="clr"></div>
+                                   
+                                      <div class="lable02"> Age Range: </div>
+                                      
+                                      <div class="field01">
+                                          <!-- <input name="txt_time" id="txt_time" type="text"  style="width:200px; "/>-->
+                                           <select style="width:115px;margin-right:5px;" name="age_from" id="age_from">
+                                                     <option value="-1">Min Age</option>
+                                                     <?=makeOptionNumber(18,80)?>
+                                           </select>
+                                           <span class="spanned_left"> &nbsp; To  &nbsp;</span>
+                                           <select style="width:115px;" name="age_to" id="age_to">
+                                                     <option value="-1">Max Age</option>
+                                                     <?=makeOptionNumber(18,80)?>
+                                          </select>
+                                           
+                                           
+                                           
+                                      </div>
+                                      <div class="lable02">Gender:</div>
+                                      <div class="field01">
+                                            <select name="gender" id="gender" style="width:269px;">
+                                                  <option value="-1" >Select</option>
+                                                  <option value="M" >Male</option>
+                                                  <option value="F" >Female</option>
+                                            </select>
+                                        <?php /*?>    <script type="text/javascript">
+                                          $(document).ready(function(arg) {
+                                              $("#gender").msDropDown();
+                                              $("#gender").hide();
+                                          })
+                                      </script><?php */?>
+                                      </div>
+                                      <div class="clr"></div>
+                                     
+                                      <div class="lable02">Church:</div>
+                                      <div class="field01">
+                                            <input name="txt_church_name" id="txt_church_name" type="text" value="" style="width:258px;"/>
+                                      </div>
+                                      <div class="clr"></div>
+                                      <?php /*?><div class="lable02">Church Location:</div>
+                                      <div class="field01">
+                                            <input name="txt_c_address" id="txt_c_address" type="text"  style="width:190px;"/>
+                                      </div>
+                                      <div class="clr"></div><?php */?>
+                                      <div class="lable02">Denomination:</div>
+                                      <?php // echo 'dd  '.$this->session->userdata('s_denomination')?>
+                                      <div class="field01">
+                                            <select name="denomination" id="denomination" style="width:269px;">
+                                                  <option value="-1">Select Denomination </option>
+                                                   <?=makeOptionDenomination()?>
+                                            </select>
+                                           <?php /*?> <script type="text/javascript">
+                                          $(document).ready(function(arg) {
+                                              $("#denomination").msDropDown();
+                                              $("#denomination").hide();
+                                          })
+                                      </script><?php */?>
+                                      </div>
+                                      <div class="clr"></div>
+                                      <div class="lable02">&nbsp;</div>
+                                      <div class="field01">
+                                            <input name="search_basic" id="search_basic" type="hidden" value="Y"/>
+                                            <input name="" type="submit" value="Search"  class="btn"/>
+                                           <?php /*?> <input name="" type="button" value="Suggest"  class="btn"/><?php */?>
+                                      </div>
+                                     
+                                      <div class="clr"></div>
+                                     </form>
+                                
+                                <?php }
+								?>
+                             </div>
+                              <DIV id="srch_prayer_partner" >
+                                  <?=$result_content?>
+                              </DIV>
+                                    
+                             
+                              
+                        </div>
+                        <!-- /left container -->
+                        <!-- right container -->
+                        <?php include(APPPATH."views/layouts/rightbar.phtml");?>
+                        <!-- /right container -->
+                  </div>
+                  <!-- /main container -->
+                  <div class="clr"></div>
+            </div>
+            <div id="bot_corner">&nbsp;</div>
+      </div>
+      <div class="clr"></div>
+</div>
+<!-- /CONTENT SECTION -->
+<div class="clr"></div>
+<!-- FOOTER SECTION -->
+<?php include(APPPATH."views/layouts/footer.phtml");?>
+<!-- /FOOTER SECTION -->
+<?php include(APPPATH."views/logged/blocks/common_popup.phtml");?>
+
+
+
+<script type="text/javascript">
+$(document).ready(function(arg) {
+ 
+ $('#frm_Search_prayer_partners').submit(function(){ 
+
+	if($('#age_from').val() == '-1' && $('#age_to').val() == '-1' && $('#denomination').val() == '-1'
+				&& $('#gender').val() == '-1' && $('#txt_church_name').val() == ''
+				&& $('#txt_email').val() == '' && $('#txt_fname').val() == '' && $('#txt_lname').val() == ''
+				 && $('#txt_location').val() == '' ){
+					 
+					 showUIMsg("Please give atleast one search condition.");
+		   return false;
+	}
+	else{
+	  
+      var datatosend=$("#frm_Search_prayer_partners").serialize();
+      
+       showBusyScreen();
+       //alert(datatosend);
+       $.ajax({
+          type: "POST",
+          url: base_url+"logged/my_prayer_partners/ajax_pagination",
+          data: datatosend,
+          success: function(data){
+           $('#srch_prayer_partner').html(data);
+              hideBusyScreen(); 
+          }
+        });  
+        
+	}
+    });
+ 
+ 
+ });
+</script>
+<script>
+$(function() {
+/*var m= "2220 AUGY,2220 BAZOCHES-SUR-VESLES,2220 BRAINE,2220 BRENELLE";
+alert(m.replace(/[,]/g,"<br>"));*/
+
+$("#txt_location").autocomplete("<?php echo base_url();?>logged/prayer_wall/send_cities", {
+    width: 268,
+    selectFirst: true,
+    minChars: 3,
+    multiple: false,
+	multipleSeparator: "\n",
+	max: null,
+    //matchContains: false,
+    formatItem: formatItem
+   });
+   
+  
+ 
+   
+});
+	
+function formatItem(row) 
+{//console.log(row);
+ //var n=row[0].replace(/[,]/g,"\n"); console.log(n);	
+ if(row[0]!="No match found")
+  return  "<span style='font-size:11px; font-weight:normal; margin:0px; padding: 3px 5px ;cursor: pointer; display:block;'>" + row[0]+"</span>";
+ else
+  return " (<span style='font-size:11px;'>" +row[0]+"</span>)";
+}
+	
+
+
+
+</script>

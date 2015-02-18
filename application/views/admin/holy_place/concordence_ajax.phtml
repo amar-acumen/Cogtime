@@ -1,0 +1,73 @@
+                            <table width="100%" border="0" cellspacing="0" cellpadding="0" class="admin-table">
+							  <form name="concordance">
+                              <tr>
+
+                               <!-- <th align="center" valign="middle" height="30" width="80">Date/Time Posted</th>-->
+                                 <th align="center" valign="middle" height="30" width="80">Fruit Name</th>
+                                 <th align="center" valign="middle" height="30" width="400" class="last">Book Name - Chapter No.:Verse No.</th>
+                               
+                                <!--<th align="left" valign="middle" height="30" width="100">Posted By</th>
+                                <th align="left" valign="middle" height="30" width="450">Description</th>
+                                <th align="center" valign="middle" height="30" width="120">Request Type</th>
+                                <th align="center" valign="middle" height="30" width="100">Start date/Time</th>
+                                <th align="center" valign="middle" height="30" width="100">End date/Time</th>-->
+                                <!--<th width="103" height="30" align="center" valign="middle" class="last">Actions</th>
+  </tr>
+                              -->
+                              
+                         <?php
+                         #pr($info_arr);
+                            if(count($info_arr)){
+                            foreach($info_arr as $key=> $info){
+                        ?>
+                              </tr><tr>
+                    			<td align="center" valign="top"><?=$key?></td>
+                                <td align="center" valign="top">
+								<div style="max-height:200px;overflow-y:auto">
+								<ul class="book-name">
+								<?php foreach($info as $value)
+								{
+								if(in_array($value['verse_id'],$selected_verse))
+								{ 
+									$checked="checked";
+								}
+								else{
+								$checked="";
+								}
+									?>
+									
+									<!--<li><input type="checkbox" <?=$checked?> onChange="check_checkbox(this);" id="<?=$value['verse_id']?>">
+									<a href="javascript:void(0);" onclick="edit_concordence(<?=$value['verse_id']?>)"><?=$value['s_book_name']?>-<?=$value['bible_verse_no']?>:<?=$value['bible_chapter_no']?></a></li>-->
+									<li><input type="checkbox" <?=$checked?> onChange="check_checkbox(this);" id="<?=$value['verse_id']?>">
+									<a href="javascript:void(0);" onclick="view_concordence('<?=$value['verse_id']?>','<?=$value['s_book_name']?>','<?=$value['bible_verse_no']?>','<?=$value['bible_chapter_no']?>')"><?=$value['s_book_name']?>-<?=$value['bible_verse_no']?>:<?=$value['bible_chapter_no']?></a></li>
+									<?php
+									
+								}?>
+								
+								</ul></div> </td>
+                                 <?php /*?> <td align="center" valign="middle" class="last">
+                              <input name="" title="Edit" type="button" class="edit-button"  value="" onclick="window.location=admin_base_url+'holy-place/<?=$current_page?>/<?=$info['id']?>/edit-prayer-wall-photos.html'" style="margin-left: 45px;"/><?php */?>
+                               <?php /*?> <input name="" title="Delete" type="button" class="delete-button"  value="" onclick="return confirm_delete_(<?=$info['id']?>,<?=$current_page?>)"/><?php */?>
+                              <?php /*?> input id="status_<?=$info['id']?>" name="" title="Disable" type="button" class="btn-06"  value="<?=($info['i_is_enable']==0)? 'Enable':'Disable';?>" onclick="return change_status_(<?=$info['id']?>,<?=$info['i_is_enable']?>)"/>
+                            
+                                </td> <?php */?>
+                                
+                                
+                              </tr>
+
+                <?php    }
+                    }
+                    else{
+                ?>
+                     <tr>
+                          <td style="text-align:center;" height="80" colspan="20">No data available!!!</td>
+                     </tr>
+                
+                <?php
+                    }
+                ?>
+                              
+                       </form>
+                            </table>
+                            <input type="hidden" id="current_page" value="<?=$current_page?>" />
+

@@ -1,0 +1,251 @@
+<link rel="stylesheet" type="text/css" href="<?php echo  base_url()?>css/jquery.multiselect.css" />
+<link rel="stylesheet" type="text/css" href="<?php echo  base_url()?>css/jquery.multiselect.filter.css" />
+<link rel="stylesheet" type="text/css" href="<?php echo  base_url()?>css/prettify.css" />
+<!--<link rel="stylesheet" type="text/css" href="<?php echo  base_url()?>css/jquery-ui.css" />-->
+<script type="text/javascript" src="<?php echo  base_url()?>js/jquery.multiselect.js"></script>
+<script type="text/javascript" src="<?php echo  base_url()?>js/jquery.multiselect.filter.js"></script>
+<script type="text/javascript" src="<?php echo  base_url()?>js/prettify.js"></script>
+<script type="text/javascript">
+$(function(){
+		$("#friendSlct").multiselect().multiselectfilter();	
+		$("#ringselect").multiselect().multiselectfilter();
+		$("#netpalselect").multiselect().multiselectfilter();
+		$("#ppselect").multiselect().multiselectfilter();	
+		$("#pgselect").multiselect().multiselectfilter();
+		$("#frndinv").multiselect().multiselectfilter();	
+		$("#netpalinv").multiselect().multiselectfilter();
+		$("#ppinv").multiselect().multiselectfilter();
+		$("#pginv").multiselect().multiselectfilter();
+	
+	});
+	</script>
+<?php include(APPPATH."views/layouts/logged_header.phtml");?>
+            <!-- NAVIGATION SECTION -->
+      <?php include(APPPATH."views/layouts/nav.phtml");?>
+      <!-- /NAVIGATION SECTION -->
+      </div>
+</div>
+<!-- /HEADER SECTION -->
+<div class="clr"></div>
+
+<!-- CONTENT SECTION -->
+<div id="content_section">
+      <div id="container">
+
+            <div id="mid_content">
+                  <!-- latest news -->
+                  <?php include(APPPATH ."views/layouts/latest_news.phtml");?>
+                  <!-- /latest news -->
+                  <div class="clr"></div>
+                  <!-- main container -->
+                  <div id="main_container">
+                    <?php include(APPPATH."views/layouts/leftbar.phtml");?>
+                    
+                        <!-- mid container -->
+                        <div id="mid_container">
+<div style="margin-left:412px; margin-bottom:5px;">
+                     <input type="submit" class="sml_btn" name="reload_search" value="Back"  style=" background:none repeat scroll 0 0 #013D62;"  onclick="window.location='<?= $_SERVER['HTTP_REFERER'] ?>'"/>
+                    </div>
+  
+                              
+               
+
+                <div class="page_heading">
+                    <div class="left"><img alt="" src="images/icons/event.png" /> <?= $event_info['0']['s_title'] ?></div>
+					
+                    <ul class="pre-time-create-time">
+                        <li><strong>Created On:</strong> <?= getShortDate($event_info['0']['dt_created_on'], 5) ?></li>
+                    </ul>
+                </div>
+                        <!--sub page links -->
+                            <?php include("event_home_menu.phtml")?>
+							
+<?php// echo 1;exit;?>                        <!--/sub page links -->
+                        <?php// pr($ring_detail_arr) ?>
+
+                             
+                              
+                             <!-- <p class="nw-ring-heading">Invite Members</p>-->
+                              <div class="arrow_btm"></div>
+                   
+                              <div class="frm_box inbox_div_blue" style=" margin-top:0px;">
+                                
+                              <input type="hidden" name="event_id" id="event_id" value="<?= $event_id?>" />
+                                
+                                
+                                <div id="contact_list" >
+
+                                      <div class="selectRecipients" style="width: 450px; height:210px;">
+                                       <!--<?php 
+
+            
+                                         
+                                         ?>
+                                         <div class="image-block <?=$CSS?>">
+                                              <input  type="checkbox"  value="<?=encrypt($val['user_id'])?>" id="chkmember<?=$val['user_id']?>" name="chkmember<?=$val['user_id']?>" />
+                                              <div class="inside">
+                                                  <?php /*?><div style="background:url('<?=$img?>') no-repeat center;width:60px; height:60px;" class="pro_photo2"></div><?php */?>
+                                                  <img alt="Friend" src="<?=$img?>" /><br/><br/><br/>
+                                                  <a href="<?=$profile_link?>" ><span><p><?=$val['s_first_name']?></p></span></a>
+                                              </div>
+                                          </div>
+                                        
+                                            
+                                         
+                                              -->
+                                              <?php
+											  	/*$ring=get_invited($ring_id,cg_ring_invitation,'i_ring_id');
+												
+												foreach($ring as $val)
+												{
+													$ringinvited[]=$val['user_id'];
+												}
+												#pr($ringinvited);*/
+												//pr($event_invited,1);
+											  	echo get_invitation('event',$event_invited);
+											  ?>
+                                      </div> 
+                                      <div class="error_msg" id="err_send_recepients"></div>
+                                      
+                                      <div class="field03">
+                                        <input id="btn_submit" class="btn" type="button" onclick="return invite_event()" value="Invite" name="btn_submit" />
+                                        <!--<input id="btn_submit" class="btn" type="button" onclick="" value="Cancel" name="btn_submit">
+                                        -->
+                                      </div>
+                                      
+                                      
+                                </div><!--/contact_list-->
+                                
+                                <div class="clr"></div>
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                              </div><!--inbox_div_blue-->
+                              <?php
+                              //echo $current_page;
+                              //echo "view more: ".$view_more;
+                              //echo "current_page : ".$current_page;
+                              
+                              ?>
+                            
+                              
+                              
+                              
+                              
+                        </div>
+                        
+                        
+                        <!-- /mid container -->
+                        <!-- right container -->
+                          <?php include(APPPATH."views/layouts/rightbar.phtml");?>
+                        <!-- /right container -->
+                  </div>
+                  <!-- /main container -->
+                  <div class="clr"></div>
+            </div>
+            <div id="bot_corner">&nbsp;</div>
+      </div>
+      <div class="clr"></div>
+</div>
+<!-- /CONTENT SECTION -->
+<div class="clr"></div>
+<!-- FOOTER SECTION -->
+<?php include(APPPATH."views/layouts/footer.phtml");?>
+<?php include(APPPATH."views/logged/blocks/common_popup.phtml");?>
+<!-- /FOOTER SECTION -->
+
+<?php include(APPPATH."views/logged/ring/comments/my_ring_post_comment_lightbox.phtml");?>
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+
+function invite_event()
+{
+    showBusyScreen();
+    var event_id = $('#event_id').val();
+    
+   /* var csv_recipient_ids = '';
+    i = 0;
+    $(function() {
+        $(':checkbox:checked').each(function(i){
+            if($(this).attr('id').substr(0, 9) == 'chkmember') {
+                csv_recipient_ids += $(this).val()+',';
+            }
+        });
+    });
+    csv_recipient_ids = csv_recipient_ids.substring(0, csv_recipient_ids.length-1);*/
+    
+  var frnds=$('#frndinv').val();
+  var netpals=$('#netpalinv').val();
+  var pp=$('#ppinv').val();
+  var pg=$('#pginv').val(); 
+  if(frnds == null)
+	{
+		frnds=0;
+		//alert(frnds);
+	}
+	var netpals=$('#netpalinv').val();
+	if(netpals == null)
+	{
+		netpals=0;
+		//alert(netpals);
+	}
+	var pp=$('#ppinv').val();
+	if(pp == null)
+	{
+		pp=0;
+		//alert(pp);
+	}
+    $('#err_send_recepients').hide();
+    
+    ajax_req = $.ajax({
+        type: 'POST',
+        url:base_url+'logged/events/send_event_invitation/'+event_id,
+    
+        dataType: 'json',
+        data: ({'frndinv': frnds,'netpalinv':netpals,'ppinv':pp,'pginv':pg, 'event_id' : event_id}),
+        success: function (data)  
+        {
+            if(data.success==true)
+            {
+                showUIMsg(data.msg);
+               window.location.href = base_url+'/my-events.html';
+            }
+            else
+            {
+                for ( var id in data.arr_message )
+                {
+                    
+                    if( $('#err_'+id) != null ) 
+                    {
+                        $('#err_'+id).html(data.arr_message[id]);
+                        $('#err_'+id).show();
+                    }
+                }
+				showUIMsg(data.msg);
+				hideBusyScreen();
+            }
+        }
+    
+    });
+   
+}
+
+
+</script>

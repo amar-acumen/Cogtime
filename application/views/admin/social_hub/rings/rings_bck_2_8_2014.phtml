@@ -1,0 +1,97 @@
+<div class="clr"></div>
+<!--navigation section start -->
+<?php include(APPPATH."views/layouts/admin/admin_nav.phtml");?>
+<!--navigation section end -->
+<!-- CONTENT SECTION -->
+<div id="content_section">
+      <div id="container">
+            <div id="mid_content">
+                  <div class="page_heading left">
+                        <div class="left"><img src="../images/icons/login.png" alt="" /> Rings</div>
+                  </div>
+                  <div class="clr"></div>
+                  <div id="right_container">
+                        <div class="arrow_btm"></div>
+                        <div class="content_area">
+                            <!--filter section start -->
+                            <div class="filter">
+                                <span class="filter-by">Filter By &raquo;</span>
+                                <form name="frm_search" id="frm_search" action="" method="post" onsubmit="return false;"  class="filter-search">
+                                    <label>Category :</label>
+                                    <div class="field01" style="float:left;">
+                                        <select name="category" id="category" style="width:150px;">
+                                               <option value="-1">Select</option>
+											   <?= makeOptionRingCategory()?>
+                                          </select>
+                                          <script type="text/javascript">
+                                            $(document).ready(function(arg) {
+                                                $("#category").msDropDown();
+                                                $("#category").hide();
+                                                $('#category').css("width", "150px"); 
+                                            })
+                                        </script>
+                                  </div>
+                                    <label>Ring Title :</label>
+                                    <input type="text" id="txt_ring_name" name="txt_ring_name" />
+                                    <input type="hidden" value="Y" name="search_basic" id="search_basic"  />
+                                    <input name="" type="submit" value="GO" class="go" />
+                                </form>  
+                                <div class="clr"></div>
+                            </div>
+                            <!--filter section end -->
+                        
+                            <h4>Rings</h4>
+                            <div class="clr"></div>
+                        	<DIV id="table_content">
+							  <?=$result_content?>
+                            </DIV>
+                            
+                        	<div class="clr"></div>
+                        </div>
+                  </div>
+                  <div class="clr"></div>
+            </div>
+      </div>
+      <div class="clr"></div>
+</div>
+<!-- /CONTENT SECTION -->
+
+
+
+<!--popup edit max members start-->
+<div class="lightbox edit-max-members" style="width:500px;">
+      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog();clear_all_error_msg();"><img src="../images/close.png" alt="" /></a></div>
+      <div class="top"><div>&nbsp;</div></div>
+      <div class="mid">
+            <div class="heading" style="margin-bottom:0px;">
+                  <div class="left">
+                        <h4>Edit Max Members</h4>
+                  </div>
+            </div>
+               <div class="shade_box_white" style="padding:8px 0px;">
+               <div class="content_area frm_box2">
+                        	  <form action="" method="post" enctype="multipart/form-data" onsubmit="return false;" >
+                                  <div class="lable01"><span class="red-mark">* </span> Max Allowed Members :</div>
+                                  <div class="field01">
+                                        <input name="txt_max_member" id="txt_max_member" type="text" />
+                                  </div>
+                                  <div id="err_max_member" class="error-message"></div>
+                                  <div class="clr"></div>
+                                  <div class="lable01">&nbsp;</div>
+                                  <div class="field01" style="width:200px;">
+                                  <input name="i_edit_id" id="i_edit_id" type="hidden" value=""/>
+                                  <input name="" type="button" class="btn"  value="Update" onclick="return update();"/>
+                                  <input name="" type="reset" class="btn"  value="Cancel"  onclick="hide_dialog();clear_all_error_msg();"/>
+                                  </div>
+                              </form>
+                              <div class="clr"></div>
+                        </div>
+               <div class="clr"></div>
+            </div>
+            
+      </div>
+      <div class="bot"><div>&nbsp;</div></div>
+</div>
+<!--popup edit max members end-->
+
+

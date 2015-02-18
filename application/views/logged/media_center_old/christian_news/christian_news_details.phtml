@@ -1,0 +1,234 @@
+<?php include(APPPATH."views/layouts/logged_header.phtml");?>
+            <!-- NAVIGATION SECTION -->
+      <?php include(APPPATH."views/layouts/nav.phtml");?>
+      <!-- /NAVIGATION SECTION -->
+      </div>
+</div>
+<div class="clr"></div>
+
+<!-- CONTENT SECTION -->
+
+<div id="content_section">
+      <div id="container">
+      	
+      <!-- main container -->
+      <!-- latest news -->
+        <?php include(APPPATH ."views/layouts/latest_news.phtml");?>
+      <!-- /latest news -->
+      <div class="clr"></div>
+      <div id="main_container">
+      <!-- left container -->
+       <?php include(APPPATH."views/layouts/leftbar.phtml");?>
+      <!-- /left container --> 
+          <div id="mid_container">
+          <div class="christian-news-bg-1">
+                <h2 class="white-title">Christian News</h2>  
+          </div>
+          <!--tabbed content start -->    
+          <div class="dp-list-main-box">
+                    <?php include(APPPATH."views/logged/media_center/christian_news/christian_news_left_panel.phtml");?>
+                    <!--tab description  -->
+                    <DIV id="parent_tab_container">
+                        <div class="tab_details menu-details-1" id="parent_tab_container">
+                            <div class="tab-detail-box select">
+                                <div class="right-link"><a href="<?=$prev_url;?>">Back</a></div>
+    
+                                <h2 id="heading" class="" ><?=$category_name?></h2>
+                            </div>
+                            
+                            <?php
+                            	#pr($detail_content);
+                            ?>
+                            <div id="content">
+                                  <div class="content-box static">
+                                            <h3 class="small_content_heading"><?=$detail_content['s_title']?></h3>
+                                            <p class="date"><?=getShortDateWithTime($detail_content['dt_posted_on'],7)?></p>
+                                            <p><?=nl2br(get_unformatted_string_edit($detail_content['s_desc']))?></p>
+                                            
+                                            <!--like comment-->
+                                            <div class="like-comment-section">
+                                                    <ul class="left-side">
+                                                        <li class="first">Like (<span><a id="like" href="javascript:void(0)" onclick="return show_people_liked(<?=$detail_content['id']?>)"><?=$detail_content['total_likes']?></a></span>)</li> 
+                                                        <li>Comments (<span><a id="comment" href="javascript:void(0)" onclick="return show_comments(<?=$detail_content['id']?>)"><?=$detail_content['total_comments']?></a></span>)</li>
+                                                    </ul> 
+                                                    
+                                                    <ul class="right-side">
+                                                        <li class="first"><a href="javascript:void(0);" onclick="return like_(<?=$detail_content['id']?>)">Like</a></li> 
+                                                        <li><a href="javascript:void(0);" onclick="return showPostComment();">Comments</a></li>
+                                                    </ul>
+                                                    <div class="clr"></div>
+                                            </div>
+                                            <!--/like comment-->
+                                    </div>
+                                    
+                                  <div class="christian-comt">
+                                         <div class="comments-number" id="like_content_div<?=$detail_content['id']?>">
+                                              <!--liked by-->
+                                              <div class="comments-number-mid">
+                                                      <div class="heading">
+                                                            <div class="left">
+                                                                  <h4><img class="cmnt" src="images/heart2.png" alt=""> Liked by <span id="like_con">(<?=$detail_content['total_likes']?>)</span> </h4>
+                                                            </div>
+                                                      </div>
+                                                      <div class="shade_box_white" id="like_content<?=$detail_content['id']?>" style="min-height:75px;">
+                                                      </div>
+                                                      
+                                                </div>
+                                              <!--liked by-->
+                                          </div>
+                                                    
+                                         <div class="comments-number" id="comment_content_div<?=$detail_content['id']?>">
+                                              <!--section 1-->
+                                                  <div class="comments-number-mid" >
+                                                  <div class="heading">
+                                                        <div class="left">
+                                                              <h4><img alt="" src="images/icons/cmnt2.png" class="cmnt"> Comments <span id="comment_con">(<?=$detail_content['total_comments']?>)</span> </h4>
+                                                        </div>
+                                                  </div>
+                                                  <div class="shade_box_white" id="comment_content<?=$detail_content['id']?>">
+                                                   </div>
+                                            </div>
+                                              <!--section 1-->
+                                       	  </div>
+                                   </div>
+                                   <div class="commentspost"  >
+                                      <div class="comments-number-mid">
+                                            <div class="heading">
+                                                <div class="left">
+                                                    <h4><img class="cmnt" src="images/no.png" alt=""> Comment </h4>
+                                                </div>
+                                            </div>
+                                            <div> 
+                                            <form method="post" id="frm_cmt">
+                                                    <textarea rows="" cols="" class="post-by" id="txtarea_comment<?=$detail_content['id']?>" name="txtarea_comment<?=$detail_content['id']?>" style="width:450px;"></textarea>
+                                                    <input type="button" onclick="comment_(<?=$detail_content['id']?>)" class="yellow-btn" value="Post">
+                                                    <br class="clr">
+                                             </form>
+                                            </div>
+                                        </div>
+                                	</div>
+                                                    
+                           
+                            </div><!--/#content-->
+                        </div>
+                        
+                        <?php 
+                        //echo "current : ".$current_page;
+                        if($view_more)  :
+                        ?>
+                        <div id="view_more_div" class="tab_details menu-details" style="min-height: 50px;">
+                            <div class="article-pagination inside-tab">
+                                <a id="view_more_news" href="javascript:void(0)" style="float: right; color: #b2b2b2; margin-right: 5px; font-size: 15px;" onclick="return show_more_feeds(<?=$current_page?>)" page_value="<?=$current_page?>">[View More] </a>
+                            </div>
+                        </div>
+                        <?php
+                        endif;
+                        ?>
+                    </DIV>
+                    
+                    
+                    <!--tab description  end-->
+              </div>
+          <!--tabbed content end --> 
+          </div>      
+         <?php include(APPPATH."views/layouts/rightbar.phtml");?>
+         </div>       
+      <!-- main container end-->       
+      </div>
+      <div class="clr"></div>
+</div>
+
+
+<!-- /CONTENT SECTION -->
+<div class="clr"></div>
+
+<input type="hidden" id="h_news_id" value="<?=$news_id?>">
+<?php include(APPPATH."views/layouts/footer.phtml");?>
+<?php include(APPPATH."views/logged/blocks/common_popup.phtml");?>
+
+
+
+<!--comment div-->
+<div class="lightbox comment_div" style="width:540px;">
+      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog();clear_frm();"><img src="images/close.png" alt="" /></a></div>
+      <div class="top">
+            <div>&nbsp;</div>
+      </div>
+      <div class="mid">
+            <div class="heading">
+                  <div class="left">
+                        <h4><img src="images/icons/coment.png" alt="" /> Post Comment </h4>
+                  </div>
+            </div>
+            <div class="frm_box">
+            <form action="" id="comment_frm" onsubmit="return false;">
+                  <p>
+                        <textarea id="txtarea_comment" name="" cols="" rows="" style="width:486px; height:100px; margin-bottom:10px;"></textarea>
+                  </p>
+                  <p>
+                        <input class="submit-green" type="submit" style="margin-top:15px;" value="Post" name="" onclick="return comment_(<?=$detail_content['id']?>)">
+                  </p>
+                  </form>
+            </div>
+      </div>
+      <div class="bot">
+            <div>&nbsp;</div>
+      </div>
+</div>
+<!--/comment div-->
+
+
+
+
+<!--view comment div-->
+<div class="lightbox view_comments_div " style="width:650px;">
+      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="<?=base_url()?>images/close.png" alt="" /></a></div>
+      <div class="top">
+            <div>&nbsp;</div>
+      </div>
+      <div class="mid" >
+            <div class="heading" style="margin-bottom:0px;">
+                  <div class="left">
+                        <h4><img src="<?=base_url()?>images/icons/cmnt.png" alt="" /> View Comments </h4>
+                  </div>
+            </div>
+            <div id="comment_html"></div>
+
+            
+      </div>
+      <div class="bot">
+            <div>&nbsp;</div>
+      </div>
+</div>
+<!--/view comment div-->
+
+<!--like div-->
+<div class="lightbox liked_by_div" style="width:500px;">
+      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="<?=base_url()?>images/close.png" alt="" /></a></div>
+      <div class="top">
+            <div>&nbsp;</div>
+      </div>
+      <div class="mid" style="height:299px;">
+            <div class="heading" style="margin-bottom:0px;">
+                  <div class="left">
+                        <h4><img src="<?=base_url()?>images/icons/thumb_up.png" alt="" /> Liked by </h4>
+                  </div>
+            </div>
+            <div id="liked_html"></div>
+      </div>
+      <div class="bot">
+            <div>&nbsp;</div>
+      </div>
+</div>
+<!--/like div-->
+
+
+
+<!-- /lightbox SECTION -->
+
+
+
+
+
+
+

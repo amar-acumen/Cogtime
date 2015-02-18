@@ -1,0 +1,82 @@
+<script type="text/javascript">
+$(document).ready(function(arg) {
+ $('#frm_search').submit(function(){ 
+						
+						var datatosend=$("#frm_search").serialize();
+						
+					     	showBusyScreen();
+							//alert(datatosend);
+							
+							$.ajax({
+							   type: "POST",
+							   url: admin_base_url+"build_kingdom/charity_projects/ajax_pagination/",
+							   data: datatosend,
+							   success: function(data){
+								  
+								  hideBusyScreen(); 
+								   $('#table_content').html(data);
+							       
+								
+								 
+							   }
+							 });	 
+					   
+						
+				});
+ 
+ });
+ </script>
+ 
+             
+<form name="frm_search" id="frm_search" action="" method="post"  class="filter-search" onsubmit="return false;" style="width:900px;" >
+      <label style="width:92px;">Project Title/ID :</label>
+      <input type="text" id="txt_title" name="txt_title"/>
+      
+      <label style="width:90px;">Duration : From:</label>
+      <input type="text"  value="" name="pro_date_to1" id="pro_date_to1"  readonly="" class="date-field"/>
+            <img src="../images/icons/cal.png" alt="" onclick="$(this).prev().focus()" class="calender" style="margin-right:21px;" />
+            <script type="text/javascript">
+                  $(document).ready(function(arg) {
+                      $.datepicker.setDefaults($.datepicker.regional['']);
+                      $("#pro_date_to1").datepicker($.datepicker.regional['en']);
+      
+                  });
+             </script>
+              
+      <label>To :</label>        
+      <input type="text"  value="" name="pro_date_to2" id="pro_date_to2"  readonly="" class="date-field"/>
+            <img src="../images/icons/cal.png" alt="" onclick="$(this).prev().focus()" class="calender" />
+            <script type="text/javascript">
+                  $(document).ready(function(arg) {
+                      $.datepicker.setDefaults($.datepicker.regional['']);
+                      $("#pro_date_to2").datepicker($.datepicker.regional['en']);
+                  });
+            </script>
+      <div class="clr"></div>
+      
+      <label style="width:92px;">Required Skill :</label>
+      <input type="text" id="txt_skill" name="txt_skill"/>
+      
+      <label style="width:90px;">Period : From:</label>
+      <input type="text"  value="" name="s_date_to1" id="s_date_to1"  readonly="" class="date-field"/>
+            <img src="../images/icons/cal.png" alt="" onclick="$(this).prev().focus()" class="calender" style="margin-right:21px;" />
+            <script type="text/javascript">
+                  $(document).ready(function(arg) {
+                      $.datepicker.setDefaults($.datepicker.regional['']);
+                      $("#s_date_to1").datepicker($.datepicker.regional['en']);
+      
+                  });
+             </script>
+              
+      <label>To :</label>        
+      <input type="text"  value="" name="s_date_to2" id="s_date_to2"  readonly="" class="date-field"/>
+            <img src="../images/icons/cal.png" alt="" onclick="$(this).prev().focus()" class="calender" />
+            <script type="text/javascript">
+                  $(document).ready(function(arg) {
+                      $.datepicker.setDefaults($.datepicker.regional['']);
+                      $("#s_date_to2").datepicker($.datepicker.regional['en']);
+                  });
+            </script>
+        <input type="hidden" value="Y" name="search_basic" id="search_basic"  />
+        <input name="" type="submit" value="GO" class="go" />
+</form>          

@@ -1,0 +1,39 @@
+<div class="grey-flying-div">
+    <!--inside grey start -->
+    <?php
+	
+	if($note_arr)
+	{
+		$bordercounter	= count($note_arr);
+		$i_border	=	0;
+		$i_border1	=	0;
+		foreach($note_arr as $key=>$bookval)
+		{
+			$i_border1++;
+		?>
+			<div class="inside-grey-container">
+				<h2><?php echo $key?></h2>
+                <?php
+				foreach($bookval as $verse_val)
+                {
+					$i_border++;
+                ?>
+                	<div class="note_detail">
+                        <span class="yellow-box"><?php echo $verse_val['chapter'].':'.$verse_val['verses_no']?></span>
+                        <div class="contents"><?php echo $verse_val['note_text']?></div>
+                    </div>
+                <?php 
+				}
+				?>
+			</div>
+		<?php
+		}
+	}
+	else
+	{
+		?><div class="inside-grey-container"><div class="contents">No Records</div></div><?php
+	}
+    ?>
+    <!--inside grey end -->
+    
+</div>

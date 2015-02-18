@@ -1,0 +1,88 @@
+<?php //pr($search_result_friends);
+ if($is_post_ == '1' ) {?>
+<div class="arrow_btm"></div>
+<div style=" margin-top:0px;" class="div_content" > 
+   <?php //pr($search_result_friends);
+   		  if(count($search_result_friends) >0) {
+            foreach($search_result_friends as $key =>$val):   
+            
+            
+            $name = $val['user_profile_name'];
+              if(!empty($val['s_country']))    
+                  $add['country']=$val['s_country_name'];
+              if(!empty($val['s_state']))
+                  $add['state']=$val['s_state'];
+              if(!empty($val['s_city']))
+                  $add['city']=$val['s_city'];
+              $address = get_user_address_info($val['id']);
+              $img = get_profile_image($val['id'], 'thumb');
+              
+              
+			  
+			  if($val['if_already_friend'] == 'true' || $val['already_added_netpal'] == 'true'){
+				  $profile_link = get_profile_url($val['id'],$val['user_profile_name']);
+			  }else
+			  {
+				 $profile_link = get_public_profile_url($val['id'],$val['user_profile_name']); 
+			  }
+              
+    ?>   
+     
+          <div class="shade_box_blue" style="padding-top:5px;">
+            <div class="txt_content compact-box"> 
+            <a href="<?= $profile_link;?>"><!--<img src="images/alex.jpg" alt="" class="pro_photo2" />--><div class="pro_photo2" style="background:url(<?=$img?>) no-repeat center;width:60px; height:60px;" ></div></a>
+                 <div class="left_div01">
+                 		
+                        <p class="blue_bold12"><a href="<?= $profile_link;?>"><?=$name?></a></p>
+                        
+                        <p class="location"><?=$address?></p>
+                        <?php if($select =='1')
+						{
+						?>
+                        <p class="location">User Chat Name:<?=$val['chat_user_name']?></p>
+                        <?php }?>
+                        <!--<p class="light-grey">10 Mutual Friends</p>-->
+                  </div>
+                  <div class="right_div02">
+                        <p class="add-remove-friend">
+                        
+                       <?php  if($val['display_becomefriend'] == 'false'){ ?>
+                        <img src="images/icons/icon11.png" alt="" /> <a  href="javascript:void(0);" id="invite_friend_<?=($val['id'])?>" onclick="invite_friend_('<?=encrypt($val['id'])?>')" >Re-send Friend Request</a>
+                       <?php
+                       }
+                       elseif($val['if_already_friend'] == 'true')
+                       {
+                       ?>
+                           <img src="images/icons/icon11.png" alt="" />Already friend
+                       <?php
+                       }
+                      else { ?>
+                        <img src="images/icons/icon11.png" alt="" /> <a  href="javascript:void(0);" id="invite_friend_<?=($val['id'])?>" onclick="invite_friend_('<?=encrypt($val['id'])?>')" >Invite As Friend</a>
+                        <?php } //endif; 
+                        ?>
+                        </p>
+                        
+                  </div>
+                  <div class="clr"></div>
+            </div>
+      </div>
+      
+    <?php
+            endforeach;
+          }
+		   else if($is_post_ == '1'){
+					echo '<div class="shade_box_blue" style="padding-top:5px;"><div  class="shade_norecords" style="width:295px;"><p class="blue_bold12">No Result Found.</p></div></div>';
+ }
+     ?>
+</div>
+<?php if($page_links){ ?>
+<div class="pagination">
+<div class="left">Viewing Page <?=$current_loaded_page_no?> of <?=$total_pages?> </div>
+<div class="right">
+       <ul class="small-paging">
+        <?=$page_links?> 
+        </ul>
+</div>
+</div>
+<?php } 
+}?>

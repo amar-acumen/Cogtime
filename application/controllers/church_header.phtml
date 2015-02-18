@@ -1,0 +1,136 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Cogtime Church</title>
+<link href="<?= base_url() ?>css/church.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<div class="header">
+  <div class="container">
+      <?php
+      // pr($church_arr);
+     $large_logo_img = get_church_logo_image($church_arr[0]->id, 'main', $church_arr[0]->ch_logo);
+     $large_cover_img = get_church_cover_image($church_arr[0]->id, 'main', $church_arr[0]->ch_cover)
+      ?>
+    <h1><a href="javascript:void(0);"><img src="<?= $large_logo_img ?>" alt="Church" width="259" height="40"></a></h1>
+    <div class="top-right">
+        
+      <ul>
+          <li><a href="javascript:void(0);" onclick="show_dialog('church_login')">Login</a></li>
+        <li>| <a href="<?= base_url() ?>church_registration">Register</a></li>
+      </ul>
+<!--      <figure><a href="<?= base_url() ?>"><img src="images/cogtime-logo.png" width="122" height="30" alt="Cogtime"></a></figure>-->
+    </div>
+    <div class="clear"></div>
+  </div>
+</div>
+    <div class="banner-bg" style="background-image: url(<?= $large_cover_img ?>);">
+  <div class="container">
+    <div class="main-caption">
+      <h2><?= $church_arr[0]->ch_banner_heading; ?></h2>
+      <p><?= $church_arr[0]->ch_details; ?></p>aaaaaaaaaa
+      <a href="<?php echo base_url().'church_registration/'.$church_arr[0]->id?>">Join Now</a> </div>
+  </div>
+</div>
+    
+    <!------------------------>
+    <!-------------------------------------------------------------------------->
+    <div class="lightbox church_login" style="width:498px;">
+    <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="images/close.png" alt="" /></a></div>
+    <div class="top"><div>&nbsp;</div></div>
+    <div class="mid" style="overflow: hidden;">
+        <div class="heading"><h4>Login</h4></div>
+        <div id="login_box" style="padding-top: 0;">
+                  
+                  
+					   <?php 
+                          
+                           if(!@$session_data['loggedin'])
+                           {
+                           // pr($_COOKIE['CG_FO']);
+                            
+                           $RemberEmail ='';
+                           $RemberPwd ='';
+                           $Rember = '';
+                                if(isset($_COOKIE['CG_FO']['email']) && isset($_COOKIE['CG_FO']['password'])) 
+                                    {
+                                        $RemberEmail  = $_COOKIE['CG_FO']['email']; 
+                                        $RemberPwd 	  = $_COOKIE['CG_FO']['password']; 
+                                        $Rember 	  = $_COOKIE['CG_FO']['remember']; 
+                                        
+                                    }
+                           }
+                      
+                      ?>
+                  
+                  
+                  
+                  
+                  
+                  
+                          <form onsubmit="return userLogin1(this.email_login.value, this.password_login.value);" action="" method="post" name="frmLogin" id="frmLogin">
+                          
+                          <input name="login_referrer" id="login_referrer" type="hidden" value="<?=@$session_data['login_referrer']?>"/>
+                          <input name="current_referrer" id="current_referrer" type="hidden" value=""/>
+                          <input type="hidden" name="is_submitted" id="is_submitted" value="Y"  /> 
+                         
+                          <input style=" " name="email_login" type="text" id="email" value="<?=($RemberEmail=='')?$posted['email']:$RemberEmail;?>"  autocomplete ="off"/>
+                          
+                          
+                          <input name="password_login" type="password" id="password" value="<?=($RemberPwd=='')?$posted['password']:$RemberPwd;?>"  autocomplete ="off"/>
+                          <div id="error_msg_password_login" class="error_msg"></div>
+                          
+                          <input name="" type="submit" value="Login" />
+                          <div id="error_msg_email_login" class="error_msg" style="margin-left:20px;"></div> 
+                          <div class="clr"></div>
+                           <label class="remember-pass"><input name="chkRem" id="chkRem" type="checkbox" value="1" <?=($Rember=='checked'?'checked="checked"':'')?>/>Remember me.
+                          <a href="<?=base_url()?>forgot-password.html">Forgot Password?</a>
+                          </form>
+                      </div>
+
+    </div>
+    <div class="bot"><div>&nbsp;</div></div>
+    
+    <?php /*?> ############ Login Status Check [Start] ########### <?php */?>
+<input type="hidden" id="logged_status" value="<?= @$logged_in_state ?>" />
+<?php /*?> ############ Login Status Check [End] ########### <?php */?>
+
+
+
+
+<!-------------------ip block pop up------------------------------->
+<?php
+//echo 'nabin';
+ $blockStatus = $_REQUEST['blockStatus'];
+ if($blockStatus == 1){
+     
+ 
+?>
+<link type="text/css" rel='stylesheet' href="<?= base_url() ?>css/myPopup.css">
+<script type="text/javascript" src="<?= base_url() ?>js/myPopup.js"></script>
+<div class="overlay-bg">
+</div>
+<div class="overlay-content popup1">
+    <p>Your IP is blocked by Admin . Please contact admin</p>
+    <img src="<?= base_url() ?>images/close.png" class="close-btn">
+</div>
+<script type="text/javascript">
+$(document).ready(function(){
+   // alert('blocked')
+   
+   $('.close-btn, .overlay-bg').click(function(){
+		//alert('dd')
+        $('.overlay-bg, .overlay-content').hide(); // hide the overlay
+    });
+  // $('#s--modalbox-overlay').css('display','block');
+});
+
+
+</script>
+
+ <?php } ?>
+<!---------------------------------------------------------------->
+</div>
+    <!--------------------------------------------->

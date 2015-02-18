@@ -1,0 +1,167 @@
+<?php include("header.php");?>
+<!-- NAVIGATION SECTION -->
+<?php include("nav.php");?>
+<!-- /NAVIGATION SECTION -->
+<div class="clr"></div>
+<!-- CONTENT SECTION -->
+<div id="content_section">
+      <div id="container">
+            <div id="top_corner">&nbsp;</div>
+            <div id="mid_content">
+                  <!-- latest news -->
+                  <?php include("latest_news.php");?>
+                  <!-- /latest news -->
+                  <div class="clr"></div>
+                  <!-- main container -->
+                  <div id="main_container">
+                        <!-- left container -->
+                        <div id="left_container01">
+                              <div class="page_heading">
+                                    <div class="left"><img src="images/icons/msgg.png" alt="" />My Email Notifications Settings </div>
+                              </div>
+                              <div class="arrow_btm"></div>
+                              <div class="shade_box_01 email_settings">
+                                    <h4>My Wall</h4>
+                                    <div class="settings_div">
+                                          <p>
+                                                <input name="" type="checkbox" value="" />
+                                                When my friend post, comment or like something on my wall</p>
+                                    </div>
+                                    <h4>Friend Request</h4>
+                                    <div class="settings_div">
+                                          <p>
+                                                <input name="" type="checkbox" value="" />
+                                                When I receive a friend request</p>
+                                          <p>
+                                                <input name="" type="checkbox" value="" />
+                                                When my friend request gets accepted</p>
+                                    </div>
+                                    <h4>My Photo</h4>
+                                    <div class="settings_div">
+                                          <p>
+                                                <input name="" type="checkbox" value="" />
+                                                When my friend comment or like</p>
+                                    </div>
+                                    <h4>My Audio</h4>
+                                    <div class="settings_div">
+                                          <p>
+                                                <input name="" type="checkbox" value="" />
+                                                When my friend comment or like</p>
+                                    </div>
+                                    <h4>My Video</h4>
+                                    <div class="settings_div">
+                                          <p>
+                                                <input name="" type="checkbox" value="" />
+                                                When my friend comment or like</p>
+                                    </div>
+                                    <h4>My Messages</h4>
+                                    <div class="settings_div">
+                                          <p>
+                                                <input name="" type="checkbox" value="" />
+                                                When I receive a message </p>
+                                    </div>
+                                    <h4>My Blog</h4>
+                                    <div class="settings_div">
+                                          <p>
+                                                <input name="" type="checkbox" value="" />
+                                                When someone comment on my  blog</p>
+                                    </div>
+                                    <h4>My Events</h4>
+                                    <div class="settings_div">
+                                          <p>
+                                                <input name="" type="checkbox" value="" />
+                                                When someone comment or support</p>
+                                          <p>
+                                                <input name="" type="checkbox" value="" />
+                                                When someone sends RSVP</p>
+                                          <p>
+                                                <input name="" type="checkbox" value="" />
+                                                When someone invites me</p>
+                                    </div>
+                                    <h4>ETrade</h4>
+                                    <div class="settings_div">
+                                          <p>
+                                                <input name="" type="checkbox" value="" />
+                                                When my buy request gets accepted</p>
+                                          <p>
+                                                <input name="" type="checkbox" value="" />
+                                                When someone sends me buy request</p>
+                                    </div>
+                                    <h4>ESwap</h4>
+                                    <div class="settings_div">
+                                          <p>
+                                                <input name="" type="checkbox" value="" />
+                                                When my swap request gets accepted</p>
+                                          <p>
+                                                <input name="" type="checkbox" value="" />
+                                                When someone sends me swap request</p>
+                                    </div>
+                                    <h4>EFreebies</h4>
+                                    <div class="settings_div">
+                                          <p>
+                                                <input name="" type="checkbox" value="" />
+                                                When my freebies request gets accepted</p>
+                                          <p>
+                                                <input name="" type="checkbox" value="" />
+                                                When someone sends me freebies request</p>
+                                    </div>
+                                    <h4>My Prayer Partner Request</h4>
+                                    <div class="settings_div">
+                                          <p>
+                                                <input name="" type="checkbox" value="" />
+                                                When my swap request gets accepted</p>
+                                          <p>
+                                                <input name="" type="checkbox" value="" />
+                                                When someone sends me swap request</p>
+                                    </div>
+                                    <h4>Prayer Wall </h4>
+                                    <div class="settings_div">
+                                          <p>
+                                                <input name="" type="checkbox" value="" />
+                                                When someone commits on my prayer request</p>
+                                    </div>
+                                    <h4>Charity project</h4>
+                                    <div class="settings_div">
+                                          <p>
+                                                <input name="" type="checkbox" value="" />
+                                                When someone commits on my prayer request</p>
+                                    </div>
+                                    <p>&nbsp;</p>
+                                    <input name="" type="button" value="Update" class="btn bottom-button" />
+                              </div>
+                        </div>
+                        <!-- /left container -->
+                        <!-- right container -->
+                        <?php include("rightbar.php");?>
+                        <!-- /right container -->
+                  </div>
+                  <!-- /main container -->
+                  <div class="clr"></div>
+            </div>
+            <div id="bot_corner">&nbsp;</div>
+      </div>
+      <div class="clr"></div>
+</div>
+<!-- /CONTENT SECTION -->
+<div class="clr"></div>
+<!-- FOOTER SECTION -->
+<?php include("footer.php");?>
+<!-- /FOOTER SECTION -->
+<script type="text/javascript">
+<!--	
+	var ticker_holder = $('.bargaining').get(0);
+	var ticker_text = $('.ticker').get(0);
+	var ticker_pos = ticker_text.parentNode.offsetWidth;
+	
+	var ticker_data = $(ticker_holder).html();
+	$(ticker_text).parent().html('<marquee scrollamount="3" scrolldelay="20">' + ticker_data + '</marquee>');
+	
+	$('#sub-nav').hover
+	(
+	function() { $('marquee', this).get(0).stop();  },
+	function() { $('marquee', this).get(0).start(); }
+	); 
+//-->
+</script>
+</body>
+</html>

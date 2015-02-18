@@ -1,0 +1,304 @@
+<?php /*?> <?php
+ if(count($info_arr)){ 
+ ?>
+	<script type="text/javascript">
+    <!--
+    function pausePlayers(playing_id) { 
+      
+       <?php
+        foreach($info_arr as $val):
+        ?>
+            
+               if(<?=$val['id']?> != playing_id) { jwplayer("myElement_"+<?=$val['id']?>).pause(true); }
+        <?php
+            endforeach;
+        ?>
+    };
+    
+    $(function(){
+    <?php
+        foreach($info_arr as $val):
+		
+		  if($val['e_type'] == 'audio'){
+            //$ID = 'm1'. $val['id'];
+          echo  $audio_filename = base_url()."uploads/user_audio_files/".get_audio_track_by_id($val['i_referenced_id']);
+    ?>
+        
+         jwplayer("myElement_<?=$val['id']?>").setup({
+            file: "<?=$audio_filename?>",
+            image: "<?=$audio_filename?>",
+            height: 30,
+			width: 285,
+    
+            events:{
+              onPlay: function() {
+                    pausePlayers(<?=$val['id']?>);
+                 //jwplayer('container3').stop();
+              }
+            }
+    
+         });
+    <?php
+		  }
+        endforeach;
+    ?>
+    });
+    //-->
+    </script>
+ <?php }
+ ?><?php */?>
+ <?php
+ #pr($info_arr);
+ ?>
+    
+    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="admin-table">
+                                      <tr>
+                                        <th align="left" valign="middle" height="30" width="300">Media</th>
+                                        <th align="left" valign="middle" height="30" width="70">Posted By</th>
+                                        <th align="left" valign="middle" height="30" width="100">Posting Date</th>
+										<th align="left" valign="middle" height="30" width="150">Reason</th>
+                                        <th align="center" valign="middle" height="30" width="80">Abuse Count</th>
+                                        <th align="center" valign="middle" height="30" class="last" width="40">Actions</th>
+                                      </tr>
+                                     <?php
+									 	
+									 if(count($info_arr)){ 
+											foreach($info_arr as $k=> $info){
+												
+												$type = $info['e_type'];
+												$id = $info['i_referenced_id'];
+												if($type == 'user'){
+												  $stype = 'user profile'	;
+												  $type_name = get_username_by_id($id);
+												  $img = get_profile_image($id); 
+												}
+												else if($type == 'audio'){
+												  $stype = 'user audio'	;
+												  $type_name = get_audio_title($id);
+												}
+												else if($type == 'video'){
+												  $stype = 'user video'	;
+												  $type_name = get_video_title($id);
+												}
+												else if($type == 'photo'){
+												  $stype = 'user photo'	;
+												  $type_name = get_photo_title($id);
+												  $img = get_photo_by_id($id); 
+												}
+												else if($type == 'event'){
+												  $stype = 'event'	;
+												  $type_name = get_event_title_by_id($id);
+												}
+												else if($type == 'wall')
+												{
+												 $stype = 'wall'	;
+												$post_detail=get_post_detail_by_id($id);
+												//pr($post_detail,1);
+												$data_arr=json_decode($post_detail['data']);
+												
+												//pr($data_arr,1);
+												}
+									  
+									  else if($type == 'blog')
+												{
+												 $stype = 'blog'	;
+												//$post_detail=get_post_detail_by_id($id);
+												//pr($post_detail,1);
+												//$data_arr=json_decode($post_detail['data']);
+												
+												//pr($data_arr,1);
+												}
+												else if($type == 'article')
+												{
+												 $stype = 'article'	;
+												//$post_detail=get_post_detail_by_id($id);
+												//pr($post_detail,1);
+												//$data_arr=json_decode($post_detail['data']);
+												
+												//pr($data_arr,1);
+												}
+												else if($type == 'ring')
+												{
+												 $stype = 'ring'	;
+												//$post_detail=get_post_detail_by_id($id);
+												//pr($post_detail,1);
+											//	$data_arr=json_decode($post_detail['data']);
+												
+												//pr($data_arr,1);
+												}
+												else if($type == 'tweet')
+												{
+												 $stype = 'tweet'	;
+												//$post_detail=get_post_detail_by_id($id);
+												//pr($post_detail,1);
+											//	$data_arr=json_decode($post_detail['data']);
+												
+												//pr($data_arr,1);
+												}
+									  		$s_status = ($info['i_status'] == 1)?'Disable':'Enable';	  
+									  ?>
+                                   		  <tr>
+                                        <td align="left" valign="top" class="banner-img">
+                                        
+                                       <?php
+										if($type == 'photo'){ 
+									   ?>
+                                        <a href="javascript:void(0);" style="float:left;"><p style="background:url(<?=$img?>) no-repeat center; width:110px; height:60px;border: 3px solid #DCDCDC; " title="photo"></p></a>
+                                        
+                                        <p class="abuse-info"><b>Uploaded by : <?=get_photo_owner_name_by_id($id)?></b></p>
+                                        <?php
+										 }
+										 else if($type == 'video'){ 
+										 	$img = get_video_snap_by_id($id);
+										?>
+                                        <a href="javascript:void(0);" style="float:left;"><p style="background:url(<?=$img?>) no-repeat center; width:110px; height:60px;border: 3px solid #DCDCDC; " title="banner"></p></a>
+                                        
+                                        
+                                        <p class="abuse-info" style="margin-right:104px;"><b>Uploaded by : <?=get_video_owner_name_by_id($id)?></b></p><br/>
+                                        <p style="float:left; margin-left:17px;"><b><?=get_video_title($id)?></b></p>
+                                        <?php
+										 }
+										 else if($type == 'audio'){ 
+										?>
+                                        <a href="javascript:void(0);" style="float:left;"><img alt="image" src="../images/audio-icon.jpg"></a>
+                                        <p class="abuse-info" style="margin-right:154px;"><b>Uploaded by : <?=get_audio_owner_name_by_id($id)?></b></p>
+                                        <br/>
+                                        <p style="float:left; margin-left:17px;"><b><?=get_audio_title($id)?></b></p>
+                                        <!--<div id="myElement_<?=$info['id']?>" style="width:285px;">Loading the player...</div>
+                                        -->
+                                        
+                                        <?php
+										 }
+										 else if($type == 'event'){ 
+										 
+										 		$event_info = get_event_detail_by_id($id);
+												
+												$user_name = ($event_info['i_user_type'] == 2)?get_admin_nameby_id($event_info['i_host_id']):get_username_by_id($event_info['i_host_id']);
+												
+												
+												//pr($event_info);
+										?>
+                                        
+                                        <p> <?=my_substr(html_entity_decode(htmlspecialchars_decode($event_info['s_title']),ENT_QUOTES,'utf-8'), 38)?></p><p >Uploaded by : <?=$user_name?></p>
+                                        
+                                        <?php
+										 }
+										 else if($type == 'user'){ 
+										?>
+                                        	 <a href="javascript:void(0);" style="float:left;"><p style="background:url(<?=$img?>) no-repeat center; width:60px; height:60px;border: 3px solid #DCDCDC; " title="banner"></p></a>
+                                        
+                                             <p class="abuse-info"><b>Profile Name: <?=get_username_by_id($info['i_referenced_id'])?></b></p>
+                                        
+                                        <?php
+										 }
+										else if($type == 'wall'){ 
+										?>
+										<p><?=$data_arr->message?></p>
+                                        <a href="javascript:void(0);" style="float:left;">
+										<?php if(!empty($data_arr->photo) && count($data_arr->photo)){ 
+			   			foreach($data_arr->photo as $key=>$photo_val):
+						 $img=base_url()."uploads/wall_photos/".getThumbName($photo_val,'thumb');
+						?>
+										<p style="background:url(<?=$img?>) no-repeat center; width:60px; height:60px;border: 3px solid #DCDCDC; " title="banner"></p>
+										<?php endforeach;}?>		
+										
+                                       <p> <?php if(!empty($data_arr->video) && count($data_arr->video)){ ?>
+			<?php
+			$url = $data_arr->video->url;
+preg_match(
+        '/[\\?\\&]v=([^\\?\\&]+)/',
+        $url,
+        $matches
+    );
+$id = $matches[1];
+ 
+$width = '240';
+$height = '160';
+echo '<object width="' . $width . '" height="' . $height . '"><param name="movie" value="http://www.youtube.com/v/' . $id . '&amp;hl=en_US&amp;fs=1?rel=0"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/' . $id . '&amp;hl=en_US&amp;fs=1?rel=0" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="' . $width . '" height="' . $height . '"></embed></object>';?>
+			    <?php /*<div class="video-image">
+                    <div  class="cogtime-video" id="myvideo_first_thumb_<?=$info['id']?>" style="background:url('') no-repeat center;;width:329px; height:212px;" ></div>
+                    <div id="myvideo_big_thumb_1_<?=$info['id']?>" media_id="<?=$info['id']?>"></div> 
+                </div>*/?>
+			<?php }	?>	</p></a>
+                                       <p style="float:right;margin-top:20px"><b>Posted by: <?=$info['i_abuser_name']?><b></p>
+                                        
+                                        <?php
+										 }else if($type == 'blog'){ 
+										 	//$img = get_video_snap_by_id($id);
+										?>
+                                        <a href="javascript:void(0);" style="float:left;"><p> <?=get_blog_name_by_id($id)?></p></a>
+                                        
+                                        <br/>
+                                        <p class="" style="float:right;margin-top:20px"><b>Blog Author : <?=$info['i_abuser_name']?></b></p>
+               
+                                        <?php
+										 }
+										 else if($type == 'article'){ 
+										 	//$img = get_video_snap_by_id($id);
+										?>
+                                        <a href="javascript:void(0);" style="float:left;"><p> <?php $article=get_article_deatil_by_id($id); echo $article['s_post_title']?></p></a>
+                                        
+                                        
+                                        <p style="float:right;margin-top:20px"><b>Article posted by : <?=$info['i_abuser_name']?></b></p><br/>
+               
+                                         <?php
+										 }
+										 else if($type == 'ring'){ 
+										 	//$img = get_video_snap_by_id($id);
+										?>
+                                        <a href="javascript:void(0);" style="float:left;"><p> <?php $article=get_ring_post_deatil_by_id($id); echo $article['s_post_title']?></p></a>
+                                        
+                                        
+                                        <p style="float:right;margin-top:20px"><b>Posted by : <?=$info['i_abuser_name']?></b></p><br/>
+               
+                                        <?php
+										 }
+										 else if($type == 'tweet'){ 
+										 	//$img = get_video_snap_by_id($id);
+										?>
+                                        <p style="float:left"> 
+										<?php 
+										$tweet= get_tweet_detail_by_id($id);
+										$data_arr=json_decode($tweet['data']);
+										echo htmlspecialchars_decode($data_arr->s_tweet_text);
+										?>
+										</p>
+                                        
+                                        
+                                        <p style="float:right;margin-top:20px"><b>Tweeted by : <?=$info['i_abuser_name']?></b></p><br/>
+               
+                                        <?php
+										 }?>
+                                        </td>
+                                        <td align="left" valign="top"><?=get_username_by_id($info['i_given_by_user_id'])?></td>
+                                        <td align="left" valign="top"><?=getShortDate($info['dt_created_on'], 5)?></td>
+										<td align="left" valign="top"><?=$info['s_reason']?></td>
+                                        <td align="center" valign="top"><?=$info['abuse_count']?></td>
+                                        <td align="center" valign="middle" class="last">
+                                        <?php /*?>  <input name="" title="Delete" type="button" class="btn-02"  value="Confirm Abuse & Disable"/>
+                                      <input name="" title="Delete" type="button" class="btn-02"  value="Not an Abuse"/><?php */?>
+                                       <?php
+									   
+							  if($info['i_status'] == 1){ ?>
+                            		<span id="<?=$info['id']?>_status"><input  title="Show" type="button" class="btn-03" onclick="javascript:changeStatus(<?php echo $info['id'] ?> , 2 , <?php echo $info['i_status'] ?>, <?=$info['i_referenced_id']?>, '<?=$type?>')"  value="<?=$s_status?>"/></span>
+                            <?php 
+							    } 
+								else if($info['i_status'] == 2){?>
+                                	<span id="<?=$info['id']?>_status"><input title="Show" type="button" class="btn-03" onclick="javascript:changeStatus(<?php echo $info['id'] ?> , 1 , <?php echo $info['i_status'] ?>, <?=$info['i_referenced_id']?>, '<?=$type?>')"  value="<?=$s_status?>"/></span>
+                            
+                            <?php }?>
+                                        </td>
+                                      </tr>
+                                     <?php }
+										}
+										else{
+									 ?>
+                                      <tr>
+                                          <td style="text-align:center;" height="80" colspan="20">No data available!!!</td>
+                                      </tr>
+                                    <?php }
+									?>
+ </table>
+ <div class="paging" >
+            <ul><?= $page_links ?></ul>
+</div>	

@@ -1,0 +1,35 @@
+ <div class="profile-frd">
+            <h4>Net Pals (<?=count($right_panel['netpals_arr'])?>)</h4>
+            <a class="pro-view-all" href="public-profile/<?=$i_profile_id?>/all-netpals.html">View all</a>
+        </div>
+        <div class="pro-container">
+            <div class="pro-slider-section">
+              <?php if(count($right_panel['netpals_arr']) > 0){
+				  ?>
+            <ul id="netpalsSlider" class="jcarousel-skin-tango" >
+                    <?php //if(count($right_panel['netpals_arr']) > 0){
+						  foreach($right_panel['netpals_arr'] as $key=>$val){
+							  $img = get_profile_image($val['user_id'], 'thumb');
+							  
+							  if($val['already_added_netpal'] == 'true' || $val['if_already_friend'] == 'true') {
+								  $profile_link = get_profile_url($val['user_id'],$val['s_displayname']);
+							  }else
+							  { $profile_link = get_public_profile_url($val['user_id'],$val['s_displayname']);
+							  }
+				  ?> 
+                    		<li onclick="window.location='<?=$profile_link?>'" style=" cursor:pointer;"><div style="background:url(<?=$img?>) no-repeat center;width:60px; height:60px;" title="friend" class="pro_photo3" ></div> <p class="pub-profile-name-p"><?= $val['s_first_name'];?></p> </li>
+                    <?php    }
+				   ?>
+                </ul>
+                 <?php 
+							 }
+							 else{
+								  echo '<li><div class="shade_box_blue" style="padding-top:5px; "><div  class="shade_norecords" style="width:235px;"><p class="blue_bold12">No Netpals.</p></div></div></li>';
+							  }
+						   		
+							?>
+                
+            </div>
+</div>
+                    
+

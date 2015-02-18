@@ -1,0 +1,132 @@
+						<?php //pr($arr_request);
+								if(count($arr_request)){
+									
+									foreach($arr_request as $key=> $val){
+						?>				
+                                        
+                                        <li>
+											
+											<div class="search-txt"><?=$val['s_name']?></div>
+											
+											
+											<div class="search-txt"><?=$val['s_address']?>, <?=$val['s_postcode']?><span><?=get_cityname($val['i_city_id'])?>, <?=get_statename($val['i_state_id'])?>, <?=get_countryname($val['i_country_id'])?> </span> </div>
+											<div class="search-contact-txt"><span>Contact Person:</span> <?=$val['s_phone']?></div>
+                                            
+											<div style="float:right; margin-top:-35px;"><img src="images/icons/map-ico.png" style="vertical-align:middle;" /><a href="javascript:void(0);" onclick="show_map('<?=$val['id']?>');">View Map</a></div>
+											<div class="clr"></div>
+                                            <div id="map_div<?=$val['id']?>" style="display:none;"></div>
+                                            
+                                            <!---------------------------------------new added----------------->
+                                             <?php 
+                                                $user_id = intval(decrypt($this->session->userdata('user_id')));
+                                              $query = $this->db->get_where('cg_church_admin', array('ch_admin_id' => $user_id));
+                                          $result = $query->result();
+                                          $numrow_superadmin = $query->num_rows();
+                                       
+                                             
+                                             if($val['i_disabled'] == 1 && $val['ch_verification_code'] == '' && $val['ch_page_url'] == '' && !empty($val['ch_email']) && $numrow_superadmin == 0){ ?>
+                          
+        <input type="button" name="" value="Create Church Space" id="crt-churchsp" class="chresend_btn" onclick="send_church_code('<?= $val['id'] ?>','<?= $val['ch_email'] ?>')">
+    <span style="display: none" class="send_success">
+        Varification code for church space has been sent to church email id.
+    </span>
+     <div class="clear"></div>
+    <script type="text/javascript">
+    function send_church_code(id,email){
+        showBusyScreen()
+   $.ajax({
+          url : base_url+'base_controller/send_verification_code',
+          type : 'post',
+          data : ({'id' : id,'email' : email}),
+          success : function(data)
+          {
+              hideBusyScreen();
+              $('.send_success').css('display','block');
+              $('#crt-churchsp').css('display','none');
+              //alert(data)
+             // $('#table_contents').html(data);
+          //window.location.href="<?= admin_base_url() ?>help_center/help_center";
+         // location.reload();
+          }
+      }); 
+    
+    
+}
+    
+    
+    </script>
+    <?php }
+    else if($val['i_disabled'] == 1 && $val['ch_verification_code'] != '' && $val['ch_page_url'] == '' && !empty($val['ch_email'])){
+        
+        ?>
+    <input type="button" name="" value="Resend Code" class="chresend_btn" onclick="send_church_code1('<?= $val['id'] ?>','<?= $val['ch_email'] ?>')">
+     <span style="display: none" class="send_success1">
+        Varification code resend successfully..
+    </span>
+    <div class="clear"></div>
+     <script type="text/javascript">
+    function send_church_code1(id,email){
+        showBusyScreen()
+   $.ajax({
+          url : base_url+'base_controller/send_verification_code',
+          type : 'post',
+          data : ({'id' : id,'email' : email}),
+          success : function(data)
+          {
+              hideBusyScreen();
+               $('.send_success1').css('display','block');
+              //alert(data)
+             // $('#table_contents').html(data);
+          //window.location.href="<?= admin_base_url() ?>help_center/help_center";
+          //location.reload();
+          }
+      }); 
+    
+    
+}
+    
+    
+    </script>
+    <?php
+    }
+    
+    else if($val['i_disabled'] == 1  && $val['ch_verification_code'] != '' && $val['ch_page_url'] != '' ) {
+        
+        
+        ?>
+    
+    <?php 
+     $user_id = intval(decrypt($this->session->userdata('user_id')));
+    $query = $this->db->get_where('cg_church_admin', array('ch_admin_id' => $user_id,'ch_id'=>$val['id']));
+            $result = $query->result();
+            //pr($result);
+           // echo count($result);
+            if(!count($result)){
+               $query1 = $this->db->get_where('cg_church_member', array('member_id' => $user_id,'church_id'=>$val['id']));  
+               $result1 = $query1->result();
+               //pr($result1);
+               if(!count($result1)){
+                    $status = '?member_id='.$user_id.'';
+                      $link = $val['ch_public_url'].$status;
+               }else{
+                   $status = '?member_status=1';
+                    $link = base_url().$val['id'].'/church-wall';
+               }
+              
+            }else{
+             $status = '?admin_status =1';
+             $link = get_church_dashboard_url_by_church_id($val['id']);
+            //pr($result);
+            }
+            
+    ?>
+    <h1 align="center"><a href="<?= $link ?>" class="church-register"> View church Space</a> </h1>
+            <?php
+        
+    }?>
+                                            <!----------------------------------------------------------->
+										</li>
+						<?php
+									}
+								}
+						?>

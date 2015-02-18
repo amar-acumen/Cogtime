@@ -1,0 +1,163 @@
+ <thead>
+      <th class="prayer-sub-heading">Prayer Groups</th>
+
+	  <?php 
+ //echo 'sdfsdfssdfsdfdfs'; 
+	  pr($church_list);
+
+		if(!empty($church_list)){
+//echo 'IFIFIIFIF';
+			foreach($church_list as $church)
+
+			{
+
+	  ?>
+
+      <tr>
+
+      <td><?php if($church_admin){?><img alt="" src="images/crown.png" style="margin-right:5px;"><?php }else {?><img alt="" src="images/man-24-16.png"><?}?><a href="<?=base_url()?>church-prayer-group/<?=$church->id?>"><?=$church->s_group_name?></a><span class="count-02"><?=$church->members?></span><?php if($church_admin){ ?><a onclick="show_dialog('delete-group'); $('#i_del_id').val('<?=$church->id?>');" title="Delete Group" href="javascript:void(0)"><img alt="" src="images/fe/cross-icon.gif"></a><?php }else { ?><a onclick="show_dialog('Leave-group'); $('#i_lev_id').val('<?=$church->i_prayer_group_id?>');" style="float:right" title="Leave Group" href="javascript:void(0)">Leave group</a><?php } ?>
+
+	  <p>Denomination- <?= getDenominationNameById($church->i_denomination_id) ?> | <?php if($church_admin){?>Created on- <?php echo getShortDate($church->dt_created_on,5);}else {?>Joined on- <?php echo getShortDate($church->dt_joined_on,5);}?>   </p>
+
+	  
+
+	  
+
+</a>
+
+	  </td>
+
+      </tr>
+
+	  <?php
+
+			}
+
+		}else
+		{	
+		?>
+
+		<tr>
+
+      <td><p>No Prayer Groups Found.</p></td>
+
+      </tr>
+
+		<?
+
+		}		
+
+	  ?>
+
+
+
+
+
+
+
+<div class="lightbox delete-group delete-post" style="width:245px;">
+
+    <div class="close"><a href="javascript:void(0)" onclick="hide_dialog();
+
+            $('#i_del_id').val('');"><img src="<?= base_url() ?>images/close.png" alt="" /></a></div>
+
+    <div class="top"><div>&nbsp;</div></div>
+
+    <div class="mid">
+
+        <div class="heading" style="margin-bottom:0px;">
+
+            <div class="left">
+
+                <h4>Delete Prayer Group</h4>
+
+            </div>
+
+        </div>
+
+        <div class="shade_box_white" style="padding:8px 0px;">
+
+            <div style="padding-bottom:10px;">
+
+                <p class="center-text" style="line-height:23px; color:#494949;">Do you really want to delete these group?</p>
+
+            </div>
+
+            <form action="" method="post" enctype="multipart/form-data">
+
+                <input type="hidden" name="i_del_id" id="i_del_id" value="" />
+
+                <input name="" type="button" value="Yes" class="popup-yes"  onClick="deleteGroup()"/>
+
+                <input name="" type="button" value="No" class="popup-no" onclick="hide_dialog();
+
+                        $('#i_del_id').val('');"/>
+
+            </form>   
+
+            <div class="clr"></div>
+
+        </div>
+
+
+
+    </div>
+
+    <div class="bot"><div>&nbsp;</div></div>
+
+</div>
+
+
+
+<div class="lightbox Leave-group delete-post" style="width:245px;">
+
+    <div class="close"><a href="javascript:void(0)" onclick="hide_dialog();
+
+            $('#i_lev_id').val('');"><img src="<?= base_url() ?>images/close.png" alt="" /></a></div>
+
+    <div class="top"><div>&nbsp;</div></div>
+
+    <div class="mid">
+
+        <div class="heading" style="margin-bottom:0px;">
+
+            <div class="left">
+
+                <h4>Leave Prayer Group</h4>
+
+            </div>
+
+        </div>
+
+        <div class="shade_box_white" style="padding:8px 0px;">
+
+            <div style="padding-bottom:10px;">
+
+                <p class="center-text" style="line-height:23px; color:#494949;">Do you really want to leave these group?</p>
+
+            </div>
+
+            <form action="" method="post" enctype="multipart/form-data">
+
+                <input type="hidden" name="i_lev_id" id="i_lev_id" value="" />
+
+                <input name="" type="button" value="Yes" class="popup-yes"  onClick="leaveGroup()"/>
+
+                <input name="" type="button" value="No" class="popup-no" onclick="hide_dialog();
+
+                        $('#i_lev_id').val('');"/>
+
+            </form>   
+
+            <div class="clr"></div>
+
+        </div>
+
+
+
+    </div>
+
+    <div class="bot"><div>&nbsp;</div></div>
+
+</div>
+

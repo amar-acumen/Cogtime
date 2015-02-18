@@ -1,0 +1,21 @@
+#topcmm_fb .presence_menu_opts_r1 {
+    background: #383b40 none no-repeat scroll right bottom;
+}
+
+#topcmm_fb #presence_bar .presence_menu_opts_r1 h2 {
+    background: #383b40 url(../images/minimize-black.gif) no-repeat scroll right top;
+    border-color: #383b40 #383b40 #383b40;
+}
+
+#topcmm_fb #presence_applications_tab_r1 {
+    border-left: 1px solid #373a3f;
+    border-bottom: 1px solid #61676d;
+}
+
+#topcmm_fb .titletip_r1, #topcmm_fb #presence_popout_sidebar .titletip_r1 {
+    background: transparent url(../images/dark-pointer-padded.gif) no-repeat scroll right bottom;
+}
+
+#topcmm_fb .titletip_r1 strong, #topcmm_fb #presence_popout_sidebar .titletip_r1 strong {
+    background: #282828 none repeat scroll 0 0;
+}

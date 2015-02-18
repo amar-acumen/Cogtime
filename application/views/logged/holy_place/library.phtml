@@ -1,0 +1,229 @@
+<?php include(APPPATH."views/layouts/logged_header.phtml");?>
+            <!-- NAVIGATION SECTION -->
+      <?php include(APPPATH."views/layouts/nav.phtml");?>
+      <!-- /NAVIGATION SECTION -->
+      </div>
+</div>
+<!-- /HEADER SECTION -->
+<div class="clr"></div>
+<style>
+#table_content .previous-next .num_tag_link {display: none !important;}
+</style>
+<!-- CONTENT SECTION -->
+<div id="content_section">
+      <div id="container">
+            <!--<div id="mid_content"> -->
+                  <!-- latest news -->
+                 <?php include(APPPATH ."views/layouts/latest_news.phtml");?>
+                  <!-- /latest news -->
+                  <div class="clr"></div>
+                  <!-- main container -->
+                  <div id="main_container">
+                        <div class="page_heading">
+                              <div class="left"><img src="images/icons/bible.png" alt="" /> Library</div>
+                        </div>
+                        
+                        <div class="bible-left-part bible-equalHeight" style="height:600px;">
+                        	
+                            <div class="grey-flying-box bible-equalHeight" id="my-readingplan" style="display:block; right:0;"><!---->
+                                <!--top panel start -->
+                                <div class="top-panel">
+                                    <span class="type" id="heading">Bible Notes</span>
+                                    <div id="category_div" style="">
+                                    <span class="filter-by">Filter By Category:</span>
+                                    <div class="filter-option">
+                                          <select name="notecategory" id="notecategory" onchange="showAllByCategory(this.value,'<?php echo base_url()?>logged/holy_place/getAllBibleNotes/','showAllNote');">
+                                                <option value="">View all</option>
+                                                <?php echo $category_html;?>
+                                          </select>
+                                          <script type="text/javascript">
+                                            $(document).ready(function() {
+                                                $("#notecategory").msDropDown();
+                                                $("#notecategory").hide();
+                                            })
+                                          </script>
+                                    </div>
+                                    </div>
+                                </div>
+                                <!--top panel end -->
+                                
+                                <!--listed content start -->
+                                <div class="grey-flying-div equal-padding nw-grey-container" id="showAllNote">
+                                <?=$BibleNotelisting?>
+                                </div>
+                                <!--listed content start -->
+                            </div>
+                      
+                        </div>
+                       
+                       <div class="bible-right-part bible-equalHeight">
+                      
+                            <div class="my-reading-options" style="margin-top:43px;">
+                                <ul>
+                                    <li>
+                                        <a href="javascript:void(0);" id="showAllNoteLi" class="select"><span class="notes"></span>Bible Notes</a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);" id="showAllPersonalNoteLi"><span class="notes"></span>Personal Notes</a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);" id="showAllBookmarkLi"><span class="bookmark"></span>Bookmarks</a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);" id="showAllHighlights"><span class="highlights"></span>Highlights</a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);" id="categoryLi"><span class="my-category"></span>My Category</a>
+                                    </li>
+                                 
+                                  
+                                </ul>
+                            </div>
+                       </div>
+        			</div>
+                  <!-- /main container -->
+                  <div class="clr"></div>
+            <!--</div> -->
+      </div>
+      <div class="clr"></div>
+</div>
+<!-- /CONTENT SECTION -->
+<div class="clr"></div>
+
+
+
+<?php include(APPPATH."views/layouts/footer.phtml");?>
+<?php include(APPPATH."views/logged/blocks/common_popup.phtml");?>
+
+<script type="text/javascript">
+
+$('.my-reading-options ul li a').click(function(){
+		showBusyScreen();
+		var showurl;
+		var divid;
+		var liId	= $(this).attr('id');
+		$('.my-reading-options ul a').removeClass('select');
+		$('#'+liId).addClass('select');
+		$('#showAllNote').niceScroll();
+
+		//alert(liId);
+		if(liId=='showAllNoteLi')
+		{
+			showurl	= '<?php echo base_url()?>logged/holy_place/getAllBibleNotes';
+			$('#notecategory').attr('onchange','');
+			$('#notecategory').attr('onchange',"showAllByCategory(this.value,'<?php echo base_url()?>logged/holy_place/getAllBibleNotes/','showAllNote')");
+			$('#heading').html('Bible Notes');
+		}
+		else if(liId=='showAllPersonalNoteLi')
+		{
+			showurl	= '<?php echo base_url()?>logged/holy_place/getOrganizerNotes';
+			$('#notecategory').hide();
+			$('#heading').html('Personal Notes');
+		}
+		else if(liId=='showAllBookmarkLi')
+		{
+			showurl	= '<?php echo base_url()?>logged/holy_place/getAllBookmark';
+			$('#notecategory').attr('onchange','');
+			$('#notecategory').attr('onchange',"showAllByCategory(this.value,'<?php echo base_url()?>logged/holy_place/getAllBookmark/','showAllNote')");
+			$('#heading').html('Bookmarks');
+		}
+		else if(liId=='showAllHighlights')
+		{
+			showurl	= '<?php echo base_url()?>logged/holy_place/getAllHighilights';
+			$('#notecategory').attr('onchange','');
+			$('#notecategory').attr('onchange',"showAllByCategory(this.value,'<?php echo base_url()?>logged/holy_place/getAllHighilights/','showAllNote')");
+			$('#heading').html('Highlights');
+		}
+		else if(liId=='categoryLi')
+		{
+			$('#heading').html('My Category');
+			showurl = '<?php echo base_url()?>logged/holy_place/getAllCategory';
+			
+		}
+		
+		$('#'+liId).addClass('select');
+		
+		if(liId!='showReadingPlan')
+		{
+			$.ajax({
+				type: 'post',
+				url: showurl,
+				dataType: 'json',
+				data: '',
+				success: function (msg) {
+						$('#ReadingPlanDiv').hide();
+						
+						if(msg.html == '')
+							$('#showAllNote').html('<div class="nw-inside-grey-container" style="height: 25px;"><div class="nw-contents" style="float:left;">No results. </div></div>');
+						else
+							$('#showAllNote').html(msg.html);
+						
+						if(liId=='categoryLi' || liId == 'showAllPersonalNoteLi' ){
+							$('#category_div').hide();
+						}
+						else
+							$('#category_div').show();
+							
+						$('#showAllNote').show();
+						$('#notecategory').html(msg.filtercat);
+						var categoryDropdown	= '<option value="">View all</option>'+msg.filtercat;
+						$('#notecategory').html(categoryDropdown);
+						$("#notecategory").msDropDown();
+						hideBusyScreen();
+				}
+				// end of success function...
+		  	});
+		 }
+});
+
+
+
+
+function gotoVerse(id)
+{
+	showBusyScreen(); 
+	$.ajax({
+		type: 'post',
+		url: '<?php echo base_url()?>logged/holy_place/getting_slab_from_verse/',
+		dataType: 'json',
+		data: 'verseid='+id,
+		success: function (msg) {
+			location.href = '<?php echo base_url()?>holy-place/read-bible/'+msg.slab+'/'+id;
+		
+		}	// end of success function...
+	});
+
+}
+
+
+
+function showAllByCategory(val,gotourl,divid)
+{
+	showBusyScreen();
+	$.ajax({
+				type: 'post',
+				url: gotourl,
+				dataType: 'json',
+				data: 'cat='+val,
+				success: function (msg) {
+						$('#'+divid).html(msg.html);
+						hideBusyScreen();
+				}	// end of success function...
+		  });
+}
+
+
+/*equal height container script start*/
+function equalHeight() {
+	$(".bible-right-part").height($(".bible-left-part").height())	;
+}	
+equalHeight();
+equalHeight($(".library-my-category li"));
+/*equal height container script end*/
+$(document).ready(function(arg) {
+	$('#showAllNote').niceScroll();
+});
+</script>
+
+
+

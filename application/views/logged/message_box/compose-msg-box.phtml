@@ -1,0 +1,110 @@
+<script>
+$(function() {
+
+function split( val ) {
+	return val.split( /,\s*/ );
+}
+function extractLast( term ) {
+	return split( term ).pop();
+}
+   
+   $('#txt_user_name, #frwd_user_name')
+    // don't navigate away from the field on tab when selecting an item
+        .bind( "keydown", function( event ) {
+            if ( event.keyCode === $.ui.keyCode.TAB &&
+                    $( this ).data( "autocomplete" ).menu.active ) {
+                event.preventDefault();
+            }
+        })
+        .autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: '<?php echo base_url();?>logged/compose_msg/suggest_friends',
+                    dataType: "json",
+                    data: {
+                        q: extractLast(request.term)
+                    },
+                    dataFilter: function (data) { return data; },
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            return {
+                                label: item.label,
+                                value: item.value,
+                                user_id: item.id
+                            }
+                        }));
+                    }
+                });
+            },
+            search: function() {
+                // custom minLength
+                var term = extractLast( this.value );
+                if ( term.length < 2 ) {
+                    return false;
+                }
+            },
+            focus: function() {
+                // prevent value inserted on focus
+                return false;
+            },
+           select: function (event, ui) {
+                var terms = split(this.value);
+                // remove the current input
+                terms.pop();
+                // add the selected item
+                terms.push(ui.item.value);
+                // add placeholder to get the comma-and-space at the end
+                terms.push("");
+                this.value = terms.join(", ");
+                var userids = $('#chkmember').val()
+                $('#chkmember').val(userids + ui.item.user_id + ",");
+                return false;
+            }
+        }).data( "autocomplete" )._renderItem = function( ul, item ) {
+        return $( "<li></li>" )
+            .data( "item.autocomplete", item )
+            .append( "<a>" + item.label+ "</a>" )
+            .appendTo( ul );
+    };
+ 
+  
+ 
+   
+});
+	
+</script>         
+         
+<div class="my-compose-section">
+                <div class="heading">
+                      <div class="left">
+                            <h4><img alt="" src="images/gtk-compose-big.png" class="my-compose-cmnt" /> <span class="comments_div69">Compose Message </span> </h4>
+                            <img src="images/minus-white.png" alt="" class="my-compose-minus" />
+                      </div>
+                </div>
+                    
+              <table width="100%" border="0" cellspacing="5" cellpadding="0">
+                <tr>
+                  <td align="left" valign="top">To</td>
+                  <td>
+                  <div class="ui-widget"><input id="txt_user_name" name="txt_user_name" type="text" size="50" /></div>
+                  </td>
+                   <input  type="hidden"  value="" id="chkmember" name="chkmember" />
+                </tr>
+                <tr> <td align="left" valign="top"></td><td style="margin-left: 195px;" class="error_msg" id="err_send_recepients"></td></tr>
+                <tr>
+                  <td align="left" valign="top">Subject</td>
+                  <td><input type="text" id="subject" /></td>
+                </tr>
+                <tr>
+                  <td align="left" valign="top">Message</td>
+                  <td><textarea rows="5" cols="5" id="message" class="my-reply-body-textarea"></textarea></td>
+                </tr>
+                <tr> <td align="left" valign="top"></td><td class="error_msg" id="err_send_message" style=" margin-top: -5px;"></td>
+</tr>
+                <tr>
+                <td></td>
+                  <td  align="left"><input type="button" value="Send" class="yellow-btn"  onclick="send_message();"  /></td>
+                </tr>
+              </table>
+                    
+</div>

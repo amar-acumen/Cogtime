@@ -1,0 +1,1 @@
+<?php mail('trishapaul91@gmail.com','Cron Job Test Script',phpversion());?>

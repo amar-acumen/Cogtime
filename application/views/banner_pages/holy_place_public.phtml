@@ -1,0 +1,254 @@
+<?php
+	if( ($this->session->userdata('loggedin') !='' || $this->session->userdata('loggedin')!=false ) && $this->session->userdata('is_admin') != 1){
+		
+		 include(APPPATH ."views/layouts/logged_header.phtml");
+		 include(APPPATH."views/layouts/nav.phtml");?>
+		  <!-- /NAVIGATION SECTION -->
+      		</div>
+		</div>
+		
+		
+   <?php  }
+     else{
+         
+		include(APPPATH ."views/layouts/header.phtml");
+	   	include(APPPATH."views/layouts/slider_nav.phtml");
+  }?>
+<!-- CONTENT SECTION -->
+<div class="clr"></div><!-- CONTENT SECTION -->
+
+<div id="content_section" style="margin-top:8px;">
+      <div id="container">
+      		<!-- main container -->
+            
+            
+            <?php if(count($contents))
+                        {
+                            foreach($contents as $r)
+                            {
+                                if($r['s_keyword']=='hp_main')
+                                {
+                                    $content['main_title']=$r['s_title'];
+                                    $content['main_desc']=nl2br($r['s_desc']);
+                                }
+                                else if($r['s_keyword']=='hp_bible')
+                                {
+                                    $content['bible_desc'] = nl2br($r['s_desc']);
+                                }
+                                else if($r['s_keyword']=='hp_library')
+                                {
+                                    $content['library_desc'] = nl2br($r['s_desc']);
+                                }
+                                else if($r['s_keyword']=='hp_prayerWall')
+                                {
+                                    $content['prayerWall_desc'] = nl2br($r['s_desc']);
+                                }
+                                else if($r['s_keyword']=='hp_eIntercession')
+                                {
+                                    $content['eIntercession_desc'] = nl2br($r['s_desc']);
+                                }
+                                else if($r['s_keyword']=='hp_fiveADay')
+                                {
+                                    $content['fiveADay_desc'] = nl2br($r['s_desc']);
+                                }
+								else if($r['s_keyword']=='hp_prayergrp')
+                                {
+                                    $content['hp_prayergrp'] = nl2br($r['s_desc']);
+                                }
+                        
+                            }
+                        }
+                        
+        ?> 
+            
+            
+            
+            <div class="landing-page">
+            	<div class="top-left" style="overflow: hidden;">
+                    <h2 class="landing-title"><?=$content['main_title']?></h2>  
+                    <p><?=$content['main_desc']?></p>
+                </div>
+                <div class="top-right">
+                <img src="images/holy-place.png" alt="holy place" />
+                </div>
+                <div class="clr"></div>
+                <!--bottom link section start -->
+                <div class="link-section">
+                	
+                    <?php
+                    if($this->session->userdata('loggedin')!='')
+                    {
+                        $destination = "window.location='five-a-day.html'";
+                        
+                    }
+                    else
+                    {
+                        $url = base64_encode(base_url().'five-a-day.html');
+                        $destination = "return show_login_popup('".$url."')";
+                    }
+                    
+                    ?>
+                     
+                    <div class="link-box" onclick="<?=$destination?>"  style="width:167px;">
+                        <div class="link-box-in"  style="width:136px;">
+                            <div class="main-img">
+                                <img src="images/fruit-basket.png" alt="Find Church"/>
+                            </div>
+                            <h3>Five a day</h3>
+                            <p><?=$content['fiveADay_desc']?></p>
+                        </div>
+                    </div>
+                    
+                    
+                    
+                    
+                    <?php
+                    if($this->session->userdata('loggedin')!='')
+                    {
+                        $destination = "window.location='holy-place/read-bible.html'";
+                        
+                    }
+                    else
+                    {
+                        $url = base64_encode(base_url().'holy-place/read-bible.html');
+                        $destination = "return show_login_popup('".$url."')";
+                    }
+                    ?>
+                    <!--box one start -->
+                    <div class="link-box" onclick="<?=$destination?>"  style="width:167px;">
+                    	<div class="link-box-in"  style="width:136px;">
+                        	<div class="main-img">
+                        		<img src="images/read-bible.png" alt="Bible"/>
+                            </div>
+                            <h3>Bible</h3>
+                            <p><?=$content['bible_desc']?></p>
+                        </div>
+                    </div>
+                    <!--box one end -->
+                    
+                    
+                    
+                     <?php
+                    if($this->session->userdata('loggedin')!='')
+                    {
+                        $destination = "window.location='holy-place/library.html'";
+                        
+                    }
+                    else
+                    {
+                        $url = base64_encode(base_url().'holy-place/library.html');
+                        $destination = "return show_login_popup('".$url."')";
+                    }
+                    ?>
+                    
+                    
+                    
+                    <!--box two start -->
+                    <div class="link-box" onclick="<?=$destination?>"  style="width:167px;">
+                    	<div class="link-box-in"  style="width:136px;">
+                        	<div class="main-img">
+                        		<img src="images/library.png" alt="Library" />
+                            </div>
+                            <h3>Library</h3>
+                            <p><?=$content['library_desc']?></p>
+                        </div>
+                    </div>
+                    <!--box two end -->
+                    
+                    
+                    <?php
+                    if($this->session->userdata('loggedin')!='')
+                    {
+                        $destination = "window.location='prayer-wall-home.html'";
+                        
+                    }
+                    else
+                    {
+                        $url = base64_encode(base_url().'prayer-wall-home.html');
+                        $destination = "return show_login_popup('".$url."')";
+                    }
+                    ?>
+                    
+                    
+                    
+                    <!--box three start -->
+                    <div class="link-box" onclick="<?=$destination?>"  style="width:167px;">
+                    	<div class="link-box-in"  style="width:136px;">
+                        	<div class="main-img">
+                        		<img src="images/prayer-wall.png" alt="Prayer Wall"/>
+                            </div>
+                            <h3>Prayer Wall</h3>
+                            <p><?=$content['prayerWall_desc']?></p>
+                        </div>
+                    </div>
+                    <!--box three end -->
+                    
+                    <?php
+                    if($this->session->userdata('loggedin')!='')
+                    {
+                        $destination = "window.location='view-search-eintercession.html'";
+                        
+                    }
+                    else
+                    {
+                        $url = base64_encode(base_url().'view-search-eintercession.html');
+                        $destination = "return show_login_popup('".$url."')";
+                    }
+                    ?>
+                    
+                    <!--box four start -->
+                    <div class="link-box" onclick="<?=$destination?>"  style="width:167px;">
+                    	<div class="link-box-in"  style="width:136px;">
+                        	<div class="main-img">
+                        		<img src="images/e-intercession.png" alt="e-intercession"/>
+                            </div>
+                            <h3>e-Intercession</h3>
+                            <p><?=$content['eIntercession_desc']?></p>
+                        </div>
+                    </div>
+                    <!--box four end -->
+                    
+                    
+                    <?php
+                    if($this->session->userdata('loggedin')!='')
+                    {
+                        $destination = "window.location='prayer-group.html'";
+                        
+                    }
+                    else
+                    {
+                        $url = base64_encode(base_url().'prayer-group.html');
+                        $destination = "return show_login_popup('".$url."')";
+                    }
+                    ?>
+                    
+                    
+                    <!--box five start -->
+                    <div class="link-box no-bg" onclick="<?=$destination?>"  style="width:167px;">
+                    	<div class="link-box-in"  style="width:136px;">
+                        	<div class="main-img">
+                        		<img src="images/nw-prayer-group.png" alt="Prayer Group"/>
+                            </div>
+                            <h3>Prayer Group</h3>
+                            <p><?=$content['hp_prayergrp']?></p>
+                        </div>
+                    </div>
+                    
+                    <!--box five end -->
+                    <div class="clr"></div>
+                </div>
+                <!--bottom link section end -->
+            </div>     
+            <!-- /main container -->
+      </div>
+      <div class="clr"></div>
+</div>
+<!-- /CONTENT SECTION -->  
+  
+<?php
+	# include footer file...
+	include_once(APPPATH ."views/layouts/footer.phtml");
+?>
+<!--login popup start -->
+
+<!--login popup end -->

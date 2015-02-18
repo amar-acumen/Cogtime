@@ -1,0 +1,18 @@
+<?php #pr($arr_trends);//pr($arr_tweets[0]['data']);
+if(count($arr_trends)){
+?>
+<ul class="trending">
+<?php 
+	foreach($arr_trends as $key=> $val){		
+?>
+
+        <li><a href="<?=base_url()?>search-trends/<?=$val['id']?>/<?=my_url($val['s_tags'])?>.html"><?=$val['s_tags']?></a></li> 
+ <?php }?>
+  </ul>
+ 
+<?php
+     }
+?>
+                                      
+
+                                  

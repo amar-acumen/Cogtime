@@ -1,0 +1,151 @@
+
+   
+
+
+
+<div class="clr"></div>
+<!-- CONTENT SECTION -->
+<!--navigation section start -->
+<?php include(APPPATH."views/layouts/admin/admin_nav.phtml");?>
+<!--navigation section end -->
+
+<!--=================================== content_section ============================================-->
+<div id="content_section">
+      <div id="container">
+            
+            <div id="mid_content">
+                  <div class="page_heading left">
+                        <div class="left"><img src="<?=base_url()?>images/icons/login.png" alt="" /> Inbox</div>
+                  </div>
+                  <div class="clr"></div>
+                  <div id="right_container">
+                        <div class="arrow_btm"></div>
+                        
+                        <div class="content_area">
+                        <!--filter section start -->
+                        <?php //include(APPPATH."views/admin/site_settings/inbox/inbox_search_panel.phtml");?>
+                        
+                        <div class="filter">
+                             <span class="filter-by">Filter By &raquo;</span>
+                            <form id="frm_search" onsubmit="return false;" method="post" enctype="multipart/form-data" class="filter-search">
+<!--                            	<label>User Reporting :</label>
+                                <input type="text" name="txt_name" id="txt_name" />
+								<label>Abuser :</label>
+                                <input type="text" name="txt_abuser_name" id="txt_abuser_name" />-->
+                                 <label>
+								<label>Type :</label>
+                                <select name="category" style="width:100px">
+								<option value='-1' selected>----</option>
+								<option value="report">Report abuse Request</option>
+								<option value="project">project Information Reques</option>
+								<option value="church">church  Reques</option>
+								<option value="ring">Ring category Request</option>
+<!--								<option value="photo">Photo</option>
+								<option value="prayer_wall">Prayer wall post</option>
+								<option value="ring">Ring Post</option>
+								<option value="user">User</option>
+								<option value="video">Video</option>
+								<option value="wall">Wall Post</option>-->
+								</select>
+								<div class="clr"></div>
+                                                                <div class="clr"></div>
+                                                                <div class="clr"></div>
+                                                                <br>
+								<label>Date Between :</label>
+                                <input type="text" name="from_date" id="from_date" class="date-field"/>
+								 <img src="../images/icons/cal.png" alt="" onclick="$(this).prev().focus()" class="calender" style="margin-right:35px;" />
+								<script type="text/javascript">
+									$(document).ready(function(arg) {
+										$.datepicker.setDefaults($.datepicker.regional['']);
+										$("#from_date").datepicker($.datepicker.regional['en']);
+
+									});
+							  </script>
+								<label>To :</label>
+                                <input type="text" name="end_date" id="end_date" class="date-field"/>
+								 <img src="../images/icons/cal.png" alt="" onclick="$(this).prev().focus()" class="calender" style="margin-right:35px;" />
+								<script type="text/javascript">
+									$(document).ready(function(arg) {
+										$.datepicker.setDefaults($.datepicker.regional['']);
+										$("#end_date").datepicker($.datepicker.regional['en']);
+
+									});
+							  </script>
+                                <input name="" type="submit" value="GO" class="go" />
+                                <input type="hidden" id="search_basic" name="search_basic" value="Y" /></label>
+                            </form>  
+                            <div class="clr"></div>
+                          </div>
+                        <!--filter section end -->
+                        
+                        <div id="table_content">
+                        <?=$result_content?>
+                        </div>
+                        
+
+                              
+                        <div class="clr"></div>
+                        </div>
+                  </div>
+                  <div class="clr"></div>
+            </div>
+            <!--<div id="bot_corner">&nbsp;</div> -->
+      </div>
+      <div class="clr"></div>
+</div>
+<!--============================== /content_section =========================================-->
+<!--popup one start-->
+<div class="lightbox delete-page-popup" style="width:500px;">
+      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="../images/close.png" alt="" /></a></div>
+      <div class="top"><div>&nbsp;</div></div>
+      <div class="mid">
+            <div class="heading" style="margin-bottom:0px;">
+                  <div class="left">
+                        <h4>Delete member</h4>
+                  </div>
+            </div>
+               <div class="shade_box_white" style="padding:8px 0px;">
+               <p class="center-text">Do you really want to delete this member?</p>
+              
+                    <input type="hidden" id="i_del_id" name="i_del_id" value="" /> 
+                    <input type="hidden" id="i_user_typ" name="i_user_typ" value="" />
+                    
+                    <input name="" type="button" value="Yes" class="btn" style="margin-left:146px;" onclick="return delete_();"/>
+                    <input name="" type="button" value="No" class="btn" onclick="hide_dialog()"/>
+ 
+               <div class="clr"></div>
+            </div>
+            
+      </div>
+      <div class="bot"><div>&nbsp;</div></div>
+</div>
+<!--popup one end-->
+
+<script type="text/javascript">
+$(document).ready(function(arg) {
+ $('#frm_search').submit(function(){ 
+						
+						var datatosend=$("#frm_search").serialize();
+						
+					     	showBusyScreen();
+							//alert(datatosend);
+							
+							$.ajax({
+							   type: "POST",
+							   url: admin_base_url+"site_settings/inbox/ajax_pagination/",
+							   data: datatosend,
+							   success: function(data){
+								  
+								  hideBusyScreen(); 
+								   $('#table_content').html(data);
+							       
+								
+								 
+							   }
+							 });	 
+					   
+						
+				});
+ 
+ });
+ </script>

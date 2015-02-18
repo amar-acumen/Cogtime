@@ -1,0 +1,65 @@
+        
+<?php 
+//pr($my_videos_album_content);
+
+if(count($my_videos_album_content)) {
+    foreach($my_videos_album_content as $video)
+    {
+        
+         $IMG = base_url()."uploads/user_videos/".getThumbName($video['s_video_image'],'bigthumb');
+         $profile_link = get_video_url($video['id'],$video['s_title']);
+?>
+        <div class="shade_box_01">
+        
+              <div class="left_div02" style="width:300px;"> <a id="res_video_<?=$video['id']?>" style="float: left; padding: 5px" href="<?= $profile_link?>"><img src="<?php echo $IMG?>" alt=""  class="img_brd"/></a>
+                    <p class="blue_bold12" style="margin-top: 4px;"><a href="<?= $profile_link?>"><strong><?= my_substr(ucfirst($video['s_title']),15)?></strong></a></p>
+                    <p><?php echo ucfirst(substr($video['s_description'],0,70))?><?php if(strlen($video['s_description'])>70) echo "...";?></p>
+              </div>
+              <div class="right_div02">
+                <select id="album_<?= $video['id']?>" name="album1" class="album1" style="width:170px; margin-bottom:10px;" onchange="return change_album_(<?php echo $video['id'].','.$video['i_video_album_id']?>)">
+                          <option value="-1">Move to another Album </option>
+                          <?php if(count($album_names)){
+						  		foreach($album_names as $a):
+                                  if($a['id'] != $album_info[0]['id']) :
+                            ?>
+                          	  <option value="<?= $a['id']?>"><?= $a['s_name']?></option>
+                            <?php   endif; 
+                            	endforeach;
+						  		}
+							?>
+                    </select>
+             
+
+                    <div class="box01" style="width: 132px;">
+                          <p class="date-time">Uploaded on :<?php echo getShortDate($video['dt_created_on'],5)?></p>
+                          
+                          <p> <img src="images/icons/edit.png" alt="" /> <a  href="javascript:void(0);" class="blue_link" onclick="return organize_edit_video_(<?= $video['id']?>)">Edit </a> &nbsp; <img src="images/icons/delete.png" alt="" /> <a  href="javascript:void(0);" class="blue_link" onclick="return delete_video_id_set_(<?= $video['id']?>);">Delete</a> </p>
+                    </div>
+                    <p><!--<img src="images/icons/play.png" alt="" /> <a  href="javascript:void(0);" class="blue_link"  onclick="return show_dialog('video_div')"><strong>Play</strong></a>--> &nbsp;  &nbsp; <?=$video['image_rank']?> </p>
+                   
+              </div>
+              <div class="clr"></div>
+        </div>
+<?php
+    }
+}
+else
+{
+            echo  '<div class="shade_box_01" style="padding-top:5px;"><div  class="shade_norecords" style="width:265px;"><p class="blue_bold12">No Videos.</p></div></div>';
+}
+?>
+
+<?php /*
+if($page_links){ ?>
+<div class="pagination">
+
+    <div class="left">Viewing Page <?=$current_loaded_page_no?> of <?=$total_pages?> </div>
+    
+    <div class="right">
+           <ul class="small-paging">
+            <?=$page_links?> 
+            </ul>
+    </div>
+</div>
+<?php  }*/
+?>

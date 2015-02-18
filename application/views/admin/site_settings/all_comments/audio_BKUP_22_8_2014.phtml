@@ -1,0 +1,23 @@
+<?php
+//pr($info_arr);
+foreach ($info_arr as $info){
+   // $IMG = base_url()."uploads/user_audio_album_photos/".getThumbName($info['s_image_name'],'thumb');
+    //echo $ALBUM_URL = get_audio_album_detail_url($info['i_id_audio_album'], $info['s_audio_file_name] ']);
+    ?>
+<div class="au_nw">
+    <span>
+        <pre>
+            <p>Audio Title : <?= $info['s_title'] ?> </p>
+            <p>Audio Artist : <?= $info['s_artist']?></p>
+            <p>Audio Genre : <?= $info['s_genre']?></p>
+            <p>Audio Description : <?= $info['s_desc'] ?></p>
+        </pre>
+    </span>
+</div>
+        <?php
+}
+?>
+<style>
+    .au_nw{ margin: 10px 0 0 195px;}
+    .au_nw span pre p{ font-size:17px; font-weight: bold;}
+</style>

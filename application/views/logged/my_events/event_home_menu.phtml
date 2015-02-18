@@ -1,0 +1,36 @@
+<div class="link-div" style="margin-top:-2px;">
+  <ul>
+  <?php
+
+$profile_id=intval(decrypt($_SESSION['user_id']));  //pr($event_info,1);?>
+
+    <li><a href="event-detail/<?= $event_info['0']['id']?>/<?=str_replace(" ","-",$event_info['0']['s_title'])?>.html" class="<?php echo ($page_name==str_replace(" ","-",$event_info['0']['s_title']))?'current':'';?>"><span>Event Details</span> </a> </li>
+    <?php //echo $page_name;exit;?>
+    
+    <?php 
+	
+    if($event_info['0']['i_host_id']==$profile_id || $event_info['0']['i_user_id']==$profile_id  )
+    {
+    ?>
+         
+          <!--  <li><a href="rings/<?= $ring_detail_arr[0]['id']?>/ring-approve-join-request.html" class="<?php //echo ($page_name=='ring-approve-join-request')?'current':'';?>"><span>Ring Requests</span></a> </li>-->
+            <li><a href="event-detail/invite-member/<?php echo $event_info[0]['id'];?>" class="<?php echo ($page_name==$event_info[0]['id'])?'current':'';?>"><span>Invite Member</span></a> </li>
+            <li><a href="event-detail/invitation-sent/<?php echo $event_info[0]['id'];?>/event.html" class="<?php echo ($page_name=='event')?'current':'';?>"><span>Invitation sent</span></a> </li>
+    <?php
+    }
+    ?>
+    
+    
+    
+    
+ 
+    
+</ul>
+<div class="clr"></div>
+</div>
+
+
+<?php
+//echo "profile_id : ".$profile_id." ring_owner_id : ".$ring_detail_arr[0]['i_user_id'];
+
+?>

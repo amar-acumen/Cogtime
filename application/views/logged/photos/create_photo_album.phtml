@@ -1,0 +1,236 @@
+<link rel="stylesheet" type="text/css" href="<?php echo  base_url()?>css/jquery.multiselect.css" />
+<link rel="stylesheet" type="text/css" href="<?php echo  base_url()?>css/jquery.multiselect.filter.css" />
+<link rel="stylesheet" type="text/css" href="<?php echo  base_url()?>css/prettify.css" />
+<!--<link rel="stylesheet" type="text/css" href="<?php echo  base_url()?>css/jquery-ui.css" />-->
+<script type="text/javascript" src="<?php echo  base_url()?>js/jquery.multiselect.js"></script>
+<script type="text/javascript" src="<?php echo  base_url()?>js/jquery.multiselect.filter.js"></script>
+<script type="text/javascript" src="<?php echo  base_url()?>js/prettify.js"></script>
+<script language="javascript">
+<!--
+var g_controller_url = base_url+"my-photos.html";
+
+var photo_id = null;
+$(document).ready(function() {
+
+	// for AJAX page-submission...
+    var options = { 
+        beforeSubmit:  showLoad,  // pre-submit callback 
+        success:       validateFrm // post-submit callback 
+    }; 
+ 
+    // bind to the form's submit event 
+    $('#frmPhotoAlbum').submit(function() {
+        $(this).ajaxSubmit(options);
+        return false;
+		
+    });
+
+});
+
+function showLoad()
+{
+ // $('#photo_album_btn').attr('disabled','disabled');
+  $('#photo_album_btn').val('Creating...');
+  
+}
+
+
+// validate ajax-submission...
+function validateFrm(data)
+{
+	//alert( data);
+	var data = JSON.parse(data);
+
+	id=data.photo_id;
+
+	if(data.success==false) 
+	{
+		
+
+		$('.error-message').each(function(i){
+			$(this).attr('style','display:none');
+		});
+		
+		$('#photo_album_btn').val('Create');
+		$('#photo_loading').html('');
+
+		for ( var id in data.arr_messages ){
+			//alert(data.arr_messages[id]);
+			if( $('#err_'+id) != null ) {
+				$('#err_'+id).html(data.arr_messages[id]);
+				$('#err_'+id).css('display', 'block');
+			}
+		}
+
+		showUIMsg(data.msg);
+	}
+	else {
+		$('#photo_album_btn').val('Create');
+		$('#photo_loading').html('');
+		$('#frmPhotoAlbum')[0].reset();
+
+		showUIMsg(data.msg);		
+		window.location.href= "<?=base_url()?>manage-my-photo.html";
+		
+	}
+	$('#sp_add_loading').html('');
+	//hideLoading();
+				
+}
+
+
+-->
+</script>
+
+<script type="text/javascript">
+$(document).ready(function () {
+
+ //counting the left characters in comment
+     function limitChars(textid, limit, infodiv)
+     {
+      var text = $('#'+textid).val(); 
+      var textlength = text.length;
+      if(textlength > limit)
+      {
+      $('#'+textid).val(text.substr(0,limit));
+       return false;
+      }
+      else
+      {
+      
+       return true;
+      }
+     }
+    
+    
+    $(function(){
+        $('#txt_add_desc').keyup(function(){
+            limitChars('txt_add_desc', 250, '');
+        });
+    });
+    
+    
+    //// just to show correct no. of chracters left while the page is loaded...
+    limitChars('txt_add_desc',250, '');
+    
+ 
+});
+</script>
+
+<script type="text/javascript">
+$(function(){
+		$("#friendSlct").multiselect().multiselectfilter();	
+		$("#ringselect").multiselect().multiselectfilter();
+		$("#netpalselect").multiselect().multiselectfilter();
+		$("#ppselect").multiselect().multiselectfilter();
+		$("#pgselect").multiselect().multiselectfilter();
+	});
+</script>
+
+<?php include(APPPATH."views/layouts/logged_header.phtml");?>
+            <!-- NAVIGATION SECTION -->
+      <?php include(APPPATH."views/layouts/nav.phtml");?>
+      <!-- /NAVIGATION SECTION -->
+      </div>
+
+<div class="clr"></div>
+<!-- CONTENT SECTION -->
+<div id="content_section">
+      <div id="container">
+            <div id="top_corner">&nbsp;</div>
+            <div id="mid_content">
+                  <!-- latest news -->
+                 <?php include(APPPATH ."views/layouts/latest_news.phtml");?>
+                  <!-- /latest news -->
+                  <div class="clr"></div>
+                  <!-- main container -->
+                  <div id="main_container">
+                      <?php include(APPPATH."views/layouts/leftbar.phtml");?>
+                        <!-- left container -->
+                        <div id="mid_container">
+                        <div class="page_heading">
+                                <div class="left"><img src="images/icons/photo.png" alt="" /> Photos</div>
+                            </div>
+                        <!--sub page links -->
+                              <div class="link-div" style="margin-top:0px;">
+                                  <ul>
+                                    <li><a href="my-photos.html"><span>My Photos</span></a></li>
+                                    <li><a href="manage-my-photo.html"><span>Manage My Photo Albums</span> </a> </li>
+                                    <li><a href="javascript:void(0);" onclick="return show_dialog('upload_photo')"><span>Upload Photo</span></a></li>
+                                </ul>
+                                <div class="clr"></div>
+                              </div>
+                             <!--/sub page links -->
+                        
+                        
+                        	<!--<div class="page_heading">
+                            	<div class="left"><img src="images/icons/photo.png" alt="" /> Create Photo Album</div>
+                             </div>-->
+                            <form id="frmPhotoAlbum"  method="post" action="<?=base_url().'logged/create_photo_album/add_photo_album'?>" onsubmit="return false;" enctype="multipart/form-data" class="form-manage">
+                             <div class="frm_box blue_box" style="background:url(images/photo.png) no-repeat 20px 90% #f0f7fa; width:452px;">
+                                    <div class="lable01">Name:</div>  
+                                    <div class="field01">
+                                    <input name="txt_name" id="txt_name" type="text" />
+                                    <span id="err_name" class="error-message"></span>  
+                                    </div> 
+                                    <div class="clr"></div>
+                                    
+                                     <div class="lable01">Browse Photo:</div> 
+                                     <div class="field01">
+                                     <input name="s_photo" id="s_photo" type="file" />
+                                     <span id="err_album_photo" class="error-message"></span>  
+                                     </div>
+                                    <div class="clr"></div>
+                                    
+                                    <div class="lable01">Description:</div>  
+                                    <div class="field01">
+                                    <textarea name="txt_add_desc"  id="txt_add_desc" cols="" rows="" style="height:125px;" maxlength="250"></textarea>
+                                    <span id="err_desc" class="error-message"></span> 
+                                    <span style="font-size: 11px;font-style: italic;line-height: 13px;">(Max 250 characters.)</span> 
+                                    </div> 
+                                    <div class="clr"></div>
+                                    
+                                    
+                                    <div class="lable01-privacy">Privacy:</div>  
+                                    
+                                    <div class="lable01"><?php echo get_privacy_setting('photo');
+									?>:</div>
+                                    <div class="field01">
+                                    <a href="<?=base_url()?>/privacy-settings.html" class="change-btn">Change</a>
+                                    <span id="err_privacy" class="error-message"></span> 
+                                    </div>
+                                    <?php /*?><select name="privacy" id="privacy" style="width:262px;">
+                                    	  <option value="-1">Select</option>
+                                          <option value="friend">My friends only</option>
+                                          <option value="everyone">Every One</option>
+                                    </select><?php */?>
+                                   
+                                    <div class="clr"></div>
+                                     
+                                    <div class="lable01">&nbsp;</div>  
+                                    <div class="field01"> 
+                                    <input name="photo_album_btn"  id="photo_album_btn" type="submit" value="Create"  class="btn"/></div> 
+                                    <div class="clr"></div>
+                          	</div>
+                            </form>
+                        </div>
+                        <!-- /left container -->
+                        <!-- right container -->
+                        <?php include(APPPATH."views/layouts/rightbar.phtml");?>
+                        <!-- /right container -->
+                  </div>
+                  <!-- /main container -->
+                  <div class="clr"></div>
+            </div>
+            <div id="bot_corner">&nbsp;</div>
+      </div>
+      <div class="clr"></div>
+</div>
+<!-- /CONTENT SECTION -->
+<div class="clr"></div>
+<!-- FOOTER SECTION -->
+<?php include(APPPATH."views/layouts/footer.phtml");?>
+<!-- /FOOTER SECTION -->
+<?php include(APPPATH."views/logged/blocks/common_popup.phtml");?>
+<?php include(APPPATH."views/logged/photos/blocks/upload_photo_popup_create_album.phtml");?>
+

@@ -1,0 +1,305 @@
+<script language="javascript">
+$(document).ready(function() {
+
+	// for AJAX page-submission...
+    var options = { 
+        beforeSubmit:  showLoad,  // pre-submit callback 
+        success:       validateFrm // post-submit callback 
+    }; 
+ 
+    // bind to the form's submit event 
+    $('#prod_frm').submit(function() {
+        $(this).ajaxSubmit(options);
+        return false;
+		
+    });
+
+});
+
+function showLoad()
+{
+ // $('#photo_album_btn').attr('disabled','disabled');
+ 	showUIMsg();
+  $('#product_create_btn').val('Creating...');
+  
+}
+
+
+// validate ajax-submission...
+function validateFrm(data)
+{
+	//alert( data);
+	var data = JSON.parse(data);
+
+	id=data.photo_id;
+
+	if(data.success==false) 
+	{
+		$('.error-message').each(function(i){
+			$(this).attr('style','display:none');
+		});
+		
+		//$('#photo_album_btn').attr('disabled','');
+		$('#product_create_btn').val('Create');
+		$('#photo_loading').html('');
+
+		for ( var id in data.arr_messages ){
+			//alert(data.arr_messages[id]);
+			if( $('#'+id) != null ) {
+				$('#'+id).html(data.arr_messages[id]);
+				$('#'+id).css('display', 'block');
+			}
+		}
+		showUIMsg(data.msg);	
+	}
+	else {
+		
+		showUIMsg(data.msg);		
+		window.location.href= "<?php echo base_url().'eswap/manage-my-product'?>";///document.URL;
+	}
+	$('#sp_add_loading').html('');
+	//hideLoading();
+				
+}
+
+
+
+
+</script>
+
+<?php 
+
+//$count=count($arr_profile_info['work_arr']);
+//if ($count==0)
+	$count=1;
+	
+	
+include(APPPATH."views/layouts/logged_header.phtml");
+?>
+            <!-- NAVIGATION SECTION -->
+      <?php include(APPPATH."views/layouts/nav.phtml");?>
+      <!-- /NAVIGATION SECTION -->
+      </div>
+</div>
+<!-- /HEADER SECTION -->
+<div class="clr"></div>
+<style>
+.newwidth
+{
+	width:320px !important;
+}
+.newwidth-lable01
+{
+	width:108px !important;
+}
+.txtwidth
+{
+	width:314px !important;
+}
+
+</style>
+<!-- CONTENT SECTION -->
+<div id="content_section">
+      <div id="container">
+            <!--<div id="mid_content"> -->
+                  <!-- latest news -->
+                 <?php include(APPPATH ."views/layouts/latest_news.phtml");?>
+                  <!-- /latest news -->
+                  <div class="clr"></div>
+                  <!-- main container -->
+                  <div id="main_container">
+                  
+                        <!-- left container -->
+                        <?php include(APPPATH."views/layouts/leftbar.phtml");?>
+                        
+                        <div id="mid_container">
+                       	  <div class="page_heading etrade-nw-heading">
+                            	<div class="left"><img src="images/icons/box.png" alt="" /> Create Product</div>
+                          </div>
+                          <!--sub page links -->
+                              <?php include(APPPATH."views/logged/eswap/menu.phtml");?>
+                              <!--/sub page links -->
+                             <div class="ne-etrade-product-category">Product I Offer</div>
+                             <div class="frm_box blue_box" style="width: 462px; padding:20px 15px;">
+                             <form name="prod_frm" id="prod_frm" action="<?=base_url().'logged/e_swap/save_eswap_product'?>" method="post"  onsubmit="return false;" enctype="multipart/form-data">
+                                    <div class="frm_box inbox_div_blue" style="padding-left:0px; padding-right:0px;">
+                                   <div class="lable01 newwidth-lable01" >Category :</div>
+                                    <div class="field03 newwidth">
+                                          <select name="category" id="category" style="width:325px;">
+                                          		<option value="">Please select category</option>
+                                                <?php echo $category?>
+                                          </select>
+                                          <span id="err_category" class="error-message"></span> 
+                                    </div>
+                                    <div class="clr"></div>
+                                    <div class="lable01 newwidth-lable01" >Name :</div>
+                                    <div class="field03 newwidth">
+                                          <input name="product_name" type="text" class="txtwidth" />
+                                          <span id="err_product_name" class="error-message"></span> 
+                                    </div>
+                                    <div class="clr"></div>
+                                    <div class="lable01 newwidth-lable01" >Brand :</div>
+                                    <div class="field03 newwidth">
+                                          <input name="product_brand" type="text" class="txtwidth" />
+                                          <span id="err_product_brand" class="error-message"></span> 
+                                    </div>
+                                    <div class="clr"></div>
+                                    
+                                    <div class="lable01 newwidth-lable01" >Attribute 1 :</div>
+                                    <div class="field03 newwidth">
+                                          <input name="product_attr1" type="text" class="txtwidth" />
+                                          <span id="err_product_attr1" class="error-message"></span> 
+                                    </div>
+                                    <div class="clr"></div>
+                                    <div class="lable01 newwidth-lable01" >Attribute 2 :</div>
+                                    <div class="field03 newwidth">
+                                          <input name="product_attr2" type="text" class="txtwidth" />
+                                          <span id="err_product_attr2" class="error-message"></span> 
+                                    </div>
+                                    <div class="clr"></div>
+                                    <div class="lable01 newwidth-lable01" >Description  :</div>
+                                    <div class="field03 newwidth">
+                                          <textarea name="product_desc" style="width:316px; height:90px;"></textarea>
+                                          <span id="err_product_desc" class="error-message"></span> 
+                                    </div>
+                                    <div class="clr"></div>
+                                    <div class="lable01 newwidth-lable01" >Image  :</div>
+                                    <div class="field03 newwidth">
+                                          <input name="image" type="file"  style="width:321px;"/>
+                                          <span id="err_image" class="error-message"></span> 
+                                    </div>
+                                    <div class="clr"></div>
+                                    <div class="lable01 newwidth-lable01" >Product Age  :</div>
+                                    <div class="field03 newwidth">
+                                          <input name="product_age" type="text" class="txtwidth" />
+                                          <span id="err_product_age" class="error-message"></span> 
+                                    </div>
+                                    <div class="clr"></div>
+                                    <div class="lable01 newwidth-lable01" >Shipping Preference :</div>
+                                    <div class="field03 newwidth">
+                                          <select name="opensale" id="sale" style="width:325px;" onchange="selectShipping(this.value)">
+                                              <option value="">Select Open to Sale</option>
+                                              <option value="1">Local</option>
+                                              <option value="2">International </option>
+                                              <option value="3">Local & International </option>
+                                          </select>
+                                          <span id="err_opensale" class="error-message"></span> 
+                                    </div>
+                                        <div class="clr"></div>
+                                        
+                                        <div><strong>Product I want</strong></div>
+                                        <div class="clr"></div>
+                                         <input type="hidden" name= "total_work_divs" id="work_div_h" value="0" />
+                                        <div id="productIWant">
+                                    	</div>
+                                    
+                                    
+                                    <div class="clr"></div>
+                                    <div onclick="add_extra_work_div();" style="cursor:pointer;">Add More</div>
+                                    <div class="clr"></div>
+                                    <div class="lable01 newwidth-lable01" >&nbsp;</div>
+                                    <div class="field03 newwidth">
+                                          <input name="" id="product_create_btn" type="submit" value="Create"  class="btn" />
+                                          <input name="" type="button" value="Cancel"  class="btn" onclick="location.href='<?php echo base_url()?>eswap/manage-my-product'" />
+                                    </div>
+                                    <div class="clr"></div>
+                              </div>
+                             
+                               </form>
+                          	</div>
+                            
+                        </div>
+                    <!-- /left container -->
+                        
+            <!-- right container -->
+                        <?php include(APPPATH."views/layouts/rightbar.phtml");?>
+                        <!-- /right container -->
+                  </div>
+                  <!-- /main container -->
+                  <div class="clr"></div>
+            <!--</div> -->
+      </div>
+      <div class="clr"></div>
+</div>
+<!-- /CONTENT SECTION -->
+<div class="clr"></div>
+
+
+
+
+
+<?php include(APPPATH."views/layouts/footer.phtml");?>
+<?php include(APPPATH."views/logged/blocks/common_popup.phtml");?>
+
+
+
+<script type="text/javascript">
+	function selectShipping(val)
+	{
+		if(val==1)
+		{
+			$('#local').show();
+			$('#international').hide();
+		}
+		else if(val==2)
+		{
+			$('#international').show();
+			$('#local').hide();
+		}
+		else if(val==3)
+		{
+			$('#local').show();
+			$('#local').show();
+		}
+	}
+	
+	function add_extra_work_div()
+	{
+		
+		var count=$('#work_div_h').val();
+	//alert(no_of_divs)
+		count++;
+		/*var work_id_order=$('#work_div_id_order').val();
+		work_id_order++;
+		divID = "work_div_"+ work_id_order;
+		$('#hidden_work_div #copy_work').attr('id', divID);*/
+	
+		
+		
+		content = '<div class="lable01 newwidth-lable01" >Product I want :</div>';
+		content += '<div class="field03 newwidth"><input name="wantproduct_name_'+count+'" id="wantprodname" type="text" class="txtwidth" />';
+        content += '<span id="err_wantproduct_name_'+count+'" class="error-message"></span></div><div class="clr"></div>';
+		content += '<div class="lable01 newwidth-lable01" >Brand Name  :</div><div class="field03 newwidth"><input name="wantbrand_name_'+count+'" id="wantbrandname1" type="text" class="txtwidth" />';
+		content += '<span id="err_wantbrand_name_'+count+'" class="error-message"></span></div><div class="clr"></div>';
+		content += '<div class="lable01 newwidth-lable01" >Category  :</div><div class="field03 newwidth">';
+		content += "<select name=\"wantcategory_"+count+"\" id=\"wantcategory1\" style=\"width:325px;\"><option value=\"\">Please select category</option><?php echo $category?></select>";
+		content += '<span id="err_wantcategory_'+count+'" class="error-message"></span></div><div class="clr"></div><div class="lable01 newwidth-lable01" >Description  :</div>';
+   		content += '<div class="field03 newwidth"><textarea name="wantproduct_desc_'+count+'" id="wantproduct_desc" style="width:316px; height:90px;"></textarea>';
+        content += '<span id="err_wantproduct_desc_'+count+'" class="error-message"></span></div><div class="clr"></div><div class="lable01 newwidth-lable01" >Not Exceeding (Years) :</div>';    
+      	content += '<div class="field03 newwidth"><input name="not_exceeding_yr_'+count+'" id="not_exceeding_yr1" type="text" class="txtwidth" />';
+		content += '<span id="err_not_exceeding_yr_'+count+'" class="error-message"></span></div><div class="clr"></div>';
+		content += '<div style="border-bottom:1px solid #CCC"></div><div class="clr"></div>';
+      
+      
+		//alert(content);
+		if(count<=3)
+		{
+			$('#work_div_h').val(count);
+			$(content).appendTo('#productIWant');
+			//$('#work_div_id_order').val(work_id_order);
+			//$('#hidden_div #'+divID).attr('id', 'copy_work');	
+		}
+		else
+		{
+			showUIMsg("Can not add more.");
+		}
+		
+	
+		
+	}// end of add_extra_div
+</script>
+<!-- /lightbox SECTION -->
+<!-- confirm delete album popup-->
+<!-- end of delete pop up -->
+
+

@@ -1,0 +1,192 @@
+<?php
+	if( ($this->session->userdata('loggedin') !='' || $this->session->userdata('loggedin')!=false ) && $this->session->userdata('is_admin') != 1){
+		
+		 include(APPPATH ."views/layouts/logged_header.phtml");
+		 include(APPPATH."views/layouts/nav.phtml");?>
+		  <!-- /NAVIGATION SECTION -->
+      		</div>
+		</div>
+		
+		
+   <?php  }
+     else{
+         
+		include(APPPATH ."views/layouts/header.phtml");
+	   	include(APPPATH."views/layouts/slider_nav.phtml");
+  }?>
+     
+<!-- /HEADER SECTION -->
+<div class="clr"></div><!-- CONTENT SECTION -->
+<div id="content_section" style="margin-top:8px;">
+      <div id="container">
+      		 <div class="cms-content">
+                     <?php $page =  $this->uri->segment(3); ?>
+             	<h2 class="page-title"><?=$info_arr['s_title']?></h2>
+                <?php if($page == 'contact-us'){ ?>
+         		<?=get_unformatted_string_edit($info_arr['s_page_content'])?>
+                <?php } else {?>
+                <?=get_unformatted_string_edit($info_arr['s_page_content'])?>
+ <?php } ?>
+			</div>
+          <!-------------------------------------->
+                        <?php if($page == 'contact-us') { ?>
+          <form method="POST" id="cont">
+                                <div class="form-panel">
+                        <div class="form-wrap">
+                         <label>Name:</label>
+                         <input type="text" id="nam">
+                         <span class="error" id="error1">Required</span>
+                        </div>
+                        
+                        <div class="form-wrap">
+                         <label>Email:</label>
+                         <input type="text" id="eml">
+                         <span class="error" id="error2">Required</span>
+                        </div>                                              
+                        
+                        <div class="form-wrap">
+                         <label>Phone No:</label>
+                         <input type="text" id="phn">
+                         <span class="error" id="error3">Required</span>
+                        </div>
+                        
+                        <div class="form-wrap">
+                         <label>Massage:</label>
+                         <textarea id="msg"></textarea>
+                            <span class="error" id="error4">Required</span>
+                        </div>
+                                    <section class="cap-width">                                        
+                                        <img src="<?php echo base_url(); ?>images/captcha.php" alt="" class="cap-img" />
+                                        
+                                        <input type="text"  name="cap" id="cap"/>
+                                        <span class="error" id="error5" style="display: none">Required</span>
+                                        
+                                    </section>          
+                                    
+                        
+                       
+                        <input type="button" class="sendbtn" value="Send Now">
+                        <div class="success" style=" display: none; color:  green; font-weight:  bold;"  > Your message send successfully</div>
+                       </div>
+          </form>
+          <script>
+          $(document).ready(function(){
+              $('.sendbtn').click(function(){
+                  $('.success').css('display','none');
+                  var nam = $('#nam').val();
+                  var eml = $('#eml').val();
+                  var phn = $('#phn').val();
+                  var msg = $('#msg').val();
+                  var cap = $('#cap').val();
+                   var chkeml=eml.match(/^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/);
+                   if(nam == ''){
+                     $('#error1').show().html('Please enter your name');
+                     var flag1 = 0;
+                   }
+                    else if(!isNaN(nam)){
+                        $('#error1').show().html('Name should not numbers');
+                         var flag1 = 0;
+                    }
+                    else
+                    {
+                      $('#error1').hide(); 
+                      var flag1 = 1;
+                    }
+                    
+                    if(eml == '')
+                    {
+                      $('#error2').show().html('Please enter your email id');
+                     var flag2 = 0;   
+                    }
+                     else if(chkeml==null){
+                          $('#error2').show().html('Please enter your valide email id');
+                     var flag2 = 0; 
+                     }
+                     else{
+                       $('#error2').hide();
+                       var flag2 = 1; 
+                     }
+                     if(phn == ''){
+                        $('#error3').show().html('Please enter your phone number');
+                     var flag3 = 0;   
+                     }
+                     else if(isNaN(phn)){
+                         $('#error3').show().html('Please enter your valide phone number');
+                     var flag3 = 0;  
+                     }
+                     else{
+                         $('#error3').hide();
+                          var flag3 = 1;  
+                         
+                     }
+                     if(msg == ''){
+                         $('#error4').show().html('Please enter your message');
+                     var flag4 = 0;    
+                     }
+                     else{
+                        $('#error4').hide();
+                          var flag4 = 1;    
+                     }
+                     if(cap == ''){
+                        $('#error5').show().html('Please enter Security Code');
+                         var flag5 = 0;  
+                     }
+                     else{
+                         $('#error4').hide();
+                           var flag5 = 1;  
+                     }
+                     if(flag1 == 1 && flag2 == 1 && flag3 == 1 && flag4 == 1 && flag5 == 1){
+                         showBusyScreen();
+			//alert(datatosend);
+                          $.ajax({
+            url : base_url+'base_controller/send_contact_mail',
+            type : 'post',
+            //dataType : 'json',
+            data : ({'cap':cap,'nam':nam,'eml':eml,'msg':msg,'phn':phn}),
+            success : function (data)
+            {
+                //alert(data)
+                if(data == 'ok'){
+                    $('.success').css('display','block');
+                    $('#error5').css('display','none');
+              $('#nam').val('');
+              $('#eml').val('');
+              $('#phn').val('');
+              $('#msg').val('');
+              $('#cap').val('');
+                    hideBusyScreen();
+                }
+                if(data == 'error'){
+                   // $('#success').css('display','none');
+                    $('#error5').show().html('captcha not matched');
+                    hideBusyScreen();
+                }
+                //hideUILoader('comments-popup');
+                //$('#comment_div').html(data.html);
+                
+            }
+        });
+							
+							
+                         
+                     }
+                     
+                     
+                    
+              });
+              
+          });
+          </script>
+                        <?php } ?>
+          <!--------------------------------------->
+                       
+      </div>
+      <div class="clr"></div>
+</div>
+<!-- /CONTENT SECTION -->
+  
+  
+<?php
+	# include footer file...
+	include_once(APPPATH ."views/layouts/footer.phtml");
+?>

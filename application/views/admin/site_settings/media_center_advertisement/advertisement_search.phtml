@@ -1,0 +1,80 @@
+<script type="text/javascript">
+$(document).ready(function(arg) {
+ $('#frm_search').submit(function(){ 
+						
+						var datatosend=$("#frm_search").serialize();
+						
+					     	showBusyScreen();
+							
+							
+							$.ajax({
+							   type: "POST",
+							   url: admin_base_url+"site_settings/media_center_advertisement/ajax_pagination/",
+							   data: datatosend,
+							   success: function(data){
+								  
+								  hideBusyScreen(); 
+								   $('#table_content').html(data);
+							       
+								
+								 
+							   }
+							 });	 
+					   
+						
+				});
+ 
+ });
+ </script>
+<form  name="frm_search" id="frm_search" action="" method="post" onsubmit="return false;" class="filter-search">
+        <label>Title :</label><input type="text" name="txt_title" id="txt_title" style=" width:240px; margin-right:10px;" />
+        <label>Posted By :</label><input type="text" name="txt_username" id="txt_username" />
+        <div class="clr"></div>
+        <label style="width:139px;">Date of posting :</label>
+        <input type="text"  value="" name="date_posting" id="date_posting"  readonly="readonly" class="date-field"/>
+              <img src="../images/icons/cal.png" alt="" onclick="$(this).prev().focus()" class="calender" style="margin-right:50px;" />
+              <script type="text/javascript">
+                    $(document).ready(function(arg) {
+                        $.datepicker.setDefaults($.datepicker.regional['']);
+                        $("#date_posting").datepicker($.datepicker.regional['en']);
+      
+                    });
+                </script>
+                
+      <!--  <label>To :</label>        
+        <input type="text"  value=" " name="date_to2" id="date_to2"  readonly="readonly" class="date-field"/>
+              <img src="../images/icons/cal.png" alt="" onclick="$(this).prev().focus()" class="calender" />
+              <script type="text/javascript">
+                    $(document).ready(function(arg) {
+                        $.datepicker.setDefaults($.datepicker.regional['']);
+                        $("#date_to2").datepicker($.datepicker.regional['en']);
+      
+                    });
+                </script>-->
+        <div class="clr"></div>
+        <label>Date of Publication From :</label>
+        <input type="text"  value="" name="date_pub_start" id="date_pub_start"  readonly="readonly" class="date-field"/>
+              <img src="../images/icons/cal.png" alt="" onclick="$(this).prev().focus()" class="calender" style="margin-right:50px;" />
+              <script type="text/javascript">
+                    $(document).ready(function(arg) {
+                        $.datepicker.setDefaults($.datepicker.regional['']);
+                        $("#date_pub_start").datepicker($.datepicker.regional['en']);
+      
+                    });
+                </script>
+                
+        <label>To :</label>        
+        <input type="text"  value="" name="date_pub_end" id="date_pub_end"  readonly="readonly" class="date-field"/>
+              <img src="../images/icons/cal.png" alt="" onclick="$(this).prev().focus()" class="calender"  />
+              <script type="text/javascript">
+                    $(document).ready(function(arg) {
+                        $.datepicker.setDefaults($.datepicker.regional['']);
+                        $("#date_pub_end").datepicker($.datepicker.regional['en']);
+      
+                    });
+                </script>
+                
+        <input type="hidden" value="Y" name="search_basic" id="search_basic"  />
+        <input name="" type="submit" value="GO" class="go" />
+</form>  
+                       

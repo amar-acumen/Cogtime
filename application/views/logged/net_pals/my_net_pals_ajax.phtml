@@ -1,0 +1,70 @@
+<div class="div_content" style=" margin-top:0px;">
+                              
+                      <?php 
+                            //pr($netpals_result_content);
+                           
+                            if(count($netpals_result_content) >0):  
+							
+							
+                            $address=array();
+                            foreach($netpals_result_content as $r)   :
+                                //echo "id : ".$r['id'];   
+                                $address=array();
+								$name = $r['s_displayname'];
+								
+                                /*if(isset($r['s_city']) && $r['s_city']!='')
+                                    $address['city'] = $r['s_city'];
+								if(isset($r['s_state']) && $r['s_state']!='')
+                                    $address['state'] = $r['s_state'];
+								if(isset($r['i_country_id']) && $r['i_country_id']!='')
+                                    $address['country'] = get_country_name_by_id($r['i_country_id']);
+                              */
+                                    
+                                //$add=implode(', ',$address);
+                                $address = get_user_address_info($r['user_id']);
+                                $profile_link = get_profile_url($r['user_id'],$r['s_displayname']);
+								$relation_arr = CheckUserRelation($r['user_id']);
+								
+								$chat_html = '';
+								if(check_Chat_link_online_hlpr($r['user_id'], 'public', $relation_arr))
+								  $chat_html = ' <a class="nogrey_link nw-chat-lnk" onclick="showOnlineUser(\'show\');chatWith(\''.$r['s_first_name'].'\','.$r['user_id'].')" chatwith="'.$r['user_id'].'"><img src="images/Chat.png" title="chat" alt="chat" /></a>';
+                                
+                      ?>
+                      
+                                     <div id="netpal_record_<?= $r['user_id']?>" class="shade_box_blue" style="padding-top:5px;"> 
+                                         <div class="txt_content">
+                                         <a href="<?= $profile_link;?>"><div class="pro_photo2" style="background:url(<?=get_profile_image($r['user_id'],$size ="thumb")?>) no-repeat center;width:60px; height:60px;" ></div></a>
+                                              <div class="left_div01" style="width:397px;">
+                                                    <p class="add-remove-friend"><img src="images/icons/remove.png" alt="" /> <a href="javascript:void(0);" onclick="remove_netpal_id_put_(<?= $r['user_id']?>); show_dialog('delete-page-popup');">Remove</a></p>
+                                                     <p class="blue_bold12"><a  href="<?= $profile_link;?>" class="left"><?=$name?> </a> &nbsp;[ <a  class="nogrey_link"> <?=check_user_online_hlpr($r['user_id'], 'public', $relation_arr); ?></a> ] <?=$chat_html?></p>
+                                                <p class="location"><?= $address;?></p>
+                                                    <p class="date-time">Connected Since : <?php echo getShortDateWithTime($r['dt_accepted_on'],6);?> </p>
+                               
+                                              </div>
+                                              <div class="clr"></div>
+                                           </div>
+                                     </div>
+
+                     <?php
+                        endforeach;
+                     ?>
+                             
+
+        <?php if($page_links){ ?>
+        <div class="pagination">
+        
+            <div class="left">Viewing Page <?=$current_loaded_page_no?> of <?=$total_pages?> </div>
+            
+            <div class="right">
+                   <ul class="small-paging">
+                    <?=$page_links?> 
+                    </ul>
+            </div>
+        </div>
+        <?php  }?>
+        <?php
+                else:
+                    echo '<div class="shade_box_blue" style="padding-top:5px; "><div  class="shade_norecords" style="width:280px;"><p class="blue_bold12">No NetPals.</p></div></div>';
+                endif;
+       ?>
+</div>

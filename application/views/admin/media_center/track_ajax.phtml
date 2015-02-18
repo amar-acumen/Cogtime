@@ -1,0 +1,78 @@
+<?php
+//pr($info_arr);
+//die();
+if(count($info_arr)!=0)
+{
+    $counter = 0;
+   //pr($info_arr[0]); 
+   
+   // echo count($info_arr[0]);
+   
+       
+
+    ?>            
+                <select name="track-name" >
+                              
+                              <?php
+                               foreach($info_arr[0] as $info)   
+                                {
+                                  // $this->load->helper('text');
+                                  // $query = $this->db->get_where('cg_track_feature', array('track_id' =>$info->id ));
+                                  // $res = $query->result();
+                                 //  pr($res);
+                              ?>
+                            
+                    <option value="<?= $info->id ?>"><?= $info->title; ?></option>
+                              
+                              
+                              
+                              
+                              
+                              
+                              
+                             
+                              
+                              
+                            
+                        
+                           
+
+<?php
+//echo $counter;
+ $counter++; 
+                                }
+}
+?> 
+                </select>
+<script type="text/javascript">
+function change_status(track_id){
+       showBusyScreen();
+                                     //
+                                     $.ajax({
+          url : admin_base_url+'media_center/audio/set_feature/',
+          type : 'post',
+          data : ({'track_id' : track_id}),
+         
+          success : function(data)
+          {
+         // alert(data.msg);
+              //showUIMsg(data.msg);
+             // $('.error').hide();
+              hideBusyScreen();
+              //hide_dialog();
+              // $('.error').hide();
+              //$('#track-list').html(data.html).show();
+          
+          }
+      });
+                                     //alert(id)
+                               
+//                                  if ( ! $('.ftur').is(':checked') ){
+//                                     //alert('uck')
+//                                 }
+                             
+    
+}
+</script>
+
+

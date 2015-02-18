@@ -1,0 +1,138 @@
+<script type="text/javascript">
+function clear_form(){
+      $('#frm_search')[0].reset();
+} 
+
+$(document).ready(function(arg) {
+
+ $('#frm_search').submit(function(){ 
+                        
+          var datatosend=$("#frm_search").serialize();
+         
+          showUILoader_nodialog('<img src="'+base_url+'images/loading_big.gif" width="50"/> ');
+              $.ajax({
+                 type: "POST",
+                 url: base_url+'logged/my_audios/audio_ajax_pagination/<?=$profile_id?>',
+                 data: datatosend,
+                 dataType : 'json',
+                 success: function(data){
+                    $('#frm_search')[0].reset();
+                    if(data.html!='') {
+                        $('#result_div').html(data.html);
+                        $('#show_more_feeds_link').attr('page_value', data.current_page);
+                    }
+                    else {
+                        $('#result_div').html('<div class="view_more" style="text-align: center; height:25px;"><p class="blue_bold12" style="font-size:14px;">No audios.</p></div>');
+                        $('#show_more_feeds_div').hide();
+                    }
+                    hide_dialog('search_audio');
+                    hideUILoader_nodialog();
+                 }
+               });     
+    });
+ 
+ });
+
+var ajax_req_feeds = null;
+function show_more_feeds(page) {
+    if(ajax_req_feeds!=null) {
+        ajax_req_feeds.abort();
+    }
+    showUILoader_nodialog();
+    ajax_req_feeds = $.ajax({
+        type: 'get',
+        url: base_url+'logged/my_audios/audio_ajax_pagination/<?=$profile_id?>'+'/'+page,
+        dataType: 'json',
+
+        success: function (data, status) {
+        //    $('div[id ^= "mp_m1"]').css('display','none');
+            hideUILoader_nodialog();
+            if(data.html!='') {
+                $('#result_div').append(data.html);
+                $('#show_more_feeds_link').attr('page_value', data.current_page);
+            }
+            else {
+                $('#result_div').append('<div class="view_more" style="text-align: center;"><p class="blue_bold12" style="font-size:14px;">No more audios.</p></div>');
+                $('#show_more_feeds_div').hide();
+            }
+            
+           
+            
+        }    // end of success function...
+    });
+}
+</script>
+
+<?php include(APPPATH."views/layouts/logged_header.phtml");?>
+            <!-- NAVIGATION SECTION -->
+      <?php include(APPPATH."views/layouts/nav.phtml");?>
+      <!-- /NAVIGATION SECTION -->
+      </div>
+</div>
+<!-- /HEADER SECTION -->
+<div class="clr"></div>
+
+<!-- CONTENT SECTION -->
+<div id="content_section">
+      <div id="container">
+            <!--<div id="mid_content"> -->
+                  <!-- latest news -->
+                 <?php include(APPPATH ."views/layouts/latest_news.phtml");?>
+                  <!-- /latest news -->
+                  <div class="clr"></div>
+                  <!-- main container -->
+                  <div id="main_container">
+                        <!-- left container -->
+                        <?php include(APPPATH."views/layouts/leftbar.phtml");?>
+                        <!-- /left container -->
+                        <!-- mid container -->
+                        <div id="mid_container" >
+                        <div class="page_heading">
+                                <div class="left"><img src="images/icons/audio.png" alt="" /> Audios</div>
+                              
+                            </div>
+                             <!--sub page links -->
+                              <div class="link-div" style="margin-top:0px;">
+                                  <ul>
+                                    <li><a href="my-audios.html"><span>My Audios</span></a> </li>
+                                    <li><a href="manage-my-audio.html"><span>Manage My Audio Albums</span></a> </li>
+                                    <li><a href="create-audio-album.html"><span>Create Audio Album</span></a></li>
+                                    <li><a href="javascript:void(0);" onclick="return show_dialog('upload_audio')"><span>Upload Audio</span></a></li>
+                                </ul>
+                                <div class="clr"></div>
+                              </div>
+                              <!--/sub page links -->
+                        
+                            <!--<div class="page_heading">
+                                <div class="left"><img src="images/icons/audio.png" alt="" /> All Albums</div>
+                            </div>-->
+                            
+                            <div class="arrow_btm"></div>
+                                
+                            <DIV id="result_albums_section">
+                             <?=$album_result_content?>
+                            </DIV>
+                            
+                        </div>                   
+                        <!-- /mid container -->
+                        <!-- right container -->
+                        <?php include(APPPATH."views/layouts/rightbar.phtml");?>
+                        <!-- /right container -->
+                  </div>
+                  <!-- /main container -->
+                  <div class="clr"></div>
+            <!--</div> -->
+      </div>
+      <div class="clr"></div>
+</div>
+<!-- /CONTENT SECTION -->
+<div class="clr"></div>
+
+
+<?php include(APPPATH."views/layouts/footer.phtml");?>
+
+<?php include(APPPATH."views/logged/audios/blocks/upload_audios_popup.phtml");?>
+<?php include(APPPATH."views/logged/blocks/common_popup.phtml");?>
+
+
+<!-- /lightbox SECTION -->

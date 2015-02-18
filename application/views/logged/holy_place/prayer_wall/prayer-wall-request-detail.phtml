@@ -1,0 +1,546 @@
+<?php include(APPPATH."views/layouts/logged_header.phtml");?>
+            <!-- NAVIGATION SECTION -->
+      <?php include(APPPATH."views/layouts/nav.phtml");?>
+      <!-- /NAVIGATION SECTION -->
+      </div>
+</div>
+<!-- /HEADER SECTION -->
+<div class="clr"></div>
+<!-- CONTENT SECTION -->
+<div id="content_section">
+      <div id="container">
+            <div id="mid_content">
+                  <!-- latest news -->
+                  <h2 class="main-title">Prayer Wall Requests</h2>
+                  <!-- /latest news -->
+                  <div class="clr"></div>
+                  <!-- main container -->
+                  <div id="main_container">
+                        <!--<div class="page_heading">
+                              <div class="left"><img src="images/icons/icn11.png" alt="" />  Prayer Request  </div>
+                               
+                        </div> -->
+                        
+                        <!--buttons section start -->
+                       <?php include(APPPATH ."views/logged/holy_place/prayer_wall/prayer_wall_menu.phtml");?>
+                        <div class="clr"></div>
+                        <!--buttons section end -->
+                         <div class="search-create-form-container">
+                          <!--search form start -->
+                          <?php include(APPPATH ."views/logged/holy_place/prayer_wall/prayer_wall_search_panel.phtml");?>
+                          <!--search form end -->
+                          
+                          <!--create new prayer request start -->
+                          <?php include(APPPATH ."views/logged/holy_place/prayer_wall/create_prayer_request.phtml");?>
+                          <!--create new prayer request start -->
+                       
+                              
+                          </div>
+                          
+                         <div class="clr"></div>
+                        
+                        
+                         <?php
+						 #pr($prayer_info);
+							$IMG = base_url().'uploads/prayer_wall_photos/'.getThumbName($prayer_info['s_image_name'],'mid');
+							$DESC = my_substr(html_entity_decode(htmlspecialchars_decode($prayer_info['s_description']),ENT_QUOTES,'utf-8'), 230);
+							$s_subject = htmlspecialchars_decode($prayer_info['s_subject']);
+							
+							$SHORT_DESC = ($prayer_info['s_description']);
+							$twit_id = getTwitterUsernameById($prayer_info['i_user_id']);
+			
+							$prayer_detail = base_url()."prayer-wall/".$prayer_info['id']."/prayer-wall-request-detail.html";
+							$TWEET_TEXT = 'Prayer Request by '.$twit_id.': <a href="'.$prayer_detail.'">'.$SHORT_DESC.'</a>'; 
+							?>
+                        <div class="prayer-wall-dotted-box">
+                        	<div class="prayer-wall-image">
+                        	<div  title="prayer" style="background:url(<?=$IMG?>) no-repeat center;width:286px; height:142px;"></div>
+                            </div>
+                            
+                           
+                            <div class="right-panel">
+                            	<p class="quoted-text"><?=$s_subject?></p>
+                                <p class="quoted-text">
+                                   <span id="first_part" style="padding:0; color:#48535a; font-size:14px; line-height:19px; margin-bottom:7px; font-style:italic;"><?=($DESC)?></span> 
+                                  
+                                   <span id="first_tym">Updated on: <?=get_time_elapsed($prayer_info['dt_insert_date'])?></span>  
+                                   <?php if(strlen($prayer_info['s_description'])>230)
+                                    {
+                                    ?>
+                                     <span class="hidden-content" style="display:none; padding:0; color:#48535a; font-size:14px; line-height:19px; margin-bottom:7px; font-style:italic;">
+                                    	<?php echo nl2br(substr($prayer_info['s_description'],0,strlen($prayer_info['s_description'])))?>
+                                    </span>
+                                    <span id="mor_tym" style="display:none;">Updated on: <?=get_time_elapsed($prayer_info['dt_insert_date'])?></span> 
+                                    
+                                     
+                                     <?php
+                                    }
+                                    ?> 
+                                                        
+                                   
+                                </p>
+                                 <span  class="more_detail less-content" style="display:none;  margin-left: 605px;"><a href="javascript:void(0);">View Less</a></span>
+                                   <?php if(strlen($prayer_info['s_description'])>230)
+                                    {
+                                    ?> <span  class="more-content more_detail" style=" margin-left: 605px;"><a href="javascript:void(0);">View More</a></span> 
+                                      <?php
+                                    }
+                                    ?> 
+                                  
+                               <h2 class="name"><?=$prayer_info['s_profile_name']?></h2>
+                         	   <p class="place"><?=$prayer_info['s_country_name']?></p>
+                               <p class="date-time">From:  <?=getShortDateWithTime($prayer_info['dt_start_date'],9)?></p> 
+                          	   <p class="date-time" style="position: relative;">To:  <?=getShortDateWithTime($prayer_info['dt_end_date'], 9)?></p>
+                                
+                                <input type="hidden" id="ta_post_tweet_<?=$prayer_info["id"]?>" value="<?=base64_encode($TWEET_TEXT)?>" />
+                               <a class="tweet" href="javascript:void(0);" onclick="show_tweetpopup(<?=$prayer_info['id']?>,'detail_align')">Tweet</a>
+                                	<!--highlights start -->
+                                 		 <div class="floating-popup add-highlight floating-top" id="floating_tweet_popup<?=$prayer_info['id']?>">
+                                          <div class="title">
+                                           Tweet Prayer Request
+                                              <a href="javascript:void(0);" class="close" title="Close" onclick="close_floating_tweet_popup(<?=$prayer_info['id']?>)"></a>
+                                          </div>
+                                           <div class="write-tweet" style="padding: 9px 17px; background:#CFCFCF; width:290px;">
+                                			<form id="" method="post" action="">
+                                    	<?php /*?><span class="tweet-top-curve"></span><?php */?>
+                                        <div class="tweet-mid-curve"><textarea onblur="if(this.value=='')this.value='Max 140 Characters';" onfocus="if(this.value=='Max 140 Characters')this.value='';" name="ta_post_tweet" id="ta_each_post_tweet_<?=$prayer_info["id"]?>" class="tweet-comment-box" autocomplete="off" role="textbox" style="display: inline-block; height: 55px; width:280px;" onKeyDown="limitText(this.form.ta_post_tweet,this.form.countdown,140);" 
+onKeyUp="limitText(this.form.ta_post_tweet,this.form.countdown,140);" >Max 140 Characters</textarea></div>
+                                            
+                                         <!--<input type="hidden" id="hd_tweet_id" value="">-->
+                                         <input type="hidden" id="hidden_inputbox" />
+                                       <?php /*?> <span class="tweet-bot-curve"></span><?php */?>
+                                        <input type="button" class="tweetSubmit" value="Cancel" name="Cancel" style="display: inline;" onclick="close_floating_tweet_popup(<?=$prayer_info["id"]?>);" />
+                                        <input type="button" onclick="tweet_prayer_request(<?=$prayer_info["id"]?>)" class="tweetSubmit" value="Tweet" name="" style="display: inline;" />
+                                    </form>
+                     
+      
+                                    <div class="clr"></div>
+                                </div>
+                                      </div>
+                           			<!--highlights end -->
+                            </div>
+                            <div class="clr"></div>
+                            
+                            <ul class="article-comment-block">
+                                <?php if($prayer_info['i_user_id'] != intval(decrypt($this->session->userdata('user_id')))
+									&& $prayer_info['CommitExists'] == 0){?> 
+                          			<li class="first" id="commit_li<?=$prayer_info['id']?>"><span><a href="javascript:void(0);" class="commit-open-close" onclick="show_reply(<?=$prayer_info['id']?>)">Commit</a></span></li> 
+                          
+                          			 <li><a href="javascript:void(0);" class="commitment-open-close" onclick="view_commits(<?=$prayer_info['id']?>)" >Commitments <span id="total_commits<?=$prayer_info['id']?>">(<?=$prayer_info['total_commitments']?>)</span></a></li>
+                          
+                        <?php }else{ ?>
+                        		 <li class="first"><a href="javascript:void(0);" class="commitment-open-close" onclick="view_commits(<?=$prayer_info['id']?>)" >Commitments <span id="total_commits<?=$prayer_info['id']?>">(<?=$prayer_info['total_commitments']?>)</span></a></li>
+                        <?php } ?>
+						<li>
+						<a href="javascript:void(0);" class="commitment-open-close" onclick="show_comment(<?=$prayer_info['id']?>)" >Comment</a>
+						</li>                      
+						<li >
+						<a href="javascript:void(0);" class="commitment-open-close" onclick="view_comments(<?=$prayer_info['id']?>)" >Comments <span id="total_comments<?=$prayer_info['id']?>">(<?=$prayer_info['total_comments']?>)</span></a>
+						</li>
+                            </ul>
+							<!-- add comment start -->
+	<div class="commit-form add-testimony" id="comment_form<?= $prayer_info['id'] ?>">
+					<div class="minimize" title="Minimize" onclick="show_comment(<?= $prayer_info['id'] ?>)">&nbsp;</div>
+					<h2>Add Comment</h2>
+					<form id="add_comment_frm<?=$prayer_info['id'] ?>" action="" method="post" enctype="multipart/form-data">
+						<label class="normal">Comment:</label>
+						<textarea onblur="if (this.value == '')
+									this.value = 'Max 500 Characters';" onfocus="if (this.value == 'Max 500 Characters')
+												this.value = '';" rows="" cols="" name="ta_comment" class="full-textarea" id="ta_comment<?= $prayer_info['id'] ?>" onKeyDown="limitText(this.form.ta_comment, this.form.countdown, 500);" 
+								  onKeyUp="limitText(this.form.ta_comment, this.form.countdown, 500);">Max 500 Characters</textarea>
+						<div class="clr"></div>
+						<input name="post" type="button" value="Post" class="post-btn post-btn2" onclick="add_comment(<?= $prayer_info['id'] ?>)" />
+					</form>
+					<div class="clr"></div>
+				</div>
+		<!-- add comment end -->
+                            <!--commit form start -->
+                            <div class="commit-form" id="commit_form<?=$prayer_info['id']?>">
+                                <h2>Add Commitment</h2>
+                                <form  id="add_commit<?=$prayer_info['id']?>" action="" method="post" enctype="multipart/form-data">
+                                    <!--left side start  -->
+                                    <div class="left-side" style="width:410px;">
+                                    <label>Word of Encouragement:</label>
+                                    <textarea onblur="if(this.value=='')this.value='Max 140 Characters';" onfocus="if(this.value=='Max 140 Characters')this.value='';" rows="" cols="" name="ta_commit_text" id="ta_commit_text_<?=$prayer_info['id']?>" class="big-textarea" onKeyDown="limitCommitText(this.form.ta_commit_text,this.form.countdown,140);" 
+      onKeyUp="limitCommitText(this.form.ta_commit_text,this.form.countdown,140);" onkeypress="return restrict_carrige(event);" style="height:40px; width:370px;">Max 140 Characters</textarea>
+                                    <span id="err_message<?=$prayer_info['id']?>" class="error-message"></span> 
+                                    </div>
+                                    <!--left side end  -->
+                                    
+                                    <!--right side start -->
+                                    <div class="right-side"  style=" float:left; width:320px;">
+                                    
+                                    	<label class="small">From:</label>
+                                        
+                                        <div class="field04" style="width:235px; float:left; margin-bottom:2px;">
+                                              <input style="width:150px; float:left; margin-right:4px; "   type="text"  value="" name="commit_date_to" id="commit_date_to_<?=$prayer_info['id']?>"  readonly="readonly"/>
+                                              <img src="images/icons/cal.png" alt="" onclick="$(this).prev().focus()" style="cursor:pointer; float:left;" />
+                                              <script type="text/javascript">
+                                                
+												  var dateToday;
+												  $(document).ready(function(arg) {
+													  
+												
+													
+											$(function(){
+												 var inputDate = $("#commit_date_to_<?=$prayer_info['id']?>");
+												 var changeYearButtons = function() {
+													setTimeout(function() {
+													   $('.NextYrClass').remove();
+													   $('.PrevYrClass').remove();
+													   var widgetHeader = inputDate.datepicker("widget").find(".ui-datepicker-header");
+													   //you can opt to style up these simple buttons tho
+													   var prevYrBtn = $('<button title="PrevYr" class="PrevYrClass"></button>');
+													   prevYrBtn.bind("click", function() {
+														$.datepicker._adjustDate(inputDate, -1, 'Y');
+													   });
+													   var nextYrBtn = $('<button title="NextYr" class="NextYrClass"> </button>');
+													   nextYrBtn.bind("click", function() {
+														$.datepicker._adjustDate(inputDate, +1, 'Y');
+													 
+													   });
+													   prevYrBtn.appendTo(widgetHeader);
+													   nextYrBtn.appendTo(widgetHeader);
+											  
+												  }, 0);
+												 };
+											  
+											  		$("#commit_date_to_<?=$prayer_info['id']?>").datetimepicker({
+															beforeShow: changeYearButtons,
+															onChangeMonthYear: changeYearButtons,
+															 minDate: new Date(<?=(date('Y'))?>, <?=(date('m')-1)?>, <?=(date('d'))?> ,  0, 00),
+															dateFormat : 'yy-mm-dd',
+															controlType: 'select',
+															stepMinute: 15
+														   });
+														
+											  });
+															  
+													
+													  
+											$(function(){
+												 var inputDate = $("#commit_date_end_<?=$prayer_info['id']?>");
+												 var changeYearButtons = function() {
+													setTimeout(function() {
+													   $('.NextYrClass').remove();
+													   $('.PrevYrClass').remove();
+													   var widgetHeader = inputDate.datepicker("widget").find(".ui-datepicker-header");
+													   //you can opt to style up these simple buttons tho
+													   var prevYrBtn = $('<button title="PrevYr" class="PrevYrClass"></button>');
+													   prevYrBtn.bind("click", function() {
+														$.datepicker._adjustDate(inputDate, -1, 'Y');
+													   });
+													   var nextYrBtn = $('<button title="NextYr" class="NextYrClass"></button>');
+													   nextYrBtn.bind("click", function() {
+														$.datepicker._adjustDate(inputDate, +1, 'Y');
+													 
+													   });
+													   prevYrBtn.appendTo(widgetHeader);
+													   nextYrBtn.appendTo(widgetHeader);
+											  
+												  }, 0);
+												 };
+											  
+											  		$("#commit_date_end_<?=$prayer_info['id']?>").datetimepicker({
+															beforeShow: changeYearButtons,
+															onChangeMonthYear: changeYearButtons,
+															dateFormat : 'yy-mm-dd',
+															 minDate: new Date(<?=(date('Y'))?>, <?=(date('m')-1)?>, <?=(date('d'))?> ,  0, 00),
+															controlType: 'select',
+															stepMinute: 15
+														   });
+														
+											  });  
+													  
+												  });
+                                              </script>
+                                              
+                                              <span id="err_start_date<?=$prayer_info['id']?>" class="error-message"></span> 
+                                        </div>
+                                        
+                                        
+                                        
+                                        <div class="clr"></div>
+                                        <label class="small">To:</label>
+                                        
+                                        <div class="field04" style="width:235px; float:left;">
+                                              <input style="width:150px; float:left; margin-right:4px;"   type="text"  value="" name="commit_date_end" id="commit_date_end_<?=$prayer_info['id']?>"  readonly="readonly"/>
+                                              <img src="images/icons/cal.png" alt="" onclick="$(this).prev().focus()" style="cursor:pointer; float:left;" />
+                                           
+                                              <span id="err_end_date<?=$prayer_info['id']?>" class="error-message"></span> 
+                                        </div>
+                                        
+                                      
+                                        
+                                    </div>
+                                    <!--right side end -->
+                                    
+                                    <div id="day_block" style="float:left; margin-top:12px;">
+                                       <label> Day of Week:</label>
+                                        <div class="secttion-padding">
+                                              <table class="cal_table" border="0" cellspacing="0" cellpadding="0">
+                                                    <tr>
+                                                          <th class="nw-cal_table">S</th>
+                                                          <th class="nw-cal_table">M</th>
+                                                          <th class="nw-cal_table">T</th>
+                                                          <th class="nw-cal_table">W</th>
+                                                          <th class="nw-cal_table">T</th>
+                                                          <th class="nw-cal_table">F</th>
+                                                          <th class="nw-cal_table">S</th>
+                                                    </tr>
+                                                    <tr id="weekdays_tr<?=$prayer_info['id']?>">
+                                                          <td valign="middle">
+                                                          <input name="chk_day[]"  type="checkbox" value="Sunday" />
+                                                          </td>
+                                                          <td valign="middle">
+                                                          <input name="chk_day[]" type="checkbox" value="Monday" />
+                                                          </td>
+                                                          <td valign="middle">
+                                                          <input name="chk_day[]" type="checkbox" value="Tuesday" />
+                                                          </td>
+                                                          <td valign="middle">
+                                                          <input name="chk_day[]" type="checkbox" value="Wednesday" />
+                                                          </td>
+                                                          <td valign="middle">
+                                                          <input name="chk_day[]" type="checkbox" value="Thursday" />
+                                                          </td>
+                                                          <td valign="middle">
+                                                          <input name="chk_day[]" type="checkbox" value="Friday" />
+                                                          </td>
+                                                          <td valign="middle">
+                                                          <input name="chk_day[]" type="checkbox" value="Saturday" />
+                                                          </td>
+                                                    </tr>
+                                              </table>
+                                            
+                                        </div>
+                                          <span id="err_chk_day<?=$prayer_info['id']?>" class="error-message err_new"></span> 
+                                        <div class="clr"></div>
+                                    </div>
+                                    <div class="clr"></div>
+                                   
+                               
+                                    <DIV class="view-pray-time">
+                                    <label> Prayer Time: </label>
+                                    <div class="prayer-time secttion-padding time-list-adjust" id="time_tr<?=$prayer_info['id']?>">
+                                         	<div class="lbl02"><input name="chk_time[]" type="checkbox" value="00:00:00-03:00:00" /> 0 – 3</div>
+                                            <div class="lbl02"><input name="chk_time[]" type="checkbox" value="03:00:00-06:00:00" /> 3 – 6</div>
+                                            <div class="lbl02"><input name="chk_time[]" type="checkbox" value="06:00:00-09:00:00" /> 6 – 9</div>
+                                            <div class="lbl02"><input name="chk_time[]" type="checkbox" value="09:00:00-12:00:00" /> 9 – 12</div>
+                                            <div class="lbl02"><input name="chk_time[]" type="checkbox" value="12:00:00-15:00:00" /> 12 – 15</div>
+                                            <div class="lbl02"><input name="chk_time[]" type="checkbox" value="15:00:00-18:00:00" /> 15 – 18</div>
+                                            <div class="lbl02"><input name="chk_time[]" type="checkbox" value="18:00:00-21:00:00" /> 18 – 21</div>
+                                            <div class="lbl02"><input name="chk_time[]" type="checkbox" value="21:00:00-23:00:00" /> 21 – 23</div>
+                                </div>
+                                	  <span id="err_chk_time<?=$prayer_info['id']?>" class="error-message err_new"></span> 
+                                </DIV>
+                              <div class="clr"></div>
+                                    <span id="err_block_time<?=$prayer_info['id']?>" class="error-message err_new"></span>
+                                    <input name="post" type="button" value="Post" class="post-btn" onclick="post_reply(<?=$prayer_info['id']?>)" />
+                                </form>
+                                <div class="clr"></div>
+                            </div>
+                            <!--commit form end -->
+                           
+                           <!--commitment start -->
+                          <DIV id="commitment-container<?=$prayer_info['id']?>">
+						  		<DIV id="commitment_content_<?=$prayer_info['id']?>"><?=$prayer_commit_content?></DIV>
+                          </DIV>
+                           <!--commitment end -->  
+						    <!--comment container start -->
+                      <div class="commitment-container" id="comment-container<?=$prayer_info['id']?>">
+                      	 <div title="Minimize" class="minimize" onclick="view_comments(<?=$prayer_info['id']?>)">&nbsp;</div>
+                          <h2 class="title">View Comments</h2>
+                          <DIV id ="comment_content_<?=$prayer_info['id']?>" class="scrll-height">
+                          <!--commitment start -->
+                          
+                          <!--comment end -->
+                          </DIV>
+                      </div>
+                      <!--commitment container end -->
+                        </div>
+                        
+                        <div class="article-pagination no-brdr">
+                         <div class="clr"></div> 
+                          
+                           
+                            
+                            <?php if($no_of_result > $pagination_per_page): ?>
+                                    
+                                    <div class="view_more" id="show_more_div"><a href="javascript:void(0);" id="show_more_tweets_link" page_value="<?=$current_page_1?>" onclick="show_more_records($(this).attr('page_value'))">[view more] </a> </div>
+                            <?php endif; ?>
+                            
+                            <input type="hidden" id="prayer_id" value="<?=$prayer_info['id']?>" />
+                    </div>
+                        
+                  </div>
+                  <!-- /main container -->
+                  <div class="clr"></div>
+            </div>
+      </div>
+      <div class="clr"></div>
+</div>
+<!-- /CONTENT SECTION -->
+<div class="clr"></div>
+<!-- FOOTER SECTION -->
+<?php include(APPPATH."views/layouts/footer.phtml");?>
+<?php include(APPPATH."views/logged/blocks/common_popup.phtml");?>
+<!-- /FOOTER SECTION -->
+
+<script type="text/javascript">
+
+var ajax_req_feeds = null;
+function show_more_records(page) {
+	
+	
+	var prayer_id = $('#prayer_id').val();
+	if(ajax_req_feeds!=null) {
+		ajax_req_feeds.abort();
+	}
+	showUILoader_nodialog();
+	ajax_req_feeds = $.ajax({
+		type: 'get',
+		url: base_url+'logged/prayer_wall/commitments_ajax_pagination/'+prayer_id+'/'+page,
+		dataType: 'json',
+
+		success: function (data, status) {
+
+			hideUILoader_nodialog();
+			if(data.html!='') {
+				
+				//alert(data.html);
+				$('#commitment_content_'+prayer_id).append(data.html);
+				$('#show_more_tweets_link').attr('page_value', data.cur_page);
+				$('#show_more_tweets_link').attr('onclick','');
+				$('#show_more_tweets_link').attr('onclick','show_more_records('+data.cur_page+')');
+			}
+			else {
+				$('#commitment_content_'+prayer_id).append('<div class="view_more" style="text-align: center;"><p class="blue_bold12" style="font-size:14px;">No More Commitments.</p></div>');
+				$('#show_more_div').remove();
+			}
+			//alert(data.view_more);
+            
+            if(data.view_more==false)
+            {
+               
+                $('#commitment_content_'+prayer_id).append('<div class="view_more" style="text-align: center;" ><p class="blue_bold12" style="font-size:14px;">No More Commitments.</p></div>');
+                $('#show_more_div').remove();
+            }
+		
+
+		}	// end of success function...
+	});
+}
+ 
+ $(document).ready(function(){
+		$('.more-content a').click(function(){
+			$('#first_part').hide();
+			$('.hidden-content').show();
+			
+			$('.more-content').hide();
+			$('.less-content').show();
+			$('#mor_tym').show();
+			$('#first_tym').hide();
+			
+		});
+		
+		$('.less-content a').click(function(){
+			
+			$('#first_part').show();
+			$('.hidden-content').hide();
+			
+			$('.less-content').hide();
+			$('.more-content').show();
+			$('#first_tym').show();
+			$('#mor_tym').hide();
+		});
+		
+		
+	});
+function limitCommitText(limitField, limitCount, limitNum) {
+	if (limitField.value.length > limitNum) {
+		limitField.value = limitField.value.substring(0, limitNum);
+	} 
+}
+</script>
+
+
+
+
+
+
+<script type="text/javascript">
+$('#ta_each_post_tweet_<?=$prayer_info["id"]?>').triggeredAutocomplete({
+	hidden: '#hidden_inputbox',
+	source: "<?php echo base_url()?>logged/tweet_home/show_connections/",
+	trigger: "@" 
+	
+});
+$(document).ready(function () {
+
+ //counting the left characters in comment
+     function limitChars(textid, limit, infodiv)
+     {
+      var text = $('#'+textid).val(); 
+      var textlength = text.length;
+      if(textlength > limit)
+      {
+      $('#'+textid).val(text.substr(0,limit));
+       return false;
+      }
+      else
+      {
+      
+       return true;
+      }
+     }
+    
+    
+    /*$(function(){
+        $('#ta_post_tweet').keyup(function(){
+            limitChars('ta_post_tweet', 140, '');
+        });
+    });*/
+    
+    
+    //// just to show correct no. of chracters left while the page is loaded...
+    //limitChars('ta_post_tweet',140, '');
+    
+ 
+});
+ var carriage_count = 0;
+function restrict_carrige(e)
+{
+	/*//if(e.keyCode == 13)
+	{
+		$.ajax({
+			type: 'post',
+			url: base_url+'logged/prayer_wall/getCarriageCount',
+			data: {'str':$('#ta_desc').val()},
+			dataType: 'json',
+	
+			success: function (data, status) {
+				
+					if(data.count > 1){
+						return false;
+					}
+				
+				}	// end of success function...
+		});
+	}*/
+	//alert($('#ta_desc').val().replace(/\r/g,"\r").replace(/\n/g,"\n"));
+
+	if(e.keyCode == 13){
+		carriage_count++;
+		console.log(carriage_count);
+	}
+	/*if(e.keyCode == 8){
+		carriage_count--;
+	}*/
+	if(e.keyCode == 13 && carriage_count >5){
+		return false;
+		//e.preventDefault();
+	}
+}
+	
+</script>

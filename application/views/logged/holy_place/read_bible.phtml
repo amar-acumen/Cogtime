@@ -1,0 +1,763 @@
+<?php include(APPPATH."views/layouts/logged_header.phtml");?>
+            <!-- NAVIGATION SECTION -->
+      <?php include(APPPATH."views/layouts/nav.phtml");?>
+      <!-- /NAVIGATION SECTION -->
+      </div>
+</div>
+<!-- /HEADER SECTION -->
+<div class="clr"></div>
+<style>
+#table_content .previous-next .num_tag_link {display: none !important;}
+</style>
+<!-- CONTENT SECTION -->
+<div id="content_section">
+      <div id="container">
+            <!--<div id="mid_content"> -->
+                  <!-- latest news -->
+                 <?php include(APPPATH ."views/layouts/latest_news.phtml");?>
+                  <!-- /latest news -->
+                  <div class="clr"></div>
+                  <!-- main container -->
+                  <div id="main_container">
+                        <div class="page_heading">
+                              <div class="left"><img src="images/icons/bible-icon.png" alt="" /> Read Bible</div>
+<script>
+	$(document).ready(function() {
+		$('#searchtxt').autofill({'value':'Search by "<keywords>" or "<book name> <chapter no.>:<verse no.>"'});
+	});
+</script>                             
+                        </div>
+                        
+                        <div class="bible-left-part bible-equalHeight" style="padding-top:1px;">
+                             <div class="bible-toolbar">
+                            	<ul class="turn-on-btns">
+                                	<li id="noteIcon" <?php /*?>onclick="noteIconClick();"<?php */?>><a href="javascript:void(0);" class="note" title="Note"></a></li>
+                                    <li id="bookmarkIcon"><a href="javascript:void(0);" class="bookmark" title="Bookmark"></a></li>
+                                    <li id="bookmarkIcon1" class="libookmark" style="display:none;"></li>
+                                    <li id="highlightIcon"><a href="javascript:void(0);" class="highlights" title="Highlight"></a></li>
+                                    <li onclick="resetAll();"><a href="javascript:void(0);" class="reset" title="Reset" id="#reset" onclick="$('#i_del_id').val('TWpBallXTjE=');show_dialog('reset-all');"></a></li>
+                                </ul>
+                                 <!----------------------light box-------------------------------->
+                                 <div class="lightbox reset-all" style="width: 400px; left: 100px;">
+      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="<?=base_url()?>images/close.png" alt="" /></a></div>
+      <div class="top"><div>&nbsp;</div></div>
+      <div class="mid">
+            <div class="heading" style="margin-bottom:0px;">
+                  <div class="left">
+                        <h4>Reset all</h4>
+                  </div>
+            </div>
+               <div class="shade_box_white" style="padding:8px 0px;">
+               <div style="padding-bottom:10px;">
+               <p class="center-text" style="line-height:23px; color:#494949;">
+                  Do you want to delete all of your bookmarks,notes and highlights ?
+               </p>
+               </div>
+               <form action="" method="post" id="delfrm">
+                  <input type="hidden" name="i_del_id" id="i_del_id" value="" />
+                 <input name="" type="button" value="Yes" class="btn" style="margin-left:105px;" onClick="resetPage()"/>
+                 <input name="" type="button" value="No" class="btn" onclick="hide_dialog()"/>
+               </form>   
+               <div class="clr"></div>
+            </div>
+            
+      </div>
+      <div class="bot"><div>&nbsp;</div></div>
+</div>
+                                 <!----------------------light box----------------------------------->
+                                <form class="keyword-search" action="<?php echo base_url()?>logged/holy_place/search" method="post" id="searchfrm" onsubmit="return false;">
+                                	<label>Keyword:</label>
+                                    <input id="searchtxt" name="searchtxt" type="text">
+                                    <input name="btnsubmit" id="btnsubmit" type="submit" class="search-btn" value="">
+                                </form>
+                                <a href="<?php echo base_url()?>holy-place/bible/all-books" class="view-all-books">View All Books</a>
+                                <div class="clr"></div>
+                            </div>
+                         <div class="shade_box_01" style="padding:12px 0px 0px;">
+                         	 <a id="getanchor" href="" style="display:none;"></a>
+                             <div class="bible-container">
+                                 <div id="table_content" class="verse-container" style="height:640px;"><!---->
+                                       <?php 
+									   echo $listingContent;
+									   ?>
+                                </div>
+                            </div>
+                            
+                        </div>
+                        
+                       </div>
+                       
+                       <div class="bible-right-part bible-equalHeight">
+                       	<div class="right-floating">
+                       		<div class="general-container">
+                            	<div class="bible-text-container">
+                                        <div class="title">Library</div>
+                                         <div class="filter-by">
+                                        	<label>Filter By: </label>
+                                            <select name="" style="padding:0;" onchange="showAllByCategory(this.value,'<?php echo base_url()?>logged/holy_place/get_all_note_bookmark_highilights','ajax_library')" id="library_categorylist">
+                                            	<option value="">View all</option>
+                                                <?php echo $category_html?>
+                                            </select>
+                                        </div>
+                                        <div class="scroll-container scroll_library" id="ajax_library">
+                                            	<?php include(APPPATH."views/logged/holy_place/ajax_holy_place/ajax_listing_library.phtml");?>
+                                        </div>
+                                    </div>
+                                   	 <div class="my-reading-options">
+                                        <ul>
+                                            <li>
+                                                <a href="javascript:void(0);" id="readingPlan"><span class="reading-plan"></span>My Reading Plan</a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0);" id="myNoteBtn"><span class="notes"></span>My Notes</a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0);" id="myBookmarkBtn"><span class="bookmark"></span>My Bookmarks</a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0);" id="myHighlightBtn"><span class="highlights"></span>My Highlights</a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0);" id="myCategoryBtn"><span class="my-category"></span>My Category</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                 </div>
+                                 <!--reading plan start -->
+                                 <?php include(APPPATH."views/logged/holy_place/reading_plan.phtml");?>
+                                 <!--reading plan end -->
+                              <div class="note-container">
+                                        <div class="bible-text-container">
+                                        <div class="title">
+                                        	<a href="javascript:void(0);" class="back" title="Back">&nbsp;</a>
+                                        	My Notes
+                                        </div>
+                                         <div class="filter-by">
+                                        	<label>Filter By: </label>
+                                            <select id="mynotes_cat" name="" style="padding:0;" onchange="showAllByCategory(this.value,'<?php echo base_url()?>logged/holy_place/get_all_note/3','notediv')">
+                                            	<option value="">View all</option>
+                                                <?php echo $category_html?>
+                                            </select>
+                                        </div>
+                                        <div class="scroll-container scroll_note" id="notediv">
+                                        </div>
+                                    </div>
+                                    </div>
+                                    
+                                <div class="bookmark-container">
+                                	<div class="bible-text-container">
+                                        <div class="title">
+                                        	<a href="javascript:void(0);" class="back" title="Back">&nbsp;</a>
+                                        	My Bookmark
+                                        </div>
+                                         <div class="filter-by">
+                                        	<label>Filter By: </label>
+                                            <select id="mybookmark_cat" name="" style="padding:0;" onchange="showAllByCategory(this.value,'<?php echo base_url()?>logged/holy_place/get_all_bookmark/3','bookmark_div')">
+                                            	<option value="">View all</option>
+                                                <?php echo $category_html?>
+                                            </select>
+                                        </div>
+                                        <div class="scroll-container scroll_bookmark" id="bookmark_div">
+                                        </div>
+                                    </div>
+                                </div>    
+                                    
+                                 <div class="highlight-container">
+                                	<div class="bible-text-container">
+                                        <div class="title">
+                                        	<a href="javascript:void(0);" class="back" title="Back">&nbsp;</a>
+                                        	My Highlights
+                                        </div>
+                                         <div class="filter-by">
+                                        	<label>Filter By: </label>
+                                            <select id="myhighlights_cat" name="" style="padding:0;" onchange="showAllByCategory(this.value,'<?php echo base_url()?>logged/holy_place/get_all_highilights/3','hilits_div')">
+                                            	<option value="">View all</option>
+                                                <?php echo $category_html?>
+                                            </select>
+                                        </div>
+                                        <div class="scroll-container scroll_highlights" id="hilits_div">
+                                            
+                                        </div>
+                                    </div>
+                                </div>   
+                       </div>
+                        
+        			</div>
+                  <!-- /main container -->
+                  <div class="clr"></div>
+            <!--</div> -->
+      </div>
+      <div class="clr"></div>
+</div>
+</div>
+<!-- /CONTENT SECTION -->
+<div class="clr"></div>
+
+<?php /*?>LIGHT BOX <?php */?>
+<?php include(APPPATH."views/logged/holy_place/lightbox.phtml");?>
+<?php /*?>LIGHT BOX <?php */?>
+
+
+<?php include(APPPATH."views/layouts/footer.phtml");?>
+
+<script type="text/javascript">
+
+
+/*********************GET SELECTION TEXT******************************/
+	/*if (!window.x) {
+    x = {};
+	}
+	x.Selector = {};
+	x.Selector.getSelected = function() {
+		var t = '';
+		if (window.getSelection) {
+			t = window.getSelection();
+		} else if (document.getSelection) {
+			t = document.getSelection();
+		} else if (document.selection) {
+			t = document.selection.createRange().text;
+		}
+		return t;
+	}*/
+	
+	function getSelectionCharOffsetsWithin(element) 
+	{
+		var start = 0,
+		end = 0;
+		var sel, range, priorRange, selectxt;
+		if (typeof window.getSelection != "undefined") {
+			range = window.getSelection().getRangeAt(0);
+			priorRange = range.cloneRange();
+			priorRange.selectNodeContents(element);//alert(element);
+			priorRange.setEnd(range.startContainer, range.startOffset);
+			start = priorRange.toString().length;
+			end = start + range.toString().length;
+			selectxt = range;
+		} else if (typeof document.selection != "undefined" && (sel = document.selection).type != "Control") {
+			range = sel.createRange();
+			priorRange = document.body.createTextRange();
+			priorRange.moveToElementText(element);
+			priorRange.setEndPoint("EndToStart", range);
+			start = priorRange.text.length;
+			end = start + range.text.length;
+			selectxt = range.text;
+		}
+		return {
+			start: start,
+			end: end,
+			selectedtxt:selectxt
+		};
+	}
+/*********************GET SELECTION TEXT******************************/
+	
+	
+	
+
+$(function()
+{
+	
+	var slab	= '<?php echo $slab?>' ;//alert(slab);
+	if(slab!='')
+	{
+		showBusyScreen(); 
+		//var	recordNo	= slab*25;alert(recordNo);
+		$.post('<?php echo base_url()?>logged/holy_place/generate_read_bible_AJAX/'+slab, {'t' : 't'}, 
+			function(data)
+			{
+				$('#table_content').html(data);
+				var elID	= "#div_"+'<?php echo $anchor_id?>';
+				showscroll();
+				scrollToGivenPosition(elID);
+				resetAll();
+				hideBusyScreen(); ; 
+			}
+		); 
+	}
+	else
+		showscroll();
+	
+});
+
+
+
+
+$('#noteIcon').click(
+		function(){
+			$('.contents').css('cursor', 'pointer');
+			$('.turn-on-btns a').removeClass('select');
+			$('.inside-grey-container .contents div').unbind('mouseup');
+			$(this).find('a').addClass('select');
+			$('.inside-grey-container').click(
+			function()
+			{
+				
+				 var arrForId	= $(this).find("a").attr('name').split('_');
+				 $("#verIdForNote").val(arrForId[1]);
+				 $('#err_cat').html(''); 
+				 $('#err_note').html('');
+				 $('#add_cat_n').val('');
+				 $('#category_N').val('');
+				 $('#notetxt').val('');
+				 show_dialog('comment_div');
+			});
+			
+});
+
+
+function addNote()
+{
+closeDialog('note');
+	$.ajax({
+			type: 'post',
+			url: '<?php echo base_url()?>logged/holy_place/add_note/',
+			dataType: 'json',
+			data: $("#frmnote").serialize(),
+			success: function (msg) {
+
+				if(msg.success==true)
+				{	
+					$.post(base_url+'logged/holy_place/generate_read_bible_AJAX/'+msg.slab, {'t' : 't'}, 
+						function(data)
+						{
+							showUIMsg(msg.data);
+							hideBusyScreen();
+							$('.inside-grey-container').unbind('click');
+							$('.note-container').slideUp();
+							$('.general-container').slideDown();
+							$('#table_content').html(data);
+							$('#ajax_library').html(msg.library);
+							$('#library_categorylist').html('');
+							$('#library_categorylist').html(msg.category_html);
+							updateCategoryOptionInPopup(msg.category_html1);
+							
+						}
+					); 
+				}	
+				else
+				{
+					if(msg.data.err_cat)
+					{
+						$('#err_cat').html(msg.data.err_cat);
+					}
+					if(msg.data.err_note)
+					{
+						$('#err_note').html(msg.data.err_note);
+					}
+				}
+				
+			}	// end of success function...
+	});
+}
+
+function resetPage()
+{
+$.ajax({
+			type: 'post',
+			url: '<?php echo base_url()?>logged/holy_place/reset_page/',
+			dataType: 'json',
+			success: function (msg) {
+
+				if(msg.success==true)
+				{	
+				showUIMsg('loading...');
+					window.location.replace("<?=base_url()?>holy-place/bible/all-books"); 
+				}	
+				else
+				{
+					showUIMsg("something went wrong. Please try again.");
+				}
+				
+			}	// end of success function...
+	});
+}
+
+
+/*$('#highlightIcon').click(function(){
+	$('.contents').css('cursor', 'text');
+	$('.turn-on-btns a').removeClass('select');
+	$("#bkmarkAdd").unbind('click');
+	$('.inside-grey-container').unbind('click');
+	$(this).find('a').addClass('select');
+	$('.inside-grey-container .contents div').bind("mouseup", function() {
+			var arrForId	= $(this).attr('id').split('_');
+			var  mytext = x.Selector.getSelected();
+			var div_obj	= $(this);
+			var verse_txt	= div_obj.html();
+			if(mytext!='')
+			{
+					$('#bk_mark_category').val('');
+					$('#err_cat_bk_mark').html('');alert(1);
+					setTimeout(function(){show_dialog('hilits_div')},100)
+					//show_dialog('hilits_div');
+					
+					$("#hilitsAdd").click(function(){
+			
+					$.ajax({
+						type: 'post',
+						url: '<?php echo base_url()?>logged/holy_place/add_highlights/',
+						dataType: 'json',
+						data: 'versesid='+arrForId[1]+'&text='+mytext+'&'+$('#frmhilits').serialize(),
+						success: function (msg) {
+			
+							if(msg.success==true)
+							{
+								div_obj.html(msg.txt);
+								$("#hilitsAdd").unbind('click');
+								showUIMsg(msg.data); 
+								closeDialog('hilits')
+							}	
+							else
+							{
+								
+								if(msg.data.err_cat)
+								{
+									$('#err_cat_hilits').html(msg.data.err_cat);
+								}
+								else
+								{
+									showUIMsg(msg.data); 
+									closeDialog('hilits')
+									$("#bkmarkAdd").unbind('click');
+								}
+							}
+						
+						}	// end of success function...
+					});
+					$('.inside-grey-container').unbind('mouseup');
+				
+		  		});
+			}
+			else
+			{
+				alert("Please select text from one verse");
+			}
+		});
+	
+	//$('#highlightIcon').unbind('click');
+});
+*/
+
+$("#table_content").on("mouseup", ".hilitstest", function() { 
+	var div_obj	= $(this);
+	var contents = $('#'+div_obj.attr('id'))[0];
+	var returnFromSelection	= getSelectionCharOffsetsWithin(contents);
+	
+	var selectedtextStart	= returnFromSelection.start;	
+	var selectedtextEnd	= returnFromSelection.end;	
+	var selectedtext	= returnFromSelection.selectedtxt;	
+	var arrId	= div_obj.attr('id').split('_'); 
+	var verse_txt	= div_obj.html();
+	if(selectedtext!='')
+	{
+		$('#highlightIcon').bind('click',function(){
+		$('.turn-on-btns a').removeClass('select');
+		$(this).find('a').addClass('select');
+		$('#bk_mark_category').val('');
+		$('#add_cat_h').val('');
+		$('#err_cat_bk_mark').html('');
+		$("#txt_select").val(selectedtext);
+		show_dialog('hilits_div');
+		$("#hilitsAdd").click(function(){
+		
+			$.ajax({
+				type: 'post',
+				url: '<?php echo base_url()?>logged/holy_place/add_highlights/',
+				dataType: 'json',
+				data: 'versesid='+arrId[1]+'&text='+$("#txt_select").val()+'&startpos='+selectedtextStart+'&endpos='+selectedtextEnd+'&'+$('#frmhilits').serialize(),
+				success: function (msg) {
+					if(msg.success==true)
+					{
+						div_obj.html(msg.txt);
+						$('#library_categorylist').html('');
+						$('#library_categorylist').html(msg.category_html);
+						
+						$("#hilitsAdd").unbind('click');
+						showUIMsg(msg.data); 
+						$('#ajax_library').html(msg.library);
+						$('.highlight-container').slideUp();
+						$('.general-container').slideDown();
+						closeDialog('hilits');
+						
+						$('#mynotes_cat').html(msg.category_html);
+						$('#mybookmark_cat').html(msg.category_html);
+						$('#myhighlights_cat').html(msg.category_html);
+						updateCategoryOptionInPopup(msg.category_html1);
+						$("#hilitsAdd").unbind('click');
+					}	
+					else
+					{
+						if(msg.data.err_cat)
+						{
+							$('#err_cat_hilits').html(msg.data.err_cat);
+						}
+						else
+						{
+							showUIMsg(msg.data); 
+							closeDialog('hilits')
+							$("#bkmarkAdd").unbind('click');
+						}
+					}
+				}	// end of success function...
+			});
+		});
+	});
+	}
+});
+
+$("#bookmarkIcon").click(function(){
+	$('.turn-on-btns a').removeClass('select');
+	$("#bkmarkAdd").unbind('click');
+	$('.inside-grey-container').unbind('mouseup');
+	
+	$(this).find('a').addClass('select');
+			
+			
+	var arrForId	= $('#versediv a:first').attr('name').split('_');
+	$('#bk_mark_category').val('');
+	$('#add_cat_b').val('');
+	$('#err_cat_bk_mark').html('');
+	show_dialog('bookmark_div');
+	
+	var thispage	= ($('div .previous-next > ul > li.current_tag_for_bible_paging').html());
+	$("#bkmarkAdd").click(function(){
+		$.ajax({
+					type: 'post',
+					url: '<?php echo base_url()?>logged/holy_place/add_bookmark/',
+					dataType: 'json',
+					data: 'versesid='+arrForId[1]+'&pagebookmark='+thispage+'&'+$('#frmbkmark').serialize(),
+					success: function (msg) {
+		
+						if(msg.success==true)
+						{	
+							$.post(base_url+'logged/holy_place/generate_read_bible_AJAX/'+msg.slab, {'t' : 't'}, 
+								function(data)
+								{
+									closeDialog('bkmark')
+									showUIMsg(msg.data);
+									$("#bkmarkAdd").unbind('click');
+									$('.bookmark-container').slideUp();
+									$('.general-container').slideDown();
+									$('#table_content').html(data);
+									$('#ajax_library').html(msg.library);
+									$('#library_categorylist').html('');
+									$('#library_categorylist').html(msg.category_html);
+									$('#mynotes_cat').html(msg.category_html);
+									$('#mybookmark_cat').html(msg.category_html);
+									$('#myhighlights_cat').html(msg.category_html);
+									updateCategoryOptionInPopup(msg.category_html1);
+									
+								}
+							); 
+						}	
+						else
+						{
+							if(msg.data.err_cat)
+							{
+								$('#err_cat_bk_mark').html(msg.data.err_cat);
+							}
+							else
+							{
+								showUIMsg(msg.data); 
+								hide_dialog();
+								
+							}
+							
+						}
+						
+						
+					}	// end of success function...
+			  });
+			  
+	});
+});
+
+
+function resetAll(clickitem)
+{
+	var clickedId	= $('.turn-on-btns a.select').parent().attr('id');
+	if(clickedId=='noteIcon')
+	{
+		$('.inside-grey-container').unbind('click');
+		$('#table_content').off('mouseup');
+	}
+	else if(clickedId=='highlightIcon')
+	{
+		$('.inside-grey-container .contents div').unbind('mouseup');
+	}
+	$('.turn-on-btns a').removeClass('select');
+	$('.contents').css('cursor', 'auto');	
+}
+
+
+function addNoteFromVerseNo(id)
+{
+	$.ajax({
+			type: 'post',
+			url: '<?php echo base_url()?>logged/holy_place/add_note/',
+			dataType: 'json',
+			data: 'verIdForNote='+id+'&'+$("#frmNote_"+id).serialize(),
+			success: function (msg) {
+				showUIMsg(msg.data);
+				if(msg.success==true)
+				{	
+					$.post(base_url+'logged/holy_place/generate_read_bible_AJAX/'+msg.slab, {'t' : 't'}, 
+						function(data)
+						{
+							$('#table_content').html(data);
+							$('#ajax_library').html(msg.library);
+							$('.note-container').slideUp();
+							$('.general-container').slideDown();
+							$('.floating-popup').hide();
+							$('.spot-edit-box').hide(); 
+							$('.ghost-layer').remove();
+							$('#library_categorylist').html('');
+							$('#library_categorylist').html(msg.category_html);
+							updateCategoryOptionInPopup(msg.category_html1);
+							
+							
+						}
+					); 
+					
+				}	
+				else
+				{
+					if(msg.data.err_cat)
+					{
+						$('#err_cat_'+id).html(msg.data.err_cat);
+					}
+					if(msg.data.err_note)
+					{
+						$('#err_note_'+id).html(msg.data.err_note);//alert();
+					}
+				}
+				
+			}	// end of success function...
+	});
+}
+
+
+function addBookmarkFromVerseNo(id)
+{
+	$.ajax({
+					type: 'post',
+					url: '<?php echo base_url()?>logged/holy_place/add_bookmark/',
+					dataType: 'json',
+					data: 'versesid='+id+'&'+$('#frmBkmark_'+id).serialize(),
+					success: function (msg) {
+		
+						if(msg.success==true)
+						{	
+							$.post(base_url+'logged/holy_place/generate_read_bible_AJAX/'+msg.slab, {'t' : 't'}, 
+								function(data)
+								{
+									$('#table_content').html(data);
+									$('#ajax_library').html(msg.library);
+									$('.bookmark-container').slideUp();
+									$('.general-container').slideDown();
+									$('.floating-popup').hide();
+									$('.spot-edit-box').hide(); 
+									$('.ghost-layer').remove();
+									$('#library_categorylist').html('');
+									$('#library_categorylist').html(msg.category_html);
+									updateCategoryOptionInPopup(msg.category_html1);
+									
+								}
+							); 
+						}	
+						else
+						{
+							if(msg.data.err_cat)
+							{
+								$('#err_cat_bk_mark'+id).html(msg.data.err_cat);
+							}
+							else
+							{
+								showUIMsg(msg.data); 
+								hide_dialog();
+								
+							}
+							
+						}
+						
+						
+					}	// end of success function...
+			  });
+}
+
+function addHighlights(id)
+{	
+	var selectedtext	= $('#div_'+id).text();
+	
+	
+	var selectedtextStart	= 0;	
+	var selectedtextEnd	= selectedtext.length;	
+	var selectedtext	= selectedtext;	
+	
+	$.ajax({
+				type: 'post',
+				url: '<?php echo base_url()?>logged/holy_place/add_highlights/',
+				dataType: 'json',
+				data: 'versesid='+id+'&text='+selectedtext+'&startpos='+selectedtextStart+'&endpos='+selectedtextEnd+'&'+$('#frm_hilits'+id).serialize(),
+				success: function (msg) {
+					if(msg.success==true)
+					{
+						showUIMsg(msg.data); 
+						$('#div_'+id).html(msg.txt);
+						
+						$("#hilitsAdd").unbind('click');
+						$('.highlight-container').slideUp();
+						$('.general-container').slideDown();
+						$('.floating-popup').hide();
+						$('.spot-edit-box').hide(); 
+						$('.ghost-layer').remove();
+						$('#ajax_library').html(msg.library);
+						//alert(msg.category_html);
+						$('#library_categorylist').html('');
+						$('#library_categorylist').html(msg.category_html);
+						updateCategoryOptionInPopup(msg.category_html1);
+					}	
+					else
+					{
+						if(msg.data.err_cat)
+						{
+							$('#err_cat_hilits'+id).html(msg.data.err_cat);
+						}
+						else
+						{
+							showUIMsg(msg.data); 
+							closeDialog('hilits')
+							$("#hilitsAdd").unbind('click');
+						}
+					}
+				
+				}	// end of success function...
+			});
+}
+
+
+
+function getColorCode(colorid,vid)
+{
+	if(vid=='')
+		$('#colorhidden').val(colorid);
+	else
+		$('#colorhidden_'+vid).val(colorid);
+}
+
+function updateCategoryOptionInPopup(categoryOption)
+{
+	$('#library_categorylist').html(categoryOption);
+	$('#bk_mark_category_h').html(categoryOption);
+	$('#bk_mark_category_b').html(categoryOption);
+	$('#category_N').html(categoryOption);
+	$('#category').html(categoryOption);
+	$('.select_shortcut_category').html(categoryOption);
+}
+</script>
+
+<style>
+    .lightbox {
+        left: 30% !important;
+        top: 30%  !important;
+    };
+</style>

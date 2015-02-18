@@ -1,0 +1,26 @@
+ <?php 
+ #pr($prayer_commits_info);
+		  if(count($prayer_commits_info)){
+			  foreach($prayer_commits_info as $commit_val){
+				  $contents = html_entity_decode(htmlspecialchars_decode($commit_val['s_contents']),ENT_QUOTES,'utf-8');
+				  $profile_image_filename = get_profile_image($commit_val['i_user_id'],'thumb');
+ ?> 
+                            
+            <div class="commitment-box"> 
+                  <a href="javascript:void(0);" class="profile-image"><div style="background:url('<?=$profile_image_filename?>') no-repeat center;width:60px; height:60px;" ></div></a>
+                  <div class="right-panel">
+                      <p class="quoted-text">
+                         <?=$contents?>
+                          <span>Updated on: <?=get_time_elapsed($commit_val['dt_created_on'])?></span>
+                      </p>
+                       <h2 class="name"><?=$commit_val['s_profile_name']?> <span><?=$commit_val['s_country']?></span></h2>
+                      
+                        <p class="date-time">From: <span><?=getShortDate($commit_val['dt_start_time'], 5)?></span> | To: <span><?=getShortDate($commit_val['dt_end_time'], 5)?></span></p>
+                  </div>
+                  <div class="clr"></div>
+            </div>
+                           
+ <?php 
+              }
+          }
+ ?>

@@ -1,0 +1,265 @@
+<!-- header -->
+<?php
+	include(APPPATH ."views/layouts/church_logged_header.phtml");
+?>
+
+<!-- CONTENT SECTION -->
+<?php //pr($prayer_group_details);
+//echo $prayer_group_id;
+?>
+<div class="container">
+  
+  <div class="main-page">
+  	<h3 class="page-heading"><?= ucfirst(get_church_prayer_group_name_by_grp_id($prayer_group_id)) ?><a href="<?=base_url().''.$_SESSION['logged_church_id']?>/church-prayer-group" class="back-btn">Back to Prayer Group</a></h3>
+    <?php include(APPPATH ."views/logged/church/church_prayer_group_left_panel.phtml");?>
+    <div class="activity-right">	<div class="prayer-grp-name"><?php foreach($prayer_group_details as $church)			{			?>			<a href="<?=base_url()?>church-prayer-group/<?=$church->id?>"><?=$church->s_group_name?></a>			
+    
+    <p>Denomination- <?= getDenominationNameById($church->i_denomination_id) ?> | <small><?php if($church_admin){?>Created on- <?php echo getShortDate($church->dt_created_on,5);}else {?>Joined on- <?php echo getShortDate($church->dt_joined_on,5);}?></small>   </p>			<?php } ?></div>
+        <div class="activity-comment-box">
+       	  
+            <!--payer notification start-->
+                <div class="main-payer-section">
+                    <div>
+                        <!-----------------only grp member can access------------------------------------------->
+                        <?php 
+                        //echo $_SESSION['subadmin_role'];
+                       // echo ;
+                        //echo $church->id;
+                         if(!($_SESSION['charch_super_admin'] =='yes' || $_SESSION['subadmin_role']==2)){
+                        
+                        $user_id = intval(decrypt($this->session->userdata('user_id')));
+                        $query = $this->db->get_where('cg_church_prayer_group_members', array('i_prayer_group_id' => $church->id , 'i_user_id' => $user_id , 's_status' => 'accepted'));
+                       $res =  $query->result();
+                       if(count($res)){
+                        ?>
+                        
+                        <div class="nw-right-heading">
+                            <h4 class="message-board-title">Message Board</h4>
+
+                            <!-- <a href="javascript:void(0);"  class="prayer-link">Create Prayer Group </a>-->
+
+                        </div>
+                        <div class="form-prayer-box">
+                            <div class="Create-list-box">
+                                <textarea  rows="" cols="" name="ta_post_prayer_grp" id="ta_post_prayer_grp"></textarea>
+                                <input type="button" class="yellow-btn" value="Post" name="" onclick="post_prayer_grp_post(<?= $praye_group_id ?>)" />
+                            </div>
+                           
+
+                        </div>
+                        <?php
+                       }
+                         } else if( $_SESSION['charch_super_admin'] =='yes' || $_SESSION['subadmin_role']==2){
+                        ?>
+                        
+                        <div class="nw-right-heading">
+                            <h4 class="message-board-title">Message Board</h4>
+
+                            <!-- <a href="javascript:void(0);"  class="prayer-link">Create Prayer Group </a>-->
+
+                        </div>
+                        <div class="form-prayer-box">
+                            <div class="Create-list-box">
+                                <textarea  rows="" cols="" name="ta_post_prayer_grp" id="ta_post_prayer_grp"></textarea>
+                                <input type="button" class="yellow-btn" value="Post" name="" onclick="post_prayer_grp_post(<?= $praye_group_id ?>)" />
+                            </div>
+                           
+
+                        </div>
+                        <?php 
+                         }
+                        ?>
+                        <!----------------------------------------------------------------->
+                        
+                        <div>
+                            <ul class="notification-ul" id="grp_post_list">
+                                <?= $postlists ?>
+                                <?php if (count($group_posts) == 0) { ?>
+                                    <li id="no_prayer_grp_post"><span style="margin-left: 290px;">No Posts.</span></li>
+                                <?php } else
+								{
+								foreach($group_posts as $k=>$v): ?>
+									<li>
+                
+                  
+              		<strong><a class="post-user" href="<?=get_public_profile_url($v->i_user_id, get_username_by_id($v->i_user_id))?>"><?=get_username_by_id($v->i_user_id)?> : </a></strong><span class="post-txt"> <?=$v->s_post_desc?> </span><br> 
+                   
+					<span class="text-small-4">Posted on: <?=getShortDateWithTime($v->dt_created_on,6)?></span>
+                                       <span class="pry-grp"> <?php 
+                                         $logged_user_id = intval(decrypt($this->session->userdata('user_id')));
+                                         if($logged_user_id == $v->i_user_id || $_SESSION['charch_super_admin'] =='yes' ||  $_SESSION['subadmin_role'] == 2){
+                                        ?>
+                                        <a href="javascript:void(0)" onclick="show_hidden('<?=$v->id ?>');">Edit</a>
+                                        <a href="javascript:void(0)" onclick="show_dialog('pry-delete<?=$v->id ?>');">Delete</a>
+                                        <?php
+                                         }
+                                        ?></span>
+                                        
+					</li>
+                                       
+                 <!--------------------------delete popup------------------------------------------->
+                 <div  class="lightbox pry-delete<?=$v->id ?>">
+      <div class="close"><a onclick="hide_dialog()" href="javascript:void(0)"><img alt="" src="<?= base_url() ?>images/close.png"></a></div>
+      <div class="top"><div>&nbsp;</div></div>
+      <div class="mid">
+            <div style="margin-bottom:0px;" class="heading">
+                  <div class="left">
+                        <h4>Delete Post</h4>
+                  </div>
+            </div>
+               <div style="padding:8px 0px;" class="shade_box_white">
+               <div style="padding-bottom:10px;">
+               <p style="line-height:23px; color:#494949; font-size:16px; text-align:center;" class="center-text">
+                  Do you want to delete prayer group post ?
+               </p>
+               </div>
+               <form id="delfrm" method="post" action=""></form>
+                  <input type="hidden" value="" id="i_del_id" name="i_del_id">
+                 <input type="button" onclick="delete_prayer_post(<?=$v->i_user_id ?>,<?=$v->id ?>,<?=$prayer_group_id?>)"  class="post-btn pull-left" value="Yes" name="">
+                 <input type="button" onclick="hide_dialog()" class="cancel-btn" value="No" name="">
+                  
+               <div class="clr"></div>
+            </div>
+            
+      </div>
+      <div class="bot"><div>&nbsp;</div></div>
+</div>
+                 <!------------------------------------------------------------------------->
+                 <!----------------------comment edit--------------------------------------->
+                 <div id="edit-post-box<?=$v->id ?>" class="" style="display: none;">
+                        <div class="prayr-grp-edit">
+                             <h3 class="page-heading">POST <span onclick="show_hidden('<?=$v->id ?>')" class="pull-right">[Hide-]</span></h3>
+                                       
+                                        
+                             
+                                  <textarea  id="wall_msg<?=$v->id ?>"  maxlength="500"><?=$v->s_post_desc?></textarea>
+                                  
+                                  <input type="button" onclick="edit_prayer_post(<?=$v->i_user_id ?>,<?=$v->id ?>,<?= $prayer_group_id ?>)"  class="post-btn" value="Update" name="" style="font-size:12px; height:24px; line-height:24px;">
+                 
+                                  
+                              </div></div>
+            
+								<?
+endforeach;								}?>
+
+                            </ul>
+                        </div>
+
+                    </div>
+
+
+
+                    <!--prayer wall eight start -->
+                   
+                    <!--prayer wall eight end  -->
+                </div>
+            
+        </div>
+
+    </div>
+    <div class="clear"></div>
+    
+    
+  </div>
+</div>
+
+<!-- /CONTENT SECTION -->
+<div class="clr"></div>
+<!-- FOOTER SECTION -->
+<?php include(APPPATH."views/layouts/church_footer.phtml");?>
+<!-- /FOOTER SECTION -->
+
+<script type="text/javascript">
+ function post_prayer_grp_post()
+ {
+	var data="";
+	data=$('#ta_post_prayer_grp').val();
+	if(data == '')
+	{
+		showUIMsg('Please enter Some message');
+	}
+	else
+	{
+		showUILoader_nodialog('<img src="'+base_url+'images/loading_big.gif" width="50"/> ');  
+			$.ajax({
+				type: 'post',
+			   // url: base_url+'logged/prayer_group/generate_friend_search_listing_AJAX/'+group_id,
+				url: base_url+'logged/church_prayer_group/post_message/<?=$prayer_group_id?>',
+				dataType: 'json',
+				data: {'inv':data
+					   },
+			   success: function (json_response) {
+				  
+						hideUILoader_nodialog();
+						   showUIMsg(json_response.msg);
+						//window.location.href = base_url+ '<?=$_SESSION['logged_church_id']?>/church-prayer-group';
+							window.location.reload();	
+					  
+					  }
+					  });
+				  }
+	}
+        
+        function delete_prayer_post(i_use_id , p_id ,prayer_group_id){
+       // alert(p_id)
+      showUILoader_nodialog('<img src="'+base_url+'images/loading_big.gif" width="50"/> ');  
+       
+        $.ajax({
+				type: 'post',
+			   // url: base_url+'logged/prayer_group/generate_friend_search_listing_AJAX/'+group_id,
+				url: base_url+'logged/church_prayer_group/delete_prayer_post',
+				dataType: 'json',
+				data: {'i_use_id':i_use_id ,'p_id':p_id , 'prayer_group_id':prayer_group_id 
+					   },
+			   success: function (data) {
+				  
+						hideUILoader_nodialog();
+                                                //alert(data.msg)
+						   //showUIMsg(json_response.msg);
+						//window.location.href = base_url+ '<?=$_SESSION['logged_church_id']?>/church-prayer-group';
+						if(data.msg == 'ok'){	
+                                          location.reload();
+                                      }else{
+                                          showUIMsg('Error...');
+                                      }
+					  
+					  }
+					  });
+        }
+         function show_hidden(feed_id)
+ {
+$('#edit-post-box'+feed_id).toggle();
+}
+ function edit_prayer_post(i_use_id , p_id , prayer_group_id){
+     var wall_msg = $('#wall_msg'+p_id).val();
+     if(wall_msg == ''){
+         showUIMsg('Please enter Some text');
+         
+     }else{
+      showUILoader_nodialog('<img src="'+base_url+'images/loading_big.gif" width="50"/> ');
+      
+        $.ajax({
+				type: 'post',
+			   // url: base_url+'logged/prayer_group/generate_friend_search_listing_AJAX/'+group_id,
+				url: base_url+'logged/church_prayer_group/edit_prayer_post',
+				dataType: 'json',
+				data: {'i_use_id':i_use_id ,'p_id':p_id ,'wall_msg' :wall_msg , 'prayer_group_id':prayer_group_id 
+					   },
+			   success: function (data) {
+				  
+						hideUILoader_nodialog();
+                                                //alert(data.msg)
+						   //showUIMsg(json_response.msg);
+						//window.location.href = base_url+ '<?=$_SESSION['logged_church_id']?>/church-prayer-group';
+						if(data.msg == 'ok'){	
+                                          location.reload();
+                                      }else{
+                                          showUIMsg('Error...');
+                                      }
+					  
+					  }
+					  });
+                                          }
+ }
+</script>
+<script type="text/javascript" src="<?= base_url(); ?>js/lightbox.js"></script>

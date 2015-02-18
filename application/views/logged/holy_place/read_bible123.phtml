@@ -1,0 +1,842 @@
+<?php include(APPPATH."views/layouts/logged_header.phtml");?>
+            <!-- NAVIGATION SECTION -->
+      <?php include(APPPATH."views/layouts/nav.phtml");?>
+      <!-- /NAVIGATION SECTION -->
+      </div>
+</div>
+<!-- /HEADER SECTION -->
+<div class="clr"></div>
+<style>
+#table_content .previous-next .num_tag_link {display: none !important;}
+</style>
+<!-- CONTENT SECTION -->
+<div id="content_section">
+      <div id="container">
+            <!--<div id="mid_content"> -->
+                  <!-- latest news -->
+                 <?php include(APPPATH ."views/layouts/latest_news.phtml");?>
+                  <!-- /latest news -->
+                  <div class="clr"></div>
+                  <!-- main container -->
+                  <div id="main_container">
+                        <div class="page_heading">
+                              <div class="left"><img src="images/icons/bible.png" alt="" /> Read Bible</div>
+<script>
+	$(document).ready(function() {
+		$('#searchtxt').autofill({'value':'Keywords or Book 13:1'});
+	});
+</script>                             
+                        </div>
+                        
+                        <div class="bible-left-part bible-equalHeight" style="padding-top:1px;">
+                        <div class="arrow_btm"></div>
+                              <div class="frm_box shade_box_01" style="padding-bottom:10px;">
+                                  <form action="<?php echo base_url()?>logged/holy_place/search" method="post" id="searchfrm" onsubmit="return false;">
+                                        <div class="lable02" style="width:55px;"> Keyword:</div>
+                                        <div class="field01">
+                                              <input id="searchtxt" name="searchtxt" type="text" value=""/>
+                                        </div>
+                                        
+                                       
+                                        <div class="field01" style="width:90px;">
+                                              <input name="btnsubmit" id="btnsubmit" type="submit" value="Search"  class="sml_btn" />
+                                        </div> 
+                                        <div class="lable01" style="float:right;">
+                                            <p><a href="<?php echo base_url()?>holy-place/bible/all-books" class="blue_link"><img src="images/icons/icn13.png" alt="" /> <strong>View all Books</strong></a></p>
+                                            
+                                    </div>
+                                        <div class="clr"></div>
+                                  </form>
+                              </div>
+                        <div class="arrow_btm"></div>
+                         <div class="shade_box_01" style="padding:12px 0px 0px;">
+                         	 <a id="getanchor" href="" style="display:none;"></a>
+                             <div class="bible-container">
+                                 <div id="table_content" class="verse-container">
+                                       <?php 
+									   echo strlen('And the earth was without form, and void; and darkness was upon the face of the deep. And the Spirit of God moved upon the face of the waters.');
+									   echo '------'.strlen('And the earth was without form, and void; and darkness was upon the face of the deep. And the Spirit of ');
+									   echo $listingContent;
+									   ?>
+                                </div>
+                            </div>
+                            
+                        </div>
+                        
+                        
+                        
+                        <!--note section start --> 
+                                <div class="grey-flying-box bible-equalHeight" id="notes">
+                                    <!--top panel start -->
+                                    <div class="top-panel">
+                                        <span class="type">Notes</span>
+                                        <span class="filter-by">Filter By Category:</span>
+                                        <div class="filter-option">
+                                              <select name="notecategory" id="notecategory" onchange="showAllByCategory(this.value,'<?php echo base_url()?>logged/holy_place/get_all_note/','showAllNote');">
+                                                    <option value="">Select</option>
+                                                    <?php echo $category_html;?>
+                                              </select>
+                                              <script type="text/javascript">
+                                                $(document).ready(function() {
+                                                    $("#categoryName").msDropDown();
+                                                    $("#categoryName").hide();
+                                                })
+                                              </script>
+                                        </div>
+                                    </div>
+                                    <!--top panel end -->
+                                    
+                                    <!--listed content start -->
+                                    <div id="showAllNote"><img width="100" src="images/loading_big.gif" style="margin:200px 312px;"></div>
+                                    <!--listed content start -->
+                                </div> 
+                                <!--note section end --> 
+                                
+                                <!--bookmark section start --> 
+                                <div class="grey-flying-box bible-equalHeight" id="bookmark">
+                                    <!--top panel start -->
+                                    <div class="top-panel">
+                                        <span class="type">Bookmark</span>
+                                        <span class="filter-by">Filter By Category:</span>
+                                        <div class="filter-option">
+                                             <select onchange="showAllByCategory(this.value,'<?php echo base_url()?>logged/holy_place/get_all_bookmark/','showAllbookmark');">
+                                                    <option value="">Select</option>
+                                                    <?php echo $category_html;?>
+                                              </select>
+                                              <script type="text/javascript">
+                                                $(document).ready(function() {
+                                                    $("#categoryName2").msDropDown();
+                                                    $("#categoryName2").hide();
+                                                })
+                                              </script>
+                                        </div>
+                                    </div>
+                                    <!--top panel end -->
+                                    
+                                    <!--listed content start -->
+                                    <div id="showAllbookmark">
+                                    	<img width="100" src="images/loading_big.gif" style="margin:200px 312px;">
+                                    </div>
+                                    <!--listed content start -->
+                                </div> 
+                                <!--bookmark section end -->
+                                
+                                <!--highlight section start --> 
+                                <div class="grey-flying-box bible-equalHeight" id="highlights">
+                                    <!--top panel start -->
+                                    <div class="top-panel">
+                                        <span class="type">Highlights</span>
+                                        <span class="filter-by">Filter By Category:</span>
+                                        <div class="filter-option">
+                                              <select name="" id="categoryName3" onchange="showAllByCategory(this.value,'<?php echo base_url()?>logged/holy_place/get_all_highilights/','showAllhlts');">
+                                                    <option value="">Select</option>
+                                                    <?php echo $category_html;?>
+                                              </select>
+                                              <script type="text/javascript">
+                                                $(document).ready(function() {
+                                                    $("#categoryName3").msDropDown();
+                                                    $("#categoryName3").hide();
+                                                })
+                                              </script>
+                                        </div>
+                                    </div>
+                                    <!--top panel end -->
+                                    
+                                    <!--listed content start -->
+                                    <div class="grey-flying-div" id="showAllhlts">
+                                    <img width="100" src="images/loading_big.gif" style="margin:200px 312px;">
+                                    </div>
+                                    <!--listed content start -->
+                                </div> 
+                                <!--highlight section end -->
+
+                       </div>
+                       
+                       <div class="bible-right-part bible-equalHeight">
+                       		<!--turn on part start -->
+                            <div class="turn-on-part">
+                            	<!--<span class="turn-on">Add</span> -->
+                                <ul class="turn-on-btns">
+                                	<li id="noteIcon"><a href="javascript:void(0);"><span class="note"></span>Note</a></li>
+                                    <li id="bookmarkIcon"><a href="javascript:void(0);"><span class="bookmark"></span>Bookmark</a></li>
+                                    <li id="highlightIcon"><a href="javascript:void(0);"><span class="highlights"></span>Highlights</a></li>
+                                    <li onclick="resetAll();"><a href="javascript:void(0);"><span class="reset"></span>Reset</a></li>
+                                </ul>
+                            </div>
+                            <!--turn on part end -->
+                            <div class="my-reading-options">
+                                <ul>
+                                    <li>
+                                        <a href="javascript:void(0);"><span class="reading-plan"></span>My Reading Plan</a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);" id="showAllNoteLi"><span class="notes"></span>Notes</a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);" id="showAllBookmarkLi"><span class="bookmark"></span>Bookmark</a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);" id="showAllHighlights"><span class="highlights"></span>Highlights</a>
+                                    </li>
+                                </ul>
+                            </div>
+                       </div>
+                        
+        			</div>
+                  <!-- /main container -->
+                  <div class="clr"></div>
+            <!--</div> -->
+      </div>
+      <div class="clr"></div>
+</div>
+<!-- /CONTENT SECTION -->
+<div class="clr"></div>
+
+<?php /*?>LIGHT BOX <?php */?>
+<div class="lightbox comment_div" style="width:540px;">
+      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="images/close.png" alt="" /></a></div>
+      <div class="top">
+            <div>&nbsp;</div>
+      </div>
+      <div class="mid">
+            <div class="heading">
+                  <div class="left">
+                        <h4><img src="images/icons/coment.png" alt="" /> Add Note </h4>
+                  </div>
+            </div>
+            <div class="frm_box">
+                <form method="post" action="" name="" id="frmnote">
+                		<input type="hidden" name="verIdForNote" id="verIdForNote" />
+                        <p>
+                            <select name="category">
+                            <option value="">select category</option>
+                            <?php echo $category_html?>
+                            </select>
+                            <span id="err_cat" class="error-message"></span>
+                      </p>
+                      <p>
+                            <textarea name="note" cols="" rows="" style="width:486px; height:100px; margin-bottom:10px;"></textarea>
+                            <span id="err_note" class="error-message"></span>
+                      </p>
+                      <p>
+                            <input class="submit-green" type="button" onclick="addNote();" style="margin-top:15px;" value="Post" name="">
+                      </p>
+                </form>
+            </div>
+      </div>
+      <div class="bot">
+            <div>&nbsp;</div>
+      </div>
+</div>
+
+<div class="lightbox bookmark_div" style="width:312px;">
+      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="images/close.png" alt="" /></a></div>
+      <div class="top">
+            <div>&nbsp;</div>
+      </div>
+      <div class="mid">
+            <div class="heading">
+                  <div class="left">
+                        <h4><img src="images/icons/coment.png" alt="" /> Add This book mark with a category</h4>
+                  </div>
+            </div>
+            <div class="frm_box">
+                <form method="post" action="" name="" id="frmbkmark">
+                        <p>
+                            <select name="bk_mark_category" id="bk_mark_category">
+                            <option value="">select category</option>
+                            <?php echo $category_html?>
+                            </select>
+                            <span id="err_cat_bk_mark" class="error-message"></span>
+                      </p>
+                      <p>
+                            <input class="submit-green" type="button" id="bkmarkAdd" style="margin-top:15px;" value="Post" name="">
+                      </p>
+                </form>
+            </div>
+      </div>
+      <div class="bot">
+            <div>&nbsp;</div>
+      </div>
+</div>
+
+<?php /*?>************************************************************************
+		**************************************************************************
+		**************************************************************************
+		**************************************************************************<?php */?>
+
+
+
+
+<div class="lightbox edit_bible_highlight" style="width:550px;">
+    <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="images/close.png" alt="" /></a></div>
+    <div class="top"><div>&nbsp;</div></div>
+    <div class="mid">
+        <div class="heading"><div class="left"><h4><img src="images/icons/icn27_edit.png" alt="" /> Edit Bible Highlight        </h4></div></div>
+           <div class="frm_box">
+             <div class="lable01">Category:</div> 
+             <div class="field01"><input name="" type="text" /> </div>
+             <div class="clr"></div>
+             
+           
+             <div class="lable01">&nbsp;</div> 
+             <div class="field01"><input name="" type="button" value="Post" class="btn" /></div>
+             <div class="clr"></div>
+           </div>
+    </div>
+    <div class="bot"><div>&nbsp;</div></div>
+</div>
+
+<div class="lightbox edit_bookmark" style="width:550px;">
+    <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="images/close.png" alt="" /></a></div>
+    <div class="top"><div>&nbsp;</div></div>
+    <div class="mid">
+        <div class="heading"><div class="left"><h4><img src="images/icons/bookmark_edit.png" alt="" /> Edit Bookmark         </h4></div></div>
+           <div class="frm_box">
+             <div class="lable01">Category:</div> 
+             <div class="field01"><input name="" type="text" /> </div>
+             <div class="clr"></div>
+              <div class="lable01">Reminder Code:</div> 
+             <div class="field01">
+              <input style="width:230px;"   type="text"  value=" DD/MM/YYYY" name="date_to" id="date_to"  readonly="readonly"/>
+            <img src="images/icons/cal.png" alt="" onclick="$(this).prev().focus()" style="cursor:pointer; " />
+            <script type="text/javascript">
+                    $(document).ready(function() {
+                        $.datepicker.setDefaults($.datepicker.regional['']);
+                        $("#date_to").datepicker($.datepicker.regional['en']);
+
+                    });
+            </script>
+             </div>
+             <div class="clr"></div>
+             <div class="lable01">Comment:</div> 
+             <div class="field01"><textarea name="" cols="" rows="" style="height:80px;"></textarea> </div>
+             <div class="clr"></div>
+           
+             <div class="lable01">&nbsp;</div> 
+             <div class="field01"><input name="" type="button" value="Post" class="btn" /></div>
+             <div class="clr"></div>
+           </div>
+    </div>
+    <div class="bot"><div>&nbsp;</div></div>
+</div>
+
+
+<div class="lightbox edit_note" style="width:550px;">
+    <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="images/close.png" alt="" /></a></div>
+    <div class="top"><div>&nbsp;</div></div>
+    <div class="mid">
+        <div class="heading"><div class="left"><h4><img src="images/icons/book.png" alt="" /> Edit Bible Note     </h4></div></div>
+           <div class="frm_box">
+             <div class="lable01">Category:</div> 
+             <div class="field01"><input name="" type="text" /> </div>
+             <div class="clr"></div>
+             <div class="lable01">Comment:</div> 
+             <div class="field01"><textarea name="" cols="" rows="" style="height:80px;"></textarea> </div>
+             <div class="clr"></div>
+           
+             <div class="lable01">&nbsp;</div> 
+             <div class="field01"><input name="" type="button" value="Post" class="btn" /></div>
+             <div class="clr"></div>
+           </div>
+    </div>
+    <div class="bot"><div>&nbsp;</div></div>
+</div>
+
+
+<div class="lightbox add_bible_highlight" style="width:550px;">
+    <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="images/close.png" alt="" /></a></div>
+    <div class="top"><div>&nbsp;</div></div>
+    <div class="mid">
+        <div class="heading"><div class="left"><h4><img src="images/icons/icn27.png" alt="" /> Add Bible Highlight        </h4></div></div>
+           <div class="frm_box">
+             <div class="lable01">Category:</div> 
+             <div class="field01"><input name="" type="text" /> </div>
+             <div class="clr"></div>
+             
+           
+             <div class="lable01">&nbsp;</div> 
+             <div class="field01"><input name="" type="button" value="Post" class="btn" /></div>
+             <div class="clr"></div>
+           </div>
+    </div>
+    <div class="bot"><div>&nbsp;</div></div>
+</div>
+
+<div class="lightbox add_bookmark" style="width:550px;">
+    <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="images/close.png" alt="" /></a></div>
+    <div class="top"><div>&nbsp;</div></div>
+    <div class="mid">
+        <div class="heading"><div class="left"><h4><img src="images/icons/bookmark.png" alt="" /> Add Bookmark         </h4></div></div>
+           <div class="frm_box">
+             <div class="lable01">Category:</div> 
+             <div class="field01"><input name="" type="text" /> </div>
+             <div class="clr"></div>
+              <div class="lable01">Reminder Code:</div> 
+             <div class="field01">
+              <input style="width:230px;"   type="text"  value=" DD/MM/YYYY" name="date_to" id="date_to"  readonly="readonly"/>
+            <img src="images/icons/cal.png" alt="" onclick="$(this).prev().focus()" style="cursor:pointer; " />
+            <script type="text/javascript">
+                    $(document).ready(function() {
+                        $.datepicker.setDefaults($.datepicker.regional['']);
+                        $("#date_to").datepicker($.datepicker.regional['en']);
+
+                    });
+            </script>
+             </div>
+             <div class="clr"></div>
+             <div class="lable01">Comment:</div> 
+             <div class="field01"><textarea name="" cols="" rows="" style="height:80px;"></textarea> </div>
+             <div class="clr"></div>
+           
+             <div class="lable01">&nbsp;</div> 
+             <div class="field01"><input name="" type="button" value="Post" class="btn" /></div>
+             <div class="clr"></div>
+           </div>
+    </div>
+    <div class="bot"><div>&nbsp;</div></div>
+</div>
+
+<div class="lightbox add_note" style="width:550px;">
+    <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="images/close.png" alt="" /></a></div>
+    <div class="top"><div>&nbsp;</div></div>
+    <div class="mid">
+        <div class="heading"><div class="left"><h4><img src="images/icons/note_plus.png" alt="" /> Add Bible Note     </h4></div></div>
+           <div class="frm_box">
+             <div class="lable01">Category:</div> 
+             <div class="field01"><input name="" type="text" /> </div>
+             <div class="clr"></div>
+             <div class="lable01">Comment:</div> 
+             <div class="field01"><textarea name="" cols="" rows="" style="height:80px;"></textarea> </div>
+             <div class="clr"></div>
+           
+             <div class="lable01">&nbsp;</div> 
+             <div class="field01"><input name="" type="button" value="Post" class="btn" /></div>
+             <div class="clr"></div>
+           </div>
+    </div>
+    <div class="bot"><div>&nbsp;</div></div>
+</div>
+
+
+
+
+<?php /*?>LIGHT BOX <?php */?>
+
+
+<?php include(APPPATH."views/layouts/footer.phtml");?>
+<?php include(APPPATH."views/logged/blocks/common_popup.phtml");?>
+
+<script type="text/javascript">
+
+
+/*********************GET SELECTION TEXT******************************/
+	if (!window.x) {
+    x = {};
+	}
+	x.Selector = {};
+	x.Selector.getSelected = function() {
+		var t = '';
+		if (window.getSelection) {
+			t = window.getSelection();
+		} else if (document.getSelection) {
+			t = document.getSelection();
+		} else if (document.selection) {
+			t = document.selection.createRange().text;
+		}
+		return t;
+	}
+/*********************GET SELECTION TEXT******************************/
+	
+	
+	
+$(function()
+{
+	var slab	= '<?php echo $slab?>' ;//alert(slab);
+	if(slab!='')
+	{
+		showBusyScreen(); 
+		//var	recordNo	= slab*25;alert(recordNo);
+		$.post('<?php echo base_url()?>logged/holy_place/generate_read_bible_AJAX/'+slab, {'t' : 't'}, 
+			function(data)
+			{
+				$('#table_content').html(data);
+				location.href	= "<?php echo my_current_url()?>#anchor_<?php echo $anchor_id?>";
+				equalHeight($(".bible-equalHeight"));
+				hideBusyScreen(); ; 
+			}
+		); 
+	}
+	
+	
+});
+
+function goToChapter(paging)
+{
+	showBusyScreen(); 
+	if(paging=='prev')
+	{
+		var anchor_name	= $("#versediv a:first").attr("name").split('_');
+		var chapter	= $("#versediv a:first").attr("chapter");
+		
+	}
+	else if(paging=='next')
+	{
+		var anchor_name	= $("#versediv a:last").attr("name").split('_');
+		var chapter	= $("#versediv a:last").attr("chapter");
+	}
+	$.ajax({
+		type: 'post',
+		url: '<?php echo base_url()?>logged/holy_place/get_chapter/',
+		dataType: 'json',
+		data: 'verseid='+anchor_name[1]+'&paging='+paging+'&chapter='+chapter,
+		success: function (msg) {
+			
+			
+			//var	recordNo	= slab*25;alert(recordNo);
+			$.post('<?php echo base_url()?>logged/holy_place/generate_read_bible_AJAX/'+msg.slab, {'t' : 't'}, 
+				function(data)
+				{
+					$('#table_content').html(data);
+					location.href	= "<?php echo my_current_url()?>#anchor_"+msg.dest_verse;
+					equalHeight($(".bible-equalHeight"));
+					hideBusyScreen(); ; 
+				}
+			); 
+			
+		}	// end of success function...
+	});
+}
+
+
+
+function goToBook(paging)
+{
+	showBusyScreen(); 
+	if(paging=='prev')
+	{
+		var anchor_name	= $("#versediv a:first").attr("name").split('_');
+		var book	= $("#versediv a:first").attr("book");
+		
+	}
+	else if(paging=='next')
+	{
+		var anchor_name	= $("#versediv a:last").attr("name").split('_');
+		var book	= $("#versediv a:last").attr("book");
+	}
+	$.ajax({
+		type: 'post',
+		url: '<?php echo base_url()?>logged/holy_place/get_book/',
+		dataType: 'json',
+		data: 'verseid='+anchor_name[1]+'&paging='+paging+'&book='+book,
+		success: function (msg) {
+			
+			
+			//var	recordNo	= slab*25;alert(recordNo);
+			$.post('<?php echo base_url()?>logged/holy_place/generate_read_bible_AJAX/'+msg.slab, {'t' : 't'}, 
+				function(data)
+				{
+					$('#table_content').html(data);
+					location.href	= "<?php echo my_current_url()?>#anchor_"+msg.dest_verse;
+					equalHeight($(".bible-equalHeight"));
+					hideBusyScreen(); 
+				}
+			); 
+			
+		}	// end of success function...
+	});
+}
+
+$('#noteIcon').click(
+		function(){
+			resetAll();
+			$(this).find('a').addClass('select');
+			$('.inside-grey-container').click(
+			function()
+			{
+				 var arrForId	= $(this).find("a").attr('name').split('_');
+				 $("#verIdForNote").val(arrForId[1]);
+				 $('#err_cat').html(''); 
+				 $('#err_note').html('');
+				 show_dialog('comment_div');
+				// $('.inside-grey-container').unbind('click');
+			});
+			
+});
+
+function addNote()
+{
+	$.ajax({
+			type: 'post',
+			url: '<?php echo base_url()?>logged/holy_place/add_note/',
+			dataType: 'json',
+			data: $("#frmnote").serialize(),
+			success: function (msg) {
+
+				if(msg.success==true)
+				{	
+					hide_dialog(); 
+					showUIMsg(msg.data); 
+				}	
+				else
+				{
+					if(msg.data.err_cat)
+					{
+						$('#err_cat').html(msg.data.err_cat);
+					}
+					if(msg.data.err_note)
+					{
+						$('#err_note').html(msg.data.err_note);
+					}
+				}
+				
+			}	// end of success function...
+	});
+}
+
+
+
+$('#highlightIcon').click(function(){
+	$("#bkmarkAdd").unbind('click');
+	resetAll();
+	
+	
+	$(this).find('a').addClass('select');
+	
+	
+	$('.inside-grey-container .contents div').bind("mouseup", function() {
+			
+			var arrForId	= $(this).attr('id').split('_');
+			
+			var  mytext = x.Selector.getSelected();
+			var div_obj	= $(this);
+			var verse_txt	= div_obj.html();
+			if(mytext!='')
+			{
+					$('#bk_mark_category').val('');
+					$('#err_cat_bk_mark').html('');
+					
+					show_dialog('bookmark_div');
+					
+					$("#bkmarkAdd").click(function(){
+			
+					$.ajax({
+						type: 'post',
+						url: '<?php echo base_url()?>logged/holy_place/add_highlights/',
+						dataType: 'json',
+						data: 'versesid='+arrForId[1]+'&text='+mytext+'&'+$('#frmbkmark').serialize(),
+						success: function (msg) {
+			
+							if(msg.success==true)
+							{	
+								var txtFromAjax	= msg.txt;
+								var mytext_change	= '<span style="background-color: #FFFF00">'+txtFromAjax+'</span>';
+								var n = verse_txt.replace(txtFromAjax,mytext_change);alert(n);
+								div_obj.html(n);
+								
+								$("#bkmarkAdd").unbind('click');
+								showUIMsg(msg.data); 
+								hide_dialog();
+							}	
+							else
+							{
+								
+								if(msg.data.err_cat)
+								{
+									$('#err_cat_bk_mark').html(msg.data.err_cat);
+								}
+								else
+								{
+									showUIMsg(msg.data); 
+									hide_dialog();
+									$("#bkmarkAdd").unbind('click');
+								}
+							}
+						
+						}	// end of success function...
+					});
+					$('.inside-grey-container').unbind('mouseup');
+				
+		  		});
+			}
+			else
+			{
+				alert("Please select text from one verse");
+			}
+		});
+	
+	$('#highlightIcon').unbind('click');
+});
+
+
+$("#bookmarkIcon").click(function(){
+	$("#bkmarkAdd").unbind('click');
+	$('.inside-grey-container').unbind('mouseup');
+	resetAll();
+	$(this).find('a').addClass('select');
+			
+			
+	var arrForId	= $('#versediv a:first').attr('name').split('_');
+	$('#bk_mark_category').val('');
+	$('#err_cat_bk_mark').html('');
+	show_dialog('bookmark_div');
+	
+	$("#bkmarkAdd").click(function(){
+		$.ajax({
+					type: 'post',
+					url: '<?php echo base_url()?>logged/holy_place/add_bookmark/',
+					dataType: 'json',
+					data: 'versesid='+arrForId[1]+'&'+$('#frmbkmark').serialize(),
+					success: function (msg) {
+		
+						if(msg.success==true)
+						{	
+							showUIMsg(msg.data); 
+							hide_dialog();
+							$("#bkmarkAdd").unbind('click');
+						}	
+						else
+						{
+							if(msg.data.err_cat)
+							{
+								$('#err_cat_bk_mark').html(msg.data.err_cat);
+							}
+							else
+							{
+								showUIMsg(msg.data); 
+								hide_dialog();
+								$("#bkmarkAdd").unbind('click');
+							}
+						}
+						
+					}	// end of success function...
+			  });
+			  
+	});
+});
+
+
+function resetAll()
+{
+	$('.inside-grey-container').unbind('click');
+	$('.inside-grey-container').unbind('mouseup');
+	$('.turn-on-btns a').removeClass('select');
+}
+
+
+$('.my-reading-options ul li a').click(function(){
+
+		$('.my-reading-options ul a').removeClass('select');
+		$(this).addClass('select');
+		var showurl;
+		var divid;
+		var liId	= $(this).attr('id');
+		var classa= $(this).children('span').attr('class');
+		//var activaLiId	= $('.active'	).attr('id');
+		
+		$('.active'	).animate({ right: "-702px"} , 1000, function(){
+			$(this).removeClass('active');																			  
+		});
+		$('#'+classa).addClass('active');
+		$('#'+classa).animate({ right: "0"} , 1000,function(){
+		
+			if(liId=='showAllNoteLi')
+			{
+				showurl	= '<?php echo base_url()?>logged/holy_place/get_all_note/';
+				divid	= 'showAllNote';
+			}
+			else if(liId=='showAllBookmarkLi')
+			{
+				showurl	= '<?php echo base_url()?>logged/holy_place/get_all_bookmark/';
+				divid	= 'showAllbookmark';
+			}
+			else if(liId=='showAllHighlights')
+			{
+				showurl	= '<?php echo base_url()?>logged/holy_place/get_all_highilights/';
+				divid	= 'showAllhlts';
+			}
+			$.ajax({
+				type: 'post',
+				url: showurl,
+				dataType: 'json',
+				data: '',
+				success: function (msg) {
+						$('#'+divid).html(msg.html);
+				}	// end of success function...
+		  });
+		});
+	});
+	
+	
+
+
+function showAllByCategory(val,gotourl,divid)
+{
+	$.ajax({
+				type: 'post',
+				url: gotourl,
+				dataType: 'json',
+				data: 'cat='+val,
+				success: function (msg) {
+						$('#'+divid).html(msg.html);
+				}	// end of success function...
+		  });
+}
+
+
+
+
+
+
+function gotoVerse(id)
+{
+	showBusyScreen(); 
+	$.ajax({
+		type: 'post',
+		url: '<?php echo base_url()?>logged/holy_place/getting_slab_from_verse/',
+		dataType: 'json',
+		data: 'verseid='+id,
+		success: function (msg) {
+			
+			
+			//var	recordNo	= slab*25;alert(recordNo);
+			$.post('<?php echo base_url()?>logged/holy_place/generate_read_bible_AJAX/'+msg.slab, {'t' : 't'}, 
+				function(data)
+				{
+					$('#table_content').html(data);
+					location.href	= "<?php echo my_current_url()?>#anchor_"+id;
+					
+					$('.active'	).animate({ right: "-702px"} , 1000, function(){
+						$(this).removeClass('active');	
+					});
+					equalHeight($(".bible-equalHeight"));
+					
+					hideBusyScreen(); 
+					}); 
+			
+		}	// end of success function...
+	});
+
+}
+
+/*equal height container script start*/
+	function equalHeight() {
+		/*var tallest = 0;
+		group.each(function() {
+			var thisHeight = $(this).height();
+			if(thisHeight > tallest) {
+				tallest = thisHeight;
+			}
+		});
+		group.height(tallest);*///alert(tallest);
+		
+		$(".bible-right-part").height($(".bible-left-part").height())	;
+	
+	}	
+	
+	equalHeight();
+	
+	/*equal height container script end*/
+</script>
+
+

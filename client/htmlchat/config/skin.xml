@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<skins>
+    <skin name="default" preview="img/skinimg/topcmm-123flashchat-default.gif">
+        <style id="layout-color"
+            href="css/skin/default/topcmm-123flashchat-skin-default.css" />
+    </skin>
+    <skin name="red" preview="img/skinimg/topcmm-123flashchat-red.gif">
+        <style id="layout-color" href="css/skin/red/topcmm-123flashchat-skin-red.css" />
+    </skin>
+    <skin name="artistic" preview="img/skinimg/topcmm-123flashchat-artistic.gif">
+        <style id="layout-color"
+            href="css/skin/artistic/topcmm-123flashchat-skin-artistic.css" />
+    </skin>
+    <skin name="beige" preview="img/skinimg/topcmm-123flashchat-beige.gif">
+        <style id="layout-color"
+            href="css/skin/beige/topcmm-123flashchat-skin-beige.css" />
+    </skin>
+    <skin name="black" preview="img/skinimg/topcmm-123flashchat-black.gif">
+        <style id="layout-color"
+            href="css/skin/black/topcmm-123flashchat-skin-black.css" />
+    </skin>
+    <skin name="blue" preview="img/skinimg/topcmm-123flashchat-blue.gif">
+        <style id="layout-color"
+            href="css/skin/blue/topcmm-123flashchat-skin-blue.css" />
+    </skin>
+    <skin name="green" preview="img/skinimg/topcmm-123flashchat-green.gif">
+        <style id="layout-color"
+            href="css/skin/green/topcmm-123flashchat-skin-green.css" />
+    </skin>
+    <skin name="lavender" preview="img/skinimg/topcmm-123flashchat-lavender.gif">
+        <style id="layout-color"
+            href="css/skin/lavender/topcmm-123flashchat-skin-lavender.css" />
+    </skin>
+    <skin name="lightblue" preview="img/skinimg/topcmm-123flashchat-lightblue.gif">
+        <style id="layout-color"
+            href="css/skin/lightblue/topcmm-123flashchat-skin-lightblue.css" />
+    </skin>
+    <skin name="yellow" preview="img/skinimg/topcmm-123flashchat-yellow.gif">
+        <style id="layout-color"
+            href="css/skin/yellow/topcmm-123flashchat-skin-yellow.css" />
+    </skin>
+    <skin name="christmas" preview="img/skinimg/topcmm-123flashchat-christmas.gif">
+        <style id="layout-color"
+            href="css/skin/christmas/topcmm-123flashchat-skin-christmas.css" />
+    </skin>
+    <skin name="thanksgiving" preview="img/skinimg/topcmm-123flashchat-thanksgiving.gif">
+        <style id="layout-color"
+            href="css/skin/thanksgiving/topcmm-123flashchat-skin-thanksgiving.css" />
+    </skin>
+    <skin name="halloween" preview="img/skinimg/topcmm-123flashchat-halloween.gif">
+        <style id="layout-color"
+            href="css/skin/halloween/topcmm-123flashchat-skin-halloween.css" />
+    </skin>
+</skins>

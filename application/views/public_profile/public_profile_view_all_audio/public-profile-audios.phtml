@@ -1,0 +1,411 @@
+<?php
+    if( $this->session->userdata('loggedin') =='' || $this->session->userdata('loggedin')==false){
+        include(APPPATH ."views/layouts/header.phtml");
+           include(APPPATH."views/layouts/slider_nav.phtml");
+     }
+     else{
+         
+         include(APPPATH ."views/layouts/logged_header.phtml");
+         include(APPPATH."views/layouts/nav.phtml");?>
+          <!-- /NAVIGATION SECTION -->
+              </div>
+        </div>
+ <?php  }?>
+<!-- /HEADER SECTION -->
+<div class="clr"></div>
+<!-- CONTENT SECTION -->
+<div id="content_section" style="margin-top:8px;">
+      <div id="container">
+      		 <div class="public-profile">
+             	<!--left block start -->
+               <?/* <div style="margin-left:880px; margin-bottom:5px;">
+               */?>
+                        
+                      <?php /*?>  <form name="frm_preserve_search" method="post" enctype="multipart/form-data" action="<?=$_SERVER['HTTP_REFERER']?>">
+                            <input type="hidden" name="IS_PRESERVE_SEARCH" id="IS_PRESERVE_SEARCH" value="Y" />
+                            <input type="submit" class="sml_btn" name="reload_search" value="Back" />
+                        </form><?php */?>
+               <?/*         <input type="button" class="btn1" name="reload_search" value="Back to profile" onclick="window.location='<?=get_profile_url($public_arr_profile_info['id'])?>'" />
+                 </div>
+                <div class="clr"></div>
+                */?>
+                <div class="left-block">
+                
+                
+                
+                 <div style="background-color: #62C3BC; float: left; font-size: 18px; height: 19px; margin-bottom: 5px; padding: 5px 0 5px 19px; width: 598px;">
+                    <h4 style="color: #FFFFFF; font-family: 'GibsonRegular'; font-size: 17px; font-weight: normal; line-height: 18px;"><?=$public_arr_profile_info['s_profile_name']?>'s Audios : </h4>
+                 </div>
+                    
+                    <div style="margin-left:622px; margin-bottom:5px;">
+                        <input type="button" class="btn1" name="reload_search" value="Back to profile" onclick="window.location='<?=get_profile_url($public_arr_profile_info['id'])?>'" />
+                    </div>
+                    
+                 <div class="clr"></div> 
+                
+                
+                
+                	<!--profile section start -->
+                    <div class="profile-section">
+                        <!--tabs -->
+                        <!--    <div class="profile-tabs">
+                                <ul>
+                                    <li class="first select"><a href="javascript:void(0);"><span>Profile</span></a></li>     
+                                    <li><a href="javascript:void(0);"><span>Basic Info</span></a></li>     
+                                    <li><a href="javascript:void(0);"><span>Education</span></a></li>     
+                                    <li><a href="javascript:void(0);"><span>Work</span></a></li>     
+                                    <li><a href="javascript:void(0);"><span>Skills</span></a></li>
+                                </ul>
+                            </div>
+                            -->
+                        <!--/tabs -->
+                        <!--tab details -->
+                            <div class="profile-content">
+                                <!--profile -->
+                                <div class="profile-tab first">
+                                    <div class="photo-section">
+                                    <?php $img = get_profile_image($public_arr_profile_info['id'], 'main');?>
+                                    <div style="background:url(<?=$img?>) no-repeat center;width:144px; height:144px;" title="member" ></div>
+                                       
+                                    </div>
+                                    
+                                    <div class="content-section">
+                                  
+                                        <h2><?=$public_arr_profile_info['s_profile_name']?> <span style="font-size:17px;">[<?=check_user_online_hlpr($public_arr_profile_info['id']); ?>]</span></h2>
+                                        <h3><?=get_user_address_info($public_arr_profile_info['id'])?></h3>
+                                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                          <tr>
+                                            <td align="left" valign="top" class="first"><span>Date of Birth</span></td>
+                                            <td align="center" valign="top" class="second"><span>:</span></td>
+                                            <td align="left" valign="top"><?=($public_arr_profile_info['dt_dob'] != '0000-00-00')?getShortDate($public_arr_profile_info['dt_dob'],5):'';?></td>
+                                          </tr>
+                                          <tr>
+                                            <td align="left" valign="top" class="first"><span>Website</span></td>
+                                            <td align="center" valign="top" class="second"><span>:</span></td>
+                                            <td align="left" valign="top"><a href="<?=$public_arr_profile_info['s_website']?>" target="_blank"><?=$public_arr_profile_info['s_website']?></a></td>
+                                          </tr>
+                                          <tr>
+                                            <td align="left" valign="top" class="first"><span>Profile URL</span></td>
+                                            <td align="center" valign="top" class="second"><span>:</span></td>
+                                            <td align="left" valign="top"><a href="http://www.cogtime.com/<?=$public_arr_profile_info['s_profile_url_suffix']?>" target="_blank">www.cogtime.com/<?=$public_arr_profile_info['s_profile_url_suffix']?></a></td>
+                                          </tr>
+                                        </table>
+
+                                    </div>
+                                    <div class="clr"></div>
+                                     
+                                </div>
+                                <!--/profile -->
+                            
+                            </div>
+                        <!--/tab details -->
+                    </div>
+                    <!--profile section end -->
+                   
+                    <div class="clr"></div>
+                    
+                    <!--my photos section start -->
+                    <div class="single-block">
+                    
+                    	<div class="heading"><h4>My Audios</h4></div>
+                        <div class="container album-container">
+                        	
+                             <div id="audio">
+                            <?= $result_audio_content?>
+                            </div>
+                            <?php
+                            if($audio_no_of_result==0)
+                                echo '<div class="shade_box_blue no_comments" style="padding-top:5px; "><div  class="shade_norecords" style="width:360px;"><p class="blue_bold12">No Audio.</p></div></div>';
+                            
+                            ?>
+                             <?php if($audio_no_of_result > $audio_pagination_per_page): ?>
+                                    
+                                    <div class="view_more" id="show_more_audio_feeds_div"><a href="javascript:void(0);" id="show_more_audio_feeds_link" page_value="<?=$audio_current_page?>" onclick="show_more_audio_feeds($(this).attr('page_value'))">[view more] </a> </div>
+                            <?php endif; ?>
+                            
+                            
+                        </div>
+                    </div>
+                    <!--my photos section end -->
+                    
+                    <div class="clr"></div>
+                    
+            <?/*        <div class="single-block">
+                              <?php
+                                       if($session_data['loggedin']) {
+                                        include(APPPATH ."views/newsfeed/public_profile_newsfeed_post_.phtml");
+                                     }
+                              ?>                                   
+                                   <div class="heading">
+                                          <div class="left">
+                                                <h4>My Wall Messages &amp; Comments</h4>
+                                          </div>
+                                    </div>
+                                   <div id="comment_result_div"><?=$result_newsfeed_content?></div>
+                                    <?php if($no_of_result > 10): ?>
+                                    
+                                    <div class="view_more" id="show_more_feeds_div"><a href="javascript:void(0);" id="show_more_feeds_link" page_value="<?=$current_page_1?>" onclick="show_more_feeds($(this).attr('page_value'))">[view more] </a> </div>
+                                    <?php endif; ?>
+                                    
+                                    
+                                   
+                    </div>
+                    
+              */?>      
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                </div>
+                <!--left block end -->
+                 <!--right block start -->
+                <?php
+                      #include_once(APPPATH ."views/layouts/public_profile_rightbar.phtml");
+                  ?>
+                  <?php include(APPPATH."views/layouts/rightbar.phtml");?>
+                 <!--right block end -->
+             
+			</div>     
+      </div>
+      <div class="clr"></div>
+</div>
+<!-- /CONTENT SECTION -->
+<div class="clr"></div>
+<!-- FOOTER SECTION -->
+<!-- FOOTER SECTION -->
+<?php
+    # include footer file...
+    include_once(APPPATH ."views/layouts/footer.phtml");
+    
+?>
+<!-- /FOOTER SECTION -->
+
+<?php include(APPPATH."views/logged/wall/my_wall_post_comment_lightbox.phtml");?>
+<?php include(APPPATH."views/logged/message_box/send_message_lightbox.phtml");?>
+
+
+<?php /*?>VIEW COMMENTS<?php */?>
+
+<div class="lightbox view_comments_div " style="width:650px;">
+      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="<?=base_url()?>images/close.png" alt="" /></a></div>
+      <div class="top">
+            <div>&nbsp;</div>
+      </div>
+      <div class="mid" >
+            <div class="heading" style="margin-bottom:0px;">
+                  <div class="left">
+                        <h4><img src="<?=base_url()?>images/icons/cmnt.png" alt="" /> View Comments </h4>
+                  </div>
+            </div>
+            <div id="comment_html"></div>
+
+            
+      </div>
+      <div class="bot">
+            <div>&nbsp;</div>
+      </div>
+</div>
+<?php /*?>VIEW COMMENTS<?php */?>
+
+<?php /*?>LIKED LIGHT BOX <?php */?>
+<div class="lightbox liked_by_div" style="width:500px;">
+      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="<?=base_url()?>images/close.png" alt="" /></a></div>
+      <div class="top">
+            <div>&nbsp;</div>
+      </div>
+      <div class="mid" style="height:299px;">
+            <div class="heading" style="margin-bottom:0px;">
+                  <div class="left">
+                        <h4><img src="<?=base_url()?>images/icons/thumb_up.png" alt="" /> Liked by </h4>
+                  </div>
+            </div>
+            <div id="liked_html"></div>
+      </div>
+      <div class="bot">
+            <div>&nbsp;</div>
+      </div>
+</div>
+<?php /*?>LIKED LIGHT BOX <?php */?>
+<!--audio lightbox start -->
+<div class="lightbox audio-details">
+      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="images/close.png" alt="" /></a></div>
+      <div class="top">
+            <div>&nbsp;</div>
+      </div>
+      <div class="mid">
+            
+            <DIV  id="audio_lightbox_html"></DIV>
+                       
+            <div class="clr"></div>                         
+      </div>
+      <div class="bot">
+            <div>&nbsp;</div>
+      </div>
+</div>
+
+<!--audio lightbox end -->
+                            
+       
+<script type="text/javascript">
+function show_audio_details_lightbox(i_audio_id,i_user_id) {
+ 
+ showUILoader_nodialog();
+ $.ajax({
+  type: 'get',
+  url: base_url+'public_profile/fetch_audio_details/'+i_audio_id+'/'+i_user_id,
+  dataType: 'json',
+
+  success: function (data, status) {
+   $('#audio_lightbox_html').html(data.html_data);
+   /*$(function(){
+   $("#ml"+i_audio_id).mb_miniPlayer({
+    width:295,
+    inLine:false
+   });
+   });*/
+   //$('.audio').mb_miniPlayer_changeFile('http://www.miaowmusic.com/mp3/Miaow-04-Lismore.mp3',false,'Lismore (mp3)');
+   show_dialog('audio-details');
+   //alert(data.html_data);
+   hideUILoader_nodialog(); 
+  } // end of success function...
+ });
+}
+</script>  
+
+<script type="text/javascript">
+
+var ajax_audio_req_post = null; 
+function post_audio_comment(id) 
+{
+  //var id=$('#i_photo_id').val();
+  
+//alert($('.newfancy_comment_box'+id).val() + ' new ' + id);
+  
+  //showUILoader_nodialog('<img src="'+base_url+'images/loading_big.gif" width="50"/> ');
+  if(ajax_audio_req_post!=null) {
+   ajax_audio_req_post.abort();
+  }
+  ajax_audio_req_post = $.ajax({
+   
+   url: base_url+'public_profile/post_audio_comment_ajax/'+ id,
+   dataType: 'json',
+   data: {'message': $('#audio_comment_box'+id).val()},
+   type: 'post',
+ 
+   success: function (data, status) {
+    //hideUILoader();
+    if(data.success == 'true'){
+   $('.no_comments').hide();
+   /* $("#m1"+id).mb_miniPlayer({
+   width:295,
+   inLine:false
+  });*/
+   $('#audio_comment_box'+id).val('');
+      $('#audio_comments_html').html(data.html);
+    }
+    
+ //hideBusyScreen();
+   // hideUILoader_nodialog();
+    showUIMsg(data.msg);
+   },
+   error: function(data, status, e) {
+    //hideLoading();
+    //hideUILoader_nodialog();
+    //hideUILoader('');
+    showUIMsg("Error!");
+    
+   }
+  });
+}
+// Post comments on a feed //
+</script>  
+
+
+
+
+<script type="text/javascript">
+
+var ajax_req_feeds = null;
+function show_more_feeds(page) {
+    if(ajax_req_feeds!=null) {
+        ajax_req_feeds.abort();
+    }
+    showUILoader_nodialog();
+    ajax_req_feeds = $.ajax({
+        type: 'get',
+        url: base_url+'public_profile/newsfeed_pagination_show_more/<?=$profile_id?>'+'/'+page,
+        dataType: 'json',
+
+        success: function (data, status) {
+
+            hideUILoader_nodialog();
+            if(data.html!='') {
+                $('#comment_result_div').append(data.html);
+                $('#show_more_feeds_link').attr('page_value', data.current_page);
+            }
+            else {
+                $('#comment_result_div').append('<div class="view_more" style="text-align: center;"><p class="blue_bold12" style="font-size:14px;">No more posts to display.</p></div>');
+                $('#show_more_feeds_div').hide();
+            }
+            
+            /*$('.htr').css('display','none');
+            $('#'+m).css('display', 'table-row'); 
+            $('#'+m+' td').html(data);*/
+
+        }    // end of success function...
+    });
+}
+</script>
+<script type="text/javascript">
+$(document).ready(function(){
+    /*for fancy lightbox start*/
+    //$('.audio_fancybox').fancybox();
+    /*for fancy lightbox end*/
+});
+
+</script>
+
+<script type="text/javascript">
+
+var ajax_req_audio_feeds = null;
+function show_more_audio_feeds(page) {
+    if(ajax_req_audio_feeds!=null) {
+        ajax_req_audio_feeds.abort();
+    }
+    showUILoader_nodialog();
+    ajax_req_audio_feeds = $.ajax({
+        type: 'get',
+        url: base_url+'public_profile_audios/audio_pagination_show_more/<?=$profile_id?>/<?=$album_id?>/'+page,
+        dataType: 'json',
+
+        success: function (data, status) {
+            
+            
+            hideUILoader_nodialog();
+            if(data.html!='') {
+                $('#audio').append(data.html);
+                $('#show_more_audio_feeds_link').attr('page_value', data.current_page);
+            }
+            else {
+                $('#audio').append('<div class="view_more" style="text-align: center;"><p class="blue_bold12" style="font-size:14px;">No more audios to display.</p></div>');
+                $('#show_more_audio_feeds_div').hide();
+            }
+            if(data.view_more==false)
+            {
+                $('#audio').append('<div class="view_more" style="text-align: center;"><p class="blue_bold12" style="font-size:14px;">No more audios to display.</p></div>');
+                $('#show_more_audio_feeds_div').hide();
+            }
+       
+        }    // end of success function...
+    });
+}
+</script>
+
+

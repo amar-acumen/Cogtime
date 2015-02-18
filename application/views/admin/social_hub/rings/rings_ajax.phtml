@@ -1,0 +1,115 @@
+<table width="100%" border="0" cellspacing="0" cellpadding="0" class="admin-table">
+    <tr>
+        <th align="left" valign="middle" height="30" width="70">Created On</th>
+        <th align="left" valign="middle" height="30" width="250">Ring Title</th>
+        <th align="left" valign="middle" height="30" width="90">Category</th>
+        <th align="left" valign="middle" height="30" width="90">Sub-Category</th>
+        <th align="left" valign="middle" height="30" width="140">Owner</th>
+        <th align="center" valign="middle" height="30" width="130"> No. of Members/<br />Max Allowed Members</th>
+        <th align="center" valign="middle" height="30" width="40">No. of Posts</th>
+        <th align="center" valign="middle" height="30" width="40">Pending Requests</th>
+        <th align="center" valign="middle" height="30" width="40">IP Address</th>
+        <th align="center" valign="middle" height="30" width="20" class="last">Actions</th>
+    </tr>
+
+    <?php
+    //pr($info_arr);
+    if (count($info_arr)) {
+        foreach ($info_arr as $key => $info) {
+
+            $s_status = ($info['i_isenabled'] == 1) ? 'DISABLE' : 'ENABLE';
+            ?>
+
+
+            <tr>
+                <td align="left" valign="top"><?= getShortDate($info['dt_created_on'], 5) ?></td>
+                <td align="left" valign="top"><a href="<?= admin_base_url() ?>rings/<?= $info['id'] ?>/ring-details.html"><?= $info['s_ring_name'] ?></a></td>
+                <td align="left" valign="top"><?= $info['s_category_name'] ?></td>
+                <td align="left" valign="top"><?= $info['s_sub_category_name'] ?></td>
+                <td align="left" valign="top"><?= $info['s_owner_name'] ?></td>
+                <td align="center" valign="top"><?= $info['i_total_member'] ?>/<span id="td_member_<?= $info['id'] ?>"><?= $info['i_member'] ?></span></td>
+                <td align="center" valign="top"><?= get_total_ring_post_by_id($info['id']) ?></td>
+               
+                <td align="center" valign="top"><a href="javascript:void(0);" onclick="return show_all_pending_requests(<?php echo $info['id'] ?>);"><?= get_pending_requests_count_by_ring_id($info['id']); ?></a></td>
+                <td align="center" valign="top"><?= $info['u_ip'] ?></td>
+                <td align="center" valign="middle" class="last">
+                    <? /* ?><input name="" title="Edit Max Members" type="button" class="btn-05"  value="Edit Max Members" onclick="return edit_ring(<?=$info['id']?>)" />
+                     */ ?>
+                    <?php /* ?><input name="" title="Enable" type="button" class="btn-06"  value="Enable"/><?php */ ?>
+
+
+                    <?php if ($info['i_isenabled'] == 1) { ?>
+                        <span id="<?= $info['id'] ?>_status">
+                            <input name="" title="Enable" type="button" class="btn-06"  onclick="javascript:changeStatus(<?php echo $info['id'] ?>, 2, <?php echo $info['i_isenabled'] ?>)"  value="<?= $s_status ?>"/>
+                        </span>
+                        <?php
+                    } else if ($info['i_isenabled'] == 2) {
+                        ?>
+                        <span id="<?= $info['id'] ?>_status">
+                            <input name="" title="Disable" type="button" class="btn-06"  onclick="javascript:changeStatus(<?php echo $info['id'] ?>, 1, <?php echo $info['i_isenabled'] ?>)"  value="<?= $s_status ?>"/>
+                        </span>
+
+                    <?php } ?>
+
+
+
+                </td>
+            </tr>
+
+            <?php
+        }
+    } else {
+        ?>
+        <tr>
+            <td style="text-align:center;" height="80" colspan="20">No data available!!!</td>
+        </tr>
+
+        <?php
+    }
+    ?>
+</table>
+
+
+<?php /* ?><table width="70%" border="0" cellspacing="0" cellpadding="0" class="admin-table">
+  <tr>
+  <th align="left" valign="middle" height="30" width="500">Category</th>
+  <th align="center" valign="middle" height="30" width="70">No. of Rings</th>
+  <th align="center" valign="middle" height="30" class="last">Actions</th>
+  </tr>
+
+  <?php
+  // pr($info_arr);
+  if(count($info_arr)){
+  foreach($info_arr as $key=> $info){
+
+
+  ?>
+  <tr id="row_<?=$info['id']?>">
+  <td id="td_name_<?=$info['id']?>" align="left" valign="top"><?=$info['s_category_name']?></td>
+  <td align="center" valign="top"><?=$info['total_rings']?></td>
+  <td align="center" valign="middle" class="last">
+  <input name="" title="Edit" type="button" class="edit-button"  value="" onclick="return edit_cat(<?=$info['id']?>)"/>
+  <input name="" title="Delete" type="button" class="delete-button"  value="" onclick="return delete_confirm_(<?=$info['id']?>,<?=$info['total_rings']?>)"/>
+
+
+
+  </td>
+  </tr>
+
+  <?php	}
+  }
+  else{
+  ?>
+  <tr>
+  <td style="text-align:center;" height="80" colspan="20">No data available!!!</td>
+  </tr>
+
+  <?php
+  }
+  ?>
+
+  </table><?php */ ?>
+
+<div class="paging">
+    <ul><?= $page_links ?></ul>
+</div>	

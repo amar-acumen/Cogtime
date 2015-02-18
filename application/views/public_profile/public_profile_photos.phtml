@@ -1,0 +1,62 @@
+<div class="profile-frd">
+                        <h4>Photos</h4>
+                        <a class="pro-view-all" href="<?=base_url()?>public-profile/<?=$i_profile_id?>/photo-album.html">View all</a>
+                    </div>
+                    <div class="pro-container">
+                        <div class="pro-slider-section">
+                        <?php #onclick="get_photo_details(<?=$photo['id']?
+          					$arr_photo_ids	= get_photoid_with_privacy(intval(decrypt($this->session->userdata('user_id'))), $i_profile_id);
+							$privacy		= get_privacy('photo',$i_profile_id);
+							//pr($public_profile['photo_res']);//exit;
+										
+						 if(count($public_profile['photo_res'])){
+						 ?>
+                        <ul id="myphotosSlider" class="jcarousel-skin-tango" >
+                         <?php #onclick="get_photo_details(<?=$photo['id']?
+          								
+							  # $flag_no_photo	= 0;
+							   foreach($public_profile['photo_res'] as $photo) {
+									
+									$img = getThumbName($photo['s_photo'],'mini');
+									$photo_img = base_url().'uploads/user_photos/'.getThumbName($photo['s_photo'],'big'); 
+									$comments_array = $photo['comments_arr'];
+									if($privacy == 'Private')
+									{
+										if(in_array($photo['id'],$arr_photo_ids))
+										{
+											#$flag_no_photo	= 1;
+										?>
+											<li style=" cursor:pointer;" onclick="window.location='<?=base_url()?>public-profile-photo/<?=$profile_id?>/album/<?=$photo['id']?>/photo-details.html'"><div class="pro_photo3" title="photo" style="background:url(<?php echo base_url().'uploads/user_photos/'.$img?>) no-repeat center;width:60px; height:60px;"></div>
+											<p class="pub-profile-name-p"><?= substr($photo['s_title'],0,10)?></p>
+											</li>
+										<?php   
+										}
+									}
+									else
+									{
+										?>
+											<li style=" cursor:pointer;" onclick="window.location='<?=base_url()?>public-profile-photo/<?=$profile_id?>/album/<?=$photo['id']?>/photo-details.html'"><div class="pro_photo3" title="photo" style="background:url(<?php echo base_url().'uploads/user_photos/'.$img?>) no-repeat center;width:60px; height:60px;"></div>
+											<p class="pub-profile-name-p"><?= substr($photo['s_title'],0,10)?></p>
+											</li>
+										<?php   
+									}
+							 	}
+								  
+							 ?>  
+                            </ul>
+                            <?php 
+								}
+								   else{
+								  echo '<div class="shade_box_blue" style="padding-top:5px; "><div  class="shade_norecords" style="width:235px;"><p class="blue_bold12">No Photos.</p></div></div>';
+							  }
+							  
+							  
+							?>
+                            
+                        </div>
+                    </div>
+
+    
+    
+    
+   

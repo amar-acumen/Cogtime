@@ -1,0 +1,64 @@
+<div class="div_content" style=" margin-top:0px;">
+
+							<?php
+							//pr($eventdata);
+							if($eventdata)
+							{
+								//pr($ringdata);
+								foreach($eventdata as $ring_inv_val)
+								{
+									$LOGO	= get_profile_image($ring_inv_val['i_user_id'],'thumb');
+									//$ring_detail_link	= base_url().'rings/'.$ring_inv_val['id'].'/ring-home.html';
+									$label = 'Name: ';
+									$title=get_username_by_id($ring_inv_val['i_user_id']);
+									$status=get_event_accept_status($ring_inv_val['i_event_id'],$ring_inv_val['i_user_id']);
+							?>
+                              
+                               <div class="shade_box_01" style="padding-top:5px; height:75px;" id="accept_<?=($ring_inv_val['ringid'])?>">
+                                    <div class="txt_content"> <a href="javascript:void(0);"><div class="pro_photo_new" style="background:URL('<?php echo $LOGO?>') no-repeat center; width:73px; height:72px; background-color:#fff"></div></a>
+                                          <div class="left_div01" style="width:260px;">
+                                               
+                                                <p><strong><?/*get_ring_name_by_id($ring_inv_val['ringid'])*/?></strong></p>
+                                                <p class="blue_bold12">
+												<?php
+													
+													$profile_link = get_profile_url($ring_inv_val['i_user_id'],$title);
+																			
+												?>
+												<?=$label?><a href="<?php echo $profile_link?>"><?php echo $title?></a></p>
+                                                <p style="">Requested On: <?php echo getShortDate($ring_inv_val['dt_created_on'],5)?> </p>                                          
+                                          </div>
+                                         <div style="width:150px;" class="right_div02">
+                                         <?php /*?>  <p > 
+                                                 <img src="images/icons/icon-19.png" alt="" /> 
+                                                 <a href="javascript:void(0);" class="blue_link" onclick="acceptRingInvitation('<?=encrypt($ring_inv_val['post_owner_user_id'])	?>','<?=encrypt($ring_inv_val['ringid'])?>', <?=($ring_inv_val['ringid'])?>)"><strong>Accept</strong></a>  
+                                                  &nbsp;  &nbsp; <img src="images/icons/dec.png" alt="" /> 
+                                                 <a  href="javascript:void(0);" class="blue_link" onclick="DeclineInvitation('<?=encrypt($ring_inv_val['post_owner_user_id'])	?>', '<?php echo encrypt($ring_inv_val['ringid'])?>', <?=($ring_inv_val['ringid'])?>)">Delete</a>
+                                              
+                                                 
+                                               </p> <?php*/ ?>
+											   
+											   <p style="float:right;">
+											   <?php if($status == 0){?>
+                                                	<a href="javascript:void(0);" style="text-decoration:underline;">Pending Acceptance</a>
+													<?php }else
+													{?>
+                                                	<a href="javascript:void(0);" style="text-decoration:underline;">Invitation accepted</a>
+													<?php }?></p>
+                                                    </div>
+													
+												
+                                          
+                                          </div>
+                              </div>
+                              <?php
+								}
+							}
+							?>
+</span></span></div><span style="text-decoration:underline; float:right;"><span>
+<input type="hidden" id="current_page" name="current_page" value="<?=$current_page_1?>"  />                     
+
+                            
+                            
+
+</span></span>

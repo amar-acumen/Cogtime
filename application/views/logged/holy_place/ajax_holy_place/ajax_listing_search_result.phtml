@@ -1,0 +1,183 @@
+<div class="div_content" style=" margin-top:0px; padding:8px;height:526px;" id="versediv"><!-- -->
+
+                            <?php
+							
+							if($arr_search_result)
+							{
+							$bookname	= '';
+							$count		= 0;
+							$verse_ids	= '';
+							foreach($arr_search_result as $bibleval)
+							{ 
+								
+								$verse_ids	.= $bibleval['id'].',';
+								if($bibleval['bookname']!=$bookname)   
+								{
+									?>
+									<h2 class="title" style="margin-bottom:0;">
+									<?php
+										echo ' <div class="booktitle" style="margin-left:0">';
+										echo $bibleval['bookname'];
+										$bookname	= $bibleval['bookname'];
+										echo '</div>';
+									?>
+									</h2>
+									<?php
+									$count = 0;
+								}
+								$count++;	
+								?> 
+										
+                               
+                                        
+                                       
+                                        <div class="inside-grey-container" style="cursor:default;">
+                                            <div class="contents">
+                                            <div class="spot-edit" >
+                                                    	 <a href="javascript:void(0);" name="anchor_<?php echo $bibleval['id']?>" chapter="<?php echo $bibleval['i_chapter_id']?>" book="<?php echo $bibleval['i_book_id']?>" style="float:left;">
+                                                                <sup onclick="spot_edit_click($(this));"><?php
+																echo $bibleval['chapter'].':'.$bibleval['verse'];
+																?></sup>
+                                                            </a>
+                                                            
+                                                           
+                                                        <div class="spot-edit-box">
+                                                        	<span class="bottom-arrow"></span>
+                                                            <div class="spot-edit-container">
+                                                                <ul class="main-buttons">
+                                                                    <!--highlights start -->
+                                                                    <li class="addHighlight"><a href="javascript:void(0);">Highlight</a></li>
+                                                                    <!--highlights start -->
+                                                                    <!--note start -->
+                                                                    <li class="addNote"><a href="javascript:void(0);">Note</a></li>
+                                                                    <!--note end -->
+                                                                    <!--bookmark start -->
+                                                                    <li class="addBookmark"><a href="javascript:void(0);">Bookmark</a></li>
+                                                                    <!--bookmark end -->
+                                                                </ul>
+                                                                <!--highlights start -->
+                                                                <div class="floating-popup add-highlight">
+                                                                    <div class="title">
+                                                                        <a title="Back" class="back" href="javascript:void(0);">&nbsp;</a>Add Highlight
+                                                                        <a href="javascript:void(0);" class="close" title="Close"></a>
+                                                                    </div>
+                                                                    <form action="" id="frm_hilits<?php echo $bibleval['id']?>" method="post" enctype="multipart/form-data" class="quick-edit-form">
+                                                                        <span class="verse-name"><?php echo $bibleval['bookname'].' '.$bibleval['chapter'].':'.$bibleval['verse']?></span>
+                                                                        <label>Select Category:</label>
+                                                                        <select name="bk_mark_category">
+                                                                            <option value="">select category</option>
+                                                                            <?php echo $category_html?>
+                                                                        </select>
+                                                                        <span id="err_cat_hilits<?php echo $bibleval['id']?>" class="error-message" style="margin-left:119px;"></span>
+                                                                        <br class="clr">
+                                                                        <label class="small">or</label>
+                                                                        <br class="clr">
+                                                                        <label>Add New Category:</label>
+                                                                        <!--<input name="add_cat_b" type="text">-->
+																		<input name="add_cat_h" type="text">
+                                                                        <br class="clr">
+                                                                        <label>Select Color:</label>
+                                                                       		<?php echo get_highlights_color($bibleval['id']);?>
+                                                                        <br class="clr">
+                                                                        <input type="hidden" id="colorhidden_<?php echo $bibleval['id']?>" value="" name="colorhidden" />
+                                                                        <input type="button" name="" value="Add" class="blue-small-button" onclick="addHighlights(<?php echo $bibleval['id']?>);">
+                                                                        <br class="clr">
+                                                                    </form>
+                                                                </div>
+                                                                <!--highlights end -->
+                                                                <!--note start -->
+                                                                <div class="floating-popup add-note">
+                                                                    <div class="title">
+                                                                        <a title="Back" class="back" href="javascript:void(0);">&nbsp;</a>Add Note
+                                                                        <a href="javascript:void(0);" class="close" title="Close"></a>
+                                                                    </div>
+                                                                    <form action="" id="frmNote_<?php echo $bibleval['id']?>" method="post" enctype="multipart/form-data" class="quick-edit-form">
+                                                                        <span class="verse-name"><?php echo $bibleval['bookname'].' '.$bibleval['chapter'].':'.$bibleval['verse']?></span>
+                                                                        <label>Select Category:</label>
+                                                                        <select name="category">
+                                                                        	<option value="">select category</option>
+                                                                            <?php echo $category_html?>
+                                                                        </select>
+                                                                        <span id="err_cat_<?php echo $bibleval['id']?>" class="error-message" style="margin-left:119px;"></span>
+                                                                        <br class="clr">
+                                                                        <label class="small">or</label>
+                                                                        <br class="clr">
+                                                                        <label>Add New Category:</label>
+                                                                        <input name="add_cat_n" type="text">
+                                                                        <br class="clr">
+                                                                        <label>Note:</label>
+                                                                        <textarea name="note" cols="" rows=""></textarea>
+                                                                        <span id="err_note_<?php echo $bibleval['id']?>" class="error-message" style="margin-left:119px;"></span>
+                                                                        <br class="clr">
+                                                                        <input type="button" name="" value="Add" class="blue-small-button" onclick="addNoteFromVerseNo('<?php echo $bibleval['id']?>');">
+                                                                        <br class="clr">
+                                                                    </form>
+                                                                </div>
+                                                                <!--note end -->
+                                                                <!--bookmark start -->
+                                                                <div class="floating-popup add-bookmark">
+                                                                    <div class="title">
+                                                                        <a title="Back" class="back" href="javascript:void(0);">&nbsp;</a>Add Bookmark
+                                                                        <a href="javascript:void(0);" class="close" title="Close"></a>
+                                                                    </div>
+                                                                    <form action="" id="frmBkmark_<?php echo $bibleval['id']?>" method="post" enctype="multipart/form-data" class="quick-edit-form">
+                                                                        <span class="verse-name"><?php echo $bibleval['bookname'].' '.$bibleval['chapter'].':'.$bibleval['verse']?></span>
+                                                                        <label>Select Category:</label>
+                                                                        <select name="bk_mark_category">
+                                                                        	<option value="">select category</option>
+                                                                            <?php echo $category_html?>
+                                                                        </select>
+                                                                        <span id="err_cat_bk_mark<?php echo $bibleval['id']?>" class="error-message" style="margin-left:119px;"></span>
+                                                                        <br class="clr">
+                                                                        <label class="small">or</label>
+                                                                        <br class="clr">
+                                                                        <label>Add New Category:</label>
+                                                                        <input name="add_cat_b" type="text">
+                                                                        <br class="clr">
+                                                                        <input type="button" name="" value="Add" class="blue-small-button" onclick="addBookmarkFromVerseNo('<?php echo $bibleval['id']?>')">
+                                                                        <br class="clr">
+                                                                    </form>
+                                                                </div>
+                                                                <!--bookmark end -->
+                                                            </div>
+                                                            <div class="clr"></div>
+                                                        </div>
+                                                    </div>
+                                            
+                                            <div class="hilitstest" id="div_<?php echo $bibleval['id']?>" style="padding-left:5px;float:left;width:622px;"  title="<?php echo $bookname.' Chapter-'.$bibleval['chapter']?>"><?php echo $bibleval['verse_txt']?></div>
+                                              <div class="clr"></div>
+                                            </div>
+                                        </div>
+                            
+                            			
+                                       
+                                        	<?php
+											if($count==5)
+											{
+											
+											?>
+                                        	<div id="click_<?php echo $bibleval['i_book_id']?>" onclick="clickToShowMore('<?php echo $bibleval['i_book_id']?>','<?php echo $verse_ids?>','<?php echo $searchtxt?>');" style="padding:10px; width:662px;color:#fff; cursor:pointer; background-color:#999999;">
+                                            	Click here to view <?php //echo $bibleval['r_verse']?>all matches from the book "<?php echo $bibleval['bookname'];?>"
+                                            </div>
+                                            
+                                        	<div id="remain_<?php echo $bibleval['i_book_id']?>" ></div>
+											<?php
+												$count = 0;
+                                            }
+										
+								}
+								
+							}
+                               
+							else
+							{
+								echo "No result found";
+							}
+                            ?>
+</div>
+
+          
+
+                            
+                            
+

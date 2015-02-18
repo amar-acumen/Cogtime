@@ -1,0 +1,67 @@
+<div id="mid_container">
+<?php
+#pr($arr_rings);
+
+if(count($arr_rings))
+{
+    foreach($arr_rings as $member)
+    {
+        if($member['if_already_friend']=='true' || $member['already_added_netpal']=='true')
+        {
+            $profile_link = get_profile_url($member['post_owner_user_id'],$member['profile_name']);
+        }    
+        else
+        {
+            $profile_link = get_public_profile_url($member['post_owner_user_id'],$member['profile_name']);
+        }
+            
+            
+            
+        $profile_img = get_profile_image($member['post_owner_user_id'],'thumb');
+        
+        //pr(check_friend_netpal_status($member));
+?>
+
+
+
+
+
+
+
+
+<div class="shade_box_01" style="padding-top:5px;" > 
+                                         <div class="txt_content">
+                                         <a href="<?= $profile_link;?>"><div class="pro_photo_new" style="background:url(<?=$profile_img?>) no-repeat center;width:60px; height:60px;" ></div></a>
+                                              <div class="left_div01 name-details">
+                                                  
+                                                  
+                                                    <p class="blue_bold12">
+                                                        <a  href="<?= $profile_link;?>" class="left"><?=$member['profile_name']?> 
+                                                        </a>  
+                                                    </p>
+                                                    
+
+
+                                                    <p style="clear:both;  font-size:12px;line-height:12px;">Member Since : <?=getShortDateWithTime($member['dt_joined_on'],6)?> </p>
+                               
+                                              </div>
+                                              <div class="right_div02">
+                                              	<?php
+                                                  
+												  	if($member['i_user_id'] == intval(decrypt($this->session->userdata('user_id'))))
+													{
+                                                  ?>  
+                                                     <p class="add-remove-friend"><img alt="" src="images/icons/remove.png" /> <a href="javascript:void(0);" onclick="delete_confirm_(<?=$member['table_id']?>)" class="blue_link">Remove</a></p>
+                                                   <?php } ?>
+                                              </div>
+                                              <div class="clr"></div>
+                                           </div>
+                                     </div>
+
+
+
+<?php
+    }
+}
+?>
+</div>

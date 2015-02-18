@@ -1,0 +1,18 @@
+<div id="member-list">
+    	<ul class="member-list">
+		<?php foreach($member_arr As $church_members) { 
+		//pr($church_members);
+		
+		?>
+        	<li>
+            	<figure><img src="<?= get_profile_image(($church_members->member_id), 'thumb') ?>" alt="<?php echo $church_members->member_name; ?>"></figure>
+                <div class="right-text"><h4><a href="javascript:void(0);"><?=$church_members->member_name; ?></a></h4>
+                <p class="designetion"><?=$church_members->s_about_me; ?></p>
+                <!--<p class="update-time">Added by Joe about 4 months ago</p>--></div>
+            </li>
+			<?php } ?>
+			<div class="clear"></div>
+            <!--<a href="javascript:void(0);" class="see-more" title="See More">See more</a>-->
+            
+        </ul>
+    </div>

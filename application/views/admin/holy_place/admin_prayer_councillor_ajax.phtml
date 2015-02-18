@@ -1,0 +1,156 @@
+<table width="100%" border="0" cellspacing="0" cellpadding="0" class="admin-table">
+    <tr>
+        <th align="left" valign="middle" height="30" width="200">Name</th>
+        <th align="left" valign="middle" height="30" width="85">Gender</th>
+        <th align="left" valign="middle" height="30" width="160">Country, State &amp; City</th>
+        <th align="left" valign="middle" height="30" width="400">Email</th>
+        <th align="left" valign="middle" height="30" width="160">Mobile</th>
+        <th align="center" valign="middle" height="30" width="80" class="last">Actions</th>
+    </tr>
+    <?php
+    //echo "current page : ".$current_page." ";
+    $now_page = round(($current_page / $pagination_per_page) + 1);
+    // echo "in admin_members_ajax.phtml : now_page = ".$now_page;
+    // pr($info_arr);
+
+    foreach ($info_arr as $info) :
+        $id = $info['id'];
+        $date_joined = getShortDate($info['dt_created_on'], 3);
+        $name = $info['s_first_name'] . ' ' . $info['s_last_name'];
+        $gender_db = $info['e_gender'];
+
+        /* $address        = (isset($info['s_country']))? $info['s_country']: '';
+          $address       .= (isset($info['s_state']))? ', '.$info['s_state']: '';
+          $address       .= (isset($info['s_city']))? ', '.$info['s_city']: '';
+         */
+
+        $add = array();
+        if (!empty($info['s_country']))
+            $add['country'] = $info['s_country'];
+        if (!empty($info['s_state']))
+            $add['state'] = $info['s_state'];
+        if (!empty($info['s_city']))
+            $add['city'] = $info['s_city'];
+
+        $address = implode(', ', $add);
+
+        $email = $info['s_email'];
+        $mobile = $info['s_mobile'];
+        $status = ($info['i_status'] == 1) ? 'Disable' : 'Enable';
+        $gender = ($gender_db == 'M' || $gender_db == 'm') ? 'Male' : 'Female';
+        $is_minister = ($info['is_minister'] == 0) ? 'SET AS MINISTER' : 'UNSET MINISTER';
+        ?>
+        <tr>
+            <td align="left" valign="top"><?php echo $name; ?></td>
+            <td align="left" valign="top"><?php echo $gender; ?></td>
+            <td align="left" valign="top"><?php echo $address; ?></td>
+            <td align="left" valign="top"><?php echo $email; ?></td>
+            <td align="left" valign="top"><?php echo $mobile; ?></td>
+            <td align="center" valign="middle" class="last">
+                <input name="" title="Delete" type="button" class="delete-button"  value="Delete" onclick="show_dialog('delete-group'); $('#i_del_id').val('<?php echo $info['id']; ?>');"/>
+            </td>
+        </tr>
+        <?php
+    endforeach;
+    ?>
+  <!--  <tr>
+      <td align="left" valign="top">20/12/2012</td>
+      <td align="left" valign="top">Andrew Maxcell</td>
+      <td align="left" valign="top">Male</td>
+      <td align="left" valign="top">USA,<br />New York,<br />7/A Garden City</td>
+      <td align="left" valign="top">andrew.maxcell@gmail.com</td>
+      <td align="left" valign="top">+91 990 000 0000</td>
+      <td align="center" valign="middle" class="last">
+      <input name="" title="View Details" type="button" class="view-button"  value="" onclick="window.location='member-details.html'"/>
+      <input name="" title="Delete" type="button" class="delete-button"  value="" onclick="return show_dialog('delete-page-popup')"/>
+      <input name="" title="Enable" type="button" class="btn-03"  value="Enable"/>
+      <input name="" title="Set As Minister" type="button" class="btn-04"  value="Set As Minister" />
+      </td>
+    </tr>
+    <tr>
+      <td align="left" valign="top">20/12/2012</td>
+      <td align="left" valign="top">Andrew Maxcell</td>
+      <td align="left" valign="top">Male</td>
+      <td align="left" valign="top">USA,<br />New York,<br />7/A Garden City</td>
+      <td align="left" valign="top">andrew.maxcell@gmail.com</td>
+      <td align="left" valign="top">+91 990 000 0000</td>
+      <td align="center" valign="middle" class="last">
+      <input name="" title="View Details" type="button" class="view-button"  value="" onclick="window.location='member-details.html'"/>
+      <input name="" title="Delete" type="button" class="delete-button"  value="" onclick="return show_dialog('delete-page-popup')"/>
+      <input name="" title="Enable" type="button" class="btn-03"  value="Enable"/>
+      <input name="" title="Set As Minister" type="button" class="btn-04"  value="Set As Minister" />
+      </td>
+    </tr>
+    <tr>
+      <td align="left" valign="top">20/12/2012</td>
+      <td align="left" valign="top">Alanee Maxcell</td>
+      <td align="left" valign="top">Female</td>
+      <td align="left" valign="top">USA,<br />New York,<br />7/A Garden City</td>
+      <td align="left" valign="top">andrew.maxcell@gmail.com</td>
+      <td align="left" valign="top">+91 990 000 0000</td>
+      <td align="center" valign="middle" class="last">
+      <input name="" title="View Details" type="button" class="view-button"  value="" onclick="window.location='member-details.html'"/>
+      <input name="" title="Delete" type="button" class="delete-button"  value="" onclick="return show_dialog('delete-page-popup')"/>
+      <input name="" title="Enable" type="button" class="btn-03"  value="Disable"/>
+      <input name="" title="Set As Minister" type="button" class="btn-04"  value="Set As Minister" />
+      </td>
+    </tr>
+    -->
+</table>
+<div class="paging"><ul><?= $page_links ?></ul></div>
+
+<!--popup one start-->
+<div class="lightbox delete-group delete-post" style="width:450px;">
+
+    <div class="close"><a href="javascript:void(0)" onclick="hide_dialog();
+
+            $('#i_del_id').val('');"><img src="<?= base_url() ?>images/close.png" alt="" /></a></div>
+
+    <div class="top"><div>&nbsp;</div></div>
+
+    <div class="mid">
+
+        <div class="heading" style="margin-bottom:0px;">
+
+            <div class="left">
+
+                <h4>Delete prayer councillor</h4>
+
+            </div>
+
+        </div>
+
+        <div class="shade_box_white" style="padding:8px 0px;">
+
+            <div style="padding-bottom:10px;">
+
+                <p class="center-text" style="line-height:23px; color:#494949; font-size:16px;">Do you really want to delete this prayer councillor?</p>
+
+            </div>
+
+            <form action="" method="post" enctype="multipart/form-data">
+
+                <input type="hidden" name="i_del_id" id="i_del_id" value="" />
+
+                <input name="" type="button" value="Yes" class="btn"  onClick="deleteGroup()"/>
+
+                <input name="" type="button" value="No" class="btn" onclick="hide_dialog();
+
+                        $('#i_del_id').val('');"/>
+
+            </form>   
+
+            <div class="clr"></div>
+
+        </div>
+
+
+
+    </div>
+
+    <div class="bot"><div>&nbsp;</div></div>
+
+</div>
+
+<!--popup one end-->
+

@@ -1,0 +1,95 @@
+ <div class="prfile-sec-content-box " >
+                        <h2>
+                        Work 
+                        </h2>
+                        <div class="profile-sml-sec">
+                         <?php $img = get_profile_image($public_arr_profile_info['id'], 'main');?>
+                            <div  class="prfile-sec-photo" style=" background:URL('<?=$img?>')no-repeat center;width:100px; height:100px;" title="member" ></div>
+                            <div class="prfile-sec-content-box-right">
+                 <?php #pr($user_education_arr);
+					if(count($user_work_arr) > 0):
+						foreach($user_work_arr as $key=>$val):
+						
+							  $address = array();
+							   
+							   if(!empty($val['s_employer_city']))
+							   $address['s_employer_city']=$val['s_employer_city'];
+			   
+							  if(!empty($val['s_employer_state']))
+								 $address['s_employer_state']=$val['s_employer_state'];
+							  
+							  if(!empty($val['s_employer_country']))    
+								 $address['s_employer_country']=get_country_name_by_id($val['s_employer_country']);
+								 
+							  $address_str = implode(', ',$address);
+							  $period_from = (($val['s_experience_year_from'] == '')?'':(($val['s_experience_year_from'] == '-1')?'-':$val['s_experience_year_from']));
+							  $mnth_from = (($val['i_experience_month_from'] == '')?'':(($val['i_experience_month_from'] == '-1')?'-':get_month_name($val['i_experience_month_from'])));
+							  
+							  $period_to= (($val['s_experience_year_to'] == '')?'':(($val['s_experience_year_to'] == '-1')?'-':$val['s_experience_year_to']));
+							  $mnth_to = (($val['i_experience_month_to'] == '')?'':(($val['i_experience_month_to'] == '-1')?'-':get_month_name($val['i_experience_month_to'])));
+							  $is_current_employer = $val['e_is_current_employer'];
+							  
+							  
+							 
+							  
+							  if($is_current_employer == 'yes'){
+								  $period = $mnth_from.' ` '.$period_from .' to till now';
+							  }else
+							  {
+								   $period = $mnth_from.' ` '.$period_from .' to '.$mnth_to.' ` '.$period_to;
+							  }
+							  
+						
+			?>
+                  <table width="100%" cellspacing="0" cellpadding="0" border="0" class="pro-table">
+                   <tr>
+                      <td valign="top" align="left" width="100">Employer:</td>
+                      <td valign="top" align="left"><?=$val['s_employer_name']?></td>
+                    </tr>
+                    <tr>
+                      <td valign="top" align="left" >Work Place: </td>
+                      <td valign="top" align="left"><?=$address_str?></td>
+                    </tr>
+                    <tr>
+                      <td valign="top" align="left" >Position: </td>
+                      <td valign="top" align="left"><?=$val['s_position']?></td>
+                    </tr>
+                    <tr>
+                      <td valign="top" align="left" >Period: </td>
+                      <td valign="top" align="left"><?=$period?></td>
+                    </tr>
+                  </table>
+                  
+      
+      		 <?php
+						endforeach;
+						else :
+			 ?>
+                 
+              	  <table width="100%" cellspacing="0" cellpadding="0" border="0" class="pro-table">
+                   <tr>
+                      <td valign="top" align="left" width="100">Employer:</td>
+                      <td valign="top" align="left"></td>
+                    </tr>
+                    <tr>
+                      <td valign="top" align="left" >Work Place: </td>
+                      <td valign="top" align="left"></td>
+                    </tr>
+                    <tr>
+                      <td valign="top" align="left" >Position: </td>
+                      <td valign="top" align="left"></td>
+                    </tr>
+                    <tr>
+                      <td valign="top" align="left" >Period: </td>
+                      <td valign="top" align="left"></td>
+                    </tr>
+                  </table>
+             <?php 
+			        endif;
+			 ?>
+      
+      </div>
+                            <br class="clear"/>
+                        </div>
+                      </div>
+                           

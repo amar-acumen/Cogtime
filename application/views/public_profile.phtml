@@ -1,0 +1,445 @@
+<?php
+	if( $this->session->userdata('loggedin') =='' || $this->session->userdata('loggedin')==false){
+		include(APPPATH ."views/layouts/header.phtml");
+	   	include(APPPATH."views/layouts/slider_nav.phtml");
+     }
+     else{
+         
+		 include(APPPATH ."views/layouts/logged_header.phtml");
+		 include(APPPATH."views/layouts/nav.phtml");?>
+		  <!-- /NAVIGATION SECTION -->
+      		</div>
+		</div>
+ <?php  }?>
+<!-- /HEADER SECTION -->
+<div class="clr"></div>
+<!-- CONTENT SECTION -->
+<div id="content_section" style="margin-top:8px;">
+      <div id="container">
+      		 <div class="public-profile">
+             	<!--left block start -->
+                <div style="margin-left:924px; margin-bottom:5px;">
+                        
+                        <form name="frm_preserve_search" method="post" enctype="multipart/form-data" action="<?=$_SERVER['HTTP_REFERER']?>">
+                        	<input type="hidden" name="IS_PRESERVE_SEARCH" id="IS_PRESERVE_SEARCH" value="Y" />
+                            <input type="submit" class="sml_btn" name="reload_search" value="Back" />
+                        </form>
+                 </div>
+                 <div class="clr"></div>
+                <div class="left-block">
+                	<!--profile section start -->
+                    <div class="profile-section">
+                    	<!--tabs -->
+                        	<div class="profile-tabs">
+                            	<ul>
+                                	<li class="first select"><a href="javascript:void(0);"><span>Profile</span></a></li>     
+                                    <li><a href="javascript:void(0);"><span>Basic Info</span></a></li>     
+                                    <li><a href="javascript:void(0);"><span>Education</span></a></li>     
+                                    <li><a href="javascript:void(0);"><span>Work</span></a></li>     
+                                    <li><a href="javascript:void(0);"><span>Skills</span></a></li>
+                                </ul>
+                            </div>
+                        <!--/tabs -->
+                        <!--tab details -->
+                        	<div class="profile-content">
+                            	<!--profile -->
+                            	<div class="profile-tab first">
+                                	<div class="photo-section">
+                                    <?php $img = get_profile_image($public_arr_profile_info['id'], 'main');?>
+                                    <div style="background:url(<?=$img?>) no-repeat center;width:144px; height:144px;" title="member" ></div>
+                                       
+                                    </div>
+                                    
+                                     <?php 
+											$relation_arr = CheckUserRelation($public_arr_profile_info['id']);
+											//pr($relation_arr);
+									  ?>
+                                    <div class="content-section">
+                                  
+                                    	<h2><?=$public_arr_profile_info['s_profile_name']?> <span style="font-size:17px;">[<?=check_user_online_hlpr($public_arr_profile_info['id'], 'public', $relation_arr); ?>]</span></h2>
+                                        <h3><?=get_user_address_info($public_arr_profile_info['id'])?></h3>
+                                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                          <tr>
+                                            <td align="left" valign="top" class="first"><span>Date of Birth</span></td>
+                                            <td align="center" valign="top" class="second"><span>:</span></td>
+                                            <td align="left" valign="top"><?=($public_arr_profile_info['dt_dob'] != '0000-00-00')?getShortDate($public_arr_profile_info['dt_dob'],5):'';?></td>
+                                          </tr>
+                                          <tr>
+                                            <td align="left" valign="top" class="first"><span>Website</span></td>
+                                            <td align="center" valign="top" class="second"><span>:</span></td>
+                                            <td align="left" valign="top"><a href="<?=$public_arr_profile_info['s_website']?>" target="_blank"><?=$public_arr_profile_info['s_website']?></a></td>
+                                          </tr>
+                                          <tr>
+                                            <td align="left" valign="top" class="first"><span>Profile URL</span></td>
+                                            <td align="center" valign="top" class="second"><span>:</span></td>
+                                            <td align="left" valign="top"><a href="http://www.cogtime.com/<?=$public_arr_profile_info['s_profile_url_suffix']?>" target="_blank">www.cogtime.com/<?=$public_arr_profile_info['s_profile_url_suffix']?></a></td>
+                                          </tr>
+                                        </table>
+
+                                    </div>
+                                    <div class="clr"></div>
+                                     <ul class="special-link">
+                                        	<?php if($own_profile == 'false'):?>
+                                            <li><a href="javascript:void(0);" onclick="show_dialog('send_message_div');">Send A Message</a></li>
+                                           
+											<?php endif;
+											
+											if($if_already_friend == 'false') :?>
+                                            	<li><a href="javascript:void(0);" id="invite_friend_<?=($public_arr_profile_info['id'])?>" onclick="invite_friend_('<?=encrypt($public_arr_profile_info['id'])?>')">Send Friend Request</a></li>
+                                            <?php elseif($display_becomefriend == 'false'):?>
+                                            	<li><a href="javascript:void(0);" id="invite_friend_<?=($public_arr_profile_info['id'])?>" onclick="invite_friend_('<?=encrypt($public_arr_profile_info['id'])?>')" >Re-send Friend Request</a></li>
+                                            <?php endif; ?>
+                                            
+                                           <?php if($if_already_netpals == 'false') :?>
+                                            	<li><a id="invite_netpal_<?= $public_arr_profile_info['id']?>"  href="javascript:void(0);" onclick="invite_netpals_(<?php echo $public_arr_profile_info['id'];?>)">Invite As Netpal</a></li>
+                                            <?php elseif($display_becomenetpals == 'false'):?>
+                                            	<li><a d="invite_netpal_<?= $public_arr_profile_info['id']?>"  href="javascript:void(0);" onclick="invite_netpals_(<?php echo $public_arr_profile_info['id'];?>)" >Reinvite As NetPal</a></li>
+                                            <?php endif; ?>
+                                            
+                                             <?php ## prayer partner
+											 if($is_hit_frm_pp){  
+												 if($prayer_partner['display_becomeprayer_partner'] == 'false'): ?>
+													<li> <a  href="javascript:void(0);" id="invite_prayer_partner_<?=($public_arr_profile_info['id'])?>" onclick="invite_prayer_partner_('<?=encrypt($public_arr_profile_info['id'])?>','<?=$prayer_partner['display_becomeprayer_partner']?>')">Re-send Partner Request</a></li>
+												  
+																								
+											  <?php elseif($prayer_partner['display_alreadyprayer_partner'] == 'true'):?>
+													<li><a href="javascript:void(0);"> Already Your Partner </a></li>
+											  
+											 
+											 <?php elseif($prayer_partner['is_available']=='false') : ?>
+													<li><a href="javascript:void(0);">Not Available as Partner</a></li>
+													 
+											  
+											  <?php else: ?>
+											 <li> <a  href="javascript:void(0);" id="invite_prayer_partner_<?=($public_arr_profile_info['id'])?>" onclick="invite_prayer_partner_('<?=encrypt($public_arr_profile_info['id'])?>','<?=$prayer_partner['display_becomeprayer_partner']?>')">Invite As Partner</a></li>
+											  
+											  <?php endif;
+											 }
+											  ?>
+                                             
+                                            
+                                        </ul>
+                                </div>
+                                <!--/profile -->
+                                <!--basic info -->
+					   			<?php include_once(APPPATH ."views/public_profile/public_profile_basic_info.phtml");?>
+                                <!--/basic info -->
+                                <!--education info -->
+                                <?php include_once(APPPATH ."views/public_profile/public_profile_edu_info.phtml");?>
+                                <!--/education info -->
+                                <!--work -->
+                            	<?php include_once(APPPATH ."views/public_profile/public_profile_work_info.phtml");?>
+                                <!--/work -->
+                                <!--skills -->
+                            	<?php include_once(APPPATH ."views/public_profile/public_profile_skill_info.phtml");?>
+                                <!--/skills -->
+                            </div>
+                        <!--/tab details -->
+                    </div>
+                    <!--profile section end -->
+                    <!--my friend section start -->
+                    <?php include_once(APPPATH ."views/public_profile/public_profile_friends.phtml");?>
+                    <!--my friend section end -->
+                    <!--my net pals section start -->
+                     <?php include_once(APPPATH ."views/public_profile/public_profile_netpals.phtml");?>
+                    
+                    <!--my net pals section end -->
+                    <!--my photos section start -->
+                     <?php include_once(APPPATH ."views/public_profile/public_profile_photos.phtml");?>
+                    <!--my photos section end -->
+                    
+                    <div class="clr"></div>
+                    <!--my videos section start -->
+                     <?php include_once(APPPATH ."views/public_profile/public_profile_videos.phtml");?>
+                    <!--my videos section end -->
+                    
+                    <!--my videos section start -->
+                    <?php include_once(APPPATH ."views/public_profile/public_profile_audios.phtml");?>
+                    
+                    <!--my videos section end -->
+                    <div class="clr"></div>
+                    
+                    
+                    <div class="single-block">
+                              <?php
+							  		 if($session_data['loggedin']) {
+										include(APPPATH ."views/newsfeed/public_profile_newsfeed_post_.phtml");
+									 }
+					    	  ?>                                   
+                                   <div class="heading">
+                                          <div class="left">
+                                                <h4>My Wall Messages &amp; Comments</h4>
+                                          </div>
+                                    </div>
+                                   <div id="comment_result_div"><?=$result_newsfeed_content?></div>
+                                   
+                                    <?php if($no_of_result > 10): ?>
+                                    
+                                    <div class="view_more" id="show_more_feeds_div"><a href="javascript:void(0);" id="show_more_feeds_link" page_value="<?=$current_page_1?>" onclick="show_more_feeds($(this).attr('page_value'))">[view more] </a> </div>
+                                    <?php endif; ?>
+                                    
+                                    
+                                   
+                    </div>
+                    
+                    
+                    
+                </div>
+                <!--left block end -->
+                <!--right block start -->
+                <?php
+					  #include_once(APPPATH ."views/layouts/public_profile_rightbar.phtml");
+				  ?>
+                  <?php include(APPPATH."views/layouts/rightbar.phtml");?>
+                <!--right block end -->
+             
+			</div>     
+      </div>
+      <div class="clr"></div>
+</div>
+<!-- /CONTENT SECTION -->
+<div class="clr"></div>
+<!-- FOOTER SECTION -->
+<?php
+	# include footer file...
+	include_once(APPPATH ."views/layouts/footer.phtml");
+	
+?>
+<!-- /FOOTER SECTION -->
+
+<?php include(APPPATH."views/logged/wall/my_wall_post_comment_lightbox.phtml");?>
+<?php include(APPPATH."views/logged/message_box/send_message_lightbox.phtml");?>
+
+
+<?php /*?>VIEW COMMENTS<?php */?>
+
+<div class="lightbox view_comments_div " style="width:650px;">
+      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="<?=base_url()?>images/close.png" alt="" /></a></div>
+      <div class="top">
+            <div>&nbsp;</div>
+      </div>
+      <div class="mid" >
+            <div class="heading" style="margin-bottom:0px;">
+                  <div class="left">
+                        <h4><img src="<?=base_url()?>images/icons/cmnt.png" alt="" /> View Comments </h4>
+                  </div>
+            </div>
+            <div id="comment_html"></div>
+
+            
+      </div>
+      <div class="bot">
+            <div>&nbsp;</div>
+      </div>
+</div>
+<?php /*?>VIEW COMMENTS<?php */?>
+
+<?php /*?>LIKED LIGHT BOX <?php */?>
+<div class="lightbox liked_by_div" style="width:500px;">
+      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="<?=base_url()?>images/close.png" alt="" /></a></div>
+      <div class="top">
+            <div>&nbsp;</div>
+      </div>
+      <div class="mid" style="height:299px;">
+            <div class="heading" style="margin-bottom:0px;">
+                  <div class="left">
+                        <h4><img src="<?=base_url()?>images/icons/thumb_up.png" alt="" /> Liked by </h4>
+                  </div>
+            </div>
+            <div id="liked_html"></div>
+      </div>
+      <div class="bot">
+            <div>&nbsp;</div>
+      </div>
+</div>
+<?php /*?>LIKED LIGHT BOX <?php */?>
+<!--view all friends lightbox start -->
+<div class="lightbox firends-view-all" style="width:870px;">
+
+      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="images/close.png" alt="" /></a></div>
+      <div class="top">
+            <div>&nbsp;</div>
+      </div>
+      <div class="mid">
+            <div class="heading"><h4>My Friends</h4></div>
+            <ul class="single-images with-name">
+            
+            <?php //pr($right_panel['friends_arr']);
+            $count=0;
+            foreach($right_panel['friends_arr'] as $friends)    :
+            $count++;
+            
+            $img = get_profile_image($friends['user_id']);
+            $country = get_country_name_by_id($friends['user_id']);
+            ?>
+            
+                <!--thumb one start -->
+                <li <?php if($count==9) echo "class='no-right-mrgn'"?>>
+                    <a href="javascript:void(0);">
+                        <img src="<?php echo $img;?>" alt="friend" width="73" height="73" />
+                        <p class="title"><?php echo $friends['s_displayname']?></p>
+                        <p><?php echo $country;?></p>
+                    </a>
+                </li>
+                <!--thumb one end -->
+                
+                
+            <?php
+            endforeach;
+            ?>
+                <!--thumb two start -->
+           
+            </ul>
+            <div class="clr"></div>                         
+      </div>
+      <div class="bot">
+            <div>&nbsp;</div>
+      </div>
+</div>
+<!--view all friends lightbox end -->
+
+
+
+
+<!--view all friends lightbox start -->
+<div class="lightbox netpals-view-all" style="width:870px;">
+
+      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="images/close.png" alt="" /></a></div>
+      <div class="top">
+            <div>&nbsp;</div>
+      </div>
+      <div class="mid">
+            <div class="heading"><h4>My NetPals</h4></div>
+            <ul class="single-images with-name">
+            
+            <?php //pr($right_panel['netpals_arr']);
+            $count=0;
+            foreach($right_panel['netpals_arr'] as $netpal)    :
+            $count++;
+            
+            $img = get_profile_image($friends['user_id']);
+            $country = get_country_name_by_id($friends['user_id']);
+            ?>
+            
+                <!--thumb one start -->
+                <li <?php if($count==9) echo "class='no-right-mrgn'"?>>
+                    <a href="javascript:void(0);">
+                        <img src="<?php echo $img;?>" alt="friend" width="73" height="73" />
+                        <p class="title"><?php echo $friends['s_displayname']?></p>
+                        <p><?php echo $country;?></p>
+                    </a>
+                </li>
+                <!--thumb one end -->
+                
+                
+            <?php
+            endforeach;
+            ?>
+                <!--thumb two start -->
+             
+            </ul>
+            <div class="clr"></div>                         
+      </div>
+      <div class="bot">
+            <div>&nbsp;</div>
+      </div>
+</div>
+<!--view all friends lightbox end -->
+
+<!--audio lightbox start -->
+<div class="lightbox audio-details">
+      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="images/close.png" alt="" /></a></div>
+      <div class="top">
+            <div>&nbsp;</div>
+      </div>
+      <div class="mid">
+            
+            <DIV  id="audio_lightbox_html"></DIV>
+                       
+            <div class="clr"></div>                         
+      </div>
+      <div class="bot">
+            <div>&nbsp;</div>
+      </div>
+</div>
+
+<!--audio lightbox end -->
+
+
+
+<script type="text/javascript">
+
+var ajax_req_feeds = null;
+function show_more_feeds(page) {
+	if(ajax_req_feeds!=null) {
+		ajax_req_feeds.abort();
+	}
+	showUILoader_nodialog();
+	ajax_req_feeds = $.ajax({
+		type: 'get',
+		url: base_url+'public_profile/newsfeed_pagination_show_more/<?=$profile_id?>'+'/'+page,
+		dataType: 'json',
+
+		success: function (data, status) {
+
+			hideUILoader_nodialog();
+			if(data.html!='') {
+				$('#comment_result_div').append(data.html);
+				$('#show_more_feeds_link').attr('page_value', data.current_page);
+			}
+			else {
+				$('#comment_result_div').append('<div class="view_more" style="text-align: center;"><p class="blue_bold12" style="font-size:14px;">No more posts to display.</p></div>');
+				$('#show_more_feeds_div').hide();
+			}
+			
+			/*$('.htr').css('display','none');
+			$('#'+m).css('display', 'table-row'); 
+			$('#'+m+' td').html(data);*/
+
+		}	// end of success function...
+	});
+}
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){
+    /*for fancy lightbox start*/
+    $('.fancybox').fancybox();
+    /*for fancy lightbox end*/
+    $('.video_fancybox').fancybox();
+	$('.audio_fancybox').fancybox();
+	
+});
+
+</script>
+
+<?php /*?><script type="text/javascript">
+function show_comments(i_newsfeed_id)
+  {
+         
+     showUILoader('<img src="'+base_url+'images/loading_big.gif" width="50"/> ');
+        $.ajax({
+            
+            url: base_url +'logged/my_videos/fetch_comment_on_photo/'+i_newsfeed_id,
+            dataType: 'json',
+            type: 'post',
+    
+            success: function (data, status) {
+                //hideUILoader();
+                $('#comment_html').html(data.html_data);
+                hideUILoader('view_comments_div');
+                //hideBusyScreen();
+                showUIMsg(data.msg);
+            },
+            error: function(data, status, e) {
+                hideUILoader('view_comments_div');
+                //show_dialog('view_comments_div');
+                showUIMsg("Error!");
+                
+            }
+        });
+                 
+         
+  }
+</script><?php */?>

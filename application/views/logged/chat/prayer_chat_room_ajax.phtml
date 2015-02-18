@@ -1,0 +1,80 @@
+ <?php //pr($arr_chat_rooms);
+ 
+ /************delete expire room********************************/
+                        $user_id = intval(decrypt($this->session->userdata('user_id')));
+        $query = $this->db->get_where('cg_users', array('id' => $user_id));
+        foreach ($query->result() as $row)
+           {
+               $time_zone = $row->s_time;
+           }
+           $nz_time = new DateTime(null, new DateTimezone($time_zone));
+          $current_user_time = $nz_time->format('H:i:s');
+          $sql = "DELETE FROM cg_prayer_grp_chat_room_invitation WHERE end_time < '{$current_user_time}'  ";
+          $this->db->query($sql);
+        
+                        
+                        
+                        /********************************************/
+ 
+		  if(count($arr_chat_rooms) > 0){
+		  //$i=1;
+			  foreach($arr_chat_rooms as $key => $val){
+							
+				  $CSS = ($key != 0 )?'style="padding-top:5px;"':'';
+                                  $chat_room_id = $val['room_id'];
+						//echo $this->session->userdata('display_username');
+                                  $query = $this->db->get_where('cg_prayer_grp_chat_room_invitation', array('i_chat_room_id' => $chat_room_id));
+                                 // $query = $this->db->get('mytable');
+
+                                foreach ($query->result() as $row)
+                                {
+                                    $start_time =  $row->start_time;
+                                    $end_time = $row->end_time;
+                                }
+                              
+   ?> 
+                              <div class="shade_box_shade" <?=$CSS?>>
+                                    
+                                    <?php if($key == 0 && $current_page_1 == 0){ ?>
+                                      <div class="page_heading" id="chat_pg_heading" >
+                                            <div style="padding-left:10px;" class="left">List of Chat Rooms </div>
+                                      </div>
+                                    <?php } ?>       
+                               
+                                          <div class="txt_content">
+                                                   <p class="add-remove-friend"><img alt="" src="images/icons/ring2.png" /> <a  href="javascript:void(0);" onclick="window.open('<?=base_url()?>client/123flashchat.html?init_room=<?=$val['room_id']?>&init_user=<?= $this->session->userdata('display_username') ?>&init_password=<?=$this->session->userdata('upassword')?>',   '',   'bReplace= 0 resizable=0, location=1, width=630, height=450');    " target="">Join this Room</a> 
+                                                  <?php 
+												   	if($val['is_owner'] == 'Y'){
+												   ?>
+                                                    |
+                                                   <img src="images/icons/delete_small.png" style="margin-right:3px;" /><a onclick="show_delete_room(<?=$val['room_id']?>)" class="blue_link" href="javascript:void(0);">Close Room</a>
+                                                   <?php } 
+												   ?>
+                                                   </p>
+                                               <?php if($val['is_owner'] != 'Y'){?>
+                                                <p> <img alt="" src="images/icons/cmnt_smal.png" /> <a class="blue_link" href="javascript:void(0);" ><strong><?=$val['name']?></strong></a></p>
+                                                <?php } 
+												else
+												{?>
+                                                <p> <img alt="" src="images/crown.png" /> <a class="blue_link" href="javascript:void(0);" ><strong><?=$val['name']?></strong></a></p>
+												<?php }?>
+                                                <?php /*?><p class="light_blue12">Sub Sub Category Name</p><?php */?>
+                                                
+                                                <p>No. of people at this moment: <span class="blue12"><strong><?=$val['user_numbers']?></strong></span></p>
+                                                <p>Group Name: <span class="blue12"><?=$val['s_group_name']?></span></p>
+                                                <p>Valid Time: <span class="blue12"><?=getShortDate($val['dt_start_time']).' '.$start_time?> - <?=getShortDate($val['dt_end_time']).' '.$end_time?></span></p>
+                                                
+                                                
+                                          </div>
+                                          
+                                          
+                                      
+                               </div> 
+                                   
+    <?php 
+			 	 }
+			 }
+  ?>    
+                                    
+                                    
+ <input type="hidden" id="current_page" name="current_page" value="<?=$current_page_1?>"  />

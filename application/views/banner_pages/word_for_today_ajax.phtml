@@ -1,0 +1,125 @@
+          <!--word for today start -->
+          <?php
+          //pr($result_arr);
+          foreach($result_arr as $res)
+          {
+          	$room_id = $res['i_room_id'];
+          ?>
+          
+
+            <div class="message-box">
+                <h2><?=$res['s_title']?></h2>
+                <p class="date-time">Posted On <?=getShortDateWithTime($res['dt_posted_on'],7)?></p>
+                <p><?=nl2br($res['s_desc'])?></p>
+              
+                
+                <p class="add-remove-friend"><img alt="" src="images/icons/ring2.png"> <a href="javascript:void(0);" onclick="window.open('<?=base_url()?>client/123flashchat.html?init_room=<?=$room_id?>&amp;init_user=<?=$this->session->userdata('display_username')?>',   '',   'bReplace= 0 resizable=0, location=1, width=630, height=450');    " target="">Join this Room</a> 
+                                                                                                     </p>
+                
+                <?php if( ($this->session->userdata('loggedin') !='' || $this->session->userdata('loggedin')!=false ) && $this->session->userdata('is_admin') != 1){?>
+                <div class="light_heading"> 
+             <div class="left">
+				<a href="javascript:void(0);" class="comments_div<?=$res['id']?>"  onclick="return show_comments(<?=$res['id']?><?php /*?>show_dialog('view_comments_div')<?php */?>)">Comments (<?=count_word_comment_link($res['id'])?>)</a>
+				&nbsp; |   &nbsp; 
+				<a href="javascript:void(0);"   onclick="" class="liked_by_<?=$res['id']?>">Liked by(<?=count_word_like_link($res['id'])?>)</a>
+			 </div>
+             
+        <?php  if((show_word_like_link($res['id']) == TRUE) ) {
+		?>
+                <div class="right"><a href="javascript:void(0);"  >Comment</a> &nbsp; |   &nbsp; <a href="javascript:void(0);" id="like_count_<?=$res['id']?>" onClick="windowLike(<?=$res['id']?>,'Like')">Like</a>  </div>                
+       <?php } 
+	   		else{ 
+	   ?>
+         		<div class="right"><a href="javascript:void(0);" >Comment</a> &nbsp; |   &nbsp; <a href="javascript:void(0);" id="like_count_<?=$res['id']?>" >Like</a> </div>
+          
+       <?php }?>
+             
+              
+         </div> 
+          <div class="new-wl">
+            <!--comment section start-->
+                <div  class="comments-number content-width" >
+                  <div class="comments-number-mid">
+                      <div class="heading" >
+                            <div class="left">
+                                  <h4><img class="cmnt" src="images/icons/cmnt2.png" alt="" /> <span class="comments_div<?=$res['id']?>">Comments (<?=count_word_comment_link($res['id'])?>)</span> </h4>
+                                  <img class="wal-minus" alt="" src="images/minus-white.png" />
+                            </div>
+                       </div>
+                       <DIV id="word_comment_div<?=$res['id']?>"></DIV>
+                    </div>
+                </div>
+            <!--comment section end-->	
+            <!--like by section start-->
+                <div  class="comments-number content-width" >
+                  <div class="comments-number-mid">
+                      <div class="heading">
+                            <div class="left">
+                                  <h4><img alt="" src="images/heart2.png" class="cmnt" /> <span class="liked_by_<?=$res['id']?>">Liked by (<?=count_word_like_link($res['id'])?>)</span> </h4>
+                                   <img class="wal-minus" alt="" src="images/minus-white.png" />
+                            </div>
+                      </div>
+                      
+                        <div class="shade_box_white" id="photo_like_div<?=$res['id']?>">
+                        </div>
+                   </div>
+            	</div>
+            <!--like by section end-->
+                
+            </div>
+            <div class="new-wl-right">
+                <!--comment section start-->
+                <div  class="comments-number content-width" >
+                  <div class="comments-number-mid comment-box-manage">
+                      <div class="heading" style="background-color: #013D62 !important;padding:10px; height:15px" >
+                            <div class="left">
+                                  <h4 style="color:white"><img alt="" src="images/no.png" class="cmnt" />  Comment  </h4>
+                                  <img class="wal-minus" alt="" src="images/minus-white.png" />
+                            </div>
+                      </div>
+                      
+                      <div class="txt_content01 comments-number-content"> 
+                      <textarea class="wal-comment-textarea" id="feed_comment_box_<?=$res['id']?>"  cols="" rows=""></textarea>
+                      <input type="button" value="Post" class="yellow-btn" id="post_comment_button" onclick="post_comment(<?=$res['id']?>)" />
+                      <br class="clr" />
+                      </div>
+                </div>
+                </div>
+                <!--comment section end-->	
+            </div>
+         <?php }?>
+
+            </div>
+
+          
+          
+          <?php
+          }
+          ?>
+          <!--word for today end -->
+<script type="text/javascript">
+		$(function(){
+		//8-oct-2013
+			$('.left a').click(function(){
+				
+				var index=$(this).index();
+				$('.new-wl > .comments-number').css('display','none');
+				$('.new-wl-right > .comments-number').css('display','none');
+				$(this).parent().parent().next('.new-wl').children('.comments-number').filter(':eq('+ index +')').slideDown('slow');
+			})
+				
+				
+			$('.right a').click(function(){
+				var index=$(this).index();
+				$('.new-wl > .comments-number').css('display','none');
+				$('.new-wl-right > .comments-number').css('display','none');
+				$(this).parent().parent().next().next('.new-wl-right').children('.comments-number').filter(':eq('+ index +')').slideDown('slow');
+			
+			})
+			$('.wal-minus').click(function(){
+				$(this).parents('.comments-number').slideUp('fast');
+			
+			})
+		//8-oct-2013
+		});
+		</script>

@@ -1,0 +1,126 @@
+<?php include(APPPATH."views/layouts/logged_header.phtml");?>
+            <!-- NAVIGATION SECTION -->
+      <?php include(APPPATH."views/layouts/nav.phtml");?>
+      <!-- /NAVIGATION SECTION -->
+      </div>
+</div>
+<div class="clr"></div>
+
+<!-- CONTENT SECTION -->
+
+<div id="content_section">
+      <div id="container">
+          <div class="top-page-heading">
+          <h2 class="landing-title">Media center</h2>
+          <div class="landing-input"><input type="text" name="" value="" placeholder="Search Keywords"></div>
+	  <div class="clr"></div>
+           </div>
+          
+          <div class="media-center-banner">
+              <!-- Place somewhere in the <body> of your page -->
+<div id="slider" class="flexslider">
+  <ul class="slides">
+    <li>
+    <img src="images/read-banner.jpg" />
+      <div class="caption-text">
+          <h3>Featured Article </h3>
+          <h4>Suspendisse bibendum id risus in venenatis proin pretium aliquet enim.</h4>
+          <p>Nulla ornare accumsan interdum. Morbi hendrerit velit sed libero interdum dictum. Integer sagittis risus magna, in malesuada turpis mollis in. Integer ornare purus urna, eu pulvinar odio accumsan non. Praesent mollis consequat placerat.</p>
+          
+      </div>
+    </li>
+    <li>
+      <img src="images/read-banner1.jpg" />
+      <div class="caption-text">
+         <!-- <h3>Featured Article </h3>
+          <h4>Suspendisse bibendum id risus in venenatis proin pretium aliquet enim.</h4>
+          <!--<p>Nulla ornare accumsan interdum. Morbi hendrerit velit sed libero interdum dictum. Integer sagittis risus magna, in malesuada turpis mollis in. Integer ornare purus urna, eu pulvinar odio accumsan non. Praesent mollis consequat placerat.</p>-->
+          
+      </div>
+    </li>
+    <li>
+      <img src="images/read-banner2.jpg" />
+      <div class="caption-text">
+          <h3>Featured Article </h3>
+          <h4>Suspendisse bibendum id risus in venenatis proin pretium aliquet enim.</h4>
+          <p>Nulla ornare accumsan interdum. Morbi hendrerit velit sed libero interdum dictum. Integer sagittis risus magna, in malesuada turpis mollis in. Integer ornare purus urna, eu pulvinar odio accumsan non. Praesent mollis consequat placerat.</p>
+          
+      </div>
+    </li>
+ 
+    <!-- items mirrored twice, total of 12 -->
+  </ul>
+</div>
+<div id="carousel-mdia" class="flexslider">
+  <ul class="slides">
+    <li>
+        <span class="read-media">&nbsp;</span>
+      <h5>Read</h5>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur id tempor justo, ut facilisis arcu.  </p>
+    </li>
+    <li>
+      <span class="watch-media">&nbsp;</span>
+      <h5>watch</h5>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur id tempor justo, ut facilisis arcu.  </p>
+    </li>
+    <li>
+      <span class="listen-media">&nbsp;</span>
+      <h5>listen</h5>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur id tempor justo, ut facilisis arcu.  </p>
+    </li>
+    <!-- items mirrored twice, total of 12 -->
+  </ul>
+</div>
+              
+          </div>
+          <div class="ad-list">
+              <ul>
+                  <li><a href="javascript:void(0);"><img src="images/ad-1.png" alt="Advertsment" width="300" height="250"></a></li>
+                  <li><a href="javascript:void(0);"><img src="images/ad-2.png" alt="Advertsment" width="300" height="250"></a></li>
+                  <li class="no-margin"><a href="javascript:void(0);"><img src="images/ad-3.png" alt="Advertsment" width="300" height="250"></a></li>
+                  
+              </ul>
+              
+          </div>
+      </div>
+      <div class="clr"></div>
+</div>
+
+
+<!-- /CONTENT SECTION -->
+<div class="clr"></div>
+
+<?php include(APPPATH."views/layouts/footer.phtml");?>
+
+
+
+ <script type="text/javascript">
+ $(window).load(function() {
+  // The slider being synced must be initialized first
+  $('#carousel-mdia').flexslider({
+    animation: "slide",
+    controlNav: false,
+    animationLoop: false,
+    slideshow: false,
+    itemWidth: 238,
+    itemMargin: 0,
+    asNavFor: '#slider'
+  });
+ 
+  $('#slider').flexslider({
+    animation: "slide",
+    controlNav: false,
+    animationLoop: false,
+    slideshow: false,
+    sync: "#carousel-mdia"
+  });
+});
+ </script>
+ 
+ 
+ <?php /*?><?php $IMG = base_url() . 'uploads/media_center_article/' . getThumbName($featured['s_image'], 'main');?>
+      <img src="<?=$IMG?>" />
+      <div class="caption-text">
+          <h3>Featured Article </h3>
+          <h4><?=$featured['s_title']?></h4>
+          <p><? #my_substr(strip_tags(get_unformatted_string_edit($featured[0]['s_desc'])),80)?></p><?php */?>

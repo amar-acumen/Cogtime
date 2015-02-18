@@ -1,0 +1,208 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>123 Flash Chat Version 9.9 Demo</title>
+<link href="css/common.css" rel="stylesheet" type="text/css" />
+<link href="css/pages.css" rel="stylesheet" type="text/css" />
+<link href="css/lightbox.css" rel="stylesheet" type="text/css" />
+<script language="javascript" src="rooms.js"></script>
+<script type="text/javascript" src="ext-core.js"></script>
+<script type="text/javascript" src="lightbox.js"></script>
+<script>
+Ext.ux.Lightbox.register('a.liveshow-screenshot', true);
+</script>
+</head>
+<body>
+<script type="text/javascript">
+function open123FlashChat()
+		{
+			var initUser=document.getElementById("init_user").value;
+			var initPassword=document.getElementById("init_password").value;
+			var initSelectedIndex=document.getElementById("init_room").selectedIndex;
+			if(initSelectedIndex==-1)
+			{
+				alert("there are no avaiable live show room");
+				return;
+			}	
+			var initRoom=document.getElementById("init_room")[initSelectedIndex].value;
+			window.open("123flashchat.html?init_user="+initUser+"&init_password="+initPassword+"&init_room="+initRoom,"123flashchat"
+			,"height=505,width=779,toolbar=no,menubar=no,alwaysRaised=yes,scrollbars=no,resizable=yes,location=no,status=no,alwaysRaised=yes,directories=no,titlebar=no");
+		}
+		
+function open123FlashChatLiveShow()
+{
+			var win_width = window.screen.width - 5;
+			var win_height = window.screen.Height - 10;
+			if(document.getElementById("customsize").checked)
+			{
+				win_width=document.getElementById("win_width").value;
+				win_height=document.getElementById("win_height").value;
+			}
+			if (win_width < 210)
+			{
+				alert("width can't be less than 210");
+				return;
+			}
+			if (win_height < 200)
+			{
+				alert("height can't be less than 200");
+				return;	
+			}
+			var initSelectedIndex=document.getElementById("init_room").selectedIndex;
+			if(initSelectedIndex==-1)
+			{
+				alert("there are no avaiable live show room");
+				return;
+			}
+			var initRoom=document.getElementById("init_room")[initSelectedIndex].value;
+			var initSkin=document.getElementById("init_skin")[document.getElementById("init_skin").selectedIndex].value;
+			window.open("123flashchat_liveshow.html?init_room="+initRoom+"&init_skin="+initSkin,"123flashchat_liveshow"
+			,"height="+win_height+",width="+win_width+",toolbar=no,menubar=no,alwaysRaised=yes,scrollbars=no,resizable=yes,location=no,status=no,alwaysRaised=yes,directories=no,titlebar=no");
+}
+</script>
+<div class="header">
+  <div class="header-top"></div>
+  <div class="header-main">
+    <div class="header-main-logo"><a href="http://www.123flashchat.com/" target="_blank"><img src="img/header-logo.png" width="180" height="60" alt="123 Flash Chat logo" border="0"/></a></div>
+    <div class="header-main-version">Version 9.9</div>
+    <div class="header-top-nav">
+      <ul>
+        <li><a href="http://www.123flashchat.com/" target="_blank">Home</a></li>
+        <li><a href="admin-panel.html">Admin Panel</a></li>
+        <li><a href="avatar-chat.html">Various Chat Clients</a>
+        <ul>
+			<li><a href="avatar-chat.html" id="eee">Avatar Chat Demo</a></li>
+			<li><a href="live-show.html">Live Show Demo</a></li>
+			<li><a href="lite-client.html">Lite Chat Demo</a></li>
+			<li><a href="banner-chat.html" id="ggg">Banner Chat Demo</a></li>
+		</ul>
+		</li>
+        <li><a href="publish-chat.html">Publish Chat</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="header-nav">
+    <div class="header-nav-content">
+      <ul>
+        <li class="header-nav-content-line"></li>
+        <li><a href="index.html">Standard Chat Demo</a></li>
+        <li class="header-nav-content-line"></li>
+        <li><a href="html-chat.html">HTML5 Chat Demo</a></li>
+        <li class="header-nav-content-line"></li>
+        <li><a href="advanced-demo.html">Advanced Demo</a></li>
+        <li class="header-nav-content-line"></li>
+        <li><a href="integration.html">Integration</a></li>
+        <li class="header-nav-content-line"></li>
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="main">
+  <div class="main-introduce">
+  	<div class="main-introduce-background">
+   	  <div class="main-introduce-content"><img src="img/header-feature-overview.png" width="310" height="200" />
+        <h1>Introduction</h1>
+        <p align="left">It&rsquo;s a  special <strong>read-only</strong> chat client,   which  can be used to broadcast the live chat content in a certain room   of the standard  chat client to attract more users to join in, or spread   site news, sports  scores, stock price, etc.</p>
+        <p> The Live  Show is a pure <strong>HTML</strong> client, and it must    be used together with the Flash chat client, because the previous one   is a  reader, and the latter one is the content provider.</p>
+        <p><a href="img/liveshow.png" class="liveshow-screenshot"><img src="img/menu-screenshot.gif" style="vertical-align:middle; float:none; margin:0;"></a></p>
+        
+		  <div style="display:none;"><a href="img/liveshow-broadcaster.png" class="liveshow-screenshot">liveshow</a></div>	
+        </div>
+        </div>
+    </div>
+  <div class="main-content">
+      <div class="main-content-block">
+        <div class="main-content-block-title">
+          <div class="main-content-block-title-line"></div>
+        <h2 class="main-content-block-title-text">Live Show Demo</h2>
+        </div>
+        <div class="main-content-block-content_html5">
+          
+          <div class="main-content-block-content_html5-chat-block" align="center">
+            <table width="100%" cellspacing="1" cellpadding="5" bgcolor="#CCCCCC" class="live-show-table" align="center">
+	  <tr align="left"><td height="30" bgcolor="#F6F6F6" ><div><b><img src="img/jiantou.gif" width="8" height="8" > Step 1: </b>Select  one room to read</div></td><td width="270px" bgcolor="#FFFFFF">
+ 			<div>
+				<select id="init_room" name="init_room" style="width:144px; ">
+				 <script language="javascript">
+				    var roomsLength=rooms.length;
+					var roomIndex=0;
+					for(var i=0;i<roomsLength;i++)
+					{
+						var room=rooms[i];
+						if(room.en==0||room.els==0)
+						{
+							continue;
+						}
+						if(roomIndex==0)
+						{
+							document.write('<option value="'+room.id+'" selected="selected">'+room.name+'('+room.count+')</option>');
+						}
+						else
+						{
+							document.write('<option value="'+room.id+'">'+room.name+'('+room.count+')</option>');
+						}
+						roomIndex++;
+					}
+				</script>
+			    </select>
+		  </div></td></tr>
+		  <tr align="left"><td valign="top" bgcolor="#F6F6F6">
+			<div>
+			  <div align="justify"><b><img src="img/jiantou.gif" width="8" height="8" > Step 2:</b> Open Live Show<span style="margin:8px 0 0 10px; display:block; font-size:12px; color:#888888; width:350px;">(Define size and choose skin at first.)
+              </span></div>
+			</div></td><td bgcolor="#FFFFFF">
+           	<table cellpadding="5" cellspacing="0" border="0"><tr><td colspan="2"><input id="customsize" name="customsize" checked="true" type="radio">&nbsp;Width:
+                  <input name="width" size="4" id="win_width" value="779" class="select"> 
+                 &nbsp;&nbsp;&nbsp; Height: 
+                  <input name="height" size="4" id="win_height" value="505" class="select"></td></tr>
+			<tr><td colspan="2"><input id="customsize" name="customsize" type="radio"> Full Screen</td></tr>
+			<tr><td>Live Show Skin:&nbsp;</td><td>
+				 <select id="init_skin" name="init_skin">
+					<option value="default.css">Default</option>
+					<option value="bubble.css" selected="selected">Bubble</option>
+					<option value="orkut.css">Orkut</option>
+					<option value="point_rect.css">Point Rect</option>
+					<option value="point_line.css">Point Line</option>
+					<option value="gradient_rect.css">Gradient Rect</option>
+					<option value="serene.css">Serene</option>																									
+				</select></td></tr><tr><td colspan="2">
+		          <a href="123flashchat_liveshow.html" onClick="open123FlashChatLiveShow();return false;"><img src="img/menu-liveshow.gif"></a></td></tr></table></td></tr>
+		  <tr align="left">
+		    <td bgcolor="#F6F6F6">
+			<b><img src="img/jiantou.gif" width="8" height="8" > Step 3:</b> Switch  to speak<span style="margin:8px 0 0 10px; display:block; font-size:12px; color:#888888; width:350px;">(Switch to the standard chat client and log in. It’s now configured that only admin and moderator are entitled to send messages in this room in the Live Show module settings.
+Admin account: admin/admin; Moderator account: moderator/moderator
+)
+              </span></td>
+		    <td bgcolor="#FFFFFF">
+			<div><input id="init_user" name="init_user" type="text" value="admin"/></div>
+			<div><input id="init_password" name="init_password" type="password" value="admin"/></div>
+ 			<div><a href="123flashchat.html" onClick="open123FlashChat();return false;"><img src="img/menu-login.gif"></a></div></td></tr></table>
+
+          </div>
+          
+        </div>
+      </div>      <div class="footer">
+        <div class="footer-top">
+          <span class="footer-top-line"></span>
+          <span class="footer-top-white">
+            <span class="footer-top-gray"></span>
+          </span>
+          <div class="footer-nav"><a href="http://www.123flashchat.com/" target="_blank">Home</a> |    <a href="http://www.123flashchat.com/quickstart.html" target="_blank">Quick Start</a> |    <a href="http://www.123flashchat.com/chat_server_help_intro.html" target="_blank">User Manual</a> |    <a target="_blank" href="mailto:support@123flashchat.com">Email Support</a> |    <a href="http://www.123flashchat.com/support.html" target="_blank">Online Support</a> |    <a href="http://www.123flashchat.com/faq.html" target="_blank">FAQ</a> |    <a href="http://www.123flashchat.com/buy.html" target="_blank">Get The Full Version</a> |    <a href="http://www.123flashchat.com/host.html" target="_blank">Chat Hosting</a> |    <a href="http://www.123flashchat.com/update.html?v=9.9" target="_blank">Check Update</a> |    <a href="123flashchat-roomlist.html" target="_blank">Chat Rooms</a></div>
+        </div>
+        <div class="footer-copyright"><a href="http://www.topcmm.com" target="_blank">Powered by TopCMM Software Ltd.</a> <img src="img/twitter.png" width="16" height="16" /><a href="http://twitter.com/123flashchat" target="_blank">Follow us on Twitter</a> <img src="img/facebook.png" width="16" height="16" /><a href="http://www.facebook.com/pages/123flashchat/262142403796209" target="_blank">Like us on Facebook</a></div>
+      </div>
+    </div>
+</div>
+	<script type="text/javascript">
+	  var _gaq = _gaq || [];
+	  _gaq.push(['_setAccount', 'UA-1907790-18']);
+	  _gaq.push(['_trackPageview']);
+	  (function() {
+	    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	  })();
+	</script>	
+</body>
+</html>

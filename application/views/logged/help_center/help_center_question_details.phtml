@@ -1,0 +1,94 @@
+<?php include(APPPATH . "views/layouts/logged_header.phtml"); ?>
+<!-- NAVIGATION SECTION -->
+<?php include(APPPATH . "views/layouts/nav.phtml"); ?>
+<!-- /NAVIGATION SECTION -->
+</div>
+</div>
+
+
+<!-- /HEADER SECTION -->
+<div class="clr"></div>
+<?php //pr($category_details,1); ?>
+<!-- CONTENT SECTION -->
+<div id="content_section" style="margin-top:8px;">
+      <div id="container">
+      		 
+             <?php //pr($question_details); ?>
+             <!-- Help Center Start-->
+             <div class="help-center-main">
+             
+            
+        <h2 class="page-title pull-left">Help Center </h2>
+        <a onclick="goBack()" class="media-back" href="javascript:void(0)">Back</a>
+        <div class="clear"></div>
+         <div class="search-main">
+                 <form method="POST" id="help_search" name="help_search" action="<?= base_url() ?>logged/help_center/help_center_search" onsubmit="return true;">
+                     <input type="text" placeholder="Find answers" class="search-box" name="help_key">
+              <input type="button" value="Search" name="search" id="help_sub">
+                 </form>
+              
+            </div>
+        <script>
+            $(document).ready(function(){
+                $('#help_sub').click(function(){
+                    $('#help_search').submit();
+                })
+                
+            });
+function goBack() {
+    window.history.back()
+}
+</script>
+        <?php //pr($category_details); ?>
+		<div class="media-center-left"> 
+        <h3><?= $category_details[0]['cat_name']; ?></h3>
+              <div class="news-details-text"> 
+                  <?php foreach ($question_details as $val){ ?>
+            <h4 class="sub-text"><?= $val['h_title'] ?></h4>
+                      <?= nl2br(get_unformatted_string_edit($val['h_des'])) ?>
+
+               <?php } ?>
+                    </div>
+
+                    
+
+
+                    
+
+                    
+
+
+                    
+             </div>
+              <div class="media-center-right">
+                 <?php //pr($all_cat_name); ?>
+             	<h3><a href="javascript:void(0);">Troubleshooting</a></h3>
+                <div class="help-list"><ul>
+                        <?php foreach ($all_cat_name as $val){ ?>
+                	<li><a href="<?= base_url() ?><?= $val['id'] ?>/help_center_details"><?= $val['cat_name']; ?></a></li>
+                        <?php } ?>
+<!--                    <li><a href="javascript:void(0);">Lorem ipsum dolor sit amet</a></li>
+                    <li><a href="javascript:void(0);">Lorem ipsum dolor sit amet</a></li>
+                    <li><a href="javascript:void(0);">Lorem ipsum dolor sit amet</a></li>-->
+                </ul></div>
+             </div>
+             
+             <div class="clear"></div>
+
+             </div>
+      		
+            <!-- Help Center End-->
+                       
+      </div>
+      <div class="clr"></div>
+</div>
+<!-- /CONTENT SECTION -->
+<div class="clr"></div>
+
+
+<?php include(APPPATH . "views/layouts/footer.phtml"); ?>
+
+<?php /* ?>POPUPS AND SCRIPTS<?php */ ?>
+
+<?php include(APPPATH . "views/logged/blocks/common_popup.phtml"); ?>
+

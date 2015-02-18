@@ -1,0 +1,78 @@
+<input type="hidden" id="current_page" value="<?=$current_page?>">
+
+<table width="100%" border="0" cellspacing="0" cellpadding="0" class="admin-table">
+                          <tr>
+                            <th align="left" valign="middle" height="30" width="70">Posted On</th>
+                            <th align="left" valign="middle" height="30" width="150">Minister</th>
+                            <th align="left" valign="middle" height="30" width="245">Title</th>
+                            <th align="left" valign="middle" height="30" width="300">Description</th>
+                            <!--<th align="center" valign="middle" height="30" width="40">Likes</th>-->
+                            <th align="left" valign="middle" height="30" width="50">Comments</th>
+                            <th align="center" valign="middle" height="30" class="last">Actions</th>
+                          </tr>
+                              
+						<?php
+                        //pr($result_arr);
+                        if(count($result_arr)) {
+                            foreach($result_arr as $val)
+                            {
+								$full_desc =  strip_tags($val['s_post_description']);
+								$s_desc = my_substr($full_desc,142);
+								$s_status = ($val['i_disable'] == 1)?'DISABLE':'ENABLE';	
+                        ?>
+                              <tr>
+                                <td align="left" valign="top"><?= getShortDateWithTime($val['dt_created_date'],7)?></td>
+                                <td align="left" valign="top"><?=$val['s_profile_name']?></td>
+                                <td align="left" valign="top"><a href="javascript:void(0);" onclick="return show_article(<?=$val['id']?>, <?=$val['i_user_id']?>)"><?=my_substr($val['s_post_title'], 80)?></a></td>
+                                <td align="left" valign="top"><?=$s_desc?></td>
+                                <td align="center" valign="top"><?=$val['total_comments']?></td>
+                                
+                                <td align="center" valign="middle" class="last">
+                                <!--<input name="" title="Edit" type="button" class="edit-button"  value="" onclick="window.location='edit-your-shout.html'"/>-->
+                                <input name="" title="Delete" type="button" class="delete-button"  value="" onclick="delete_confirm_(<?= $val['id'] ?>);"/>
+                                <?php if($val['i_disable'] == 1){ ?>
+                            		<span id="<?=$val['id']?>_status">
+                                    <input name="" title="Enable" type="button" class="btn-06"  onclick="javascript:changeStatus(<?php echo $val['id'] ?> , 2 , <?php echo $val['i_disable'] ?>)"  value="<?=$s_status?>"/>
+                                    </span>
+								  <?php 
+                                      } 
+                                      else if($val['i_disable'] == 2){?>
+                                          <span id="<?=$val['id']?>_status">
+                                          <input name="" title="Disable" type="button" class="btn-06"  onclick="javascript:changeStatus(<?php echo $val['id'] ?> , 1 , <?php echo $val['i_disable'] ?>)"  value="<?=$s_status?>"/>
+                                          </span>
+                                  
+                                  <?php }?>
+                                </td>
+                              </tr>
+					  <?php
+                          }
+                      }
+                      else
+                      {
+                      ?>
+                              <tr>
+                                  <td style="text-align:center;" height="80" colspan="20">No data available!!!</td>
+                               </tr>
+                      <?php
+                      }
+                      ?>
+                       
+                            
+                            </table>
+
+<?php
+
+if($page_links) :
+?>         
+<div class="paging">
+            <ul><?= $page_links ?></ul>
+</div>        
+<?php
+endif;
+?>                              				
+                
+                
+                
+                
+                
+                

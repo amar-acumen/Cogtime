@@ -1,0 +1,76 @@
+<script type="text/javascript">
+$(document).ready(function(arg) {
+ $('#frm_search').submit(function(){ 
+						
+						var datatosend=$("#frm_search").serialize();
+						
+					     	showBusyScreen();
+							//alert(datatosend);
+							
+							$.ajax({
+							   type: "POST",
+							   url: admin_base_url+"social_hub/events/ajax_pagination/",
+							   data: datatosend,
+							   success: function(data){
+								  
+								  hideBusyScreen(); 
+								   $('#table_content').html(data);
+							       
+								
+								 
+							   }
+							 });	 
+					   
+						
+				});
+ 
+ });
+ </script>
+ 
+
+
+<form name="frm_search" id="frm_search" action="" method="post" onsubmit="return false;"  class="filter-search">
+    <label style="width:88px;">Event Title :</label>
+    <input type="text" name="txt_title" id="txt_title" />
+    
+    <label style="width:32px;" >Start Date :</label>
+    <input type="text"  value="" name="date_to1" id="date_to1"   class="date-field"/>
+          <img src="../images/icons/cal.png" alt="" onclick="$(this).prev().focus()" class="calender" style="margin-right:35px;" />
+          <script type="text/javascript">
+                $(document).ready(function(arg) {
+                    $.datepicker.setDefaults($.datepicker.regional['']);
+                    $("#date_to1").datepicker($.datepicker.regional['en']);
+
+                });
+          </script>
+		  <label style="width:32px;" >End Date :</label>
+    <input type="text"  value="" name="date_end1" id="date_end1"   class="date-field"/>
+          <img src="../images/icons/cal.png" alt="" onclick="$(this).prev().focus()" class="calender" style="margin-right:35px;" />
+          <script type="text/javascript">
+                $(document).ready(function(arg) {
+                    $.datepicker.setDefaults($.datepicker.regional['']);
+                    $("#date_end1").datepicker($.datepicker.regional['en']);
+
+                });
+          </script>
+		   <div class="clr"></div> 
+     <label>Created By :</label>
+     <input type="text" id="txt_name" name="txt_name" />
+     
+    
+     <label style="">Venue :</label>
+     <input type="text" name="txt_country" id="txt_country" />
+     
+    <?php /*?> <label style="width:32px;">State :</label>
+     <input type="text" id="txt_state" name="txt_state" /><?php */?>
+     
+    <?php /*?> <label>City :</label>
+     <input type="text" id="txt_city" name="txt_city" /> 
+     <div class="clr"></div>  <?php */?>
+     
+     <?php /*?><label>Street Address :</label>
+     <input type="text" id="txt_address" name="txt_address" />      <?php */?> 
+        <input type="hidden" value="Y" name="search_basic" id="search_basic"  />
+        <input name="" type="submit" value="GO" class="go" />
+</form> 
+                       

@@ -1,0 +1,352 @@
+<?php
+//pr($result_arr);
+if($result_arr){
+    
+    
+?>
+<div class="search-div">
+    <h6>Search Result:</h6>
+    <div class="result-new">
+        <ul>
+            <li><span class="left-prt">Name :</span> <span class="right-prt"><?php  echo $result_arr[0] -> s_name ?></span></li>
+    
+            <li><span class="left-prt">Address : </span> <span class="right-prt"><?= $result_arr[0] ->s_address ?></span></li>
+    
+            <li><span class="left-prt">Country : </span> <span class="right-prt"><?= get_country_name_by_id($result_arr[0]->i_country_id) ?></span></li>
+    
+            <li><span class="left-prt">Created On :</span> <span class="right-prt"><?= $result_arr[0] ->dt_created_on ?></span></li>
+    
+            <li><span class="left-prt">Email : </span> <span class="right-prt"><?= $result_arr[0]->ch_email ?>
+            </span></li>
+    
+            <li><span class="left-prt">Contact no. : </span> <span class="right-prt"><?= $result_arr[0]->s_phone ?></span></li>
+    
+        </ul>
+    <?php if($result_arr[0]->i_disabled == 1 && $result_arr[0]->ch_verification_code == '' && $result_arr[0]->ch_page_url == ''){ ?>
+                          
+        <input type="button" name="" value="Create Church Space" id="crt-churchsp" class="chresend_btn" onclick="send_church_code('<?= $result_arr[0]->id ?>','<?= $result_arr[0]->ch_email ?>')">
+    <span style="display: none" class="send_success">
+        Varification code for church space has been sent to church email id.
+    </span>
+     <div class="clear"></div>
+    <script type="text/javascript">
+    function send_church_code(id,email){
+        showBusyScreen()
+   $.ajax({
+          url : base_url+'base_controller/send_verification_code',
+          type : 'post',
+          data : ({'id' : id,'email' : email}),
+          success : function(data)
+          {
+              hideBusyScreen();
+              $('.send_success').css('display','block');
+              $('#crt-churchsp').css('display','none');
+              //alert(data)
+             // $('#table_contents').html(data);
+          //window.location.href="<?= admin_base_url() ?>help_center/help_center";
+         // location.reload();
+          }
+      }); 
+    
+    
+}
+    
+    
+    </script>
+    <?php }
+    else if($result_arr[0]->i_disabled == 1 && $result_arr[0]->ch_verification_code != '' && $result_arr[0]->ch_page_url == ''){
+        
+        ?>
+    <input type="button" name="" value="Resend Code" class="chresend_btn" onclick="send_church_code1('<?= $result_arr[0]->id ?>','<?= $result_arr[0]->ch_email ?>')">
+     <span style="display: none" class="send_success1">
+        Varification code resend successfully..
+    </span>
+    <div class="clear"></div>
+     <script type="text/javascript">
+    function send_church_code1(id,email){
+        showBusyScreen()
+   $.ajax({
+          url : base_url+'base_controller/send_verification_code',
+          type : 'post',
+          data : ({'id' : id,'email' : email}),
+          success : function(data)
+          {
+              hideBusyScreen();
+               $('.send_success1').css('display','block');
+              //alert(data)
+             // $('#table_contents').html(data);
+          //window.location.href="<?= admin_base_url() ?>help_center/help_center";
+          //location.reload();
+          }
+      }); 
+    
+    
+}
+    
+    
+    </script>
+    <?php
+    }
+    
+    else if($result_arr[0]->i_disabled == 1  && $result_arr[0]->ch_verification_code != '' && $result_arr[0]->ch_page_url != '' ) {
+        ?>
+    <?php 
+     $user_id = intval(decrypt($this->session->userdata('user_id')));
+    $query = $this->db->get_where('cg_church_admin', array('ch_admin_id' => $user_id,'ch_id'=>$result_arr[0]->id));
+            $result = $query->result();
+            //pr($result);
+           // echo count($result);
+            if(!count($result)){
+               $query1 = $this->db->get_where('cg_church_member', array('member_id' => $user_id,'church_id'=>$result_arr[0]->id));  
+               $result1 = $query1->result();
+               //pr($result1);
+               if(!count($result1)){
+                    $status = '?member_id='.$user_id.'';
+                      $link = $result_arr[0]->ch_public_url.$status;
+               }else{
+                   $status = '?member_status=1';
+                    $link = base_url().$result_arr[0]->id.'/church-wall';
+               }
+              
+            }else{
+             $status = '?admin_status =1';
+             $link = get_church_dashboard_url_by_church_id($result_arr[0]->id);
+            //pr($result);
+            }
+            
+    ?>
+    <a href="<?= $link; ?>" class="church-register"> View church Space</a> 
+            <?php
+        
+    }?>
+    
+    </div>
+</div>
+<?php
+    
+}else{
+    ?>
+
+<h1 id='no_res'>No church registered with this email id..</h1>
+<h2><a id="open_box" href="javascript:void(0)" class="church-register">Register a new church</a></h2>
+
+
+
+<div id="church_reg_new" style="display: none;">
+    <div class="register-your-church-form">
+								<form id="register_church" method="post" >
+                                                                    
+                                                                    <div class="lable-form-nw"> Church Name <span class="req-reg">*</span></div>
+									<input type="text"  name="txt_name" id="txt_name1">
+									<span class="church-form-error-message" id="err_name"></span>
+									<div class="clr"></div>   
+                                                                        <div class="lable-form-nw"> Church Email <span class="req-reg">*</span></div>
+									<input type="text"  name="txt_email_new" id="txt_email_new">
+									<span class="church-form-error-message" id="err_email"></span>
+									<div class="clr"></div>   
+                                                                        
+                                                                    <div class="lable-form-nw">Street Address <span class="req-reg">*</span></div>
+									<input type="text"  name="txt_address" id="txt_address">
+                                    <span class="church-form-error-message" id="err_address"></span>
+									<div class="clr"></div>
+                                                                    <div class="lable-form-nw"> Postcode <span class="req-reg">*</span></div>
+									<input type="text"  name="txt_postcode" id="txt_postcode">
+                                    <span class="church-form-error-message" id="err_postcode"></span>
+									<div class="clr"></div>
+                                    
+                                     <div class="lable-form-nw"> Phone No. <span class="req-reg">*</span></div>
+									<input type="text" name="txt_phone" id='txt_phone_new'>
+                                    <span class="church-form-error-message" id="err_phone"></span>
+									<div class="clr"></div>
+                           <div class="lable-form-nw"> Country <span class="req-reg">*</span></div>
+                           <select name="sel_country" id="sel_country" style="width:285px; margin-bottom:6px; height: 31px;" onchange="showState(this.value);">
+                                       <option value="-1">---</option>
+                                       <?=makeOptionCountryNew('',encrypt($posted['i_country_id']));?>
+                                       
+                                    </select>
+                                    <span class="church-form-error-message" id="err_country"></span>
+                           <div class="clr"></div>
+                                    
+                           <div class="lable-form-nw"> State <span class="req-reg">*</span></div>
+                           <select name="txt_state" id="txt_state" style="width:285px; margin-bottom:6px; height: 31px;" onchange="showCity(this.value);">
+                                       <option value="-1">---</option>
+                                       <?=$state;?>
+                                     
+                                     </select>
+                                    <span class="church-form-error-message" id="err_state"></span>
+                           <div class="clr"></div>
+                                    
+                           <div class="lable-form-nw"> City <span class="req-reg">*</span></div>
+                            <select name="txt_city" id="txt_city" style="width:285px; margin-bottom:6px;  height: 31px;">
+                                       <option value="-1">---</option>
+                                       <?=$city;?>
+                                     </select>
+                                    <span class="church-form-error-message" id="err_city"></span>
+                           <div class="clr"></div>     
+									
+
+                           
+                                    
+                           
+                                    
+									
+                                    
+                                   
+                           
+                                    
+									
+									<div class="lable-form-nw"> 
+                                                                            <input type="button" class="yellow-btn register-your-float-right" value="Register" name="" onclick="add_new_church();">
+									</div>
+									<div class="clr"></div>
+                                                                        
+									</form>
+								  </div>
+</div>
+<div id="success_ch_req" style="display: none;" class="send_success">
+   Church added Successfully , Waiting for  admin  approval. 
+</div>
+
+<script type="text/javascript">
+$(document).ready(function(){
+   $('#open_box').click(function(){
+       $('#no_res').css('display','none');
+       $('#church_reg_new').slideToggle();
+       
+   }); 
+});
+function add_new_church(){
+    var datatosend = $("#register_church").serialize();
+    
+   // showBusyScreen()
+    var txt_name  = $('#txt_name1').val();
+    var txt_email = $('#txt_email_new').val();
+    var txt_address = $('#txt_address').val();
+    var txt_postcode = $('#txt_postcode').val();
+    var txt_phone = $('#txt_phone_new').val();
+    var sel_country = $('#sel_country').val();
+    var txt_state = $('#txt_state').val();
+    var txt_city = $('#txt_city').val();
+    //alert(txt_email);
+   // alert(txt_name);
+     var chkeml = txt_email.match(/^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/);
+     
+         if(txt_name == ''){
+             $('#err_name').css('display','block').html('Please enter name')
+             var flag1 = '0'; 
+         }else{
+             $('#err_name').css('display','none');
+             var flag1 = '1';
+         } 
+         
+         
+         if(txt_email == ''){
+             $('#err_email').css('display','block').html('Please enter email id');
+             var flag2 = '0';
+         }
+         else if(chkeml==null){
+            $('#err_email').css('display','block').html('Please enter valid email id'); 
+            var flag2 = '0';
+         }else{
+            $('#err_email').css('display','none'); 
+            var flag2 = '1';
+         }
+         
+         
+         if(txt_address == ''){
+            $('#err_address').css('display','block').html('Please enter address.');
+            var flag3 = '0';
+         }else{
+             $('#err_address').css('display','none');
+             var flag3 = '1';
+         }
+         
+         
+         if(txt_postcode == ''){
+             $('#err_postcode').css('display','block').html('please  enter address');
+             var flag4 = '0';
+         }else{
+             $('#err_postcode').css('display','none');
+             var flag4 = '1';
+         }
+         
+         if(txt_phone == ''){
+          $('#err_phone').css('display','block').html('Please enter contact number');  
+          var flag5 = '0';
+         }
+         else if(isNaN(txt_phone)){
+          $('#err_phone').css('display','block').html('Please enter valid contact number');   
+          var flag5 = '0';
+         }
+         else{
+             $('#err_phone').css('display','none');
+             var flag5  = '1';
+         }
+         
+         if(sel_country == '-1'){
+             $('#err_country').css('display','block').html('Please enter country');
+             var flag6 = '0';
+         }else{
+             $('#err_country').css('display','none');
+              var flag6 = '1';
+         }
+         
+         if(txt_state == '-1'){
+             
+              $('#err_state').css('display','block').html('Please enter country');
+             var flag7 = '0';
+             
+         }else{
+             $('#err_state').css('display','none'); 
+             var flag7 = '1';
+         }
+         
+         if(txt_city == '-1'){
+              $('#err_city').css('display','block').html('Please enter city');
+             var flag8 = '0'; 
+         }else{
+            $('#err_city').css('display','none'); 
+             var flag8 = '1';
+         }
+         
+         
+         if(flag1 == '1' && flag2 == '1' && flag3 == '1' && flag4 == '1' && flag5 == '1' && flag6 == '1' && flag7 == '1' && flag8 == '1'){
+             showBusyScreen();
+                  $.ajax({
+                    type: "POST",
+                    url: base_url + "base_controller/add_new_church/",
+                    data: datatosend,
+                    dataType: 'json',
+                    success: function(data,msg) {
+                         //alert(JSON.stringify(data));
+                         //alert(data.msg)
+                        if(data.msg == 'Error!'){
+                            
+                            $('#err_email').css('display','block').html('Email id already exists.')
+                            $('#success_ch_req').css('display','none');
+                        }else if(data.msg == 'ok'){
+                            $('#err_email').css('display','none');
+                             $('#church_reg_new').slideUp();
+                             $('#success_ch_req').slideDown();
+                        }
+                        hideBusyScreen();
+                        
+
+                        
+
+                    }
+                });
+         }
+         
+         
+
+   // alert(datatosend);
+}
+
+</script>
+<?php
+}
+?>
+<style type="text/css">
+    .req-reg{ color: #d70000;}
+</style>

@@ -1,0 +1,24 @@
+                                <?php
+                                
+                                    if(count($video_result_arr))
+                                    {
+                                        $counter = 0;
+                                        foreach($video_result_arr as $video) :
+                                            $counter++;
+                                            $IMG = base_url()."uploads/user_videos/".getThumbName($video['s_video_image'],'bigthumb');
+											$photo_img = base_url().'uploads/user_videos/'.getThumbName($video['s_video_image'],'bigthumb'); 
+											$comments_array = $video['comments_arr'];
+                                ?>
+                                 
+                                <div class="friend-pro-video-sec">
+                                    <a href="<?=base_url()?>public-profile-video/<?=$profile_id?>/album/<?=$video['id']?>/video-details.html">
+                                        <div class="album-cover" style="height: 82px; width: 144px"><div  style="background:url(<?=$IMG?>) no-repeat center; height:82px; cursor:pointer;"  ></div></div>
+                                        <br class="clr"/>
+                                        <span><?php echo substr($video['s_title'],0,18)?></span>
+                                    </a>
+                                </div>                           
+                            <?php
+                                        endforeach;
+                                    }
+                            ?>
+                          

@@ -1,0 +1,265 @@
+<?php include(APPPATH."views/layouts/logged_header.phtml");?>
+            <!-- NAVIGATION SECTION -->
+      <?php include(APPPATH."views/layouts/nav.phtml");?>
+      <!-- /NAVIGATION SECTION -->
+      </div>
+</div>
+<!-- /HEADER SECTION -->
+<div class="clr"></div>
+<!-- CONTENT SECTION -->
+<div id="content_section">
+      <div id="container">
+            <div id="top_corner">&nbsp;</div>
+			 <div id="mid_content">
+				<!-- latest news -->
+                 <?php include(APPPATH ."views/layouts/latest_news.phtml");?>
+                  <!-- /latest news -->
+				   <div class="clr"></div>
+				   <!-- main container -->
+					  <div id="main_container">
+					   <!-- left container -->
+					   <?php include(APPPATH."views/layouts/leftbar.phtml");?>					  
+                       <!-- left container -->
+					   <div id="mid_container">
+							<!--credit Purchase start-->
+							<div class="page_heading etrade-nw-heading">
+							  <div class="left"><img src="images/credit-card.png" alt="" />Purchase Product Listing Credit</div>
+							</div>
+							<div class="arrow_btm"></div>
+							<div class="ne-etrade-product">
+                                <form method="post" id="frm_common_donation" onsubmit="return false;">        
+                                    <div class="lable-txt-nw" >Amount($): </div>                                    
+                                          <input name="txt_amount" id="txt_amount" class="Card-Holder-Name" type="text"  />
+                                          <div class="clr"></div>
+                                          <div class="error-message-card1" id="err_amount" style="display:none"></div>
+                                      
+                                      <div class="clr"></div>
+                                    
+                                    <div class="lable-txt-nw" > Card Holder Name:</div>
+                                    
+                                          <input name="txt_card_holder" id="txt_card_holder" type="text"  class="Card-Holder-Name"/>
+                                          <div class="clr"></div>
+                                          <div class="error-message-card1" id="err_card_holder" style="display:none">*Required Field</div>
+                                    
+                                   
+                                  
+                                   <div class="card-left">
+                                    <div class="lable-txt-nw"> Expiry Date:</div>
+                                    <div class="Expiry-Date-card">
+                                          <div class="lbl01" style=" width:90px;">
+                                                <select name="mnth" class="nw-select-box" id="mnth" style="width:90px;">
+                                                     <option value="-1">MM</option>
+                                                     <?=makeNewOptionMonth()?>
+                                                </select>
+                                               
+                                          </div>
+                                          <div class="lbl01"  style=" width:90px;">
+                                                <select name="yr" class="nw-select-box" id="yr" style="width:90px;">
+                                                       <option value="-1">YYYY</option>
+                                                       <?=makePaypalOptionYear()?>
+                                                </select>
+                                               
+                                          </div>
+                                          </div>
+                                                                                         
+                                        <div class="error-message-card" id="err_mnth" style="display:none">*Required Field</div>
+
+                                          </div>
+                                          
+                                          <div class="card-right">
+                                          <div class="lbl01 txt-normal"  style=" width:40px; padding-top:1px;"> CVV: </div>
+                                         
+                                                <input name="txt_cvv" id="txt_cvv" type="text"  class="cvv"/>
+                                                
+                                                <div class="clr"></div>
+                                        <div class="error-message-card" id="err_cvv" style="display:none">*Required Field</div>
+                                          
+                                    </div>
+                                    
+                                    <div class="clr"></div>
+                                    
+                                      <div class="clr"></div>
+                                        <div class="lable-txt-nw" > Card Type:</div>
+                                          <select name="txt_card_typ" id="yr" style="width:188px;" class="nw-select-box">
+                                          	   <option value="-1">Select</option>
+                                               <option value="Visa">Visa</option>
+                                               <option value="MasterCard">MasterCard</option>
+                                               <option value="Discover">Discover</option>
+                                               <option value="American Express">American Express</option>
+                                          </select>
+                                          <!-- Note: For direct payment only, American Express restricts direct card acceptance merchants in certain business categories. Merchants are required to accept the American Express Card Acceptance agreement in order to process American Express cards directly.-->
+
+                                          <div id="err_card_typ" class="error-message-card"  style="display:none"></div>
+                                        <div class="clr"></div>
+									 <div class="lable-txt-nw" > Card No.:</div>
+                                  
+                                          <input name="txt_card_number" type="text"  class="amount-input Card-No-input"/>
+                                          <div class="error-message-card" id="err_card_number" style="display:none">*Required Field</div>
+                                   <div class="clr"></div>
+                                    <div class="lable-txt-input" > <input name="" type="submit" value="Pay"  class="yellow-btn float-right"/></div>
+                                    <div class="clr"></div>
+                                    </form>
+                            </div>
+							  
+							  <!--credit Purchase end-->
+							  <!--balance inquiry start-->
+							<div class="page_heading">
+							  <div class="left"><img alt="" src="images/icons/bag.png" />Balance in Account</div>
+							</div>
+							<div class="arrow_btm"></div>
+							<div class="ne-etrade-product">
+								<ul class="balance-info">								
+									<li>Amount: </li>
+									<li>$ <span  id="total_amount"><?=round($total_amount,2)?></span></li>
+								</ul>
+							</div>
+							
+							   <!--balance inquiry start-->
+							   
+							    <!--Credit Purchase Details inquiry start-->
+							<div class="page_heading">
+							  <div class="left"><img alt="" src="images/icons/bag1.png" />Credit Purchase Details</div>
+							</div>
+						     <?php if($no_of_result  != 0){?>
+							<div class="ne-etrade-product" >
+                                <table class="credit-table" id="listingContent">
+								<tr>
+									<th>Amount ($)</th>
+									<th>Card Holder Name</th>
+									<th>Date of Purchase</th>
+								</tr>
+								 <?=$listingContent?>
+                                </table>
+							</div>
+                            <?php } ?>
+							
+				   <?php if($no_of_result  == 0):?>
+                        <div class="shade_box_01" style="padding-top:5px;"><div  class="shade_norecords" style="width:260px;"><p class="blue_bold12">No Result.</p></div>
+                        </div>
+                    <?php endif;?>	
+                    <?php if($no_of_result > $pagination_per_page): ?>
+                            <div class="view_more" id="show_more_feeds_div"><a href="javascript:void(0);" id="show_more_feeds_link" page_value="<?=$current_page_1?>" onclick="show_more_record($(this).attr('page_value'))">[view more] </a> </div>
+                    <?php endif; ?>
+							<!--Credit Purchase Details inquiry start-->
+							  
+							  
+					   </div>
+					   <!-- right container -->
+					   <?php include(APPPATH."views/layouts/rightbar.phtml");?>
+                       <!-- right container -->
+					  </div>
+				  <!-- main container -->
+				  <br class="clr"/>
+                
+			 
+			 </div>
+
+           
+            <div id="bot_corner">&nbsp;</div>
+      </div>
+      <div class="clr"></div>
+</div>
+ <div class="clr"></div>
+</div>
+<!-- /CONTENT SECTION -->
+<div class="clr"></div>
+
+
+
+
+<?php include(APPPATH."views/layouts/footer.phtml");?>
+<?php include(APPPATH."views/logged/blocks/common_popup.phtml");?>
+
+<script type="text/javascript">
+var ajax_req_feeds = null;
+function show_more_record(page) {
+	
+	if(ajax_req_feeds!=null) {
+		ajax_req_feeds.abort();
+	}
+	showUILoader_nodialog();
+	ajax_req_feeds = $.ajax({
+		type: 'get',
+		url: base_url+'logged/trade_activities/generate_credits_listing_AJAX/'+page,
+		dataType: 'json',
+
+		success: function (data, status) {
+
+			hideUILoader_nodialog();
+			if(data.html!='') {
+				
+				//alert(data.cur_page+'dfdf');
+				$('#listingContent').append(data.html);
+				$('#show_more_feeds_link').attr('page_value', data.cur_page);
+				$('#show_more_feeds_link').attr('onclick','');
+				$('#show_more_feeds_link').attr('onclick','show_more_record('+data.cur_page+')');
+			}
+			else {
+				$('#listingContent').append('<div class="view_more" style="text-align: center;"><p class="blue_bold12" style="font-size:14px;">No More Records.</p></div>');
+				$('#show_more_feeds_div').remove();
+			}
+            
+            if(data.view_more==false)
+            {
+                
+                $('#listingContent').append('<div class="view_more" style="text-align: center;" ><p class="blue_bold12" style="font-size:14px;">No More Records.</p></div>');
+                $('#show_more_feeds_div').remove();
+            }
+		
+
+		}	// end of success function...
+	});
+}
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(arg) {
+	
+ $('#frm_common_donation').submit(function(){ 
+					
+				     var datatosend=$("#frm_common_donation").serialize(); 
+				     showUILoader_nodialog('<img src="'+base_url+'images/loading_big.gif" width="50"/> ');
+					 showDelayMsg('Please do not refresh , your card is processing...');
+					 						  
+					  $.ajax({
+						 type: "POST",
+						 url: base_url+'logged/trade_activities/purchaseProductCredit',
+						 data: datatosend,
+						 dataType: 'json',
+						 success: function(data){
+							 
+							 $('[class ^= "error-message-card"]').each(function(i){
+										$(this).attr('style','display:none');
+							 });
+							 $('.error-message-card1').hide;
+							 
+							 hideDelayMsg();
+							 hideUILoader_nodialog();
+							 if(data.success ==false){
+								  
+								  for ( var id in data.arr_messages ){
+									  //alert(data.arr_messages[id]);
+									  if( $('#'+id) != null ) { //alert(111);
+										  $('#'+id).html(data.arr_messages[id]);
+										  $('#'+id).css('display', 'block');
+									  }
+								  }
+								 	showUIMsg(data.msg);
+							 }
+							 else{
+									$('#frm_common_donation')[0].reset();
+									$('#listingContent').append(data.listingContent);
+									$('#total_amount').html(data.total_amount);
+									showUIMsg(data.msg);
+									location.reload();
+							 }
+								
+						 }
+					   });	 
+				});
+ 
+ });
+//});
+ </script>
+
+

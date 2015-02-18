@@ -1,0 +1,171 @@
+<div class="clr"></div>
+<!--navigation section start -->
+<?php include(APPPATH."views/layouts/admin/admin_nav.phtml");?>
+<!--navigation section end -->
+<div id="content_section">
+      <div id="container">
+            <div id="mid_content">
+                  <div class="page_heading left">
+                        <div class="left"><img src="../images/icons/login.png" alt="" />  eFreebies Products</div>
+                  </div>
+                  <div class="clr"></div>
+                  <div id="right_container">
+                        <div class="arrow_btm"></div>
+                        <div class="content_area">
+                            <!--filter section start -->
+                            <div class="filter">
+                                <span class="filter-by">Filter By &raquo;</span>
+                                <form name="frm_search" id="frm_search" action="" method="post" enctype="multipart/form-data" class="filter-search" onSubmit="return false;"  style="width:820px;">
+                                    <label>Category :</label>
+                                    <div class="field01">
+                                          <select name="category" id="category" style="width:183px;" onChange="show_subcategory($(this).val())">
+                                           <option value="-1">Select</option>
+                                              <?=makeOptionEtradeTopCategory()?>
+                                          </select>
+                                    </div>
+                                    <span style="display:none;" id="subCategorySpan">
+                                    <label style="margin-left:5px;">Sub Category :</label>
+                                    <div class="field01">
+                                          <select name="sub_category" id="subCategory" style="width:206px;">
+                                          </select>
+                                    </div>
+                                    </span>
+                                    <div class="clr"></div>
+                                    <label>Title :</label><input type="text" name="txt_title" style="margin-right:43px;" />
+                                    <label>Brand :</label><input type="text" name="txt_brand" style="margin-right:31px;" />
+                                    <label>Code :</label><input type="text" name="product_code" style="width:100px;" />
+                                    
+                                   <!-- <div class="clr"></div>
+                                      <label>Price Range Between :</label>
+                                    <input type="text" style="width:112px; margin-right:64px;" name="txt_start_price" />
+                                    
+                                    <label>To :</label><input type="text" name="txt_end_price" />
+                                    
+                                  <label>User Name :</label>
+                                    <input type="text" name="txt_user_name" />-->
+                                    
+                                    <input type="hidden" id="frm_typ" value="0"/>
+                                    <input type="hidden" value="Y" name="search_basic" id="search_basic"  />
+        							<input name="" type="submit" value="GO" class="go" />
+                                </form>  
+                                <div class="clr"></div>
+                            </div>
+                            <!--filter section end -->
+                            
+                            <!--tab section start -->
+                            <div class="tab-box">
+                                <div class="tab_content title-div">
+                                    <ul>
+                                        <li class="first select"><a href="javascript:void(0);">Products</a></li>
+                                        <li class="noBg"><a href="javascript:void(0);"><span>e</span>Freebies Request(s)</a></li>
+                                    </ul>
+                                </div>
+                                <div class="clr"></div>
+                                <div class="tab_details detail-div">
+                                    <!--product chart box -->
+                                     <div class="show lavel-01"  id="PRODUCT_DIV">
+                                         <?=$product_content?>    
+                                    </div>
+                                    <!--/product chart box -->
+                                    <!--efreebie request box -->
+                                    <div class="lavel-01" id="REQUEST_DIV">
+                                        <?=$request_content?>       
+                                    </div>
+                                    <!--/efreebie request box -->
+                                </div>
+                            </div>
+                            <!--tab section end -->
+                        
+                        	<div class="clr"></div>
+                        </div>
+                  </div>
+                  <div class="clr"></div>
+            </div>
+      </div>
+      <div class="clr"></div>
+</div>
+<!-- /CONTENT SECTION -->
+
+<!--popup one start-->
+<div class="lightbox delete-product" style="width:500px;">
+      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="../images/close.png" alt="" /></a></div>
+      <div class="top"><div>&nbsp;</div></div>
+      <div class="mid">
+            <div class="heading" style="margin-bottom:0px;">
+                  <div class="left">
+                        <h4>Delete Product</h4>
+                  </div>
+            </div>
+               <div class="shade_box_white">
+               <p class="center-text">Do you really want to delete this Product?</p>
+               <form action="" method="post" enctype="multipart/form-data">
+               <input type="hidden" id="hd_del_product_id" />
+               		<input name="" type="button" value="Yes" class="btn" style="margin-left:146px;" onClick="delete_()"/>
+                    <input name="" type="button" value="No" class="btn" onclick="hide_dialog()"/>
+               </form>   
+               <div class="clr"></div>
+            </div>
+            
+      </div>
+      <div class="bot"><div>&nbsp;</div></div>
+</div>
+<!--popup one end-->
+
+<!--popup two start-->
+<div class="lightbox delete-request" style="width:500px;">
+      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="../images/close.png" alt="" /></a></div>
+      <div class="top"><div>&nbsp;</div></div>
+      <div class="mid">
+            <div class="heading" style="margin-bottom:0px;">
+                  <div class="left">
+                        <h4>Delete Buy Request</h4>
+                  </div>
+            </div>
+               <div class="shade_box_white">
+               <p class="center-text">Do you really want to delete this Request?</p>
+               <form action="" method="post" enctype="multipart/form-data">
+               <input type="hidden" id="hd_del_request_id" />
+               		<input name="" type="button" value="Yes" class="btn" style="margin-left:146px;"  onClick="delete_req()"/>
+                    <input name="" type="button" value="No" class="btn" onclick="hide_dialog()"/>
+               </form>   
+               <div class="clr"></div>
+            </div>
+            
+      </div>
+      <div class="bot"><div>&nbsp;</div></div>
+</div>
+<!--popup two end-->
+
+<!--popup product details start-->
+<div class="lightbox product-details" style="width:700px;">
+      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="../images/close.png" alt="" /></a></div>
+      <div class="top"><div>&nbsp;</div></div>
+      <div class="mid">
+            <div class="heading" style="margin-bottom:0px;">
+                  <div class="left">
+                        <h4>Galaxy Note</h4>
+                  </div>
+            </div>
+               <div class="shade_box_white product" id="detail_box">
+				</div>
+            
+      </div>
+      <div class="bot"><div>&nbsp;</div></div>
+</div>
+<!--popup product details end-->
+<script type="text/javascript">
+// JavaScript Document for content tab
+$(document).ready(function() {
+	$(".tab_content ul li a").click(function() {
+		$('.tab_content ul li').removeClass('select');
+		$(this).parent('li').addClass('select');
+		var index = jQuery('.tab_content ul li a').index(jQuery(this));
+		$('.tab_details > div').hide();
+		$('.tab_details > div').filter(':eq(' + index + ')').show();
+		$('#frm_typ').val(index);
+  	});
+	
+ });
+
+
+</script>

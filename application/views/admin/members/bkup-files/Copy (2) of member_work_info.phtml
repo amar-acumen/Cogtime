@@ -1,0 +1,295 @@
+<div class="lavel-01">
+
+                                	<!--title section -->
+                                	<div class="sec-title">
+                                    	<span class="title-left"></span>
+                                        <div class="title-body"><h2>Work</h2></div>
+                                    </div>
+                                    <!--/title section -->
+                                    <!--detail section -->
+                                    <div class="sec-detail">
+                                    
+                                        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="member-table text-table">
+                                        <?php 
+                                       
+                                        $count= count($result['work_arr']);
+                                            
+                                            if($count==0)
+                                                $count=1;
+                                            for($i=0;$i<$count;$i++)    :
+                                            
+                                            $country  = $result["work_arr"][$i]["s_employer_country"];
+                                            $state    = $result["work_arr"][$i]["s_employer_state"];
+                                            $city     = $result["work_arr"][$i]["s_employer_city"];
+                                            
+                                            $work_address=array();
+                                            if(!empty($country))    
+                                                $work_address['country']=$country;
+                                            if(!empty($state))
+                                                $work_address['state']=$state;
+                                            if(!empty($city))
+                                                $work_address['city']=$city;
+                                            
+                                            $address = implode(', ',$work_address);
+                                            
+                                            $work_experience_year_from = $result['work_arr'][$i]['s_experience_year_from'];
+                                            $work_experience_month_from = $result['work_arr'][$i]['i_experience_month_from'];
+                                            $work_experience_year_to = $result['work_arr'][$i]['s_experience_year_to'];
+                                            $work_experience_month_to = $result['work_arr'][$i]['i_experience_month_to'];
+                                            
+                                            if($work_experience_year_from=='-1')
+                                            {
+                                                $work_experience_month_from=-1;
+                                                $experience_from = "";
+                                            }
+                                                
+                                            else
+                                                $experience_from = $work_experience_year_from;
+                                                
+                                            $experience_to= " to ";
+                                            if($result['work_arr'][$i]['e_is_current_employer']=='yes')
+                                                $experience_to .= "till now";
+                                            else
+                                                $experience_to .= $work_experience_year_to;  
+                                            
+                                            
+                                        ?>
+                                            <tr>
+                                              <td align="left" valign="top" height="25" width="180" class="label">Employer</td>
+                                              <td align="left" valign="top" width="20" class="label">:</td>
+                                              <td align="left" valign="top" ><?php echo $result['work_arr'][$i]['s_employer_name'];?></td>
+                                            </tr>
+                                            <tr>
+                                              <td align="left" valign="top" height="25" width="180" class="label">Work Place</td>
+                                              <td align="left" valign="top" width="20" class="label">:</td>
+                                              <td align="left" valign="top" ><?php echo $address;?></td>
+                                            </tr>
+                                            <tr>
+                                              <td align="left" valign="top" height="25" width="180" class="label">Position</td>
+                                              <td align="left" valign="top" width="20" class="label">:</td>
+                                              <td align="left" valign="top" ><?php echo $result['work_arr'][$i]['s_position'];?></td>
+                                            </tr>
+                                            <tr>
+                                              <td align="left" valign="top" height="25" width="180" class="label">Period</td>
+                                              <td align="left" valign="top" width="20" class="label">:</td>
+                                              <td align="left" valign="top" ><?php echo $experience_from.$experience_to;?></td>
+                                            </tr>
+                                            <tr>
+                                                <td>&nbsp;</td>
+                                            </tr>
+                                            <?php 
+                                                endfor;
+                                            ?>
+                                            <tr>
+                                              <td align="left" valign="bottom" height="40" colspan="2">&nbsp;</td>
+                                              <td align="left" valign="bottom"><a href="javascript:void(0);" class="edit-btn">Edit</a></td>
+                                            </tr>
+                                        </table>
+                                        
+                                        <form id="frmManageWorkProfile"  method="post" action="<?=admin_base_url()?>members/member_details/modify_my-profile_work_info_ajax/<?=$result['id']?>" onsubmit="return modify_my_work_profile_ajax()" enctype="multipart/form-data">   
+                                        <?php 
+                                       
+                                            $work_no=0;
+                                            
+                                            for($i=0;$i<$count;$i++)   :   
+                                            
+                                            $work_no++;
+                                            $db_id=isset($result['work_arr'][$i]['id'])? $result['work_arr'][$i]['id']:'' ;
+                                            
+                                        ?>
+                                        <table id="<?php echo "work_".$work_no;?>" width="100%" border="0" cellspacing="0" cellpadding="0" class="member-table form-table work_info">
+                                        <?php
+                                            if($i>0)    
+                                                echo '<tr><td class="label" width="180" valign="top" height="30" align="left"></td><td class="label" width="20" valign="top" align="left"></td><td valign="top" align="left" style=" float: right; width:193px;"><a class="close" href="javascript:void(0);" onclick="admin_closeExtraWorkDiv(this)" ><img src="'.base_url().'images/icons/close.png" alt="" ></a></td></tr>';
+                                        
+                                        ?>
+                                            <tr>
+                                              <td align="left" valign="top" height="30" width="180" class="label">Employer</td>
+                                              <td align="left" valign="top" width="20" class="label">:</td>
+                                              <td align="left" valign="top" ><input type="text" name="txt_employer_name[]" value="<?php echo isset($result['work_arr'][$i]['s_employer_name'])? $result['work_arr'][$i]['s_employer_name']:'';?>" /></td>
+                                            </tr>
+                                            
+                                            <tr>
+                                              <td align="left" valign="top" height="30" width="180" class="label">Work country</td>
+                                              <td align="left" valign="top" width="20" class="label">:</td>
+                                              <td align="left" valign="top" ><input type="text" name="txt_employer_country[]" value="<?php echo isset($result['work_arr'][$i]['s_employer_country'])? $result['work_arr'][$i]['s_employer_country']:'';?>" /></td>
+                                            </tr>
+                                            <tr>
+                                              <td align="left" valign="top" height="30" width="180" class="label">Work state</td>
+                                              <td align="left" valign="top" width="20" class="label">:</td>
+                                              <td align="left" valign="top" ><input type="text" name="txt_employer_state[]" value="<?php echo isset($result['work_arr'][$i]['s_employer_state'])? $result['work_arr'][$i]['s_employer_state']:'';?>" /></td>
+                                            </tr>
+                                            <tr>
+                                              <td align="left" valign="top" height="30" width="180" class="label">Work city</td>
+                                              <td align="left" valign="top" width="20" class="label">:</td>
+                                              <td align="left" valign="top" ><input type="text" name="txt_employer_city[]" value="<?php echo isset($result['work_arr'][$i]['s_employer_city'])? $result['work_arr'][$i]['s_employer_city']:'';?>" /></td>
+                                            </tr>
+                                            
+                                            <tr>
+                                              <td align="left" valign="top" height="30" width="180" class="label">Position</td>
+                                              <td align="left" valign="top" width="20" class="label">:</td>
+                                              <td align="left" valign="top" ><input type="text" name="txt_employer_position[]" value="<?php echo isset($result['work_arr'][$i]['s_position'])? $result['work_arr'][$i]['s_position']:'';?>" /></td>
+                                            </tr>
+                                            <tr>
+                                              <td align="left" valign="top" height="30" width="180" class="label">Period</td>
+                                              <td align="left" valign="top" width="20" class="label">:</td>
+                                              <td align="left" valign="top" >
+                                              <select name="mnth_from[]" class="profile_combo mnth_from" style="width:90px;margin-right:5px; ">
+                                             <option value="-1">Select</option>
+                                             <?php echo makeOptionMonth(isset($result["work_arr"][$i]["i_experience_month_from"])? $result["work_arr"][$i]["i_experience_month_from"]:'')?> 
+                                            </select>
+                                               <script type="text/javascript">
+                                                    $(document).ready(function(arg) {
+                                                        $(".profile_combo").msDropDown();
+                                                        //$(".profile_combo").hide();
+                                                    })
+                                                </script>
+                                          
+                                        <select name="year_from[]" class="profile_combo year_from" style="width:60px;">
+                                                   <option value="-1">Select</option>
+                                                 <?=makeOptionYear(isset($result["work_arr"][$i]["s_experience_year_from"])? $result["work_arr"][$i]["s_experience_year_from"]:'')?>
+                                         </select>
+                                         
+                                         
+                                         <span class="left"> &nbsp; To  &nbsp;</span>
+                                         <select name="mnth_to[]" class="profile_combo mnth_to" style="width:90px; margin-right:5px;" <?php if($result["work_arr"][$i]["e_is_current_employer"]=='yes') echo "disabled='disabled' id= 'disabled_mnth_to' ";?>>
+                                             <option value="-1">Select</option>
+                                             <?php echo makeOptionMonth(isset($result["work_arr"][$i]["i_experience_month_to"])? $result["work_arr"][$i]["i_experience_month_to"]:'');?> 
+                                            </select>
+                         
+                                           
+                                          
+                                         <select name="year_to[]" class="profile_combo year_to" style="width:60px;" <?php if($result["work_arr"][$i]["e_is_current_employer"]=='yes') echo "disabled='disabled' id= 'disabled_year_to'";?>>
+                                                   <option value="-1">Select</option>
+                                                 <?=makeOptionYear(isset($result["work_arr"][$i]["s_experience_year_to"])? $result["work_arr"][$i]["s_experience_year_to"]:'')?>
+                                         </select></td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                                <td >
+                                                <?php //echo isset($result["work_arr"][$i]["e_is_current_employer"])? "yes" : "no";?>
+                                                    <input name="is_current_employer" type="radio" class="radio_cur_emp"  onclick="return current_emp(this);"  <?php if($result["work_arr"][$i]["e_is_current_employer"]=='yes') echo "checked";?> value="<?= $result["work_arr"][$i]["id"]; ?>"  /> Current Employer
+                                                </td>
+                                            </tr>
+                                            
+                                            <tr><td>&nbsp;</td></tr>
+                                             <input type="hidden" name="db_id[]" id="dbId" value="<?php echo $db_id;?>"  />          
+                                        </table>
+                                        
+                                        <?php
+                                            endfor;
+                                        ?>
+                                        
+                                        <table id="add_more_work" width="100%" border="0" cellspacing="0" cellpadding="0" class="member-table form-table">
+                                        <!--<tr><td align="left" valign="bottom" height="30" colspan="2">&nbsp;</td></tr>-->
+                                        </table>
+                                        
+                                         
+                                         <table width="100%" border="0" cellspacing="0" cellpadding="0" class="member-table form-table">  
+                                           <tr>
+                                              <td align="left" valign="top" height="30" width="180" colspan="3"><a href="javascript:void(0);" class="add-one" onClick="return admin_add_extra_work_div()">Add One</a></td>
+                                            </tr>
+                                         </table>
+                                         
+                                         
+                                         <table width="100%" border="0" cellspacing="0" cellpadding="0" class="member-table form-table">
+                                         <tr>
+                                              <td align="left" valign="bottom" height="30" colspan="2">&nbsp;</td>
+                                              <td align="left" valign="bottom">
+                                              
+                                              <input name="" type="submit" class="btn"  value="Update"/>
+                                              <input name="" type="reset" class="btn"  value="Cancel" onclick="window.location='<?php admin_base_url();?>members/member-details/<?php echo $result['id'];?>'" />
+                                              </td>
+                                            </tr>
+                                         </table>
+                                         <input type="hidden" name="total_work_divs" id="h_work" value="<?php echo $work_no;?>" />
+                                        
+										</form>
+                                    </div>
+                                    <!--/detail section -->
+                                </div>
+                                
+<!-- ********************* -->
+<div id="div_copy" style="display:none;">
+    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="member-table work_info">
+    
+        <tr><td class="label" width="180" valign="top" height="30" align="left"></td><td class="label" width="20" valign="top" align="left"></td><td valign="top" align="left" style=" float: right; width:193px;"><a class="close" href="javascript:void(0);" onclick="admin_closeExtraWorkDiv(this)" ><img src="<?= base_url()?>images/icons/close.png" alt="" ></a></td></tr>
+    
+
+        <tr>
+          <td align="left" valign="top" height="30" width="180" class="label">Employer</td>
+          <td align="left" valign="top" width="20" class="label">:</td>
+          <td align="left" valign="top" ><input type="text" name="txt_employer_name[]" value="" /></td>
+        </tr>
+        
+        <tr>
+          <td align="left" valign="top" height="30" width="180" class="label">Work country</td>
+          <td align="left" valign="top" width="20" class="label">:</td>
+          <td align="left" valign="top" ><input type="text" name="txt_employer_country[]" value="" /></td>
+        </tr>
+        <tr>
+          <td align="left" valign="top" height="30" width="180" class="label">Work state</td>
+          <td align="left" valign="top" width="20" class="label">:</td>
+          <td align="left" valign="top" ><input type="text" name="txt_employer_state[]" value="" /></td>
+        </tr>
+        <tr>
+          <td align="left" valign="top" height="30" width="180" class="label">Work city</td>
+          <td align="left" valign="top" width="20" class="label">:</td>
+          <td align="left" valign="top" ><input type="text" name="txt_employer_city[]" value="" /></td>
+        </tr>
+        
+        <tr>
+          <td align="left" valign="top" height="30" width="180" class="label">Position</td>
+          <td align="left" valign="top" width="20" class="label">:</td>
+          <td align="left" valign="top" ><input type="text" name="txt_employer_position[]" value="" /></td>
+        </tr>
+        <tr>
+          <td align="left" valign="top" height="30" width="180" class="label">Period</td>
+          <td align="left" valign="top" width="20" class="label">:</td>
+          <td align="left" valign="top" >
+          <select name="mnth_from[]" class="profile_combo1 mnth_from" style="width:90px;margin-right:5px; ">
+         <option value="-1">Select</option>
+         <?php echo makeOptionMonth()?> 
+        </select>
+           <?php /*?><script type="text/javascript">
+                $(document).ready(function(arg) {
+                    $(".profile_combo").msDropDown();
+                    $(".profile_combo").hide();         
+                })
+            </script><?php */?>
+      
+    <select name="year_from[]" class="profile_combo1 year_from" style="width:60px;">
+               <option value="-1">Select</option>
+             <?=makeOptionYear()?>
+     </select>
+     
+     
+     <span class="left"> &nbsp; To  &nbsp;</span>
+     <select name="mnth_to[]" class="profile_combo1 mnth_to" style="width:90px; margin-right:5px;" >
+         <option value="-1">Select</option>
+         <?php echo makeOptionMonth(); ?> 
+        </select>
+    
+       
+      
+     <select name="year_to[]" class="profile_combo1 year_to" style="width:60px;" >
+               <option value="-1">Select</option>
+             <?=makeOptionYear()?>
+     </select></td>
+        </tr>
+    
+        <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td >
+                <input name="is_current_employer" type="radio" class="radio_cur_emp"  onclick="return current_emp(this);"  value=""  /> Current Employer
+            </td>
+        </tr>
+        
+        <tr><td>&nbsp;</td></tr>
+         <input type="hidden" name="db_id[]" id="dbId" value=""  />          
+    </table>
+</div>
+<!-- ********************* -->                                

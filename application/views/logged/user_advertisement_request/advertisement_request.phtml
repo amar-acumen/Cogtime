@@ -1,0 +1,584 @@
+<?php include(APPPATH . "views/layouts/logged_header.phtml"); ?>
+<!-- NAVIGATION SECTION -->
+<?php include(APPPATH . "views/layouts/nav.phtml"); ?>
+<!-- /NAVIGATION SECTION -->
+</div>
+</div>
+
+
+<!-- /HEADER SECTION -->
+<div class="clr"></div>
+
+<!-- CONTENT SECTION -->
+<div id="content_section" style="margin-top:8px;">
+      <div id="container">
+      		 
+             
+             <!-- Help Center Start-->
+             <div class="help-center-main">             
+             <h2 class="page-title">Advertisment</h2>             
+            </div>
+             
+        <ul class="care-tab-link">
+            <li class="active">Cogtime Advertisment</li>
+            <li>Media Center Advertisment</li>
+        </ul>
+        
+        <div class="care-tab-main-container block">
+            <form method="POST" action="<?= base_url() ?>logged/advertisement_request/add_cogtime_adv?sandbox=1" name="cogtimeAddSub" enctype="multipart/form-data" id="cogtimeAddSub">
+       <div class="form-main">
+       	<label>Name: </label>
+        <input type="text" name="user" value="<?= get_username_by_id(intval(decrypt($this->session->userdata('user_id')))) ?>" readonly="readonly" disabled="disabled">
+        <span>Required</span>
+       </div>
+       <div class="clear"></div>
+
+        <div class="form-main">
+        <label>Email: </label>
+        <input type="text" name="eml" value="<?= get_useremail_by_id(intval(decrypt($this->session->userdata('user_id')))) ?>" readonly="readonly" disabled="disabled">
+        <span>Required</span>
+       </div>
+       <div class="clear"></div>
+
+        <div class="form-main">
+        <label>Start Date: </label>
+        <input type="text" name="create_time" id="create_time" class="create_time">
+        <script type="text/javascript">
+                $(window).load(function(arg) {
+                       var dateToday = new Date(); 
+                        $.datepicker.setDefaults($.datepicker.regional['']);
+                       $("#create_time").datepicker({
+                                            regional: 'en',
+                                            dateFormat: 'yy-mm-dd',
+                                            minDate: dateToday
+                                        });
+                });
+	</script> 
+        <span id="error1" style="display: none;"></span>
+       </div>
+       <div class="clear"></div>
+        
+         <div class="form-main">
+        <label>End Date: </label>
+        <input type="text" id="create_time1" name="create_time1" class="create_time1">
+          <script type="text/javascript">
+                $(window).load(function(arg) {
+                        //var dateToday = new Date(); 
+                        var date = new Date();
+                            var today = date.getTime();
+                            var nextday = new Date(today+86400000);
+                        $.datepicker.setDefaults($.datepicker.regional['']);
+                         $("#create_time1").datepicker({
+                                            regional: 'en',
+                                            dateFormat: 'yy-mm-dd',
+                                            minDate: nextday
+                                        });
+                        //var dateToday = new Date();
+
+                });
+	</script> 
+        <span id="error2" style="display: none;" ></span>
+       </div>
+       <div class="clear"></div>
+
+        <div class="form-main">
+        <label>Page Location: </label>
+        
+        <select id="cost_cal" name="cost_cal" >
+            <option value="">--------------------------------------------------------------------------------------------------------------------------------</option>
+            <option value="home_page_cost">Home</option>
+            <option value="socail_hub_chitter_tweets_page_cost">Socail Hub Chitter Tweets</option>
+            <option value="socail_hub_blogs_page_cost">Socail Hub Blogs</option>
+            <option value="socail_hub_rings_page_cost">Socail Hub Rings</option>
+            <option value="socail_hub_events_page_cost">Socail Hub Events</option>
+            <option value="socail_hub_chat_rooms_page_cost">Socail Hub Chat Rooms</option>
+            <option value="build_kingdom_prayer_partners_zone_page_cost">Build Kingdom Prayer Partners Zone</option>
+            <option value="build_kingdom_bible_quiz_page_cost">Build Kingdom Bible Quiz</option>
+            <option value="build_kingdom_find_a_church_page_cost">Build Kingdom Find a Church</option>
+            <option value="my_profile_page_cost">My Profile</option>
+            <option value="my_friends_zone_page_cost">My Friends Zone</option>
+            <option value="my_netpals_zone_page_cost">My NetPals Zone</option>
+            <option value="my_photos_page_cost">My Photos</option>
+            <option value="my_audios_page_cost">My Audios</option>
+            <option value="my_videos_page_cost">My Videos</option>
+            <option value="my_messages_page_cost">My Messages</option>
+            <option value="my_privacy_settings_page_cost">My Privacy Settings</option>
+            <option value="my_alert_settings_page_cost">My Alert Settings</option>
+            <option value="my_email_notification_settings_page_cost">My Email Notification Settings</option>
+            <option value="organizer_page_cost">Organizer</option>
+            <option value="change_password_page_cost">Change Password</option>
+            <option value="deactivate_account_page_cost">Deactivate Account</option>
+            <option value="public_profile_cost">Public Profile</option>
+              
+        </select>
+        &pound;<div class="price"></div>
+        <input type="hidden" name="cogtime_adv_cost"  id="cogtime_adv_cost">
+       <span style="display: none; float: none;" id="error5"></span>
+       </div>
+       <div class="clear"></div>
+       <div class="form-main">
+        <label>Advertisement URL: </label>
+        <input type="text" name="addurl" id="addurl"><span style="display: none;" id="error3"></span>
+        <p style="display: block; padding-left: 153px; text-align: right; width: 52%; font-size: 12px; color: #919191;">Exp : http://www.cogtime.com</p>
+        
+       </div>
+        <div class="clear"></div>
+          <div class="form-main">
+        <label>Advertisement Image: </label>
+        <input type="file" name="addimage" id="addimage"> <span style="display: none; padding-left: 150px;" id="error4"></span>
+        <p style="display: block; padding-left: 153px; text-align: right; width: 28%; font-size: 12px; color: #919191;">(Preferred dimension is 200 X 200.)</p>
+       </div>
+        <div class="clear"></div>
+         <div class="form-main">
+        <label>&nbsp;</label>
+         <input type="hidden" name="action" value="process" />
+        <input type="submit" value="Submit" class="btn" id="cg_ad">
+               </div>
+       <div class="clear"></div>
+            </form>
+         
+         
+        
+    </div>
+             <script type="text/javascript">
+                $(window).load(function(){
+                    $('#cost_cal').change(function(){
+                         
+                        var page_log = $(this).val();
+                        var start_date = $('#create_time').val();
+                        var end_date = $('#create_time1').val();
+                        if(start_date == ''  ){
+                          $('#error1').css('display','block').html('Please enter start date');
+                          var flag1 = 0;
+                        }
+                        else{
+                            $('#error1').css('display','none');
+                            var flag1 = 1;
+                        }
+                        if(end_date == ''  ){
+                          $('#error2').css('display','block').html('Please enter end date');
+                          var flag2 = 0;
+                        }
+                        else
+                        {
+                            $('#error2').css('display','none');
+                            var flag2 = 1;
+                            
+                        }
+                        if(flag1 == 1 && flag2 == 1){
+                             showBusyScreen();
+                           // alert(end_date)
+                           $.ajax({
+          url : base_url+'logged/advertisement_request/get_cost',
+          type : 'post',
+          data : ({'page_log' : page_log,'start_date':start_date,'end_date':end_date}),
+          success : function(data)
+          {
+              hideBusyScreen();
+              $('.price').html(data);
+              $('#cogtime_adv_cost').val(data)
+              $('#error5').css('display','none');
+          }
+      });
+                        }
+                        //alert(end_date)
+                        
+                    });
+                    $('#cg_ad').click(function(e){
+                        e.preventDefault();
+                        var url = $('#addurl').val();
+                        var re = /^(http|https)?:\/\/[a-zA-Z0-9-\.]+\.[a-z]{2,4}/;
+                         var image = $('#addimage').val();
+                         var cost_cal = $('#cost_cal').val();
+                         var create_time  = $('#create_time').val();
+                         var create_time1  = $('#create_time1').val();
+                          var extension = image.split('.');
+		         extension = extension[1];
+                           if(url == ''){
+                                  $('#error3').css('display','block').html('Please input url');
+                            var flag3 = 0;
+                           }
+                           else if(!re.test(url)){
+                             $('#error3').css('display','block').html('Please input valid url');
+                            var flag3 = 0;
+                            //alert()
+                        }
+                        else{
+                            $('#error3').css('display','none');
+                            var flag3 = 1; 
+                        }
+                        if(image == ''){
+                            $('#error4').css('display','block').html('Please input image');
+                            var flag4 = 0;
+                        }
+                         else if(extension != 'jpg' && extension !='png' &&  extension !='jpeg'){
+                            $('#error4').css('display','block').html('Please input valid image');
+                            var flag4 = 0;
+                        }
+                        else{
+                            $('#error4').css('display','none');
+                            var flag4 = 1; 
+                        }
+                        if(cost_cal == ''){
+                              $('#error5').css('display','block').html('Please select page location');
+                            var flag5 = 0;
+                           // alert()
+                        }
+                        else{
+                           $('#error5').css('display','none');
+                            var flag5 = 1;  
+                        }
+                        if(create_time == ''){
+                             $('#error1').css('display','block').html('Please enter start date');
+                            var flag6 = 0;
+                        }
+                        else
+                        {
+                         $('#error1').css('display','none');
+                            var flag6 = 1;  
+                        }
+                        if(create_time1 == ''){
+                              $('#error2').css('display','block').html('Please enter end date');
+                            var flag7 = 0;
+                        }
+                        else{
+                             $('#error2').css('display','none');
+                            var flag7 = 1;  
+                        }
+                         if($('#cogtime_adv_cost').val() == ''){
+                           $('#error5').css('display','block').html('Please select page location again');
+                           var flag8 = 0;
+                        }
+                        else{
+                            $('#error5').css('display','none');
+                            var flag8 = 1;
+                        }
+                        if(flag3 == 1 && flag4 == 1 && flag5 == 1 && flag6 == 1 && flag7 == 1 && flag8 == 1){
+                            //alert('ss')
+                            $('#cogtimeAddSub').submit()
+                        }
+                       
+
+
+                        //alert(url)
+                        
+                    });
+                     $('#create_time,#create_time1').click(function(){
+                    //alert('s')
+                   $('#cogtime_adv_cost').val('');
+                  // $('#er3').css('display','block').html('Please enter page location again');
+                });
+                });
+             </script>  
+
+<div class="care-tab-main-container">
+        
+    <form method="POST" action="<?= base_url() ?>logged/advertisement_request/add_media_center_adv?sandbox=1" name="mediaAddSub" enctype="multipart/form-data" id="mediaAddSub">
+       <div class="form-main">
+        <label>Name: </label>
+        <input type="text" name="mediauser" value="<?= get_username_by_id(intval(decrypt($this->session->userdata('user_id')))) ?>" readonly="readonly">
+        <span>Required</span>
+       </div>
+       <div class="clear"></div>
+
+        <div class="form-main">
+        <label>Email: </label>
+        <input type="text" name="mediaeml" value="<?= get_useremail_by_id(intval(decrypt($this->session->userdata('user_id')))) ?>" readonly="readonly">
+        <span>Required</span>
+       </div>
+       <div class="clear"></div>
+
+        <div class="form-main">
+        <label>Start Date: </label>
+        <input type="text" name="time" class="time" id="time">
+         <script type="text/javascript">
+                $(document).ready(function(arg) {
+                        var dateToday = new Date(); 
+                        $.datepicker.setDefaults($.datepicker.regional['']);
+                         $("#time").datepicker({
+                                            regional: 'en',
+                                            dateFormat: 'yy-mm-dd',
+                                            minDate: dateToday
+                                        });
+                        //var dateToday = new Date();
+
+                });
+	</script> 
+        <span id="er1" style="display:none; "></span>
+       </div>
+       <div class="clear"></div>
+        
+         <div class="form-main">
+        <label>End Date: </label>
+        <input type="text" name="time2" class="time2" id="time2">
+         <script type="text/javascript">
+                $(document).ready(function(arg) {
+                       // var dateToday = new Date(); 
+                         var date = new Date();
+                            var today = date.getTime();
+                            var nextday = new Date(today+86400000);
+                        $.datepicker.setDefaults($.datepicker.regional['']);
+                         $("#time2").datepicker({
+                                            regional: 'en',
+                                            dateFormat: 'yy-mm-dd',
+                                            minDate: nextday
+                                        });
+                        //var dateToday = new Date();
+
+                });
+	</script> 
+        <span id="er2" style="display:none; "></span>
+       </div>
+       <div class="clear"></div>
+
+        <div class="form-main">
+        <label>Page Location: </label>
+        <select id="media_cost" name="media_cost">
+                <option value="">----------------------------------------------------------------------------------------------------------------------------------------------------</option>
+                <option value="media_center_banner_page_cost">Media Center Landing page</option>
+                <option value="read_page_cost">read</option>
+                <option value="watch_page_cost">watch</option>
+                <option value="listen_page_cost">listen</option>
+                <option value="media_center_category_page_cost">Media Center Category page</option>
+                <option value="media_center_search_page_cost">Media Center Search page</option>
+                
+            </select>
+       
+        &pound;<div class="price1"></div>
+         <span id="er3" style=" display: none;"></span>
+         <input type="hidden" name="media_cost_value" id="media_cost_value">
+       </div>
+       <div class="clear"></div>
+
+
+       <div class="form-main">
+<!--        <label>Address: </label>
+        <input type="text">
+        <span>Required</span>
+       </div>
+       <div class="clear"></div>
+
+       <div class="form-main">
+        <label>Phone No.: </label>
+        <input type="text">
+        <span>Required</span>
+       </div>-->
+       <div class="clear"></div>
+       
+        <div class="form-main">
+        <label>Advertisement URL: </label>
+        <input type="text" name="mediaaddurl" id="mediaaddurl">
+        <p style="display: block; padding-left: 153px; text-align: right; width: 52%; font-size: 12px; color: #919191;">Exp : http://www.cogtime.com</p>
+        <span id="er4" style=" display: none"></span>
+       </div>
+        <div class="clear"></div>
+          <div class="form-main">
+        <label>Advertisement Image: </label>
+        <input type="file" name="mideaaddimage" id="mideaaddimage">
+        <p id="img1" style="display: block; padding-left: 153px; text-align: right; width: 28%; font-size: 12px; color: #919191;">(Preferred dimension is 200 X 200.)</p>
+        <p id="img2" style="display: none; padding-left: 153px; text-align: right; width: 28%; font-size: 12px; color: #919191;">(Preferred dimension is 1000 X 258.)</p>
+         <span id="er5" style=" display: none"></span>
+       </div>
+        <div class="clear"></div>
+
+        
+         <div class="form-main">
+        <label>&nbsp;</label>
+         <input type="hidden" name="action" value="process" />
+        <input type="submit" value="Submit" class="btn" id="mc_add">
+               </div>
+        
+       <div class="clear"></div> 
+       
+        
+       
+  </div>
+    </form>
+    <!---------media center ad------------------->
+        <script type="text/javascript">
+            $(window).load(function(){
+                $('#mc_add').click(function(e){
+                     e.preventDefault();
+                     var start_time = $('#time').val();
+                     var end_time = $('#time2').val();
+                     var page_log = $('#media_cost').val();
+                     var mediaaddurl = $('#mediaaddurl').val();
+                     var re1 = /^(http|https)?:\/\/[a-zA-Z0-9-\.]+\.[a-z]{2,4}/;
+                     var mideaaddimage = $('#mideaaddimage').val();
+                      var extension1 = mideaaddimage.split('.');
+		         extension1 = extension1[1];
+                     if(start_time == ''){
+                         $('#er1').css('display','block').html('Please enter start date');
+                         var flag1 = 0;
+                     }
+                     else{
+                         $('#er1').css('display','none');
+                         var flag1 = 1;
+                     }
+                     if(end_time == ''){
+                         $('#er2').css('display','block').html('Please enter end date');
+                         var flag2 = 0;
+                     }
+                     else{
+                         $('#er2').css('display','none');
+                         var flag2 = 1;
+                     }
+                     if(page_log == ''){
+                         $('#er3').css('display','block').html('Please enter page location');
+                         var flag3 = 0;
+                     }
+                      else{
+                          $('#er3').css('display','none');
+                          var flag3 = 1;
+                      }
+                      if(mediaaddurl == ''){
+                          $('#er4').css('display','block').html('Please enter url');
+                         var flag4 = 0;
+                      }
+                     else if(!re1.test(mediaaddurl)){
+                         $('#er4').css('display','block').html('Please enter valid url');
+                         var flag4 = 0;
+                         
+                     }
+                     else{
+                          $('#er4').css('display','none');
+                          var flag4 = 1;
+                     }
+                     if(mideaaddimage == ''){
+                           $('#er5').css('display','block').html('Please enter image');
+                         var flag5 = 0;
+                     }
+                     else if(extension1 != 'jpg' && extension1 !='png' &&  extension1 !='jpeg'){
+                          $('#er5').css('display','block').html('Please enter valid image');
+                         var flag5 = 0;
+                     }
+                     else{
+                          $('#er5').css('display','none');
+                          var flag5 = 1;
+                     }
+                     if($('#media_cost_value').val() == ''){
+                           $('#er3').css('display','block').html('Please select page location ');
+                           var flag6 = 0;
+                        }
+                        else{
+                            $('#er3').css('display','none');
+                            var flag6 = 1;
+                        }
+                     
+                     if(flag1 == 1 && flag2 == 1 && flag3 == 1 && flag4 == 1 && flag5 == 1 && flag6 == 1){
+                        // alert('ok')
+                        $('#mediaAddSub').submit();
+                     }
+                     
+                     
+                    // alert('ss')
+                });
+                 $('#time,#time2').click(function(){
+                    //alert('s')
+                   $('#media_cost_value').val('');
+                  // $('#er3').css('display','block').html('Please enter page location again');
+                });
+            });
+        </script>
+        <!---------------------->
+    
+         <script type="text/javascript">
+                $(window).load(function(){
+                    $('#media_cost').change(function(){
+                         
+                        var page_log = $(this).val();
+                        var start_date = $('#time').val();
+                        var end_date = $('#time2').val();
+                        if(start_date == ''  ){
+                          $('#er1').css('display','block').html('Please enter start date');
+                          var flag1 = 0;
+                        }
+                        else{
+                            $('#er1').css('display','none');
+                            var flag1 = 1;
+                        }
+                        if(end_date == ''  ){
+                          $('#er2').css('display','block').html('Please enter end date');
+                          var flag2 = 0;
+                        }
+                        else
+                        {
+                            $('#er2').css('display','none');
+                            var flag2 = 1;
+                            
+                        }
+                         if(page_log == 'media_center_banner_page_cost'){
+                            $('#img1').css('display','none');
+                             $('#img2').css('display','block');
+                        }
+                        else
+                        {
+                            $('#img2').css('display','none');
+                             $('#img1').css('display','block');
+                        }
+                        
+                        if(flag1 == 1 && flag2 == 1){
+                             showBusyScreen();
+                           // alert(end_date)
+                           $.ajax({
+          url : base_url+'logged/advertisement_request/get_media_cost',
+          type : 'post',
+          data : ({'page_log' : page_log,'start_date':start_date,'end_date':end_date}),
+          success : function(data)
+          {
+              hideBusyScreen();
+              $('.price1').html(data);
+               $('#media_cost_value').val(data);
+                $('#er3').css('display','none');
+          }
+      });
+                        }
+                        //alert(end_date)
+                        
+                    });
+                })
+             </script>  
+
+
+             
+
+             
+
+
+        
+
+
+             
+             <div class="clear"></div>
+
+             </div>
+      		
+            <!-- Help Center End-->
+                       
+      </div>
+<!-- /CONTENT SECTION -->
+<div class="clr"></div>
+<script type="text/javascript">
+ $('.care-tab-link li').click(function(){
+  	var careTabNo = $(this).index();
+	$('.care-tab-link li').removeClass('active');
+	$(this).addClass('active');
+	$(this).parents().find('.care-tab-main-container').hide();
+	$(this).parents().find('.care-tab-main-container').eq(careTabNo).show();
+	
+  });
+</script>
+<!--<script type="text/javascript">
+$(document).ready(function(){
+    
+   $('#ui-datepicker-div').css('display','none'); 
+});
+
+
+</script>-->
+<?php include(APPPATH . "views/layouts/footer.phtml"); ?>
+
+<?php /* ?>POPUPS AND SCRIPTS<?php */ ?>
+
+<?php //include(APPPATH . "views/logged/blocks/common_popup.phtml"); ?>
+

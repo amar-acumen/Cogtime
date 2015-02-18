@@ -1,0 +1,36 @@
+<div class="lightbox send_message_div" style="width: 600px;">
+      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="images/close.png" alt="" /></a></div>
+      <div class="top">
+            <div>&nbsp;</div>
+      </div>
+      <div class="mid">
+            <div class="heading" style="margin-bottom:0px;">
+                  <div class="left">
+                        <h4><img src="images/icons/msg.png" alt="" width="30"  />Write Message</h4>
+                  </div>
+            </div>
+            <div class="frm_box">
+             <div class="lable05">To:</div> 
+             <div class="field03"><span style="color:#004084; font-size:14px;"><?=$public_arr_profile_info['s_profile_name']?></span></div>
+             <input type="hidden" id="recipent_id" value="<?=encrypt($public_arr_profile_info['id'])?>" />
+             <div class="clr"></div>
+             
+              <div class="lable05">Subject:</div> 
+             <div class="field03"><input type="text" name="subject" id="subject" /></div>
+             <div class="clr"></div>
+             
+             <div class="lable05">Body:</div> 
+             <div class="field03"><textarea style="width:400px; height:100px;" rows="" cols="" name="message" id="message"></textarea></div>
+             <div class="error_msg" id="err_send_message" style=" margin-left:138px;"></div>
+             <div class="clr"></div>
+              <div class="clr"></div>
+             
+             <div class="lable05">&nbsp;</div> 
+             <div class="field01"><input type="button" class="btn" value="Send" name="" onclick="send_message_from_public_profile()" /></div>
+             <div class="clr"></div>
+           </div>
+      </div>
+      <div class="bot">
+            <div>&nbsp;</div>
+      </div>
+</div>

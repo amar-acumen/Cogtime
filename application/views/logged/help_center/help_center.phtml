@@ -1,0 +1,204 @@
+<?php include(APPPATH . "views/layouts/logged_header.phtml"); ?>
+<!-- NAVIGATION SECTION -->
+<?php include(APPPATH . "views/layouts/nav.phtml"); ?>
+<!-- /NAVIGATION SECTION -->
+</div>
+</div>
+
+
+<!-- /HEADER SECTION -->
+<div class="clr"></div>
+
+<!-- CONTENT SECTION -->
+<div id="content_section" style="margin-top:8px;">
+      <div id="container">
+      		 
+             
+             <!-- Help Center Start-->
+             <div class="help-center-main">
+             
+             <h2 class="page-title">Help Center</h2>
+             <div class="search-main">
+                 <form method="POST" id="help_search" name="help_search" action="<?= base_url() ?>logged/help_center/help_center_search" onsubmit="return true;">
+                     <input type="text" placeholder="Find answers" class="search-box" name="help_key">
+                     <input type="button" value="Search" name="search"  id="help_sub">
+                 </form>
+                 <script type="text/javascript">
+                 $(window).load(function(){
+                    $('#help_sub').click(function(){
+                        $('#help_search').submit();
+                    });
+                 });
+                 </script>
+               
+              
+            </div>
+             <?php if($help1){ ?>
+             <div class="help-category-main">
+                 <h3>
+                    <?php 
+                    $query = $this->db->get_where('cg_help_center_category', array('id' => 1));
+                        foreach ($query->result() as $row)
+                            {
+                                echo $row->cat_name;
+                                $id = $row->id;
+                            }
+                        ?> 
+                 </h3>
+                  <ul>
+                      <?php foreach ($help1 as $val){ ?>
+                    <li><a href="<?= base_url() ?><?= $val['id'] ?>/help_center_question_details"><?= my_substr($val['h_title'],46) ?></a></li>
+<!--                    <li><a href="javascript:void(0);">Lorem ipsum dolor sit amet</a></li>
+                    <li><a href="javascript:void(0);">Lorem ipsum dolor sit amet</a></li>-->
+                      <?php } ?>
+                  </ul>
+                  <a href="<?= base_url() ?><?=$id ?>/help_center_details" class="read-more">Read More</a>
+             </div>
+             <?php } ?>
+             
+             
+          <?php if($help2){ ?>
+        <div class="help-category-main">
+                <h3><?php 
+                    $query = $this->db->get_where('cg_help_center_category', array('id' => 2));
+                        foreach ($query->result() as $row)
+                            {
+                                echo $row->cat_name;
+                                $id = $row->id;
+                            }
+                        ?> </h3>
+                  <ul>
+                      <?php foreach ($help2 as $val){ ?>
+                  <li><a href="<?= base_url() ?><?= $val['id'] ?>/help_center_question_details"><?= my_substr($val['h_title'],46) ?></a></li>
+              
+                      <?php } ?>
+                  </ul>
+                  <a href="<?= base_url() ?><?=$id ?>/help_center_details" class="read-more">Read More</a>
+             </div>
+          <?php } ?>
+               
+             <?php if($help3){ ?>
+             <div class="help-category-main">
+                <h3><?php 
+                    $query = $this->db->get_where('cg_help_center_category', array('id' => 3));
+                        foreach ($query->result() as $row)
+                            {
+                                echo $row->cat_name;
+                                $id = $row->id;
+                            }
+                        ?> </h3>
+                  <ul>
+                      <?php foreach ($help3 as $val){ ?>
+                    <li><a href="<?= base_url() ?><?= $val['id'] ?>/help_center_question_details"><?= my_substr($val['h_title'],46) ?></a></li>
+                      <?php } ?>
+                    
+                  </ul>
+                  <a href="<?= base_url() ?><?=$id ?>/help_center_details" class="read-more">Read More</a>
+             </div>
+             <?php } ?>
+             
+             <?php if($help4){ ?>
+             <div class="help-category-main">
+                <h3><?php 
+                    $query = $this->db->get_where('cg_help_center_category', array('id' => 4));
+                        foreach ($query->result() as $row)
+                            {
+                                echo $row->cat_name;
+                                $id = $row->id;
+                            }
+                        ?> </h3>
+                  <ul>
+                      <?php foreach ($help4 as $val){ ?>
+                    <li><a href="<?= base_url() ?><?= $val['id'] ?>/help_center_question_details"><?= my_substr($val['h_title'],46) ?></a></li>
+                      <?php } ?>
+                  </ul>
+                  <a href="<?= base_url() ?><?=$id ?>/help_center_details" class="read-more">Read More</a>
+             </div>
+             <?php } ?>
+
+             
+             <?php if($help5){ ?>
+        <div class="help-category-main">
+                <h3><?php 
+                    $query = $this->db->get_where('cg_help_center_category', array('id' => 5));
+                        foreach ($query->result() as $row)
+                            {
+                                echo $row->cat_name;
+                                $id = $row->id;
+                            }
+                        ?> </h3>
+                  <ul>
+                       <?php foreach ($help5 as $val){ ?>
+                    <li><a href="<?= base_url() ?><?= $val['id'] ?>/help_center_question_details"><?= my_substr($val['h_title'],46) ?></a></li>
+                       <?php } ?>
+                  </ul>
+                  <a href="<?= base_url() ?><?=$id ?>/help_center_details" class="read-more">Read More</a>
+             </div>
+             <?php } ?>
+             
+              <?php if($help6){ ?>
+
+             <div class="help-category-main">
+                <h3><?php 
+                    $query = $this->db->get_where('cg_help_center_category', array('id' => 6));
+                        foreach ($query->result() as $row)
+                            {
+                                echo $row->cat_name;
+                                $id = $row->id;
+                            }
+                        ?> </h3>
+                  <ul>
+                      <?php foreach ($help6 as $val){ ?>
+                    <li><a href="<?= base_url() ?><?= $val['id'] ?>/help_center_question_details"><?= my_substr($val['h_title'],46) ?></a></li>
+                      <?php } ?>
+                  </ul>
+                  <a href="<?= base_url() ?><?=$id ?>/help_center_details" class="read-more">Read More</a>
+             </div>
+              <?php } ?>
+             
+             <?php if($help7){ ?>
+
+             <div class="help-category-main">
+                <h3><?php 
+                    $query = $this->db->get_where('cg_help_center_category', array('id' => 7));
+                        foreach ($query->result() as $row)
+                            {
+                                echo $row->cat_name;
+                                $id = $row->id;
+                            }
+                        ?> </h3>
+                  <ul>
+                      <?php foreach ($help7 as $val){ ?>
+                    <li><a href="<?= base_url() ?><?= $val['id'] ?>/help_center_question_details"><?= my_substr($val['h_title'],46) ?></a></li>
+                      <?php } ?>
+                  </ul>
+                  <a href="<?= base_url() ?><?=$id ?>/help_center_details" class="read-more">Read More</a>
+             </div>
+              <?php } ?>
+             <div class="clear"></div>
+
+             </div>
+      		
+            <!-- Help Center End-->
+                       
+      </div>
+      <div class="clr"></div>
+</div>
+<!-- /CONTENT SECTION -->
+<div class="clr"></div>
+
+<script>
+    $(document).ready(function(){
+       
+                $('.help-category-main:eq(2)').addClass('no-right-mrgn');
+                 $('.help-category-main:eq(5)').addClass('no-right-mrgn');
+            
+        
+    });
+</script>
+<?php include(APPPATH . "views/layouts/footer.phtml"); ?>
+
+<?php /* ?>POPUPS AND SCRIPTS<?php */ ?>
+
+<?php include(APPPATH . "views/logged/blocks/common_popup.phtml"); ?>
+

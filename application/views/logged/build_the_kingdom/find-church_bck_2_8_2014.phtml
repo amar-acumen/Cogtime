@@ -1,0 +1,300 @@
+<?php include(APPPATH."views/layouts/logged_header.phtml");?>
+<!-- NAVIGATION SECTION -->
+<?php include(APPPATH."views/layouts/nav.phtml");?>
+<!-- /NAVIGATION SECTION -->
+</div>
+</div>
+<!-- /HEADER SECTION -->
+<div class="clr"></div>
+<script type="text/javascript" src="//maps.googleapis.com/maps/api/js?sensor=false"></script>
+<link href="http://code.google.com/apis/maps/documentation/javascript/examples/default.css" rel="stylesheet" type="text/css" />
+<div id="content_section">
+      <div id="container">
+            <div id="top_corner">&nbsp;</div>
+            <div id="mid_content">
+                  <!-- latest news -->
+                   <?php include(APPPATH ."views/layouts/latest_news.phtml");?>
+                  <!-- /latest news -->
+                  <div class="clr"></div>
+                  <!-- main container -->
+                  <div id="main_container">
+				  
+				   		<!-- left container -->
+                        <?php include(APPPATH."views/layouts/leftbar.phtml");?>
+                        <!-- /left container -->
+						
+						<!-- mid container -->
+                        <div id="mid_container">
+							<div class="page_heading">
+                                    <div class="left"><img alt="" src="images/icons/church.png" />Find a Church </div>
+                                    <div class="right"><a href="register-your-church.html" class="register-your-church"><img alt="" src="images/icons/church_plus.png" />Register your Church</a></div>
+                              </div>
+							  
+							 <div class="arrow_btm"></div>
+							 <div class="find-church-mid">
+							 
+								  <div class="register-your-church-form">
+								  <form id="frm_srch" method="post" action="" onsubmit=" return false;">
+									<div class="lable-form-nw"> Church Name:</div>
+									<input type="text"  name="txt_name" id="txt_name" />
+									<div class="clr"></div>
+                                    
+									<div class="lable-form-nw">Address:</div>
+									<input type="text"  name="txt_address" />
+									<div class="clr"></div>
+                                    
+									<div class="lable-form-nw"> Postcode:</div>
+									<input type="text" name="txt_postcode" />
+									<div class="clr"></div>
+                                    
+									<!--<div class="lable-form-nw"> Country:</div>
+									<select name="srch_country" id="srch_country" style="width:285px; margin-bottom:6px; height: 31px;" onchange="showState(this.value);">
+                                       <option value="-1">---</option>-->
+                                     <!--  <?//=makeOptionCountryNew('',encrypt($posted['i_country_id']));?>-->
+                                       
+                                    <!--</select>
+									<div class="clr"></div>
+                                    
+									<div class="lable-form-nw"> State:</div>
+									<select name="srch_state" id="srch_state" style="width:285px; margin-bottom:6px; height: 31px;" onchange="showCity(this.value);">
+                                       <option value="-1">---</option>-->
+                                       <!--<?#=$state;?>-->
+                                    <!-- </select>
+									<div class="clr"></div>
+                                    
+									<div class="lable-form-nw"> City:</div>
+									<select name="srch_city" id="srch_city" style="width:285px; margin-bottom:6px;  height: 31px;">
+                                       <option value="-1">---</option>
+                                       <?#=$city;?>
+                                     </select>
+									<div class="clr"></div>-->
+                                    <div class="lable-form-nw">Location: </div>
+                                      <div class="field01">
+                                            <input name="txt_location" id="txt_location" type="text" value="<?=$this->session->userdata('location')?>" style="width:463px;"/>
+                                      </div>
+                                      <div class="clr"></div>
+                                       <div style="font-weight: normal;font-size: 11px;font-style: italic; ">(Note : Please use ',' (comma) between places.) </div> 
+                                      <div class="clr"></div>
+                                    
+									<div class="lable-form-nw"> Phone No.:</div>
+									<input type="text" name="txt_phone" />
+									<div class="clr"></div>
+                                    
+									<div class="lable-form-nw"> 
+										<input type="submit" class="yellow-btn register-your-float-right click-church" value="Search" name="" />
+									</div>
+                                    <input type="hidden" value="Y" name="search_basic" id="search_basic"  />
+									<div class="clr"></div>
+									</form>
+							 </div>
+							 </div>
+							 <a href="javascript:void(0)" class="ModifySearch">Modify Search</a>
+							  
+                              <DIV ID="main_div" style="display:none;" >
+								<div class="nw-right-heading search-heading-section">
+								<div class="left">
+									<h4>Search</h4>
+								</div>
+								</div>
+								
+									<ul class="search-list-display" id="church_content">
+									<?=$church_content?>
+				
+                               </ul>
+                                  
+                              	    <?php if($no_of_result == 0): ?>
+                                        <div class="view_more" style="text-align:center;padding-top: 20px;height: 30px;" id="no_project" >No Church.</div>
+                                     <?php endif; ?>  
+                                    
+                              </DIV>
+							 
+						</div>
+						<!-- mid container -->
+						<!-- right container -->
+                        <?php include(APPPATH."views/layouts/rightbar.phtml");?>
+                        <!-- /right container -->
+						
+						 <div class="clr"></div>
+				  
+                              
+                        </div>
+                  </div>
+                  <!-- /main container -->
+                  <div class="clr"></div>
+            </div>
+            <div id="bot_corner">&nbsp;</div>
+      </div>
+      <div class="clr"></div>
+</div>
+<!-- /CONTENT SECTION -->
+<div class="clr"></div>
+
+<!-- FOOTER SECTION -->
+ <?php include(APPPATH."views/layouts/footer.phtml");?>
+ <?php include(APPPATH."views/logged/blocks/common_popup.phtml");?>
+<!-- /FOOTER SECTION -->
+<!--/map section-->
+<div class="lightbox map-page-popup" style="width:500px;">
+      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="<?=base_url()?>images/close.png" alt="" /></a></div>
+       
+       <iframe id="map_container" ></iframe>                             
+     
+            
+      </div>
+      <div class="bot"><div>&nbsp;</div></div>
+</div>
+<!--map section end-->
+<script type="text/javascript">
+$(document).ready(function(arg) {
+ $('#frm_srch').submit(function(){ 
+ 
+		if($('#txt_name').val() !=''  && $('#txt_name').val().length < 3) {
+			showUIMsg("Please give atleast three letters text in church name field.");
+			return false;
+		}
+		else{
+			
+		$('.ModifySearch').css('display','block');
+		$('.register-your-church-form').slideUp('slow');	
+		var datatosend=$("#frm_srch").serialize();
+		showBusyScreen();
+			$.ajax({
+			   type: "POST",
+			   url: base_url+"logged/build_the_kingdom/search_church_ajax_pagination/",
+			   data: datatosend,
+			   dataType: 'json',
+			   success: function(data){
+				  hideBusyScreen(); 
+				
+				   $('#main_div').show();
+				   $('#show_more_div').remove();
+				    $('#church_content').html('');
+				   if(data.html != ''){
+						  $('#no_project').hide();
+						  $('#church_content').html(data.html);
+					}
+				   if(data.view_more==true)
+					{
+						cur_page = data.cur_page;
+						$('#main_div').append('<div class="custom_show view_more" id="show_more_div" style="width:475px;"><a href="javascript:void(0);" id="show_more_records_link" page_value="'+cur_page+'" onclick="show_more_records('+cur_page+')">[view more] </a> </div>');
+						
+					}
+					
+				}
+			 });
+		}
+	});
+ 
+ 
+ });
+ 
+ var ajax_req_feeds = null;
+function show_more_records(page) {
+	
+	if(ajax_req_feeds!=null) {
+		ajax_req_feeds.abort();
+	}
+	
+	showUILoader_nodialog();
+	ajax_req_feeds = $.ajax({
+		type: 'get',
+		url: base_url+'logged/build_the_kingdom/search_church_ajax_pagination/'+page,
+		dataType: 'json',
+
+		success: function (data, status) {
+			$('#show_more_div').remove();
+			hideUILoader_nodialog();
+			if(data.html!='') {
+				
+				$('#church_content').append(data.html);
+				$('#show_more_records_link').attr('page_value', data.cur_page);
+				$('#show_more_records_link').attr('onclick','');
+				$('#show_more_records_link').attr('onclick','show_more_records('+data.cur_page+')');
+			}
+			else {
+				$('#church_content').append('<div class="view_more " style="text-align: center;"><p class="blue_bold12" style="font-size:14px;">No More Church.</p></div>');
+				$('#show_more_div').remove();
+			}
+			
+			if(data.view_more==true)
+			{
+				cur_page = data.cur_page;
+				$('#main_div').append('<div class="custom_show view_more" id="show_more_div" style="width:475px;"><a href="javascript:void(0);" id="show_more_records_link" page_value="'+cur_page+'" onclick="show_more_records('+cur_page+')">[view more] </a> </div>');
+				
+			}
+            
+            if(data.view_more==false)
+            {
+                
+                $('#church_content').append('<div class="view_more " style="text-align: center;" ><p class="blue_bold12" style="font-size:14px;">No More Church.</p></div>');
+                $('#show_more_div').remove();
+            }
+		
+
+		}	// end of success function...
+	});
+}
+</script>
+<script>
+$(function() {
+/*var m= "2220 AUGY,2220 BAZOCHES-SUR-VESLES,2220 BRAINE,2220 BRENELLE";
+alert(m.replace(/[,]/g,"<br>"));*/
+
+$("#txt_location").autocomplete("<?php echo base_url();?>logged/prayer_wall/send_cities", {
+    width: 473,
+    selectFirst: true,
+    minChars: 3,
+    multiple: false,
+	multipleSeparator: "\n",
+	max: null,
+    //matchContains: false,
+    formatItem: formatItem
+   });
+   
+  
+ 
+   
+});
+	
+function formatItem(row) 
+{//console.log(row);
+ //var n=row[0].replace(/[,]/g,"\n"); console.log(n);	
+ if(row[0]!="No match found")
+  return  "<span style='font-size:11px; font-weight:normal; margin:0px; padding: 3px 5px ;cursor: pointer; display:block;'>" + row[0]+"</span>";
+ else
+  return " (<span style='font-size:11px;'>" +row[0]+"</span>)";
+}
+
+	
+function show_map(id)
+{ //alert(id);
+		
+	if($('#map_div'+id).css('display')=="none" ){
+		showBusyScreen();
+		$.ajax({
+				   type: "POST",
+				   url: base_url+"logged/build_the_kingdom/view_map/"+id,
+				   dataType: 'json',
+				   success: function(data){
+				    hideBusyScreen(); 
+							if(data.success == true){
+								$('#map_div'+id).html(data.html)
+								$('#map_div'+id).slideToggle('slow');
+								showmap();
+							}
+							else
+								showUIMsg("Please check address.");
+							//$('#map_container').contents().find('html').html(data.html);
+							//show_dialog('map-page-popup');
+				 }
+		 });
+	}
+	else{
+		$('#map_div'+id).slideToggle('fast');
+	}
+
+}
+
+
+</script>
+

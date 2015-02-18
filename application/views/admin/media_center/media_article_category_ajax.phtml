@@ -1,0 +1,47 @@
+<input type="hidden" id="current_page" value="<?=$current_page?>">
+
+<table width="100%" border="0" cellspacing="0" cellpadding="0" class="admin-table">
+                              <tr>
+                                <th align="left" valign="middle" height="30" width="150">Category</th>
+                                <th align="center" valign="middle" height="30" class="last" style="width: 42px;">Actions</th>
+                              </tr>
+                              
+<?php
+//pr($result_arr);
+if(count($result_arr)) {
+    foreach($result_arr as $news)
+    {
+?>
+                              <tr>
+                                <td align="left" valign="top"><?=$news['s_cat_name']?></td>
+                                <td align="center" valign="middle" class="last">
+                                <input name="" title="Edit" type="button" class="edit-button"  value="" onclick="window.location='<?=admin_base_url()?><?=$current_page?>/<?=$news['id']?>/edit-christian-news-category.html'"/>
+                                 <?php if($news['is_hidden'] == 1){ ?><input type="button" value="Show" id="cat-read-en" class="media-show" onclick="return change_read_cat_status_enable('<?= $news['id'] ?>')"><?php } if($news['is_hidden'] == 0){ ?><input type="button" value="Hide" id="cat-read-ds" class="media-hide" onclick="return change_read_cat_status_disable('<?= $news['id'] ?>')"><?php } ?>
+                                </td>
+                              </tr>
+<?php
+    }
+}
+else
+{
+?>
+                            <tr>
+                                <td style="text-align:center;" height="80" colspan="20">No data available!!!</td>
+                             </tr>
+<?php
+}
+?>
+                       
+                            
+                            </table>
+
+<?php
+
+if($page_links) :
+?>         
+<div class="paging">
+            <ul><?= $page_links ?></ul>
+</div>        
+<?php
+endif;
+?>                              

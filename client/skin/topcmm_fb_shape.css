@@ -1,0 +1,94 @@
+/* Body of the bar (outer)*/
+body #topcmm_fb {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    line-height: normal;
+    color: #111111;
+    font-size: 11px;
+    height: 25px;
+    padding: 0;
+    width: 100%;
+    z-index: 65535;
+    font-family: Tahoma, Arial, Sans-serif;
+	text-align:left;
+}
+
+/* prevent that div margin is already set in page*/
+body #topcmm_fb div {
+    margin: 0;
+}
+
+/* Body of the bar (inner)*/
+#topcmm_fb #presence_ui {
+    margin: 0 15px;
+    position: relative;
+    overflow: visible !important;
+}
+
+#topcmm_fb #presence_bar {
+    background-position: top left;
+    background-repeat: repeat-x;
+    height: 25px;
+    padding: 0;
+}
+
+#topcmm_fb .presence_section {
+    float: left;
+    padding: 0;
+    height: 25px;
+}
+
+#topcmm_fb .presence_bar_button {
+    cursor: pointer;
+    height: 25px;
+    padding: 0 6px;
+    position: relative;
+    width: 100px;
+    padding-top: 3px;
+    background: url("../images/MegaSprite_5004_ltr.gif") repeat-x scroll 1 -24px transparent
+}
+
+#topcmm_fb .presence_bar_button.focused {
+    border-bottom: 1px solid #333333;
+}
+
+#topcmm_fb #presence_bar_right .presence_section {
+    float: right;
+}
+
+/* Tab focused*/
+#topcmm_fb #presence_ui .focused {
+    margin: -1px 0 1px;
+}
+
+#topcmm_fb .unselectable {
+    -moz-user-select: none;
+}
+
+
+#topcmm_fb .hide4swf {
+    width: 1px;
+    height: 1px;
+}
+
+
+#topcmm_fb .fb_123flashchat_clearfix {
+    display: inline-block;
+}
+
+#topcmm_fb .presence_menu_opts_wrapper {
+    background: transparent none repeat scroll 0 0;
+    border: 0px;
+    bottom: 27px;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    right: 0;
+    _bottom: 27px;
+}
+
+
+#topcmm_fb .unselectable {
+    -moz-user-select: none;
+}

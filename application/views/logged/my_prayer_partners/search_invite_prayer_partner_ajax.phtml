@@ -1,0 +1,89 @@
+<?php  //pr($posted);
+	if(count($search_result_friends) >0) {
+		?>
+<div class="arrow_btm"></div>
+<div class="div_content" style=" margin-top:0px;">
+      <div class="shade_box_blue" style="padding-top:5px; margin-bottom:0px;">
+          <div class="page_heading_01">
+                <div class="left" style="padding-left:10px;"> Search Result (<?=$no_of_result?>)</div>
+          </div>
+           <div style="margin-left:395px;font-size: 12px;line-height: 24px;margin-top: -35px;width: 270px;">
+                <div> <img alt="" src="images/icons/blue-icon.png" /> [ 100% Match]</div>
+                <div><img alt="" src="images/icons/away.png" /> [Possible Match]</div>
+          </div>
+      </div>
+      
+
+<?php
+            foreach($search_result_friends as $key =>$val):   
+            $add = array();
+            
+            $name = $val['s_displayname'];
+			  if(!empty($val['s_city']))
+                  $add['city']=$val['s_city'];
+				  
+			  if(!empty($val['s_state']))
+                  $add['state']=$val['s_state'];
+              if(!empty($val['i_country_id']))    
+                  $add['country']=get_country_name_by_id($val['i_country_id']);
+             
+              
+              $address = implode(', ',$add);
+              $img = get_profile_image($val['user_id'], 'thumb');
+			  $available_status = ($val['is_available'] == 'true')?'':'Max limit reached';
+			  $css =($val['is_available'] == 'true')?'class = "available"':'class = "not-available" ';
+			  $status_img =($val['is_available'] == 'true')?'':'not-available.png ';
+              
+			   if($val['if_already_friend'] == 'true' || $val['already_added_netpal'] == 'true'){
+				  $profile_link = get_profile_url($val['user_id'],$val['s_displayname']);
+				}else
+				{
+					$profile_link = get_profile_url_prayer_partner($val['user_id'],$val['s_displayname']);
+				}
+			  
+			  
+			  $IS_EXACT_MATCH  = ($val['IS_EXACT_RESULT'] == 'Y')?'100% Match':'Possible match'; 
+			  $css_exact_match =($val['IS_EXACT_RESULT'] == 'Y')?'class = "available"':'class = "not-available" ';
+			  $status_img_match =($val['IS_EXACT_RESULT'] == 'Y')?'blue-icon.png':'away.png';
+              
+    ?>   
+
+<div class="shade_box_blue" style="padding-top:5px;">
+        <div class="txt_content compact-box"> <a href="<?= $profile_link;?>"><div class="pro_photo2" style="background:url(<?=$img?>) no-repeat center;width:60px; height:60px;" ></div></a>
+              <div class="left_div01">
+              		<p <?=$css?>><a class="left" href="<?= $profile_link;?>" ><?=$name?> </a> <?php if($val['is_available'] != 'true'):?>[ <img alt="" src="images/icons/<?=$status_img?>" /> <span class="nogrey_link"><?=$available_status?></span> ]<?php endif; ?>[ <img alt="" src="images/icons/<?=$status_img_match?>" /> <span class="nogrey_link"><?=$IS_EXACT_MATCH?></span> ]</p>
+                    <p class="location"><?=$address?></p>
+                   <!-- <p class="light-grey">10 Mutual Friends</p>-->
+              </div>
+              <div class="right_div02">
+                    <p class="add-remove-friend">
+                    
+                    <?php  if($val['display_becomeprayer_partner'] == 'false'): ?>
+                    <img src="images/icons/icon24.png" alt="" /> <a  href="javascript:void(0);" id="invite_prayer_partner_<?=($val['user_id'])?>" onclick="invite_prayer_partner_('<?=encrypt($val['user_id'])?>','<?=$val['display_becomeprayer_partner']?>')">Re-send Partner Request</a>
+                    <?php elseif($val['display_alreadyprayer_partner'] == 'true'):?>
+                     <img src="images/icons/icon24.png" alt="" /> Already Your Partner
+                    
+                    
+                     <?php elseif($val['is_available']=='false') : ?>
+                    <img src="images/icons/icon24.png" alt="" /> Not Available
+                     <?php else: ?>
+                    <img src="images/icons/icon24.png" alt="" /> <a  href="javascript:void(0);" id="invite_prayer_partner_<?=($val['user_id'])?>" onclick="invite_prayer_partner_('<?=encrypt($val['user_id'])?>','<?=$val['display_becomeprayer_partner']?>')">Invite As Partner</a>
+                    
+                    <?php endif; ?>
+                    
+                    
+                    </p>
+              </div>
+              <div class="clr"></div>
+        </div>
+</div>
+ <?php
+            endforeach;
+?>
+</div>
+<?php          }
+		   else if($is_post_ == '1') {
+					echo '<div class="shade_box_blue" style="padding-top:5px;"><div  class="shade_norecords"><p class="blue_bold12">No Result Found.</p></div></div>';
+ }
+     ?>
+

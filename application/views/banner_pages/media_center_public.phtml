@@ -1,0 +1,351 @@
+<?php
+	if( ($this->session->userdata('loggedin') !='' || $this->session->userdata('loggedin')!=false ) && $this->session->userdata('is_admin') != 1){
+		
+		 include(APPPATH ."views/layouts/logged_header.phtml");
+		 include(APPPATH."views/layouts/nav.phtml");?>
+		  <!-- /NAVIGATION SECTION -->
+      		</div>
+		</div>
+		
+		
+   <?php  }
+     else{
+         
+		include(APPPATH ."views/layouts/header.phtml");
+	   	include(APPPATH."views/layouts/slider_nav.phtml");
+  }?>
+<!-- CONTENT SECTION -->
+<div class="clr"></div><!-- CONTENT SECTION -->
+
+<div id="content_section" style="margin-top:8px;">
+      <div id="container">
+      	  <!-- main container -->
+          <div class="media-center-bg" style="overflow: hidden;">
+          
+          
+          
+           <?php if(count($contents))
+                        {
+                            foreach($contents as $r)
+                            {
+                                if($r['s_keyword']=='mc_main')
+                                {
+                                    $content['main_title']=$r['s_title'];
+                                    $content['main_desc']=nl2br($r['s_desc']);
+                                }
+                            }
+                        }
+                        
+        ?> 
+                <h2 class="white-title"><?=$content['main_title']?></h2>  
+                <p><?=$content['main_desc']?></p>
+          </div>
+          
+          
+          
+          
+          <!--word for today start -->
+          <?php
+          if($this->session->userdata('loggedin')!='')  :
+          
+          ?>
+          
+          
+          <div class="word-for-today">
+              <h3 class="title">Word for today</h3>
+            <div class="message-box">
+                <h2><?=$latest_word_for_today['s_title']?></h2>
+                <p class="date-time">Posted On <?=getShortDateWithTime($latest_word_for_today['dt_posted_on'],7)?></p>
+                <p><?=nl2br($latest_word_for_today['s_desc'])?></p>
+                <p class="add-remove-friend"><img alt="" src="images/icons/ring2.png"> <a href="javascript:void(0);" onclick="window.open('<?=base_url()?>client/123flashchat.html?init_room=<?=$latest_word_for_today['i_room_id']?>&amp;init_user=<?=$this->session->userdata('display_username')?>',   '',   'bReplace= 0 resizable=0, location=1, width=630, height=450');    " target="">Join this Room</a> </p>
+                <br class="clr" />
+                <a href="word-for-today.html" class="view-all">View All</a>
+                <div class="light_heading"> 
+             <div class="left">
+				<a href="javascript:void(0);" class="comments_div<?=$latest_word_for_today['id']?>"  onclick="return show_comments(<?=$latest_word_for_today['id']?><?php /*?>show_dialog('view_comments_div')<?php */?>)">Comments (<?=count_word_comment_link($latest_word_for_today['id'])?>)</a>
+				&nbsp; |   &nbsp; 
+				<a href="javascript:void(0);"   onclick="" class="liked_by_<?=$latest_word_for_today['id']?>">Liked by(<?=count_word_like_link($latest_word_for_today['id'])?>)</a>
+			 </div>
+             
+        <?php  if((show_word_like_link($res['id']) == TRUE) ) {
+		?>
+                <div class="right"><a href="javascript:void(0);"  >Comment</a> &nbsp; |   &nbsp; <a href="javascript:void(0);" id="like_count_<?=$latest_word_for_today['id']?>" onClick="windowLike(<?=$latest_word_for_today['id']?>,'Like')">Like</a>  </div>                
+       <?php } 
+	   		else{ 
+	   ?>
+         		<div class="right"><a href="javascript:void(0);" >Comment</a> &nbsp; |   &nbsp; <a href="javascript:void(0);" id="like_count_<?=$latest_word_for_today['id']?>" >Like</a> </div>
+          
+       <?php }?>
+             
+              
+         </div> 
+         <div class="new-wl">
+            <!--comment section start-->
+                <div  class="comments-number content-width" >
+                  <div class="comments-number-mid">
+                      <div class="heading" >
+                            <div class="left">
+                                  <h4><img class="cmnt" src="images/icons/cmnt2.png" alt="" /> <span class="comments_div<?=$latest_word_for_today['id']?>">Comments (<?=count_word_comment_link($latest_word_for_today['id'])?>)</span> </h4>
+                                  <img class="wal-minus" alt="" src="images/minus-white.png" />
+                            </div>
+                       </div>
+                       <DIV id="word_comment_div<?=$latest_word_for_today['id']?>"></DIV>
+                    </div>
+                </div>
+            <!--comment section end-->	
+            <!--like by section start-->
+                <div  class="comments-number content-width" >
+                  <div class="comments-number-mid">
+                      <div class="heading">
+                            <div class="left">
+                                  <h4><img alt="" src="images/heart2.png" class="cmnt" /> <span class="liked_by_<?=$latest_word_for_today['id']?>">Liked by (<?=count_word_like_link($latest_word_for_today['id'])?>)</span> </h4>
+                                   <img class="wal-minus" alt="" src="images/minus-white.png" />
+                            </div>
+                      </div>
+                      
+                        <div class="shade_box_white" id="photo_like_div<?=$latest_word_for_today['id']?>">
+                        </div>
+                   </div>
+            	</div>
+            <!--like by section end-->
+                
+            </div>
+            <div class="new-wl-right">
+                <!--comment section start-->
+                <div  class="comments-number content-width" >
+                  <div class="comments-number-mid comment-box-manage">
+                      <div class="heading" style="background-color: #013D62 !important;padding:10px; height:15px" >
+                            <div class="left">
+                                  <h4 style="color:white"><img alt="" src="images/no.png" class="cmnt" />  Comment  </h4>
+                                  <img class="wal-minus" alt="" src="images/minus-white.png" />
+                            </div>
+                      </div>
+                      
+                      <div class="txt_content01 comments-number-content"> 
+                      <textarea class="wal-comment-textarea" id="feed_comment_box_<?=$latest_word_for_today['id']?>"  cols="" rows=""></textarea>
+                      <input type="button" value="Post" class="yellow-btn" id="post_comment_button" onclick="post_comment(<?=$latest_word_for_today['id']?>)" />
+                      <br class="clr" />
+                      </div>
+                </div>
+                </div>
+                <!--comment section end-->	
+            </div>
+            </div>
+            
+          </div>
+          
+          
+          <?php
+          endif;
+          ?>
+          <!--word for today end -->
+          
+          
+          
+          
+      	  <!--three link section start -->
+          <div class="three-link-box">
+          		<!--box one start -->
+                <? /*<div class="media-link-box left" onclick="return show_dialog('login-box')">
+                */ ?>
+                
+                
+                
+<?php
+    $christian_news_URL="window.location.href='".base_url()."christian-news/t/top-stories.html'";
+    $popup = "show_login_popup('".base64_encode(my_current_url())."')";
+?>
+
+
+            <?php /*?>    <div class="media-link-box left" onclick="<?=($this->session->userdata('user_id')!='')? $christian_news_URL :$popup?>">
+            <?php */?>
+                  <?php //pr($contents,1);
+                    if($this->session->userdata('loggedin')!='')
+                    {
+                        $destination = "window.location='christian-news/t/top-stories.html'";
+                    }
+                    else
+                    {
+                        $url = base64_encode(base_url().'christian-news/t/top-stories.html');
+                        $destination = "return show_login_popup('".$url."')";
+                    }
+                    
+                    ?>
+            
+            
+                <div class="media-link-box left" onclick="<?=$destination?>">
+                	<h3 class="yellow">Christian News</h3>
+                    <img src="images/christian-news-image.png" alt="Christian News" width="257" height="257" />
+                </div>
+                <!--box one end -->
+                <!--box two start -->
+                
+                
+                 <?php //pr($contents,1);
+                    if($this->session->userdata('loggedin')!='')
+                    {
+                        $destination = "window.location='gospel-magazine.html'";
+                    }
+                    else
+                    {
+                        $url = base64_encode(base_url().'gospel-magazine.html');
+                        $destination = "return show_login_popup('".$url."')";
+                    }
+                    
+                  ?>
+                <div class="media-link-box middle" onclick="<?=$destination?>">
+                	<h3 class="green">Gospel Magazine</h3>
+                    <img src="images/gospel-magazine-image.png" alt="Gospel Magazine" width="257" height="257" />
+                </div>
+                <!--box two end -->
+                
+                <!--box three start -->
+                 <?php //pr($contents,1);
+                    if($this->session->userdata('loggedin')!='')
+                    {
+                        $destination = "window.location='christan-project.html'";
+                    }
+                    else
+                    {
+                        $url = base64_encode(base_url().'christan-project.html');
+                        $destination = "return show_login_popup('".$url."')";
+                    }
+                    
+                    ?>
+                <div class="media-link-box right" onclick="<?=$destination?>">
+                	<h3 class="blue">Christian Projects</h3>
+                    <img src="images/christian-project-image.png" alt="Christian Projects" width="257" height="257" />
+                </div>
+                <!--box three end -->
+          </div>
+          <!--three link section end -->
+          
+          
+          
+          
+          
+          <?//pr($videos)?>
+          
+          
+          <!--video gallery start -->
+          <?php include(APPPATH."views/banner_pages/video_carousel.phtml")?>
+                    
+          <!--video gallery end -->	
+      <!-- main container end-->  
+      </div>
+      <div class="clr"></div>
+</div>
+<!-- /CONTENT SECTION -->  
+  
+<?php
+	# include footer file...
+	include_once(APPPATH ."views/layouts/footer.phtml");
+?>
+<!--login popup start -->
+
+<!--login popup end -->
+
+<script type="text/javascript">
+function windowLike(window_id,like_val)
+{
+
+	showUILoader_nodialog('<img src="'+base_url+'images/loading_big.gif" width="50"/> ');
+	$.ajax({
+		type: "POST",
+		url: base_url+"banner_pages/media_center/like_word",
+		data: "window_id="+window_id+"&like_val="+like_val,
+		dataType:"json",
+		success: function(json_response){
+				if(json_response.status)
+				{
+					$('.liked_by_'+window_id).html(json_response.response_html);
+				}
+			hideUILoader_nodialog();
+		}
+	});
+
+}
+</script>
+<script type="text/javascript">
+		$(function(){
+		//8-oct-2013
+			$('.left a').click(function(){
+				
+				var index=$(this).index();
+				$('.new-wl > .comments-number').css('display','none');
+				$('.new-wl-right > .comments-number').css('display','none');
+				$(this).parent().parent().next('.new-wl').children('.comments-number').filter(':eq('+ index +')').slideDown('slow');
+			})
+				
+				
+			$('.right a').click(function(){
+				var index=$(this).index();
+				$('.new-wl > .comments-number').css('display','none');
+				$('.new-wl-right > .comments-number').css('display','none');
+				$(this).parent().parent().next().next('.new-wl-right').children('.comments-number').filter(':eq('+ index +')').slideDown('slow');
+			
+			})
+			$('.wal-minus').click(function(){
+				$(this).parents('.comments-number').slideUp('fast');
+			
+			})
+		//8-oct-2013
+		});
+		var ajax_comment_post=null;
+		function post_comment(id) 
+{
+		showUILoader_nodialog('<img src="'+base_url+'images/loading_big.gif" width="50"/> ');
+		if(ajax_comment_post!=null) {
+			ajax_comment_post.abort();
+		}
+		ajax_comment_post = $.ajax({
+			
+			url: base_url+'banner_pages/media_center/post_comment/'+ id,
+			dataType: 'json',
+			data: {'message': $('#feed_comment_box_'+id).val()},
+			type: 'post',
+	
+			success: function (data, status) {
+				if(data.success == 'true'){
+				  $('#feed_comment_box_'+id).val('');
+				  $('.comments_div'+id).html(data.html);
+				}
+				else{
+					$('#feed_comment_box_'+id).val('');
+				}
+				$('.wal-minus').trigger('click');
+				hideUILoader_nodialog();
+				showUIMsg(data.msg);
+			},
+			error: function(data, status, e) {
+				hideUILoader_nodialog();
+				showUIMsg("Error!");
+				
+			}
+		});
+}
+		function show_comments(i_newsfeed_id)
+  {
+		 
+	 showUILoader_nodialog('<img src="'+base_url+'images/loading_big.gif" width="50"/> ');
+		$.ajax({
+			
+			url: base_url +'banner_pages/media_center/NEW_fetch_comment_word/'+i_newsfeed_id,
+			dataType: 'json',
+			type: 'post',
+	
+			success: function (data, status) {
+				$('#word_comment_div'+i_newsfeed_id).html(data.html_data);
+				hideUILoader_nodialog();
+				showUIMsg(data.msg);
+			},
+			error: function(data, status, e) {
+				hideUILoader_nodialog();
+				showUIMsg("Error!");
+				
+			}
+		});
+				 
+		 
+  }
+</script>

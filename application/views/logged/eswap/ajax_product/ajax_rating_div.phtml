@@ -1,0 +1,67 @@
+<?php
+#pr($info[0]);
+if($info[0]['i_accept']==1)
+{
+?>
+<div class="ne-etrade-product">
+      <p class="send-request-quantity">Quantity Requested: <?php echo $info[0]['req_qty']?></p>
+      <ul class="ne-etrade-breadcrumb">
+        <li>Buyer From : <span><?php echo get_user_address_info($info[0]['requid']);?></span></li>
+        <li>I</li>
+        
+        <li><a href="javascript:void(0)">Accepted On - <?php echo getShortDate($info[0]['dt_accept'],5)?></a></li>
+        <li>I</li>
+        <li><img class="acpt" src="images/icons/accept.png" alt="" /> <span>Request Accepted</span></li>
+        <li>I</li>
+        <li><img class="acpt" src="images/icons/car1.png" alt="" /><a href="javascript:void(0);">Shipped</a></li>
+      </ul>
+     <br class="clear" />
+    
+    <!--personal information start-->
+    
+    <ul class="Item-list-req">
+        <li>Name: <?php echo $info[0]['s_first_name'].''.$info[0]['s_last_name']?></li>
+        <li>Phone:  <?php echo ($info[0]['s_phone']=='')?$info[0]['s_moblie_no']:$info[0]['s_phone']?></li>
+        <li>Email: <?php echo ($info[0]['req_email']=='')?$info[0]['s_email']:$info[0]['req_email']?></li>
+    </ul>
+    <br class="clear" />
+        <ul class="Item-list-req2">
+        <li><label class="subproduct">Buyer Rating : </label><?php echo show_rating($info[0]['f_rate_for_buyer']);?></li>
+        <?php
+		if($info[0]['f_rate_for_buyer']==0)
+		{
+		?>
+        <li>
+            <label class="subproduct">Give Rating :</label>
+        	<select style="width: 80px;" id="rating<?php echo $info[0]['reqid']?>" name="item">
+                <option value="1">1</option>
+                <option value="2">2</option>.
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+        	</select>
+        
+        <br class="clear" />
+        </li>
+        <li class="req-margin-bottom">
+        	<input type="button" name="" value="Submit" onclick="giveRatingToBuyer('<?php echo $info[0]['reqid']?>');" class="yellow-btn req-margin-left" />
+        </li>
+        <?php
+		}
+		?>
+        </ul>
+    <br class="clear" />
+</div>
+<?php
+}
+else
+{
+	?>
+    <div class="ne-etrade-product">
+    	<ul class="ne-etrade-breadcrumb">
+    		 <li><img class="acpt" src="images/icons/band.png" alt="" /> <span>Request Declined</span></li>
+    	</ul>
+    </div>
+    <?php
+}
+?>

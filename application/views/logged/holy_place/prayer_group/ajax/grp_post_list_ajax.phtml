@@ -1,0 +1,33 @@
+<?php #pr($result_arr);
+		if(count($result_arr)){
+			foreach($result_arr as $key=> $val){
+				$logged_user = intval(decrypt($this->session->userdata('user_id')));
+				 $is_grp_owner = ($logged_user == $val['i_owner_id'] && $logged_user != $val['i_user_id'])?'Y':'N';
+?>
+              <li>
+                  <span>
+              		<strong><?=$val['s_profile_name']?>:</strong> 
+                    <?=nl2br($val['s_post_desc'])?>
+                  </span>
+                  <ul class="Message-option">
+                  
+                  <li>Posted on: <?=getShortDate($val['dt_created_on'],5)?></li>
+                  
+                  <?php if($logged_user == $val['i_owner_id'] || $logged_user == $val['i_user_id']){?>
+                  	<li class="Message-option-li-float"><a href="javascript:void(0)" onclick="show_confirm_popup(<?=$val['id']?>)">Remove Post</a></li>
+                  	<li class="Message-option-li-float">I</li>
+                  	<li class="Message-option-li-float"><a href="javascript:void(0)" class="editprayerpost" onclick="edit_prayer_grp_post(<?=$val['id']?>)" >Edit Post</a></li>
+                  <?php }?>
+               </ul>
+               
+               <div class="Message-edit-textarea" id="message_edit_<?=$val['id']?>">
+               <textarea  rows="" cols="" id="ta_edit_post_<?=$val['id']?>"><?=br2nl($val['s_post_desc'])?></textarea>
+               <input type="button" class="yellow-btn" value="Save" name="" onclick="save_post(<?=$val['id']?>,<?=$val['i_prayer_group_id']?>,  '<?=$is_grp_owner?>', <?=$val['i_user_id']?>)">
+               </div>
+              </li>
+<?php 		}
+		}
+?>
+
+								
+							

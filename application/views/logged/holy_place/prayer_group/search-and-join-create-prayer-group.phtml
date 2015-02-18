@@ -1,0 +1,250 @@
+<?php include(APPPATH."views/layouts/logged_header.phtml");?>
+            <!-- NAVIGATION SECTION -->
+      <?php include(APPPATH."views/layouts/nav.phtml");?>
+      <!-- /NAVIGATION SECTION -->
+      </div>
+</div>
+<!-- /HEADER SECTION -->
+<div class="clr"></div>
+<!-- CONTENT SECTION -->
+<div id="content_section">
+      <div id="container">
+            <div id="mid_content">
+                 
+                 
+                  <!-- main container -->
+                  <div class="main-prayer-group">
+                      <!--buttons section start -->
+                     <div class="arrow_btm"></div>
+                      
+                     <div class="page_heading_01 grey">
+                            	<div class="left">Search And Join Create Prayer Group</div>
+                                <a class="create-group2" href="<?=base_url().'prayer-group.html'?>">Back to Prayer Group</a>
+                     </div>
+                      
+                      <div class="clr"></div>
+                     <?php /*?> <ul class="back-prayer-option">
+									<li><a href="<?=base_url().'prayer-group.html'?>">Back to Prayer Group</a></li>
+					  </ul><?php */?>
+                      <!--buttons section end -->
+					  
+					  <!--payer notification start-->
+					  <div class="main-payer-section">
+                      <div class="payer-notification">
+                            <div class="nw-right-heading">
+                               <div class="left"><h4>Search And Join Prayer Group Here</h4></div>
+                            </div>
+                            
+                            <div class="notification-list-box">
+                                 <!--Seach And Join Create Prayer Group Here-->  
+                                 <div class="">
+                            
+                                    <div class="lable-txt-nw"> Prayer Group Name:</div>
+                                    <input type="text" name="txt_name" id="txt_name" class="amount-input prayer-No-input">
+                                     <div class="clr"></div>
+                                     
+                                     <div class="lable-txt-nw">Denomination:</div>
+                                      <select  name="sel_denomination" id="sel_denomination"  style="width:185px;">
+                                          <option value="-1">Select</option>
+                                          <?=makeOptionDenomination()?>
+                                      </select>
+                                    <input type="hidden" id="hd_submit" name="hd_submit" value="Y" />
+                                     <div class="clr"></div>
+                                     <div class="prayer-group-name"></div>
+                                     <input type="button" class="yellow-btn" value="Search" name="" onclick="searchPrayerGrp()">
+                          
+                                </div>
+                                 <!--Seach And Join Create Prayer Group Here--> 
+                            </div>
+                            <br class="clr" />
+                      
+					  		<div class="" style="display:none;" id="data_div">
+                                <div class="nw-right-heading">
+                                   <div class="left"><h4>Search List </h4></div>
+                                </div>	
+                                <div class="notification-list-box">
+                                    <ul class="prayermember-ul">
+                                    <DIV id="listingContent"><?=$listingContent?></DIV>
+                            		</ul>
+                                </div>
+						
+							</div>
+					   </div>
+                      
+                      
+                      <!--prayer wall eight start -->
+					  <div class="main-notification-section">
+                		<div class="nw-right-heading">
+                     	 	<div class="left"><h4>Prayer Group i have joined/created</h4></div>
+                 		</div>
+                        <div class="nw-prayer-wall-box no-right-mrgn">
+                         
+                          <span class="prayermember-leble">
+                              <img src="images/crown.png" alt="" width="12" /> Group Owner
+                          </span>
+                          <label class="short-by-prayer-selt">Sort by: </label>
+                            <select class="prayer-selt " id="ordr_by" onchange="getSortedGrpList()">
+                                <option value="-1">Select</option>
+                                <option value="1" >Date</option>
+                                <option value="2" >A-Z</option>
+                            </select>
+                           <br class="clr">
+                            <label class="short-by-prayer-selt">Group by: </label>
+                            <select class="prayer-selt" id="grp_by" onchange="getSortedGrpList()">
+                                <option value="all">All</option>
+                                <option value="ownership" >Ownership</option>
+                                <option value="members" >Members</option>
+                            </select>
+                         
+                         
+                         
+                          <span class="prayermember-leble">
+                              <img src="images/man-24-16.png" alt="" width="12" /> Member
+                          </span>
+                           <br class="clr"/>
+                          
+                          	<ul class="prayermember-ul">
+                          	 	<DIV id="grp_list" style="margin-top: 10px;"><?=$group_listing?></DIV>
+                            </ul>
+          					</div> 
+						</div>
+                      <!--prayer wall eight end  -->
+					  </div>
+					
+					  <!--payer notification end-->
+                      
+                  	  <div class="clr"></div> 
+                  </div>
+                  <!-- /main container -->
+                 
+            </div>
+      </div>
+      <div class="clr"></div>
+</div>
+<!-- /CONTENT SECTION -->
+<div class="clr"></div>
+<!-- FOOTER SECTION -->
+<?php include(APPPATH."views/layouts/footer.phtml");?>
+<?php include(APPPATH."views/logged/blocks/common_popup.phtml");?>
+<!-- /FOOTER SECTION -->
+
+<script type="text/javascript">
+var ajax_req_feeds = null;
+function show_more_feeds(page) {
+	
+    if(ajax_req_feeds!=null) {
+        ajax_req_feeds.abort();
+    }
+    showUILoader_nodialog();
+    ajax_req_feeds = $.ajax({
+        type: 'get',
+        url: base_url+'logged/prayer_group/generate_prayer_group_listing_AJAX/'+page,
+        dataType: 'json',
+
+        success: function (data, status) {
+
+            hideUILoader_nodialog();
+            if(data.html!='') {
+                $('#listingContent').append(data.html);
+                $('#show_more_feeds_link').attr('page_value', data.cur_page);
+                $('#show_more_feeds_link').attr('onclick','');
+                $('#show_more_feeds_link').attr('onclick','show_more_feeds('+data.cur_page+')');
+            }
+            else {
+                $('#listingContent').append('<div class=" view_more" style="text-align: center;"><p class="blue_bold12" style="font-size:14px;">No more result.</p></div>');
+                $('#show_more_feeds_div').remove();
+            }
+            
+            if(data.view_more==false)
+            {
+                
+                $('#listingContent').append('<div class=" view_more" style="text-align: center;"><p class="blue_bold12" style="font-size:14px;">No more result.</p></div>');
+                $('#show_more_feeds_div').remove();
+            }
+            
+            
+        }    // end of success function...
+    });
+}
+
+
+function searchPrayerGrp()
+{
+   
+    var denomination = $('#sel_denomination').val();
+	var grpname =  $('#txt_name').val();
+	
+    if(denomination == '-1' && grpname == '')
+    {
+        showUIMsg("Please provide group name or select a denomination.");
+        return false;
+    }
+	else
+    {
+      showUILoader_nodialog('<img src="'+base_url+'images/loading_big.gif" width="50"/> ');  
+        $.ajax({
+            type: 'post',
+            url: base_url+'logged/prayer_group/generate_prayer_group_listing_AJAX/',
+            dataType: 'json',
+            data: {'txt_name': $('#txt_name').val(),
+					'sel_denomination' : $('#sel_denomination').val(),
+				   'hd_submit': $('#hd_submit').val()},
+           success: function (data, status) {
+                
+                $('#data_div').show();
+                if(data.html!='') {
+                            
+                            $('#show_more_feeds_div').remove();
+                            $('#listingContent').html(data.html);
+                            $('#show_more_feeds_link').attr('page_value', data.cur_page);
+                            $('#show_more_feeds_link').attr('onclick','');
+                            $('#show_more_feeds_link').attr('onclick','show_more_feeds('+data.cur_page+')');
+                        }
+                        else {
+                            $('#listingContent').html('<div class=" view_more" style="text-align: center;"><p class="blue_bold12" style="font-size:14px;">No result.</p></div>');
+                            $('#show_more_feeds_div').remove();
+                        }
+                        
+                        if(data.no_of_result == 0){
+                            $('#show_more_feeds_div').remove();
+                        }
+                        else if(data.view_more==false)
+                        {
+                            //alert(1);
+                            $('#listingContent').append('<div class=" view_more" style="text-align: center;"><p class="blue_bold12" style="font-size:14px;">No More result.</p></div>');
+                            $('#show_more_feeds_div').remove();
+                        }
+                        else if((data.no_of_result - data.cur_page != 0) && data.view_more!=false){
+                        
+                            //alert(2);
+                            $('#show_more_div').remove();
+                            $('.main-payer-section').after('<div class="custom_show view_more" id="show_more_feeds_div"><a href="javascript:void(0);" id="show_more_feeds_link" page_value="'+data.cur_page+'" onclick="show_more_feeds('+data.cur_page+')">[view more]  </a> </div>');
+                        }
+                
+                hideUILoader_nodialog();
+                
+            }    // end of success function...
+        });
+    }
+}
+
+function getSortedGrpList(){
+	
+	var sort_val = $('#ordr_by').val();
+	var grp_val = $('#grp_by').val();
+	
+	showUILoader_nodialog();
+	 $.ajax({
+		type: 'get',
+		url: base_url+'logged/prayer_group/groups_ajax_listing/'+0+'/'+sort_val+'/'+grp_val,
+		dataType: 'json',
+
+		success: function (data, status) {
+
+			hideUILoader_nodialog();
+			$('#grp_list').html(data.grp_html);
+		}	// end of success function...
+	});
+	
+}
+</script>

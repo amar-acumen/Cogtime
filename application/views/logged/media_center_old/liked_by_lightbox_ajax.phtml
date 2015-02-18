@@ -1,0 +1,43 @@
+<?php
+#pr($result_arr);exit;
+if(count($result_arr) > 0){ 
+?>
+<div class="shade_box_white" style="padding: 12px 0px 12px 4px;">
+<?php
+ 	foreach($result_arr as $key=> $val){	
+		 $name = $val['s_profile_name'];
+		 $profile_image = get_profile_image($val['i_user_id'],'thumb',$val['s_profile_photo']);
+		 
+		 if($val['if_already_friend'] == 'true' || $val['already_added_netpal'] == 'true'){
+		  $profile_link = get_profile_url($val['post_owner_user_id'],$val['s_profile_name']);
+		 }
+		 else
+		 {
+		  $profile_link = get_public_profile_url($val['post_owner_user_id'],$val['s_profile_name']);
+		 }
+?>
+
+    <div class="user_div"> <a href="<?=$profile_link?>"><div class="pro_photo2" style="background:url('<?=$profile_image?>') no-repeat center;width:60px; height:60px;"></div></a> <a href="<?=$profile_link?>" class="blue_link"><?=$name?></a> </div>
+    
+
+<?php    }
+?>
+</div>
+<div class="clr"></div>
+<?php  }
+else
+{
+	echo '<div class="shade_box_white"  style="padding: 12px 0px 12px 4px;"><p class="blue_bold12" style="margin-left: 205px; margin-top: 18px;">No Likes.</p></div>';
+}
+?>
+<?php if($page_links){ ?>
+<div class="">
+<?php /*?><div class="left">Viewing Page <?=$current_loaded_page_no?> of <?=$total_pages?> </div>
+<?php */?>
+<div class="right">
+       <ul class="small-paging">
+        <?=$page_links?> 
+        </ul>
+</div>
+</div>
+<?php } ?>

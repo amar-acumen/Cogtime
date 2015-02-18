@@ -1,0 +1,101 @@
+<div class="navigation">
+	<div class="navigation-inner">
+        <?php
+		if( $this->session->userdata('is_admin') == 1){
+		?>
+        	<ul>
+            <li <?php echo ($top_menu_selected == 1)?'class="select"':'' ;?>><a href="javascript:void(0);">Site settings</a>
+                <ul>
+                    <li <?php echo ($submenu == 1)?'class="select"':'';?>><a href="<?=base_url()?>admin/site_settings/hp-banners.html">HP banners</a></li>
+                    <li <?php echo ($submenu == 2)?'class="select"':'';?>><a href="<?=base_url()?>admin/site_settings/hp-cms.html">HP CMS</a></li>
+                    <li <?php echo ($submenu == 3)?'class="select"':'';?>><a href="<?=base_url()?>admin/site_settings/advertisement.html">Advertisements</a></li>
+                    <li <?php echo ($submenu == 4)?'class="select"':'';?>><a href="<?=base_url()?>admin/site_settings/cms-pages.html">CMS pages</a></li>
+                    <li <?php echo ($submenu == 5)?'class="select"':'';?>><a href="<?=base_url()?>admin/scrolling-headlines.html">Scrolling headlines</a></li>
+                    <li <?php echo ($submenu == 6)?'class="select"':'';?>><a href="<?=base_url()?>admin/site_settings/admin-groups.html">ADMIN groups</a></li>
+                    <li <?php echo ($submenu == 7)?'class="select"':'';?>><a href="<?=base_url()?>admin/site_settings/reporting-abuse.html">Reporting abuse</a></li>
+                    <li <?php echo ($submenu == 8)?'class="select"':'';?>><a href="<?=base_url()?>admin/site_settings/abuse-dictionary.html">Abuse Dictionary</a></li>
+                    <li <?php echo ($submenu == 11)?'class="select"':'';?>><a href="<?=base_url()?>admin/site_settings/denomination.html">Manage Denomination</a></li>
+                    <li <?php echo ($submenu == 9)?'class="select"':'';?>><a href="common-settings.html">Common settings</a></li>
+                    <li <?php echo ($submenu == 10)?'class="select"':'';?>><a href="<?=base_url()?>admin/site_settings/reset-password.html">Reset password</a></li>
+                     <li <?php echo ($submenu == 13)?'class="select"':'';?>><a href="<?=base_url()?>admin/site-settings/manage-admin.html">Manage Admin</a></li>
+                     <li <?php echo ($submenu == 12)?'class="select"':'';?>><a href="<?=admin_base_url()?>site-settings/ring/messages.html">Messages</a></li>
+                   <li <?php echo ($submenu == 14)?'class="select"':'';?>><a href="<?=admin_base_url()?>site-settings/languages">Language</a></li>
+                    <li <?php echo ($submenu == 15)?'class="select"':'';?>><a href="<?=admin_base_url()?>site-settings/inbox">Inbox</a></li>
+                </ul>
+            </li>
+            <li <?php echo ($top_menu_selected == 2)?'class="select"':'' ;?>><a href="<?=base_url()?>admin/members/members.html">Members</a>
+            </li>
+            <li <?php echo ($top_menu_selected == 3)?'class="select"':'' ;?>><a href="javascript:void(0);">Social hubs</a>
+                <ul>
+                    <li <?php echo ($submenu == 1)?'class="select"':'';?>><a href="<?=admin_base_url()?>social-hub-landing-page.html">Landing page contents</a></li>
+                    <li <?php echo ($submenu == 2)?'class="select"':'';?>><a href="<?=base_url()?>admin/tweets.html">Tweets</a></li>
+                    <li <?php echo ($submenu == 3)?'class="select"':'';?>><a href="<?=base_url()?>admin/blogs.html">Blogs</a></li>
+                    <li <?php echo ($submenu == 4)?'class="select"':'';?>><a href="<?=base_url()?>admin/ring-categories.html">Ring categories</a></li>
+                    <li <?php echo ($submenu == 5)?'class="select"':'';?>><a href="rings.html">Rings</a></li>
+                    <li <?php echo ($submenu == 6)?'class="select"':'';?>><a href="<?=admin_base_url()?>events.html">Events</a></li>
+                    <li <?=($submenu == 8)?'class="select"':'';?>><a href="<?=admin_base_url()?>chat-categories.html">Chat room categories</a></li>
+                    
+                    <li <?php echo ($submenu == 7)?'class="select"':'';?>><a href="<?=admin_base_url()?>chat-rooms.html">Chat rooms</a></li>
+                   
+                    
+                </ul>
+            </li>
+            <li <?php echo ($top_menu_selected == 4)?'class="select"':'' ;?>><a href="javascript:void(0);">Trade center</a>
+                <ul>
+                    <li <?php echo ($submenu == 1)? 'class="select"':'';?>><a href="<?=admin_base_url()?>trade-center-landing-page.html">Landing page contents</a></li>
+                    <li <?php echo ($submenu == 2)? 'class="select"':'';?>><a href="<?=base_url()?>admin/trade-center/product-categories.html">Product categories</a></li>
+                     <li <?php echo ($submenu == 7)? 'class="select"':'';?>><a href="<?=base_url()?>admin/manage-product-category-attribute.html">Manage Product Category Attribute </a></li>
+                    <li <?php echo ($submenu == 3)? 'class="select"':'';?>><a href="<?=admin_base_url()?>etrade-products.html">eTrade products</a></li>
+                    <li <?php echo ($submenu == 4)? 'class="select"':'';?>><a href="<?=admin_base_url()?>eswap-products.html">eSwap products</a></li>
+                    <li <?php echo ($submenu == 5)? 'class="select"':'';?>><a href="<?=admin_base_url()?>efreebie-products.html">eFreebies products</a></li>
+                    <li <?php echo ($submenu == 6)? 'class="select"':'';?>><a href="<?=admin_base_url()?>credit-history.html">Credit history</a></li>
+                </ul>
+            </li>
+            <li <?php echo ($top_menu_selected == 5)?'class="select"':'' ;?>><a href="javascript:void(0);">Media center</a>
+                <ul style="width:1000px;">
+                    <!--<li <?php echo ($submenu == 1)? 'class="select"':'';?>><a href="<?=admin_base_url()?>media-center-landing-page.html">Landing page contents</a></li>
+                    <li <?php echo ($submenu == 2)? 'class="select"':'';?>><a href="<?=admin_base_url()?>word-for-today.html">Word for Today</a></li>-->
+                    <li <?php echo ($submenu == 1)? 'class="select"':'';?>><a href="<?=admin_base_url()?>0/media_article.html">Read</a></li>
+                    <li <?php echo ($submenu == 3)? 'class="select"':'';?>><a href="<?=admin_base_url()?>0/media-center-landing-videos.html">Watch</a></li>
+                    <li <?php echo ($submenu == 4)? 'class="select"':'';?>><a href="<?=admin_base_url()?>0/audio.html">Listen</a></li>
+                    <!--<li <?php echo ($submenu == 5)? 'class="select"':'';?>><a href="<?=admin_base_url()?>gospel-magazine.html">Gospel magazine</a></li>
+                    <li <?php echo ($submenu == 6)? 'class="select"':'';?>><a href="<?=admin_base_url()?>chirstan-project.html">Christian projects</a></li>
+                    <li <?php echo ($submenu == 7)?'class="select"':'';?>><a href="<?=admin_base_url()?>minister-shouts.html">Minister shouts</a></li>-->
+                </ul>
+            </li>
+            <li <?php echo ($top_menu_selected == 6)?'class="select"':'' ;?>><a href="javascript:void(0);">Build the kingdom</a>
+                <ul>
+                	<li <?php echo ($submenu == 1)? 'class="select"':'';?>><a href="<?=admin_base_url()?>build-the-kingdom-landing-page.html">Landing page contents</a></li>
+                    <li <?php echo ($submenu == 2)?'class="select"':'';?>><a href="<?=admin_base_url()?>donation.html">Donations</a></li>
+                    <li <?php echo ($submenu == 3)?'class="select"':'';?>><a href="<?=admin_base_url()?>charity-projects.html">Charity projects</a></li>
+                    <li <?php echo ($submenu == 4)?'class="select"':'';?>><a href="<?=admin_base_url()?>salvation-prayer.html">Salvation prayer</a></li>
+                    <li <?php echo ($submenu == 5)?'class="select"':'';?>><a href="<?=admin_base_url()?>bible-quiz.html">Bible Quiz</a></li>
+                    <li <?php echo ($submenu == 6)?'class="select"':'';?>><a href="<?=admin_base_url()?>churches.html">Churches</a></li>
+                </ul>
+            </li>
+            <li class="noMargin <?php echo ($top_menu_selected == 7)?'select':'' ;?>"><a href="javascript:void(0);">Holy place</a>
+                <ul>
+                    <li <?php echo ($submenu == 1)?'class="select"':'' ;?>><a href="holy-place-landing-page.html">Landing page contents</a></li>
+                    <li <?php echo ($submenu == 8)?'class="select"':'' ;?>><a href="holy-place/prayer-wall-photos.html">Prayer Wall Photos</a></li>
+                    <?php /*?><li><a href="javascript:void(0);">5 a day</a></li>
+                    <li <?php echo ($submenu == 3)?'class="select"':'' ;?>><a href="holy-place/read-bible.html">Read Bible</a></li><?php */?>
+                    <li <?php echo ($submenu == 5)?'class="select"':'' ;?>><a href="holy-place/prayer-wall.html">Prayer wall</a></li> 
+                    <li <?php echo ($submenu == 6)?'class="select"':'' ;?>><a href="holy-place/intercession.html">E-Intercession</a></li>
+                    <li <?php echo ($submenu == 7)?'class="select"':'' ;?>><a href="holy-place/concordence.html">Concordence</a></li> 
+                    <? /*?><li <?php echo ($submenu == 7)?'class="select"':'' ;?>><a href="holy-place/0/testimonies.html">Testimonies</a></li>
+                    <?*/?>
+                    
+                       <li <?php echo ($submenu == 9)?'class="select"':'';?>><a href="<?=admin_base_url()?>holy-place/2/daily-bible-verse.html">Daily Bible verse</a></li>
+                   
+                </ul>
+            </li>
+        </ul>
+        
+        <?php
+		}
+		else if($this->session->userdata('is_admin') == 2){
+			echo $sub_admin_menu_html;
+		}
+		?>
+    </div>
+</div>

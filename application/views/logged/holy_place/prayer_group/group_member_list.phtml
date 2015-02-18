@@ -1,0 +1,50 @@
+<div class="main-notification-section">
+					  <div class="nw-right-heading">
+                           <div class="left"><h4>Members</h4></div>
+                        </div>
+                      <div class="nw-prayer-wall-box no-right-mrgn">
+						
+						<!--<span class="prayermember-leble">
+							<a href="javascript:void(0)"> Join a Prayer</a>
+						</span>-->
+						
+                        <ul class="prayermember-ul">
+							<?php
+									if(count($prayer_member_arr)){
+										foreach($prayer_member_arr as $key=> $val):
+											
+											$profile_image = get_profile_image($val['post_owner_user_id'],'thumb');
+											
+											if($val['if_already_friend'] == 'true' || $val['already_added_netpal'] == 'true'){
+												  $profile_link = get_profile_url($val['post_owner_user_id'],$val['s_profile_name']);
+											}else
+											{
+											   $profile_link = get_public_profile_url($val['post_owner_user_id'],$val['s_profile_name']); 
+											}	
+							 ?>
+                        	 	  <li>
+                                      <span class="payer-member-name">
+                                      
+                                      <div class="pro_photo3" style="background:url(<?php echo $profile_image;?>) no-repeat center;width:30px; height:30px;" ></div>
+                                          <div class="pra-member-content">
+                                              <a href="<?=$profile_link?>"><?=$val['s_profile_name']?></a>
+                                          <ul class="prayer-option">
+                                          <li>No.of Post-<?=$val['total_post']?></li>
+                                          <li>I</li>
+                                          <li>Member Since- <?=getShortDate($val['member_since'],5)?> </li>
+                                          </ul>
+                                          </div>
+                                      </span>          
+                                  </li>
+                            <?php 		endforeach;
+									}
+									else
+									{
+										echo '<li><span class="payer-member-name"><ul class="prayer-option"><li>No Members.</li></ul></span></li>';
+									}
+							  ?>
+						</ul>
+                        
+                        
+                      </div> 
+</div>

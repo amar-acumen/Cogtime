@@ -1,0 +1,194 @@
+	<!-- RECEIVED INVITATION -->	
+	<?php #pr($message);
+	$check_notification_message_type = array('contact_request','prayer_partner_request','net_pal_request');
+	
+	$check_normal_message_type = array('normal','contact_accept','contact_rejected','contact_deleted','prayer_partner_accept','prayer_partner_rejected','net_pal_accept','net_pal_rejected','net_pal_deleted','prayer_partner_deleted', 'event_invitations_request','ring_join_request','ring_join_request_from_normal_user','ring_leave' ,'prayer_group_invitation' ,'prayer_group_chat_room_invitation','prayer_post_modified' ,'prayer_group_joining' );
+	
+	
+	$check_no_response_message_type = array('video_comment','photo_comment','audio_comment','todo_reminder_im_mail', 'event_comment', 'ring_accept_join_request', 'ring_deny_join_request','ring_comments_notification','ring_post_notification','blog_comment','tweet_comment','retweet' ,'prayer_r_commit','prayer_group_accept_join_request','prayer_group_deny_join_request','prayer_group_join_request_accepted_by_owner' );
+	
+		if(in_array($message['s_type'], $check_notification_message_type)){
+	?>
+			   <div id="receivedInvitation<?=$message['id']?>" style="">
+                               
+                     <table  border="0" cellspacing="0" cellpadding="0" style=" line-height:25px;">
+                      
+                      <tr>
+                            <td align="left">Date:</td>
+                            <td align="left" class="blue_bold12 date-time"><?=getShortDateWithTime($message['dt_created_on'],6)?></td>
+                      </tr>
+                      <tr>
+                            <td align="left">From:</td>
+                            <td align="left" class="blue_bold12"><strong><?=$message['s_first_name']?></strong></td>
+                      </tr>
+                      <tr>
+                            <td align="left" style="width:50px;">Subject:</td>
+                            <td align="left"><h1>Request Invitation <span class="light_blue_link"><?=$message['s_first_name']?></span></h1></td>
+                      </tr>
+                    </table>
+                                
+                                <blockquote style=" width:auto; padding-top:15px; line-height:21px; font-size:13px;">
+					            <?=$message['s_message']?>
+				 
+                                </blockquote>
+	<?php
+			if( $message['i_ended']=='0' ) 
+			{
+				if($message['s_type'] == 'prayer_partner_request'){
+					$invitation_type = 'prayer_partner_request';
+				}else if($message['s_type'] == 'contact_request'){
+					$invitation_type = 'contact_request';
+				}
+                else if($message['s_type'] == 'net_pal_request'){
+                    $invitation_type = 'net_pal_request';
+                }
+	?>
+					
+                    
+						 
+                             <div  align="right">
+                                <input type="button" class="btn" id="btn_<?=$invitation_type?>_accept_<?php echo ($message['id']);?>" onclick="javascript:invitation_accept_<?=$invitation_type?>_reject('<?php echo ($message['id']);?>','<?php echo ($message['i_sender_id']);?>','accept')" value="<?php echo "Accept";?>"   style="margin-right:5px;"/>
+                                
+                                <input type="button" class="btn" id="btn_<?=$invitation_type?>_reject_<?php echo ($message['id']);?>" onclick="javascript:invitation_accept_<?=$invitation_type?>_reject('<?php echo ($message['id']);?>','<?php echo ($message['i_sender_id']);?>','reject')" value="<?php echo "Refuse";?>"  />
+                                
+                                
+                                  
+                                  
+                            </div>
+                            
+                            
+                            
+							
+                              
+	<?php
+			}
+	?>
+
+                            </div> 
+
+	<?php
+		}/*elseif( $message['s_type']=='normal' ||  $message['s_type']=='contact_accept' ||  $message['s_type']=='contact_rejected' ||  $message['s_type']=='contact_deleted' || $message['s_type']=='prayer_partner_accept' ||  $message['s_type']=='prayer_partner_rejected' || $message['s_type']=='net_pal_accept' ||  $message['s_type']=='net_pal_rejected'||  $message['s_type']=='net_pal_deleted' || $message['s_type']=='prayer_partner_deleted'  ||  $message['s_type'] =='video_comment' ||  $message['s_type'] == 'photo_comment' ||  $message['s_type'] == 'audio_comment' ) */
+		elseif(in_array($message['s_type'], $check_normal_message_type))
+		{
+			
+		   $sender_name = my_url($message['s_name']);
+		   #$sender_profile_url = get_profile_url($message['i_sender_id'],$sender_name,$message['i_user_type']);
+		   
+		   $sender_profile_url = get_profile_url($message['i_sender_id']);
+		   
+		   #pr( $message);
+	?>
+			
+			
+			
+			<!-- RECEIVED MESSAGE -->
+                            <div id="receivedMsg<?=$message['id']?>">
+                              <table  border="0" cellspacing="0" cellpadding="0" style=" line-height:25px;">
+                                
+                                 <tr>
+                                      <td align="left">Date:</td>
+                                      <td align="left" class="blue_bold12 date-time"><?=getShortDateWithTime($message['dt_created_on'],6)?></td>
+                                </tr>
+                                
+                                <tr>
+                                      <td align="left"><?=($sent_msgs == 'true')?'To':'From';?>:</td>
+                                      <td align="left" class="blue_bold12"><strong><?=$message['s_first_name']?></strong></td>
+                                </tr>
+                                <tr>
+                                      <td align="left" style="width:50px;">Subject:</td>
+                                      <td align="left"><span class="light_blue_link" style="text-decoration:none;"><?=($message['s_subject'] != '')?$message['s_subject']:'No Subject.'?></span></td>
+                                </tr>
+                              </table>
+                              
+                                <blockquote style="min-height:100px; width:auto;  line-height:21px; font-size:13px;"> 
+								
+								<?=$message['s_message']?>
+					
+                                </blockquote>
+                               
+                                                               
+                               <div  align="right" style="margin-top: 10px;">
+                                 <?php if($message['s_type']=='normal' && $sent_msgs != 'true'){?>
+                                  <input type="button" class="btn" onclick="redirect_reply_message(<?=$message['i_sender_id']?>,<?=$message['id']?>)" value="<?php echo "Reply";?>"  style="margin-right:5px;" />
+                                  <?php } ?>
+                                  
+                                   <?php if($message['s_type']=='event_invitations_request' && $message['i_ended']=='0' ) 
+			{?>
+                                  <input type="button" class="btn" onclick="send_rsvp(<?=$message['i_referred_media_id']?>)" value="<?php echo "Send RSVP";?>"  style="margin-right:5px;" />
+                                  <?php }
+								  else if($message['s_type']=='ring_join_request' && $message['i_ended']=='0'){
+								  ?>
+                                  <input type="button" class="btn" onclick="acceptRingInvitation('<?=$this->session->userdata('user_id')?>','<?=encrypt($message['i_referred_media_id'])?>')" value="Join"  style="margin-right:5px;" />
+                                  <?php } 
+								  else if($message['s_type']=='ring_join_request_from_normal_user' && $message['i_ended']=='0'){
+								  ?>
+                                  <input type="button" class="btn" onclick="acceptDeclineInvitation('<?=encrypt($message['i_referred_media_id'])?>','<?=encrypt($message['i_sender_id'])?>','<?=encrypt($message['id'])?>','accept')" value="Accept"  style="margin-right:5px;" />
+                                  <input type="button" class="btn" onclick="acceptDeclineInvitation('<?=encrypt($message['i_referred_media_id'])?>','<?=encrypt($message['i_sender_id'])?>','<?=encrypt($message['id'])?>','decline')" value="Decline"  style="margin-right:5px;" />
+                                  <?php } 
+								  
+								  	else if($message['s_type']=='prayer_group_invitation' && $message['i_ended']=='0'){
+								  ?>
+                                  	 <input type="button" class="btn" onclick="acceptDecline_PrayerGroup_Invitation('<?=$message['i_referred_media_id']?>','<?=$message['i_sender_id']?>','<?=$message['id']?>','accept')" value="Accept"  style="margin-right:5px;" />
+                                  <input type="button" class="btn" onclick="acceptDecline_PrayerGroup_Invitation('<?=$message['i_referred_media_id']?>','<?=$message['i_sender_id']?>','<?=$message['id']?>','decline')" value="Decline"  style="margin-right:5px;" />
+                                  
+                                  <?php 
+										/*}
+								   else if($message['s_type']=='prayer_group_chat_room_invitation' && $message['i_ended']=='0'){ ?>
+                                   <input type="button" class="btn" onclick="join_PrayerGroup_Chat_Invitation('<?=$message['i_referred_media_id']?>','<?=$message['i_receiver_id']?>','<?=$message['id']?>','accept')" value="Join"  style="margin-right:5px;" />*/?>
+                                  <?php } 
+								  		else if($message['s_type']=='prayer_group_joining' && $message['i_ended']=='0'){
+								  ?>
+                                  		<input type="button" class="btn" onclick="acceptDecline_PrayerGroup_Invitation('<?=$message['i_referred_media_id']?>','<?=$message['i_sender_id']?>','<?=$message['id']?>','joining_req_accept_by_owner')" value="Accept"  style="margin-right:5px;" />
+                                        <input type="button" class="btn" onclick="acceptDecline_PrayerGroup_Invitation('<?=$message['i_referred_media_id']?>','<?=$message['i_sender_id']?>','<?=$message['id']?>','decline')" value="Decline"  style="margin-right:5px;" />
+                                  <?php
+										}
+								  ?>
+                                  
+
+                               	<input class="btn" type="button" onclick="hide_dialog()" value="Close" name="" />
+							   </div>
+								
+								
+								
+                                
+                            </div>
+                          
+
+	<?php
+		}
+		elseif(in_array($message['s_type'], $check_no_response_message_type)){
+	?>
+    		<div id="receivedMsg<?=$message['id']?>">
+                              <table  border="0" cellspacing="0" cellpadding="0" style=" line-height:25px;">
+                                
+                                 <tr>
+                                      <td align="left">Date:</td>
+                                      <td align="left" class="blue_bold12 date-time"><?=getShortDateWithTime($message['dt_created_on'],6)?></td>
+                                </tr>
+                                
+                               
+                                <tr>
+                                      <td align="left" style="width:50px;">Subject:</td>
+                                      <td align="left"><span class="light_blue_link" style="text-decoration:none;"><?=($message['s_subject'] != '')?$message['s_subject']:'No Subject.'?></span></td>
+                                </tr>
+                           
+                              </table>
+                              
+                                <blockquote style="min-height:100px; width:auto;  line-height:21px; font-size:13px;"> 
+								
+								<?=$message['s_message']?>
+					
+                                </blockquote>
+                               
+                                                               
+                               <div  align="right" style="margin-top: 10px;">
+
+                               	<input class="btn" type="button" onclick="hide_dialog();" value="Close" name="" />
+							   </div>
+								
+								
+                            </div>
+    
+    <?php }
+	 ?>
+

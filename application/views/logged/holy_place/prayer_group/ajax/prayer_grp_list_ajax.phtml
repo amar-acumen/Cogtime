@@ -1,0 +1,60 @@
+								 <?php 
+								 		#pr($result_arr);
+								 		if(is_array($result_arr) && count($result_arr)){
+											
+											foreach($result_arr as $val){
+												 
+												 $detail_url = get_group_url($val['id'],$val['s_group_name']);
+												 $URL = ($val['member_group_status'] == 'accepted' || $val['member_group_status'] == 'owner')?$detail_url :'javascript:void(0)' ;
+												 
+								 ?>
+                                 <li>
+                                    <span class="payer-member-name">
+                                        <div class="">
+                                        	
+                                            <a href="<?=$URL?>"><?=$val['s_group_name']?></a>
+                                            
+                                            <span class="pra-invite-link" id="invite_text_<?=$val['id']?>">
+											<?php if($val['member_group_status'] == 'accepted'){ ?>
+                                            <a href="javascript:void(0);" ><img alt="" src="images/man-24-16.png"></a>
+                                            <?php }
+                                            else if($val['member_group_status'] == 'not available'){
+                                            ?>
+                                                <input type="button"  value="Request to Join" class="accept" onclick="sendGrpJoinReq(<?=$val['id']?>, <?=$val['group_owner']?>)"  />
+                                            <?php }
+                                                else if($val['member_group_status'] == 'pending'){
+                                            ?>
+                                               <?php /*?> <a href="javascript:void(0);" onclick="sendGrpJoinReq(<?=$val['id']?>, <?=$val['group_owner']?>)">Re-send Join Request</a><?php */?>
+                                                <input type="button"  value="Re-send Join Request" class="accept" onclick="sendGrpJoinReq(<?=$val['id']?>, <?=$val['group_owner']?>)"  />  
+                                            <?php }
+									          else if($val['member_group_status'] == 'owner'){
+                                            ?>
+                                            	<a href="javascript:void(0);" ><img alt="" src="images/crown.png"></a>  
+                                            <?php
+											  	}
+											?>
+                                            </span>
+                                            
+                                            <ul class="prayer-option">
+                                            	<li>Group Owner - <?=$val['s_profile_name']?></li>
+                                                 <li>I</li>
+                                                <li>Denomination - <?=$val['s_name']?></li>
+                                                <li>I</li>
+                                                <li>No.of members - <?=$val['total_member']?> </li>
+                                                <li>I</li>
+                                                <li>created on- <?=getshortdate($val['dt_created_on'], 5)?></li>
+                                             </ul>
+                                             
+                                             
+                                        </div>
+                                    
+                                    </span>
+                                    
+                                </li>
+                                
+                                <?php 
+											}
+										}
+								?>
+                                
+                                

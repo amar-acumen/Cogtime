@@ -1,0 +1,158 @@
+
+<div class="clr"></div>
+<!-- CONTENT SECTION -->
+<!--navigation section start -->
+<?php include(APPPATH."views/layouts/admin/admin_nav.phtml");?>
+<!--navigation section end -->
+<div id="content_section">
+      <div id="container">
+            <!--<div id="top_corner">&nbsp;</div> -->
+            <div id="mid_content">
+                  <div class="page_heading left">
+                  <?php $mode = ($mode =='add')?'Add':'Edit';?>
+                        <div class="left"><img src="../images/icons/login.png" alt="" /><?=$mode?> Advertisement</div>
+                  </div>
+                  <div class="clr"></div>
+                  <div id="right_container">
+                        <div class="arrow_btm"></div>
+                        <div class="content_area frm_box">
+                        	  <form name="frm_adv" action="" method="post" enctype="multipart/form-data">
+                                  <div class="lable01"><span class="red-mark">* </span> Ad Title :</div>
+                                  <div class="field01">
+                                        <input name="txt_title"  id="txt_title" type="text" value="<?= $posted['s_title']; ?>" />
+                                  </div>
+                                  <?php $show_title_err = (form_error('txt_title') != '')?'style="display:block;"':''; ?>
+                                  <div class="error-message" <?=$show_title_err?>><?php echo form_error('txt_title'); ?></div>
+                                  <div class="clr"></div>
+                                  
+                                  <div class="lable01"><span class="red-mark">* </span> Ref. URL : </div>
+                                  <div class="field01">
+                                        <input name="txt_url" id="txt_url" type="text" value="<?= $posted['s_url']; ?>"/>
+                                  </div>
+                                  <?php $show_url_err = (form_error('txt_url') != '')?'style="display:block;"':''; ?>
+                                  <div class="error-message" <?=$show_url_err?>><?php echo form_error('txt_url'); ?></div>
+                                  <div class="clr"></div>
+                                  
+                                  
+                                  <div class="lable01"><span class="red-mark">* </span> Ad Image : </div>
+                                  <div class="field01">
+                                    <input name="adv_image" id="adv_image" type="file" size="52" /> 
+                                    <div class="clr"></div>
+                                    <span>(Preferred dimension is 200 X 200.)</span>   
+                                  </div>
+                                  <?php $show_image_err = ($file_error_adv_image != '')?'style="display:block;"':''; ?>
+                                  <div class="error-message" <?=$show_image_err?>><?php echo $file_error_adv_image; ?></div>
+                                  <div class="clr"></div>
+                                 <?php //echo $posted['s_image'];
+									if($posted['s_image'] !== "")
+									{
+										$IMG_THUMB_PATH = base_url() ."uploads/advertisements/";
+										$name=getThumbName($posted['s_image'],'main'); 
+										$IMG_THUMB = $IMG_THUMB_PATH . $name;
+										?>
+										<div class="lable01"></div>
+										<?php if($name != ""): ?> <img src="<?= $IMG_THUMB ?>" width="200" height="200" /><?php endif;?> 	<input type="hidden" name="h_image" value="<?=$posted['s_image'] ?>" />
+									<?php }
+									
+									else {?>
+                                    	 
+                                         <div class="lable01"></div>
+                                  		 <input type="image" alt="no image" src="../images/no-image.gif" name="no image" />
+                                 		 <div class="clr"></div>
+                                    
+                					<?php } ?>
+                                  
+                                  
+                                  <div class="clr"></div>
+                                  <!---------Arif-------------------->
+                                  <div class="lable01"><span class="red-mark">* </span> Add page location:</div>
+                                  <select name="page-loc" id="page-loc">
+                                      <option value="">--</option>
+                                      <option value="my-wall" <?php if($posted['p_loc']=='my-wall'){ ?> selected=""<?php } ?> >Home</option>
+                                      <option value="tweets" <?php if($posted['p_loc']=='tweets'){ ?> selected=""<?php } ?>>Socail Hub Chitter Tweets</option>
+                                      <option value="blogs" <?php if($posted['p_loc']=='blogs'){ ?> selected=""<?php } ?>>Socail Hub Blogs</option>
+                                      <option value="ring" <?php if($posted['p_loc']=='ring'){ ?> selected=""<?php } ?>>Socail Hub Rings</option>
+                                      <option value="events" <?php if($posted['p_loc']=='events'){ ?> selected=""<?php } ?>>Socail Hub Events</option>
+                                      <option value="chat-room" <?php if($posted['p_loc']=='chat-room'){ ?> selected=""<?php } ?>>Socail Hub Chat Rooms</option>
+                                      
+                                      <option value="prayer-partner" <?php if($posted['p_loc']=='prayer-partner'){ ?> selected=""<?php } ?>>Build Kingdom Prayer Partners Zone</option> 
+                                      <option value="quiz" <?php if($posted['p_loc']=='quiz'){ ?> selected=""<?php } ?>>Build Kingdom Bible Quiz</option>
+                                      <option value="Church" <?php if($posted['p_loc']=='Church'){ ?> selected=""<?php } ?>>Build Kingdom Find a Church </option>
+                                       
+                                      <option value="my-profile" <?php if($posted['p_loc']=='my-profile'){ ?> selected=""<?php } ?>>My Profile</option>
+                                      <option value="my-friends" <?php if($posted['p_loc']=='my-friends'){ ?> selected=""<?php } ?>>My Friends Zone</option>
+                                      
+                                      <option value="my-net-pals" <?php if($posted['p_loc']=='my-net-pals'){ ?> selected=""<?php } ?>>My NetPals Zone</option>
+                                        <option value="my-photos" <?php if($posted['p_loc']=='my-photos'){ ?> selected=""<?php } ?>>My Photos</option>
+                                         <option value="my-audios" <?php if($posted['p_loc']=='my-audios'){ ?> selected=""<?php } ?>>My Audios</option>
+                                          <option value="my-videos" <?php if($posted['p_loc']=='my-videos'){ ?> selected=""<?php } ?>>My Videos</option>
+                                           <option value="my-msg-inbox" <?php if($posted['p_loc']=='my-msg-inbox'){ ?> selected=""<?php } ?>>My Messages</option>
+                                            <option value="privacy-settings" <?php if($posted['p_loc']=='privacy-settings'){ ?> selected=""<?php } ?>>My Privacy Settings</option>
+                                            <option value="user-alert-settings" <?php if($posted['p_loc']=='user-alert-settings'){ ?> selected=""<?php } ?>>My Alert Settings</option>
+                                            <option value="user-email-settings" <?php if($posted['p_loc']=='user-email-settings'){ ?> selected=""<?php } ?>>My Email Notification Settings</option>
+                                            <option value="organizer-day-view" <?php if($posted['p_loc']=='organizer-day-view'){ ?> selected=""<?php } ?>>Organizer</option>
+                                            <option value="change-password" <?php if($posted['p_loc']=='change-password'){ ?> selected=""<?php } ?>>Change Password</option>
+                                            <option value="deactivate-account" <?php if($posted['p_loc']=='deactivate-account'){ ?> selected=""<?php } ?>>Deactivate Account</option>
+                                            <option value="public-profile" <?php if($posted['p_loc']=='public-profile'){ ?> selected=""<?php } ?>>Public Profile</option>
+                                  
+                                  </select>
+                                  <?php $show_url_err = (form_error('page-loc') != '')?'style="display:block;"':''; ?>
+                                  <div class="error-message" <?=$show_url_err?>><?php echo form_error('page-loc'); ?></div>
+                                   <div class="clr"></div>
+                                  <!---------Arif-------------------->
+                                  
+                                  
+                                  <div class="lable01"><span class="red-mark">* </span> Ad Publication Start date :</div>
+                                  <input type="text"  value="<?=$posted['dt_start_date'] ?>" name="date_to1" id="date_to1"  readonly="readonly" class="date-field"/>
+                                      <img src="../images/icons/cal.png" alt="" onclick="$(this).prev().focus()" class="calender" />
+                                      <script type="text/javascript">
+                                            $(document).ready(function(arg) {
+                                                $.datepicker.setDefaults($.datepicker.regional['']);
+                                                $("#date_to1").datepicker($.datepicker.regional['en']);
+                    
+                                            });
+                                        </script>
+                                        <?php $show_date_to1 = (form_error('date_to1') != '')?'style="display:block;"':''; ?>
+                                        <div class="error-message" <?=$show_date_to1?>><?php echo form_error('date_to1'); ?></div>
+                                  <div class="clr"></div>   
+                                  
+                                    
+                                  <div class="lable01"><span class="red-mark">* </span> Ad Publication End date :</div>      
+                                  <input type="text"  value="<?=$posted['dt_end_date'] ?>" name="date_to2" id="date_to2"  readonly="readonly" class="date-field"/>
+                                      <img src="../images/icons/cal.png" alt="" onclick="$(this).prev().focus()" class="calender"  />
+                                      <script type="text/javascript">
+                                            $(document).ready(function(arg) {
+                                                $.datepicker.setDefaults($.datepicker.regional['']);
+                                                $("#date_to2").datepicker($.datepicker.regional['en']);
+                    
+                                            });
+                                        </script>
+                                      <div class="clr"></div>
+                                       <?php $show_date_o = (form_error('date_to2') != '')?'style="display:block;"':''; ?>
+                                        <div class="error-message" <?= $show_date_o?>><?php echo form_error('date_to2'); ?></div>
+                                      
+                                  
+                                  
+                                  
+                                  
+                                  <div class="lable01"> </div>
+                                  <div class="field01">
+									<?php if($mode == 'Add'): ?>
+                                        	<input name="" type="submit" class="btn"  value="Add"/>
+                                   <?php else :?>
+                                    		<input name="" type="submit" class="btn"  value="Update"/>
+                                    <?php endif;?>
+                                        <input name="" type="reset" class="btn"  value="Cancel" onclick="window.location='<?=admin_base_url().'site_settings/advertisement.html'?>'"/>
+                                  </div>
+                              </form>
+                              <div class="clr"></div>
+                        </div>
+                        
+                  </div>
+                  <div class="clr"></div>
+            </div>
+            <!--<div id="bot_corner">&nbsp;</div> -->
+      </div>
+      <div class="clr"></div>
+</div>
+<!-- /CONTENT SECTION -->

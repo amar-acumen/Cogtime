@@ -1,0 +1,186 @@
+<div class="clr"></div>
+<!--navigation section start -->
+<?php include(APPPATH."views/layouts/admin/admin_nav.phtml");?>
+<!--navigation section end -->
+<!-- CONTENT SECTION -->
+<div id="content_section">
+      <div id="container">
+            <!--<div id="top_corner">&nbsp;</div> -->
+            <div id="mid_content">
+                  <div class="page_heading left">
+                        <div class="left"><img src="../images/icons/login.png" alt="" /> Trade Center &raquo; Landing page contents</div>
+                  </div>
+                  <div class="clr"></div>
+                  <div id="right_container">
+                        <div class="arrow_btm"></div>
+                        <div class="content_area frm_box frm_box2">
+                        
+                        <?php if(count($res))
+                        {
+                            foreach($res as $r)
+                            {
+                                if($r['s_keyword']=='tc_main')
+                                {
+                                    $content['main_title']=$r['s_title'];
+                                    $content['main_desc']=$r['s_desc'];
+                                }
+                                if($r['s_keyword']=='tc_eTrade')
+                                {
+                                    $content['eTrade_desc'] = $r['s_desc'];
+                                }
+                                if($r['s_keyword']=='tc_eSwap')
+                                {
+                                    $content['eSwap_desc'] = $r['s_desc'];
+                                }
+                                if($r['s_keyword']=='tc_eFreebie')
+                                {
+                                    $content['eFreebie_desc'] = $r['s_desc'];
+                                }
+                                if($r['s_keyword']=='tc_eActivities')
+                                {
+                                    $content['eActivities_desc'] = $r['s_desc'];
+                                }
+                                if($r['s_keyword']=='tc_productListingCredit')
+                                {
+                                    $content['productListingCredit_desc'] = $r['s_desc'];
+                                }
+                        
+                            }
+                        }
+                        
+                        ?> 
+                        
+                        <form id="trade_center_landing_frm" action="" method="post" enctype="multipart/form-data" onsubmit="return form_post()">
+                                  <!--<h2>Introduction Section</h2> -->
+                                  <div class="lable02">Title :</div>
+                                  <div class="field02">
+                                        <input name="txt_tc_title" type="text" value="<?=$content['main_title']?>"/>
+                                  </div>
+                                  <div id="err_tc_title" class="error-message"></div>
+                                  <div class="clr"></div>
+                                  <div class="lable02">Introduction : </div>
+                                  <div class="field02">
+                                        <textarea name="txtarea_tc_desc" cols="" rows="" style="height: 144px;"><?=$content['main_desc']?></textarea>
+                                  </div>
+                                  
+                                  <div class="clr"></div>
+                                  
+                                  <h2>eTrade</h2>
+                                  <div class="lable02">Content : </div>
+                                  <div class="field02">
+                                        <textarea name="txtarea_tc_eTrade" cols="" rows="" class="small" style="height: 88px;"><?=$content['eTrade_desc']?></textarea>
+                                  </div>
+                                  <div class="clr"></div>
+                                  
+                                  <h2>eSwap</h2>
+                                  <div class="lable02">Content : </div>
+                                  <div class="field02">
+                                        <textarea name="txtarea_tc_eSwap" cols="" rows="" class="small" style="height: 88px;"><?=$content['eSwap_desc']?></textarea>
+                                  </div>
+                                  <div class="clr"></div>
+                                  <h2>eFreebies</h2>
+                                  <div class="lable02">Content : </div>
+                                  <div class="field02">
+                                        <textarea name="txtarea_tc_eFreebie" cols="" rows="" class="small" style="height: 88px;"><?=$content['eFreebie_desc']?></textarea>
+                                  </div>
+                                  <div class="clr"></div>
+                                  <h2>Trade Activities</h2>
+                                  <div class="lable02">Content : </div>
+                                  <div class="field02">
+                                        <textarea name="txtarea_tc_eActivities" cols="" rows="" class="small" style="height: 88px;"><?=$content['eActivities_desc']?></textarea>
+                                  </div>
+                                  <div class="clr"></div>
+                                  <h2>Product Listing Credit</h2>
+                                  <div class="lable02">Content : </div>
+                                  <div class="field02">
+                                        <textarea name="txtarea_tc_productListingCredit" cols="" rows="" class="small" style="height: 88px;"><?=$content['productListingCredit_desc']?></textarea>
+                                  </div>
+                                  <div class="clr"></div>
+                                  
+                                  <div class="lable02"> </div>
+                                  <div class="field02">
+                                        <input name="" type="submit" class="btn"  value="Update" />
+                                        <input name="" type="reset" class="btn"  value="Reset" onclick="return clear_box()"/>
+                                  </div>
+                              </form>
+                        
+                             
+                              
+                              <div class="clr"></div>
+                        </div>
+                  </div>
+                  <div class="clr"></div>
+            </div>
+            <!--<div id="bot_corner">&nbsp;</div> -->
+      </div>
+      <div class="clr"></div>
+</div>
+
+
+<!-- /CONTENT SECTION -->
+
+
+<script type="text/javascript">
+$(document).ready(function(arg) {
+    
+    // for AJAX page-submission...
+    optionsArr = {
+        beforeSubmit:  showBusyScreen,  // pre-submit callback 
+        success:       validateFrm, // post-submit callback 
+        url:        admin_base_url + "trade_center/trade_center_landing_page/post_data"
+    }; 
+});
+function form_post()
+{
+    
+    $('#trade_center_landing_frm').ajaxSubmit(optionsArr);
+    
+    return false;
+    
+    //var values = $('#trade_center_landing_frm').serialize();
+    
+}
+// validate ajax-submission...
+function validateFrm(data)
+{
+    
+    var data = JSON.parse(data);
+hideBusyScreen();
+showUIMsg(data.msg);
+
+     $('.error-message').each(function(i){
+            $(this).attr('style','display:none');
+        });
+        
+    if(data.result=='failure') 
+    {
+       
+        
+        for ( var id in data.arr_messages ){
+            
+            if( $('#err_'+id) != null ) {
+                $('#err_'+id).html(data.arr_messages[id]);
+                $('#err_'+id).css('display', 'block');
+
+                //$('#err_'+id).attr('style','margin-left: 12px;');
+            }
+        }
+        
+    }
+    else {
+        
+         
+       
+    }
+
+}
+
+function clear_box(){
+      
+          $('#trade_center_landing_frm')[0].reset();
+          $('.error-message').hide();
+      
+  }
+
+
+</script>

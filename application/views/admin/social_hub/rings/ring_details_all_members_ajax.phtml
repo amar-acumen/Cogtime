@@ -1,0 +1,36 @@
+      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="../images/close.png" alt="" /></a></div>
+      <div class="top"><div>&nbsp;</div></div>
+      <div class="mid">
+            <div class="heading" style="margin-bottom:0px;">
+                  <div class="left">
+                        <h4>All Members in the Ring</h4>
+                  </div>
+            </div>
+               <div class="shade_box_white" style="height:400px; overflow:auto">
+               
+                <?php
+                                   if(count($ring_user_arr)){
+                                      
+                                     foreach( $ring_user_arr as $key => $val){
+                                        
+                                         $img = get_profile_image($val['user_joined_id'], 'thumb'); 
+                                         
+                               ?>
+                                    <div class="member-block">
+                                     <!-- <div class="member-pic" style="background:url(<?=$img?>) no-repeat center;width:73px; height:73px; margin-left: 9px;" ></div>-->
+                                        <?php /*?><img src="../images/man1.png" alt="pic" width="73" height="73" class="member-pic" /><?php */?>
+                                        <h3><?=$val['s_profile_name']?></h3>
+                                        <h4><?=$val['s_country_name']?></h4>
+                                        <a href="javascript:void(0);" class="remove" onclick="remove_member_confirm(<?php echo $val['table_id']?>,'<?=$val['s_profile_name']?>','<?=$img?>','popup')">Remove from Ring</a>
+                                    </div>
+                                    
+                               <?php 
+                                     }
+                                   }
+                               ?>
+                       
+               <div class="clr"></div>
+            </div>
+            
+      </div>
+      <div class="bot"><div>&nbsp;</div></div>

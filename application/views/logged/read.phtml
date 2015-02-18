@@ -1,0 +1,451 @@
+<?php include(APPPATH."views/layouts/logged_header.phtml");?>
+            <!-- NAVIGATION SECTION -->
+      <?php include(APPPATH."views/layouts/nav.phtml");?>
+      <!-- /NAVIGATION SECTION -->
+      </div>
+</div>
+<div class="clr"></div>
+
+<!-- CONTENT SECTION -->
+<div class="left-menu">
+    <div class="menu-icon"><img src="images/menu-icon.png" alt="Menu" width="45" height="50"></div>
+
+
+
+    <? include "media_center_nav.phtml" ?>
+</div>
+
+<div id="content_section">
+      <div id="container">
+          <div class="top-page-heading">
+          <h2 class="landing-title">Media center</h2>
+          <div class="landing-input"><input type="text" name="" value="" placeholder="Search Keywords"></div>
+	  <div class="clr"></div>
+           </div>
+          <div class="media-center-left">
+               
+                <h3 class="featured-heading">fEATURED</h3>
+                <div class="read-slide">
+                    <div id="ei-slider" class="ei-slider">
+                    <?
+                    if($featured)
+					{
+					?>
+                    <ul class="ei-slider-large">
+                    	<? foreach($featured as $val) 
+						{
+						$IMG = base_url() . 'uploads/article/' . getThumbName($val['s_image'], 'mid
+						');
+						?>
+						<li>
+                            <img src="<?=$IMG?>" alt="image06"/>
+                            <div class="ei-title">
+                                <h2><?=$val['s_title']?></h2>
+                                
+                            </div>
+                        </li>
+                        <? } ?>
+                    </ul><!-- ei-slider-large -->
+                    <? } ?>
+                    <ul class="ei-slider-thumbs">
+                        <li class="ei-slider-element">Current</li>
+                    <li><a href="#">Slide 6</a></li>
+                        <li><a href="#">Slide 1</a></li>
+                        <li><a href="#">Slide 2</a></li>
+                        <li><a href="#">Slide 3</a></li>
+                        <li><a href="#">Slide 4</a></li>
+                        <li><a href="#">Slide 5</a></li>
+                        <li><a href="#">Slide 7</a></li>
+                    </ul><!-- ei-slider-thumbs -->
+                </div><!-- ei-slider -->
+                    
+                </div>
+                
+                <h3 class="story-heading">Your Story <a href="javascript:void(0);">View all</a></h3>
+                <div class="panel-main">
+                    <div class="panel-left">
+                        <div><img src="images/story-pic.png" alt="Story" width="348" height="195"></div>
+                        <h4>Suscipit sed at montes at tellus. Aliquam nisl penatibus commodo massa.</h4>
+                        <p>Molestias ultricies, ante quam urna ut volutpat, egestas dolor dui, nec hac ultrices nulla non netus. Placerat vehicula donec non suscipit egestas, augue vel suspendisse. Et felis venenatis blandit sed est ultrices, adipiscing urna, at aliquam nullam facilisis aliquet sapien, eget duis consectetuer tristique nunc vitae erat, mi purus nisl lorem.</p>
+                    
+                    </div>
+                    <div class="panel-right">
+                        <div class="story-panel">
+                            <h4>Vulputate etcommodo in tristique sed velit.</h4>
+                            <div class="story-thumb">
+                                <div class="pic"><img src="images/story-thumb1.png" alt="Story" width="98" height="75"></div>
+                                <p>Sed blandit ornare leo, nec ullamcorper ligula dapibus id. Etiam lacinia blandit augue quis elementum. Nullam tempor libero est, sed placerat est varius sollicitudin. Integer tristique metus vel ipsum.. </p>
+                                <div class="clr"></div>
+                            </div>                           
+                        </div>
+                        
+                        <div class="story-panel">
+                            <h4>Everti maiorum voluptatum omnes eligendi.</h4>
+                            <div class="story-thumb">
+                                <div class="pic"><img src="images/story-thumb2.png" alt="Story" width="98" height="75"></div>
+                                <p>Mauris ut lorem a urna dignissim sagittis. Nullam volutpat gravida ligula, eu ultrices tellus vestibulum id. Mauris ac nunc sed augue pharetra adipiscing id ut neque. Cras quis tempor enim. </p>
+                                <div class="clr"></div>
+                            </div>                           
+                        </div>
+                        
+                        <div class="story-panel">
+                            <h4>Eu ultrices tellus vestibulum id.</h4>
+                            <div class="story-thumb">
+                                <div class="pic"><img src="images/story-thumb3.png" alt="Story" width="98" height="75"></div>
+                                <p>Mauris ut lorem a urna dignissim sagittis. Nullam volutpat gravida ligula, eu ultrices tellus vestibulum id. Mauris ac nunc sed augue pharetra adipiscing id ut neque. Cras quis tempor enim. </p>
+                                <div class="clr"></div>
+                            </div>                           
+                        </div>
+                    </div>
+                    <div class="clr"></div>
+                </div>
+                
+                  <h3 class="blog-icon">Blogs<a href="javascript:void(0);">View all</a></h3>
+                  
+                  <div class="panel-main">
+                    <div class="panel-left">
+                        <div><img src="images/blogs.png" alt="Story" width="348" height="195"></div>
+                        <h4>Proin vel nisi ac orci varius vestibulum. In ultri ces, orci aliquet sagittis tristique.</h4>
+                        <div class="blog-date">May 12, 2014 by Jon kol</div>         
+                        <div class="blog-quick-list">
+                            <ul>
+                                <li class="blog-comment"><a href="javascript:void(0);">14 Comments</a></li>
+                                <li class="blog-view"><a href="javascript:void(0);">39 Views</a></li>
+                            </ul>
+                         </div>
+                       <p>Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Proin dapibus ipsum sem, ac fringilla massa rutrum at. </p>
+                    
+                    </div>
+                    <div class="panel-right">
+                        <div class="story-panel">
+                            <h4>Etiam mauris enim, consequat ut urna et</h4>
+                            <div class="story-thumb">
+                                <div class="pic"><img src="images/blog-thumb1.png" alt="Story" width="98" height="75"></div>
+                                <div class="blog-date">May 12, 2014 by Jon kol</div>
+                       
+                        <div class="blog-quick-list">
+                            <ul>
+                                <li class="blog-comment"><a href="javascript:void(0);">14 Comments</a></li>
+                                <li class="blog-view"><a href="javascript:void(0);">39 Views</a></li>
+                            </ul>
+                         </div>
+                                <p>Sed blandit ornare leo, nec ullamc orpe rlig ula dapibus id. Etiam lacinia blandit.. </p>
+                                <div class="clr"></div>
+                            </div>                           
+                        </div>
+                        
+                        <div class="story-panel">
+                            <h4>Maecenas pretium tempor diam et facilisis.</h4>
+                            <div class="story-thumb">
+                                <div class="pic"><img src="images/blog-thumb2.png" alt="Story" width="98" height="75"></div>
+                                 <div class="blog-date">May 12, 2014 by Jon kol</div>         
+                        <div class="blog-quick-list">
+                            <ul>
+                                <li class="blog-comment"><a href="javascript:void(0);">14 Comments</a></li>
+                                <li class="blog-view"><a href="javascript:void(0);">39 Views</a></li>
+                            </ul>
+                         </div>
+                                <p>Cras justo metus, feugiat eget venenatis sit amet, bibendum ut enim. Quisque volutpa..</p>
+                                <div class="clr"></div>
+                            </div>                           
+                        </div>
+                        
+                        <div class="story-panel">
+                            <h4>Sociosqu ad litora torquent per conubia.</h4>
+                            <div class="story-thumb">
+                                <div class="pic"><img src="images/blog-thumb3.png" alt="Story" width="98" height="75"></div>
+                                <div class="blog-date">May 12, 2014 by Jon kol</div>         
+                        <div class="blog-quick-list">
+                            <ul>
+                                <li class="blog-comment"><a href="javascript:void(0);">14 Comments</a></li>
+                                <li class="blog-view"><a href="javascript:void(0);">39 Views</a></li>
+                            </ul>
+                         </div>
+                                <p>Cras justo metus, feugiat eget venenatis sit amet, bibendum ut enim. Quisque volutpa..</p>
+                                <div class="clr"></div>
+                            </div>                           
+                        </div>
+                    </div>
+                    <div class="clr"></div>
+                </div>
+                  
+                     <h3 class="mission-icon">Mission Possible<a href="javascript:void(0);">View all</a></h3>
+                     <div class="mission-panel">
+                         <div class="mission-left">
+                             <img src="images/mission1.png" alt="Mission Possible" width="200" height="138">
+                         </div>
+                         <div class="mission-right">
+                              <h4>Nullam volutpat gravida ligula, eu ultrices tellus vestibulum piscing</h4>
+                                <div class="blog-date">May 12, 2014 by Jon kol</div>         
+                        <div class="blog-quick-list">
+                            <ul>
+                                <li class="blog-comment"><a href="javascript:void(0);">14 Comments</a></li>
+                                <li class="blog-view"><a href="javascript:void(0);">39 Views</a></li>
+                            </ul>
+                         </div>
+                                <p>Pellentesque faucibus, mauris et aliquam placa, risus risus gravida ipsum, eget ultricies erat odio at odio. Vivamus malesuada dignissim erat eu malesuada. Cras vitae scelerisque velit, id laoreet metus. Sed quis tincidunt sem. Fusce nibh velit, lacinia ut mi eu, tempus mollis ipsum. Suspendisse quam lectus, iaculis in lectus a, iaculis bibendum felis..</p>
+                         </div>
+                         <div class="clr"></div>                         
+                     </div>
+                     
+                     <div class="mission-panel">
+                         <div class="mission-left">
+                             <img src="images/mission2.png" alt="Mission Possible" width="200" height="138">
+                         </div>
+                         <div class="mission-right">
+                              <h4>Vivamus malesuada dignissim erat eu malesuada. Cras vitae sceleris</h4>
+                                <div class="blog-date">May 12, 2014 by Jon kol</div>         
+                        <div class="blog-quick-list">
+                            <ul>
+                                <li class="blog-comment"><a href="javascript:void(0);">14 Comments</a></li>
+                                <li class="blog-view"><a href="javascript:void(0);">39 Views</a></li>
+                            </ul>
+                         </div>
+                                <p>Pellentesque faucibus, mauris et aliquam placa, risus risus gravida ipsum, eget ultricies erat odio at odio. Vivamus malesuada dignissim erat eu malesuada. Cras vitae scelerisque velit, id laoreet metus. Sed quis tincidunt sem. Fusce nibh velit, lacinia ut mi eu, tempus mollis ipsum. Suspendisse quam lectus, iaculis in lectus a, iaculis bibendum felis..</p>
+                         </div>
+                         <div class="clr"></div>                         
+                     </div>
+                     
+                     
+                     <div class="mission-panel">
+                         <div class="mission-left">
+                             <img src="images/mission3.png" alt="Mission Possible" width="200" height="138">
+                         </div>
+                         <div class="mission-right">
+                              <h4>Nunc varius fermentum vestibulum. Donec vel pharetra neque.</h4>
+                                <div class="blog-date">May 12, 2014 by Jon kol</div>         
+                        <div class="blog-quick-list">
+                            <ul>
+                                <li class="blog-comment"><a href="javascript:void(0);">14 Comments</a></li>
+                                <li class="blog-view"><a href="javascript:void(0);">39 Views</a></li>
+                            </ul>
+                         </div>
+                                <p>Pellentesque faucibus, mauris et aliquam placa, risus risus gravida ipsum, eget ultricies erat odio at odio. Vivamus malesuada dignissim erat eu malesuada. Cras vitae scelerisque velit, id laoreet metus. Sed quis tincidunt sem. Fusce nibh velit, lacinia ut mi eu, tempus mollis ipsum. Suspendisse quam lectus, iaculis in lectus a, iaculis bibendum felis..</p>
+                         </div>
+                         <div class="clr"></div>                         
+                     </div>
+                     <div class="faith-part">
+                         <div class="faith-left">
+                             <h3 class="faithbook-icon">Faithbook</h3>
+                             <div class="part-pic">
+                                 <img src="images/faithbook.png" alt="Faithbook">
+                                 <span>Vivamus malesuad dignissim erat eu. </span>
+                            </div>
+                             <div class="clr"></div>
+                             <ul class="faith-list">
+                                 <li>Suspendisse quam lectus, iaculis in lec tus iaculis bibendum felis.</li>
+                                 <li>Pellentesque faucibus, mauris et aliquam placa, risus risus gravida ipsum,</li>
+                                 <li>Duis nibh dui tincidunt sed sapien ac, viverra eleifend turpis.</li>
+                                 <li>Aliquam eget neque sem fusce nuncante ornare id metus ut.</li>
+                                 <li>Duis nibh dui tincidunt sed sapien ac, viverra eleifend turpis.</li>                                 
+                             </ul>
+                         </div>
+                         <div class="faith-left">
+                              <h3 class="socaity-icon">Socity</h3>
+                             <div class="part-pic">
+                                 <img src="images/socity.png" alt="Socity">
+                                 <span>Tincidunt sed sapien ac viverra  </span>
+                            </div>
+                             <div class="clr"></div>
+                             <ul class="faith-list">
+                                 <li>Suspendisse quam lectus, iaculis in lec tus iaculis bibendum felis.</li>
+                                 <li>Pellentesque faucibus, mauris et aliquam placa, risus risus gravida ipsum,</li>
+                                 <li>Duis nibh dui tincidunt sed sapien ac, viverra eleifend turpis.</li>
+                                 <li>Aliquam eget neque sem fusce nuncante ornare id metus ut.</li>
+                                 <li>Duis nibh dui tincidunt sed sapien ac, viverra eleifend turpis.</li>                                 
+                             </ul>
+                             
+                         </div>
+                         <div class="faith-right">
+                               <h3 class="grow-icon">G.R.O.W</h3>
+                             <div class="part-pic">
+                                 <img src="images/grow.png" alt="G.R.O.W">
+                                 <span>Donec sit amet tu rpis dui fringilla</span>
+                            </div>
+                             <div class="clr"></div>
+                             <ul class="faith-list">
+                                 <li>Suspendisse quam lectus, iaculis in lec tus iaculis bibendum felis.</li>
+                                 <li>Pellentesque faucibus, mauris et aliquam placa, risus risus gravida ipsum,</li>
+                                 <li>Duis nibh dui tincidunt sed sapien ac, viverra eleifend turpis.</li>
+                                 <li>Aliquam eget neque sem fusce nuncante ornare id metus ut.</li>
+                                 <li>Duis nibh dui tincidunt sed sapien ac, viverra eleifend turpis.</li>                                 
+                             </ul>
+                             
+                         </div>
+                         </div>
+                         
+                     </div>
+             <div class="media-center-right">
+                 <div class="advertisment"><img src="images/left-ad1.png" alt="Advertisment" width="250" height="250"></div>
+
+              <div>
+                  <h3 class="devotional">G.R.O.W</h3>
+                  <div class="dev-main">
+                      <div class="pic-left"><img src="images/devotional1.png" alt="Devotional"></div>
+                      <div class="pic-right">
+                          <h4>Donec sit amet turpis dui fringilla sed</h4>
+                          <p>Suspendisse vitae lorem sit amet eros volutpat imperdiet sit amet vel elit. Aliquam eget neque sem..</p>
+                      </div>
+                      <div class="clr"></div>
+                  </div>
+                  
+                  <div class="dev-main">
+                      <div class="pic-left"><img src="images/devotional2.png" alt="Devotional"></div>
+                      <div class="pic-right">
+                          <h4>Donec sit amet turpis dui fringilla sed</h4>
+                          <p>Suspendisse vitae lorem sit amet eros volutpat imperdiet sit amet vel elit. Aliquam eget neque sem..</p>
+                      </div>
+                      <div class="clr"></div>
+                  </div>
+                  
+                  
+                  <div class="dev-main">
+                      <div class="pic-left"><img src="images/devotional3.png" alt="Devotional"></div>
+                      <div class="pic-right">
+                          <h4>Donec sit amet turpis dui fringilla sed</h4>
+                          <p>Suspendisse vitae lorem sit amet eros volutpat imperdiet sit amet vel elit. Aliquam eget neque sem..</p>
+                      </div>
+                      <div class="clr"></div>
+                  </div>
+                  
+              </div>
+              
+              <div>
+               <h3 class="voice">The voices</h3>    
+               <div class="dev-main">
+                      <div class="pic-left"><img src="images/voice1.png" alt="The Voices"></div>
+                      <div class="pic-right">
+                          <h4>Sed dictum urna non neque vestibulum</h4>
+                          <p>Suspendisse vitae lorem sit amet eros volutpat imperdiet sit amet vel elit. Aliquam eget neque sem..</p>
+                      </div>
+                      <div class="clr"></div>
+                  </div>
+               
+               <div class="dev-main">
+                      <div class="pic-left"><img src="images/voice2.png" alt="The Voices"></div>
+                      <div class="pic-right">
+                          <h4>Quisque adipiscing eranon turpis blandit</h4>
+                          <p>Duis nibh dui, tincidunt sed sapien ac, viverra eleifend turpis. Donec in felis malesuada iaculis mi..</p>
+                      </div>
+                      <div class="clr"></div>
+                  </div>
+               
+                <div class="dev-main">
+                      <div class="pic-left"><img src="images/voice3.png" alt="The Voices"></div>
+                      <div class="pic-right">
+                          <h4>Maecenas pretium temp or diam et facilisis. </h4>
+                          <p>Aliquam eget neque sem. Fusce nunc ante, ornare id metus ut, vestibulum ultrices dui. Maecenas pretium.. tempor diam et facilisis. </p>
+                      </div>
+                      <div class="clr"></div>
+                  </div>
+               
+                <div class="dev-main">
+                      <div class="pic-left"><img src="images/voice4.png" alt="The Voices"></div>
+                      <div class="pic-right">
+                          <h4>Tincidunt sed sapien ac, viverra eleifend turpis. </h4>
+                          <p>Duis nibh dui, tincidunt sed sapien ac, viverra eleifend turpis. Donec in felis malesuada iaculis mi..</p>
+                      </div>
+                      <div class="clr"></div>
+                  </div>
+               
+                  
+              </div>
+              
+              <div>
+                  <h3 class="shout">your shout</h3> 
+                  <div class="dev-main">
+                      <div class="pic-left"><img src="images/shout1.png" alt="your shout"></div>
+                      <div class="pic-right">
+                          <h4>Donec sit amet turpis dui fringilla sed</h4>
+                          <p>Suspendisse vitae lorem sit amet eros volutpat imperdiet sit amet vel elit. Aliquam eget neque sem..</p>
+                      </div>
+                      <div class="clr"></div>
+                  </div>
+                  
+                   <div class="dev-main">
+                      <div class="pic-left"><img src="images/shout2.png" alt="your shout"></div>
+                      <div class="pic-right">
+                          <h4>Proin lacus lacus, condimentum ut eros et,</h4>
+                          <p>Duis nibh dui, tincidunt sed sapien ac, viverra eleifend turpis. Donec in felis malesuada iaculis mi..</p>
+                      </div>
+                      <div class="clr"></div>
+                  </div>
+                  
+                   <div class="dev-main">
+                      <div class="pic-left"><img src="images/shout3.png" alt="your shout"></div>
+                      <div class="pic-right">
+                          <h4>Donec sit amet turpis dui fringilla sed</h4>
+                          <p>Aliquam eget neque sem. Fusce nunc ante, ornare id metus ut, vestibulum ultrices dui. Maecenas pretium.. tempor diam et facilisis. </p>
+                      </div>
+                      <div class="clr"></div>
+                  </div>
+              </div>
+              
+              <div>
+                  <h3 class="review">Book Reviews</h3> 
+                  <div class="review-section">
+                      <h4>Consectetur adipisicing elit</h4>
+                      <p>Mauris libero nisi, volutpat id ligula vitae, pharetra porta ligula. Fusce interdum hendrerit elit, quis eleifend neque mollis tempus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Cras ut </p>
+                      
+                  </div>
+                  
+                  <div class="review-section">
+                      <h4>Consectetur adipisicing elit</h4>
+                      <p>Mauris libero nisi, volutpat id ligula vitae, pharetra porta ligula. Fusce interdum hendrerit elit, quis eleifend neque mollis tempus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Cras ut </p>
+                      
+                  </div>
+                  
+                  <div class="review-section">
+                      <h4>Consectetur adipisicing elit</h4>
+                      <p>Mauris libero nisi, volutpat id ligula vitae, pharetra porta ligula. Fusce interdum hendrerit elit, quis eleifend neque mollis tempus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Cras ut </p>
+                      
+                  </div>
+              </div>              
+          </div>
+          <div class="clr"></div>
+          </div>
+       
+      </div>
+      <div class="clr"></div>
+</div>
+
+
+<!-- /CONTENT SECTION -->
+<div class="clr"></div>
+
+<?php include(APPPATH."views/layouts/footer.phtml");?>
+
+
+
+
+
+
+
+
+<!--view comment div-->
+
+
+<!--/view comment div-->
+<!-- /lightbox SECTION -->
+
+<?php //include(APPPATH."views/logged/blocks/common_popup.phtml");?>
+
+
+<script type="text/javascript">
+            $(function() {
+                $('#ei-slider').eislideshow({
+					animation			: 'center',
+					autoplay			: true,
+					slideshow_interval	: 3000,
+					titlesFactor		: 0
+                });
+            });
+        </script>
+ <script type="text/javascript">
+$(function(){
+	$('#navigation_vert').naviDropDown({
+		dropDownWidth: '336px',
+		orientation: 'vertical'
+	});
+});
+</script>

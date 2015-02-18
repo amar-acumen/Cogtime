@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<base href="<?php echo base_url();?>" />
+<title>
+<?=$error_title?>
+</title>
+<link href="<?php echo base_url();?>css/style.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<?php
+		# include header file...
+		include_once(APPPATH ."views/layouts/header.phtml");
+		?>
+        <div id="content_section">
+        	<?php
+				# include navigation-panel file...
+				include_once(APPPATH ."views/layouts/nav.phtml");
+			?>
+            	<div id="container">
+                		 
+                	<h2><?=$error_title?></h2>
+    				<br />
+    				<p> <?=$error_message?> </p>
+                    <h2><img src="<?= base_url() ?>images/error_message.png" alt="" /> 404 Error: Page Not Found </h2>
+          <div class="error_mesg_box">This page may have moved or is no longer available. You would like to look at <a href="<?=base_url()?>" class="black_link">Cogtime.com</a></div>
+                </div>
+                
+        
+        </div>
+        <?php
+		# include footer file...
+		include_once(APPPATH ."views/layouts/footer.phtml");
+	?>
+
+</body>
+</html>

@@ -1,0 +1,267 @@
+<?php
+$logged_id=intval(decrypt($this->session->userdata('user_id')));
+$data_arr = json_decode($feed['data']);
+#pr($feed);
+#echo count($data_arr->video); 
+# dump( $session_data );
+
+$msg_id = $feed['id'];		 
+#echo ' ==> '.show_delete_link($msg_id);	
+if( $feed['s_type'] == 'wall_post' ){
+	$user_primary_info = get_primary_user_info($data_arr->user_id);
+	$profile_image_filename = get_profile_image($data_arr->user_id,'thumb');
+	//$user_primary_info['s_picture'];
+	$profile_displayname = $user_primary_info['s_profile_name'];
+	 $url=CheckUserRelation($data_arr->user_id);
+	 if($url['i_isfriend'] == true || $url['i_isnetpal'] == true)
+	 {
+	 $profile_url = $user_primary_info['s_profile_url'];
+	 }
+	 else if($data_arr->user_id == $logged_id)
+	{
+	$profile_url = base_url().'my-wall.html';
+	}
+	else{
+	$profile_url = get_public_profile_url($data_arr->user_id,$user_primary_info['s_profile_name']);
+	}
+	
+	#echo $show_comment_like.' @@@@@@@@';
+	
+?>
+
+        
+   <div class="txt_content01">  <a href="<?=$profile_url?>"><div class="pro_photo" style="background:url(<?php echo $profile_image_filename;?>) no-repeat center;width:60px; height:60px;" ></div></a>
+                          <div class="left_div01a">
+                                <p class="blue_bold12"><a  href="<?=$profile_url?>"><?=$profile_displayname?></a></p>
+                                <p><?=$data_arr->message?></p>
+                                
+                                  <!-- image --> 
+								   <?php if(!empty($data_arr->photo) && count($data_arr->photo)){ 
+                                            foreach($data_arr->photo as $key=>$photo_val):
+                                                
+                                                $IMG = base_url()."uploads/wall_photos/".getThumbName($photo_val,'mid');
+                                   ?>
+                                    <div class="video-image">
+                                         <div class="" style="background:url('<?=$IMG?>') no-repeat center;width:329px; height:212px;" ></div> 
+                                    </div>
+                                   <?php 	endforeach;
+                                         }
+                                    ?>
+                                  <!-- image -->
+                                   
+                                   <!--video play-->
+                                   <?php if(!empty($data_arr->video) && count($data_arr->video)){ 
+                                   ?>
+                                    <div class="video-image">
+                                        <div  class="cogtime-video" id="myvideo_first_thumb_<?=$feed['id']?>" style="background:url('') no-repeat center;;width:329px; height:212px;" ></div>
+                                        <div id="myvideo_big_thumb_1_<?=$feed['id']?>" media_id="<?=$feed['id']?>"></div> 
+                                    </div>
+                                    
+                                    
+                                   <?php 	
+                                         }
+                                    ?>
+                                   <!--video play--> 
+                                
+                               <?php if(get_time_elapsed($feed['dt_created_on']) != '') {?>
+                                 <p class="date-time">Updated : <?=get_time_elapsed($feed['dt_created_on'])?></p>
+                                <?php } ?>
+                          </div>
+                          <div class="clr"></div>
+                          <div class="light_heading">
+                                <div class="left"><a href="javascript:void(0);" class="comments_div<?=$feed['id']?>"  onclick="return show_comments(<?=$feed['id']?>)<?php /*?>show_dialog('view_comments_div')<?php */?>">Comments (<?=$feed['total_comments']?>)</a> &nbsp; |   &nbsp; <a href="javascript:void(0);"   onclick="return show_people_liked(<?=$feed['id']?>); " class="liked_by_<?=$feed['id']?>">Liked by (<?=count_like_link($feed['id'])?>)</a></div>
+                                
+                                
+                              <?php /*?>  <div class="right"><a href="javascript:void(0);" >Comment</a> &nbsp; |   &nbsp; <a href="javascript:void(0);">Like</a> &nbsp;   |  &nbsp; <a href="javascript:void(0);">Delete</a> </div>
+                                <?php */?>
+                                 <?php if($session_data['loggedin'] && $show_comment_like) { ?>
+       
+							   <?php if((show_like_link($msg_id) == TRUE) ) { 
+                                ?>
+                                        <div class="right"><a href="javascript:void(0);" >Report abuse</a>&nbsp; | &nbsp;<a href="javascript:void(0);" >Comment</a> &nbsp; |   &nbsp; <a href="javascript:void(0);" id="like_count_<?=$feed['id']?>" onClick="windowLike(<?=$feed['id']?>,'Like')">Like</a> &nbsp;    </div>                
+                               <?php } 
+                                    else{ 
+                               ?>
+                                 <div class="right"><a href="javascript:void(0);" >Report abuse</a>&nbsp; | &nbsp;<a href="javascript:void(0);" >Comment</a> &nbsp; |   &nbsp; <a href="javascript:void(0);" id="like_count_<?=$feed['id']?>" >Like</a> &nbsp;   </div>
+                                  
+                                <?php }?>
+                               <?php }?>
+                                
+                          </div>
+                          
+                          <!-- slide section start -->
+                            <div class="new-wl">
+                                <!--comment section start-->
+                                <div  class="comments-number content-width " >
+                                  <div class="comments-number-mid">
+                                      <div class="heading">
+                                            <div class="left">
+                                                  <h4><img class="cmnt" src="images/icons/cmnt2.png" alt="" /> <span class="comments_div<?=$feed['id']?>">Comments (<?=$feed['total_comments']?>) </span></h4>
+                                                  <img class="wal-minus" alt="" src="images/minus-white.png" />
+                                            </div>
+                                      </div>
+                                      <DIV ID="post_comments_div<?=$feed['id']?>"></DIV>
+                                      
+                                </div>
+                                </div>
+                       
+                            <!--comment section end-->	
+                            <!--like by section start-->
+                               <div  class="comments-number content-width " >
+                              
+                                  <div class="comments-number-mid ">
+                                      <div class="heading">
+                                            <div class="left">
+                                                  <h4><img alt="" src="images/heart2.png" class="cmnt" /><span class="liked_by_<?=$feed['id']?>"> Liked by (<?=count_like_link($feed['id'])?>) </span></h4>
+                                                   <img class="wal-minus" alt="" src="images/minus-white.png" />
+                                            </div>
+                                      </div>
+                                      
+                                        <div class="shade_box_white" id="like_content_div<?=$feed['id']?>">
+                                        </div>
+                                        
+                                </div>
+                             
+                            </div>
+                            <!--like by section end-->
+                            </div>
+                            <div class="new-wl-right">
+							
+							 <!-- report abuse section start -->
+								  <div class="comments-number content-width" id="text-section-<?=$msg_id?>" style="display:none">
+									<form id="frm_report_abuse_<?=$msg_id?>" onSubmit="return false;">
+										<textarea rows="5" cols="5" id="txt_abuse_profile_text_<?=$msg_id?>" style="width:461px;margin-bottom:10px;"></textarea>
+										<input type="hidden" id="abuser_<?=$msg_id?>" value=<?=$data_arr->user_id?>>
+										<input type="button" class="yellow-btn" value="Send" onclick="report_abuse_news(<?=$msg_id?>)"/>
+									</form>
+								</div>
+								<!--report abuse section end -->
+                                <!--comment section start-->
+                                
+                                <div  class="comments-number content-width " >
+                              
+                                  <div class="comments-number-mid comment-box-manage-profile">
+                                      <div class="heading">
+                                            <div class="left">
+                                                  <h4><img alt="" src="images/no.png" class="cmnt" />  Comment  </h4>
+                                                  <img class="wal-minus" alt="" src="images/minus-white.png" />
+                                            </div>
+                                      </div>
+                                      
+                                        <div class="txt_content01 comments-number-content content-width"> 
+                                        <textarea  name="feed_comment_box_<?=$feed['id']?>" id="feed_comment_box_<?=$feed['id']?>" class="wal-comment-textarea"  cols="" rows=""></textarea>
+                                        <input type="button" value="Post" class="yellow-btn" onclick="post_comment(<?=$feed['id']?>)" />
+                                    <br class="clr" />
+                                        
+                                        </div>
+                  
+                                </div>
+                             
+                            </div>
+                            <!--comment section end-->	
+                            </div>
+                          <!-- slide section end -->
+                          
+                          
+                    </div>
+                    <script type="text/javascript">
+					$('.left a').click(function(){
+						var index=$(this).index();
+						$('.new-wl > .comments-number').css('display','none');
+						$('.new-wl-right > .comments-number').css('display','none');
+						$(this).parent().parent().next('.new-wl').children('.comments-number').filter(':eq('+ index +')').slideDown('slow');
+					})
+						
+					$('.right a').click(function(){
+						var index=$(this).index();
+						$('.new-wl > .comments-number').css('display','none');
+						$('.new-wl-right > .comments-number').css('display','none');
+						$(this).parent().parent().next().next('.new-wl-right').children('.comments-number').filter(':eq('+ index +')').slideDown('slow');
+					})
+						
+						
+					$('.wal-minus').click(function(){
+						$(this).parents('.comments-number').slideUp('fast');
+					})
+					</script>
+
+
+<?php } 
+?>
+
+<script type="text/javascript">
+//Fetching the followings.........
+  function show_comments(i_newsfeed_id)
+  {
+		 
+	 showUILoader_nodialog('<img src="'+base_url+'images/loading_big.gif" width="50"/> ');
+		$.ajax({
+			
+			url: base_url +'public_profile/NEW_fetch_comment_post/'+i_newsfeed_id,
+			dataType: 'json',
+			type: 'post',
+	
+			success: function (data, status) {
+				$('#post_comments_div'+i_newsfeed_id).html(data.html_data);
+				hideUILoader_nodialog();
+				showUIMsg(data.msg);
+			},
+			error: function(data, status, e) {
+				hideUILoader_nodialog();
+				showUIMsg("Error!");
+				
+			}
+		});
+				 
+		 
+  }
+  
+  function show_people_liked(i_newsfeed_id)
+  {
+		 //alert(i_newsfeed_id);
+	 showUILoader_nodialog('<img src="'+base_url+'images/loading_big.gif" width="50"/> ');
+		$.ajax({
+			
+			url: base_url +'public_profile/new_fetch_likes_on_post/'+i_newsfeed_id,
+			dataType: 'json',
+			type: 'post',
+	
+			success: function (data, status) {
+				$('#like_content_div'+i_newsfeed_id).html(data.html_data);
+				hideUILoader_nodialog();
+				showUIMsg(data.msg);
+			},
+			error: function(data, status, e) {
+				hideUILoader_nodialog();
+				showUIMsg("Error!");
+				
+			}
+		});
+				 
+		 
+  }
+  
+  function report_abuse_news(id)
+  {
+  alert(id);
+	if($('#txt_abuse_profile_text_'+id).val() == ''){
+		  showUIMsg('Please provide reason.');
+		  return false;
+	  }
+	  showUILoader_nodialog();
+	  $.ajax({
+		  type: 'post',
+		  url: base_url + 'public_profile/abuseMedia/'+id+'/wall',
+		  data: {'s_reason':$('#txt_abuse_profile_text_'+id).val(),'abuser':$('#abuser_'+id).val()},
+		  dataType: 'json',
+		  success: function(data, status) {
+			  
+			  showUIMsg(data.msg);
+			  $('#txt_abuse_profile_text_'+id).val('');
+			  //$('.link-report').trigger('click');
+			  $("#text-section-"+id).css("display","none");
+			  hideUILoader_nodialog();
+		  }	// end of success function...
+	  });
+  }
+</script>

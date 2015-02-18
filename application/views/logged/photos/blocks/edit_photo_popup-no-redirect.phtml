@@ -1,0 +1,253 @@
+<script type="text/javascript">
+ function edit_photo(id)
+	{
+		$('#i_edit_id').val(id);
+		//$('#i_album_id').val(album_id);
+		 showUILoader('<img src="<?= base_url() ?>images/loading_big.gif" width="50"/> ');
+	  
+			 $.ajax({
+				 type: "get",
+				 url: '<?=base_url()?>logged/organize_photo/edit_photo_ajax/'+id,
+				 dataType:"json",
+				 success: function(json_response){
+					 
+					  if(json_response.result = 'success') {
+						    $('#s_title').val(json_response.photo_arr.s_title);
+							//$('#s_photo').val(json_response.photo_arr.s_photo);
+							$('#s_description').val(json_response.photo_arr.s_description);
+							
+							// puting image name ///
+							 var IMG_THUMB_PATH = base_url+ "uploads/user_photos/";
+							 var image_name  = json_response.photo_arr.s_photo.split('.');
+							 var s_photo_name = IMG_THUMB_PATH + image_name[0]+'-thumb.'+image_name[1];
+							 var photo = "background:url("+s_photo_name+") no-repeat center;max-width:122px; max-height:82px; cursor:pointer; float:none; ";
+						      //alert(s_photo_name)
+							  $('#image_div').attr('style',photo);
+							  $('#h_image_1').val(json_response.photo_arr.s_photo);
+							
+						 	hideUILoader('edit_photo');
+					  }
+					  else {
+						   hideUILoader('edit_photo');
+						  showUIMsg('Some error occurred. Please try again.');
+					  }
+				  },
+				  error: function(){
+					 hideUILoader('edit_photo');
+					  showUIMsg('Some error occurred. Please try again.');
+				  }
+			  });	 
+		//show_dialog('edit-scrolling-headlines');
+		//return false;
+	}
+
+
+
+$(document).ready(function() {
+	
+	// for AJAX page-submission...
+    var options = { 
+        beforeSubmit:  showLoad,  // pre-submit callback 
+        success:       validateFrm // post-submit callback 
+    }; 
+ 
+    // bind to the form's submit event 
+    $('#frmEditPhoto').submit(function() {
+	
+        $(this).ajaxSubmit(options);
+		
+        return false;
+		
+    });
+
+});
+function showLoad()
+{
+ // $('#edit_photo_btn').attr('disabled','disabled');
+  $('#edit_photo_btn').val('Updating...');
+  $('#edit_photo_loading').html('<img id="img_holder" src="<?=base_url()?>images/loading_small.gif" align="absmiddle" />');
+  
+}
+
+
+// validate ajax-submission...
+function validateFrm(data)
+{
+	
+	var data = JSON.parse(data);//alert(data.html);
+	if(data.success==false) 
+	{ //alert(1111);
+		
+		$('.error-message').each(function(i){
+			$(this).attr('style','display:none');
+		});
+		
+		//$('#edit_photo_btn').attr('disabled','');
+		$('#edit_photo_btn').val('Update');
+		$('#edit_photo_loading').html('');
+
+		for ( var id in data.arr_messages ){
+			//alert(data.arr_messages[id]);
+			if( $('#err_'+id) != null ) {
+				$('#err_'+id).html(data.arr_messages[id]);
+				$('#err_'+id).attr('style','display:block;');
+			}
+		}
+
+		
+	}
+	else {
+        //alert(data.html);
+		  // clearing form
+		  $('#frmEditPhoto')[0].reset();
+		  $('.error-message').hide();
+		  //$('#select_album1').val($('options:first', '#select_album1').val());
+		 // $('#edit_photo_btn').attr('disabled','');
+		  $('#edit_photo_btn').val('Update');
+		  hide_dialog();
+		  $('#album_div').html(base64_decode(data.html));
+		  showUIMsg(data.msg);
+		  //window.location.href=document.URL;
+	}
+	$('#edit_photo_loading').html('');
+	//hideLoading();
+				
+}
+function clear_box(mode){
+		  $('#frmEditPhoto')[0].reset();
+		  $('.error-message').hide();
+}
+</script>
+<script type="text/javascript">
+$(document).ready(function () {
+
+ //counting the left characters in comment
+     function limitChars(textid, limit, infodiv)
+     {
+      var text = $('#'+textid).val(); 
+      var textlength = text.length;
+      if(textlength > limit)
+      {
+      $('#'+textid).val(text.substr(0,limit));
+       return false;
+      }
+      else
+      {
+      
+       return true;
+      }
+     }
+    
+    
+    $(function(){
+        $('#s_description').keyup(function(){
+            limitChars('s_description', 250, '');
+        });
+    });
+    
+    
+    //// just to show correct no. of chracters left while the page is loaded...
+    limitChars('s_description',250, '');
+    
+ 
+});
+</script>
+
+<form id="frmEditPhoto"  method="post" action="<?=base_url().'logged/organize_photo/edit_photo_ajax'?>" onsubmit="return false;" enctype="multipart/form-data">
+<div class="lightbox edit_photo" style="width:480px;">
+    <div class="close"><a href="javascript:void(0)" onclick="clear_box();hide_dialog()"><img src="images/close.png" alt="" /></a></div>
+    
+    <div class="top"><div>&nbsp;</div></div>
+       <div class="mid">
+        <div class="heading"><div class="left"><h4><img src="images/icons/photo.png" alt="" /> Edit Photo </h4></div></div>
+               <div class="frm_box">
+               
+              <?php /*?> <div style="color:#004084; font-weight:bold; font-size:12px;"><a href="javascript:void(0);" onclick="hide_dialog('upload_photo'); show_dialog('multiple_album'); " >Upload Multiple Photo</a></div><?php */?>
+               
+               
+                 <div class="lable01">Title:</div> 
+                 <div class="field01">
+                 <input name="s_title" id="s_title" type="text" />
+                 <span id="err_edit_title" class="error-message"></span> 
+                 </div>
+                 <div class="clr"></div>
+               
+                 <div class="lable01">Description:</div> 
+                 <div class="field01">
+                 <textarea name="s_description"  id="s_description" cols="" rows="" style="height:80px;" maxlength="250"></textarea>
+                 <span style="font-size: 11px;font-style: italic;line-height: 13px;">(Max 250 characters.)</span>
+                  </div>
+                 <div class="clr"></div>
+                 
+                 <div class="lable01">Browse Photo:</div> 
+                 <div class="field01">
+                 <input name="s_photo" id="s_photo" type="file" />
+                 <span id="err_edit_photo" class="error-message"></span>  
+                 </div>
+                 <div class="clr"></div>
+                 
+                 <div class="lable01"></div> 
+                <div class="field01">
+               
+				<div id="image_div" class="img_brd" style="background:url(<?=$IMG_THUMB?>) no-repeat center;max-width:122px; max-height:82px; cursor:pointer; float:none; "  ></div>
+                <input type="hidden" name="h_image_1" id="h_image_1" value="" />
+             
+                </div>
+
+                 
+                 
+                 
+                 <div class="lable01">Select Album:</div> 
+                 <div class="field01"> 
+                 <select name="select_album1" id="i_photo_album_id" style="width:260px;">
+                       <?php /*?> <option value="new_album">[New Album]</option><?php */?>
+                     <?php if(count($all_photo_albums)>0):
+					 		echo '<option value="-1">Select</option>';
+					 		foreach($all_photo_albums as $photo_album):
+							
+								$sel = ($current_album_id == $photo_album['id'])?'selected ="selected"':'';
+					  ?>
+                            
+                     		<!--<option>[New Album]</option>-->
+                            <option value="<?=$photo_album['id']?>" <?=$sel?>><?=$photo_album['s_name']?></option>
+                     <?php 	endforeach;
+						  	else:
+							echo '<option value="0">No Albums available, Please create.</option>';
+						   endif;
+					 ?>
+                </select>
+               <?php /*?> <script type="text/javascript">
+                    $(document).ready(function(arg) {
+                        $("#select_album1").msDropDown();
+                        $("#select_album1").hide();
+                    })
+                </script> <?php */?>
+                <span id="err_edit_album1" class="error-message"></span> 
+                </div>
+                 <div class="clr"></div>
+                 
+                 <?php /*?><div class="lable01">New Album Name:</div> 
+                 <div class="field01">
+                 <input name="txt_album_name" id="txt_album_name" type="text" /> 
+                 <span id="err_album_name" class="error-message"></span> 
+                 </div>
+                 <div class="clr"></div><?php */?>
+                 
+                 <div class="lable01">&nbsp;</div> 
+                 <input name="i_edit_id" id="i_edit_id" type="hidden" value=""/>
+                 
+                 <div class="field01">
+                 <?php if(count($all_photo_albums)>0):?>
+                 	<input name="edit_photo_btn" id="edit_photo_btn" type="submit" value="Update" class="btn" />
+                 <?php else:?>
+                 	<input name="cancel" type="button" value="Cancel" class="btn" onclick="clear_box();hide_dialog();" />
+                 <?php endif;?>
+                 <span id="edit_edit_photo_loading"></span>
+                 </div>
+                 <div class="clr"></div>
+               </div>
+          
+    </div>
+    <div class="bot"><div>&nbsp;</div></div>
+</div>
+</form>

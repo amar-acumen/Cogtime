@@ -1,0 +1,338 @@
+<?php include(APPPATH."views/layouts/logged_header.phtml");?>
+            <!-- NAVIGATION SECTION -->
+      <?php include(APPPATH."views/layouts/nav.phtml");?>
+      <!-- /NAVIGATION SECTION -->
+      </div>
+</div>
+<div class="clr"></div>
+
+<!-- CONTENT SECTION -->
+
+
+
+
+    <? include "media_center_nav.phtml" ?>
+
+<div id="content_section">
+      <div id="container">
+          <div class="top-page-heading">
+          <h2 class="landing-title">Media center</h2>
+          <div class="landing-input">
+		  <form name="user_frms" id="user_frms" method="post" action="<?= base_url() . 'logged/christian_news/search_news' ?>"  onsubmit="return true;" >
+		  <input type="text" name="search_keyword_val" value="<?php echo $search_keyword_val?>" placeholder="Type Keywords separated by comma">
+		  <input name="" type="submit" value="Deactivate"  class="btn" style="display:none;"/>
+		  </form>
+		  </div>
+	  <div class="clr"></div>
+           </div>
+          <div class="media-center-left">
+               
+                
+       
+        	 <?
+			if($featured)
+			{
+			?>
+			<h3 class="biblerap-icon">FEATURED</h3>
+                <div class="read-slide">
+                  <div class="blueberry">
+					<ul class="slides">
+			
+					<? foreach($featured as $val) 
+					{
+						if($val['s_image'] != '')
+						{
+						$mg = base_url().'uploads/media_center_audios/'.getThumbName($val['s_image'], 'mid_FO');
+						}
+						else
+						{
+						$mg="images/listen-slide1.png";
+						}
+						//echo $mg;
+						//echo '<img src="$mg" alt="image06"/>';
+					?>
+					<li>
+					
+						<img src="<?=$mg?>" alt="image06"/>
+						<span>
+							<h3><?=$val['s_title']?></h3>
+						</span>
+					</li>
+					<? } ?>
+
+					  </ul>
+				</div>
+                    
+                </div>
+                 <? 
+				 }
+				 
+				if($cat1_article)
+				{
+				?>
+                <h3 class="music-channel-icon"><a class="article_category" href="<?php echo base_url().'listen/category/1' ?>"><?php echo $cat_name['1']?></a><!--<a href="<?php echo base_url().'christian_news/category/1' ?>">View all</a>--></h3>
+               	
+            <div>
+           	  <p class="music-description"><?=my_substr(strip_tags(get_unformatted_string_edit($cat1_article[0]['s_desc'])),80)?></p>
+                    
+              <div class="music-bg">
+                    	<div>
+                            
+                            <a href="<?php echo base_url()."listen-detail/".$cat1_article[0]['id'].'/'.my_url($cat1_article[0]['s_title']).".html" ?>"><?=$cat1_article[0]['s_url']?></a>
+                            <div class="clear"></div>
+                        </div>
+                        
+                  <table width="99%" border="0" cellspacing="0" cellpadding="0" class="music-layer-list">
+                   <? 
+					$i=0;
+					foreach($cat1_article as $val) 
+					{	
+						$i++;
+						if($i == 1)
+							continue;
+							?>
+                      <tr>
+                        <td></td>
+                        <td><a href="<?php echo base_url()."listen-detail/".$val['id'].'/'.my_url($val['s_title']).".html" ?>"><?=$val['s_title']?></a></td>
+                        <td align="right"></td>
+                      </tr>
+                      <? 
+						
+					 }
+					 ?>
+                    
+                    </table>
+
+                  <!--<div><img src="images/bottom-pic.png" alt="Music"></div>-->
+                    </div>
+
+                </div>
+                
+                
+                <? } ?>
+                
+             	<?
+				if($cat2_article)
+				{
+				?>
+                
+                <div class="audio-part-main">
+                	<div class="pull-left">
+                    	 <h3 class="audiobook-icon"><a class="article_category" href="<?php echo base_url().'listen/category/2' ?>"><?php echo $cat_name['2']?></a></h3>
+                         <div class="player-book">
+                         	<?=$cat2_article[0]['s_url']?>
+                            <table width="99%" border="0" cellspacing="0" cellpadding="0" class="music-layer-list">
+                            <? 
+							$i=0;
+							foreach($cat2_article as $val) 
+							{	
+								$i++;
+								if($i == 1)
+									continue;
+									?>
+                          <tr>
+                            <td></td>
+                            <td><a href="<?php echo base_url()."listen-detail/".$val['id'].'/'.my_url($val['s_title']).".html" ?>"><?=$val['s_title']?></a></td>
+                            <td align="left"></td>
+                          </tr>
+                           <? } ?> 
+                         
+                        </table>
+                        
+                         </div>
+                         
+                    </div>
+  <? } ?>  
+  
+  <?
+				if($cat3_article)
+				{
+				?>                
+                    <div class="pull-right">
+                    	<h3 class="musicplay-icon"><a class="article_category" href="<?php echo base_url().'listen/category/3' ?>"><?php echo $cat_name['3']?></a></h3>
+                        <p class="music-description"><?=my_substr(strip_tags(get_unformatted_string_edit($cat3_article[0]['s_desc'])),80)?></p>
+                        
+                        <div class="player-book">
+                         	<?=$cat3_article[0]['s_url']?>
+                            <table width="99%" border="0" cellspacing="0" cellpadding="0" class="music-layer-list">
+                            <? 
+							$i=0;
+							foreach($cat3_article as $val) 
+							{	
+								$i++;
+								if($i == 1)
+									continue;
+									?>
+                              <tr>
+                                <td></td>
+                                <td><a href="<?php echo base_url()."listen-detail/".$val['id'].'/'.my_url($val['s_title']).".html" ?>"><?=$val['s_title']?></a></td>
+                                <td align="left"></td>
+                              </tr>
+                              <? }?>
+                            
+                            </table>
+                         </div>
+                    </div>
+                	<div class="clear"></div>
+                </div>
+                <? }?>
+                 <?
+				if($cat4_article)
+				{
+				?>  
+                
+                  <h3 class="buisnesstips-icon"><a class="article_category" href="<?php echo base_url().'listen/category/4' ?>"><?php echo $cat_name['4']?></a><a href="javascript:void(0);">View all</a></h3>
+                  
+                  <div>
+           	  <p class="music-description"<?=my_substr(strip_tags(get_unformatted_string_edit($cat4_article[0]['s_desc'])),80)?></p>
+                    
+              <div class="music-bg">
+                    	<div>
+                        <a href="<?php echo base_url()."listen-detail/".$cat4_article[0]['id'].'/'.my_url($cat4_article[0]['s_title']).".html" ?>"><?=$cat4_article[0]['s_url']?></a>
+                           
+                            <div class="clear"></div>
+                        </div>
+                        
+                  <table width="99%" border="0" cellspacing="0" cellpadding="0" class="music-layer-list">
+  					 <? 
+							$i=0;
+							foreach($cat4_article as $val) 
+							{	
+								$i++;
+								if($i == 1)
+									continue;
+									?>
+                      <tr>
+                        <td></td>
+                        <td><a href="<?php echo base_url()."listen-detail/".$val['id'].'/'.my_url($val['s_title']).".html" ?>"><?=$val['s_title']?></a></td>
+                        <td align="right"></td>
+                      </tr>
+                    <? }?>
+                    </table>
+
+                 <!-- <div><img src="images/bottom-pic.png" alt="Music"></div>-->
+				  
+                    </div>
+
+                </div>
+                  <? }?> 
+                  
+         </div> 
+                     
+              <div class="media-center-right">
+               
+            <?
+				if($cat5_article)
+				{
+				?>  
+                  <div>
+                  <h3 class="daily-devotional-icon"><a class="article_category" href="<?php echo base_url().'listen/category/5' ?>"><?php echo $cat_name['5']?></a></h3>
+                  
+                  <div class="player-right">
+                  	<?=$cat5_article[0]['s_url']?>
+                    <table width="99%" border="0" cellspacing="0" cellpadding="0" class="music-layer-list">
+ 						 <? 
+							$i=0;
+							foreach($cat5_article as $val) 
+							{	
+								$i++;
+								if($i == 1)
+									continue;
+									?>
+                      <tr>
+                        <td class="no-BorderBottom"></td>
+                        <td class="no-BorderBottom"><a href="<?php echo base_url()."listen-detail/".$val['id'].'/'.my_url($val['s_title']).".html" ?>"><?=$val['s_title']?></a></td>
+                        <td align="right" class="no-BorderBottom"></td>
+                      </tr>
+                    <? }?>
+                    </table>
+                  </div>
+                  
+                 
+              </div>
+              <? }?>
+              <?
+				if($cat6_article)
+				{
+				?>  
+              <h3 class="audio-bible-icon"><a class="article_category" href="<?php echo base_url().'listen/category/6' ?>"><?php echo $cat_name['6']?></a></h3>
+              
+                   <div class="player-right no-BorderBottom">
+                  	<a href="<?php echo base_url()."listen-detail/".$cat6_article[0]['id'].'/'.my_url($cat6_article[0]['s_title']).".html" ?>"><?=$cat6_article[0]['s_url']?></a
+                    	
+                    ></div>
+                    <div>
+                    	<p><?=$cat6_article[0]['s_desc']?></p><br>
+<br>
+
+                    </div>
+                    <? }?>
+                    <!------------------------------------->
+                    <?php
+                      if(count($advertisementmedia_detail)){ 
+                          //echo 'll';
+                          $j = count($advertisementmedia_detail);
+                          for($i=0;$i<$j;$i++){
+                               $IMG_THUMB_PATH = base_url() ."uploads/media_center_advertisement/";
+  $name=getThumbName($advertisementmedia_detail[$i]['s_image'],'main'); 
+  $IMG_THUMB = $IMG_THUMB_PATH . $name; ;
+                          ?>
+                    <div class="advertisment"><img src="<?=$IMG_THUMB?>" alt="" width="250" height="250" onclick="window.open('<?=$advertisementmedia_detail[$i]['s_url']?>')"/></div>
+
+                      <?php 
+                          }
+                      
+                          } ?>
+                    <!--------------------------------------->
+<!--                    <div class="advertisment"><img src="images/ad1.png" alt="Advertisment" width="250" height="250"></div>
+              <div class="advertisment"><img src="images/ad2.png" alt="Advertisment" width="250" height="250"></div>
+              <div class="advertisment"><img src="images/ad3.png" alt="Advertisment" width="250" height="250"></div>
+              <div class="advertisment"><img src="images/ad4.png" alt="Advertisment" width="250" height="250"></div>-->
+             
+              </div>
+                            
+          
+          <div class="clr"></div>
+          </div>
+       
+      </div>
+      <div class="clr"></div>
+</div>
+
+
+			  
+			  
+<!-- /CONTENT SECTION -->
+<div class="clr"></div>
+
+<?php include(APPPATH."views/layouts/footer.phtml");?>
+
+
+
+
+
+
+
+
+<!--view comment div-->
+
+
+<!--/view comment div-->
+<!-- /lightbox SECTION -->
+
+<?php //include(APPPATH."views/logged/blocks/common_popup.phtml");?>
+
+
+<script>
+$(window).load(function() {
+ $('.blueberry').blueberry();
+});
+</script>
+ <script type="text/javascript">
+$(function(){
+	$('#navigation_vert').naviDropDown({
+		dropDownWidth: '200px',
+		orientation: 'vertical'
+	});
+});
+</script>

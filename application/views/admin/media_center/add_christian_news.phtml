@@ -1,0 +1,251 @@
+<div class="clr"></div>
+<!--navigation section start -->
+<?php include(APPPATH."views/layouts/admin/admin_nav.phtml");?>
+<!--navigation section end -->
+<!-- CONTENT SECTION -->
+<div id="content_section">
+      <div id="container">
+            <!--<div id="top_corner">&nbsp;</div> -->
+            <div id="mid_content">
+                  <div class="page_heading left">
+                        <div class="left"><img src="../images/icons/login.png" alt="" /> Add Media Article</div>
+              </div>
+                  <div class="clr"></div>
+                  <div id="right_container">
+                        <div class="arrow_btm"></div>
+                        <div class="content_area frm_box frm_box2">
+                              <form id="add_news_frm" action="" method="post" onsubmit="return add_news_()" enctype="multipart/form-data">
+										<div class="lable01">Category :</div>
+										<div class="field01" style="margin-bottom:8px;">
+										  <select name="category" id="category" style="width:412px;">
+										  <?php
+											foreach($categories as $cat) :
+										  ?>
+												<option value="<?=$cat['id']?>"><?=$cat['s_cat_name']?></option>
+											   
+										  <?php
+										  endforeach;
+										  ?>
+										  </select>
+										  
+										</div>
+										<div id="err_category" class="error-message"></div>
+										<div class="clr"></div>
+									<div class="lable01"></div>
+										<div class="field02">
+											<input type="radio" name="articleinsert" value="rss" onclick="showInsertBlock($(this).val())" checked >&nbsp;Rss insert
+											<input type="radio" name="articleinsert" value="own" onclick="showInsertBlock($(this).val())">&nbsp;Own Article
+											
+										</div>
+										
+										<div class="clr"></div>
+								<div id="rss">		
+									<div class="lable01">Rss link :</div>
+										<div class="field02">
+										<input name="rsslink" type="text" />
+										</div>
+										<div id="err_title" class="error-message"></div>
+										<div class="clr"></div>	
+								</div>
+									<div id="single" style="display:none;">
+										<div class="lable01">Title :</div>
+										<div class="field02">
+										<input name="txt_title" type="text" />
+										</div>
+										<div id="err_title" class="error-message"></div>
+										<div class="clr"></div>
+
+										<div class="lable02">Description :</div>
+										<div class="field02" style="width:820px; margin-bottom:6px;">
+										<textarea id="elm1" name="txtarea_desc" class="elml" rows="" cols="" style="width:820px; min-height:400px;">
+										</textarea>
+										</div>
+										<div id="err_desc" class="error-message"></div>
+										<div class="clr"></div>
+
+										<div class="lable02">Upload Image :</div>
+										<div class="field02" style="width:820px; margin-bottom:6px;">
+										<input type="file" name="adv_image">                                  </div>
+										<div id="err_adv_image" class="error-message"></div>
+										<div class="clr"></div>
+
+										<div class="lable01">Tags :</div>
+										<div class="field01">
+										<input name="tags" type="text" />
+										</div>
+										<!--<div id="err_url" class="error-message"></div>-->
+										<div class="clr"></div>
+
+										<div class="lable01">Is Feature:</div>
+										<div class="field01" style="margin-bottom:8px;">
+										  <select name="top_story" id="topStory" style="width:412px;">
+												<option value="1">Yes</option>
+												<option value="0" selected="selected">No</option>
+										  </select>
+										  <script type="text/javascript">
+											$(document).ready(function(arg) {
+												//$("#topStory").msDropDown();
+												//$("#topStory").hide();
+												//$('#topStory').css("width", "412px"); 
+											})
+										  </script>
+										</div>
+										<div class="error-message"></div>
+										<div class="clr"></div>
+										
+										
+										
+										<div class="lable01">In home:</div>
+                                  		<div class="field01" style="margin-bottom:8px;">
+                                          <select name="is_feature_home" id="is_feature_home" style="width:412px;">
+                                                <option value="1" <?=($news_info['i_is_feature_home']==1)? 'selected="selected"':''?>>Yes</option>
+                                                <option value="0" <?=($news_info['i_is_feature_home']==0)? 'selected="selected"':''?>>No</option>
+                                          </select>
+                                          <script type="text/javascript">
+                                            $(document).ready(function(arg) {
+                                                //$("#topStory").msDropDown();
+                                                //$("#topStory").hide();
+                                                //$('#topStory').css("width", "412px"); 
+                                            })
+                                          </script>
+										  </div>
+										  <div class="error-message"></div>
+										  <div class="clr"></div>
+										
+										  
+										  
+										  <div id="div_adv_image_featured" style="display:none;">
+										  <div class="lable02">Upload Image :</div>
+										  <div class="field02" style="width:820px; margin-bottom:6px;">
+											   <input type="file" name="adv_image_featured">
+											   <?php 
+											   if ($news_info['i_is_feature_home'] ==1)
+											   {
+											   ?>
+											   <img src="<?= base_url() . 'uploads/media_center_article_featured_home/' . getThumbName($news_info['s_image_featured'], 'thumb')?>" />
+											   <?php
+											   }
+											   ?>
+											   <div>[resolution: 1000 X 500 ]</div>
+											   </div>
+										  <div id="err_adv_image_featured" class="error-message"></div>
+										  <div class="clr"></div>
+										  </div>
+										  
+										  
+										   	
+										
+										
+									</div>
+									<div class="lable01">&nbsp;</div>
+									<div class="field01">
+									<input name="" type="submit" class="btn"  value="Add"/><input name="" type="reset" class="btn"  value="Cancel" onclick="window.location='0/media_article.html'"/>
+									</div>
+                              </form>
+                              <div class="clr"></div>
+                        </div>
+                  </div>
+                  <div class="clr"></div>
+            </div>
+            
+            
+            <div class="clr"></div>
+</div>
+</div>
+
+<!-- /CONTENT SECTION -->
+
+
+<script type="text/javascript">
+
+$(document).ready(function(arg) {
+    
+    // for AJAX page-submission...
+   
+    
+    
+    optionsArrAdd = {
+        beforeSubmit:  showBusyScreen,  // pre-submit callback 
+        success:       validateAddFrm, // post-submit callback 
+        url:        admin_base_url + "media_center/add_media_article/post_add_data"
+    }; 
+    
+	
+	$("#is_feature_home").change(function(){
+		if ($(this).val() == 1)
+		{
+			$("#div_adv_image_featured").css("display","block");
+		}
+		else
+		{
+			$("#div_adv_image_featured").css("display","none");
+		}
+	});
+    
+});
+//---------------------------------- add ----------------------------------------
+
+function add_news_()
+{
+    tinyMCE.triggerSave(false,true);
+    $('#add_news_frm').ajaxSubmit(optionsArrAdd);
+    return false;
+}
+function validateAddFrm(data)
+{
+    
+    var data = JSON.parse(data);
+
+    showUIMsg(data.msg);
+    hideBusyScreen();
+
+     $('.error-message').each(function(i){
+            $(this).attr('style','display:none');
+        });
+        
+    if(data.result=='failure') 
+    {
+       
+        
+        for ( var id in data.arr_messages ){
+            
+            if( $('#err_'+id) != null ) {
+                $('#err_'+id).html(data.arr_messages[id]);
+                $('#err_'+id).css('display', 'block');
+
+            }
+        }
+        
+    }
+    else {  //success
+        
+         //hideBusyScreen();
+
+         $('#add_news_frm')[0].reset();
+         window.location.href = admin_base_url+'0/media_article.html';
+         
+       
+    }
+
+}
+
+//---------------------------------- end add ----------------------------------------
+
+function showInsertBlock(val)
+{
+	if(val=='rss')
+	{
+		$('#single').hide();
+		$('#rss').show();
+	}
+	else
+	{
+		$('#single').show();
+		$('#rss').hide();
+	}
+}
+
+
+</script>
+
+

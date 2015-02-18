@@ -1,0 +1,421 @@
+<div id="myjquerymenu" class="jquerycssmenu">
+
+            <ul>
+
+			<?php
+
+			//echo  substr($_SERVER["SCRIPT_NAME"],strrpos($_SERVER["SCRIPT_NAME"],"/")+1);
+
+            $full_name = basename($_SERVER['REQUEST_URI']);//($_SERVER['PHP_SELF']);
+
+			$full_name = explode('.',$full_name);
+
+           // $name_array = explode('/',$full_name);
+
+            //$count = count($name_array);
+
+			 $page_name = $full_name[0];//$name_array[$count-1];
+
+                         $location =  $this->uri->segment(1);
+
+                         $watch_location =  $this->uri->segment(3);
+
+            ?>
+
+                  <li><a href="my-wall.html" class="first <?php echo ($page_name=='my-wall')?'current':'';?>"><span>Home</span></a>
+
+                  </li>
+
+                  <li><a href="social-hub.html" class="<?php echo ($page_name=='social-hub' ||$page_name=='my-tweet' || $page_name=='blogs' || $page_name=='search-follow-tweet' ||  $page_name=='rings' ||  $page_name=='browse-ring' || $page_name=='create-ring' || $page_name=='my-rings' || $page_name=='create-event' || $page_name=='my-events' || $page_name=='event-invitations-received' || $page_name=='upcoming-events' || $page_name=='browse-chat-room')?'current':'';?>"><span>Social&nbsp;Hub</span></a>
+
+                        <ul>
+
+                              <li><a href="tweets.html">Chitter Tweets</a>
+
+                                    <!--<ul>
+
+                                          <li><a href="my-tweet">View My Tweet </a> </li>
+
+                                          <li><a href="search-follow-tweet">Search  &amp; Follow Tweet</a> </li>
+
+                                    </ul> -->
+
+                              </li>
+
+                              <li><a href="blogs.html">Blogs</a>
+
+                                    <!--<ul>
+
+                                          <li><a href="my-blog">My Blog </a> </li>
+
+                                          <li><a href="search-blog">Search All Blogs</a> </li>
+
+                                    </ul> -->
+
+                              </li>
+
+                              <li><a href="my-ring.html">Rings</a>
+
+                                    <!--<ul>
+
+                                          <li><a href="browse-ring">Browse  &amp;  Search Ring </a> </li>
+
+                                          <li><a href="create-ring">Create New Ring</a> </li>
+
+                                          <li><a href="my-rings">My Rings</a> </li>
+
+                                    </ul> -->
+
+                              </li>
+
+                              <li><a href="<?=base_url().'all-events.html'?>">Events</a>
+
+                                    <!--<ul>
+
+                                          <li><a href="create-event">Create Event </a> </li>
+
+                                          <li><a href="my-events">My Events</a> </li>
+
+                                          <li><a href="event-invitations-received">Event Invitations Received</a> </li>
+
+                                    </ul> -->
+
+                              </li>
+
+                              <li><a href="<?=base_url()."browse-chat-room.html"?>">Chat Rooms</a>
+
+                                    <!--<ul>
+
+                                          <li><a href="browse-chat-room">Browse Chat Rooms </a> </li>
+
+                                    </ul> -->
+
+                              </li>
+
+                        </ul>
+
+                  </li>
+
+                 <?php /* <li><a href="trade-center.html" class="<?php echo ($page_name=='trade-center' ||$page_name=='etrade-home' || $page_name=='buy-sent-request' || $page_name=='manage-product-listing' || $page_name=='buy-request-received' || $page_name=='eswap-home' || $page_name=='manage-swap-request-sent' || $page_name=='eswap-product-wishlist' || $page_name=='manage-swap-request-received' || $page_name=='efreebie-home' || $page_name=='efreebies-offered' || $page_name=='manage-freebie-request-received' || $page_name=='manage-freebie-request-sent' || $page_name=='trade-center-activities' || $page_name=='buy-product-listing-credit' || $page_name == 'manage-sent-request' || $page_name == 'manage-my-product' || $page_name == 'manage-buy-request-received' || $page_name == 'create_product' || $page_name == 'sent-request' || $page_name == 'request-received' || $page_name == 'detail' || $page_name == 'edit-product' || $page_name == 'trade-activities')?'current':'';?>"><span>Trade&nbsp;Center</span></a>
+
+                        <ul>
+
+                              <li><a href="<?=base_url()?>etrade-home.html">eTrade</a>
+
+                                    <!--<ul>
+
+                                          <li><a href="etrade-home">eTrade Home</a> </li>
+
+                                          <li><a href="buy-sent-request">Manage Buy Request Sent</a> </li>
+
+                                          <li><a href="manage-product-listing">Manage My Products Listing</a> </li>
+
+                                          <li><a href="buy-request-received">Manage Buy Request Received </a> </li>
+
+                                    </ul>-->
+
+                              </li>
+
+                              <li><a href="<?=base_url()?>eswap-home.html">eSwap</a>
+
+                                    <!--<ul>
+
+                                          <li><a href="eswap-home">eSwap Home</a> </li>
+
+                                          <li><a href="manage-swap-request-sent">Manage Swap Request Sent</a> </li>
+
+                                          <li><a href="eswap-product-wishlist">My eSwap Products and Wish List </a> </li>
+
+                                          <li><a href="manage-swap-request-received">Manage Swap Request Received</a> </li>
+
+                                    </ul> <?=base_url()?>efreebie-home-->
+
+                              </li>
+
+                              <li><a href="<?=base_url()?>efreebie-home.html">eFreebie</a>
+
+                                    <!--<ul>
+
+                                          <li><a href="efreebie-home">eFreebie Home</a> </li>
+
+                                          <li><a href="efreebies-offered">eFreebies Offered</a> </li>
+
+                                          <li><a href="manage-freebie-request-received">Manage Freebie Request Received</a> </li>
+
+                                          <li><a href="manage-freebie-request-sent">Manage Freebie Request Sent</a> </li>
+
+                                    </ul> -->
+
+                              </li>
+
+                              <li><a href="<?=base_url()?>trade-activities.html">My Trade Center Activities</a> </li>
+
+                              <li><a href="buy-product-listing-credit.html">Purchase Product Listing Credit</a> </li>
+
+                        </ul>
+
+                  </li>*/?>
+
+				  
+
+				    <li><a href="media-center.html" class="<?php echo ($page_name=='media-center' || $page_name=='christian_news'|| $page_name=='christian-news-details' || $page_name=='gospel-magazine' || $page_name=='gospel-magazine-details' || $page_name=='christian-project-highlight' || $page_name=='christian-project-highlight-details' || $page_name=='minister-shout' || $page_name == 'word-for-today' || $page_name == 'read' || $page_name == 'watch' || $page_name == 'listen' || $location == 'christian_news' || $watch_location == 'christian-news-details' || $location == 'watch' || $watch_location == 'watch-detail' || $location == 'listen' || $location == 'listen-detail')?'current':'';?>"><span>Media&nbsp;Center</span></a>
+
+                  		<ul> 
+
+                        	<li><a href="<?=base_url()?>christian-news/read.html">Read</a></li><?php /*?><?=base_url()?>christian-news/t/top-stories.html<?php */?>
+
+                         <?php /*?><li><a href="<?=base_url()?>gospel-magazine.html">news</a></li><?=base_url()?>gospel-magazine<?php */?>
+
+                             <li><a href="<?=base_url()?>watch.html">Watch</a></li>
+
+							 <li><a href="<?=base_url()?>listen.html">Listen</a></li><?php /*?><?=base_url()?>christan-project<?php */?> 
+
+							 <?php /*?><?=base_url()?>christan-project<?php */?> 
+
+                            <!--<li><a href="<?=base_url()?>minister-shout.html">Audio</a></li>
+
+							<li><a href="<?=base_url()?>christan-project-detail/1/2">video-detail</a></li>
+
+							<li><a href="<?=base_url()?>searchlist.html">search list</a></li>
+
+							<li><a href="<?=base_url()?>category-media.html">category</a></li>
+
+							<li><a href="<?=base_url()?>audio-detail.html">Audio detail</a></li>-->
+
+                        </ul>
+
+                  </li>
+
+                 <?php /* <li><a href="media-center.html" class="<?php echo ($page_name=='media-center' || $page_name=='christian-news'|| $page_name=='christian-news-details' || $page_name=='gospel-magazine' || $page_name=='gospel-magazine-details' || $page_name=='christian-project-highlight' || $page_name=='christian-project-highlight-details' || $page_name=='minister-shout' || $page_name == 'word-for-today')?'current':'';?>"><span>Media&nbsp;Center</span></a>
+
+                  		<ul> 
+
+                        	<li><a href="<?=base_url()?>christian-news/read.html">Read</a></li><?php /*?><?=base_url()?>christian-news/t/top-stories.html
+
+                          <!-- <li><a href="<?=base_url()?>gospel-magazine.html">Gospel&nbsp;Magazine</a></li><?php /*?><?=base_url()?>gospel-magazine
+
+                             <li><a href="<?=base_url()?>christan-project.html">Christian Project</a></li><?php /*?><?=base_url()?>christan-project 
+
+                            <li><a href="<?=base_url()?>minister-shout.html">Ministers Shout</a></li>-->
+
+                        </ul>
+
+                  </li> */?>
+
+                  <li><a href="build-the-kingdom.html" class="<?php echo ($page_name=='build-the-kingdom' || $page_name=='giving' || $page_name=='my-prayer-partners' || $page_name=='prayer-partner-request' || $page_name=='find-church'||  $page_name=='search-invite-prayer-partner' || $page_name=='bible-quiz' || $page_name=='charity-project-home' || $page_name=='view-manage-projects'  || $page_name=='find-church' || $page_name=='register-your-church' || $page_name =='find-church-space' || $page_name == 'create-church-space')?'current':'';?>"><span>Build&nbsp;The&nbsp;Kingdom</span></a>
+
+                        <ul>
+
+<!--                              <li><a href="giving.html">Giving </a></li>-->
+
+                              <li><a href="my-prayer-partners.html">Prayer Partners Zone</a>
+
+                                    <!--<ul>
+
+                                          <li><a href="my-prayer-partners">My Prayer Partners </a></li>
+
+                                          <li><a href="prayer-partner-request">Prayer Partner Requests</a></li>
+
+                                          <li><a href="search-invite-prayer-partner">Search  &amp;  Invite Prayer Partners</a></li>
+
+                                    </ul> -->
+
+                              </li>
+
+<!--                              <li><a href="suggest-projects/charity-project-home.html">Charity Projects</a>-->
+
+                                    <!--<ul>
+
+                                          <li><a href="charity-project-home">Charity Project Home </a></li>
+
+                                          <li><a href="view-manage-projects">View  &amp;  Manage My Projects</a></li>
+
+                                    </ul> -->
+
+                              
+
+                              <li><a href="javascript:void(0);" onclick="show_dialog('welcome')">Salvation Prayer</a></li>
+
+                              <li><a href="bible-quiz.html">Bible Quiz</a></li>
+
+                              <li><a href="find-church.html">Find a Church </a></li>
+
+<!--                                   <li><a href="find-church-space">Find a Church </a></li>-->
+
+                               <li><a href="create-church-space">Create Church Space </a></li>
+
+                              
+
+                        </ul>
+
+                  </li>
+
+                  <li><a href="holy-place.html" class="<?php echo ($page_name=='holy-place' || $page_name=='read-bible-testament-view'  || $page_name=='my-daily-bible-reading-plan' || $page_name=='library' || $page_name=='prayer-wall-home' || $page_name=='view-search-prayer-wall' || $page_name=='view-manage-prayer-posts-commitment' || $page_name=='view-search-eintercession' || $page_name=='view-manage-eintercession-commitments'  || $page_name=='view-manage-eintercession-commitments' || $page_name=='tesimony'  || $page_name == 'manage-my-commitments' || $page_name == 'manage-my-prayer-request' || $page_name == 'view-all-prayer-request' || $page_name == 'prayer-wall-request-detail' || $page_name == 'view-search-eintercession' || $page_name == 'prayer-wall-testimony' || $page_name == 'intercession-testimony' || $page_name == 'five-a-day')?'current':'';?>"><span>Holy&nbsp;Zone</span></a>
+
+                        <ul>
+
+                              <li><a href="<?php echo base_url().'five-a-day.html'?>">5 a Day</a></li>
+
+                              <li><a href="<?php echo base_url()?>holy-place/bible/all-books">Bible</a></li>
+
+                              
+
+                             <?php /*?> <li><a href="<?php echo base_url()?>holy-place/read-bible">My Daily Bible Reading Plan</a></li>
+
+                              <li><a href="<?php echo base_url()?>holy-place/bible-library">Library</a></li><?php */?>
+
+                              <li><a href="prayer-wall-home.html">Prayer Wall</a>
+
+                                    <!--<ul>
+
+                                          <li><a href="prayer-wall-home">Prayer Wall Home</a></li>
+
+                                          <li><a href="view-search-prayer-wall">View  &amp;  Search Prayer Wall</a></li>
+
+                                          <li><a href="view-manage-prayer-posts-commitment">View  &amp;  Manage My Prayer Posts  &amp;  Commitments</a></li>
+
+                                    </ul> -->
+
+                              </li>
+
+                              <li><a href="view-search-eintercession.html"><i class="e_italic">e</i>Intercession</a>
+
+                                    <!--<ul>
+
+                                          <li><a href="view-search-eintercession">View  &amp;  Search E-Intercession</a></li>
+
+                                          <li><a href="view-manage-eintercession-commitments">View  &amp;  Manage My E-Intercession Commitments</a></li>
+
+                                    </ul> -->
+
+                              </li>
+
+                              <li><a href="prayer-wall-testimony.html">Testimony</a></li>
+
+                              <li class="not_li"><a href="prayer-group.html">Prayer Group</a><?php if($arr_profile_info['prayergrp_notification_count'] != 0) { ?><span class="notification pryr_notfication" id="pryergrp_not"><?=$arr_profile_info['prayergrp_notification_count']?></span><?php } ?></li>
+
+                              
+
+                        </ul>
+
+                  </li>
+
+                  
+
+                  <li><a href="javascript:void(0);" class="<?php echo ($page_name=='my-profile' || $page_name=='my-friends' || $page_name=='friend-request' || $page_name=='search-invite-friends' || $page_name=='my-net-pals' || $page_name=='my-prayer-partners' || $page_name=='net-pal-request' || $page_name=='search-invite-net-pals' || $page_name=='my-photos' || $page_name=='manage-my-photo' || $page_name=='my-audios' || $page_name=='manage-my-audio' || $page_name=='my-videos' || $page_name=='manage-video-album' || $page_name=='my-msg-inbox' || $page_name=='my-msg-outbox' || $page_name=='my-msg-deleted-items' || $page_name=='buy-credit' || $page_name=='privacy-settings' || $page_name=='email-notification-settings' || $page_name=='sms-notification-settings' || $page_name=='my-account' || $page_name=='organizer-day-view' || $page_name == 'user-alert-settings' || $page_name == 'my-msg-trashbox')?'current':'';?>"><span>My&nbsp;Account</span></a>
+
+                  	    <ul>
+
+                              <!--<li><a href="my-wall">My Wall</a></li>-->
+
+                              <li><a href="my-profile.html">My Profile</a> </li>
+
+                              <li><a href="my-friends.html">My Friends Zone</a>
+
+                                    <!--<ul>
+
+                                          <li><a href="my-friends">My Friends</a> </li>
+
+                                          <li><a href="friend-request">Friend Request</a> </li>
+
+                                          <li><a href="search-invite-friends">Search  &amp;  Invite Friends</a> </li>
+
+                                    </ul>-->
+
+                              </li>
+
+                              <li><a href="my-net-pals.html">My NetPals Zone</a>
+
+                                    <!--<ul>
+
+                                          <li><a href="my-net-pals">My Net Pals</a> </li>
+
+                                          <li><a href="net-pal-request">Net Pal Request</a> </li>
+
+                                          <li><a href="search-invite-net-pals">Search  &amp;  Invite Net Pals</a> </li>
+
+                                    </ul> -->
+
+                              </li>
+
+                              <li><a href="my-prayer-partners.html">My Prayer Partners</a></li>
+
+                              <li><a href="my-photos.html">My Photos</a>
+
+                                    <!--<ul>
+
+                                          <li><a href="my-photos">View My Photos</a> </li>
+
+                                          <li><a href="manage-my-photo">Manage My Photo Albums </a> </li>
+
+                                    </ul> -->
+
+                              </li>
+
+                              <li><a href="my-audios.html">My Audios</a>
+
+                                    <!--<ul>
+
+                                          <li><a href="my-audios">View My Audios </a> </li>
+
+                                          <li><a href="manage-my-audio">Manage My Audio Albums</a> </li>
+
+                                    </ul> -->
+
+                              </li>
+
+                              <li><a href="my-videos.html">My Videos</a>
+
+                                    <!--<ul>
+
+                                          <li><a href="my-videos">View My Videos </a> </li>
+
+                                          <li><a href="manage-video-album">Manage My Video Albums</a> </li>
+
+                                    </ul> -->
+
+                              </li>
+
+                              <li><a href="my-msg-inbox.html">My Messages</a>
+
+                                    <!--<ul>
+
+                                          <li><a href="my-msg-inbox">Inbox </a> </li>
+
+                                          <li><a href="my-msg-outbox">Sent Items</a> </li>
+
+                                          <li><a href="my-msg-deleted-items">Deleted Items</a> </li>
+
+                                    </ul> -->
+
+                              </li>
+
+                             <!-- <li><a href="javascript:void(0);">Purchase SMS Credit</a> </li>-->
+
+                              <li><a href="<?php echo base_url().'privacy-settings.html'?>">My Privacy Settings</a> </li>
+
+                              <li><a href="user-alert-settings.html">My Alert Settings</a> </li>
+
+                              <li><a href="user-email-settings.html">My Email Notification Settings</a> </li>
+
+                              <!--<li><a href="javascript:void(0);">My SMS Notification Settings</a> </li>-->
+
+                              <li><a href="organizer-day-view.html">Organizer</a> </li>
+
+                              <li ><a href="change-password.html">Change Password</a> </li>
+
+                              <li ><a href="deactivate-account.html">Deactivate Account</a> </li>
+
+                              
+
+                        </ul>
+
+                        
+
+                  </li>
+
+                  
+
+            </ul>
+
+      </div>

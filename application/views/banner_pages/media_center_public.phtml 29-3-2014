@@ -1,0 +1,177 @@
+<?php
+	if( ($this->session->userdata('loggedin') !='' || $this->session->userdata('loggedin')!=false ) && $this->session->userdata('is_admin') != 1){
+		
+		 include(APPPATH ."views/layouts/logged_header.phtml");
+		 include(APPPATH."views/layouts/nav.phtml");?>
+		  <!-- /NAVIGATION SECTION -->
+      		</div>
+		</div>
+		
+		
+   <?php  }
+     else{
+         
+		include(APPPATH ."views/layouts/header.phtml");
+	   	include(APPPATH."views/layouts/slider_nav.phtml");
+  }?>
+<!-- CONTENT SECTION -->
+<div class="clr"></div><!-- CONTENT SECTION -->
+
+<div id="content_section" style="margin-top:8px;">
+      <div id="container">
+      	  <!-- main container -->
+          <div class="media-center-bg" style="overflow: hidden;">
+          
+          
+          
+           <?php if(count($contents))
+                        {
+                            foreach($contents as $r)
+                            {
+                                if($r['s_keyword']=='mc_main')
+                                {
+                                    $content['main_title']=$r['s_title'];
+                                    $content['main_desc']=nl2br($r['s_desc']);
+                                }
+                            }
+                        }
+                        
+        ?> 
+                <h2 class="white-title"><?=$content['main_title']?></h2>  
+                <p><?=$content['main_desc']?></p>
+          </div>
+          
+          
+          
+          
+          <!--word for today start -->
+          <?php
+          if($this->session->userdata('loggedin')!='')  :
+          
+          ?>
+          
+          
+          <div class="word-for-today">
+              <h3 class="title">Word for today</h3>
+            <div class="message-box">
+                <h2><?=$latest_word_for_today['s_title']?></h2>
+                <p class="date-time">Posted On <?=getShortDateWithTime($latest_word_for_today['dt_posted_on'],7)?></p>
+                <p><?=nl2br($latest_word_for_today['s_desc'])?></p>
+                <p class="add-remove-friend"><img alt="" src="images/icons/ring2.png"> <a href="javascript:void(0);" onclick="window.open('<?=base_url()?>client/123flashchat.html?init_room=<?=$latest_word_for_today['i_room_id']?>&amp;init_user=<?=$this->session->userdata('display_username')?>',   '',   'bReplace= 0 resizable=0, location=1, width=630, height=450');    " target="">Join this Room</a> </p>
+                <br class="clr" />
+                <a href="word-for-today.html" class="view-all">View All</a>
+            </div>
+          </div>
+          
+          
+          <?php
+          endif;
+          ?>
+          <!--word for today end -->
+          
+          
+          
+          
+      	  <!--three link section start -->
+          <div class="three-link-box">
+          		<!--box one start -->
+                <? /*<div class="media-link-box left" onclick="return show_dialog('login-box')">
+                */ ?>
+                
+                
+                
+<?php
+    $christian_news_URL="window.location.href='".base_url()."christian-news/t/top-stories.html'";
+    $popup = "show_login_popup('".base64_encode(my_current_url())."')";
+?>
+
+
+            <?php /*?>    <div class="media-link-box left" onclick="<?=($this->session->userdata('user_id')!='')? $christian_news_URL :$popup?>">
+            <?php */?>
+                  <?php //pr($contents,1);
+                    if($this->session->userdata('loggedin')!='')
+                    {
+                        $destination = "window.location='christian-news/t/top-stories.html'";
+                    }
+                    else
+                    {
+                        $url = base64_encode(base_url().'christian-news/t/top-stories.html');
+                        $destination = "return show_login_popup('".$url."')";
+                    }
+                    
+                    ?>
+            
+            
+                <div class="media-link-box left" onclick="<?=$destination?>">
+                	<h3 class="yellow">Christian News</h3>
+                    <img src="images/christian-news-image.png" alt="Christian News" width="257" height="257" />
+                </div>
+                <!--box one end -->
+                <!--box two start -->
+                
+                
+                 <?php //pr($contents,1);
+                    if($this->session->userdata('loggedin')!='')
+                    {
+                        $destination = "window.location='gospel-magazine.html'";
+                    }
+                    else
+                    {
+                        $url = base64_encode(base_url().'gospel-magazine.html');
+                        $destination = "return show_login_popup('".$url."')";
+                    }
+                    
+                  ?>
+                <div class="media-link-box middle" onclick="<?=$destination?>">
+                	<h3 class="green">Gospel Magazine</h3>
+                    <img src="images/gospel-magazine-image.png" alt="Gospel Magazine" width="257" height="257" />
+                </div>
+                <!--box two end -->
+                
+                <!--box three start -->
+                 <?php //pr($contents,1);
+                    if($this->session->userdata('loggedin')!='')
+                    {
+                        $destination = "window.location='christan-project.html'";
+                    }
+                    else
+                    {
+                        $url = base64_encode(base_url().'christan-project.html');
+                        $destination = "return show_login_popup('".$url."')";
+                    }
+                    
+                    ?>
+                <div class="media-link-box right" onclick="<?=$destination?>">
+                	<h3 class="blue">Christian Projects</h3>
+                    <img src="images/christian-project-image.png" alt="Christian Projects" width="257" height="257" />
+                </div>
+                <!--box three end -->
+          </div>
+          <!--three link section end -->
+          
+          
+          
+          
+          
+          <?//pr($videos)?>
+          
+          
+          <!--video gallery start -->
+          <?php include(APPPATH."views/banner_pages/video_carousel.phtml")?>
+                    
+          <!--video gallery end -->	
+      <!-- main container end-->  
+      </div>
+      <div class="clr"></div>
+</div>
+<!-- /CONTENT SECTION -->  
+  
+<?php
+	# include footer file...
+	include_once(APPPATH ."views/layouts/footer.phtml");
+?>
+<!--login popup start -->
+
+<!--login popup end -->
+
+

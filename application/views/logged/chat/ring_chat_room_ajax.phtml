@@ -1,0 +1,45 @@
+ <?php #pr($arr_chat_rooms);
+		  if(count($arr_chat_rooms) > 0){
+		  //$i=1;
+			  foreach($arr_chat_rooms as $key => $val){
+							
+				  $CSS = ($key != 0 )?'style="padding-top:5px;"':'';
+								
+   ?> 
+                              <div class="shade_box_shade" <?=$CSS?>>
+                                    
+                                    <?php if($key == 0 && $current_page_1 == 0){ ?>
+                                      <div class="page_heading" id="chat_pg_heading" >
+                                            <div style="padding-left:10px;" class="left">List of Chat Rooms </div>
+                                      </div>
+                                    <?php } ?>       
+                               
+                                          <div class="txt_content">
+                                                   <p class="add-remove-friend"><img alt="" src="images/icons/ring2.png" /> <a  href="javascript:void(0);" onclick="window.open('<?=base_url()?>client/123flashchat.html?init_room=<?=$val['room_id']?>&init_user=<?= $this->session->userdata('display_username') ?>&init_password=<?=$this->session->userdata('upassword')?>',   '',   'bReplace= 0 resizable=0, location=1, width=630, height=450');    " target="">Join this Room</a> 
+                                                 
+                                                   </p>
+                                                <?php if($val['is_owner'] != 'Y'){?>
+                                                <p> <img alt="" src="images/icons/cmnt_smal.png" /> <a class="blue_link" href="javascript:void(0);" ><strong><?=$val['name']?></strong></a></p>
+                                                <?php } 
+												else
+												{?>
+                                                <p> <img alt="" src="images/crown.png" /> <a class="blue_link" href="javascript:void(0);" ><strong><?=$val['name']?></strong></a></p>
+												<?php }?>
+                                                <?php /*?><p class="light_blue12">Sub Sub Category Name</p><?php */?>
+                                                
+                                                <p>No. of people at this moment: <span class="blue12"><strong><?=$val['user_numbers']?></strong></span></p>
+                                                <p>Ring Name: <span class="blue12"><?=$val['s_ring_name']?></span></p>
+                                                <p>Ring Owner: <span class="blue12"><?=get_username_by_id($val['owner_id'])?></span></p>
+                                          </div>
+                                          
+                                          
+                                      
+                               </div> 
+                                   
+    <?php 
+			 	 }
+			 }
+  ?>    
+                                    
+                                    
+ <input type="hidden" id="current_page" name="current_page" value="<?=$current_page_1?>"  />

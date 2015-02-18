@@ -1,0 +1,214 @@
+<?php include(APPPATH."views/layouts/logged_header.phtml");?>
+            <!-- NAVIGATION SECTION -->
+      <?php include(APPPATH."views/layouts/nav.phtml");?>
+      <!-- /NAVIGATION SECTION -->
+      </div>
+</div>
+<!-- /HEADER SECTION -->
+<div class="clr"></div>
+<!-- CONTENT SECTION -->
+<div id="content_section">
+      <div id="container">
+            <div id="top_corner">&nbsp;</div>
+			
+			
+			 <div id="mid_content">
+				 <!-- latest news -->
+                  <?php include(APPPATH ."views/layouts/latest_news.phtml");?>
+                  <!-- /latest news -->
+				  <div class="clr"></div>
+				   <!-- main container -->
+                  <div id="main_container">
+					 <!-- left container -->
+					 <?php include(APPPATH."views/layouts/leftbar.phtml");?>
+                      <!-- left container -->
+                      <div id="mid_container">
+                            <div class="page_heading etrade-nw-heading">
+                              <div class="left"><img src="images/trade-shop.png" alt="" />My Trade Center Activities</div>
+                            </div>
+                            <div class="arrow_btm"></div>
+                            <div class="nw-trade-product">
+                              <form method="post" action="<?=base_url().'trade-activities.html'?>">
+                                <label class="subproduct">Product :</label>
+                                <input type="text" class="subproduct-input" name="prodname" />
+                                 <input type="submit" class="trade-search-btn" value="" name=""/>
+                                 
+                                 </form>
+                            </div>
+                            
+                                <!--product tab start-->
+                                <div class="trade-center-header">
+                                    <ul>
+                                     <li><a href="javascript:void(0);" class="select">eTrade</a></li>
+                                     <li><a href="javascript:void(0);" >eSwap</a></li>
+                                     <li><a href="javascript:void(0);">eFreebie</a></li>
+
+                                   </ul>
+                                </div>
+                                <div class="clr"></div>
+                                <div class="donate-time-donors-content">
+                                    <!--eTrade block start -->
+                                    <div class="trade-block" style="display: block;">
+                                            <div class="trade-center">
+                                            <label class="subproduct">eTrade</label>
+                                            <label class="activity">Activity</label>
+                                            <br class="clr"/>
+                                            <DIV ID ="etrade_content"><?=$listingContent?></DIV>
+                                             </div>
+                                     <?php if($trade_no_of_result  == 0):?>
+                                        <div class="shade_box_01" style="padding-top:5px;">
+                                         <div  class="shade_norecords" style="width:260px;"><p class="blue_bold12">No Product.</p></div>
+                                        </div>
+                                     <?php  endif;?>	
+                                    <?php if($trade_no_of_result > $pagination_per_page): ?>
+                                            <div class="view_more" id="show_more_feeds_div_0"><a href="javascript:void(0);" id="show_more_feeds_link_0" page_value="<?=$current_page_1?>" onclick="show_more_record($(this).attr('page_value'))">[view more] </a> </div>
+                                    <?php endif; ?>    
+                                           
+                                    </div>
+                                    <!--eTrade block end -->
+                                   <!--eSwap section start-->
+                                     <div class="trade-block">
+                                            <div class="trade-center">
+                                            <label class="subproduct">eSwap</label>
+                                            <label class="activity">Activity</label>
+                                            <br class="clr"/>
+                                            <DIV ID="eswap_content"><?=$swap_listingContent?></DIV>
+                                            </div>
+                                      <?php if($swap_no_of_result  == 0):?>
+                                        <div class="shade_box_01" style="padding-top:5px;">
+                                         <div  class="shade_norecords" style="width:260px;"><p class="blue_bold12">No Product.</p></div>
+                                        </div>
+                                     <?php  endif;?>	
+                                    <?php if($swap_no_of_result > $pagination_per_page): ?>
+                                            <div class="view_more" id="show_more_feeds_div_1"><a href="javascript:void(0);" id="show_more_feeds_link_1" page_value="<?=$current_page_1?>" onclick="show_more_record($(this).attr('page_value'))">[view more] </a> </div>
+                                    <?php endif; ?>
+                                    </div>
+                                   <!--eSwap section end-->
+                                    <!--eFreebie section start-->
+                                     <div class="trade-block">
+                                            <div class="trade-center">
+                                            <label class="subproduct">eFreebie</label>
+                                            <label class="activity">Activity</label>
+                                            <br class="clr"/>
+                                            <DIV id="freebie_content"><?=$free_listingContent?></DIV>
+                                            </div>
+                                            
+                             <?php if($free_no_of_result  == 0):?>
+                                <div class="shade_box_01" style="padding-top:5px;">
+                                 <div  class="shade_norecords" style="width:260px;"><p class="blue_bold12">No Product.</p></div>
+                                </div>
+                             <?php  endif;?>	
+							<?php if($free_no_of_result > $pagination_per_page): ?>
+                                    <div class="view_more" id="show_more_feeds_div_2"><a href="javascript:void(0);" id="show_more_feeds_link_2" page_value="<?=$current_page_1?>" onclick="show_more_record($(this).attr('page_value'))">[view more] </a> </div>
+                            <?php endif; ?>
+                                     </div>
+                                   <!--eFreebie section end-->
+                                 </div>
+                                
+                                
+                                 <!--product tab start-->           
+                                                    
+                                                    
+                             <input id="hd_active_tab" type="hidden" value="0" />
+                           
+                            
+                            
+                      </div>
+                      <!-- right container -->
+                  <?php include(APPPATH."views/layouts/rightbar.phtml");?>
+                  <!-- right container -->
+				  </div>
+				  <!-- main container -->
+				 
+			 
+			 </div>
+			<div id="bot_corner">&nbsp;</div>
+      </div>
+      <div class="clr"></div>
+</div>
+<!-- /CONTENT SECTION -->
+<div class="clr"></div>
+<!-- FOOTER SECTION -->
+
+<?php include(APPPATH."views/layouts/footer.phtml");?>
+<?php include(APPPATH."views/logged/blocks/common_popup.phtml");?>
+<script type="text/javascript">
+
+var ajax_req_feeds = null;
+function show_more_record(page) {
+	
+	if(ajax_req_feeds!=null) {
+		ajax_req_feeds.abort();
+	}
+	
+	var URL ;
+	var content_div ;
+	var link_div;
+	var more_div;
+	
+	if($('#hd_active_tab').val() == '0'){
+		URL = base_url+'logged/trade_activities/generate_product_listing_AJAX/'+$('#hd_active_tab').val()+'/'+page;
+		content_div = '#etrade_content';
+		link_div = '#show_more_feeds_link_0';
+		more_div = '#show_more_feeds_div_0';
+	}
+	else if($('#hd_active_tab').val() == '1'){
+		URL = base_url+'logged/trade_activities/generate_product_listing_AJAX/'+$('#hd_active_tab').val()+'/'+page;
+		content_div = '#eswap_content';
+		link_div = '#show_more_feeds_link_1';
+		more_div = '#show_more_feeds_div_1';
+	}
+	else if($('#hd_active_tab').val() == '2'){
+		URL = base_url+'logged/trade_activities/generate_product_listing_AJAX/'+$('#hd_active_tab').val()+'/'+page;
+		content_div = '#freebie_content';
+		link_div = '#show_more_feeds_link_2';
+		more_div = '#show_more_feeds_div_2';
+	}
+	showUILoader_nodialog();
+	ajax_req_feeds = $.ajax({
+		type: 'get',
+		url: URL,
+		dataType: 'json',
+
+		success: function (data, status) {
+
+			hideUILoader_nodialog();
+			if(data.html!='') {
+				
+				//alert(data.cur_page+'dfdf');
+				$(content_div).append(data.html);
+				$(link_div).attr('page_value', data.cur_page);
+				$(link_div).attr('onclick','');
+				$(link_div).attr('onclick','show_more_record('+data.cur_page+')');
+			}
+			else {
+				$(content_div).append('<div class="view_more" style="text-align: center;"><p class="blue_bold12" style="font-size:14px;">No More Records.</p></div>');
+				$(more_div).remove();
+			}
+            
+            if(data.view_more==false)
+            {
+                
+                $(content_div).append('<div class="view_more" style="text-align: center;" ><p class="blue_bold12" style="font-size:14px;">No More Records.</p></div>');
+                $(more_div).remove();
+            }
+		
+
+		}	// end of success function...
+	});
+}
+
+$(document).ready(function() {
+
+	$('.trade-center-header li a').click(function(){
+		var donateIndex=$('.trade-center-header li a').index(this);		//alert(donateIndex);
+
+		$('.trade-center-header li a').removeClass('select');
+		$('.donate-time-donors-content >.trade-block').slideUp('slow');
+		$(this).addClass('select');
+		$('.donate-time-donors-content >.trade-block').filter(':eq(' + donateIndex + ')').slideDown('slow');
+		$('#hd_active_tab').val(donateIndex);	
+	});
+
+});
+</script>

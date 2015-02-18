@@ -1,0 +1,113 @@
+									 <?php
+									  if($info[0]['i_accept']==0)
+									  {
+									  	?> 
+										<div class="ne-etrade-product">
+							
+								 	  <p class="send-request-quantity">Quantity Requested: <?php echo $info[0]['req_qty']?></p>
+									  <ul class="ne-etrade-breadcrumb">
+										<li><a href="javascript:void(0)">Requested On - <?php echo getShortDate($info[0]['dt_req_date'],5)?></a></li>
+									  </ul>
+									  <br class="clear" />
+									  
+									  <label class="subproduct">Request Sent edit</label>
+										  <input type="text" value="" name="req_qty" style="width:50px; float:left; margin-right:5px;" />
+										  <input type="button" name="" value="Save" class="yellow-btn margin-bottom" onclick="editRequest('<?php echo encrypt($info[0]['id'])?>','<?php echo encrypt($info[0]['reqid'])?>',$(this));" />
+							  			</div>
+                                    	<?php
+									  }
+									  else if($info[0]['i_accept']==1)
+									  {
+										  ?>
+                                          <div class="ne-etrade-product">
+							
+								 	  <p class="send-request-quantity">Quantity Requested: <?php echo $info[0]['req_qty']?></p>
+									  <ul class="ne-etrade-breadcrumb">
+										<li><img class="acpt" src="images/icons/accept.png" alt="" />Request Accepted</li>
+										<li>»</li>
+										<li><a href="javascript:void(0)">Accepted On - <?php echo getShortDate($info[0]['dt_accept'],5)?></a></li>
+									  </ul>
+									  
+									  <br class="clear" />
+									  
+									  <!--personal information start-->
+									
+											<ul class="Item-list-req">
+												<li>Name: William Best</li>
+												<li>Phone: 9856989822</li>
+												<li>Email: abc@xyz.com</li>
+											</ul>
+									<br class="clear" />
+                                    		<?php
+											if($info[0]['f_rate_for_seller_item']==0)
+											{
+											?>
+                                    		<form action="<?php echo base_url()?>logged/e_trade/add_rate_for_seller" method="post" name="rating" id="rating<?php echo $info[0]['reqid']?>" onsubmit="return false;">
+											<input type="hidden" value="<?php echo encrypt($info[0]['reqid'])?>" name="id" />
+                                            <ul class="Item-list-req2">
+												<li>
+												
+                                                <label class="subproduct">Item as Described :</label>
+                                                <select style="width: 80px;" name="item">
+                                                    <option value="1">1</option>
+                                                    <option value="2">2</option>
+                                                    <option value="3">3</option>
+                                                    <option value="4">4</option>
+                                                    <option value="5">5</option>
+                                                </select>
+                                                <br class="clear" />
+												</li>
+												<li>
+												<label class="subproduct">Communication :</label>
+												<select style="width: 80px;" name="communication">
+                                                    <option value="1">1</option>
+                                                    <option value="2">2</option>
+                                                    <option value="3">3</option>
+                                                    <option value="4">4</option>
+                                                    <option value="5">5</option>
+                                                </select>
+												<br class="clear" />
+												</li>
+												
+												<li>
+												<label class="subproduct">Dispatch Time :</label>
+												<select style="width: 80px;" name="dispatch">
+                                                    <option value="1">1</option>
+                                                    <option value="2">2</option>
+                                                    <option value="3">3</option>
+                                                    <option value="4">4</option>
+                                                    <option value="5">5</option>
+                                                </select>
+												<br class="clear" />
+												</li>
+												<li class="req-margin-bottom">
+												<input type="button" name="" value="Give Rating" class="yellow-btn req-margin-left" onclick="giveRatingToBuyer();" />
+												</li>
+											</ul>
+											</form>
+											<?php
+											}
+											?>
+									   <!--personal information end-->
+									   <br class="clear" />
+									  <div class="read-disclaimer attribute1"> 
+										  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec velit odio, pulvinar eu tincidunt id,
+										  tincidunt eu mauris. Aliquam ac tortor massa, sit amet interdum libero. Pellentesque arcu est, venenatis ut convallis nec, 
+										  sollicitudin eget nisl. Suspendisse hendrerit luctus nibh, quis faucibus arcu pretium sit amet. Pellentesque dui enim, imperdiet 
+										  in accumsan eu, interdum sed neque. Quisque vitae magna eget metus ultricies facilisis. Donec malesuada sagittis fringilla. 
+										  Phasellus blandit nisi congue urna vestibulum adipiscing.
+									  </div>
+							  			</div>
+                                          <?php
+									  }
+									  else if($info[0]['i_accept']==2)
+									  {
+										  ?>
+                                        <div class="ne-etrade-product">
+                                            <ul class="ne-etrade-breadcrumb">
+                                                 <li><img class="acpt" src="images/icons/band.png" alt="" /> <span>Request Declined</span></li>
+                                            </ul>
+                                        </div>
+                                        <?php
+									  }
+									  ?>

@@ -1,0 +1,58 @@
+<html> <head> <style>
+			.topcmm-123flashchat-move-text
+			{
+			   color:#3355FF;
+			   font-size:35pt;
+			   font-family:Helvetica;
+			   font-weight:bold;
+			}
+			.topcmm-123flashchat-move-text-color
+			{
+				color: #FF6600
+			}
+
+			.topcmm-123flashchat-move-text-di {
+			    background: none repeat scroll 0 0 #000000;
+			    height: 60px;
+			    opacity: 0.2;
+			    position: absolute;
+			    width: 100%;
+			}
+		</style> <script type="text/javascript" src="js/jquery-1.8.2.min.js"></script> <script type="text/javascript" src="js/marquee.js"></script> <script>
+			function init()
+			{
+				var paramstr = window.location.href.substring(window.location.href.indexOf("?") + 1);
+				if (paramstr == null)
+				{
+					complete();
+					return;
+				}
+
+				var params = paramstr.split("&");
+				for (var i=0; i < params.length; i++)
+				{
+					var keyValue = params[i];
+					var kv = params[i].split("=");
+					if (kv[0] == "sender")
+					{
+						document.getElementById("topcmm-123flashchat-extension-nickname").innerHTML = decodeURIComponent(kv[1]) + ": ";
+					}
+					if (kv[0] == "msg")
+					{
+						document.getElementById("topcmm-123flashchat-extension-content").innerHTML = decodeURIComponent(kv[1]);
+					}
+				}
+				
+				$('marquee').marquee('topcmm-123flashchat-move-text').bind('stop', 
+				        function() {
+				    		complete()
+				    	});
+
+			}
+
+			function complete()
+			{
+			    window.parent.topcmm.fireEvent("MarqueeEnd", "ok");
+			}
+			
+		</script> </head> <body onload="init();" style="overflow: hidden;background:transparent;border: none;"> <div style="margin: 0 auto 0; position: absolute; left:0; right:0; top:0px;"> <marquee direction=left loop=1 scrollamount="3"> <div class="topcmm-123flashchat-move-text"> <span id="topcmm_bg"><span class="topcmm-123flashchat-move-text-color" id="topcmm-123flashchat-extension-nickname"></span><span id="topcmm-123flashchat-extension-content"></span></span> </div> </marquee> </div> </body> </html>

@@ -1,0 +1,37 @@
+1.Deploy Grab Seat plugin
+We support two ways to apply this plugin in you chat with php and tomcat.
+Deploy on php:
+1.1 To deploy on php server, you need copy the files under /plugin/seat/server fold to you php server.
+1.2 You maybe need to modify the config.php that you just copy with. Moify the two variable $updateCreditsAPI $customMessageAPI to you need. 
+   And how to modify the config.php, you can see the explain on config.php.
+1.3 Under /plugin/seat/js fold there is a config.js, you need modify the var getSeatURL and updateSeatURL to you need, just like the example.
+    Some important infomation is on config.js file and you need read it anyway.
+   
+   
+   
+2 Deploy on tomcat: 
+2.1 Just like the step 1.3
+2.2 If you want to deploy on tomcat server, copy the ChatPlugin.war under the fold plugin to you webapps fold and restart you server.
+   Or maybe you have other J2EE server, you just do you need to deplay the ChatPlugin.war file.
+   Under the project ChatPlugin, navigator to the fold ChatPlugins\WebRoot\WEB-INF\classes and open 
+   the server.properties, modify update-user-credits-api and custom-message-api to you need.
+   /*
+	For example of the "http://localhost:35555/update-user-credits.api";
+	http://localhost:35555 is the chat server, you may be need to modify the localhost to you chat server ip.
+	And alse need change 35555 to the server port;
+	
+	change "http://localhost:35555/custommessage.api" just like follows
+	
+	To important, open the server.xml under CHAT_ROOT\server\etc\groups\default, find tag just like follows 
+		<data-api enable="On"> 
+			<query-allow-access-from password=""> 
+				<ip>*</ip> 
+			</query-allow-access-from> 
+			<push-allow-access-from password=""> 
+				<ip>*</ip> 
+			</push-allow-access-from> 
+		</data-api>
+	
+	the data-api should be enabled, and the <ip> under  query-allow-access-from need add you domain without limited
+	<ip>*</ip> is not so scurity, you could modify like this <ip>127.0.0.1</ip>
+	*/

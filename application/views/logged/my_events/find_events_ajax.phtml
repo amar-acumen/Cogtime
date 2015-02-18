@@ -1,0 +1,155 @@
+<?php
+//pr($hp_events);
+//echo $no_of_result;
+//pr($no_of_result);
+
+if ($no_of_result) {
+//echo '2';exit;
+    //$i=1;
+    foreach ($hp_events as $val) {
+        $title = html_entity_decode(htmlspecialchars_decode($val['s_title']), ENT_QUOTES, 'utf-8');
+        $desc = my_substr(html_entity_decode(htmlspecialchars_decode($val['s_desc']), ENT_QUOTES, 'utf-8'), 285);
+        $country = get_country_name_by_id($val['i_country_id']);
+        $address = $val['s_address'] . ', ' . $val['s_city'] . ', ' . $val['s_state'] . ', ' . $country;
+        $detail_url = get_events_detail_url($val['id']);
+
+        $IMG_THUMB_PATH = base_url() . "uploads/events_photo/";
+        $main_name = getThumbName($val['s_image_1'], 'mid_FO');
+        $MAIN_IMG_THUMB = $IMG_THUMB_PATH . $main_name;
+
+        $logged_user_id = intval(decrypt($this->session->userdata('user_id')));
+        ?>
+        <!--event start -->
+        <div class="shade_box_01">
+            <div class="left_div03">
+
+
+                <div class="top-section">
+                   
+                    <div class="event-image-big" style="background:url(<?= $MAIN_IMG_THUMB ?>) no-repeat center;max-width:180px; max-height:180px; cursor:pointer; " title="upcoming event"  ></div>
+                    <div class="text-part events-text-part">
+                        <p class="blue_bold12" style="margin-bottom:0px;"><a href="<?= $detail_url ?>"><?= $title ?></a></p>
+                        <p class="light_blue12 venue" style="margin-bottom:0px;"><strong>Venue:</strong> <?= $address ?></p>
+                        <p style="padding-bottom:6px;" class="time"><strong>Start Date:</strong> <?= getShortDateWithTime($val['dt_start_time'], 7) ?></p>
+                        <p style="padding-bottom:6px;" class="time"><strong>End Date:</strong> <?= getShortDateWithTime($val['dt_end_time'], 7) ?></p>
+                        <p><?= nl2br($desc) ?></p>
+
+                        <div class="right_div02">
+                            <div class="box01">
+                                <p>Created On:</p>
+                                <p class="date-time"><?= getShortDate($val['dt_created_on'], 5) ?></p>
+
+                            </div>
+
+
+                            <?php
+                            if ($this->session->userdata('loggedin')):
+                                ?>
+                                <p style="margin-right:8px;" class="add-remove-friend"><?php if ((show_event_rsvp($val['id']) == TRUE) && $val['event_owner_id'] != $logged_user_id) { ?><span id="send_rsvp_<?= $val['id'] ?>"><img src="<?= base_url() ?>images/icons/send.png" alt="" /> <a  href="javascript:void(0);" onclick="send_rsvp(<?= $val['id'] ?>)">Send RSVP</a></span><?php } ?></p>
+                                <?php
+                            else:
+                                ?>
+                                <p class="add-remove-friend" style="margin-right:8px;"><img alt="" src="images/icons/send.png" /> <a onclick="return show_login_popup('<?= base64_encode(my_current_url()) ?>')" href="javascript:void(0);">Send RSVP</a></p>
+                            <?php
+                            endif;
+                            ?>   
+
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+
+            <div class="light_heading"> 
+
+                <div class="left"><a href="javascript:void(0);"   class="comments_div<?= $val['id'] ?>"  onclick="return show_comments(<?= $val['id'] ?>)">Comments (<?= $val['total_comments'] ?>)</a> &nbsp; |   &nbsp; 
+                    <?php
+                    if ($this->session->userdata('loggedin')):
+                        ?><a href="javascript:void(0);"  >Comments</a>
+                    <?php else: ?>
+                        <a href="javascript:void(0);"  onclick="return show_login_popup('<?= base64_encode(my_current_url()) ?>')">Comment  &amp;   Support</a>
+                    <?php endif; ?>
+                </div>
+            </div> 
+            <!-- slide section start -->
+            <div class="new-wl">
+                <!--comment section start-->
+                <div  class="comments-number content-width" >
+                    <div class="comments-number-mid">
+                        <div class="heading">
+                            <div class="left">
+                                <h4><img class="cmnt" src="images/icons/cmnt2.png" alt="" /><span  class="comments_div<?= $val['id'] ?>">  Comments (<?= $val['total_comments'] ?>) </span></h4>
+                                <img class="wal-minus" alt="" src="images/minus-white.png" />
+                            </div>
+                        </div>
+                        <DIV ID="post_comment_div<?= $val['id'] ?>"></DIV>
+                    </div>
+                </div>
+                <!--comment section end-->	
+                <!--like by section start-->
+
+                <div  class="comments-number content-width" >
+                    <div class="comments-number-mid comment-box-manage">
+                        <div class="heading">
+                            <div class="left">
+                                <h4><img alt="" src="images/no.png" class="cmnt" />  Post Comment  </h4>
+                                <img class="wal-minus" alt="" src="images/minus-white.png" />
+                            </div>
+                        </div>
+                        <div class="txt_content01 comments-number-content"> 
+                            <textarea name="feed_comment_box_<?= $val['id'] ?>" id="feed_comment_box_<?= $val['id'] ?>" class="eve-wal-comment-textarea" cols="" rows=""></textarea>
+                            <input type="button" value="Post" class="yellow-btn" onclick="post_comment(<?= $val['id'] ?>);" />
+                            <br class="clr" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- slide section end -->
+        </div>
+        <!--event end -->
+
+        <script type="text/javascript">
+            $(function() {
+
+                $('.left a').click(function() {
+                    var index = $(this).index();
+                    //alert(index);
+                    $('.new-wl > .comments-number').css('display', 'none');
+                    $('.new-wl-right > .comments-number').css('display', 'none');
+                    $(this).parent().parent().next('.new-wl').children('.comments-number').filter(':eq(' + index + ')').slideDown('slow');
+                });
+
+                $('.wal-minus').click(function() {
+                    $(this).parents('.comments-number').slideUp('fast');
+                });
+
+            });
+        </script>
+        <?php
+        //$i++;
+    }
+}else {
+//echo '1';exit;
+    ?>
+    <div class="shade_box_01">
+        <div class="left_div03">
+            <div class="top-section">
+                No Results Found
+            </div>
+        </div>
+
+    </div>
+<?php }
+?>
+
+<input type="hidden" id="current_page" name="current_page" value="<?= $current_page_1 ?>"  />
+
+<?php
+/* ?>
+  <?php if($page_links){ ?>
+  <div class="article-pagination" >
+  <ul><?= $page_links ?></ul>
+  </div>
+  <?php }?><?php */?>

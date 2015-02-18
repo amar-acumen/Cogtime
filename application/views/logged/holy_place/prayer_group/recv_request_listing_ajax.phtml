@@ -1,0 +1,70 @@
+
+                  <?php  #pr($prayer_grp_info_arr);
+				  		if(count($prayer_grp_info_arr)){
+                          foreach($prayer_grp_info_arr as $key=> $val):
+                           
+                           $detail_url = get_group_url($val['id'],$val['s_group_name']);
+						   $DATETEXT = ($val['is_owner'] == 'Y')?'Created on':'Joined on';
+						   $profile_image = get_profile_image($val['i_owner_id'],'thumb');
+                  ?>
+                      <li id="pg_li_<?=$val['i_prayer_group_id']?>">
+                                      <span class="payer-member-name">
+                                      
+                                      <div class="pro_photo3" style="background:url(<?php echo $profile_image;?>) no-repeat center;width:45px; height:45px; margin-top:4px;" ></div>
+                                          
+                                          <div class="">
+                                          	  <p>Group Name : <a href="javascript:void(0);"><?=($val['s_group_name'])?></a></p>
+                                              <p>Owner Name : <a href="javascript:void(0);"><?=get_username_by_id($val['i_owner_id'])?></a></p>
+                                              <p>Requested On- <?=getShortDate($val['dt_created_on'],5)?> </p>
+                                              <ul class="pg-li" style=" margin-left:360px; width:122px;">
+                                            <li class="my-msg-accpt"><a onclick="acceptDecline_PrayerGroup_Invitation('<?=$val['i_prayer_group_id']?>','<?=$val['i_owner_id']?>','','accept')" href="javascript:void(0)">Accept</a></li>
+                                            <li class="my-msg-decline"><a onclick="acceptDecline_PrayerGroup_Invitation('<?=$val['i_prayer_group_id']?>','<?=$val['i_owner_id']?>','','decline')" href="javascript:void(0)">Decline</a></li>
+                                    </ul>
+                                                
+                                       
+                                          </div>
+                                      </span>          
+                                  </li>
+                      
+                   <?php  
+                          endforeach;
+                      }
+                      else
+                      {
+                          echo '<li><span class="payer-member-name">No Request.</span></li>';
+                      }
+                   ?>
+            <script type="text/javascript">
+			 function acceptDecline_PrayerGroup_Invitation(grp_id, uid, id, type)
+			  {
+					  if(type=='accept')
+					  {
+						  $.ajax({
+							  type: 'get',
+							  url: base_url+'logged/prayer_group/accept_req/'+grp_id+'/'+uid+'/'+id+'/1',
+							  dataType: 'json',
+					  
+							  success: function (data) {
+								  showUIMsg(data.msg);
+								  $('#pg_li_'+grp_id).hide();
+								 // hide_dialog();
+							  }	// end of success function...
+						  });
+					  }
+					  else if(type=='decline')
+					  {
+						  $.ajax({
+							  type: 'get',
+							  url: base_url+'logged/prayer_group/decline_req/'+grp_id+'/'+uid+'/'+id+'/1',
+							  dataType: 'json',
+					  
+							  success: function (data) {
+								  showUIMsg(data.msg);
+								  $('#pg_li_'+grp_id).hide();
+								 // hide_dialog();
+							  }	// end of success function...
+						  });
+					  }
+			  }
+			
+			</script>

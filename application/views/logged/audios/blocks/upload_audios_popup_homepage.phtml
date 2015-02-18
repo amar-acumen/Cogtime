@@ -1,0 +1,214 @@
+<script type="text/javascript">
+
+$(document).ready(function() {
+	
+	// for AJAX page-submission...
+    var options = { 
+        beforeSubmit:  showLoad_audio,  // pre-submit callback 
+        success:       validateAudioFrm // post-submit callback 
+    }; 
+ 
+    // bind to the form's submit event 
+    $('#frmUploadPhoto').submit(function() {
+	
+        $(this).ajaxSubmit(options);
+		
+        return false;
+		
+    });
+
+});
+
+function showLoad_audio()
+{ 
+ // $('#add_photo_btn').attr('disabled','disabled');
+  $('#add_photo_btn').val('Uploading...');
+  $('#photo_loading').html('<img id="img_holder" src="<?=base_url()?>images/loading_small.gif" align="absmiddle" />');
+  
+}
+
+
+// validate ajax-submission...
+function validateAudioFrm(data)
+{
+	//alert( data);
+	var data = JSON.parse(data);
+	if(data.success==false) 
+	{
+		
+		$('.error-message').each(function(i){
+			$(this).attr('style','display:none');
+		});
+		
+		//$('#add_photo_btn').attr('disabled','');
+		$('#add_photo_btn').val('Upload');
+		$('#photo_loading').html('');
+
+		for ( var id in data.arr_messages ){
+			//alert(data.arr_messages[id]);
+			if( $('#err_'+id) != null ) {
+				$('#err_'+id).html(data.arr_messages[id]);
+				$('#err_'+id).css('display', 'block');
+			}
+		}
+		if(data.maxlimit == true){
+		  $('#frmUploadPhoto')[0].reset();
+		  $('.error-message').hide();
+		  hide_dialog();
+		 showUIMsg(data.msg);
+		}
+		
+	}
+	else {
+		  // clearing form
+		  $('#frmUploadPhoto')[0].reset();
+		  //$('#select_album1').val($('options:first', '#select_album1').val());
+		 // $('#add_photo_btn').attr('disabled','');
+		  $('.error-message').hide();
+		  $('#add_photo_btn').val('Upload');
+		  hide_dialog();
+		  showUIMsg(data.msg);
+		 window.location.href= base_url+"my-audios.html";//document.URL;
+	}
+	$('#photo_loading').html('');
+	//hideLoading();
+				
+}
+function clear_box(){
+		  $('#frmUploadPhoto')[0].reset();
+		  $('.error-message').hide();
+}
+</script>
+<script type="text/javascript">
+$(document).ready(function () {
+
+ //counting the left characters in comment
+     function limitChars(textid, limit, infodiv)
+     {
+      var text = $('#'+textid).val(); 
+      var textlength = text.length;
+      if(textlength > limit)
+      {
+      $('#'+textid).val(text.substr(0,limit));
+       return false;
+      }
+      else
+      {
+      
+       return true;
+      }
+     }
+    
+    
+    $(function(){
+        $('#ta_desc').keyup(function(){
+            limitChars('ta_desc', 250, '');
+        });
+    });
+    
+    
+    //// just to show correct no. of chracters left while the page is loaded...
+    limitChars('ta_desc',250, '');
+    
+ 
+});
+</script>
+
+<form id="frmUploadPhoto"  method="post" action="<?=base_url().'logged/my_audios/add_new_track'?>" onsubmit="return false;" enctype="multipart/form-data">
+<div class="lightbox upload_audio" style="width:550px;">
+    <div class="close"><a href="javascript:void(0)" onclick="clear_box();hide_dialog()"><img src="images/close.png" alt="" /></a></div>
+    <div class="top"><div>&nbsp;</div></div>
+    <div class="mid">
+        <div class="heading"><div class="left"><h4><img src="images/icons/audio.png" alt="" /> Upload Audio </h4></div></div>
+           <div class="frm_box">
+           
+             <div class="lable01">Title:</div> 
+             <div class="field01"><input name="txt_title" id="txt_title"  type="text" /> 
+             <span id="err_title" class="error-message"></span> 
+             </div>
+             <div class="clr"></div>
+             
+             
+             <div class="lable01">Artist:</div> 
+             <div class="field01"><input name="txt_artists" id="txt_artists" type="text" />
+             <span id="err_artists" class="error-message"></span> 
+             </div>
+             <div class="clr"></div>
+             
+             
+             <div class="lable01">Genre:</div> 
+             <div class="field01"><!--<input name="txt_genre" id="txt_genre" type="text" />--> 
+              <select name='txt_genre' style='width:260px'>
+             	<option value="-1">Select</option>
+                <?=makeOptionGenre();?>
+             </select>
+             <span id="err_genre" class="error-message"></span> 
+             </div>
+             <div class="clr"></div> 
+             
+            <?php /*?>             
+             <div class="lable01">Sound Track Album:</div> 
+             <div class="field01"><input name="txt_album_name" id="txt_album_name" type="text" /> 
+              <span id="err_album_name" class="error-message"></span> 
+             </div>
+             <div class="clr"></div><?php */?>
+             
+             
+             <div class="lable01">Description:</div> 
+             <div class="field01"><textarea name="ta_desc" id="ta_desc" cols="" rows="" style="height:80px;"></textarea> 
+             </div>
+             <div class="clr"></div>
+             
+             
+             <div class="lable01">Browse Audio:</div> 
+             <div class="field01 error_txt" style="width:320px;"><input name="track_music_file" id="track_music_file" type="file" style="width:217px;" /> (.mp3 only) 
+              <span id="err_track_music_file" class="error-message"></span> 
+             </div>
+             <div class="clr"></div>
+             
+            <div class="lable01">Select Album:</div> 
+             <div class="field01"> 
+             <select name="select_album1" id="select_album1" style="width:260px;">
+                 <?php if(count($all_audio_albums)>0):
+					 		echo '<option value="-1">Select</option>';
+					 		foreach($all_audio_albums as $album):
+							
+								$sel = ($current_album_id == $album['id'])?'selected ="selected"':'';
+					  ?>
+                            
+                     		<!--<option>[New Album]</option>-->
+                            <option value="<?=$album['id']?>" <?=$sel?>><?=$album['s_name']?></option>
+                     <?php 	endforeach;
+						  	else:
+							echo '<option value="0">No Albums available, Please create.</option>';
+						   endif;
+					 ?>
+            </select>
+           <?php /*?> <script type="text/javascript">
+                $(document).ready(function(arg) {
+                    $("#select_album1").msDropDown();
+                    $("#select_album1").hide();
+                })
+            </script> <?php */?>
+             <span id="err_album1" class="error-message"></span> 
+            </div>
+             <div class="clr"></div>
+              <div class="field01" style="width:517px; font-style:italic; color:#494949; line-height:15px;">Disclaimer: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec velit odio, pulvinar eu tincidunt id, tincidunt eu mauris.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec velit odio, pulvinar eu tincidunt id, tincidunt eu mauris.</div>
+             <div class="clr"></div>
+           <?php /*?>   <div class="lable01">New Album Name:</div> 
+             <div class="field01"><input name="" type="text" /> </div>
+             <div class="clr"></div><?php */?>
+             <div class="lable01">&nbsp;</div> 
+             <div class="field01">
+             <?php if(count($all_audio_albums)>0):?>
+                <input name="add_photo_btn" id="add_photo_btn" type="submit" value="Upload" class="btn" />
+             <?php else:?>
+                <input name="cancel" type="button" value="Cancel" class="btn" onclick="clear_box();hide_dialog();" />
+             <?php endif;?>
+             </div>
+             <div class="clr"></div>
+           </div>
+    </div>
+    <div class="bot"><div>&nbsp;</div></div>
+</div>
+</form>

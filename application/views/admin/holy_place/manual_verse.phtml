@@ -1,0 +1,60 @@
+      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="../images/close.png" alt="" /></a></div>
+      <div class="top"><div>&nbsp;</div></div>
+      <div class="mid">
+            <div class="heading" style="margin-bottom:0px;">
+                  <div class="left">
+                        <h4>Verse</h4>
+						<?php						//pr($result_arr);?>
+                  </div>
+            </div>
+               <div class="shade_box_white" style="height:auto; overflow:auto">
+			 
+               
+               
+							    <div class="pop-content <?php echo ($counter == 1) ? 'first' : '' ?>">  
+                                   <h4 style="display:block;color:#014882"><?=$book_name?>[<?=$chapter?>:<?=$verse_no?>]</h4>
+                               
+                                    
+                                       <p><?=$verse['s_text']?></p>
+                                    
+                                    </div>
+                              
+			
+               <div class="clr"></div>
+			   
+            </div>
+            
+      </div>
+      <div class="bot"><div>&nbsp;</div></div>
+	  
+	  <script type="text/javascript">
+	  function add_selected_verse()
+	  {
+	  showBusyScreen();
+		 var values = $('input[name="select_verse"]:checked').map(function() {
+        return $(this).val();
+    }).toArray();
+	
+	//alert(values);
+		$.ajax({
+            url: admin_base_url + 'holy_place/daily_bible_verse/add_verse',
+            type: 'post',
+            dataType: 'json',
+            data: ({'verse_id': values}),
+            success: function(data)
+            {
+			if(data.success == true)
+			{
+			hide_dialog();
+			showUIMsg(data.msg);
+			location.href="<?=base_url()?>admin/holy-place/2/daily-bible-verse.html";
+			} else
+			{
+			showUIMsg(data.msg);
+			//hideBusyScreen();
+			}
+			}
+		});
+			
+	  }
+	  </script>

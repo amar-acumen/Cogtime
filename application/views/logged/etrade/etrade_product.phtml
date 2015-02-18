@@ -1,0 +1,234 @@
+<?php include(APPPATH."views/layouts/logged_header.phtml");?>
+            <!-- NAVIGATION SECTION -->
+      <?php include(APPPATH."views/layouts/nav.phtml");?>
+      <!-- /NAVIGATION SECTION -->
+      </div>
+</div>
+<!-- /HEADER SECTION -->
+<div class="clr"></div>
+
+<!-- CONTENT SECTION -->
+<div id="content_section">
+      <div id="container">
+            <!--<div id="mid_content"> -->
+                  <!-- latest news -->
+                 <?php include(APPPATH ."views/layouts/latest_news.phtml");?>
+                  <!-- /latest news -->
+                  <div class="clr"></div>
+                  <!-- main container -->
+                  <div id="main_container">
+                        <!-- left container -->
+                        <?php include(APPPATH."views/layouts/leftbar.phtml");?>
+                        <!-- /left container -->
+                        <!-- mid container -->
+                        <div id="mid_container">
+                              <div class="page_heading etrade-nw-heading">
+                                    <div class="left"><img src="images/icons/etrade.png" alt="" /> eTrade</div>
+                                    <div class="right">
+                                        <input type="button" onclick="window.location='<?php echo base_url()?>etrade-home/create_product'" value="Add Product" style="padding-left:20px;" class="evnt_btn" />
+                                    </div>
+                              </div>
+							   <!--sub page links -->
+                              <?php include(APPPATH."views/logged/etrade/menu.phtml");?>
+                              <!--/sub page links -->
+							  
+							  <div class="ne-etrade-product">
+							  <form action="<?php echo base_url()?>etrade-home" method="POST" name="frmetradeList">
+								 <label class="subproduct">Product :</label>
+								 <input type="text" name="prodname" class="subproduct-input" value="<?php echo $prodname?>" />
+								 <label class="subproduct"> Category :</label>
+								 <select name="category" id="category" class="subproduct-input" style="margin: 0 5px 0 0;">
+                                 	<?php echo $category?>
+                                 </select>
+								 <input type="submit" class="trade-search-btn" value="" name=""/>
+								 </form>
+							  </div>
+							  
+							  <!--breadcrumb menu-->
+							  <ul class="ne-etrade-breadcrumb">
+								<li><a href="<?php echo base_url()?>etrade-home">Home</a></li>
+								<?php 
+								if($parent_category_name != ''){
+								?>
+                                <li>»</li>
+                                <li><?=$parent_category_name?></li>
+                                <?php
+								}
+								if($category_name != ''){
+								?>
+                                <li>»</li>
+								<li><?php echo $category_name?></li>
+                                <?php 
+									}
+								?>
+							  </ul>
+								
+							   <!--breadcrumb menu-->
+                               <?php if($subcategory!=''){?>
+							   <div class="arrow_btm"></div>
+							   <div class="ne-etradeshade-box">
+								   <?php /*?><div class="slider">
+                                         
+                                          <script type="text/javascript">
+												stepcarousel.setup({
+													galleryid: 'bandContainer1', //id of carousel DIV
+													beltclass: 'belt', //class of inner "belt" DIV containing all the panel DIVs
+													panelclass: 'thumbnails', //class of panel DIVs each holding content
+													autostep: {enable:false, moveby:1, pause:3000},
+													panelbehavior: {speed:500, wraparound:true, persist:false},
+													defaultbuttons: {enable: false, moveby: 1, leftnav: ['http://i34.tinypic.com/317e0s5.gif', -5, 80], rightnav: ['http://i38.tinypic.com/33o7di8.gif', -20, 80]},
+													statusvars: ['statusA', 'statusB', 'statusC'], //register 3 variables that contain current panel (start), current panel (last), and total panels
+													contenttype: ['inline'] //content setting ['inline'] or ['external', 'path_to_external_file']
+												})
+											</script>
+                                          <img src="images/ar_l.png" alt=""  class="scroller_arrow"  onclick="javascript:stepcarousel.stepBy('bandContainer1', -1)"/>
+                                          <div id="bandContainer1" class="bandContainer">
+                                                <div class="belt">
+                                                      <div class="thumbnails"><img src="images/prdt1.png" alt="" /></div>
+                                                      <div class="thumbnails"><img src="images/prdt2.png" alt="" /></div>
+                                                      <div class="thumbnails"><img src="images/tv.png" alt="" /></div>
+													   <div class="thumbnails"><img src="images/prdt2.png" alt="" /></div>
+                                                      <div class="thumbnails"><img src="images/tv.png" alt="" /></div>
+                                                </div>
+                                          </div>
+                                          <img src="images/ar_r.png" alt=""  class="scroller_arrow" onclick="javascript:stepcarousel.stepBy('bandContainer1', 1)" style="float:right;" /> 
+										  </div><?php */?>
+										  
+										 <!--item list-->
+                                         <form name="frmSubcat" id="frmSubcat" action="<?php echo base_url()?>etrade-home" method="post" style="margin-top:10px;">
+                                         <input type="hidden" name="subcat" value="1" />
+                                         <input type="hidden" name="category" id="subcatid" value="" />
+											<ul class="ne-etrade-itemlist">
+                                                <?php echo $subcategory;?>
+											</ul>
+                                         </form>
+										 <!--item list-->										 
+							   </div>
+                               <?php
+							   }
+							   ?>
+							   <div class="arrow_btm"></div>
+							   <div class="ne-etrade-product-category">Products Under "<?php echo ($category_name == '')?$parent_category_name:$category_name;?>"</div>
+                            <div class="blog-container" style=" margin-top:0px; padding:0px;" id="listingContent">
+                                 <?php echo $listingContent;?>
+                            </div>
+                            <?php if($no_of_result  == 0):?>
+                                <div class="pagination" style=" height:56px;">
+                                <div class="shade_box_01" style="padding-top:5px;"><div  class="shade_norecords" style="width:260px;"><p class="blue_bold12">No Product.</p></div></div>
+                                </div>
+                            <?php endif;?>	
+                            <?php if($no_of_result > $pagination_per_page): ?>
+                                    <div class="pagination" style=" height:56px;">
+                                    <div class="view_more" id="show_more_feeds_div"><a href="javascript:void(0);" id="show_more_feeds_link" page_value="<?=$current_page_1?>" onclick="show_more_record($(this).attr('page_value'))">[view more] </a> </div>
+                                    </div>
+                            <?php endif; ?>
+                            
+                        </div>
+                            <!--sub page links -->
+                                      
+                        <!-- /mid container -->
+                        <!-- right container -->
+                        <?php include(APPPATH."views/layouts/rightbar.phtml");?>
+                        <!-- /right container -->
+                        </div>
+                  </div>
+                  <!-- /main container -->
+                  <div class="clr"></div>
+            <!--</div> -->
+      </div>
+      <div class="clr"></div>
+</div>
+<!-- /CONTENT SECTION -->
+<div class="clr"></div>
+
+
+
+<?php include(APPPATH."views/layouts/footer.phtml");?>
+<?php include(APPPATH."views/logged/blocks/common_popup.phtml");?>
+
+<script type="text/javascript">
+$(document).ready(function() {
+
+	// for AJAX page-submission...
+    var eTradeoptions = { 
+        beforeSubmit:  showBusyScreen,  // pre-submit callback 
+        success:       validateFrm // post-submit callback 
+    }; 
+ 
+    // bind to the form's submit event 
+    $('#frmetradeList').submit(function() {
+        $(this).ajaxSubmit(eTradeoptions);
+        return false;
+    });
+
+
+});
+
+function showDisclaimer(id)
+{
+	$('#disclaimer_'+id).slideToggle('slow');
+}
+function showShippingFee(id)
+{
+	$('#shippingfee_'+id).slideToggle('slow');
+}
+function showContactSection(id)
+{
+	$('#contact-section_'+id).slideToggle('slow');
+}
+function validateFrm(data)
+{
+	var data = JSON.parse(data);
+	$('#listingContent').html('');
+	$('#listingContent').html(data.html);
+	hideBusyScreen();
+	showUIMsg(data.msg);		
+}
+function goToSubCategoryList(id)
+{
+	$('#subcatid').val(id);
+	$('#frmSubcat').submit();
+}
+
+var ajax_req_feeds = null;
+function show_more_record(page) {
+	
+	if(ajax_req_feeds!=null) {
+		ajax_req_feeds.abort();
+	}
+	showUILoader_nodialog();
+	ajax_req_feeds = $.ajax({
+		type: 'get',
+		url: base_url+'logged/e_swap/generate_product_listing_AJAX/'+page,
+		dataType: 'json',
+
+		success: function (data, status) {
+
+			hideUILoader_nodialog();
+			if(data.html!='') {
+				
+				//alert(data.cur_page+'dfdf');
+				$('#listingContent').append(data.html);
+				$('#show_more_feeds_link').attr('page_value', data.cur_page);
+				$('#show_more_feeds_link').attr('onclick','');
+				$('#show_more_feeds_link').attr('onclick','show_more_record('+data.cur_page+')');
+			}
+			else {
+				$('#listingContent').append('<div class="view_more" style="text-align: center;"><p class="blue_bold12" style="font-size:14px;">No More Records.</p></div>');
+				$('#show_more_feeds_div').remove();
+			}
+            
+            if(data.view_more==false)
+            {
+                
+                $('#listingContent').append('<div class="view_more" style="text-align: center;" ><p class="blue_bold12" style="font-size:14px;">No More Records.</p></div>');
+                $('#show_more_feeds_div').remove();
+            }
+		
+
+		}	// end of success function...
+	});
+}
+</script>
+
+

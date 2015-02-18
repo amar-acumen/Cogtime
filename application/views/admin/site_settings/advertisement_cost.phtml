@@ -1,0 +1,322 @@
+<div class="clr"></div>
+<!-- CONTENT SECTION -->
+<!--navigation section start -->
+<?php include(APPPATH."views/layouts/admin/admin_nav.phtml");?>
+<!--navigation section end -->
+<div id="content_section">
+      <div id="container">
+            <!--<div id="top_corner">&nbsp;</div> -->
+            <div id="mid_content">
+                  <div class="page_heading left">
+                        <div class="left"><img src="../images/icons/login.png" alt="" /> Advertisement Cost  Settings</div>
+                  </div>
+                  <div class="clr"></div>
+                  <div id="right_container">
+                        <div class="arrow_btm"></div>
+                        
+                         <form name="user_alerts" id="user_alerts" method="post"  onsubmit="return false;" >  
+                        <div class="content_area frm_box">
+                            <h1 style="margin: 0 0 0 400px; font-size: 14px; font-weight: bold; color: #005ca8;">Cogtime Advertisement</h1>
+                            <br class="clr">
+                              <div class="lable01">Home page(&pound):</div>
+                              <div class="field01">
+                                  <input name="home_page_cost" type="text"  value="<?=$cost['home_page_cost']?>" />
+                              </div>
+                              <div class="error-message" id="err_home_page_cost"></div>
+                              <div class="clr"></div>
+                              <div class="lable01"> Socail Hub Chitter Tweets page(&pound) :</div>
+                              <div class="field01">
+                                    <input name="socail_hub_chitter_tweets_page_cost" type="text"  value="<?=$cost['socail_hub_chitter_tweets_page_cost']?>" />
+                              </div>
+                              <div class="error-message" id="err_socail_hub_chitter_tweets_page_cost"></div>
+                              <div class="clr"></div>
+                              <div class="lable01"> Socail Hub Blogs page(&pound) :</div>
+                              <div class="field01">
+                                    <input name="socail_hub_blogs_page_cost" type="text"   value="<?=$cost['socail_hub_blogs_page_cost']?>" />
+                              </div>
+                              <div class="error-message" id="err_socail_hub_blogs_page_cost"></div>
+                              <div class="clr"></div>
+                              <div class="lable01"> Socail Hub Rings page(&pound) :</div>
+                              <div class="field01">
+                                    <input name="socail_hub_rings_page_cost" type="text"   value="<?=$cost['socail_hub_rings_page_cost']?>" />
+                              </div>
+                              <div class="error-message" id="err_socail_hub_rings_page_cost"></div>
+                              <div class="clr"></div>
+                              <div class="lable01"> Socail Hub Events page(&pound) :</div>
+                              <div class="field01">
+                                    <input name="socail_hub_events_page_cost" type="text"  value="<?=$cost['socail_hub_events_page_cost']?>" />
+                              </div>
+                              <div class="error-message" id="err_socail_hub_events_page_cost"></div>
+                              <div class="clr"></div>
+                              <!--<div class="lable01"> Prayer Partner Reminder Interval (month) :</div>
+                              <div class="field01">
+                                    <input name="" type="text"   value="3"/>
+                              </div>
+                              <div class="error-message">* Required Field</div>
+                              <div class="clr"></div>-->
+                              <div class="lable01"> Socail Hub Chat Rooms page(&pound) :</div>
+                              <div class="field01">
+                                    <input name="socail_hub_chat_rooms_page_cost" type="text"  value="<?=$cost['socail_hub_chat_rooms_page_cost']?>"  />
+                              </div>
+                              <div class="error-message" id="err_socail_hub_chat_rooms_page_cost"></div>
+                              <div class="clr"></div>
+                              <div class="lable01"> Build Kingdom Prayer Partners Zone page(&pound)</div>
+                              <div class="field01">
+                                    <input name="build_kingdom_prayer_partners_zone_page_cost" type="text" value="<?=$cost['build_kingdom_prayer_partners_zone_page_cost']?>"/>
+                              </div>
+                              <div class="error-message" id="err_build_kingdom_prayer_partners_zone_page_cost"></div>
+                              <div class="clr"></div>
+                              
+                              
+                              <div class="lable01"> Build Kingdom Bible Quiz page(&pound) :</div>
+                              <div class="field01">
+                                    <input name="build_kingdom_bible_quiz_page_cost" type="text" value="<?=$cost['build_kingdom_bible_quiz_page_cost']?>" />
+                              </div>
+                              <div class="error-message" id="err_build_kingdom_bible_quiz_page_cost"></div>
+                              <div class="clr"></div>
+                              
+                              <div class="lable01"> Build Kingdom Find a Church  page(&pound):</div>
+                              <div class="field01">
+                                    <input name="build_kingdom_find_a_church_page_cost" type="text" value="<?=$cost['build_kingdom_find_a_church_page_cost']?>" />
+                              </div>
+                              <div class="error-message" id="err_build_kingdom_find_a_church_page_cost"></div>
+                              <div class="clr"></div>
+                              
+                              
+                              
+                              <div class="lable01"> My Profile page(&pound) :</div>
+                              <div class="field01">
+                                    <input name="my_profile_page_cost" type="text" value="<?=$cost['my_profile_page_cost']?>" />
+                              </div>
+                              <div class="error-message" id="err_my_profile_page_cost"></div>
+                              <div class="clr"></div>
+                              <div class="lable01"> My Friends Zone page(&pound):</div>
+                              <div class="field01">
+                                    <input name="my_friends_zone_page_cost" type="text" value="<?=$cost['my_friends_zone_page_cost']?>"  />
+                              </div>
+                               <div class="error-message" id="err_my_friends_zone_page_cost"></div>
+                              <div class="clr"></div>
+                              <div class="lable01"> My NetPals Zone page(&pound):</div>
+                              <div class="field01">
+                                    <input name="my_netpals_zone_page_cost" type="text" value="<?=$cost['my_netpals_zone_page_cost']?>"  />
+                              </div>
+                              <div class="error-message" id="err_my_netpals_zone_page_cost"></div>
+                              <div class="clr"></div>
+                              <div class="lable01"> My Photos page (&pound):</div>
+                              <div class="field01">
+                                    <input name="my_photos_page_cost" type="text" value="<?=$cost['my_photos_page_cost']?>" />
+                              </div>
+                              <div class="error-message" id="err_my_photos_page_cost"></div>
+                              <div class="clr"></div>
+                              <div class="lable01"> My Audios page (&pound):</div>
+                             <div class="field01">
+                                    <input name="my_audios_page_cost" type="text" value="<?=$cost['my_audios_page_cost']?>" />
+                              </div>
+                              <div class="error-message" id="err_my_audios_page_cost"></div>
+                              <div class="clr"></div>
+                              
+                               <div class="lable01"> My Videos page(&pound) :</div>
+                             <div class="field01">
+                                    <input name="my_videos_page_cost" type="text" value="<?=$cost['my_videos_page_cost']?>" />
+                              </div>
+                              <div class="error-message" id="err_my_videos_page_cost"></div>
+                              <div class="clr"></div>
+                              
+                               <div class="lable01"> My Messages page(&pound) :</div>
+                             <div class="field01">
+                                    <input name="my_messages_page_cost" type="text" value="<?=$cost['my_messages_page_cost']?>" />
+                              </div>
+                              <div class="error-message" id="err_my_messages_page_cost"></div>
+                              <div class="clr"></div>
+                               <div class="lable01"> My Privacy Settings page(&pound) :</div>
+                             <div class="field01">
+                                    <input name="my_privacy_settings_page_cost" type="text" value="<?=$cost['my_privacy_settings_page_cost']?>" />
+                              </div>
+                              <div class="error-message" id="err_my_privacy_settings_page_cost"></div>
+                              <div class="clr"></div>
+                              
+                               
+                              <div class="clr"></div>
+                               <div class="lable01"> My Alert Settings page(&pound) :</div>
+                             <div class="field01">
+                                    <input name="my_alert_settings_page_cost" type="text" value="<?=$cost['my_alert_settings_page_cost']?>" />
+                              </div>
+                              <div class="error-message" id="err_my_alert_settings_page_cost"></div>
+                              <div class="clr"></div>
+                              
+                              
+                              <div class="clr"></div>
+                               <div class="lable01"> My Email Notification Settings page(&pound) :</div>
+                             <div class="field01">
+                                    <input name="my_email_notification_settings_page_cost" type="text" value="<?=$cost['my_email_notification_settings_page_cost']?>" />
+                              </div>
+                              <div class="error-message" id="err_my_email_notification_settings_page_cost"></div>
+                              <div class="clr"></div>
+                              
+                              <div class="lable01"> Organizer page(&pound):</div>
+                             <div class="field01">
+                                    <input name="organizer_page_cost" type="text" value="<?=$cost['organizer_page_cost']?>" />
+                              </div>
+                              <div class="error-message" id="err_organizer_page_cost"></div>
+                              <div class="clr"></div>
+                              
+                              <div class="lable01"> Change Password page(&pound):</div>
+                             <div class="field01">
+                                    <input name="change_password_page_cost" type="text" value="<?=$cost['change_password_page_cost']?>" />
+                              </div>
+                              <div class="error-message" id="err_change_password_page_cost"></div>
+                              <div class="clr"></div>
+                              
+                              <div class="lable01"> Deactivate Account page(&pound):</div>
+                             <div class="field01">
+                                    <input name="deactivate_account_page_cost" type="text" value="<?=$cost['deactivate_account_page_cost']?>" />
+                              </div>
+                              <div class="error-message" id="err_deactivate_account_page_cost"></div>
+                              <div class="clr"></div>
+                              <div class="lable01"> Public Profile page(&pound):</div>
+                             <div class="field01">
+                                    <input name="public_profile_cost" type="text" value="<?=$cost['public_profile_cost']?>" />
+                              </div>
+                              <div class="error-message" id="err_public_profile_cost"></div>
+                              <div class="clr"></div>
+                              <br class="clr">
+                              <h1 style="margin: 0 0 0 400px; font-size: 14px; font-weight: bold; color: #005ca8;">Media Center Advertisement</h1>
+                              <br class="clr">
+                               <div class="lable01"> Media Center Banner page(&pound):</div>
+                             <div class="field01">
+                                    <input name="media_center_banner_page_cost" type="text" value="<?=$cost['media_center_banner_page_cost']?>" />
+                              </div>
+                              <div class="error-message" id="err_media_center_banner_page_cost"></div>
+                              <div class="clr"></div>
+                              <br class="clr">
+                              <div class="lable01"> Read page(&pound):</div>
+                             <div class="field01">
+                                    <input name="read_page_cost" type="text" value="<?=$cost['read_page_cost']?>" />
+                              </div>
+                              <div class="error-message" id="err_read_page_cost"></div>
+                              <div class="clr"></div>
+                              <br class="clr">
+                              
+                              <div class="lable01"> watch page(&pound):</div>
+                             <div class="field01">
+                                    <input name="watch_page_cost" type="text" value="<?=$cost['watch_page_cost']?>" />
+                              </div>
+                              <div class="error-message" id="err_watch_page_cost"></div>
+                              <div class="clr"></div>
+                              <br class="clr">
+                              <div class="lable01"> listen page(&pound):</div>
+                             <div class="field01">
+                                    <input name="listen_page_cost" type="text" value="<?=$cost['listen_page_cost']?>" />
+                              </div>
+                              <div class="error-message" id="err_listen_page_cost"></div>
+                              <div class="clr"></div>
+                              <br class="clr">
+                              <div class="lable01"> Media Center Category  page(&pound):</div>
+                             <div class="field01">
+                                    <input name="media_center_category_page_cost" type="text" value="<?=$cost['media_center_category_page_cost']?>" />
+                              </div>
+                              <div class="error-message" id="err_media_center_category_page_cost"></div>
+                              <div class="clr"></div>
+                              <br class="clr">
+                              <div class="lable01"> Media Center Search  page(&pound):</div>
+                             <div class="field01">
+                                    <input name="media_center_search_page_cost" type="text" value="<?=$cost['media_center_search_page_cost']?>" />
+                              </div>
+                              <div class="error-message" id="err_media_center_search_page_cost"></div>
+                              <div class="clr"></div>
+                              <br class="clr">
+                             <!-- <div class="lable01"> No of RSS item in RSS Feed :</div>
+                              <div class="field01">
+                                    <input name="" type="text" value="20" />
+                              </div>
+                              <div class="error-message">* Required Field</div>
+                               <div class="clr"></div> 
+                               <div class="lable01"> User Password Expires Every :</div>
+                              <div class="field01">
+                                    <select name="category" id="pass-expire" style="width:412px; margin-bottom:5px;">
+                                            <option>6 Months</option>
+                                            <option>12 Months</option>
+                                      </select>
+                                      <script type="text/javascript">
+                                        $(document).ready(function(arg) {
+                                            $("#pass-expire").msDropDown();
+                                            $("#pass-expire").hide();
+											$('#pass-expire').css("width", "412px"); 
+                                        })
+                                    </script>
+                              </div>
+                              <div class="error-message">* Required Field</div>
+                               <div class="clr"></div>-->
+                              <div class="lable01"> </div>
+                              <div class="field01">
+                                    <input name="" type="submit" class="btn"  value="Save" />
+                                    <input name="" type="button" class="btn"  value="Cancel"  id="cencel_update"/>
+                              </div>
+                              <div class="clr"></div>
+                        </div>
+                        </form>
+                        <script>
+                        $(document).ready(function(){
+                            $('#cencel_update').click(function(){
+                                window.location.href='<?= admin_base_url() ?>';
+                            });
+                        });
+                        </script>
+                  </div>
+                  <div class="clr"></div>
+            </div>
+            <!--<div id="bot_corner">&nbsp;</div> -->
+      </div>
+      <div class="clr"></div>
+</div>
+<!-- /CONTENT SECTION -->
+
+<script type="text/javascript">
+$(document).ready(function(arg) {
+	
+
+ $('#user_alerts').submit(function(){
+						
+				  var datatosend=$("#user_alerts").serialize();
+				 // alert(datatosend);
+				  showBusyScreen();
+											  
+					  $.ajax({
+						 type: "POST",
+						 url: base_url+"admin/site_settings/advertisement_cost/edit_info",
+						 data: datatosend,
+						 dataType: 'json',
+						 success: function(data){
+							
+							if(data.success==false) 
+							{
+								
+						
+								$('.error-message').each(function(i){
+									$(this).attr('style','display:none');
+								});
+								
+								
+								for ( var id in data.arr_messages ){
+									//alert('#err_'+id);
+									if( $('#err_'+id) != null ) {
+										$('#err_'+id).html(data.arr_messages[id]);
+										$('#err_'+id).css('display', 'block');
+									}
+								}
+						
+								
+							}
+                                                        if(data.success==true) 
+							{
+							window.location.href = '<?= admin_base_url() ?>site-settings/advertisement_cost';
+							
+                                                    }
+                                                    hideBusyScreen(); 
+							showUIMsg(data.msg);
+						 }
+					   });	 
+				});
+ 
+ });
+</script>

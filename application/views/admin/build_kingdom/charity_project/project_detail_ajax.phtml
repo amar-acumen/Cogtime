@@ -1,0 +1,13 @@
+<div class="product-details full" style="float:left;">
+<!--  <h3>Project One <span>#ME2033091</span></h3>
+--> 
+  <h3><?=$project_detail['s_title']?></h3>
+  <h4>Location : <span><?=get_cityname($project_detail['s_city'])?>, <?=get_statename($project_detail['s_state'])?>, <?=get_countryname($project_detail['i_country_id'])?></span></h4>
+  <h5>Duration: <span><?=getShortDate($project_detail['dt_start_date'],5)?></span> - <span><?=getShortDate($project_detail['dt_end_date'],5)?></span></h5>
+</div>
+<div class="clr"></div>
+<div class="details">
+  <p class="title">Details:</p>
+  <p><?=nl2br($project_detail['s_description'])?></p> 
+</div>
+<div class="clr"></div>

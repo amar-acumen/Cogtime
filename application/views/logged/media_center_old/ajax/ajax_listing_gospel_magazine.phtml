@@ -1,0 +1,49 @@
+        	<?
+			$i=0;
+			//pr($gospel_magazine ,1); height:102px;style="height:50px;"
+			if($gospel_magazine)
+			{
+				foreach($gospel_magazine as $val)
+				{
+					$i++;
+					$nomargin	= '';
+					if($i==3)
+					{
+						$nomargin	=	"no-mrgn";
+						$i		= 0;
+					}
+				?>
+				<div class="article-box2 " onClick="window.location.href='gospel-magazine-detail/<?php echo $val['id']?>/<?=my_url($val['s_title'])?>.html'">
+					<h3 ><?php echo substrws($val['s_title'],80) ?></h3>
+					<p class="grey"  style="height:14px;"><?php echo $val['s_publisher'] ?></p>
+					<p class="grey date" style="height:14px;"><?php echo $val['dt_posted_on'] ?></p>
+					<div style=""><?php echo htmlspecialchars_decode(substrws($val['s_description'],230)) ?></div>
+				</div>
+				<?php
+				}
+			}
+			?>
+            
+            <!--pagination start -->
+            <div class="clr"></div>
+            <?php 
+			if($page_links)
+			{
+			?>
+            <div class="article-pagination">
+            	<ul><?php echo $page_links;?></ul>
+            	<!--<ul>
+                    <li class="previous"><a href="javascript:void(0);">Previous</a></li>
+                    <li class="active"><a href="javascript:void(0);">1</a></li>
+                    <li><a href="javascript:void(0);">2</a></li>
+                    <li><a href="javascript:void(0);">3</a></li>
+                    <li><a href="javascript:void(0);">4</a></li>
+                    <li><a href="javascript:void(0);">5</a></li>
+                    <li><a href="javascript:void(0);">6</a></li>
+                    <li class="next"><a href="javascript:void(0);">Next</a></li>
+                </ul>-->
+            </div>
+            <?php
+			}
+			?>
+            <!--pagination end -->

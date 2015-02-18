@@ -1,0 +1,40 @@
+<!--<div class="shade_box_01">-->
+<?php
+//pr($arr_photos);
+if (count($arr_photos) > 0) {
+    foreach ($arr_photos as $val):
+
+        $IMG = base_url() . "uploads/user_photos/" . getThumbName($val['s_photo'], 'thumb');
+		 $BIGIMG = base_url() . "uploads/user_photos/" . getThumbName($val['s_photo'], 'big');
+        $photo_link = get_photo_detail_url($val['id'], $val['s_title']);
+        //show_photo_details(<?=$val['id']
+        ?>
+
+        <a href="<?= $BIGIMG ?>"  rel="image"   class="thumbnail-box lightbox-2 "><div  style="background:url(<?= $IMG ?>) no-repeat center;max-width:122px; max-height:82px; height:82px; cursor:pointer;"  ></div><span style="margin-top: 5px;"><?= my_substr($val['s_title'], 18) ?></span></a>
+
+        <?php endforeach; ?>
+
+<?php
+}
+else {
+    echo '<div class="shade_box_01" style="padding-top:5px;"><div  class="shade_norecords" style="width:260px;"><p class="blue_bold12">No Photos.</p></div></div>';
+}
+?>
+<div class="clr"></div> 
+
+<!--</div>-->
+<input type="hidden" id="current_page" name="current_page" value="<?= $current_page ?>"  />
+
+
+<?php
+/* if($page_links){ ?>
+  <div class="pagination">
+  <div class="left">Viewing Page <?=$current_loaded_page_no?> of <?=$total_pages?> </div>
+  <div class="right">
+  <ul class="small-paging">
+  <?=$page_links?>
+  </ul>
+  </div>
+  </div>
+  <?php } */
+?>

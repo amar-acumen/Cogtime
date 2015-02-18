@@ -1,0 +1,56 @@
+<table width="70%" border="0" cellspacing="0" cellpadding="0" class="admin-table" >
+    <tr>
+     
+      <th align="left" valign="middle" height="30" width="85%">Denominations</th>
+
+      <th align="center" valign="middle" height="30" class="last" width="15%">Actions</th>
+    </tr>
+
+  <?php 
+			//pr($info_arr);			  
+	   if( count($info_arr) ) :
+              $ROW = 0;
+			  $last = count($info_arr);
+			   foreach($info_arr as $info) : 
+					
+				  
+				  $id = $info['id'];
+                  $date = getShortDateWithTime($info['dt_created_on'],7);
+
+				  $name = $info['s_name'];
+				  $s_status = ($info['i_status'] == 1)?'HIDE':'SHOW';	
+                  
+                     
+				//  $CSS = ($ROW == $last )?'class="last"':'';
+	
+	?>
+    			
+  				<tr id="row_<?=$id?>" class="deno_content">
+                           
+                            <td id="td_name_<?=$id?>" align="left" valign="top"><?=$name;?></td>
+                           
+                            <td align="center" valign="middle" <?=$CSS?>>
+                            <input name="" title="Edit" type="button" class="edit-button"  value="" onclick="edit_denomination_(<?=$id?>); "/>
+                            <input name="" title="Delete" type="button" class="delete-button"  value="" onclick="delete_confirm_(<?= $id ?>);"/>
+
+						 
+
+                            </td>
+                </tr>
+                
+		<?php
+				 $ROW++;
+                 endforeach;
+                 
+		   else :	// i.e. no records exists...
+	  ?>
+		  <tr>
+			  <td style="text-align:center;" height="80" colspan="20">No data available!!!</td>
+		  </tr>
+	  <?php
+		   endif;
+	  ?>
+  
+</table>
+
+                  

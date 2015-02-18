@@ -1,0 +1,14 @@
+<DIV id="view_comments" class="scroll-container" ><?=$comments_list?></DIV>
+
+
+<div id="view_more_outer_div">
+<?php
+if($view_more)
+{
+    //echo "view_more".$view_more." current : ".$current_page;
+?>
+<div class="view_more" id="show_more_news_div"><a href="javascript:void(0);" id="show_more_news" page_value="<?=$current_page?>" onclick="show_more_comments($(this).attr('page_value'))">[view more] </a> </div>
+<?php
+}
+?>
+</div>

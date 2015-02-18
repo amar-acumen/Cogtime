@@ -1,0 +1,427 @@
+<script type="text/javascript">
+    function edit_group_(id)
+    {
+        
+        $('#i_edit_id').val(id);
+             $.ajax({
+                 type: "get",
+                 url: '<?=admin_base_url()?>site_settings/admin_groups/edit_group/'+id,
+                 dataType:"json",
+                 success: function(json_response){
+                      if(json_response.result = 'success') {
+                            $('#prev_group_name').val(json_response.s_name);        
+                          show_dialog('edit-admin-group');
+                      }
+                      else {
+                          showUIMsg('Some error occurred. Please try again.');
+                      }
+                  },
+                  error: function(){
+                      hideLoading();
+                      showUIMsg('Some error occurred. Please try again.');
+                  }
+              });     
+        
+        
+        
+        show_dialog('edit-admin-group');
+        //return false;
+    }
+
+</script>
+
+<script type="text/javascript">
+  function resetPassword(id)
+	{
+		var URL = '<?php echo admin_base_url()?>' +'members/members/reset_password/';
+		showBusyScreen();
+		if(ajax_req!=null) {
+			ajax_req.abort();
+		}
+		ajax_req = $.ajax({
+			type: 'POST',
+			url:URL,
+			dataType: 'json',
+			data: ({ 'record_id' : id
+				 }),
+			success: function (data, status) {
+							var result_obj = data;
+							hideBusyScreen();
+							if(result_obj.result=='success' && result_obj.redirect == false ) {
+								showUIMsg(result_obj.msg);
+								//$('#'+result_obj.u_id+'_status').html(result_obj.action_txt);
+							}
+							else if(result_obj.result==false && result_obj.redirect == true){
+							    showUIMsg(result_obj.msg);
+							}
+					},
+			error: function (data, status, e) {
+								hideBusyScreen();
+								showUIMsg(data.msg);
+			}
+		});
+	}
+</script>
+
+
+<div class="clr"></div>
+<!-- CONTENT SECTION -->
+<!--navigation section start -->
+<?php include(APPPATH."views/layouts/admin/admin_nav.phtml");?>
+<!--navigation section end -->
+
+<!--=================================== content_section ============================================-->
+<div id="content_section">
+      <div id="container">
+            
+            <div id="mid_content">
+                  <div class="page_heading left">
+                        <div class="left"><img src="<?=base_url()?>images/icons/login.png" alt="" /> Members</div>
+                  </div>
+                  <div class="clr"></div>
+                  <div id="right_container">
+                        <div class="arrow_btm"></div>
+                        
+                        <div class="content_area">
+                        <!--filter section start -->
+                        <?php/* include(APPPATH."views/admin/members/members_search_panel.phtml");*/?>
+                        <!--filter section end -->
+						<script type="text/javascript">
+$(document).ready(function(arg) {
+
+ $('#frm_search').submit(function(){ 
+ var type=$('#post_type').val();
+						var datatosend=$("#frm_search").serialize();
+						
+					     	showBusyScreen();
+							//alert(datatosend);
+							
+							$.ajax({
+							   type: "POST",
+							   url: admin_base_url+"members/members_post/ajax_pagination/<?=$i_id?>/"+type,
+							   data: datatosend,
+							   success: function(data){
+								  
+								  hideBusyScreen(); 
+								  //alert(data);
+								   $('#'+type+'_content').html();
+								   $('#'+type+'_content').html(data);
+							       
+								
+								 
+							   }
+							 });	 
+					   
+						
+				});
+ 
+ });
+ </script>
+ 
+
+  <div class="filter">
+  <span class="filter-by">Filter By &raquo;</span>
+<form name="frm_search" id="frm_search" action="" method="post" onsubmit="return false;"  class="filter-search">
+   
+    
+    <label style="" >Posted Between :</label>
+    <input type="text"  value="" name="date_to1" id="date_to1"   class="date-field"/>
+          <img src="../images/icons/cal.png" alt="" onclick="$(this).prev().focus()" class="calender" style="margin-right:35px;" />
+          <script type="text/javascript">
+                $(document).ready(function(arg) {
+                    $.datepicker.setDefaults($.datepicker.regional['']);
+                    $("#date_to1").datepicker($.datepicker.regional['en']);
+
+                });
+          </script>
+		  <label style="width:32px;" > To :</label>
+    <input type="text"  value="" name="date_end1" id="date_end1"   class="date-field"/>
+          <img src="../images/icons/cal.png" alt="" onclick="$(this).prev().focus()" class="calender" style="margin-right:35px;" />
+          <script type="text/javascript">
+                $(document).ready(function(arg) {
+                    $.datepicker.setDefaults($.datepicker.regional['']);
+                    $("#date_end1").datepicker($.datepicker.regional['en']);
+
+                });
+          </script>
+		  
+     
+    <?php /*?> <label style="width:32px;">State :</label>
+     <input type="text" id="txt_state" name="txt_state" /><?php */?>
+     
+    <?php /*?> <label>City :</label>
+     <input type="text" id="txt_city" name="txt_city" /> 
+     <div class="clr"></div>  <?php */?>
+     
+     <?php /*?><label>Street Address :</label>
+     <input type="text" id="txt_address" name="txt_address" />      <?php */?> 
+	 <input type="hidden" id="post_type" name="post_type">
+        <input type="hidden" value="Y" name="search_basic" id="search_basic"  />
+        <input name="" type="submit" value="GO" class="go" />
+</form> <div class="clr"></div>
+			</div>
+			
+			<div class="tab-box">
+                                 <div class="tab_content title-div">
+                                    <ul>
+                                        <li class="first select" id="common"><a href="javascript:void(0);" onClick="show_posts('wall')">Wall</a></li>
+                                        <li id="fund" class=""><a href="javascript:void(0);" onClick="show_posts('ring')">Ring</a></li>
+										<li id="fund" class=""><a href="javascript:void(0);" onClick="show_posts('blog')">Blog</a></li>
+										<li id="fund" class=""><a href="javascript:void(0);" onClick="show_posts('prayer_group')">Prayer Group</a></li>
+										<li id="fund" class="noBg"><a href="javascript:void(0);" onClick="show_posts('tweet')">Chitter</a></li>
+                                    </ul>
+                                </div>
+								<div class="clr"></div>
+								<div class="tab_details detail-div">
+                                    
+                                    <!--Donation Busket box -->
+                                    <div class="show lavel-01" id="wall_content">
+                                        <?=$result_content1?>       
+                                    </div>
+                                    <!--/Donation Busket box -->
+                                    <!--Donation towards Projects box -->
+                                    <div class="lavel-01" id="ring_content">
+                                    	 <?=$result_content2?>       
+                                    </div>
+                                    <!--/Donation towards Projects box -->
+                                    <!---arif---->
+                                    <div class="lavel-01" id="blog_content">
+                                        <?=$result_content3?>       
+                                    </div>
+									<div class="lavel-01" id="prayer_group_content">
+                                        <?=$result_content4?>       
+                                    </div>
+									<div class="lavel-01" id="tweet_content">
+                                        <?=$result_content5?>       
+                                    </div>
+                                    <!---arif---->
+                                </div>
+                            </div>
+                              
+                        <div class="clr"></div>
+                        </div>
+                  </div>
+                  <div class="clr"></div>
+            </div>
+            <!--<div id="bot_corner">&nbsp;</div> -->
+      </div>
+      <div class="clr"></div>
+      <div class="lightbox comments-popup" style="width:600px;">
+      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="../images/close.png" alt="" /></a></div>
+      <div class="top"><div>&nbsp;</div></div>
+      <div class="mid">
+            <div class="heading" style="margin-bottom:0px;">
+                  <div class="left">
+                        <h4>View Comments</h4>
+                  </div>
+            </div>
+               <div id="comment_div" class="shade_box_white" style="height:280px; overflow:auto">
+              
+               
+            </div>
+            
+      </div>
+      <div class="bot"><div>&nbsp;</div></div>
+</div>
+</div>
+<!--============================== /content_section =========================================-->
+<!--popup one start-->
+<div class="lightbox delete-page-popup" style="width:500px;">
+      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="../images/close.png" alt="" /></a></div>
+      <div class="top"><div>&nbsp;</div></div>
+      <div class="mid">
+            <div class="heading" style="margin-bottom:0px;">
+                  <div class="left">
+                        <h4>Delete Post</h4>
+                  </div>
+            </div>
+               <div class="shade_box_white" style="padding:8px 0px;">
+               <p class="center-text">Do you really want to delete post?</p>
+              
+                    <input type="hidden" id="i_del_id" name="i_del_id" value="" /> 
+                    <input type="hidden" id="i_user_typ" name="i_user_typ" value="" />
+                    <input type="hidden" id="i_typ" name="i_typ" value="" />
+                    <input name="" type="button" value="Yes" class="btn" style="margin-left:146px;" onclick="return delete_();"/>
+                    <input name="" type="button" value="No" class="btn" onclick="hide_dialog()"/>
+ 
+               <div class="clr"></div>
+            </div>
+            
+      </div>
+      <div class="bot"><div>&nbsp;</div></div>
+</div>
+<!--popup one end-->
+<script type="text/javascript">
+    //------------------------------//
+    function show_all_comments_post(id)
+    {
+        //alert(id);
+        showUILoader('<img src="'+base_url+'images/loading_big.gif" width="50"/> ');
+        
+        $.ajax({
+            url : admin_base_url+'members/members_post/all_comments',
+            type : 'post',
+            dataType : 'json',
+            data : ({'id':id}),
+            success : function (data)
+            {
+                hideUILoader('comments-popup');
+                $('#comment_div').html(data.html);
+                
+            }
+        });
+        
+        
+        
+    }
+    function show_all_comments_ring(i_ring_id)
+    {
+        //alert(id);
+        showUILoader('<img src="'+base_url+'images/loading_big.gif" width="50"/> ');
+        
+        $.ajax({
+            url : admin_base_url+'members/members_post/all_comments_ring',
+            type : 'post',
+            dataType : 'json',
+            data : ({'id':i_ring_id}),
+            success : function (data)
+            {
+                hideUILoader('comments-popup');
+                $('#comment_div').html(data.html);
+                
+            }
+        });
+        
+        
+        
+    }
+    function show_all_comments_blog(id)
+    {
+        //alert(id);
+        showUILoader('<img src="'+base_url+'images/loading_big.gif" width="50"/> ');
+        
+        $.ajax({
+            url : admin_base_url+'members/members_post/all_comments_blog',
+            type : 'post',
+            dataType : 'json',
+            data : ({'id':id}),
+            success : function (data)
+            {
+                hideUILoader('comments-popup');
+                $('#comment_div').html(data.html);
+                
+            }
+        });
+        
+        
+        
+    }
+    
+    
+   function delimg_blog(id){
+       
+     showUILoader('<img src="'+base_url+'images/loading_big.gif" width="50"/> ');   
+     $.ajax({
+            url : admin_base_url+'members/members_post/del_blog',
+            type : 'post',
+            dataType : 'json',
+            data : ({'id':id}),
+            success : function (data)
+            {
+                hideUILoader('comments-popup');
+                $('#del'+id).hide();
+                
+            }
+        });
+   } 
+    
+    function del_ring_comment(id){
+       
+     showUILoader('<img src="'+base_url+'images/loading_big.gif" width="50"/> ');   
+     $.ajax({
+            url : admin_base_url+'members/members_post/del_ring_comment',
+            type : 'post',
+            dataType : 'json',
+            data : ({'id':id}),
+            success : function (data)
+            {
+                hideUILoader('comments-popup');
+                $('#ring_del'+id).hide();
+                
+            }
+        });
+   }  
+   function del_post_com(id){
+      showUILoader('<img src="'+base_url+'images/loading_big.gif" width="50"/> ');   
+     $.ajax({
+            url : admin_base_url+'members/members_post/del_post_com',
+            type : 'post',
+            dataType : 'json',
+            data : ({'id':id}),
+            success : function (data)
+            {
+                hideUILoader('comments-popup');
+                $('#del_post'+id).hide();
+                
+            }
+        });  
+   } 
+    //------------------------------//
+function delete_confirm_(file_id,user_id,type)
+{
+	//alert(file_id);
+	$('#i_del_id').val( file_id );
+	$('#i_user_typ').val( user_id );
+	$('#i_typ').val( type );
+	show_dialog('delete-page-popup');
+	//return false;
+}
+
+function delete_()
+{
+	  var selected_id = parseInt( $('#i_del_id').val() );
+	  var user_id=parseInt($('#i_user_typ').val());
+	  var type =$('#i_typ').val();
+		  //alert(selected_id);
+		  
+	
+	  if( selected_id>=0 )
+	  {
+		  showUIMsg("Deleted successfully.");
+		  
+		  var delURL = admin_base_url + 'members/members_post/delete_post/'+selected_id+'/'+user_id+'/'+type;
+		  window.location.href = delURL;
+	  } else {
+	  
+		  var msg = "Sorry an error has occured, Please try again";
+		  showUIMsg(msg);
+		  
+		  hide_dialog();
+		  
+	  }
+}
+
+function show_posts(type)
+{
+showUILoader_nodialog('<img src="'+base_url+'images/loading_big.gif" width="50"/> ');
+	  $.ajax({
+			  type: 'get',
+			  url: admin_base_url+'members/members_post/ajax_pagination/'+<?=$i_id?>+'/'+ type,
+			  success: function (data, status) {
+					  
+					  $('#'+type+'_content').html('');
+					  $('#'+type+'_content').html(data);
+					  $('.tab_content ul li').removeClass('select');
+					  $('#'+type).addClass('select');
+					  $('.tab_details > div').hide();
+					  $('#'+type+'_content').show();
+					  $('#post_type').val(type);
+					  //$('.tab_details > div').hide();
+					 // $('#'+tabname+'_content').show();
+					  
+					  hideUILoader_nodialog();
+						  
+				  }	// end of success function...
+		  });
+}
+</script>

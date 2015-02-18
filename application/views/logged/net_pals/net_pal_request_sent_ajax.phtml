@@ -1,0 +1,86 @@
+<div class="shade_box_01"> 
+<div class="div_content" style=" margin-top:0px;">
+         
+         <?php
+           // pr($result_arr);
+            if(count($result_arr) >0):  
+                            
+                            
+                            $address=array();
+                            foreach($result_arr as $r)   :
+                                //echo "id : ".$r['id'];   
+                                $address=array();
+                                $name = $r['s_displayname'];
+                                
+                                if(isset($r['s_city']) && $r['s_city']!='')
+                                    $address['city'] = $r['s_city'];
+                                if(isset($r['s_state']) && $r['s_state']!='')
+                                    $address['state'] = $r['s_state'];
+                                if(isset($r['i_country_id']) && $r['i_country_id']!='')
+                                    $address['country'] = get_country_name_by_id($r['i_country_id']);
+                              
+                                    
+                                $add=implode(', ',$address);
+                                
+                               // $profile_link = get_profile_url($r['i_accepter_id'],$r['s_displayname']);
+							  # $profile_link = get_public_profile_url($r['i_accepter_id'],$r['s_displayname']); 
+							   if($r['if_already_friend'] == 'true' || $r['already_added_netpal'] == 'true'){
+								  $profile_link = get_profile_url($r['i_accepter_id'],$r['s_displayname']);
+							  }else
+							  {
+								 $profile_link = get_public_profile_url($r['i_accepter_id'],$r['s_displayname']); 
+							  }
+         
+         ?>
+         <div id="sent_request_<?= $r['i_accepter_id']?>" class="shade_box_blue" style="padding-top:5px;">
+                <div class="txt_content"> 
+                <a href="<?= $profile_link;?>">
+                <div class="pro_photo_new  " style="background:url(<?=get_profile_image($r['user_id'],$size ="thumb")?>) no-repeat center;" ></div>
+                </a>
+                      <div class="left_div01" style="width:260px;">
+                            <p class="blue_bold12"><a href="<?= $profile_link;?>"><?= $r['s_displayname']?></a></p>
+                            <p class="location"><?= $add;?></p>
+                            <p class="date-time"><?php echo getShortDateWithTime($r['dt_created_on'],6);?> </p>
+                      </div>
+                      <div class="right_div02"  style="width:150px;">
+                            <p class="add-remove-friend"><img src="images/icons/frnd_request.png" alt="" /> <a  href="javascript:void(0);" onclick="invite_netpals_(<?php echo $r['user_id'];?>)" >Re-send NetPal Request</a></p>
+                            <p class="add-remove-friend"><img src="images/icons/close.png" alt="" /> <a  href="javascript:void(0);" onclick="cancel_netpal_(<?= $r['i_accepter_id']?>)">Delete</a></p>
+                      </div>
+                      <div class="clr"></div>
+                </div>
+          </div>
+          
+         <?php
+            endforeach;
+         
+         ?>
+          <?php
+                else:
+                    echo '<div class="shade_box_blue" style="padding-top:5px; "><div  class="shade_norecords" style="width:320px;"><p class="blue_bold12">No NetPals Request Sent.</p></div></div>';
+                endif;
+       ?>
+
+</div>
+
+        <?php if($page_links){ ?>
+        <div class="pagination">
+        
+            <div class="left">Viewing Page <?=$current_loaded_page_no?> of <?=$total_pages?> </div>
+            
+            <div class="right">
+                   <ul class="small-paging">
+                    <?=$page_links?> 
+                    </ul>
+            </div>
+        </div>
+        <?php  }?>
+       
+        
+        
+        
+     <!--   <div class="pagination">
+          <div class="left">Viewing Page 1 of 10 </div>
+          <div class="right"><a  href="javascript:void(0);" class="blue_link">&laquo; Previous</a> <a href="javascript:void(0);">1</a> <a href="javascript:void(0);">2</a> <a href="javascript:void(0);">3</a> <a href="javascript:void(0);">4</a> <a href="javascript:void(0);">5</a> <a  href="javascript:void(0);" class="blue_link">Next &raquo;</a></div>
+        </div>
+     -->
+</div>

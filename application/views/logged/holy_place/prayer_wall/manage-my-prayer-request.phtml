@@ -1,0 +1,243 @@
+<?php include(APPPATH . "views/layouts/logged_header.phtml"); ?>
+<!-- NAVIGATION SECTION -->
+<?php include(APPPATH . "views/layouts/nav.phtml"); ?>
+<!-- /NAVIGATION SECTION -->
+</div>
+</div>
+<!-- /HEADER SECTION -->
+<div class="clr"></div>
+<!-- CONTENT SECTION -->
+<div id="content_section">
+    <div id="container">
+        <div id="mid_content">
+            <!-- latest news -->
+            <h2 class="main-title">My Prayer Request</h2>
+            <!-- /latest news -->
+            <div class="clr"></div>
+
+
+            <!-- main container -->
+            <div id="main_container">
+                <!--<div class="page_heading">
+                      <div class="left"><img src="images/icons/icn11.png" alt="" />  Prayer Request  </div>
+                       
+                </div> -->
+                <!--buttons section start -->
+                <?php include(APPPATH . "views/logged/holy_place/prayer_wall/prayer_wall_menu.phtml"); ?>
+
+                <!--buttons section end -->
+
+                <!--search prayer wall, create prayer request tab start -->
+                <div class="search-create-form-container">
+
+                    <?php /* ?><ul class="search-create-btn-holder">
+                      <li><a href="javascript:void(0);">Create new prayer request</a></li>
+                      </ul>
+                      <div class="clr"></div>
+                      <?php */ ?>
+                    <div class="search-create-form-container" >
+                        <!--search form start -->
+                        <?php include(APPPATH . "views/logged/holy_place/prayer_wall/prayer_wall_search_panel.phtml"); ?>
+                        <!--search form end -->
+                    </div>   
+                    <!--create new prayer request start -->
+                    <?php include(APPPATH . "views/logged/holy_place/prayer_wall/create_prayer_request.phtml"); ?>
+                    <!--create new prayer request start -->
+                </div>
+                <!--search prayer wall, create prayer request tab end -->
+
+
+                <DIV id="req_content_div"><?= $prayer_req_ajax_content ?></DIV>   
+
+
+            </div>
+            <!-- /main container -->
+            <!--pagination start -->
+            <div class="clr"></div> 
+            <div class="article-pagination no-brdr">
+                <div class="clr"></div> 
+                <?php if ($no_of_result == 0): ?>
+                    <div class="shade_box_01" style="padding-top:5px;" id="no_tweets"><div  class="shade_norecords" style="width:520px;;"><p class="blue_bold12">No Prayer Request.</p></div></div>
+                <?php endif; ?>	
+
+
+                <?php if ($no_of_result > $pagination_per_page): ?>
+
+                    <div class="view_more" id="show_more_div"><a href="javascript:void(0);" id="show_more_tweets_link" page_value="<?= $current_page_1 ?>" onclick="show_more_records($(this).attr('page_value'))">[view more] </a> </div>
+                <?php endif; ?>
+            </div>
+            <!--pagination end -->
+
+        </div>
+    </div>
+    <div class="clr"></div>
+</div>
+<!-- /CONTENT SECTION -->
+<div class="clr"></div>
+<!-- FOOTER SECTION -->
+<?php include(APPPATH . "views/layouts/footer.phtml"); ?>
+<?php include(APPPATH . "views/logged/blocks/common_popup.phtml"); ?>
+<!-- /FOOTER SECTION -->
+
+
+
+<!-- confirm delete ring-->
+<div class="lightbox delete-prayer" style="width: 400px; left: 296px;">
+    <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="<?= base_url() ?>images/close.png" alt="" /></a></div>
+    <div class="top"><div>&nbsp;</div></div>
+    <div class="mid">
+        <div class="heading" style="margin-bottom:0px;">
+            <div class="left">
+                <h4>Delete Prayer Request</h4>
+            </div>
+        </div>
+        <div class="shade_box_white" style="padding:8px 0px;">
+            <div style="padding-bottom:10px;">
+                <p class="center-text" style="line-height:23px; color:#494949;">
+                    Do you really want to delete the prayer request?
+                    This will delete all commitments on this prayer request.
+                </p>
+            </div>
+            <form action="" method="post" id="delfrm">
+                <input type="hidden" name="i_del_id" id="i_del_id" value="" />
+                <input name="" type="button" value="Yes" class="btn" style="margin-left:105px;" onClick="delete_()"/>
+                <input name="" type="button" value="No" class="btn" onclick="hide_dialog()"/>
+            </form>   
+            <div class="clr"></div>
+        </div>
+
+    </div>
+    <div class="bot"><div>&nbsp;</div></div>
+</div>
+<!-- confirm delete ring-->
+<div class="lightbox edit-prayer" style="width: 400px; left: 296px;">
+    <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="<?= base_url() ?>images/close.png" alt="" /></a></div>
+    <div class="top"><div>&nbsp;</div></div>
+    <div class="mid">
+        <!--        <div class="heading" style="margin-bottom:0px;">
+                    <div class="left">
+                        <h4>Delete Prayer Request</h4>
+                    </div>
+                </div>-->
+        <div class="shade_box_white" style="padding:8px 0px;">
+            <div style="padding-bottom:10px;">
+                <p class="center-text" style="line-height:23px; color:#494949;">
+                    Sorry!You are not allowed to edit an expired prayer request.
+                </p>
+            </div>
+            <form action="" method="post" id="delfrm">                
+                <center><input name="" type="button" value="OK" class="btn" onclick="hide_dialog()"/></center>
+            </form>   
+            <div class="clr"></div>
+        </div>
+
+    </div>
+    <div class="bot"><div>&nbsp;</div></div>
+</div>
+
+
+<script type="text/javascript">
+
+    var ajax_req_feeds = null;
+    function show_more_records(page) {
+
+        var user_id = '<?= intval(decrypt($this->session->userdata('user_id'))) ?>';
+        if (ajax_req_feeds != null) {
+            ajax_req_feeds.abort();
+        }
+        showUILoader_nodialog();
+        ajax_req_feeds = $.ajax({
+            type: 'get',
+            url: base_url + 'logged/prayer_wall/my_all_prayer_request_ajax_pagination/' + user_id + '/' + page,
+            dataType: 'json',
+            success: function(data, status) {
+
+                hideUILoader_nodialog();
+                if (data.html != '') {
+
+                    //alert(data.cur_page+'dfdf');
+                    $('#req_content_div').append(data.html);
+                    $('#show_more_tweets_link').attr('page_value', data.cur_page);
+                    $('#show_more_tweets_link').attr('onclick', '');
+                    $('#show_more_tweets_link').attr('onclick', 'show_more_records(' + data.cur_page + ')');
+                }
+                else {
+                    $('#req_content_div').append('<div class="view_more" style="text-align: center;"><p class="blue_bold12" style="font-size:14px;">No More Prayer Request.</p></div>');
+                    $('#show_more_div').remove();
+                }
+                //alert(data.view_more);
+
+                if (data.view_more == false)
+                {
+
+                    $('#req_content_div').append('<div class="view_more" style="text-align: center;" ><p class="blue_bold12" style="font-size:14px;">No More Prayer Request.</p></div>');
+                    $('#show_more_div').remove();
+                }
+
+
+            }	// end of success function...
+        });
+    }
+
+</script>
+<div class="lightbox edit_photo_div" style="width: 900px; ">
+    <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="images/close.png" alt="" /></a></div>
+    <div class="top">
+        <div>&nbsp;</div>
+    </div>
+    <div class="mid">
+        <div class="heading" style="margin-bottom:0px;">
+            <div class="left">
+                <h4>Select from prayer wall photos </h4>
+            </div>
+        </div>
+        <div class="shade_box_white" style="padding:8px 0px;">
+
+
+            <div id="contact_list" >
+
+                <div class="selectRecipients" style="background-color: #FFF; width: 860px; height:430px;; max-height: 415px; border:none;">
+                    <?php
+                    if (count($prayer_photo)):
+                        $count_total = 1;
+                        #pr($prayer_photo);
+                        foreach ($prayer_photo as $key => $val) {
+
+
+                            $IMG = base_url() . "uploads/prayer_wall_photos/" . getThumbName($val['s_photo_name'], 'mid_thumb');
+                            $CSS = ($count_total % 5 == 0) ? 'no-right-mrgn' : '';
+                            ?>
+                            <div class="image-block <?= $CSS ?>" style="text-align:center;">
+
+
+
+                                <?php /* ?> <div style="background:url(<?=$IMG?>) center no-repeat; width:73px; height:73px; border: 3px solid #62C3BC; margin-bottom:5px; cursor:pointer;" ></div><?php */ ?>
+
+                                <div style="background:url(<?= $IMG ?>) center no-repeat; width:150px; height:100px; border: 3px solid #62C3BC; margin-bottom:5px; cursor:pointer;"  onclick="select_pic('<?= $val['id'] ?>')"></div>
+                                <div class="clr"></div>
+                                <?php /* ?>  <img alt="Prayer photo" src="<?=$IMG?>" height="73" width="73"><?php */ ?>
+
+
+                                <input type="radio" name="edit_prayer_img_name" value="<?= $val['s_photo_name'] ?>" thumb="<?= base_url() . "uploads/prayer_wall_photos/" . getThumbName($val['s_photo_name'], 'mid_thumb'); ?>" style="float:none;" id="edit_prayer_img_name<?= $val['id'] ?>"/>
+                            </div>
+
+
+                            <?php
+                            $count_total++;
+                        }
+                    endif;
+                    ?>
+
+                </div> 
+            </div>
+            <input type="hidden" class="record_id" value="" />
+            <div class="clr"></div>
+            <br />
+            <div style="text-align:right;"><input name="" type="button" value="Done" onclick="javascript:get_edit_selected_photo();" class="blue-small-button blue-small-done-button"/></div>
+        </div>
+
+    </div>
+    <div class="bot">
+        <div>&nbsp;</div>
+    </div>
+</div>

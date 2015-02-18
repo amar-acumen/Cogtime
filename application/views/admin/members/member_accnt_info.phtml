@@ -1,0 +1,72 @@
+<div class="lavel-01">
+                                	<!--title section -->
+                                	<div class="sec-title">
+                                    	<span class="title-left"></span>
+                                        <div class="title-body"><h2>Account Information</h2></div>
+                                        <span class="title-right"></span>
+                                    </div>
+                                    <!--/title section -->
+                                    <!--detail section -->
+                                    <div class="sec-detail">
+                                        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="member-table text-table">
+                                            <tr>
+                                              <td align="left" valign="top" height="25" width="180" class="label">Time Zone</td>
+                                              <td align="left" valign="top" width="20" class="label">:</td>
+                                              <td align="left" valign="top" ><?php echo $result['s_time'];?></td>
+                                            </tr>
+                                            <tr>
+                                              <td align="left" valign="top" height="25" width="180" class="label">Email</td>
+                                              <td align="left" valign="top" width="20" class="label">:</td>
+                                              <td align="left" valign="top" ><a href="mailto:<?php echo $result['s_email']?>"><?php echo $result['s_email']?></a></td>
+                                            </tr>
+                                            <tr>
+                                              <td align="left" valign="top" height="25" width="180" class="label">Mobile</td>
+                                              <td align="left" valign="top" width="20" class="label">:</td>
+                                              <td align="left" valign="top" ><?php echo $result['s_mobile']?></td>
+                                            </tr>
+                                            <tr>
+                                              <td align="left" valign="bottom" height="40" colspan="2">&nbsp;</td>
+                                              <td align="left" valign="bottom"><a href="javascript:void(0);" class="edit-btn">Edit</a></td>
+                                            </tr>
+                                        </table>
+                                       <form id="frmManageAccntProfile"  method="post" action="<?=admin_base_url()?>members/member_details/modify_my_account_info_ajax/<?=$result['id']?>" onsubmit="return modify_my_account_ajax()" enctype="multipart/form-data">
+                                        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="member-table form-table">
+                                            <tr>
+                                              <td align="left" valign="top" height="30" width="180" class="label">Time Zone</td>
+                                              <td align="left" valign="top" width="20" class="label">:</td>
+                                              <td align="left" valign="top" >
+                                              	<select  id="time-zone" name="time-zone" style="width:360px;">
+                                                	<option value="-1">Select</option> 
+                                                     <?= makeOptionTimezones($result['s_time']) ?>
+                                                </select>
+                                                <script type="text/javascript">
+                                                    $(document).ready(function(arg) {
+                                                        $("#time-zone").msDropDown();
+                                                        $("#time-zone").hide();
+                                                    })
+                                                </script>
+                                              </td>
+                                            </tr>
+                                            <tr>
+                                              <td align="left" valign="top" height="30" width="180" class="label">Email</td>
+                                              <td align="left" valign="top" width="20" class="label">:</td>
+                                              <td align="left" valign="top" ><input type="text" id="txt_email" name="txt_email"  value="<?=$result['s_email']?>"/></td>
+                                            </tr>
+                                            <tr>
+                                              <td align="left" valign="top" height="30" width="180" class="label">Mobile</td>
+                                              <td align="left" valign="top" width="20" class="label">:</td>
+                                              <td align="left" valign="top" ><input type="text" id="txt_phone" name="txt_phone" value="<?=$result['s_mobile']?>" /></td>
+                                            </tr>
+                                            <tr>
+                                              <td align="left" valign="bottom" height="30" colspan="2">&nbsp;</td>
+                                              <td align="left" valign="bottom">
+                                               <input type="hidden" name="is_basic_submitted" id="is_basic_submitted" value="Y" />
+                  								<input name="" type="submit" class="btn"  value="Update"/>
+                                              <input name="" type="reset" class="btn cancel_btn"  value="Cancel" />
+                                              </td>
+                                            </tr>
+                                        </table>
+										</form>
+                                    </div>
+                                    <!--/detail section -->
+                                </div>

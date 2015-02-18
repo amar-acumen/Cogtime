@@ -1,0 +1,31 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<title>&nbsp;</title>
+<style type="text/css">
+<!--
+body {
+	margin-left: 0px;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+}
+-->
+</style>
+</head>
+<body>
+<script type="text/javascript">
+var dataStr = window.location.href;
+dataStr = dataStr.substr(dataStr.indexOf("?")+1);
+var swfUrl = "privateMsg.swf?winId="+dataStr;
+document.write("<object classid=\"clsid:D27CDB6E-AE6D-11cf-96B8-444553540000\" codebase=");
+document.write("\"http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,0,0\"");
+document.write("width=\"100%\" height=\"100%\">");
+document.write("<param name=\"movie\" value=\""+swfUrl+"\" />");
+document.write("<param name=\"quality\" value=\"high\" />");
+document.write("<embed src=\""+swfUrl+"\" quality=\"high\" ");
+document.write("pluginspage=\"http://www.macromedia.com/go/getflashplayer\" ");
+document.write("type=\"application/x-shockwave-flash\" width=\"100%\" height=\"100%\"></embed></object>");
+</script>
+</body>
+</html>

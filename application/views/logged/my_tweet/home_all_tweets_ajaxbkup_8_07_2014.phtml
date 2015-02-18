@@ -1,0 +1,124 @@
+ <?php //pr($arr_tweets);pr($arr_tweets[0]['data']);
+if(count($arr_tweets)){
+	foreach($arr_tweets as $key=> $val){
+		
+		$data = json_decode($val['data']);
+		
+		if($val['s_type'] == 'retweeted'){
+			//$profile_image_filename = get_profile_image($data->tweet_owner_id,'thumb');
+			$twit_id = getTwitterUsernameById($data->tweet_owner_id);
+			$rt_profile_link = getTwitterProfileLink($twit_id);
+		}
+		$profile_image_filename = get_profile_image($val['i_user_id'],'thumb');
+		$profile_link = getTwitterProfileLink($val['s_tweet_id']);
+		$profile_image_filename = get_profile_image($val['i_user_id'],'thumb');
+		
+		$MARK_UNMARK_TXT = ($val['fav_tweet'] == 1)?'Unmark from your favourite tweet?':'Mark this as your favourite tweet?';
+		#echo get_twitter_profile_hash_link(my_substr(htmlspecialchars_decode($data->s_tweet_text),280)); exit;
+?>
+
+ <div class="tweets-blog">
+           <div class="top-part">
+                
+                <div class="tweeter-thumb" style="background:url(<?php echo $profile_image_filename;?>) no-repeat center;width:36px; height:36px;" ></div>
+                <?php /*?><img src="images/tweeter-thumb.jpg" alt="profile img" width="36" height="36" class="tweeter-thumb"><?php */?>
+                <?php if($val['s_type'] == 'normal'){ 
+                ?>
+               	
+                  <div class="tweet-container">
+                  <h2><span><?=$val['s_profile_name']?></span> <a href="<?=$profile_link?>"><?=$val['s_tweet_id']?></a></h2>
+                  <p class="date-time"><?=get_time_elapsed($val['dt_created_on'])?>
+                   <span id="fav_img<?=$val['id']?>">
+				  <?php if($val['fav_tweet'] > 0){?>
+                   
+                   <img src="images/icons/heart.png" alt="favorite" width="14" height="14" class="favorite-icon" title="Favorite" />
+                   
+                  <?php } ?>
+                  </span>
+                  </p>
+                  <p><?=get_twitter_profile_hash_link(substrws(htmlspecialchars_decode($data->s_tweet_text),200))?></p>
+                </div>
+                <?php 
+				   }
+				   else if($val['s_type'] == 'retweeted'){
+				?>
+                		<div class="tweet-container">
+                         <h2><span><?=$val['s_profile_name']?></span> <a href="<?=$profile_link?>"><?=$val['s_tweet_id']?></a></h2>
+                          <p class="date-time"><?=get_time_elapsed($val['dt_created_on'])?>
+                           <span id="fav_img<?=$val['id']?>">
+                          <?php if($val['fav_tweet'] > 0){?>
+                           
+                           <img src="images/icons/heart.png" alt="favorite" width="14" height="14" class="favorite-icon" title="Favorite" />
+                           
+                          <?php } ?>
+                          </span>
+                          </p>
+                          <p> <span style=" font-size:13px;color: #ABABAB;">RT <a href="<?=$rt_profile_link?>" style="color: #ABABAB; text-decoration:none;"><?=getTwitterUsernameById($data->tweet_owner_id)?></a> :</span> <?=get_twitter_profile_hash_link(substrws(htmlspecialchars_decode($data->s_tweet_text),240))?></p>
+                          <?php /*?><h2 style=" font-size:13px;color: #ABABAB;"><span>Retweeted by : </span><a href="<?=getTwitterProfileLink($val['s_tweet_id'])?>"><?=$val['s_profile_name']?></a></h2><?php */?>
+                          <?php //$val['s_tweet_id']?>
+                      </div>
+                <?php
+				   }
+				?>
+                <div class="clr"></div>
+            </div>
+            
+          
+            <div class="liquid">
+                <ul class="article-comment-block" style="margin: 5px 0 0;">
+                    <li class="no-bg" id="li_reply_block<?=$val['id']?>"><a  href="javascript:void(0);" onclick="view_tweet_reply(<?= $val['id']?>)" >reply(<span id="total_reply<?=$val['id']?>"><?=$val['total_reply']?></span>)</a></li>
+                    <li id="li_fav_block<?=$val['id']?>"><a  href="javascript:void(0);" onclick="open_mark_fav(<?= $val['id']?>)">mark as favorite</a></li>
+                    
+                  <?php   
+				  //echo $val['i_owner_id'] .' == '.$data->tweet_owner_id.' -- '.intval(decrypt($this->session->userdata('user_id'))); 
+				    if($val['i_owner_id'] != intval(decrypt($this->session->userdata('user_id'))) && $data->tweet_owner_id != intval(decrypt($this->session->userdata('user_id')))){ ?>
+                    <li id="li_retweet_block<?=$val['id']?>"><a  href="javascript:void(0);" onclick="slideDownRetweet(<?= $val['id']?>)">retweet</a></li>
+                   <?php  }
+				   ?>
+                </ul>
+                <div class="clr"></div>
+            
+                <div class="tweeterBlock">
+                    <!--reply block start -->
+                    <div class="insideTweeterBlock" id="tweet_reply_block<?=$val['id']?>">
+                     <div id="tweet_reply<?=$val['id']?>"></div>
+                      <form action="" method="post">
+                          <textarea class="big-box" name="ta_tweet_reply<?=$val['id']?>" id="ta_tweet_reply<?=$val['id']?>" onfocus="if(this.value=='Max 140 Characters')this.value='';" onblur="if(this.value=='')this.value='Max 140 Characters';" >Max 140 Characters</textarea>
+                          <input name="post" type="button" value="Post" class="small-blue-btn left" onclick="post_reply(<?=$val['id']?>)"/>
+                          <div class="clr"></div>
+                      </form>
+                  </div>
+                    <!--reply block end -->
+                    <!--mark as favorite block start -->
+                    <div class="insideTweeterBlock" id="tweet_fav_block<?=$val['id']?>">
+                        <p id="<?='ptext'.$val['id']?>"><?=$MARK_UNMARK_TXT?></p>
+                        <div class="clr"></div>
+                        <?php if($val['fav_tweet'] == 1){ ?>
+                              <span id="<?=$val['id']?>_status"><input name="favorite" type="button" value="Unmark" class="small-blue-btn" onclick="javascript:mark_fav_tweet(<?=$val['id']?>,0,<?=$val['fav_tweet']?>)"/></span>
+                        <?php 
+                            } 
+                            else if($val['fav_tweet'] == 0){?>
+                                <span id="<?=$val['id']?>_status"><input name="favorite" type="button" value="Mark" class="small-blue-btn" onclick="javascript:mark_fav_tweet(<?=$val['id']?>,1,<?=$val['fav_tweet']?>)"/></span>
+                        
+                        <?php }?>
+                    </div>
+                    <!--mark as favorite block end -->
+                    <!--retweet block start -->
+                    <div class="insideTweeterBlock" id="retweet_block<?=$val['id']?>">
+                        <p>Retweet this to your followers?</p>
+                        <div class="clr"></div>
+                        <input name="retweet" type="button" value="Retweet" class="small-blue-btn" onclick="retweet('all_tweet',<?=$val['id']?>);" />
+                        <input name="cancel" type="button" value="Cancel" class="small-green-btn" onclick="slideDownRetweet(<?=$val['id']?>)" />
+                    </div>
+                    <!--retweet block end -->
+                </div>
+                <div class="clr"></div>
+            </div>
+            <div class="clr"></div>
+</div>
+ <?php }
+     }
+?>
+                                      
+
+                                  

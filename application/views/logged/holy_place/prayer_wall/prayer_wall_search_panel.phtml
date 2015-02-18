@@ -1,0 +1,213 @@
+<script>
+$(function() {
+/*var m= "2220 AUGY,2220 BAZOCHES-SUR-VESLES,2220 BRAINE,2220 BRENELLE";
+alert(m.replace(/[,]/g,"<br>"));*/
+
+$("#txt_location").autocomplete("<?php echo base_url();?>logged/prayer_wall/send_cities", {
+    width: 310,
+    selectFirst: true,
+    minChars: 3,
+    multiple: false,
+	multipleSeparator: "\n",
+	max: null,
+    //matchContains: false,
+    formatItem: formatItem
+   });
+   
+  
+ 
+   
+});
+	
+function formatItem(row) 
+{//console.log(row);
+ //var n=row[0].replace(/[,]/g,"\n"); console.log(n);	
+ if(row[0]!="No match found")
+  return  "<span style='font-size:11px; font-weight:normal; margin:0px; padding: 3px 5px ;cursor: pointer; display:block;'>" + row[0]+"</span>";
+ else
+  return " (<span style='font-size:11px;'>" +row[0]+"</span>)";
+}
+	
+
+
+
+</script>         
+         
+<div class="frm_box search-create-prayer-box" id="search_p_wall">
+          <!--minimize link start -->
+              <div class="minimize" id="minimize_p_wall" title="Minimize">&nbsp;</div>
+          <!--minimize link end -->
+          
+              <form id="frm_Search" action="<?=base_url().'search-prayer-request.html'?>" method="post" enctype="multipart/form-data" >
+               <label class="normal">Request Type:</label>
+                <div class="field04">
+                      <select name="srch_request_type" id="srch_request_type" style="width:212px;" value="<?=$this->session->userdata('srch_request_type')?>" >
+                          
+                            <option value="-1">Select</option>
+                            <option value="1">Emergency</option>
+                            <option value="2">On Going</option>
+                      </select>
+                   
+                </div>
+              
+                
+                <div class="lable01" style=" width:100px;">Location:</div>
+                <div class="field04">
+                      <input name="txt_location" id="txt_location" type="text" value="<?=$this->session->userdata('location')?>" style="width:300px;" />
+                     <span style="font-weight: normal;font-size: 11px;font-style: italic;">(Note : Please use ',' (comma) between places.) </span> 
+                </div>
+                <div class="clr"></div>
+                
+                
+               
+                <div class="lable01" style=" width:84px;">From:</div>
+                
+                <div class="field04">
+                	
+                      <input style="width:170px;"   type="text"  value="<?=$this->session->userdata('srch_date_to')?>" name="srch_date_to" id="srch_date_to"  readonly="readonly"/>
+                      <img src="images/icons/cal.png" alt="" onclick="$(this).prev().focus()" style="cursor:pointer; " />
+                      <script type="text/javascript">
+                              $(document).ready(function(arg) {
+                                 
+									
+									  
+									   $(function(){
+												 var inputDate = $("#srch_date_end");
+												 var changeYearButtons = function() {
+													setTimeout(function() {
+													   $('.NextYrClass').remove();
+													   $('.PrevYrClass').remove();
+													   var widgetHeader = inputDate.datepicker("widget").find(".ui-datepicker-header");
+													   //you can opt to style up these simple buttons tho
+													   var prevYrBtn = $('<button title="PrevYr" class="PrevYrClass"></button>');
+													   prevYrBtn.bind("click", function() {
+														$.datepicker._adjustDate(inputDate, -1, 'Y');
+													   });
+													   var nextYrBtn = $('<button title="NextYr" class="NextYrClass"> </button>');
+													   nextYrBtn.bind("click", function() {
+														$.datepicker._adjustDate(inputDate, +1, 'Y');
+													 
+													   });
+													   prevYrBtn.appendTo(widgetHeader);
+													   nextYrBtn.appendTo(widgetHeader);
+											  
+												  }, 0);
+												 };
+											  
+											  		$("#srch_date_end").datetimepicker({
+															beforeShow: changeYearButtons,
+															onChangeMonthYear: changeYearButtons,
+															dateFormat : 'yy-mm-dd',
+												  
+															controlType: 'select',
+															stepMinute: 15
+														   });
+														
+											  });
+											  
+											   $(function(){
+												 var inputDate = $("#srch_date_to");
+												 var changeYearButtons = function() {
+													setTimeout(function() {
+													   $('.NextYrClass').remove();
+													   $('.PrevYrClass').remove();
+													   var widgetHeader = inputDate.datepicker("widget").find(".ui-datepicker-header");
+													   //you can opt to style up these simple buttons tho
+													   var prevYrBtn = $('<button title="PrevYr" class="PrevYrClass"></button>');
+													   prevYrBtn.bind("click", function() {
+														$.datepicker._adjustDate(inputDate, -1, 'Y');
+													   });
+													   var nextYrBtn = $('<button title="NextYr" class="NextYrClass"></button>');
+													   nextYrBtn.bind("click", function() {
+														$.datepicker._adjustDate(inputDate, +1, 'Y');
+													 
+													   });
+													   prevYrBtn.appendTo(widgetHeader);
+													   nextYrBtn.appendTo(widgetHeader);
+											  
+												  }, 0);
+												 };
+											  
+											  		$("#srch_date_to").datetimepicker({
+															beforeShow: changeYearButtons,
+															onChangeMonthYear: changeYearButtons,
+															dateFormat : 'yy-mm-dd',
+												  
+															controlType: 'select',
+															stepMinute: 15
+														   });
+														
+											  });
+  
+                              });
+                          </script>
+                </div>
+                
+             
+                
+                
+                <div class="lable01" style=" width:98px;">To:</div>
+                
+                <div class="field04">
+                      <input style="width:170px;"   type="text"  value="<?=$this->session->userdata('srch_date_end')?>" name="srch_date_end" id="srch_date_end"  readonly="readonly"/>
+                      <img src="images/icons/cal.png" alt="" onclick="$(this).prev().focus()" style="cursor:pointer; " />
+                    
+                </div>
+                
+              
+                <div class="lable01" style=" width:18px;">&nbsp;</div>
+                <div class="field04" >
+                      <input type="hidden" id="search_basic" name="search_basic" value="Y"/>
+                      <input name="" type="submit" value="Search"  class="blue-small-button"/>
+                </div>
+                <div class="clr"></div>
+              </form>
+          </div>
+          
+<script type="text/javascript">
+
+var ajax_req_feeds = null;
+function show_more_records(page) {
+	
+	if(ajax_req_feeds!=null) {
+		ajax_req_feeds.abort();
+	}
+	showUILoader_nodialog();
+	ajax_req_feeds = $.ajax({
+		type: 'get',
+		url: base_url+'logged/prayer_wall/search_all_prayer_request_ajax_pagination/'+page,
+		dataType: 'json',
+
+		success: function (data, status) {
+
+			hideUILoader_nodialog();
+			if(data.html!='') {
+				
+				//alert(data.cur_page+'dfdf');
+				$('#req_content_div').append(data.html);
+				$('#show_more_tweets_link').attr('page_value', data.cur_page);
+				$('#show_more_tweets_link').attr('onclick','');
+				$('#show_more_tweets_link').attr('onclick','show_more_records('+data.cur_page+')');
+			}
+			else {
+				$('#req_content_div').append('<div class="view_more" style="text-align: center;"><p class="blue_bold12" style="font-size:14px;">No More Prayer Request.</p></div>');
+				$('#show_more_div').remove();
+			}
+			//alert(data.view_more);
+            
+            if(data.view_more==false)
+            {
+               
+                $('#req_content_div').append('<div class="view_more" style="text-align: center;" ><p class="blue_bold12" style="font-size:14px;">No More Prayer Request.</p></div>');
+                $('#show_more_div').remove();
+            }
+		
+
+		}	// end of success function...
+	});
+}
+
+
+
+ 
+</script>

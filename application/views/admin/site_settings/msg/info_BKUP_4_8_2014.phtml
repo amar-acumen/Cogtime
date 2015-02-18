@@ -1,0 +1,155 @@
+<div class="clr"></div>
+<!-- CONTENT SECTION -->
+<!--navigation section start -->
+<?php include(APPPATH."views/layouts/admin/admin_nav.phtml");?>
+<!--navigation section end -->
+
+<div id="content_section">
+      <div id="container">
+            <div id="mid_content">
+                  <div class="page_heading left">
+                        <div class="left"><img src="../images/icons/login.png" alt="" /> Administrator's Messages</div>
+                      
+                  </div>
+                  <div class="clr"></div>
+                  <div id="right_container">
+                        <div class="arrow_btm"></div>
+                        <div class="content_area">
+                        
+                        	<!--tab section start -->
+                            <div class="tab-box">
+                                <div class="tab_content title-div">
+                                    <ul>
+                                        <li class="first select" id="common"><a href="javascript:void(0);" onClick="show_donations('ring')">Ring Category Requests</a></li>
+                                        <li id="fund" class="noBg"><a href="javascript:void(0);" onClick="show_donations('project')">Project Information Requests</a></li>
+                                    </ul>
+                                </div>
+                                <div class="clr"></div>
+                                <div class="tab_details detail-div">
+                                    <!--Donation Busket box -->
+                                    <div class="show lavel-01" id="ring_content">
+                                        <?=$result_content2?>       
+                                    </div>
+                                    <!--/Donation Busket box -->
+                                    <!--Donation towards Projects box -->
+                                    <div class="lavel-01" id="project_content">
+                                    	 <?=$result_content1?>       
+                                    </div>
+                                    <!--/Donation towards Projects box -->
+                                    
+                                </div>
+                            </div>
+                            <!--tab section end -->
+                            
+                            
+                        	<div class="clr"></div>
+                        </div>
+                  </div>
+                  <div class="clr"></div>
+            </div>
+      </div>
+      <div class="clr"></div>
+</div>
+<!-- /CONTENT SECTION -->
+
+
+<!--popup one start-->
+<div class="lightbox delete-page-popup" style="width:500px;">
+      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="../images/close.png" alt="" /></a></div>
+      <div class="top"><div>&nbsp;</div></div>
+      <div class="mid">
+            <div class="heading" style="margin-bottom:0px;">
+                  <div class="left">
+                        <h4>Delete Project</h4>
+                  </div>
+            </div>
+               <div class="shade_box_white" style="padding:8px 0px;">
+               <p class="center-text">Do you really want to delete this project?</p>
+               		 <input type="hidden" name="i_del_id" id="i_del_id" value="" />
+               		<input name="" type="button" value="Yes" class="btn" style="margin-left:146px;" onClick="delete_()"/>
+                    <input name="" type="button" value="No" class="btn" onclick="hide_dialog()"/>
+               <div class="clr"></div>
+            </div>
+            
+      </div>
+      <div class="bot"><div>&nbsp;</div></div>
+</div>
+<!--popup one end-->
+
+<!--popup donated by start-->
+<div class="lightbox donors" style="width:750px;">
+      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="../images/close.png" alt="" /></a></div>
+      <div class="top"><div>&nbsp;</div></div>
+      <div class="mid">
+            <div class="heading" style="margin-bottom:0px;">
+                  <div class="left">
+                        <h4>Donors</h4>
+                  </div>
+            </div>
+               <div class="shade_box_white" style="height:400px; overflow:auto" id="fund_donor_content">
+               		
+            </div>
+      </div>
+      <div class="bot"><div>&nbsp;</div></div>
+</div>
+<!--popup donated by end-->
+
+<!--popup skill donation start-->
+<div class="lightbox skill-donations" style="width:750px;">
+      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="../images/close.png" alt="" /></a></div>
+      <div class="top"><div>&nbsp;</div></div>
+      <div class="mid">
+            <div class="heading" style="margin-bottom:0px;">
+                  <div class="left">
+                        <h4>Skill Donations</h4>
+                  </div>
+            </div>
+               <div class="shade_box_white" style="height:400px; overflow:auto" id="skill_donor_content">
+               		
+               </div>
+      </div>
+      <div class="bot"><div>&nbsp;</div></div>
+</div>
+<!--popup skill donation end-->
+
+<!--popup project details start-->
+<div class="lightbox project-details" style="width:700px;">
+      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="../images/close.png" alt="" /></a></div>
+      <div class="top"><div>&nbsp;</div></div>
+      <div class="mid">
+            <div class="heading" style="margin-bottom:0px;">
+                  <div class="left">
+                        <h4>Welfare Project One</h4>
+                  </div>
+            </div>
+               <div class="shade_box_white product" id="project_content">
+					
+               </div>
+            
+      </div>
+      <div class="bot"><div>&nbsp;</div></div>
+</div>
+<!--popup project details end-->
+<script>
+function  show_donations(tabname){
+	
+	 showUILoader_nodialog('<img src="'+base_url+'images/loading_big.gif" width="50"/> ');
+	  $.ajax({
+			  type: 'get',
+			  url: admin_base_url+'site_settings/messages/info_ajax_pagination/'+ tabname,
+			  success: function (data, status) {
+					  
+					  $('#'+tabname+'_content').html('');
+					  $('#'+tabname+'_content').html(data);
+					  $('.tab_content ul li').removeClass('select');
+					  $('#'+tabname).addClass('select');
+					  $('.tab_details > div').hide();
+					  $('#'+tabname+'_content').show();
+					  
+					  hideUILoader_nodialog();
+						  
+				  }	// end of success function...
+		  });
+
+}
+</script>

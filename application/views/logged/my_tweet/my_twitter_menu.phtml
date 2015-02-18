@@ -1,0 +1,11 @@
+<div class="tweeter-nav">
+    <ul>
+        <li class="home <?php echo ($page_name=='tweets')?'select':'';?>"><a href="tweets.html"><span></span><br />Home</a></li>
+        <li class="<?php echo ($page_name=='my-tweets')?'select':'';?>"><a href="my-tweets.html"><span id="count_my_tweets"><?=$total_my_tweets?></span><br />My Chitter Tweets</a></li>
+        <li class="<?php echo ($page_name=='my-followings')?'select':'';?>"><a href="my-followings.html"><span id="count_my_followings"><?=$total_following?></span><br />I'm Following</a></li>
+        <li class="<?php echo ($page_name=='my-followers')?'select':'';?>"><a href="my-followers.html"><span><?=$total_followers?></span><br />My Followers</a></li>
+        <li class="<?php echo ($page_name=='my-favourite-tweets')?'select':'';?> favorite"><a href="my-favourite-tweets.html"><span>&nbsp;</span><br />Favorites</a></li>
+        <li class="<?php echo ($page_name=='trends')?'select':'';?> last"><a href="trends.html"><span>#</span><br />Trending</a></li>
+    </ul>
+    <div class="clr"></div>
+</div>

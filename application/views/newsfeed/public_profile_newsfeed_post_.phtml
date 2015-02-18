@@ -1,0 +1,154 @@
+<script src="<?php echo base_url()?>js/ajaxupload.js" ></script>
+<script src="<?php echo base_url()?>js/frontend/wall/wall_photo_upload.js" ></script>
+	<div class="pr-div-content">
+                    <div class="postheading">
+                          <div class="left">
+                                <h4>Post In Wall</h4>
+                          </div>
+                    </div>
+                      <form name="public_wall_post_form" id="public_wall_post_form"  method="post" class="wall-comment-form" enctype="multipart/form-data" action="<?=base_url().'newsfeed/post_his_wall/'?>" onsubmit="return false;">
+					   <div class="comment-content nw-comment-content">
+					  <!--text div start -->
+                                <div class="write-text nw-write-text" style="display: block;">
+                                <textarea onblur="if(this.value=='')this.value='Max 500 Characters';" onfocus="if(this.value=='Max 500 Characters')this.value='';" onKeyDown="limitTextarea(this.form.wall_msg,this.form.countdown,500);" 
+onKeyUp="limitTextarea(this.form.wall_msg,this.form.countdown,500);"  rows="" cols="" name="wall_msg" id="wall_msg">Max 500 Characters</textarea>
+                                </div>
+								</div>
+                                <!--text div end -->
+                            <div class="tab_details comment-content nw-comment-content">
+            
+            <input type="hidden" id="public_wall_owner_id" name="public_wall_owner_id" value="<?=($this->session->userdata('user_id'))?>" />
+            <input type="hidden" id="wall_type" name="wall_type" value="public_wall" />
+            <input type="hidden" id="public_profile_id" name="public_profile_id" value="<?=$profile_id?>" />
+                            
+                                <!--text div start -->
+                                <!--<div class="write-text nw-write-text" style="display: block;">
+                                <textarea onblur="if(this.value=='')this.value='Max 500 Characters';" onfocus="if(this.value=='Max 500 Characters')this.value='';" onKeyDown="limitTextarea(this.form.wall_msg,this.form.countdown,500);" 
+onKeyUp="limitTextarea(this.form.wall_msg,this.form.countdown,500);"  rows="" cols="" name="wall_msg" id="wall_msg">Max 500 Characters</textarea>
+                                </div>-->
+                                <!--text div end -->
+                                <!--upload image div start -->
+                                <div class="upload-image" style="display: none;">
+                                    <label class="upload-img">Upload Image :</label><input type="file" id="btn_upload" name="btn_upload" size="40"  />
+                                  <div id="all_photos"> </div>
+                                  <div id="hdnflds" > </div>
+                                   
+                                </div>
+                                <!--upload image div end -->
+                                <!--upload video div start -->
+                                <div class="upload-video" style="display: none;;">
+                                    <label class="upload-img">Video Url :</label>
+                                    <div class="video-url"><input type="text" name="txt_video_url" id="txt_video_url" /></div>
+									<ul class="video-logo" >
+					<li><img src="<?=base_url()?>/images/YouTube.png"title="YouTube" alt="YouTube"></li>
+					<li><img src="<?=base_url()?>/images/Vimeo.png"title="Vimeo" alt="Vimeo"></li>
+					<li><img src="<?=base_url()?>/images/DailyMotion.png"title="DailyMotion" alt="DailyMotion"></li>
+					<li><img src="<?=base_url()?>/images/Viadeo.png"title="Viadeo" alt="Viadeo"></li>
+					</ul>
+                                     <div id="all_videos"></div>
+                                     <div id="hdnvideoflds" ></div>
+                                   
+                                   
+                                </div>
+                                <!--upload video div end -->
+                            </div>
+                            <div class="tab_content button-set type-text">
+                                <ul>
+                                    <!--<li class="select"><a href="javascript:void(0);"><img title="Write Text" alt="text" src="images/nw-text-btn.png" /></a></li>-->
+                                    <li class=""><a href="javascript:void(0);"><img title="Upload Photo" alt="photo" src="images/nw-photo-btn.png" /></a></li>
+                                    <li><a href="javascript:void(0);"><img title="Upload Video" alt="video" src="images/nw-video-btn.png" /></a></li>
+                                </ul>
+                            </div>
+                            
+                            <input type="submit" value="Post" class="wall-comment-submit-nw " name="" />
+                 </form>
+                </div>
+<div class="clr" style="margin-top:10px;"></div>
+<script language="javascript">
+<!--
+var g_controller_url = document.URL;
+$(document).ready(function() {
+	
+	//alert(document.URL);
+	// for AJAX page-submission...
+    var options = { 
+        beforeSubmit:  showLoading,  // pre-submit callback 
+        success:       validateFrm // post-submit callback 
+    }; 
+    // bind to the form's submit event 
+    $('#public_wall_post_form').submit(function() {
+        $(this).ajaxSubmit(options);
+        return false;
+		
+    });
+
+});
+
+
+// validate ajax-submission...
+function validateFrm(data)
+{
+	//alert( data);
+	var data = JSON.parse(data);
+	//alert(data.feed); //alert(data.vid_msg);
+	if(data.success==false) 
+	{
+		hideLoading(); 
+		if(data.vid_msg == ''){
+			showUIMsg(data.msg);
+		}else{
+			showUIMsg(data.vid_msg);
+		}
+	}
+	else {
+		hideLoading(); 
+		$("#public_wall_post_form")[0].reset(); 
+		$('#all_photos').html('');
+		$('#hdnflds').html('');
+		$('.tab_content ul li').removeClass('select');
+		$('.tab_content ul li').first().addClass('select');
+		var index = 0;
+		
+		$('.tab_details > div').hide();
+		$('.tab_details > div').filter(':eq(' + index + ')').show();
+		$('.tab_details .sec-title').filter(':eq(' + index + ')').show();
+		$('.tab_details .sec-detail').filter(':eq(' + index + ')').show();
+		$('.tab_details .title-body').filter(':eq(' + index + ')').show();
+		
+		$("#comment_result_div").html(base64_decode(data.feed)+$('#comment_result_div').html());
+		//window.location.href=g_controller_url;
+		showUIMsg(data.msg);		
+	}
+}
+-->
+</script>
+<script language="javascript">
+$(document).ready(function() {
+
+//  $('#myvideo_big_thumb_1').click(function(){
+$('[id^="myvideo_big_thumb_1_"]').click(function(){ 
+//alert($(this).attr('media_id'));
+  showLoading(); 
+  var media_id =  $(this).attr('media_id');
+  $.ajax({
+		type: 'post',
+		url: base_url+'logged/my_wall/get_video/',
+		data: ({'media_id' : media_id ,'width':329 ,'height':212}),
+
+		dataType: 'json',
+		success: function (data, status) {
+			if(data.result=='success') {
+				hideLoading();
+			   $('#myvideo_first_thumb_'+media_id).html(data.s_image_source.html);
+			   $('#myvideo_first_thumb_'+media_id).attr('i_media_id',data.i_media_id);
+			}
+		},
+		error: function (data, status, e) {
+			hideLoading();
+			showUIMsg('Some error occurred. Please try again.');
+		}
+	});
+});
+  $('[id^="myvideo_big_thumb_1_"]').trigger('click');
+});
+</script>

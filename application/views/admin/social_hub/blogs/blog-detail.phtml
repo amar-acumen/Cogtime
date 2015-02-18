@@ -1,0 +1,464 @@
+<div class="clr"></div>
+<!--navigation section start -->
+<?php include(APPPATH."views/layouts/admin/admin_nav.phtml");?>
+<!--navigation section end -->
+<!-- CONTENT SECTION -->
+
+<div id="content_section">
+      <div id="container">
+            <div id="mid_content">
+                  <div class="page_heading left">
+                        <div class="left"><img src="../images/icons/login.png" alt="" /> Blog</div>
+                        <div class="right"><a class="back-page" href="blogs.html">Back to Blog List</a></div>
+                  </div>
+                  <div class="clr"></div>
+                  <div id="right_container">
+                        <div class="arrow_btm"></div>
+                        <div class="content_area">
+                            <!--filter section start -->
+                            <div class="filter">
+                                <span class="filter-by">Filter By &raquo;</span>
+                                <form id="frm_article_search" action="" method="post" enctype="multipart/form-data" class="filter-search" onsubmit="return false;">
+                                    <label>Article Title :</label><input type="text" name="txt_article_title" id="txt_article_title" />
+                                    <label>Posted By :</label><input type="text" name="txt_username" id="txt_username"  />
+                                    <input type="hidden" value="Y" name="search_basic" id="search_basic"  />
+                                    
+                                    <input name="" type="submit" value="GO" class="go" />
+                                </form>  
+                                <div class="clr"></div>
+                            </div>
+                            <!--filter section end -->
+                            
+                            <!--blog brief start -->
+<?php //pr($blogdata)?>
+                            <div class="blog-brief">
+                            	<img src="<?php echo get_profile_image($blogdata[0]['i_user_id'],'thumb',$blogdata[0]['s_profile_photo']);?>" alt="posted by" width="73" height="73" class="blog-posted-by" />
+                            	<div class="right-panel">
+                                    <h2><?php echo $blogdata[0]['s_title']?></h2>
+                                    <h3>Created by <strong><?php echo $blogdata[0]['s_profile_name']?></strong> on <span><?php echo getShortDate($blogdata[0]['dt_created_on'],5)?></span></h3>
+                                    <p id="first_part"><?php echo my_substr($blogdata[0]['s_description'],293)?> </p>
+                                    <?php if(strlen($blogdata[0]['s_description'])>293)
+                                    {
+                                    ?>
+                                    <div class="hidden-content">
+                                    <p><?php echo substr($blogdata[0]['s_description'],0,strlen($blogdata[0]['s_description']))?></p>
+                                    </div>
+                                    <span  class="more-content"><a href="javascript:void(0);">View More</a></span>
+                                    <?php
+                                    }
+                                    ?>
+                                </div>
+                            </div>
+                            <div class="clr"></div>
+                            <!--blog brief end -->
+                            <h4>List of Articles</h4>
+                            <div class="clr"></div>
+                            
+                            
+                            
+                            <DIV id="table_content" style="margin-top:5px;">
+							  <?=$result_content?>
+                            </DIV>
+                        	
+                            
+                            <div class="clr"></div>
+                        </div>
+                  </div>
+                  <div class="clr"></div>
+            </div>
+      </div>
+      <div class="clr"></div>
+</div>
+<!-- /CONTENT SECTION -->
+
+<!--popup one start-->
+<div class="lightbox delete-page-popup" style="width:500px;">
+      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="../images/close.png" alt="" /></a></div>
+      <div class="top"><div>&nbsp;</div></div>
+      <div class="mid">
+            <div class="heading" style="margin-bottom:0px;">
+                  <div class="left">
+                        <h4>Delete Article</h4>
+                  </div>
+            </div>
+            <div class="shade_box_white">
+               <p class="center-text">Do you really want to delete this article?</p>
+               <form action="" method="post" enctype="multipart/form-data">
+               <input type="hidden" name="i_delete_id" id="i_delete_id" value="">
+               		<input name="" type="button" value="Yes" class="btn" style="margin-left:146px;" onclick="return delete_article()"/>
+                    <input name="" type="button" value="No" class="btn" onclick="hide_dialog()"/>
+               </form>   
+               <div class="clr"></div>
+            </div>
+      </div>
+      <div class="bot"><div>&nbsp;</div></div>
+</div>
+<!--popup one end-->
+
+<!--popup view article start-->
+<div class="lightbox article-popup" style="width:600px;">
+      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="../images/close.png" alt="" /></a></div>
+      <div class="top"><div>&nbsp;</div></div>
+      <div class="mid">
+            <div class="heading" style="margin-bottom:0px;">
+                  <div class="left">
+                        <h4>View Article</h4>
+                  </div>
+            </div>
+               <div class="shade_box_white">
+               		<div class="pop-content first">	
+                       <img id="img_article_post_by" src="" alt="posteb by" width="73" height="73" class="posted-by" />
+                       <div class="right-panel">
+                            <h5 id="article_title"></h5>
+                            <h6>Posted by <strong id="article_user_name"></strong> on <span id="article_posted_on"></span></h6>
+                            <p id="article_desc"></p>
+                       </div>
+                    </div>
+               <div class="clr"></div>
+            </div>
+            
+      </div>
+      <div class="bot"><div>&nbsp;</div></div>
+</div>
+<!--popup view article end-->
+
+<!--popup view comment start-->
+<div class="lightbox comments-popup" style="width:600px;">
+      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="../images/close.png" alt="" /></a></div>
+      <div class="top"><div>&nbsp;</div></div>
+      <div class="mid">
+            <div class="heading" style="margin-bottom:0px;">
+                  <div class="left">
+                        <h4>View Comments</h4>
+                  </div>
+            </div>
+               <div id="comment_div" class="shade_box_white" style="height:280px; overflow:auto">
+               <?/* <div class="pop-content first">		
+                       <img src="../images/man.png" alt="posteb by" width="73" height="73" class="posted-by" />
+                       <div class="right-panel">
+                            <h5>Alex brown</h5>
+                            <h6>Updated on: <span>May 1, 2011</span> <span>12:26 PM</span></h6>
+                            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis p</p>
+                       </div>
+                    </div>
+                    <div class="pop-content">		
+                       <img src="../images/man.png" alt="posteb by" width="73" height="73" class="posted-by" />
+                       <div class="right-panel">
+                            <h5>Alex brown</h5>
+                            <h6>Updated on: <span>May 1, 2011</span> <span>12:26 PM</span></h6>
+                            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis p</p>
+                       </div>
+                    </div>
+                    <div class="pop-content">		
+                       <img src="../images/man.png" alt="posteb by" width="73" height="73" class="posted-by" />
+                       <div class="right-panel">
+                            <h5>Alex brown</h5>
+                            <h6>Updated on: <span>May 1, 2011</span> <span>12:26 PM</span></h6>
+                            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis p</p>
+                       </div>
+                    </div>
+                    <div class="pop-content">		
+                       <img src="../images/man.png" alt="posteb by" width="73" height="73" class="posted-by" />
+                       <div class="right-panel">
+                            <h5>Alex brown</h5>
+                            <h6>Updated on: <span>May 1, 2011</span> <span>12:26 PM</span></h6>
+                            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis p</p>
+                       </div>
+                    </div>
+               */?>
+               
+            </div>
+            
+      </div>
+      <div class="bot"><div>&nbsp;</div></div>
+</div>
+<!--popup view comment end-->
+
+<!--edit article popup -->
+<div class="lightbox article-edit-popup" style="width:500px;">
+      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="../images/close.png" alt="" /></a></div>
+      <div class="top"><div>&nbsp;</div></div>
+      <div class="mid">
+            <div class="heading" style="margin-bottom:0px;">
+                  <div class="left">
+                        <h4>Edit Article</h4>
+                  </div>
+            </div>
+            <div class="shade_box_white">
+           		<div class="content_area frm_box2">
+                        	  <form action="" method="post" enctype="multipart/form-data" onsubmit="return false;">
+                                  <div class="lable01">Title :</div>
+                                  
+                                  <div class="field01">
+                                        <input name="txt_title" type="text" id="txt_title" />
+                                  </div>
+                                  <div id="err_title" class="error-message"></div>
+                                  <div class="clr"></div>
+                                  <div class="lable01">Description : </div>
+                                  <div class="field01">
+                                        <textarea class="lightbox-textarea" name="limitedtextarea" id="limitedtextarea" style="height: 200px;" ></textarea>                    
+
+										<br class="clr" />                                
+                                        
+										<label class="left">(Maximum characters: 500) </label>
+                                  </div>
+                                  <div id="err_limitedtextarea" class="error-message"></div>
+                                  <div class="clr"></div>
+                                  <div class="lable01">&nbsp;</div>
+                                  <div class="field01">
+                                  <input type="hidden" id="i_edit_id" name="i_edit_id" value="">
+                                        <input name="" type="submit" class="btn"  value="Update" onclick="return edit_article()"/><input name="" type="reset" class="btn"  value="Cancel" onclick="hide_dialog();clear_all_error_msg();"/>
+                                  </div>
+                              </form>
+                              <div class="clr"></div>
+                        </div>
+            </div>
+      </div>
+      <div class="bot"><div>&nbsp;</div></div>
+</div>
+<!--edit article popup end -->
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('.more-content a').click(function(){
+			$('#first_part').hide();
+            $('.hidden-content').slideDown();
+            
+			$(this).hide();
+		});
+	});
+	
+
+    
+    
+    
+    function limitChars(textid, limit, infodiv)
+     {
+      var text = $('#'+textid).val(); 
+      var textlength = text.length;
+      if(textlength > limit)
+      {
+      $('#'+textid).val(text.substr(0,limit));
+       return false;
+      }
+      else
+      {
+      
+       return true;
+      }
+     }
+    
+    
+    
+
+    
+    $(function(){
+        $('#limitedtextarea').keyup(function(){
+            limitChars('limitedtextarea', 500, '');
+        });
+    });
+    
+
+    
+    //// just to show correct no. of chracters left while the page is loaded...
+    
+    limitChars('limitedtextarea',500, '');
+
+    
+    function edit_article_fetch(id)
+    {
+        $('#i_edit_id').val(id );
+         showUILoader('<img src="'+base_url+'images/loading_big.gif" width="50"/> ');
+      
+             $.ajax({
+                 type: "get",
+                 url: admin_base_url+'social_hub/blog_detail/edit_info/'+id,
+                 dataType:"json",
+                 success: function(json_response){
+                     
+                      if(json_response.result == 'success') {
+                          $('#txt_title').val('');
+                          $('#txt_title').val(json_response.s_title);
+                          
+                          $('#limitedtextarea').val('');
+                          $('#limitedtextarea').val(json_response.s_description);
+                             hideUILoader('article-edit-popup');
+                      }
+                      else {
+                           hideUILoader('article-edit-popup');
+                          showUIMsg('Some error occurred. Please try again.');
+                      }
+                  },
+                  error: function(){
+                     hideUILoader('article-edit-popup');
+                      showUIMsg('Some error occurred. Please try again.');
+                  }
+              });     
+        //show_dialog('edit-scrolling-headlines');
+        //return false;
+    }
+    
+    
+    function edit_article()
+    {
+        
+        var id = $('#i_edit_id').val();
+        var title = $('#txt_title').val();
+        var desc = $('#limitedtextarea').val();
+         showUILoader('<img src="'+base_url+'images/loading_big.gif" width="50"/> ');
+      
+             $.ajax({
+                 type: "post",
+                 url: admin_base_url+'social_hub/blog_detail/edit_info',
+                 data : ({'txt_title':title,'limitedtextarea':desc, 'i_edit_id':id}),
+                 dataType:"json",
+                 success: function(json_response){
+                     
+                     showUIMsg(json_response.msg);
+                     clear_all_error_msg();
+                     
+                      if(json_response.success == true) {
+                         
+                             hideUILoader('article-edit-popup');
+                             hide_dialog();
+                             $('#table_content').html(json_response.html);
+                             
+                             
+                      }
+                      else {
+                          
+                          
+                          
+                        
+                            for ( var id in json_response.arr_messages ){
+                                //alert(data.arr_messages[id]);
+                                if( $('#err_'+id) != null ) {
+                                    $('#err_'+id).html(json_response.arr_messages[id]);
+                                    $('#err_'+id).css('display', 'block');
+                                }
+                            }
+                          
+                          
+                           hideUILoader('article-edit-popup');
+                         //showUIMsg('Some error occurred. Please try again.');
+                          
+                      }
+                  },
+                  error: function(){
+                     hideUILoader('article-edit-popup');
+                      showUIMsg('Some error occurred. Please try again.');
+                  }
+              });     
+        //show_dialog('edit-scrolling-headlines');
+        //return false;
+    }
+    
+    function clear_all_error_msg()
+    {
+         $('.error-message').each(function(i){
+            $(this).attr('style','display:none');
+        });
+    }
+    
+    
+    function delete_article_popup(id)
+    {
+        showUILoader('<img src="'+base_url+'images/loading_big.gif" width="50"/> ');
+        hideUILoader('delete-page-popup');
+        $('#i_delete_id').val(id);
+    }
+    
+    
+    function delete_article()
+    {
+        var id = $('#i_delete_id').val();
+        
+        $.ajax({
+            url : admin_base_url+'social_hub/blog_detail/delete_information',
+            type : 'post',
+            dataType : 'json',
+            data : ({'id':id}),
+            success : function (data)
+            {
+                window.location = document.URL;
+            }
+        });
+    }
+    
+    function change_status(i_disable,id)
+    {
+        //alert(i_disable+', '+id);
+        $.ajax({
+            url : admin_base_url+'social_hub/blog_detail/change_status',
+            type : 'post',
+            dataType : 'json',
+            data : ({'id':id, 'i_status':i_disable}),
+            success : function (data)
+            {
+                if(data.result==true)
+                {
+                    showUIMsg(data.msg);
+                    $('#status_'+id).html(data.action_txt);
+                    
+                }
+            }
+        });
+    }
+    
+    function show_article(article_id,user_id)
+    {
+        //alert(article_id+','+user_id);
+        showUILoader('<img src="'+base_url+'images/loading_big.gif" width="50"/> ');
+        
+        
+        
+        $.ajax({
+            url : admin_base_url+'social_hub/blog_detail/article_detail',
+            type : 'post',
+            dataType : 'json',
+            data : ({'id':article_id,'user_id':user_id}),
+            success : function (data)
+            {
+                hideUILoader('article-popup');
+                if(data.success==true)
+                {
+                    $('#img_article_post_by').attr('src',data.img);
+                    $('#article_title').html(data.title);
+                    $('#article_user_name').html(data.user_name);
+                    $('#article_posted_on').html(data.created_dt);
+                    $('#article_desc').html(data.desc);
+                    
+                }
+                else
+                {
+                    showUIMsg('Sorry. Error occured.');
+                }
+            }
+        });
+    }
+    
+    function show_all_comments(id)
+    {
+        //alert(id);
+        showUILoader('<img src="'+base_url+'images/loading_big.gif" width="50"/> ');
+        
+        $.ajax({
+            url : admin_base_url+'social_hub/blog_detail/all_comments_ajax_pagination',
+            type : 'post',
+            dataType : 'json',
+            data : ({'id':id}),
+            success : function (data)
+            {
+                hideUILoader('comments-popup');
+                $('#comment_div').html(data.html);
+                
+            }
+        });
+        
+        
+        
+    }
+    
+    
+    
+    
+</script>

@@ -1,0 +1,347 @@
+<?php include("header.php");?>
+<!-- NAVIGATION SECTION -->
+<?php include("nav.php");?>
+<!-- /NAVIGATION SECTION -->
+</div>
+</div>
+<div class="clr"></div>
+<!-- CONTENT SECTION -->
+<div id="content_section">
+      <div id="container">
+			 <div id="top_corner">&nbsp;</div>
+			  <div id="mid_content">
+			  
+			  <!-- latest news -->
+                  <?php include("latest_news.php");?>
+                  <!-- /latest news -->
+                  <div class="clr"></div>
+				    <!-- main container -->
+                  <div id="main_container">
+					<!-- left container -->
+                        <?php include("leftbar.php");?>
+                    <!-- left container -->
+						
+							  <div id="mid_container">
+							  
+							    <div class="page_heading">
+                                    <div class="left"><img src="images/icons/etrade.png" alt="" /> eTrade</div>
+                                    <div class="right" ><a href="" style="width:180px; " class="btn_link"><span><img src="images/icons/glass.png" alt="" /> Browse Recent Product</span></a></div>
+                              </div>
+							   <!--sub page links -->
+                              <div class="link-div">
+                              	<ul>
+                                	<li><a href="buy-sent-request.php"><span class="nw-etrade">Manage Buy Request Sent</span></a></li>
+                                    <li><a href="manage-product-listing.php"><span class="nw-etrade">Manage My Products Listing</span></a></li>
+                                    <li><a href="buy-request-received.php"><span class="nw-etrade">Manage Buy Request Received</span></a></li>
+                                </ul>
+                                <div class="clr"></div>
+                              </div>
+                              <!--/sub page links -->
+							  
+							  <div class="ne-etrade-product">
+							  <form action="" method="">
+								<label class="subproduct">Product :</label>
+								<input type="text" name="" class="subproduct-input" />
+								<label class="subproduct"> Category :</label>
+								 <select name="album2" id="album2" class="subproduct-input">
+                                                <option>Select</option>
+                                          </select>
+                                          <script type="text/javascript">
+                                            $(document).ready(function(arg) {
+                                                $("#album2").msDropDown();
+                                                $("#album2").hide();
+                                            })
+                                 </script>
+								
+								 <input type="submit" class="trade-search-btn" value="" name=""/>
+								 </form>
+							  </div>
+							  
+							  <!--breadcrumb menu-->
+							  <ul class="ne-etrade-breadcrumb">
+								<li><a href="javascript:void(0)">Home</a></li>
+								<li>»</li>
+								<li><a href="javascript:void(0)">Electronics</a></li>
+								<li>»</li>
+								<li><a href="javascript:void(0)">Consumer Appliances</a></li>
+								
+							  </ul>
+								
+							   <!--breadcrumb menu-->
+							   <div class="arrow_btm"></div>
+							   <div class="ne-etradeshade-box">
+								   <div class="slider">
+                                         
+                                          <script type="text/javascript">
+												stepcarousel.setup({
+													galleryid: 'bandContainer1', //id of carousel DIV
+													beltclass: 'belt', //class of inner "belt" DIV containing all the panel DIVs
+													panelclass: 'thumbnails', //class of panel DIVs each holding content
+													autostep: {enable:false, moveby:1, pause:3000},
+													panelbehavior: {speed:500, wraparound:true, persist:false},
+													defaultbuttons: {enable: false, moveby: 1, leftnav: ['http://i34.tinypic.com/317e0s5.gif', -5, 80], rightnav: ['http://i38.tinypic.com/33o7di8.gif', -20, 80]},
+													statusvars: ['statusA', 'statusB', 'statusC'], //register 3 variables that contain current panel (start), current panel (last), and total panels
+													contenttype: ['inline'] //content setting ['inline'] or ['external', 'path_to_external_file']
+												})
+											</script>
+                                          <img src="images/ar_l.png" alt=""  class="scroller_arrow"  onclick="javascript:stepcarousel.stepBy('bandContainer1', -1)"/>
+                                          <div id="bandContainer1" class="bandContainer">
+                                                <div class="belt">
+                                                      <div class="thumbnails"><img src="images/prdt1.png" alt="" /></div>
+                                                      <div class="thumbnails"><img src="images/prdt2.png" alt="" /></div>
+                                                      <div class="thumbnails"><img src="images/tv.png" alt="" /></div>
+													   <div class="thumbnails"><img src="images/prdt2.png" alt="" /></div>
+                                                      <div class="thumbnails"><img src="images/tv.png" alt="" /></div>
+                                                </div>
+                                          </div>
+                                          <img src="images/ar_r.png" alt=""  class="scroller_arrow" onclick="javascript:stepcarousel.stepBy('bandContainer1', 1)" style="float:right;" /> 
+										  </div>
+										  
+										 <!--item list-->
+											<ul class="ne-etrade-itemlist">
+												<li><a href="#">Television</a></li>
+												<li><a href="#">Refrigerator</a></li>
+												<li><a href="#">DSLR Camera</a></li>
+												<li><a href="#">Mobile Phone</a></li>
+												<li><a href="#">Microwave</a></li>
+												<li><a href="#">Washing Machine</a></li>
+												<li><a href="#">Dishwasher</a></li>
+												<li><a href="#">Toaster</a></li>
+											</ul>
+										 <!--item list-->										 
+							   </div>
+							   <div class="arrow_btm"></div>
+							   <div class="ne-etrade-product-category">Product Under this Category</div>
+							   <!--product list-->
+							   <div class="ne-etrade-product-category-list">
+									<div class="thumb"><img src="images/tv.png" alt=""/></div>
+									<div class="thumb-right">
+										<ul class="pro-categorylist">
+											<li><a href="javascript:void(0)">Sub Sub Category 1</a></li>
+											<li>I</li><li>
+											</li><li><a href="javascript:void(0)">Similar Products</a></li>
+										</ul>
+										<br class="clear"/>
+									
+										<div class="heading-etrade"><a href="">#12345678</a></div>
+										<div class="heading-etrade"><a href="">Product Name1</a></div>
+										<p class="attribute1">
+											<strong>Attribute1:</strong>  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+										
+										</p>
+										
+										
+										
+									</div>
+									<ul class="ne-etrade-breadcrumb2">
+											<li>Condition: New Product</li>
+											
+											<li>Stock: 2</li>
+											
+											<li>
+											Unit Price: $2.10 <a  class="view-shipping-free" href="javascript:void(0);">View Shipping Fee</a>
+											<!--slide view shipping free-->
+												<div class="slide-view-shipping-free attribute1">
+													<p><strong> Local Shipping Fee :</strong> $5</p>
+													<p><strong> International Shipping Fee :</strong> $5</p>
+												
+												</div>
+											<!--slide view shipping free-->
+											</li>
+											
+											<li>Posted On: 06/09/2013</li>
+											
+											<li>Seller From: City, State, Country</li>
+											
+											<li>
+												Seller Rating : 
+												<img alt="" src="images/icons/star.png" />
+												<img alt="" src="images/icons/star.png" />
+												<img alt="" src="images/icons/star.png" />
+												<img alt="" src="images/icons/star.png" />
+												<img alt="" src="images/icons/star.png" />
+											</li>
+								
+									</ul>
+									
+							<!--Quantity Section-->
+								<div class="ne-etrade-quantity-section">
+								
+									  <div class="ne-etrade-product">
+							  <form action="" method="">
+								
+								<label class="subproduct"> Quantity :</label>
+								 <select name="album2" id="nw-album2" class="subproduct-input">
+                                                <option>Select</option>
+                                          </select>
+                                          <script type="text/javascript">
+                                            $(document).ready(function(arg) {
+                                                $("#nw-album2").msDropDown();
+                                                $("#nw-album2").hide();
+                                            })
+                                 </script>
+								
+								 <input type="button" class="yellow-btn " value="Request to Buy" name="" />
+								 </form>
+								 <br class="clr"/>
+								 	  <p class="attribute1" >Accepting International Sell <a class="error_txt disclaimer-link" href="javascript:void(0)">Read Disclaimer</a></p>
+									  <div class="read-disclaimer attribute1"> 
+										  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec velit odio, pulvinar eu tincidunt id,
+										  tincidunt eu mauris. Aliquam ac tortor massa, sit amet interdum libero. Pellentesque arcu est, venenatis ut convallis nec, 
+										  sollicitudin eget nisl. Suspendisse hendrerit luctus nibh, quis faucibus arcu pretium sit amet. Pellentesque dui enim, imperdiet 
+										  in accumsan eu, interdum sed neque. Quisque vitae magna eget metus ultricies facilisis. Donec malesuada sagittis fringilla. 
+										  Phasellus blandit nisi congue urna vestibulum adipiscing.
+ 
+									  </div>
+							  </div>
+						
+								</div>
+							<!--Quantity Section-->
+							  <p class="attribute1">
+								<strong> Details</strong>  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+							 </p>
+							 <br class="clr"/>
+								<a class="view_more" href="javascript:void(0);">Read More</a>
+							   </div>
+							    <!--product list-->
+							  </div>
+					    <!-- /left container -->
+                        <!-- right container -->
+                        <?php include("rightbar.php");?>
+                        <!-- /right container -->
+				  
+				  </div>
+				  <br class="clr"/>
+			  <div class="pagination">
+                                    <div class="left">Viewing Page 1 of 10 </div>
+                                    <div class="right"><a class="blue_link" href="javascript:void(0);">« Previous</a> <a href="javascript:void(0);">1</a> <a href="javascript:void(0);">2</a> <a href="javascript:void(0);">3</a> <a href="javascript:void(0);">4</a> <a href="javascript:void(0);">5</a> <a class="blue_link" href="javascript:void(0);">Next »</a></div>
+                              </div>
+			  </div>
+			
+			
+           
+            <div id="bot_corner">&nbsp;</div>
+      </div>
+      <div class="clr"></div>
+</div>
+<!-- /CONTENT SECTION -->
+<div class="clr"></div>
+<!-- FOOTER SECTION -->
+<?php include("footer.php");?>
+<!-- /FOOTER SECTION -->
+<div class="lightbox shipping_fee_div" style="width:400px;">
+      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="images/close.png" alt="" /></a></div>
+      <div class="top">
+            <div>&nbsp;</div>
+      </div>
+      <div class="mid">
+            <div class="heading">
+                  <h4><img src="images/icons/car-light.png" alt="" /> Shipping Fees</h4>
+            </div>
+            <p style="padding-bottom:5px;"><strong> Local Shipping Fee :</strong> <span class="blue12">$5</span></p>
+            <p><strong> International Shipping Fee :</strong> <span class="blue12">$5</span></p>
+      </div>
+      <div class="bot">
+            <div>&nbsp;</div>
+      </div>
+</div>
+<div class="lightbox read_disclaimer_div" style="width:600px;">
+      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="images/close.png" alt="" /></a></div>
+      <div class="top">
+            <div>&nbsp;</div>
+      </div>
+      <div class="mid">
+            <div class="heading">
+                  <h4>Disclaimer</h4>
+            </div>
+            <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec velit odio, pulvinar eu tincidunt id, tincidunt eu mauris. Aliquam ac tortor massa, sit amet interdum libero. Pellentesque arcu est, venenatis ut convallis nec, sollicitudin eget nisl. Suspendisse hendrerit luctus nibh, quis faucibus arcu pretium sit amet. Pellentesque dui enim, imperdiet in accumsan eu, interdum sed neque. Quisque vitae magna eget metus ultricies facilisis. Donec malesuada sagittis fringilla. Phasellus blandit nisi congue urna vestibulum adipiscing.</p>
+      </div>
+      <div class="bot">
+            <div>&nbsp;</div>
+      </div>
+</div>
+<div class="lightbox product_detail_div" style="width:740px; ">
+      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="images/close.png" alt="" /></a></div>
+      <div class="top">
+            <div>&nbsp;</div>
+      </div>
+      <div class="mid">
+            <div class="heading">
+                  <h4>Product Details</h4>
+            </div>
+            <div class="txt_content">
+                  <div class="img_div" style="width:260px; height:260px; margin-right:15px;"><img src="images/lcd.jpg" alt="" width="260" height="260" /></div>
+                  <div class="left_div01" style="width:380px;">
+                        <p class="blue_bold12"><a href="javascript:void(0);">#12345678</a></p>
+                        <p class="blue_bold12"><a href="javascript:void(0);">Product Name1</a></p>
+                        <p class="light_blue12"><a href="javascript:void(0);">Sub Sub Category 1</a></p>
+                        <p> <strong>Attribute1 :</strong> Lorem ipsum</p>
+                        <p><strong>Condition :</strong> New Product</p>
+                        <p> <strong>Stock :</strong> 2</p>
+                        <p> <strong>Unit Price :</strong> $2.10</p>
+                        <p> <strong>Local Shipping Fee :</strong> $1</p>
+                        <p> <strong>International Shipping Fee  :</strong> $1</p>
+                        <p> <strong>Posted On :</strong> HH:MM DD/MM/YYYY</p>
+                        <p> <strong>Seller From :</strong> City, State, Country</p>
+                        <p> <strong>Seller Rating :</strong> <img src="images/icons/star.png" alt="" /><img src="images/icons/star.png" alt="" /><img src="images/icons/star.png" alt="" /><img src="images/icons/star.png" alt="" /><img src="images/icons/star.png" alt="" /></p>
+                  </div>
+                  <div class="clr"></div>
+                  <p class="blue_bold12"> Details</p>
+                  <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec velit odio, pulvinar eu tincidunt id, tincidunt eu mauris. Aliquam ac tortor massa, sit amet interdum libero. Pellentesque arcu est, venenatis ut convallis nec, sollicitudin eget nisl. Suspendisse hendrerit luctus nibh, quis faucibus arcu pretium sit amet. Pellentesque dui enim, imperdiet in accumsan eu, interdum sed neque. Quisque vitae magna eget metus ultricies facilisis. Donec malesuada sagittis fringilla. Phasellus blandit nisi congue urna vestibulum adipiscing.</p>
+            </div>
+      </div>
+      <div class="bot">
+            <div>&nbsp;</div>
+      </div>
+</div>
+<div class="lightbox change_contact_address" style="width:550px;">
+      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="images/close.png" alt="" /></a></div>
+      <div class="top">
+            <div>&nbsp;</div>
+      </div>
+      <div class="mid">
+            <div class="heading">
+                  <div class="left">
+                        <h4> Change Contact Info before You Proceed </h4>
+                  </div>
+            </div>
+            <div class="frm_box">
+                  <div class="lable01">Your Contact Email:</div>
+                  <div class="field01">
+                        <input name="" type="text" value="lorem@abc.com" />
+                  </div>
+                  <div class="clr"></div>
+                  <div class="lable01">Your Contact No.:</div>
+                  <div class="field01">
+                        <input name="" type="text"  value="123456"/>
+                  </div>
+                  <div class="clr"></div>
+                  <div class="lable01">&nbsp;</div>
+                  <div class="field01">
+                        <input name="" type="button" value="Proceed" class="btn" />
+                  </div>
+                  <div class="clr"></div>
+            </div>
+      </div>
+      <div class="bot">
+            <div>&nbsp;</div>
+      </div>
+</div>
+<script type="text/javascript">
+<!--	
+	var ticker_holder = $('.bargaining').get(0);
+	var ticker_text = $('.ticker').get(0);
+	var ticker_pos = ticker_text.parentNode.offsetWidth;
+	
+	var ticker_data = $(ticker_holder).html();
+	$(ticker_text).parent().html('<marquee scrollamount="3" scrolldelay="20">' + ticker_data + '</marquee>');
+	
+//	$('#sub-nav').hover
+//	(
+//		function() { $('marquee', this).get(0).stop();  },
+//		function() { $('marquee', this).get(0).start(); }
+//	); 
+//-->
+</script>
+</body>
+</html>

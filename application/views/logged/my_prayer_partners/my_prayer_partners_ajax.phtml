@@ -1,0 +1,138 @@
+<div class="div_content" style=" margin-top:0px;">
+    <?php
+    //pr($result_arr);
+    if (count($result_arr) > 0) {
+        foreach ($result_arr as $key => $val):
+            #echo $val['i_country_id'];
+            $chat_html = '';
+            $add = array();
+            $name = $val['s_displayname'];
+            if (!empty($val['s_city']))
+                $add['city'] = $val['s_city'];
+            if (!empty($val['s_state']))
+                $add['state'] = $val['s_state'];
+            if (!empty($val['i_country_id']))
+                $add['country'] = get_country_name_by_id($val['i_country_id']);
+
+            $address = implode(', ', $add);
+            $img = get_profile_image($val['user_id'], 'thumb');
+
+            if ($val['if_already_friend'] == 'true' || $val['already_added_netpal'] == 'true') {
+                $profile_link = get_profile_url($val['user_id'], $val['s_displayname']);
+            } else {
+                $profile_link = get_profile_url_prayer_partner($val['user_id'], $val['s_displayname']);
+            }
+
+            $relation_arr = CheckUserRelation($val['user_id']);
+
+            //echo check_Chat_link_online_hlpr($val['user_id'], 'public', $relation_arr).' wedqwe';
+
+            if (check_Chat_link_online_hlpr($val['user_id'], 'public', $relation_arr))
+                $chat_html = ' <a class="nogrey_link nw-chat-lnk" onclick="showOnlineUser(\'show\');chatWith(\'' . $val['s_first_name'] . '\',' . $val['user_id'] . ')" chatwith="' . $val['user_id'] . '"><img src="images/Chat.png" title="chat" alt="chat" /></a>';
+            ?>   
+
+
+
+
+
+            <div class="shade_box_blue" style="padding-top:5px;" id="friend_record_<?= $val['user_id'] ?>"> 
+                <div class="txt_content">
+                    <a href="<?= $profile_link; ?>"><div class="pro_photo2" style="background:url(<?= $img ?>) no-repeat center;width:60px; height:60px;" ></div></a>
+                    <div class="left_div01" style="width:397px;">
+                        <p class="add-remove-friend"><img src="images/icons/remove.png" alt="" /> <a href="javascript:void(0);" onclick="delete_partner(<?= $val['user_id'] ?>)">Remove</a></p>
+                        <p class="blue_bold12"><a  href="<?= $profile_link; ?>" class="left"><?= $name ?> </a> &nbsp;[ <a class="nogrey_link"><?= check_user_online_hlpr($val['user_id'], 'public', $relation_arr); ?></a> ] <?= $chat_html ?>
+                        </p>
+
+
+
+
+
+
+
+                        <?php if ($val['s_about_me'] != '') { ?>
+                            <p class="light_blue12">About Me:</p>
+                            <p><?= nl2br(my_substr($val['s_about_me'], 140)) ?></p>
+                        <?php } ?>
+
+                    </div>
+                    <div class="clr"></div>
+
+                </div>
+                <?php /* ?><div class="light_heading expandable"> 
+                  <ul class="left">
+                  <li><a href="javascript:void(0);" onclick="write_points(<?= $val['user_id']?>)">Write Prayer Points</a></li>
+                  <li class="no-bg"><a href="javascript:void(0);" onclick="read_prayer_partner_(<?= $val['user_id']?>)"> Read Prayer Points</a></li>
+                  </ul>
+                  <div class="clr"></div>
+                  <div class="read-write-prayer-points">
+                  <div class="prayer-points">
+                  <p><textarea class="text_area_prayer_point" id="text_area_prayer_point<?= $val['user_id']?>" cols="" rows="" style="width:460px; height:100px;"></textarea></p>
+                  <p style="padding-bottom:8px;" class="blue12">You Should write date along with prayer points</p>
+                  <input type="hidden" class="dbId" id="" value="">
+                  <p><input name="save_btn"  type="button" value="Save" class="btn save_btn" onclick="write_prayer_partner_(<?= $val['user_id']?>)" /></p>
+                  </div>
+
+                  <div class="prayer-points" id="prayer_points<?=$val['user_id']?>">
+                  </div>
+                  </div>
+                  <div class="clr"></div>
+                  </div><?php */ ?>
+
+                <div class="light_heading expandable"> 
+                    <a href="javascript:void(0);" class="read-prayer-points" onclick="read_prayer_partner_(<?= $val['user_id'] ?>)"><strong>Prayer Point Board</strong></a>
+                    &nbsp;<?php /* ?><img src="images/icons/online.png" alt=""  width="10" height="10"/><?php */ ?>
+
+                    <div class="read-write-prayer-points">
+                        <div class="prayer-points" >
+                            <ul id="prayer_points<?= $val['user_id'] ?>">
+
+                            </ul>
+
+                            <p style="padding-top:8px;" class="blue12">Write Prayer Points</p>
+                            <p><textarea class="text_area_prayer_point" id="text_area_prayer_point<?= $val['user_id'] ?>" cols="" rows="" style="width:460px; height:100px;"></textarea></p>
+                            <?php /* ?> <p style="padding-bottom:8px;" class="blue12">You Should write date along with prayer points</p><?php */ ?>
+                            <p style="padding-bottom:8px;" class="blue12"></p>
+                            <input type="hidden" class="dbId" id="" value="" />
+                            <p><input name="save_btn"  type="button" value="Save" class="btn save_btn" onclick="write_prayer_partner_(<?= $val['user_id'] ?>)" /></p>
+                        </div>
+                    </div>
+                    <div class="clr"></div>
+                </div>
+                <?php /* ?><div class="light_heading"> 
+                  <div class="left"><a href="javascript:void(0);"  onclick="if_any_exists_(<?= $val['user_id']?>) ">Write Prayer Points</a>  &nbsp; |   &nbsp;
+                  <a href="javascript:void(0);" onclick="read_prayer_partner_(<?= $val['user_id']?>)" > Read Prayer Points</a>
+                  </div>
+                  </div><?php */ ?>
+            </div>
+
+
+
+
+            <?php
+        endforeach;
+    } else {
+        echo '<div class="shade_box_blue" style="padding-top:5px;"><div  class="shade_norecords" style="width:275px;"><p class="blue_bold12">No Prayer Patners.</p></div></div>';
+    }
+    ?>
+    <script type="text/javascript">
+        $(function() {
+            //$('.edit-prayer-partner').hide();
+            $(".edit").live("click", function() {
+                // $('.edit-prayer-partner').toggle('slow');
+                // alert("jjk");
+                $(this).parents('.parent_div').find('.edit-prayer-partner').toggle('slow');
+            });
+        });
+    </script>
+</div>
+<?php if ($page_links) { ?>
+    <div class="pagination">
+        <div class="left">Viewing Page <?= $current_loaded_page_no ?> of <?= $total_pages ?> </div>
+        <div class="right">
+            <ul class="small-paging">
+                <?= $page_links ?> 
+            </ul>
+        </div>
+    </div>
+    <?php
+} 

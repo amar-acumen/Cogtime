@@ -1,0 +1,250 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="Description" content="123 Flash Chat" />
+<meta name="Keywords" content="Chat,123 Flash Chat" />
+<title>123 Flash Chat HTML Chat Login Page</title>
+<link rel="shortcut icon" href="favicon.ico" type="image/ico" />
+<link href="css/font.css" rel="stylesheet" type="text/css" />
+<script language="javascript" src="rooms.js"></script>
+</head>
+<body>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<!--Main nav -->
+<div style="width:330px; height:195px; border:1px solid #C5C5C5; margin:0 auto;">
+  <table width="100%" border="0" cellspacing="2" cellpadding="3" align="center" style="font-size:12px">
+    <form id="login_form" name="login_form" method="GET" action="htmlchat/ChatApplication.html">
+	  <tr>
+	  <td colspan="2" height="7"><!----></td>
+	  </tr>
+      <tr valign="bottom">
+        <td width="34%">&nbsp;</td>
+        <td width="66%"><input type="checkbox" id="guest_checkbox" name="guest_checkbox" checked="checked" onclick="javascript:checkIsGuestLogin();"/>        Guest</td>
+      </tr>
+      <tr>
+        <td align="right">User Name:</td>
+        <td><input id="init_user" name="init_user" type="text" class="inp" />        </td>
+      </tr>
+      <tr id="password_tr" name="password_tr">
+        <td align="right">Password:</td>
+        <td><input id="init_password" name="init_password" type="password" class="inp"/>        </td>
+      </tr>
+      <tr>
+        <td align="right">Rooms List:</td>
+        <td><select name="init_room" style="width:144px; ">
+            <script language="javascript">
+			  var roomsLength=rooms.length;
+				var roomIndex=0;
+				for(var i=0;i<roomsLength;i++)
+				{
+					var room=rooms[i];
+					if(room.st!=0)
+					{
+						continue;
+					}
+					if(roomIndex==0)
+					{
+						document.write('<option value="'+room.id+'" selected="selected">'+room.name+'('+room.count+')</option>');
+					}
+					else
+					{
+						document.write('<option value="'+room.id+'">'+room.name+'('+room.count+')</option>');
+					}
+					roomIndex++;
+				}
+				</script>
+          </select>        </td>
+      </tr>
+      <tr style="display:none">
+        <input id="init_host" name="init_host" value="" type="hidden"/>
+        <input id="init_port" name="init_port" value="" type="hidden"/>
+        <input id="init_group" name="init_group" value="" type="hidden"/>
+        <input id="init_skin" name="init_skin" value="" type="hidden"/>
+  		<input id="init_userlist" name="init_userlist" value="" type="hidden"/>
+     	<input id="init_nickname" name="init_nickname" value="" type="hidden"/>
+		 <input id="init_dir" name="init_dir" value="" type="hidden"/>
+	  </tr>
+	  <tr valign="bottom">
+        <td width="34%">&nbsp;</td>
+        <td width="66%"><input type="checkbox" id="right_to_left_checkbox" name="right_to_left_checkbox" onclick="javascript:checkRightToLeft();"/>
+          Right to left input <br/>(For Arabic, Hebrew, etc.)</td>
+      </tr>
+      <tr>
+        <td>&nbsp;</td>
+        <td height="30"><input id="login" name="login" type="image" src="img/login.gif" value="Login" onMouseOver="this.src='img/login2.gif'" onMouseOut="this.src='img/login.gif'" onClick="javascript:sumbitData();return false;"></td>
+      </tr>
+    </form>
+  </table>
+</div>
+<script language="javascript">
+	var init_host="";
+	var init_port="";
+	var init_group="";
+	var init_skin="";
+	var init_userlist="";
+	var init_nickname="";
+	var parameters="";
+  function getUrlGetValueByName(str,name)
+  {
+		var value="";
+		var indexOfName=str.indexOf("?"+name+"=");
+		if(indexOfName==-1)
+		{
+			indexOfName=str.indexOf("&"+name+"=");
+		}
+		if(indexOfName!=-1)
+		{
+			var lengthOfName=(name.length+1);
+			var tempStr=str.substring(indexOfName+1);
+			var indexOfAnd=tempStr.indexOf("&");
+			if(indexOfAnd!=-1)
+			{
+				value=tempStr.substring(lengthOfName,indexOfAnd);
+			}
+			else
+			{
+				value=tempStr.substring(lengthOfName);
+			}
+		}
+		return value;
+	}
+	function checkRightToLeft()
+	{
+		if(document.login_form.right_to_left_checkbox.checked)
+		{	
+			document.getElementById("init_dir").style.display="";
+			document.login_form.init_dir.value="rtl";
+		}
+		else
+		{			
+			document.getElementById("init_dir").style.display="none";
+			document.login_form.init_dir.value="";
+		}
+	}
+	function checkIsGuestLogin()
+	{
+		if(document.login_form.guest_checkbox.checked)
+		{
+			document.getElementById("password_tr").style.display="none";
+			document.login_form.init_password.disabled=true;
+			document.login_form.init_password.value="";
+		}
+		else
+		{	
+			document.getElementById("password_tr").style.display="";
+			document.login_form.init_password.disabled=false;
+		}
+	}
+	function initFormData()
+	{
+		document.login_form.init_user.value="";
+		document.login_form.init_password.value="";
+		document.login_form.init_host.disabled=false;
+		document.login_form.init_port.disabled=false;
+		document.login_form.init_group.disabled=false;
+		document.login_form.init_skin.disabled=false;
+		document.login_form.init_userlist.disabled=false;
+		document.login_form.init_nickname.disabled=false;
+		document.login_form.guest_checkbox.disabled=false;
+		document.login_form.guest_checkbox.checked="checked";
+		document.login_form.right_to_left_checkbox.disabled=false;
+		document.login_form.init_dir.checked="";
+		checkIsGuestLogin();
+		checkRightToLeft();
+	}
+	function sumbitData()
+	{
+		if(!document.login_form.guest_checkbox.checked&&document.login_form.init_password.value=="")
+		{
+			alert("You must enter the password");
+		}
+		else
+		{   
+			document.login_form.guest_checkbox.disabled=true;
+			document.login_form.right_to_left_checkbox.disabled=true;
+			if(init_host!="")
+			{
+				document.login_form.init_host.value=init_host;
+			}
+			else if(document.login_form.init_host.value=="")
+			{
+				document.login_form.init_host.disabled=true;
+			}
+		    if(init_port!="")
+			{
+				document.login_form.init_port.value=init_port;
+			}
+			else if(document.login_form.init_port.value=="")
+			{
+				document.login_form.init_port.disabled=true;
+			}
+			if(init_group!="")
+			{
+				document.login_form.init_group.value=init_group;
+			}
+			else if(document.login_form.init_group.value=="")
+			{
+				document.login_form.init_group.disabled=true;
+			}
+			if(init_skin!="")
+			{
+				document.login_form.init_skin.value=init_skin;
+			}
+			else if(document.login_form.init_skin.value=="")
+			{
+				document.login_form.init_skin.disabled=true;
+			}
+			if(init_userlist!="")
+			{
+				document.login_form.init_userlist.value=init_userlist;
+			}
+			else if(document.login_form.init_userlist.value=="")
+			{
+				document.login_form.init_userlist.disabled=true;
+			}
+			if(init_nickname!="")
+			{
+				document.login_form.init_nickname.value=init_nickname;
+			}
+			else if(document.login_form.init_nickname.value=="")
+			{
+				document.login_form.init_nickname.disabled=true;
+			}
+	   	    document.login_form.submit();
+		}
+	}
+	if(urlLink==undefined)
+	{
+		var urlLink;
+		try
+		{
+			urlLink=window.location.href;
+		}
+		catch(e)
+		{
+			try
+			{
+				urlLink=document.URL;
+			}
+			catch(e)
+			{
+				urlLink="";
+			}
+		}
+	}
+	if(urlLink.indexOf("?")!=-1)
+	{
+		parameters=urlLink.substring(urlLink.indexOf("?"));
+		init_skin=getUrlGetValueByName(parameters,"init_skin");
+		init_group=getUrlGetValueByName(parameters,"init_group");
+		init_host=getUrlGetValueByName(parameters,"init_host");
+		init_port=getUrlGetValueByName(parameters,"init_port");
+		init_userlist=getUrlGetValueByName(parameters,"init_userlist");
+		init_nickname=getUrlGetValueByName(parameters,"init_nickname");
+	}
+	initFormData();
+</script>
+</body>
+</html>

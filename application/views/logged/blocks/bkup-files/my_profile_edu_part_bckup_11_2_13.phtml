@@ -1,0 +1,145 @@
+<div>
+          <div id="3">
+                 <div class="heading01"> 
+                     <div class="left">
+                     <h4><img src="<?php echo base_url();?>images/icons/education.png" alt=" " />  Education</h4>
+                     </div>
+                    <div class="right">
+                    <img src="<?php echo base_url();?>images/icons/edit.png" alt=" " />
+                    <a onclick="showDiv('3')" href="javascript:void(0);" class="white-link"><strong>Edit</strong></a></div>
+                 </div>
+                 <?php
+                    $count=count($arr_profile_info['education_arr']);
+                    if ($count==0)
+                        $count=1;
+                  
+                    for($i=0;$i<$count;$i++)    :
+                 ?>
+                 <div class="shade_box_01 frm_box shade_box_blue" style="padding-bottom:17px;">
+                 
+                    <div class="lable01">School/College:</div>  
+                    <div class="field01"><?=$arr_profile_info["education_arr"][$i]["s_school_name"]?></div> 
+                    <div class="clr"></div>
+                    <div class="lable01">School Location:</div>  
+                    <div class="field01"><?=$arr_profile_info["education_arr"][$i]['s_school_city'].' '.$arr_profile_info["education_arr"][$i]['s_school_state'].' '.$arr_profile_info["education_arr"][$i]['s_school_country']?></div> 
+                    <div class="clr"></div>
+                    <div class="lable01">Class Year:</div>  
+                    <div class="field01"><?=$arr_profile_info["education_arr"][$i]['i_class_year']?></div> 
+                    <div class="clr"></div>
+                    <div class="lable01">Degree:</div>  
+                    <div class="field01"><?=$arr_profile_info["education_arr"][$i]['s_degree']?></div> 
+                    <div class="clr"></div>
+    
+                 </div>
+                 <?php
+                    endfor;
+                 ?>
+          </div>
+          <div id="jason3" style="display:none;"> 
+                 <div class="heading01"> 
+                       <div class="left"><h4><img src="<?php echo base_url();?>images/icons/education.png" alt=" " />  Education</h4> </div>
+                   </div>
+                   <form id="frmManageEduProfile"  method="post" action="modify-my-profile-edu-info-ajax" onsubmit="return modify_my_edu_profile_ajax()" enctype="multipart/form-data">
+                  <div class="shade_box_01 frm_box shade_box_blue" style="padding-bottom:17px;">
+                  
+                  <?php
+                      
+                      //$count=count($arr_profile_info['education_arr']);
+                      for($i=0;$i<$count;$i++)   :
+                  
+                  ?>
+                  <!------------------------edu div----------------------------->
+                  <div id="<?php echo (($i>0)? 'edu_div_'.($i+1):'edu_div')?>"> 
+                  <?php 
+                       if($i>0 && $i<$count)
+                       {
+                           $j= $i+1;
+                              
+                  echo "<h4 class='sepration'></h4><a class='close' href='javascript:void(0);' style='margin:5px;' onclick=\"closeExtraEduDiv('edu_div', $j)\" ><img src='images/icons/close.png' alt=''></a>";
+                       }
+                  ?>
+                     <div class="lable01">School/College:</div>  
+                      <div class="field01">
+                      <input name="txt_school_name[]"  type="text" style="width:230px;" value="<?=isset($arr_profile_info["education_arr"][$i]["s_school_name"])? $arr_profile_info["education_arr"][$i]["s_school_name"]: '' ?>" />
+                      <span class="err_msg" id="err_school_name"></span>
+                      
+                      <!--<a href="javascript:void();" ><img src="images/icons/close.png" alt=""></a>-->
+                      </div> 
+                      <div class="clr"></div>
+                       <div class="lable01">City:</div>  
+                      <div class="field01">
+                      <input name="txt_school_city[]" type="text" value="<?=isset($arr_profile_info["education_arr"][$i]["s_school_city"])? $arr_profile_info["education_arr"][$i]["s_school_city"]: '' ?>" style="width:230px;" />
+                      <span class="err_msg" id="err_school_city"></span>
+                      </div> 
+                      <div class="clr"></div>
+                      <div class="lable01">State:</div>  
+                      <div class="field01">
+                      <input name="txt_school_state[]" type="text" value="<?=isset($arr_profile_info["education_arr"][$i]["s_school_state"])? $arr_profile_info["education_arr"][$i]["s_school_state"]: '' ?>" style="width:230px;" />
+                      <span class="err_msg" id="err_school_state"></span>
+                      </div> 
+                      <div class="clr"></div>
+                      
+                      <div class="lable01">Country:</div>  
+                      <div class="field01">
+                      <input name="txt_school_country[]" type="text" value="<?=isset($arr_profile_info["education_arr"][$i]["s_school_country"])? $arr_profile_info["education_arr"][$i]["s_school_country"]: '' ?>" style="width:230px;" />
+                      <span class="err_msg" id="err_school_country"></span>
+                      </div> 
+                      <div class="clr"></div> 
+                      
+                      <div class="lable01">Class Year:</div>  
+                      <div class="field01">
+                      <input name="txt_school_year[]" type="text"  value="<?=isset($arr_profile_info["education_arr"][$i]["i_class_year"])? $arr_profile_info["education_arr"][$i]["i_class_year"]: '' ?>" style="width:230px;"/>
+                      <span class="err_msg" id="err_school_year"></span>
+                      </div> 
+                      <div class="clr"></div>
+                      
+                      <div class="lable01">Degree:</div>  
+                      <div class="field01">
+                      <input name="txt_school_degree[]" type="text" value="<?=isset($arr_profile_info["education_arr"][$i]["s_degree"])? $arr_profile_info["education_arr"][$i]['s_degree']: '' ?>"  style="width:230px;"/>
+                      <span class="err_msg" id="err_school_degree"></span>
+                      </div> 
+                      <!-- <div class="clr"></div>
+                      
+                      <?php /*?><DIV id="div_more_edu">
+                          <div class="fld01">
+                              <input name="article_photos[]" type="file"  size="51"/>
+                          </div>
+                      </DIV><?php */?>
+                      
+                      
+                      <div class="lable01">&nbsp;</div>  
+                      -->
+                      <input type="hidden" name="db_id[]" id="dbId" value="<?php echo isset($arr_profile_info["education_arr"][$i]["id"])? $arr_profile_info["education_arr"][$i]['id']: ''?>">
+                      
+                      <!------------------------/edu div----------------------------->
+                      </div>  
+                      <?php
+                         
+                          endfor;
+                      ?>
+                      
+                      <div id="add_more_edu_div"></div>
+                      
+                      <div class="clr"></div>
+                      <div class="lable01">&nbsp;</div>  
+                      <input type="hidden" name= "total_edu_divs" id="edu_div_h" value="<?php echo $count;?>" />
+                      <div class="field01" style="text-align:right; width:250px;"> 
+                      
+                           <a href="javascript:void(0);"  class="blue_link" id="add_mor_edu" onclick="add_extra_edu_div('edu_div');"><strong>Add More..</strong></a>
+                           
+                      </div> 
+                      <div class="clr"></div>
+                      
+                      
+                       <div class="lable01">&nbsp;</div>  
+                      <div class="field01">
+                      <input type="hidden" name="is_basic_submitted" id="is_basic_submitted" value="Y" />
+                      
+                       <input name="" type="submit" value="Save"  class="btn" disabled="disabled" />
+                       <input name="" type="button" value="Cancel"  class="btn" onclick="closeDiv('3')"/>
+                       </div> 
+                      <div class="clr"></div>
+                   </div>
+                   </form>
+           </div>
+</div>

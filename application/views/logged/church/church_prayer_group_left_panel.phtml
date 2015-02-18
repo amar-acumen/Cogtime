@@ -1,0 +1,32 @@
+
+    <div class="activity-left">
+    	<ul class="left-list">
+		<?
+		//echo $active_menu;
+        if(subadmin_access('prayer_group'))
+        {
+            ?>
+            <li><a href="<?=base_url().''.$_SESSION['logged_church_id']?>/create-prayer-group" class="<?php echo ($active_menu == 'create_group')?'active':'';?>">Create Prayer Group</a></li>
+			<?php if($prayer_group_id != null) { ?>
+			<li><a href="<?=base_url()?>church-prayer-group-invite/<?=$prayer_group_id?>" class="<?php echo ($active_menu == 'search_invite')?'active':'';?>">Search and Invite</a></li>
+			<? } ?>
+		<? 
+        } 
+        else 
+        {
+            ?>		
+            <li><a href="<?=base_url().''.$_SESSION['logged_church_id']?>/request" class="<?php echo ($active_menu == 'invite')?'active':'';?>">Prayer Group Requests</a></li>		
+		<?php } 
+        ?>
+<!--		<li><a href="<?=base_url().''.$_SESSION['logged_church_id']?>/church-prayer-group" class="<?php echo ($active_menu == 'prayer-groups')?'active':'';?>" >Prayer Groups</a></li>-->
+		<?php if($prayer_group_id != null) { ?>
+		<li><a href="<?=base_url()?>church-prayer-group-member/<?=$prayer_group_id?>" class="<?php echo ($active_menu == 'member')?'active':'';?>">Members</a></li>
+		<?}?>
+		<?php if(!subadmin_access('prayer_group')) {?>
+		<li><a href="<?=base_url().''.$_SESSION['logged_church_id']?>/search-and-join-church-prayer-group" class="<?php echo ($active_menu == 'search_join')?'active':'';?>">Search and Join Prayer Group</a></li>	
+				
+		<?php }?>
+        </ul>
+		
+    </div>
+    

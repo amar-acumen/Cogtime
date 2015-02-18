@@ -1,0 +1,28 @@
+          <!--word for today start -->
+          <?php
+          //pr($result_arr);
+          foreach($result_arr as $res)
+          {
+          	$room_id = $res['i_room_id'];
+          ?>
+          
+          
+
+            <div class="message-box">
+                <h2><?=$res['s_title']?></h2>
+                <p class="date-time">Posted On <?=getShortDateWithTime($res['dt_posted_on'],7)?></p>
+                <p><?=nl2br($res['s_desc'])?></p>
+              
+                
+                <p class="add-remove-friend"><img alt="" src="images/icons/ring2.png"> <a href="javascript:void(0);" onclick="window.open('<?=base_url()?>client/123flashchat.html?init_room=<?=$room_id?>&amp;init_user=<?=$this->session->userdata('display_username')?>',   '',   'bReplace= 0 resizable=0, location=1, width=630, height=450');    " target="">Join this Room</a> 
+                                                                                                     </p>
+                
+
+            </div>
+
+          
+          
+          <?php
+          }
+          ?>
+          <!--word for today end -->

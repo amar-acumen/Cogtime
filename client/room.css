@@ -1,0 +1,44 @@
+html,body{font-family: arial,sans-serif; font-size: 11px; background:#b8d8ed; margin:0 auto; padding:0px;}
+a{color:#025da2;text-decoration:none;}
+a:hover{text-decoration:underline;}
+img{border:0;}
+.block{background:#95b1d8;border:1px solid #aecae0; margin:10px; padding:0; clear:both; height:100%;}
+.block1{background:#fff; border:1px solid #fff; margin:1px; height:100% !important; overflow:hidden;}
+.logo{background:#eef1f6; height:45px; }
+span{display:block; width:100%;}
+span.logo1{height:1px; background:#e9ecf1;}
+span.logo2{height:1px; background:#e2e5ec;}
+span.logo3{height:1px; background:#d4d7de;}
+span.listname1{height:1px; background:#f7f8fa;}
+span.listname2{height:1px; background:#f4f5f7;}
+span.listname3{height:1px; background:#d7dadf;}
+.div1, .div2, .div3, .div4{float:left; margin:5px; line-height:22px; word-break: break-all; word-wrap: break-word;}
+.div1{width:15%;}
+.div2{width:45%;}
+.div3{width:15%;}
+
+.div1 a{background:url(room-btn.gif) no-repeat; padding-left:23px;}
+.div2{color:#7e7f80;}
+.div2 img{vertical-align:middle; border:medium none; margin-left:10px;}
+.div2 a{color:#888888;text-decoration:none;}
+.div2 a:hover{text-decoration:underline;}
+.div4 a{background:url(button.gif) no-repeat; width:130px; height:26px; display:block; line-height:26px; text-indent:27px; text-decoration:none;}
+.div4 a:hover{ font-weight:bold;}
+.title{clear:both; line-height:22px; height:26px;}
+.title .div1{border-right:1px dotted #84989f;}
+.title .div2{border-right:1px dotted #84989f;}
+.title .div3{border-right:1px dotted #84989f;}
+.white, .gray{clear:both; line-height:30px; border-bottom:1px solid #edeef2; height:100% !important; overflow:hidden;}
+.white .div1,.gray .div1{border-right:1px dotted #d4d9dc; }
+.white .div2,.gray .div2{border-right:1px dotted #d4d9dc; }
+.white .div3,.gray .div3{border-right:1px dotted #d4d9dc;}
+.gray{background:#f8f9fd}
+.space{height:5px; width:100%;clear:both;}
+table {width: 100%;table-layout: fixed}
+td {width: 20%;word-break: break-all;word-wrap: break-word;border-bottom: 1px solid #edeef2;padding-left: 14px;}
+.footer{width:100%; height:12px;}
+.pagelist {position: relative;padding: 6x 0;height: 12px;width: 250px; margin-right:10px;}
+.pagelist a{color:#888888;text-decoration:none;}
+.pagelist a:hover{text-decoration:underline;}
+.bottomtable {border: none;}
+.noboardertd {border: none;}

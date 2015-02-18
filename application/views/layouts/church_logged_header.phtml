@@ -1,0 +1,111 @@
+<meta charset="utf-8">
+<title>Cogtime Church</title>
+<!--<link href="<?= base_url() ?>css/church_admin.css" rel="stylesheet" type="text/css">-->
+
+</head>
+
+<body>
+<div class="header">
+  <div class="container">
+  <?php //pr($church_arr); ?>
+    <h1><img src="<?=get_church_logo_image($_SESSION['logged_church_id'], 'main', $church_arr[0]->ch_logo)?>" alt="Church" width="259" class="logo" height="40"><?//=$church_arr[0]->s_name?></h1>
+    <div class="top-right">
+	 <img src="<?= get_profile_image(decrypt($this->session->userdata('user_id')), 'thumb') ?>" alt="Profile Pic" title="<?=$this->session->userdata('username')?>" width="42" height="42">
+      <ul class="logmenu">
+          <?php 
+          $user_id = decrypt($this->session->userdata('user_id'));
+          ?>
+          <li class="login"><a href="javascript:void(0)">Welcome&nbsp;</a><a class="active" href="<?//= get_profile_url($user_id) ?> <?=base_url()?>my-profile.html"><?=get_user_name_by_id($user_id)?></a> </li>
+        <li style="color: #ffffff;">|</li>
+        <li style=""><a href="<?=base_url().'logout'?>">Logout</a></li><br>
+
+        <li class="cogtime-toplogo"><a href="<?=base_url()?>" title="Cogtime"><img src="<?=base_url()?>images/cogtime-logo.png" width="102" height="25" alt="Cogtime"></a></li>
+      </ul>
+	  
+    <div class="clear"></div>
+  </div>
+</div>
+</div>
+<!-- banner and menu section start -->
+<div class="container">
+<?php if($_SESSION['charch_super_admin']=='yes' || $_SESSION['subadmin_role']==2) {
+    $page_location = $this->uri->segment(1);
+ $page_location1 = $this->uri->segment(2);
+    ?>
+	<div class="admin-menu">
+    	<ul>
+        	<li><a  <?php if($page_location1 == 'church-wall'){  ?> class="active" <?php } ?> href="<?= base_url().''.$_SESSION['logged_church_id'].'/church-wall' ?>">Church wall</a></li>
+            
+            <li><a <?php if($page_location == 'church'){  ?> class="active" <?php } ?> href="<?= get_church_dashboard_url_by_church_id($_SESSION['logged_church_id']) ?>">Dashboard</a></li>
+            
+             <li><a <?php if($page_location == 'church_setting.html'){  ?> class="active" <?php } ?> href="<?=base_url()?>church_setting.html">Manage site</a></li>
+             
+           
+           
+            <li><a <?php if($page_location == 'church_member'){  ?> class="active" <?php } ?> href="<?php echo base_url().'church_member'?>">Members</a></li>
+            
+            
+        <li><a <?php if($page_location == 'church-subadmin'){  ?> class="active" <?php } ?> href="<?= base_url().'church-subadmin' ?>">Sub Admin</a></li>
+        
+            
+            
+            
+              <?php
+            if(!($_SESSION['subadmin_role']==2 || $_SESSION['charch_super_admin'] =='yes') || $_SESSION['subadmin_role']==2){
+            ?>
+        <li><a <?php if($page_location == 'member_ring' || $page_location == 'member_ring' || $page_location == 'church-ring-list' || $page_location == 'create-church-ring' || $page_location == 'search_ring' || $page_location == 'ring_request' || $page_location == 'church_rings' || $page_location == 'create_ring_category'){  ?> class="active" <?php } ?> href="<?php echo base_url().'member_ring/'.$_SESSION['logged_church_id'];?>">Rings</a></li>  
+            <?php } else {?>
+          <li><a  <?php if($page_location == 'church-ring-list' || $page_location == 'member_ring' || $page_location == 'church-ring-list' || $page_location == 'create-church-ring' || $page_location == 'search_ring' || $page_location == 'ring_request' || $page_location == 'church_rings' || $page_location == 'create_ring_category'){  ?> class="active" <?php } ?> href="<?php echo base_url().'church-ring-list';?>">Rings</a></li>  
+            <?php } ?>
+            
+            
+            
+            
+                     
+       <li><a href="<?= base_url().$_SESSION['logged_church_id'].'/church-prayer-group' ?>" <?php if($page_location1 == 'church-prayer-group' || $page_location1 == 'create-prayer-group' || $page_location == 'church-prayer-group' || $page_location == 'church-prayer-group-member' || $page_location == 'church-prayer-group-invite' ) { ?> class="active" <?php } ?>>Prayer Groups</a></li>
+       
+       
+       
+       
+            
+            
+              
+            
+            <li><a <?php if($page_location1 == 'church_activity_management'){  ?> class="active" <?php } ?> href="<?php echo base_url().$_SESSION['logged_church_id'];?>/church_activity_management/">Activity</a></li>
+                 
+           
+           
+         
+		  
+       
+       <?php
+       if($_SESSION['charch_super_admin'] =='yes')
+       {
+        ?>
+        <li><a href="<?= base_url().'church_plugin' ?>" <?php if($page_location == 'church_plugin'  ) { ?> class="active" <?php } ?>>Church Plugin</a></li>
+        <?php
+       }
+       ?>
+        </ul>
+        
+    </div>
+<?php } ?>
+<div class="cover-main">
+    <img src="<?=get_church_cover_image($_SESSION['logged_church_id'], 'main', $church_arr[0]->ch_cover)?>" alt="Cover Photo" title="Cover Photo" width="999">
+   
+	<div class="menu-bg">
+    	 <div class="profile-thumb"><img src="<?=get_church_profile_image($_SESSION['logged_church_id'], 'profile', $church_arr[0]->ch_profile_img)?>" width="136" height="136" alt="Profile Pic"></div>
+        <ul class="church-menu">
+        	
+<?php
+	include(APPPATH ."views/layouts/church_common_nav.phtml");
+?>
+        </ul>
+		
+    </div>  
+</div>
+ <div class="clear"></div>
+ 
+ </div>
+ <div class="clear"></div>
+<!-- banner and menu section end -->

@@ -1,0 +1,72 @@
+介绍: 
+配置飞屏分为两个部分. 第一步配置客户端，按照下面步骤1 配置
+第二步配置服务器端，按照下面步骤2配置
+
+步骤 1 添加插件
+1.1 添加必要的几脚本
+打开 <123flashchat server root dictionay>/client/htmlchat/123flashchat.html, 添加如下脚本
+<script type="text/javascript" src="config/123flashchat_extension_lib.js"></script>
+<script type="text/javascript" src="config/extensions.js"></script>
+<script type="text/javascript" src="plugin/screenmsg/js/flashscreen.js"></script>
+例子如下所示:
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+<title></title>
+...
+
+<script type="text/javascript" src="config/123flashchat_extension_lib.js"></script>
+<script type="text/javascript" src="config/extensions.js"></script>
+<script type="text/javascript" src="plugin/screenmsg/js/flashscreen.js"></script>
+</head>
+
+
+步骤二 2.部署飞屏服务器端
+我们支持两张服务器配置，一种是php，一种是tomcat
+2.1 PHP:
+2.1.1 php 服务器必须支持 curl 模块.
+2.1.2 复制<123flashchat server root dictionay>/client/htmlchat/plugin/screenmsg/upload 目录下 flashscreen 文件夹到php服务器可访问目录
+2.1.3 <123flashchat server root dictionay>/client/htmlchat/plugin/screenmsg/js目录下有一个config.js，将变量 flashscreen 改为2.1.2复制文件夹中
+		flashscreen.php可访问路径
+
+/*** 例子代码如下 ***/
+var flashscreen = "http://<you website url>/flashscreen/flashscreen.php"; 
+
+
+2.1.4 你需要修改config.php 文件中的两个变量（ $updateCreditsAPI $customMessageAPI），可以按照步骤 3就行配置 
+please read 3.1
+
+
+//-------------------------------------------------------------
+//------------------------------------------------------------
+
+2.2 Tomcat:
+2.2.1 复制 ChatPlugin.war 到tomcat webapps 目录并重启服务器
+如果想部署到别的服务器，你按照别的服务器部署方法部署ChatPlugin.war就行
+到 ChatPlugins\WebRoot\WEB-INF\classes 目录下 and 打开 server.properties 文件并修改 update-user-credits-api and custom-message-api变量.
+怎么配置这两个变量，请参考步骤3
+2.2.2 <123flashchat server root dictionay>/client/htmlchat/plugin/screenmsg/js目录下有一个config.js，按照配置文件中注释修改flashscreen变量
+
+
+步骤 3
+3.1 怎么配置API
+/*
+看这个例子 "http://localhost:35555/update-user-credits.api";
+http://localhost:35555 是的chat http server, 你需要修改为你自己chat server ip和http端口
+配置 "http://localhost:35555/custommessage.api" 类似上面的配置
+
+注意： 打开CHAT_ROOT\server\etc\groups\default目录下的 server.xml。找到下面的节点
+<data-api enable="On">
+<query-allow-access-from password="">
+<ip>*</ip>
+</query-allow-access-from>
+<push-allow-access-from password="">
+<ip>*</ip>
+</push-allow-access-from>
+</data-api>
+
+data-api 节点的 enabled 属性必须On, 你要将你的php所在server的ip添加到<query-allow-access-from password=""> 节点下，类似如下
+<query-allow-access-from password="">
+<ip>127.0.0.1</ip>
+</query-allow-access-from>
+*/
+

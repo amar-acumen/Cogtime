@@ -1,0 +1,154 @@
+
+
+<!--tab buttons -->
+
+                    <?php /*?><div class="tab_content menu-tab">
+                        <ul>
+                          <li class="<?=($category=='t')? 'select':''?>" li_value="t" li_heading="Top Stories"><a href="<?=base_url()?>christian-news/t/top-stories.html" ><img src="images/icons/tab-icon-1.png" alt="icon" width="20" height="12" >Top Stories<span></span></a></li>
+                          <li class="<?=($category=='v')? 'select':''?>" li_value="v" li_heading="Most Viewed"><a href="<?=base_url()?>christian-news/v/most-viewed.html" ><img src="images/icons/tab-icon-2.png" alt="icon" width="20" height="14" >Most Viewed<span></span></a></li>
+                          <?php
+                        
+                          if(count($all_categories))    :
+                                $img_no = 2;
+                                foreach($all_categories as $cat)
+                                {
+                                    
+                                    $img_no++;
+                          ?>
+                          <li class="<?=($category==$cat['id'])? 'select':''?>" li_value="<?=$cat['id']?>" li_heading="<?=$cat['s_cat_name']?>"><a href="<?=base_url()?>christian-news/<?=$cat['id']?>/<?=my_url($cat['s_cat_name'])?>.html" ><img src="images/icons/tab-icon-<?=$img_no?>.png" alt="icon" width="20" height="18" ><?=$cat['s_cat_name']?><span></span></a></li>
+                          <?php
+                                }
+                          endif;
+                          ?>
+                         
+                        </ul>
+                    </div><?php */?>
+                    
+                    <div class="pd-box">
+                      <ul class="dp-list">
+                        <li li_value="t" li_heading="Top Stories"><a href="<?=base_url()?>christian-news/t/top-stories.html" class="<?=($category=='t')? 'select':''?>" >Top Stories</a></li>
+                        <li li_value="v" li_heading="Most Viewed"><a href="<?=base_url()?>christian-news/v/most-viewed.html" class="<?=($category=='v')? 'select':''?>"  >Most Viewed<span></span></a></li>
+                        
+                         <?php
+                        
+                          if(count($all_categories))    :
+                                $img_no = 2;
+                                foreach($all_categories as $cat)
+                                {
+                                    
+                                    $img_no++;
+                          ?>
+                          <li li_value="<?=$cat['id']?>" li_heading="<?=$cat['s_cat_name']?>"><a href="<?=base_url()?>christian-news/<?=$cat['id']?>/<?=my_url($cat['s_cat_name'])?>.html" class="<?=($category==$cat['id'])? 'select':''?>"><?=$cat['s_cat_name']?><span></span></a></li>
+                          <?php
+                                }
+                          endif;
+                          ?>
+                        
+                      </ul>
+                    <br class="clr" />
+                  </div>
+                    <!--tab buttons end --> 
+
+                    
+<script type="text/javascript">
+
+
+
+/*
+$(document).ready(function(){
+    $('li').click(function(){
+        
+   
+showBusyScreen();
+        $('li').attr('class','');
+        $(this).attr('class','select');
+        
+        var heading = $(this).attr('li_heading');
+        
+        
+        var li_value = $(this).attr('li_value');
+
+		var AJAX_URL = base_url+"logged/christian_news/index/"+ li_value +"/Y";
+		//var AJAX_URL = base_url+"logged/christian_news/news_ajax";
+        
+        $.ajax({
+            url : AJAX_URL,
+            type : 'post',
+            data : ({'cat' : li_value,'is_posted':'y'}),
+            dateType : 'json',
+            success : function(data)
+            {
+                var res = JSON.parse(data);
+                
+                $('#heading').html(heading);
+
+                $('#view_more_div').html('');
+                if(res.view_more)
+                {
+                    $('#view_more_div').html('<div class="article-pagination inside-tab"><a id="view_more_news" href="javascript:void(0)" style="float: right; color: #b2b2b2; margin-right: 5px; font-size: 15px;" onclick="return show_more_feeds('+res.current_page+')" page_value="'+res.current_page+'">[View More] </a></div>');
+                }
+                else
+                {
+                }
+                //if(res.html!='')
+				$('#parent_tab_container').html(res.html);
+				if(res.list_content=='')
+                    $('#content').html('<div class="content-box"><h3 style="margin-left:292px; margin-top:50px;">No News.</h3></div>');
+				$('#heading').html(heading);
+                
+                
+
+                hideBusyScreen();
+            }
+        });
+        
+    });
+});
+*/
+
+
+var ajax_req_feeds = null;
+function show_more_feeds(page) {
+    
+    if(ajax_req_feeds!=null) {
+        ajax_req_feeds.abort();
+    }
+var cat = $('li.select').attr('li_value');
+
+    showUILoader_nodialog();
+    ajax_req_feeds = $.ajax({
+        type: 'get',
+        url: base_url+'logged/christian_news/news_ajax/'+page+'/'+cat,
+        dataType: 'json',
+
+        success: function (data, status) {
+    //alert(data.view_more);
+    //alert(data.html);
+            hideUILoader_nodialog();
+            if(data.html!='') {
+               
+                $('#content').append(data.html);
+                $('#view_more_news').attr('page_value','');
+                $('#view_more_news').attr('onclick','');
+                $('#view_more_news').attr('page_value', data.current_page);
+                $('#view_more_news').attr('onclick','return show_more_feeds('+data.current_page+')');
+            }
+            else {
+                $('#view_more_div').html('<div class="article-pagination inside-tab"><a href="javascript:void(0)" style="float: right; color: #b2b2b2; margin-right: 238px; font-size: 17px;">No More News </a></div>');
+                //$('#show_more_albums_div').hide();
+            }
+            if(data.view_more==false)
+            {
+                $('#view_more_div').html('<div class="article-pagination inside-tab"><a href="javascript:void(0)" style="float: right; color: #b2b2b2; margin-right: 238px; font-size: 17px;">No More News </a></div>');
+                //$('#show_more_albums_div').hide();
+            }
+            
+            
+
+        }    // end of success function...
+    });
+}
+
+
+
+</script>

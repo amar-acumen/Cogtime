@@ -1,0 +1,25 @@
+<?php // pr($commit_arr);
+	if(count($commit_arr)){
+		foreach($commit_arr as $val){
+			
+			$profile_image_filename = get_profile_image($val['i_user_id'],'thumb');
+			$DESC = html_entity_decode(htmlspecialchars_decode($val['s_contents']),ENT_QUOTES,'utf-8');
+?>
+<div class="commitment-box"> 
+        <a href="javascript:void(0);" class="profile-image"><div style="background:url('<?=$profile_image_filename?>') no-repeat center;width:60px; height:60px;" ></div></a>
+        <div class="right-panel ">
+            <p class="quoted-text">
+                <?=nl2br($DESC)?> 
+                <span>Updated on: <?=get_time_elapsed($val['dt_created_on'])?></span>
+            </p>
+            <h2 class="name"><?=$val['s_profile_name']?> <span><?=$val['s_country']?></span></h2>
+            <p class="date-time">From: <span><?=getShortDate($val['dt_start_time'], 5)?></span> | To: <span><?=getShortDate($val['dt_end_time'], 5)?></span></p>
+           
+        </div>
+        <div class="clr"></div>
+</div>
+<?php
+		}
+	}
+	
+?>

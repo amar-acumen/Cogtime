@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<base href="<?php echo admin_base_url(); ?>" />
+<link href="<?php echo base_url();?>css/admin.css" rel="stylesheet" type="text/css" media="screen" />
+<link href="<?php echo base_url();?>css/jquery-ui-1.8.2.custom.css" rel="stylesheet" type="text/css" media="screen" />
+
+
+<script  type="text/javascript" src="<?php echo base_url();?>js/jquery-1.5.2.js"></script>
+<script language="javascript" src="<?php echo base_url();?>js/ModalDialog.js" type="text/javascript"></script>
+<script language="javascript" src="<?php echo base_url();?>js/jquery-ui-1.8.2.custom.min.js" type="text/javascript"></script>
+<script language="javascript" src="<?php echo base_url();?>js/jquery.url.js" type="text/javascript"></script>
+<script language="javascript" src="<?php echo base_url();?>js/jquery.blockUI.js" type="text/javascript"></script>
+
+<script type="text/javascript" src="<?php echo base_url(); ?>js/utility_js_for_admin_and_fe.js" ></script>
+<script type="text/javascript" src="<?php echo base_url(); ?>js/backend/admin_utilities.js"></script>
+<script type="text/javascript">
+<!--
+	//Write your body onload codes here
+	var base_url = '<?php echo base_url(); ?>';
+	var admin_base_url = '<?php echo admin_base_url(); ?>';
+	var loading_big_image = '<img src="<?php echo base_url();?>images/loading_big.gif" border="0" />';
+//-->
+</script>
+<?php echo $header['header_html']; ?>
+
+
+
+</head>
+<body>
+
+<?php flush(); ?>
+	
+<?php echo $header['header_part']; ?>
+<?php echo $content; ?>
+<?php echo $header['footer_part']; ?>
+
+</body>
+
+<?php echo $header['footer_html']; ?>
+</html>

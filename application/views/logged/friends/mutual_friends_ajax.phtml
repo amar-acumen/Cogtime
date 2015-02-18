@@ -1,0 +1,74 @@
+ <div class="div_content" style=" margin-top:0px;">
+ <?php   
+ if(count($result_arr) != 0)
+ {
+foreach($result_arr as $k=>$m)	{
+									$i=$i+1;
+									$name=get_user_name_by_id($k);
+									$profile_link = get_public_profile_url($k,$name);
+									 $img = get_profile_image($k, 'thumb');
+									 $ct=get_mutual_count($m);
+    ?>  <div class="shade_box_blue" style="padding-top:5px;" id="friend_record_<?=$k?>"> 
+                                         <div class="txt_content compact-box">
+                                         <a href="<?= $profile_link;?>"><div class="pro_photo2" style="background:url(<?=$img?>) no-repeat center;width:60px; height:60px;" ></div></a>
+                                              <div class="left_div01" >
+                                                   
+                         <p class="blue_bold12"><a  href="<?= $profile_link;?>" ><?=$name?> </a></p>
+								<?php $val=get_user_details_by_id($k);?>
+								<?php $address = get_user_address_info($k); ?>
+								
+                       <p class="location"><?=$address?></p>
+					
+						<?php if($val['s_languages'] != null){?>
+                        <p class="location">Language | speak : <?=$val['s_languages']?></p>
+						<?php }?>
+						<?php if($val['s_about_me'] != null){?>
+                        <p class="location">About me : <?=$val['s_about_me']?></p>
+						<?php }?>
+						<?php if($val['s_church_name'] != null){?>
+                        <p class="location">Church Name : <?=$val['s_church_name']?></p>
+						<?php }?>
+						
+						<?php $church_addr=get_church_address_info($val['id']);
+							if($val['s_church_name'] !='')
+							{?>
+						<p class="location">Church address : <?=$church_addr?></p>
+							<?php
+							}
+						?>
+						<?php if($val['s_church_phone'] != null){?>
+                        <p class="location">Church Phone : <?=$val['s_church_phone']?></p>
+						<?php }?>
+						<?php
+						if($val['i_id_denomination'] !=0)
+						{
+						$den_id= getDenominationNameById($val['i_id_denomination']);
+						?>
+                        <p class="location">Denomination: <?=$den_id?></p>
+						<?php
+						}
+						?>
+						<p class="nw-date-time" ><?=get_mutual_count($m)?> Mutual Friend<?=($ct==1)?' ':'s '?></p>
+												 
+                                              </div>
+											<div class="right_div02">
+		
+                                            <p class="add-remove-friend"><a href="javascript:void(0);" id="#invite_friend_(<?=$k?>)" class="add-as-friend" onclick="invite_friend_('<?=encrypt($k)?>')">[add as friend]</a></p>
+                                     </div> 
+											   
+											
+                                              <div class="clr"></div>
+											 
+									 </div>
+									 </div>
+   <?php 
+          
+ }
+ }
+ else
+ {
+ echo '<div class="shade_box_blue" style="padding-top:5px;"><div  class="shade_norecords" style="width:275px;"><p class="blue_bold12">No friends.</p></div></div>';
+ }
+ 
+     ?>
+</div>

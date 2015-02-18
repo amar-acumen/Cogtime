@@ -1,0 +1,363 @@
+
+
+
+<div class="clr"></div>
+<!-- CONTENT SECTION -->
+<!--navigation section start -->
+<?php include(APPPATH."views/layouts/admin/admin_nav.phtml");?>
+<!--navigation section end -->
+<script>
+$(document).ready(function(){
+    //$('#postT').hide();
+       // $('#postText').hide();
+    $('.type > a').live('click',function(){
+        
+        var act = $(this).attr('id');
+         if(act == 'Wall'){
+             $('#comt_type').html('For Wall ')
+         }
+         if(act == 'Ring'){
+             $('#comt_type').html('For Ring')
+         }
+         if(act == 'event'){
+             $('#comt_type').html('For Event')
+         }
+         if(act == 'Prayer wall'){
+             $('#comt_type').html('For Prayer wall ')
+         }
+         if(act == 'media'){
+             $('#comt_type').html('For Media')
+         }
+          if(act == 'Blog'){
+             $('#comt_type').html('For Blog')
+         }
+      //alert(act)
+       // $('#act').html(act);
+    });
+});
+</script>
+<!--=================================== content_section ============================================-->
+<div id="content_section">
+      <div id="container">
+            
+            <div id="mid_content">
+                  <div class="page_heading left">
+                      <div class="left">All Comment &nbsp;<span id='comt_type'></span></div>
+                  </div>
+                  <div class="clr"></div>
+                  <div id="right_container">
+                        <div class="arrow_btm"></div>
+                        
+                        <div class="content_area">
+                        <!--filter section start -->
+                        <?php/* include(APPPATH."views/admin/members/members_search_panel.phtml");*/?>
+                        <!--filter section end -->
+						<script type="text/javascript">
+$(document).ready(function(arg) {
+
+ $('#frm_search').submit(function(){ 
+ var type=$('#post_type').val();
+						var datatosend=$("#frm_search").serialize();
+						//alert(datatosend)
+					     	showBusyScreen();
+							//alert(datatosend);
+							
+							$.ajax({
+							   type: "POST",
+							   url: admin_base_url+"site_settings/all_comments/ajax_pagination/"+type,
+							   data: datatosend,
+							   success: function(data){
+								  
+								  hideBusyScreen(); 
+								  //alert(data);
+								   $('#'+type+'_content').html();
+								   $('#'+type+'_content').html(data);
+							       
+								
+								 
+							   }
+							 });	 
+					   
+						
+				});
+ 
+ });
+ </script>
+ 
+
+  <div class="filter">
+  <span class="filter-by">Filtera By &raquo;</span>
+<form name="frm_search" id="frm_search" action=""  onsubmit="return false;"  class="filter-search">
+        <label id="postT">comment by :</label>
+     <input type="text"  value="" name="cmntby" id="postText"   class=""/>
+    <label id="postT">comments :</label>
+    <input type="text"  value="" name="title" id="postText"   class=""/>
+    <div style="padding-bottom: 28px;">
+    <label style="" >Posted Between :</label>
+    <input type="text"  value="" name="date_to1" id="date_to1"   class="date-field"/>
+          <img src="../images/icons/cal.png" alt="" onclick="$(this).prev().focus()" class="calender" style="margin-right:35px;" />
+          <script type="text/javascript">
+                $(document).ready(function(arg) {
+                    $.datepicker.setDefaults($.datepicker.regional['']);
+                    $("#date_to1").datepicker($.datepicker.regional['en']);
+
+                });
+          </script>
+          <div style="display: block; float: left;"> <label style="width:32px;" > To :</label>
+              <input type="text"  value="" name="date_end1" id="date_end1"   class="date-field"/>
+          <img src="../images/icons/cal.png" alt="" onclick="$(this).prev().focus()" class="calender" style="margin-right:35px;" />
+          <script type="text/javascript">
+                $(document).ready(function(arg) {
+                    $.datepicker.setDefaults($.datepicker.regional['']);
+                    $("#date_end1").datepicker($.datepicker.regional['en']);
+
+                });
+          </script>
+		  
+     
+    <?php /*?> <label style="width:32px;">State :</label>
+     <input type="text" id="txt_state" name="txt_state" /><?php */?>
+     
+    <?php /*?> <label>City :</label>
+     <input type="text" id="txt_city" name="txt_city" /> 
+     <div class="clr"></div>  <?php */?>
+     
+     <?php /*?><label>Street Address :</label>
+     <input type="text" id="txt_address" name="txt_address" />      <?php */?>
+	 <input type="hidden" id="post_type" name="post_type">
+        <input type="hidden" value="Y" name="search_basic" id="search_basic"  />
+        <input name="" type="submit" value="GO" class="go" />
+          </div> 
+</form> <div class="clr"></div>
+			</div>
+    
+			<div class="tab-box">
+                                 <div class="tab_content title-div">
+                                    <ul>
+                                        <li class="first select type" id="common"><a href="javascript:void(0);" onClick="show_posts('wall')" id="Wall">Wall</a></li>
+                                        <li id="fund" class="type"><a href="javascript:void(0);" onClick="show_posts('ring')" id="Ring">Ring</a></li>
+										<li id="fund" class="type"><a href="javascript:void(0);" onClick="show_posts('blog')" id="Blog">Blog</a></li>
+                                                                                <li id="fund" class="type"><a href="javascript:void(0);" onClick="show_posts('event')" id="event">event</a></li>
+                                                                                <li id="fund" class="type"><a href="javascript:void(0);" onClick="show_posts('prayer_wall')" id="Prayer wall">prayer wall</a></li>
+                                                                                <li id="fund" class="noBg type"><a href="javascript:void(0);" onClick="show_posts('media')" id="media">media</a></li>
+                                    </ul>
+                                </div>
+								<div class="clr"></div>
+								<div class="tab_details detail-div">
+                                    
+                                    <!--Donation Busket box -->
+                                    <div class="show lavel-01" id="wall_content">
+                                        
+                                        <?=$result_content1?>       
+                                    </div>
+                                    <!--/Donation Busket box -->
+                                    <!--Donation towards Projects box -->
+                                    <div class="lavel-01" id="ring_content">
+                                    	 <?=$result_content2?>       
+                                    </div>
+                                    <!--/Donation towards Projects box -->
+                                    <!---arif---->
+                                    <div class="lavel-01" id="blog_content">
+                                        <?=$result_content3?>       
+                                    </div>
+				<div class="lavel-01" id="event_content">
+                                        <?=$result_content4?>       
+                                    </div>
+									<div class="lavel-01" id="media_content">
+                                        <?=$result_content5?>       
+                                    </div>
+                                    <div class="lavel-01" id="prayer_wall_content">
+                                        <?=$result_content6?>       
+                                    </div>
+                                    <!---arif---->
+                                </div>
+                            </div>
+                              
+                        <div class="clr"></div>
+                        </div>
+                  </div>
+                  <div class="clr"></div>
+            </div>
+            <!--<div id="bot_corner">&nbsp;</div> -->
+      </div>
+      <div class="clr"></div>
+      <div class="lightbox comments-popup" style="width:600px;">
+      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="../images/close.png" alt="" /></a></div>
+      <div class="top"><div>&nbsp;</div></div>
+      <div class="mid">
+            <div class="heading" style="margin-bottom:0px;">
+                  <div class="left">
+                        <h4>View Media</h4>
+                  </div>
+            </div>
+               <div id="comment_div" class="shade_box_white" style="height:280px; overflow:auto">
+              
+               
+            </div>
+            
+      </div>
+      <div class="bot"><div>&nbsp;</div></div>
+</div>
+</div>
+<!--============================== /content_section =========================================-->
+<!--popup one start-->
+<div class="lightbox delete-page-popup" style="width:500px;">
+      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="../images/close.png" alt="" /></a></div>
+      <div class="top"><div>&nbsp;</div></div>
+      <div class="mid">
+            <div class="heading" style="margin-bottom:0px;">
+                  <div class="left">
+                        <h4>Delete Post</h4>
+                  </div>
+            </div>
+               <div class="shade_box_white" style="padding:8px 0px;">
+               <p class="center-text">Do you really want to delete post?</p>
+              
+                    <input type="hidden" id="i_del_id" name="i_del_id" value="" /> 
+                    <input type="hidden" id="i_user_typ" name="i_user_typ" value="" />
+                    <input type="hidden" id="i_typ" name="i_typ" value="" />
+                    <input name="" type="button" value="Yes" class="btn" style="margin-left:146px;" onclick="return delete_();"/>
+                    <input name="" type="button" value="No" class="btn" onclick="hide_dialog()"/>
+ 
+               <div class="clr"></div>
+            </div>
+            
+      </div>
+      <div class="bot"><div>&nbsp;</div></div>
+</div>
+<!--popup one end-->
+<script type="text/javascript">
+    //----------------------------------/
+     function show_media(id,type){
+         
+        showUILoader('<img src="'+base_url+'images/loading_big.gif" width="50"/> ');
+        
+        $.ajax({
+            url : admin_base_url+'site_settings/all_comments/show_media/'+type,
+            type : 'post',
+            dataType : 'json',
+            data : ({'id':id,'type':type}),
+            success : function (data)
+            {
+                //alert(data)
+                hideUILoader('comments-popup');
+                $('#comment_div').html(data.html);
+                
+            }
+        });
+    }
+   function del_com(id,type){
+      //alert('dd');
+        showUILoader('<img src="'+base_url+'images/loading_big.gif" width="50"/> ');   
+     $.ajax({
+            url : admin_base_url+'site_settings/all_comments/del_com',
+            type : 'post',
+            dataType : 'json',
+            data : ({'id':id,'type':type}),
+            success : function (data)
+            {
+               // hideUILoader('comments-popup');
+                //$('#del_commitmen'+id).hide();
+                 window.location.href = '<?= base_url() ?>admin/site-settings/all_comments';
+                
+            }
+        });  
+   }
+    
+function delete_confirm_(file_id,user_id,type)
+{
+	//alert(file_id);
+	$('#i_del_id').val( file_id );
+	$('#i_user_typ').val( user_id );
+	$('#i_typ').val( type );
+	show_dialog('delete-page-popup');
+	//return false;
+}
+
+function delete_()
+{
+	  var selected_id = parseInt( $('#i_del_id').val() );
+	  var user_id=parseInt($('#i_user_typ').val());
+	  var type =$('#i_typ').val();
+		  //alert(selected_id);
+		  
+	
+	  if( selected_id>=0 )
+	  {
+		  showUIMsg("Deleted successfully.");
+		  
+		  var delURL = admin_base_url + 'members/members_post/delete_post/'+selected_id+'/'+user_id+'/'+type;
+		  window.location.href = delURL;
+	  } else {
+	  
+		  var msg = "Sorry an error has occured, Please try again";
+		  showUIMsg(msg);
+		  
+		  hide_dialog();
+		  
+	  }
+}
+
+function show_posts(type)
+{
+showUILoader_nodialog('<img src="'+base_url+'images/loading_big.gif" width="50"/> ');
+	  $.ajax({
+			  type: 'get',
+			  url: admin_base_url+'site_settings/all_comments/ajax_pagination/'+ type,
+			  success: function (data, status) {
+					  
+					  $('#'+type+'_content').html('');
+					  $('#'+type+'_content').html(data);
+					  $('.tab_content ul li').removeClass('select');
+					  $('#'+type).addClass('select');
+					  $('.tab_details > div').hide();
+					  $('#'+type+'_content').show();
+					  $('#post_type').val(type);
+					  //$('.tab_details > div').hide();
+					 // $('#'+tabname+'_content').show();
+					  
+					  hideUILoader_nodialog();
+						  
+				  }	// end of success function...
+		  });
+}
+
+
+
+/***********************add ip block & unblock function on 18-12-2014***************************************/
+function block_ip(id,ip){
+  showUILoader_nodialog('<img src="'+base_url+'images/loading_big.gif" width="50"/> ');
+  
+  $.ajax({
+            url : admin_base_url+'site_settings/all_comments/ip_block',
+            type : 'post',
+            dataType : 'json',
+            data : ({'id':id,'ip':ip}),
+            success : function (data , status)
+            {
+              //alert('ok')
+                 window.location.href = '<?= base_url() ?>admin/site-settings/all_comments';
+                
+            }
+        });  
+}
+
+function unblock_ip(id,ip){
+showUILoader_nodialog('<img src="'+base_url+'images/loading_big.gif" width="50"/> ');
+  
+  $.ajax({
+            url : admin_base_url+'site_settings/all_comments/ip_unblock',
+            type : 'post',
+            dataType : 'json',
+            data : ({'id':id,'ip':ip}),
+            success : function (data , status)
+            {
+                  // alert('ok')
+                 window.location.href = '<?= base_url() ?>admin/site-settings/all_comments';
+                
+            }
+        });  
+
+}
+/******************************************************************/
+</script>

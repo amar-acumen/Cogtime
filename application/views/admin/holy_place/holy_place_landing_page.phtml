@@ -1,0 +1,209 @@
+<div class="clr"></div>
+<!--navigation section start -->
+<?php include(APPPATH."views/layouts/admin/admin_nav.phtml");?>
+<!--navigation section end -->
+<!-- CONTENT SECTION -->
+<div id="content_section">
+      <div id="container">
+            <!--<div id="top_corner">&nbsp;</div> -->
+            <div id="mid_content">
+                  <div class="page_heading left">
+                        <div class="left"><img src="../images/icons/login.png" alt="" /> Holy Place &raquo; Landing page contents</div>
+                  </div>
+                  <div class="clr"></div>
+                  <div id="right_container">
+                        <div class="arrow_btm"></div>
+                        <div class="content_area frm_box frm_box2">
+                        
+                        <?php if(count($res))
+                        {
+                            foreach($res as $r)
+                            {
+                                if($r['s_keyword']=='hp_main')
+                                {
+                                    $content['main_title']=$r['s_title'];
+                                    $content['main_desc']=$r['s_desc'];
+                                }
+                                if($r['s_keyword']=='hp_bible')
+                                {
+                                    $content['hp_bible'] = $r['s_desc'];
+                                }
+                                if($r['s_keyword']=='hp_library')
+                                {
+                                    $content['hp_library'] = $r['s_desc'];
+                                }
+                                if($r['s_keyword']=='hp_prayerWall')
+                                {
+                                    $content['hp_prayerWall'] = $r['s_desc'];
+                                }
+                                if($r['s_keyword']=='hp_eIntercession')
+                                {
+                                    $content['hp_eIntercession'] = $r['s_desc'];
+                                }
+                                if($r['s_keyword']=='hp_fiveADay')
+                                {
+                                    $content['hp_fiveADay'] = $r['s_desc'];
+                                }
+								else if($r['s_keyword']=='hp_prayergrp')
+                                {
+                                    $content['hp_prayergrp'] = nl2br($r['s_desc']);
+                                }
+                        
+                            }
+                        }
+                        
+                        ?> 
+                        
+                        <form id="trade_center_landing_frm" action="" method="post" enctype="multipart/form-data" onsubmit="return form_post()">
+                                  <!--<h2>Introduction Section</h2> -->
+                                  <div class="lable02">Title :</div>
+                                  <div class="field02">
+                                        <input name="txt_hp_title" type="text" value="<?=$content['main_title']?>"/>
+                                  </div>
+                                  <div id="err_hp_title" class="error-message"></div>
+                                  <div class="clr"></div>
+                                  <div class="lable02">Introduction : </div>
+                                  <div class="field02">
+                                        <textarea name="txtarea_hp_desc" cols="" rows="" style="height: 144px;"><?=$content['main_desc']?></textarea>
+                                  </div>
+                                  
+                                  <div class="clr"></div>
+                                  
+                                  
+                                  <h2>Five a day</h2>
+                                  <div class="lable02">Content : </div>
+                                  <div class="field02">
+                                        <textarea name="txtarea_hp_five_a_day" cols="" rows="" class="small" style="height: 88px;"><?=$content['hp_fiveADay']?></textarea>
+                                  </div>
+                                  <div class="clr"></div>
+                                  
+                                  
+                                  
+                                  
+                                  <h2>Bible</h2>
+                                  <div class="lable02">Content : </div>
+                                  <div class="field02">
+                                        <textarea name="txtarea_hp_bible" cols="" rows="" class="small" style="height: 88px;"><?=$content['hp_bible']?></textarea>
+                                  </div>
+                                  <div class="clr"></div>
+                                  
+                                  <h2>Library</h2>
+                                  <div class="lable02">Content : </div>
+                                  <div class="field02">
+                                        <textarea name="txtarea_hp_library" cols="" rows="" class="small" style="height: 88px;"><?=$content['hp_library']?></textarea>
+                                  </div>
+                                  <div class="clr"></div>
+                                  <h2>Prayer Wall</h2>
+                                  <div class="lable02">Content : </div>
+                                  <div class="field02">
+                                        <textarea name="txtarea_hp_prayerWall" cols="" rows="" class="small" style="height: 88px;"><?=$content['hp_prayerWall']?></textarea>
+                                  </div>
+                                  <div class="clr"></div>
+                                  <h2>e-Intercession</h2>
+                                  <div class="lable02">Content : </div>
+                                  <div class="field02">
+                                        <textarea name="txtarea_hp_eIntercession" cols="" rows="" class="small" style="height: 88px;"><?=$content['hp_eIntercession']?></textarea>
+                                  </div>
+                                  <div class="clr"></div>
+                                  <?php /*?><h2>Find Church</h2>
+                                  <div class="lable02">Content : </div>
+                                  <div class="field02">
+                                        <textarea name="txtarea_hp_findChurch" cols="" rows="" class="small" style="height: 88px;"><?=$content['hp_findChurch']?></textarea>
+                                  </div>
+                                  <div class="clr"></div>
+                                  <?php */?>
+                                  
+                                  <h2>Prayer Group</h2>
+                                  <div class="lable02">Content : </div>
+                                  <div class="field02">
+                                        <textarea name="txtarea_hp_pg" cols="" rows="" class="small" style="height: 88px;"><?=$content['hp_prayergrp']?></textarea>
+                                  </div>
+                                  <div class="clr"></div>
+                                  
+                                  <div class="lable02"> </div>
+                                  <div class="field02">
+                                        <input name="" type="submit" class="btn"  value="Update" />
+                                        <input name="" type="reset" class="btn"  value="Reset" onclick="return clear_box()"/>
+                                  </div>
+                              </form>
+                        
+                             
+                              
+                              <div class="clr"></div>
+                        </div>
+                  </div>
+                  <div class="clr"></div>
+            </div>
+            <!--<div id="bot_corner">&nbsp;</div> -->
+      </div>
+      <div class="clr"></div>
+</div>
+
+
+<!-- /CONTENT SECTION -->
+
+
+<script type="text/javascript">
+$(document).ready(function(arg) {
+    
+    // for AJAX page-submission...
+    optionsArr = {
+        beforeSubmit:  showBusyScreen,  // pre-submit callback 
+        success:       validateFrm, // post-submit callback 
+        url:        admin_base_url + "holy_place/holy_place_landing_page/post_data"
+    }; 
+});
+function form_post()
+{
+    
+    $('#trade_center_landing_frm').ajaxSubmit(optionsArr);
+    
+    return false;
+    
+    //var values = $('#trade_center_landing_frm').serialize();
+    
+}
+// validate ajax-submission...
+function validateFrm(data)
+{
+    
+    var data = JSON.parse(data);
+hideBusyScreen();
+showUIMsg(data.msg);
+
+     $('.error-message').each(function(i){
+            $(this).attr('style','display:none');
+        });
+        
+    if(data.result=='failure') 
+    {
+       
+        
+        for ( var id in data.arr_messages ){
+            
+            if( $('#err_'+id) != null ) {
+                $('#err_'+id).html(data.arr_messages[id]);
+                $('#err_'+id).css('display', 'block');
+
+                //$('#err_'+id).attr('style','margin-left: 12px;');
+            }
+        }
+        
+    }
+    else {
+        
+         
+       
+    }
+
+}
+
+function clear_box(){
+      
+          $('#trade_center_landing_frm')[0].reset();
+          $('.error-message').hide();
+      
+  }
+
+
+</script>

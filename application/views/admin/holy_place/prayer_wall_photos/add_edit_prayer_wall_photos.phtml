@@ -1,0 +1,91 @@
+
+<div class="clr"></div>
+<!-- CONTENT SECTION -->
+<!--navigation section start -->
+<?php include(APPPATH."views/layouts/admin/admin_nav.phtml");?>
+<!--navigation section end -->
+<div id="content_section">
+      <div id="container">
+            <!--<div id="top_corner">&nbsp;</div> -->
+            <div id="mid_content">
+                  <div class="page_heading left">
+                  
+                  
+                 
+                  
+                  <?php $s_mode = ($mode =='add')?'Add New':'Edit';?>
+                        <div class="left"><img src="<?=base_url()?>images/icons/login.png" alt="" /><?=$s_mode?> Prayer Wall Photo</div>
+                  </div>
+                  <div class="clr"></div>
+                  <div id="right_container">
+                        <div class="arrow_btm"></div>
+                        <div class="content_area frm_box">
+                              
+                              
+                               <form name="frm_adv" action="" method="post" enctype="multipart/form-data">
+                                  <div class="lable01"><span class="red-mark">* </span> Title :</div>
+                                  <div class="field01">
+                                        <input name="txt_title"  id="txt_title" type="text" value="<?=html_entity_decode($posted['s_title']); ?>" />
+                                  </div>
+                                  <?php $show_title_err = (form_error('txt_title') != '')?' style="display:block;"':''; ?>
+                                   <div class="error-message" <?=$show_title_err?>><?php echo form_error('txt_title'); ?></div>
+                                  <div class="clr"></div>
+                                  
+                                  
+                                  
+                                  
+                                  <div class="lable01"><span class="red-mark">* </span> Photo :</div>
+                                  <div class="field01">
+                                        <input name="file_photo"  id="file_photo" type="file" size="52" value="<?= $posted['s_photo_name']; ?>" />
+                                  </div>
+                                  <?php $show_file_err = (form_error('file_photo') != '' || $error_file_photo != '')?' style="display:block; margin-left:3px;"':''; ?>
+                                   <div class="error-message" <?=$show_file_err?>><?php echo $error_file_photo; ?></div>
+                                  <div class="clr"></div>          
+                                  
+                                  
+                                  
+                                  
+                                  <?php
+                                  if($mode=='edit')
+                                  {
+                                  #echo "photo : ".$posted['s_photo_name'];
+                                      
+                                  ?>
+                                    <div class="lable01">&nbsp;</div>
+                                    <div class="field01" style="margin-top:10px;">
+                                    <img src="<?=base_url().'uploads/prayer_wall_photos/'.getThumbName($posted['s_photo_name'],'mid')?>" alt="">   
+                                        
+                                    </div>
+                                  <div class="clr"></div> 
+                                  
+                                  <?php
+                                  }
+                                  ?>
+                                  
+                                  
+                                
+                                  <div class="lable01">&nbsp;</div>
+                                  <div class="field01" style="margin-top:10px;">
+                                       <?php if($mode == 'add'): 
+                                            $current_page=0;
+                                       ?>
+                                            <input name="" type="submit" class="btn"  value="Add"/>
+                                   <?php else :?>
+                                            <input name="" type="submit" class="btn"  value="Update"/>
+                                    <?php endif;?>
+                                        <input name="" type="reset" class="btn"  value="Cancel" onclick="window.location='<?=admin_base_url().'holy-place/'.$current_page.'/prayer-wall-photos.html'?>'"/>
+                                        </div>
+                              </form>
+                              <div class="clr"></div>
+                        </div>
+                        
+                  </div>
+                  <div class="clr"></div>
+            </div>
+            <!--<div id="bot_corner">&nbsp;</div> -->
+      </div>
+      <div class="clr"></div>
+</div>
+<!-- /CONTENT SECTION -->
+
+

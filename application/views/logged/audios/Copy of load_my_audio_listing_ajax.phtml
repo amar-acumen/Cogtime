@@ -1,0 +1,61 @@
+<?php //pr($arr_photos)?>
+<?php
+	if(count($arr_photos)>0){
+		foreach($arr_photos as $val):
+				
+		 $audio_filename = base_url()."uploads/user_audio_files/".$val['s_audio_file_name'];
+?>
+
+        <div class="shade_box_01">
+         <div class="checkbox-div"><?php /*?><input name="chk_photo<?=$val['id']?>" id="chk_photo<?=$val['id']?>" type="checkbox" value="<?=$val['id']?>" class="check-box" /><?php */?></div>
+        <div class="left_div02"> 
+        <p class="blue_bold12"><img src="images/icons/audio_icon.png" alt="" /> <a href="javascript:void(0);"><?=my_substr($val['s_title'], 35);?></a></p>
+           <p class="light_blue12"><?=$val['s_artist']?> , <?=$val['s_genre']?> , <?=$val['s_sound_track_album']?></p>
+           <p class="date-time"><?=getShortDate($albm_val['dt_created_on'], 5)?></p>
+           <p><?=my_substr($val['s_desc'] , 160)?></p>
+           
+           <div class="audio-player">
+                <a id="m1<?=$val['id']?>" class="audio " href="<?=$audio_filename?>"><?=$val['s_title']?>(mp3/ogg)</a>
+           </div>
+           	
+        </div>
+        
+        
+        <div class="light_heading"> 
+             <div class="left"><a href="javascript:void(0);" id="comments_div<?=$val['id']?>"  onclick="return show_comments(<?=$val['id']?>)<?php /*?>show_dialog('view_comments_div')<?php */?>">Comments (<?=$val['total_comments']?>)</a> &nbsp; |   &nbsp; <a href="javascript:void(0);"   onclick="return show_people_liked(<?=$val['id']?>); " id="liked_by_<?=$val['id']?>">Liked by (<?=count_photo_like_link($val['id'],'photo')?>)</a></div>
+             
+        <?php if((show_photo_like_link($val['id'],'photo') == TRUE) ) { 
+		?>
+                <div class="right"><a href="javascript:void(0);"  onclick="return show_post_comment_box('<?=$val['id']?>')">Comment</a> &nbsp; |   &nbsp; <a href="javascript:void(0);" id="like_count_<?=$val['id']?>" onClick="windowLike(<?=$val['id']?>,'Like')">Like</a>  </div>                
+       <?php } 
+	   		else{ 
+	   ?>
+         		<div class="right"><a href="javascript:void(0);"  onclick="return show_post_comment_box('<?=$val['id']?>')">Comment</a> &nbsp; |   &nbsp; <a href="javascript:void(0);" id="like_count_<?=$val['id']?>" >Like</a> </div>
+          
+       <?php }?>
+             
+              
+         </div> 
+        </div>
+     
+<?php                                
+		endforeach;?>
+		        
+<?php	}
+	else{
+			echo  '<div class="shade_box_01" style="padding-top:5px;"><div  class="shade_norecords" style="width:260px;"><p class="blue_bold12">No Photos.</p></div></div>';
+	}
+?>
+<input type="hidden" id="current_page" name="current_page" value="<?=$current_page?>"  />
+
+<?php if($page_links){ ?>
+<div class="pagination">
+<div class="left">Viewing Page <?=$current_loaded_page_no?> of <?=$total_pages?> </div>
+<div class="right">
+       <ul class="small-paging">
+        <?=$page_links?> 
+        </ul>
+</div>
+</div>
+<?php } ?>
+  

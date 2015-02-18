@@ -1,0 +1,396 @@
+<!DOCTYPE html> <html lang="en"> <head> <script type="text/javascript" src="js/jquery-1.8.2.min.js"></script> <script type="text/javascript" src="js/config.js"></script> <script type="text/javascript" src="js/seat.js"></script> <style type="text/css">
+
+body
+{
+    margin:0px;
+}
+
+.topcmm-123flashchat-seats-container-center
+{
+    width: 414px;
+    height: 95px;
+    position: absolute;
+}
+
+.topcmm-123flashchat-seats-container {
+    width: 414px;
+    height: 95px;
+    position: relative;
+    text-align: center;
+    overflow: hidden;
+    background-image: url("img/bg.png");
+}
+
+.topcmm-123flashchat-seats-container ul {
+    width: 414px;
+    height: 95px;
+    float: left;
+    list-style: none;
+    margin: 0 0 0 -5px;
+    padding-left: 0;
+}
+
+.topcmm-123flashchat-seats-container ul li {
+    width: 100px;
+    height: 95px;
+    float: left;
+    list-style: none;
+    margin-top: 10px;
+}
+
+.topcmm-123flashchat-seat-name-image
+{
+   cursor: pointer;
+    margin-top: -4px;
+    max-height: 68px;
+    max-width: 66px;
+}
+
+.topcmm-123flashchat-gift-seat-kong {
+    background: url("img/seat.png") no-repeat scroll 0 0 transparent;
+    width: 42px;
+    height: 42px;
+    margin-top: 10px;
+    margin-right: 4px;
+    float: left;
+}
+
+a {
+    border: 0 none;
+    display: block;
+    height: 42px;
+    margin-left: 28px;
+    text-decoration: none;
+    width: 42px;
+    cursor: hand;
+}
+
+#tooltip {
+    position: absolute;
+    background: none repeat scroll 0 0 #FDFAD1;
+    border: 1px solid #949899;
+    box-shadow: 1px 1px 1px #CACCCE;
+    color: #333333;
+    padding: 5px;
+    border-radius: 5px;
+    font-size: 12px;
+    font-family: Tahoma;
+    word-wrap: break-word;
+    display: block;
+    overflow: hidden;
+    max-width: 100px;
+}
+
+.topcmm-123flashchat-seat-name {
+    color: #000000;
+    display: block;
+    font-family: tahoma;
+    font-size: 12px;
+    height: 28px;
+    line-height: 20px;
+    max-height: 18px;
+    max-width: 80px;
+    overflow: hidden;
+    position: relative;
+    text-overflow: ellipsis;
+    top: 16px;
+    white-space: nowrap;
+    cursor: default;
+}
+
+.topcmm-123flashchat-gift-seat-bg {
+    background: url("img/seat_name.png") no-repeat scroll 0 0 transparent;
+    width: 87px;
+    height: 42px;
+    margin-top: -6px;
+    margin-right: 4px;
+    float: left;
+    margin-left: 6px;
+}
+
+.topcmm-123flashchat-change-avatar-panel-left-single-avatar-div {
+    border-style: solid;
+    border-width: 1px;
+    float: left;
+    height: 28px;
+    left: 16px;
+    margin: 2px;
+    position: relative;
+    top: -66px;
+    width: 28px;
+    background-color: #fff;
+    cursor: pointer;
+}
+
+.topcmm-123flashchat-change-avatar-panel-left-single-avatar-div img
+{
+    max-width: 26px;
+    max-height: 26px;
+    margin: 1px;
+}
+</style> <script type="text/javascript">
+        	var mySeatArray = new Array()
+            var currentseats;
+            var initData = false;
+            var currentOperateRoom = null;
+            var dataArrived = false;
+            
+            function getUsername()
+            {
+                if (window.parent != null)
+                {
+                    return encodeURIComponent(window.parent.topcmm.getMyUsername());
+                }
+                return "";
+            }
+            
+            function getData()
+            {
+                if (window.parent == null || window.parent.topcmm == null)
+                {
+                    return;
+                }
+                dataArrived = false;
+                var roomid = window.parent.topcmm.getCurrentRoomId();
+                jQuery.getJSON(getSeatURL +"?roomid="+ roomid + "&group=" + window.parent.topcmm.getGroup() +"&un="+ getUsername()+"&callback=?", function(data){
+                    var json_data_object = data;
+                    currentseats = json_data_object;
+                    $(json_data_object).each(function(i){
+                        var name = json_data_object[i].username;
+                        if (name != "")
+                        {
+                            $("#seat" + i ).find(".topcmm-123flashchat-change-avatar-panel-left-single-avatar-div").show();
+                            $("#seat" + i ).find(".topcmm-123flashchat-change-avatar-panel-left-single-avatar-div").html("");
+                            $("#seat" + i ).find(".topcmm-123flashchat-change-avatar-panel-left-single-avatar-div").append("<img src = '"+window.parent.topcmm.getAvatarByUsername(json_data_object[i].username)+"'/>");
+                            $("#seat" + i ).find(".topcmm-123flashchat-change-avatar-panel-left-single-avatar-div").find("img").one('load', function() {
+                                // do stuff
+                              }).each(function() {
+                                if(this.complete)
+                                {
+									$(this).parent().width($(this).width() + 2);                                   
+									$(this).parent().height($(this).height() + 2);             
+									$(this).parent().css("margin-left", ((28 - $(this).width() + 2) / 2).toString() + "px");
+									$(this).parent().css("margin-top", ((28 - $(this).height() + 2) / 2).toString() + "px");
+                                }
+                            });
+                            $("#seat" + i ).find("#topcmm-123flashchat-seat-name").text(window.parent.topcmm.getNicknameByUsername(name));
+                            
+                            if ($("#seat" + i ).find("#topcmm-123flashchat-seat-name").get(0).scrollWidth > $("#seat" + i ).find("#topcmm-123flashchat-seat-name").width())
+                            {
+                                $("#seat" + i ).find("#topcmm-123flashchat-seat-name").attr("type", "tipName");
+                            }
+                        }
+                        else
+                        {
+                            $("#seat" + i ).find("#topcmm-123flashchat-seat-name").text(default_seat_name);
+                            $("#seat" + i ).find("#topcmm-123flashchat-seat-name").attr("type", "normal");
+                            $("#seat" + i ).find(".topcmm-123flashchat-change-avatar-panel-left-single-avatar-div").hide();
+                        }
+                        var personName = bid_and_take_seat.replace("%C", json_data_object[i].credits);
+                        $("#seat" + i ).find("a").attr("rel", personName);
+                        
+                        initData = true;
+                        dataArrived = true;
+                    });
+                });
+            }
+            
+            function judgeCustomMsgIegal(msg)
+            {
+                if (window.parent == null)
+                {
+                    return false;
+                }
+                if (msg != null && msg.type == 'topcmm_123flashchat_getseat')
+                {
+                    return true;
+                }
+                return false;
+            }
+            
+            function clearSeatAfterQuitRoomOrLogout(data)
+            {
+                if (window.parent == null)
+                {
+                    return;
+                }
+                $.ajax({
+                    type: 'POST',
+                    async: false,
+                    url: getSeatURL +"?clear=1&roomid="+ data + "&group=" + window.parent.topcmm.getGroup()+"&un="+ getUsername(),
+                    data: ''
+                });
+            }
+            window.parent.topcmm.addListener("Logout", function(msg)
+            {
+                if (null != window.parent)
+                {
+                    window.parent.topcmm.closeCustomPopupView();            
+                }
+            });
+                    
+            window.parent.topcmm.addListener("QuitRoom", function(msg)
+            {
+                if (currentOperateRoom == msg && null != window.parent)
+            	{
+                  	window.parent.topcmm.closeCustomPopupView();   
+             	}
+            });
+            function init()
+            {
+                var hasPopup = false;
+                $(".topcmm-123flashchat-seat-name-image").click(function()
+                {
+                    if (window.parent != null && "1" == window.parent.topcmm.myselfIsGuest())
+                    {
+                        window.parent.topcmm.showLoginAndRegisterPanel();
+                        return;
+                    }
+                    if (!hasPopup && window.parent != null)
+                    {
+                        window.parent.topcmm.trackEvent("SeatExtension", "GetSeat");
+                        hasPopup = true;
+                        currentOperateRoom = window.parent.topcmm.getCurrentRoomId();
+                        window.parent.topcmm.popupUrlContent("extensions/seat/popup.html", bid_for_front_sofa_title, "284", "126", "71", "-170", "1");
+                        $(".topcmm-123flashchat-hidden-get-seat").val($(this).attr('name'));
+                        return false;
+                    }
+                });
+                
+                $(".topcmm-123flashchat-change-avatar-panel-left-single-avatar-div").click(function(){
+                    $(this).parent().find(".topcmm-123flashchat-seat-name-image").click();
+                });
+
+                window.parent.topcmm.addListener("CustomMessage", function(msg)
+                {
+                    if (!judgeCustomMsgIegal(msg))
+                    {
+                        return;
+                    }
+                    getData();
+                });
+                
+                window.parent.topcmm.onChangeRoom(function(){
+                    getData();
+                });
+               
+                window.parent.topcmm.addListener("ExtensionPopupViewCancel", function(msg)
+                {
+                    if (msg == 'extensions/seat/popup.html' && null != window.parent)
+                    {
+                        window.parent.topcmm.trackEvent("SeatExtension", "PopupInputCreditsClickCloseBtn");
+                        hasPopup = false;   
+                    }
+                });
+                
+                window.parent.onUserGetSeatCreditsInputCancel = function()
+                {
+                    hasPopup = false;
+                }
+                
+                getData();
+                
+                var userinputCre;
+                var pingInteval = null;
+                
+                window.parent.onUserGetSeatCreditsInputEnd = function(creditsValue)
+                {
+                    if (window.parent != null && "1" == window.parent.topcmm.myselfIsGuest())
+                    {
+                        window.parent.topcmm.showLoginAndRegisterPanel();
+                        return;
+                    }
+                    userinputCre = creditsValue.replace(/(^[\\s]*)|([\\s]*$)/g, "");
+                    var re = /^[0-9]*[1-9][0-9]*$/;
+                    if (!re.test(userinputCre))
+                    {
+                        window.parent.topcmm.alert(only_positive_integer_allowed);
+                        return;
+                    }
+                    if (parseInt(userinputCre) * 100 > window.parent.topcmm.getCredits())
+                    {
+                        if ("1" == window.parent.topcmm.myselfIsGuest())
+                                {
+                                    window.parent.topcmm.showLoginAndRegisterPanel();
+                                }
+                                else
+                                {
+                                    window.parent.topcmm.showBuyCredits();
+                                }
+                                return;
+                    }
+                    $(currentseats).each(function(i){
+                        var seatNj = $(".topcmm-123flashchat-hidden-get-seat").val();
+                        if (currentseats[i].seatNum == seatNj)
+                        {
+                            if (currentseats[i].credits > window.parent.topcmm.getCredits() && window.parent != null)
+                            {
+                                window.parent.topcmm.alert(insufficient_credits_tip);
+                            }
+                            else
+                            {
+                                window.parent.topcmm.preUpdateCreditsForSercurity(currentOperateRoom, (parseInt(userinputCre) * -100).toString(), "seat", function(transactionId){
+                                    var param = "roomid=" + currentOperateRoom + "&un=" + getUsername() + "&credits=" + userinputCre + "&seatNum=" + $(".topcmm-123flashchat-hidden-get-seat").val()
+                                    + "&tid="+transactionId + "&group=" + window.parent.topcmm.getGroup();
+                                    jQuery.getJSON(updateSeatURL + "?"+ param +"&callback=?", function(data){
+                                        if (window.parent == null)
+                                        {
+                                            return;
+                                        }
+                                        if (data.result == 2)
+                                        {
+                                            window.parent.topcmm.alert(fail_to_bid_sofa);
+                                            return;
+                                        }
+                                        else if (data.result == 3)
+                                        {
+                                            window.parent.topcmm.alert(bid_credits_not_enought);
+                                            return;
+                                        }
+                                        if (data.result == 1)
+                                        {
+                                            mySeatArray.push($(".topcmm-123flashchat-hidden-get-seat").val()); //add seat to my seat collection.
+                                            window.parent.topcmm.trackEvent("SeatExtension", "GetSeatSuccess");
+                                        }
+                                    });
+                                });
+                            }
+                        }
+                    });
+                }
+                
+                if (pingInteval != null)
+                {
+                    clearInterval(pingInteval);
+                }
+            	pingInteval = setInterval(function(){
+                        if (window.parent != null && initData)
+                        {
+                            if (dataArrived)
+                            {
+                                getData();
+                            }
+                        }
+                        else if (initData)
+                        {
+                            clearInterval(pingInteval);
+                        }
+                    }, 60000);
+            }
+            
+            function loadJS()
+            {
+               var lange = window.navigator.language;
+               var langurl = "lang/lang-" + lange + ".js";
+               $.getScript(langurl)
+               .done(function(script, textStatus) {
+                   init();
+               })
+               .fail(function(jqxhr, settings, exception) {
+                   $.getScript("lang/lang-en-US.js")
+                   .done(function(script, textStatus) {
+                       init();
+                   });
+               }); 
+             }
+        </script> </head> <body onload="loadJS()" style="overflow: hidden;"> <div class="topcmm-123flashchat-seats-container-center"> </div> <div class="topcmm-123flashchat-seats-container"> <ul class="tt-wrapper"> <li id="seat0"> <div id="topcmm-123flashchat-seat-swpper-div"> <a class="tooltip" rel="" type="seatCreditsTip"> <img class="topcmm-123flashchat-seat-name-image" id="topcmm-123flashchat-seat-name-image" src="img/seat.png" name="0"/> <div class="topcmm-123flashchat-change-avatar-panel-left-single-avatar-div" style="display: none;"> </div> </a> <div style="margin-left:21px;"> <span id="topcmm-123flashchat-seat-name" class="topcmm-123flashchat-seat-name tooltip"></span> </div> </div> </li> <li id="seat1"> <div id="topcmm-123flashchat-seat-swpper-div"> <a class="tooltip" rel="" type="seatCreditsTip"> <img class="topcmm-123flashchat-seat-name-image" id="topcmm-123flashchat-seat-name-image" src="img/seat.png" name="1"/> <div class="topcmm-123flashchat-change-avatar-panel-left-single-avatar-div" style="display: none;"> </div> </a> <div style="margin-left:21px;"> <span id="topcmm-123flashchat-seat-name" class="topcmm-123flashchat-seat-name tooltip"></span> </div> </div> </li> <li id="seat2"> <div id="topcmm-123flashchat-seat-swpper-div"> <a class="tooltip" rel="" type="seatCreditsTip"> <img class="topcmm-123flashchat-seat-name-image" id="topcmm-123flashchat-seat-name-image" src="img/seat.png" name="2"/> <div class="topcmm-123flashchat-change-avatar-panel-left-single-avatar-div" style="display: none;"> </div> </a> <div style="margin-left:21px;"> <span id="topcmm-123flashchat-seat-name" class="topcmm-123flashchat-seat-name tooltip"></span> </div> </div> </li> <li id="seat3"> <div id="topcmm-123flashchat-seat-swpper-div"> <a class="tooltip" rel="" type="seatCreditsTip"> <img class="topcmm-123flashchat-seat-name-image" id="topcmm-123flashchat-seat-name-image" src="img/seat.png" name="3"/> <div class="topcmm-123flashchat-change-avatar-panel-left-single-avatar-div" style="display: none;"> </div> </a> <div style="margin-left:21px;"> <span id="topcmm-123flashchat-seat-name" class="topcmm-123flashchat-seat-name tooltip"></span> </div> </div> </li> </ul> <input class="topcmm-123flashchat-hidden-get-seat" type="hidden"></input> </div> </body> </html>

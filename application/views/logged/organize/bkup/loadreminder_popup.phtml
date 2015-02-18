@@ -1,0 +1,54 @@
+<div class="frm_box ">
+         <form id="frmDntRemindMe" action="<?=base_url()?>logged/organizer_day_view/set_reminder_off_ajax" onsubmit="return false;"  method="post" > 
+            
+           <?php // pr($reminder_content);
+				  if(count($reminder_content)){
+					  foreach($reminder_content as $key=> $r_val){
+					  
+		   ?>
+            
+            <label><input name="list_<?=$r_val['organizer_id']?>" type="checkbox" value="1"><?=$r_val['content']?></label>
+            <input type="hidden" name="hd_list_[]" id="hd_list_[]" value="<?=$r_val['organizer_id']?>" />
+            <div class="clr"></div>
+            <span style="margin-left:25px;"><strong>Due Time: </strong><?=$r_val['due_time']?></span>
+            <div class="clr"></div>
+           
+           <?php 	 }
+				  }
+		   ?>
+           
+            <div class="field01">
+                <input name="" type="submit" value="Don't Remind Me Again" class="dont-remind" id="dont-remind-button" />
+                <input name="" type="button" value="Close" class="btn" onclick="hide_dialog()"/>
+            </div>
+            <div class="clr"></div>
+        </form>	
+</div>
+
+
+<script type="text/javascript">
+$(document).ready(function(arg) {
+	
+///$("#dont-remind-button").click(function(){
+ $('#frmDntRemindMe').submit(function(){ 
+					
+					//alert(1);	
+				    var datatosend=$("#frmDntRemindMe").serialize();
+				   //alert(datatosend);
+				 //  showUILoader_nodialog('<img src="'+base_url+'images/loading_big.gif" width="50"/> ');
+											  
+					  $.ajax({
+						 type: "POST",
+						 url: base_url+'logged/organizer_day_view/set_reminder_off_ajax',
+						 data: datatosend,
+						 dataType: 'json',
+						 success: function(data){
+							hide_dialog('reminder');
+							//hideUILoader_nodialog();
+						 }
+					   });	 
+				});
+ 
+ });
+//});
+ </script>

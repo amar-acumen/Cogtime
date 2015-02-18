@@ -1,0 +1,50 @@
+<?php
+include_once(APPPATH.'models/base_model.php');
+class Church_new_model extends Base_model
+{
+	
+	public function __construct() 
+	{
+		parent::__construct();
+	}
+
+        function get_church_info($c_id){
+             $query = $this->db->get_where('cg_church', array('id' => $c_id));
+             $result = $query->result();
+			 
+             return $result;
+            
+        }
+        function get_service_info($c_id){
+           
+              $query = $this->db->query('select * from cg_church_schedul where c_id = '.$c_id.' ORDER BY c_update ASC LIMIT 0, 5');
+             $result = $query->result();
+             return $result;
+            
+        }
+		
+		function get_church_admin_data($c_id)
+		{
+			$query = $this->db->get_where('cg_church_admin',array('ch_id'=>$c_id));
+			$result = $query->result();
+			
+			return $result[0];
+		}
+    	function get_churchmembers($c_id,$where=''){
+            $sql = 'select *,cm.id AS mid from cg_church_member AS cm LEFT JOIN cg_users AS u 
+            	ON cm.member_id=u.id WHERE cm.church_id = '.$c_id.' AND is_approved=1 AND cm.is_deleted=0 '.$where.' ORDER BY cm.id DESC';
+            $query = $this->db->query($sql);
+            $result = $query->result();
+            return $result;
+            
+        }
+
+        function get_churchsubadmin($c_id){
+            $sql = 'select *,cm.id AS mid from cg_church_member AS cm,cg_users AS u 
+                where cm.member_id=u.id AND cm.church_id = '.$c_id.' AND is_deleted=0 AND role=2 ORDER BY cm.id DESC';
+            $query = $this->db->query($sql);
+            $result = $query->result();
+            return $result;
+            
+        }
+}

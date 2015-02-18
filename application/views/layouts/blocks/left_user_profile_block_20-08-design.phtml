@@ -1,0 +1,363 @@
+<div class="nw-left-profile">
+    <a href="my-wall.html"  class="nw-profile-link"> <div style="background:url(<?= get_profile_image($arr_profile_info['id'], 'thumb') ?>) no-repeat center;width:60px; height:60px;" title="member" class="pro_photo4 user_pro_image" ></div></a>
+    <p class="wall-name"><a href="my-wall.html"><?= $arr_profile_info['s_profile_name'] ?></a> &nbsp;</p>
+     <?php /*?><div class="online-display">
+        <?=show_profile_rating($arr_profile_info['id'])?>
+     </div><?php */?>
+    <input type="hidden" id="hd_logged_id" value="<?php echo $_SESSION['username']; ?>"/>
+	<br/>
+   <p style="float:left;"> <a href="javascript:void(0);" class="on-line online-status status-right" id="user_status">(<?php echo $arr_profile_info['s_chat_display_name']; ?>)&nbsp;<?= check_user_online_hlpr($arr_profile_info['id']); ?> </a></p>
+    <!--Mood Message Start-->
+    <div class="mood-message">
+        
+        <p id="show_save_bio"><?= ($arr_profile_info['s_bio'] =='')? '' : '"'.$arr_profile_info['s_bio'].'"' ?></p>
+        <a href="javascript:void(0);" onclick="open_bio_popup()">[update mood]</a>
+    
+    </div>
+    
+    <!--Mood Message End-->
+    <?php
+    $list_types = '';
+    $listarr = array();
+
+    if ($arr_profile_info['user_status']['i_isfriend'] == 1)
+        array_push($listarr, '<li>Friends</li>');
+
+    if ($arr_profile_info['user_status']['i_isnetpal'] == 1)
+        array_push($listarr, '<li>Net Pals</li>');
+
+    if ($arr_profile_info['user_status']['i_isprayerpartner'] == 1 && $arr_profile_info['e_want_prayer_partner'] == 'Y')
+        array_push($listarr, '<li id="prayer_partner_li">Prayer Partners</li>');
+
+    $list_types = implode('<li>I</li>', $listarr);
+    //pr($listarr);
+
+	   if($arr_profile_info['user_status']['i_isprayerpartner'] == 0 && $arr_profile_info['user_status']['i_isnetpal'] == 0){
+		
+			$DROPDOWN_HTML = ' <input type="text" value="" onblur="getIMList()" id="txt_name"/>
+								';
+		}
+		else if($arr_profile_info['user_status']['i_isprayerpartner'] == 0 && $arr_profile_info['user_status']['i_isfriend'] == 0){
+			
+			$DROPDOWN_HTML = ' <input type="text" value="" onblur="getIMList()" id="txt_name"/>
+								';
+		}
+		else if($arr_profile_info['user_status']['i_isfriend'] == 0 && $arr_profile_info['user_status']['i_isnetpal'] == 0){
+		
+			$DROPDOWN_HTML = ' <input type="text" value="" onblur="getIMList()" id="txt_name"/>
+								';
+		}
+		else if($arr_profile_info['user_status']['i_isfriend'] == 0){
+			
+			$DROPDOWN_HTML = ' <input type="text" value="" onblur="getIMList()" id="txt_name"/>
+								<select onchange="getIMList()" id="filter_list">
+									<option value="all">All</option>
+									<option value="netpal">Netpal</option>
+									<option value="pp">Prayer Partner</option>
+								</select>';
+		}
+		else if($arr_profile_info['user_status']['i_isnetpal'] == 0){
+			$DROPDOWN_HTML = ' <input type="text" value="" onblur="getIMList()" id="txt_name"/>
+								<select onchange="getIMList()" id="filter_list">
+									<option value="all">All</option>
+									<option value="friend">Friend</option>
+									<option value="pp">Prayer Partner</option>
+								</select>';
+		}
+		else if($arr_profile_info['user_status']['i_isprayerpartner'] == 0 ){				
+			$DROPDOWN_HTML = ' <input type="text" value="" onblur="getIMList()" id="txt_name"/>
+								<select onchange="getIMList()" id="filter_list">
+									<option value="all">All</option>
+									<option value="friend">Friend</option>
+									<option value="netpal">Netpal</option>
+								</select>';
+		}
+		else{
+			
+			$DROPDOWN_HTML = '<input type="text" value="" onblur="getIMList()" id="txt_name"/>
+								<select onchange="getIMList()" id="filter_list">
+								<option value="all">All</option>
+								<option value="friend">Friend</option>
+								<option value="netpal">Netpal</option>
+								<option value="pp">Prayer Partner</option>
+							   </select>';
+		}
+	
+	
+    ?>
+    <span class="online-for">Online For :</span>
+    <span class="online-display">        
+        <ul class="online-status-txt" id="online_user_types">
+            <?= ($list_types) ?>
+        </ul>
+        <span class="nw-change-online">
+            <a  href="javascript:void(0);" id="change-online-slide"   class="on-line" >[change]</a>
+            <a  href="javascript:void(0);"   class="on-line" onclick="updateOnlineStatus()">[update]</a>
+            <span class="nw-change-content">
+                <span class="nw-status">
+                    <input type="checkbox" name="chk_frnd" id="chk_frnd" <?= ( $arr_profile_info['user_status']['i_isfriend'] == 1) ? 'checked="checked"' : '' ?> value="1"  />
+                    My Friends
+                </span>
+                <span class="nw-status">
+                    <input type="checkbox" name="chk_netpal" id="chk_netpal" <?= ($arr_profile_info['user_status']['i_isnetpal'] == 1) ? 'checked="checked"' : '' ?> value="1"  />
+                    My Net Pals
+                </span>
+                <span class="nw-status" id="prayer_partner_span">
+                    <?php
+                    if ($arr_profile_info['e_want_prayer_partner'] == 'Y') {
+                        ?>
+                        <input type="checkbox" name="chk_pp" id="chk_pp" <?= ( $arr_profile_info['user_status']['i_isprayerpartner'] == 1) ? 'checked="checked"' : '' ?> value="1" />
+                        My Prayer Partners
+
+                    <?php } ?></span>
+            </span>
+        </span>         
+    </span>
+   
+    <div class="clr"></div>
+    <ul>
+        <?php
+        //echo $arr_profile_info['e_want_prayer_partner'];
+        if ($arr_profile_info['total_prayer_partner'] == $site_settings_arr['i_max_prayer_partner']) {
+            ?>
+
+            <li id="seeking"><a  href="javascript:void(0);"  onclick="show_dialog('optout-as-prayer-partner2');"  title="Max Limit Reached"><img src="images/enable-prayer-partner-hover.png" alt=""/>Prayer Partner (Max Limit Reached)</a></li>
+            <?php
+        } else if ($arr_profile_info['e_want_prayer_partner'] == 'Y') {
+            ?>
+            <li id="seeking"><a  href="javascript:void(0);"  onclick="show_dialog('optout-as-prayer-partner2');"  title="Enable Prayer Partner"><img src="images/icons/icon-17.png" alt=""/>Prayer Partner</a></li>
+        <?php } else {
+            ?>
+            <li id="seeking"><a  href="javascript:void(0);" onclick="show_dialog('enlist-as-prayer-partner2');" title="Disable Prayer Partner"><img src="images/icon-17-red.png" alt=""/>Prayer Partner</a></li>
+        <?php } ?>
+        <li>
+        
+        <span id="instant-msg-space">
+        <?php 
+        
+			if ($arr_profile_info['user_status']['i_isfriend'] == 0 && $arr_profile_info['user_status']['i_isnetpal'] == 0 
+					&& $arr_profile_info['user_status']['i_isprayerpartner'] == 0){ 
+        ?>
+            <a id="instantmsg" href="javascript:void(0);" onclick="showUIMsg('You are offline to network!');" ><img src="images/Chat.png" alt=""/>Instant Message</a>
+        <?php 
+					}
+			else {
+		?>
+         <a id="instantmsg" href="javascript:void(0);" onclick= "showOnlineUser('show')" ><img src="images/Chat.png" alt=""/>Instant Message</a>
+         <?php } ?>
+         </span>
+        
+            <div class="instant-message">
+                <div class="instantsearch" id="instantsearch_html">
+                    <?=$DROPDOWN_HTML?>
+                </div>
+                <div class="instant-list">
+                    <ul id="im_list" ><?= $im_list_contents ?></ul>
+                </div>      
+            </div>
+        </li>
+    </ul>
+</div>
+<script type="text/javascript">
+    $(function() {
+        //Code..
+        $('#change-online-slide').click(function() {
+            $('.nw-change-content').slideToggle('slow');
+        })
+
+    })
+
+    /*$(function() {
+     $('#seeking a').tooltip();
+     });*/
+    function showOnlineUser(type) {
+
+
+        if (type == 'show') {
+            getIMList();
+            $('#instantmsg').attr('onClick', "");
+            $('#instantmsg').attr('onClick', "showOnlineUser('hide')");
+            $('.instant-message').slideToggle('slow');
+
+        }
+        else {
+            $('#instantmsg').attr('onClick', "");
+            $('#instantmsg').attr('onClick', "showOnlineUser('show')");
+            $('.instant-message').slideToggle('slow');
+
+        }
+    }
+
+
+    function chnge_pp_status(status) {
+
+        hide_dialog();
+        if (status == 'N') {
+            $.ajax({
+                type: "POST",
+                url: base_url + "logged/my_prayer_partners/enlist_prayer_partner",
+                dataType: "json",
+                success: function(json_response) {
+
+                    if (json_response.success == true)
+                    {
+                        showUIMsg(json_response.msg);
+                        $('#seeking').html('<a  href="javascript:void(0);" onclick="chnge_pp_status(\'Y\')"><img src="images/icons/icon-17.png" alt="" title="Enable Prayer Partner"/>Prayer Partner</a>');
+                        $('#prayer_partner_span').html('<input type="checkbox" name="chk_pp" id="chk_pp" <?= ( $arr_profile_info['user_status']['i_isprayerpartner'] == 1) ? 'checked="checked"' : '' ?> value="1" onclick="updateOnlineStatus()"/>My Prayer Partners');
+                        $('#online_user_types').append('<li>I</li><li id="prayer_partner_li">Prayer Partners</li>')
+                    }
+                    else
+                    {
+                        showUIMsg(json_response.msg);
+                    }
+                }
+            });
+        }
+        else {
+            $.ajax({
+                type: "POST",
+                url: base_url + "logged/my_prayer_partners/optout",
+                dataType: "json",
+                success: function(json_response) {
+
+                    if (json_response.success == true)
+                    {
+                        showUIMsg(json_response.msg);
+                        $('#seeking').html('<a  href="javascript:void(0);" onclick="chnge_pp_status(\'N\')"><img src="images/icon-17-red.png" alt="" title="Diasble Prayer Partner"/>Prayer Partner</a>');
+                        $('#prayer_partner_span').hide();
+                        $('#prayer_partner_li').hide();
+                        $('#prayer_partner_li').prev().hide();
+                    }
+                    else
+                    {
+                        showUIMsg(json_response.msg);
+                    }
+                }
+            });
+        }
+    }
+
+
+    function getIMList() {
+
+        var sort_val = $('#filter_list').val();
+        var name = $('#txt_name').val();
+        showUILoader_nodialog();
+        $.ajax({
+            type: 'get',
+            url: base_url + 'base_controller/new_getImList_Ajax/' + 0 + '/' + sort_val + '/' + name,
+            dataType: 'json',
+            success: function(data, status) {
+                hideUILoader_nodialog();
+			    $('#instantsearch_html').html('');
+				$('#im_list').html('');
+				$('#instantsearch_html').html(data.DROPDOWN_HTML);
+                $('#im_list').html(data.im_html);
+
+            }	// end of success function...
+        });
+
+    }
+
+
+
+</script>
+
+<script language="javascript">
+<!--
+    function updateOnlineStatus() {
+
+        var status = 1;
+
+        if (typeof $('#chk_frnd:checked').val() == 'undefined' && typeof $('#chk_netpal:checked').val() == 'undefined' && typeof $('#chk_pp:checked').val() == 'undefined')
+            status = 4;
+
+        showBusyScreen();
+
+        $.ajax({
+            type: "POST",
+            url: base_url + "logged/my_profile/updateUserStatus",
+            data: {'chk_frnd': $('#chk_frnd:checked').val()
+                , 'chk_netpal': $('#chk_netpal:checked').val()
+                , 'chk_pp': $('#chk_pp:checked').val()
+                , 'status': status},
+            dataType: "json",
+            success: function(data) {
+
+                if (data.success == true)
+                {
+                    showUIMsg(data.msg);
+                    $('#user_status').html(data.status);
+                    $('#online_user_types').html('');
+                    $('#online_user_types').html(data.list_types);
+                    $('.nw-change-content').slideToggle('slow');
+					
+					if($('.instant-message').css('display')=="block"){
+					 $('.instant-message').slideToggle('slow');
+					}
+					$('#instant-msg-space').html(data.inst_html);
+                    hideBusyScreen();
+                }
+
+            }
+        });
+
+
+
+    }
+
+    function save_bio(s_bio){ 
+         if($('#s_bio').val() == ''){
+           showUIMsg('Please provide mood text!');
+           return false;
+         } 
+         showBusyScreen();
+         
+         $.ajax({
+            type: "POST",
+            url: base_url + "logged/my_profile/save_bio",
+            data: {'s_bio': $('#s_bio').val()},
+            dataType: "json",
+            success: function(data) {
+
+                if (data.success == true)
+                {
+                    hide_dialog();
+                    showUIMsg(data.msg);
+                    $('#show_save_bio').html('"'+data.s_bio+'"');
+                    $('#s_bio').val('');
+                    hideBusyScreen();
+                }
+
+            }
+        });
+
+    }
+	
+    function open_bio_popup(){
+        var bio = $("#show_save_bio").html();
+        
+        $('#s_bio').val(bio.substring(1, bio.length-1));
+        show_dialog('edit-mood');
+    }
+	
+//-->
+
+
+</script>
+<div class="lightbox edit-mood">
+      <div class="close"><a href="javascript:void(o)" onclick="hide_dialog(); $('#s_bio').val('');"><img src="<?=base_url()?>images/close.png" alt="" /></a></div>
+      <div class="top"><div>&nbsp;</div></div>
+      <div class="mid">
+          <div class="mood-message-haeding">
+              <h4>Change your Mood Message</h4>
+            </div>
+               <div class="shade_box_white" style="padding:8px 0px;">
+                   <textarea rows="4" cols="50" name="s_bio" id="s_bio" maxlength="85"></textarea><br><br>
+                 <input name="" type="button" value="Save" class="btn" onclick="save_bio($('#s_bio').val());" />
+              
+            </div>
+            
+      </div>
+      <div class="bot"><div>&nbsp;</div></div>
+</div>

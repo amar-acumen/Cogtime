@@ -1,0 +1,128 @@
+<!-- header -->
+
+<?php
+
+	include(APPPATH ."views/layouts/church_logged_header.phtml");
+
+?>
+
+<!-- CONTENT SECTION -->
+<div class="container">
+  
+  <div class="main-page">
+  	<h3 class="page-heading">Prayer Group</h3>
+    <?php include(APPPATH ."views/logged/church/church_prayer_group_left_panel.phtml");?>
+	<div class="activity-right">
+	 <div class="activity-comment-box">
+                                <form id="search_prayer_grp"  action="" method="post" class="create-ring" >
+								<div class="lable01"> Prayer Group Name:</div>
+                                <div class="field03">
+                                    <input type="text" class="amount-input prayer-No-input" name="txt_name" id="txt_name" />
+                                    </div>
+                                    <div class="clr"></div>
+						
+<!--                                    <div class="lable01">Denomination:</div>-->
+                      
+<div class="field03" style="display: none;"> <select  name="sel_denomination" id="sel_denomination" class="amount-input prayer-No-input" >
+                                        <option value="-1">Select</option>
+                                        <?= makeOptionDenomination() ?>
+                                    </select>
+                                    </div>
+                                    <div class="clr"></div>
+									<input type="hidden" id="hd_submit" name="hd_submit" value="Y" />
+                                    <div class="lable01">&nbsp;</div>
+                                    <div class="field03"> 
+                                    <input type="button" class="btn" value="Search" id="create_bt" onclick="searchPrayerGrp()" />
+                                    </div>
+									</form>
+                                    <div class="clr"></div>
+									<div class="">
+                            <ul id="grp_post_list" class="notification-ul grp-table">
+     </ul></div>                 
+                            </div>
+	</div>
+    <div class="clear"></div>
+                                              									
+    
+  </div>
+</div>
+<!-- /CONTENT SECTION -->
+
+<div class="clr"></div>
+
+<!-- FOOTER SECTION -->
+
+<?php include(APPPATH."views/layouts/church_footer.phtml");?>
+
+<!-- /FOOTER SECTION -->
+
+<script type="text/javascript">
+function searchPrayerGrp()
+{
+   
+    var denomination = $('#sel_denomination').val();
+	var grpname =  $('#txt_name').val();
+	
+    if(denomination == '-1' && grpname == '')
+    {
+        showUIMsg("Please provide group name");
+        return false;
+    }
+	else
+    {
+      showUILoader_nodialog('<img src="'+base_url+'images/loading_big.gif" width="50"/> ');  
+        $.ajax({
+            type: 'post',
+            url: base_url+'logged/church_prayer_group/generate_prayer_group_listing_AJAX/',
+            dataType: 'json',
+            data: {'txt_name': $('#txt_name').val(),
+					'sel_denomination' : $('#sel_denomination').val(),
+				   'hd_submit': $('#hd_submit').val()},
+           success: function (data, status) {
+                
+                $('#data_div').show();
+                if(data.html!='') {
+                            
+                            $('#grp_post_list').html(data.html);
+                        }
+                
+                hideUILoader_nodialog();
+                
+            }    // end of success function...
+        });
+    }
+}
+
+function sendGrpJoinReq(grp_id){
+	
+	var URL = base_url +'logged/church_prayer_group/join_group';
+		showBusyScreen();
+		if(ajax_req!=null) {
+			ajax_req.abort();
+		}
+		ajax_req = $.ajax({
+			type: 'POST',
+			url:URL,
+			dataType: 'json',
+			data: ({ 
+					 'grp_id' : grp_id,
+				 }),
+			success: function (data) {
+							
+							hideBusyScreen();
+							if(data.success== true ) {
+								showUIMsg(data.msg);
+								$('#invite_text_'+grp_id).text('Resend Join Request');
+							}
+							else if(data.success==false){
+							    showUIMsg(data.msg);
+							}
+					},
+			error: function (data, status, e) {
+								hideBusyScreen();
+								showUIMsg(data.msg);
+			}
+		});
+	
+}
+</script>

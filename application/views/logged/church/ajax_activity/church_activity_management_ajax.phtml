@@ -1,0 +1,76 @@
+
+	<?php 
+	
+	if($result_arr) { 
+	foreach($result_arr As $church_activity_feed_comment) { 
+			$data_arr = json_decode($church_activity_feed_comment->feedtitle);
+			//pr($data_arr);
+	//pr($data_arr->photo);
+	if ( $church_activity_feed_comment->post_type == 1 ) {
+	?>
+    	<div class="activity-comment-box" id="wall_activity-comment-box<?php echo $church_activity_feed_comment->id; ?>">
+        	<h4 style="font-size:14px;"><a href="javascript:void(0);"><?php echo $church_activity_feed_comment->member_name; ?></a> Posted a Comment on a wall post.</h4>
+            <div class="timeline-part">
+        	<p style="padding-left:0;"><?php echo $data_arr->message; ?></p>
+			<?php if(!empty($data_arr->photo) && count($data_arr->photo) < 2){
+			//echo 'I'.count($data_arr->photo);
+			//pr($data_arr->photo);
+			foreach($data_arr->photo as $key=>$photo_val){
+			$IMG = base_url()."uploads/church_wall/".getThumbName($photo_val,'big');
+			?>
+            <figure><img src="<?=$IMG?>" alt="Prayer" width="477" height="244"></figure>
+			<?php }
+			} else if(!empty($data_arr->photo) && count($data_arr->photo) > 2){?>
+			<ul class="bxslider">
+				<?php
+			foreach($data_arr->photo as $key=>$photo_val){
+			$IMG = base_url()."uploads/church_wall/".getThumbName($photo_val,'big');
+			?>
+			<li><img src="<?=$IMG?>" alt="Prayer" ></li>
+			<?php 
+			}
+			?>
+			</ul>
+			<?php }?>
+			<div class="comment-text">
+            	<textarea style="font-family: 'GibsonRegular'; color:#878d91; font-size:13px; height:30px;" name="wall_comment_txt" id="wall_comment_txt_<?php echo $church_activity_feed_comment->id; ?>" class="comment_message" height="20" width="40"><?php echo $church_activity_feed_comment->s_contents; ?></textarea> 
+				<input type="button" name="save_comment" id="save_comment_<?php echo $church_activity_feed_comment->id; ?>" value="SAVE" onclick="javascript:save_comments('<?php echo $church_activity_feed_comment->id; ?>','<?php echo $church_activity_feed_comment->post_type; ?>');" style="display:none;"/>
+           
+			</div>
+            <div class="edit-review"> <a href="javascript:comments_edit('<?php echo $church_activity_feed_comment->id; ?>','<?php echo $church_activity_feed_comment->post_type; ?>');" style="width:60px;">Edit</a> <a style="margin-right:0;" href="javascript:remove_comments('<?php echo $church_activity_feed_comment->id; ?>','<?php echo $church_activity_feed_comment->post_type; ?>');">Remove</a></div>
+        </div>
+		</div>
+		<?php } 
+		else if ( $church_activity_feed_comment->post_type == 2 ) { ?>
+        <div class="activity-comment-box" id="ring_activity-comment-box<?php echo $church_activity_feed_comment->id; ?>">
+        	<h4 style="font-size:14px;"><a href="javascript:void(0);"><?php echo $church_activity_feed_comment->member_name; ?></a> Posted a Comment on a Ring.</h4>
+            <h5 style="font-size:13px;">Ring Name: <span><?php echo $church_activity_feed_comment->feedtitle; ?></span></h5>
+             <div class="comment-text">
+            	<textarea style="font-family: 'GibsonRegular'; font-size:12px;" name="ring_comment_txt" id="ring_comment_txt<?php echo $church_activity_feed_comment->id; ?>" class="comment_message" height="20" width="40"><?php echo $church_activity_feed_comment->s_contents; ?></textarea> 
+				<input type="button" name="ring_save_comment" id="ring_save_comment_<?php echo $church_activity_feed_comment->id; ?>" value="SAVE" onclick="javascript:save_comments('<?php echo $church_activity_feed_comment->id; ?>','<?php echo $church_activity_feed_comment->post_type; ?>');" style="display:none;"/> 
+            </div>
+            
+            <div class="edit-review"> <a href="javascript:comments_edit('<?php echo $church_activity_feed_comment->id; ?>','<?php echo $church_activity_feed_comment->post_type; ?>');">Edit</a>  <a style="margin-right:0;" href="javascript:remove_comments('<?php echo $church_activity_feed_comment->id; ?>','<?php echo $church_activity_feed_comment->post_type; ?>');">Remove</a></div>
+        </div>
+        <?php } 
+		} } else { 
+		echo '<div class="activity-comment-box"><h4> No records found. </h4></div>';
+		}		//echo $no_of_result;
+		?>			
+        
+        <!--<div class="activity-comment-box">
+        	<h4><a href="javascript:void(0);">John Smith</a> Posted a Comment on a Prayer Group.</h4>
+            <h5>Prayer Group Name: <span>Prayer for Jesus</span></h5>
+             <div class="comment-text">
+            	Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley book. 
+            </div>
+            
+            <div class="edit-review"> <a href="javascript:void(0);">Edit</a> |  <a href="javascript:void(0);">Remove</a></div>
+        </div>-->
+        
+<!-- /FOOTER SECTION -->
+<script type="text/javascript">
+
+</script>
+
+

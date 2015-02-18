@@ -1,0 +1,30 @@
+                  
+                        <?php
+                            $counter = 0;
+                            if(count($album_result_arr))
+                            {
+                                foreach($album_result_arr as $album) : 
+                                $counter++;
+                                $IMG = base_url()."uploads/user_videos_album/".getThumbName($album['s_video_album_image'],'thumb');
+									$videos_link = get_public_profile_videos_url($album['i_user_id'],$album['id']);
+                        ?>
+                   
+                            <div class="friend-pro-video">
+                                <a href="public-profile-video/<?=$profile_id?>/album/<?=$album['id']?>/videos.html">
+                                    <div class="album-cover" style="height: 69px; width: 122px"><div  style="background:url(<?=$IMG?>) no-repeat center;height:82px; cursor:pointer;"  ></div></div>
+                                    <br class="clr"/>
+                                    <span><?php echo substr($album['s_name'],0,18)?></span>
+                                    <p class="track-number"><?php echo $album['total_videos']?>  Videos(s)</p>
+                                </a>
+                            </div>
+                        <?php
+                                endforeach;
+                            }
+                        ?>
+                        
+                        
+                        
+                   
+                            
+                           
+                        

@@ -1,0 +1,35 @@
+<?php
+//pr($result,1);
+if(count($result))
+{
+    $counter = 0;
+    foreach($result as $res)
+    {
+        $counter++;
+        $profile_image = get_profile_image($res['i_posted_user_id'],'thumb');
+        $profile_displayname = $res['s_profile_name'];
+        $comment_txt = $res['s_contents'];
+
+?>
+
+<div class="pop-content <?=($counter==1)? 'first':''?>">        
+                       <img src="<?=$profile_image?>" alt="posteb by" width="73" height="73" class="posted-by" />
+                       <div class="right-panel">
+                            
+                                <p class="add-remove-friend" style="float: right; margin-right: 5px; font-size: 11px;">
+                                <img alt="" src="../images/icons/remove.png">
+                                <a onclick="return remove_comment_(<?=$res['id']?>)" href="javascript:void(0);">Remove</a>
+                                </p>
+                                <h5><?=$profile_displayname?></h5>
+                            <h6>Updated on: <span><?=get_time_elapsed($res['dt_commented_on'])?></span></h6>
+                            <p><?=$comment_txt?></p>
+                       </div>
+                    </div>
+<?php
+    }
+}else
+    {
+        echo '<div class="shade_box_white"  style="padding: 12px 0px 12px 4px;"><p class="blue_bold12" style="margin-left: 250px; margin-top: 120px;">No Comment.</p></div>';
+    }
+
+?>

@@ -1,0 +1,79 @@
+<!--tweeter header start -->  
+	<div style="background:url(images/tweeter-profile-bg.jpg) no-repeat 0 0;" class="tweeter-profile-header">
+	<div class="follow-section" id="tweet_follow_status<?=$public_profile_info['id']?>">
+	<?php if($is_follow == false && intval(decrypt($this->session->userdata('user_id'))) != $public_profile_info['id']){
+        
+    ?>
+            <span  class="follow-btn"><input name="Follow" type="button" value="Follow"  onclick="javascript:followUser(<?=$public_profile_info['id']?>,'follow')"/></span>
+        
+        
+     <?php } else if(intval(decrypt($this->session->userdata('user_id'))) != $public_profile_info['id'])
+            {
+                #
+	  ?>
+        
+            <span class="follow-btn"><input name="Unfollow" type="button" value="Unfollow"  onclick="javascript:followUser(<?=$public_profile_info['id']?>,'Unfollow')"/></span>
+        
+    <?php     
+	    }else{
+			$img_css = 'style="margin-top:40px;"';
+		}
+     ?>
+     </div> 
+    <div class="clr"></div>
+    <div class="img-thumb" <?=$img_css?> >
+    <div style="background:url(<?=get_profile_image($public_profile_info['id'],'thumb')?>) no-repeat center;width:73px; height:73px;" title="tweeter profile pic" ></div>
+    </div>
+    <h2><?=$public_profile_info['s_profile_name']?></h2>
+    <h3><?=$public_profile_info['s_tweet_id']?></h3>
+</div> 
+<!--tweeter header end --> 
+
+<!--tweeter page nav start --> 
+ 	<div class="tweeter-nav">
+      <ul>
+         <li class="<?php echo ($home_menu=='1')?'select':'';?>"><a href="<?=getTwitterProfileLink($public_profile_info['s_tweet_id'])?>"><span id=""><?=$total_my_tweets?></span><br />Chitter Tweets</a></li>
+          <li class="<?php echo ($page_name=='followings')?'select':'';?>"><a href="<?=base_url().'user-twitter-profile/'.$public_profile_info['id'].'/followings.html'?>"><span id="count_total_following"><?=$total_following?></span><br />Followings</a></li>
+          <li class="last <?php echo ($page_name=='followers')?'select':'';?>"><a href="<?=base_url().'user-twitter-profile/'.$public_profile_info['id'].'/followers.html'?>"><span id="count_total_follower"><?=$total_followers?></span><br />Followers</a></li>
+          
+      </ul>
+      <div class="clr"></div>
+  </div>
+<!--tweeter page nav end -->  
+
+
+<script type="text/javascript">
+function followUser(user_id,i_status)
+{
+		
+	var URL = base_url +'logged/user_twitter_profile/follow_user/';
+	showUILoader_nodialog('<img src="'+base_url+'images/loading_big.gif" width="50"/> ');
+	if(ajax_req!=null) {
+		ajax_req.abort();
+	}
+	ajax_req = $.ajax({
+		type: 'POST',
+		url:URL,
+		dataType: 'json',
+		data: ({ 'user_id' : user_id
+				 ,'i_status' : i_status
+				 
+			 }),
+		success: function (data, status) {
+						var result_obj = data;
+						hideUILoader_nodialog();
+						if(result_obj.result== true ) {
+							showUIMsg(result_obj.msg);
+							$('#tweet_follow_status'+result_obj.u_id).html(result_obj.action_txt);
+							$('#count_total_follower').html(result_obj.total_follower);
+						}
+						
+				},
+		error: function (data, status, e) {
+							hideUILoader_nodialog();
+							showUIMsg(data.msg);
+		}
+	});
+}
+
+</script>

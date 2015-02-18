@@ -1,0 +1,278 @@
+<?php include(APPPATH."views/layouts/logged_header.phtml");?>
+            <!-- NAVIGATION SECTION -->
+      <?php include(APPPATH."views/layouts/nav.phtml");?>
+      <!-- /NAVIGATION SECTION -->
+      </div>
+</div>
+<!-- /HEADER SECTION -->
+<div class="clr"></div>
+<!-- CONTENT SECTION -->
+<div id="content_section">
+      <div id="container">
+            <!--<div id="mid_content"> -->
+                  <!-- latest news -->
+                 <?php include(APPPATH ."views/layouts/latest_news.phtml");?>
+                  <!-- /latest news -->
+                  <div class="clr"></div>
+                  <!-- main container -->
+                  <div id="main_container">
+                        <!-- left container -->
+                        <?php include(APPPATH."views/layouts/leftbar.phtml");?>
+                        <!-- /left container -->
+                        <!-- mid container -->
+                        <div id="mid_container">
+                           
+                            <!--sub page links -->
+                              <div class="link-div" style="margin-top:-2px;">
+                                  <ul>
+                                  
+                                    <li><a href="tweets.html" class="<?php echo ($page_name=='tweets')?'current':'';?>"><span>All Tweets</span></a> </li>
+                                    <li><a href="my-tweets.html" class="<?php echo ($page_name=='my-tweets')?'current':'';?>"><span>View My Tweets</span></a> </li>
+                                    <li><a href="my-friends-tweets.html" class="<?php echo ($page_name=='my-friends-tweets')?'current':'';?>"><span>View Friends Tweets</span></a> </li>
+                                  </ul>
+                                <div class="clr"></div>
+                              </div>
+                              <!--/sub page links -->
+                           
+                           
+                             <?php /*?>  <div class="page_heading" style="margin-bottom: 5px;">
+                              <div class="left"><img src="images/icons/tweet.png" alt="" /> My Friends Tweets</div>
+                               <div class="right"><a href="search-follow-tweet.php" class="btn_link" style="width:175px;"><span><img src="images/icons/search.png" alt="" /> Search  &amp; Follow Tweet</span></a></div>
+                            </div><?php */?>
+                            
+                             
+                              
+                            <!--<div class="arrow_btm"></div> -->
+                            <!--<div class="section01"> -->
+                                  <?php /*?><div class=" div_content wall-comment tweet-textarea2" style="padding: 0 0 5px;" >
+                                       <!--<textarea name="" cols="" rows="" onfocus="if(this.value=='Max 140 Characters')this.value='';" onblur="if(this.value=='')this.value='Max 140 Characters';" style="height:80px;">Max 140 Characters</textarea>-->
+                                       <form action="" method="post" class="wall-comment-form">
+                                        <div class="wall-comment-box" style="margin-top:15px;height: 85px;">
+                                            <textarea onfocus="if(this.value=='Max 140 Characters')this.value='';" 
+                                            onblur="if(this.value=='')this.value='Max 140 Characters';" 
+                                            maxlength="140" id="ta_post_tweet" name="ta_post_tweet" >Max 140 Characters</textarea>
+                                        </div>
+                                            <input name="" type="button" class="wall-comment-submit" value="Post" onclick="post_tweet_text('my_friends')" />
+                                    </form>
+                                     <?php /*?><p class="white-bold left" style=" margin-right:10px; padding-left:10px;">
+                                        <img src="images/icons/bird1.png" alt="" /> <a href="my-tweet-followers.php">View My Followers</a>   
+                                    </p><?php */?>
+                                    <?php /*?> <p class="white-bold left">   
+                                     <img src="images/icons/bird10.png" alt="" /> <a href="javascript:void(0);">Follow this Tweet</a>
+                                    </p> <?php 
+                                    <!--<input name="" type="button" value="Post" class="btn right" />-->
+                                    <div class="clr"></div>
+                                 </div><?php */?>
+                            <!--</div> -->
+                             <div class="page_heading_01">
+                                <div class="left"><img src="images/icons/tweet1.png" alt="" />My Friends Tweets</div>
+                               <div class="right" style="padding-right:0px;">
+                                   <?php /*?><div class="search_box">
+                                     <form name="frm_search" id="frm_search" class="filter-search" method="post" onsubmit="return false;"  >
+                                        <input name="txt_keyword" id="txt_keyword" type="text"  value="Keywords" onfocus="if(this.value=='Keywords')this.value='';" onblur="if(this.value=='')this.value='Keywords';"  />
+                                        <input type="hidden" id="search_basic" name="search_basic" value="Y" /> 
+                                        <input name="" type="submit" id="keyword_search"  />
+                                     </form>
+                                   </div><?php */?> 
+                                  <?php /*?><div class="left05"> 
+                                  
+                                  <a href="javascript:void(0);"><img src="images/icons/sml_brd.png" alt="" title="show my tweets only" /></a><a href="javascript:void(0);" class=" light_blue_link" title="show my tweets only">(5)</a> &nbsp; 
+                                   <a href="javascript:void(0);"><img src="images/icons/heart.png" alt=""  title="show my favorite tweets"  /></a><a href="javascript:void(0);" class="light_blue_link" title="show my favorite tweets" >(10)</a></div><?php */?>
+                               </div>
+                            </div>
+                            <div class="arrow_btm"></div>
+                            <div class="div_content" style=" margin-top:0px;">
+                            <DIV id="frnd_tweet_contents"><?=$tweets_ajax_content?></DIV>      
+                            </div>
+                            
+                            <?php if($no_of_result  == 0):?>
+                                <div class="shade_box_01" style="padding-top:5px;" id="no_tweets"><div  class="shade_norecords" style="width:260px;"><p class="blue_bold12">No Tweets.</p></div></div>
+                            <?php endif;?>	
+                            
+                            
+                            <?php  if($no_of_result > $pagination_per_page): ?>
+                                    
+                                    <div class="view_more" id="show_more_div"><a href="javascript:void(0);" id="show_more_tweets_link" page_value="<?=$current_page_1?>" onclick="show_more_tweets($(this).attr('page_value'))">[view more] </a> </div>
+                                 <?php endif; ?>
+                                 
+                                 <input type="hidden" id="i_user_id" value="<?=$profile_id?>" />
+                          </div>                   
+                        <!-- /mid container -->
+                        <!-- right container -->
+                        <?php include(APPPATH."views/layouts/rightbar.phtml");?>
+                        <!-- /right container -->
+                  </div>
+                  <!-- /main container -->
+                  <div class="clr"></div>
+            <!--</div> -->
+      </div>
+      <div class="clr"></div>
+</div>
+<!-- /CONTENT SECTION -->
+<div class="clr"></div>
+
+
+<?php include(APPPATH."views/layouts/footer.phtml");?>
+<?php include(APPPATH."views/logged/blocks/common_popup.phtml");?>
+
+<?php /*?><div class="lightbox teeter_reply_div" style="width:540px;">
+      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="images/close.png" alt="" /></a></div>
+      <div class="top">
+            <div>&nbsp;</div>
+      </div>
+      <div class="mid">
+            <div class="heading">
+                  <div class="left">
+                        <h4><img src="images/icons/tweet1.png" alt="" /> Reply </h4>
+                  </div>
+            </div>
+            <div class="frm_box">
+                  <p>  <textarea name="" cols="" rows="" style="width:486px; height:100px; margin-bottom:10px;">Re: First few words of org message ></textarea></p>
+                  <p> <input name="" type="button" value="Post"  class="btn"/></p>
+             </div>
+      </div>
+      <div class="bot">
+            <div>&nbsp;</div>
+      </div>
+</div>
+
+<div class="lightbox view_teeter_reply_div" style="width:650px;">
+      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="images/close.png" alt="" /></a></div>
+      <div class="top">
+            <div>&nbsp;</div>
+      </div>
+      <div class="mid">
+            <div class="heading" style="margin-bottom:0px;">
+                  <div class="left">
+                        <h4><img src="images/icons/tweet1.png" alt="" /> View Replies </h4>
+                  </div>
+            </div>
+               <div class="shade_box_white" style="padding:8px 0px;">
+                  <div class="txt_content01"> <a href="javascript:void(0);"><img src="images/man.png" alt="" class="pro_photo" /></a>
+                        <div class="left_div01 left_div_view_comment">
+                            
+                              <p><a href="javascript:void(0);" class="blue_link"><strong>Alex Brown</strong></a>: Re: First few words of org message > Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eius tempor Lorem ipsum dolor. </p>
+                            <p class="date-time"> HH:MM DD/MM/YYYY</p>
+                        </div>
+                        <div class="clr"></div>
+                  </div>
+            </div>
+            <div class="shade_box_white" style="padding:8px 0px;">
+                  <div class="txt_content01"> <a href="javascript:void(0);"><img src="images/man1.png" alt="" class="pro_photo" /></a>
+                        <div class="left_div01 left_div_view_comment">
+                            
+                               <p><a href="javascript:void(0);" class="blue_link"><strong>George Swift</strong></a>: Re: First few words of org message > Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eius tempor Lorem ipsum dolor. </p>
+                            <p class="date-time"> HH:MM DD/MM/YYYY</p>
+                        </div>
+                        <div class="clr"></div>
+                  </div>
+            </div>
+      </div>
+      <div class="bot">
+            <div>&nbsp;</div>
+      </div>
+</div>
+<?php */?>
+
+<script type="text/javascript">
+
+var ajax_req_feeds = null;
+function show_more_tweets(page) {
+	
+	var i_user_id = $('#i_user_id').val();
+	if(ajax_req_feeds!=null) {
+		ajax_req_feeds.abort();
+	}
+	showUILoader_nodialog();
+	ajax_req_feeds = $.ajax({
+		type: 'get',
+		url: base_url+'logged/tweets/my_friends_tweets_ajax_pagination/'+i_user_id+'/'+page,
+		dataType: 'json',
+
+		success: function (data, status) {
+
+			hideUILoader_nodialog();
+			if(data.html!='') {
+				
+				//alert(data.cur_page+'dfdf');
+				
+				$('#frnd_tweet_contents').append(data.html);
+				$('#show_more_tweets_link').attr('page_value', data.cur_page);
+				$('#show_more_tweets_link').attr('onclick','');
+				$('#show_more_tweets_link').attr('onclick','show_more_tweets('+data.cur_page+')');
+			}
+			else {
+				$('#frnd_tweet_contents').append('<div class="view_more" style="text-align: center;"><p class="blue_bold12" style="font-size:14px;">No More Tweets.</p></div>');
+				$('#show_more_div').remove();
+			}
+            
+			
+            if(data.view_more==false)
+            {
+                
+                $('#frnd_tweet_contents').append('<div class="view_more" style="text-align: center;"><p class="blue_bold12" style="font-size:14px;">No More Tweets.</p></div>');
+                $('#show_more_div').remove();
+            }
+		
+
+		}	// end of success function...
+	});
+}
+
+$(document).ready(function(arg) {
+	
+
+ $('#frm_search').submit(function(){ 
+			
+		  var i_user_id = $('#i_user_id').val();			
+		  var datatosend=$("#frm_search").serialize();
+		   showUILoader_nodialog('<img src="'+base_url+'images/loading_big.gif" width="50"/> ');
+			  $.ajax({
+				 type: "POST",
+				 url: base_url+'logged/tweets/my_friends_tweets_ajax_pagination/'+i_user_id,
+				 data: datatosend,
+				 dataType : 'json',
+				 success: function(data){
+						$('#frm_search')[0].reset();
+						
+						if(data.html!='') {
+							alert( data.cur_page+' posting');
+							$('#show_more_div').remove();
+							$('#frnd_tweet_contents').html(data.html);
+							$('#show_more_tweets_link').attr('page_value', data.cur_page);
+							$('#show_more_tweets_link').attr('onclick','');
+							$('#show_more_tweets_link').attr('onclick','show_more_tweets('+data.cur_page+')');
+						}
+						else {
+							$('#frnd_tweet_contents').html('<div class="view_more" style="text-align: center;" ><p class="blue_bold12" style="font-size:14px;">No Tweets.</p></div>');
+							$('#show_more_div').remove();
+						}
+						
+						
+						//alert(data.no_of_result- data.current_page);
+						if(data.no_of_result == 0){
+							$('#show_more_div').remove();
+						}
+						else if(data.view_more==false )
+						{
+							//alert(1);
+							$('#frnd_tweet_contents').append('<div class="view_more" style="text-align: center;"><p class="blue_bold12" style="font-size:14px;">No More Tweets.</p></div>');
+							$('#show_more_div').remove();
+						}
+						else if((data.no_of_result - data.cur_page != 0)){
+							//alert(2);
+							
+							$('#show_more_div').remove();
+							$('#mid_container').append('<div class="view_more" id="show_more_div"><a href="javascript:void(0);" id="show_more_tweets_link" page_value="'+data.cur_page+'" onclick="show_more_tweets('+data.cur_page+')">[view more]dd </a> </div>');
+						}
+						hideUILoader_nodialog();
+					 }
+			   });	 
+	});
+ 
+
+
+});
+
+
+</script>

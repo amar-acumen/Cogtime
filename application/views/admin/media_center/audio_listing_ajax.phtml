@@ -1,0 +1,73 @@
+<input type="hidden" id="current_page" value="<?=$current_page?>" />
+<table width="100%" border="0" cellspacing="0" cellpadding="0" class="admin-table">
+                              <tr>
+                                <th align="left" valign="middle" height="30" width="80">Posted On</th>
+                             <?php /*?>   <th align="left" valign="middle" height="30" width="80">By Admin ID</th>
+                              <?php */?>
+                                <th align="left" valign="middle" height="30" width="185">Audio Title</th>
+                                <th align="left" valign="middle" height="30" width="95">Category</th>
+                                <th align="left" valign="middle" height="30" width="400">Description</th>
+                                <th align="left" valign="middle" height="30">Feature</th>
+								<th align="left" valign="middle" height="30" width="90">Posted By</th>
+                                <th align="center" valign="middle" height="30" width="42" class="last">Actions</th>
+                              </tr>
+                              
+                              
+                              <?php
+                              //pr($result_arr);
+                              if(count($result_arr))
+                              {
+                                  
+                                  foreach($result_arr as $res)
+                                  {
+                                        $post_on_arr=array();   
+                                      $posted_on = getShortDateWithTime($res['dt_posted_on'],7);
+                                      $post_on_arr = explode('  ',$posted_on);
+                                      
+                                      $post = $post_on_arr[0]."<br>".$post_on_arr[1];
+                              ?>
+                              
+                              <tr>
+                                <td align="left" valign="top"><?=$post?></td>
+                            <?php /*?> >  <td align="left" valign="top"><?=$res['i_posted_by']?></td>
+                             <?php */?>
+                                <td align="left" valign="top"><?=$res['s_title']?></td>
+                                <td align="left" valign="top"><?=$res['cat_name']?></td>
+                                <td align="left" valign="top"><?=my_substr(strip_tags($res['s_desc']),100)?></td>
+                                <td align="left" valign="top"><?=($res['is_featured']==1)?'Yes':''?></td>
+								<td align="left" valign="top"><?=get_admin_username_by_id($res['i_posted_by'])?></td>
+                                <td align="center" valign="middle" class="last">
+                                <input name="" title="Edit" type="button" class="edit-button"  value="" 
+onclick="window.location=admin_base_url+'media_center/edit_audio/index/<?=$current_page?>/<?=$res['id']?>/'"/>
+                                <input name="" title="Delete" type="button" class="delete-button"  value="" onclick="return confirm_delete_(<?=$res['id']?>);"/>
+                                </td>
+                              </tr>
+                              
+                              
+                              <?php
+                                    }
+                              }
+                              else
+                              {
+                              ?>
+                                 <tr>
+                                    <td style="text-align:center;" height="80" colspan="20">No data available!!!</td>
+                                </tr>
+                             <?php
+
+                              }
+                              ?>
+                        
+                            </table>
+                            
+                            
+<?php
+
+if($page_links) :
+?>         
+<div class="paging">
+            <ul><?= $page_links ?></ul>
+</div>        
+<?php
+endif;
+?>  

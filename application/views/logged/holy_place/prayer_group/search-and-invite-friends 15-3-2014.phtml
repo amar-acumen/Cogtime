@@ -1,0 +1,196 @@
+<?php include(APPPATH."views/layouts/logged_header.phtml");?>
+            <!-- NAVIGATION SECTION -->
+      <?php include(APPPATH."views/layouts/nav.phtml");?>
+      <!-- /NAVIGATION SECTION -->
+      </div>
+</div>
+<!-- /HEADER SECTION -->
+<div class="clr"></div>
+<!-- CONTENT SECTION -->
+<div id="content_section">
+      <div id="container">
+            <div id="mid_content">
+                 
+                 
+                  <!-- main container -->
+                  <div class="main-prayer-group">
+                      <!--buttons section start -->
+                     <div class="arrow_btm"></div>
+                      
+                     <div class="page_heading_01 grey">
+                            	<div class="left">Search and Invite - <?=$prayer_detail_arr['s_group_name']?></div>
+                     </div>
+                      
+                      <div class="clr"></div>
+                      <ul class="back-prayer-option">
+									<li><a href="<?=base_url().'prayer-group.html'?>">Back to Prayer Group</a></li>
+						</ul>
+                      <!--buttons section end -->
+					  
+					  <!--payer notification start-->
+					  <div class="main-payer-section">
+                      <div class="payer-notification">
+						<div class="nw-right-heading">
+                           <div class="left"><h4>Search Partner From </h4></div>
+                        </div>
+						
+						<div class="notification-list-box">
+							<form  method="" action="">
+								<div class="pra-search-friends">
+									<span class="pra-search-friends-span"><input type="checkbox" id="frnd_typ1"  name="chk_type[]" value="1" class="pra-search-friends-check"/>Friends </span>
+									<span class="pra-search-friends-span"><input type="checkbox" name="chk_type[]" id="frnd_typ2" value="1" class="pra-search-friends-check"/>Net Pals </span>
+									<span class="pra-search-friends-span"><input type="checkbox" name="chk_type[]" id="frnd_typ3" value="1" class="pra-search-friends-check"/>Prayer Partner</span>
+                                    <input type="hidden" name="" id="hd_submit" value="Y"  />
+								</div>
+                                <div class="clr"></div>
+                                <div class="user-txt-nw">User Name:</div>
+                                    <input type="text" class="Card-Holder-Name" name="txt_name" id="txt_name">
+								<div class="clr"></div>
+								<input type="button" name="" value="Search" class="yellow-btn" onclick="searchFriend();">
+								
+							</form>
+						</div>
+                          
+                          <div class="" style="display:none;" id="data_div">
+                                <div class="nw-right-heading">
+                                         <div class="left"><h4>Search List </h4></div>
+                                </div>
+                                    <div class="notification-list-box">
+                                        <ul class="prayermember-ul">
+									<DIV id="listingContent"><?=$listingContent?></DIV>	
+                                   </ul>
+                                   </div>					
+                          </div>
+                         
+                         
+                         </div>
+					                      
+                      <input type="hidden" id="current_group_id" value="<?=$prayer_group_id?>" />
+                      <!--prayer wall eight start -->
+                      <?php include(APPPATH.'views/logged/holy_place/prayer_group/group_member_list.phtml');?>
+                      <!--prayer wall eight end  -->
+                      
+					  </div>
+                      
+                              
+					  <!--payer notification end-->
+                      
+                  	  <div class="clr"></div> 
+                  </div>
+                  <!-- /main container -->
+                 
+            </div>
+      </div>
+      <div class="clr"></div>
+</div>
+<!-- /CONTENT SECTION -->
+<div class="clr"></div>
+<!-- FOOTER SECTION -->
+<?php include(APPPATH."views/layouts/footer.phtml");?>
+<?php include(APPPATH."views/logged/blocks/common_popup.phtml");?>
+
+<script type="text/javascript">
+var ajax_req_feeds = null;
+function show_more_feeds(page) {
+	
+	var group_id = $('#current_group_id').val();
+   
+    if(ajax_req_feeds!=null) {
+        ajax_req_feeds.abort();
+    }
+    showUILoader_nodialog();
+    ajax_req_feeds = $.ajax({
+        type: 'get',
+        url: base_url+'logged/prayer_group/generate_friend_search_listing_AJAX/'+group_id+'/'+page,
+        dataType: 'json',
+
+        success: function (data, status) {
+
+            hideUILoader_nodialog();
+            if(data.html!='') {
+                $('#listingContent').append(data.html);
+                $('#show_more_feeds_link').attr('page_value', data.cur_page);
+                $('#show_more_feeds_link').attr('onclick','');
+                $('#show_more_feeds_link').attr('onclick','show_more_feeds('+data.cur_page+')');
+            }
+            else {
+                $('#listingContent').append('<div class=" view_more" style="text-align: center;"><p class="blue_bold12" style="font-size:14px;">No more result.</p></div>');
+                $('#show_more_feeds_div').remove();
+            }
+            
+            if(data.view_more==false)
+            {
+                
+                $('#listingContent').append('<div class=" view_more" style="text-align: center;"><p class="blue_bold12" style="font-size:14px;">No more result.</p></div>');
+                $('#show_more_feeds_div').remove();
+            }
+            
+            
+        }    // end of success function...
+    });
+}
+
+
+function searchFriend()
+{
+   
+    var checked_option = $('input[name="chk_type[]"]:checked').length > 0;
+	var username =  $('#txt_name').val();
+	
+	var group_id = $('#current_group_id').val();
+    if(checked_option == false && username == '')
+    {
+        showUIMsg("Please select atleast one friend group or provide username.");
+        return false;
+    }
+    else
+    {
+      showUILoader_nodialog('<img src="'+base_url+'images/loading_big.gif" width="50"/> ');  
+        $.ajax({
+            type: 'post',
+            url: base_url+'logged/prayer_group/generate_friend_search_listing_AJAX/'+group_id,
+            dataType: 'json',
+            data: {'frnd_type1':$('input[id="frnd_typ1"]:checked').val(),
+                   'frnd_type2':$('input[id ="frnd_typ2"]:checked').val(),
+                   'frnd_type3':$('input[id="frnd_typ3"]:checked').val(),
+				   'txt_name': $('#txt_name').val(),
+				   'hd_submit': $('#hd_submit').val()},
+           success: function (data, status) {
+                
+                $('#data_div').show();
+                if(data.html!='') {
+                            
+                            $('#show_more_feeds_div').remove();
+                            $('#listingContent').html(data.html);
+                            $('#show_more_feeds_link').attr('page_value', data.cur_page);
+                            $('#show_more_feeds_link').attr('onclick','');
+                            $('#show_more_feeds_link').attr('onclick','show_more_feeds('+data.cur_page+')');
+                        }
+                        else {
+                            $('#listingContent').html('<div class=" view_more" style="text-align: center;"><p class="blue_bold12" style="font-size:14px;">No result.</p></div>');
+                            $('#show_more_feeds_div').remove();
+                        }
+                        
+                        if(data.no_of_result == 0){
+                            $('#show_more_feeds_div').remove();
+                        }
+                        else if(data.view_more==false)
+                        {
+                            //alert(1);
+                            $('#listingContent').append('<div class=" view_more" style="text-align: center;"><p class="blue_bold12" style="font-size:14px;">No More result.</p></div>');
+                            $('#show_more_feeds_div').remove();
+                        }
+                        else if((data.no_of_result - data.cur_page != 0) && data.view_more!=false){
+                        
+                            //alert(2);
+                            $('#show_more_div').remove();
+                            $('.main-payer-section').after('<div class="custom_show view_more" id="show_more_feeds_div"><a href="javascript:void(0);" id="show_more_feeds_link" page_value="'+data.cur_page+'" onclick="show_more_feeds('+data.cur_page+')">[view more]  </a> </div>');
+                        }
+                
+                hideUILoader_nodialog();
+                
+            }    // end of success function...
+        });
+    }
+}
+</script>

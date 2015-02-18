@@ -1,0 +1,29 @@
+                                <?php
+                                
+                                    if(count($photo_result_arr))
+                                    {
+                                        $counter = 0;
+                                        foreach($photo_result_arr as $photo) :
+                                            $counter++;
+                                            $IMG = base_url()."uploads/user_photos/".getThumbName($photo['s_photo'],'mini');
+											$photo_img = base_url().'uploads/user_photos/'.getThumbName($photo['s_photo'],'big'); 
+											$comments_array = $photo['comments_arr'];
+                                ?>
+                                
+                                
+                                
+                                
+                              
+    							<li>
+                                    <a href="<?=base_url()?>public-profile-photo/<?=$profile_id?>/album/<?=$photo['id']?>/photo-details.html">
+                                    <div style="background:url(<?php echo $IMG?>) no-repeat center;width:60px; height:60px; border:3px solid #666666;" title="photo"></div>
+                                    <span><?= substr($photo['s_title'],0,10)?></span>
+                                    </a>
+                                </li>
+   
+                            <?php
+                                        endforeach;
+                                    }
+                            ?>
+                         
+                       

@@ -1,0 +1,219 @@
+<?php
+	include(APPPATH ."views/layouts/header.phtml");
+?>
+<!-- CONTENT SECTION -->
+<div id="content_section" style="margin-top:8px;">
+      <div id="container">
+            <div id="top_corner">&nbsp;</div>
+            <div id="mid_content">
+                  <!-- left container -->
+                  <div id="register_l">
+                        <h1> Register Now - It’s  FREE </h1>
+                        <div class="frm_box">
+                        
+                        
+                        	<form name="frm_registration" id="frm_registration"  method="post" action="<?=base_url()?>register.html" enctype="multipart/form-data">
+                        
+                              <div class="lable01">Title:</div>
+                              <div class="field01">
+                                    <select name="title" id="title" style="width:100px;">
+                                          <option value="-1" >Select</option> 
+                                          <option value="Mr" <?php echo $selected =($posted["title"]=='Mr')?'selected':''?>>Mr.</option>
+                                          <option value="Mrs" <?php echo $selected =($posted["title"]=='Mrs')?'selected':''?>>Mrs.</option>
+                                          <option value="Ms" <?php echo $selected =($posted["title"]=='Ms')?'selected':''?>>Ms.</option>
+                                    </select>
+                                    <script type="text/javascript">
+                                    $(document).ready(function(arg) {
+                                        $("#title").msDropDown();
+                                        $("#title").hide();
+                                    })
+                                </script>
+                                <?php if($error_title != '') {?>
+                                <div class="error_massage" style="display:block;clear:both;"><?php echo $error_title; ?></div>
+                                <?php }?>
+                              </div>
+                              <div class="clr"></div>
+                              <div class="lable01">First Name:</div>
+                              <div class="field01">
+                                    <input name="txt_first_name" id="txt_first_name" type="text" value="<?=$posted['txt_first_name']?>"/>
+                                    <?php if(form_error('txt_first_name') != ''){ ?><?php echo form_error('txt_first_name'); }?>
+                              </div>
+                              <div class="clr"></div>
+                              <div class="lable01">Last Name:</div>
+                              <div class="field01">
+                                    <input name="txt_last_name" id="txt_last_name" type="text" value="<?=$posted['txt_last_name']?>"/>
+                                    <?php if(form_error('txt_last_name') != ''){ echo form_error('txt_last_name'); } ?>
+                              </div>
+                              <div class="clr"></div>
+                              
+                               <div class="lable01">Chat Name:</div>
+                              <div class="field01">
+                                    <input name="txt_chat_display_name" id="txt_chat_display_name" type="text" value="<?=$posted['txt_chat_display_name']?>"/>
+                                    <?php if(form_error('txt_chat_display_name') != ''){ echo form_error('txt_chat_display_name'); } ?>
+                              </div>
+                              <div class="clr"></div>
+                              
+                              <div class="lable01">Gender:</div>
+                              <div class="field01">
+                                    <select name="gender" id="gender" style="width:100px;">
+                                          <option value="-1">Select</option>  
+                                          <option value="M" <?php echo $selected =($posted["gender"]=='M')?'selected':''?>>Male</option>  
+                                          <option value="F" <?php echo $selected =($posted["gender"]=='F')?'selected':''?>>Female</option>
+                                    </select>
+                                    <script type="text/javascript">
+                                    $(document).ready(function(arg) {
+                                        $("#gender").msDropDown();
+                                        $("#gender").hide();
+                                    })
+                                </script>
+                                 <?php if($error_gender != ''){  echo '<div class="error_massage" style="clear:both;">'.$error_gender.'</div>'; }?>
+                              </div>
+                             
+                              <div class="clr"></div>
+                              <div class="lable01">Email:</div>
+                              <div class="field01">
+                                    <input name="txt_email"  id="txt_email" type="text" value="<?=$posted['txt_email']?>"   />
+                                    <?php if(form_error('txt_email') != ''){  echo form_error('txt_email');} ?>
+                              </div>
+                              <div class="clr"></div>
+                              <div class="lable01">Password:</div>
+                              <div class="field01">
+                                    <input name="txt_password" id="txt_password" type="password" value="" autocomplete ="off" />
+                                    <?php // if(form_error('txt_password') != ''){ echo form_error('txt_password'); }?>
+                                    <?php  if($error_password != ''){  ?>
+                                       <div class="error_massage"><?php echo $error_password; ?></div><?php } ?>
+                              </div>
+                              <div class="clr"></div>
+                              <div class="lable01">Confirm Password:</div>
+                              <div class="field01">
+                                    <input name="txt_cpassword" id="txt_cpassword" type="password" value=""/>
+                                    <?php //if(form_error('txt_cpassword') != ''){ echo form_error('txt_cpassword');} ?>
+                                       <?php  if($error_cpassword != ''){  ?>
+                                       <div class="error_massage"><?php echo $error_cpassword; ?></div><?php } ?>
+                                    
+                              </div>
+                              <div class="clr"></div>
+                              <div class="lable01">Time Zone:</div>
+                              <div class="field01">
+                                    <select name="time_zone" id="time_zone" style="width:312px;">
+                                          <option value="-1">Select</option>
+                                          <?= makeOptionTimezones($posted['time_zone']) ?>
+                                          
+                                    </select>
+                                   
+                                    <script type="text/javascript">
+                                    $(document).ready(function(arg) {
+                                        $("#time_zone").msDropDown();
+                                        $("#time_zone").hide();
+                                    })
+                                </script>
+                                
+                           <?php  if($error_zone != ''){  ?>
+                           <div class="error_massage"><?php echo $error_zone; ?></div><?php } ?>
+                              </div>
+                              <div class="clr"></div>
+                             
+                              <div class="lable01">Captcha:</div>
+                              <div class="field01" style="padding-top:3px;">
+                                    <p> Type the characters you see in the picture below:</p>
+                              </div>
+                              <div class="clr"></div>
+                              <div class="lable01">&nbsp;</div>
+                              <div class="field01">
+                               <p><!--<img src="images/captcha.png" alt="" />-->
+                                    <?php
+									echo $captcha["image"];
+								?>	</p>
+                              </div>
+                              <div class="clr"></div>
+                              <div class="lable01">&nbsp;</div>
+                              <?php /*?><div class="field01">
+                                    <input name="txt_" type="text"  />
+                              </div><?php */?>
+                              <div class="field01"> 	
+							   <input type="hidden" id="ssc" name="ssc" value="<?=encrypt($captcha["word"]);?>" />
+                               <input type="text" id="security_code" name="security_code" />
+									 <?php if(form_error('security_code') != '') { echo form_error('security_code');} ?>
+                           	  </div>
+                              <div class="clr"></div>
+                          
+                                                         
+                              
+                              <div class="lable01">&nbsp;</div>
+                              <div class="field01">
+                                 <input name="txt_terms_cond"  id="txt_terms_cond" type="checkbox"  value="1" <?=($posted["txt_terms_cond"]== 1)?'checked="checked"':''?>/>
+                                    Accept <a href="javascript:void();" class="blue_link"  onclick="return show_dialog('terms_condition')">Terms & Conditions</a> & <a href="javascript:void();" class="blue_link"  onclick="return show_dialog('privacy_policy')">Privacy Policy </a>
+                                  <?php  if($error_terms_cond != ''){  ?>
+                           <div class="error_massage"><?php echo $error_terms_cond; ?></div><?php } ?>  
+                                  </div>
+                              <div class="clr"></div>
+                              <div class="lable01">&nbsp;</div>
+                              <div class="field01">
+                               		<input type="hidden" name="is_submitted" id="is_submitted" value="Y"  />
+                                    <input name="btn_submit" type="submit" value="Sign Up!"  class="btn"/>
+                              </div>
+                              <div class="clr"></div>
+                            </form>
+                        </div>
+                  </div>
+                  <!-- /left container -->
+                  <!-- right container -->
+                  <div id="register_r">
+                        <h1>Lorem ipsum dolor sit amet</h1>
+                        <p>CoGTime Xtian Network aims to network Christians around the world.</p>
+                        <p>As a centre point it is envisaged the site will help unite global communities and meet the needs of the less privileged by channeling provision from other societies around the world. </p>
+                        <p>What you get from this site is:</p>
+                        <ul class="list01 list04">
+                              <li>Lorem ipsum dolor sit amet.</li>
+                              <li>Consectetur adipisicing elit.</li>
+                              <li>Sed do  tempor incididunt.</li>
+                              <li>Ut labore et dolore magna aliqua.</li>
+                        </ul>
+                  </div>
+                  <!-- /right container -->
+            </div>
+            <div id="bot_corner">&nbsp;</div>
+      </div>
+      <div class="clr"></div>
+</div>
+<!-- /CONTENT SECTION -->
+<div class="clr"></div>
+<!-- FOOTER SECTION -->
+<?php include(APPPATH."views/layouts/footer.phtml");?>
+<!-- /FOOTER SECTION -->
+
+<div class="lightbox terms_condition" style="width:700px;">
+    <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="images/close.png" alt="" /></a></div>
+    <div class="top"><div>&nbsp;</div></div>
+    <div class="mid">
+        <div class="heading"><h4>Terms & Conditions</h4></div>
+          <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec velit odio, pulvinar eu tincidunt id, tincidunt eu mauris. Aliquam ac tortor massa, sit amet interdum libero. Pellentesque arcu est, venenatis ut convallis nec, sollicitudin eget nisl. Suspendisse hendrerit luctus nibh, quis faucibus arcu pretium sit amet. Pellentesque dui enim, imperdiet in accumsan eu, interdum sed neque. Quisque vitae magna eget metus ultricies facilisis. Donec malesuada sagittis fringilla. Phasellus blandit nisi congue urna vestibulum adipiscing.</p>
+<p>&nbsp;</p>
+<p>Suspendisse sit amet eleifend urna. Vivamus accumsan suscipit mauris, et molestie nisi lobortis sed. Donec fringilla blandit nunc eu euismod. Mauris leo arcu, suscipit nec vulputate pretium, feugiat id mauris. Duis quis ante eget metus blandit cursus. Morbi cursus euismod facilisis. Pellentesque semper accumsan mi a pretium. Nunc a dolor erat, eu tristique ipsum. Suspendisse potenti. Vestibulum condimentum, est non condimentum interdum, nisi lorem tempus lorem, eget posuere sapien arcu sit amet ligula. Nulla neque enim, egestas id lacinia nec, rutrum id lorem.</p>
+<p>&nbsp;</p>
+<p>Morbi eu neque in arcu aliquet dapibus. Pellentesque quis dignissim risus. Quisque posuere consectetur mi, ullamcorper faucibus justo iaculis et. Integer aliquet placerat porta. Morbi vitae leo augue, lacinia iaculis leo. Donec varius bibendum bibendum. Quisque nibh velit, sagittis laoreet congue quis, rhoncus a metus. Proin vel risus purus. Pellentesque posuere aliquet lectus nec adipiscing. Aenean eget iaculis sem. Nulla id blandit ligula.</p>
+<p>&nbsp;</p>
+<p>Integer auctor purus at arcu convallis feugiat. Nullam a est a ante adipiscing pretium nec nec quam. Etiam sed orci vitae neque adipiscing pellentesque et non sem. Vestibulum pellentesque tellus vel magna tempus vel adipiscing turpis mollis. Nulla facilisi. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aenean in mauris et arcu vestibulum eleifend. Integer ante elit, fermentum ac lacinia fermentum, sollicitudin eu massa. Cras ultricies sapien sed mauris feugiat imperdiet sed in mauris. Sed felis nulla, sollicitudin sed facilisis a, mollis sed diam. Sed eu condimentum ipsum.</p>
+
+    </div>
+    <div class="bot"><div>&nbsp;</div></div>
+</div>
+
+
+<div class="lightbox privacy_policy" style="width:700px;">
+    <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="images/close.png" alt="" /></a></div>
+    <div class="top"><div>&nbsp;</div></div>
+    <div class="mid">
+        <div class="heading"><h4>Privacy policy</h4></div>
+          <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec velit odio, pulvinar eu tincidunt id, tincidunt eu mauris. Aliquam ac tortor massa, sit amet interdum libero. Pellentesque arcu est, venenatis ut convallis nec, sollicitudin eget nisl. Suspendisse hendrerit luctus nibh, quis faucibus arcu pretium sit amet. Pellentesque dui enim, imperdiet in accumsan eu, interdum sed neque. Quisque vitae magna eget metus ultricies facilisis. Donec malesuada sagittis fringilla. Phasellus blandit nisi congue urna vestibulum adipiscing.</p>
+<p>&nbsp;</p>
+<p>Suspendisse sit amet eleifend urna. Vivamus accumsan suscipit mauris, et molestie nisi lobortis sed. Donec fringilla blandit nunc eu euismod. Mauris leo arcu, suscipit nec vulputate pretium, feugiat id mauris. Duis quis ante eget metus blandit cursus. Morbi cursus euismod facilisis. Pellentesque semper accumsan mi a pretium. Nunc a dolor erat, eu tristique ipsum. Suspendisse potenti. Vestibulum condimentum, est non condimentum interdum, nisi lorem tempus lorem, eget posuere sapien arcu sit amet ligula. Nulla neque enim, egestas id lacinia nec, rutrum id lorem.</p>
+<p>&nbsp;</p>
+<p>Morbi eu neque in arcu aliquet dapibus. Pellentesque quis dignissim risus. Quisque posuere consectetur mi, ullamcorper faucibus justo iaculis et. Integer aliquet placerat porta. Morbi vitae leo augue, lacinia iaculis leo. Donec varius bibendum bibendum. Quisque nibh velit, sagittis laoreet congue quis, rhoncus a metus. Proin vel risus purus. Pellentesque posuere aliquet lectus nec adipiscing. Aenean eget iaculis sem. Nulla id blandit ligula.</p>
+<p>&nbsp;</p>
+<p>Integer auctor purus at arcu convallis feugiat. Nullam a est a ante adipiscing pretium nec nec quam. Etiam sed orci vitae neque adipiscing pellentesque et non sem. Vestibulum pellentesque tellus vel magna tempus vel adipiscing turpis mollis. Nulla facilisi. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aenean in mauris et arcu vestibulum eleifend. Integer ante elit, fermentum ac lacinia fermentum, sollicitudin eu massa. Cras ultricies sapien sed mauris feugiat imperdiet sed in mauris. Sed felis nulla, sollicitudin sed facilisis a, mollis sed diam. Sed eu condimentum ipsum.</p>
+
+    </div>
+    <div class="bot"><div>&nbsp;</div></div>
+</div>
+

@@ -1,0 +1,34 @@
+<?php
+if(count($result_liked_arr) > 0){ 
+?>
+<div class="shade_box_white" style="padding: 12px 0px 12px 4px;">
+<?php
+ 	foreach($result_liked_arr as $key=> $val){	
+		$profile_image = get_profile_image($val['i_liked_user_id'],'thumb');
+		$profile_displayname = $val['s_profile_name'];
+		$profile_link = get_profile_url($val['i_liked_user_id'],$val['s_profile_name']);
+?>
+
+    <div class="user_div"> <a href="<?=$profile_link?>"><div class="pro_photo2" style="background:url('<?=$profile_image?>') no-repeat center;width:60px; height:60px;"></div></a> <a href="<?=$profile_link?>" class="blue_link"><?=$profile_displayname?></a> </div>
+    
+
+<?php    }
+?>
+</div>
+<?php  }
+else
+{ 
+	echo '<div class="shade_box_white"  style="padding: 12px 0px 12px 4px;"><p class="blue_bold12" style="margin-left: 205px; margin-top: 80px;">No Likes.</p></div>';
+}
+?>
+<?php if($page_links){ ?>
+<div class="">
+<?php /*?><div class="left">Viewing Page <?=$current_loaded_page_no?> of <?=$total_pages?> </div>
+<?php */?>
+<div class="right">
+       <ul class="small-paging">
+        <?=$page_links?> 
+        </ul>
+</div>
+</div>
+<?php } ?>

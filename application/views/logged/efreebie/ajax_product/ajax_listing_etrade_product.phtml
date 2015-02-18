@@ -1,0 +1,97 @@
+<div class="div_content" style=" margin-top:0px;">
+
+							<?php
+							//pr($prod_data);
+							if($prod_data)
+							{
+								foreach($prod_data as $product)
+								{
+									$LOGO	= base_url().'uploads/e_trade_product/'.getThumbName($product['s_image'],'thumb');
+									//$ring_detail_link	= base_url().'rings/'.$product['ringid'].'/ring-home.html';
+							?>
+									<div class="ne-etrade-product-category-list">
+									<div class="thumb">
+                                    	<div class="img_div" style="background:url(<?php echo $LOGO?>) no-repeat center #fff;" onclick="window.location='<?php echo base_url()?>efreebie/<?php echo $product['id']?>/detail.html'" ></div>
+                                    </div>
+									<div class="thumb-right">
+                                    	<?php
+										if($product['i_user_id']==intval(decrypt($this->session->userdata('user_id'))))
+										{
+										?>
+											<ul class="pro-categorylist">
+                                                <li><a href="javascript:void(0)" onclick="show_dialog('delete-product');$('#i_prod_id').val('<?php echo $product['id']?>');">Delete</a></li>
+                                                <li>I</li><li>
+                                                </li><li><a href="<?php echo base_url()?>efreebie/<?php echo $product['id']?>/edit-product">Edit</a></li>
+											</ul>
+                                            
+                                            <?php
+										}
+										?>
+										<br class="clear"/>
+									
+										<div class="heading-etrade"><strong><?php echo $product['product_id']?></strong></div>
+										<div class="heading-etrade" onclick="window.location='<?php echo base_url()?>efreebie/<?php echo $product['id']?>/detail.html'" style="cursor:pointer;"><?php echo $product['s_name']?></div>
+										<p class="attribute1">
+											<?php echo substr($product['s_attribute1'],0,100)?>
+										</p>
+                                       
+									</div>
+									<ul class="ne-etrade-breadcrumb2">
+											<li>Brand: <?php echo $product['s_brand'];?></li>
+											<li>Product Age: <?php echo $product['s_product_age']?></li>
+                                             <li><a class="view-shipping-free" href="javascript:void(0);" onclick="showShippingFee('<?php echo $product['id']?>')">View Shipping Fee</a>
+											<!--slide view shipping free-->
+												<div class="slide-view-shipping-free attribute1" id="shippingfee_<?php echo $product['id']?>">
+													<p><strong> Local Shipping Fee :</strong> <?php echo get_price($product['f_local_shipping_cost'])?></p>
+													<p><strong> International Shipping Fee :</strong> <?php echo get_price($product['f_international_shipping_cost'])?></p>
+												</div>
+											<!--slide view shipping free-->
+											</li><li>Shipping Preference: <?php echo ($product['i_open_to_offer_for_local']==1)?'Local':(($product['i_open_to_offer_for_local']==2)?'International':'Local & International')?></li>
+											<li>Posted On: <?php echo getShortDate($product['dt_insert_time'],5)?></li>
+											<li>Seller From: <?php echo get_user_address_info($product['i_user_id'])?></li>
+									</ul>
+							<!--Quantity Section-->
+                           
+							<!--Quantity Section-->
+							  <p class="attribute1">
+								<strong> Details: </strong><?php echo substrws($product['s_description'],70)?>
+                              </p>
+                                <br class="clr"/>
+                                <a class="view_more" href="<?php echo base_url()?>efreebie/<?php echo $product['id']?>/detail.html">Read More</a>
+							   </div>
+                            <?php
+								}
+							}
+							?>
+</div>
+<input type="hidden" id="current_page" name="current_page" value="<?=$current_page_1?>"  />                     
+
+                            
+<script type="text/javascript">
+
+function sendRequest(obj,id)
+{
+	$.ajax({
+			"type":'post',
+			"data":$('#frmReq'+id).serialize(),
+			"dataType":'json',
+			"url":'<?php base_url()?>logged/e_freebie/sendrequest',
+			"success": function(data)
+						{
+							if(data.success==false)
+							{
+								showUIMsg(data.msg);
+							}
+							else
+							{
+								obj.prev().prev().slideUp();
+								$('#frmReq'+id+' .reqqty_txt').val('');
+								showUIMsg(data.msg);
+							}
+						}
+		
+		});
+}
+
+</script>                          
+

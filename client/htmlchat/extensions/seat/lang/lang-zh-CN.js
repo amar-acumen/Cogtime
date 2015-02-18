@@ -1,0 +1,10 @@
+var bid_for_front_sofa_content = "请输入沙发数量（100点/沙发）！";
+var bid_for_front_sofa_title = "抢座位";
+var only_positive_integer_allowed = "请输入正整数！";
+var insufficient_credits_tip = "您的点数不够，请充值，谢谢！";
+var fail_to_bid_sofa = "对不起，占座失败！";
+var bid_and_take_seat = "抢座, 当前:%C个沙发";
+var default_seat_name = "抢座";
+var btn_confirm = "确定";
+var btn_cancel = "取消";
+var bid_credits_not_enought = "您输入的沙发数不足以抢得这个座位!";

@@ -1,0 +1,18 @@
+/* Body of the bar (inner)*/
+#topcmm_fb #presence_ui {
+    background: url(../images/MegaSprite_5004_ltr-black.gif) repeat-x 0 -24px;
+}
+
+/* Tab focused*/
+#topcmm_fb #presence_ui .focused {
+    background-color: #7d838a;
+    color: #fdfffc;
+}
+
+#topcmm_fb #presence_bar {
+    border: solid 1px #373a3f;
+}
+
+#topcmm_fb .presence_bar_button {
+    color: #fdfffc;
+}

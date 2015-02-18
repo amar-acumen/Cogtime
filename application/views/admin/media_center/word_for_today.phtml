@@ -1,0 +1,646 @@
+<div class="clr"></div>
+<!--navigation section start -->
+<?php include(APPPATH."views/layouts/admin/admin_nav.phtml");?>
+<!--navigation section end -->
+<!-- CONTENT SECTION -->
+<div id="content_section">
+      <div id="container">
+            <!--<div id="top_corner">&nbsp;</div> -->
+            <div id="mid_content">
+                  <div class="page_heading left">
+                        <div class="left"><img src="../images/icons/login.png" alt="" />  Word for Today</div>
+                  </div>
+                  <div class="clr"></div>
+                  <div id="right_container">
+                        <div class="arrow_btm"></div>
+                        <div class="content_area">
+                            <!--filter section start -->
+                            <div class="filter">
+                                <span class="filter-by">Filter By &raquo;</span>
+                                <form id="search_frm" action="" method="post" enctype="multipart/form-data" class="filter-search" onsubmit="return search_();">
+                                    <label>Title :</label><input id="txt_search_title" name="txt_search_title" type="text" />
+                                    <input name="" type="submit" value="GO" class="go" />
+                                    
+                                    &nbsp;&nbsp;<a href="javascript:void(0)" onclick="return show_all_();" >Show all</a>
+                                </form>  
+                                <div class="clr"></div>
+                            </div>
+                            <!--filter section end -->
+                        
+                            <h4>Word for Today</h4>
+                            <div class="right" style="margin-bottom:14px;"><input name="" type="button" value="Add New Word for Today"  class="evnt_btn2" onclick="return show_dialog('add-new-word')"/></div>
+                        
+                        <div class="clr"></div>
+                        
+                        <DIV id="table_contents">
+                        <?=$content?>
+                        </DIV>
+                        
+                        
+                                                        
+                        <div class="clr"></div>
+                        </div>
+                  </div>
+                  <div class="clr"></div>
+            </div>           
+            <!--<div id="bot_corner">&nbsp;</div> -->
+      </div>
+      <div class="clr"></div>
+</div>
+
+
+<!-- /CONTENT SECTION -->
+
+
+
+
+
+<!--popup one start-->
+<div class="lightbox delete-page-popup" style="width:500px;">
+      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="../images/close.png" alt="" /></a></div>
+      <div class="top"><div>&nbsp;</div></div>
+      <div class="mid">
+            <div class="heading" style="margin-bottom:0px;">
+                  <div class="left">
+                        <h4>Delete Word for Today</h4>
+                  </div>
+            </div>
+               <div class="shade_box_white">
+               <p class="center-text">Do you really want to delete this word for today?</p>
+               <form action="" method="post" enctype="multipart/form-data">
+               <input type="hidden" id="del_word_id" value="">
+                       <input name="" type="button" value="Yes" class="btn" style="margin-left:146px;" onclick="return delete_word();"/>
+                    <input name="" type="button" value="No" class="btn" onclick="hide_dialog()"/>
+               </form>   
+               <div class="clr"></div>
+            </div>
+            
+      </div>
+      <div class="bot"><div>&nbsp;</div></div>
+</div>
+<!--popup one end-->
+
+<!--add word for today popup -->
+<div class="lightbox add-new-word" style="width:500px;">
+      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog();clear_box();"><img src="../images/close.png" alt="" /></a></div>
+      <div class="top"><div>&nbsp;</div></div>
+      <div class="mid">
+            <div class="heading" style="margin-bottom:0px;">
+                  <div class="left">
+                        <h4>Add New Word for Today</h4>
+                  </div>
+            </div>
+            <div class="shade_box_white">
+                   <div class="content_area frm_box2">
+                              <form id="add_word_frm" action="" method="post" enctype="multipart/form-data" onsubmit="return add_word_()">
+                                  <div class="lable01">Title :</div>
+                                  <div class="field01">
+                                        <input id="txt_add_title" name="txt_add_title" type="text" />
+                                  </div>
+                                  <div id="err_add_title" class="error-message"></div>
+                                  <div class="clr"></div>
+                                  <div class="lable01">Description : </div>
+                                  <div class="field01">
+                                        <textarea id="txtarea_add_desc" class="lightbox-textarea" name="txtarea_add_desc" style="height: 212px;"></textarea>
+                                        <br class="clr" />
+                                        <label class="left">(Maximum characters: 1000)</label>
+                                  </div>
+                                  <div id="err_add_desc" class="error-message"></div>
+                                  <div class="clr"></div>
+                                  
+                                  <div class="lable01">&nbsp;</div>
+                                  <div class="field01">
+                                        <input name="" type="submit" class="btn"  value="Add"/><input name="" type="reset" class="btn"  value="Cancel" onclick="hide_dialog();clear_box();"/>
+                                  </div>
+                              </form>
+                              <div class="clr"></div>
+                        </div>
+           
+           
+           
+           
+            </div>
+      </div>
+      <div class="bot"><div>&nbsp;</div></div>
+</div>
+<!--add word for today popup end -->
+
+
+<!--edit word for today popup -->
+<div class="lightbox edit-new-word" style="width:500px;">
+      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog();clear_box();"><img src="../images/close.png" alt="" /></a></div>
+      <div class="top"><div>&nbsp;</div></div>
+      <div class="mid">
+            <div class="heading" style="margin-bottom:0px;">
+                  <div class="left">
+                        <h4>Edit Word for Today</h4>
+                  </div>
+            </div>
+            <div class="shade_box_white">
+                   <div class="content_area frm_box2">
+                              <form id="edit_word_frm" action="" method="post" enctype="multipart/form-data" onsubmit="return edit_word_();">
+                                  <div class="lable01">Title :</div>
+                                  <div class="field01">
+                                        <input id="txt_edit_title" name="txt_edit_title" type="text" />
+                                  </div>
+                                  <div id="err_edit_title" class="error-message"></div>
+                                  <div class="clr"></div>
+                                  <div class="lable01">Description : </div>
+                                  <div class="field01">
+                                        <textarea id="txtarea_edit_desc" class="lightbox-textarea" name="txtarea_edit_desc" style="height: 212px;"></textarea>
+                                        <br class="clr" />
+                                        <label class="left">(Maximum characters: 1000) </label>
+                                  </div>
+                                  <div id="err_edit_desc" class="error-message"></div>
+                                  <div class="clr"></div>
+                                  
+                                  <div class="lable01">&nbsp;</div>
+                                  <div class="field01">
+                                  <input type="hidden" id="i_edit_word_id" name="i_edit_word_id" value="">
+                                  <input type="hidden" id="i_current_page" name="i_current_page" value="">
+                                        <input name="" type="submit" class="btn"  value="Update"/><input name="" type="reset" class="btn"  value="Cancel" onclick="hide_dialog();clear_box();"/>
+                                  </div>
+                              </form>
+                              <div class="clr"></div>
+                        </div>
+           
+           
+           
+           
+            </div>
+      </div>
+      <div class="bot"><div>&nbsp;</div></div>
+</div>
+<!--edit word for today popup end -->
+<!--popup view comment start-->
+<div class="lightbox comments-popup" style="width:600px;">
+      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="../images/close.png" alt="" /></a></div>
+      <div class="top"><div>&nbsp;</div></div>
+      <div class="mid">
+            <div class="heading" style="margin-bottom:0px;">
+                  <div class="left">
+                        <h4>View Comments</h4>
+                  </div>
+            </div>
+               <div class="shade_box_white" style="height:280px; overflow:auto">
+                       <div class="pop-content first">        
+                       <img src="../images/man.png" alt="posteb by" width="73" height="73" class="posted-by" />
+                       <div class="right-panel">
+                            <h5>Alex brown</h5>
+                            <h6>Updated on: <span>May 1, 2011</span> <span>12:26 PM</span></h6>
+                            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis p</p>
+                       </div>
+                    </div>
+                    <div class="pop-content">        
+                       <img src="../images/man.png" alt="posteb by" width="73" height="73" class="posted-by" />
+                       <div class="right-panel">
+                            <h5>Alex brown</h5>
+                            <h6>Updated on: <span>May 1, 2011</span> <span>12:26 PM</span></h6>
+                            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis p</p>
+                       </div>
+                    </div>
+                    <div class="pop-content">        
+                       <img src="../images/man.png" alt="posteb by" width="73" height="73" class="posted-by" />
+                       <div class="right-panel">
+                            <h5>Alex brown</h5>
+                            <h6>Updated on: <span>May 1, 2011</span> <span>12:26 PM</span></h6>
+                            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis p</p>
+                       </div>
+                    </div>
+                    <div class="pop-content">        
+                       <img src="../images/man.png" alt="posteb by" width="73" height="73" class="posted-by" />
+                       <div class="right-panel">
+                            <h5>Alex brown</h5>
+                            <h6>Updated on: <span>May 1, 2011</span> <span>12:26 PM</span></h6>
+                            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis p</p>
+                       </div>
+                    </div>
+               <div class="clr"></div>
+            </div>
+            
+      </div>
+      <div class="bot"><div>&nbsp;</div></div>
+</div>
+<!--popup view comment end-->
+
+<!--popup liked by start-->
+<div class="lightbox liked-by" style="width:750px;">
+      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="../images/close.png" alt="" /></a></div>
+      <div class="top"><div>&nbsp;</div></div>
+      <div class="mid">
+            <div class="heading" style="margin-bottom:0px;">
+                  <div class="left">
+                        <h4>Liked By</h4>
+                  </div>
+            </div>
+               <div class="shade_box_white" style="height:400px; overflow:auto">
+                       <div class="member-block">
+                        <img src="../images/man1.png" alt="pic" width="73" height="73" class="member-pic" />
+                        <h3>Alex</h3>
+                        <h4>Canada</h4>
+                        <a href="javascript:void(0);" class="remove">Remove</a>
+                    </div>
+                    <div class="member-block">
+                        <img src="../images/man1.png" alt="pic" width="73" height="73" class="member-pic" />
+                        <h3>Alex</h3>
+                        <h4>Canada</h4>
+                        <a href="javascript:void(0);" class="remove">Remove</a>
+                    </div>
+                    <div class="member-block">
+                        <img src="../images/man1.png" alt="pic" width="73" height="73" class="member-pic" />
+                        <h3>Alex</h3>
+                        <h4>Canada</h4>
+                        <a href="javascript:void(0);" class="remove">Remove</a>
+                    </div>
+                    <div class="member-block">
+                        <img src="../images/man1.png" alt="pic" width="73" height="73" class="member-pic" />
+                        <h3>Alex</h3>
+                        <h4>Canada</h4>
+                        <a href="javascript:void(0);" class="remove">Remove</a>
+                    </div>
+                    <div class="member-block">
+                        <img src="../images/man1.png" alt="pic" width="73" height="73" class="member-pic" />
+                        <h3>Alex</h3>
+                        <h4>Canada</h4>
+                        <a href="javascript:void(0);" class="remove">Remove</a>
+                    </div>
+                    <div class="member-block">
+                        <img src="../images/man1.png" alt="pic" width="73" height="73" class="member-pic" />
+                        <h3>Alex</h3>
+                        <h4>Canada</h4>
+                        <a href="javascript:void(0);" class="remove">Remove</a>
+                    </div>
+                    <div class="member-block">
+                        <img src="../images/man1.png" alt="pic" width="73" height="73" class="member-pic" />
+                        <h3>Alex</h3>
+                        <h4>Canada</h4>
+                        <a href="javascript:void(0);" class="remove">Remove</a>
+                    </div>
+                    <div class="member-block">
+                        <img src="../images/man1.png" alt="pic" width="73" height="73" class="member-pic" />
+                        <h3>Alex</h3>
+                        <h4>Canada</h4>
+                        <a href="javascript:void(0);" class="remove">Remove</a>
+                    </div>
+                    <div class="member-block">
+                        <img src="../images/man1.png" alt="pic" width="73" height="73" class="member-pic" />
+                        <h3>Alex</h3>
+                        <h4>Canada</h4>
+                        <a href="javascript:void(0);" class="remove">Remove</a>
+                    </div>
+                    <div class="member-block">
+                        <img src="../images/man1.png" alt="pic" width="73" height="73" class="member-pic" />
+                        <h3>Alex</h3>
+                        <h4>Canada</h4>
+                        <a href="javascript:void(0);" class="remove">Remove</a>
+                    </div>
+                    <div class="member-block">
+                        <img src="../images/man1.png" alt="pic" width="73" height="73" class="member-pic" />
+                        <h3>Alex</h3>
+                        <h4>Canada</h4>
+                        <a href="javascript:void(0);" class="remove">Remove</a>
+                    </div>
+                    <div class="member-block">
+                        <img src="../images/man1.png" alt="pic" width="73" height="73" class="member-pic" />
+                        <h3>Alex</h3>
+                        <h4>Canada</h4>
+                        <a href="javascript:void(0);" class="remove">Remove</a>
+                    </div>
+                    <div class="member-block">
+                        <img src="../images/man1.png" alt="pic" width="73" height="73" class="member-pic" />
+                        <h3>Alex</h3>
+                        <h4>Canada</h4>
+                        <a href="javascript:void(0);" class="remove">Remove</a>
+                    </div>
+                    <div class="member-block">
+                        <img src="../images/man1.png" alt="pic" width="73" height="73" class="member-pic" />
+                        <h3>Alex</h3>
+                        <h4>Canada</h4>
+                        <a href="javascript:void(0);" class="remove">Remove</a>
+                    </div>
+                    <div class="member-block">
+                        <img src="../images/man1.png" alt="pic" width="73" height="73" class="member-pic" />
+                        <h3>Alex</h3>
+                        <h4>Canada</h4>
+                        <a href="javascript:void(0);" class="remove">Remove</a>
+                    </div>
+                    <div class="member-block">
+                        <img src="../images/man1.png" alt="pic" width="73" height="73" class="member-pic" />
+                        <h3>Alex</h3>
+                        <h4>Canada</h4>
+                        <a href="javascript:void(0);" class="remove">Remove</a>
+                    </div>
+                    <div class="member-block">
+                        <img src="../images/man1.png" alt="pic" width="73" height="73" class="member-pic" />
+                        <h3>Alex</h3>
+                        <h4>Canada</h4>
+                        <a href="javascript:void(0);" class="remove">Remove</a>
+                    </div>
+                    <div class="member-block">
+                        <img src="../images/man1.png" alt="pic" width="73" height="73" class="member-pic" />
+                        <h3>Alex</h3>
+                        <h4>Canada</h4>
+                        <a href="javascript:void(0);" class="remove">Remove</a>
+                    </div>
+                    <div class="member-block">
+                        <img src="../images/man1.png" alt="pic" width="73" height="73" class="member-pic" />
+                        <h3>Alex</h3>
+                        <h4>Canada</h4>
+                        <a href="javascript:void(0);" class="remove">Remove</a>
+                    </div>
+                    <div class="member-block">
+                        <img src="../images/man1.png" alt="pic" width="73" height="73" class="member-pic" />
+                        <h3>Alex</h3>
+                        <h4>Canada</h4>
+                        <a href="javascript:void(0);" class="remove">Remove</a>
+                    </div>
+                    <div class="member-block">
+                        <img src="../images/man1.png" alt="pic" width="73" height="73" class="member-pic" />
+                        <h3>Alex</h3>
+                        <h4>Canada</h4>
+                        <a href="javascript:void(0);" class="remove">Remove</a>
+                    </div>
+               <div class="clr"></div>
+            </div>
+            
+      </div>
+      <div class="bot"><div>&nbsp;</div></div>
+</div>
+<!--popup liked by end-->
+
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+$(document).ready(function(arg) {
+     var current_page = $('#current_page').val();
+    //alert(current_page);
+    // for AJAX page-submission...
+    
+    
+    optionsArrAdd = {
+        beforeSubmit:  showBusyScreen,  // pre-submit callback 
+        success:       validateAddFrm, // post-submit callback 
+        url:        admin_base_url + "media_center/word_for_today/post_add_data"
+    }; 
+    
+    
+});
+//---------------------------------- add ----------------------------------------
+
+function add_word_()
+{
+    $('#add_word_frm').ajaxSubmit(optionsArrAdd);
+    return false;
+}
+function validateAddFrm(data)
+{
+    
+    var data = JSON.parse(data);
+
+    showUIMsg(data.msg);
+
+     $('.error-message').each(function(i){
+            $(this).attr('style','display:none');
+        });
+        
+    if(data.result=='failure') 
+    {
+       
+        
+        for ( var id in data.arr_messages ){
+            
+            if( $('#err_'+id) != null ) {
+                $('#err_'+id).html(data.arr_messages[id]);
+                $('#err_'+id).css('display', 'block');
+
+            }
+        }
+        
+    }
+    else {  //success
+        
+         //hideBusyScreen();
+         hide_dialog();
+         $('#add_word_frm')[0].reset();
+         $('#table_contents').html(data.html);
+         
+       
+    }
+
+}
+
+//---------------------------------- end add ----------------------------------------
+
+
+
+
+
+//------------------------------------- edit ------------------------------------------
+function fetch_word_info_(word_id)
+{
+   
+    $('#txt_edit_title').val('');
+    $('#txtarea_edit_desc').val('');
+    $('#i_edit_word_id').val('');
+    var current_page = $('#current_page').val();
+     showUILoader('<img src="<?= base_url() ?>images/loading_big.gif" width="50"/> ');
+    
+    $.ajax({
+        url : admin_base_url+'media_center/word_for_today/fetch_word_info',
+        type : 'post',
+        data : ({'id':word_id}),
+        dataType : 'json',
+        success : function(data)
+        {
+            
+            $('#txt_edit_title').val(data.title);
+            $('#txtarea_edit_desc').val(data.desc);
+            $('#i_edit_word_id').val(word_id);
+            $('#i_current_page').val(current_page);
+            
+            hideUILoader('edit-new-word');
+        }
+    });
+    
+}
+
+
+function edit_word_()
+{
+    current_page = $('#current_page').val();
+    optionsArrEdit = {
+        beforeSubmit:  showBusyScreen,  // pre-submit callback 
+        success:       validateEditFrm, // post-submit callback 
+        url:        admin_base_url + "media_center/word_for_today/post_edit_data/"+current_page
+    };
+	 
+	$('#edit_word_frm').ajaxSubmit(optionsArrEdit);
+    return false;
+}
+function validateEditFrm(data)
+{
+    
+    var data = JSON.parse(data);
+
+    showUIMsg(data.msg);
+
+     $('.error-message').each(function(i){
+            $(this).attr('style','display:none');
+        });
+        
+    if(data.result=='failure') 
+    {
+       
+        
+        for ( var id in data.arr_messages ){
+            
+            if( $('#err_'+id) != null ) {
+                $('#err_'+id).html(data.arr_messages[id]);
+                $('#err_'+id).css('display', 'block');
+
+            }
+        }
+        
+    }
+    else {  //success
+        
+         //hideBusyScreen();
+         hide_dialog();
+         $('#edit_word_frm')[0].reset();
+
+         $('#table_contents').html(data.html);
+         
+         
+         
+       
+    }
+
+}
+//------------------------------------- end edit ------------------------------------------
+
+//--------------------------------------- delete ----------------------------------------------
+function confirm_delete_word_(word_id)
+{
+    $('#del_word_id').val(word_id);
+    show_dialog('delete-page-popup');
+}
+function delete_word()
+{
+    var word_id = $('#del_word_id').val();
+    var current_page = $('#current_page').val();
+    $.ajax({
+        url : admin_base_url+'media_center/word_for_today/delete_word/'+current_page,
+        type : 'post',
+        data : ({'word_id':word_id,'current_page':current_page}),
+        dataType : 'json',
+        success : function(data)
+        {
+            showUIMsg(data.msg);
+            $('#table_contents').html(data.html);
+            hide_dialog();
+            
+        }
+    });
+}
+//--------------------------------------- end delete ----------------------------------------------
+
+function clear_box(){
+      
+          //$('#media_center_landing_frm')[0].reset();
+          $('.error-message').hide();
+      
+  }
+
+
+  
+  function search_()
+  {
+      showBusyScreen();
+      var title = $('#txt_search_title').val();
+      $.ajax({
+          url : admin_base_url+'media_center/word_for_today/word_listing_AJAX',
+          type : 'post',
+          data : ({'title' : title}),
+          success : function(data)
+          {
+              hideBusyScreen();
+              $('#table_contents').html(data);
+          }
+      });
+      return false;
+  }
+  
+  
+  
+  $(document).ready(function () {
+
+ //counting the left characters in comment
+    
+     function limitChars(textid, limit, infodiv)
+     {
+      var text = $('#'+textid).val(); 
+      var textlength = text.length;
+      if(textlength > limit)
+      {
+      $('#'+textid).val(text.substr(0,limit));
+       return false;
+      }
+      else
+      {
+      
+       return true;
+      }
+     }
+    
+    
+    
+    $(function(){
+        $('#txtarea_add_desc').keyup(function(){
+            limitChars('txtarea_add_desc', 1000, '');
+        });
+    });
+    
+    $(function(){
+        $('#txtarea_edit_desc').keyup(function(){
+            limitChars('txtarea_edit_desc', 1000, '');
+        });
+    });
+    
+    
+
+    
+    //// just to show correct no. of chracters left while the page is loaded...
+    limitChars('txtarea_add_desc',1000, '');
+    limitChars('txtarea_edit_desc',1000, '');
+
+    
+ 
+});
+  
+  
+  
+  function show_all_()
+  {
+      $('#search_frm')[0].reset();
+      showBusyScreen();
+      $.ajax({
+          url : admin_base_url+'media_center/word_for_today/word_listing_AJAX',
+          type : 'post',
+
+          success : function(data)
+          {
+              hideBusyScreen();
+              $('#table_contents').html(data);
+          }
+      });
+  }
+  
+</script>

@@ -1,0 +1,199 @@
+<?php include(APPPATH."views/layouts/logged_header.phtml");?>
+            <!-- NAVIGATION SECTION -->
+      <?php include(APPPATH."views/layouts/nav.phtml");?>
+      <!-- /NAVIGATION SECTION -->
+      </div>
+</div>
+<!-- /HEADER SECTION -->
+<div class="clr"></div>
+
+<!-- CONTENT SECTION -->
+<div id="content_section">
+      <div id="container">
+            <!--<div id="mid_content"> -->
+                  <!-- latest news -->
+                 <?php include(APPPATH ."views/layouts/latest_news.phtml");?>
+                  <!-- /latest news -->
+                  <div class="clr"></div>
+                  <!-- main container -->
+                  <div id="main_container">
+                        <!-- left container -->
+                        <?php include(APPPATH."views/layouts/leftbar.phtml");?>
+                        <!-- /left container -->
+                        <!-- mid container -->
+                        
+                        <?php //pr($info);
+							$LOGO	= base_url().'uploads/e_trade_product/'.getThumbName($info['s_image'],'big');
+						?>
+                        <div id="mid_container">
+							<div class="page_heading etrade-nw-heading">
+                                    <div class="left"><img src="images/icons/box.png" alt="" /><?=$info['product_id']?></div>
+                                    <div class="right">
+                                        <input type="button" onclick="window.location='<?php echo $_SERVER['HTTP_REFERER']?>'" value="Back" style="" class="yellow-btn" />
+                                    </div>
+                            </div>
+							
+							  <div class="arrow_btm"></div>
+							   <div class="ne-etrade-product-category"><?php echo $info['s_name']?></div>
+							   <!--product list-->
+							   <div class="ne-etrade-product-category-list">
+									<div class="read-thumb"><div style="background:url(<?php echo $LOGO?>) no-repeat center #fff; height:366px; width:411px; cursor:pointer;" ></div></div>
+									<div class="read-thumb-right">
+										<!--<ul class="pro-categorylist">
+											<li><a href="javascript:void(0)">Category</a></li>
+											<li>I</li><li>
+											</li><li><a href="javascript:void(0)">Similar Products</a></li>
+										</ul>-->
+										<br class="clear"/>
+									
+										
+										<p class="readmore-attribute1">
+											<?php echo $info['s_attribute1']?>
+										
+										</p>
+                                        <p class="readmore-attribute1">
+											<?php echo $info['s_attribute2']?>
+										</p>
+										
+										
+										
+									</div>
+									<ul class="ne-etrade-breadcrumb2">
+											<li>Condition: <?php echo ($info['i_condition']==1)?'New':'Old'?></li>
+											
+											<li>Stock: <?php echo $info['i_stock']?></li>
+											
+											<li>
+											Unit Price: $<?=$info['f_unit_price']?> <a  class="view-shipping-free" href="javascript:void(0);" onclick="showShippingFee()">View Shipping Fee</a>
+											<!--slide view shipping free-->
+												<div class="slide-view-shipping-free attribute1">
+													<p><strong> Local Shipping Fee :</strong> $<?php echo ($info['f_local_shipping_cost'])?></p>
+													<p><strong> International Shipping Fee :</strong> $<?php echo ($info['f_international_shipping_cost'])?></p>
+												
+												</div>
+											<!--slide view shipping free-->
+											</li>
+											
+											<li>Posted On: <?php echo getShortDate($info['dt_insert_time'],5)?></li>
+											
+											<li>Seller From: <?=get_user_address_info($info['i_user_id'])?></li>
+											
+											<li>
+												Seller Rating : 
+                                                <?php
+												$avgrate	= round((($info['f_rate_for_seller_item']+$info['f_rate_for_seller_communication']+$info['f_rate_for_seller_time'])/3),1);
+												echo show_rating($avgrate);
+												?>
+											</li>
+								
+									</ul>
+									
+							<!--Quantity Section-->
+							
+							<!--Quantity Section-->
+							  <p class="attribute1">
+								<strong> Details</strong>  
+								<?php echo $info['s_description']?>
+							 </p>
+							 <br class="clr"/>
+							
+                            <?php
+							 $logged_user_id = intval(decrypt($this->session->userdata('user_id')));
+							  $user_info = get_primary_user_info($logged_user_id);
+                            if($info['i_user_id']!=intval(decrypt($this->session->userdata('user_id'))))
+							{
+							?>
+								<div class="ne-etrade-quantity-section" id="req_buy_<?php echo $info['id']?>">
+								
+									  <div class="ne-etrade-product">
+                                      	<form action="" method="" id="frmReq<?php echo $info['id']?>">
+                                         <input type="hidden" name="id" value="<?php echo encrypt($info['id'])?>" />
+                                         <label class="subproduct subproduct-width"> Quantity :</label>
+                                         <input class="reqqty_txt" type="text" name="qty" value="" style="float:left; width:100px; margin-right:5px;" />
+                                          <input type="button" class="yellow-btn change-request-btn-margin " value="Request to Buy" name="" onclick="sendRequest($(this),'<?php echo $info['id']?>')" />
+                                         
+                                         <a href="javascript:void(0);" class="change-contact-det" onclick="showContactSection('<?php echo $info['id']?>');">Update contact detalis</a>
+                                         <br class="clear"/>
+                                         <div class="changes-contact-section" id="contact-section_<?php echo $info['id']?>">
+                                             <label class="subproduct subproduct-width"> Email :</label>
+                                             <input type="text" name="email" value="<?=$user_info['s_email']?>" style="float:left; width:257px; margin-right:5px;" />
+                                              <br class="clear"/>
+                                             <label class="subproduct subproduct-width"> Phone :</label>
+                                             <input type="text" name="phone" value="<?=$user_info['s_mobile']?>" style="float:left; width:257px; margin-right:5px;" />
+                                              <br class="clear"/>
+                                         </div>
+                                         <br class="clear"/>
+                                        
+                                         </form>
+								 		<br class="clr"/>
+								 	
+							  		</div>
+								</div>
+                            <?php
+							}
+							?>
+							
+                           
+                            
+                            </div>
+							    <!--product list-->
+								 
+					
+								
+						</div>
+                            <!--sub page links -->
+                                      
+                        <!-- /mid container -->
+                        <!-- right container -->
+                        <?php include(APPPATH."views/layouts/rightbar.phtml");?>
+                        <!-- /right container -->
+                        </div>
+                  </div>
+                  <!-- /main container -->
+                  <div class="clr"></div>
+            <!--</div> -->
+      </div>
+      <div class="clr"></div>
+</div>
+<!-- /CONTENT SECTION -->
+<div class="clr"></div>
+
+
+
+<?php include(APPPATH."views/layouts/footer.phtml");?>
+<?php include(APPPATH."views/logged/blocks/common_popup.phtml");?>
+
+<script type="text/javascript">
+function showShippingFee()
+{
+	$('.slide-view-shipping-free').slideToggle('slow');
+}
+
+function showContactSection(id)
+{
+	$('#contact-section_'+id).slideToggle('slow');
+}
+
+function sendRequest(obj,id)
+{
+  $.ajax({
+		"type":'post',
+		"data":$('#frmReq'+id).serialize(),
+		"dataType":'json',
+		"url":'<?php base_url()?>logged/e_trade/sendrequest',
+		"success": function(data)
+			  {
+				  if(data.success==false)
+				  {
+					  showUIMsg(data.msg);
+				  }
+				  else
+				  {
+					  obj.prev().prev().slideUp();
+					  $('#frmReq'+id+' .reqqty_txt').val('');
+					  showUIMsg(data.msg);
+				  }
+			  }
+	});
+}
+</script>

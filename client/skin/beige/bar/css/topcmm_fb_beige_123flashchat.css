@@ -1,0 +1,16 @@
+#topcmm_fb .presence_menu_opts_r1 {
+    background: #000000 none no-repeat scroll right bottom;
+}
+
+#topcmm_fb #presence_bar .presence_menu_opts_r1 h2 {
+    background: #7b5a24 url(../images/minimize-beige.gif) no-repeat scroll right top;
+    border-color: #7b5a24 #7b5a24 #7b5a24;
+}
+
+#topcmm_fb .titletip_r1, #topcmm_fb #presence_popout_sidebar .titletip_r1 {
+    background: transparent url(../images/dark-pointer-padded.gif) no-repeat scroll right bottom;
+}
+
+#topcmm_fb .titletip_r1 strong, #topcmm_fb #presence_popout_sidebar .titletip_r1 strong {
+    background: #282828 none repeat scroll 0 0;
+}

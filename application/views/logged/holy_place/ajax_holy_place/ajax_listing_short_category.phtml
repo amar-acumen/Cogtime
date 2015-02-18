@@ -1,0 +1,51 @@
+<?php 
+	if($category)
+	{
+		?>
+		<ul class="right-marked" id="cat_ul">
+                 
+		
+		<?php 
+		#pr($readingplan);
+		$i	= 0;
+		foreach($category as $cat)
+		{
+			 /*?>$i++;
+				if($i==1)
+				{
+				?>
+				<tr>
+        	<?php
+			}
+			?><?php */?>
+            <li>
+                 <div class="content">
+                <p class="title-text">
+                	<?php echo $cat['s_category']?>
+                    
+                    	<a href="javascript:void(0);" class="delete-button" title="Delete" onclick="show_dialog('delete_category');$('#deleteCatId').val('<?php echo encrypt($cat['id'])?>')"></a>
+                    	<a href="javascript:void(0);" class="edit-button" title="Edit" onclick="showEditCategory('<?php echo encrypt($cat['id'])?>')"></a>
+                  
+                </p>
+                <p><?php echo $val['s_note']?></p>
+            </div>
+          
+            <?php
+			if($cat['s_category']=='' && $i<3)
+			{
+				
+			}
+			if($i==3)
+			{
+			?>
+				<!--</tr>-->
+			<?php
+				$i	= 0;
+			}
+			
+		}
+	?>
+	</ul>
+<?php
+}
+?>

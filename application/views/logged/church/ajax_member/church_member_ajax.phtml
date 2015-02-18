@@ -1,0 +1,401 @@
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+
+         <?php
+
+            if($info_arr)
+
+            {
+
+             ?>
+
+  <thead>
+
+    <tr>
+
+      <th>S no.</th>
+
+      <th align="left">Name</th>
+
+      <th>Joined on</th>
+
+      <th align="left">Email</th>
+
+      <th align="left">Tel</th>
+
+      <th>Action</th>
+
+    </tr>
+
+   </thead>
+
+    <tbody>
+
+    <?php
+
+                $i = 1;
+
+                foreach ($info_arr as $member) {
+
+                    ?>
+
+    <tr>
+
+    
+
+      <td width="6%"><?php echo $i++; ?></td>
+
+      <td width="27%" class="textleft"><?php echo $member->s_first_name.' '.$member->s_last_name?></td>
+
+      <td width="5%"><?php echo getShortDate($member->created_date,3)?></td>
+
+      <td width="25%" class="textleft"><?php echo $member->s_email?></td>
+
+      <td width="20%"><?php echo $member->s_moblie_no?></td>
+
+      <?php
+            if($member->is_approved==0)
+            {
+              $class = 'approve';
+            }  
+            else if($member->is_approved==1)
+            {
+                $class =  "approve";
+            }
+            else if($member->is_approved==2)
+            {
+                $class =  "decline";
+            }
+
+            ?>
+
+      <td class="<?php echo $class?>" width="15%" id="approve_<?php echo $member->cmid?>">
+
+         <?php
+
+            if($member->is_approved==0)
+
+            {
+
+                ?>
+
+                <a style="margin-right:5px; float:left;" href="javascript:void(0);"  onclick="show_dialog('approved-group'); $('#i_del_id').val('<?=$member->cmid?>'); $('#i_mem_id').val('<?php echo $member->mid?>'); $('#i_mem_status').val('1');" class="approve">Approve</a>
+                <a href="javascript:void(0);" onclick="show_dialog('decline-group'); $('#i_del_id').val('<?=$member->cmid?>'); $('#i_mem_id').val('<?php echo $member->mid?>'); $('#i_mem_status').val('2');" class="decline">Decline</a>
+                <?php
+
+            }
+
+            else if($member->is_approved==1)
+            {
+                echo "Approved";
+            }
+            else if($member->is_approved==2)
+            {
+                echo "Declined";
+            }
+
+            ?>
+			<?php if($member->is_approved==2)
+				{ ?>
+				<a href="javascript:void(0);" onclick="show_dialog('delete-group'); $('#i_del_id').val('<?=$member->cmid?>');">Delete</a>
+			<?php } 
+			if($member->is_approved==1)
+            {
+			$mem_approved_status = 0;
+			$mem_approved_status_label = 'Block';
+			$dialog_box_class = 'block-group';
+			if ($member->is_blocked == 0) { 
+				$mem_approved_status = 1;
+				$mem_approved_status_label = 'Unblock';
+				$dialog_box_class = 'unblock-group';
+			}
+			?>
+			<a href="javascript:void(0);" onclick="show_dialog('<?=$dialog_box_class?>'); $('#i_del_id').val('<?=$member->cmid?>'); $('#i_mem_unblock').val('<?=$mem_approved_status?>');"><?php echo $mem_approved_status_label; ?></a>
+			<?php } ?>
+
+      </td>
+
+    </tr>
+	
+	
+
+    <?php } ?>
+
+  </tbody>
+
+  <?php }
+
+else
+
+{
+
+  echo '<tr><td colspan="5">No Records</td></tr>';
+
+}  ?>
+
+</table>
+<div class="paging"><ul><?= $page_links ?></ul></div>
+
+<div class="lightbox approved-group delete-post" style="width:450px;">
+
+    <div class="close"><a href="javascript:void(0)" onclick="hide_dialog();
+
+            $('#i_del_id').val('');"><img src="<?= base_url() ?>images/close.png" alt="" /></a></div>
+
+    <div class="top"><div>&nbsp;</div></div>
+
+    <div class="mid">
+
+        <div class="heading" style="margin-bottom:0px;">
+
+            <div class="left">
+
+                <h4>Approved Member</h4>
+
+            </div>
+
+        </div>
+
+        <div class="shade_box_white" style="padding:8px 0px;">
+
+            <div style="padding-bottom:10px;">
+
+                <p class="center-text" style="line-height:23px; color:#494949; font-size:16px;">Do you really want to approved this member?</p>
+
+            </div>
+
+            <form action="" method="post" enctype="multipart/form-data">
+
+                <input type="hidden" name="i_del_id" id="i_del_id" value="" />
+				<input type="hidden" name="i_mem_id" id="i_mem_id" value="" />
+				<input type="hidden" name="i_mem_status" id="i_mem_status" value="" />
+
+                <input name="" type="button" value="Yes" class="post-btn"  onClick="approvedMember();"/>
+
+                <input name="" type="button" value="No" class="cancel-btn" onclick="hide_dialog();
+
+                        $('#i_del_id').val('');"/>
+
+            </form>   
+
+            <div class="clr"></div>
+
+        </div>
+
+
+
+    </div>
+
+    <div class="bot"><div>&nbsp;</div></div>
+
+</div>
+
+<div class="lightbox decline-group delete-post" style="width:450px;">
+
+    <div class="close"><a href="javascript:void(0)" onclick="hide_dialog();
+
+            $('#i_del_id').val('');"><img src="<?= base_url() ?>images/close.png" alt="" /></a></div>
+
+    <div class="top"><div>&nbsp;</div></div>
+
+    <div class="mid">
+
+        <div class="heading" style="margin-bottom:0px;">
+
+            <div class="left">
+
+                <h4>Decline Member</h4>
+
+            </div>
+
+        </div>
+
+        <div class="shade_box_white" style="padding:8px 0px;">
+
+            <div style="padding-bottom:10px;">
+
+                <p class="center-text" style="line-height:23px; color:#494949; font-size:16px;">Do you really want to decline this member?</p>
+
+            </div>
+
+            <form action="" method="post" enctype="multipart/form-data">
+
+                <input type="hidden" name="i_del_id" id="i_del_id" value="" />
+				<input type="hidden" name="i_mem_id" id="i_mem_id" value="" />
+				<input type="hidden" name="i_mem_status" id="i_mem_status" value="" />
+
+                <input name="" type="button" value="Yes" class="post-btn"  onClick="approvedMember();"/>
+
+                <input name="" type="button" value="No" class="cancel-btn" onclick="hide_dialog();
+
+                        $('#i_del_id').val('');"/>
+
+            </form>   
+
+            <div class="clr"></div>
+
+        </div>
+
+
+
+    </div>
+
+    <div class="bot"><div>&nbsp;</div></div>
+
+</div>
+
+<div class="lightbox delete-group delete-post" style="width:450px;">
+
+    <div class="close"><a href="javascript:void(0)" onclick="hide_dialog();
+
+            $('#i_del_id').val('');"><img src="<?= base_url() ?>images/close.png" alt="" /></a></div>
+
+    <div class="top"><div>&nbsp;</div></div>
+
+    <div class="mid">
+
+        <div class="heading" style="margin-bottom:0px;">
+
+            <div class="left">
+
+                <h4>Delete Member</h4>
+
+            </div>
+
+        </div>
+
+        <div class="shade_box_white" style="padding:8px 0px;">
+
+            <div style="padding-bottom:10px;">
+
+                <p class="center-text" style="line-height:23px; color:#494949; font-size:16px;">Do you really want to delete this member?</p>
+
+            </div>
+
+            <form action="" method="post" enctype="multipart/form-data">
+
+                <input type="hidden" name="i_del_id" id="i_del_id" value="" />
+
+                <input name="" type="button" value="Yes" class="post-btn"  onClick="deleteGroup()"/>
+
+                <input name="" type="button" value="No" class="cancel-btn" onclick="hide_dialog();
+
+                        $('#i_del_id').val('');"/>
+
+            </form>   
+
+            <div class="clr"></div>
+
+        </div>
+
+
+
+    </div>
+
+    <div class="bot"><div>&nbsp;</div></div>
+
+</div>
+
+
+<div class="lightbox block-group delete-post" style="width:450px;">
+
+    <div class="close"><a href="javascript:void(0)" onclick="hide_dialog();
+
+            $('#i_del_id').val('');"><img src="<?= base_url() ?>images/close.png" alt="" /></a></div>
+
+    <div class="top"><div>&nbsp;</div></div>
+
+    <div class="mid">
+
+        <div class="heading" style="margin-bottom:0px;">
+
+            <div class="left">
+
+                <h4>Block Member</h4>
+
+            </div>
+
+        </div>
+
+        <div class="shade_box_white" style="padding:8px 0px;">
+
+            <div style="padding-bottom:10px;">
+
+                <p class="center-text" style="line-height:23px; color:#494949; font-size:16px;">Do you really want to block this member?</p>
+
+            </div>
+
+            <form action="" method="post" enctype="multipart/form-data">
+
+                <input type="hidden" name="i_del_id" id="i_del_id" value="" />
+
+                <input name="" type="button" value="Yes" class="post-btn"  onClick="blockGroup()"/>
+
+                <input name="" type="button" value="No" class="cancel-btn" onclick="hide_dialog();
+
+                        $('#i_del_id').val('');"/>
+
+            </form>   
+
+            <div class="clr"></div>
+
+        </div>
+
+
+
+    </div>
+
+    <div class="bot"><div>&nbsp;</div></div>
+
+</div>
+
+<div class="lightbox unblock-group delete-post" style="width:450px;">
+
+    <div class="close"><a href="javascript:void(0)" onclick="hide_dialog();
+
+            $('#i_del_id').val('');"><img src="<?= base_url() ?>images/close.png" alt="" /></a></div>
+
+    <div class="top"><div>&nbsp;</div></div>
+
+    <div class="mid">
+
+        <div class="heading" style="margin-bottom:0px;">
+
+            <div class="left">
+
+                <h4>Unblock Member</h4>
+
+            </div>
+
+        </div>
+
+        <div class="shade_box_white" style="padding:8px 0px;">
+
+            <div style="padding-bottom:10px;">
+
+                <p class="center-text" style="line-height:23px; color:#494949; font-size:16px;">Do you want to unblock this member?</p>
+
+            </div>
+
+            <form action="" method="post" enctype="multipart/form-data">
+
+                <input type="hidden" name="i_del_id" id="i_del_id" value="" />
+
+                <input name="" type="button" value="Yes" class="post-btn"  onClick="unblockGroup()"/>
+
+                <input name="" type="button" value="No" class="cancel-btn" onclick="hide_dialog();
+
+                        $('#i_del_id').val('');"/>
+
+            </form>   
+
+            <div class="clr"></div>
+
+        </div>
+
+
+
+    </div>
+
+    <div class="bot"><div>&nbsp;</div></div>
+
+</div>

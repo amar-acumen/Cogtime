@@ -1,0 +1,193 @@
+                                    <div class="shade_box_01 frm_box shade_box_blue" style="padding-bottom:17px;">
+                                        
+                                        <div class="lable01">Title:</div>  
+                                        <div class="field01">
+                                         <select name="txt_title" id="txt_title" style="width:60px;">
+                                              <option value="-1" >---</option>
+                                              <option value="Mr" <?php echo $selected =($arr_profile_info["e_title"]=='Mr')?'selected':''?>>Mr.</option>
+                                              <option value="Mrs" <?php echo $selected =($arr_profile_info["e_title"]=='Mrs')?'selected':''?>>Mrs.</option>
+                                              <option value="Ms" <?php echo $selected =($arr_profile_info["e_title"]=='Ms')?'selected':''?>>Ms.</option>
+                                        </select>
+                     
+                                        <script type="text/javascript">
+                                            $(document).ready(function(arg) {
+                                                //$("#txt_title").msDropDown();
+                                                //$("#txt_title").hide();
+                                            })
+                                        </script>
+                                        <?php echo form_error('txt_title'); ?>
+                                         <div class="error-message" id="err_title"></div>
+                                       </div> 
+                                        <div class="clr"></div>
+                                        
+                                        <div class="lable01">First Name:</div>  
+                                        <div class="field01">
+                                        <input name="txt_fname" id="txt_fname" type="text" value="<?=isset($arr_profile_info["s_first_name"])? $arr_profile_info["s_first_name"]: '' ?>" />
+                                        <?php /*?><?php echo form_error('txt_fname'); ?><?php */?>
+                                       <div class="error-message" id="err_fname"></div>
+                                        </div> 
+                                        <div class="clr"></div>
+                                        
+                                        <div class="lable01">Last Name:</div>  
+                                        <div class="field01">
+                                        <input name="txt_lname" id="txt_lname" type="text" value="<?=isset($arr_profile_info["s_last_name"])? $arr_profile_info["s_last_name"]: '' ?>" />
+                                        <?php echo form_error('txt_lname'); ?>
+                                         <div class="error-message" id="err_lname"></div>
+                                        </div> 
+                                        <div class="clr"></div>
+                                        
+                                        <div class="lable01">City:</div>  
+                                        <div class="field01">
+                                        <input name="txt_city" id="txt_city" type="text" value="<?=isset($arr_profile_info["s_city"])? $arr_profile_info["s_city"]: '' ?>" />
+                                        <?php echo form_error('txt_city'); ?>
+                                         <div class="error-message" id="err_city"></div>
+                                        </div> 
+                                        <div class="clr"></div>
+                                        
+                                        <div class="lable01">State:</div>  
+                                        <div class="field01">
+                                        <input name="txt_state" id="txt_state" type="text" value="<?=isset($arr_profile_info["s_state"])? $arr_profile_info["s_state"]: '' ?>" />
+                                        <?php echo form_error('txt_state'); ?>
+                                         <div class="error-message" id="err_state"></div>
+                                        </div> 
+                                        <div class="clr"></div>
+                                        
+                                        <div class="lable01">Country:</div>  
+                                        <div class="field01">
+                                        
+                                        <select name="txt_country" id="txt_country" style="width:150px; margin-bottom:6px;">
+                                            <option value="-1">---</option>
+                                            <?=makeOptionCountry('',encrypt($arr_profile_info["i_country_id"]));?>
+                                        </select>
+                                        <?php echo form_error('txt_country'); ?>
+                                         <div class="error-message" id="err_country"></div>
+                                        </div> 
+                                        <div class="clr"></div>
+                                        
+                                        <div class="lable01">Gender:</div>  
+                                        <div class="field01">
+                                        
+                                        <select name="txt_gender" id="txt_gender" style="width: 70px;">
+                                        <option value="-1">---</option>
+                                        <option value="M" <?php echo $selected = ($arr_profile_info["s_gender"]=='Male')? 'Selected':''; ?>>Male</option>
+                                        <option value="F" <?php echo $selected = ($arr_profile_info["s_gender"]=='Female')? 'Selected':''; ?>>Female</option>
+                                        </select>
+                                        <?php echo form_error('txt_gender'); ?>
+                                         <div class="error-message" id="err_gender"></div>
+                                        </div> 
+                                        <div class="clr"></div>
+                                        
+                                        <div class="lable01">Date of Birth:</div>  
+                                        <div class="field01">
+                                       
+                                           <?php
+                                          # getting day-month-yr extracted from db DOB...
+                                         if($arr_profile_info['dt_dob'] != '0000-00-00'){
+                                          $DOB_TSTAMP = strtotime($arr_profile_info['dt_dob']);
+                                          $DOB_DAY = date( "j", $DOB_TSTAMP );
+                                          $DOB_MONTH = date( "n", $DOB_TSTAMP );
+                                          $DOB_YR = date( "Y", $DOB_TSTAMP );
+                                          }
+                                      ?>
+                                      
+                                          <select name="day" id="day"  style="width:50px; margin-right:2px;" autocomplete="off">
+                                            <option value="">---</option>
+                                            <?= makeOptionDay($DOB_DAY) ?>
+                                             
+                                          </select>
+                                          
+                                          <select name="month" id="month"  style="width:90px; margin-right:2px;">
+                                                <option value="">---</option>
+                                                <?= makeOptionMonth($DOB_MONTH) ?>
+                                          </select>
+                                          
+                                          <select name="year" id="year"  style="width:70px;">
+                                                <option value="">---</option>
+                                                <?= makeOptionYear($DOB_YR) ?>
+                                          </select> 
+                                          <script type="text/javascript">
+                                            $(document).ready(function(arg) {
+                                                //$("#day").msDropDown();
+                                                //$("#day").hide();
+                                                //$("#month").msDropDown();
+                                                //$("#month").hide();
+                                                //$("#year").msDropDown();
+                                                //$("#year").hide();
+                                            })
+                                        </script>
+                                        <?php // if(form_error('day')!='' || form_error('month')!='' ||  form_error('year')!='' ) echo '<div class="error_massage" id="err_msg">Please provide Birth date</div>'; ?>
+                                        <div class="error-message" id="err_dob"></div>
+                                        
+                                        </div> 
+                                        <div class="clr"></div>
+                                        
+                                        <div class="lable01">Profile Photo:</div>  
+                                        <div class="field01">
+                                        
+                                        <?php
+                                         
+                                            $IMG = base_url()."uploads/user_profile_image/".getThumbName($arr_profile_info['s_profile_photo'],'thumb');
+                                            
+                                        ?>
+                                        <input name="txt_profile_pic" id="txt_profile_pic" type="file" size="25" />
+                                        
+                                        
+                                        <?php echo form_error('txt_profile_pic'); ?>
+                                        </div> 
+                                        <div class="clr"></div>
+                                        
+                                        <div class="lable01">Want to be Prayer Partner:</div>  
+                                        <div class="field01">
+                                         <select name="txt_prayer_ptnr" id="txt_prayer_ptnr" style="width:55px;">
+                                             <option value="Y" <?php echo $selected =($arr_profile_info["s_want_prayer_partner"]=='Yes')?'selected':''?>>Yes</option>
+                                             <option value="N" <?php echo $selected =($arr_profile_info["s_want_prayer_partner"]=='No')?'selected':''?>>No</option>
+                                        </select>
+                     
+                                        <script type="text/javascript">
+                                            $(document).ready(function(arg) {
+                                                //$("#txt_prayer_ptnr").msDropDown();
+                                                //$("#txt_prayer_ptnr").hide();
+                                            })
+                                        </script>
+                                       </div> 
+                                        <div class="clr"></div>
+                                        <div class="lable01">Want to be Net Pal:</div>  
+                                          <div class="field01">
+                                           <select name="txt_net_pal" id="txt_net_pal" style="width:55px;">
+                                             <option value="Y" <?php echo $selected =($arr_profile_info["s_want_net_pal"]=='Yes')?'selected':''?>>Yes</option>
+                                             <option value="N" <?php echo $selected =($arr_profile_info["s_want_net_pal"]=='No')?'selected':''?>>No</option>
+                                        </select>
+                     
+                                        <script type="text/javascript">
+                                            $(document).ready(function(arg) {
+                                                //$("#txt_net_pal").msDropDown();
+                                                //$("#txt_net_pal").hide();
+                                            })
+                                        </script></div>
+                                        <div class="clr"></div>
+                                        
+                                        <div class="lable01">My Website:</div>  
+                                        <div class="field01">
+                                        <input name="txt_website" id="txt_website" type="text"  value="<?=$arr_profile_info['s_website']?>"/>
+                                        <?php echo form_error('txt_website'); ?>
+                                        <div class="error-message" id="err_website"></div >
+                                        </div> 
+                                        <div class="clr"></div>
+                                        
+                                        <div class="lable01">My Profile URL:</div>  
+                                        <div class="field01">www.xtiannetwork.com/ &nbsp;  
+                                        <input name="txt_profile_url" id="txt_profile_url" value="<?=$arr_profile_info['s_profile_url_suffix']?>" type="text"  style="width:113px;"/>
+                                        <?php echo form_error('txt_profile_url'); ?>
+                                        <div class="error-message" id="err_profile_url"></div >
+                                        </div> 
+                                        <div class="clr"></div>
+                                        
+                                        <div class="lable01">&nbsp;</div>  
+                                        <div class="field01"> 
+                                        <input type="hidden" name="is_submitted" id="is_submitted" value="Y" />
+                                        <input name="btn_manage_profile" id="btn_manage_profile" type="submit" value="Save"  class="btn"  /> 
+                                        <input name="" type="button" value="Cancel"  class="btn" onclick="closePersonalInfoDiv()"/>
+                                        </div> 
+                                        <div class="clr"></div>
+                             
+                                     </div>

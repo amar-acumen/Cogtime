@@ -1,0 +1,124 @@
+<?php include(APPPATH."views/layouts/logged_header.phtml");?>
+            <!-- NAVIGATION SECTION -->
+      <?php include(APPPATH."views/layouts/nav.phtml");?>
+      <!-- /NAVIGATION SECTION -->
+      </div>
+</div>
+<!-- /HEADER SECTION -->
+<div class="clr"></div>
+<!-- CONTENT SECTION -->
+<div id="content_section">
+      <div id="container">
+            <?php /*?><div id="top_corner">&nbsp;</div><?php */?>
+            <div id="mid_content">
+                  <!-- latest news -->
+                   <?php include(APPPATH ."views/layouts/latest_news.phtml");?>
+                  <!-- /latest news -->
+                  <div class="clr"></div>
+                  <!-- main container -->
+                  <div id="main_container">
+                        <!-- left container -->
+                        <?php include(APPPATH."views/layouts/leftbar.phtml");?>
+                        <!-- /left container -->
+                        <!-- mid container -->
+                        <div id="mid_container">
+                        	<!--my tweeter profile start -->    
+                            <div class="tweeter-profile">
+                             
+                                 <?php include(APPPATH ."views/logged/my_tweet/search_panel.phtml");?>
+                                <!--tweeter header start -->  
+                                <div class="tweeter-profile-header" style="height:auto; text-align:left; margin-left:-10px;">
+                                	<?php if($s_tags != ''){?>
+                                    <span>Search Results for <strong><?=$s_tags?></strong></span>
+                                    <?php } ?>
+                                    <div class="clr"></div>
+                                </div> 
+                                <!--tweeter header end --> 
+                              
+                             <div id="new_tweet_contents"><?=$trends_content?></div>  
+                             </div>
+                            <!--my tweeter profile end -->  
+                              <?php if($no_of_result  == 0):?>
+                                <div class="shade_box_01" style="padding-top:5px;" id="no_tweets"><div  class="shade_norecords" style="width:260px;"><p class="blue_bold12">No Results.</p></div></div>
+                            <?php endif;?>	
+                           
+                            
+                            <?php if($no_of_result > $pagination_per_page): ?>
+                                    
+                                    <div class="view_more" id="show_more_div"><a href="javascript:void(0);" id="show_more_tweets_link" page_value="<?=$current_page_1?>" onclick="show_more_tweets($(this).attr('page_value'))">[view more] </a> </div>
+                            <?php endif; ?>
+                            <input type="hidden" id="i_user_id" value="<?=$profile_id?>" />
+                        </div>
+                        <!-- /mid container -->
+                        <!-- right container -->
+                        <?php include(APPPATH."views/layouts/rightbar.phtml");?>
+                        <!-- /right container -->
+                  </div>
+                  <!-- /main container -->
+                  <div class="clr"></div>
+            </div>
+            <div id="bot_corner">&nbsp;</div>
+      </div>
+      <div class="clr"></div>
+</div>
+<!-- /CONTENT SECTION -->
+<div class="clr"></div>
+<!-- FOOTER SECTION -->
+<?php include(APPPATH."views/layouts/footer.phtml");?>
+<?php include(APPPATH."views/logged/blocks/common_popup.phtml");?>
+
+<!-- /FOOTER SECTION -->
+
+<!-- /lightbox SECTION -->
+<script type="text/javascript">
+			
+$(document).ready(function(){
+	
+		$("#searchTweeter").autofill({'value':"Type Keyword"}); 
+});
+
+</script>
+<script type="text/javascript">
+
+var ajax_req_feeds = null;
+function show_more_tweets(page) {
+	
+	if(ajax_req_feeds!=null) {
+		ajax_req_feeds.abort();
+	}
+	showUILoader_nodialog();
+	ajax_req_feeds = $.ajax({
+		type: 'get',
+		url: base_url+'logged/tweet_home/search_trendings_ajax_pagination/'+page,
+		dataType: 'json',
+
+		success: function (data, status) {
+
+			hideUILoader_nodialog();
+			if(data.html!='') {
+				
+				//alert(data.cur_page+'dfdf');
+				$('#new_tweet_contents').append(data.html);
+				$('#show_more_tweets_link').attr('page_value', data.cur_page);
+				$('#show_more_tweets_link').attr('onclick','');
+				$('#show_more_tweets_link').attr('onclick','show_more_tweets('+data.cur_page+')');
+			}
+			else {
+				$('#new_tweet_contents').append('<div class="view_more" style="text-align: center;"><p class="blue_bold12" style="font-size:14px;">No More Results.</p></div>');
+				$('#show_more_div').remove();
+			}
+            
+            if(data.view_more==false)
+            {
+                
+                $('#new_tweet_contents').append('<div class="view_more" style="text-align: center;" ><p class="blue_bold12" style="font-size:14px;">No More Results.</p></div>');
+                $('#show_more_div').remove();
+            }
+		
+
+		}	// end of success function...
+	});
+}
+
+</script>
+

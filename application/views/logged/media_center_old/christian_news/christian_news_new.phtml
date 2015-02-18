@@ -1,0 +1,25 @@
+<!--tab description  -->
+<div class="tab_details menu-details">
+    <div class="tab-detail-box select">
+        <div class="right-link"><a href="media-center.html">Back to Media Center</a></div>
+        <h2 id="heading">Top Stories</h2>
+    </div>
+    <div id="content"><?=$listingContent?></div>
+</div>
+
+<?php 
+//echo "current : ".$current_page;
+if($view_more)  :
+?>
+<div id="view_more_div" class="tab_details menu-details" style="min-height: 50px;">
+    <div class="article-pagination inside-tab">
+        <a id="view_more_news" href="javascript:void(0)" style="float: right; color: #b2b2b2; margin-right: 5px; font-size: 15px;" onclick="return show_more_feeds(<?=$current_page?>)" page_value="<?=$current_page?>">[View More] </a>
+    </div>
+</div>
+<?php
+endif;
+?>
+
+
+
+<!--tab description  end-->

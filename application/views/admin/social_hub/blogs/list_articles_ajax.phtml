@@ -1,0 +1,112 @@
+<table width="100%" border="0" cellspacing="0" cellpadding="0" class="admin-table">
+                              <tr>
+                                <th align="left" valign="middle" height="30" width="70">Posted on</th>
+                                <th align="left" valign="middle" height="30" width="180">Article Title</th>
+                                <th align="left" valign="middle" height="30" width="400"> Description</th>
+                                <th align="left" valign="middle" height="30" width="100">Posted By</th>
+                                <th align="center" valign="middle" height="30" width="40">No. of Comments</th>
+                                <th align="center" valign="middle" height="30" class="last">Actions</th>
+                              </tr>
+                              <? //pr($info_arr)?>
+                              <?php if(count($info_arr))
+                              {
+                                  foreach($info_arr as $articles)
+                                  {
+                              ?>
+                              <tr>
+                                <td align="left" valign="top" height="34"><?php echo getShortDate($articles->dt_created_date,5)?></td>
+                                <td align="left" valign="top"><a href="javascript:void(0);" onclick="return show_article(<?php echo $articles->id.', '.$articles->i_user_id?>)"><?php echo my_substr($articles->s_post_title,58)?></a></td>
+                                <td align="left" valign="top"><?php echo my_substr($articles->s_post_description,130)?></td>
+                                <td align="left" valign="top"><?php echo $articles->user_name?></td>
+                                <td align="center" valign="top"><a href="javascript:void(0);" onclick="return show_all_comments(<?php echo $articles->id?>);"><?php echo $articles->no_of_comments?></a></td>
+                                <td align="center" valign="middle" class="last">
+                                <input name="" title="Edit" type="button" class="edit-button"  value="" onclick="return edit_article_fetch(<?php echo $articles->id?>)"/>
+                                <input name="" title="Delete" type="button" class="delete-button"  value="" onclick="return delete_article_popup(<?php echo $articles->id ?>)"/>
+                                <span id="status_<?php echo $articles->id?>"><input name="" title="Enable" type="button" class="btn-06"  value="<?php echo ($articles->i_disable==1)? 'Disable':'Enable'?>" onclick="return change_status(<?php echo $articles->i_disable.','.$articles->id?>)"/>
+                                </span>
+                                </td>
+                              </tr>
+                              
+                              <?php
+                                  }
+                              }
+                              ?>
+                          <?/*    <tr>
+                                <td align="left" valign="top" height="34">20/12/2012<br />10:10:40PM</td>
+                                <td align="left" valign="top"><a href="javascript:void(0);" onclick="return show_dialog('article-popup')">Lorem ipsum</a></td>
+                                <td align="left" valign="top">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.</td>
+                                <td align="left" valign="top">Andrew Maxcell</td>
+                                <td align="center" valign="top"><a href="javascript:void(0);" onclick="return show_dialog('comments-popup')">3</a></td>
+                                <td align="center" valign="middle" class="last">
+                                <input name="" title="Edit" type="button" class="edit-button"  value="" onclick="return show_dialog('article-edit-popup')"/>
+                                <input name="" title="Delete" type="button" class="delete-button"  value="" onclick="return show_dialog('delete-page-popup')"/>
+                                <input name="" title="Enable" type="button" class="btn-06"  value="Disable"/>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td align="left" valign="top" height="34">20/12/2012<br />10:10:40PM</td>
+                                <td align="left" valign="top"><a href="javascript:void(0);" onclick="return show_dialog('article-popup')">Lorem ipsum</a></td>
+                                <td align="left" valign="top">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.</td>
+                                <td align="left" valign="top">Andrew Maxcell</td>
+                                <td align="center" valign="top"><a href="javascript:void(0);" onclick="return show_dialog('comments-popup')">3</a></td>
+                                <td align="center" valign="middle" class="last">
+                                <input name="" title="Edit" type="button" class="edit-button"  value="" onclick="return show_dialog('article-edit-popup')"/>
+                                <input name="" title="Delete" type="button" class="delete-button"  value="" onclick="return show_dialog('delete-page-popup')"/>
+                                <input name="" title="Enable" type="button" class="btn-06"  value="Disable"/>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td align="left" valign="top" height="34">20/12/2012<br />10:10:40PM</td>
+                                <td align="left" valign="top"><a href="javascript:void(0);" onclick="return show_dialog('article-popup')">Lorem ipsum</a></td>
+                                <td align="left" valign="top">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.</td>
+                                <td align="left" valign="top">Andrew Maxcell</td>
+                                <td align="center" valign="top"><a href="javascript:void(0);" onclick="return show_dialog('comments-popup')">3</a></td>
+                                <td align="center" valign="middle" class="last">
+                                <input name="" title="Edit" type="button" class="edit-button"  value="" onclick="return show_dialog('article-edit-popup')"/>
+                                <input name="" title="Delete" type="button" class="delete-button"  value="" onclick="return show_dialog('delete-page-popup')"/>
+                                <input name="" title="Enable" type="button" class="btn-06"  value="Disable"/>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td align="left" valign="top" height="34">20/12/2012<br />10:10:40PM</td>
+                                <td align="left" valign="top"><a href="javascript:void(0);" onclick="return show_dialog('article-popup')">Lorem ipsum</a></td>
+                                <td align="left" valign="top">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.</td>
+                                <td align="left" valign="top">Andrew Maxcell</td>
+                                <td align="center" valign="top"><a href="javascript:void(0);" onclick="return show_dialog('comments-popup')">3</a></td>
+                                <td align="center" valign="middle" class="last">
+                                <input name="" title="Edit" type="button" class="edit-button"  value="" onclick="return show_dialog('article-edit-popup')"/>
+                                <input name="" title="Delete" type="button" class="delete-button"  value="" onclick="return show_dialog('delete-page-popup')"/>
+                                <input name="" title="Enable" type="button" class="btn-06"  value="Disable"/>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td align="left" valign="top" height="34">20/12/2012<br />10:10:40PM</td>
+                                <td align="left" valign="top"><a href="javascript:void(0);" onclick="return show_dialog('article-popup')">Lorem ipsum</a></td>
+                                <td align="left" valign="top">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.</td>
+                                <td align="left" valign="top">Andrew Maxcell</td>
+                                <td align="center" valign="top"><a href="javascript:void(0);" onclick="return show_dialog('comments-popup')">3</a></td>
+                                <td align="center" valign="middle" class="last">
+                                <input name="" title="Edit" type="button" class="edit-button"  value="" onclick="return show_dialog('article-edit-popup')"/>
+                                <input name="" title="Delete" type="button" class="delete-button"  value="" onclick="return show_dialog('delete-page-popup')"/>
+                                <input name="" title="Enable" type="button" class="btn-06"  value="Disable"/>
+                                </td>
+                              </tr>
+                              */?>
+  </table>  
+  
+  <?php
+if(count($info_arr)==0)
+{
+?>
+      <div class="shade_box_blue" style="padding-top:5px; width: 997px; height: 45px;">
+<div class="shade_norecords" style="width:515px;">
+<p class="blue_bold12" style="font-weight: bold; ">No result found.</p>
+</div>
+</div>
+<?php
+}
+?>
+
+<div class="paging" >
+            <ul><?= $page_links ?></ul>
+</div>                        

@@ -1,0 +1,95 @@
+<?php //pr($result_arr);
+	if(count($result_arr)){
+		foreach($result_arr as $key=>$val){
+			
+			//$grp_url = get_group_url($val['i_prayer_group_id']);
+			$CSS = '';
+			$action_li = 0;
+			//echo $val['s_type'];
+			if($val['s_type'] == 'join'){
+				
+				$img = base_url().'images/man-24-16.png';
+				$text = get_username_by_id($val['i_user_id']).' joined ';
+                                //$action_li = 1;
+			}
+			else if($val['s_type'] == 'post'){
+				
+				$img = base_url().'images/comment-16.png';
+				$text = get_username_by_id($val['i_user_id']).' Post on ';
+                               // $action_li = 1;
+			}
+			else if($val['s_type'] == 'prayer_meeting'){
+				
+				$img = base_url().'images/Alert.png';
+				$text = 'Prayer meeting due on ';
+                                $action_li = 1;
+			}
+			else if($val['s_type'] == 'invited'){
+				
+				$img = base_url().'images/man-24-16.png';
+				$pending_img_content = ($val['message_arr']['i_ended'] == '0' )?'<span id="pending_img'.$val['id'].'"><img class="alertred" src="'. base_url().'images/alertred.png"></span>':'';
+				$text = get_username_by_id($val['i_requester_user_id']) .' has invited you to his/her prayer group '.$pending_img_content;
+				$CSS  = 'class="notifical"';
+				$action_li = 1;
+			}
+			else if($val['s_type'] == 'joining_req'){
+				
+				$img = base_url().'images/man-24-16.png';
+				$pending_img_content = ($val['message_arr']['i_ended'] == '0' )?'<span id="pending_img'.$val['id'].'"><img class="alertred" src="'. base_url().'images/alertred.png"></span>':'';
+				$text = get_username_by_id($val['i_requester_user_id']) .' has sent you request to join your prayer group '.$pending_img_content;
+				$CSS  = 'class="notifical"';
+				$action_li = 1;
+			}
+			
+			
+?>
+
+<?php if($action_li == 1){
+?>
+
+<li <?=$CSS?> ><img src="<?=$img?>" alt="" /><?=$val['msg']?> 
+<br/>
+<?php
+
+	if($val['s_type'] == 'joining_req'){
+?>
+<!--	<span id="join_action_content<?=$val['id']?>"> 
+     <div class="button-content">
+     <input value="Accept" type="button" class="accept" onclick="acceptDeclinePrayerGroupInvitation('<?=$val['message_arr']['i_referred_media_id']?>','<?=$val['message_arr']['i_sender_id']?>','<?=$val['message_arr']['id']?>','joining_req_accept_by_owner',<?=$val['id']?>)" />  
+     <input value="Decline" class="decline" type="button" onclick="acceptDeclinePrayerGroupInvitation('<?=$val['message_arr']['i_referred_media_id']?>','<?=$val['message_arr']['i_sender_id']?>','<?=$val['message_arr']['id']?>','decline',<?=$val['id']?>)" />  
+     </div>  
+     </span>-->
+
+   
+<?php
+	}
+	else{
+?>
+<!--	<span id="join_action_content<?=$val['id']?>"> 
+    
+    <div class="button-content">
+     <input value="Join" type="button" class="accept" onclick="acceptDeclinePrayerGroupInvitation('<?=$val['message_arr']['i_referred_media_id']?>','<?=$val['message_arr']['i_sender_id']?>','<?=$val['message_arr']['id']?>','accept',<?=$val['id']?>)" />  
+     <input value="Decline" class="decline" type="button" onclick="acceptDeclinePrayerGroupInvitation('<?=$val['message_arr']['i_referred_media_id']?>','<?=$val['message_arr']['i_sender_id']?>','<?=$val['message_arr']['id']?>','decline',<?=$val['id']?>)" />  
+     </div>  
+     </span>-->
+    
+<?php
+	}
+
+?>
+</li>
+<?php
+	  } 
+	 else{
+?>
+<li <?=$CSS?>><img src="<?=$img?>" alt="" /><?=$val['msg']?>  </li>
+
+<?php 
+	 }
+?>
+<?php 
+		}
+	}else{
+?>
+<div class="view_more" style="text-align:center;">No Notifications.</div>
+        <?php } ?>

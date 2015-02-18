@@ -1,0 +1,379 @@
+<script type="text/javascript">
+<!--
+	function showWorkEdit(obj) {
+		$(obj).parents('.text-table').hide();
+		if($(obj).parents('.sec-detail').find('.form-table').css('display')=='none'){
+			$(obj).parents('.sec-detail').find('.form-table').show();
+		}
+	}
+	
+	
+	// when "cancel" button clicked...
+	function hideWorkEdit(obj) {
+		
+		//// remove those extra "add-more" divs...
+		var actual_work_rec_count = parseInt( $('#actual_work_divs').val() );
+		actual_work_rec_count = ( actual_work_rec_count<=0 )? 1: actual_work_rec_count;
+		var max_no_of_tbls = 5;
+		var start_loop = actual_work_rec_count+1;
+		/*for(i=start_loop; i<=max_no_of_tbls; i++) {
+			tblID = "#work_"+ i;
+			
+			if( $(obj).parents('.sec-detail').find(tblID) )
+				$(obj).parents('.sec-detail').find(tblID).remove();
+		}*/
+		
+		/*var no_of_edu_divs= parseInt( $("table[id^=work_]:visible").length );
+		alert(no_of_edu_divs + '--' + actual_work_rec_count );
+		if(no_of_edu_divs > actual_work_rec_count){
+		   $('table[id^=work_]:gt('+ actual_work_rec_count +')').remove();
+		}*/
+		$(obj).parents('.sec-detail').find("#work_2").remove();
+		$(obj).parents('.sec-detail').find("#work_3").remove();
+		$('#h_work').val( actual_work_rec_count );	// resetting edu-count...
+		$('#deleted_work_divs').val('');		// resetting deleted record-count to 0 again...
+		
+		
+		$(obj).parents('.sec-detail').find('.form-table').hide();
+		
+		//// form reset
+		$('#frmManageWorkProfile')[0].reset();
+		$('div.sec-detail select').attr('disabled', false);
+		//var tblID = "#"+ $('input[name=is_current_employer]:checked', '#frmManageWorkProfile').closest('table').attr('id');
+		var tblID = "#"+ $("#frmManageWorkProfile input[name='is_current_employer']").filter(':checked').closest('table').attr('id');
+		var str = "table"+ tblID +" select";
+		$(str).eq(3).attr('disabled', true);
+		$(str).eq(4).attr('disabled', true);
+		 
+        if($(obj).parents('.sec-detail').find('.text-table').css('display')=='none'){
+            $(obj).parents('.sec-detail').find('.text-table').show();
+        }
+		
+	}
+//-->
+</script>
+<div class="lavel-01">
+
+    <!--title section -->
+    <div class="sec-title">
+        <span class="title-left"></span>
+        <div class="title-body"><h2>Work</h2></div>
+        <span class="title-right"></span>
+    </div>
+    <!--/title section -->
+    <!--detail section -->
+    <div class="sec-detail">
+    
+        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="member-table text-table" id="member_work_details">
+        <?php 
+       
+         $count= count($result['work_arr']);
+            
+            if($count==0)
+                $count=1;
+            for($i=0;$i<$count;$i++)    :
+            
+            //$country  = $result["work_arr"][$i]["s_employer_country"];
+			$country  = get_country_name_by_id($result["work_arr"][$i]["s_employer_country"]);
+            $state    = $result["work_arr"][$i]["s_employer_state"];
+            $city     = $result["work_arr"][$i]["s_employer_city"];
+            
+            $work_address=array();
+            if(!empty($country))    
+                $work_address['country']=$country;
+            if(!empty($state))
+                $work_address['state']=$state;
+            if(!empty($city))
+                $work_address['city']=$city;
+            
+            $address = implode(', ',$work_address);
+            
+            $work_experience_year_from = $result['work_arr'][$i]['s_experience_year_from'];
+            $work_experience_month_from = $result['work_arr'][$i]['i_experience_month_from'];
+            $work_experience_year_to = $result['work_arr'][$i]['s_experience_year_to'];
+            $work_experience_month_to = $result['work_arr'][$i]['i_experience_month_to'];
+            
+            if($work_experience_year_from=='-1')
+            {
+                $work_experience_month_from=-1;
+                $experience_from = "";
+            }
+                
+            else
+                $experience_from = $work_experience_year_from;
+                
+            
+            if($result['work_arr'][$i]['e_is_current_employer']=='yes')
+                $experience_to = " to till now";
+            else {
+				
+				if( !empty($work_experience_year_to) )
+					$experience_to = " to ".$work_experience_year_to;
+				else
+					$experience_to = "";
+					
+			}
+				
+            
+            
+        ?>
+            <tr>
+              <td align="left" valign="top" height="25" width="180" class="label">Employer</td>
+              <td align="left" valign="top" width="20" class="label">:</td>
+              <td align="left" valign="top" ><?php echo $result['work_arr'][$i]['s_employer_name'];?></td>
+            </tr>
+            <tr>
+              <td align="left" valign="top" height="25" width="180" class="label">Work Place</td>
+              <td align="left" valign="top" width="20" class="label">:</td>
+              <td align="left" valign="top" ><?php echo $address;?></td>
+            </tr>
+            <tr>
+              <td align="left" valign="top" height="25" width="180" class="label">Position</td>
+              <td align="left" valign="top" width="20" class="label">:</td>
+              <td align="left" valign="top" ><?php echo $result['work_arr'][$i]['s_position'];?></td>
+            </tr>
+            <tr>
+              <td align="left" valign="top" height="25" width="180" class="label">Period</td>
+              <td align="left" valign="top" width="20" class="label">:</td>
+              <td align="left" valign="top" ><?php echo $experience_from.$experience_to;?></td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+            </tr>
+            <?php 
+                endfor;
+            ?>
+            <tr>
+              <td align="left" valign="bottom" height="40" colspan="2">&nbsp;</td>
+              <td align="left" valign="bottom"><a href="javascript:void(0);" class="edit-btn">Edit</a></td>
+            </tr>
+        </table>
+        
+        <form id="frmManageWorkProfile"  method="post" action="<?=admin_base_url()?>members/member_details/modify_my_profile_work_info_ajax/<?=$result['id']?>" onsubmit="return modify_my_work_profile_ajax()" enctype="multipart/form-data">   
+        <?php 
+       
+            $work_no=0;
+            
+            for($i=0;$i<$count;$i++)   : 
+            
+              
+            
+            $work_no++;
+            $db_id=isset($result['work_arr'][$i]['id'])? $result['work_arr'][$i]['id']:'' ;
+            
+        ?>
+        <table id="<?php echo "work_".$work_no;?>" width="100%" border="0" cellspacing="0" cellpadding="0" class="member-table form-table work_info">
+        <?php
+            if($i>0)    
+                echo '<tr><td class="label" width="180" valign="top" height="30" align="left"></td><td class="label" width="20" valign="top" align="left"></td><td valign="top" align="left" style=" float: right; width:193px;"><a class="close" href="javascript:void(0);" onclick="admin_closeExtraWorkDiv(this)" ><img src="'.base_url().'images/icons/close.png" alt="" ></a></td></tr>';
+        
+        ?>
+            <tr>
+              <td align="left" valign="top" height="30" width="180" class="label">Employer</td>
+              <td align="left" valign="top" width="20" class="label">:</td>
+              <td align="left" valign="top" ><input type="text" name="txt_employer_name[]" value="<?php echo isset($result['work_arr'][$i]['s_employer_name'])? $result['work_arr'][$i]['s_employer_name']:'';?>" /></td>
+            </tr>
+            
+            <tr>
+              <td align="left" valign="top" height="30" width="180" class="label">Work country</td>
+              <td align="left" valign="top" width="20" class="label">:</td>
+              <td align="left" valign="top" >
+                    <select name="txt_employer_country[]" class="txt_work_country" style="width:238px; margin-bottom:6px;">
+                        <option value="">---</option>
+						<?= makeOptionCountry('', encrypt($result['work_arr'][$i]['s_employer_country'])) ?>
+                    </select>
+              </td>
+            </tr>
+            <tr>
+              <td align="left" valign="top" height="30" width="180" class="label">Work state</td>
+              <td align="left" valign="top" width="20" class="label">:</td>
+              <td align="left" valign="top" ><input type="text" name="txt_employer_state[]" value="<?php echo isset($result['work_arr'][$i]['s_employer_state'])? $result['work_arr'][$i]['s_employer_state']:'';?>" /></td>
+            </tr>
+            <tr>
+              <td align="left" valign="top" height="30" width="180" class="label">Work city</td>
+              <td align="left" valign="top" width="20" class="label">:</td>
+              <td align="left" valign="top" ><input type="text" name="txt_employer_city[]" value="<?php echo isset($result['work_arr'][$i]['s_employer_city'])? $result['work_arr'][$i]['s_employer_city']:'';?>" /></td>
+            </tr>
+            
+            <tr>
+              <td align="left" valign="top" height="30" width="180" class="label">Position</td>
+              <td align="left" valign="top" width="20" class="label">:</td>
+              <td align="left" valign="top" ><input type="text" name="txt_employer_position[]" value="<?php echo isset($result['work_arr'][$i]['s_position'])? $result['work_arr'][$i]['s_position']:'';?>" /></td>
+            </tr>
+            <tr>
+              <td align="left" valign="top" height="30" width="180" class="label">Period</td>
+              <td align="left" valign="top" width="20" class="label">:</td>
+              <td align="left" valign="top" >
+                <select name="mnth_from[]" class="profile_combo mnth_from" style="width:90px;margin-right:5px; ">
+                    <option value="">---</option>
+                    <?php echo makeOptionMonth(isset($result["work_arr"][$i]["i_experience_month_from"])? $result["work_arr"][$i]["i_experience_month_from"]:'')?> 
+                </select>
+          
+        <select name="year_from[]" class="profile_combo year_from" style="width:60px;">
+                   <option value="">---</option>
+                 <?=makeOptionYear(isset($result["work_arr"][$i]["s_experience_year_from"])? $result["work_arr"][$i]["s_experience_year_from"]:'')?>
+         </select>
+         
+         
+         <span class="spanned_left"> &nbsp; To  &nbsp;</span>
+         
+         <span class="experience_month_to" <?php if($result["work_arr"][$i]["e_is_current_employer"]=='yes') echo 'id="exp_to"'?>>
+         <select name="mnth_to[]" class="profile_combo mnth_to" style="width:90px; margin-right:5px;" <?php if($result["work_arr"][$i]["e_is_current_employer"]=='yes' || ($i == 0 && $count ==1)) echo "disabled='disabled'  ";?>>
+             <option value="">---</option>
+             <?php echo makeOptionMonth(isset($result["work_arr"][$i]["i_experience_month_to"])? $result["work_arr"][$i]["i_experience_month_to"]:'');?> 
+            </select>
+            </span>
+          
+           
+         <span class="experience_year_to" <?php if($result["work_arr"][$i]["e_is_current_employer"]=='yes') echo 'id="exp_year_to"'?>>   
+         <select name="year_to[]" class="profile_combo year_to" style="width:60px;" <?php if($result["work_arr"][$i]["e_is_current_employer"]=='yes' || ($i == 0 && $count ==1)) echo "disabled='disabled' ";?>>
+                   <option value="">---</option>
+                 <?=makeOptionYear(isset($result["work_arr"][$i]["s_experience_year_to"])? $result["work_arr"][$i]["s_experience_year_to"]:'')?>
+         </select>
+         </span>
+         
+         </td>
+            </tr>
+
+            <tr>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td >
+                <?php //echo isset($result["work_arr"][$i]["e_is_current_employer"])? "yes" : "no";?>
+                    <input name="is_current_employer" type="radio" class="radio_cur_emp"  onclick="current_emp(this);"  <?php if($result["work_arr"][$i]["e_is_current_employer"]=='yes' || $i==0) echo "checked";?> value="<?= $i+1 ?>"  /> Current Employer
+                </td>
+            </tr>
+            
+            <tr><td>&nbsp;</td></tr>
+            <input type="hidden"  name="if_current_emp[]" id="if_current_emp" value="<?= $i+1 ?>" ?>
+             <input type="hidden" name="db_id[]" id="dbId" value="<?php echo $db_id;?>"  />          
+        </table>
+        
+        <?php
+            endfor;
+        ?>
+        
+        <table id="add_more_work" width="100%" border="0" cellspacing="0" cellpadding="0" class="member-table form-table">
+        <!--<tr><td align="left" valign="bottom" height="30" colspan="2">&nbsp;</td></tr>-->
+        </table>
+        
+         
+         <table width="100%" border="0" cellspacing="0" cellpadding="0" class="member-table form-table">  
+           <tr>
+              <td align="left" valign="top" height="30" width="180" colspan="3"><a href="javascript:void(0);" class="add-one" onClick="return admin_add_extra_work_div()">Add One</a></td>
+            </tr>
+         </table>
+         
+         
+         <table width="100%" border="0" cellspacing="0" cellpadding="0" class="member-table form-table">
+         <tr>
+         
+              <td align="left" valign="top" height="30" width="180" class="label"></td>
+              <td align="left" valign="top" width="20" class="label"></td>
+              <td align="left" valign="top" ></td>
+              <td align="left" valign="bottom" height="30" colspan="2">&nbsp;</td>
+              <td align="left" valign="bottom">
+              
+              <input name="" type="submit" class="btn"  value="Update" onclick="showWorkEdit(this)" />
+              <input name="" type="reset" class="btn" value="Cancel" onclick="hideWorkEdit(this)" />
+              </td>
+            </tr>
+         </table>
+         <input type="hidden" name="total_work_divs" id="h_work" value="<?php echo $work_no;?>" />
+         
+         <?php /*?> //////////// NEW FIELD(S) [BEGIN] //////////// <?php */?>
+             <input type="hidden" name="actual_work_divs" id="actual_work_divs" value="<?= count($result['work_arr']) ?>" />
+             <input type="hidden" name="deleted_work_ids" id="deleted_work_divs" value="" />
+         <?php /*?> //////////// NEW FIELD(S) [END] //////////// <?php */?>
+        
+        </form>
+    </div>
+    <!--/detail section -->
+</div>
+                                
+<!-- ********************* -->
+<span id="div_copy" style="display:none;">
+    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="member-table work_info">
+    
+        <tr><td class="label" width="180" valign="top" height="30" align="left"></td><td class="label" width="20" valign="top" align="left"></td><td valign="top" align="left" style=" float: right; width:193px;"><a class="close" href="javascript:void(0);" onclick="admin_closeExtraWorkDiv(this)" ><img src="<?= base_url()?>images/icons/close.png" alt="" ></a></td></tr>
+    
+
+        <tr>
+          <td align="left" valign="top" height="30" width="180" class="label">Employer</td>
+          <td align="left" valign="top" width="20" class="label">:</td>
+          <td align="left" valign="top" ><input type="text" name="txt_employer_name[]" value="" /></td>
+        </tr>
+        
+        <tr>
+          <td align="left" valign="top" height="30" width="180" class="label">Work country</td>
+          <td align="left" valign="top" width="20" class="label">:</td>
+          <td align="left" valign="top" >
+            <select name="txt_employer_country[]" class="txt_work_country1" style="width:238px; margin-bottom:6px;">
+                <option value="-1">---</option>
+                <?= makeOptionCountry('') ?>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td align="left" valign="top" height="30" width="180" class="label">Work state</td>
+          <td align="left" valign="top" width="20" class="label">:</td>
+          <td align="left" valign="top" ><input type="text" name="txt_employer_state[]" value="" /></td>
+        </tr>
+        <tr>
+          <td align="left" valign="top" height="30" width="180" class="label">Work city</td>
+          <td align="left" valign="top" width="20" class="label">:</td>
+          <td align="left" valign="top" ><input type="text" name="txt_employer_city[]" value="" /></td>
+        </tr>
+        
+        <tr>
+          <td align="left" valign="top" height="30" width="180" class="label">Position</td>
+          <td align="left" valign="top" width="20" class="label">:</td>
+          <td align="left" valign="top" ><input type="text" name="txt_employer_position[]" value="" /></td>
+        </tr>
+        <tr>
+          <td align="left" valign="top" height="30" width="180" class="label">Period</td>
+          <td align="left" valign="top" width="20" class="label">:</td>
+          <td align="left" valign="top" >
+          <select name="mnth_from[]" class="profile_combo1 mnth_from" style="width:90px;margin-right:5px; ">
+             <option value="-1">---</option>
+             <?php echo makeOptionMonth()?> 
+          </select>
+      
+    <select name="year_from[]" class="profile_combo1 year_from" style="width:60px;">
+               <option value="-1">---</option>
+             <?=makeOptionYear()?>
+     </select>
+     
+     
+     <span class="left"> &nbsp; To  &nbsp;</span>
+     <span class="experience_month_to">
+     <select name="mnth_to[]" class="profile_combo1 mnth_to" style="width:90px; margin-right:5px;" >
+         <option value="-1">---</option>
+         <?php echo makeOptionMonth(); ?> 
+        </select>
+     </span>
+    
+       
+      
+     <span class="experience_year_to">
+     <select name="year_to[]" class="profile_combo1 year_to" style="width:60px;" >
+               <option value="-1">---</option>
+             <?=makeOptionYear()?>
+     </select>
+     </span>
+     </td>
+        </tr>
+    
+        <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td >
+                <input name="is_current_employer" type="radio" class="radio_cur_emp"  onclick="current_emp(this);"  value=""  /> Current Employer
+            </td>
+        </tr>
+        
+        <tr><td>&nbsp;</td></tr>
+         <input type="hidden" name="db_id[]" id="dbId" value=""  />          
+    </table>
+</span>
+<!-- ********************* -->

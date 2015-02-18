@@ -1,0 +1,108 @@
+<div class="lavel-01">
+
+    <!--title section -->
+    <div class="sec-title">
+        <span class="title-left"></span>
+        <div class="title-body"><h2>Work</h2></div>
+        <span class="title-right"></span>
+    </div>
+    <!--/title section -->
+    <!--detail section -->
+    <div class="sec-detail">
+    
+        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="member-table text-table" id="member_work_details">
+        <?php 
+       
+         $count= count($result['work_arr']);
+            
+            if($count==0)
+                $count=1;
+            for($i=0;$i<$count;$i++)    :
+            
+            //$country  = $result["work_arr"][$i]["s_employer_country"];
+			$country  = get_country_name_by_id($result["work_arr"][$i]["s_employer_country"]);
+            $state    = $result["work_arr"][$i]["s_employer_state"];
+            $city     = $result["work_arr"][$i]["s_employer_city"];
+            
+            $work_address=array();
+            if(!empty($country))    
+                $work_address['country']=$country;
+            if(!empty($state))
+                $work_address['state']=$state;
+            if(!empty($city))
+                $work_address['city']=$city;
+            
+            $address = implode(', ',$work_address);
+            
+            $work_experience_year_from = $result['work_arr'][$i]['s_experience_year_from'];
+            $work_experience_month_from = $result['work_arr'][$i]['i_experience_month_from'];
+            $work_experience_year_to = $result['work_arr'][$i]['s_experience_year_to'];
+            $work_experience_month_to = $result['work_arr'][$i]['i_experience_month_to'];
+            
+            if( empty($work_experience_year_from) )
+            {
+                $work_experience_month_from=-1;
+                $experience_from = "";
+            }
+            else {
+				if( !empty($work_experience_month_from)	)
+					$experience_from = get_month_name($work_experience_month_from, $work_experience_year_from) ." ".$work_experience_year_from;
+				else
+					$experience_from = $work_experience_year_from;
+			}
+                
+            
+            if($result['work_arr'][$i]['e_is_current_employer']=='yes')
+                $experience_to = " to till now";
+            else {
+				
+				if( !empty($work_experience_year_to) ) {
+					
+					if( !empty($work_experience_month_to) )
+						$experience_to = " to ". get_month_name($work_experience_month_to, $work_experience_year_to) ." ".$work_experience_year_to;
+					else
+						$experience_to = " to ". $work_experience_year_to;
+				}
+				else
+					$experience_to = "";
+					
+			}
+				
+            
+            
+        ?>
+            <tr>
+              <td align="left" valign="top" height="25" width="180" class="label">Employer</td>
+              <td align="left" valign="top" width="20" class="label">:</td>
+              <td align="left" valign="top" ><?php echo $result['work_arr'][$i]['s_employer_name'];?></td>
+            </tr>
+            <tr>
+              <td align="left" valign="top" height="25" width="180" class="label">Work Place</td>
+              <td align="left" valign="top" width="20" class="label">:</td>
+              <td align="left" valign="top" ><?php echo $address;?></td>
+            </tr>
+            <tr>
+              <td align="left" valign="top" height="25" width="180" class="label">Position</td>
+              <td align="left" valign="top" width="20" class="label">:</td>
+              <td align="left" valign="top" ><?php echo $result['work_arr'][$i]['s_position'];?></td>
+            </tr>
+            <tr>
+              <td align="left" valign="top" height="25" width="180" class="label">Period</td>
+              <td align="left" valign="top" width="20" class="label">:</td>
+              <td align="left" valign="top" ><?php echo $experience_from.$experience_to;?></td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+            </tr>
+            <?php 
+                endfor;
+            ?>
+            <tr>
+              <td align="left" valign="bottom" height="40" colspan="2">&nbsp;</td>
+              <td align="left" valign="bottom"><a href="javascript:void(0);" class="edit-btn" onclick="show_edit_part_AJAX('work')">Edit</a></td>
+            </tr>
+        </table>
+        
+    </div>
+    <!--/detail section -->
+</div>

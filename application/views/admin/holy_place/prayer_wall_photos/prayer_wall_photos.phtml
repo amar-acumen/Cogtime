@@ -1,0 +1,217 @@
+<div class="clr"></div>
+<!--navigation section start -->
+<?php include(APPPATH."views/layouts/admin/admin_nav.phtml");?>
+<!--navigation section end -->
+<!-- CONTENT SECTION -->
+<div id="content_section">
+      <div id="container">
+            <!--<div id="top_corner">&nbsp;</div> -->
+            <div id="mid_content">
+                  <div class="page_heading left">
+                        <div class="left"><img src="../images/icons/login.png" alt="" />Prayer Wall Photos</div>
+                        <div class="right" style="margin-bottom:14px;">
+                                <input class="evnt_btn" type="button" onclick="window.location=admin_base_url+'holy-place/add-prayer-wall-photos.html'" value="Add New Photo" name="">
+                            </div>
+                  </div>
+
+
+                  <div class="clr"></div>
+                  <div id="right_container">
+                        <div class="arrow_btm"></div>
+                        <div class="content_area">
+                            <!--filter section start -->
+                            <div class="filter">
+                                <span class="filter-by">Filter By &raquo;</span>
+                                
+                                
+                                <form id="search_frm" action="" method="post" enctype="multipart/form-data" class="filter-search" onsubmit="return form_post();">
+                                    <label>Title:</label>
+                                    <input type="text"  value="<?=$search_keyword?>" name="txt_title" id="txt_title" />
+                                          
+                                    <input type="hidden" name="if_post" id="if_post" value="y" />
+                                    <input name="" type="submit" value="GO" class="go" />
+                                    <a href="javascript:void(0)" onclick="return show_all()" style="margin-left: 10px;">Show all</a>
+                                </form>  
+
+                                
+                                
+                                
+                                <div class="clr"></div>
+                            </div>
+                            <!--filter section end -->
+                            <!--<h4>Prayer Wall Photos</h4>
+                            <div class="right" style="margin-bottom:14px;">
+                                <input class="evnt_btn" type="button" onclick="window.location=admin_base_url+'holy-place/add-prayer-wall-photos.html'" value="Add New" name="">
+                            </div>
+                            <div class="clr"></div>-->
+<?php
+//echo "current page : ".$this->session->userdata('current_page_intercession');
+
+?>                        
+                            <DIV id="table_content" style="width: 700px;">
+                            <?=$result_content?>
+                            </DIV>
+                            
+                            
+                            
+                            <div class="clr"></div>
+                        </div>
+                  </div>
+                  <div class="clr"></div>
+                  
+            </div><!--/mid_content-->
+            
+            <!--<div id="bot_corner">&nbsp;</div> -->
+      </div>
+      <div class="clr"></div>
+</div>
+
+
+<!-- /CONTENT SECTION -->
+
+
+
+<!--popup one start-->
+<div class="lightbox delete-page-popup" style="width:500px;">
+      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="../images/close.png" alt="" /></a></div>
+      <div class="top"><div>&nbsp;</div></div>
+      <div class="mid">
+            <div class="heading" style="margin-bottom:0px;">
+                  <div class="left">
+                        <h4>Delete Prayer Wall Photos</h4>
+                  </div>
+            </div>
+               <div class="shade_box_white">
+               <p class="center-text">Do you really want to delete this Photo?</p>
+               <form action="" method="post" enctype="multipart/form-data">
+               <input type="hidden" id="h_del_prayer_wall_photos_id" value="">
+               <input type="hidden" id="h_current_page" value="">
+                       <input name="" type="button" value="Yes" class="btn" style="margin-left:146px;" onclick="return delete_()"/>
+                    <input name="" type="button" value="No" class="btn" onclick="hide_dialog()"/>
+               </form>   
+               <div class="clr"></div>
+            </div>
+            
+      </div>
+      <div class="bot"><div>&nbsp;</div></div>
+</div>
+<!--popup one end-->
+
+<!--popup detailed-descriptions start-->
+<div class="lightbox detailed-descriptions" style="width:700px;">
+      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="../images/close.png" alt="" /></a></div>
+      <div class="top"><div>&nbsp;</div></div>
+      <div class="mid">
+            <div class="heading" style="margin-bottom:0px;">
+                  <div class="left">
+                        <h4>Prayer Wall</h4>
+                  </div>
+            </div>
+               <div class="shade_box_white product">
+                       
+                    <div class="product-details full">
+                        <h3><span>Posted By:</span> Allen</h3>
+                    </div>
+                    <div class="clr"></div>
+                    <div class="details">
+                        <p class="title">Description:</p>
+                        <p>Pellentesque odio turpis, aliquam ut varius quis, pulvinar a arcu. Sed ultricies pharetra tortor a ultrices. Pellentesque a adipiscing enim.</p> 
+                    </div>
+               <div class="clr"></div>
+            </div>
+            
+      </div>
+      <div class="bot"><div>&nbsp;</div></div>
+</div>
+<!--popup detailed-descriptions end-->
+
+
+
+<script type="text/javascript">
+$(document).ready(function(){
+     optionsArr = { 
+        beforeSubmit:  showBusyScreen,  // pre-submit callback 
+        success:       validateFrm, // post-submit callback 
+        url:        admin_base_url + "holy_place/prayer_wall_photos/prayer_wall_photos_ajax_pagination"
+    }; 
+});
+
+
+function form_post()
+{
+    $('#search_frm').ajaxSubmit(optionsArr);
+    
+    return false;
+}
+
+function validateFrm(data)
+{
+   hideBusyScreen();
+        $('#table_content').html(data);
+}
+
+
+function confirm_delete_(id,page)
+{
+    $('#h_del_prayer_wall_photos_id').val(id);
+    $('#h_current_page').val(page);
+    show_dialog('delete-page-popup');
+}
+function delete_()
+{
+    var id = $('#h_del_prayer_wall_photos_id').val();
+    var current_page = $('#h_current_page').val();
+   
+    $.ajax({
+        url : admin_base_url+'holy_place/prayer_wall_photos/delete_prayer_wall_photos/'+current_page,
+        type : 'post',
+        data : ({'id':id}),
+        dataType : 'json',
+        success : function(data)
+        {
+            hide_dialog();
+          
+            $('#table_content').html(data.response);
+        }
+    });
+    
+}
+
+function change_status_(id,status)
+{
+    showBusyScreen();
+        $.ajax({
+        url : admin_base_url+'holy_place/prayer_wall_photos/change_status/',
+        type : 'post',
+        data : ({'id':id,'status':status}),
+        dataType : 'json',
+        success : function(data)
+        {
+            hideBusyScreen();
+            if(data.status==0)
+                var now_status = 'Enable';
+            else
+                var now_status = 'Disable';
+            $('#status_'+id).attr('value',now_status);
+        }
+    });
+}
+
+function show_all()
+{
+    showBusyScreen();
+    $('#txt_title').val('');
+    $.ajax({
+        url : admin_base_url + 'holy_place/prayer_wall_photos/show_all',
+        dataType : 'json',
+        success : function(data)
+        {
+            $('#table_content').html(data.html);
+            hideBusyScreen();
+        }
+    });
+}
+</script>
+
+
+

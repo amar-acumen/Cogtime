@@ -1,0 +1,10 @@
+var bid_for_front_sofa_content = "Bid for the front sofa (must be one or multiple of 100 credits, bid more to win.)";
+var bid_for_front_sofa_title = "Bid Front Sofa";
+var only_positive_integer_allowed = "Only positive integer allowed!";
+var insufficient_credits_tip = "Insufficient credits, please buy credits, thanks!";
+var fail_to_bid_sofa = "Sorry, failed to bid sofa";
+var bid_and_take_seat = "Bid and take seat, current bid: %C sofa";
+var default_seat_name = "Take Seat";
+var btn_confirm = "Confirm";
+var btn_cancel = "Cancel";
+var bid_credits_not_enought = "Sorry your bid lost!";

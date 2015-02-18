@@ -1,0 +1,127 @@
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                      <tr>
+                                            <td align="left" style="width:181px;" valign="top">
+                                            	<table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                                    <tr>
+                                                          <td style="height:26px; width:142px;">&nbsp;</td>
+                                                    </tr>
+                                                    <tr>
+                                                          <td class="blue_back_line" style=" border-left:1px solid #f0f0f0;"><div>&nbsp;</div></td>
+                                                    </tr>
+                                                    
+                                                    <?php
+														if(count($project_info['skill'])){
+															
+															foreach($project_info['skill'] as $key=> $p_val){
+													?>
+                                                        <tr>
+                                                              <td align="left" class="white_td_line" style=" border-left:1px solid #d9d9d9; padding-left:10px;"><div><?=$p_val['s_name']?> (<?=$p_val['i_total_manpower_req']?>)</div>
+                                                              </td>
+                                                             
+                                                             
+                                                        </tr>
+                                                    <?php 
+															}
+														}
+													?>
+                                                    
+                                                    
+                                              </table>	
+                                            
+                                            </td>
+                                            <td align="left" valign="top">
+                                            	<div class="scroll_div" style="width:629px;">
+                                                      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                                      <tr class="blue_back"> 
+													  <?php 
+															 if(count($calendar_arr)){
+																foreach($calendar_arr as $c_val){
+																	 $CSS = ($c_val['day_name'] == 'Sun')?'class="red_txt"':'';
+													   ?>
+                                                                  <th align="center" <?=$CSS?>><?=$c_val['day_name']?></th>
+                                                       <?php       }
+																}
+													   ?>
+                                                       </tr>
+                                                       
+                                                       <tr class="blue_back">
+                                                       
+                                                       <?php 
+															 if(count($calendar_arr)){
+																foreach($calendar_arr as $c_val){
+																	 $CSS = ($c_val['day_name'] == 'Sun')?'class="red_txt"':'';
+													   ?>
+                                                                  <td align="center"><?=$c_val['day']?><br /><?=$c_val['month']?><br /><?=$c_val['year']?></td>
+                                                       <?php       }
+																}
+													   ?>
+                                                            </tr>
+                                                       
+                                                       
+                                                    
+                                                   <?php //pr($project_info['skill']);
+												   		if(count($project_info['skill'])){
+															foreach($project_info['skill'] as $key=> $p_val){
+													?>
+                                                       
+                                                            <tr>
+                                                            <?php #pr($calendar_arr);
+																  if(count($calendar_arr)){
+																	foreach($calendar_arr as $c_val){
+																		 
+																		 $CSS = ($c_val['day_name'] == 'Sun')?'class="red_txt"':'';
+																		  
+																		  $is_sufficient = checkSufficientSkillPerDay($p_val['s_name'], $p_val['i_project_id'], $c_val['dt']); 
+																			  
+																			if($c_val['dt'] <= $p_val['dt_end_date'] && $c_val['dt'] >= $p_val['dt_start_date']){
+																				
+																				if($is_sufficient >= $p_val['i_total_manpower_req']){
+																					$div_css = 'blue_td';
+																				}
+																				else if($is_sufficient < $p_val['i_total_manpower_req'] && $is_sufficient != 0){
+																					$div_css ='yellow_td';
+																				}
+																				else if($is_sufficient == 0){
+																					$div_css = 'red_td';
+																				}
+																			 
+																			  //$div_css = ($is_sufficient >= $p_val['i_total_manpower_req'])?'blue_td':'red_td';
+																			}
+																			else{
+																				
+																				$div_css = '';
+																			}
+																		   
+																	#red_td 	 blue_td dt_end_date dt
+																		 
+													   		?>
+                                                                  <td align="center" onClick="showDonorList('<?=$c_val['dt']?>','<?=$p_val['s_name']?>')"><div class="<?=$div_css?>">&nbsp; </div></td>
+                                                                  
+                                                                  
+                                                                 
+                                                             <?php       }
+																}
+													  		 ?>
+                                                            </tr>
+                                                        <?php 
+															}
+														}
+													?>
+                                                            
+                                                            
+                                                      </table>
+                                                </div>
+                                            </td>
+                                           
+                                            
+                                      </tr>
+                                      <tr>
+                                          <td align="center">&nbsp;</td>
+                                          <td colspan="2" valign="top" style="height:30px;"><img src="../images/blue_dot.png" alt="" /> Full   &nbsp; &nbsp; 
+                                          <img src="../images/yellow_dot.png" alt="" />  Partially Fulfilled
+                                          &nbsp; &nbsp; 
+                                          <img src="../images/red_dot.png" alt="" /> Vacant
+                                          </td>
+                                    </tr>
+                                   
+                                </table>

@@ -1,0 +1,102 @@
+<table width="100%" border="0" cellspacing="0" cellpadding="0" class="admin-table">
+                              <tr>
+                                <th align="left" valign="middle" height="30" width="80">Created On</th>
+                                <th align="left" valign="middle" height="30" width="100">Started On</th>
+                                <th align="left" valign="middle" height="30" width="100">Ended On</th>
+                                <th align="left" valign="middle" height="30" width="150">Chat Room Title</th>
+                                <th align="left" valign="middle" height="30" width="150">Chat Room Owner</th>
+                                <th align="left" valign="middle" height="30" width="90">Category</th>
+                                 <th align="left" valign="middle" height="30" width="90">Type</th>
+                                <th align="left" valign="middle" height="30" width="350">Description</th>
+                                <th align="center" valign="middle" height="30" width="80">Max Allowed Members</th>
+                                <th align="center" valign="middle" height="30" width="80">Room Status</th>
+                                <th align="center" valign="middle" height="30" width="40">No. of Members Active</th>
+                                <th align="center" valign="middle" height="30" width="100" class="last">Actions</th>
+                              </tr>
+                              
+                              
+                              
+                              <?php
+								//pr($info_arr);
+              									if(count($info_arr)){
+                									foreach($info_arr as $key=> $info){
+                										#$info['create_time']
+                										$s_status = ($info['enable'] == 1)?'Restrict Access':'Restricted';	
+
+                                    $dt = $info['room_creation_dt'];
+                                    $owner_name = '';
+                                    $owner_name = get_chat_room_owner($info['room_id']);
+                                   $create_date=date('Y-m-d', substr($info['create_time'], 0, -3));
+                                  // echo getChatCatID($info['room_id']);
+                                   // echo substr($info['create_time'], 0, -3); 
+                                  // echo 
+                                   
+                                    ?>
+
+                                      <tr>
+                                <td align="left" valign="top"><?=getShortDate($create_date,5)?></td>
+                                <td align="left" valign="top"><?=getChatStartDatebyId($info['room_id'])?></td>
+                                <td align="left" valign="top"><?=getChatEndDatebyId($info['room_id'])?></td>
+                                <td align="left" valign="top"><?=$info['name']?></td>
+                                <td align="left" valign="top">
+                                  <?=($owner_name != '')? $owner_name :'Administrator' ?>
+                                </td>
+                                <td align="left" valign="top"><?=(getChatCatID($info['room_id']) !='')?getChatCatID($info['room_id']):'Private Chat Room'?></td>
+                               <td align="left" valign="top"><?php if(getChattypebyid($info['room_id']) == 1){ echo 'Public Chat Room';} else if(getChattypebyid($info['room_id']) == 2){ echo 'Private Chat Room';}else if(getChattypebyid($info['room_id']) == 3){ echo 'Prayer Chat Room';}else if(getChattypebyid($info['room_id']) == 4){ echo 'Ring Chat Room';} ?></td>
+                                 <?php if($info['member_only'] == 0) {?>
+                                <td align="left" valign="top"><?=my_substr($info['des'], 200)?></td>
+                                <?php }
+                                 else {
+                                ?>
+                                <td align="left" valign="top">Private chat room</td>
+                                <?php 
+								 }
+								?>
+                                <td align="center" valign="top"><?=$info['max_user']?></td>
+                                <td align="center" valign="top"><?php if($info['user_numbers'] > 0){ echo '<font color =#39af00 ><b>Active</b></font>';}else{ echo '<font color =#eda200 >Idle</font>';}?></td>
+                                <td align="center" valign="top"><?= $info['user_numbers']?></td>
+                                <td align="center" valign="middle" class="last">
+                               <?php if($info['member_only'] == 0) {?>
+                                <input name="" title="Edit" type="button" class="edit-button"  value="" onclick="return edit_chatRoom(<?=$info['room_id']?>); "/>
+                                <?php } else{?>
+                                 <input name="" title="Edit" type="button" class="edit-button"  value="" onclick="return edit_chatRoom(<?=$info['room_id']?>); " disabled="disabled"/>
+                                 <?php } ?>
+                                <?php if($info['user_numbers'] == 0){ ?>
+                                <input name="" title="Delete" type="button" class="delete-button"  value="" onclick="return delete_chatRoom(<?=$info['room_id']?>);"/>
+                               
+                                <?php } ?>
+                               <?php /*?> <input name="" title="Disable" type="button" class="btn-06"  value="Disable"/><?php */?>
+                                
+                                
+                                 <?php if($info['enable'] == 1){ ?>
+                            		<span id="<?=$info['room_id']?>_status">
+                                    <input name="" title="Restricted" type="button" class="btn-02"  onclick="javascript:changeStatus(<?php echo $info['room_id'] ?> , 0 , <?php echo $info['enable'] ?>)"  value="<?=$s_status?> " style="background:#FFC200;"/>
+                                    </span>
+									<?php 
+                                        } 
+                                        else if($info['enable'] == 0){?>
+                                            <span id="<?=$info['room_id']?>_status">
+                                            <input name="" title="Disable" type="button" class="btn-02"  onclick="javascript:changeStatus(<?php echo $info['room_id'] ?> , 1 , <?php echo $info['enable'] ?>)"  value="<?=$s_status?>"/>
+                                            </span>
+                                    
+                                    <?php }?>
+                                
+                                </td>
+                              </tr>
+                                 <?php	}
+								  }
+								  else{
+							  ?>
+								   <tr>
+										<td style="text-align:center;" height="80" colspan="20">No data available!!!</td>
+								   </tr>
+							  
+							  <?php
+								  }
+							  ?>
+                             
+</table>
+
+<div class="paging">
+            <ul><?= $page_links ?></ul>
+</div>	

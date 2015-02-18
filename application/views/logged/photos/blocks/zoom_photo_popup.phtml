@@ -1,0 +1,14 @@
+<div style="display:block;  margin-left: 80px;" class="lightbox zoom_img_small">
+     <div class="close"><a onclick="tb_remove()" href="javascript:void(0)"><img src="images/close.png" alt="" /></a></div>
+          <div class="top"><div>&nbsp;</div></div>
+           <div class="mid">
+            <?php $BIG_IMG = base_url()."uploads/user_photos/".getThumbName($photo_info['s_photo'],'main'); ?>
+           <div class="heading"><div class="left">
+              <h4><img src="images/icons/photo1.png" width="30" height=" 30" alt="" /> <?=$photo_info['s_title']?></h4></div>
+           </div>
+           <div style="text-align:center;">
+           <div style="background:url(<?=$BIG_IMG?>) no-repeat center;width:400px; height:327px; cursor:pointer; "  ></div>
+           </div>
+          </div>
+          <div class="bot"><div>&nbsp;</div></div>
+</div>

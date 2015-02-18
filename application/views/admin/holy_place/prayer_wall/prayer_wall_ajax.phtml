@@ -1,0 +1,76 @@
+                       
+                       <input type="hidden" id="h_current_page" value="<?=$current_page?>">
+                            <table width="100%" border="0" cellspacing="0" cellpadding="0" class="admin-table">
+                              <tr>
+                                <th align="center" valign="middle" height="30" width="90">Date/Time Posted</th>
+                                <th align="left" valign="middle" height="30" width="140">Posted By</th>
+                                <th align="left" valign="middle" height="30" width="450">Description</th>
+                                <th align="left" valign="middle" height="30" width="80">Request Type</th>
+                                <th align="center" valign="middle" height="30" width="100">Start date/Time</th>
+                                <th align="center" valign="middle" height="30" width="100">End date/Time</th>
+                                <th align="center" valign="middle" height="30" class="last">Actions</th>
+                              </tr>
+                              
+                              
+                         <?php
+                         //pr($info_arr);
+                            if(count($info_arr)){
+                            foreach($info_arr as $key=> $info){
+                            
+                                             
+                        ?>
+                              
+                              
+                              <tr>
+                                <td align="center" valign="top"><?=getShortDateWithTime($info['dt_insert_date'],7)?></td>
+                                <td align="left" valign="top"><?=$info['posted_by']?></td>
+                                <td align="left" valign="top"><a href="javascript:void(0);" onclick="return show_desc_(<?=$info['id']?>);"><?= my_substr(html_entity_decode(htmlspecialchars_decode($info['s_description']),ENT_QUOTES,'utf-8'),150)?></a></td>
+                                <td align="center" valign="top"><?=$info['e_request_type']?></td>
+                                <td align="center" valign="top"><?=getShortDateWithTime($info['dt_start_date'],9)?></td>
+                                <td align="center" valign="top"><?=getShortDateWithTime($info['dt_end_date'],9)?></td>
+                                <td align="center" valign="middle" class="last">
+                                <input name="" title="Edit" type="button" class="edit-button"  value="" onclick="window.location=admin_base_url+'holy-place/<?=$current_page?>/<?=$info['id']?>/edit-prayer-wall.html'"/>
+                                <input name="" title="Delete" type="button" class="delete-button"  value="" onclick="return confirm_delete_(<?=$info['id']?>)"/>
+                                <input id="status_<?=$info['id']?>" name="" title="Disable" type="button" class="btn-06"  value="<?=($info['i_isenabled']==2)? 'Enable':'Disable';?>" status="<?=$info['i_isenabled']?>" onclick="return change_status_(<?=$info['id']?>,<?=$info['i_isenabled']?>)"/>
+                                
+                                
+                                 <?php
+                               
+                                if($info['testimony']==0)
+                                    $value = 'Add Testimony';
+                                else
+                                    $value = 'Edit Testimony';
+                                ?>
+                                
+                                
+                                
+                                <input id="testimony_<?=$info['id']?>" name="" title="Disable" type="button" class="btn-05"  value="<?=$value?>" onclick="return show_testimony_(<?=$info['id']?>)"/>
+                                </td>
+                              </tr>
+                              
+                              
+                              
+                <?php    }
+                    }
+                    else{
+                ?>
+                     <tr>
+                          <td style="text-align:center;" height="80" colspan="20">No data available!!!</td>
+                     </tr>
+                
+                <?php
+                    }
+                ?>
+                              
+                       
+                            </table>
+<?php
+
+if($page_links) :
+?>         
+<div class="paging">
+            <ul><?= $page_links ?></ul>
+</div>        
+<?php
+endif;
+?>  

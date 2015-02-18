@@ -1,0 +1,145 @@
+<div class="clr"></div>
+<!-- CONTENT SECTION -->
+<!--navigation section start -->
+<?php include(APPPATH."views/layouts/admin/admin_nav.phtml");?>
+<!--navigation section end -->
+<div id="content_section">
+      <div id="container">
+            <div id="mid_content">
+                  <div class="page_heading left">
+                        <div class="left"><img src="../images/icons/login.png" alt="" /> Dashboard</div>
+                  </div>
+                  <div class="clr"></div>
+                  <?php /*?><div id="right_container">
+                        <div class="arrow_btm"></div>
+                        <div class="content_area dashboard">
+                        
+                            <p><img src="../images/blue-arrow.png" alt="blue arrow" width="14" height="12" />Total <span><?=$total_user?></span> Registered Members</p>
+							
+							<p><img src="../images/blue-arrow.png" alt="blue arrow" width="14" height="12" />Total <span><?=$total_online_user?></span> Online Users</p>
+    
+                            <p><img src="../images/blue-arrow.png" alt="blue arrow" width="14" height="12" />Total <span><?=$total_blogs?></span> Blogs, <img src="../images/blue-arrow.png" alt="blue arrow" width="14" height="12" /> <span><?=$total_rings?></span> Rings, <img src="../images/blue-arrow.png" alt="blue arrow" width="14" height="12" /> <span><?=$total_events?></span> Events, <img src="../images/blue-arrow.png" alt="blue arrow" width="14" height="12" /> <span><?=$total_chat_rooms?></span> Chatrooms</p>
+                            
+                            <p><img src="../images/blue-arrow.png" alt="blue arrow" width="14" height="12" />Total <span>1254</span> eTrade Products, <img src="../images/blue-arrow.png" alt="blue arrow" width="14" height="12" /> <span>3219</span> eSwap Products, <img src="../images/blue-arrow.png" alt="blue arrow" width="14" height="12" /> <span>2134</span> eFreebies Products</p>
+                            
+                            <p><img src="../images/blue-arrow.png" alt="blue arrow" width="14" height="12" />Total <span><?=round($total_mc_videos)?></span> Videos, <img src="../images/blue-arrow.png" alt="blue arrow" width="14" height="12" /> <span><?=round($total_ch_news)?></span> Christian News, <img src="../images/blue-arrow.png" alt="blue arrow" width="14" height="12" /> <span><?=round($total_gospel_mag)?></span> Gospel Magazines, <img src="../images/blue-arrow.png" alt="blue arrow" width="14" height="12" /> <span><?=round($total_ch_projects)?></span> Christian Projects</p>
+                            
+                            <p><img src="../images/blue-arrow.png" alt="blue arrow" width="14" height="12" />Total <span>$<?=round($fund_donor_list,2)?></span> Donations, <img src="../images/blue-arrow.png" alt="blue arrow" width="14" height="12" /> <span><?=round($total_project)?></span> Charity Projects<!--, <img src="../images/blue-arrow.png" alt="blue arrow" width="14" height="12" /> <span>5478</span> Salvation Prayers--></p>
+                            
+                            <p><img src="../images/blue-arrow.png" alt="blue arrow" width="14" height="12" />Total <span><?=$total_quiz?></span> Bible Quiz, <?/*<img src="../images/blue-arrow.png" alt="blue arrow" width="14" height="12" /> <span>5218=$total_testimonies;</span> Testimonies,?> <img src="../images/blue-arrow.png" alt="blue arrow" width="14" height="12" /> <span><?=$total_church?></span> Churches</p>
+                            
+                            
+                            <p><img src="../images/blue-arrow.png" alt="blue arrow" width="14" height="12" />Total <span><?=$total_prayer_req;?></span> Prayer Requests, <img src="../images/blue-arrow.png" alt="blue arrow" width="14" height="12" /> <span><?=$total_intercession?></span> e-Intercessions, <img src="../images/blue-arrow.png" alt="blue arrow" width="14" height="12" /> <span><?=$total_testimonies;?></span> Testimonies</p>
+                        
+                            <div class="clr"></div>
+                        </div>
+                  </div><?php */?>
+                  <div class="clr"></div>
+
+
+                  <!-- Start New Dashboard Html added-->
+                  <div id="right_container">
+                        <div class="arrow_btm"></div>
+
+                         <div class="content_area">
+
+                          <div class="left-dashboard">
+                            <div class="group-block">
+                              <h3 class="member-heading">Members</h3>
+                                <ul>
+                                  <li><a href="javascript:void(0);">Registered Members</a> <span>(<?=$total_user?>)</span></li>
+                                  <li><a href="javascript:void(0);">Online Users</a> <span>(<?=$total_online_user?>)</span></li>
+                                </ul>
+
+                            </div>
+
+                             <div class="group-block">
+                              <h3 class="social-heading">Social hubs</h3>
+                                <ul>
+                                  <li><a href="javascript:void(0);">Blogs</a> <span>(<?=$total_blogs?>)</span></li>
+                                  <li><a href="javascript:void(0);">Rings</a> <span>(<?=$total_rings?>)</span></li>
+                                  <li><a href="javascript:void(0);">Events</a> <span>(<?=$total_events?>)</span></li>                                  
+                                </ul>
+
+                            </div>
+
+
+                             <div class="group-block">
+                              <h3 class="media-heading">Media center</h3>
+                                <ul>
+                                  <li><a href="javascript:void(0);">Read</a> <span>(<?=round($total_ch_news)?>)</span></li>
+                                  <li><a href="javascript:void(0);">Watch</a> <span>(<?=round($total_mc_videos)?>)</span></li>
+                                  <li><a href="javascript:void(0);">Listen</a> <span>(<?=round($total_gospel_mag)?>)</span></li>
+                                </ul>
+
+                            </div>
+
+                             <div class="group-block">
+                              <h3 class="kingdom-heading">Build the kingdom</h3>
+                                <ul>
+                                  <li><a href="javascript:void(0);">Bible Quiz</a> <span>(<?=$total_quiz?>)</span></li>
+                                  <li><a href="javascript:void(0);">Churches</a> <span>(<?=$total_church?>)</span></li>
+                                </ul>
+
+                            </div>
+
+
+                             <div class="group-block">
+                              <h3 class="holy-heading">Holy place</h3>
+                                <ul>
+                                  <li><a href="javascript:void(0);">Prayer Requests</a> <span>(<?=$total_prayer_req;?>v</span></li>
+                                  <li><a href="javascript:void(0);">e-Intercessions</a> <span>(<?=$total_intercession?>)</span></li>
+                                  <li><a href="javascript:void(0);">Testimonies</a> <span>(<?=$total_testimonies;?>)</span></li>
+                                </ul>
+
+                            </div>
+
+
+                          </div>
+                          <div class="right-dashboard">
+                            <div class="quick-link-panels">
+                              <h3>Quick Links</h3>
+                                <ul>
+                                    <li><a href="<?= admin_base_url() ?>site-settings/ring/messages.html"> Administrator's Messages<span>(  Ring category request , project information request ,Church Request )</span></a></li>
+                                    <li><a href="<?= admin_base_url() ?>site-settings/inbox">Inbox</a></li>
+                                    <li><a href="<?= admin_base_url() ?>site-settings/all_comments">All Comment <span>( Wall , Ring ,Blog , Event ,Prayer Wall , Media)</span> </a></li>
+                                    <li><a href="<?= admin_base_url() ?>common-settings.html">Common Settings</a></li>
+<!--                                    <li><a href="javascript:void(0);">Lorem ipsum dolar sit am</a></li>-->
+                                </ul>
+                            </div>
+
+                            <div class="quick-link-panels">
+                              <h3>Quick Links</h3>
+                                <ul>
+                                    
+                                    <li><a href="<?=admin_base_url() ?>members/members.html">Members</a></li>
+                                    <li><a href="<?=admin_base_url() ?>chat-rooms.html">Chat rooms</a></li>
+                                    <li><a href="<?=admin_base_url() ?>events.html">Events</a></li>
+                                    <li><a href="<?=admin_base_url() ?>blogs.html">Blogs</a></li>
+                                </ul>
+                            </div>
+
+                            <div class="quick-link-panels">
+                              <h3>Quick Links</h3>
+                                <ul>
+                                    <li><a href="<?=base_url() ?>livehelperchatmaster/livehelperchat-master/lhc_web/index.php/site_admin/user/login" target="_blank">Net Coach Online Support</a></li>
+                                    <li><a href="<?=admin_base_url() ?>holy-place/prayer-wall.html">Prayer wall</a></li>
+                                    <li><a href="<?=admin_base_url() ?>holy-place/2/daily-bible-verse.html">Daily Bible verse</a></li>
+                                    <li><a href="<?=admin_base_url() ?>churches.html">Churches</a></li>
+                                    
+                                </ul>
+                            </div>
+                            
+                          </div>
+
+                          
+                          <div class="clr"></div>
+                         </div>
+
+                  </div>  
+                  <!-- End New Dashboard Html -->                     
+            </div>
+      </div>
+      <div class="clr"></div>
+</div>
+<!-- /CONTENT SECTION -->

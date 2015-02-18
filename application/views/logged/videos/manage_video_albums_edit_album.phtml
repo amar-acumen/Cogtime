@@ -1,0 +1,427 @@
+<link rel="stylesheet" type="text/css" href="<?php echo  base_url()?>css/jquery.multiselect.css" />
+<link rel="stylesheet" type="text/css" href="<?php echo  base_url()?>css/jquery.multiselect.filter.css" />
+<link rel="stylesheet" type="text/css" href="<?php echo  base_url()?>css/prettify.css" />
+<!--<link rel="stylesheet" type="text/css" href="<?php echo  base_url()?>css/jquery-ui.css" />-->
+<script type="text/javascript" src="<?php echo  base_url()?>js/jquery.multiselect.js"></script>
+<script type="text/javascript" src="<?php echo  base_url()?>js/jquery.multiselect.filter.js"></script>
+<script type="text/javascript" src="<?php echo  base_url()?>js/prettify.js"></script>
+<script type="text/javascript">
+$(function(){
+		$("#friendSlct").multiselect().multiselectfilter();	
+		$("#ringselect").multiselect().multiselectfilter();
+		$("#netpalselect").multiselect().multiselectfilter();
+		$("#ppselect").multiselect().multiselectfilter();	
+		$("#pgselect").multiselect().multiselectfilter();
+	
+	});
+	
+</script>
+<?php include(APPPATH."views/layouts/logged_header.phtml");?>
+            <!-- NAVIGATION SECTION -->
+      <?php include(APPPATH."views/layouts/nav.phtml");?>
+      <!-- /NAVIGATION SECTION -->
+      </div>
+
+<div class="clr"></div>
+
+<!-- CONTENT SECTION -->
+<div id="content_section">
+      <div id="container">
+            <div id="top_corner">&nbsp;</div>
+            <div id="mid_content">
+                  <!-- latest news -->
+                  <?php include(APPPATH ."views/layouts/latest_news.phtml");?>
+                  <!-- /latest news -->
+                  <div class="clr"></div>
+                  <!-- main container -->
+                  <div id="main_container">
+                    <?php include(APPPATH."views/layouts/leftbar.phtml");?>
+                        <!-- left container -->
+                        <div id="mid_container">
+                        <div id="mid_container">
+                        <div class="page_heading">
+                              <div class="left" style="padding:3px 0"><img src="images/icons/video.png" alt="" /> Videos </div>
+                              </div>
+                        <div class="link-div" style="margin-top: 0;">
+                                  <ul>
+                                    <li><a href="my-videos.html"><span>My Videos</span></a> </li>
+                                    <li><a href="manage-video-album.html"><span>Manage My Video Albums</span></a> </li>
+                                    <li><a href="create-video-album.html"><span>Create Video Album</span></a> </li>
+                                    <li><a href="javascript:void(0)" onclick="return show_dialog('upload_video');"><span>Upload Video</span></a> </li>
+                                </ul>
+                                <div class="clr"></div>
+                                
+                              </div>
+                        
+                        
+                            <!--<div class="page_heading">
+                                <div class="left"><img src="images/icons/video.png" alt="" /> Edit Video Album</div>
+                             </div>-->
+                             <div class="frm_box blue_box" style="width:452px;">
+                                  <form name="" id="editVideoAlbumFrm" method="post" action="<?= base_url().'logged/my_videos/edit_video_album_ajax_submit'?>" enctype="multipart/data" onsubmit="return edit_video_album_();">     
+                                  
+                 
+          <?    //pr($album_info);
+          
+            $IMG = base_url()."uploads/user_videos_album/".getThumbName($album_info[0]['s_video_album_image'],'thumb');
+          ?>
+                                  
+                                    <input type="hidden" name="album_id" id="album_id" value="<?=$album_info[0]['id']?>">  
+                                    
+                                    <input type="hidden" name="album_cover_img" value="<?=getThumbName($album_info[0]['s_video_album_image'],'thumb')?>">  
+                                    
+                                    <div class="lable01" style="width:80px;">Name:</div>  
+                                    <div class="field01"><input id="txt_video_album_name" name="txt_video_album_name" type="text" value="<?= $album_info[0]['s_name']?>" /> 
+                                        <span id="err_txt_video_album_name" class="error-message"></span>
+                                    </div>
+                                    <div class="clr"></div>
+                                    
+                                    <div class="lable01" style="width:80px;">Description:</div>  
+                                    <div class="field01">
+                                        <textarea name="txtarea_desc" id="txtarea_desc" maxlength="500" style="height:80px;"> <?= $album_info[0]['s_desc']?></textarea>
+                                        <span id="err_txtarea_desc" class="error-message"></span>
+
+                                      <span style="font-size:11px; font-style:italic; line-height:13px;" >
+                                      (Max 500 characters.)
+                                      </span>
+
+                                    </div>
+                                    <div class="clr"></div>
+
+                                    
+                                    
+                                    
+                                    <?php /*?><div class="lable01" style="width:80px;">Privacy:</div>  
+                                    <div class="field01">
+                                    <select name="video_album_privacy" id="privacy" style="width:262px;">
+                                            <option value="-1">Select</option>
+                                            <option value="friend" <? echo ($album_info[0]['e_privacy'] == 'friend')? 'selected="selected"' : '';?>>My friends only</option>
+                                            <option value="everyone" <? echo ($album_info[0]['e_privacy'] == 'everyone')? 'selected="selected"' : '';?> >Every one</option>
+                                          
+                                    </select>
+                                    
+                 
+                                    <script type="text/javascript">
+                                        $(document).ready(function(arg) {
+                                            //$("#privacy").msDropDown();
+                                            //$("#privacy").hide();
+                                        })
+                                    </script>
+ 
+                                        <span id="err_video_album_privacy" class="error-message" ></span>                                                        </div>
+                                    <div class="clr"></div><?php */?>
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    <div class="lable01" style="width:80px;">Cover photo:</div>  
+                                    <div class="field01"><input name="file_cover_photo" type="file" />
+                                        <span id="err_file_cover_photo" class="error-message" ></span>
+                                    </div> 
+                                    
+                                    <div class="clr"></div>
+                                    
+
+                                    <div class="lable01" style="width:80px;"></div>  
+                                    <div class="field01">
+                                        <div><img src="<?= $IMG?>" alt=""></div>    
+                                    </div> 
+                                    <div class="clr"></div>
+                                    
+                                    <div class="lable01" style="width:80px;">Privacy:</div>  
+                                    <div class="field01">
+                                    <?php echo get_privacy_setting('video',$privacy_arr);?>
+                                    <a href="<?=base_url()?>/privacy-settings.html" style="text-decoration:underline">  [Change]</a>
+                                    </div>
+                                    <div class="clr"></div>
+                                  
+                                    <div class="lable01" style="width:80px;"></div>  
+                                    <div class="field01"> <input name="" type="submit" value="Edit"  class="btn"/></div> 
+                                    <div class="clr"></div>
+                                     <div class="rill" style="left: 340px;"></div>   
+                                 </form>  
+                              </div>
+                        </div>
+                        </div>
+                        <!-- /left container -->
+                        <!-- right container -->
+                        <?php include(APPPATH."views/layouts/rightbar.phtml");?>
+                        <!-- /right container -->
+                  </div>
+                  <!-- /main container -->
+                  <div class="clr"></div>
+            </div>
+            <div id="bot_corner">&nbsp;</div>
+      </div>
+      <div class="clr"></div>
+</div>
+<!-- /CONTENT SECTION -->
+<div class="clr"></div>
+<!-- FOOTER SECTION -->
+<?php include(APPPATH."views/layouts/footer.phtml");?>
+<!-- /FOOTER SECTION -->
+
+
+
+<div class="lightbox upload_video" style="width:550px;">
+      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog();form_reset_('uploadVideoFrm');clr_all_err_()"><img src="images/close.png" alt="" /></a></div>
+      <div class="top">
+            <div>&nbsp;</div>
+      </div>
+      <div class="mid">
+            <div class="heading">
+                  <div class="left">
+                        <h4><img src="images/icons/video1.png" alt="" /> Upload Video </h4>
+                  </div>
+            </div>
+            <div class="frm_box">
+            <form id="uploadVideoFrm" action="<?php echo base_url()?>logged/my_videos/upload_individual_video" method="post" enctype="multipart/data" onsubmit="return upload_video_edit_()">
+                  <div class="lable01">Title:</div>
+                  <div class="field01">
+                        <input name="txt_title" type="text" />
+                        <span id="err_txt_title" class="error-message"></span>
+                  </div>
+                  <div class="clr"></div>
+                  
+                  <div class="lable01">Description:</div>
+                  <div class="field01">
+                        <textarea name="txtarea_desc_video" id="txtarea_desc_video" cols="" rows="" style="height:80px;" maxlength="250"></textarea>
+                        <span id="err_txtarea_desc_video" class="error-message"></span>
+                         <span style="font-size:11px; font-style:italic; line-height:13px;" >
+                                      (Max 250 characters.)
+                                      </span>
+
+                  </div>
+                  <div class="clr"></div>
+                  
+                  
+               <!--   <div class="lable01">Artist:</div>
+                  <div class="field01">
+                        <input name="txt_artist" type="text" />
+                        <span id="err_txt_artist" class="error-message"></span>
+                  </div>
+                  <div class="clr"></div>
+                  <div class="lable01">Genre:</div>
+                  <div class="field01">
+                        <input name="txt_genre" type="text" />
+                        <span id="err_txt_genre" class="error-message"></span>
+                  </div>
+                  <div class="clr"></div>
+               -->
+                  <div class="lable01">Video URL:</div>
+                  <div class="field01">
+                        <input name="txt_video_track_album" type="text" />
+                        <span id="err_txt_video_track_album" class="error-message"></span>
+                  </div>
+				  <ul class="video-logo" style=" margin-left: 80px;" >
+					<li><img src="<?=base_url()?>/images/YouTube.png"title="YouTube" alt="YouTube"></li>
+					<li><img src="<?=base_url()?>/images/Vimeo.png"title="Vimeo" alt="Vimeo"></li>
+					<li><img src="<?=base_url()?>/images/DailyMotion.png"title="DailyMotion" alt="DailyMotion"></li>
+					<li><img src="<?=base_url()?>/images/Viadeo.png"title="Viadeo" alt="Viadeo"></li>
+					</ul>
+                  <div class="clr"></div>
+                  
+                  
+                  <div class="lable01">Select Album:</div>
+                  <div class="field01">
+                    <select name="select_album1" id="select_album1" style="width:260px;">
+                    <?php
+                    
+                    if(count($album_names))
+                    {
+                        
+                    
+                    ?>
+                        
+                                <option value="-1"> Select</option>
+                             <!-- <option value="0">[New Album]</option>
+                             -->
+                              <?php
+                              foreach($album_names as $name)
+                              {
+                                  echo "<option value='".$name['id']."'>".$name['s_name']."</option>";
+                              }
+                    }
+                    else
+                    {
+                        echo "<option value='-1' disabled>Please create an album first.</option>";
+                    }
+                              ?>
+                              
+                        </select>
+                        <span id="err_select_album1" class="error-message"></span>
+                        <script type="text/javascript">
+                $(document).ready(function(arg) {
+                    //$("#select_album1").msDropDown();
+                    //$("#select_album1").hide();
+                })
+            </script>
+                  </div>
+                  <div class="clr"></div>
+            <!--      <div class="lable01">New Album Name:</div>
+                  <div class="field01">
+                        <input name="txt_nw_album" type="text" />
+                        <span id="err_txt_nw_album" class="error-message"></span>
+                  </div>
+                  <div class="clr"></div>
+            -->
+                  <div class="lable01">&nbsp;</div>
+                  <div class="field01">
+                        <input name="" type="submit" value="Upload" class="btn" />
+
+                  </div>
+                  <div class="clr"></div>
+            
+            </form>
+            </div>
+      </div>
+      <div class="bot">
+            <div>&nbsp;</div>
+      </div>
+</div>
+
+
+
+<script type="text/javascript">
+<!--    
+    var ticker_holder = $('.bargaining').get(0);
+    var ticker_text = $('.ticker').get(0);
+    var ticker_pos = ticker_text.parentNode.offsetWidth;
+    
+    var ticker_data = $(ticker_holder).html();
+    $(ticker_text).parent().html('<marquee scrollamount="3" scrolldelay="20">' + ticker_data + '</marquee>');
+    
+    $('#sub-nav').hover
+    (
+    function() { $('marquee', this).get(0).stop();  },
+    function() { $('marquee', this).get(0).start(); }
+    ); 
+//-->
+</script>
+
+<script type="text/javascript">
+$(document).ready(function () {
+
+ //counting the left characters in comment
+    
+     function limitChars(textid, limit, infodiv)
+     {
+      var text = $('#'+textid).val(); 
+      var textlength = text.length;
+      if(textlength > limit)
+      {
+      $('#'+textid).val(text.substr(0,limit));
+       return false;
+      }
+      else
+      {
+      
+       return true;
+      }
+     }
+    
+    
+    
+    $(function(){
+        $('#txtarea_desc').keyup(function(){
+            limitChars('txtarea_desc', 250, '');
+        });
+    });
+    
+    
+    
+
+    
+    //// just to show correct no. of chracters left while the page is loaded...
+    limitChars('txtarea_desc',250, '');
+    
+ 
+});
+</script>
+
+
+
+
+<script type="text/javascript">
+
+function upload_video_edit_()
+{
+    // for AJAX page-submission...
+    optionsArr = { 
+        beforeSubmit:  showUILoader_nodialog('<img src="'+base_url+'images/loading_big.gif" width="50"/> '),
+        //showBusyScreen,  // pre-submit callback 
+        success:       validateUploadFrm // post-submit callback 
+    }; 
+ 
+    frm_obj = $('#uploadVideoFrm');
+    $(frm_obj).ajaxSubmit(optionsArr);
+    
+    return false; 
+    
+}
+// validate ajax-submission...
+function validateUploadFrm(data)
+{
+    
+    $('.error-message').each(function(i){
+        $(this).attr('style','display:none');
+    });
+    var result_obj = JSON.parse(data);
+    
+    
+    
+    if(result_obj.success==true) {
+        
+        showUIMsg(result_obj.msg);
+        $('#uploadVideoFrm')[0].reset();
+        hide_dialog();
+            // hide busy-screen...
+    //hideBusyScreen();
+    
+    window.location.href=base_url+"manage-video-album.html";
+    //window.location.href=result_obj.http_referer;
+    
+    }
+
+    
+   // $('div[id^=err_]').html(''); 
+    
+    if(result_obj.success==false) {
+    
+        
+        $('.error-message').each(function(i){
+            $(this).attr('style','display:none');
+        });
+        
+        
+        for ( var id in result_obj.arr_messages ){
+            //alert(data.arr_messages[id]);
+            if( $('#err_'+id) != null ) {
+                $('#err_'+id).html(result_obj.arr_messages[id]);
+                $('#err_'+id).css('display', 'block');
+            }
+        }
+    
+    
+    
+    }
+    
+hideUILoader_nodialog();
+}
+//----------------------------------------- end of upload video --------------------------------------------
+
+//====================================== necessary tiny functions =======================================
+function form_reset_(id)
+{
+    $('#'+id)[0].reset();
+}
+
+
+function clr_all_err_()
+{
+    $('.error-message').each(function(i){
+            $(this).attr('style','display:none');
+        });
+}
+</script>

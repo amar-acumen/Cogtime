@@ -1,0 +1,269 @@
+<?php include(APPPATH."views/layouts/logged_header.phtml");?>
+            <!-- NAVIGATION SECTION -->
+      <?php include(APPPATH."views/layouts/nav.phtml");?>
+      <!-- /NAVIGATION SECTION -->
+      </div>
+</div>
+<!-- /HEADER SECTION -->
+<div class="clr"></div>
+
+<!-- CONTENT SECTION -->
+
+
+
+
+<div id="content_section">
+      <div id="container">
+            <div id="top_corner">&nbsp;</div>
+            <div id="mid_content">
+                  <!-- latest news -->
+                  <?php include(APPPATH ."views/layouts/latest_news.phtml");?>
+                  <!-- /latest news -->
+                  <div class="clr"></div>
+                  <!-- main container -->
+                  <div id="main_container">
+                   <!-- left container -->
+                        <?php include(APPPATH."views/layouts/leftbar.phtml");?>
+                        <!-- /left container -->
+
+                        <div id="mid_container">
+                        
+                        
+                         <div class="link-div" style="margin-top: 0;">
+                                  <ul>
+                                       <li><a href="blogs.html"><span>All Blogs</span></a> </li>
+                                    <li><a href="my-blog.html"><span>My Blog</span></a> </li>
+                                    <li><a class="current" href="javascript:void(0)"><span>Search All Blogs</span></a> </li>
+                                    <li><a href="most-popular-blogs.html"><span>Most Popular</span></a> </li>
+                                   
+                                </ul>
+                                <div class="clr"></div>
+                              </div>
+                        
+                        
+                        
+                              <div class="page_heading">
+                                    <div class="left"><img src="images/icons/blog_search.png" alt="" />Search Blogs </div>
+                              </div>
+                              <div class="arrow_btm"></div>
+                              <div class="frm_box shade_box_01" style="padding-bottom:17px;">
+                                    <div class="lable02">Keyword:</div>
+                                    <div class="field02">
+                                          <input id="txt_title" name="" type="text"  style="width:300px;"/>
+                                          <span class="error-message" id="err_blog_title"></span>
+                                    </div>
+                                    
+                                    <div class="clr"></div>
+                                    <div style="font-size:11px; font-style:italic; line-height:13px; margin-left:125px;">(Please provide atleast three letters keyword.)</div>
+                                  
+                                    <div class="lable02">Posted By:</div>
+                                    <div class="field02">
+                                        <input id="txt_posted_by" type="text" name="" style="width:200px;">
+                                    
+                                    </div>
+                                    <div class="clr"></div>
+                                    
+                                    <div class="lable02">&nbsp;</div>
+                                    <div class="field02" style="width:315px;">
+                                    <input type="radio" name="rd_type" value="1" checked="checked" /><span style="vertical-align: -1px">Show blogs and articles&nbsp;&nbsp;</span>
+                                    <input type="radio" name="rd_type" value="2" /><span style="vertical-align: -1px">Only articles&nbsp;&nbsp;</span>
+                                    <input type="radio" name="rd_type" value="3" /><span style="vertical-align: -1px">Only blogs</span>
+                                    </div>
+                                    
+                                    <div class="lable02">&nbsp;</div>
+                                    <div class="field02">
+                                          <input name="" type="button" value="Search"  class="btn" onclick="search_blogs()"/>
+                                    </div>
+                                    <div class="clr"></div>
+                              </div>
+                              
+                       
+                              
+                              
+                             <div id="result" class="blog-container" >
+
+
+                                        <div id="search_result" class="my-article"><?php echo $listingContent;?></div>
+                                       
+
+                             </div> 
+                             
+
+                                    
+                                    
+                             
+                             
+
+                              
+
+                        </div>
+                        <!-- /left container -->
+                        <!-- right container -->
+                        <?php include(APPPATH."views/layouts/rightbar.phtml");?>
+                        <!-- /right container -->
+                  </div>
+                  <!-- /main container -->
+                  <div class="clr"></div>
+            </div>
+            <div id="bot_corner">&nbsp;</div>
+      </div>
+      <div class="clr"></div>
+</div>
+<!-- /CONTENT SECTION -->
+<div class="clr"></div>
+
+
+<?php include(APPPATH."views/layouts/footer.phtml");?>
+<?php include(APPPATH."views/logged/blocks/common_popup.phtml");?>
+
+<!-- /lightbox SECTION -->
+
+
+
+
+
+<script type="text/javascript">
+
+$(function(){
+/*	$.ajax({
+				type: "POST",
+				url: '<?php echo base_url()?>logged/my_blog/generate_search_blog_listing_AJAX',
+				data: '',
+				success: function(msg){
+					if(msg.result=='error')
+					{
+						for (var i in msg.msg) 
+						{ 
+							$('#'+i).html(msg.msg[i]); 
+						};
+					}
+					else if(msg.result=='success')
+					{
+						showUIMsg(msg.msg);
+						$('#bloglist').html(msg.content);
+						//show_more_feeds($('#show_more_feeds_link').attr('page_value'));
+						$('#blogpost_title').val('Type title here');
+						$('#blogpost_desc').val('Max 500 Charaters');
+					}
+				},
+				dataType: 'json'
+			});
+            */
+
+});
+
+
+function search_blogs()
+{
+    var title = $('#txt_title').val();
+    var rd_type = $('input[name=rd_type]:checked').val();
+	var posted_by = $('#txt_posted_by').val();
+    
+    
+    //showUILoader_nodialog();
+    $.ajax({
+        url : base_url+"logged/my_blog/generate_search_blog_listing_AJAX",
+        dataType : 'json',
+        type : "post",
+        data : ({'title' : title, 'rd_type':rd_type, "posted_by" : posted_by}),
+        success : function(data)
+                {
+					
+					if(data.status == 'success'){	
+							  $('#err_blog_title').hide();
+							  $('#show_more_feeds_div').remove();
+							  hideUILoader_nodialog();
+							  
+							  if(data.html=='')
+							  {
+								  $('#search_result').html('<div class="page_heading_full">Search Results</div>'+'<div class="section01" style="padding-top:5px;"><div class="shade_norecords" style="width:260px;"><p class="blue_bold12">No Blog.</p></div></div></div>');
+							  }
+							  else
+							  {
+								  $('#search_result').html('<div class="page_heading_full">Search Results</div>'+data.html);
+							  }
+							  
+							  if(data.view_more==true)
+							  {
+		  
+								  $('#search_result').append('<div class="view-more" id="show_more_feeds_div" ><a class="view-more-btn" href="javascript:void(0);" id="show_more_feeds_link" page_value="'+data.current_page+'" onclick="show_more_feeds('+data.current_page+')">[view more] </a> </div>');
+							  }
+							  /*else
+							  {
+								  $('#show_more_feeds_div').hide();
+							  }
+							  */
+					}
+					else if(data.status == 'failure'){
+						
+						showUIMsg(data.blog_title);
+						hideUILoader_nodialog();//$('#err_blog_title').show();
+					}
+                    
+                }
+        
+    });
+}
+
+
+
+
+
+var ajax_req_feeds = null;
+function show_more_feeds(page) {
+    if(ajax_req_feeds!=null) {
+        ajax_req_feeds.abort();
+    }
+    showUILoader_nodialog();
+    ajax_req_feeds = $.ajax({
+        type: 'get',
+        url: base_url+'logged/my_blog/generate_search_blog_listing_AJAX/0'+'/'+page,
+        dataType: 'json',
+
+        success: function (data, status) {
+//alert(data.html);
+//alert(data.current_page);
+            hideUILoader_nodialog();
+            if(data.html!='') {
+                $('#search_result').append(data.html);
+                
+                /*var view_more = $('#show_more_feeds_div').html();
+                alert(view_more);
+                $('#show_more_feeds_div').hide();
+                
+                $('#show_more_feeds_link').attr('page_value', data.current_page);
+                $('#show_more_feeds_link').attr('onclick', '');
+                $('#show_more_feeds_link').attr('onclick', 'show_more_feeds('+data.current_page+')');
+              */  
+
+              $('#show_more_feeds_div').remove();
+
+            }
+            else {
+                $('#result').append('<div class="view_more" style="text-align: center;"><p class="blue_bold12" style="font-size:14px;">No more result.</p></div>');
+                $('#show_more_feeds_div').remove();
+            }
+			//alert(data.view_more);
+            if(data.view_more==false)
+            {
+                $('#show_more_feeds_div').remove();
+                $('#search_result').append('<div class="view_more" style="text-align: center;"><p class="blue_bold12" style="font-size:14px;">No more result.</p></div>');
+                //
+            }
+            else
+            {
+                $('#result').append('<div class="view-more" id="show_more_feeds_div"><a class="view-more-btn" href="javascript:void(0);" id="show_more_feeds_link" page_value="'+data.current_page+'" onclick="show_more_feeds('+data.current_page+')">[view more] </a> </div>');
+            }
+            
+            /*$('.htr').css('display','none');
+            $('#'+m).css('display', 'table-row'); 
+            $('#'+m+' td').html(data);*/
+
+        }    // end of success function...
+    });
+}
+
+
+</script>
+
+

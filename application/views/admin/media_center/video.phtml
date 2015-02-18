@@ -1,0 +1,295 @@
+<?php include(APPPATH."views/layouts/logged_header.phtml");?>
+            <!-- NAVIGATION SECTION -->
+      <?php include(APPPATH."views/layouts/nav.phtml");?>
+      <!-- /NAVIGATION SECTION -->
+      </div>
+</div>
+<div class="clr"></div>
+
+<!-- CONTENT SECTION -->
+<? include "media_center_nav.phtml" ?>
+
+
+
+<div id="content_section">
+      <div id="container">
+          <div class="top-page-heading">
+          <h2 class="landing-title">Media center</h2>
+          <div class="landing-input"><input type="text" name="" value="" placeholder="Search Keywords"></div>
+	  <div class="clr"></div>
+           </div>
+          <div class="media-center-left">
+               
+                <h3 class="featured-heading">featured</h3>
+                <?php
+				pr($video_featured);
+				?>
+                <h4 class="video-txt"><?php echo my_substr($video_featured[0]['s_title'],20)?></h4>
+                <div class="read-slide">
+                <?php
+                	$is_img = BASEPATH.'../uploads/media_center_videos/' . getThumbName($video_featured[0]['s_image'], 'mid_FO');
+					echo $IMG = base_url() . 'uploads/media_center_videos/' . getThumbName($video_featured[0]['s_image'], 'mid_FO');
+					if(is_file($is_img))
+					{
+					?>
+                   <img src="<?=$IMG?>" alt="Watch">
+                   <?
+				   }
+				  ?>
+                    
+                <div class="thumbnail-bg">
+                    
+                    <?
+					if($video_featured)
+					{
+					?>
+                    	<ul class="thumb-list">
+                        <?
+						foreach($video_featured as $val)
+						{
+							$is_img = BASEPATH.'../uploads/media_center_videos/' . getThumbName($val['s_image'], 'sliderthumb');
+							echo $IMG = base_url() . 'uploads/media_center_videos/' . getThumbName($val['s_image'], 'sliderthumb');
+							if(is_file($is_img))
+							{
+							?>
+                            	<li><a href="javascript:void(0);"><img src="<?=$IMG?>" alt="thumb"><span><?php echo my_substr($val['s_title'],20)?></span></a></li>
+                       	 	<?
+							}
+						}
+						?>
+                        </ul>
+                    <? }?>
+                    <div class="clr"></div>
+                </div>
+                </div>
+                <?php
+				if($video1)
+				{
+				?>
+                <h3 class="minister-shout"><a class="article_category" href="<?php echo base_url().'watch/category/1' ?>"><?php echo $cat_name['1']?></a></h3>
+                	<div class="shout-list">
+                    	<ul>
+						<?php
+						$i  = 1;
+						foreach($video1 as $val) 
+						{	
+							$class = '';
+							if($i==3)
+							{
+								$class='last';
+								$i=1;
+							}
+							$IMG = base_url() . 'uploads/media_center_videos/' . getThumbName($val['s_video_thumb'], 'bigthumb');
+							
+						?>
+                        	<li class="<?php echo $class?>"><a href="<?= base_url().$val['id']."/".my_url($val['cat_name'])."/watch-detail/".my_url($val['s_title']).".html"?>"><img src="<?php echo $IMG?>" alt="Minister4 Shout" width="222" height="157"><span>
+							<?php echo my_substr($val['s_title'],20)?></span></a>
+                            	<ul>
+                                	<li><a href="javascript:void(0);">Comments</a><span> (0)</span></li>
+                                    <li>|</li>
+                                    <li><a href="javascript:void(0);">Liked by</a><span> (0)</span></li>
+                                </ul>
+                            </li>
+                        <?php
+						$i++;
+						}
+						?>						
+                        </ul>
+                    </div>
+                <div class="clear"></div>
+                <?php
+				}
+				
+				if(count($video2)>0)
+				{
+				
+				?>
+                  <h3 class="channel-icon"><a class="article_category" href="<?php echo base_url().'watch/category/2' ?>"><?php echo $cat_name['2']?></a><a href="<?php echo 'watch/category/'.$val['i_category_id']?>">View all</a></h3>
+                  
+                <div class="thumb-slider"> 
+					<div class="slider4">
+					<?php
+					
+					foreach($video2 as $val) 
+					{
+					
+					$IMG = base_url() . 'uploads/media_center_videos/' . getThumbName($val['s_video_thumb'], 'midthumb');
+					?>
+						<div class="slide"><a href="<?= base_url().$val['id']."/".my_url($val['cat_name'])."/watch-detail/".my_url($val['s_title']).".html"?>">
+						<img src="<?php echo $IMG?>" width="164" height="114" alt="Cogtime Channel"><span><?php echo my_substr($val['s_title'],20)?></span></a></div>
+					<?php
+					}
+					?>
+ 
+					</div>
+				</div>
+				<?php
+				}
+				if($video3)
+				{
+				?>
+                 
+                     <h3 class="overcomers-icon"><a class="article_category" href="<?php echo base_url().'watch/category/3' ?>"><?php echo $cat_name['3']?></a></h3>
+                     <div class="thumb-slider"> 
+						<div class="slider4">
+						<?php
+						foreach($video3 as $val) 
+						{
+						$IMG = base_url() . 'uploads/media_center_videos/' . getThumbName($val['s_video_thumb'], 'midthumb');
+						?>
+						<div class="slide"><a href="<?= base_url().$val['id']."/".my_url($val['cat_name'])."/watch-detail/".my_url($val['s_title']).".html"?>"><img src="<?php echo $IMG?>" width="164" height="114" alt="Overcomers"><span><?php echo my_substr($val['s_title'],20)?></span></a></div>
+						<?php
+						}
+						?>
+						</div>
+					</div>
+				<?php
+				}
+				if($video4)
+				{
+				?>
+                      <h3 class="inspired-icon"><a class="article_category" href="<?php echo base_url().'watch/category/4' ?>"><?php echo $cat_name['4']?></a><a href="<?php echo 'watch/category/'.$val['i_category_id']?>">View all</a></h3>
+						<div class="thumb-slider"> 
+						<div class="slider4">
+						<?php
+						foreach($video4 as $val) 
+						{
+						$IMG = base_url() . 'uploads/media_center_videos/' . getThumbName($val['s_video_thumb'], 'midthumb');
+						?>
+						<div class="slide"><a href="<?= base_url().$val['id']."/".my_url($val['cat_name'])."/watch-detail/".my_url($val['s_title']).".html"?>"><img src="<?php echo $IMG ?>" width="164" height="114" alt="Overcomers"><span><?php echo my_substr($val['s_title'],20)?></span></a></div>
+						 
+						<?php
+						}
+						?>
+ 						</div>
+						</div>
+				<?php
+				}
+				if($video5)
+				{
+				?>
+				<h3 class="coaching-icon"><a class="article_category" href="<?php echo base_url().'watch/category/5' ?>"><?php echo $cat_name['5']?></a><a href="<?php echo 'watch/category/'.$val['i_category_id']?>">View all</a></h3>
+					<div class="thumb-slider"> 
+					<div class="slider4">
+					<?php
+					foreach($video5 as $val) 
+					{
+					$IMG = base_url() . 'uploads/media_center_videos/' . getThumbName($val['s_video_thumb'], 'midthumb');
+					?>
+					<div class="slide"><a href="<?= base_url().$val['id']."/".my_url($val['cat_name'])."/watch-detail/".my_url($val['s_title']).".html"?>"><img src="<?php echo $IMG?>" width="164" height="114" alt="coaching"><span><?php echo my_substr($val['s_title'],20)?></span></a></div>
+  
+					<?php
+					}
+					?>	
+ 
+					</div>
+					</div>
+				<?php
+				}
+				?>				
+                     
+                     
+                     
+                     
+                         
+                     </div>
+             <div class="media-center-right">
+                 <div class="right-ad"><img src="images/left-ad1.png" alt="Advertisment" width="250" height="250"></div>         
+				 
+              <div class="right-ad">
+			  <?php
+				
+				if($video6)
+				{
+				?>
+                  <h3 class="prelibrary-icon"><a class="article_category" href="<?php echo base_url().'watch/category/6' ?>"><?php echo $cat_name['6']?></a></h3>
+				  <?php
+				  foreach($video6 as $val)
+				  {
+				  $IMG = base_url() . 'uploads/media_center_videos/' . getThumbName($val['s_video_thumb'], 'thumb');
+				  ?>
+                  <div class="dev-main">
+                      <div class="pic-left"><img src="<?php echo $IMG?>" alt="Library"></div>
+                      <div class="pic-right">
+                          <h4><?php echo $val['s_title']?></h4>
+                          <p><?php echo my_substr(strip_tags(get_unformatted_string_edit($val['s_desc'])),80)?></p>
+                         	 <ul class="green-comment">
+                             	<li><a href="<?= base_url().$val['id']."/".my_url($val['cat_name'])."/watch-detail/".my_url($val['s_title']).".html"?>">Liked by</a><span> (0)</span></li>
+                             </ul>
+                      </div>
+                      <div class="clr"></div>
+                  </div>
+                <?php 
+				}
+				}
+				?> 
+                  
+                      <div class="pic-left"><img src="images/library7.png" alt="library"></div>
+                      <div class="pic-right">
+                          <h4>Donec sit amet turpis dui fringilla</h4>
+                          <p>Faucibus orci luctus et ultrices posuere cubilia Curae..</p>
+                          <ul class="green-comment">
+                             	<li><a href="javascript:void(0);">Liked by</a><span> (0)</span></li>
+                             </ul>
+                      </div>
+                      <div class="clr"></div>
+                  </div>
+                  <div class="right-ad"><img src="images/left-ad2.png" alt="Advertisment" width="250" height="250"></div>
+              
+              <div class="right-ad"><img src="images/left-ad3.png" alt="Advertisment" width="250" height="250"></div>
+              </div>
+              
+              
+              
+                            
+          </div>
+          <div class="clr"></div>
+          </div>
+       
+      </div>
+      <div class="clr"></div>
+</div>
+
+
+<!-- /CONTENT SECTION -->
+<div class="clr"></div>
+
+<?php include(APPPATH."views/layouts/footer.phtml");?>
+
+
+
+
+
+
+
+
+<!--view comment div-->
+
+
+<!--/view comment div-->
+<!-- /lightbox SECTION -->
+
+<?php //include(APPPATH."views/logged/blocks/common_popup.phtml");?>
+
+
+
+ <script type="text/javascript">
+$(function(){
+	$('#navigation_vert').naviDropDown({
+		dropDownWidth: '336px',
+		orientation: 'vertical'
+	});
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){
+  $('.slider4').bxSlider({
+    slideWidth: 164,
+    minSlides: 4,
+    maxSlides: 4,
+    moveSlides: 1,
+    slideMargin: 24
+  });
+});
+</script>

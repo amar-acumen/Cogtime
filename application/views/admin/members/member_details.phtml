@@ -1,0 +1,244 @@
+<script type="text/javascript">
+$(document).ready(function(){
+	
+	var href = document.URL;
+    var current_page = href.substr(href.lastIndexOf('/') + 1);
+	
+	$('#current_page_val').val( current_page );
+	
+	$(".sec-detail").show();
+	//$('.edit-btn').click(function(){
+	$('.edit-btn').live('click', function(){
+		$(this).parents('.text-table').hide();
+		if($(this).parents('.sec-detail').find('.form-table').css('display')=='none'){
+			$(this).parents('.sec-detail').find('.form-table').show();
+            
+			$(this).parents('.sec-detail').find('.dd').show();
+			//$('#add_more_edu > div').remove();
+		}
+	});                             
+                                    
+    
+    //$('.cancel_btn').click(function(){
+	$('.cancel_btn').live('click', function(){
+		$(this).parents('.sec-detail').find('.form-table').hide(); 
+        if($(this).parents('.sec-detail').find('.text-table').css('display')=='none'){
+            $(this).parents('.sec-detail').find('.text-table').show();
+            $(this).parents('.sec-detail').find('.dd').hide();
+            
+        }
+    });  
+	
+});
+
+
+
+$(document).ready(function() {
+	
+	// for AJAX page-submission...
+    var options = { 
+        beforeSubmit:  showLoading,  // pre-submit callback 
+        success:       validatephotoFrm // post-submit callback 
+    }; 
+ 
+    // bind to the form's submit event 
+    $('#frmUploadPhoto').submit(function() {
+	
+        $(this).ajaxSubmit(options);
+		
+        return false;
+		
+    });
+
+});
+
+
+
+// validate ajax-submission...
+function validatephotoFrm(data)
+{
+	//alert( data);
+	var data = JSON.parse(data);
+
+	if(data.success==false) 
+	{
+		$('.error_msg').each(function(i){
+			$(this).attr('style','display:none');
+		});
+		
+
+		for ( var id in data.arr_messages ){
+			//alert(data.arr_messages[id]);
+			if( $('#err_'+id) != null ) {
+				$('#err_'+id).html(data.arr_messages[id]);
+				$('#err_'+id).css('display', 'block');
+			}
+		}
+	}
+	else {
+		  // claering form
+		  $('#frmUploadPhoto')[0].reset();
+		  hide_dialog();
+		  showUIMsg(data.msg);
+		  window.location.href=document.URL;;
+	}
+	hideLoading();
+				
+}
+
+</script>
+
+<div class="clr"></div>
+<!-- CONTENT SECTION -->
+<!--navigation section start -->
+<?php include(APPPATH."views/layouts/admin/admin_nav.phtml");?>
+<!--navigation section end -->
+<!-- CONTENT SECTION -->
+<div id="content_section">
+      <div id="container">
+            
+            <div id="mid_content">
+                  <div class="page_heading left">                                           
+                        <div class="left"><img src="<?=base_url()?>images/icons/login.png" alt="" /> Member Details</div>
+                        <div class="right"><a id="back" class="back-page" href="javascript:void(0);" onclick="go_back_()">Back</a></div>
+                  </div>
+                  <div class="clr"></div>
+                  <div id="right_container">
+                        <div class="arrow_btm"></div>
+                         <input type="hidden" name="current_page_val" id="current_page_val" value="<?=$current_page?>" />
+                         <input type="hidden" name="selected_user" id="selected_user" value="<?= $selected_user_id ?>" />
+                        <div class="content_area">
+                        
+                        
+                        
+                        <!--tab section start -->
+                        <div class="tab-box">
+                        	<div class="tab_content title-div">
+                            	<ul>
+                                	<li class="first select"><a href="javascript:void(0);" onclick="show_display_form_AJAX('personal', this)">Personal Info</a></li>
+                                    <li><a href="javascript:void(0);" onclick="show_display_form_AJAX('basic', this)">Basic Info</a></li>
+                                    <li><a href="javascript:void(0);" onclick="show_display_form_AJAX('edu', this)">Education</a></li>
+                                    <li><a href="javascript:void(0);" onclick="show_display_form_AJAX('work', this)">Work</a></li>
+                                    <li><a href="javascript:void(0);" onclick="show_display_form_AJAX('skills', this)">Skills</a></li>
+                                    <li><a href="javascript:void(0);" onclick="show_display_form_AJAX('balance', this)">A/C Balance</a></li>
+                                    <li class="noBg"><a href="javascript:void(0);" onclick="show_display_form_AJAX('subscription', this)">Subscriptions</a></li>
+                                </ul>
+                            </div>
+                            <div class="clr"></div>   
+                            
+                            
+                            
+                            <div class="member-img-box">
+                             <?php //echo $posted['s_image'];
+                              //echo $page_no;
+							  if($result['s_profile_photo'] != "" || $result['s_profile_photo'] != NULL)
+							  {
+								  $IMG_THUMB_PATH = base_url() ."uploads/user_profile_image/";
+								  $name=getThumbName($result['s_profile_photo'],'main'); 
+								  $IMG_THUMB = $IMG_THUMB_PATH . $name;
+                                  
+                                 
+								  ?>
+
+								 <?php if($name != ""): ?> 
+                                            <img src="<?=$IMG_THUMB?>" alt="" />
+                                 <?php endif;?> 	
+							<?php 
+								}else{
+							 
+                                    if($result['e_gender']=='M' || $result['e_gender']=='m')
+                                        $no_img = base_url()."uploads/no-image/noprofile-img-male-big.gif";
+                                    else
+                                        $no_img = base_url()."uploads/no-image/noprofile-img-female-big.png";
+							  ?>
+                                 
+                              <img  name="no image" src="<?php echo $no_img;?>" alt="no image">
+                            <?php 
+                                } 
+                            ?>
+                                <a class="change-image-link" href="javascript:void(0);" onclick="return show_dialog('change-image')">Change Profile Image</a>
+                            </div>
+                            
+                            
+                            
+                            <div class="tab_details detail-div member-details-area" id="tab_content">
+                            	<!--Personal Info box -->
+                            	<?php include(APPPATH."views/admin/members/member_personal_info.phtml");?>
+                                <!--/Personal Info box -->
+                            </div>
+                        </div>
+                        <!--tab section end -->
+                        
+                        
+                        
+
+                              
+                        <div class="clr"></div>
+                        </div>
+                  </div>
+                  <div class="clr"></div>
+            </div>
+            <!--<div id="bot_corner">&nbsp;</div> -->
+      </div>
+      <div class="clr"></div>
+</div>
+
+
+
+<!--profile image popup start-->
+<div class="lightbox change-image" style="width:500px;">
+      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="<?=base_url()?>images/close.png" alt="" /></a></div>
+      <div class="top"><div>&nbsp;</div></div>
+      <div class="mid">
+            <div class="heading" style="margin-bottom:0px;">
+                  <div class="left">
+                        <h4>Change your profile picture</h4>
+                  </div>
+            </div>
+               <div class="shade_box_white" style="padding:8px 0px;">
+               <div class="content_area frm_box2">
+               <form id="frmUploadPhoto"  method="post" action="<?=admin_base_url().'members/member_details/add_photo/'.$result['id']?>" onsubmit="return false;" enctype="multipart/form-data">
+                    <div class="lable01">Image : </div>
+                    <div class="field01">
+                      <input name="s_profile_photo" id="s_profile_photo" type="file" size="38" /> 
+                      <div class="clr"></div>
+                     <!-- <span>Size of the image</span> -->
+                      <span id="err_photo" class="error-message" style="padding: 0 0 0 2px;"></span>    
+                    </div>
+                    <div class="clr"></div>
+                      <?php //echo $posted['s_image'];
+					  if($result['s_profile_photo'] !== "")
+					  {
+						  $IMG_THUMB_PATH = base_url() ."uploads/user_profile_image/";
+						  $name=getThumbName($result['s_profile_photo'],'main'); 
+						  $IMG_THUMB = $IMG_THUMB_PATH . $name;
+						  ?>
+						  <div class="lable01"></div>
+						  <?php if($name != ""): ?> <img src="<?= $IMG_THUMB ?>" width="119" height="131" /><?php endif;?> 
+                          <input type="hidden" name="h_image" value="<?=$result['s_profile_photo'] ?>" />
+					  <?php }
+					  
+					  else {?>
+						   
+						   <div class="lable01"></div>
+						   <input type="image" alt="no image" src="<?=base_url()?>images/no-image.gif" name="no image">
+						   <div class="clr"></div>
+					  
+					  <?php } ?>
+					
+                                  
+                    <div class="clr"></div>
+                    <div class="lable01"> </div>
+                    <div class="field01">
+                    <input name="" type="submit" class="btn"  value="Update"/>
+                    <input name="" type="reset" class="btn"  value="Cancel" onclick="hide_dialog();"/>
+                    </div>
+               </form>  
+               </div> 
+               <div class="clr"></div>
+            </div>
+            
+      </div>
+      <div class="bot"><div>&nbsp;</div></div>
+</div>
+<!--profile image popup end-->

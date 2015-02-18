@@ -1,0 +1,30 @@
+ <!--right block start -->
+      <div id="right_container">
+          <!--prayer partner -->
+          <div class="cogtime_projects">
+              <div class="heading">
+                    <div class="left"><h4>My Prayer Partners</h4></div>
+              </div>
+              <div>
+              <?php #pr($right_panel['prayer_partner_arr']);
+			  
+			  		if(count($right_panel['prayer_partner_arr']) > 0):
+						foreach($right_panel['prayer_partner_arr'] as $key=>$val):
+							$img = get_profile_image($val['user_id'], 'thumb');
+							$profile_link = get_profile_url($val['user_id'],$val['s_displayname']);
+			  ?>
+                  <div class="project_box">
+                      <a href="<?=$profile_link?>"><div style="background:url(<?=$img?>) no-repeat center;width:60px; height:60px;" title="member" class="pro_photo2" ></div></a>
+                      <p class="grey-link"><a href="<?=$profile_link?>"><?=$val['s_displayname']?></a></p>
+                      <p class="green-text"><?=get_user_address_info($val['user_id'])?></p>
+                  </div>
+             <?php		endforeach;
+			 		else:
+					echo ' <div class="project_box"><p class="grey-link" style="margin-left: 55px;">No Prayer Partners.</p><div>';
+			 		endif;
+			 ?>
+              </div>
+          </div>
+          <!--/prayer partner -->
+      </div>
+ <!--right block end -->

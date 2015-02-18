@@ -1,0 +1,45 @@
+<?php  //pr($arr_albums);
+  if(count($arr_albums)){ 
+		foreach($arr_albums as $albm_val):	
+			$IMG = base_url()."uploads/user_audio_album_photos/".getThumbName($albm_val['s_image_name'],'thumb');
+			$ALBUM_URL = get_audio_album_detail_url($albm_val['id'], $albm_val['s_name']);
+?>
+<div class="div_content" style=" margin-top:0px;">
+          <div class="shade_box_blue">
+                <div class="left_div02" style="width:310px;">
+                      <!--<div class="photo_box"> <a href="javascript:void(0);"><img src="images/audio.png" alt="" /></a> </div> -->
+                      <a href="<?=$ALBUM_URL?>"><div style="background:url(<?=$IMG?>) no-repeat center;width:122px; height:82px; cursor:pointer; "  title="Album" class="img_brd" ></div></a>
+                      <p class="blue_bold12"><strong> <a  href="<?=$ALBUM_URL?>"><?=$albm_val['s_name']?> (<?=$albm_val['total_audio']?>)</a></strong></p>
+                      <p><?=nl2br(my_substr($albm_val['s_desc'], 120))?></p>
+                </div>
+                <div class="right_div02">
+                      <div class="box01">
+                            <p class="date-time"> Created on : <?=getShortDate($albm_val['dt_created_on'], 5)?></p>
+                            <p class="add-remove-friend"> <img src="images/icons/edit.png" alt="" /> <a href="audio-albums/<?=$albm_val['id']?>/edit-audio-album.html" >Edit</a> &nbsp; <img src="images/icons/delete.png" alt="" /> <a  href="javascript:void(0);" onclick="delete_confirm_(<?=$albm_val['id']?>)">Delete</a> </p>
+                      </div>
+                      <input type="hidden" id="hd_album_id<?=$albm_val['id']?>" value="<?=$albm_val['id']?>" />
+                      <p style="margin-right:8px;" class="add-remove-friend"><img src="images/icons/org.png" alt="" /> <a  href="<?=get_audio_album_url($albm_val['id'])?>">Organize</a></p>
+                </div>
+                <div class="clr"></div>
+          </div>
+</div>
+ <?php 
+ 		  endforeach;?>
+		  
+<?php
+	}
+	else{
+			echo '<div class="shade_box_01" style="padding-top:5px;"><div  class="shade_norecords" style=" width: 415px;"><p class="blue_bold12">No Audio Albums.</p></div></div>';
+	}
+?>
+<?php
+ if($page_links){ ?>
+<div class="pagination">
+<div class="left">Viewing Page <?=$current_loaded_page_no?> of <?=$total_pages?> </div>
+<div class="right">
+       <ul class="small-paging">
+        <?=$page_links?> 
+        </ul>
+</div>
+</div>
+<?php } ?>       

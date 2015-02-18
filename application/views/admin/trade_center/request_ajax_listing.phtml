@@ -1,0 +1,67 @@
+										  <input type="hidden" id="h_current_page" value="<?=$current_page?>" />
+                                        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="admin-table small">
+                                          <tr>
+                                            <th align="left" valign="middle" height="30" width="70">Date Requested</th>
+                                            <th align="left" valign="middle" height="30" width="80">Requested By</th>
+                                            <th align="left" valign="middle" height="30" width="80">Buyer's Location</th>
+                                            <th align="left" valign="middle" height="30" width="200">Product Title</th>
+                                            <th align="left" valign="middle" height="30" width="80">Brand</th>
+                                            <th align="center" valign="middle" height="30" width="80">Category</th>
+                                            <th align="left" valign="middle" height="30" width="80">Sub-Category</th>
+                                            <th align="center" valign="middle" height="30" width="80">Unit Price($)</th>
+                                            <th align="center" valign="middle" height="30" width="80">Req. Qty</th>
+                                            <th align="left" valign="middle" height="30" width="80">Request Status</th>
+                                            <th align="center" valign="middle" height="30" width="100" class="last">Actions</th>
+                                          </tr>
+                                          
+									  <?php
+                                           //  pr($info_arr);
+                                            if(count($info_arr)){
+                                            foreach($info_arr as $key=> $info){
+                                            
+                                        ?>
+                              
+                                          <tr>
+                                            <td align="left" valign="top"><?=getShortDate($info['dt_insert_time'],5)?></td>
+                                            <td align="left" valign="top"><?=get_username_by_id($info['req_userid'])?></td>
+                                            <td align="left" valign="top"><?=get_user_address_info($info['req_userid'])?></td>
+                                            <td align="left" valign="top"><a href="javascript:void(0);" onclick="return get_details(<?=$info['id']?>)"><?=$info['s_name']?></a></td>
+                                            <td align="left" valign="top"><?=$info['s_brand']?></td>
+                                            <td align="center" valign="top"><?=get_main_category_name($info['i_category_id'])?></td>
+                                            <td align="left" valign="top"><?=get_trade_category_name($info['i_category_id'])?></td>
+                                            <td align="center" valign="top">$ <?=$info['f_unit_price']?></td>
+                                            <td align="center" valign="top"><?=$info['i_qty']?></td>
+                                            <td align="left" valign="top"><?=($info['i_accept'] == 0)?'Pending':'Completed'?></td>
+                                            <td align="center" valign="middle" class="last">
+                            			<!--	<input name="" title="Delete" type="button" class="delete-button"  value="" onclick="return show_dialog('delete-request')"/>
+                                            <input name="" title="Decline" type="button" class="btn-06"  value="Decline"/>
+                                            <input name="" title="Enable" type="button" class="btn-06"  value="Enable"/>-->
+                                             <input name="" title="Delete" type="button" class="delete-button"  value="" onclick="return confirm_delete_req(<?=$info['request_id']?>)"/>
+                                              <span id="req_status_<?=$info['request_id']?>">
+                                <input  name="" title="Disable" type="button" class="btn-06"  value="<?=($info['r_i_isenabled']==2)? 'Enable':'Disable';?>" status="<?=$info['r_i_isenabled']?>" onclick="return change_req_status(<?=$info['request_id']?>,<?=$info['r_i_isenabled']?>)"/></span>
+                                            </td>
+                                          </tr>
+                                       
+                                            <?php    }
+												}
+												else{
+											?>
+												 <tr>
+													  <td style="text-align:center;" height="80" colspan="20">No data available!!!</td>
+												 </tr>
+											
+											<?php
+												}
+											?>
+										</table>
+                                        
+                                    <?php
+
+if($page_links) :
+?>         
+<div class="paging">
+            <ul><?= $page_links ?></ul>
+</div>        
+<?php
+endif;
+?>  

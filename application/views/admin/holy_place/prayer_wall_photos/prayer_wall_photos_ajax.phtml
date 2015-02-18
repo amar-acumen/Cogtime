@@ -1,0 +1,59 @@
+                            <table width="100%" border="0" cellspacing="0" cellpadding="0" class="admin-table">
+                              <tr>
+                                <th align="center" valign="middle" height="30" width="70">Date/Time Posted</th>
+                                <th align="left" valign="middle" height="30" width="350">Photos With Title</th>
+                              <?/*  <th align="center" valign="middle" height="30" width="127">Start date/Time</th>
+                                <th align="center" valign="middle" height="30" width="125">End date/Time</th>
+                              */?>
+                                <th width="103" height="30" align="center" valign="middle" class="last">Actions</th>
+  </tr>
+                              
+                              
+                         <?php
+                         //pr($info_arr);
+                            if(count($info_arr)){
+                            foreach($info_arr as $key=> $info){
+                        ?>
+                              <tr>
+                                <td align="center" valign="top"><?=getShortDateWithTime($info['dt_uploaded_on'],7)?></td>
+                                <td align="left" valign="top">
+                                <p title="banner" style="background:url(<?=base_url().'uploads/prayer_wall_photos/'.getThumbName($info['s_photo_name'],'thumb')?>) no-repeat center; width:60px; height:60px;border: 1px solid #DCDCDC; float: left; "></p>
+                              
+                                <p style="margin-left : 80px;"><?= my_substr(html_entity_decode($info['s_title']),150)?></p></td>
+                               <?/* <td align="center" valign="top"><?=getShortDate($info['dt_start_date'],9)?></td>
+                                <td align="center" valign="top"><?=getShortDate($info['dt_end_date'],9)?></td>
+                               */?>
+                                <td align="center" valign="middle" class="last">
+                                <input name="" title="Edit" type="button" class="edit-button"  value="" onclick="window.location=admin_base_url+'holy-place/<?=$current_page?>/<?=$info['id']?>/edit-prayer-wall-photos.html'" style="margin-left: 45px;"/>
+                                <input name="" title="Delete" type="button" class="delete-button"  value="" onclick="return confirm_delete_(<?=$info['id']?>,<?=$current_page?>)"/>
+                               <?/* <input id="status_<?=$info['id']?>" name="" title="Disable" type="button" class="btn-06"  value="<?=($info['i_is_enable']==0)? 'Enable':'Disable';?>" onclick="return change_status_(<?=$info['id']?>,<?=$info['i_is_enable']?>)"/>
+                               */?>
+                                </td>
+                              </tr>
+
+                <?php    }
+                    }
+                    else{
+                ?>
+                     <tr>
+                          <td style="text-align:center;" height="80" colspan="3">No data available!!!</td>
+                     </tr>
+                
+                <?php
+                    }
+                ?>
+                              
+                       
+                            </table>
+                            <input type="hidden" id="current_page" value="<?=$current_page?>">
+<?php
+
+
+if($page_links) :
+?>         
+<div class="paging">
+            <ul><?= $page_links ?></ul>
+</div>        
+<?php
+endif;
+?>  

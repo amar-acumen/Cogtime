@@ -1,0 +1,173 @@
+<div class="left-menu">
+    <div class="menu-icon"><img src="images/menu-icon.png" alt="Menu" width="45" height="50"></div>
+	<div id="navigation_vert">
+                <ul>
+                    <li class="read">
+                        <a href="<?php echo base_url()?>christian-news/read.html" class="navlink"><span>Read</span></a>
+                        <div class="dropdown" id="dropdown_four">            
+                            <ul class="menu-item">
+								<?php
+								if ($artical_cat_name)
+								{
+									foreach($artical_cat_name as $key=>$val)
+									{
+										if ($val['id'] == 12)
+											$class = "news-icon";
+										else if ($val['id'] == 10)
+											$class = "life-icon";
+										else if ($val['id'] == 5)
+											$class = "society-icon";
+										else if ($val['id'] == 13)
+											$class = "talk-icon";
+										else if ($val['id'] == 8)
+											$class = "shout-icon";
+										else if ($val['id'] == 7)
+											$class = "shout-icon";
+										else if ($val['id'] == 1)
+											$class = "story-icon";
+										else if ($val['id'] == 3)
+											$class = "mission-icon";
+										else if ($val['id'] == 4)
+											$class = "faithbook-icon";
+										else if ($val['id'] == 9)
+											$class = "book-icon";
+										else if ($val['id'] == 2)
+											$class = "blog-icon";
+										else if ($val['id'] == 11)
+											$class = "devotionals-icon";
+										else if ($val['id'] == 6)
+											$class = "grow-icon";	
+											
+											
+								?>
+                                	
+									<li>
+									<?php if ($val['CAT_COUNT']) {?>
+									<a href="<?php echo base_url()?>christian_news/category/<?php echo $val['id']?>" class="<?php echo $class?>">
+										<?php echo $val['s_cat_name']?>
+									</a>
+									<?php } else {?>
+									<a href="javascript:void(0)" class="<?php echo $class?>" style="color:#999999;">
+										<?php echo $val['s_cat_name']?>
+									</a>	
+									<?php } ?>
+									</li>
+                                
+								<?php 
+									}
+								} 
+								?>
+								<!--<li><a href="javascript:void(0);" class="life-icon">This Life</a></li>
+                                <li><a href="javascript:void(0);" class="society-icon">Our Society</a></li>
+                                <li><a href="javascript:void(0);" class="talk-icon">Let’s talk</a></li>
+                                <li><a href="javascript:void(0);" class="shout-icon">Your Shout/The Voice</a></li>
+                                <li><a href="javascript:void(0);" class="story-icon">Your Story</a></li>
+                                <li><a href="javascript:void(0);" class="mission-icon">Mission Possible</a></li>
+                                <li><a href="javascript:void(0);" class="faithbook-icon">Faithbook</a></li>
+                                <li><a href="javascript:void(0);" class="book-icon">Book Reviews</a></li>
+                                <li><a href="javascript:void(0);" class="blog-icon">Blogs</a></li>
+                                <li><a href="javascript:void(0);" class="devotionals-icon">Devotionals</a></li>
+                                <li><a href="javascript:void(0);" class="grow-icon">G.R.O.W</a></li>-->
+                            </ul>
+                        </div>  
+                    </li>
+                    <li class="watch">
+                        <a href="<?php echo base_url()?>watch.html" class="navlink"><span>Watch</span></a>
+                        <div class="dropdown" id="dropdown_five">            
+                              <ul class="menu-item">
+                               
+							    <?php
+								if ($watch_cat_name)
+								{
+									foreach($watch_cat_name as $key=>$val)
+									{
+										if ($val['id'] == 1)
+											$class = "news-icon";
+										else if ($val['id'] == 2)
+											$class = "life-icon";
+										else if ($val['id'] == 3)
+											$class = "society-icon";
+										else if ($val['id'] == 4)
+											$class = "talk-icon";
+										else if ($val['id'] == 5)
+											$class = "shout-icon";
+										else if ($val['id'] == 6)
+											$class = "shout-icon";
+										else
+											$class = "story-icon";
+								?>
+                                	
+									<li>
+									<?php if ($val['CAT_COUNT']) {?>
+									<a href="<?php echo base_url()?>watch/category/<?php echo $val['id']?>" class="<?php echo $class?>">
+										<?php echo $val['s_name']?>
+									</a>
+									<?php } else {?>
+									<a href="javascript:void(0)" class="<?php echo $class?>" style="color:#999999;">
+										<?php echo $val['s_name']?>
+									</a>	
+									<?php } ?>
+									</li>
+									
+                                
+								<?php 
+									}
+								} 
+								?> 
+							   
+                            </ul>
+                        </div>
+                    </li>
+                    
+                    <li class="listen">
+                        <a href="<?php echo base_url()?>listen.html" class="navlink"><span>Listen</span></a>
+                        <div class="dropdown" id="dropdown_six">            
+                         
+                          <ul class="menu-item">
+                                <?php
+								if ($listen_cat_name)
+								{
+									foreach($listen_cat_name as $key=>$val)
+									{
+										if ($val['id'] == 1)
+											$class = "news-icon";
+										else if ($val['id'] == 2)
+											$class = "life-icon";
+										else if ($val['id'] == 3)
+											$class = "society-icon";
+										else if ($val['id'] == 4)
+											$class = "talk-icon";
+										else if ($val['id'] == 5)
+											$class = "shout-icon";
+										else if ($val['id'] == 6)
+											$class = "shout-icon";
+										else if ($val['id'] == 8)
+											$class = "story-icon";
+										else 
+											$class = "mission-icon";
+								?>
+                                	
+									<li>
+									<?php if ($val['CAT_COUNT']) {?>
+									<a href="<?php echo base_url()?>listen/category/<?php echo $val['id']?>" class="<?php echo $class?>">
+										<?php echo $val['s_name']?>
+									</a>
+									<?php } else {?>
+									<a href="javascript:void(0)" class="<?php echo $class?>" style="color:#999999;">
+										<?php echo $val['s_name']?>
+									</a>	
+									<?php } ?>
+									</li>
+                                
+								<?php 
+									}
+								} 
+								?> 
+								
+							    
+                            </ul>
+                        </div>            
+                	</li>
+                </ul>
+            </div>
+		</div>

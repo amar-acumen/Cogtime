@@ -1,0 +1,657 @@
+<?php include(APPPATH . "views/layouts/logged_header.phtml"); ?>
+<!-- NAVIGATION SECTION -->
+<?php
+include(APPPATH . "views/layouts/nav.phtml");
+//
+?>
+<!-- /NAVIGATION SECTION -->
+</div>
+</div>
+<div class="clr"></div>
+<!-- CONTENT SECTION -->
+<div id="content_section">
+    <div id="container">
+        <!--<div id="mid_content"> -->
+        <!-- latest news -->
+        <?php include(APPPATH . "views/layouts/latest_news.phtml"); ?>
+        <!-- /latest news -->
+        <div class="clr"></div>
+        <!-- main container -->
+        <div id="main_container">
+            <!-- left container -->
+            <?php include(APPPATH . "views/layouts/leftbar.phtml"); ?>
+            <!-- /left container -->
+            <!-- mid container -->
+            <div id="mid_container"> 
+                <div id="personal_info_section">
+                    <div id="1">
+                        <div class="heading01"> 
+                            <div class="left"><h4><img src="<?php echo base_url(); ?>images/icons/profile.png" alt=" " />  Basic Information</h4> </div>
+                            <div class="right"><img src="<?php echo base_url(); ?>images/icons/edit.png" alt=" " />  <a onclick="showDiv('1')" href="javascript:void(0);" class="white-link"><strong>Edit</strong></a></div>
+                        </div>
+                        <div id="profile_info_div" class="shade_box_01 frm_box shade_box_blue" style="padding-bottom:17px;">
+                            <div class="lable01">Title:</div>  
+                            <div class="field01"><?= $arr_profile_info['e_title'] ?></div> 
+                            <div class="clr"></div>
+                            <div class="lable01">First Name:</div>  
+                            <div class="field01"><?= $arr_profile_info['s_first_name'] ?> </div> 
+                            <div class="clr"></div>
+                            <div class="lable01">Last Name:</div>  
+                            <div class="field01"><?= $arr_profile_info['s_last_name'] ?></div> 
+                            <div class="clr"></div>
+                            <div class="lable01">Chat Name:</div>  
+                            <div class="field01"><?= $arr_profile_info['s_chat_display_name'] ?></div> 
+                            <div class="clr"></div>
+                            <div class="clr"></div>
+                            <div class="lable01">Country:</div>  
+                            <div class="field01"><?= get_countryname($arr_profile_info['i_country_id']) ?></div> 
+                            <div class="clr"></div>
+                            <div class="lable01">State:</div>  
+                            <div class="field01"><?= get_statename($arr_profile_info['i_state_id']) ?></div> 
+                            <div class="clr"></div>
+                            <div class="lable01">City:</div>  
+                            <div class="field01"><?= get_cityname($arr_profile_info['i_city_id']) ?></div> 
+                            <div class="clr"></div>
+
+                            <div class="clr"></div>
+                            <div class="lable01">Gender:</div>  
+                            <div class="field01"><?= $arr_profile_info['s_gender'] ?></div> 
+                            <div class="clr"></div>
+                            <div class="lable01">Date of Birth:</div>  
+                            <div class="field01">
+                                <?php
+                                //echo $arr_profile_info['dt_dob'] ;
+                                if ($arr_profile_info['dt_dob'] == '0000-00-00') {
+                                    echo "";
+                                } else {
+                                    echo getShortDate($arr_profile_info['dt_dob'], '1');
+                                }
+                                ?>
+                            </div> <!--- Arif---->
+                            <div class="clr"></div>
+                            <? /* <div class="lable01">Profile Photo:</div>  
+                              <div class="field01"><a href="javascript:void(0);" class="blue_link"  onclick="showDiv('1')"><strong>[change]</strong></a></div>
+                              <div class="clr"></div>
+                             */ ?>
+                            <div class="lable01">Want to be Prayer Partner:</div>  
+                            <div class="field01"><?= $arr_profile_info['s_want_prayer_partner'] ?></div> 
+                            <div class="clr"></div>
+                            <div class="lable01">Want to be Net Pal:</div>  
+                            <div class="field01"><?= $arr_profile_info['s_want_net_pal'] ?></div> 
+                            <div class="clr"></div>
+                            <div class="lable01">My Website:</div>  
+                            <div class="field01"><a  href="javascript:void(0);" class="blue_link"><?= $arr_profile_info['s_website'] ?></a> </div> 
+                            <div class="clr"></div>
+
+                            <?php
+                            //pr($arr_profile_info);
+                            $p_url = get_profile_url($arr_profile_info['id'], $arr_profile_info['s_profile_name']); ?>
+                            <div class="lable01">My Profile URL:</div>  
+                            <div class="field01"><a  href="<?= $p_url ?>" class="blue_link"><?= $p_url ?><?php /* ?>www.xtiannetwork.com/<?=$arr_profile_info['s_profile_url_suffix']?><?php */ ?></a> </div> 
+
+                            <div class="clr"></div>
+
+
+                            <!--                                     <div class="heading01"> 
+                                                                     <div class="left"><h4><img src="<?php echo base_url(); ?>images/icons/info.png" alt=" " />  Basic Information</h4> </div>
+                                                                    <div class="right"><img src="images/icons/edit.png" alt=" " />  <a onclick="showDiv('2')" href="javascript:void(0);" class="white-link"><strong>Edit</strong></a></div>
+                                                                 </div>-->
+
+                            <div id="basic_info_div" class="shade_box_01 frm_box shade_box_blue" style="padding-bottom:17px;">
+                                <div class="lable01">Languages I Speak:</div>  
+                                <div class="field01"><?= $arr_profile_info['s_languages'] ?></div>
+
+                                <div class="clr"></div>
+                                <div class="lable01">About Me:</div>  
+                                <div class="field01"><?= nl2br($arr_profile_info['s_about_me']) ?></div> 
+                                <div class="clr"></div>
+
+                                <p class="lable01" style="font-weight: bold; font-size: 12px;">Church Details</p>
+                                <div class="clr"></div>
+                                <div class="lable01">Church Name:</div>  
+                                <div class="field01"><?= $arr_profile_info['s_church_name'] ?></div> 
+                                <div class="clr"></div>
+                                <div class="lable01">Location:</div>  
+                                <div class="field01"><?= $arr_profile_info['s_church_location'] ?></div> 
+                                <div class="clr"></div>
+                                <div class="lable01">Phone:</div>  
+                                <div class="field01"><?= $arr_profile_info['s_church_phone'] ?></div> 
+                                <div class="clr"></div>
+                                <div class="lable01">Denomination:</div>  
+                                <div class="field01"><?= $arr_profile_info['s_name'] ?></div> 
+                                <div class="clr"></div>
+                                <!--<div class="lable01">Profile Photo:</div>  
+                                <div class="field01"><a href="javascript:void(0);" onclick="showDiv('2')" class="blue_link"><strong>[change]</strong></a></div> 
+                                <div class="clr"></div>-->
+                            </div>
+
+
+
+
+                        </div>
+                    </div>
+
+                    <div id="jason1" style="display:none;"> 
+                        <div class="heading01"> 
+                            <div class="left"><h4><img src="<?php echo base_url(); ?>images/icons/profile.png" alt=" " />  Basic Information</h4> </div>
+                        </div>
+                        <!--FORM TO MODIFY Personal Information-->
+                        <form id="frmManageProfile" method="post" action="modify-my-profile-personal-info-ajax" onsubmit="return modify_my_profile_ajax()" enctype="multipart/form-data">
+                            <div class="shade_box_01 frm_box shade_box_blue" style="padding-bottom:17px;">
+
+                                <div class="lable01">Title:</div>  
+                                <div class="field01">
+                                    <select name="txt_title" id="txt_title" style="width:60px;">
+                                        <option value="-1" >---</option>
+                                        <option value="Mr" <?php echo $selected = ($arr_profile_info["e_title"] == 'Mr') ? 'selected' : '' ?>>Mr.</option>
+                                        <option value="Mrs" <?php echo $selected = ($arr_profile_info["e_title"] == 'Mrs') ? 'selected' : '' ?>>Mrs.</option>
+                                        <option value="Ms" <?php echo $selected = ($arr_profile_info["e_title"] == 'Ms') ? 'selected' : '' ?>>Ms.</option>
+                                    </select>
+
+                                    <script type="text/javascript">
+                                        $(document).ready(function(arg) {
+                                            //$("#txt_title").msDropDown();
+                                            //$("#txt_title").hide();
+                                        })
+                                    </script>
+                                    <?php echo form_error('txt_title'); ?>
+                                    <div class="error-message" id="err_title"></div>
+                                </div> 
+                                <div class="clr"></div>
+
+                                <div class="lable01">First Name:</div>  
+                                <div class="field01">
+                                    <input name="txt_fname" id="txt_fname" type="text" value="<?= isset($arr_profile_info["s_first_name"]) ? $arr_profile_info["s_first_name"] : '' ?>" />
+                                    <?php /* ?><?php echo form_error('txt_fname'); ?><?php */ ?>
+                                    <div class="error-message" id="err_fname"></div>
+                                </div> 
+                                <div class="clr"></div>
+
+                                <div class="lable01">Last Name:</div>  
+                                <div class="field01">
+                                    <input name="txt_lname" id="txt_lname" type="text" value="<?= isset($arr_profile_info["s_last_name"]) ? $arr_profile_info["s_last_name"] : '' ?>" />
+                                    <?php echo form_error('txt_lname'); ?>
+                                    <div class="error-message" id="err_lname"></div>
+                                </div> 
+                                <div class="clr"></div>
+                                <div class="lable01">Country:</div>  
+                                <div class="field01">
+
+                                    <select name="txt_country" id="txt_country" style="width:150px; margin-bottom:6px;" onchange="showState(this.value);">
+                                        <option value="-1">---</option>
+                                        <?= makeOptionCountryNew('', encrypt($arr_profile_info["i_country_id"])); ?>
+                                    </select>
+                                    <?php echo form_error('txt_country'); ?>
+                                    <div class="error-message" id="err_country"></div>
+                                </div> 
+                                <div class="clr"></div>
+                                <div class="lable01">State:</div>  
+                                <div class="field01">
+                                    <select name="txt_state" id="txt_state" onchange="showCity(this.value)">
+                                        <option value="-1">---</option>
+                                        <?= $state; ?>
+                                    </select>
+
+                                    <?php echo form_error('txt_state'); ?>
+                                    <div class="error-message" id="err_state"></div>
+                                </div> 
+                                <div class="clr"></div>
+                                <div class="lable01">City:</div>  
+                                <div class="field01">
+                                    <select name="txt_city" id="txt_city">
+                                        <option value="-1">---</option>
+                                        <?= $city; ?>
+                                    </select>
+
+                                    <?php echo form_error('txt_city'); ?>
+                                    <div class="error-message" id="err_city"></div>
+                                </div> 
+                                <div class="clr"></div>
+
+
+                                <div class="lable01">Gender:</div>  
+                                <div class="field01">
+
+                                    <select name="txt_gender" id="txt_gender" style="width: 70px;">
+                                        <option value="-1">---</option>
+                                        <option value="M" <?php echo $selected = ($arr_profile_info["s_gender"] == 'Male') ? 'Selected' : ''; ?>>Male</option>
+                                        <option value="F" <?php echo $selected = ($arr_profile_info["s_gender"] == 'Female') ? 'Selected' : ''; ?>>Female</option>
+                                    </select>
+                                    <?php echo form_error('txt_gender'); ?>
+                                    <div class="error-message" id="err_gender"></div>
+                                </div> 
+                                <div class="clr"></div>
+
+                                <div class="lable01">Date of Birth:</div>  
+                                <div class="field01">
+
+                                    <?php
+                                    # getting day-month-yr extracted from db DOB...
+                                    if ($arr_profile_info['dt_dob'] != '0000-00-00') {
+                                        $DOB_TSTAMP = strtotime($arr_profile_info['dt_dob']);
+                                        $DOB_DAY = date("j", $DOB_TSTAMP);
+                                        $DOB_MONTH = date("n", $DOB_TSTAMP);
+                                        $DOB_YR = date("Y", $DOB_TSTAMP);
+                                    }
+                                    ?>
+
+                                    <select name="day" id="day"  style="width:50px; margin-right:2px;" autocomplete="off">
+                                        <option value="">---</option>
+                                        <?= makeOptionDay($DOB_DAY) ?>
+
+                                    </select>
+
+                                    <select name="month" id="month"  style="width:90px; margin-right:2px;">
+                                        <option value="">---</option>
+                                        <?= makeOptionMonth($DOB_MONTH) ?>
+                                    </select>
+
+                                    <select name="year" id="year"  style="width:70px;">
+                                        <option value="">---</option>
+                                        <?= makeOptionDobYear($DOB_YR) ?>
+                                    </select> 
+                                    <div class="error-message" id="err_dob"></div>
+
+                                </div> 
+                                <div class="clr"></div>
+
+                                <div class="lable01">Profile Photo:</div>  
+                                <div class="field01">
+
+                                    <?php
+                                    $IMG = base_url() . "uploads/user_profile_image/" . getThumbName($arr_profile_info['s_profile_photo'], 'thumb');
+                                    ?>
+                                    <input name="txt_profile_pic" id="txt_profile_pic" type="file" size="25" />
+
+
+                                    <?php echo form_error('txt_profile_pic'); ?>
+                                </div> 
+                                <div class="lable01">Time Zone:</div>
+                                <div class="field01">
+                                    <select name="time_zone" id="time_zone" style="width:312px;">
+                                        <option value="-1">Select</option>
+
+                                        <?= makeOptionTimezones($arr_profile_info['s_time']) ?>
+
+                                    </select>
+
+                                    <script type="text/javascript">
+                                        $(document).ready(function(arg) {
+                                            $("#time_zone").msDropDown();
+                                            $("#time_zone").hide();
+                                        })
+                                    </script>
+
+                                     <?php echo form_error('s_time'); ?>
+                                </div>
+                                <div class="clr"></div>
+
+                                <div class="lable01">Want to be Prayer Partner:</div>  
+                                <div class="field01">
+                                    <select name="txt_prayer_ptnr" id="txt_prayer_ptnr" style="width:55px;">
+                                        <option value="Y" <?php echo $selected = ($arr_profile_info["s_want_prayer_partner"] == 'Yes') ? 'selected' : '' ?>>Yes</option>
+                                        <option value="N" <?php echo $selected = ($arr_profile_info["s_want_prayer_partner"] == 'No') ? 'selected' : '' ?>>No</option>
+                                    </select>
+
+                                </div> 
+                                <div class="clr"></div>
+                                <div class="lable01">Want to be Net Pal:</div>  
+                                <div class="field01">
+                                    <select name="txt_net_pal" id="txt_net_pal" style="width:55px;">
+                                        <option value="Y" <?php echo $selected = ($arr_profile_info["s_want_net_pal"] == 'Yes') ? 'selected' : '' ?>>Yes</option>
+                                        <option value="N" <?php echo $selected = ($arr_profile_info["s_want_net_pal"] == 'No') ? 'selected' : '' ?>>No</option>
+                                    </select>
+
+                                </div>
+                                <div class="clr"></div>
+
+                                <div class="lable01">My Website:</div>  
+                                <div class="field01">
+                                    <input name="txt_website" id="txt_website" type="text"  value="<?= $arr_profile_info['s_website'] ?>"/>
+                                    <?php echo form_error('txt_website'); ?>
+                                    <div class="error-message" id="err_website"></div >
+                                </div> 
+                                <div class="clr"></div>
+
+                                <div class="lable01">My Profile URL:</div>  
+                                <div class="field01">www.xtiannetwork.com/ &nbsp;  
+                                    <input name="txt_profile_url" id="txt_profile_url" value="<?= $arr_profile_info['s_profile_url_suffix'] ?>" type="text"  style="width:113px;"/>
+                                    <?php echo form_error('txt_profile_url'); ?>
+                                    <div class="error-message" id="err_profile_url"></div >
+                                </div> 
+                                <div class="clr"></div>
+
+                                <div class="lable01">&nbsp;</div>  
+                                <div class="field01"> 
+<!--                                        <input type="hidden" name="is_submitted" id="is_submitted" value="Y" />
+                                <input name="btn_manage_profile" id="btn_manage_profile" type="submit" value="Save"  class="btn"  /> 
+                                <input name="" type="button" value="Cancel"  class="btn" onclick="closePersonalInfoDiv()"/>-->
+                                </div> 
+                                <div class="clr"></div>
+
+                            </div>
+
+                            <!-------------------------------->
+
+                            <!--                                   <div class="heading01"> 
+                                                                     <div class="left"><h4><img src="<?php echo base_url(); ?>images/icons/info.png" alt=" " />  Basic Information</h4> </div>
+                                                                 </div>-->
+                            <!--FORM TO MODIFY basic Information-->
+                            <!--                                     <form id="frmManageBasicProfile"  method="post" action="modify-my-profile-basic-info-ajax" onsubmit="return modify_my_basic_profile_ajax()" enctype="multipart/form-data">-->
+                            <div class="shade_box_01 frm_box shade_box_blue" style="padding-bottom:17px;">
+                                <div class="lable01">Languages I Speak:</div>  
+                                <div class="field01">
+                                    <? /* <input name="txt_lang" id="txt_lang" type="text" value="<?=isset($arr_profile_info["s_languages"])? $arr_profile_info["s_languages"]: '' ?>" /> */ ?>
+                                    <select name="txt_lang" id="txt_lang" style="width:212px;">
+                                        <option value="">---</option>
+                                        <?php
+                                        if ($arr_profile_info['s_languages'] == '') {
+                                            ?>
+                                            <?php
+                                            echo makeNetpalLanguage();
+                                        } else {
+                                            echo makeNetpalLanguage($arr_profile_info['s_languages']);
+                                        }
+                                        ?>
+                                    </select>
+                                    <?php echo form_error('txt_lang'); ?>
+                                </div> 
+                                <div class="clr"></div>
+                                <div class="lable01">About Me:</div>  
+                                <div class="field01">
+                                    <textarea style="height: 60px;" rows="" cols="" name="txt_about" id="txt_about"><?= isset($arr_profile_info["s_about_me"]) ? get_unformatted_string_edit(br2nl($arr_profile_info["s_about_me"])) : '' ?></textarea>
+                                    <?php echo form_error('txt_about'); ?>
+                                </div> 
+                                <div class="clr"></div>
+
+                                <p class="lable01" style="font-weight: bold; font-size: 12px;">Church Details</p>
+                                <div class="clr"></div>
+
+                                <div class="lable01">Church Name:</div>  
+                                <div class="field01">
+                                    <input name="txt_cname" id="txt_cname" type="text" value="<?= isset($arr_profile_info["s_church_name"]) ? $arr_profile_info["s_church_name"] : '' ?>" />
+                                    <?php echo form_error('txt_cname'); ?>
+                                </div> 
+                                <div class="clr"></div>
+
+                                <div class="lable01">Address:</div>  
+                                <div class="field01">
+                                    <input name="txt_caddress" id="txt_caddress" type="text" value="<?= isset($arr_profile_info["s_church_address"]) ? $arr_profile_info["s_church_address"] : '' ?>" />
+
+                                    <?php echo form_error('txt_caddress'); ?>
+                                </div> 
+                                <div class="clr"></div>
+
+                                <div class="lable01">Country:</div>  
+                                <div class="field01">
+
+                                    <select name="txt_ccountry" id="txt_ccountry" style="width:238px; margin-bottom:6px;" onchange="showChurchState(this.value);">
+                                        <option value="-1">---</option>
+                                        <?= makeOptionCountryNew('', encrypt($arr_profile_info["i_church_country_id"])); ?>
+
+                                    </select>
+                                    <?php echo form_error('txt_ccountry'); ?>
+
+                                </div> 
+                                <div class="clr"></div> 
+
+                                <div class="lable01">State:</div>  
+                                <div class="field01">
+                                    <select name="txt_cstate" id="txt_cstate" onchange="showChurchCity(this.value)">
+                                        <option value="-1">---</option>
+
+                                        <?php echo $cstate; ?>
+                                    </select>
+
+                                    <?php echo form_error('txt_cstate'); ?>
+                                    <div class="error-message" id="err_cstate"></div>
+                                </div> 
+                                <div class="clr"></div> 
+                                <div class="lable01">City:</div>  
+                                <div class="field01">
+                                    <select name="txt_ccity" id="txt_ccity">
+                                        <option value="-1">---</option>
+                                        <?= $ccity; ?>
+                                    </select>
+
+                                    <?php echo form_error('txt_ccity'); ?>
+                                    <div class="error-message" id="err_ccity"></div>
+                                </div>
+
+                                <?php /* ?> 
+                                  <div class="lable01">City:</div>
+                                  <div class="field01">
+                                  <input name="txt_ccity" id="txt_ccity" type="text" value="<?=isset($arr_profile_info["s_church_city"])? $arr_profile_info["s_church_city"]: '' ?>" />
+                                  <?php echo form_error('txt_ccity'); ?>
+                                  </div>
+                                  <div class="clr"></div>
+
+                                  <div class="lable01">State:</div>
+                                  <div class="field01">
+                                  <input name="txt_cstate"  id="txt_cstate" type="text" value="<?=isset($arr_profile_info["s_church_state"])? $arr_profile_info["s_church_state"]: '' ?>" />
+                                  <?php echo form_error('txt_cstate'); ?>
+                                  </div> <?php */ ?>
+                                <div class="clr"></div>
+
+                                <div class="lable01">Postcode:</div>  
+                                <div class="field01">
+                                    <input name="txt_cpostcode" id="txt_cpostcode" type="text" value="<?= isset($arr_profile_info["s_church_postcode"]) ? $arr_profile_info["s_church_postcode"] : '' ?>" />
+                                    <?php echo form_error('txt_cpostcode'); ?>
+                                </div> 
+                                <div class="clr"></div>
+
+                                <div class="lable01">Phone:</div>  
+                                <div class="field01">
+                                    <input name="txt_cphone" id="txt_cphone" type="text"  value="<?= isset($arr_profile_info["s_church_phone"]) ? $arr_profile_info["s_church_phone"] : '' ?>"/>
+                                    <?php echo form_error('txt_cphone'); ?>
+                                </div> 
+                                <div class="clr"></div>
+
+                                <div class="lable01">Denomination:</div>  
+                                <div class="field01">
+                                    <select name="txt_denomination" id="txt_denomination" style="width:260px;">
+                                        <option value="<?= encrypt(0) ?>">---</option>
+                                        <?= makeOptionDenomination(encrypt($arr_profile_info['i_id_denomination'])); ?>
+                                    </select>
+
+
+                                    <?php echo form_error('txt_denomination'); ?>
+                                </div> 
+                                <div class="clr"></div>
+
+                                <div class="lable01">&nbsp;</div>  
+                                <div class="field01"> 
+                                    <input type="hidden" name="is_submitted" id="is_basic_submitted" value="Y" />
+                                    <input name="" type="submit" value="Save"  class="btn" />
+                                    <input name="" type="button" value="Cancel"  class="btn" onclick="closePersonalInfoDiv()"/>
+                                </div> 
+                                <div class="clr"></div>
+                            </div>
+
+                            <!--FORM TO MODIFY basic Information-->
+
+                            <!----------------------------------->
+
+
+                        </form>
+                        <!--end FORM TO MODIFY Personal Information-->
+                    </div>
+                </div>
+
+
+
+
+                <?php include(APPPATH . "views/logged/blocks/my_profile_edu_part.phtml"); ?>
+                <?php //include(APPPATH."views/logged/blocks/my_profile_work_part.phtml"); ?>
+
+
+                <div id="skill_section">
+                    <div id="5">
+                        <div class="heading01"> 
+                            <div class="left"><h4><img src="images/icons/man2.png" alt=" " />  Skills</h4> </div>
+                            <div class="right"><img src="images/icons/edit.png" alt=" " />  <a onclick="showDiv('5')" href="javascript:void(0);" class="white-link"><strong>Edit</strong></a></div>
+                        </div>
+                        <div class="shade_box_01 frm_box shade_box_blue" style="padding-bottom:17px;">
+                            <?php
+                            $count = count($arr_profile_info['skill_arr']);
+                            if ($count < 2)
+                                $count = 2;
+
+                            for ($i = 0; $i < $count; $i++) :
+                                ?>
+                                <div class="lable01">Skill <?php echo $i + 1; ?>:</div>  
+                                <div class="field01"><?php echo isset($arr_profile_info['skill_arr'][$i]['s_name']) ? $arr_profile_info['skill_arr'][$i]['s_name'] : ''; ?></div> 
+                                <div class="clr"></div>
+
+                                <?php
+                            endfor;
+                            ?>
+
+                        </div>
+                    </div>
+                    <div id="jason5" style="display:none;"> 
+                        <div class="heading01"> 
+                            <div class="left"><h4><img src="images/icons/man2.png" alt=" " />  Skills</h4> </div>
+                        </div>
+                        <form id="frmManageSkillProfile"  method="post" action="modify-my-profile-skill-info-ajax" onsubmit="return modify_my_skill_profile_ajax()" enctype="multipart/form-data">
+                            <div class="shade_box_01 frm_box shade_box_blue" style="padding-bottom:17px;">
+
+                                <?php
+                                for ($i = 0; $i < $count; $i++) :
+                                    $close_div_val = $i + 1;
+
+                                    $db_skill_id = isset($arr_profile_info["skill_arr"][$i]["id"]) ? $arr_profile_info["skill_arr"][$i]['id'] : '0';
+                                    ?>
+                                    <!------------------------skill div----------------------------->
+                                    <div id="<?php echo "skill_div_" . $close_div_val; ?>"> 
+                                        <?php
+                                        if ($i > 1) {
+                                            echo "<a class='close' href='javascript:void(0);' onclick=\"closeExtraSkillDiv(this)\" ><img src='images/icons/close.png' alt=''></a>";
+                                        }
+                                        ?>
+                                        <div class="lable01">Skill <?php echo $i + 1; ?>:</div>  
+                                        <div class="field01">
+                                            <input name="txt_skill[]" type="text" style="width:230px;" value="<?php echo isset($arr_profile_info['skill_arr'][$i]['s_name']) ? $arr_profile_info['skill_arr'][$i]['s_name'] : ''; ?>" /> 
+                                        </div> 
+                                        <div class="clr"></div>
+                                        <input type="hidden" name="skill_db_id[]" id="dbId" value="<?php echo $db_skill_id; ?>" />
+
+                                    </div>  
+                                    <!------------------------/skill div----------------------------->
+
+                                    <?php
+                                endfor;
+                                ?>
+                                <div id="extra_skill_divs"></div>  
+
+
+                                <input type="hidden" name="total_skill_divs" id="skill_div_h" value="<?php echo $count; ?>" />
+                                <div class="lable01">&nbsp;</div>  
+                                <div class="field01" style="text-align:right;width:250px;"> 
+                                    <a href="javascript:void(0);"  class="blue_link" onClick="add_extra_skill_div()"><strong>Add More..</strong></a>
+                                </div> 
+
+                                <div class="clr"></div>
+                                <div class="lable01">&nbsp;</div>  
+                                <div class="field01">
+                                    <input type="hidden" name="is_basic_submitted" id="is_basic_submitted" value="Y" />
+                                    <input name="" type="submit" value="Save"  class="btn" onclick="closeDiv('5')"  />
+                                    <input name="" type="button" value="Cancel"  class="btn" onclick="closeSkillDiv()"/>
+                                </div> 
+                                <div class="clr"></div>
+                            </div>
+
+                            <?php /* ?> //////////// NEW FIELD(S) [BEGIN] //////////// <?php */ ?>
+                            <input type="hidden" name="actual_skill_divs" id="actual_skill_divs" value="<?= count($arr_profile_info['skill_arr']) ?>" />
+                            <input type="hidden" name="deleted_skill_ids" id="deleted_skill_divs" value="" />
+                            <input type="hidden" name="skill_div_id_order"  id="skill_div_id_order" value="<?= (count($arr_profile_info['skill_arr']) == 0) ? '2' : count($arr_profile_info['skill_arr']); ?>" />
+                            <?php /* ?> //////////// NEW FIELD(S) [END] //////////// <?php */ ?>
+                        </form>
+                    </div>
+                </div>
+            </div>                        
+            <!-- /mid container -->
+            <!-- right container -->
+            <?php include(APPPATH . "views/layouts/rightbar.phtml"); ?>
+            <!-- /right container -->
+        </div>
+        <!-- /main container -->
+        <div class="clr"></div>
+        <!--</div> -->
+    </div>
+    <div class="clr"></div>
+</div>
+<!-- /CONTENT SECTION -->
+<div class="clr"></div>
+
+
+<?php include(APPPATH . "views/layouts/footer.phtml"); ?>
+<?php include(APPPATH . "views/logged/blocks/common_popup.phtml"); ?>
+
+<script>
+    function showChurchState(country)
+    {
+        //alert(country);
+        showBusyScreen();
+        $.ajax({
+            "type": "post",
+            "url": base_url + 'logged/country_state_city/getstate/' + country,
+            "success": function(response)
+            {
+                var optiontxt = '<option value="-1">---</option>' + response;
+                $('#txt_cstate').html(optiontxt);
+                hideBusyScreen();
+            }
+        });
+
+    }
+    function showChurchCity(state)
+    {
+        showBusyScreen();
+        $.ajax({
+            "type": "post",
+            "url": base_url + 'logged/country_state_city/getcity/' + state,
+            "success": function(response)
+            {
+                var optiontxt = '<option value="-1">---</option>' + response;
+                $('#txt_ccity').html(optiontxt);
+                hideBusyScreen();
+            }
+        });
+
+    }
+    function showEduState(country, i)
+    {
+        showBusyScreen();
+        //alert(i);
+        $.ajax({
+            "type": "post",
+            "url": base_url + 'logged/country_state_city/getstate/' + country,
+            "success": function(response)
+            {
+                var optiontxt = '<option value="-1">---</option>' + response;
+                $('#txt_sstate_' + i).html(optiontxt);
+                hideBusyScreen();
+            }
+        });
+
+    }
+    function showEduCity(state, i)
+    {
+        //alert(i);
+        showBusyScreen();
+        $.ajax({
+            "type": "post",
+            "url": base_url + 'logged/country_state_city/getcity/' + state,
+            "success": function(response)
+            {
+                var optiontxt = '<option value="-1">---</option>' + response;
+                $('#txt_scity_' + i).html(optiontxt);
+                hideBusyScreen();
+            }
+        });
+
+    }
+
+</script>
+

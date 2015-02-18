@@ -1,0 +1,125 @@
+<div class="clr"></div>
+<!-- CONTENT SECTION -->
+<!--navigation section start -->
+<?php include(APPPATH."views/layouts/admin/admin_nav.phtml");?>
+<!--navigation section end -->
+<div id="content_section">
+      <div id="container">
+            <!--<div id="top_corner">&nbsp;</div> -->
+            <div id="mid_content">
+                  <div class="page_heading left">
+                        <div class="left"><img src="../images/icons/login.png" alt="" /> Homepage CMS</div>
+                  </div>
+                  <div class="clr"></div>
+                  <div id="right_container">
+                        <div class="arrow_btm"></div>
+                        <div class="content_area frm_box frm_box2">
+                            <form id="frm_hp_cms"  method="post"  onsubmit="return post_frm_ajax();" enctype="multipart/form-data">
+                                  <h2>Know About Cogtime</h2>
+                                  <div class="lable02"><span class="red-mark">* </span>Content : </div>
+                                  <div class="field02">
+                                        <textarea name="txt_content1"  id="txt_content1" cols="" rows="" style="width:600px;" maxlength="1150"><?= get_unformatted_string_edit($hp_cms_content['s_content_1']);?></textarea>
+                                        
+                                   
+                                  <div class="clr"></div>
+                                  <span>(Max 400 characters.)</span>
+                                 
+                                  </div>
+                                  <div class="error-message" id="err_content1"></div>
+                                  <div class="clr"></div>
+                                  
+                                  <div class="lable02"><span class="red-mark">* </span>Video Url  :</div>
+                                  <div class="field02">
+                                        <input name="txt_video_url_2" id="txt_video_url_2" type="text" value="<?= ($hp_cms_content['s_video_url_2']);?>" />
+                                        <div class="clr"></div>
+                                    	<span>(YouTube, DailyMotion, Vimeo, Viadeo videos)</span> 
+                                  </div>
+                                  <div class="error-message" id="err_video_url_2"></div>
+                                  <div class="clr"></div>
+                                  
+                                  
+                                  
+                                  
+                                  <h2 style="margin-top: 15px;">What People Say</h2>
+                                  <div class="lable02"><span class="red-mark">* </span>Content : </div>
+                                  <div class="field02">
+                                        <textarea name="txt_content2" id="txt_content2" cols="" rows="" style="width:600px;" maxlength="400"><?= get_unformatted_string_edit($hp_cms_content['s_content_2']);?></textarea>
+                                        
+                                  <div class="clr"></div>
+                                  <span>(Max 400 characters.)</span>
+                                  </div>
+                                  <div class="error-message" id="err_content2"></div>
+                                  <div class="clr"></div>
+                                  
+                                  <div class="lable02"><span class="red-mark">* </span>Video Url :</div>
+                                  <div class="field02">
+                                        <input name="txt_video_url" id="txt_video_url" type="text" value="<?= ($hp_cms_content['s_video_url']);?>" />
+                                        <div class="clr"></div>
+                                    	<span>(YouTube, DailyMotion, Vimeo, Viadeo videos)</span> 
+                                  </div>
+                                  <div class="error-message" id="err_video_url"></div>
+                                  <div class="clr"></div>
+                                  
+                                  
+                                  
+                                  
+                                  
+                                  <div class="lable02"> </div>
+                                  <div class="field02">
+                                        <input name="" type="submit" class="btn"  value="Update"/>
+                                        <input name="" type="reset" class="btn"  value="Cancel" onclick="window.location='<?= admin_base_url() ?>'"/>
+                                  </div>
+                              </form>
+                              <div class="clr"></div>
+                        </div>
+                  </div>
+                  <div class="clr"></div>
+            </div>
+            <!--<div id="bot_corner">&nbsp;</div> -->
+      </div>
+      <div class="clr"></div>
+</div>
+<!-- /CONTENT SECTION -->
+<script type="text/javascript">
+$(document).ready(function () {
+
+ //counting the left characters in comment
+	
+	 function limitChars(textid, limit, infodiv)
+	 {
+	  var text = $('#'+textid).val(); 
+	  var textlength = text.length;
+	  if(textlength > limit)
+	  {
+	  $('#'+textid).val(text.substr(0,limit));
+	   return false;
+	  }
+	  else
+	  {
+	  // $('#' + infodiv).html((limit - textlength) +'<?php echo 'characters left.' ?>');
+	   return true;
+	  }
+	 }
+	
+	
+	
+	$(function(){
+		$('#txt_content1').keyup(function(){
+			limitChars('txt_content1', 400, 'charlimitinfo');
+		});
+    });
+	
+	$(function(){
+		$('#txt_content2').keyup(function(){
+			limitChars('txt_content2', 400, 'charlimitinfo');
+		});
+    });
+	
+
+	
+	//// just to show correct no. of chracters left while the page is loaded...
+	limitChars('txt_content1',400, 'charlimitinfo');
+	limitChars('txt_content2',400, 'charlimitinfo');
+ 
+});
+</script>

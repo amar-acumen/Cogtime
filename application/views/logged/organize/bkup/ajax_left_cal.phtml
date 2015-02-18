@@ -1,0 +1,23 @@
+<div class="date-calender">
+    <div class="date-calender-inside"  >
+    
+<?php 
+	$d_year = date('Y',mktime(0, 0, 0, $selected_month ,$selected_day-1, $selected_year));
+	$d_month = date('m',mktime(0, 0, 0, $selected_month ,$selected_day-1, $selected_year));
+	$d_day = date('d',mktime(0, 0, 0, $selected_month ,$selected_day-1, $selected_year));
+	
+?>
+     <a href="javascript:void(0);" class="prev" onclick="show_cal_contents(<?=$selected_year?>,<?=$selected_month?>  ,<?=$selected_day?>,'prev')"></a>
+     
+     
+        <ul class="dates jcarousel-skin-tango calendar_sec" >
+            <li month_value="<?=$selected_month?>" year_value="<?=$selected_year?>" day_value="<?=$selected_day?>">
+                <p class="month" ><?=getMonthName(date('m',mktime(0, 0, 0, $selected_month  ,$selected_day, $selected_month)))?></p> 
+                <p class="day" ><?=date('d',mktime(0, 0, 0, $selected_month  ,$selected_day, $selected_year))?></p> 
+                <p class="year" ><?=date('Y',mktime(0, 0, 0, $selected_month  ,$selected_day, $selected_year))?></p>
+            </li>
+            
+        </ul>
+      <a href="javascript:void(0);" class="next" onclick="show_cal_contents(<?=$selected_year?>,<?=$selected_month?>  ,<?=$selected_day?> , 'next')"></a> 
+    </div>
+</div>

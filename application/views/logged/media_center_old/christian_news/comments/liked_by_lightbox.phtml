@@ -1,0 +1,14 @@
+<DIV id="view_people_liked" class="scroll-container" style="height:auto; "><?=$people_liked_list?></DIV>
+
+
+
+<?php
+
+if($view_more)
+{
+    //echo "view_more".$view_more." current : ".$current_page;
+?>
+<div class="view_more" id="show_more_news_div"><a href="javascript:void(0);" id="show_more_news" page_value="<?=$current_page?>" onclick="show_more_likes($(this).attr('page_value'))">[view more] </a> </div>
+<?php
+}
+?>

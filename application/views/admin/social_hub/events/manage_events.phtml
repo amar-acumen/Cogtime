@@ -1,0 +1,133 @@
+<script type="text/javascript">
+  function changeStatus(id,i_status ,cur_status)
+	{
+		var URL = '<?php echo admin_base_url()?>' +'social_hub/events/change_status/';
+		showBusyScreen();
+		if(ajax_req!=null) {
+			ajax_req.abort();
+		}
+		ajax_req = $.ajax({
+			type: 'POST',
+			url:URL,
+			dataType: 'json',
+			data: ({ 'record_id' : id
+				   	 ,'i_status' : i_status
+					 ,'cur_status' : cur_status
+				 }),
+			success: function (data, status) {
+							var result_obj = data;
+							hideBusyScreen();
+							if(result_obj.result=='success' && result_obj.redirect == false ) {
+								showUIMsg(result_obj.msg);
+								$('#'+result_obj.u_id+'_status').html(result_obj.action_txt);
+							}
+							else if(result_obj.result==false && result_obj.redirect == true){
+							    showUIMsg(result_obj.msg);
+							}
+					},
+			error: function (data, status, e) {
+								hideBusyScreen();
+								showUIMsg(data.msg);
+			}
+		});
+	}
+</script>
+<div class="clr"></div>
+<!-- CONTENT SECTION -->
+<!--navigation section start -->
+<?php include(APPPATH."views/layouts/admin/admin_nav.phtml");?>
+<!--navigation section end -->
+<!-- CONTENT SECTION -->
+<div id="content_section">
+      <div id="container">
+            <!--<div id="top_corner">&nbsp;</div> -->
+            <div id="mid_content">
+                  <div class="page_heading left">
+                        <div class="left"><img src="../images/icons/login.png" alt="" /> Events</div>
+                        <div class="right">
+                        <input name="" type="button" value="Add New Event"  class="evnt_btn1" onclick="window.location='<?=admin_base_url().'social_hub/events/add_info.html'?>'"/>
+                        </div>
+                  </div>
+                  <div class="clr"></div>
+                  <div id="right_container">
+                        <div class="arrow_btm"></div>
+                        <div class="content_area">
+                        
+                        <div class="filter">
+                        	<span class="filter-by">Filter By &raquo;</span>
+                             <?php include(APPPATH.'views/admin/social_hub/events/events_search.phtml');?>  
+                            <div class="clr"></div>
+                       
+                        
+                         </div>
+                       <span style="color:#005CA8; margin-bottom:10px;" ><strong>NOTE:</strong> The events will be listed on the frontend in the order of the latest upcoming events shown first.</span> 
+            		  <DIV id="table_content" style="margin-top:5px;">
+						<?=$result_content?>
+                      </DIV>
+                              
+                        <div class="clr"></div>
+                        </div>
+                       
+                  </div>
+                  <div class="clr"></div>
+            </div>
+            <!--<div id="bot_corner">&nbsp;</div> -->
+      </div>
+      <div class="clr"></div>
+</div>
+<!-- /CONTENT SECTION -->
+
+
+
+
+<!--popup view article start-->
+<div class="lightbox event-popup" style="width:600px;">
+      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="../images/close.png" alt="" /></a></div>
+      <div class="top"><div>&nbsp;</div></div>
+      <div class="mid">
+            <div class="heading" style="margin-bottom:0px;">
+                  <div class="left">
+                        <h4>View Event</h4>
+                  </div>
+            </div>
+               <div class="shade_box_white">
+               		<div class="pop-content first">	
+                       <img src="../images/man.png" alt="posteb by" width="73" height="73" class="posted-by" />	
+                       <div class="right-panel">
+                            <h5>Lorem Ipsum</h5>
+                            <h6>Venue <strong>Florida</strong> on <span>dd-mm-yyyy</span> <span>hh:mm</span></h6>
+                            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis p</p>
+                       </div>
+                    </div>
+               <div class="clr"></div>
+            </div>
+            
+      </div>
+      <div class="bot"><div>&nbsp;</div></div>
+</div>
+<!--popup view article end-->
+
+
+
+<!--popup one start-->
+<div class="lightbox delete-page-popup" style="width:500px;">
+      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="../images/close.png" alt="" /></a></div>
+      <div class="top"><div>&nbsp;</div></div>
+      <div class="mid">
+            <div class="heading" style="margin-bottom:0px;">
+                  <div class="left">
+                        <h4>Delete Event</h4>
+                  </div>
+            </div>
+               <div class="shade_box_white" style="padding:8px 0px;">
+               <p class="center-text">Do you really want to delete this Event?</p>
+               		 <input type="hidden" name="i_del_id" id="i_del_id" value="" />
+               		<input name="" type="button" value="Yes" class="btn" style="margin-left:146px;" onClick="delete_()"/>
+                    <input name="" type="button" value="No" class="btn" onclick="hide_dialog()"/>
+               <div class="clr"></div>
+            </div>
+            
+      </div>
+      <div class="bot"><div>&nbsp;</div></div>
+</div>
+<!--popup one end-->

@@ -1,0 +1,68 @@
+
+                                <?php
+                                
+                                //pr($audio_result_arr,1);
+                                    if(count($audio_result_arr))
+                                    {
+                                        $counter = 0;
+                                        foreach($audio_result_arr as $audio) :
+                                            $counter++;
+                                            
+											$comments_array = $audio['comments_arr'];
+                                        
+                                            
+                                ?>
+                                
+                              
+                            
+                            	 <li>
+                                	
+                                    <a href="public-profile-audio/<?=$profile_id?>/album/<?=$audio['id']?>/audio-details.html" class="title-audio"><?=$audio['s_title']?></a>
+                                    <p class="upload-date">uploaded on : <?=getShortDate($audio['dt_created_on'],5)?></p>
+                                    <br class="clr"/>
+                                    <p><?=$audio['s_artist'].", "?><?php if($audio['s_genre_id']==0)
+									{
+										echo $audio['s_genre'];
+									}
+									else
+									{
+										echo get_genre_name_by_id($audio['s_genre_id']);
+									}
+									?><?php echo ", "?></p>
+                                    
+                                    <p><?=$audio['s_sound_track_album']?></p>
+                                    <p> <?=$audio['s_desc']?></p>
+                                    
+                                    <div class="audio-player">
+                                         <div id="myElement_<?=$audio['id']?>">Loading the player...</div>
+                                    </div>
+                                </li>
+        
+
+                              <!--thumb one end -->
+    							<script type="text/javascript">
+								<!--
+								$(function(){
+								<?php
+										$audio_filename = base_url()."uploads/user_audio_files/".$audio['s_audio_file_name'];
+								?>
+								   jwplayer("myElement_<?=$audio['id']?>").setup({
+										file: "<?=$audio_filename?>",
+										image: "<?=$audio_filename?>",
+										height: 30,
+										width: 440
+									});
+								});
+								
+								//-->
+								</script>
+                        
+                            <?php
+                                        endforeach;
+                                    }
+                                   
+                            ?>
+                            
+                            
+                   
+                       

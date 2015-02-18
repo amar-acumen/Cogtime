@@ -1,0 +1,196 @@
+<?php include(APPPATH."views/layouts/logged_header.phtml");?>
+            <!-- NAVIGATION SECTION -->
+      <?php include(APPPATH."views/layouts/nav.phtml");?>
+      <!-- /NAVIGATION SECTION -->
+      </div>
+</div>
+<!-- /HEADER SECTION -->
+<div class="clr"></div>
+
+<!-- CONTENT SECTION -->
+
+
+
+<?/*<div id="content_section">
+      <div id="container">
+            <!--<div id="mid_content"> -->
+                  <!-- latest news -->
+                 <?php include(APPPATH ."views/layouts/latest_news.phtml");?>
+                  <!-- /latest news -->
+                  <div class="clr"></div>
+                  <!-- main container -->
+                  <div id="main_container">
+                        <!-- left container -->
+                        <?php include(APPPATH."views/layouts/leftbar.phtml");?>
+                        <!-- /left container -->
+                        <!-- mid container -->
+                        <div id="mid_container">
+                             <div class="page_heading_01">
+                                <div class="left"><img src="images/icons/icon1.png" alt="" /> All Blogs</div>
+                                
+                            </div>
+                            <div class="arrow_btm"></div>
+                            <div id="bloglist">
+                            
+                              </div>
+                           <input type="hidden" id="current_page" name="current_page" value="<?=$current_page?>"  />
+                            <?php if($no_of_result  == 0):?>
+                            <div class="shade_box_01" style="padding-top:5px;"><div  class="shade_norecords" style="width:260px;"><p class="blue_bold12">No Blog Post.</p></div></div>
+                            <?php endif;?>    
+                            <?php if($no_of_result > $this->pagination_per_page): ?>
+                            <div class="view_more" id="show_more_feeds_div"><a href="javascript:void(0);" id="show_more_feeds_link" page_value="<?=$current_page_1?>" onclick="show_more_feeds($(this).attr('page_value'))">[view more] </a> </div>
+                            <?php endif; ?>
+                        </div>                   
+                        <!-- /mid container -->
+                        <!-- right container -->
+                        <?php include(APPPATH."views/layouts/rightbar.phtml");?>
+                        <!-- /right container -->
+                  </div>
+                  <!-- /main container -->
+                  <div class="clr"></div>
+            <!--</div> -->
+      </div>
+      
+      
+      
+      
+      
+      
+      
+      <div class="clr"></div>
+</div>
+*/?>
+
+
+
+
+
+
+
+
+<div id="content_section">
+      <div id="container">
+            <div id="top_corner">&nbsp;</div>
+            <div id="mid_content">
+                  <!-- latest news -->
+                  <?php include(APPPATH ."views/layouts/latest_news.phtml");?>
+                  <!-- /latest news -->
+                  <div class="clr"></div>
+                  <!-- main container -->
+                  <div id="main_container">
+                   <!-- left container -->
+                        <?php include(APPPATH."views/layouts/leftbar.phtml");?>
+                        <!-- /left container -->
+
+                        <div id="mid_container">
+                        
+                        
+                         <div class="link-div" style="margin-top: 0;">
+                                  <ul>
+                                       <li><a href="blogs.html"><span>All Blogs</span></a> </li>
+                                    <li><a href="my-blog.html"><span>My Blog</span></a> </li>
+                                    <li><a href="search-blogs.html"><span>Search All Blogs</span></a> </li>
+                                    <li><a class="current" href="javascript:void(0)"><span>Most Popular</span></a> </li>
+                                   
+                                  </ul>
+                                <div class="clr"></div>
+                              </div>
+                        
+                        
+                        
+                              
+                             <?/*v class="arrow_btm"></div>
+                              */?>
+                              
+                              
+                              <?/*<div class="page_heading_full" style="margin-top: 10px;">
+                              */?>
+                              <div style="margin: 10px 0;">
+                                      <img alt="" src="images/icons/note.png" style="vertical-align:middle;"> 
+                                      <span style="font-size:19px; color:#004084"> Popular Blogs </span>
+                                </div>
+                                
+                                
+                                
+                        <div class="blog-container" style="padding: 0;">        
+                        
+                              <div class="my-article">
+                                
+
+                          
+       
+                              <?php
+                             if(count($popular_blogs))
+                              {
+                                    //pr($popular_blogs);  
+                                    $counter = 0;
+                                    foreach($popular_blogs as $blogs) :
+                                    $counter++;
+                                    $profile_link = get_profile_url($blogs['i_user_id'],$val['user_name']);
+                               ?>
+                               <div class="blog" style="margin-top: 20px;">
+
+
+                                          <h2 class="nw-blg-heading"><a href="<?php echo 'blog/'.$blogs['id'].'/detail.html'?>"><?php echo my_substr($blogs['s_title'],140)?></a></h2>
+                                          <p class="time-posted">created <?=get_time_elapsed_blog($blogs['dt_created_on'])?> by <a href="<?= $profile_link?>" ><?php echo $blogs['user_name']?></a></p>
+                                          
+                                          <p style="height: 80px;overflow: hidden;"><?php echo my_substr(nl2br($blogs['s_description']),350) ?></p>
+                                          
+                                          
+                                          <ul class="article-comment-block article-comment-block2">
+                                                <li class="first">Total articles : <?=$blogs['total_articles']?> </li> 
+                                                <li> <span>Total comments : <?=$blogs['total_comments']?></span></li>
+                                                <li> <span>Total views : <?php echo $blogs['i_view_count']?></span></li>
+                                          </ul>
+<?php /*?>                                        <p style="font-size: 12px; color: #004084;">Total comments : <?=$blogs['total_comments']?></p>
+                                          <p style="font-size: 12px; color: #004084;">Created on : <?=getShortDate($blogs['dt_created_on'],5)?></p>
+                                        <?php */?>
+                                   
+                               </div>
+                               <?php  
+                                endforeach;
+                              }
+                              else
+                              {
+                              ?>
+                              <div class="section01" style="padding-top:5px;">
+                                    <div class="shade_norecords" style="width:260px;">
+                                    <p class="blue_bold12">No Blog.</p>
+                                    </div>
+                              </div>
+                              
+                              <?php
+                              }
+                              ?>
+                        
+                        
+                                    <div class="clr"></div>
+                              </div>
+                        
+                        </div>
+
+                              
+                              
+                        </div>
+                        <!-- /left container -->
+                        <!-- right container -->
+                        <?php include(APPPATH."views/layouts/rightbar.phtml");?>
+                        <!-- /right container -->
+                  </div>
+                  <!-- /main container -->
+                  <div class="clr"></div>
+            </div>
+            <div id="bot_corner">&nbsp;</div>
+      </div>
+      <div class="clr"></div>
+</div>
+<!-- /CONTENT SECTION -->
+<div class="clr"></div>
+
+
+<?php include(APPPATH."views/layouts/footer.phtml");?>
+
+<?php include(APPPATH."views/logged/blocks/common_popup.phtml");?>
+
+
+

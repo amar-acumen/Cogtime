@@ -1,0 +1,51 @@
+<?php //pr($arr_albums)?>
+
+<div class="section01" id="albums_section" style="margin-bottom:2px;">
+ <?php 
+ 
+        if(count($arr_albums)):
+			foreach($arr_albums as $album_val):
+				$IMG = base_url()."uploads/user_audio_album_photos/".getThumbName($album_val['s_image_name'],'thumb');
+				$ALBUM_URL = get_audio_album_detail_url($album_val['id'], $album_val['s_name']);
+   ?> 
+            <div class="audio_div">
+                <div class="photo-div">
+                    <a href="<?=$ALBUM_URL?>"><div style="background:url(<?=$IMG?>) no-repeat center;width:122px; height:82px; cursor:pointer; "  title="Album" ></div></a>
+                </div>
+                <p class="album-title-listing" style="font-size: 14px;"><a href="<?=$ALBUM_URL?>" ><?=my_substr($album_val['s_name'],40)?></a></p>
+                <span id="album_photo_count_<?=$album_val['id']?>"><?=$album_val['total_audio']?></span> Audios
+            </div>
+  <?php
+			endforeach;
+	    else:
+			echo '<div class="audio_div"><div class="shade_norecords" style=" margin-left: 170px;width:260px;"><p class="blue_bold12">No Audio Albums.</p></div></div>';
+		endif;
+  ?> 
+</div>
+ <div class="clr"></div>
+<input type="hidden" id="current_page" name="current_page" value="<?=$current_page?>"  />
+
+<?php 
+if($total_no_of_albums>3):
+?>
+<div class="pagination" style="background-color: #ECECEC; height: 20px; margin-top: -2px;">
+     <div class="right">
+        <ul class="small-paging"><a href="all-audio-albums.html">View all</a>
+        </ul>
+     </div>
+</div>
+
+
+<?php endif;
+
+/*if($page_links){ ?>
+<div class="pagination">
+<div class="left">Viewing Page <?=$current_loaded_page_no?> of <?=$total_pages?> </div>
+<div class="right">
+       <ul class="small-paging">
+        <?=$page_links?> 
+        </ul>
+</div>
+</div>
+<?php } 
+*/?>

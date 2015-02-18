@@ -1,0 +1,239 @@
+<?php include(APPPATH . "views/layouts/logged_header.phtml"); ?>
+<!-- NAVIGATION SECTION -->
+<?php include(APPPATH . "views/layouts/nav.phtml"); ?>
+<!-- /NAVIGATION SECTION -->
+</div>
+</div>
+<!-- /HEADER SECTION -->
+<div class="clr"></div>
+<div id="content_section">
+    <div id="container">
+        <div id="top_corner">&nbsp;</div>
+        <div id="mid_content">
+            <!-- latest news -->
+            <?php include(APPPATH . "views/layouts/latest_news.phtml"); ?>
+            <!-- /latest news -->
+            <div class="clr"></div>
+            <!-- main container -->
+            <div id="main_container">
+                <!-- left container -->
+                <?php include(APPPATH . "views/layouts/leftbar.phtml"); ?>
+                <!-- /left container -->
+                <div id="mid_container">
+                    <?php /*?><div class="link-div ps">
+                        <ul>
+                            <li>
+                                <a href="javascript:void(0);">
+                                    <span class="nw-etrade">Browse</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);">
+                                    <span class="nw-etrade">My chat rooms</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="create-chat-room.html">
+                                    <span class="nw-etrade">Create chat room</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div><?php */?>
+                    
+                    
+                     <div class="page_heading etrade-nw-heading">
+                        <div class="left"><img alt="" src="images/icons/coment.png" />Browse Chat Room </div>
+                        <div class="right">
+                            <ul class="my-mail">
+                                <?php 
+                                 $logged_user_id = intval(decrypt($this->session->userdata('user_id')));
+                                 $frnd_number = get_friend_number_by_id($logged_user_id);
+                                 if($frnd_number <= 0){
+                                 
+                                ?>
+                                <li><input type="button" value="Create Your Own Private Room" onclick="show_dialog('frnd-pop')" class="compose_btn compose-msg-link"/></li>
+                                 <?php } else if($frnd_number > 0){ ?>
+                                <li><input type="button" value="Create Your Own Private Room" onclick="window.location='create-chat-room.html'" class="compose_btn compose-msg-link"/></li>
+                                 <?php } ?>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <?php include(APPPATH . "views/logged/chat/chat_menu.phtml"); ?>
+                    
+
+                   <?php /*?> <p style="padding-left:8px;" class="blue_bold12">
+                        <?php if ($parent_category_name != '') { ?>
+                            <a href="javascript:void();"><?= $parent_category_name ?></a>
+                            <?php
+                        } else if ($category_name != '') {
+                            ?>
+                            <a href="javascript:void();"><?= $category_name ?></a>
+                        <?php } ?>
+                    </p>
+                    <div class="arrow_btm"></div>
+                    <div class="inbox_div frm_box">
+                        <form id="frm_search" onsubmit="return false;" method="post" >
+                            <div style="width:120px; float:left; text-align:left;" class="lable02"> Select Category :  </div>      
+                            <div class="">
+                                <select style="width: 215px;"  name="cat" onchange="generateSubcat($(this).val())">
+                                    <option value="-1">Select Category</option>
+                                    <?= makeOptionChatTopCategory() ?>
+                                </select>
+                                 <input id="search_basic" type="hidden" name="search_basic" value="Y" />
+                                <input class="yellow-btn" style="float:right;" type="submit" value="Search" name="" />
+                            </div>
+                            <div class="clr"></div>
+
+                            <div id="sub_cat" style="display:none; ">
+                            </div>
+                            <div>
+                               
+                            </div>
+                            <div class="clr"></div>
+                        </form>
+                    </div>
+<?php */?>
+
+                    <div style=" margin-top:0px;" class="div_content">
+                        <div class="arrow_btm"></div>
+
+
+                        <DIV id="content_div"><?= $room_ajax_content ?></DIV>   
+
+                        <?php if ($no_of_result == 0): ?>
+
+                            <div class="shade_box_01" style="padding-top:5px;"><div  class="shade_norecords" style="width:260px;"><p class="blue_bold12">No Chat Room.</p></div></div>
+
+                        <?php endif; ?>
+
+
+                        <?php if ($no_of_result > $pagination_per_page): ?>
+
+                            <div class="view_more" id="show_more_feeds_div"><a href="javascript:void(0);" id="show_more_feeds_link" page_value="<?= $current_page_1 ?>" onclick="show_more_feeds($(this).attr('page_value'))">[view more] </a> </div>
+                        <?php endif; ?>
+
+
+                    </div>
+                </div>
+                <!-- /left container -->
+                <!-- right container -->
+                <?php include(APPPATH . "views/layouts/rightbar.phtml"); ?>
+                <!-- /right container -->
+            </div>
+            <!-- /main container -->
+            <div class="clr"></div>
+        </div>
+        <div id="bot_corner">&nbsp;</div>
+    </div>
+    <div class="clr"></div>
+</div>
+
+<!-- /CONTENT SECTION -->
+<div class="clr"></div>
+
+
+
+<?php include(APPPATH . "views/layouts/footer.phtml"); ?>
+<?php include(APPPATH . "views/logged/blocks/common_popup.phtml"); ?>
+
+
+<!-- /FOOTER SECTION -->
+
+<script type="text/javascript">
+
+    var ajax_req_feeds = null;
+    function show_more_feeds(page) {
+        if (ajax_req_feeds != null) {
+            ajax_req_feeds.abort();
+        }
+        showUILoader_nodialog();
+        ajax_req_feeds = $.ajax({
+            type: 'get',
+            url: base_url + 'logged/browse_chat_room/all_chat_rooms_ajax_pagination' + '/' + page,
+            dataType: 'json',
+            success: function(data, status) {
+                $('#chat_pg_heading').hide();
+                hideUILoader_nodialog();
+                if (data.html != '') {
+                    $('#content_div').append(data.html);
+                    $('#show_more_feeds_link').attr('page_value', data.current_page);
+                }
+                else {
+                    $('#content_div').append('<div class="view_more" style="text-align: center;"><p class="blue_bold12" style="font-size:14px;">No More Chat Room.</p></div>');
+                    $('#show_more_feeds_div').hide();
+                }
+
+                if (data.view_more == false)
+                {
+
+                    $('#content_div').append('<div class="view_more" style="text-align: center;"><p class="blue_bold12" style="font-size:14px;">No More Chat Room.</p></div>');
+                    $('#show_more_feeds_div').hide();
+                }
+
+
+            }	// end of success function...
+        });
+    }
+
+    function generateSubcat(id) {
+        showUILoader_nodialog();
+        $.ajax({
+            type: 'get',
+            url: '<?= base_url() ?>logged/browse_chat_room/generateSubCat' + '/' + id,
+            dataType: 'json',
+            success: function(data, status) {
+                hideUILoader_nodialog();
+                $('#sub_cat').html(data.html);
+                $('#sub_cat').attr('style', 'display:block;');
+            }	// end of success function...
+        });
+    }
+    $(document).ready(function(arg) {
+        $('#frm_search').submit(function() {
+
+            var datatosend = $("#frm_search").serialize();
+            showBusyScreen();
+            //alert(datatosend);
+            $.ajax({
+                type: "POST",
+                url: base_url + 'logged/browse_chat_room/all_chat_rooms_ajax_pagination/',
+                data: datatosend,
+                dataType: 'json',
+                success: function(data) {
+                    hideBusyScreen();
+                    if (data.html != '') {
+                        $('#content_div').html(data.html);
+                        $('#show_more_feeds_link').attr('page_value', data.current_page);
+                    }
+					else if(data.html == ''){
+						$('#listingContent').html('');
+						$('.view_more').remove();
+						 $('#content_div').append('<div class="view_more" style="text-align: center;"><p class="blue_bold12" style="font-size:14px;">No More Chat Room.</p></div>');
+                        $('#show_more_feeds_div').hide();
+					}
+                    else {
+                        $('#content_div').append('<div class="view_more" style="text-align: center;"><p class="blue_bold12" style="font-size:14px;">No More Chat Room.</p></div>');
+                        $('#show_more_feeds_div').hide();
+                    }
+
+                    if (data.view_more == false)
+                    {
+
+                        $('#content_div').append('<div class="view_more" style="text-align: center;"><p class="blue_bold12" style="font-size:14px;">No More Chat Room.</p></div>');
+                        $('#show_more_feeds_div').hide();
+                    }
+                }
+            });
+        });
+
+    });
+</script>
+
+
+
+
+
+
+<!--------------------light box------------------------------------------>
+

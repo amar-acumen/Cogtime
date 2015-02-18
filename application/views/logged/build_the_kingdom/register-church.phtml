@@ -1,0 +1,129 @@
+<?php include(APPPATH."views/layouts/logged_header.phtml");?>
+<!-- NAVIGATION SECTION -->
+<?php include(APPPATH."views/layouts/nav.phtml");?>
+<!-- /NAVIGATION SECTION -->
+</div>
+</div>
+<!-- /HEADER SECTION -->
+<div class="clr"></div>
+<!-- CONTENT SECTION -->
+<div id="content_section">
+      <div id="container">
+            <div id="mid_content">
+                  <!-- latest news -->
+                  <?php include(APPPATH ."views/layouts/latest_news.phtml");?>
+                  <!-- /latest news -->
+                  <div class="clr"></div>
+                  <!-- main container -->
+                  <div id="main_container">
+				  
+				        <!-- left container -->
+                        <?php include(APPPATH."views/layouts/leftbar.phtml");?>
+                        <!-- /left container -->
+						
+						<!-- mid container -->
+                        <div id="mid_container">
+							<div class="page_heading">
+                                    <div class="left"><img alt="" src="images/icons/church.png" />Register your Church</div>
+                                    <div class="right"></div>
+                              </div>
+							  
+							 <div class="arrow_btm"></div>
+							 <div class="find-church-mid">
+								<div class="register-your-church-form">
+								<form id="register_church" method="post" action="<?=base_url().'logged/build_the_kingdom/add_church'?>" onsubmit="return false;">
+                           <div class="lable-form-nw"> Country:</div>
+                           <select name="sel_country" id="sel_country" style="width:285px; margin-bottom:6px; height: 31px;" onchange="showState(this.value);">
+                                       <option value="-1">---</option>
+                                       <?=makeOptionCountryNew('',encrypt($posted['i_country_id']));?>
+                                       
+                                    </select>
+                                    <span class="church-form-error-message" id="err_country"></span>
+                           <div class="clr"></div>
+                                    
+                           <div class="lable-form-nw"> State:</div>
+                           <select name="txt_state" id="txt_state" style="width:285px; margin-bottom:6px; height: 31px;" onchange="showCity(this.value);">
+                                       <option value="-1">---</option>
+                                       <?=$state;?>
+                                     
+                                     </select>
+                                    <span class="church-form-error-message" id="err_state"></span>
+                           <div class="clr"></div>
+                                    
+                           <div class="lable-form-nw"> City:</div>
+                            <select name="txt_city" id="txt_city" style="width:285px; margin-bottom:6px;  height: 31px;">
+                                       <option value="-1">---</option>
+                                       <?=$city;?>
+                                     </select>
+                                    <span class="church-form-error-message" id="err_city"></span>
+                           <div class="clr"></div>     
+									
+
+                           <div class="lable-form-nw"> Church Name:</div>
+									<input type="text"  name="txt_name" id="txt_name">
+									<span class="church-form-error-message" id="err_name"></span>
+									<div class="clr"></div>
+                                                                        
+                                           <div class="lable-form-nw"> Church Email:</div>
+									<input type="text"  name="txt_email" id="txt_name">
+									<span class="church-form-error-message" id="err_email"></span>
+									<div class="clr"></div>                             
+                                    
+                           <div class="lable-form-nw">Street Address:</div>
+									<input type="text"  name="txt_address" id="txt_address">
+                                    <span class="church-form-error-message" id="err_address"></span>
+									<div class="clr"></div>
+                                    
+									
+                                    
+                                   
+                           <div class="lable-form-nw"> Postcode:</div>
+									<input type="text"  name="txt_postcode" id="txt_postcode">
+                                    <span class="church-form-error-message" id="err_postcode"></span>
+									<div class="clr"></div>
+                                    
+                                     <div class="lable-form-nw"> Phone No.:</div>
+									<input type="text" name="txt_phone">
+                                    <span class="church-form-error-message" id="err_phone"></span>
+									<div class="clr"></div>
+                                    
+									
+									<div class="lable-form-nw"> 
+										<input type="submit" class="yellow-btn register-your-float-right" value="Register" name="">
+									</div>
+									<div class="clr"></div>
+									</form>
+								  </div>
+							 </div>
+							 
+						</div>
+						<!-- mid container -->
+						<!-- right container -->
+                         <?php include(APPPATH."views/layouts/rightbar.phtml");?>
+                        <!-- /right container -->
+						
+						 <div class="clr"></div>
+  
+                       <!-- <div class="pagination">
+                              <div class="left">Viewing Page 1 of 10 </div>
+                              <div class="right"><a  href="javascript:void(0);" class="blue_link">&laquo; Previous</a> <a href="javascript:void(0);">1</a> <a href="javascript:void(0);">2</a> <a href="javascript:void(0);">3</a> <a href="javascript:void(0);">4</a> <a href="javascript:void(0);">5</a> <a  href="javascript:void(0);" class="blue_link">Next &raquo;</a></div>
+                        </div>-->
+                        </div>
+                  </div>
+                  <!-- /main container -->
+                  <div class="clr"></div>
+            </div>
+            <div id="bot_corner">&nbsp;</div>
+      </div>
+      <div class="clr"></div>
+</div>
+<!-- /CONTENT SECTION -->
+<div class="clr"></div>
+
+<!-- FOOTER SECTION -->
+ <?php include(APPPATH."views/layouts/footer.phtml");?>
+ <?php include(APPPATH."views/logged/blocks/common_popup.phtml");?>
+<!-- /FOOTER SECTION -->
+
+
+

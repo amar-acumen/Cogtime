@@ -1,0 +1,20 @@
+<?php 
+
+   $page_location = $this->uri->segment(1);
+ $page_location1 = $this->uri->segment(2);
+?>
+<li><a <?php if($page_location1 == 'church-wall'){  ?> class="community-ico active" <?php } ?> href="<?= base_url().''.$_SESSION['logged_church_id'].'/church-wall' ?>" class="community-ico">Community</a></li>
+<li><a <?php if($page_location1 == 'church_wall_about'){  ?> class="about-ico active" <?php } ?> href="<?php echo base_url().$_SESSION['logged_church_id'];?>/church_wall_about/" class="about-ico">About</a></li>
+<li><a  <?php if($page_location1 == 'church_members'){  ?> class="member-ico active" <?php } ?> href="<?php echo base_url().$_SESSION['logged_church_id'];?>/church_members/" class="member-ico">Members</a></li>
+<li><a <?php if($page_location1 == 'church-prayer-group' || $page_location1 == 'create-prayer-group' || $page_location == 'church-prayer-group' || $page_location == 'church-prayer-group-member' || $page_location == 'church-prayer-group-invite' ){  ?> class="prayer-ico active" <?php } ?> href="<?php echo base_url().$_SESSION['logged_church_id'];?>/church-prayer-group" class="prayer-ico">Prayer Groups</a></li>
+<?php if(!($_SESSION['charch_super_admin']=='yes' || $_SESSION['subadmin_role']==2) || $_SESSION['subadmin_role']==2) { ?>
+<li><a <?php if($page_location == 'church-ring-list' || $page_location == 'member_ring' || $page_location == 'church-ring-list' || $page_location == 'create-church-ring' || $page_location == 'search_ring' || $page_location == 'ring_request' || $page_location == 'church_rings' || $page_location == 'create_ring_category'){  ?> class="ring-ico active" <?php } ?> href="<?php echo base_url().'member_ring/'.$_SESSION['logged_church_id']?>" class="ring-ico">Rings</a></li>
+<?php
+}
+else
+{
+?>
+<li><a <?php if($page_location == 'member_ring' || $page_location == 'member_ring' || $page_location == 'church-ring-list' || $page_location == 'create-church-ring' || $page_location == 'search_ring' || $page_location == 'ring_request' || $page_location == 'church_rings' || $page_location == 'create_ring_category'){  ?> class="ring-ico active" <?php } ?> href="<?php echo base_url().'church-ring-list';?>" class="ring-ico">Rings</a></li>
+<?php
+}
+?>

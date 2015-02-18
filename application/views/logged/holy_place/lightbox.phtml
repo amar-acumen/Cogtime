@@ -1,0 +1,256 @@
+<div style="width: 348px;" class="lightbox comment_div">
+    <div class="close"><a onclick="closeDialog('note');" href="javascript:void(0)"><img alt="" src="images/close.png"></a></div>
+    <div class="top"><div>&nbsp;</div></div>
+    <div class="mid">
+	<div class="floating-popup add-note">
+      <div class="title">Add Note</div>
+                <form method="post" action="" name="" id="frmnote" class="quick-edit-form">
+                		<input type="hidden" name="verIdForNote" id="verIdForNote" />
+                        <label>Select category:</label>
+                         
+                            <select name="category" id="category_N">
+                            <option value="">Select category</option>
+                            <?php echo $category_html?>
+                            </select>
+                            
+                            <span style="margin-left: 118px; width: 174px;" id="err_cat" class="error-message"></span>
+                        <br class="clr">
+                       
+                        <label class="small">or</label>
+                        <br class="clr">
+                        <label>Add new category:</label>
+                            <input type="text" value="" name="add_cat_n" id="add_cat_n" />
+                        <br class="clr">
+                        <label>Note:</label>
+                            <textarea name="note" id="notetxt" cols="" rows=""></textarea>
+                            <span style="margin-left: 118px; width: 174px;" id="err_note" class="error-message"></span>
+                        <br class="clr">
+                     	<input class="blue-small-button" type="button" onclick="addNote();" value="Add" name="">
+						 <br class="clr">     
+                </form>
+                <br class="clr">     
+                </div>
+             </div>   
+          <div class="bot"><div>&nbsp;</div></div>  
+</div>
+
+<div class="lightbox bookmark_div" style="width:348px;">
+     <div class="close"><a onclick="closeDialog('bkmark');" href="javascript:void(0)"><img alt="" src="images/close.png"></a></div>
+    <div class="top"><div>&nbsp;</div></div>
+    <div class="mid">
+	<div class="floating-popup add-note">
+      <div class="title">Add Bookmark</div>
+                <form method="post" action="" name="" id="frmbkmark" class="quick-edit-form">
+                        	<label>Select category:</label>
+                                <select name="bk_mark_category" id="bk_mark_category_b">
+                                <option value="">Select category</option>
+                                <?php echo $category_html?>
+                                </select>
+                                <span style="margin-left: 118px; width: 174px;" id="err_cat_bk_mark" class="error-message"></span>
+                            	<br class="clr">
+                       
+                                <label class="small">or</label>
+                                <br class="clr">
+                                <label>Add new category:</label>
+                                <input type="text" value="" name="add_cat_b" id="add_cat_b" />
+                            	<br class="clr">
+                            	<input class="blue-small-button" type="button" id="bkmarkAdd" style="margin-top:15px;" value="Add" name="">
+                            	<br class="clr">
+                </form>
+                <br class="clr">
+            </div>
+             </div>   
+          <div class="bot"><div>&nbsp;</div></div>  
+</div>
+
+<div class="lightbox hilits_div" style="width:348px;">
+      <div class="close"><a onclick="closeDialog('hilits');" href="javascript:void(0)"><img alt="" src="images/close.png"></a></div>
+        <div class="top"><div>&nbsp;</div></div>
+        <div class="mid">
+        <div class="floating-popup add-note">
+          <div class="title">Add Highlights</div>
+                <form method="post" action="" name="" id="frmhilits" class="quick-edit-form">
+                        <label>Select category:</label>
+                            <select name="bk_mark_category" id="bk_mark_category_h">
+                            <option value="">Select category</option>
+                            <?php echo $category_html?>
+                            </select>
+                            
+                            <span style="margin-left: 118px; width: 174px;" id="err_cat_hilits" class="error-message"></span>
+                            <br class="clr">
+                                <label class="small">or</label>
+                                <br class="clr">
+                                <label>Add new category:</label>
+                                <input type="text" value="" name="add_cat_h" id="add_cat_h" />
+                             	<br class="clr">
+                            	<label>Select Color:</label>
+								 <?php echo get_highlights_color('');?>
+                            	<br class="clr">
+                            	<input type="hidden" id="colorhidden" value="" name="colorhidden" />
+                      			<input type="hidden" id="txt_select" value="" name="txt_select" />
+                            	<input class="blue-small-button" type="button" id="hilitsAdd" style="margin-top:15px;" value="Add" name="">
+								<br class="clr">                
+                     </form>
+                     <br class="clr">
+           </div>
+             </div>   
+          <div class="bot"><div>&nbsp;</div></div>  
+</div>
+
+<div style="width: 348px;" class="lightbox delete_hilits">
+    <div class="close"><a onclick="closeDialog('note');" href="javascript:void(0)"><img alt="" src="images/close.png"></a></div>
+    <div class="top"><div>&nbsp;</div></div>
+    <div class="mid">
+	<div class="floating-popup add-note">
+      <div class="title">Delete Bible Highlights</div>  
+            <form method="post" action="" name="" id="deleteHilitsFrm"  class="quick-edit-form" style="text-align:center;">
+            	<input type="hidden" name="deleteHilitsId" id="deleteHilitsId" />
+            <br class="clr">
+             Do you want to delete this highlights?
+             <br class="clr">
+                    <input class="submit-green" type="button" style="margin-top:15px;" value="Yes" name="deleteNoteBtn1" onclick="delete_hilits();">
+                    <input class="submit-green" type="button" style="margin-top:15px;" value="No" onclick="hide_dialog()">
+              <br class="clr">
+              </form>
+              <br class="clr">
+           </div>
+             </div>   
+          <div class="bot"><div>&nbsp;</div></div>  
+</div>
+           
+<div style="width: 348px;" class="lightbox delete_bkmark">
+    <div class="close"><a onclick="closeDialog('note');" href="javascript:void(0)"><img alt="" src="images/close.png"></a></div>
+    <div class="top"><div>&nbsp;</div></div>
+    <div class="mid">
+	<div class="floating-popup add-note">
+      <div class="title">Delete Bible Book Mark</div>  
+            <form method="post" action="" name="" id="deleteBkmarkFrm" class="quick-edit-form" style="text-align:center;">
+            	<input type="hidden" name="deleteBkmarkId" id="deleteBkmarkId" />
+             <br class="clr">
+             Do you want to delete this book mark?
+              <br class="clr">
+                    <input class="submit-green" type="button" style="margin-top:15px;" value="Yes" name="deleteNoteBtn2" onclick="delete_bkmark();">
+                    <input class="submit-green" type="button" style="margin-top:15px;" value="No" onclick="hide_dialog()">
+               <br class="clr">
+              </form>
+               <br class="clr">
+           </div>
+             </div>   
+          <div class="bot"><div>&nbsp;</div></div>  
+</div>
+           
+<div style="width: 348px;" class="lightbox delete_note">
+    <div class="close"><a onclick="closeDialog('note');" href="javascript:void(0)"><img alt="" src="images/close.png"></a></div>
+    <div class="top"><div>&nbsp;</div></div>
+    <div class="mid">
+	<div class="floating-popup add-note">
+      <div class="title">Delete Bible Note</div>  
+      
+            <form method="post" action="" name="" id="deletefrmnote" class="quick-edit-form" style="text-align:center;">
+            	<input type="hidden" name="deletenoteid" id="deletenoteid" />
+            
+             Do you want to delete this note?
+             <br class="clr">
+                    <input class="submit-green" type="button" style="margin-top:15px;" value="Yes" name="deleteNoteBtn" onclick="delete_note();">
+                    <input class="submit-green" type="button" style="margin-top:15px;" value="No" onclick="hide_dialog()">
+              <br class="clr">
+              </form>
+              <br class="clr">
+           </div>
+             </div>   
+          <div class="bot"><div>&nbsp;</div></div>  
+</div>
+           
+<div style="width: 348px;" class="lightbox edit_note">
+    <div class="close"><a onclick="closeDialog('note');" href="javascript:void(0)"><img alt="" src="images/close.png"></a></div>
+    <div class="top"><div>&nbsp;</div></div>
+    <div class="mid">
+	<div class="floating-popup add-note">
+      <div class="title">Edit Bible Note</div>          
+             <form method="post" action="" name="" id="frmnoteedit" class="quick-edit-form">
+                		<input type="hidden" name="noteid" id="noteid" />
+                        	<label>Select category:</label>
+                            <select name="category" id="category">
+                            <option value="">Select category</option>
+                            <?php echo $category_html?>
+                            </select>
+                            <span id="err_cat" class="error-message"></span>
+                            <br class="clr">
+                           
+                            <label>Note:</label>
+                            <textarea id="note" name="note" cols="" rows=""></textarea>
+                            <span id="err_note" class="error-message"></span>
+                      		 <br class="clr">
+                            <input class="submit-green" type="button" value="Update" name="editNoteBtn" id="editNoteBtn" style="margin-left: 118px;" onclick="editNote();">
+                            <br class="clr">     
+                           </form>
+                           <br class="clr">     
+            </div>
+             </div>   
+          <div class="bot"><div>&nbsp;</div></div>  
+</div>
+                                
+<div class="lightbox delete_plan" style="width:291px;">
+    <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="images/close.png" alt="" /></a></div>
+    <div class="top"><div>&nbsp;</div></div>
+    <div class="mid">
+        <div class="heading"><div class="left"><h4><img src="images/icons/icn27.png" alt="" /> Delete reading plan</h4></div></div>
+           <div class="frm_box">
+            <form method="post" action="" name="" id="deleteHilitsFrm">
+            	<input type="hidden" name="deleteHilitsId" id="deleteHilitsId" />
+            </form>
+             Do you want to delete the existing reading plan?
+             <p style="text-align:center;">
+                    <input class="submit-green" type="button" style="margin-top:15px;" value="Yes" name="deleteBtn" onclick="deletePlan();">
+                    <input class="submit-green" type="button" style="margin-top:15px;" value="No" onclick="hide_dialog()">
+              </p>
+           </div>
+    </div>
+    <div class="bot"><div>&nbsp;</div></div>
+</div>
+           
+<div style="width: 348px;" class="lightbox delete_category">
+    <div class="close"><a onclick="closeDialog('note');" href="javascript:void(0)"><img alt="" src="images/close.png"></a></div>
+    <div class="top"><div>&nbsp;</div></div>
+    <div class="mid">
+	<div class="floating-popup add-note">
+      <div class="title">Delete Category</div>          
+           
+            <form method="post" action="" name="" id="deleteCatFrm" class="quick-edit-form" style="text-align:center;">
+            	<input type="hidden" name="deleteCatId" id="deleteCatId" />
+            
+            <br class="clr">
+            If you delete this category then all notes, bookmarks & hightlights associated with this category will be deleted as well. Are you sure you want to delete this category anyway?
+            <br class="clr">
+                    <input class="submit-green" type="button" style="margin-top:15px;" value="Yes" name="deleteCatBtn" onclick="delete_category();">
+                    <input class="submit-green" type="button" style="margin-top:15px;" value="No" onclick="hide_dialog()">
+             <br class="clr">
+             </form>
+              <br class="clr">
+           </div>
+             </div>   
+          <div class="bot"><div>&nbsp;</div></div>  
+</div>
+           
+<div style="width: 348px;" class="lightbox edit_cat">
+    <div class="close"><a onclick="closeDialog('note');" href="javascript:void(0)"><img alt="" src="images/close.png"></a></div>
+    <div class="top"><div>&nbsp;</div></div>
+    <div class="mid">
+	<div class="floating-popup add-note">
+      <div class="title">Edit Category</div>
+             <form method="post" action="" name="" id="frmeditcat" class="quick-edit-form">
+               <input type="hidden" name="catid" id="catid" value="" />
+                            <label>Category Name : </label>
+                            
+                            <input type="text" name="edit_category" value="" id="edit_category" />
+                            <span id="err_editcat" class="error-message"></span>
+                      		<br class="clr">
+                            <label>&nbsp;</label>
+                            <input class="submit-green" type="button" value="Update" name="editCatBtn" id="editCatBtn">
+                      		<br class="clr">
+                </form>
+                <br class="clr">     
+            </div>
+             </div>   
+          <div class="bot"><div>&nbsp;</div></div>  
+</div>

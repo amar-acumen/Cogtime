@@ -1,0 +1,501 @@
+<style>
+.select-box{ width:105px !important;}
+.right-gap{ float:right; width: 258px;}
+.del_img{ cursor:pointer;}
+.day-event{ cursor:pointer;}
+.edit-list-label-nw{ width:33px;}
+.nw-edit-select-box { width:90px !important;}
+</style>
+<?php include(APPPATH."views/layouts/logged_header.phtml"); ?>
+<!-- NAVIGATION SECTION -->
+<?php include(APPPATH."views/layouts/nav.phtml"); ?>
+<!-- /NAVIGATION SECTION -->
+</div>
+</div>
+<!-- /HEADER SECTION -->
+<div class="clr"></div>
+<!-- CONTENT SECTION -->
+<div id="content_section">
+    <div id="container">
+        <div id="top_corner">&nbsp;</div>
+        <div id="mid_content">
+            <!-- latest news -->
+            <?php include(APPPATH . "views/layouts/latest_news.phtml"); ?>
+            <!-- /latest news -->
+            <div class="clr"></div>
+            <!-- main container -->
+            <div id="main_container">
+
+                <!-- left container -->
+                <?php include(APPPATH . "views/layouts/leftbar.phtml"); ?>
+                <!-- /left container -->
+                <!-- mid container -->
+                <div id="mid_container" style="overflow:inherit;">
+                    <div class="page_heading">
+                        <div class="left"><img src="images/icons/calender2.png" alt=""  /> Organizer - </div>
+                        <ul class="organizer-timer">
+                            <li><a href="organizer-day-view.html" >Day</a></li> 
+                            <li><a href="organizer-week-view.html" class="select">Week</a></li> 
+                            <li class="no-bg select"><a href="organizer-month-view.html">Month</a></li>
+                        </ul>
+                    </div>
+                    <!--todays entry section start -->
+                    <div class="todays-entry-block">
+
+
+                        <div class="organize-calender-section">
+
+                            <script type="text/javascript">
+                                $(function() {
+                                    $('#current-month').datepicker({
+                                        numberOfMonths: 2,
+										altField: "#hd_cal_date",
+										onChangeMonthYear: function(y, m, i){  
+											var d = i.selectedDay;   
+											var WeekNumber = $.datepicker.iso8601Week(new Date(y, m , d));
+											show_cal_contents_by_week(y, m, d, 'null', WeekNumber)
+										},
+										onSelect: function(selectedDate) { //alert(selectedDate);
+											var day_arr = selectedDate.split('/');
+											var WeekNumber = $.datepicker.iso8601Week(new Date(day_arr[2], day_arr[0] , day_arr[1]));											
+											var val_date = day_arr[2]+'-'+day_arr[0]+'-'+day_arr[1];
+											gotoDay(val_date);
+										}
+                                    });
+									
+                                });
+                            </script>
+<input type="hidden" id="hd_cal_date" value=""/>
+
+                            <div class="current-month" id="current-month"></div>
+
+                        </div>
+
+                        <div class="page_heading">
+                            <?php
+                            $d_year = date('Y', mktime(0, 0, 0, $selected_month, $selected_day, $selected_year));
+                            $d_month = date('m', mktime(0, 0, 0, $selected_month, $selected_day, $selected_year));
+                            $d_day = date('d', mktime(0, 0, 0, $selected_month, $selected_day, $selected_year));
+
+                            $day_num = 0;
+                            $display_start_date = date('F  d, Y', strtotime($d_year . "W" . $weekNumber . $day_num));
+                            $display_end_date = date('F  d, Y', strtotime($d_year . "W" . $weekNumber . ($day_num + 6)));
+                            ?>
+                            <div class="left line-height" id="displayDateDIV"><?php echo $display_start_date . ' - ' . $display_end_date ?> </div>
+
+                            <span id="slider-span">
+                                <img src="images/icons/calender-right.png" class="calender-left-arrow" alt="" onclick="show_cal_contents_by_week(<?= $d_year ?>, <?= $d_month ?>, <?= $d_day ?>, 'next', <?= $weekNumber + 1 ?>)"/>
+
+                                <img src="images/icons/calender-left.png" class="calender-left-arrow" alt="" onclick="show_cal_contents_by_week(<?= $this->session->userdata('year') ?>,<?= $this->session->userdata('month') ?>,<?= $this->session->userdata('day') ?>, 'prev',<?= $weekNumber - 1 ?>)"/>
+
+                                <input type="hidden" id="week_number" value="<?= $weekNumber ?>" />
+                            </span>
+                            <br class="clear"/>
+
+                        </div>
+
+                        <ul class="calender-add-todolist">
+                            <li><a href="javascript:void(0);">Add New Note</a></li>
+                            <li><a href="javascript:void(0);">Add New ToDo List</a></li>
+                        </ul>
+                        <br class="clear"/>
+
+                        <div class="add-cal-list">
+
+                            <div class="shade_box_01 cal-list cal-list-1">
+                                <form id="frmAddNote"  method="post" action="<?= base_url() . 'logged/organizer_day_view/add_note_ajax' ?>" onsubmit="return false;"  enctype="multipart/form-data" class="note-todo-form">
+
+                                    <div class="lable-txt-nw">Add Note : </div>
+                                    <textarea rows="" cols="" name="txt_desc" id="txt_desc" onKeyDown="limitText(this.form.txt_desc, this.form.countdown, 250);" onKeyUp="limitText(this.form.txt_desc, this.form.countdown, 250);"></textarea>
+                                    <span id="err_desc" class="error-message" style="margin-left: 130px;margin-top: -8px;"></span> 
+                                    <br class="clear"/>
+                                    
+                                    
+                                    <div class="lable-txt-nw">Date : </div>
+                                    <div style="margin-top: 2px;">
+                                    <input type="text"  value="" name="start_to2" id="start_to2"  readonly="readonly" style="width:93px;"/>
+                                     <img src="images/icons/cal.png" alt="" onclick="$(this).prev().focus()" class="calender" />
+                                     <script type="text/javascript">
+										   var  dateToday = new Date();	
+										  $(document).ready(function(arg) {
+                                                                                     
+											  var inputDate = $("#start_to2");
+												
+											  $("#start_to2").datepicker({
+											  minDate: dateToday,
+											  dateFormat : 'dd/mm/yy',
+											  altField: "#hd_date",
+											  altFormat: "yy-mm-dd",
+											  onClose: function (selectedDate) {
+														var myDate = $(this).datepicker('getDate'); 
+														$('#start_to2').datepicker('setDate', myDate);
+														var formatted_dt = $.datepicker.formatDate('yy-mm-dd', myDate);
+														$('#hd_date').val(formatted_dt);
+														
+													}
+											  });
+											  $('#start_to2').datepicker('setDate', dateToday);
+										  });
+									  </script>
+                                    </div>
+                                    <br class="clear"/>
+                                  <?php /*?>  <span id="err_time" class="error-message" style="margin-left: 130px;margin-top: -8px;"></span> 
+                                    <?php */?>
+                                    <div class="lable-txt-nw"> Remind Me At : </div>
+                                    <select name="s_time" id="s_time" class="select-box nw-select-box rem_sel_box" >
+                                        <option value="-1">Do not remind</option>
+                                        <?= makeOption_time() ?>
+                                    </select>
+                                    <span id="err_time" class="error-message" style="margin-left: 130px;margin-top: -8px;"></span> 									
+                                    <input type="hidden" id="hd_date" name="hd_date" value="<?= getShortDate($selected_date, '8') ?>"/>
+                                    <input type="hidden" id="hd_note_ajax_method" name="hd_note_ajax_method" value="week_slider_ajax_list" />
+
+                                    <br class="clear"/>
+                                    <div class="lable-txt-nw"></div>
+                                    <div class="calader-lable-txt">
+                                        <input name="Add" type="submit" value="Add" class="yellow-btn calader-float-left"/>
+                                        <input name="cancel" type="button" value="Cancel" class="yellow-btn calader-float-left" onclick="$('.cal-list-1').slideToggle();
+                                                clearFrmAdd('frmAddNote')" />
+                                    </div>
+                                    <br class="clear"/>
+                                </form>
+
+                            </div>
+
+
+
+                            <div class="shade_box_01 cal-list cal-list-2">
+
+                                <form id="frmAddTodolist"  method="post" action="<?= base_url() . 'logged/organizer_day_view/add_todo_ajax' ?>" onsubmit="return false;" enctype="multipart/form-data" class="note-todo-form">
+                                    <div class="lable-txt-nw">Add Todo List : </div>
+                                    <textarea rows="" cols=""  name="ta_todo_desc" id="ta_todo_desc" onKeyDown="limitText(this.form.ta_todo_desc, this.form.countdown, 250);" 
+                          onKeyUp="limitText(this.form.ta_todo_desc, this.form.countdown, 250);"></textarea>	
+                                    <span id="err_todo_desc" class="error-message" style="margin-left: 130px;
+                                          margin-top: -9px;"></span>
+                                    <br class="clear"/>
+
+                                    <div class="lable-txt-nw">Start Time :</div>
+                                    <select class="select-box nw-select-box" name="todo_strt_frm" id="todo_strt_frm" onchange="generateEndtime($(this).val())">
+                                        <option value="-1">Select</option>
+                                        <?= makeOption_time() ?>
+                                    </select>
+
+
+                                    <span id="add_to_do_end_time"  class="right-gap">
+                                        <div class="lable-txt-nw left-gap" style="text-align:none; ">End Time :</div>
+                                        <select name="todo_end_frm" id="todo_end_frm" class="select-box nw-select-box">
+                                            <?php /* ?><option value="-1">Select</option><?php */ ?>
+                                            <?= makeOption_time() ?>
+                                        </select>
+                                    </span>
+
+                                    <span id="err_todo_strt_frm" class="error-message" style="margin-left: 130px;margin-top: -8px;"></span> 														
+                                    <span id="err_todo_end_frm" class="error-message" style="margin-left: 374px;margin-top: -19px;"></span>
+                                    <br class="clear"/>
+
+                                    <div class="lable-txt-nw">Remind Me :</div>                                      
+                                    <select name="todo_rem_time" id="todo_rem_time" class="select-box nw-select-box rem_sel_box">
+                                       <option value="-1">Do not remind</option>
+                                        <option value="00:15">15 Minutes</option>
+                                        <option value="00:30">30 Minutes</option>
+                                        <option value="00:45">45 Minutes</option> 
+                                        <option value="01:00">1 Hour</option>
+                                        <option value="02:00">2 Hours</option>
+                                    </select>
+                                    <span class="blue12"><strong>Back</strong></span>
+
+                                    <span id="err_todo_rem_time" class="error-message" style="margin-left: 130px;margin-top: -8px;"></span>
+                                     <br class="clear"/>
+                                    
+                                    <div class="lable-txt-nw">Date : </div>
+                                    <div style="margin-top: 2px;">
+                                    <input type="text"  value="" name="start_to" id="start_to"  readonly="readonly" style="width:93px;"/>
+                                     <img src="images/icons/cal.png" alt="" onclick="$(this).prev().focus()" class="calender" />
+                                     <script type="text/javascript">
+											
+									 var  dateToday = new Date();
+											 $(document).ready(function(arg) {
+                                                                                            
+											  var inputDate = $("#start_to");
+												
+											  $("#start_to").datepicker({
+											  minDate: dateToday,
+											  dateFormat : 'dd/mm/yy',
+											  altField: "#hd_tododate",
+											  altFormat: "yy-mm-dd",
+											  onClose: function (selectedDate) {
+														var myDate = $(this).datepicker('getDate'); 
+														$('#start_to').datepicker('setDate', myDate);
+														var formatted_dt = $.datepicker.formatDate('yy-mm-dd', myDate);
+														$('#hd_tododate').val(formatted_dt);
+														
+													}
+											  });
+											  
+											  $('#start_to').datepicker('setDate', dateToday);
+											 
+										  });
+									</script>
+                                    </div>
+                                    <span id="err_time" class="error-message" style="margin-left: 130px;margin-top: -8px;"></span> 
+                                    
+                                    <input type="hidden" id="hd_tododate" name="hd_tododate" value="<?= getShortDate($selected_date, '8') ?>"/>
+                                    <input type="hidden" id="hd_list_ajax_method" name="hd_list_ajax_method" value="week_slider_ajax_list" />
+                                    <br class="clear"/>
+                                    <!---------time slot error------------------------>
+                 <span id="err_time_stamp" class="error-message" style="margin-left: 374px;margin-top: -19px;"></span>
+                <!------------------------------------>
+                                    <div class="lable-txt-nw"></div>
+                                    <div class="calader-lable-txt">
+                                        <input type="submit" class="yellow-btn calader-float-left" value="Add" name="Add" />
+                                        <input type="button"  class="yellow-btn calader-float-left" value="Cancel" name="cancel" onclick="$('.cal-list-2').slideToggle('slow');
+                                                clearFrmAdd('frmAddTodolist')" />
+                                    </div>
+                                </form>
+                                <br class="clear"/>
+                            </div>
+                        </div>
+
+                        <!--calender start -->
+                        <div class="organize-calender" id="content_div">
+							<?= $result_content ?>
+
+                            <ul class="legends">
+                                <li><img src="images/icons/add_note.png" alt="note" width="16" height="16" />&raquo; Note</li>
+                                <li><img src="images/icons/add_list.png" alt="todo" width="16" height="16" />&raquo; To-Do List</li>
+                                <li><img src="images/icons/add_event.png" alt="event" width="13" height="17" />&raquo; Event</li>
+                            </ul>
+                            <div class="clr"></div>
+                        </div>
+                        <!--calender end -->
+						<div style="display:none;">
+                        <form id="gotoFrm" action="<?=base_url().'organizer-day-view.html'?>" method="post"><input type="hidden" name="goto_date" id="goto_date" value="" /></form>
+                        </div>
+
+                    </div>
+                    <!--todays entry section end -->
+                </div>
+
+                <!-- /left container -->
+                <!-- right container -->
+				<?php include(APPPATH . "views/layouts/rightbar.phtml"); ?>
+                <!-- /right container -->
+            </div>
+            <!-- /main container -->
+            <div class="clr"></div>
+        </div>
+        <div id="bot_corner">&nbsp;</div>
+    </div>
+    <div class="clr"></div>
+</div>
+<!-- /CONTENT SECTION -->
+<div class="clr"></div>
+<!-- FOOTER SECTION -->
+<?php include(APPPATH . "views/layouts/footer.phtml"); ?>
+<?php include(APPPATH . "views/logged/blocks/common_popup.phtml"); ?>
+<!-- /FOOTER SECTION -->
+
+<div class="lightbox edit-list" style="width:390px;">
+    <div class="close"><a href="javascript:void(0)" onclick="hide_dialog();clearFrmAdd('frmEditTodolist');"><img src="<?= base_url() ?>images/close.png" alt="" /></a></div>
+    <div class="top"><div>&nbsp;</div></div>
+    <div class="mid">
+        <div class="heading" style="margin-bottom:0px;">
+            <div class="left">
+                <h4>Edit List</h4>
+            </div>
+        </div>
+        <div class="shade_box_white" style="padding:8px 0px;">
+
+            <form id="frmEditTodolist"  method="post" enctype="multipart/form-data" class="note-todo-form">
+                <div class="lable-txt-nw"  style="width:64px;">Todo List : </div>
+                <textarea rows="" cols=""  name="ta_edit_todo_desc" id="ta_edit_todo_desc" onKeyDown="limitText(this.form.ta_edit_todo_desc, this.form.countdown, 250);" 
+                          onKeyUp="limitText(this.form.ta_edit_todo_desc, this.form.countdown, 250);" style=" width:202px;"  ></textarea>	
+                <span id="err_edit_todo_desc" class="error-message" style="margin-left: 130px;
+                      margin-top: -9px;"></span>
+                <br class="clear"/>
+
+                <div class="lable-txt-nw"  style="width:64px;">Start Time :</div>
+                <select class="select-box nw-edit-select-box" name="edit_todo_strt_frm" id="edit_todo_strt_frm" onchange="generateEndtime($(this).val())">
+                    <option value="-1">Select</option>
+<?= makeOption_time() ?>
+                </select>
+
+
+                <span id="edit_end_time_div" class="right-gap">
+                    <div class="lable-txt-nw left-gap edit-list-label-nw" style="text-align:none;width:64px; ">End Time :</div>
+                    <select name="edit_todo_end_frm" id="edit_todo_end_frm" class="select-box nw-edit-select-box">
+<?= makeOption_time() ?>
+                    </select>
+                </span>
+
+                <span id="err_edit_todo_strt_frm" class="error-message" style="margin-left: 130px;margin-top: -8px;"></span> 														
+                <span id="err_edit_todo_end_frm" class="error-message" style="margin-left: 374px;margin-top: -19px;"></span>
+                <br class="clear"/>
+
+                <div class="lable-txt-nw"  style="width:64px;">Remind Me :</div>                                      
+                <select name="edit_todo_rem_time" id="edit_todo_rem_time" class="select-box nw-select-box">
+                    <option value="-1">Select</option>
+
+                    <option value="00:15:00">15 Minutes</option>
+                    <option value="00:30:00">30 Minutes</option>
+                    <option value="00:45:00">45 Minutes</option> 
+                    <option value="01:00:00">1 Hour</option>
+                    <option value="02:00:00">2 Hours</option>
+                </select>
+                <span class="blue12"><strong>Back</strong></span>
+
+                <span id="err_edit_todo_rem_time" class="error-message" style="margin-left: 130px;margin-top: -8px;"></span>
+                <input type="hidden" id="hd_edit_tododate" name="hd_edit_tododate" />
+                <input type="hidden" id="hd_edit_list_id" />
+         
+
+                <br class="clear"/>
+                
+                <div class="lable-txt-nw"></div>
+                <div class="calader-lable-txt">
+                    <input type="button" class="yellow-btn calader-float-left" value="Update" name="Add" onclick="edit_list_ajax()"/>
+                    <input type="button"  class="yellow-btn calader-float-left" value="Cancel" name="cancel" onclick="clearFrmAdd('frmEditTodolist');
+                            hide_dialog();" />
+                </div>
+            </form> 
+            <div class="clr"></div>
+        </div>
+
+    </div>
+    <div class="bot"><div>&nbsp;</div></div>
+</div>
+
+
+<div class="lightbox edit-note" style="width:285px;">
+    <div class="close"><a href="javascript:void(0)" onclick="hide_dialog();
+            clearFrmAdd('frmEditNote');"><img src="<?= base_url() ?>images/close.png" alt="" /></a></div>
+    <div class="top"><div>&nbsp;</div></div>
+    <div class="mid">
+        <div class="heading" style="margin-bottom:0px;">
+            <div class="left">
+                <h4>Edit Note</h4>
+            </div>
+        </div>
+        <div class="shade_box_white" style="padding:8px 0px;">
+            <form id="frmEditNote"  method="post"  enctype="multipart/form-data" class="note-todo-form">
+
+                <div class="lable-txt-nw" style="width:33px;">Note : </div>
+                <textarea rows="" cols="" name="txt_edit_desc" id="txt_edit_desc" style=" width:202px;" onKeyDown="limitText(this.form.txt_edit_desc, this.form.countdown, 250);" 
+                          onKeyUp="limitText(this.form.txt_edit_desc, this.form.countdown, 250);"></textarea>
+                <span id="err_edit_desc" class="error-message" style="margin-left: 130px;margin-top: -8px;"></span> 
+                <br class="clear"/>
+
+                <div class="lable-txt-nw" style="width:33px;">Time : </div>
+                <select name="s_edit_time" id="s_edit_time" class="select-box nw-select-box" >
+                    <option value="-1">Select</option>
+<?= makeOption_time() ?>
+                </select>
+                <span id="err_edit_time" class="error-message" style="margin-left: 130px;margin-top: -8px;"></span> 									
+                <input type="hidden" id="hd_edit_date" name="hd_edit_date" value="<?= getShortDate($selected_date, '8') ?>"/>					
+                <input type="hidden" id="hd_edit_note_id" />
+
+                <br class="clear"/>
+                <div class="lable-txt-nw"></div>
+                <div class="calader-lable-txt">
+                    <input name="Add" type="button" value="Update" class="yellow-btn calader-float-left" onclick="edit_note_ajax()"/>
+                    <input name="cancel" type="button" value="Cancel" class="yellow-btn calader-float-left" onclick="clearFrmAdd('frmEditNote');
+                            hide_dialog();" />
+                </div>
+                <br class="clear"/>
+            </form>
+            <div class="clr"></div>
+        </div>
+
+    </div>
+    <div class="bot"><div>&nbsp;</div></div>
+</div>
+
+
+<div class="lightbox delete-note" style="width:245px;">
+    <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="<?= base_url() ?>images/close.png" alt="" /></a></div>
+    <div class="top"><div>&nbsp;</div></div>
+    <div class="mid">
+        <div class="heading" style="margin-bottom:0px;">
+            <div class="left">
+                <h4>Delete Prayer Points</h4>
+            </div>
+        </div>
+        <div class="shade_box_white" style="padding:8px 0px;">
+            <div style="padding-bottom:10px;">
+                <p class="center-text" style="line-height:23px; color:#494949;">Do you really want to delete this Note?</p>
+            </div>
+            <form action="" method="post" enctype="multipart/form-data">
+                <input type="hidden" name="note_del_id" id="note_del_id" value="" />
+                <input name="" type="button" value="Yes" class="popup-yes"  onClick="remove_note()"/>
+                <input name="" type="button" value="No" class="popup-no " onclick="hide_dialog()"/>
+            </form>   
+            <div class="clr"></div>
+        </div>
+
+    </div>
+    <div class="bot"><div>&nbsp;</div></div>
+</div>
+
+
+<div class="lightbox delete-list" style="width:245px;">
+    <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="<?= base_url() ?>images/close.png" alt="" /></a></div>
+    <div class="top"><div>&nbsp;</div></div>
+    <div class="mid">
+        <div class="heading" style="margin-bottom:0px;">
+            <div class="left">
+                <h4>Delete Prayer Points</h4>
+            </div>
+        </div>
+        <div class="shade_box_white" style="padding:8px 0px;">
+            <div style="padding-bottom:10px;">
+                <p class="center-text" style="line-height:23px; color:#494949;">Do you really want to delete this list?</p>
+            </div>
+            <form action="" method="post" enctype="multipart/form-data">
+                <input type="hidden" name="list_del_id" id="list_del_id" value="" />
+                <input name="" type="button" value="Yes" class="popup-yes"  onClick="remove_list()"/>
+                <input name="" type="button" value="No" class="popup-no " onclick="hide_dialog()"/>
+            </form>   
+            <div class="clr"></div>
+        </div>
+
+    </div>
+    <div class="bot"><div>&nbsp;</div></div>
+</div>
+
+<script type="text/javascript">
+$(document).ready(function() {
+
+	  $('#month-select').jcarousel({
+		  wrap: 'circular'
+	  });
+	  $('#year-select').jcarousel({
+		  wrap: 'circular'
+	  });
+	  $('.ui-datepicker').show(); 
+	  $('#ui-datepicker-div').hide();  
+});
+//$.noConflict();
+function show_cal_contents_by_week(year, month, day, s_type, WeekNumber) {
+
+	showUILoader_nodialog('<img src="' + base_url + 'images/loading_big.gif" width="50"/> ');
+	$.ajax({
+		type: "POST",
+		url: base_url + 'logged/organizer_day_view/week_slider_ajax_list' + '/' + year + '/' + month + '/' + day + '/' + s_type + '/' + WeekNumber,
+		dataType: 'json',
+		success: function(data, status) {
+
+			$('#displayDateDIV').html(data.display_date);
+			$('#slider-span').html(data.cal_html);
+			$('#hd_date').val(data.selected_date);
+			$('#hd_tododate').val(data.selected_date);
+			$('#content_div').html(data.html);
+			hideUILoader_nodialog();
+		}
+	});
+}
+  
+</script>
+<style>
+.nw-select-box{ text-transform:capitalize !important;}
+.rem_sel_box{width:120px !important;}
+</style>

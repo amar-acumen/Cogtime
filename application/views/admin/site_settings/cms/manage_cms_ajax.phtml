@@ -1,0 +1,66 @@
+<table width="100%" border="0" cellspacing="0" cellpadding="0" class="admin-table">
+                          <tr>
+                            <th align="left" valign="middle" height="30" width="240">Title</th>
+                            <?php /*?><th align="left" valign="middle" height="30" width="350">Description</th><?php */?>
+                            <th width="350" valign="middle" height="30" align="left">Description</th>
+                            <th align="left" valign="middle" height="30" width="130">Appears In</th>
+                            <th width="142" valign="middle" height="30" align="center">Order</th>
+                            <th align="center" valign="middle" height="30" class="last" width="98">Actions</th>
+                          </tr>
+                          <?php 
+						  
+						  	 if( count($info_arr) ) :
+				   
+							 foreach($info_arr as $info) : 
+							  
+								$id = $info['id'];
+								$title = $info['s_title'];
+								$full_desc =  strip_tags(get_unformatted_string_edit($info['s_page_content']));
+								$s_desc = my_substr($full_desc,187);
+								
+ 							    $scope = ($info['e_both'] == 'yes')?'Both':(( $info["e_show_in_non_logged_in_page"]=='yes' )?'Public Section':' Logged Section ');
+							
+								$i_user_id = $info['i_user_id'];
+								$s_status = ($info['i_status'] == 1)?'HIDE':'SHOW';	   
+						  
+						  ?>
+                          
+                          
+                          <tr>
+                            <td align="left" valign="top"><?=$title?></td>
+                            <td align="left" valign="top"><?=$s_desc?></td>
+                            <td align="left" valign="top"><?=$scope?></td>
+                            <?=$info['image_rank']?>
+                            <td align="center" valign="middle" class="last">
+                            <input name="" title="Edit" type="button" class="edit-button"  value="" onclick="window.location='<?= admin_base_url() ?>site_settings/cms-pages/edit-cms-pages/<?= $id;?>'"/>
+                            <input name="" title="Delete" type="button" class="delete-button"  value="" onclick="delete_confirm_(<?= $id ?>);"/>
+                             <?php if($info['i_status'] == 1){ ?>
+                            		<span id="<?=$info['id']?>_status" class="btn-01" style="padding-bottom: -5px;"><input  title="Show" type="button" class="btn-01" onclick="javascript:changeStatus(<?php echo $info['id'] ?> , 2 , <?php echo $info['i_status'] ?>)"  value="<?=$s_status?>"/></span>
+                            <?php 
+							    } 
+								else if($info['i_status'] == 2){?>
+                                	<span id="<?=$info['id']?>_status" style="height:18px;"><input title="Show" type="button" class="btn-01" onclick="javascript:changeStatus(<?php echo $info['id'] ?> , 1 , <?php echo $info['i_status'] ?>)"  value="<?=$s_status?>"/></span>
+                            
+                            <?php }?>
+                            </td>
+                          </tr>
+                          
+                          
+                          
+                                   
+					  <?php
+                             endforeach;
+                             
+                           else :	// i.e. no records exists...
+                      ?>
+                          <tr>
+                              <td style="text-align:center;" height="80" colspan="20">No data available!!!</td>
+                          </tr>
+                      <?php
+                           endif;
+                      ?>
+                              </table>
+	
+<div class="paging_box" >
+            <ul><?= $page_links ?></ul>
+</div>	

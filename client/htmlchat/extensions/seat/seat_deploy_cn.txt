@@ -1,0 +1,60 @@
+部署占座插件
+
+1 部署client端
+1.1 添加必要的几脚本
+打开 123flashchat.html, 添加如下脚本
+<script type="text/javascript" src="config/123flashchat_extension_lib.js"></script>
+<script type="text/javascript" src="config/extensions.js"></script>
+例子如下所示:
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+<title></title>
+...
+
+<script type="text/javascript" src="config/123flashchat_extension_lib.js"></script>
+<script type="text/javascript" src="config/extensions.js"></script>
+</head>
+1.2
+
+2 部署服务器
+我们支持两张服务器配置，一种是php，一种是tomcat
+2.1 PHP:
+2.1.1 php 服务器必须支持 curl 模块。
+2.1.2 复制<123flashchat server root dictionay>/client/htmlchat/plugin/seat/upload 目录seat文件夹到php服务器可访问目录
+2.1.3 在 <123flashchat server root dictionay>/client/htmlchat/plugin/seat/js 目录下有一个config.js， 将变量 getSeatURL 和 updateSeatURL 改成符合你的服务器配置, 按照例子修改，配置文件中有相应的注释.
+config.js 文件中有些重要信息，必须看一遍
+2.1.4 你需要修改config.php 文件中的两个变量（ $updateCreditsAPI $customMessageAPI），可以按照步骤 3就行配置 
+
+   
+   
+2.2 Deploy on tomcat: 
+2.2.1 If you want to deploy on tomcat server, copy the ChatPlugin.war under the fold plugin to you webapps fold and restart you server.
+   Or maybe you have other J2EE server, you just do you need to deplay the ChatPlugin.war file.
+   Under the project ChatPlugin, navigator to the fold ChatPlugins\WebRoot\WEB-INF\classes and open 
+   the server.properties, modify update-user-credits-api and custom-message-api to you need.
+       怎么配置这两个变量，请参考步骤3
+2.2.2 在 <123flashchat server root dictionay>/client/htmlchat/plugin/seat/js 目录下有一个config.js， 将变量 getSeatURL 和 updateSeatURL 改成符合你的服务器配置, 按照例子修改，配置文件中有相应的注释.
+config.js 文件中有些重要信息，必须看一遍
+	
+步骤 3
+3.1 怎么配置API
+/*
+看这个例子 "http://localhost:35555/update-user-credits.api";
+http://localhost:35555 是的chat http server, 你需要修改为你自己chat server ip和http端口
+配置 "http://localhost:35555/custommessage.api" 类似上面的配置
+
+注意： 打开CHAT_ROOT\server\etc\groups\default目录下的 server.xml。找到下面的节点
+<data-api enable="On">
+<query-allow-access-from password="">
+<ip>*</ip>
+</query-allow-access-from>
+<push-allow-access-from password="">
+<ip>*</ip>
+</push-allow-access-from>
+</data-api>
+
+data-api 节点的 enabled 属性必须On, 你要将你的php所在server的ip添加到<query-allow-access-from password=""> 节点下，类似如下
+<query-allow-access-from password="">
+<ip>127.0.0.1</ip>
+</query-allow-access-from>
+*/

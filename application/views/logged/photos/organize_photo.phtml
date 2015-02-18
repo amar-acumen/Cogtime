@@ -1,0 +1,206 @@
+<script type="text/javascript">
+function set_as_profile_pic(photo_id, album_id) {
+	showLoading();
+	$.ajax({
+	   type: "get",
+	   url: '<?=base_url()?>session/set-as-profile-pic/'+photo_id,
+	   dataType:"json",
+	   success: function(json_response){
+			hideLoading();
+			
+			if(json_response.success) {
+				showUIMsg("Your profile's Photo changed.");
+				window.location.href = base_url+'photo-albums/'+album_id+'/organize-photo.html';
+			}
+			else {
+				showUIMsg('Some error occurred. Please try again.');
+			}
+		},
+		error: function(){
+			hideLoading();
+			showUIMsg('Some error occurred. Please try again.');
+		}
+	});
+}
+
+  
+</script>
+<script type="text/javascript">
+
+var ajax_req_feeds = null;
+function show_more_feeds(page) {
+    if(ajax_req_feeds!=null) {
+        ajax_req_feeds.abort();
+    }
+    showUILoader_nodialog();
+    ajax_req_feeds = $.ajax({
+        type: 'get',
+        url: base_url+'logged/organize_photo/album_wise_photo_ajax_pagination/<?=$current_album_id?>'+'/public/'+page,
+        dataType: 'json',
+
+        success: function (data, status) {
+
+            hideUILoader_nodialog();
+            if(data.html!='') {
+                $('#album_div').append(data.html);
+                $('#show_more_feeds_link').attr('page_value', data.current_page);
+            }
+            else {
+                $('#album_div').append('<div class="view_more" style="text-align: center;"><p class="blue_bold12" style="font-size:14px;">No More Album.</p></div>');
+                $('#show_more_feeds_div').hide();
+            }
+            if(data.view_more==false)
+            {
+                $('#album_div').append('<div class="view_more" style="text-align: center;"><p class="blue_bold12" style="font-size:14px;">No More Album.</p></div>');
+                $('#show_more_feeds_div').hide();
+            }
+
+        }    // end of success function...
+    });
+}
+</script>
+
+<?php include(APPPATH."views/layouts/logged_header.phtml");?>
+<!-- NAVIGATION SECTION -->
+      <?php include(APPPATH."views/layouts/nav.phtml");?>
+<!-- /NAVIGATION SECTION -->
+<div class="clr"></div>
+<!-- CONTENT SECTION -->
+<div id="content_section">
+      <div id="container">
+            <div id="top_corner">&nbsp;</div>
+            <div id="mid_content">
+                  <!-- latest news -->
+                 <?php include(APPPATH ."views/layouts/latest_news.phtml");?>
+                  <!-- /latest news -->
+                  <div class="clr"></div>
+                  <!-- main container -->
+                  <div id="main_container">
+                       <!-- left container -->
+                        <?php include(APPPATH."views/layouts/leftbar.phtml");?>
+                        <!-- /left container -->
+                        <!-- left container -->
+                        <div id="mid_container">
+                        	<div class="page_heading">
+                                <div class="left"><img src="images/icons/photo.png" alt="" /> Photos</div>
+                            </div>
+                             <!--sub page links -->
+                              <div class="link-div" style="margin-top:0px;">
+                                  <ul>
+                                    <li><a href="my-photos.html"><span>My Photos</span> </a> </li>
+                                     <li><a href="manage-my-photo.html"><span>Manage My Photo Albums</span> </a> </li>
+                                     <li><a href="create-photo-album.html"><span>Create Photo Album</span></a></li>
+                                    <li><a href="javascript:void(0);" onclick="return show_dialog('upload_photo')"><span>Upload Photo</span></a></li>
+                                </ul>
+                                <div class="clr"></div>
+                              </div>
+                             <!--/sub page links -->            
+                        
+                        
+                        
+                        	<div class="page_heading_01">
+                            	<div class="left"><img src="images/icons/photo.png" alt="" /> <?=$arr_albums['s_name']?></div>
+                             </div>
+                             <div class="arrow_btm"></div>
+                                  <div class="shade_box_01" style="padding:17px 10px;">
+                                  <?php 
+								  	$IMG = base_url()."uploads/user_album_photos/".getThumbName($arr_albums['s_photo'],'thumb');
+									$ALBUM_URL = get_photo_album_detail_url($arr_albums['id'], $arr_albums['s_name']);
+								   ?>
+                                  <div class="photo-div" style="float:left; margin-right:10px;"><div style="background:url(<?=$IMG?>) no-repeat center;width:122px; height:82px; cursor:pointer; "  title="Album" onclick="window.location.href='<?=$ALBUM_URL?>'" ></div></div>
+                                  <p onclick="window.location.href='<?=$ALBUM_URL?>'" style="cursor:pointer; font-size:12px; line-height:15px;"><?=$arr_albums['s_desc']?></p>
+                                   <div class="clr"></div>
+                                  </div>
+                                  
+                                 
+                          	 <div class="page_heading_01">
+                                    <div class="left"><img src="images/icons/photo1.png" alt="" /> Organize Photos</div>
+                                    <div class="right">
+                              
+                                        <input type="button" class="upload_btn"  value="Upload Photo" onclick="return show_dialog('upload_photo')"/>
+                                    </div>
+                              </div>
+                              <div class="arrow_btm"></div>
+                              <DIV ID ="album_div">
+                              <?=$result_album_content?>
+                              
+                              <?php
+                              if($total == 0) :
+                              ?>
+                              <div class="section01" style="padding-top:5px;" id="no_tweets"><div  class="shade_norecords" style="width:260px;"><p class="blue_bold12">No Photos.</p></div></div>
+                              <?php
+                              endif;
+                              ?>
+                              
+                              
+                              </DIV>
+                              
+                              <?php 
+                              if($total > $pagination_per_page): ?>
+                                    
+                                    <div class="view_more" id="show_more_feeds_div"><a href="javascript:void(0);" id="show_more_feeds_link" page_value="<?=$current_page?>" onclick="show_more_feeds($(this).attr('page_value'))">[view more] </a> </div>
+                              <?php endif; ?>
+                              
+                              
+                        </div>
+                          
+                        <!-- /left container -->
+                        <!-- right container -->
+                        <?php include(APPPATH."views/layouts/rightbar.phtml");?>
+                        <!-- /right container -->
+                  </div>
+                  <!-- /main container -->
+                  <div class="clr"></div>
+            </div>
+            <div id="bot_corner">&nbsp;</div>
+      </div>
+      <div class="clr"></div>
+</div>
+<!-- /CONTENT SECTION -->
+<div class="clr"></div>
+<!-- FOOTER SECTION -->
+<?php include(APPPATH."views/layouts/footer.phtml");?>
+<!-- /FOOTER SECTION -->
+<?php include(APPPATH."views/logged/photos/blocks/upload_multi_photo_popup-noredirect.phtml");?>
+
+<?php include(APPPATH."views/logged/photos/blocks/upload_photo_popup-no-redirect.phtml");?>
+<?php include(APPPATH."views/logged/photos/blocks/edit_photo_popup-no-redirect.phtml");?>
+<?php include(APPPATH."views/logged/blocks/common_popup.phtml");?>
+
+<?php /*?>delete confirm box for wall post <?php */?>
+<div class="lightbox delete-photo" style="width:auto;">
+      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="<?=base_url()?>images/close.png" alt="" /></a></div>
+      <div class="top"><div>&nbsp;</div></div>
+      <div class="mid">
+            <div class="heading" style="margin-bottom:0px;">
+                  <div class="left">
+                        <h4>Delete Photo</h4>
+                  </div>
+            </div>
+               <div class="shade_box_white" style="padding:8px 0px;">
+               <div style="padding-bottom:10px;">
+               <p class="center-text" style="line-height:23px; color:#494949;">Do you really want to delete this photo?</p>
+               </div>
+               <form action="" method="post" enctype="multipart/form-data">
+                  <input type="hidden" name="i_del_id" id="i_del_id" value="" />
+                  <input type="hidden" name="i_album_id" id="i_album_id" value="" />
+                 <input name="" type="button" value="Yes" class="popup-yes"  onClick="delete_()"/>
+                    <input name="" type="button" value="No" class="popup-no" onclick="hide_dialog()"/>
+               </form>   
+               <div class="clr"></div>
+            </div>
+            
+      </div>
+      <div class="bot"><div>&nbsp;</div></div>
+</div>
+
+
+<script type="text/javascript">
+// show zoom window...
+function open_zoom_lightbox(id ) {
+	var url = base_url + 'logged/organize_photo/zoom_photo/'+id+'?width=630&height=400';
+	tb_show('zoom_img_small', url);
+}
+</script>
+
+

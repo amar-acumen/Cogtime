@@ -1,0 +1,323 @@
+<div class="clr"></div>
+<!--navigation section start -->
+<?php include(APPPATH."views/layouts/admin/admin_nav.phtml");?>
+<!--navigation section end -->
+<!-- CONTENT SECTION -->
+<div id="content_section">
+      <div id="container">
+            <!--<div id="top_corner">&nbsp;</div> -->
+            <div id="mid_content">
+                  <div class="page_heading left">
+                        <div class="left"><img src="../images/icons/login.png" alt="" />Testimonials</div>
+                  </div>
+                  <div class="clr"></div>
+                  <div id="right_container">
+                        <div class="arrow_btm"></div>
+                        <div class="content_area">
+                          <?php /*?>  <!--filter section start -->
+                            <div class="filter">
+                                <span class="filter-by">Filter By &raquo;</span>
+                                
+                                
+                                <form id="search_frm" action="" method="post" enctype="multipart/form-data" class="filter-search" onsubmit="return form_post();">
+                                    
+                                    
+                                    <label>Start date:</label>
+                                    <input type="text"  value="" name="date_to1" id="date_to1"  readonly="readonly" class="date-field"/>
+                                          <img src="../images/icons/cal.png" alt="" onclick="$(this).prev().focus()" class="calender"/>
+                                          <script type="text/javascript">
+                                                $(document).ready(function(arg) {
+                                                    $.datepicker.setDefaults($.datepicker.regional['']);
+                                                    $("#date_to1").datepicker($.datepicker.regional['en']);
+                        
+                                                });
+                                           </script>
+                                            
+                                    <label>End Date :</label>        
+                                    <input type="text"  value=" " name="date_to2" id="date_to2"  readonly="readonly" class="date-field"/>
+                                          <img src="../images/icons/cal.png" alt="" onclick="$(this).prev().focus()" class="calender" style="margin-right:40px;"/>
+                                          <script type="text/javascript">
+                                                $(document).ready(function(arg) {
+                                                    $.datepicker.setDefaults($.datepicker.regional['']);
+                                                    $("#date_to2").datepicker($.datepicker.regional['en']);
+                                                });
+                                          </script>
+                                    <input name="" type="submit" value="GO" class="go" />
+                                </form>  
+                                
+                                
+                                
+                                
+                                <div class="clr"></div>
+                            </div>
+                            <!--filter section end -->
+                            <?php */?>
+                            <h4>List Of Testimonials</h4>
+                            <div class="clr"></div>
+                            
+                            <DIV id="table_content">
+                            <?=$result_content?>
+                            </DIV>
+                            
+                            
+                            
+                            <div class="clr"></div>
+                        </div>
+                  </div>
+                  <div class="clr"></div>
+                  
+            </div><!--/mid_content-->
+            
+            <!--<div id="bot_corner">&nbsp;</div> -->
+      </div>
+      <div class="clr"></div>
+</div>
+
+
+<!-- /CONTENT SECTION -->
+
+
+
+<!--popup one start-->
+<div class="lightbox delete-page-popup" style="width:500px;">
+      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="../images/close.png" alt="" /></a></div>
+      <div class="top"><div>&nbsp;</div></div>
+      <div class="mid">
+            <div class="heading" style="margin-bottom:0px;">
+                  <div class="left">
+                        <h4>Delete Testimonial</h4>
+                  </div>
+            </div>
+               <div class="shade_box_white">
+               <p class="center-text">Do you really want to delete this Testimonial?</p>
+               <form action="" method="post" enctype="multipart/form-data">
+               <input type="hidden" id="h_del_testimonial_id" value="">
+                       <input name="" type="button" value="Yes" class="btn" style="margin-left:146px;" onclick="return delete_()"/>
+                    <input name="" type="button" value="No" class="btn" onclick="hide_dialog()"/>
+               </form>   
+               <div class="clr"></div>
+            </div>
+            
+      </div>
+      <div class="bot"><div>&nbsp;</div></div>
+</div>
+<!--popup one end-->
+
+<!--edit testimonial-->
+<div class="lightbox edit-testimonial" style="width:500px;">
+      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="../images/close.png" alt="" /></a></div>
+      <div class="top"><div>&nbsp;</div></div>
+      <div class="mid">
+            <div class="heading" style="margin-bottom:0px;">
+                  <div class="left">
+                        <h4>Edit Testimonial</h4>
+                  </div>
+            </div>
+            <div class="shade_box_white">
+                   <div class="content_area frm_box2">
+                              <form action="" method="post" enctype="multipart/form-data">
+                                  <div class="lable01">Description :</div>
+                                  <div class="field01">
+                                        <textarea class="lightbox-textarea" name="limitedtextarea" id="limitedtextarea" style="height: 80px;"></textarea>
+                                        <br class="clr" />
+                                        <label class="left">(Maximum characters: 300)</label>
+                                  </div>
+                                  <div id="err_limitedtextarea" class="error-message"></div>
+                                  <div class="clr"></div>
+                                  
+                                  <div class="lable01">&nbsp;</div>
+                                  <div class="field01">
+                                  <input type="hidden" id="h_testimony_id" value="">
+                                        <input name="" type="button" class="btn"  value="Update" onclick="return edit_()"/><input name="" type="reset" class="btn"  value="Cancel" onclick="hide_dialog()"/>
+                                  </div>
+                              </form>
+
+                              <div class="clr"></div>
+                        </div>
+            </div>
+      </div>
+      <div class="bot"><div>&nbsp;</div></div>
+</div>
+<!--/edit testimonial -->
+
+<!--popup detailed-descriptions start-->
+<div class="lightbox detailed-descriptions" style="width:700px;">
+      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="../images/close.png" alt="" /></a></div>
+      <div class="top"><div>&nbsp;</div></div>
+      <div class="mid">
+            <div class="heading" style="margin-bottom:0px;">
+                  <div class="left">
+                        <h4>Prayer Wall</h4>
+                  </div>
+            </div>
+               <div class="shade_box_white product">
+                       
+                    <div class="product-details full">
+                        <h3><span>Posted By:</span> <span id="posted_by"></span></h3>
+                    </div>
+                    <div class="clr"></div>
+                    <div class="details">
+                        <p class="title">Description:</p>
+                        <p id="desc">Pellentesque odio turpis, aliquam ut varius quis, pulvinar a arcu. Sed ultricies pharetra tortor a ultrices. Pellentesque a adipiscing enim.</p> 
+                    </div>
+               <div class="clr"></div>
+            </div>
+            
+      </div>
+      <div class="bot"><div>&nbsp;</div></div>
+</div>
+<!--popup detailed-descriptions end-->
+
+
+
+<script type="text/javascript">
+$(document).ready(function(){
+     optionsArr = { 
+        beforeSubmit:  showBusyScreen,  // pre-submit callback 
+        success:       validateFrm, // post-submit callback 
+        url:        admin_base_url + "holy_place/testimonies/testimonies_ajax_pagination"
+    }; 
+});
+
+
+function form_post()
+{
+    $('#search_frm').ajaxSubmit(optionsArr);
+    
+    return false;
+}
+
+function validateFrm(data)
+{
+   hideBusyScreen();
+        $('#table_content').html(data);
+}
+
+
+function fetch_edit_(id)
+{
+    showBusyScreen();
+    $.ajax({
+        url : admin_base_url+'holy_place/testimonies/fetch_testimony_detail',
+        type : 'post',
+        data:({'id':id}),
+        dataType : 'json',
+        success : function(data)
+        {
+            $('#err_limitedtextarea').hide();
+            $('#limitedtextarea').html(data.desc);
+            show_dialog('edit-testimonial');
+            $('#h_testimony_id').val(id);
+        }
+    });
+}
+
+function edit_()
+{
+    var desc = $('#limitedtextarea').val();
+    var id = $('#h_testimony_id').val();
+    var current_page = $('#current_page').val();
+    
+    showBusyScreen();
+    $.ajax({
+        url : admin_base_url+'holy_place/testimonies/edit_testimony/'+current_page,
+        type : 'post',
+        data:({'id':id,'desc':desc}),
+        dataType : 'json',
+        success : function(data)
+        {
+            
+            $('#err_limitedtextarea').hide();
+            if(data.result=='success')
+            {
+                showUIMsg(data.msg);
+                $('#table_content').html(data.html);
+                hide_dialog();
+            }
+            else
+            {
+                $('#err_limitedtextarea').html(data.msg);
+                $('#err_limitedtextarea').show();
+            }
+        }
+    });
+}
+
+function delete_confirm_(id)
+{
+    $('#h_del_testimonial_id').val(id);
+    show_dialog('delete-page-popup');
+}
+function delete_()
+{
+    var id =  $('#h_del_testimonial_id').val();
+    var current_page = $('#current_page').val();
+    
+    $.ajax({
+        url : admin_base_url + 'holy_place/testimonies/delete_testimony/'+current_page,
+        type : 'post',
+        data:({'id':id,'current_page':current_page}),
+        dataType : 'json',
+        success : function(data)
+        {
+            $('#table_content').html(data.response);
+            hide_dialog();
+        }
+    });
+}
+
+
+function view_post_(id)
+{
+    //showBusyScreen();
+      $.ajax({
+        url : admin_base_url + 'holy_place/testimonies/viwe_post/',
+        type : 'post',
+        data:({'id':id}),
+        dataType : 'json',
+        success : function(data)
+        {
+            $('#posted_by').html(data.res.posted_by);
+            $('#desc').html(data.res.s_description);
+            show_dialog('detailed-descriptions');
+        }
+    });
+}
+
+
+
+  $(document).ready(function () {
+
+ //counting the left characters in comment
+    
+     function limitChars(textid, limit, infodiv)
+     {
+      var text = $('#'+textid).val(); 
+      var textlength = text.length;
+      if(textlength > limit)
+      {
+      $('#'+textid).val(text.substr(0,limit));
+       return false;
+      }
+      else
+      {
+      
+       return true;
+      }
+     }
+    
+    $(function(){
+        $('#limitedtextarea').keyup(function(){
+            limitChars('limitedtextarea', 300, '');
+        });
+    });
+    
+    //// just to show correct no. of chracters left while the page is loaded...
+    
+    limitChars('limitedtextarea',300, '');
+
+});
+</script>
+
+
+

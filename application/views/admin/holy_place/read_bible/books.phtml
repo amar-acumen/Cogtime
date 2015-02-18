@@ -1,0 +1,209 @@
+<div class="clr"></div>
+<!--navigation section start -->
+<?php include(APPPATH."views/layouts/admin/admin_nav.phtml");?>
+<!--navigation section end -->
+<!-- CONTENT SECTION -->
+<div id="content_section">
+      <div id="container">
+            <!--<div id="top_corner">&nbsp;</div> -->
+            <div id="mid_content">
+            
+            
+            
+            
+                  <div class="page_heading left">
+                        <div class="left"><img src="../images/icons/login.png" alt="" />  Read Bible</div>
+                  </div>
+                  <div class="clr"></div>
+                  <div id="right_container">
+                        <div class="arrow_btm"></div>
+                        <div class="content_area">
+                            <div class="right" style="margin-bottom:14px;"><input name="" type="button" value="Add New Book"  class="evnt_btn1" onclick="return show_dialog('add-new-book')"/></div>
+                            <div class="clr"></div>
+                            <div id="table_content">
+                            <?php echo $result_content?>
+                            </div>
+                            
+                            <div class="clr"></div>
+                        </div>
+                  </div>
+                  <div class="clr"></div>
+                  
+                  
+                  
+                  
+                  
+            </div><!--/mid_content-->
+            
+            
+            <!--<div id="bot_corner">&nbsp;</div> -->
+      </div>
+      <div class="clr"></div>
+</div>
+
+
+<!-- /CONTENT SECTION -->
+
+<!--add 5 a day popup -->
+<div class="lightbox add-new-book" style="width:500px;">
+      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="../images/close.png" alt="" /></a></div>
+      <div class="top"><div>&nbsp;</div></div>
+      <div class="mid">
+            <div class="heading" style="margin-bottom:0px;">
+                  <div class="left">
+                        <h4>Add New Book</h4>
+                  </div>
+            </div>
+            <div class="shade_box_white">
+                   <div class="content_area frm_box2">
+                              <form action="" method="post" enctype="multipart/form-data">
+                                  <div class="lable01">Book Name :</div>
+                                  <div class="field01">
+                                        <input name="" type="text" />
+                                  </div>
+                                  <div class="error-message">* Required Field</div>
+                                  <div class="clr"></div>
+                                  
+                                  <div class="lable01">&nbsp;</div>
+                                  <div class="field01">
+                                        <input name="" type="button" class="btn"  value="Add"/><input name="" type="reset" class="btn"  value="Cancel" onclick="window.location=''"/>
+                                  </div>
+                              </form>
+                              <div class="clr"></div>
+                        </div>
+            </div>
+      </div>
+      <div class="bot"><div>&nbsp;</div></div>
+</div>
+<!--add 5 a day end -->
+
+<!--popup one start-->
+<div class="lightbox delete-page-popup" style="width:500px;">
+      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="../images/close.png" alt="" /></a></div>
+      <div class="top"><div>&nbsp;</div></div>
+      <div class="mid">
+            <div class="heading" style="margin-bottom:0px;">
+                  <div class="left">
+                        <h4>Delete Book</h4>
+                  </div>
+            </div>
+               <div class="shade_box_white">
+               <p class="center-text">Do you really want to delete this Book?</p>
+               <form action="" method="post" enctype="multipart/form-data">
+                       <input name="" type="button" value="Yes" class="btn" style="margin-left:146px;"/>
+                    <input name="" type="button" value="No" class="btn" onclick="hide_dialog()"/>
+               </form>   
+               <div class="clr"></div>
+            </div>
+            
+      </div>
+      <div class="bot"><div>&nbsp;</div></div>
+</div>
+<!--popup one end-->
+
+<!--edit 5 a day popup -->
+<div class="lightbox edit-book" style="width:500px;">
+      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="../images/close.png" alt="" /></a></div>
+      <div class="top"><div>&nbsp;</div></div>
+      <div class="mid">
+            <div class="heading" style="margin-bottom:0px;">
+                  <div class="left">
+                        <h4>Edit Book</h4>
+                  </div>
+            </div>
+            <div class="shade_box_white">
+                   <div class="content_area frm_box2">
+                              <form action="" method="post" enctype="multipart/form-data">
+                                  <div class="lable01">Book Name :</div>
+                                  <div class="field01">
+                                        <input name="" type="text" />
+                                  </div>
+                                  <div class="error-message">* Required Field</div>
+                                  <div class="clr"></div>
+                                  
+                                  <div class="lable01">&nbsp;</div>
+                                  <div class="field01">
+                                        <input name="" type="button" class="btn"  value="Update"/><input name="" type="reset" class="btn"  value="Cancel" onclick="window.location=''"/>
+                                  </div>
+                              </form>
+                              <div class="clr"></div>
+                        </div>
+            </div>
+      </div>
+      <div class="bot"><div>&nbsp;</div></div>
+</div>
+<!--edit 5 a day end -->
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+$(document).ready(function(arg) {
+    
+    // for AJAX page-submission...
+    optionsArr = {
+        beforeSubmit:  showBusyScreen,  // pre-submit callback 
+        success:       validateFrm, // post-submit callback 
+        url:        admin_base_url + "trade_center/trade_center_landing_page/post_data"
+    }; 
+});
+function form_post()
+{
+    
+    $('#trade_center_landing_frm').ajaxSubmit(optionsArr);
+    
+    return false;
+    
+    //var values = $('#trade_center_landing_frm').serialize();
+    
+}
+// validate ajax-submission...
+function validateFrm(data)
+{
+    
+    var data = JSON.parse(data);
+hideBusyScreen();
+showUIMsg(data.msg);
+
+     $('.error-message').each(function(i){
+            $(this).attr('style','display:none');
+        });
+        
+    if(data.result=='failure') 
+    {
+       
+        
+        for ( var id in data.arr_messages ){
+            
+            if( $('#err_'+id) != null ) {
+                $('#err_'+id).html(data.arr_messages[id]);
+                $('#err_'+id).css('display', 'block');
+
+                //$('#err_'+id).attr('style','margin-left: 12px;');
+            }
+        }
+        
+    }
+    else {
+        
+         
+       
+    }
+
+}
+
+function clear_box(){
+      
+          $('#trade_center_landing_frm')[0].reset();
+          $('.error-message').hide();
+      
+  }
+
+
+</script>

@@ -1,0 +1,37 @@
+ <!-- cogtime projects -->
+<div class="cogtime_projects">
+                                    <div class="nw-right-heading">
+                                          <div class="left">
+                                                <h4>CoGTime Projects </h4>
+                                          </div>
+                                          <div class="right exp-col02"><img src="images/minus-white.png" alt=""  class="plus-minus" /></div>
+                                          <div class="right exp-col02" style="display:none;"><img src="images/plus-white.png" alt="" class="plus-minus" /></div>
+                                    </div>
+                                    <div class="content" id="switchdiv02">
+                                    <?php 
+										if(is_array($latest_charity_project))
+										{
+										
+										foreach($latest_charity_project as $result){
+										?>
+                                          <div class="project_box">
+                                                <p class="blue_bold12"><strong><?=$result['title']?></strong></p>
+                                                <p><?=my_substr(html_entity_decode(htmlspecialchars_decode($result['description']),ENT_QUOTES,'utf-8'), 97);?></p>
+                                                <p><?=$result['city']?>, <?=$result['state']?>, <?=$result['country']?></p>
+                                                <p>Duration: <?=$result['start_date']?> to <?=$result['end_date']?></p>
+                                          </div>
+                                          <?php }
+										}
+										
+										
+									?>
+                                         <!-- <div class="project_box">
+                                                <p class="blue_bold12"><a href="javascript:void(0);">Halloween Project</a></p>
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do  tempor...</p>
+                                                <p class="read-more">[<a href="charity-project-home.php">read more</a>]</p>
+                                          </div>-->
+                                          <div class="clr"></div>
+                                        <!--  <div class="view_more"><a href="suggest-projects/charity-project-home.html">[see all]</a></div>-->
+                                    </div>
+                              </div>
+ <!-- /cogtime projects -->

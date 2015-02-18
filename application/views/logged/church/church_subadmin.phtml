@@ -1,0 +1,100 @@
+<?php
+	include(APPPATH ."views/layouts/church_admin_header.phtml");
+?>
+<script language="javascript">
+
+</script>
+<!-- CONTENT SECTION -->
+<?php //pr($church_arr); ?>
+
+<div class="container-body">
+   <?php
+	//include(APPPATH ."views/layouts/church_admin_left.phtml");
+?>
+    <div class="right-panel">
+    <div class="bottom15"><h2>Sub Admin</h2>
+  <a title="Add New" class="add-button" href="<?php echo base_url().'church-addsubadmin'?>">Add New</a>
+  <div class="clear"></div>
+  </div>
+   <div class="right-box">
+
+           <?php /*?> <?php
+            if($member_arr)
+            {
+             ?>
+             <ul>
+                <li class="head">
+                <span class="sl">S no.</span>
+                <span class="name">Name</span>
+                 <span class="joind-on">Joined on</span>
+                <span class="email">Email</span>
+                <span class="action">Action</span>
+                <!--<span class="fileapprove">File approved/<br>Not Approved</span>-->
+               
+                </li>
+                <?php
+                $i = 1;
+                foreach ($member_arr as $member) {
+                    ?>
+                     <li class="">
+                    <span class="sl"><?php echo $i++; ?></span>
+                    <span class="name"><?php echo $member->s_first_name.' '.$member->s_last_name?></span>
+                    <span class="joind-on"><?php echo getShortDate($member->created_date,3)?></span>
+                    <span class="email"><?php echo $member->s_email?></span>
+                    <span class="action"><a href="<?php echo base_url().'church-editsubadmin/'.$member->mid?>">Edit</a></span>
+                    
+                    </li>
+                    <?php
+                }
+               ?>
+            </ul>
+
+             <?php   
+            }
+             else
+            {
+                ?><li class="">No Records</li><?php
+            }
+            ?>
+           <?php */?>
+            <div class="church-time-table" style="margin-right:0;" id="table_content">
+            	<?= $result_content ?>
+
+            </div>
+        <div class="spacer"></div>
+        
+        
+     
+
+    </div>
+    
+     
+    
+    </div>
+    
+    </div>
+<!-- /CONTENT SECTION -->
+<div class="clr"></div>
+<!-- FOOTER SECTION -->
+<?php include(APPPATH."views/layouts/church_footer.phtml");?>
+<!-- /FOOTER SECTION -->
+<script type="text/javascript">
+function deleteGroup()
+    {
+        hide_dialog();
+        showBusyScreen();
+        $.ajax({
+            type: 'POST',
+            url: base_url + 'logged/church/delete_subadmin/',
+            dataType: 'json',
+            data: ({'gr_id': $('#i_del_id').val()}),
+            success: function(data, status) {
+                hideBusyScreen();
+                showUIMsg(data.msg);
+                //$('#table_content').html(data.html);
+				window.location.reload();
+            }
+        });
+    }
+</script>
+

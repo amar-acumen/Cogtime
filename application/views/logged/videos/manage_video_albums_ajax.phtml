@@ -1,0 +1,65 @@
+<?php
+//pr($manage_my_videos_album_content);
+if(count($manage_my_videos_album_content))
+{
+    foreach($manage_my_videos_album_content as $album)
+    {
+        $IMG = base_url()."uploads/user_videos_album/".getThumbName($album['s_video_album_image'],'thumb');
+        $NO_IMG = base_url()."uploads/user_videos_album/no_image.gif";
+        
+        $organize_url = base_url()."video-albums/".$album['id']."/organize-video.html"
+        
+?>            
+
+            <div class="shade_box_blue">
+                <div class="left_div02" style="width:300px;">
+                <a href="<?php echo get_video_album_url($album['id'], $album['s_name'])?>"><img src="<?php if($album['s_video_album_image']!='') echo $IMG; else echo $NO_IMG?>" alt=""  class="img_brd"/></a>
+                     <p class="blue_bold12"> <a  href="<?php echo get_video_album_url($album['id'], $album['s_name'])?>"><strong><?php echo my_substr(ucfirst($album['s_name']),22)?></strong></a></p>
+                     
+                     
+                     <p style="margin : 3px;"><?= $album['count']." Video(s)"?></p>
+           
+           
+           
+                    <p><?php echo nl2br(substr($album['s_desc'],0,80))?><?php if(strlen($album['s_desc'])>60) echo "...";?></p>
+                </div>
+                <div class="right_div02">
+                    <div class="box01">
+                        <p class="date-time">Created on : <?php echo getShortDate($album['dt_created_on'],5)?></p>
+                        <p class="add-remove-friend">
+                            <img src="images/icons/edit.png" alt="" /> <a href="<?php echo get_edit_video_album_url($album['id'],$album['s_name'])?>">Edit  </a>  &nbsp;      
+                            <img src="images/icons/delete.png" alt="" /> <a href="javascript:void(0);" onclick="show_dialog('delete-page-popup');set_del_album_id(<?php echo $album['id']?>)">Delete</a>
+                            <?//return delete_video_album_(<?php echo $album['id']?>
+                        </p>
+                    </div>
+                     <p class="add-remove-friend"><img src="images/icons/org.png" alt="" /> <a  href="<?php echo $organize_url;?>" >Organize</a>
+                       &nbsp;  &nbsp;                  
+                       <!-- <a href="javascript:void(0);"><img src="images/up.png"  alt="" /></a><a href="javascript:void(0);"><img src="images/dwn.png" alt="" style="margin-right:8px;" /></a>
+                       -->
+                     </p>
+                </div>
+                <div class="clr"></div>
+            </div>
+<?php
+    }   // endforeach
+}
+else{
+            echo  '<div class="shade_box_01" style="padding-top:5px;"><div  class="shade_norecords" style="width:380px;"><p class="blue_bold12">No Video Albums.</p></div></div>';
+    }
+?>
+
+<?php /*
+if($page_links){ ?>
+<div class="pagination">
+
+    <div class="left">Viewing Page <?=$current_loaded_page_no?> of <?=$total_pages?> </div>
+    
+    <div class="right">
+           <ul class="small-paging">
+            <?=$page_links?> 
+            </ul>
+    </div>
+</div>
+<?php  }
+*/
+?>

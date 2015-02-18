@@ -1,0 +1,270 @@
+			<?php  #pr($arr_request); 
+					if(count($arr_request)){
+						foreach($arr_request as $key=> $val){
+							
+							$IMG = base_url().'uploads/prayer_wall_photos/'.getThumbName($val['s_image_name'],'mid_thumb');
+							$DESC = my_substr(html_entity_decode(htmlspecialchars_decode($val['s_description']),ENT_QUOTES,'utf-8'),150);
+							$subject = my_substr(html_entity_decode(htmlspecialchars_decode($val['s_subject']),ENT_QUOTES,'utf-8'),70);
+							
+							$type = ($val['posted_by_admin'] == '' )?'prayer':'intercession';
+			?>					
+                                <div class="tithe-time-mid">
+									<div class="txt_content">
+                                         <a href="javascript:void(0);">
+                                        <!-- <img class="pro_photo3" alt="" src="images/prayer-wall-1-thumb.jpg">-->
+                                         <div  title="prayer" style="background:url(<?=$IMG?>) no-repeat center;width:150px; height:74px;" class="pro_photo3"></div></a>
+                                              <div  class="left">
+
+                                                <p><a href="<?=base_url()?>prayer-wall/<?=$val['id']?>/prayer-wall-request-detail.html"><?=$subject?></a></p>    
+                                                <p> <a href="<?=base_url()?>prayer-wall/<?=$val['id']?>/prayer-wall-request-detail.html"><?=nl2br($DESC)?></a></p>
+												<p class="blue_bold12 name-heading">Updated on: <?=get_time_elapsed($val['dt_insert_date'])?></p>
+                                                <p class="light_blue12"><strong><?=($val['s_profile_name'] =='')?$val['posted_by_admin']:$val['s_profile_name']?> <?=$val['s_country']?></strong></p>
+												<p class="tithe-time-date">From: <?=getShortDateWithTime($val['dt_start_date'], 9)?> To: <?=getShortDateWithTime($val['dt_end_date'], 9)?>
+</p>
+                               
+                                              </div>
+											  
+                                              <div class="clr"></div>
+                                              
+                                           </div>
+                                     <ul class="list-tithe-time">
+ 										<?php
+										 	if($type == 'prayer'){
+										?>                                         
+											   <?php if($val['i_user_id'] != intval(decrypt($this->session->userdata('user_id'))) && $val['CommitExists'] == 0){?> 
+                                                        <li class="first" id="commit_li<?=$val['id']?>"><span><a href="javascript:void(0);"  onclick="show_commit_reply(<?=$val['id']?>)">Commit</a></span></li> 
+                              
+                                                        <li><a href="javascript:void(0);" onclick="view_tithe_commits(<?=$val['id']?>)" >Commitments <span id="total_commits<?=$val['id']?>">(<?=$val['total_commitments']?>)</span></a></li>
+                              
+                                              <?php }else{ ?>
+                                                       <li class="first" ><a href="javascript:void(0);"  onclick="view_tithe_commits(<?=$val['id']?>)" >Commitments <span id="total_commits<?=$val['id']?>">(<?=$val['total_commitments']?>)</span></a></li>
+                                              <?php } ?>
+                                          
+                                        <?php 
+											}
+											else{
+										?>
+                                        		<?php if($val['commit_exists'] == 0){?> 
+                          							<li class="first" id="commit_li<?=$val['id']?>"><span><a href="javascript:void(0);"  onclick="show_intercession_reply(<?=$val['id']?>)">Commit</a></span></li> 
+                          
+                          							<li><a href="javascript:void(0);" onclick="view_intercession_commits(<?=$val['id']?>)" >Commitments <span id="total_commits<?=$val['id']?>">(<?=$val['total_commitments']?>)</span></a></li>
+                          
+												<?php }else{ ?>
+                                                         <li class="first" ><a href="javascript:void(0);"  onclick="view_intercession_commits(<?=$val['id']?>)" >Commitments <span id="total_commits<?=$val['id']?>">(<?=$val['total_commitments']?>)</span></a></li>
+                                                <?php } ?>
+                                        
+                                        <?php 
+											}
+										?>
+                                     </ul>
+										   
+									<div class="tithe-content" >
+										   <!--Add Commitment-->
+											<div class="frm_box slide-tgl" id="commit_form<?=$val['id']?>">
+												<div class="">Add Commitment</div>
+                                                <form  id="add_commit<?=$val['id']?>" action="" method="post" enctype="multipart/form-data">
+												<div class="tithe_shade_box encouragement-pan">
+												 
+												  <div class="tithe-txt-nw">Word of Encouragement </div>
+												  
+                                                  <textarea onblur="if(this.value=='')this.value='Max 140 Characters';" onfocus="if(this.value=='Max 140 Characters')this.value='';" rows="" cols="" name="ta_commit_text" id="ta_commit_text_<?=$val['id']?>"  onKeyDown="limitTextarea(this.form.ta_commit_text,this.form.countdown,140);" 
+onKeyUp="limitTextarea(this.form.ta_commit_text,this.form.countdown,140);" class="amount-input tithe-input ">Max 140 Characters</textarea>
+                              					 <span id="err_message<?=$val['id']?>" class="error-message"></span> 
+												  <div class="clr"></div>
+                                                  
+                                                    <div class="margin-top-tithe" style="float:left;">
+                                                     <label class="small">From:</label>
+                                                      <div class="slide-tgl-field01">
+                                                        <div class="lbl01"  style=" width:165px;">
+                                                          <input  type="text"  value="" name="commit_date_to_<?=$val['id']?>" id="commit_date_to_<?=$val['id']?>"  readonly="readonly" style="width:125px;"/>
+                                                          <img src="images/icons/cal.png" class="tithe-your-calender-icon2 right" alt=""  onclick="$(this).prev().focus()"  />
+                                                           </div>
+                                                            <span id="err_start_date<?=$val['id']?>" class="error-message"></span> 
+                                            	       </div>
+                                                       <div class="clr"></div>
+                                                      <label class="small">To:</label>
+                                                       <div class="lbl01"  style=" width:165px;">
+                                                          <input type="text"  value="" name="commit_date_end1_<?=$val['id']?>" id="commit_date_end1_<?=$val['id']?>"  readonly="readonly" style="width:125px;"/>
+                                                          <img src="images/icons/cal.png" class="tithe-your-calender-icon2 right" alt=""  onclick="$(this).prev().focus()"  />
+														  <script type="text/javascript">
+															var dateToday;
+																
+															   $(function(){
+																 var inputDate = $("#commit_date_to_<?=$val['id']?>");
+																 var changeYearButtons = function() {
+																	setTimeout(function() {
+																	   $('.NextYrClass').remove();
+																	   $('.PrevYrClass').remove();
+																	   var widgetHeader = inputDate.datepicker("widget").find(".ui-datepicker-header");
+																	   //you can opt to style up these simple buttons tho
+																	   var prevYrBtn = $('<button title="PrevYr" class="PrevYrClass"></button>');
+																	   prevYrBtn.bind("click", function() {
+																		$.datepicker._adjustDate(inputDate, -1, 'Y');
+																	   });
+																	   var nextYrBtn = $('<button title="NextYr" class="NextYrClass"> </button>');
+																	   nextYrBtn.bind("click", function() {
+																		$.datepicker._adjustDate(inputDate, +1, 'Y');
+																	 
+																	   });
+																	   prevYrBtn.appendTo(widgetHeader);
+																	   nextYrBtn.appendTo(widgetHeader);
+															  
+																  }, 0);
+																 };
+															  
+																	$("#commit_date_to_<?=$val['id']?>").datepicker({
+																			beforeShow: changeYearButtons,
+																			onChangeMonthYear: changeYearButtons,
+																			dateFormat : 'yy-mm-dd',
+																			minDate: new Date(<?=(date('Y'))?>, <?=(date('m')-1)?>, <?=(date('d'))?> ,  0, 00),
+																			//controlType: 'select',
+																			//stepMinute: 15
+																		   });
+																		
+															  
+															  //$("#commit_date_to_<?=$val['id']?>").datetimepicker();
+															  });
+															  
+																		
+															
+															  
+															   $(function(){
+																 var inputDate = $("#commit_date_end1_<?=$val['id']?>");
+																 var changeYearButtons = function() {
+																	setTimeout(function() {
+																	   $('.NextYrClass').remove();
+																	   $('.PrevYrClass').remove();
+																	   var widgetHeader = inputDate.datepicker("widget").find(".ui-datepicker-header");
+																	   //you can opt to style up these simple buttons tho
+																	   var prevYrBtn = $('<button title="PrevYr" class="PrevYrClass"></button>');
+																	   prevYrBtn.bind("click", function() {
+																		$.datepicker._adjustDate(inputDate, -1, 'Y');
+																	   });
+																	   var nextYrBtn = $('<button title="NextYr" class="NextYrClass"> </button>');
+																	   nextYrBtn.bind("click", function() {
+																		$.datepicker._adjustDate(inputDate, +1, 'Y');
+																	 
+																	   });
+																	   prevYrBtn.appendTo(widgetHeader);
+																	   nextYrBtn.appendTo(widgetHeader);
+															  
+																  }, 0);
+																 };
+															  
+																	$("#commit_date_end1_<?=$val['id']?>").datepicker({
+																			beforeShow: changeYearButtons,
+																			onChangeMonthYear: changeYearButtons,
+																			dateFormat : 'yy-mm-dd',
+																			minDate: new Date(<?=(date('Y'))?>, <?=(date('m')-1)?>, <?=(date('d'))?> ,  0, 00),
+																			//controlType: 'select',
+																			//stepMinute: 15
+																		   });
+																		
+															  
+																
+															});
+															
+														</script>
+                                                          
+                                                          <div class="clr"></div>
+                                                           <span id="err_end_date<?=$val['id']?>" class="error-message"></span> 
+
+                                                   	   </div>
+                                                       
+                                                  </div>
+													<div id="day_block" style="float:left; margin-top:4px;">
+                                       <label> Day of Week:</label>
+                                        <div class="secttion-padding">
+                                              <table class="cal_table" border="0" cellspacing="0" cellpadding="0">
+                                                    <tr>
+                                                          <th class="nw-cal_table">S</th>
+                                                          <th class="nw-cal_table">M</th>
+                                                          <th class="nw-cal_table">T</th>
+                                                          <th class="nw-cal_table">W</th>
+                                                          <th class="nw-cal_table">T</th>
+                                                          <th class="nw-cal_table">F</th>
+                                                          <th class="nw-cal_table">S</th>
+                                                    </tr>
+                                                    <tr id="weekdays_tr<?=$val['id']?>">
+                                                          <td valign="middle">
+                                                          <input name="chk_day[]"  type="checkbox" value="Sunday" />
+                                                          </td>
+                                                          <td valign="middle">
+                                                          <input name="chk_day[]" type="checkbox" value="Monday" />
+                                                          </td>
+                                                          <td valign="middle">
+                                                          <input name="chk_day[]" type="checkbox" value="Tuesday" />
+                                                          </td>
+                                                          <td valign="middle">
+                                                          <input name="chk_day[]" type="checkbox" value="Wednesday" />
+                                                          </td>
+                                                          <td valign="middle">
+                                                          <input name="chk_day[]" type="checkbox" value="Thursday" />
+                                                          </td>
+                                                          <td valign="middle">
+                                                          <input name="chk_day[]" type="checkbox" value="Friday" />
+                                                          </td>
+                                                          <td valign="middle">
+                                                          <input name="chk_day[]" type="checkbox" value="Saturday" />
+                                                          </td>
+                                                    </tr>
+                                              </table>
+                                            
+                                        </div>
+                                          <span id="err_chk_day<?=$val['id']?>" class="error-message err_new"></span> 
+                                        <div class="clr"></div>
+                                    </div>
+											 		<div class="clr"></div>
+                                                  
+                                                  
+                                                  
+                                <div class="pray-time-panel">
+                                    <label> Prayer Time: </label>
+                                    <div class="prayer-time secttion-padding time-list-adjust" id="time_tr<?=$val['id']?>">
+                                         	<div class="lbl02"><input name="chk_time[]" type="checkbox" value="00:00:00-03:00:00" /> 0:00 – 3:00</div>
+                                            <div class="lbl02"><input name="chk_time[]" type="checkbox" value="03:00:00-06:00:00" /> 3:00 – 6:00</div>
+                                            <div class="lbl02"><input name="chk_time[]" type="checkbox" value="06:00:00-09:00:00" /> 6:00 – 9:00</div>
+                                            <div class="lbl02"><input name="chk_time[]" type="checkbox" value="09:00:00-12:00:00" /> 9:00 – 12:00</div>
+                                            <div class="lbl02"><input name="chk_time[]" type="checkbox" value="12:00:00-15:00:00" /> 12:00 – 15:00</div>
+                                            <div class="lbl02"><input name="chk_time[]" type="checkbox" value="15:00:00-18:00:00" /> 15:00 – 18:00</div>
+                                            <div class="lbl02"><input name="chk_time[]" type="checkbox" value="18:00:00-21:00:00" /> 18:00 – 21:00</div>
+                                            <div class="lbl02"><input name="chk_time[]" type="checkbox" value="21:00:00-23:00:00" /> 21:00 – 23:00</div>
+                                </div>
+                                	  <span id="err_chk_time<?=$val['id']?>" class="error-message err_new"></span> 
+                                </div>
+												</div>  
+												  
+												  
+												  
+												<div class="clr"></div>
+											  
+												
+												<div class="small-margin" > 
+                                                <input name="" type="button" value="Post"  class="yellow-btn" onclick="post_<?=$type?>_commit(<?=$val['id']?>)"/>
+                                                </div>
+												<div class="clr"></div>
+                       							</form>
+                      
+                       
+											</div>
+										   <!--Add Commitment-->
+										   
+										    <!--View Commitments-->
+											<div class="frm_box slide-tgl" id="commitment-container<?=$val['id']?>">
+												<div class="">View Commitments</div>
+												
+												 <DIV id ="commitment_content_<?=$val['id']?>">
+                                                  <!--commitment start -->
+                                                  
+                                                  <!--commitment end -->
+                                                  </DIV>
+												</div>
+										   <!--View Commitments-->
+										
+										   </div>
+								
+								</div>
+              <?php			}
+						}
+			  ?>
+                                

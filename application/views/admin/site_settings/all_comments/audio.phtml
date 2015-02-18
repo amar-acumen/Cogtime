@@ -1,0 +1,26 @@
+<?php
+//pr($info_arr);
+foreach ($info_arr as $info){
+   // $IMG = base_url()."uploads/user_audio_album_photos/".getThumbName($info['s_image_name'],'thumb');
+    //echo $ALBUM_URL = get_audio_album_detail_url($info['i_id_audio_album'], $info['s_audio_file_name] ']);
+    ?>
+<div class="audio-main">
+        <img src="<?= base_url(); ?>images/audio-pic.png" alt="Audio" title="Audio" />
+        <div class="audio-details">
+        	<h3><?= $info['s_title'] ?></h3>
+            <h4>Audio Artist : <?= $info['s_artist']?></h4>
+            <h4>Audio Genre : <?= $info['s_genre']?></h4>
+            <p>  <?= $info['s_desc'] ?></p>
+        </div>
+        </div>
+        <?php
+}
+?>
+<style type="text/css">
+ .audio-main{ background:#fafafa; border:1px solid #ccc; padding:10px; overflow:hidden; margin-bottom:15px;}
+.audio-main img{ float:left; margin-right:15px; border:1px solid #ccc;  padding:3px;}
+.audio-details{}
+.audio-details h3{ font-family:arial; font-size:19px; font-weight:bold; color:#62c3bc; padding:0; margin:0 0 5px 0; line-height:normal;}
+.audio-details h4{ padding:0; margin:0 0 5px 0; font-size:14px; font-weight:normal; color:#013d62; line-height:normal;}
+.audio-details p{ font-family:Arial; font-size:13px; line-height:normal;}
+</style>

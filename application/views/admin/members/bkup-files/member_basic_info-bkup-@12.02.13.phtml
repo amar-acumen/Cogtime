@@ -1,0 +1,217 @@
+<script type="text/javascript">
+<!--
+    function showBasicEdit(obj) {
+        $(obj).parents('.text-table').hide();
+        if($(obj).parents('.sec-detail').find('.form-table').css('display')=='none'){
+            $(obj).parents('.sec-detail').find('.form-table').show();
+            $(obj).parents('.sec-detail').find('.dd').show();
+        }
+    }
+    
+    
+    // when "cancel" button clicked...
+    function hideBasicEdit(obj) {
+        
+        //// remove those extra "add-more" divs...
+       /* var actual_edu_rec_count = parseInt( $('#actual_edu_divs').val() );
+        var max_no_of_tbls = 5;
+        var start_loop = actual_edu_rec_count+1;
+        for(i=start_loop; i<=max_no_of_tbls; i++) {
+            tblID = "#edu_"+ i;
+            $(obj).parents('.sec-detail').find(tblID).remove();
+        }
+        $('#h_edu').val( actual_edu_rec_count );    // resetting edu-count...
+        $('#deleted_edu_divs').val('');        // resetting deleted record-count to 0 again...
+      */  
+        
+        $(obj).parents('.sec-detail').find('.form-table').hide(); 
+        if($(obj).parents('.sec-detail').find('.text-table').css('display')=='none'){
+            $(obj).parents('.sec-detail').find('.text-table').show();
+            $(obj).parents('.sec-detail').find('.dd').hide();
+            
+        }
+        
+    }
+//-->
+</script>
+
+
+  <?php //pr($result); ?>
+<div class="lavel-01">
+        <!--title section -->
+        <div class="sec-title">
+            <span class="title-left"></span>
+            <div class="title-body"><h2>Basic Information</h2></div>
+            <span class="title-right"></span>
+        </div>
+        <!--/title section -->
+        <!--detail section -->
+
+        
+        <div class="sec-detail">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0" class="member-table text-table" id="member_basic_info_details">
+            <?php
+            $church_add = $result['s_church_address'];
+            $postcode   = $result['s_church_postcode'];
+            $city     = $result["s_church_city"];
+            $state    = $result["s_church_state"];
+            $country  = get_country_name_by_id($result["i_church_country_id"]);  
+            
+            $basic_address=array();
+            if(!empty($church_add))    
+                $basic_address['church_add']=$church_add;
+            if(!empty($postcode))    
+                $basic_address['postcode']=$postcode;
+            if(!empty($city))
+                $basic_address['city']=$city;
+            if(!empty($state))
+                $basic_address['state']=$state;
+            if(!empty($country))    
+                $basic_address['country']=$country;
+            
+            
+            $address= implode(', ',$basic_address);
+        /*
+          $address = (isset($result['s_church_address']))? $result['s_church_address']:"";
+          $address .= ($result['s_church_postcode'] != '')? ', '.$result['s_church_postcode']:"";
+          $address .= (isset($result['s_church_city']))? ', '.$result['s_church_city']:"";
+          $address .= (isset($result['s_church_state']))? ', '.$result['s_church_state']:"";
+          $address .= (isset($result['s_church_country']))? ', '.$result['s_church_country']:"";
+        */  
+        
+        ?>
+                <tr>
+                  <td align="left" valign="top" height="25" width="180" class="label">Languages I Speak</td>
+                  <td align="left" valign="top" width="20" class="label">:</td>
+                  <td align="left" valign="top" ><?php echo $result['s_languages'];?></td>
+                </tr>
+                <tr>
+                  <td align="left" valign="top" height="25" width="180" class="label">About Me</td>
+                  <td align="left" valign="top" width="20" class="label">:</td>
+                  <td align="left" valign="top" ><?php echo $result['s_about_me'];?></td>
+                </tr>
+                <tr>
+                  <td align="left" valign="top" height="25" width="180" class="label">My Church Name</td>
+                  <td align="left" valign="top" width="20" class="label">:</td>
+                  <td align="left" valign="top" ><?php echo $result['s_church_name'];?></td>
+                </tr>                            
+                <tr>
+                  <td align="left" valign="top" height="25" width="180" class="label">Church Location</td>
+                  <td align="left" valign="top" width="20" class="label">:</td>
+                  <td align="left" valign="top" ><?php echo $address;?></td>      
+                </tr>
+                <tr>
+                  <td align="left" valign="top" height="25" width="180" class="label">Church Phone</td>
+                  <td align="left" valign="top" width="20" class="label">:</td>
+                  <td align="left" valign="top" ><?php echo $result['s_church_phone'];?></td>
+                </tr>
+                <tr>
+                  <td align="left" valign="top" height="25" width="180" class="label">Denomination</td>
+                  <td align="left" valign="top" width="20" class="label">:</td>
+                  <td align="left" valign="top" ><?php echo $result['s_name'];?></td>    
+                </tr>
+                
+                
+                <tr>
+                  <td align="left" valign="bottom" height="40" colspan="2">&nbsp;</td>
+                  <td align="left" valign="bottom"><a href="javascript:void(0);" class="edit-btn">Edit</a></td>
+                </tr>
+            </table>
+            
+            <form id="frmManageBasicProfile"  method="post" action="<?=admin_base_url()?>members/member_details/modify_my_profile_basic_info_ajax/<?=$result['id']?>" onsubmit="return modify_my_basic_profile_ajax()" enctype="multipart/form-data">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0" class="member-table form-table">
+                <tr>
+                  <td align="left" valign="top" height="30" width="180" class="label">Languages I Speak</td>
+                  <td align="left" valign="top" width="20" class="label">:</td>
+                  <td align="left" valign="top" ><input type="text" name="txt_lang" id="txt_lang" value="<?php echo $result['s_languages'];?>"/></td>
+                </tr>
+                <tr>
+                  <td align="left" valign="top" height="70" width="180" class="label">About Me</td>
+                  <td align="left" valign="top" width="20" class="label">:</td>
+                  <td align="left" valign="top" ><textarea name="txt_about" id="txt_about" cols="" rows=""><?php echo $result['s_about_me'];?></textarea></td>
+                </tr>
+                <tr>
+                  <td align="left" valign="top" height="30" width="180" class="label">My Church Name</td>
+                  <td align="left" valign="top" width="20" class="label">:</td>
+                  <td align="left" valign="top" ><input name="txt_cname" id="txt_cname" type="text" value="<?php echo $result['s_church_name'];?>"/></td>
+                </tr>
+                
+                 <tr>
+                  <td align="left" valign="top" height="30" width="180" class="label">Church Address</td>
+                  <td align="left" valign="top" width="20" class="label">:</td>
+                  <td align="left" valign="top" ><input type="text" name="txt_caddress" id="txt_caddress" value="<?php echo $result['s_church_address'];?>"></td>
+                </tr>
+                
+                <tr>
+                  <td align="left" valign="top" height="30" width="180" class="label">Church City</td>
+                  <td align="left" valign="top" width="20" class="label">:</td>
+                  <td align="left" valign="top" ><input type="text" name="txt_ccity" id="txt_ccity" value="<?php echo $result['s_church_city'];?>"></td>
+                </tr>
+                <tr>
+                  <td align="left" valign="top" height="30" width="180" class="label">Church State</td>
+                  <td align="left" valign="top" width="20" class="label">:</td>
+                  <td align="left" valign="top" ><input type="text" id="txt_cstate" name="txt_cstate" value="<?php echo $result['s_church_state'];?>"></td>
+                </tr>
+                <tr>
+                  <td align="left" valign="top" height="30" width="180" class="label">Church Country</td>
+                  <td align="left" valign="top" width="20" class="label">:</td>
+                  <td align="left" valign="top" >
+                  <select name="txt_ccountry" class="txt_basic_country" style="width:238px; margin-bottom:6px;">
+                     <option value="-1">Select</option>
+                     <?= makeOptionCountry('', encrypt($result['i_church_country_id'])) ?>
+                     
+                  </select>
+                  <script type="text/javascript">
+                      $(document).ready(function(arg) {
+                          $(".txt_basic_country").msDropDown();
+                          //$("#txt_country").hide();
+                          //$('#txt_country').css("width", "20px"); 
+                      })
+                  </script>
+                  
+                  </td>
+                </tr>
+                
+                <tr>
+                  <td align="left" valign="top" height="30" width="180" class="label">Church Postcode</td>
+                  <td align="left" valign="top" width="20" class="label">:</td>
+                  <td align="left" valign="top" ><input type="text" name="txt_cpostcode" id="txt_cpostcode" value="<?php echo $result['s_church_postcode'];?>"></td>
+                </tr>
+                
+                <tr>
+                  <td align="left" valign="top" height="30" width="180" class="label">Church Phone</td>
+                  <td align="left" valign="top" width="20" class="label">:</td>
+                  <td align="left" valign="top" ><input type="text" id="txt_cphone" name="txt_cphone" value="<?php echo $result['s_church_phone'];?>" /></td>
+                </tr>
+                <tr>
+                  <td align="left" valign="top" height="30" width="180" class="label">Denomination</td>
+                  <td align="left" valign="top" width="20" class="label">:</td>
+                  <td align="left" valign="top" >
+                  <select name="txt_denomination" id="txt_denomination" style="width:260px;">
+                       <option value="<?=encrypt(0)?>"><?="Denomination"?></option>
+                       <?=makeOptionDenomination(encrypt($result['i_id_denomination']));?>
+                  </select>
+
+                  <script type="text/javascript">
+                      $(document).ready(function(arg) {
+                          $("#txt_denomination").msDropDown();
+                          //$("#txt_denomination").hide();
+                      })
+                  </script>
+                  </td>
+                </tr>
+                
+                
+                <tr>
+                  <td align="left" valign="bottom" height="30" colspan="2">&nbsp;</td>
+                  <td align="left" valign="bottom">
+                  <input type="hidden" name="is_basic_submitted" id="is_basic_submitted" value="Y" />
+                  <input name="" type="submit" class="btn"  value="Update"/>
+                  <input name="" type="reset" class="btn cancel_btn"  value="Cancel" />
+                  </td>
+                </tr>
+            </table>
+            </form>
+        </div>
+        <!--/detail section -->
+</div>

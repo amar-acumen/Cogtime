@@ -1,0 +1,142 @@
+<?php //pr($arr_photos)?>
+
+<?php
+	if(count($arr_photos)>0){
+		foreach($arr_photos as $val):
+				
+		 $IMG = base_url()."uploads/user_photos/".getThumbName($val['s_photo'],'thumb');
+		 $photo_link = get_photo_detail_url($val['id'], $val['s_title']);
+?>
+
+        <div class="shade_box_01">
+         <div class="checkbox-div"><?php /*?><input name="chk_photo<?=$val['id']?>" id="chk_photo<?=$val['id']?>" type="checkbox" value="<?=$val['id']?>" class="check-box" /><?php */?></div>
+        <div class="left_div02"> 
+         <a href="<?=$photo_link?>"><div class="img_brd" style="background:url(<?=$IMG?>) no-repeat center;max-width:122px; max-height:82px; cursor:pointer;"  ></div><!--<img src="<?$IMG?>" alt=""  class="img_brd"/>--></a>
+           <p class="blue_bold12"> <a href="<?=$photo_link?>"><?=my_substr($val['s_title'], 35);?></a></p>
+           <p class="date-time">Uploaded on : <?=getShortDate($val['dt_created_on'], 5)?></p>
+           <p><?=my_substr($val['s_description'] , 160)?></p>
+        </div>
+        
+        <div class="light_heading"> 
+             <div class="left">
+                 <a href="javascript:void(0);" class="comments_div<?=$val['id']?>"  onclick="return show_comments(<?=$val['id']?>)<?php /*?>show_dialog('view_comments_div')<?php */?>">Comments (<?php if(empty($val['total_comments'])){ echo '0'; }elseif(!empty ($val['total_comments'])){ echo $val['total_comments'];} ?>)</a>
+				&nbsp; |   &nbsp; 
+				<a href="javascript:void(0);"   onclick="return show_people_liked(<?=$val['id']?>); " class="liked_by_<?=$val['id']?>">Liked by (<?=count_photo_like_link($val['id'],'photo')?>)</a>
+			 </div>
+             
+        <?php if((show_photo_like_link($val['id'],'photo') == TRUE) ) { 
+		?>
+                <div class="right"><a href="javascript:void(0);"  >Comment</a> &nbsp; |   &nbsp; <a href="javascript:void(0);" id="like_count_<?=$val['id']?>" onClick="windowLike(<?=$val['id']?>,'Like')">Like</a>  </div>                
+       <?php } 
+	   		else{ 
+	   ?>
+         		<div class="right"><a href="javascript:void(0);" >Comment</a> &nbsp; |   &nbsp; <a href="javascript:void(0);" id="like_count_<?=$val['id']?>" >Like</a> </div>
+          
+       <?php }?>
+             
+              
+         </div> 
+		 <!-- slide section start -->
+            <div class="new-wl">
+            <!--comment section start-->
+                <div  class="comments-number content-width" >
+                  <div class="comments-number-mid">
+                      <div class="heading">
+                            <div class="left">
+                                  <h4><img class="cmnt" src="images/icons/cmnt2.png" alt="" /> <span class="comments_div<?=$val['id']?>">Comments (<?=$val['total_comments']?>)</span> </h4>
+                                  <img class="wal-minus" alt="" src="images/minus-white.png" />
+                            </div>
+                       </div>
+                       <DIV id="photo_comment_div<?=$val['id']?>"></DIV>
+                    </div>
+                </div>
+            <!--comment section end-->	
+            <!--like by section start-->
+                <div  class="comments-number content-width" >
+                  <div class="comments-number-mid">
+                      <div class="heading">
+                            <div class="left">
+                                  <h4><img alt="" src="images/heart2.png" class="cmnt" /> <span class="liked_by_<?=$val['id']?>">Liked by (<?=count_photo_like_link($val['id'],'photo')?>)</span> </h4>
+                                   <img class="wal-minus" alt="" src="images/minus-white.png" />
+                            </div>
+                      </div>
+                      
+                        <div class="shade_box_white" id="photo_like_div<?=$val['id']?>">
+                        </div>
+                   </div>
+            	</div>
+            <!--like by section end-->
+                
+            </div>
+            <div class="new-wl-right">
+                <!--comment section start-->
+                <div  class="comments-number content-width" >
+                  <div class="comments-number-mid comment-box-manage">
+                      <div class="heading">
+                            <div class="left">
+                                  <h4><img alt="" src="images/no.png" class="cmnt" />  Comment  </h4>
+                                  <img class="wal-minus" alt="" src="images/minus-white.png" />
+                            </div>
+                      </div>
+                      
+                      <div class="txt_content01 comments-number-content"> 
+                      <textarea class="wal-comment-textarea" id="feed_comment_box_<?=$val['id']?>"  cols="" rows=""></textarea>
+                      <input type="button" value="Post" class="yellow-btn" id="post_comment_button" onclick="post_comment(<?=$val['id']?>)" />
+                      <br class="clr" />
+                      </div>
+                </div>
+                </div>
+                <!--comment section end-->	
+            </div>
+          <!-- slide section end -->
+        </div>
+        
+        <script type="text/javascript">
+		$(function(){
+		//8-oct-2013
+			$('.left a').click(function(){
+				
+				var index=$(this).index();
+				$('.new-wl > .comments-number').css('display','none');
+				$('.new-wl-right > .comments-number').css('display','none');
+				$(this).parent().parent().next('.new-wl').children('.comments-number').filter(':eq('+ index +')').slideDown('slow');
+			})
+				
+				
+			$('.right a').click(function(){
+				var index=$(this).index();
+				$('.new-wl > .comments-number').css('display','none');
+				$('.new-wl-right > .comments-number').css('display','none');
+				$(this).parent().parent().next().next('.new-wl-right').children('.comments-number').filter(':eq('+ index +')').slideDown('slow');
+			
+			})
+			$('.wal-minus').click(function(){
+				$(this).parents('.comments-number').slideUp('fast');
+			
+			})
+		//8-oct-2013
+		});
+		</script>
+<?php                                
+		endforeach;?>
+		        
+<?php	}
+	else{
+			echo  '<div class="shade_box_01" style="padding-top:5px;"><div  class="shade_norecords" style="width:260px;"><p class="blue_bold12">No Photo.</p></div></div>';
+	}
+?>
+<input type="hidden" id="current_page" name="current_page" value="<?=$current_page_1?>"  />
+
+<?php  
+/* if($page_links){ ?>
+<div class="pagination">
+<div class="left">Viewing Page <?=$current_loaded_page_no?> of <?=$total_pages?> </div>
+<div class="right">
+       <ul class="small-paging">
+        <?=$page_links?> 
+        </ul>
+</div>
+</div>
+<?php } */
+?>
+

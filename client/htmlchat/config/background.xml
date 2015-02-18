@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<background path="img/background"> 
+    <skin name="default">
+				<item name="default" href="img/background/topcmm-123flashchat-sea-big.jpg" preview="img/background/topcmm-123flashchat-no-background-image.gif"/>
+        <item name="sea" href="img/background/topcmm-123flashchat-sea-big.jpg" preview="img/background/topcmm-123flashchat-sea.gif"/>
+        <item name="drinking girl" href="img/background/topcmm-123flashchat-background-drinking-girl-big.jpg" preview="img/background/topcmm-123flashchat-drinking-girl.gif"/>
+        <item name="boat" href="img/background/topcmm-123flashchat-boat-bi.jpg" preview="img/background/topcmm-123flashchat-boat.gif"/>
+        <item name="by the sea" href="img/background/topcmm-123flashchat-by-the-sea-big.jpg" preview="img/background/topcmm-123flashchat-by-the-sea.gif"/>
+        <item name="meadow" href="img/background/topcmm-123flashchat-meadow-big.jpg" preview="img/background/topcmm-123flashchat-meadow.gif"/>
+        <item name="sailing" href="img/background/topcmm-123flashchat-sailing-big.jpg" preview="img/background/topcmm-123flashchat-sailing.gif"/>
+        <item name="sandbeach" href="img/background/topcmm-123flashchat-sandbeach-big.jpg" preview="img/background/topcmm-123flashchat-sandbeach.gif"/>
+        <item name="spring" href="img/background/topcmm-123flashchat-spring-big.jpg" preview="img/background/topcmm-123flashchat-spring.gif"/>
+    </skin>
+</background>

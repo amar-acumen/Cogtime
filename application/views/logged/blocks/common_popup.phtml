@@ -1,0 +1,27 @@
+<?php  $page_excluded = array('prayer-wall-home',
+							 'view-all-prayer-request', 'manage-my-prayer-request', 'manage-my-commitments', 		 
+							 'prayer-wall-request-detail','intercession-testimony','prayer-wall-testimony','search-prayer-request' 	
+							 ,'e-intercession-request-detail','prayer-group-details', 'prayer-group','search-and-invite'
+							 ,'search-and-join-prayer-group','library','five-a-day','word-for-today'
+							 ,'upcoming-events');
+	if(!in_array($page_name ,$page_excluded) || $show_marquee == 1){
+?>
+<script type="text/javascript">
+<!--	
+	var ticker_holder = $('.bargaining').get(0);
+	var ticker_text = $('.ticker').get(0);
+	var ticker_pos = ticker_text.parentNode.offsetWidth;
+	
+	var ticker_data = $(ticker_holder).html();
+	$(ticker_text).parent().html('<marquee scrollamount="3" scrolldelay="20">' + ticker_data + '</marquee>');
+	
+	$('#sub-nav').hover
+	(
+	function() { $('marquee', this).get(0).stop();  },
+	function() { $('marquee', this).get(0).start(); }
+	); 
+//-->
+</script>
+
+<?php } ?>
+

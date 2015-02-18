@@ -1,0 +1,74 @@
+										  <input type="hidden" id="h_current_page" value="<?=$current_page?>" />
+                                        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="admin-table small">
+                                         <tr>
+                                            <th align="left" valign="middle" height="30" width="70">Date Requested</th>
+                                            <th align="left" valign="middle" height="30" width="150">Requested By</th>
+                                            <th align="left" valign="middle" height="30" width="180">User's Location</th>
+                                            <th align="left" valign="middle" height="30" width="150">Product Title</th>
+                                            <th align="left" valign="middle" height="30" width="100">Brand</th>
+                                            <th align="left" valign="middle" height="30" width="80">Category</th>
+                                            <th align="left" valign="middle" height="30" width="80">Sub-Category</th>
+                                            <th align="left" valign="middle" height="30" width="150">Swap with Product</th>
+                                            <th align="left" valign="middle" height="30" width="100">Listed By</th>
+                                            <th align="left" valign="middle" height="30" width="80">Request Status</th>
+                                            <th align="center" valign="middle" height="30" width="120" class="last">Actions</th>
+                                          </tr>
+                                          
+									  <?php
+                                          //pr($info_arr);
+                                            if(count($info_arr)){
+                                            foreach($info_arr as $key=> $info){
+												
+												if($info['i_accept'] == 3 )
+													$status = 'Canceled';
+												else if($info['i_accept'] == 2)
+													$status = 'Rejected';
+												else if($info['i_accept'] == 1)
+													$status = 'Accepted';
+												else if($info['i_accept'] == 0)
+													$status = 'Pending';
+                                            
+                                        ?>
+                                          
+                                          <tr>
+                                            <td align="left" valign="top"><?=getShortDate($info['dt_insert_time'],5)?></td>
+                                            <td align="left" valign="top"><?=get_user_address_info($info['requid'])?></td>
+                                            <td align="left" valign="top"><?=get_username_by_id($info['requid'])?></td>
+                                            <td align="left" valign="top"><a href="javascript:void(0);" onclick="return get_details(<?=$info['reqpid']?>)"><?=$info['req_product_name']?></a></td>
+                                            <td align="left" valign="top"><?=$info['s_brand']?></td>
+                                            <td align="left" valign="top"><?=get_main_category_name($info['i_category_id'])?></td>
+                                            <td align="left" valign="top"><?=get_trade_category_name($info['i_category_id'])?></td>
+                                            <td align="left" valign="top"><a href="javascript:void(0);" onclick="return get_details(<?=$info['rcv_product_id']?>)"><?=$info['rcv_product_name']?></a></td>
+                                            
+                                            <td align="left" valign="top"><?=get_username_by_id($info['rcvuid'])?></td>
+                                            <td align="left" valign="top"><?=$status?></td>
+                                            <td align="center" valign="middle" class="last">
+                                             <input name="" title="Delete" type="button" class="delete-button"  value="" onclick="return confirm_delete_req(<?=$info['reqid']?>)"/>
+                                              <span id="req_status_<?=$info['reqid']?>">
+                                <input  name="" title="Disable" type="button" class="btn-06"  value="<?=($info['i_isenabled']==2)? 'Enable':'Disable';?>" status="<?=$info['i_isenabled']?>" onclick="return change_req_status(<?=$info['reqid']?>,<?=$info['i_isenabled']?>)"/></span>
+                                            </td>
+                                          </tr>
+                                       
+                                            <?php    }
+												}
+												else{
+											?>
+												 <tr>
+													  <td style="text-align:center;" height="80" colspan="20">No data available!!!</td>
+												 </tr>
+											
+											<?php
+												}
+											?>
+										</table>
+                                        
+                                    <?php
+
+if($page_links) :
+?>         
+<div class="paging">
+            <ul><?= $page_links ?></ul>
+</div>        
+<?php
+endif;
+?>  

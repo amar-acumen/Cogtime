@@ -1,0 +1,90 @@
+<!-- header -->
+<?php
+	include(APPPATH ."views/layouts/church_logged_header.phtml");
+?>
+
+<!-- CONTENT SECTION -->
+<?php //pr($church_arr); ?>
+<div class="container">
+  
+  <div class="main-page">
+  	<h3 class="page-heading"> <?=  ucfirst(get_church_prayer_group_name_by_grp_id($prayer_group_id)) ?></h3>
+    <?php include(APPPATH ."views/logged/church/church_prayer_group_left_panel.phtml");?>
+    <div class="activity-right">
+        <div class="activity-comment-box">
+       	  
+            <?php //pr($prayer_member_arr)?>  
+			<?php 
+			if(!empty($prayer_member_arr)){
+			foreach($prayer_member_arr as $key=>$val)
+			{
+			?>
+            <div class="nw-prayer-wall-box no-right-mrgn" id="member_<?=$val->i_user_id?>">
+						
+						<!--<span class="prayermember-leble">
+							<a href="javascript:void(0)"> Join a Prayer</a>
+						</span>-->
+						
+                        <ul class="prayermember-ul">
+							                        	 	  <li>
+                                      <span class="payer-member-name">
+                                      
+                                      <div style="background:url(<?=get_profile_image($val->i_user_id,'thumb')?>) no-repeat center;width:30px; height:30px;" class="pro_photo3"></div>
+                                          <div class="pra-member-content">
+                                              <a href="<?=get_public_profile_url($val->i_user_id, get_username_by_id($val->i_user_id))?>"><?=get_username_by_id($val->i_user_id)?></a>&nbsp;&nbsp; <a href="javascript:void(0);" onclick="delete_member(<?=$val->i_user_id?>,<?=$val->i_prayer_group_id?>)">Remove</a>
+                                          <ul class="prayer-option">
+                                         
+                                          <li>Member Since- <?=getShortDateWithTime($val->dt_joined_on,6)?> </li>
+                                          </ul>
+                                          </div>
+                                      </span>          
+                                  </li>
+                            						</ul>
+                        
+                        
+                      </div>
+					  <?php }
+						}else{					  ?>
+						<p>This Prayer group does not have any member.</p>
+						<? }?>
+        </div>
+
+    </div>
+    <div class="clear"></div>
+    
+    
+  </div>
+</div>
+
+<!-- /CONTENT SECTION -->
+<div class="clr"></div>
+<!-- FOOTER SECTION -->
+<?php include(APPPATH."views/layouts/church_footer.phtml");?>
+<!-- /FOOTER SECTION -->
+
+<script type="text/javascript">
+$(document).ready(function() {
+	// for AJAX page-submission...
+   
+});
+
+var base_url="<?=base_url()?>";
+function delete_member(member,prayer)
+{
+	showUILoader_nodialog('<img src="'+base_url+'images/loading_big.gif" width="50"/> ');
+	$.ajax({
+				type: 'post',
+				url: base_url+'logged/church_prayer_group/remove_member',
+				dataType: 'json',
+				data: {'member':member,'grp':prayer},
+				success: function(data)
+				{
+					
+					hideUILoader_nodialog();
+						showUIMsg(data.message);
+						$('#member_'+member).hide();
+					
+				}
+			});
+}
+</script>

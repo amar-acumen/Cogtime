@@ -1,0 +1,18 @@
+<?php //pr($note_arr);
+	if(count($note_arr)){
+		foreach($note_arr as $k=> $val){
+?>
+<div class="nw-inside-grey-container">
+        <span style="font-size:10px; float:right; color:#999999; font-style:italic;"><?=getShortDate($val['created_date'],5)?></span>
+        <div class="nw-contents" style="float:left;">
+            <img class="icon-note" src="images/icons/new-note.png" alt="">
+            <?=$val['book_name'].' '.$val['bookid'].':'.$val['chapter']?>
+            <p><?=$val['s_note']?></p>
+        </div>
+    	<br class="clr">
+</div>
+
+<?php
+		}
+	}
+?>

@@ -1,0 +1,107 @@
+<?php if($is_post==1)
+{
+?> 
+
+							<?php
+							if(count($blog_arr))    
+                            {
+							//pr($blog_arr);
+							$counter=0;
+								foreach($blog_arr as $blogs)
+								{
+                                    $counter++;
+                                    //echo "count : ".count($blog_arr)." , ".$counter;
+                                    $user_name = $blogs['s_first_name'].' '.$blogs['s_last_name'];
+                                    $profile_link = get_profile_url($blogs['user_id'],$user_name);
+							?>
+
+                            <?php  
+								if($blogs['s_type'] == 'blog'){
+							?>
+                            	 <div class="blog" style="margin-top: 5px;">
+                            
+                            
+                                          <h2 style="max-height : 60px; overflow: hidden;"> <a href="<?php echo base_url().'blog/'.$blogs['id'].'/detail.html'?>"><?php echo my_substr(nl2br($blogs['title']),140)?></a></h2>
+                                          <p class="time-posted">created  <?php echo get_time_elapsed_blog($blogs['dt_created'])?> by <a href="<?= $profile_link?>"><?= $user_name?></a> </p>
+                                          
+                                          
+                                          
+                                          
+                                          <p style="height: 80px; overflow: hidden;"> <?php echo my_substr(nl2br($blogs['s_desc']),300)?></p>
+                                          
+                                          <p style="margin-left :425px;" class="read-more">[<a href="<?php echo base_url().'blog/'.$blogs['id'].'/detail.html'?>">read more</a>]</p>
+                                         
+                                         <ul class="article-comment-block article-comment-block2">
+                                            <li class="first">Articles (<span id='articles'><a href="javascript:void(0)"><?=$blogs['total_articles']?></a></span>)</li> 
+                                        
+                                        </ul>
+                                   <div class="clr"></div>                                          
+                                          
+                  </div>          
+                             
+                            <?php
+								}
+								else if($blogs['s_type']== 'article'){
+							 ?>
+                            
+                             <div class="blog" style="margin-top: 5px;">
+                            
+                            
+                                          <h2 style="max-height : 60px; overflow: hidden;"> <a href="<?php echo base_url().'blog/'.$blogs['blog_id'].'/detail.html#blog_article'.$blogs['id']?>"><?php echo my_substr(nl2br($blogs['title']),140)?></a></h2>
+                                          <p class="time-posted">posted  <?php echo get_time_elapsed_blog($blogs['dt_created'])?> by <a href="<?= $profile_link?>"><?= $user_name?></a> </p>
+                                          
+                                          
+                                          
+                                          
+                                          <p style="height: 80px; overflow: hidden;"> <?php echo my_substr(nl2br($blogs['s_desc']),300)?></p>
+                                          
+                                          <p style="" class="read-more">Posted in blog <strong><a href="<?php echo base_url().'blog/'.$blogs['blog_id'].'/detail.html'?>"><?=get_blog_name_by_id($blogs['blog_id'])?></a></strong></p>
+                                         
+                                         <ul class="article-comment-block article-comment-block2">
+                                            <li class="first">Comments (<?=$blogs['comment_count']?>)</li> 
+                                        
+                                        </ul>
+                                <div class="clr"></div>                                          
+                                          
+  
+                  </div>
+                            
+							<?php
+							 	}
+							 ?>
+                 			 <?php /*?>        
+							
+                            <div class="div_content" style=" margin-top:0px;">
+                                 <div class="shade_box_01">
+                              <div class="project_box" style="border:0px;"> 
+                             <p class="blue_bold12"> 
+                                 <a href="javascript:void(0);"><?php echo $blogs['s_title']?></a>
+                                 <?php echo $blogs['s_desription']?>
+                             </p>
+                             
+                                 
+                                 <p>&nbsp;</p>
+                                 <p>Created By: <?php echo $blogs['s_first_name'].' '.$blogs['s_last_name']?></p>
+                                 <p>No. Of Articles: <?php echo $blogs['total_articles']?></p>
+                             </div>
+                                        
+                                 </div>  
+                                 
+                            
+                            </div>
+                          <?php */?>
+                            <?php
+								}
+                            }
+ 
+							?>
+
+                            
+<?php
+}
+?>                       
+                        
+
+                            
+                            
+

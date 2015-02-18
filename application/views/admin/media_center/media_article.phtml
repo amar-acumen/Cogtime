@@ -1,0 +1,383 @@
+<div class="clr"></div>
+<!--navigation section start -->
+<?php include(APPPATH."views/layouts/admin/admin_nav.phtml");?>
+<!--navigation section end -->
+<!-- CONTENT SECTION -->
+<div id="content_section">
+      <div id="container">
+            <!--<div id="top_corner">&nbsp;</div> -->
+            <div id="mid_content">
+                  <div class="page_heading left">
+                        <div class="left"><img src="../images/icons/login.png" alt="" /> Article</div>
+                  </div>
+                  <div class="clr"></div>
+                  <div id="right_container">
+                        <div class="arrow_btm"></div>
+                        <div class="content_area">
+                            <!--filter section start -->
+                            <div class="filter">
+                            <span class="filter-by">Filter By &raquo;</span>
+                                <form id="search_frm" action="" method="post" enctype="multipart/form-data" class="filter-search" onsubmit="return search_()">
+                                    <label>News Title :</label><input id="txt_search_title" name="txt_search_title" type="text" />
+								   <label>Posted By :</label><input type="text" id="txt_uploaded_by" name="txt_uploaded_by">
+									   
+										
+										<label style="">Posted on</label>
+										
+										<input type="text"  value="" name="create_time" id="create_time"   class="date-field"/>
+										<img src="../images/icons/cal.png" alt="" onclick="$(this).prev().focus()" class="calender" style="margin-right:35px;" />
+										<script type="text/javascript">
+											  $(document).ready(function(arg) {
+											  
+												  $.datepicker.setDefaults($.datepicker.regional['']);
+												  $("#create_time").datepicker($.datepicker.regional['en']);
+
+											  });
+										</script> 
+										  <div class="clr"></div>
+										 <label style="margin-top:9px">Category :</label>
+										 <select name="video-cat" id="video-cat" style="float:left;margin:9px 15px;">
+										 <option value="-1">  - - - - - - </option>
+										 <?=makeOptionSubCategoryMc('news')?>
+										 </select>
+										 <label style="margin-top:9px">Featured/Non-Featured :</label>
+										 <select name="video-f" id="video-f" style="float:left;margin:9px 15px;">
+										 <option value="-1">  - - - - - - </option>
+										 <option value='1'>Featured</option>
+										 <option value='0'>Non-Featured</option>
+										 </select>
+                                    <input name="" type="submit" value="GO" class="go" style="margin-top:9px" />
+                                    &nbsp;&nbsp;<a href="javascript:void(0)" onclick="return show_all_();" style="margin-top:9px">Show all</a>
+                                </form> 
+                                <div class="clr"></div>
+                            </div>
+                            <!--filter section end -->
+                        
+                            <h4>List of Article</h4>
+                            <div class="right" style="margin-bottom:14px;"><input name="" type="button" value="Add Article"  class="evnt_btn1" onclick="window.location=admin_base_url+'add_media_article.html'"/></div>
+                        
+                        
+                        <div class="clr"></div>
+                        
+                        <DIV id="table_contents">
+                        <?=$content;?>
+                        </DIV>
+                        
+                        
+                        
+                        
+                        <div class="clr"></div>
+                        </div>
+                  </div>
+                  <div class="clr"></div>
+            </div>       
+            <!--<div id="bot_corner">&nbsp;</div> -->
+      </div>
+      <div class="clr"></div>
+</div>
+<input type="hidden" id="news_id" value="">
+<input type="hidden" id="comment_news_id" value="">
+
+
+<!-- /CONTENT SECTION -->
+
+
+
+<!--popup one start-->
+<div class="lightbox delete-page-popup" style="width:500px;">
+      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="../images/close.png" alt="" /></a></div>
+      <div class="top"><div>&nbsp;</div></div>
+      <div class="mid">
+            <div class="heading" style="margin-bottom:0px;">
+                  <div class="left">
+                        <h4>Delete Christian News</h4>
+                  </div>
+            </div>
+               <div class="shade_box_white">
+               <p class="center-text">Do you really want to delete this news?</p>
+               <form action="" method="post" enctype="multipart/form-data">
+               <input type="hidden" id="i_del_id" value="">
+                       <input name="" type="button" value="Yes" class="btn" style="margin-left:146px;" onclick="return delete_()"/>
+                    <input name="" type="button" value="No" class="btn" onclick="hide_dialog()"/>
+               </form>   
+               <div class="clr"></div>
+            </div>
+            
+      </div>
+      <div class="bot"><div>&nbsp;</div></div>
+</div>
+<!--popup one end-->
+
+<!--popup view comment start-->
+<div class="lightbox comments-popup" style="width:600px;">
+      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="../images/close.png" alt="" /></a></div>
+      <div class="top"><div>&nbsp;</div></div>
+      <div class="mid">
+            <div class="heading" style="margin-bottom:0px;">
+                  <div class="left">
+                        <h4>View Comments</h4>
+                  </div>
+            </div>
+               <div class="shade_box_white" style="height:400px; overflow:auto">
+               <DIV id="comment_html">
+               <?=$result?>
+               </DIV>
+
+               <div class="clr"></div>
+            </div>
+            
+      </div>
+      <div class="bot"><div>&nbsp;</div></div>
+</div>
+<!--popup view comment end-->
+
+<!--popup liked by start-->
+<div class="lightbox liked-by" style="width:750px;">
+      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="../images/close.png" alt="" /></a></div>
+      <div class="top"><div>&nbsp;</div></div>
+      <div class="mid">
+            <div class="heading" style="margin-bottom:0px;">
+                  <div class="left">
+                        <h4>Liked By</h4>
+                  </div>
+            </div>
+               <div class="shade_box_white" style="height:400px; overflow:auto">
+               <DIV id="liked_html">
+               <?=$result?>
+               </DIV>
+                     
+               <div class="clr"></div>
+            </div>
+            
+      </div>
+      <div class="bot"><div>&nbsp;</div></div>
+</div>
+<!--popup liked by end-->
+
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+
+
+function search_()
+  {
+      showBusyScreen();
+     
+		var title = $('#txt_search_title').val();
+      var uploaded_by = $('#txt_uploaded_by').val();
+	  var create_time = $('#create_time').val();
+	  var category = $('#video-cat').val();
+	  var featured = $('#video-f').val();
+	  
+	  
+      $.ajax({
+          url : admin_base_url+'media_center/christian_news/christian_news_listing_ajax',
+          type : 'post',
+          data : ({'title' : title, 'uploaded_by' : uploaded_by,'create_time':create_time,'category':category,'featured':featured,'hd_val':1}),
+          success : function(data)
+          {
+              hideBusyScreen();
+              $('#table_contents').html(data);
+          }
+      });
+      return false;
+  }
+  
+
+function confirm_delete_(id)
+{
+  $('#i_del_id').val(id);
+  show_dialog('delete-page-popup');
+}
+
+function delete_()
+{
+    var id = $('#i_del_id').val();
+    var current_page = $('#current_page').val();
+    showBusyScreen();
+    $.ajax({
+          url : admin_base_url+'media_center/media_article/delete_news/'+ current_page,
+          type : 'post',
+          data : ({'id' : id,'current_page':current_page}),
+          dataType : 'json',
+          success : function(data)
+          {
+
+              showUIMsg(data.msg);
+              hideBusyScreen();
+              hide_dialog();
+              $('#table_contents').html(data.html);
+          }
+      });
+    
+}
+
+function show_all_()
+  {
+      $('#search_frm')[0].reset();
+      showBusyScreen();
+      $.ajax({
+          url : admin_base_url+'media_center/christian_news/christian_news_listing_ajax/0',
+          type : 'post',
+          success : function(data)
+          {
+              hideBusyScreen();
+              $('#table_contents').html(data);
+          }
+      });
+  }
+  
+  
+  
+  function show_people_like(news_id)
+  {
+      
+      $('#news_id').val(news_id);
+         
+     showUILoader('<img src="'+base_url+'images/loading_big.gif" width="50"/> ');
+        $.ajax({
+            
+            url: admin_base_url +'media_center/christian_news/fetch_people_liked_post/',
+            dataType: 'json',
+            type: 'post',
+            data : ({'news_id':news_id}),
+    
+            success: function (data, status) {
+                //hideUILoader();
+                $('#liked_html').html(data.html_data);
+                hideUILoader('liked-by');
+                
+                //hideBusyScreen();
+                showUIMsg(data.msg);
+            },
+            error: function(data, status, e) {
+                hideUILoader('liked-by');
+                //show_dialog('view_comments_div');
+                showUIMsg("Error!");
+                
+            }
+        });
+                 
+         
+  }
+  
+  
+  function show_comments(news_id)
+  {
+        
+      $('#comment_news_id').val(news_id);
+      
+     showUILoader('<img src="'+base_url+'images/loading_big.gif" width="50"/> ');
+        $.ajax({
+            
+            url: admin_base_url +'media_center/christian_news/fetch_comment_on_news/',
+            dataType: 'json',
+            type: 'post',
+            data : ({'news_id':news_id}),
+    
+            success: function (data, status) {
+              
+                $('#comment_html').html(data.html_data);
+                hideUILoader('comments-popup');
+                
+                //hideBusyScreen();
+                showUIMsg(data.msg);
+            },
+            error: function(data, status, e) {
+                hideUILoader('comments-popup');
+                //show_dialog('view_comments_div');
+                showUIMsg("Error!");
+                
+            }
+        });
+                 
+  }
+  
+function remove_like_(id)
+{
+    var news_id = $('#news_id').val();
+    $.ajax({
+        url : admin_base_url+'media_center/christian_news/remove_like',
+        type : 'post',
+        data : ({'comment_record_id':id,'news_id':news_id}),
+        dataType : 'json',
+        success : function(data)
+        {
+            $('#like_'+news_id).html(data.total_likes);
+                showUILoader('<img src="'+base_url+'images/loading_big.gif" width="50"/> ');
+                $.ajax({
+                    
+                    url: admin_base_url +'media_center/christian_news/fetch_people_liked_post/',
+                    dataType: 'json',
+                    type: 'post',
+                    data : ({'news_id':news_id}),
+            
+                    success: function (data, status) {
+                        //hideUILoader();
+                        $('#liked_html').html(data.html_data);
+                        hideUILoader('liked-by');
+                        
+                        //hideBusyScreen();
+                        showUIMsg(data.msg);
+                    },
+                    error: function(data, status, e) {
+                        hideUILoader('liked-by');
+                        //show_dialog('view_comments_div');
+                        showUIMsg("Error!");
+                        
+                    }
+                });
+        }
+    });
+}
+
+
+function remove_comment_(id)
+{
+    var news_id = $('#comment_news_id').val();
+    
+        $.ajax({
+        url : admin_base_url+'media_center/christian_news/remove_comment',
+        type : 'post',
+        data : ({'comment_record_id':id,'news_id':news_id}),
+        dataType : 'json',
+        success : function(data)
+        {
+            $('#comment_'+news_id).html(data.total_comments);
+            
+                showUILoader('<img src="'+base_url+'images/loading_big.gif" width="50"/> ');
+                $.ajax({
+                    
+                    url: admin_base_url +'media_center/christian_news/fetch_comment_on_news/',
+                    dataType: 'json',
+                    type: 'post',
+                    data : ({'news_id':news_id}),
+            
+                    success: function (data, status) {
+                      
+                        $('#comment_html').html(data.html_data);
+                        hideUILoader('comments-popup');
+                        
+                        //hideBusyScreen();
+                        showUIMsg(data.msg);
+                    },
+                    error: function(data, status, e) {
+                        hideUILoader('comments-popup');
+                        //show_dialog('view_comments_div');
+                        showUIMsg("Error!");
+                        
+                    }
+                });
+        }
+    });
+}
+
+</script>>

@@ -1,0 +1,37 @@
+<?php
+//pr($result_arr);
+if($result_arr){
+    
+    
+?>
+<div class="search-div">
+    <h6>Search Result:</h6>
+    <div class="result-div">
+        <ul>
+            <?php 
+              $logged_user_id = intval(decrypt($this->session->userdata('user_id')));
+            ?>
+            <li><a href="<?php echo $result_arr[0] -> ch_public_url;  ?>?user_id=<?=$logged_user_id?> "><?php  echo $result_arr[0] -> s_name ?></a></li>
+    
+<!--            <li><span>Address : </span> <?= $result_arr[0] ->s_address ?></li>
+    
+            <li><span>Country : </span><?= get_country_name_by_id($result_arr[0]->i_country_id) ?></li>
+    
+            <li><span>Created On :</span> <?= $result_arr[0] ->dt_created_on ?></li>
+    
+            <li><span>Email : </span><?= $result_arr[0]->ch_email ?></li>
+    
+            <li><span>Contact no. : </span><?= $result_arr[0]->s_phone ?></li>-->
+    
+        </ul>
+  
+<?php
+    
+}else{
+    ?>
+
+<h1 id='no_res'>No church registered with this email id..</h1>
+<?php }  ?>
+<style type="text/css">
+    .req-reg{ color: #d70000;}
+</style>

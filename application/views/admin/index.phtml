@@ -1,0 +1,149 @@
+<script language="javascript">
+<!--
+function after_submit() {
+	if(window.location.hash!='') {
+		//alert(window.location.hash);
+		$('#frm_login').append('<input type="hidden" name="hash" value="'+window.location.hash + '" />');
+	}
+}
+
+$(document).ready(function(arg) {
+	$('#error_msg_forgot_passw').hide();
+});
+//-->
+</script>
+
+<!-- CONTENT SECTION -->
+<div class="index-container">
+            <div id="top_corner">&nbsp;</div>
+            <div id="mid_content">
+                  <div class="page_heading">
+                        <div class="left"><img src="<?=base_url()?>images/icons/login.png" alt="" /> Login</div>
+                  </div>
+                  <div class="arrow_btm"></div>
+                  
+                  
+                    
+				  <?php 
+                      
+                       if(!@$session_data['loggedin'])
+                       {
+                        
+						
+                       $RemberEmail ='';
+                       $RemberPwd ='';
+                       $Rember = '';
+                            if(isset($_COOKIE['CG']['email']) && isset($_COOKIE['CG']['password'])) 
+                                {
+                                    $RemberEmail  = $_COOKIE['CG']['email']; 
+                                    $RemberPwd 	  = $_COOKIE['CG']['password']; 
+                                    $Rember 	  = $_COOKIE['CG']['remember']; 
+                                    
+                                }
+                       }
+                  
+                  ?>
+                  
+                  
+                 
+                  
+				<form  action="<?=base_url().'admin/index.html'?>" method="post" name="frmAdminLogin" id="frmAdminLogin"  onsubmit="after_submit()">
+                  	<div class="content_area admin-login">
+                      <?php if($err != '')
+					         echo '<div class="error-message" style="width:auto; padding:0 0 0 66px; display:block;">'.$err.'</div>';
+					  ?> 
+                        <div class="lable01">E-mail :</div>
+                        <div class="field01">
+                              <input name="txt_email" id="txt_email" type="text" value="<?=($RemberEmail=='')?$posted['txt_email']:$RemberEmail;?>" autocomplete="off" />
+                        </div>
+                        
+                        <?php $show_mail_error = (form_error('txt_email') != '')?' style="display:block;"':'';?>
+						<div class="error-message" <?=$show_mail_error?>><?php echo form_error('txt_email'); ?></div>
+                        
+                        <div class="clr"></div>
+                        <div class="lable01">Password : </div>
+                        <div class="field01">
+                              <input name="txt_password" id="txt_password" type="password" value="<?=($RemberPwd=='')?$posted['txt_password']:$RemberPwd;?>" autocomplete="off" />
+                        </div>
+                        
+                        <?php $show_pwd_error = (form_error('txt_password') != '')?' style="display:block;"':'';?>
+                        <div class="error-message" <?=$show_pwd_error?>><?php  echo form_error('txt_password'); ?></div>
+                        <div class="clr"></div>
+                        <div class="lable01"> </div>
+                        <label class="remember-pass">
+                        <input name="chkRem" id="chkRem" type="checkbox" value="1" <?=($Rember=='checked'?'checked="checked"':'')?>/>Remember me</label>
+                        <a class="forget-password" href="javascript:void(0);" onclick="return show_dialog('send_email')">Forgot password</a>
+                        
+                        <div class="clr"></div>
+                        <div class="lable01"> </div>
+                        <div class="field01">
+                         <input name="login_referrer" id="login_referrer" type="hidden" value="<?= @$session_data['login_referrer'] ?>"/>
+                        	  <input name="is_submitted" type="hidden"  value="Y"/>
+                              <input name="" type="submit" class="btn"  value="Login"/>
+                        </div>
+                        <div class="clr"></div>
+                  </div>
+                  </form>
+            </div>
+            <div id="bot_corner">&nbsp;</div>
+      <div class="clr"></div>
+</div>
+<!-- /CONTENT SECTION -->
+
+
+<!--popup one start-->
+<div class="lightbox send_email" style="width:500px;">
+      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="<?=base_url()?>images/close.png" alt="" /></a></div>
+      <div class="top">
+            <div>&nbsp;</div>
+      </div>
+      <div class="mid">
+            <div class="heading" style="margin-bottom:0px;">
+                  <div class="left">
+                        <h4>Forgot Password</h4>
+                  </div>
+            </div>
+               <div class="shade_box_white" style="padding:20px 0px 8px;">
+               <form action="" method="post" enctype="multipart/form-data" class="forget-pass-popup">
+               
+              
+               		<label>Enter your E-mail : </label>
+               		<input type="text" name="txt_forgot_email"  id="txt_forgot_email" style="width: 245px;" />
+                    
+                    <input name="" type="button" value="Send" class="btn" onclick="javascript:forgotPasswordAJAX();" style="width:87px;"/>
+                     <div id="error_msg_forgot_passw" class="error-message" style="margin-left:115px; margin-top:5px;">* Required</div> 
+               </form>   
+               <div class="clr"></div>
+            </div>
+            
+      </div>
+      <div class="bot">
+            <div>&nbsp;</div>
+      </div>
+</div>
+<!--popup one end-->
+<!--popup two start -->
+<div class="lightbox sent-to-mail" style="width:500px;">
+      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="../images/close.png" alt="" /></a></div>
+      <div class="top">
+            <div>&nbsp;</div>
+      </div>
+      <div class="mid">
+            <div class="heading" style="margin-bottom:0px;">
+                  <div class="left">
+                        <h4>Forgot Password</h4>
+                  </div>
+            </div>
+               <div class="shade_box_white" style="padding:8px 0px;color:#747474; font-size:16px; font-weight:bold; line-height:22px;">
+               Your password has been reset and sent to your e-mail. Please check your e-mail for the new password.
+               
+               <input name="" type="button" value="OK" class="btn" onclick="hide_dialog()" style="margin-left:190px; margin-top:16px;"/>
+               <div class="clr"></div>
+            </div>
+            
+      </div>
+      <div class="bot">
+            <div>&nbsp;</div>
+      </div>
+</div>
+<!--popup two end -->

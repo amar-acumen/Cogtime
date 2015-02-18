@@ -1,0 +1,397 @@
+<div id="work_section">
+                                   <div id="4">
+                                     <div class="heading01"> 
+                                         <div class="left"><h4><img src="images/icons/job.png" alt=" " />  Work</h4> </div>
+                                        <div class="right"><img src="images/icons/edit.png" alt=" " />  <a onclick="showDiv('4')" href="javascript:void(0);" class="white-link"><strong>Edit</strong></a></div>
+                                     </div>
+                                     <?php
+                                        
+                                     
+                                        $count=count($arr_profile_info['work_arr']);
+                                        if ($count==0)
+                                            $count=1;
+                                      
+                                        for($i=0;$i<$count;$i++)    :
+                                            $country  = get_country_name_by_id($arr_profile_info["work_arr"][$i]["s_employer_country"]);
+                                            $state    = $arr_profile_info["work_arr"][$i]["s_employer_state"];
+                                            $city     = $arr_profile_info["work_arr"][$i]["s_employer_city"];
+                                            
+                                            /*$address  = (!empty($country))? $country:'';
+                                            $address .= (!empty($state))? ', '.$state: '';
+                                            $address .= (!empty($city))? ', '.$city: '';
+                                            */                                           
+                                            
+                                            $work_address=array();
+                                            if(!empty($country))    
+                                                $work_address['country']=$country;
+                                            if(!empty($state))
+                                                $work_address['state']=$state;
+                                            if(!empty($city))
+                                                $work_address['city']=$city;
+                                            
+                                            $address = implode(', ',$work_address);
+                                              #echo $arr_profile_info['work_arr'][$i]['s_experience_year_from']."yay";
+                                      if($arr_profile_info['work_arr'][$i]['s_experience_year_from']=='' )
+                                      {
+                                           $work_experience_year_from = "";
+                                      }
+                                      else
+                                      {
+                                          $work_experience_year_from = ($arr_profile_info['work_arr'][$i]['s_experience_year_from']!='-1')? "' ".$arr_profile_info['work_arr'][$i]['s_experience_year_from'] : '-';
+                                      }
+                                      
+                                      if($arr_profile_info['work_arr'][$i]['s_experience_year_from']=='' )
+                                      {
+                                           $work_experience_month_from = "";
+                                      }
+                                      else
+                                      {
+                                          $work_experience_month_from = ($arr_profile_info['work_arr'][$i]['i_experience_month_from']!='-1')? get_month_name($arr_profile_info['work_arr'][$i]['i_experience_month_from']) : '-';
+                                      }
+                                      
+                                      if($arr_profile_info['work_arr'][$i]['s_experience_year_to']=='' )
+                                      {
+                                          $work_experience_year_to = "";
+                                      }
+                                      else
+                                      {
+                                          $work_experience_year_to = ($arr_profile_info['work_arr'][$i]['s_experience_year_to']!='-1')? "' ".$arr_profile_info['work_arr'][$i]['s_experience_year_to'] : '-';
+                                      }
+                                      
+                                      if($arr_profile_info['work_arr'][$i]['i_experience_month_to']=='' )
+                                      {
+                                          $work_experience_month_to = "";
+                                      }
+                                      else
+                                      {
+                                          $work_experience_month_to = ($arr_profile_info['work_arr'][$i]['i_experience_month_to']!='-1')? get_month_name($arr_profile_info['work_arr'][$i]['i_experience_month_to']) : '-';
+                                      }
+                                           
+                                            
+                           /* $work_experience_year_from = ($arr_profile_info['work_arr'][$i]['s_experience_year_from']!='' && $arr_profile_info['work_arr'][$i]['s_experience_year_from']!='-1')? "' ".$arr_profile_info['work_arr'][$i]['s_experience_year_from'] : '-';
+                            
+                            $work_experience_month_from = ($arr_profile_info['work_arr'][$i]['i_experience_month_from']!= '' && $arr_profile_info['work_arr'][$i]['i_experience_month_from']!='-1')? get_month_name($arr_profile_info['work_arr'][$i]['i_experience_month_from']) : '-';
+                           
+                            $work_experience_year_to = ($arr_profile_info['work_arr'][$i]['s_experience_year_to']!='' && $arr_profile_info['work_arr'][$i]['s_experience_year_to']!='-1')? "' ".$arr_profile_info['work_arr'][$i]['s_experience_year_to'] : '-';
+                            
+                            $work_experience_month_to =  ($arr_profile_info['work_arr'][$i]['i_experience_month_to']!='' && $arr_profile_info['work_arr'][$i]['i_experience_month_to']!='-1')? get_month_name($arr_profile_info['work_arr'][$i]['i_experience_month_to']) : '-';
+                             */             
+                                          //echo "month from : ".$arr_profile_info['work_arr'][$i]['i_experience_month_from'];
+                                            
+                                            /*if($work_experience_year_from=='-1')
+                                            {
+                                                $work_experience_month_from=-1;
+                                                $experience_from = "--";
+                                            }
+                                                
+                                            else
+                                                $experience_from = $work_experience_year_from;
+                                                
+                                            $experience_to= " to "; */
+                        $experience_from = $work_experience_month_from.' '.$work_experience_year_from.' ';
+                        if( $arr_profile_info['work_arr'][$i]['e_is_current_employer']=='yes')
+                        {
+                            if($work_experience_month_from!='-' || $work_experience_year_from!='-')
+                            { 
+                                $experience_from = $work_experience_month_from.' '.$work_experience_year_from;
+                                $experience_to = "till now";
+                                
+                            }
+                            else
+                            { 
+                                $experience_to = '- -';
+                            }
+                        }   
+                        //($work_experience_year_to!='-' || $work_experience_year_to!='-') &&
+                        // $experience_to = "till now";
+                        else { 
+                            $experience_to = $work_experience_month_to.' '.$work_experience_year_to;
+						
+						}
+                       
+					    $work_experience_month_from.' t '.$work_experience_year_from;
+                        //echo "from".intval($experience_from)." to ".$experience_to;
+                        
+						
+						 if($experience_from == '  ' && $experience_to == ' ' )   {
+                                // $experience_from='' ;
+                           // $experience_to='';
+						   
+                            $to = '';
+                           
+                        }
+                        else{
+                            $to=' to ';                   
+                        }   
+                                             
+                                            
+                                            
+                                            
+                                     ?>
+                                      
+                                         <div class="shade_box_01 frm_box shade_box_blue" style="padding-bottom:17px;">
+                                            <div class="lable01">Employer:</div>  
+                                            <div class="field01"><?=$arr_profile_info["work_arr"][$i]["s_employer_name"]?></div> 
+                                            <div class="clr"></div>
+                                            <div class="lable01">Work Place:</div>  
+                                            <div class="field01"><?=$address;?></div> 
+                                            <div class="clr"></div>
+                                            <div class="lable01">Position:</div>  
+                                            <div class="field01"><?=$arr_profile_info["work_arr"][$i]["s_position"];?></div> 
+                                            <div class="clr"></div>
+                                            <div class="lable01">Period:</div>  
+                                            <div class="field01"><?php echo $experience_from.$to.$experience_to;?></div> 
+                                            <div class="clr"></div>
+                                         </div>
+                                      <?php
+                                         endfor;
+                                      ?>
+                                   </div>
+                                   <div id="jason4" style="display:none;"> 
+                                   <div class="heading01"> 
+                                         <div class="left"><h4><img src="images/icons/job.png" alt=" " />  Work</h4> </div>
+                                     </div>
+                                     <form id="frmManageWorkProfile"  method="post" action="modify-my-profile-work-info-ajax" onsubmit="return modify_my_work_profile_ajax()" enctype="multipart/form-data">
+                                    <div class="shade_box_01 frm_box shade_box_blue" style="padding-bottom:17px;">
+                                    
+                                    <?php
+                                        
+                                        for($i=0;$i<$count;$i++)   :
+                                                   
+                                    ?>
+                                   
+                                    <!------------------------work div----------------------------->
+                                    <div id="<?php echo (($i>0)? 'work_div_'.($i+1):'work_div_1')?>"> 
+                                    <?php 
+                                        if($i>0 && $i<$count)
+                                        {
+                                            $j= $i+1;
+
+                                            echo "<h4 class='sepration'></h4><a class='close' href='javascript:void(0);' style='margin:5px;' onclick=\"closeExtraWorkDiv(this)\" ><img src='images/icons/close.png' alt=''></a>";
+                                        }
+                                    ?>
+                                      <div class="lable01">Employer:</div>  
+                                        <div class="field01"><input name="txt_work_company[]" type="text" value="<?=isset($arr_profile_info["work_arr"][$i]["s_employer_name"])? $arr_profile_info["work_arr"][$i]["s_employer_name"]: '' ?>" style="width:230px;" /> </div> 
+                                        <div class="clr"></div>
+                                        <div class="lable01">Work City:</div>  
+                                        <div class="field01"><input name="txt_work_city[]" type="text" value="<?=isset($arr_profile_info["work_arr"][$i]["s_employer_city"])? $arr_profile_info["work_arr"][$i]["s_employer_city"]: '' ?>" style="width:230px;" /></div> 
+                                        <div class="clr"></div>
+                                        <div class="lable01">Work State:</div>  
+                                        <div class="field01"><input name="txt_work_state[]" type="text" value="<?=isset($arr_profile_info["work_arr"][$i]["s_employer_state"])? $arr_profile_info["work_arr"][$i]["s_employer_state"]: '' ?>"  style="width:230px;"/></div> 
+                                        <div class="clr"></div>
+                                        <div class="lable01">Work Country:</div>  
+                                        <div class="field01"><? /*<input name="txt_work_country[]" type="text" value="<?=isset($arr_profile_info["work_arr"][$i]["s_employer_country"])? $arr_profile_info["work_arr"][$i]["s_employer_country"]: '' ?>" style="width:230px;" />*/?>
+                                        <select name="txt_work_country[]" class="txt_country_work" style="width:238px; margin-bottom:6px;">
+                                             <option value="-1">---</option>
+                                             <?=makeOptionCountry('',encrypt($arr_profile_info["work_arr"][$i]["s_employer_country"]));?>
+                                         
+                                         </select>
+                                        
+                                        
+                                        </div> 
+                                        <div class="clr"></div> 
+                                        <div class="lable01">Position:</div>  
+                                        <div class="field01"><input name="txt_work_position[]" type="text"  value="<?=isset($arr_profile_info["work_arr"][$i]["s_position"])? $arr_profile_info["work_arr"][$i]["s_position"]: '' ?>" style="width:230px;"/></div> 
+                                        <div class="clr"></div>
+                                        <div class="lable01">Period:</div>  
+                                        
+                                        
+                                         <div class="field01" >
+                                          <span class="left" style="width:40px;">From :</span>
+                                          <select name="mnth_from[]" class="profile_combo mnth_from" style="width:133px; float:left;">
+                                             <option value="-1">---</option>
+                                             <?php echo makeOptionMonth(isset($arr_profile_info["work_arr"][$i]["i_experience_month_from"])? $arr_profile_info["work_arr"][$i]["i_experience_month_from"]:'')?> 
+                                            </select>
+                                               <script type="text/javascript">
+                                                    $(document).ready(function(arg) {
+                                                        //$(".profile_combo").msDropDown();
+                                                        //$(".profile_combo").hide(); 
+      
+                                                    })
+                                                </script>
+                                                
+                                         
+                                          
+                                        <select name="year_from[]" class="profile_combo year_from" style="width:60px; margin-bottom:10px; float:left;">
+                                       			<option value="-1">---</option>
+                                            	 <?=makeOptionYear(isset($arr_profile_info["work_arr"][$i]["s_experience_year_from"])? $arr_profile_info["work_arr"][$i]["s_experience_year_from"]:'')?>
+                                         </select>
+                                               
+                                         <div class="clr"></div>
+
+                                         
+                                         <span class="left" style="width:40px;">To :</span>
+                                       
+                                         
+                                         <select name="mnth_to[]" class="profile_combo mnth_to" style="width:133px; float:left;"  <?php if($arr_profile_info["work_arr"][$i]["e_is_current_employer"]=='yes') echo " disabled='disabled' id= 'disabled_mnth_to' ";?>>
+                                             <option value="-1">---</option>
+                                             <?php echo makeOptionMonth(isset($arr_profile_info["work_arr"][$i]["i_experience_month_to"])? $arr_profile_info["work_arr"][$i]["i_experience_month_to"]:'');?> 
+                                            </select>
+                                          
+                                          
+                                         <select name="year_to[]" class="profile_combo year_to" style="width:60px; margin-bottom:10px; float:left;" <?php if($arr_profile_info["work_arr"][$i]["e_is_current_employer"]=='yes') echo "disabled='disabled' id= 'disabled_year_to'";?>>
+                                       			<option value="-1">---</option>
+                                            	 <?=makeOptionYear(isset($arr_profile_info["work_arr"][$i]["s_experience_year_to"])? $arr_profile_info["work_arr"][$i]["s_experience_year_to"]:'')?>
+                                         </select>
+                                      
+                                         </div>
+                                      
+                                         
+                                        <div class="clr"></div>
+                                         <div class="lable01">&nbsp;</div>  
+                                        <div class="field01">
+                                            <input name="is_current_employer" type="radio" class="radio_cur_emp"  onclick="return current_emp(this);"  <?php if($arr_profile_info["work_arr"][$i]["e_is_current_employer"]=='yes') echo "checked";?> value="<?= $arr_profile_info["work_arr"][$i]["id"]; ?>"  /> Current Employer
+                                        </div>
+                                        
+                                       
+                                        
+                                        <input type="hidden" name="db_id[]" id="dbId" value="<?php echo isset($arr_profile_info["work_arr"][$i]["id"])? $arr_profile_info["work_arr"][$i]['id']: '0'?>">
+                                        </div>  <!------------------------/work div----------------------------->
+                                        <script type="text/javascript">
+                                                    $(document).ready(function(arg) {
+                                                       
+                                                        //$(".txt_country_work").msDropDown();
+                                                        //$(".txt_country_work").hide();        
+                                                    })
+                                                </script>
+                                        <?php
+                                            endfor;
+                                        ?>
+                                
+                                
+                                        <div id="add_more_work_div">  </div>
+                                        
+                                         <input type="hidden" name= "total_work_divs" id="work_div_h" value="<?php echo $count;?>" />
+                                        <div class="clr"></div>
+                                        <div class="lable01">&nbsp;</div>  
+                                        <div class="field01" style="text-align:right;width:250px;"> 
+                                             <a href="javascript:void(0);" id="add_extra_work"   class="blue_link" onClick="add_extra_work_div()"><strong>Add More..</strong></a>
+                                        </div> 
+                                        <div class="clr"></div>
+                                        <div class="lable01">&nbsp;</div>  
+                                        <div class="field01"> 
+                                        <input type="hidden" name="is_work_submitted" id="is_work_submitted" value="Y" />
+                                        <input name="" type="submit" value="Save"  class="btn"  />
+                                        <input name="" type="button" value="Cancel"  class="btn" onclick="closeWorkDiv();"/>
+                                        </div> 
+                                        <div class="clr"></div>
+                                     </div>
+                                     
+                                     
+                                        <?php /*?> //////////// NEW FIELD(S) [BEGIN] //////////// <?php */?>
+                                        <input type="hidden" name="actual_work_divs" id="actual_work_divs" value="<?= count($arr_profile_info['work_arr']) ?>" />
+                                        <input type="hidden" name="deleted_work_ids" id="deleted_work_divs" value="" />
+                                        <input type="hidden" name="work_div_id_order" id="work_div_id_order" value="<?= count($arr_profile_info['work_arr']) ?>" />
+                                        <?php /*?> //////////// NEW FIELD(S) [END] //////////// <?php */?>
+                                        
+                                     </form>
+                                  </div>
+                              
+                              
+                              
+<script type="text/javascript">
+ 
+	$(document).ready(function(arg) {
+	    //$("#test").msDropDown();
+		//$("#test").hide();      
+	/*	$(".profile_comb").msDropDown();
+		$(".profile_comb").hide();*/
+		
+		
+	});
+	/*$('.profile_combo').live('select', function() {
+           alert('hello from binded function call');
+			{
+				alert(div_no);
+				$('.year_to').removeAttr('disabled');
+				$('.mnth_to').removeAttr('disabled');
+				$('#work_div_'+div_no).find('.year_to').attr('disabled','disabled');
+				$('#work_div_'+div_no).find('.mnth_to').attr('disabled','disabled');
+			}
+		     $("#test").msDropDown();
+		$("#test").hide();      
+    });*/
+	
+	
+</script>
+
+              
+
+<div id="hidden_work_div" style="display:none;"> 
+<div id="copy_work">
+<h4 class='sepration'></h4><a class='close' href='javascript:void(0);' style='margin:5px;' onclick="closeExtraWorkDiv(this)" ><img src='images/icons/close.png' alt=''></a>
+
+
+<div class="lable01">Employer:</div>  
+<div class="field01"><input name="txt_work_company[]" type="text" value="" style="width:230px;" /> </div> 
+<div class="clr"></div>
+<div class="lable01">Work City:</div>  
+<div class="field01"><input name="txt_work_city[]" type="text" value="" style="width:230px;" /></div> 
+<div class="clr"></div>
+<div class="lable01">Work State:</div>  
+<div class="field01"><input name="txt_work_state[]" type="text" value=""  style="width:230px;"/></div> 
+<div class="clr"></div>
+<div class="lable01">Work Country:</div>  
+<div class="field01">
+<select name="txt_work_country[]" class="txt_country_work1" style="width:238px; margin-bottom:6px;">
+     <option value="-1">---</option>
+     <?=makeOptionCountry();?>
+ 
+ </select>
+
+
+</div> 
+<div class="clr"></div> 
+<div class="lable01">Position:</div>  
+<div class="field01"><input name="txt_work_position[]" type="text"  value="" style="width:230px;"/></div> 
+<div class="clr"></div>
+<div class="lable01">Period:</div>  
+
+
+ <div class="field01" >
+  <span class="left" style="width:40px;">From :</span>
+  <select name="mnth_from[]" class="profile_combo mnth_from" style="width:133px; float:left;">
+     <option value="-1">---</option>
+     <?php echo makeOptionMonth()?> 
+    </select>
+       
+        
+ 
+  
+<select name="year_from[]" class="profile_combo year_from" style="width:60px; margin-bottom:10px; float:left;">
+           <option value="-1">---</option>
+         <?=makeOptionYear()?>
+ </select>
+       
+ <div class="clr"></div>
+
+ 
+ <span class="left" style="width:40px;">To :</span>
+ 
+ 
+ <select name="mnth_to[]" class="profile_combo mnth_to" style="width:133px; float:left;"  >
+     <option value="-1">---</option>
+     <?php echo makeOptionMonth();?> 
+    </select>
+  
+  
+ <select name="year_to[]" class="profile_combo year_to" style="width:60px; margin-bottom:10px; float:left;" >
+           <option value="-1">---</option>
+         <?=makeOptionYear()?>
+ </select>
+
+ </div>
+
+ 
+<div class="clr"></div>
+ <div class="lable01">&nbsp;</div>  
+<div class="field01">
+    <input name="is_current_employer" type="radio" class="radio_cur_emp"  onclick="current_emp(this);" value=""   /> Current Employer
+</div>
+
+
+
+<input type="hidden" name="db_id[]" id="dbId" value="">
+</div>
+</div>
+</div>

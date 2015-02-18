@@ -1,0 +1,17 @@
+	<?php if(count($friends_arr)) { 
+            foreach($friends_arr as $k=> $friends){
+                $img = get_profile_image($friends['user_id']);
+				$CSS = (($k+1) % 7 == 0)?'style="clear:both;"':'';
+    ?>
+        <li <?=$CSS?> <?=$CSS_ajax?>>
+            <a href="photo-album-details.php">
+            <img class="pro_photo3" alt="" src="images/alex.jpg" />
+            <span>test pic</span>
+            <p>3 Photo(s)</p>
+            </a>
+        </li>
+        
+    <?php 	$CSS_ajax = '';
+			}
+        } 
+    ?>

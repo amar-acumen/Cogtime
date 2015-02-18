@@ -1,0 +1,318 @@
+ <!--prayer request box start -->
+ 
+<?php
+
+if(count($arr_prayer_request)){
+	foreach($arr_prayer_request as $key=> $val){
+		
+		$IMG = base_url().'uploads/prayer_wall_photos/'.getThumbName($val['s_image_name'],'mid');
+		$DESC = my_substr(html_entity_decode(htmlspecialchars_decode($val['s_description']),ENT_QUOTES,'utf-8'),230);
+		$s_subject = htmlspecialchars_decode($val['s_subject']);
+		
+?>
+      <div class="prayer-wall-dotted-box date-wd">
+                      <div class="prayer-wall-image">
+                      <div  title="prayer" style="background:url(<?=$IMG?>) no-repeat center;width:286px; height:142px;"></div>
+                      
+                      </div>
+                      <div class="right-panel">
+                          <p class="quoted-text"><a href="<?=base_url()?>prayer-wall/<?=$val['id']?>/prayer-wall-request-detail.html"><?=$s_subject?></a></p>
+                          <p class="quoted-text">
+                              <a href="<?=base_url()?>prayer-wall/<?=$val['id']?>/prayer-wall-request-detail.html"><?=nl2br($DESC)?></a> 
+                              <span>Updated on: <?=get_time_elapsed($val['dt_insert_date'])?></span>
+                          </p>
+                          
+                          <h2 class="name"><?=$val['s_profile_name']?></h2>
+                          <p class="place"><?=$val['s_country']?></p>
+                          <p class="date-time"><span style="margin-right: 2px;">From: </span><?=getShortDateWithTime($val['dt_start_date'], 9)?></p> 
+                          <p class="date-time"><span style="margin-right: 18px;">To:</span><?=getShortDateWithTime($val['dt_end_date'], 9)?></p>
+                      </div>
+                      <div class="clr"></div>
+                      
+                      <ul class="article-comment-block">
+                          
+                        <?php if($val['i_user_id'] != intval(decrypt($this->session->userdata('user_id'))) && $val['CommitExists'] == 0 && $val['isExpired'] == ''){?> 
+                          <li class="first" id="commit_li<?=$val['id']?>"><span><a href="javascript:void(0);" class="commit-open-close" onclick="show_reply(<?=$val['id']?>)">Commit</a></span></li> 
+                          
+                           <li><a href="javascript:void(0);" class="commitment-open-close" onclick="view_commits(<?=$val['id']?>)" >Commitments <span id="total_commits<?=$val['id']?>">(<?=$val['total_commitments']?>)</span></a></li>
+                          
+                        <?php }else{ ?>
+                        		 <li class="first" ><a href="javascript:void(0);" class="commitment-open-close" onclick="view_commits(<?=$val['id']?>)" >Commitments <span id="total_commits<?=$val['id']?>">(<?=$val['total_commitments']?>)</span></a></li>
+                        <?php } ?>
+						<li >
+<a href="javascript:void(0);" class="commitment-open-close" onclick="view_comments(<?=$val['id']?>)" >Comments <span id="total_comments<?=$val['id']?>">(<?=$val['total_comments']?>)</span></a>
+						</li>
+						<li class="right">
+<a href="javascript:void(0);" class="commitment-open-close" onclick="show_comment(<?=$val['id']?>)" >Comment</a>
+						</li>
+                         
+                      </ul>
+					  
+					  <div class="commit-form add-testimony" id="comment_form<?= $val['id'] ?>">
+						<div class="minimize" title="Minimize" onclick="show_comment(<?= $val['id'] ?>)">&nbsp;</div>
+						<h2>Add Comment</h2>
+						<form id="add_comment_frm<?=$val['id'] ?>" action="" method="post" enctype="multipart/form-data">
+							<label class="normal">Comment:</label>
+							<textarea onblur="if (this.value == '')
+										this.value = 'Max 500 Characters';" onfocus="if (this.value == 'Max 500 Characters')
+													this.value = '';" rows="" cols="" name="ta_comment" class="full-textarea" id="ta_comment<?= $val['id'] ?>" onKeyDown="limitText(this.form.ta_comment, this.form.countdown, 500);" 
+									  onKeyUp="limitText(this.form.ta_comment, this.form.countdown, 500);">Max 500 Characters</textarea>
+							<div class="clr"></div>
+							<input name="post" type="button" value="Post" class="post-btn post-btn2" onclick="add_comment(<?= $val['id'] ?>)" />
+						</form>
+						<div class="clr"></div>
+					</div>
+
+                      
+                      <!--commit form start -->
+                      <div class="commit-form add-commitment" id="commit_form<?=$val['id']?>">
+                      	  <!--minimize link start -->
+                           <div class="minimize" title="Minimize" onclick="show_reply(<?=$val['id']?>)">&nbsp;</div>
+                          <!--minimize link end -->
+                          <h2>Add Commitment</h2>
+                          <form  id="add_commit<?=$val['id']?>" action="" method="post" enctype="multipart/form-data">
+                              <!--left side start  -->
+                              <div class="left-side" style="width:410px;">
+                              <label>Word of Encouragement:</label>
+                              <textarea onblur="if(this.value=='')this.value='Max 140 Characters';" onfocus="if(this.value=='Max 140 Characters')this.value='';" rows="" cols="" name="ta_commit_text" id="ta_commit_text_<?=$val['id']?>" class="big-textarea" onKeyDown="limitText(this.form.ta_commit_text,this.form.countdown,140);" 
+onKeyUp="limitText(this.form.ta_commit_text,this.form.countdown,140);" style="height: 36px; width:370px;">Max 140 Characters</textarea>
+                              <span id="err_message<?=$val['id']?>" class="error-message"></span> 
+                              </div>
+                              <!--left side end  -->
+                              
+                              <!--right side start -->
+                              <div class="right-side" style=" float:left; width:320px;">
+                                  <label class="small">From:</label>
+                                 
+                                  <div class="field04" style="width:235px; float:left;">
+                                        <input style="width:150px; float:left; margin-right:4px; "   type="text"  value="" name="commit_date_to" id="commit_date_to_<?=$val['id']?>"  readonly="readonly"/>
+                                        <img src="images/icons/cal.png" alt="" onclick="$(this).prev().focus()" style="cursor:pointer; float:left;" />
+                                        
+                                        
+                                        <script type="text/javascript">
+                                        	var dateToday;
+											$(document).ready(function(arg) {
+												
+											<?php /*?>  $.datepicker.setDefaults($.datepicker.regional['<?=get_current_language()?>']);
+                                              $('#commit_date_to_<?=$val['id']?>').datetimepicker({
+                                                    dateFormat : 'yy-mm-dd',
+                                                    minDate: new Date(<?=(date('Y'))?>, <?=(date('m')-1)?>, <?=(date('d'))?> ,  0, 00),
+													controlType: 'select',
+				   										    stepMinute: 15
+                                              });<?php */?>
+											  
+											   $(function(){
+												 var inputDate = $("#commit_date_to_<?=$val['id']?>");
+												 var changeYearButtons = function() {
+													setTimeout(function() {
+													   $('.NextYrClass').remove();
+													   $('.PrevYrClass').remove();
+													   var widgetHeader = inputDate.datepicker("widget").find(".ui-datepicker-header");
+													   //you can opt to style up these simple buttons tho
+													   var prevYrBtn = $('<button title="PrevYr" class="PrevYrClass"></button>');
+													   prevYrBtn.bind("click", function() {
+														$.datepicker._adjustDate(inputDate, -1, 'Y');
+													   });
+													   var nextYrBtn = $('<button title="NextYr" class="NextYrClass"> </button>');
+													   nextYrBtn.bind("click", function() {
+														$.datepicker._adjustDate(inputDate, +1, 'Y');
+													 
+													   });
+													   prevYrBtn.appendTo(widgetHeader);
+													   nextYrBtn.appendTo(widgetHeader);
+											  
+												  }, 0);
+												 };
+											  
+											  		$("#commit_date_to_<?=$val['id']?>").datetimepicker({
+															beforeShow: changeYearButtons,
+															onChangeMonthYear: changeYearButtons,
+															dateFormat : 'yy-mm-dd',
+												  			minDate: new Date(<?=(date('Y'))?>, <?=(date('m')-1)?>, <?=(date('d'))?> ,  0, 00),
+															controlType: 'select',
+															stepMinute: 15
+														   });
+														
+											  });
+											  
+                                                        
+                                             <?php /*?> $('#commit_date_end_<?=$val['id']?>').datetimepicker({
+                                                    dateFormat : 'yy-mm-dd',
+                                                    minDate: new Date(<?=(date('Y'))?>, <?=(date('m')-1)?>, <?=(date('d'))?>, 0, 00),
+													controlType: 'select',
+				   										    stepMinute: 15
+                                              });
+                                              $.timepicker.setDefaults($.timepicker.regional['en']);
+											  <?php */?>
+											  
+											   $(function(){
+												 var inputDate = $("#commit_date_end_<?=$val['id']?>");
+												 var changeYearButtons = function() {
+													setTimeout(function() {
+													   $('.NextYrClass').remove();
+													   $('.PrevYrClass').remove();
+													   var widgetHeader = inputDate.datepicker("widget").find(".ui-datepicker-header");
+													   //you can opt to style up these simple buttons tho
+													   var prevYrBtn = $('<button title="PrevYr" class="PrevYrClass"></button>');
+													   prevYrBtn.bind("click", function() {
+														$.datepicker._adjustDate(inputDate, -1, 'Y');
+													   });
+													   var nextYrBtn = $('<button title="NextYr" class="NextYrClass"></button>');
+													   nextYrBtn.bind("click", function() {
+														$.datepicker._adjustDate(inputDate, +1, 'Y');
+													 
+													   });
+													   prevYrBtn.appendTo(widgetHeader);
+													   nextYrBtn.appendTo(widgetHeader);
+											  
+												  }, 0);
+												 };
+											  
+											  		$("#commit_date_end_<?=$val['id']?>").datetimepicker({
+															beforeShow: changeYearButtons,
+															onChangeMonthYear: changeYearButtons,
+															dateFormat : 'yy-mm-dd',
+												  			minDate: new Date(<?=(date('Y'))?>, <?=(date('m')-1)?>, <?=(date('d'))?> ,  0, 00),
+															controlType: 'select',
+															stepMinute: 15
+														   });
+														
+											  });
+												
+                                            });
+                                        </script>
+                                        
+                                        <span id="err_start_date<?=$val['id']?>" class="error-message"></span> 
+                                  </div>
+                                  
+                                <?php /*?>  <label class="small">Time:</label>
+                                  <div class="field01" style=" width:200px; float:left; margin-right:15px; margin-bottom:10px;">
+                                       <input name="txt_commit_from_time" id="txt_commit_from_time_<?=$val['id']?>" type="text" style="width:55px;"/> 
+                                       <span style=" font-size: 10px;font-style: italic;">(24-hour format ex : HH:MM)</span>
+                                       <span id="err_start_time<?=$val['id']?>" class="error-message"></span> 
+                                  </div><?php */?>
+                                  
+                                  <div class="clr"></div>
+                                  
+                                  <label class="small">To:</label>
+                                  
+                                  <div class="field04" style="width:235px; float:left;">
+                                        <input style="width:150px; float:left; margin-right:4px;"   type="text"  value="" name="commit_date_end" id="commit_date_end_<?=$val['id']?>"  readonly="readonly"/>
+                                        <img src="images/icons/cal.png" alt="" onclick="$(this).prev().focus()" style="cursor:pointer; float:left;" />
+                                     
+                                        <span id="err_end_date<?=$val['id']?>" class="error-message"></span> 
+                                  </div>
+                                  
+                                  <?php /*?><label class="small">Time:</label>
+                                  <div class="field01" style=" width:200px; float:left; margin-right:15px;">
+                                         <input name="txt_commit_to_time" id="txt_commit_to_time_<?=$val['id']?>" type="text" style="width:55px;"/> 
+                                          <span style=" font-size: 10px;font-style: italic;">(24-hour format ex : HH:MM)</span>
+                                         <span id="err_end_time<?=$val['id']?>" class="error-message"></span> 
+                                  </div><?php */?>
+                                  
+                                  
+                              </div>
+                              <!--right side end -->
+                             
+                              
+                              <div id="day_block" style="float:left; margin-top:12px;">
+                                       <label> Day of Week:</label>
+                                        <div class="secttion-padding">
+                                              <table class="cal_table" border="0" cellspacing="0" cellpadding="0">
+                                                    <tr>
+                                                         <!-- <th class="nw-cal_table">S</th>-->
+                                                          <th class="nw-cal_table">M</th>
+                                                          <th class="nw-cal_table">T</th>
+                                                          <th class="nw-cal_table">W</th>
+                                                          <th class="nw-cal_table">T</th>
+                                                          <th class="nw-cal_table">F</th>
+                                                          <th class="nw-cal_table">S</th>
+                                                    </tr>
+                                                    <tr id="weekdays_tr<?=$val['id']?>">
+                                                         <!-- <td valign="middle">
+                                                          <input name="chk_day[]"  type="checkbox" value="Sunday" />
+                                                          </td>-->
+                                                          <td valign="middle">
+                                                          <input name="chk_day[]" type="checkbox" value="Monday" />
+                                                          </td>
+                                                          <td valign="middle">
+                                                          <input name="chk_day[]" type="checkbox" value="Tuesday" />
+                                                          </td>
+                                                          <td valign="middle">
+                                                          <input name="chk_day[]" type="checkbox" value="Wednesday" />
+                                                          </td>
+                                                          <td valign="middle">
+                                                          <input name="chk_day[]" type="checkbox" value="Thursday" />
+                                                          </td>
+                                                          <td valign="middle">
+                                                          <input name="chk_day[]" type="checkbox" value="Friday" />
+                                                          </td>
+                                                          <td valign="middle">
+                                                          <input name="chk_day[]" type="checkbox" value="Saturday" />
+                                                          </td>
+                                                    </tr>
+                                              </table>
+                                            
+                                        </div>
+                                          <span id="err_chk_day<?=$val['id']?>" class="error-message err_new"></span> 
+                                        <div class="clr"></div>
+                                    </div>
+                               <div class="clr"></div>
+                               
+                                <DIV class="view-pray-time">
+                                    <label> Prayer Time: </label>
+                                    <div class="prayer-time secttion-padding time-list-adjust" id="time_tr<?=$val['id']?>">
+                                         	<div class="lbl02"><input name="chk_time[]" type="checkbox" value="00:00:00-03:00:00" /> 0 – 3</div>
+                                            <div class="lbl02"><input name="chk_time[]" type="checkbox" value="03:00:00-06:00:00" /> 3 – 6</div>
+                                            <div class="lbl02"><input name="chk_time[]" type="checkbox" value="06:00:00-09:00:00" /> 6 – 9</div>
+                                            <div class="lbl02"><input name="chk_time[]" type="checkbox" value="09:00:00-12:00:00" /> 9 – 12</div>
+                                            <div class="lbl02"><input name="chk_time[]" type="checkbox" value="12:00:00-15:00:00" /> 12 – 15</div>
+                                            <div class="lbl02"><input name="chk_time[]" type="checkbox" value="15:00:00-18:00:00" /> 15 – 18</div>
+                                            <div class="lbl02"><input name="chk_time[]" type="checkbox" value="18:00:00-21:00:00" /> 18 – 21</div>
+                                            <div class="lbl02"><input name="chk_time[]" type="checkbox" value="21:00:00-23:00:00" /> 21 – 23</div>
+                                </div>
+                                	  <span id="err_chk_time<?=$val['id']?>" class="error-message err_new"></span> 
+                                </DIV>
+                              
+                               
+                              <input name="post" type="button" value="Post" class="post-btn" onclick="post_reply(<?=$val['id']?>)"
+                              style="margin-top:45px;" />
+                          </form>
+                          <div class="clr"></div>
+                      </div>
+                      <!--commit form end -->
+                      
+                      
+                      <!--commitment container start -->
+                      <div class="commitment-container" id="commitment-container<?=$val['id']?>">
+                      	 <div title="Minimize" class="minimize" onclick="view_commits(<?=$val['id']?>)">&nbsp;</div>
+                          <h2 class="title">View Commitments</h2>
+                          <DIV id ="commitment_content_<?=$val['id']?>" class="scrll-height">
+                          <!--commitment start -->
+                          
+                          <!--commitment end -->
+                          </DIV>
+                      </div>
+                      <!--commitment container end -->
+					  
+					   <!--comment container start -->
+                      <div class="commitment-container" id="comment-container<?=$val['id']?>">
+                      	 <div title="Minimize" class="minimize" onclick="view_comments(<?=$val['id']?>)">&nbsp;</div>
+                          <h2 class="title">View Comments</h2>
+                          <DIV id ="comment_content_<?=$val['id']?>" class="scrll-height">
+                          <!--commitment start -->
+                          
+                          <!--comment end -->
+                          </DIV>
+                      </div>
+                      <!--commitment container end -->
+                      
+                  </div>
+                  
+ 
+<?php 
+	}
+}
+?>
+ <!--prayer request box end -->
+ 

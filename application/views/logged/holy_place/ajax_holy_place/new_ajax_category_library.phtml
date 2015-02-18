@@ -1,0 +1,16 @@
+<?php //pr($category);
+	if(count($category)){
+		foreach($category as $k=> $val){
+?>
+<div class="nw-inside-grey-container">
+        <div class="nw-contents" style="float:left;">
+            <img class="icon-note" src="images/icons/new-note.png" alt="">
+            <p><?=$val['s_category']?></p>
+        </div>
+    	<br class="clr">
+</div>
+
+<?php
+		}
+	}
+?>

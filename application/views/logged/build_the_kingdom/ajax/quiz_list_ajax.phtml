@@ -1,0 +1,18 @@
+						<?php //pr($arr_request);
+								if(count($arr_request)){
+									
+									foreach($arr_request as $key=> $val){
+						?>				
+                                        
+                                       <li style="width: 450px;" id="quiz_<?=$val['id']?>">
+										<div class="Question"><?=$val['s_question']?></div>
+										<div class="ans-section"> 
+											<?=$val['s_answer']?>
+										</div>
+										<a href="javascript:void(0)" class="view-answer" id="view_answer<?=$val['id']?>" onclick="show_answer(<?=$val['id']?>)">View Answer</a>
+									</li>
+
+						<?php
+									}
+								}
+						?>

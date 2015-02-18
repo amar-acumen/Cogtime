@@ -1,0 +1,70 @@
+<div class="div_content" style=" margin-top:0px;">
+
+							<?php
+							#pr($ringdata);
+							if($prayer_wall_data)
+							{
+								foreach($prayer_wall_data as $ringval)
+								{
+									$LOGO	= base_url().'uploads/user_ring_logos/'.getThumbName($ringval['s_logo'],'thumb');
+									$ring_detail_link	= base_url().'rings/'.$ringval['ringid'].'/ring-home.html';
+							?>
+							<div class="blog">
+                            <h2>
+                            <a href="<?php echo $ring_detail_link?>" id="ring_name_<?php echo $ringval['ringid']?>" style="font-size: 16px; color: #096AA7;"><?php echo $ringval['s_ring_name']?></a>
+                            </h2>
+                            <div class="clr"></div>
+                            <p class="time-posted">
+                            created <?php echo getShortDate($ringval['dt_created_on'],5)?> by 
+                            <?php
+							if($ringval['if_already_friend'] == 'true' || $ringval['already_added_netpal'] == 'true'){
+							  $profile_link = get_profile_url($ringval['post_owner_user_id'],$ringval['s_profile_name']);
+							 }else
+							 {
+							  $profile_link = get_profile_url_prayer_partner($ringval['post_owner_user_id'],$ringval['s_profile_name']);
+							 }										
+							?>
+                            <a style="color: #62C3BC;" href="<?php echo $profile_link?>"><?php echo $ringval['owner_name']?></a> 
+                            </p>
+                            
+                            <p><?php echo my_substr($ringval['s_description'],160)?></p>
+                            <div class="clr"></div>
+                            <ul class="article-comment-block article-comment-block2">
+                            	<li class="first">Total Posts : <?php echo $ringval['post']?> </li> 
+                                <li> <span>Total Comments : <?php echo $ringval['cmt']?></span></li>
+                                <li> <span>Total Likes : <?php echo $ringval['lik']?></span></li>
+                                <li class="right">
+                                	<ul>
+										<?php
+                                         if($ringval['i_user_id']==$this->i_profile_id)
+                                         {
+                                         ?>
+                                         <li class="first"><a  href="<?php echo base_url().'my-ring/'.$ringval['ringid'].'/edit.html'?>">Edit</a></li>
+                                         <li><a  href="javascript:void(0);" onclick="$('#i_del_id').val('<?php echo encrypt($ringval['ringid'])?>');show_dialog('delete-ring');">Delete</a></li>
+                                         <?php
+                                         }
+                                         else
+                                         {
+                                         ?>
+                                         <li class="first"><img src="images/icons/view2.png" alt="" class="icon-img" /> <a  href="javascript:void(0);">View</a></li>
+                                         <?php
+                                         }
+                                         ?>
+                                 	</ul>
+                                 </li>
+                             </ul>
+                             
+                            
+                                  
+                            </div>
+                            
+                            <?php
+								}
+							}
+							?>
+</div>
+<input type="hidden" id="current_page" name="current_page" value="<?=$current_page_1?>"  />                     
+
+                            
+                            
+

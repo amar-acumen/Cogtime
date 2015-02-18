@@ -1,0 +1,227 @@
+<?php include(APPPATH."views/layouts/logged_header.phtml");?>
+            <!-- NAVIGATION SECTION -->
+      <?php include(APPPATH."views/layouts/nav.phtml");?>
+      <!-- /NAVIGATION SECTION -->
+      </div>
+</div>
+<!-- /HEADER SECTION -->
+<div class="clr"></div>
+
+<!-- CONTENT SECTION -->
+<div id="content_section">
+      <div id="container">
+            <!--<div id="mid_content"> -->
+                  <!-- latest news -->
+                 <?php include(APPPATH ."views/layouts/latest_news.phtml");?>
+                  <!-- /latest news -->
+                  <div class="clr"></div>
+                  <!-- main container -->
+                  <div id="main_container">
+                        <!-- left container -->
+                        <?php include(APPPATH."views/layouts/leftbar.phtml");?>
+                        <!-- /left container -->
+                        <!-- mid container -->
+                        <div id="mid_container">
+                              <div class="page_heading etrade-nw-heading">
+                                    <div class="left"><img src="images/icons/box.png" alt="" />eSwap</div>
+                                    <div class="right">
+                                        <input type="button" onclick="window.location='<?php echo base_url()?>eswap/add-product.html'" value="Add Product" style="padding-left:20px;" class="evnt_btn" />
+                                    </div>
+                              </div>
+							   <!--sub page links -->
+                              <?php include(APPPATH."views/logged/eswap/menu.phtml");?>
+                              <!--/sub page links -->
+							    <!--<div class="arrow_btm"></div>
+								<div class="ne-etrade-product">
+								<div class="ne-etrade-product-category">
+										Product you may like - <span class="attribute1-2">Listing product of those owners who want a product I have</span>
+									</div>
+							  <form method="" action="">
+								<label class="subproduct"> I Want :</label>
+								<input type="text" class="subproduct-input" name="" />
+								<label class="subproduct">  I Offer :</label>
+								<input type="text" class="subproduct-input" name="" />
+								 <br class="clear" />
+								 <input type="submit" name="" value="Search" class="yellow-btn ne-etradefloat-right" />
+								 </form>
+							  </div>-->
+                              
+                               <div class="ne-etrade-product" style="float:right; background-color:#fff; width:51%;">
+                              <form action="<?php echo base_url()?>eswap-home" method="POST" name="frmetradeList">
+								 <label class="subproduct"> Category :</label>
+								 <select name="category" id="category" class="subproduct-input" style="margin: 0 5px 0 0;">
+                                 	<?php echo $category?>
+                                 </select>
+								 <input type="submit" class="trade-search-btn" value="" name=""/>
+								 </form>
+                                 </div>
+                              
+                              <div style="float:left; padding:1%; margin-bottom:10px;">
+                             <!--breadcrumb menu-->
+<?php /*?>
+                              <ul class="ne-etrade-breadcrumb">
+								<li><a href="<?php echo base_url()?>eswap-home">Home</a></li>
+								<li>»</li>
+								<li><?php echo $category_name?></li>
+							  </ul><?php */?>
+                               <!--breadcrumb menu-->
+							  <ul class="ne-etrade-breadcrumb">
+								<li><a href="<?php echo base_url()?>eswap-home.html">Home</a></li>
+								<?php 
+								if($parent_category_name != ''){
+								?>
+                                <li>»</li>
+                                <li><?=$parent_category_name?></li>
+                                <?php
+								}
+								if($category_name != ''){
+								?>
+                                <li>»</li>
+								<li><?php echo $category_name?></li>
+                                <?php 
+									}
+								?>
+							  </ul>
+								
+							   <!--breadcrumb menu-->
+                              <!--breadcrumb menu-->
+                              </div>
+                               <?php if($subcategory!=''){?>
+							   <div class="arrow_btm"></div>
+							   <div class="ne-etradeshade-box">
+                                        
+                                         <form name="frmSubcat" id="frmSubcat" action="<?php echo base_url()?>eswap-home" method="post" style="margin-top:10px;">
+                                         <input type="hidden" name="subcat" value="1" />
+                                         <input type="hidden" name="category" id="subcatid" value="" />
+											<ul class="ne-etrade-itemlist">
+                                                <?php echo $subcategory;?>
+											</ul>
+                                         </form>
+										 <!--item list-->										 
+							   </div>
+                               <?php
+							   }
+							   ?>
+                             <div class="arrow_btm"></div>
+							 <div class="ne-etrade-product-category">Products you may like - <span class="attribute1-2">Listing product of those owners who want a product I have</span></div>
+                            <div class="blog-container" style=" margin-top:0px; padding:0px;" id="listingContent">
+                                 <?php echo $listingContent;?>
+                            </div>
+                            <?php if($no_of_result  == 0):?>
+                                <div class="pagination" style=" height:56px;">
+                                <div class="shade_box_01" style="padding-top:5px;"><div  class="shade_norecords" style="width:260px;"><p class="blue_bold12">No Product.</p></div></div>
+                                </div>
+                            <?php endif;?>	
+                            <?php if($no_of_result > $pagination_per_page): ?>
+                                    <div class="view_more" id="show_more_feeds_div"><a href="javascript:void(0);" id="show_more_feeds_link" page_value="<?=$current_page_1?>" onclick="show_more_record($(this).attr('page_value'))">[view more] </a> </div>
+                            <?php endif; ?>
+                            
+                        </div>
+                            <!--sub page links -->
+                                      
+                        <!-- /mid container -->
+                        <!-- right container -->
+                        <?php include(APPPATH."views/layouts/rightbar.phtml");?>
+                        <!-- /right container -->
+                        </div>
+                  </div>
+                  <!-- /main container -->
+                  <div class="clr"></div>
+            <!--</div> -->
+      </div>
+      <div class="clr"></div>
+</div>
+<!-- /CONTENT SECTION -->
+<div class="clr"></div>
+
+
+
+<?php include(APPPATH."views/layouts/footer.phtml");?>
+<?php include(APPPATH."views/logged/blocks/common_popup.phtml");?>
+
+<script type="text/javascript">
+$(document).ready(function() {
+
+	// for AJAX page-submission...
+    var eTradeoptions = { 
+        beforeSubmit:  showBusyScreen,  // pre-submit callback 
+        success:       validateFrm // post-submit callback 
+    }; 
+ 
+    // bind to the form's submit event 
+    $('#frmetradeList').submit(function() {
+        $(this).ajaxSubmit(eTradeoptions);
+        return false;
+    });
+
+
+});
+
+function showDisclaimer(id)
+{
+	$('#disclaimer_'+id).slideToggle('slow');
+}
+function showShippingFee(id)
+{
+	$('#shippingfee_'+id).slideToggle('slow');
+}
+function showContactSection(id)
+{
+	$('#contact-section_'+id).slideToggle('slow');
+}
+function validateFrm(data)
+{
+	var data = JSON.parse(data);
+	$('#listingContent').html('');
+	$('#listingContent').html(data.html);
+	hideBusyScreen();
+	showUIMsg(data.msg);		
+}
+function goToSubCategoryList(id)
+{
+	$('#subcatid').val(id);
+	$('#frmSubcat').submit();
+}
+
+var ajax_req_feeds = null;
+function show_more_record(page) {
+	
+	if(ajax_req_feeds!=null) {
+		ajax_req_feeds.abort();
+	}
+	showUILoader_nodialog();
+	ajax_req_feeds = $.ajax({
+		type: 'get',
+		url: base_url+'logged/e_swap/generate_product_listing_AJAX/'+page,
+		dataType: 'json',
+
+		success: function (data, status) {
+
+			hideUILoader_nodialog();
+			if(data.html!='') {
+				
+				//alert(data.cur_page+'dfdf');
+				$('#listingContent').append(data.html);
+				$('#show_more_feeds_link').attr('page_value', data.cur_page);
+				$('#show_more_feeds_link').attr('onclick','');
+				$('#show_more_feeds_link').attr('onclick','show_more_record('+data.cur_page+')');
+			}
+			else {
+				$('#listingContent').append('<div class="view_more" style="text-align: center;"><p class="blue_bold12" style="font-size:14px;">No More Records.</p></div>');
+				$('#show_more_feeds_div').remove();
+			}
+            
+            if(data.view_more==false)
+            {
+                
+                $('#listingContent').append('<div class="view_more" style="text-align: center;" ><p class="blue_bold12" style="font-size:14px;">No More Records.</p></div>');
+                $('#show_more_feeds_div').remove();
+            }
+		
+
+		}	// end of success function...
+	});
+}
+</script>
+
+
