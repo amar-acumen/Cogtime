@@ -296,11 +296,9 @@ if (!@$session_data['loggedin']) {
     <script type="text/javascript">
     // to show clock
         $(document).ready(function(arg) {
-           //comment out to reduce page load time-sanhita
-           //get_system_notifications();
-           //get_system_reminders_at_remind_me_time();
-           //comment out to reduce page load time-sanhita
-            //get_system_reminders();
+           get_system_notifications();
+           get_system_reminders_at_remind_me_time();
+            get_system_reminders();
 
     //setInterval(function(){get_system_notifications()},59000);
         });
@@ -453,8 +451,7 @@ if (!@$session_data['loggedin']) {
 </div>
 
 <script type="text/javascript">
- //comment out -sanhita 
-/*$(document).ready(function(arg) {
+$(document).ready(function(arg) {
 get_user_clock();
 setInterval(function(){get_user_clock()},1000);
 });
@@ -477,7 +474,7 @@ function get_user_clock() {return false;
 			//showUIMsg('Some error occurred. Please try again.');
 		}
 	});
-}*/
+}
 
 </script>
     
