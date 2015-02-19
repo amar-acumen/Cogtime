@@ -53,7 +53,7 @@ class Prayer_group extends Base_controller
     {
         try
         {
-		die('ok');	
+		//die('ok');	
             $posted=array();
             $this->data["posted"]=$posted;/*don't change*/    
             $data = $this->data;      
