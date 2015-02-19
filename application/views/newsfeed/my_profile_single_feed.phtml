@@ -31,7 +31,38 @@ if( $feed['s_type'] == 'wall_post' ){
                  	 <p class="blue_bold12" style="font-size:13px;"><?=$posting_user_name?> has posted on <?=($wall_owner_name)."'s wall."?></p>
 				 <?php    }
 				 ?>
-                <p><?=$data_arr->message?></p>
+<!--                <p><?=$data_arr->message?></p>-->
+                           <p><?php
+                $msg = $data_arr->message;
+              
+                if(filter_var($msg, FILTER_VALIDATE_URL)){
+                   // echo 'ok';
+                    ?>
+                    
+                    <a href="<?=$msg ?>" target="_blank" style="color: #096aa7; white-space: nowrap " ><?= $msg ?></a>
+                        <?php
+                }else{
+                   //echo $msg;
+                   $strarr =explode(' ',$data_arr->message);
+                   $cnt = count($strarr);
+                   //pr($strarr);
+                   for($i=0;$i<$cnt;$i++){
+                       //echo $i;
+                       if(filter_var($strarr[$i], FILTER_VALIDATE_URL)){
+                         //  echo str_replace($strarr[$i],"<a href=".$strarr[$i].">$strarr[$i]</a>",$strarr[$i]);
+                            $strarr[$i] = "<a href=".$strarr[$i]." style='color:#096aa7;white-space: nowrap' target='_blank'>$strarr[$i]</a>";
+                         
+                           
+                           
+                       }
+                      // $finalarr = array($strarr[$i]);
+                       //$total_str = $strarr[$i];
+                       echo $strarr[$i].'   ';
+                   }
+                   
+                }
+                
+                        ?></p>
                
               <!-- image --> 
                <?php if(!empty($data_arr->photo) && count($data_arr->photo)){ 
