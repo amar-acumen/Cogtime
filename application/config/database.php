@@ -69,10 +69,10 @@ $dbprefix = $db['flashchat']['dbprefix'];
 $active_group = 'default';
 $active_record = TRUE;
 
-$db['default']['hostname'] = 'localhost';
-$db['default']['username'] = 'acumencs_siddhi';
-$db['default']['password'] = 'siddhi@acu#1!';
-$db['default']['database'] = 'acumencs_cogtime';
+$db['default']['hostname'] = '103.227.62.106';
+$db['default']['username'] = 'acumen';
+$db['default']['password'] = 'eWvo456&';
+$db['default']['database'] = 'admin_cogtime';
 $db['default']['dbdriver'] = 'mysqli';
 $db['default']['dbprefix'] = 'cg_';
 $db['default']['pconnect'] = FALSE;
