@@ -15,7 +15,7 @@
 |
 */
 $config['baseURL'] = sprintf('%s://%s/', ($_SERVER['HTTPS'] == 'on' ? 'https' : 'http'), $_SERVER['HTTP_HOST']);
-$config['base_url']    = $config['baseURL'] ."cogtime/";
+$config['base_url']    = $config['baseURL'] ."Cogtime/";
 
 $config['https_base_url']    = $config['baseURL'] ."Cogtime/";
 $config['admin_base_url']    = $config['baseURL'] ."Cogtime/admin/";
