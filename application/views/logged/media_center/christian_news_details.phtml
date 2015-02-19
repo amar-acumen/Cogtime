@@ -67,7 +67,15 @@ function goBack() {
 			  
               <div class="news-details-text">
 				
-              	 <p><?=nl2br(get_unformatted_string_edit($detail_content['s_desc']))?></p>
+<!--              	 <p><?nl2br(get_unformatted_string_edit($detail_content['s_desc']))?></p>-->
+                   <p><?php
+                     $text = nl2br(get_unformatted_string_edit($detail_content['s_desc']));
+                         echo    str_replace('<a', '<a target="_blank"', $text);
+                            ?>
+                 <?php 
+                //echo  strpos($detail_content['s_desc'],'Continue reading')
+                 ?>
+                 </p>
                  
                 <div class="clear"></div>
                 <ul class="tag-list">
