@@ -9,3 +9,6 @@ RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.*)$ index.php?/$1 [L]
 </IfModule>
+<IfModule mod_fcgid.c>
+   FcgidIOTimeout  7200
+</IfModule>
