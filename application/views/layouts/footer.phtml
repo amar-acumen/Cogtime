@@ -457,7 +457,7 @@ setInterval(function(){get_user_clock()},1000);
 });
 
  
-function get_user_clock() {return false;
+function get_user_clock() {//return false;
 	$.ajax({
 	   type: "post",
 	   url: '<?=base_url()?>base_controller/getUserClock',
