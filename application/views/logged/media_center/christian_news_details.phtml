@@ -132,6 +132,7 @@ function goBack() {
 				  foreach($right_content as $val)
 				  {
 					$IMG = base_url() . 'uploads/media_center_article/' . getThumbName($val['s_image'], 'thumb');
+                                        echo $val['cat_name'];
 				  ?>
                   <div class="dev-main">
                       <div class="pic-left"><a href="<?= base_url().$val['id']."/".my_url($val['cat_name'])."/christian-news-details/".my_url($val['s_title']).".html"?>">
