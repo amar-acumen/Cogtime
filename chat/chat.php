@@ -25,10 +25,13 @@ OTHER DEALINGS IN THE SOFTWARE.
 //session_start();
 
 define ('DBPATH','localhost');
-define ('DBUSER','cogtime_dbuser');
+/*define ('DBUSER','cogtime_dbuser');
 define ('DBPASS','qBzw29wH');
 define ('DBNAME','cogtime');
-
+*/
+define ('DBUSER','acumen');
+define ('DBPASS','eWvo456&');
+define ('DBNAME','admin_cogtime');
 
 global $DB_OBJ;
 $DB_OBJ = mysql_connect(DBPATH,DBUSER,DBPASS);
