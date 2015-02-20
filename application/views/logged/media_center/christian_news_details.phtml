@@ -132,6 +132,7 @@ function goBack() {
 				  foreach($right_content as $val)
 				  {
 					$IMG = base_url() . 'uploads/media_center_article/' . getThumbName($val['s_image'], 'thumb');
+                                        //echo $val['cat_name'];
 				  ?>
                   <div class="dev-main">
                       <div class="pic-left"><a href="<?= base_url().$val['id']."/".my_url($val['cat_name'])."/christian-news-details/".my_url($val['s_title']).".html"?>">
@@ -152,7 +153,14 @@ function goBack() {
                               <a href="<?= base_url().$val['id']."/".my_url($val['cat_name'])."/christian-news-details/".my_url($val['s_title']).".html"?>"><?=my_substr($val['s_title'],20)?></a>
                               <?php } ?>
                           </h4>
+                              <?php 
+                               if($val['cat_name'] != 'News'){
+                              ?>
                           <p><?=my_substr(strip_tags(get_unformatted_string_edit($val['s_desc'])),40)?></p>
+                          <?php 
+                               }
+                          ?>
+                          
                          	 <ul class="green-comment">
                              	<li><a href="javascript:void(0);">Liked by</a><span> (<?php echo $val['total_likes']?>)</span></li>
                              </ul>

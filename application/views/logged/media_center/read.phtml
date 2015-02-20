@@ -278,7 +278,7 @@ echo $img[1];
                                    ?>
                                    
                         <h4><a href="<?= base_url().$cat2_article[0]['id']."/".my_url($cat2_article[0]['cat_name'])."/christian-news-details/".my_url($cat2_article[0]['s_title']).".html"?>" class="article_category" title="<?=$cat2_article[0]['s_title']?>"><?=my_substr($cat2_article[0]['s_title'],30)?></a></h4>
-                        <div class="blog-date"><?=getShortDate($val['dt_posted_on'],4)?> by <?=$val['admin_name']?></div>         
+                        <div class="blog-date"><?=getShortDate($val['dt_posted_on'],4)?>  <?//$val['admin_name']?></div>         
                         <div class="blog-quick-list">
                             <ul>
                                 <li class="blog-comment"><a href="javascript:void(0);"><?=$val['total_comments']?> Comments</a></li>
@@ -339,7 +339,7 @@ echo $img[1];
                                           
                                       } ?>
                                                         <!------------------------------------------>
-                                <div class="blog-date"><?=getShortDate($val['dt_posted_on'],4)?> by <?=$val['admin_name']?></div>
+                                <div class="blog-date"><?=getShortDate($val['dt_posted_on'],4)?> <?php //$val['admin_name']?></div>
                        
                         <div class="blog-quick-list">
                             <ul>
@@ -421,7 +421,7 @@ echo $img[1];
                                         ?>	
                          <div class="mission-right">
                               <h4><a href="<?= base_url().$val['id']."/".my_url($val['cat_name'])."/christian-news-details/".my_url($val['s_title']).".html"?>" title="<?=$val['s_title']?>"><?=my_substr($val['s_title'],65)?></a></h4>
-                                <div class="blog-date"><?=getShortDate($val['dt_posted_on'],4)?> by <?=$val['admin_name']?></div>         
+                                <div class="blog-date"><?=getShortDate($val['dt_posted_on'],4)?>  <?php //$val['admin_name']?></div>         
                         <div class="blog-quick-list">
                             <ul>
                                 <li class="blog-comment"><a href="javascript:void(0);"><?=$val['total_comments']?> Comments</a></li>
