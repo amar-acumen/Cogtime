@@ -33,7 +33,7 @@ class Dashboard extends Admin_base_Controller
 			$this->load->model('my_blog_model');
 			$this->load->model('my_ring_model');
 			$this->load->model('events_model');
-            $this->load->model('chat_rooms_model');
+           // $this->load->model('chat_rooms_model');
             $this->load->model('prayer_wall_model');
 			$this->load->model('intercession_model');
 			$this->load->model('projects_model');
@@ -79,8 +79,8 @@ class Dashboard extends Admin_base_Controller
 			$where_events = " WHERE E.i_status = 1 ";
             $data['total_events'] = $this->events_model->get_list_count($where_events);
 			
-			$data['total_chat_rooms'] =  $this->chat_rooms_model->get_list_count();
-            
+			//$data['total_chat_rooms'] =  $this->chat_rooms_model->get_list_count();
+            $data['total_chat_rooms']='';
             //---------- holy place --------------------
             $data['total_prayer_req'] = $this->prayer_wall_model->get_count_list_prayers_request(" WHERE p.i_isenabled=1");
             $data['total_intercession'] = $this->intercession_model->get_total_intercession(" WHERE i.i_is_enable=1");
