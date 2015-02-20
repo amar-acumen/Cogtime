@@ -12392,9 +12392,9 @@ width:98%; padding:5px 1% 0; height:105px; text-align:left; resize:none;}
 /*********** Advertsiment part start****/
 
 .care-tab-link{margin:20px 0 0 0; padding:0; list-style-type:none; overflow:hidden;}
-.care-tab-link li{display:block; float:left; padding:8px 1%; text-align:center; width:48%; color:#666; cursor:pointer; background:#eaeaea; font-size:18px;}
-.care-tab-link li:hover{background:#54b3ac; color:#FFFFFF;}
-.care-tab-link li.active{background:#62c3bc; color:#FFFFFF;}
+.care-tab-link li{ font-size:18px;}
+.care-tab-link li:hover{}
+.care-tab-link li.active{}
 
 .care-tab-main-container{ border:1px solid #eaeaea; padding: 20px; margin: 0 0 20px 0; display:none;}
 .care-tab-main-container.block{display:block;}
