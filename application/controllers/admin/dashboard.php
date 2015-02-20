@@ -33,7 +33,7 @@ class Dashboard extends Admin_base_Controller
 			$this->load->model('my_blog_model');
 			$this->load->model('my_ring_model');
 			$this->load->model('events_model');
-            $this->load->model('chat_rooms_model');
+           // $this->load->model('chat_rooms_model');
             $this->load->model('prayer_wall_model');
 			$this->load->model('intercession_model');
 			$this->load->model('projects_model');
