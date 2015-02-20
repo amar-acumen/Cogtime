@@ -142,7 +142,9 @@
                     ?>
                     
                     
-                    
+                    <?php
+                     if($this->session->userdata('loggedin')!=''){
+                    ?>
                     <!--box two start -->
                     <div class="link-box" onclick="<?=$destination?>"  style="width:167px;">
                     	<div class="link-box-in"  style="width:136px;">
@@ -154,7 +156,7 @@
                         </div>
                     </div>
                     <!--box two end -->
-                    
+                     <?php }  ?>
                     
                     <?php
                     if($this->session->userdata('loggedin')!='')

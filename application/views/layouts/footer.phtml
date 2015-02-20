@@ -200,7 +200,7 @@ if (!@$session_data['loggedin']) {
 
 <?php /* ?>NOTIFICATION BLOCK <?php */ ?>
 <?php if (@$session_data['loggedin'] && $this->session->userdata('user_type') == 1) { ?>
-    <script type="text/javascript">
+<!--    <script type="text/javascript">
     // to show clock
         $(document).ready(function(arg) {
            get_new_request_notification();
@@ -291,9 +291,9 @@ if (!@$session_data['loggedin']) {
         }
 
 
-    </script>
+    </script>-->
 
-    <script type="text/javascript">
+<!--    <script type="text/javascript">
     // to show clock
         $(document).ready(function(arg) {
            get_system_notifications();
@@ -370,38 +370,38 @@ if (!@$session_data['loggedin']) {
 
     //////// get system reminders at remind me time of user//////////////////////////
 
-        function get_system_reminders_at_remind_me_time() {
-
-            //alert(1)
-			var sound_file = base_url + "uploads/alert/56895^DING.mp3"
-            $.ajax({
-                type: "post",
-                url: '<?= base_url() ?>base_controller/show_system_reminder_popup_at_remind_me_time',
-                dataType: "json",
-                success: function(json_response) {
-                    ///alert(11);
-                    if (json_response.result === 'success') {
-                        ///alert(json_response.notification_msg);
-                        $('#cogtime_notification_div').html(json_response.reminder_html);
-						//$('#reminder').html(json_response.reminder_html);
-                       // show_dialog('reminder');
-						 $('.control').trigger('click');
-                        get_new_request_notification();
-                        playSound(sound_file);
-                    }
-                    setTimeout(function() {
-                        get_system_reminders_at_remind_me_time()
-                    }, 10000);
-                },
-                error: function() {
-                    //showUIMsg('Some error occurred. Please try again.');
-                }
-            });
-        }
+//        function get_system_reminders_at_remind_me_time() {
+//
+//            //alert(1)
+//			var sound_file = base_url + "uploads/alert/56895^DING.mp3"
+//            $.ajax({
+//                type: "post",
+//                url: '<?= base_url() ?>base_controller/show_system_reminder_popup_at_remind_me_time',
+//                dataType: "json",
+//                success: function(json_response) {
+//                    ///alert(11);
+//                    if (json_response.result === 'success') {
+//                        ///alert(json_response.notification_msg);
+//                        $('#cogtime_notification_div').html(json_response.reminder_html);
+//						//$('#reminder').html(json_response.reminder_html);
+//                       // show_dialog('reminder');
+//						 $('.control').trigger('click');
+//                        get_new_request_notification();
+//                        playSound(sound_file);
+//                    }
+//                    setTimeout(function() {
+//                        get_system_reminders_at_remind_me_time()
+//                    }, 10000);
+//                },
+//                error: function() {
+//                    //showUIMsg('Some error occurred. Please try again.');
+//                }
+//            });
+//        }
 
     ///////////end //////////////////////////////////////////
 
-    </script>
+    </script>-->
     
     
 <div class="lightbox optout-as-prayer-partner2" style="width:480px;">
@@ -450,7 +450,10 @@ if (!@$session_data['loggedin']) {
       </div>
 </div>
 
-<script type="text/javascript">
+    
+    
+    
+<!--<script type="text/javascript">
 $(document).ready(function(arg) {
 get_user_clock();
 setInterval(function(){get_user_clock()},1000);
@@ -476,7 +479,7 @@ function get_user_clock() {//return false;
 	});
 }
 
-</script>
+</script>-->
     
 <?php } ?>
 <?php /* ?>NOTIFICATION BLOCK <?php */ ?>
