@@ -4,7 +4,22 @@
 <!-- /NAVIGATION SECTION -->
 </div>
 </div>
+<script type="text/javascript">
+$(document).ready(function(){
+    $('#mcad').click(function(){
+        $('#mcad').attr('checked',true);
+        $('#mcadd').css('display','block');
+         $('#cgad').attr('checked', false);
+    })
+    $('#cgad').click(function(){
+        $('#cgad').attr('checked', true);
+         $('#mcad').attr('checked',false);
+         $('#cgadd').css('display','block');
+    });
+})
 
+
+</script>
 
 <!-- /HEADER SECTION -->
 <div class="clr"></div>
@@ -20,11 +35,11 @@
             </div>
              
         <ul class="care-tab-link">
-            <label><input type="radio"> Cogtime Advertisment</label>
-            <label><input type="radio"> Media Center Advertisment</label>
+            <label><input type="radio" name="Ad" value="cgad" id="cgad" checked=""> Cogtime Advertisment</label>
+            <label><input type="radio" name="Ad" value="mcad" id="mcad"> Media Center Advertisment</label>
         </ul>
         
-        <div class="care-tab-main-container block">
+             <div class="care-tab-main-container block" id="cgadd">
             <form method="POST" action="<?= base_url() ?>logged/advertisement_request/add_cogtime_adv?sandbox=1" name="cogtimeAddSub" enctype="multipart/form-data" id="cogtimeAddSub">
        <div class="form-main">
        	<label>Name: </label>
@@ -271,7 +286,7 @@
                 });
              </script>  
 
-<div class="care-tab-main-container">
+<div class="care-tab-main-container" id="mcadd">
         
     <form method="POST" action="<?= base_url() ?>logged/advertisement_request/add_media_center_adv?sandbox=1" name="mediaAddSub" enctype="multipart/form-data" id="mediaAddSub">
        <div class="form-main">
