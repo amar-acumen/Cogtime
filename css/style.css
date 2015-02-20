@@ -731,10 +731,10 @@ input[type="checkbox"] {
 	line-height:32px;
 }
 #myjquerymenu ul li a.first {
-	padding:0 0 0 26px;
+	padding:0 0 0 31px;
 }
 #myjquerymenu ul li a.first span {
-	padding:0 26px 0 0;
+	padding:0 30px 0 0;
 }
 <!--
 * html #myjquerymenu ul li a {
