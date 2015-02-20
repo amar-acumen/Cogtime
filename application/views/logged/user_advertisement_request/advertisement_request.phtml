@@ -20,22 +20,22 @@
             </div>
              
         <ul class="care-tab-link">
-            <li class="active">Cogtime Advertisment</li>
-            <li>Media Center Advertisment</li>
+            <li class="active"><input type="checkbox"> Cogtime Advertisment</li>
+            <li><input type="checkbox"> Media Center Advertisment</li>
         </ul>
         
         <div class="care-tab-main-container block">
             <form method="POST" action="<?= base_url() ?>logged/advertisement_request/add_cogtime_adv?sandbox=1" name="cogtimeAddSub" enctype="multipart/form-data" id="cogtimeAddSub">
        <div class="form-main">
        	<label>Name: </label>
-        <input type="text" name="user" value="<?= get_username_by_id(intval(decrypt($this->session->userdata('user_id')))) ?>" readonly="readonly" disabled="disabled">
+        <input type="text" name="user" value="<?= get_username_by_id(intval(decrypt($this->session->userdata('user_id')))) ?>" readonly disabled="disabled">
         <span>Required</span>
        </div>
        <div class="clear"></div>
 
         <div class="form-main">
         <label>Email: </label>
-        <input type="text" name="eml" value="<?= get_useremail_by_id(intval(decrypt($this->session->userdata('user_id')))) ?>" readonly="readonly" disabled="disabled">
+        <input type="text" name="eml" value="<?= get_useremail_by_id(intval(decrypt($this->session->userdata('user_id')))) ?>" readonly disabled="disabled">
         <span>Required</span>
        </div>
        <div class="clear"></div>
@@ -276,14 +276,14 @@
     <form method="POST" action="<?= base_url() ?>logged/advertisement_request/add_media_center_adv?sandbox=1" name="mediaAddSub" enctype="multipart/form-data" id="mediaAddSub">
        <div class="form-main">
         <label>Name: </label>
-        <input type="text" name="mediauser" value="<?= get_username_by_id(intval(decrypt($this->session->userdata('user_id')))) ?>" readonly="readonly">
+        <input type="text" name="mediauser" value="<?= get_username_by_id(intval(decrypt($this->session->userdata('user_id')))) ?>" readonly>
         <span>Required</span>
        </div>
        <div class="clear"></div>
 
         <div class="form-main">
         <label>Email: </label>
-        <input type="text" name="mediaeml" value="<?= get_useremail_by_id(intval(decrypt($this->session->userdata('user_id')))) ?>" readonly="readonly">
+        <input type="text" name="mediaeml" value="<?= get_useremail_by_id(intval(decrypt($this->session->userdata('user_id')))) ?>" readonly>
         <span>Required</span>
        </div>
        <div class="clear"></div>
