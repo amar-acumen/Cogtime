@@ -266,6 +266,14 @@ class Index extends Base_controller
 			$where = "WHERE 1 and E.i_status =1 AND E.dt_end_time >= '".$cur_time."' AND E.i_user_type = 2";
 			$order_by = "`dt_start_time` ASC ";
 			$data['hp_events']=$this->events_model->get_list($where,0,4,$order_by);
+                        $map = new simpleGMapAPI();
+            $geo = new simpleGMapGeocoder();
+
+            $map->setWidth(475);
+            $map->setHeight(180);
+            $map->setZoomLevel(13); 
+            
+                        
                $VIEW = "banner_pages/event_details.phtml";
             parent::_render($data, $VIEW);
          }
