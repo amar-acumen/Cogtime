@@ -2102,6 +2102,7 @@ $this->email->message("$body");
     'church_id' => $_SESSION['logged_church_id']
                         
                         
+                        
 );
 
 $this->db->insert('cg_church_ring_category', $data); 
