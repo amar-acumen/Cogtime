@@ -87,12 +87,12 @@
 //                             $geo = new simpleGMapGeocoder();
                                $full_address = $val['s_address']. ', ' . $val['s_city'] . ', ' . $val['s_state'] . ', ' . get_country_name_by_id($val['i_country_id']);
 
-                                      echo   $zipcode=$val['s_postcode'];
+                                        $zipcode=$val['s_postcode'];
                                         $url = "http://maps.googleapis.com/maps/api/geocode/json?address=".$zipcode."&sensor=false";
                                         $details=file_get_contents($url);
                                         $result = json_decode($details,true);
 
-                                        $lat=$result['results'][0]['geometry']['location']['lat'];
+                                      echo  $lat=$result['results'][0]['geometry']['location']['lat'];
 
                                         $lng=$result['results'][0]['geometry']['location']['lng'];
 
@@ -120,7 +120,7 @@
  
 ?>
                             
-                             <div class="map" id="map_canvas">
+                             <div class="map" id="map_canvas<?= $val['id'] ?>">
                                 <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
     <script>
 var map;
@@ -133,7 +133,7 @@ function initialize() {
     zoom: 19,
     center: new google.maps.LatLng(lat, lan )
   };
-  map = new google.maps.Map(document.getElementById('map-canvas'),
+  map = new google.maps.Map(document.getElementById('map-canvas<?= $val['id'] ?>'),
       mapOptions);
 	  
 	   var marker = new google.maps.Marker({
