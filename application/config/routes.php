@@ -709,3 +709,8 @@ $route['find-church-space'] = 'logged/search_church_space/index';
 /** admin prayer councillor section **/
 $route['admin/holy-place/prayer_councillor'] = "admin/holy_place/prayer_councillor/index";
 $route['admin/holy-place/add-prayercouncillor'] = "admin/holy_place/prayer_councillor/add_prayer_councillor";
+
+
+
+/************************pre login event **********************************/
+$route['upcoming-events'] = 'index/event_details';
