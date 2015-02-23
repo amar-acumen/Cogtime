@@ -37,6 +37,13 @@
                         <p class="title"><a href="javascript:void(0);" onclick="show_dialog('event<?= $val['id']?>')"><?=$title?></a></p>
                         <p class="date" style="color:#000 !important; font-size:13px;"><?=getShortDate($val['dt_start_time'], 9)?></p>
                         <p><?=$desc?></p>
+                        <p>Created On: <?=$val['dt_created_on'] ?></p>
+                        <p>Venue: <?= $val['s_address']. ', ' . $val['s_city'] . ', ' . $val['s_state'] . ', ' . get_country_name_by_id($val['i_country_id']); ?></p>
+                        <p>Details :<?= $desc; ?></p>
+               
+               
+
+                        <p>Time: <?=$val['dt_start_time'] ?></p>
                     </div>
                 </li>
             
