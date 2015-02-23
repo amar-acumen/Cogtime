@@ -51,13 +51,13 @@
 			obj.ready(function(){
 			
 					setTimeout(function() {
-                       // check();
+                        check();
 					  // console.log(obj.attr('id'));
                     },2000);
 			
 			});
-			$(ids).remove();
-			alert(ids);
+			$('#'+ids).remove();
+			console.log(ids);
 			$('head').append(obj);
 		};
 		
