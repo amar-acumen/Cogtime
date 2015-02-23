@@ -678,24 +678,24 @@ class Church_ring extends Base_controller
 				  $s_query_type = 'both';
 				  if($ring_name!='')
 				  {
-					  $wh	.= " AND (r.s_ring_name LIKE '%".$ring_name."%' OR r.s_description LIKE '%".$ring_name."%')";
+					  $wh	.= " AND (r.s_ring_name LIKE '%".$ring_name."%' OR r.s_description LIKE '%".$ring_name."%') AND r.church_id = $church_id";
 				  }
 				  if($cat_id!='')
 				  {
-					  $wh	.= " AND r.i_category_id ='".$cat_id."'";
+					  $wh	.= " AND r.i_category_id ='".$cat_id."' AND r.church_id = $church_id";
 				  }
 				  if($sub_cat!='')
 				  {
-					  $wh	.= " AND r.i_sub_category_id ='".$sub_cat."'";
+					  $wh	.= " AND r.i_sub_category_id ='".$sub_cat."' AND r.church_id = $church_id";
 				  }
 				  
 				  if($ring_name!='')
 				  {
-					  $wh_ring_post	.= " AND (rp.s_post_title  LIKE '%".$ring_name."%' OR rp.s_post_description LIKE '%".$ring_name."%')";
+					  $wh_ring_post	.= " AND (rp.s_post_title  LIKE '%".$ring_name."%' OR rp.s_post_description LIKE '%".$ring_name."%') AND r.church_id = $church_id";
 				  }
 				  if($cat_id!='')
 				  {
-					  $wh_ring_post	.= " AND r.i_category_id ='".$cat_id."'";
+					  $wh_ring_post	.= " AND r.i_category_id ='".$cat_id."' AND r.church_id = $church_id";
 				  }
 				  
 				  
@@ -705,16 +705,16 @@ class Church_ring extends Base_controller
 				  $s_query_type = 'posts';
 				  if($ring_name!='')
 				  {
-					  $wh	.= " AND (rp.s_post_title LIKE '%".$ring_name."%' OR rp.s_post_description LIKE '%".$ring_name."%')";
+					  $wh	.= " AND (rp.s_post_title LIKE '%".$ring_name."%' OR rp.s_post_description LIKE '%".$ring_name."%') AND r.church_id = $church_id";
 				  }
 				  if($cat_id!='')
 				  {
-					  $wh	.= " AND r.i_category_id ='".$cat_id."'";
+					  $wh	.= " AND r.i_category_id ='".$cat_id."' AND r.church_id = $church_id";
 				  }
 				  
 				  if($sub_cat!='')
 				  {
-					  $wh	.= " AND r.i_sub_category_id ='".$sub_cat."'";
+					  $wh	.= " AND r.i_sub_category_id ='".$sub_cat."' AND r.church_id = $church_id";
 				  }
 				  
 			}
