@@ -24,7 +24,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 //session_start();
 
-define ('DBPATH','localhost');
+define ('DBPATH','103.227.62.106');
 /*define ('DBUSER','cogtime_dbuser');
 define ('DBPASS','qBzw29wH');
 define ('DBNAME','cogtime');
