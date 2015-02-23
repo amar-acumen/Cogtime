@@ -90,6 +90,7 @@
                         $map->setHeight(180);
                           $map->setZoomLevel(13); 
                           $coords = $geo->getGeoCoords($full_address);
+                          pr($coords);
                            $map->addMarker($coords['lat'], $coords['lng'], 'Map Location', '', '', true);
                               $mapshow = $map;
                                $geodata = $coords;
