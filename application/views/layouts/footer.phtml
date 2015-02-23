@@ -203,10 +203,10 @@ if (!@$session_data['loggedin']) {
     <script type="text/javascript">
     // to show clock
         $(document).ready(function(arg) {
-           get_new_request_notification();
+           /*get_new_request_notification();
            setInterval(function() {
                 get_new_request_notification()
-            }, 59000);
+            }, 59000);*/
 
         });
         $(document).ready(function() {
@@ -325,9 +325,9 @@ if (!@$session_data['loggedin']) {
                         get_new_request_notification();
                         playSound(sound_file);
                     }
-                    setTimeout(function() {
+                  /*  setTimeout(function() {
                         get_system_notifications()
-                    }, 10000);
+                    }, 10000);*/
                 },
                 error: function() {
                     //showUIMsg('Some error occurred. Please try again.');
@@ -355,9 +355,9 @@ if (!@$session_data['loggedin']) {
 						 $('.control').trigger('click');
                         playSound(sound_file);
                     }
-                    setTimeout(function() {
+                   /* setTimeout(function() {
                         get_system_reminders()
-                    }, 10000);
+                    }, 10000);*/
                 },
                 error: function() {
                     //showUIMsg('Some error occurred. Please try again.');
