@@ -1808,9 +1808,11 @@ function makeOptionChurchRingCategory($mix_where = '', $s_id = '') {
         $CI = & get_instance();
 
         $cond = (trim($mix_where)) ? " AND  " . $mix_where : '';
-        $res = $CI->db->query("SELECT * FROM cg_church_ring_category WHERE i_parent_category = 0 {$cond}");
+        $res = $CI->db->query("SELECT * FROM cg_church_ring_category WHERE i_parent_category = 0 AND church_id = '".$_SESSION['logged_church_id']."' {$cond}");
         $mix_value = $res->result_array();
 
+        
+        
         $s_option = '';
         if ($mix_value) {
             $s_select = ''; //defined here for unsetting this var 
