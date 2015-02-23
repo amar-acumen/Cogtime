@@ -1812,6 +1812,7 @@ function makeOptionChurchRingCategory($mix_where = '', $s_id = '') {
         $mix_value = $res->result_array();
 
         
+        
         $s_option = '';
         if ($mix_value) {
             $s_select = ''; //defined here for unsetting this var 
