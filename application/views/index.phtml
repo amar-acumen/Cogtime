@@ -50,12 +50,47 @@
             
             					<li><img src="<?=$IMG_THUMB?>" alt="prayer meeting" />
                     <div class="events-container-inside">
-                        <p class="title"><a href="<?=$detail_url?>"><?=$title?></a></p>
+                        <p class="title"><a href="javascript:void(0);" onclick="show_dialog('event<?= $val['id']?>')"><?=$title?></a></p>
                         <p class="date" style="color:#000 !important; font-size:13px;"><?=getShortDate($val['dt_start_time'], 9)?></p>
                         <p><?=$desc?></p>
                     </div>
                 </li>
-                
+                <!---------------------------------event pop up----------------------------------->
+                 <div class="lightbox event<?= $val['id']?>" style="width: 400px; left: 100px;">
+      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="<?=base_url()?>images/close.png" alt="" /></a></div>
+      <div class="top"><div>&nbsp;</div></div>
+      <div class="mid">
+            <div class="heading" style="margin-bottom:0px;">
+                  <div class="left">
+                        <h4>Event Details</h4>
+                  </div>
+            </div>
+               <div class="shade_box_white" style="padding:8px 0px;">
+               <div style="padding-bottom:10px;">
+               <p class="center-text" style="line-height:23px; color:#494949; font-size:16px; text-align:center;">
+                  <!-----contain start---->
+                  <span><img src="<?=$IMG_THUMB?>" alt="event" /></span>
+               <h1><?=$title?></h1>
+               <span>Created On: <?=$val['dt_created_on'] ?></span>
+               <span>Venue: <?= $val['s_address']. ', ' . $val['s_city'] . ', ' . $val['s_state'] . ', ' . get_country_name_by_id($val['i_country_id']); ?></span>
+               <span>Details :<?= $desc; ?></span>
+
+               <span>Time: <?=$val['dt_started_on'] ?></span>
+               
+               </p>
+               </div>
+               <form action="" method="post" id="delfrm">
+                  <input type="hidden" name="i_del_id" id="i_del_id" value="" />
+<!--                 <input name="" type="button" value="Yes" class="post-btn" style="margin-left:105px;" onClick="delete_service(<?= $val->id ?>)"/>
+                 <input name="" type="button" value="No" class="cancel-btn" onclick="hide_dialog()"/>-->
+               </form>   
+               <div class="clr"></div>
+            </div>
+            
+      </div>
+      <div class="bot"><div>&nbsp;</div></div>
+</div>
+                <!-------------------------------------------------------------------------------------->
                 <?php 
 						 }
 					  }
