@@ -2113,7 +2113,7 @@ $this->db->insert('cg_church_ring_category', $data);
         function add_ring_sub_cat(){
             $select_cat = $this->input->post('select_cat');
             $sub_cat_name = $this->input->post('sub_cat_name');
-            $query = $this->db->query('select * from cg_church_ring_category where s_category_name ="'.$sub_cat_name.'" AND i_parent_category="'.$select_cat.'" ');
+            $query = $this->db->query('select * from cg_church_ring_category where s_category_name ="'.$sub_cat_name.'" AND i_parent_category="'.$select_cat.'" AND church_id = "'.$_SESSION['logged_church_id'].'" ');
             $result = $query->result();
             if(!empty($result)){
                 echo json_encode(array('status'=>"error" , 'msg'=>'Category  already exist..')); 
