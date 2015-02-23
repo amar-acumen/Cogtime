@@ -83,29 +83,37 @@
 
 
                             <?php
-                             $map = new simpleGMapAPI();
-                             $geo = new simpleGMapGeocoder();
+//                             $map = new simpleGMapAPI();
+//                             $geo = new simpleGMapGeocoder();
                                $full_address = $val['s_address']. ', ' . $val['s_city'] . ', ' . $val['s_state'] . ', ' . get_country_name_by_id($val['i_country_id']);
-                          $map->setWidth(475);
-                        $map->setHeight(180);
-                          $map->setZoomLevel(13); 
-                          $coords = $geo->getGeoCoords($full_address);
-                          pr($coords);
-                           $map->addMarker($coords['lat'], $coords['lng'], 'Map Location', '', '', true);
-                              $mapshow = $map;
-                               $geodata = $coords;
-                               if($mapshow){
+//                         
+                          $address = str_replace(" ", "+", $full_address);
+                          $json = file_get_contents("http://maps.google.com/maps/api/geocode/json?address=$address&sensor=false&region=$region");
+                           $json = json_decode($json);
+
+                             $lat = $json->{'results'}[0]->{'geometry'}->{'location'}->{'lat'};
+                              $long = $json->{'results'}[0]->{'geometry'}->{'location'}->{'lng'};
+                              echo  $lat.','.$long;
+//                            $map->setWidth(475);
+//                        $map->setHeight(180);
+//                          $map->setZoomLevel(13); 
+//                          $coords = $geo->getGeoCoords($full_address);
+//                          pr($coords);
+//                           $map->addMarker($coords['lat'], $coords['lng'], 'Map Location', '', '', true);
+//                              $mapshow = $map;
+//                               $geodata = $coords;
+                            //   if($mapshow){
                           //  $postcode = $val['s_postcode'];
  
 ?>
                             
                              <div class="map" id="map_canvas">
                                     <?php 
-                                      echo $mapshow->printGMapsJS();
-                                      echo $mapshow->showMap(false); 
+                                     // echo $mapshow->printGMapsJS();
+                                     // echo $mapshow->showMap(false); 
                                     ?>
                                 </div>
-                               <?php } ?>
+                               <?php// } ?>
                         </div>
                         <!--/right part -->
                </p>
