@@ -736,6 +736,7 @@ class Church_ring extends Base_controller
 				  {
 					  $wh	.= " AND r.i_sub_category_id ='".$sub_cat."' AND r.church_id = $church_id";
 				  }
+                                  
 			}
 			
 				  $this->session->set_userdata('where',$wh);
