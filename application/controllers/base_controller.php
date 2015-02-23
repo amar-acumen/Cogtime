@@ -541,7 +541,7 @@ class Base_controller extends CI_Controller {
 
             // Inline css will be written in a file with the same name as view file 
             // and will be parsed by controller parse, action css.
-            $data['header']['header_html'] .= '<link href="' . base_url() . 'parse/css/' . $css_script . '" rel="stylesheet" type="text/css" />' . "\n";
+            $data['header']['header_html'] .= '';//'<link href="' . base_url() . 'parse/css/' . $css_script . '" rel="stylesheet" type="text/css" />' . "\n";
 
             //dump($this->js_files);
             $bible_content_change_method = "var this_method = '';";
