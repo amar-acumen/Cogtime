@@ -176,7 +176,7 @@ class Ring_categories_model extends Base_model
        $sql = "SELECT *,
 						subcat.i_parent_category AS subcat_i_parent_category, 
 						(SELECT s_category_name FROM cg_church_ring_category AS pcat WHERE pcat.id=subcat_i_parent_category) AS pcat_name
-								FROM cg_church_ring_category AS subcat WHERE subcat.i_parent_category > 0 {$where} ORDER BY pcat_name ASC
+								FROM cg_church_ring_category AS subcat WHERE subcat.i_parent_category > 0 AND subcat.church_id = '".$_SESSION['logged_church_id']."'  {$where} ORDER BY pcat_name ASC
 				 ";
           
         $res = $this->db->query($sql)->result_array();
