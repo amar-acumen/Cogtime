@@ -246,6 +246,14 @@ class Index extends Base_controller
 			} 
 			
 	 }
+         function event_details(){
+             $cur_time = date('Y-m-d');
+			$where = "WHERE 1 and E.i_status =1 AND E.dt_end_time >= '".$cur_time."' AND E.i_user_type = 2";
+			$order_by = "`dt_start_time` ASC ";
+			$data['hp_events']=$this->events_model->get_list($where,0,4,$order_by);
+               $VIEW = "event_details.phtml";
+            parent::_render($data, $VIEW);
+         }
 
 }   // end of controller...
 
