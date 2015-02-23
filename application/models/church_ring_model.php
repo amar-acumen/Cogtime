@@ -1016,14 +1016,14 @@ public function get_by_id($id)
 								 CONCAT(u.s_first_name,' ',u.s_last_name) AS owner_name,
 								 
 														 
-							   (SELECT COUNT(cm.id) FROM {$this->db->USER_RING_POST_COMMENTS} 
+							   (SELECT COUNT(cm.id) FROM cg_church_ring_post_comments 
 												AS cm WHERE cm.i_ring_post_id = rp.id) AS post_cmt,
 												
-							   (SELECT COUNT(lk.id) FROM {$this->db->USER_RING_POST_LIKE} 
+							   (SELECT COUNT(lk.id) FROM cg_church_ring_post_like 
 												AS lk WHERE lk.i_ring_post_id = rp.id) AS post_lik
 								
-								FROM cg_user_ring AS r left join cg_user_ring_post rp ON rp.i_ring_id = r.id , 
-								cg_ring_category c , cg_users AS u 
+								FROM cg_church_ring AS r left join cg_church_ring_post rp ON rp.i_ring_id = r.id , 
+								cg_church_ring_category c , cg_users AS u 
 								 
 								WHERE
 								 rp.i_user_id=u.id 
@@ -1050,20 +1050,20 @@ public function get_by_id($id)
 								   
 								   c.s_category_name AS s_category_name , 
 								   CONCAT(u.s_first_name,' ',u.s_last_name) AS owner_name,
-								   (SELECT COUNT(id) FROM {$this->db->USER_RING_POST} WHERE i_ring_id=r.id) AS post,
+								   (SELECT COUNT(id) FROM cg_church_ring_post WHERE i_ring_id=r.id) AS post,
 								 
-								   (SELECT COUNT(cm.id) FROM {$this->db->USER_RING_POST} AS po, {$this->db->USER_RING_POST_COMMENTS} 
+								   (SELECT COUNT(cm.id) FROM cg_church_ring_post AS po, cg_church_ring_post_comments 
 													AS cm WHERE po.id=cm.i_ring_post_id AND po.i_ring_id=r.id) AS cmt,
 													
-								   (SELECT COUNT(lk.id) FROM {$this->db->USER_RING_POST} AS po, {$this->db->USER_RING_POST_LIKE} 
+								   (SELECT COUNT(lk.id) FROM cg_church_ring_post AS po, cg_church_ring_post_like 
 													AS lk WHERE po.id=lk.i_ring_post_id AND po.i_ring_id=r.id) AS lik,
 													1 as post_cmt,
 													1 as post_lik
 													
 								  
 							  
-							  FROM {$this->db->RING} AS r, 
-							  {$this->db->RING_CAT} c , {$this->db->USERS} AS u 
+							  FROM cg_church_ring AS r, 
+							  cg_church_ring_category c , {$this->db->USERS} AS u 
 							   
 							  WHERE r.i_user_id=u.id AND r.i_category_id=c.id AND r.i_isenabled=1 AND r.i_privacy=2
 							  {$s_where} 
@@ -1091,15 +1091,15 @@ public function get_by_id($id)
 								 '0' AS cmt,
 								 '0' AS lik,
 							
-								  (SELECT COUNT(cm.id) FROM {$this->db->USER_RING_POST_COMMENTS} 
+								  (SELECT COUNT(cm.id) FROM cg_church_ring_post_comments 
 												AS cm WHERE cm.i_ring_post_id = rp.id) AS post_cmt,
 												
-							   	(SELECT COUNT(lk.id) FROM {$this->db->USER_RING_POST_LIKE} 
+							   	(SELECT COUNT(lk.id) FROM cg_church_ring_post_like 
 												AS lk WHERE lk.i_ring_post_id = rp.id) AS post_lik
 							  
 												  
-								FROM cg_user_ring AS r left join cg_user_ring_post rp ON rp.i_ring_id = r.id , 
-								cg_ring_category c , cg_users AS u 
+								FROM cg_church_ring AS r left join cg_church_ring_post rp ON rp.i_ring_id = r.id , 
+								cg_church_ring_category c , cg_users AS u 
 								 
 								WHERE
 								 rp.i_user_id=u.id 
@@ -1150,8 +1150,8 @@ public function get_by_id($id)
 		else if($s_query_type == 'posts'){
 			 
 			 $s_qry = "  SELECT  COUNT(*) AS i_total
-								FROM cg_user_ring AS r left join cg_user_ring_post rp ON rp.i_ring_id = r.id , 
-								cg_ring_category c , cg_users AS u 
+								FROM cg_church_ring AS r left join cg_church_ring_post rp ON rp.i_ring_id = r.id , 
+								cg_church_ring_category c , cg_users AS u 
 								 
 								WHERE
 								 rp.i_user_id=u.id 
@@ -1167,8 +1167,8 @@ public function get_by_id($id)
 							(SELECT 
 								   r.id AS ringid
 								  
-							  FROM {$this->db->RING} AS r, 
-							  {$this->db->RING_CAT} c , {$this->db->USERS} AS u 
+							  FROM cg_church_ring AS r, 
+							  cg_church_ring_category c , {$this->db->USERS} AS u 
 							   
 							  WHERE r.i_user_id=u.id AND r.i_category_id=c.id AND r.i_isenabled=1 AND r.i_privacy=2
 							  {$s_where}
@@ -1183,8 +1183,8 @@ public function get_by_id($id)
 							 	 
 								 rp.id AS ringPostid
 								 												  
-								FROM cg_user_ring AS r left join cg_user_ring_post rp ON rp.i_ring_id = r.id , 
-								cg_ring_category c , cg_users AS u 
+								FROM cg_church_ring AS r left join cg_church_ring_post rp ON rp.i_ring_id = r.id , 
+								cg_church_ring_category c , cg_users AS u 
 								 
 								WHERE
 								 rp.i_user_id=u.id 
