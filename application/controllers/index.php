@@ -247,6 +247,21 @@ class Index extends Base_controller
 			
 	 }
          function event_details(){
+             
+			parent::_set_title('::: COGTIME Xtian network :::');
+            parent::_set_meta_desc('');
+            parent::_set_meta_keywords('');
+			/* end seo tags */
+			
+            parent::_add_js_arr( array( //'js/jquery-1.7.2.js',
+										/*'js/jquery.js', // causing conflict with block ui*/
+									   'js/frontend/header_slider.js',
+									   'js/contentslider.js',
+									   'js/jquery.autofill.js',
+									   
+									   
+									  ));
+			parent::_add_css_arr( array('css/big-slider.css') );
              $cur_time = date('Y-m-d');
 			$where = "WHERE 1 and E.i_status =1 AND E.dt_end_time >= '".$cur_time."' AND E.i_user_type = 2";
 			$order_by = "`dt_start_time` ASC ";
