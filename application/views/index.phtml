@@ -93,21 +93,15 @@
 
                              $lat = $json->{'results'}[0]->{'geometry'}->{'location'}->{'lat'};
                               $long = $json->{'results'}[0]->{'geometry'}->{'location'}->{'lng'};
-                              echo  $lat.','.$long;
-//                            $map->setWidth(475);
-//                        $map->setHeight(180);
-//                          $map->setZoomLevel(13); 
-//                          $coords = $geo->getGeoCoords($full_address);
-//                          pr($coords);
-//                           $map->addMarker($coords['lat'], $coords['lng'], 'Map Location', '', '', true);
-//                              $mapshow = $map;
-//                               $geodata = $coords;
-                            //   if($mapshow){
-                          //  $postcode = $val['s_postcode'];
+                             // echo  $lat.','.$long;
+
  
 ?>
                             
                              <div class="map" id="map_canvas">
+                                 <iframe width="300" height="170" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?q='+<?= $lat ?>+','+<?= $long ?>+'&hl=es;z=14&amp;output=embed"></iframe><br /><small><a href="https://maps.google.com/maps?q='+data.<?= $lat ?>+','+data.<?= $long ?>+'&hl=es;z=14&amp;output=embed" style="color:#0000FF;text-align:left" target="_blank">See map bigger</a></small>
+
+
                                     <?php 
                                      // echo $mapshow->printGMapsJS();
                                      // echo $mapshow->showMap(false); 
