@@ -40,7 +40,14 @@ function after_submit() {
     	<div id="logo"><a href="<?=base_url().'index'?>"><img src="<?=base_url()?>images/logo.png" alt="COGTIME Xtian network" title="Cogtime" /></a></div>
             <?php if( ($this->session->userdata('loggedin')!='' || $this->session->userdata('loggedin')!=false) && $this->session->userdata('is_admin') != 1)
           {?>
-          	 <div id="header_right"> Welcome <a href="<?=base_url();?>my-wall.html"><?=$this->session->userdata('username').' '.$this->session->userdata('user_lastname')?></a> | <span id="user_local_time">Time: <?=getUserLocalTime($arr_profile_info['s_time'])?></span> | <a href="<?=base_url().'logout'?>">Logout</a><br />
+          	 <div id="header_right"> Welcome <a href="<?=base_url();?>my-wall.html"><?=$this->session->userdata('username').' '.$this->session->userdata('user_lastname')?></a> | 
+                <span id="user_local_time">
+                 Time: 
+                 <? 
+                    $UserLocalTime = explode(' ',getUserLocalTime($arr_profile_info['s_time']);
+                    echo $UserLocalTime[0];
+                 ?>
+                </span> | <a href="<?=base_url().'logout'?>">Logout</a><br />
                   <ul>
                       <li><a href="javascript:void(0);"  id="online-chat">Speak to a Net Coach</a></li>
                         <li>|</li>
