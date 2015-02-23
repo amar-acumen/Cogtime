@@ -725,16 +725,16 @@ class Church_ring extends Base_controller
 				  if($ring_name!='')
 				  {
                                       
-					  $wh	.= " AND (r.s_ring_name LIKE '%".$ring_name."%' OR r.s_description LIKE '%".$ring_name."%') AND church_id = $church_id";
+					  $wh	.= " AND (r.s_ring_name LIKE '%".$ring_name."%' OR r.s_description LIKE '%".$ring_name."%') AND r.church_id = $church_id";
 				  }
 				  if($cat_id!='')
 				  {
-					  $wh	.= " AND r.i_category_id ='".$cat_id."' AND church_id = $church_id";
+					  $wh	.= " AND r.i_category_id ='".$cat_id."' AND r.church_id = $church_id";
 				  }
 				  
 				  if($sub_cat!='')
 				  {
-					  $wh	.= " AND r.i_sub_category_id ='".$sub_cat."' AND church_id = $church_id";
+					  $wh	.= " AND r.i_sub_category_id ='".$sub_cat."' AND r.church_id = $church_id";
 				  }
 			}
 			
