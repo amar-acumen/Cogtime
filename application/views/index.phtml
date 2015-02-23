@@ -112,7 +112,7 @@ function initialize() {
     zoom: 16, 
     center: new google.maps.LatLng(<?= $lat ?>, <?= $long ?>)
   };
-  map = new google.maps.Map(document.getElementById('map-canvas'+<?= $val['id']?>),
+  map = new google.maps.Map(document.getElementById('map-canvas<?= $val['id']?>'),
       mapOptions);
 }
 
