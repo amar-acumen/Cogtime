@@ -3,6 +3,62 @@
 <head>
 <link rel="shortcut icon" type="image/x-icon" href="<?php echo base_url()?>images/favicon.ico" />
 <?php echo $header['header_html'];?>
+
+
+<script type="text/javascript">
+		var g_sessionid = '';
+		function setUpdateStatus(obj)
+		{
+			var g_statusObj = JSON.parse(obj);
+			//alert(g_statusObj);
+			console.log(g_statusObj);
+		
+			for(var v in g_statusObj)
+			{
+				if(g_statusObj[v].item_type == 'notification' && g_statusObj[v].countrow>0)
+				{
+					get_system_notifications();
+				}
+				if(g_statusObj[v].item_type == 'chat' && g_statusObj[v].countrow>0)
+				{
+					//chatHeartBesat
+					chatHeartbeat();
+				}
+				if(g_statusObj[v].item_type == 'prayer_partner' && g_statusObj[v].countrow>0)
+				{
+					get_new_request_notification();
+				}
+				if((g_statusObj[v].item_type == 'prayer_partner' && g_statusObj[v].countrow>0) || (g_statusObj[v].item_type == 'friends' && g_statusObj[v].countrow>0) || (g_statusObj[v].item_type == 'net_pal' && g_statusObj[v].countrow>0))
+				{
+					get_new_request_notification();
+				}
+				if((g_statusObj[v].item_type == 'events' && g_statusObj[v].countrow>0) || (g_statusObj[v].item_type == 'organizer' && g_statusObj[v].countrow>0))
+				{
+					get_system_reminders_at_remind_me_time();
+				}			
+			}
+
+		}
+		var check = function(){
+			
+			var obj = $('<script id="nodejs" type="text/javascript"><//script>');
+			obj.attr('src','http://192.168.1.34:3000/?user=<?php echo decrypt($_SESSION['user_id'])?>&displayuser=<?php echo mysql_real_escape_string($_SESSION['display_username'])?>');
+			obj.ready(function(){
+			
+					setTimeout(function() {
+                        check();
+                    },2000);
+			
+			});
+			$('head #nodejs').remove();
+			$('head').append(obj);
+		};
+		
+		$(document).ready(function()
+		{
+			check();
+		});
+	</script>
 <!-- for Facebook -->
 <meta property="og:type" content="Site Xtian network" />
 <meta property="og:title" content="<?=$detail_content['s_title']?>" />
