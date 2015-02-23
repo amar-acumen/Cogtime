@@ -83,18 +83,11 @@
 
 
                             <?php
-                            # if map longitude-latitude data available...
-                            if (strtolower($geodata['status']) == 'ok') :
-                                ?>
-                                <div class="map" id="map_canvas">
-                                    <?php 
-                                      echo $mapshow->printGMapsJS();
-                                      echo $mapshow->showMap(false); 
-                                    ?>
-                                </div>
-                                <?php
-                            endif;
-                            ?>
+                            $postcode = $val['s_postcode'];
+ $val = getLnt($postcode);
+ echo "Latitude: ".$val['lat']."<br>";
+ echo "Longitude: ".$val['lng']."<br>";
+?>
 
                         </div>
                         <!--/right part -->
