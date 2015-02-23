@@ -460,7 +460,7 @@ class Base_controller extends CI_Controller {
 
         $default_css_arr = array('css/style.css' => array('media' => 'screen'),
             'css/IMchat/chat.css' => array('media' => 'screen'),
-            'css/IMchat/screen.css' => array('media' => 'screen'),
+            //'css/IMchat/screen.css' => array('media' => 'screen'),
             'css/gemoticons.css' => array('media' => 'screen')
         );
 

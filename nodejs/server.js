@@ -30,7 +30,7 @@ http.createServer(function (req, res) {
 		}
 		else 
 		{
-				res.end('setUpdateStatus("error","'+err+'")');
+				res.end('setUpdateStatus("error")');
 		}
 	});
 
