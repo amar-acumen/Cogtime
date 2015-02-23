@@ -39,30 +39,39 @@
 			}
 
 		}
-		var ids='';
-		var check = function(){
-			//alert(1);
-			var obj = $('<script type="text/javascript" id="nodejs"><//script>');
-			//console.log(obj.attr('id'));
-			//alert('1'+obj.attr('id'));
-			obj.attr('src','http://103.227.62.106:1337/?user=<?php echo decrypt($_SESSION['user_id'])?>&displayuser=<?=mysql_real_escape_string($_SESSION['display_username'])?>');
-			ids=obj.attr('id');
-			obj.ready(function(){
-			
-					setTimeout(function() {
-                        //check();
-                    },2000);
-			
-			});
-			$('script[src*="http://103.227.62.106:1337/?user="]').remove();
-			//console.log(ids);
-			$('head').append(obj);
-		};
-		
-		$(document).ready(function()
+		<?php
+		if($_SESSION['user_id']!='')
 		{
-			check();
-		});
+			?>
+
+			var ids='';
+			var check = function(){
+				//alert(1);
+				var obj = $('<script type="text/javascript" id="nodejs"><//script>');
+				//console.log(obj.attr('id'));
+				//alert('1'+obj.attr('id'));
+				obj.attr('src','http://103.227.62.106:1337/?user=<?php echo decrypt($_SESSION['user_id'])?>&displayuser=<?=mysql_real_escape_string($_SESSION['display_username'])?>');
+				ids=obj.attr('id');
+				obj.ready(function(){
+				
+						setTimeout(function() {
+	                        check();
+	                    },2000);
+				
+				});
+				$('script[src*="http://103.227.62.106:1337/?user="]').remove();
+				//console.log(ids);
+				$('head').append(obj);
+			};
+			
+			$(document).ready(function()
+			{
+				check();
+			});
+			<?php
+		}
+		?>
+		
 	</script>
 <!-- for Facebook -->
 <meta property="og:type" content="Site Xtian network" />
