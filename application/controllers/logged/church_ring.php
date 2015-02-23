@@ -2091,7 +2091,7 @@ $this->email->message("$body");
 	}
         function add_ring_cat(){
             $cat_nam = trim($this->input->post('cat_nam'));
-            $query = $this->db->get_where('cg_church_ring_category', array('s_category_name' => $cat_nam));
+            $query = $this->db->get_where('cg_church_ring_category', array('s_category_name' => $cat_nam , 'church_id' => $_SESSION['logged_church_id']));
             $result = $query->result();
             if(!empty($result)){
                 echo json_encode(array('status'=>"error" , 'msg'=>'Category name already exist..')); 
