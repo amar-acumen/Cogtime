@@ -104,6 +104,35 @@ echo $long = $response_a->results[0]->geometry->location->lng;
                                      // echo $mapshow->printGMapsJS();
                                      // echo $mapshow->showMap(false); 
                                     ?>
+                             <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+    <script>
+var map;
+var lat=<?php echo $lat; ?>;
+var lan=<?php echo $long;?>;
+//alert(lat)
+function initialize() {
+	var pos= new google.maps.LatLng(lat, lan );
+  var mapOptions = {
+    zoom: 19,
+    center: new google.maps.LatLng(lat, lan )
+  };
+  map = new google.maps.Map(document.getElementById('map-canvas'),
+      mapOptions);
+	  
+	   var marker = new google.maps.Marker({
+      position:  pos,
+      map: map,
+      title: 'Hello World!'
+  });
+
+}
+
+google.maps.event.addDomListener(window, 'load', initialize);
+
+
+
+    </script>
+                             <div id="map-canvas"></div>
                                 </div>
                                <?php// } ?>
                         </div>
