@@ -970,6 +970,7 @@ public function get_by_id($id)
 	function show_all_public_ring_new($s_where,$i_start=null,$i_limit=null,$s_order_by=null, $s_query_type = "both",$wh_ring_post)
     {
            // die('ok');
+            
         try
         {
           $ret_= array();
