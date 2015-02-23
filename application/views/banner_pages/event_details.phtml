@@ -18,7 +18,39 @@
 <div class="clr"></div><!-- CONTENT SECTION -->
 
 <div id="content_section" style="margin-top:8px;">
-    <div id="container"></div>
+    <div id="container">
+        <div class="evnt">
+            <?php 
+            if(count($hp_events)){
+                
+                foreach ($hp_events as $val){
+            $title = my_substr(html_entity_decode(htmlspecialchars_decode($val['s_title']),ENT_QUOTES,'utf-8'), 68);
+								$desc = my_substr(html_entity_decode(htmlspecialchars_decode($val['s_desc']),ENT_QUOTES,'utf-8'), 100);
+								$detail_url = get_events_detail_url($val['id']);
+								
+								$IMG_THUMB_PATH = base_url() ."uploads/events_photo/";
+								$name=getThumbName($val['s_image_1'],'thumb'); 
+								$IMG_THUMB = $IMG_THUMB_PATH . $name;
+				?>
+            <li><img src="<?=$IMG_THUMB?>" alt="prayer meeting" />
+                    <div class="events-container-inside">
+                        <p class="title"><a href="javascript:void(0);" onclick="show_dialog('event<?= $val['id']?>')"><?=$title?></a></p>
+                        <p class="date" style="color:#000 !important; font-size:13px;"><?=getShortDate($val['dt_start_time'], 9)?></p>
+                        <p><?=$desc?></p>
+                    </div>
+                </li>
+            
+            <?php
+            
+            
+                }
+            
+                } ?>
+            
+        </div>
+        
+        
+    </div>
       <div class="clr"></div>
 </div>
 <!-- /CONTENT SECTION -->  
