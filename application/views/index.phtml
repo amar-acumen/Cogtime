@@ -109,7 +109,7 @@ $response_a = json_decode($response);
                             var map;
 function initialize() {
   var mapOptions = {
-    zoom: 10, 
+    zoom: 16, 
     center: new google.maps.LatLng(<?= $lat ?>, <?= $long ?>)
   };
   map = new google.maps.Map(document.getElementById('map-canvas'),
