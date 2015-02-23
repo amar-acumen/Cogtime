@@ -2122,6 +2122,7 @@ $this->db->insert('cg_church_ring_category', $data);
    'dt_created_on' => get_db_datetime() ,
    'i_parent_category' => $select_cat,
    'church_id' => $_SESSION['logged_church_id']
+                        
 );
 
 $this->db->insert('cg_church_ring_category', $data); 
