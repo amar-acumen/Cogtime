@@ -38,5 +38,5 @@ http.createServer(function (req, res) {
    
    
   
-}).listen(3000, '192.168.1.34');
+}).listen(1337, '103.227.62.106');
 console.log('Server running at http://127.0.0.1:1337/');
