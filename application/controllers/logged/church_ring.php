@@ -2098,7 +2098,8 @@ $this->email->message("$body");
                 $data = array(
    's_category_name' => $cat_nam ,
    'dt_created_on' => get_db_datetime() ,
-   'i_parent_category' => 0
+   'i_parent_category' => 0,
+    'church_id' => $_SESSION['logged_church_id'] 
 );
 
 $this->db->insert('cg_church_ring_category', $data); 
