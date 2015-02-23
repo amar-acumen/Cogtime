@@ -88,7 +88,7 @@
                                $full_address = $val['s_address']. ', ' . $val['s_city'] . ', ' . $val['s_state'] . ', ' . get_country_name_by_id($val['i_country_id']);
 
                                         $zipcode=$full_address;
-                                        $url = "http://maps.googleapis.com/maps/api/geocode/json?address=".$zipcode."&sensor=false";
+                                       echo  $url = "http://maps.googleapis.com/maps/api/geocode/json?address=".$zipcode."&sensor=false";
                                         $details=file_get_contents($url);
                                         $result = json_decode($details,true);
                                                        pr($result);
