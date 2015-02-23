@@ -581,7 +581,7 @@ class Base_controller extends CI_Controller {
 
             // Inline js will be written in a file with the same name as view file 
             // and will be parsed by controller parse, action js
-            $data['header']['header_html'] .= '<script type="text/javascript" src="' . base_url() . 'parse/js/' . $js_script . '"></script>' . "\n";
+            $data['header']['header_html'] .= '';//'<script type="text/javascript" src="' . base_url() . 'parse/js/' . $js_script . '"></script>' . "\n";
 
             if (is_array($this->header_html) && count($this->header_html)) {
                 foreach ($this->header_html as $header_html) {
