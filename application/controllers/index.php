@@ -16,6 +16,11 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 include(APPPATH.'controllers/base_controller.php');
 
+
+
+include_once APPPATH . "libraries/gmapAPI/simpleGMapAPI.php";
+include_once APPPATH . "libraries/gmapAPI/simpleGMapGeocoder.php";
+
 class Index extends Base_controller
 {
 	
