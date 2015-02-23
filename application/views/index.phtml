@@ -77,8 +77,27 @@
                
                
 
-               <span>Time: <?=$val['dt_started_on'] ?></span>
-               
+               <span>Time: <?=$val['dt_start_time'] ?></span>
+                 <!--right part -->
+                        <div class="pre-time-map">                               
+
+
+                            <?php
+                            # if map longitude-latitude data available...
+                            if (strtolower($geodata['status']) == 'ok') :
+                                ?>
+                                <div class="map" id="map_canvas">
+                                    <?php 
+                                      echo $mapshow->printGMapsJS();
+                                      echo $mapshow->showMap(false); 
+                                    ?>
+                                </div>
+                                <?php
+                            endif;
+                            ?>
+
+                        </div>
+                        <!--/right part -->
                </p>
                </div>
                <form action="" method="post" id="delfrm">
@@ -213,4 +232,5 @@
   });
 </script>
 <script type="text/javascript" src="<?= base_url() ?>js/lightbox.js"></script>
+<link href="http://code.google.com/apis/maps/documentation/javascript/examples/default.css" rel="stylesheet" type="text/css" />
 <!--videos posts  -->	
