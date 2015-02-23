@@ -3776,7 +3776,7 @@ function getUserLocalTime($zone_val) {
     $timezone = new DateTimeZone($zone_val);
     $date = new DateTime();
     $date->setTimezone($timezone);
-    return $date->format('H:i:s');
+    return $date->format('F d, Y H:i:s');
 }
 
 /* * ********prayer partner check********* */

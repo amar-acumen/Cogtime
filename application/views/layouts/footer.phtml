@@ -449,13 +449,42 @@ if (!@$session_data['loggedin']) {
             <div>&nbsp;</div>
       </div>
 </div>   
-<!--<script type="text/javascript">
+<script type="text/javascript">
+
+//show current time
+
+var currenttime = '<? print $user_local_time_to_display ?>' //PHP method of getting server date
+
+///////////Stop editting here/////////////////////////////////
+
+var montharray=new Array("January","February","March","April","May","June","July","August","September","October","November","December")
+var serverdate=new Date(currenttime)
+
+function padlength(what){
+var output=(what.toString().length==1)? "0"+what : what
+return output
+}
+
+function displaytime(){
+serverdate.setSeconds(serverdate.getSeconds()+1)
+var datestring=montharray[serverdate.getMonth()]+" "+padlength(serverdate.getDate())+", "+serverdate.getFullYear()
+var timestring=padlength(serverdate.getHours())+":"+padlength(serverdate.getMinutes())+":"+padlength(serverdate.getSeconds())
+document.getElementById("servertime").innerHTML=datestring+" "+timestring
+$('#user_local_time').html(datestring+" "+timestring);     
+}
+
+window.onload=function(){
+setInterval("displaytime()", 1000)
+}
+
+
 $(document).ready(function(arg) {
 //get_user_clock();
 //setInterval(function(){get_user_clock()},1000);
+
 });
  
-function get_user_clock() {//return false;
+/*function get_user_clock() {//return false;
 	$.ajax({
 	   type: "post",
 	   url: '<?=base_url()?>base_controller/getUserClock',
@@ -472,9 +501,9 @@ function get_user_clock() {//return false;
 			//showUIMsg('Some error occurred. Please try again.');
 		}
 	});
-}
+}*/
 
-</script>-->
+</script>
     
 <?php } ?>
 <?php /* ?>NOTIFICATION BLOCK <?php */ ?>

@@ -1316,6 +1316,9 @@ class Base_controller extends CI_Controller {
 
         $this->data['arr_profile_info'] = $arr_profile_info;
         //pr($arr_profile_info);
+
+        $this->data['user_local_time_to_display'] = getUserLocalTime($arr_profile_info['s_time']);
+        
     }
 
     public function show_event_calendar($user_id = '', $year = '', $month = '', $temp = '', $displayslider = 0) {
