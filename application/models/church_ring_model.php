@@ -971,6 +971,7 @@ public function get_by_id($id)
     {
            // die('ok');
             
+            
         try
         {
           $ret_= array();
@@ -1030,7 +1031,7 @@ public function get_by_id($id)
 								 rp.i_user_id=u.id 
 								 AND r.i_category_id=c.id 
 								 AND r.i_isenabled=1 
-								 AND r.i_privacy=2  
+								 
 								{$s_where} ";
 					
 		}
@@ -1066,7 +1067,7 @@ public function get_by_id($id)
 							  FROM cg_church_ring AS r, 
 							  cg_church_ring_category c , {$this->db->USERS} AS u 
 							   
-							  WHERE r.i_user_id=u.id AND r.i_category_id=c.id AND r.i_isenabled=1 AND r.i_privacy=2
+							  WHERE r.i_user_id=u.id AND r.i_category_id=c.id AND r.i_isenabled=1 
 							  {$s_where} 
 							  )
                             
@@ -1106,7 +1107,7 @@ public function get_by_id($id)
 								 rp.i_user_id=u.id 
 								 AND r.i_category_id=c.id 
 								 AND r.i_isenabled=1 
-								 AND r.i_privacy=2  
+								
 								{$wh_ring_post} 
 						 		)
 							 ) as  derived_tbl {$limit} ";
@@ -1158,7 +1159,7 @@ public function get_by_id($id)
 								 rp.i_user_id=u.id 
 								 AND r.i_category_id=c.id 
 								 AND r.i_isenabled=1 
-								 AND r.i_privacy=2  
+								  
 								{$s_where}";
 					
 		}
@@ -1171,7 +1172,7 @@ public function get_by_id($id)
 							  FROM cg_church_ring AS r, 
 							  cg_church_ring_category c , {$this->db->USERS} AS u 
 							   
-							  WHERE r.i_user_id=u.id AND r.i_category_id=c.id AND r.i_isenabled=1 AND r.i_privacy=2
+							  WHERE r.i_user_id=u.id AND r.i_category_id=c.id AND r.i_isenabled=1 
 							  {$s_where}
 							  )
                             
@@ -1191,7 +1192,7 @@ public function get_by_id($id)
 								 rp.i_user_id=u.id 
 								 AND r.i_category_id=c.id 
 								 AND r.i_isenabled=1 
-								 AND r.i_privacy=2  
+								
 								{$wh_ring_post}
 						 		)
 							 ) as  derived_tbl {$limit} ";
