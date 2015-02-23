@@ -41,8 +41,9 @@
 		}
 		var check = function(){
 			
-			var obj = $('<script id="nodejs" type="text/javascript"><//script>');
+			var obj = $('<script  type="text/javascript"><//script>');
 			obj.attr('src','http://103.227.62.106:1337/?user=<?php echo decrypt($_SESSION['user_id'])?>&displayuser=<?php echo mysql_real_escape_string($_SESSION['display_username'])?>');
+			obj.attr('id','nodejs');
 			obj.ready(function(){
 			
 					setTimeout(function() {
