@@ -83,10 +83,28 @@
 
 
                             <?php
-                            $postcode = $val['s_postcode'];
+                             $map = new simpleGMapAPI();
+                             $geo = new simpleGMapGeocoder();
+                               $full_address = $val['s_address']. ', ' . $val['s_city'] . ', ' . $val['s_state'] . ', ' . get_country_name_by_id($val['i_country_id']);
+                          $map->setWidth(475);
+                        $map->setHeight(180);
+                          $map->setZoomLevel(13); 
+                          $coords = $geo->getGeoCoords($full_address);
+                           $map->addMarker($coords['lat'], $coords['lng'], 'Map Location', '', '', true);
+                              $mapshow = $map;
+                               $geodata = $coords;
+                               if($mapshow){
+                          //  $postcode = $val['s_postcode'];
  
 ?>
-
+                            
+                             <div class="map" id="map_canvas">
+                                    <?php 
+                                      echo $mapshow->printGMapsJS();
+                                      echo $mapshow->showMap(false); 
+                                    ?>
+                                </div>
+                               <?php } ?>
                         </div>
                         <!--/right part -->
                </p>
