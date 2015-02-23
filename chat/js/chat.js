@@ -421,7 +421,7 @@ function startChatSession() {
                 setTimeout('$("#chatbox_"+chatboxtitle+" .chatboxcontent").scrollTop($("#chatbox_"+chatboxtitle+" .chatboxcontent")[0].scrollHeight);', 100); // yet another strange ie bug
             }
 
-            setTimeout('chatHeartbeat();', chatHeartbeatTime);
+         //   setTimeout('chatHeartbeat();', chatHeartbeatTime);
 
         }});
 }
