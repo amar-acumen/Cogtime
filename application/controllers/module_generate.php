@@ -16,7 +16,6 @@ class Module_generate extends CI_Controller {
 		$this->load->driver('minify');
 	}
 
-
 	function deploy(){
        // if($this->session->userdata('admin_id') != '' && $this->session->userdata('admin_logged_in') != false){
             $type = $this->input->get('type');
