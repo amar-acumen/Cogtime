@@ -51,7 +51,7 @@
     </thead>
     <tbody>
         <?php 
-        $query = $this->db->query(' select * from cg_church_ring_category where i_parent_category = 0  order by dt_created_on DESC');
+        $query = $this->db->query(' select * from cg_church_ring_category where i_parent_category = 0 AND church_id = "'.$_SESSION['logged_church_id'].'" order by dt_created_on DESC');
         $i= 1;
 foreach ($query->result() as $row){
         ?>
