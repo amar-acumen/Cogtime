@@ -5,10 +5,10 @@ var mysql      = require('mysql');
 http.createServer(function (req, res) {
 
 	var connection = mysql.createConnection({
-	  host     : 'localhost',
-	  user     : 'root',
-	  password : '',
-	  database : 'cogtime'
+	  host     : '103.227.62.106',
+	  user     : 'acumen',
+	  password : 'eWvo456&',
+	  database : 'admin_cogtime'
 	});
 
 	var url_parts = url.parse(req.url, true);
