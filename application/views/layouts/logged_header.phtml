@@ -123,16 +123,8 @@ function after_submit() {
 <?php /*?> ############ Login Status Check [Start] ########### <?php */?>
 <input type="hidden" id="logged_status" value="<?= @$logged_in_state ?>" />
 
-
 <?php /*?> ############ Login Status Check [End] ########### <?php */?>
 
-<style type="text/css">
-    .session-popup{ background: #fff; border-radius:5px; padding: 10px; text-align: center; width: 500px; }
-    .session-popup .mid{background:#013d62; border:none; padding: 18px;}
-    .session-popup .mid h4{ font-size: 22px;}
-    #lgout{ background:#62c3bc; font-size: 14px; width: 65px; line-height: 28px; cursor: pointer; height: 28px; border:none; color:#fff; text-align: center;}
-     #lgout:hover{color:#000;}
-</style>
 
 <script type="text/javascript" src="<?= base_url() ?>js/jquery.cookie.js"></script>
 

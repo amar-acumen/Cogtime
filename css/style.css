@@ -12548,3 +12548,10 @@ text-align: center;}
 .result-new ul li span.left-prt{ width: 74px; float: left; text-align: right; margin-right: 15px; color: #004084;}
 .result-new ul li span.right-prt{ width:380px; float: left;} 
 #no_res{ color:#ff0000; text-align:center; padding:15px 0; font-size:14px; font-weight:normal;}
+
+/** session popup **/
+.session-popup{ background: #fff; border-radius:5px; padding: 10px; text-align: center; width: 500px; }
+.session-popup .mid{background:#013d62; border:none; padding: 18px;}
+.session-popup .mid h4{ font-size: 22px;}
+#lgout{ background:#62c3bc; font-size: 14px; width: 65px; line-height: 28px; cursor: pointer; height: 28px; border:none; color:#fff; text-align: center;}
+#lgout:hover{color:#000;}
