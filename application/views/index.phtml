@@ -98,9 +98,9 @@ curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
 $response = curl_exec($ch);
 curl_close($ch);
 $response_a = json_decode($response);
-echo $lat = $response_a->results[0]->geometry->location->lat;
-echo "<br />";
-echo $long = $response_a->results[0]->geometry->location->lng;
+ $lat = $response_a->results[0]->geometry->location->lat;
+
+ $long = $response_a->results[0]->geometry->location->lng;
                                      // echo $mapshow->printGMapsJS();
                                      // echo $mapshow->showMap(false); 
                                     ?>
