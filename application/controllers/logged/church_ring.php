@@ -799,7 +799,7 @@ class Church_ring extends Base_controller
 			  $view_more = false;
          //--------- end check
         # loading the view-part...
-        $AJAX_VIEW_FILE = 'logged/church/ajax_ring/ajax_listing_search_ring.phtml';
+        $AJAX_VIEW_FILE = 'logged/church/ajax_ring/ajax_listing_search_ring1.phtml';
         
         
    //pr($result);
