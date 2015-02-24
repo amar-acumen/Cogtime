@@ -113,6 +113,7 @@ function sendGrpJoinReq(grp_id){
 							if(data.success== true ) {
 								showUIMsg(data.msg);
 								$('#invite_text_'+grp_id).val('Resend Join Request');
+                                                                
 							}
 							else if(data.success==false){
 							    showUIMsg(data.msg);
