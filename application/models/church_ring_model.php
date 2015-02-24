@@ -1201,7 +1201,7 @@ public function get_by_id($id)
 						 		)
 							 ) as  derived_tbl {$limit} ";
 		}
-echo 	$s_qry;exit();		
+//echo 	$s_qry;exit();		
 		 $res = $this->db->query($s_qry)->result_array();
 		//echo  $res[0]['i_total'].' @@';
          return $res[0]['i_total'];
