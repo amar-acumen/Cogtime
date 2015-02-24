@@ -28,7 +28,9 @@ http.createServer(function (req, res) {
 						var nonZeroFound = false;
 						for(var i=0;i<rows.length;i++)
 						{
-							if(rows[i].countrow*1>0)
+							if(rows[i].countrow*1>0 
+								&& rows[i].item_type!='events' && rows[i].item_type!='organizer'
+							)
 								nonZeroFound = true;
 						}
 						if(nonZeroFound || cnt<=0)
