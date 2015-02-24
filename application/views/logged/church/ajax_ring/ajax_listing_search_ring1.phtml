@@ -100,7 +100,8 @@
                            elseif($ringval['s_type'] == 'post'){
                                
 							$member=check_church_member_by_ring_id($ringval['ringid'],$logged_id);
-							if($member == true)
+                                                       // echo $member;
+							if($member == true || $_SESSION['charch_super_admin'] =='yes')
 							{
 							?>
                             
