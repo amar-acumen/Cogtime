@@ -69,8 +69,8 @@
                     ?>
 
                     <a href="<?php echo $profile_link ?>"><?php echo $ringval['owner_name'] ?></a> 
-                    <?php if(!empty($ringval['dt_updated_on']) && $ringval['dt_updated_on'] != null){ ?>
-                    | <?= $ringval['dt_updated_on'] ?>
+                    <?php if(!empty($ringval['dt_updated_on'])){ ?>
+                    | Updated  <?= $ringval['dt_updated_on'] ?>
                     <?php } ?>
                 </p>
 
