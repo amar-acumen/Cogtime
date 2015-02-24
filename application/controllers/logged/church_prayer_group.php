@@ -1853,8 +1853,8 @@ class Church_prayer_group extends Base_controller
 			$data['church_admin'] = $this->church_new_model->get_church_admin_data($_SESSION['logged_church_id']);
 
 		$data['church_list'] =  $this->church_new_model->get_prayer_group_search_result_by_church($_SESSION['logged_church_id'],$logged_user_id,$order='dt_created_on',$direction='DESC',$s_where);
-		//pr($data['church_list']);
-        # loading the view-part...
+		// pr($data['church_list']);
+        # loadi ng the view-part...
         $AJAX_VIEW_FILE = 'logged/church/search_prayer_group_listing_ajax.phtml';
         
         //if( $total_rows>0 ) {
