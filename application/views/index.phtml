@@ -77,13 +77,12 @@
                <p class="center-text" style="line-height:23px; color:#494949; font-size:16px; text-align:center;">
                   <!-----contain start---->
                   <span><img src="<?=$IMG_THUMB?>" alt="event" /></span>
-               <h1><?=$title?></h1>
-               <span class="pull-left">Created On: <?=$val['dt_created_on'] ?></span>
-               <span class="pull-right">Venue: <?= $val['s_address']. ', ' . $val['s_city'] . ', ' . $val['s_state'] . ', ' . get_country_name_by_id($val['i_country_id']); ?></span>
+               <?php /*?><h1><?=$title?></h1><?php */?>
+               <?php /*?><span class="pull-left">Created On: <?=$val['dt_created_on'] ?></span><?php */?>
+               <span>Venue: <?= $val['s_address']. ', ' . $val['s_city'] . ', ' . $val['s_state'] . ', ' . get_country_name_by_id($val['i_country_id']); ?></span>
+               
+               
                <div class="clr"></div>
-               <span>Details :<?= $desc; ?></span>
-               
-               
 
                <span class="pull-left">Start Time: <?=$val['dt_start_time'] ?></span>
                <span class="pull-right">Close Time : <?=$val['dt_end_time'] ?></span>
