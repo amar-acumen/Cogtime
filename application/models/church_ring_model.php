@@ -1003,42 +1003,40 @@ public function get_by_id($id)
 		}
 		else if($s_query_type == 'posts'){
 			 
-//			 $s_qry = "
-//							 SELECT 
-//							 	 r.id AS ringid,   
-//								 rp.id AS ringPostid, 
-//								 rp.s_post_title as s_name,
-//								 rp.s_post_description as s_desc,
-//								 rp.dt_created_on,
-//								 r.i_sub_category_id, 
-//								
-//								 'post' as s_type,
-//								 c.s_category_name AS s_category_name , 
-//								 rp.i_user_id as post_owner_user_id, 
-//								 CONCAT(u.s_first_name,' ',u.s_last_name) AS owner_name,
-//								 
-//														 
-//							   (SELECT COUNT(cm.id) FROM cg_church_ring_post_comments 
-//												AS cm WHERE cm.i_ring_post_id = rp.id) AS post_cmt,
-//												
-//							   (SELECT COUNT(lk.id) FROM cg_church_ring_post_like 
-//												AS lk WHERE lk.i_ring_post_id = rp.id) AS post_lik
-//								
-//								FROM cg_church_ring AS r left join cg_church_ring_post rp ON rp.i_ring_id = r.id , 
-//								cg_church_ring_category c , cg_users AS u 
-//								 
-//								WHERE
-//								 rp.i_user_id=u.id 
-//								 AND r.i_category_id=c.id 
-//								 AND r.i_isenabled=1 
-//								 
-//								{$s_where} ";
+//			
                     
-                    
-                    $s_qry = 'Select  r.id AS ringid , rp.id AS ringPostid ,  rp.s_post_title as s_name,rp.s_post_description as s_desc,rp.dt_created_on,
-                            r.i_sub_category_id,"post" as s_type, c.s_category_name AS s_category_name ,rp.i_user_id as post_owner_user_id , CONCAT(u.s_first_name," ",u.s_last_name) AS owner_name,
-                            FROM cg_church_ring AS r , cg_church_ring_category as c ,cg_church_ring_post as rp ,cg_users AS u where rp.i_ring_id = r.id AND 
-                             rp.i_user_id=u.id AND r.i_category_id=c.id , AND r.i_isenabled=1 '.$s_where.' ';
+                     $s_qry = "
+							 SELECT 
+							 	 r.id AS ringid,   
+								 rp.id AS ringPostid, 
+								 rp.s_post_title as s_name,
+								 rp.s_post_description as s_desc,
+								 rp.dt_created_on,
+								 r.i_sub_category_id, 
+								
+								 'post' as s_type,
+								 c.s_category_name AS s_category_name , 
+								 rp.i_user_id as post_owner_user_id, 
+								 CONCAT(u.s_first_name,' ',u.s_last_name) AS owner_name,
+								 
+														 
+							   (SELECT COUNT(cm.id) FROM cg_church_ring_post_comments 
+												AS cm WHERE cm.i_ring_post_id = rp.id) AS post_cmt,
+												
+							   (SELECT COUNT(lk.id) FROM cg_church_ring_post_like 
+												AS lk WHERE lk.i_ring_post_id = rp.id) AS post_lik
+								
+								FROM cg_church_ring AS r left join cg_church_ring_post rp ON rp.i_ring_id = r.id , 
+								cg_church_ring_category c , cg_users AS u 
+								 
+								WHERE
+								 rp.i_user_id=u.id 
+								 AND r.i_category_id=c.id 
+								 AND r.i_isenabled=1 
+								 
+							{$s_where} ";
+                     
+//                    
 					
 		}
 		else if($s_query_type == 'both'){
