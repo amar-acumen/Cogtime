@@ -35,6 +35,9 @@
                     }
                     ?>
                     <a href="<?php echo $profile_link ?>"><?php echo $ringval['owner_name'] ?></a> 
+                    <?php if(!empty($ringval['dt_updated_on'])){ ?>
+                    | Updated  <?= getShortDate($ringval['dt_updated_on'],5) ?>
+                    <?php  } ?>
                 </p>
 
                 <p><?php echo my_substr($ringval['s_description'], 160) ?></p>
