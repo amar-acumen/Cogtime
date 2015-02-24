@@ -36,7 +36,25 @@
       
       
       
-      </a><? }?>
+      </a>
+      <a href="javascript:void(0);" class="searchjoin-btn" onClick="sendGrpJoinReq('<?=$church->id?>')" id="#invite_text_new<?=$church->id?>" style="display: none;">
+	  
+	  <?php 
+	  if($church->is_member == 'pending'){
+	  ?>
+      <img src="images/icons/restore.png">
+      <?php } else{ ?>
+      <img src="images/icons/restore.png">
+       <?php }?>
+     
+          
+	  <?php echo ($church->is_member == 'pending')?'Send Join Request':'Send Join Request';?>
+      
+      
+      
+      
+      </a>
+      <? }?>
  </p>
 
 	  
