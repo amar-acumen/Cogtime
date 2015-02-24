@@ -2383,3 +2383,4 @@ width: 89px;}
 .search-main-ring select{height:26px; border:1px solid #d7d7d7; width:150px;}
 .search-main-ring .date-colm{ float:left; margin-right:10px;}
 .article-comment-block .ring-member-list li{ background-image:none; padding:0 10px 0 0; font-size:12px; color:#3b3b3b;}
+.article-comment-block.article-comment-block2 li.left{ background-image:none;}
