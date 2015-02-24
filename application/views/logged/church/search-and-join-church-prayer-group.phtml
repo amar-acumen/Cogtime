@@ -92,9 +92,9 @@ function searchPrayerGrp()
         });
     }
 }
-
+var grp_id = null;
 function sendGrpJoinReq(grp_id){
-	
+	var grp_id = grp_id;
 	var URL = base_url +'logged/church_prayer_group/join_group';
 		showBusyScreen();
 		if(ajax_req!=null) {
