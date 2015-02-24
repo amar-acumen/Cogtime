@@ -12555,4 +12555,4 @@ text-align: center;}
 .session-popup .mid h4{ font-size: 22px;}
 #lgout{ background:#62c3bc; font-size: 14px; width: 65px; line-height: 28px; cursor: pointer; height: 28px; border:none; color:#fff; text-align: center;}
 #lgout:hover{color:#000;}
-.event-news-pop{ z-index:999999999999 !important;}
+.lightbox.event-news-pop{ z-index:999999999999 !important;}
