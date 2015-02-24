@@ -35,7 +35,7 @@ http.createServer(function (req, res) {
 							res.end("setUpdateStatus('"+JSON.stringify(rows)+"')");
 						else 
 						{
-							setTimeout(functin(){
+							setTimeout(function(){
 								cnt--;
 								tmp(cnt);
 							},1000);
