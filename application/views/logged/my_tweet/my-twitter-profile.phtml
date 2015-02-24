@@ -42,18 +42,14 @@ $max_file_size = $max_file_size * 1024 * 1024;
                             ?>
                             <!--tweeter header start -->  
                             <div style="background:url(images/tweeter-profile-bg.jpg) no-repeat 0 0;" class="tweeter-profile-header">
-                                <?php /* ?<div class="follow-section">
-                                  ><span class="follow-btn"><input name="Follow" type="button" value="Follow"></span>
-                                  </div><?php */ ?>
+                                
                                 <div class="clr"></div>
                                 <div class="edit_twtr_pic" style="display: none"><a href="javascript:void(0);" onclick="show_dialog('edit-bg-image');"><h3>Edit Background Image</h3></a></div>
                                 <?php include(APPPATH . "views/logged/my_tweet/tweet_user_detail.phtml"); ?>
                             </div> 
                         <?php } else { ?>
                             <div style="background:url(<?php echo $img_url; ?>) no-repeat 0 0;" class="tweeter-profile-header">
-                                <?php /* ?<div class="follow-section">
-                                  ><span class="follow-btn"><input name="Follow" type="button" value="Follow"></span>
-                                  </div><?php */ ?>
+                                
                                 <div class="clr"></div>
                                 <div class="edit_twtr_pic" style="display: none"><a href="javascript:void(0);" onclick="show_dialog('edit-bg-image');"><h3>Edit Background Image</h3></a></div>
                                 <?php include(APPPATH . "views/logged/my_tweet/tweet_user_detail.phtml"); ?>
