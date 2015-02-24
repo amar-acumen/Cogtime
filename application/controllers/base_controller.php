@@ -30,7 +30,7 @@ class Base_controller extends CI_Controller {
             parent::__construct();
 
             $this->_set_timezone();
-			//$this->output->cache(60);
+			$this->output->cache(60);
             $this->load->helper('common_helper');
             //$this->load->helper('chat_helper'); 
             $this->load->model('projects_model');
