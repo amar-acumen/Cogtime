@@ -13,7 +13,8 @@
 .lightbox.event-news-pop h1{ font-size:18px; color:#096aa7; padding-bottom:10px;}
 .lightbox.event-news-pop span{ font-size:14px; display:block; padding-bottom:5px;}
 .pull-right{ float:right;}
-.lightbox.event-news-pop span img{ width:100%; max-width:494px; border:1px solid #ccc; padding:3px;}
+.lightbox.event-news-pop span img{ width:100%; max-width:467px; border:1px solid #ccc; padding:3px;}
+.lightbox.event-news-pop span.venue{ color:#096aa7; font-size:15px; text-align:left;}
 </style>
 <div id="content_section">
     <div id="container">
@@ -80,7 +81,7 @@
                   <span><img src="<?=$IMG_THUMB?>" alt="event" /></span>
                <?php /*?><h1><?=$title?></h1><?php */?>
                <?php /*?><span class="pull-left">Created On: <?=$val['dt_created_on'] ?></span><?php */?>
-               <span>Venue: <?= $val['s_address']. ', ' . $val['s_city'] . ', ' . $val['s_state'] . ', ' . get_country_name_by_id($val['i_country_id']); ?></span>
+               <span class="venue">Venue: <?= $val['s_address']. ', ' . $val['s_city'] . ', ' . $val['s_state'] . ', ' . get_country_name_by_id($val['i_country_id']); ?></span>
                
                
                <div class="clr"></div>
