@@ -31,17 +31,7 @@ onKeyUp="limitTextarea(this.form.wall_msg,this.form.countdown,500);" onkeypress=
             <div class="tab_details comment-content nw-comment-content">
             
             <input type="hidden" id="public_wall_owner_id" name="public_wall_owner_id" value="<?=($this->session->userdata('user_id'))?>" />
-            
-            
-              <!--  text div start -->
-               <!-- <div class="write-text">
-                <textarea name="wall_msg" id="wall_msg" cols="" rows="" onfocus="if(this.value=='Max 500 Characters')this.value='';" onblur="if(this.value=='')this.value='Max 500 Characters';" maxlength ="500" 
-                onKeyDown="limitTextarea(this.form.wall_msg,this.form.countdown,500);" 
-onKeyUp="limitTextarea(this.form.wall_msg,this.form.countdown,500);" onkeypress="return restrict_carrige(event);"  >Max 500 Characters</textarea>
- <p style=" clear:both; float:left"> <span id="text_count">0</span> Characters</p>
-                </div>-->
-               <!-- text div end  -->
-                
+
                <!-- upload image div start  -->
                 <div class="upload-image" >
 				<a href="javascript:void(0);" onclick="$(this).parent('div').hide();" style="float:right;color:#013d62">Hide[-]</a>
@@ -54,13 +44,8 @@ onKeyUp="limitTextarea(this.form.wall_msg,this.form.countdown,500);" onkeypress=
             
                   <div id="hdnflds" >
                   </div>
-                 
                  </div>   
-                      
                 <!--upload image div end -->
-                
-                
-                
                <!-- upload video div start -->
                 <div class="upload-video">
 				<a href="javascript:void(0);" onclick="$(this).parent('div').hide();" style="float:right;color:#013d62">Hide[-]</a>
@@ -73,8 +58,6 @@ onKeyUp="limitTextarea(this.form.wall_msg,this.form.countdown,500);" onkeypress=
 					</ul>
                     <br class="clr"/>
                     <div id="all_videos">
-                      <?php /*?><div class="view-thumb"><img src="images/photo-img01.jpg" alt="photo" width="60" height="60" /><a href="javascript:void(0);" class="remove" title="Remove Video"></a></div>
-                     <?php */?>
                     </div>
                     
                      <div id="hdnvideoflds" >
@@ -82,14 +65,11 @@ onKeyUp="limitTextarea(this.form.wall_msg,this.form.countdown,500);" onkeypress=
                   
                 </div>
                <!-- upload video div end -->
-               
-               
             </div>
             <div class="tab_content button-set type-text">
                 <ul>
-                   <!-- <li class="select"><a href="javascript:void(0);"><img src="images/nw-text-btn.png" alt="text" title="Write Text"  /></a></li>-->
-                    <li><a href="javascript:void(0);"><img src="images/nw-photo-btn.png" alt="photo" title="Upload Photo" /></a></li>
-                    <li><a href="javascript:void(0);"><img src="images/nw-video-btn.png" alt="video" title="Upload Video" /></a></li>
+                    <li><a href="javascript:void(0);"><img src="images/nw-photo-btn.png" width="12" height="10" alt="photo" title="Upload Photo" /></a></li>
+                    <li><a href="javascript:void(0);"><img src="images/nw-video-btn.png" width="12" height="10" alt="video" title="Upload Video" /></a></li>
                 </ul>
             </div>
             
