@@ -23,7 +23,7 @@
             $chat_html = '';
 
             if (check_Chat_link_online_hlpr($val['user_id'], 'public', $relation_arr))
-                $chat_html = ' <a class="nogrey_link nw-chat-lnk" onclick="showOnlineUser(\'show\');chatWith(\'' . $val['s_first_name'] . '\',' . $val['user_id'] . ')" chatwith="' . $val['user_id'] . '"><img src="images/Chat.png" title="chat" alt="chat" /></a>';
+                $chat_html = ' <a class="nogrey_link nw-chat-lnk" onclick="showOnlineUser(\'show\');chatWith(\'' . $val['s_first_name'] . '\',' . $val['user_id'] . ')" chatwith="' . $val['user_id'] . '"><img src="images/Chat.png" height="20px" width="20px" title="chat" alt="chat" /></a>';
             ?>   
 
             <div class="shade_box_blue" style="padding-top:5px;" id="friend_record_<?= $val['user_id'] ?>"> 
