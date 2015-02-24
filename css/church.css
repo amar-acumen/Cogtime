@@ -2387,4 +2387,6 @@ width: 89px;}
 .ring-cat-edit{ width:500px;}
 .ring-cat-edit input[type="text"]{ border:1px solid #ccc;  width:98%; font-size:14px;padding:5px 1%; margin:10px 0;}
 .ring-cat-edit input[type="button"]{ font-size:12px; height:25px; width:55px; line-height:25px; font-weight:normal;} 
-.post-radio-list{ font-size:12px; color:#3b3b3b;}
+.post-radio-list{ font-size:14px; color:#3b3b3b;}
+.post-radio-list input[type="radio"]{ float:left; margin-right:5px;}
+.post-radio-list span{ float:left;}
