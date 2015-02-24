@@ -4,7 +4,7 @@
 
     <?php
 
-    pr($ringdata);
+   // pr($ringdata);
 
     if ($ringdata) {
 
@@ -69,9 +69,9 @@
                     ?>
 
                     <a href="<?php echo $profile_link ?>"><?php echo $ringval['owner_name'] ?></a> 
-                    <?php //if(!empty($ringval['dt_updated_on'])){ ?>
-                    | Updated  <?= $ringval['dt_updated_on'] ?>
-                    <?php // } ?>
+                    <?php if(!empty($ringval['dt_updated_on'])){ ?>
+                    | Updated  <?= getShortDate($ringval['dt_updated_on'],5) ?>
+                    <?php  } ?>
                 </p>
 
 
