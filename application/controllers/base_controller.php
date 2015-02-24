@@ -442,8 +442,10 @@ class Base_controller extends CI_Controller {
 
         if ($this->session->userdata('loggedin') != '' && $this->session->userdata('loggedin') != false && $this->session->userdata('is_admin') == '') {
             $logged_chat_js = array(# added for im
-                'chat/js/chat.js' => 'header',
-                'js/jquery.gemoticons.js' => 'header'
+                /*'chat/js/chat.js' => 'header',
+                'js/jquery.gemoticons.js' => 'header'*/
+                'js/production/chat.js' => 'header',
+                'js/production/jquery.gemoticons.js' => 'header'
                 );
             $this->_add_js_arr($logged_chat_js);
         }
