@@ -2,7 +2,7 @@
 
 							<?php
 							$logged_id=intval(decrypt($_SESSION['user_id']));
- pr($ringdata);
+ //pr($ringdata);
 							
 							if($ringdata)
 							{
@@ -16,6 +16,7 @@
 									
 									#pr($arr_join_req_sent);
 									#pr($arr_join_req_recv);
+                                                                        echo $ringval['s_type'];
 							?>
                             <?php if($ringval['s_type'] == 'ring'){
 							?>
