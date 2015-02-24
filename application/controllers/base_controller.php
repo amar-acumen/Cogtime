@@ -417,11 +417,11 @@ class Base_controller extends CI_Controller {
     protected function _add_default_js_files() {
         ///////// NEW CODE [FOR DEFAULT JS FILES - BEGIN] /////////
         $default_js_arr = array(
-            'js/jquery-1.7.2.js' => 'header',
+            //'js/jquery-1.7.2.js' => 'header',
             //'js/jquery.js' => 'header', // causing conflict with block ui
             //'js/frontend/header_slider.js'=>'header',
             //'js/contentslider.js'=>'header',
-            'js/jquery/ui/jquery.blockUI.js' => 'header',
+            /*'js/jquery/ui/jquery.blockUI.js' => 'header',
             'js/jquery/ui/jquery.ui.core.js' => 'header',
             'js/frontend/utilities.js' => 'header',
             'js/jquery/ui/jquery-ui-1.8.4.custom.js' => 'header',
@@ -433,8 +433,8 @@ class Base_controller extends CI_Controller {
             #'js/backend/admin_utilities.js'=>'header',
             'js/login.js' => 'header',
             'js/notification.js' => 'header',
-            'js/utility_js_for_admin_and_fe.js' => 'header'
-            //'js/production.js' => 'header'
+            'js/utility_js_for_admin_and_fe.js' => 'header'*/
+            'js/production.js' => 'header'
         );
 
 
