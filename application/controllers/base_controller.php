@@ -563,8 +563,12 @@ class Base_controller extends CI_Controller {
 
             ///////// NEW CODE [FOR DEFAULT JS FILES] /////////
             #$default_js_arr = array('js/jquery.hoverIntent.js'=>'header');
-            $default_js_arr = array('js/jquery.hoverIntent.js' => 'header',
-                'js/frontend/utils.js' => 'header');
+            $default_js_arr = array(
+                /*'js/jquery.hoverIntent.js' => 'header',
+                'js/frontend/utils.js' => 'header'*/
+                'js/production/jquery.hoverIntent.js' => 'header',
+                'js/production/utils.js' => 'header'
+            );
 
             if (is_array($this->js_files) && count($this->js_files)) {
 
