@@ -628,15 +628,15 @@ class Base_controller extends CI_Controller
 				{
 					$bible_content_change_method	= "var this_method = '".$this->router->fetch_method()."';";
 				}
-                $data['header']['header_html'] .= "<script type=\"text/javascript\">
+               /* $data['header']['header_html'] .= "<script type=\"text/javascript\">
                                                    <!--
                                                     var base_url = '".base_url()."';
                                                     var is_login = '".$this->session->userdata('loggedin')."';
 													".$bible_content_change_method."
                                                    //-->
-                                                  </script>";
+                                                  </script>";*/
                 
-                
+                $data['header']['header_html'].='';
         
                 ///////// NEW CODE [FOR DEFAULT JS FILES] /////////
                 #$default_js_arr = array('js/jquery.hoverIntent.js'=>'header');
