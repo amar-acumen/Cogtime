@@ -2,7 +2,7 @@
 
 							<?php
 							$logged_id=intval(decrypt($_SESSION['user_id']));
-
+ //pr($ringdata);
 							
 							if($ringdata)
 							{
@@ -16,6 +16,7 @@
 									
 									#pr($arr_join_req_sent);
 									#pr($arr_join_req_recv);
+                                                                      //  echo $ringval['s_type'];
 							?>
                             <?php if($ringval['s_type'] == 'ring'){
 							?>
@@ -93,9 +94,14 @@
                             
                                   
                             </div>
-                            <?php } else if($ringval['s_type'] == 'post'){
-							$member=check_member_by_ring_id($ringval['ringid'],$logged_id);
-							if($member == true)
+                            <?php } 
+                            
+                            
+                           elseif($ringval['s_type'] == 'post'){
+                                           // echo 'ok';
+							$member=check_church_member_by_ring_id($ringval['ringid'],$logged_id);
+                                                       // echo $member;
+							if($member == true || $_SESSION['charch_super_admin'] =='yes')
 							{
 							?>
                             

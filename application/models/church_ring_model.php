@@ -1003,7 +1003,9 @@ public function get_by_id($id)
 		}
 		else if($s_query_type == 'posts'){
 			 
-			 $s_qry = "
+//			
+                    
+                     $s_qry = "
 							 SELECT 
 							 	 r.id AS ringid,   
 								 rp.id AS ringPostid, 
@@ -1032,7 +1034,9 @@ public function get_by_id($id)
 								 AND r.i_category_id=c.id 
 								 AND r.i_isenabled=1 
 								 
-								{$s_where} ";
+							{$s_where} ";
+                     
+//                    
 					
 		}
 		else if($s_query_type == 'both'){
@@ -1117,7 +1121,7 @@ public function get_by_id($id)
 		 
 		 
 		  $s_qry= $s_qry.(trim($s_order_by)!=""?" ORDER BY ".$s_order_by."":"ORDER BY ringid DESC")." ".(is_numeric($i_start) && is_numeric($i_limit)?" LIMIT ".intval($i_start).",".intval($i_limit):"");
-//echo nl2br($s_qry);exit;
+ //echo nl2br($s_qry);exit;
 		  $res = $this->db->query($s_qry)->result_array();
 		  return $res;
         }

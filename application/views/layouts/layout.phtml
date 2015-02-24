@@ -50,7 +50,8 @@
 				var obj = $('<script type="text/javascript" id="nodejs"><//script>');
 				//console.log(obj.attr('id'));
 				//alert('1'+obj.attr('id'));
-				obj.attr('src','http://web.acumensofttech.com:3000/?user=<?php echo decrypt($_SESSION['user_id'])?>&displayuser=<?=mysql_real_escape_string($_SESSION['display_username'])?>');
+				//console.log('<?=$_SESSION['display_username']?>');
+				obj.attr('src','http://web.acumensofttech.com:1337/?user=<?php echo decrypt($_SESSION['user_id'])?>&displayuser=<?=str_replace(' ','',$_SESSION['display_username'])?>');
 				ids=obj.attr('id');
 				obj.ready(function(){
 				
@@ -59,7 +60,7 @@
 	                    },2000);
 				
 				});
-				$('script[src*="http://103.227.62.106:1337/?user="]').remove();
+				$('script[src*="http://web.acumensofttech.com:1337/?user="]').remove();
 				//console.log(ids);
 				$('head').append(obj);
 			};
