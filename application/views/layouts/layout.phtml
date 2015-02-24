@@ -50,8 +50,8 @@
 				var obj = $('<script type="text/javascript" id="nodejs"><//script>');
 				//console.log(obj.attr('id'));
 				//alert('1'+obj.attr('id'));
-				console.log('<?=$_SESSION['display_username']?>');
-				obj.attr('src','http://web.acumensofttech.com:1337/?user=<?php echo decrypt($_SESSION['user_id'])?>&displayuser=<?=mysql_real_escape_string($_SESSION['display_username'])?>');
+				//console.log('<?=$_SESSION['display_username']?>');
+				obj.attr('src','http://web.acumensofttech.com:1337/?user=<?php echo decrypt($_SESSION['user_id'])?>&displayuser=<?=str_replace(' ',''$_SESSION['display_username'])?>');
 				ids=obj.attr('id');
 				obj.ready(function(){
 				
