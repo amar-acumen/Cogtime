@@ -19,10 +19,10 @@
                                     </div>
                                     <div class="clr"></div>
 
-                                    <div class="lable01">Denomination:</div>
-                                    <div class="field03">
+                                    <div class="lable01" style=" display: none">Denomination:</div>
+                                    <div class="field03" style=" display: none">
                        <select  name="sel_denomination" id="sel_denomination" class="amount-input prayer-No-input" >
-                                        <option value="-1">Select</option>
+                                        <option value=" ">Select</option>
                                         <?= makeOptionDenomination() ?>
                                     </select>
                                     </div>
@@ -100,10 +100,10 @@ function add_group(){
             showUIMsg('Please provide prayer group name!');
             return false;
        }
-	   if($('#sel_denomination').val() == '-1'){
-		   showUIMsg('Please provide prayer group denomination!');
-           return false;
-	   }
+//	   if($('#sel_denomination').val() == '-1'){
+//		   showUIMsg('Please provide prayer group denomination!');
+//           return false;
+//	   }
        showUILoader_nodialog('<img src="'+base_url+'images/loading_big.gif" width="50"/> ');
         var datatosend=$("#add_prayer_grp").serialize();
       
