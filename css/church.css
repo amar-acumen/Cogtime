@@ -2385,4 +2385,5 @@ width: 89px;}
 .article-comment-block .ring-member-list li{ background-image:none; padding:0 10px 0 0; font-size:12px; color:#3b3b3b;}
 .article-comment-block.article-comment-block2 li.left{ background-image:none; padding-left:0;}
 .ring-cat-edit{ width:500px;}
-.ring-cat-edit input[type="text"]{ border:1px solid #ccc; height:38px; width:80%; font-size:14px;padding:0 1%;}
+.ring-cat-edit input[type="text"]{ border:1px solid #ccc;  width:80%; font-size:14px;padding:5px 1%; margin:10px 0;}
+.ring-cat-edit input[type="button"]{ font-size:12px; height:25px; width:55px; line-height:25px;} 
