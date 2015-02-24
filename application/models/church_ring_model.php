@@ -1064,7 +1064,7 @@ public function get_by_id($id)
 //								 AND r.i_isenabled=1 
 //								 
 //								{$s_where} ";
-                    
+                     
 //                    $s_qry = 'Select  r.id AS ringid , rp.id AS ringPostid ,  rp.s_post_title as s_name,rp.s_post_description as s_desc,rp.dt_created_on,
 //                            r.i_sub_category_id,"post" as s_type, c.s_category_name AS s_category_name ,rp.i_user_id as post_owner_user_id , CONCAT(u.s_first_name," ",u.s_last_name) AS owner_name,
 //                            FROM cg_church_ring AS r , cg_church_ring_category as c ,cg_church_ring_post as rp ,cg_users AS u where rp.i_ring_id = r.id AND 
