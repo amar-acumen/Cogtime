@@ -112,7 +112,8 @@ function sendGrpJoinReq(grp_id){
 							hideBusyScreen();
 							if(data.success== true ) {
 								showUIMsg(data.msg);
-								$('#invite_text_'+grp_id).text('Resend Join Request'); 
+								$('#invite_text_'+grp_id).css('display','none');
+                                                                $('#invite_text_new'+grp_id).css('display','block');
                                                                 alert('ok')
 							}
 							else if(data.success==false){
