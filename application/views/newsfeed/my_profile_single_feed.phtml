@@ -123,7 +123,7 @@ if( $feed['s_type'] == 'wall_post' ){
                         <div class="heading">
                               <div class="left">
                                     <h4><img class="cmnt" src="images/icons/cmnt2.png"  height="20px" width="20px" alt="" /> <span class="comments_div<?=$feed['id']?>">Comments (<?=$feed['total_comments']?>)</span> </h4>
-                                    <img class="wal-minus" alt="" src="images/minus-white.png" />
+                                    <img class="wal-minus" alt="" src="images/minus-white.png" width="13" height="10" />
                               </div>
                             </div>
                             <DIV id="comment_content_div<?=$feed['id']?>"></DIV>
@@ -136,7 +136,7 @@ if( $feed['s_type'] == 'wall_post' ){
                         <div class="heading">
                               <div class="left">
                                     <h4><img alt="" src="images/heart2.png" height="19px" width="20px" class="cmnt" /> <span class="liked_by_<?=$feed['id']?>">Liked by (<?=count_like_link($feed['id'])?>) </span></h4>
-                                     <img class="wal-minus" alt="" src="images/minus-white.png" />
+                                     <img class="wal-minus" alt="" src="images/minus-white.png" width="13" height="10"/>
                               </div>
                         </div>
                               <div class="shade_box_white" id="like_content_div<?=$feed['id']?>"></div>
@@ -155,7 +155,7 @@ if( $feed['s_type'] == 'wall_post' ){
                             <div class="heading">
                                   <div class="left">
                                         <h4><img alt="" src="images/no.png" class="cmnt" />  POST </h4>
-                                        <img class="wal-minus" alt="" src="images/minus-white.png" onClick="show_hidden('<?=$feed['id']?>')" />
+                                        <img class="wal-minus" alt="" src="images/minus-white.png" width="13" height="10" onClick="show_hidden('<?=$feed['id']?>')" />
                                   </div>
                             </div>
                               <div class="txt_content01 comments-number-content content-width" id="post_content_<?=$feed['id']?>"> 
@@ -308,7 +308,7 @@ onKeyUp="limitTextarea(this.form.wall_msg,this.form.countdown,500);" onkeypress=
                             <div class="heading">
                                   <div class="left">
                                         <h4><img alt="" src="images/no.png" class="cmnt" />  Comment  </h4>
-                                        <img class="wal-minus" alt="" src="images/minus-white.png" />
+                                        <img class="wal-minus" alt="" src="images/minus-white.png" width="13" height="10"/>
                                   </div>
                             </div>
                               <div class="txt_content01 comments-number-content content-width"> 
