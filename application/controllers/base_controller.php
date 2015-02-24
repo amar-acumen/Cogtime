@@ -418,7 +418,7 @@ class Base_controller extends CI_Controller {
         ///////// NEW CODE [FOR DEFAULT JS FILES - BEGIN] /////////
         $default_js_arr = array(
             'js/jquery-1.7.2.js' => 'header',
-            'js/jquery.js' => 'header', // causing conflict with block ui
+            //'js/jquery.js' => 'header', // causing conflict with block ui
             //'js/frontend/header_slider.js'=>'header',
             //'js/contentslider.js'=>'header',
             /*'js/jquery/ui/jquery.blockUI.js' => 'header',
