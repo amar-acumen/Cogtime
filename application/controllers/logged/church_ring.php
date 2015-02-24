@@ -769,7 +769,7 @@ class Church_ring extends Base_controller
                    // die('ok');
 		$data['ringdata']	= $this->church_ring_model->show_all_public_ring_new($wh,$page,$this->pagination_per_page,'',$s_query_type, $wh_ring_post);
 		
-		//pr($data['ringdata']);		exit;
+		pr($data['ringdata']);		exit;
 		$data['pagination_per_page'] = $this->pagination_per_page;
 		//pr($result);
 		
