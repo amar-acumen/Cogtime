@@ -78,12 +78,12 @@ class Module_generate extends CI_Controller {
                     'js/utilities.js',
                     'js/login.js',
                     'js/notification.js',
-                    'js/utility_js_for_admin_and_fe.js',
-                    'js/frontend/header_slider.js',
+                    'js/utility_js_for_admin_and_fe.js'
+                   /* 'js/frontend/header_slider.js',
                     'js/contentslider.js',
                     'js/jquery.autofill.js',
                     'js/jquery.hoverIntent.js',
-                    'js/frontend/utils.js'
+                    'js/frontend/utils.js'*/
 
                 );
                 $js = '';
@@ -98,16 +98,13 @@ class Module_generate extends CI_Controller {
                 echo '<br/> production.js';
             }
             // #################  Individual js min generate ###################
-            /*if($js_indi){
+            if($js_indi){
                 $files_indvid_js = array(
-                    'assets/js/custom/global.js',
-                    'assets/js/custom/ajaxcall.js',
-                    'assets/js/custom/messages.js',
-                    'assets/js/custom/chat.js',
-                    'assets/js/custom/user.js',
-                    'assets/js/custom/notification.js',
-                    'assets/js/custom/community.js',
-                    'assets/js/custom/hashtag.js'
+                    'chat/js/chat.js',
+                    'js/jquery.gemoticons.js',
+                    'js/jquery.hoverIntent.js',
+                    'js/frontend/utils.js'
+
                 );
                 $js_indvid = '';
                 foreach($files_indvid_js as $data){
@@ -119,12 +116,12 @@ class Module_generate extends CI_Controller {
                    // $packer = new JavaScriptPacker($js_indvid, 62, true, true);
                    // $js_indvid = $packer->pack();
 
-                    $jsfile = fopen("assets/js/production/".$file_name, "w") or die("Unable to open file!");
+                    $jsfile = fopen("js/production/".$file_name, "w") or die("Unable to open file!");
                     fwrite($jsfile, $js_indvid);
                     fclose($jsfile);
                     echo '<br/> Individual files : '.$file_name;
                 }
-            }*/
+            }
 
       /* }else{
            echo 'Unauthorized access.';
