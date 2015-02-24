@@ -38,5 +38,5 @@ http.createServer(function (req, res) {
    
    
   
-}).listen(8124, 'web.acumensofttech.com');
-//console.log('Server running at http://127.0.0.1:1337/');
+}).listen(8889, 'web.acumensofttech.com');
+console.log('Server running at http://127.0.0.1:1337/');
