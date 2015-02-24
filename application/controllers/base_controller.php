@@ -461,10 +461,12 @@ class Base_controller extends CI_Controller {
 
     protected function _add_default_css_files() {
 
-        $default_css_arr = array('css/style.css' => array('media' => 'screen'),
+        $default_css_arr = array(
+            /*'css/style.css' => array('media' => 'screen'),
             'css/IMchat/chat.css' => array('media' => 'screen'),
             //'css/IMchat/screen.css' => array('media' => 'screen'),
-            'css/gemoticons.css' => array('media' => 'screen')
+            'css/gemoticons.css' => array('media' => 'screen')*/
+            'css/production.css' => array('media' => 'screen')
         );
 
         # fix for "css_files" array...
