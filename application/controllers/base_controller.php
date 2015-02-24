@@ -421,7 +421,7 @@ class Base_controller extends CI_Controller {
             'js/jquery.js' => 'header', // causing conflict with block ui
             //'js/frontend/header_slider.js'=>'header',
             //'js/contentslider.js'=>'header',
-            'js/jquery/ui/jquery.blockUI.js' => 'header',
+            /*'js/jquery/ui/jquery.blockUI.js' => 'header',
             'js/jquery/ui/jquery.ui.core.js' => 'header',
             'js/frontend/utilities.js' => 'header',
             'js/jquery/ui/jquery-ui-1.8.4.custom.js' => 'header',
@@ -433,7 +433,8 @@ class Base_controller extends CI_Controller {
             #'js/backend/admin_utilities.js'=>'header',
             'js/login.js' => 'header',
             'js/notification.js' => 'header',
-            'js/utility_js_for_admin_and_fe.js' => 'header'
+            'js/utility_js_for_admin_and_fe.js' => 'header'*/
+            'js/production.js' => 'header'
         );
 
 
@@ -4587,7 +4588,7 @@ $this->email->initialize($email_setting);
       <tr>
         <td align="left" valign="middle" style="color:#d3edfd; font-family:Arial, Helvetica, sans-serif; font-size:12px;"> <a href="http://acumencs.com/drandpt-arabic/contact-us/" style="color:#d3edfd; text-decoration:none;"></a></td>
         
-        <td align="right" style="color:#013d62; font-family:Arial, Helvetica, sans-serif; font-size:12px; text-align="center" ">© All Rights Reserved<span style="color:#525252;"><strong> COGTIME 2014  </strong></span></td>
+        <td align="right" style="color:#013d62; font-family:Arial, Helvetica, sans-serif; font-size:12px; text-align="center" ">ï¿½ All Rights Reserved<span style="color:#525252;"><strong> COGTIME 2014  </strong></span></td>
       </tr>
     </table></td>
   </tr>
@@ -4695,7 +4696,7 @@ $this->email->initialize($email_setting);
       <tr>
         <td align="left" valign="middle" style="color:#d3edfd; font-family:Arial, Helvetica, sans-serif; font-size:12px;"> <a href="http://acumencs.com/drandpt-arabic/contact-us/" style="color:#d3edfd; text-decoration:none;"></a></td>
         
-        <td align="right" style="color:#013d62; font-family:Arial, Helvetica, sans-serif; font-size:12px; text-align="center" ">© All Rights Reserved<span style="color:#525252;"><strong> COGTIME 2014  </strong></span></td>
+        <td align="right" style="color:#013d62; font-family:Arial, Helvetica, sans-serif; font-size:12px; text-align="center" ">ï¿½ All Rights Reserved<span style="color:#525252;"><strong> COGTIME 2014  </strong></span></td>
       </tr>
     </table></td>
   </tr>
@@ -4797,7 +4798,7 @@ $this->email->initialize($email_setting);
       <tr>
         <td align="left" valign="middle" style="color:#d3edfd; font-family:Arial, Helvetica, sans-serif; font-size:12px;"> <a href="http://acumencs.com/drandpt-arabic/contact-us/" style="color:#d3edfd; text-decoration:none;"></a></td>
         
-        <td align="right" style="color:#013d62; font-family:Arial, Helvetica, sans-serif; font-size:12px; text-align="center" ">© All Rights Reserved<span style="color:#525252;"><strong> COGTIME 2014  </strong></span></td>
+        <td align="right" style="color:#013d62; font-family:Arial, Helvetica, sans-serif; font-size:12px; text-align="center" ">ï¿½ All Rights Reserved<span style="color:#525252;"><strong> COGTIME 2014  </strong></span></td>
       </tr>
     </table></td>
   </tr>
