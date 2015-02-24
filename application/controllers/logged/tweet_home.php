@@ -284,12 +284,7 @@ class Tweet_home extends Base_controller {
                                 $photo_uploaded = true;
                             }
                         }
-                        /* else {
-                          // This is a server-side checking for extra safety
-                          // and normally javascript will not allow it.
-                          echo json_encode( array('success'=>'false', 'msg'=>'Photo is blank.') );
-                          exit;
-                          } */
+                       
                     }
         
 					if ($this->input->post('txt_video_url') != '') {
