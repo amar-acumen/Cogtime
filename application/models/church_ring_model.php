@@ -346,6 +346,7 @@ public function get_by_id($id)
 //						$ret_[$i_cnt]["dt_created_on"]		=	$row->dt_created_on;
 //						$ret_[$i_cnt]["i_country_id"]		=	intval($row->i_country_id);
 						$ret_[$i_cnt]["dt_created_on"]		=	($row->dt_created_on);
+                                                $ret_[$i_cnt]["dt_updated_on"]		=	($row->dt_updated_on);
 						$ret_[$i_cnt]["s_category_name"]	=	$row->s_category_name;
 //						$ret_[$i_cnt]["post"]				=	$row->post;
 //						$ret_[$i_cnt]["cmt"]				=	$row->cmt;
