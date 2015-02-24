@@ -9,9 +9,12 @@
 <!-- CONTENT SECTION -->
 <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
 <style type="text/css">
-.lightbox.event-news-pop{ z-index:999999999999 !important;}
+.lightbox.event-news-pop{ z-index:999999999999 !important; text-align:left;}
 .lightbox.event-news-pop h1{ font-size:18px; color:#096aa7; padding-bottom:10px;}
 .lightbox.event-news-pop span{ font-size:14px; display:block; padding-bottom:5px;}
+.pull-right{ float:right;}
+.lightbox.event-news-pop span img{ width:100%; max-width:467px; border:1px solid #ccc; padding:3px;}
+.lightbox.event-news-pop span.venue{ color:#096aa7; font-size:15px; text-align:left;}
 </style>
 <div id="content_section">
     <div id="container">
@@ -50,7 +53,7 @@
 								$detail_url = get_events_detail_url($val['id']);
 								
 								$IMG_THUMB_PATH = base_url() ."uploads/events_photo/";
-								$name=getThumbName($val['s_image_1'],'thumb'); 
+								$name=getThumbName($val['s_image_1'],'big'); 
 								$IMG_THUMB = $IMG_THUMB_PATH . $name;
 				?>
             
@@ -62,7 +65,7 @@
                     </div>
                 </li>
                 <!---------------------------------event pop up----------------------------------->
-                 <div class="lightbox event-news-pop event<?= $val['id']?>" style="width: 400px; left: 100px;">
+                 <div class="lightbox event-news-pop event<?= $val['id']?>" style="width: 500px; left: 100px;">
       <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="<?=base_url()?>images/close.png" alt="" /></a></div>
       <div class="top"><div>&nbsp;</div></div>
       <div class="mid">
@@ -76,15 +79,15 @@
                <p class="center-text" style="line-height:23px; color:#494949; font-size:16px; text-align:center;">
                   <!-----contain start---->
                   <span><img src="<?=$IMG_THUMB?>" alt="event" /></span>
-               <h1><?=$title?></h1>
-               <span>Created On: <?=$val['dt_created_on'] ?></span>
-               <span>Venue: <?= $val['s_address']. ', ' . $val['s_city'] . ', ' . $val['s_state'] . ', ' . get_country_name_by_id($val['i_country_id']); ?></span>
-               <span>Details :<?= $desc; ?></span>
+               <?php /*?><h1><?=$title?></h1><?php */?>
+               <?php /*?><span class="pull-left">Created On: <?=$val['dt_created_on'] ?></span><?php */?>
+               <span class="venue">Venue: <?= $val['s_address']. ', ' . $val['s_city'] . ', ' . $val['s_state'] . ', ' . get_country_name_by_id($val['i_country_id']); ?></span>
                
                
+               <div class="clr"></div>
 
-               <span>Start Time: <?=$val['dt_start_time'] ?></span>
-               <span>Close Time : <?=$val['dt_end_time'] ?></span>
+               <span class="pull-left">Start Time: <?=$val['dt_start_time'] ?></span>
+               <span class="pull-right">Close Time : <?=$val['dt_end_time'] ?></span>
                  <!--right part -->
                  <div class="pre-time-map" style=" display: none">                               
 
