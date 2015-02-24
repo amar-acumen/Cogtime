@@ -41,8 +41,8 @@ $max_file_size = $max_file_size * 1024 * 1024;
                         $img_url = base_url() . 'uploads/user_photos/' . $bg_img_name . '-big.' . $ext;
                         if (empty($bg_img_name)) {
                             ?>
-                            <?php //include(APPPATH . "views/logged/my_tweet/common_user_twiter_profile_part.phtml");  ?>
-                            <div style="background:url(images/tweeter-profile-bg.jpg) no-repeat 0 0;" class="tweeter-profile-header">
+                            
+                            <div style="background:url(images/tweeter-profile-bg.jpg) no-repeat 0 0;" class="tweeter-profile-header">aaaaaaaaaaaa
                                 <div class="follow-section" id="tweet_follow_status<?= $public_profile_info['id'] ?>">
                                     <?php if ($is_follow == false && intval(decrypt($this->session->userdata('user_id'))) != $public_profile_info['id']) {
                                         ?>
