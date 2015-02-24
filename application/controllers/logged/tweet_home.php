@@ -49,7 +49,7 @@ class Tweet_home extends Base_controller {
 
             $posted = array();
             $this->data["posted"] = $posted; /* don't change */
-            $data = $this->data;
+            /*$data = $this->data;
             $this->data["MAIN_MENU_SELECTED"] = 1;
             parent::_set_title('::: COGTIME Xtian network :::');
             parent::_set_meta_desc('');
@@ -90,11 +90,11 @@ class Tweet_home extends Base_controller {
             $content_obj = json_decode($content);
             $data['tweets_ajax_content'] = $content_obj->html;
             $data['no_of_result'] = $content_obj->no_of_result;
-            ob_end_clean();
+            ob_end_clean();*/
 
 
             # view file...
-            $VIEW = "logged/my_tweet/my-twitter-profile.phtml";
+            $VIEW = '';//"logged/my_tweet/my-twitter-profile.phtml";
             parent::_render($data, $VIEW);
         } catch (Exception $err_obj) {
             
