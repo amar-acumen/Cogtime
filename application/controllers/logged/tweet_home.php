@@ -195,7 +195,7 @@ class Tweet_home extends Base_controller {
 
 
             # view file...
-            $VIEW = '';//"logged/my_tweet/my_tweets.phtml";
+            $VIEW = "logged/my_tweet/my_tweets.phtml";
             parent::_render($data, $VIEW);
         } catch (Exception $err_obj) {
             
