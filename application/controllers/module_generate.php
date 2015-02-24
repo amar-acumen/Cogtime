@@ -47,8 +47,8 @@ class Module_generate extends CI_Controller {
                 $files_css = array(
                     'css/style.css',
                     'css/IMchat/chat.css',
-                    'css/gemoticons.css',
-                    'css/big-slider.css'
+                    'css/gemoticons.css'
+                    //'css/big-slider.css'
                 );
                 $css = '';
                 foreach($files_css as $data){
