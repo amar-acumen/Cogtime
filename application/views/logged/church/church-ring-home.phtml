@@ -67,7 +67,7 @@
 
                             </div>
 
-                            <p class="time-posted"> Owner : <a href="#"><?= $ring_detail_arr[0]['s_owner_name'] ?></a> | Created on <?= getShortDate($ring_detail_arr[0]['dt_created_on'], 5) ?> | <?php if(!empty($ring_detail_arr[0]['dt_updated_on'])){ ?> <?= getShortDate($ring_detail_arr[0]['dt_updated_on'], 5).'|' ?> <?php } ?>  Member : <a href="<?= base_url().'church-rings-members/'.$ring_detail_arr[0]['id'] ?>"><?= get_member_count_by_ring_id($ring_detail_arr[0]['id']); ?></a> </p>
+                            <p class="time-posted"> Owner : <a href="#"><?= $ring_detail_arr[0]['s_owner_name'] ?></a> | Created on <?= getShortDate($ring_detail_arr[0]['dt_created_on'], 5) ?> | <?php if(!empty($ring_detail_arr[0]['dt_updated_on'])){ ?> Updated on  <?= getShortDate($ring_detail_arr[0]['dt_updated_on'], 5).'|' ?> <?php } ?>  Member : <a href="<?= base_url().'church-rings-members/'.$ring_detail_arr[0]['id'] ?>"><?= get_member_count_by_ring_id($ring_detail_arr[0]['id']); ?></a> </p>
 
                             <div class="clr"></div>
 
