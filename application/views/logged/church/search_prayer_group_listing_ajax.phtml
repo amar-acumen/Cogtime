@@ -20,7 +20,7 @@
 
 	  <p>Denomination- <?= getDenominationNameById($church->i_denomination_id) ?> | <small><?php if($church_admin){?>Created on- <?php echo getShortDate($church->dt_created_on,5);}else {?>Joined on- <?php echo getShortDate($church->dt_joined_on,5);}?></small>  
       <span class="already-member"><?php if($church->is_member == 1){ ?><img alt="" src="images/icons/accept.png"><?php echo 'Already Member';  }else{?></span> 
-      <a href="javascript:void(0);" class="searchjoin-btn" onClick="sendGrpJoinReq('<?=$church->id?>')" id="#invite_text_<?=$church->id?>">
+      <a href="javascript:void(0);" class="searchjoin-btn" onClick="sendGrpJoinReq('<?=$church->id?>')" id="invite_text_<?=$church->id?>">
 	  
 	  <?php 
 	  if($church->is_member == 'pending'){
@@ -37,7 +37,7 @@
       
       
       </a>
-      <a href="javascript:void(0);" class="searchjoin-btn" onClick="sendGrpJoinReq('<?=$church->id?>')" id="#invite_text_new<?=$church->id?>" style="display: none;">
+      <a href="javascript:void(0);" class="searchjoin-btn" onClick="sendGrpJoinReq('<?=$church->id?>')" id="invite_text_new<?=$church->id?>" style="display: none;">
 	  
 	  <?php 
 	  if($church->is_member == 'pending'){
@@ -48,7 +48,7 @@
        <?php }?>
      
           
-	  <?php echo ($church->is_member == 'pending')?'Send Join Request':'Send Join Request';?>
+	  <?php echo ($church->is_member == 'pending')?'Resend Join Request':'Resend Join Request';?>
       
       
       

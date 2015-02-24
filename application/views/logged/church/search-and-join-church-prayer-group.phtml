@@ -57,6 +57,7 @@
 <!-- /FOOTER SECTION -->
 
 <script type="text/javascript">
+    
 function searchPrayerGrp()
 {
    
@@ -92,9 +93,12 @@ function searchPrayerGrp()
         });
     }
 }
-
+var grp_id = null;
 function sendGrpJoinReq(grp_id){
 	var grp_id = grp_id;
+        //alert(grp_id);
+        var obj;
+        obj = $("#invite_text_"+grp_id);
 	var URL = base_url +'logged/church_prayer_group/join_group';
 		showBusyScreen();
 		if(ajax_req!=null) {
@@ -114,7 +118,10 @@ function sendGrpJoinReq(grp_id){
 								showUIMsg(data.msg);
 								$('#invite_text_'+grp_id).hide();
                                                                 $('#invite_text_new'+grp_id).show();
-                                                                alert('#invite_text_'+grp_id)
+                                                                
+                                                                
+                                                                obj.hide();
+                                                               // alert('#invite_text_'+grp_id)
 							}
 							else if(data.success==false){
 							    showUIMsg(data.msg);
@@ -126,5 +133,6 @@ function sendGrpJoinReq(grp_id){
 			}
 		});
 	
+       
 }
 </script>

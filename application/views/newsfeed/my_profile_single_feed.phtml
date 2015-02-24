@@ -123,7 +123,7 @@ if( $feed['s_type'] == 'wall_post' ){
                         <div class="heading">
                               <div class="left">
                                     <h4><img class="cmnt" src="images/icons/cmnt2.png"  height="20px" width="20px" alt="" /> <span class="comments_div<?=$feed['id']?>">Comments (<?=$feed['total_comments']?>)</span> </h4>
-                                    <img class="wal-minus" alt="" src="images/minus-white.png" />
+                                    <img class="wal-minus" alt="" src="images/minus-white.png" width="13" height="10" />
                               </div>
                             </div>
                             <DIV id="comment_content_div<?=$feed['id']?>"></DIV>
@@ -136,7 +136,7 @@ if( $feed['s_type'] == 'wall_post' ){
                         <div class="heading">
                               <div class="left">
                                     <h4><img alt="" src="images/heart2.png" height="19px" width="20px" class="cmnt" /> <span class="liked_by_<?=$feed['id']?>">Liked by (<?=count_like_link($feed['id'])?>) </span></h4>
-                                     <img class="wal-minus" alt="" src="images/minus-white.png" />
+                                     <img class="wal-minus" alt="" src="images/minus-white.png" width="13" height="10"/>
                               </div>
                         </div>
                               <div class="shade_box_white" id="like_content_div<?=$feed['id']?>"></div>
@@ -154,8 +154,8 @@ if( $feed['s_type'] == 'wall_post' ){
                         <div class="comments-number-mid content-width ">
                             <div class="heading">
                                   <div class="left">
-                                        <h4><img alt="" src="images/no.png" class="cmnt" />  POST </h4>
-                                        <img class="wal-minus" alt="" src="images/minus-white.png" onClick="show_hidden('<?=$feed['id']?>')" />
+                                        <h4><img alt="" src="images/no.png" width="21" height="19" class="cmnt" />  POST </h4>
+                                        <img class="wal-minus" alt="" src="images/minus-white.png" width="13" height="10" onClick="show_hidden('<?=$feed['id']?>')" />
                                   </div>
                             </div>
                               <div class="txt_content01 comments-number-content content-width" id="post_content_<?=$feed['id']?>"> 
@@ -276,11 +276,7 @@ onKeyUp="limitTextarea(this.form.wall_msg,this.form.countdown,500);" onkeypress=
                
             </div>
             <div class="tab_content button-set type-text">
-              <!--  <ul>
-                    <li class="select"><a href="javascript:void(0);"><img src="images/nw-text-btn.png" alt="text" title="Write Text"  /></a></li>
-                    <li><a href="javascript:void(0);"><img src="images/nw-photo-btn.png" alt="photo" title="Upload Photo" onClick="$('.upload-video').hide();$('.upload-image').show();" /></a></li>
-                    <li><a href="javascript:void(0);"><img src="images/nw-video-btn.png" alt="video" title="Upload Video" onClick="$('.upload-image').hide();$('.upload-video').show();" /></a></li>
-                </ul>-->
+            
             </div>
             
             <input name="" type="submit" class="wall-comment-submit-nw " value="Post" />
@@ -307,8 +303,8 @@ onKeyUp="limitTextarea(this.form.wall_msg,this.form.countdown,500);" onkeypress=
                         <div class="comments-number-mid content-width comment-box-manage-profile">
                             <div class="heading">
                                   <div class="left">
-                                        <h4><img alt="" src="images/no.png" class="cmnt" />  Comment  </h4>
-                                        <img class="wal-minus" alt="" src="images/minus-white.png" />
+                                        <h4><img alt="" src="images/no.png" width="21" height="19" class="cmnt" />  Comment  </h4>
+                                        <img class="wal-minus" alt="" src="images/minus-white.png" width="13" height="10"/>
                                   </div>
                             </div>
                               <div class="txt_content01 comments-number-content content-width"> 

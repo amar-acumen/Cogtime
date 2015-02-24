@@ -13,7 +13,7 @@ function after_submit() {
 <!-- HEADER SECTION -->
 <div id="header_section">
     <div id="header">
-    	<div id="logo"><a href="<?=base_url().'index'?>"><img src="<?=base_url()?>images/logo.png" alt="COGTIME Xtian network" title="Cogtime" /></a></div>
+    	<div id="logo"><a href="<?=base_url().'index'?>"><img src="<?=base_url()?>images/logo.png" width="230" height="57" alt="COGTIME Xtian network" title="Cogtime" /></a></div>
             <?php if( ($this->session->userdata('loggedin')!='' || $this->session->userdata('loggedin')!=false) && $this->session->userdata('is_admin') != 1)
           {?>
           	 <div id="header_right"> Welcome <a href="<?=base_url();?>my-wall.html"><?=$this->session->userdata('username').' '.$this->session->userdata('user_lastname')?></a> | 
@@ -48,7 +48,7 @@ function after_submit() {
       
       
       <div class="mid">
-          <div><a href="<?=base_url().'index'?>"><img src="<?=base_url()?>images/logo.png" alt="COGTIME Xtian network" title="Cogtime" /></a></div>
+          <div><a href="<?=base_url().'index'?>"><img src="<?=base_url()?>images/logo.png" alt="COGTIME Xtian network" title="Cogtime" width="230" height="57" /></a></div>
       <h4>Your session has expired. Please login again </h4>
       <input type="submit" value="Login" name="" id="lgout"> 
     </div>          

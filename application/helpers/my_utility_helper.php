@@ -725,15 +725,15 @@ function check_user_online_hlpr($user_id, $scope = 'own', $relation = 'no', $Img
     if ($relation == 'no' && $scope == 'own') {
         if (is_array($ret_) && count($ret_)) {
             if ($ret_['s_status'] == 1)
-                return '<img src="' . base_url() . 'images/icons/online.png" alt="" />';
+                return '<img src="' . base_url() . 'images/icons/online.png" width="12px" height="12px" alt="" />';
             else if ($ret_['s_status'] == 2)
                 return '<img src="' . base_url() . 'images/icons/invisible.png" alt="" />';
             else if ($ret_['s_status'] == 3)
                 return '<img src="' . base_url() . 'images/icons/away.png" alt="" />';
             else if ($ret_['s_status'] == 0 || $ret_['s_status'] == 4)
-                return '<img src="' . base_url() . 'images/icons/offline.png" alt="" />';
+                return '<img src="' . base_url() . 'images/icons/offline.png" width="12px" height="12px" alt="" />';
         } else
-            return '<img src="' . base_url() . 'images/icons/offline.png" alt="" /> ';
+            return '<img src="' . base_url() . 'images/icons/offline.png" width="12px" height="12px" alt="" /> ';
     }
     elseif ($ImgOnly == true) {
 
@@ -760,11 +760,11 @@ function check_user_online_hlpr($user_id, $scope = 'own', $relation = 'no', $Img
             //echo $show_f_online .',,'.$show_n_online.',,'.$show_p_online ; exit;
 
             if ($ret_['s_status'] == 1 && ($show_f_online == 'Y' || $show_n_online == 'Y' || $show_p_online == 'Y'))
-                return '<img src="' . base_url() . 'images/icons/online.png" alt="" />';
+                return '<img src="' . base_url() . 'images/icons/online.png" width="12px" height="12px" alt="" />';
             else if ($show_f_online == 'N' || $show_n_online == 'N' || $show_p_online == 'N')
-                return '<img src="' . base_url() . 'images/icons/offline.png" alt="" />';
+                return '<img src="' . base_url() . 'images/icons/offline.png" width="12px" height="12px" alt="" />';
         } else
-            return '<img src="' . base_url() . 'images/icons/offline.png" alt="" />';
+            return '<img src="' . base_url() . 'images/icons/offline.png" width="12px" height="12px" alt="" />';
     }
     else {//pr($ret_);
         if (is_array($ret_) && count($ret_) && is_array($status_arr) && count($status_arr)) {
@@ -789,11 +789,11 @@ function check_user_online_hlpr($user_id, $scope = 'own', $relation = 'no', $Img
             //echo $show_f_online .',,'.$show_n_online.',,'.$show_p_online ; exit;
 
             if ($ret_['s_status'] == 1 && ($show_f_online == 'Y' || $show_n_online == 'Y' || $show_p_online == 'Y'))
-                return '<img src="' . base_url() . 'images/icons/online.png" alt="" /> ';
+                return '<img src="' . base_url() . 'images/icons/online.png" width="12px" height="12px" alt="" /> ';
             else if ($show_f_online == 'N' || $show_n_online == 'N' || $show_p_online == 'N')
-                return '<img src="' . base_url() . 'images/icons/offline.png" alt="" />';
+                return '<img src="' . base_url() . 'images/icons/offline.png" width="12px" height="12px" alt="" />';
         } else
-            return '<img src="' . base_url() . 'images/icons/offline.png" alt="" />';
+            return '<img src="' . base_url() . 'images/icons/offline.png" width="12px" height="12px" alt="" />';
     }
 }
 
@@ -804,15 +804,15 @@ function check_user_online_image($user_id) {
     $ret_ = $arr_qry->row_array(); #pr($ret_); exit;
     if (is_array($ret_) && count($ret_)) {
         if ($ret_['s_status'] == 1)
-            return '<img src="' . base_url() . 'images/icons/online.png" alt="" />';
+            return '<img src="' . base_url() . 'images/icons/online.png" width="12px" height="12px" alt="" />';
         else if ($ret_['s_status'] == 2)
-            return '<img src="' . base_url() . 'images/icons/offline.png" alt="" />';
+            return '<img src="' . base_url() . 'images/icons/offline.png" width="12px" height="12px" alt="" />';
         else if ($ret_['s_status'] == 3)
             return '<img src="' . base_url() . 'images/icons/away.png" alt="" />';
         else if ($ret_['s_status'] == 4 || $ret_['s_status'] == 0)
-            return '<img src="' . base_url() . 'images/icons/offline.png" alt="" />';
+            return '<img src="' . base_url() . 'images/icons/offline.png" width="12px" height="12px" alt="" />';
     } else
-        return '<img src="' . base_url() . 'images/icons/offline.png" alt="" />';
+        return '<img src="' . base_url() . 'images/icons/offline.png" width="12px" height="12px" alt="" />';
 }
 
 function get_user_online_status_text($user_id) {
