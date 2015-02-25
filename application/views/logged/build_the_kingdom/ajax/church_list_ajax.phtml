@@ -19,7 +19,7 @@
                                             <!---------------------------------------new added----------------->
                                              <?php 
                                                 $user_id = intval(decrypt($this->session->userdata('user_id')));
-                                              $query = $this->db->get_where('cg_church_admin', array('ch_admin_id' => $user_id));
+                                              $query = $this->db->get_where('cg_church', array('ch_admin_id' => $user_id));
                                           $result = $query->result();
                                           $numrow_superadmin = $query->num_rows();
                                        
@@ -97,7 +97,7 @@
     
     <?php 
      $user_id = intval(decrypt($this->session->userdata('user_id')));
-    $query = $this->db->get_where('cg_church_admin', array('ch_admin_id' => $user_id,'ch_id'=>$val['id']));
+    $query = $this->db->get_where('cg_church', array('ch_admin_id' => $user_id,'id'=>$val['id']));
             $result = $query->result();
             //pr($result);
            // echo count($result);
