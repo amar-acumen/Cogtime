@@ -50,10 +50,10 @@ class Module_generate extends CI_Controller {
                     'css/gemoticons.css',
                     //user logged in css
                     //'css/jquery-ui-1.8.2.custom.css',
-                   // 'css/jquery-ui-1.8.13.custom.css',
-                    //'css/dd.css',
-                    //'css/church.css',
-                    //'css/flexslider.css'
+                    'css/jquery-ui-1.8.13.custom.css',
+                    'css/dd.css',
+                    'css/church.css',
+                    'css/flexslider.css'
                     //'css/big-slider.css'
                 );
                 $css = '';
@@ -74,7 +74,7 @@ class Module_generate extends CI_Controller {
                     'assets/js/contrib/jquery-ui-1.10.4.custom.min.js',
                     //'assets/js/contrib/gmap3.min.js',*/
                     'js/jquery-1.7.2.js',
-                    //'js/jquery.cookie.js',
+                    'js/jquery.cookie.js',
                     'js/jquery/ui/jquery.blockUI.js',
                     'js/jquery/ui/jquery.ui.core.js',
                     'js/frontend/utilities.js',
@@ -91,7 +91,7 @@ class Module_generate extends CI_Controller {
                     'js/contentslider.js',
                     'js/jquery.autofill.js',*/
                     // User logged in JS files
-                   /* 'js/jquery.hoverIntent.js',
+                    'js/jquery.hoverIntent.js',
                     'js/frontend/utils.js',
                     'js/ddsmoothmenu.js',
                     'js/switch.js',
@@ -108,7 +108,7 @@ class Module_generate extends CI_Controller {
                     'js/jquery.hoverIntent.minified.js',
                     'js/jquery.naviDropDown.1.0.js',
                     'js/church_login.js',
-                    'js/frontend/logged/holy_place/prayer_group.js'*/
+                    'js/frontend/logged/holy_place/prayer_group.js'
 
                 );
                 $js = '';
