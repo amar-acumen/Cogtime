@@ -25,7 +25,7 @@
               <span class="count-02"><?=$church->members?></span>
                           <?php if($church_admin){ ?><a onclick="show_dialog('delete-group'); $('#i_del_id').val('<?=$church->id?>');" title="Delete Group" href="javascript:void(0)" class="delete-icon"><img alt="" src="images/fe/prayer-cross.png"></a><?php }else { ?><a onclick="show_dialog('Leave-group'); $('#i_lev_id').val('<?=$church->i_prayer_group_id?>');" style="float:right" title="Leave Group" href="javascript:void(0)">Leave group</a><?php } ?>
 
-	  <p>Denomination- <?= getDenominationNameById($church->i_denomination_id) ?>  <small><?php if($church_admin){?>Created on- <?php echo getShortDate($church->dt_created_on,5);}else {?>Joined on- <?php echo getShortDate($church->dt_joined_on,5);}?></small>   </p>
+	  <p><?//getDenominationNameById($church->i_denomination_id) ?>  <small><?php if($church_admin){?>Created on- <?php echo getShortDate($church->dt_created_on,5);}else {?>Joined on- <?php echo getShortDate($church->dt_joined_on,5);}?></small>   </p>
 
 	  
 
