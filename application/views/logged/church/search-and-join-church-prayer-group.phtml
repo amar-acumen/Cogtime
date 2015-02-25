@@ -22,7 +22,7 @@
 	</form>
    
     </div>
-     <div><a href="javascript:void(0);" class="showall-btn">Show All</a></div>
+           <div><a href="javascript:void(0);" class="showall-btn" onclick="show_all_prayer();">Show All</a></div>
 	<div class="clear"></div>
     </div>                         
                                 
@@ -235,5 +235,9 @@ function sendGrpJoinReq(grp_id){
 
         });
 
+    }
+    function show_all_prayer(){
+    location.reload();
+    
     }
         </script>
