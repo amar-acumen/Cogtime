@@ -4662,7 +4662,7 @@ $ci = & get_instance();
 function get_church_by_admin($uid)
 {
 	$ci=& get_instance();
-	$query = $ci->db->get_where('cg_church_admin', array('ch_admin_id' => $uid));
+	$query = $ci->db->get_where('cg_church', array('ch_admin_id' => $uid));
 	$result=$query->result();
 	return $result[0];
 }
@@ -4858,7 +4858,7 @@ function get_active_church_ring_members_count($ring_id = '') {
 /**********************ring counter for perticular church****************************************************/
 function get_church_ring_number_by_id($id){
     $ci=& get_instance();
-	$sql="select count(*) as ring_number from  cg_church_ring  where church_id= $id";
+	$sql="select count(*) as ring_number from  cg_church_ring  where church_id= '".$id."'";
 	$res=$ci->db->query($sql);
 	$s=$res->result_array();
 	
@@ -5032,15 +5032,15 @@ function get_all_church_session($cid){
     }
     else
     {
-        $query = $ci->db->get_where('cg_church_admin', array('ch_admin_id' => $user_id));
+        $query = $ci->db->get_where('cg_church', array('ch_admin_id' => $user_id));
         $result = $query->result();
-
+//pr($result,1);
         $numrow_superadmin = $query->num_rows();
         if($numrowmember==0 && $numrow_superadmin>0)
         {
            
             $_SESSION['charch_super_admin'] = 'yes';
-            $_SESSION['logged_church_id'] = $result[0]->ch_id;
+            $_SESSION['logged_church_id'] = $result[0]->id;
             $_SESSION['subadmin_role'] = '';
            
         }

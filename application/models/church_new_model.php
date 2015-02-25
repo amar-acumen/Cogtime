@@ -25,7 +25,7 @@ class Church_new_model extends Base_model
 		
 		function get_church_admin_data($c_id)
 		{
-			$query = $this->db->get_where('cg_church_admin',array('ch_id'=>$c_id));
+			$query = $this->db->get_where('cg_church',array('id'=>$c_id));
 			$result = $query->result();
 			
 			return $result[0];
@@ -505,7 +505,7 @@ class Church_new_model extends Base_model
               $query_churchmember = $this->db->query($sql_churchmember);
 			  $numrowmember = $query_churchmember->num_rows();
               $result_churchmember = $query_churchmember->result();
-                $query = $this->db->get_where('cg_church_admin', array('ch_admin_id' => $user_id));
+                $query = $this->db->get_where('cg_church', array('ch_admin_id' => $user_id));
               $result = $query->result();
               return $result;
                     
@@ -571,6 +571,7 @@ class Church_new_model extends Base_model
                  return $result;
         
     }
+
 	
 	function get_church_invited_members($c_id,$where='',$i_start=0,$order_by='id DESC',$i_limit=0){
     		$limit = (is_numeric($i_start) && is_numeric($i_limit)) ? " Limit " . intval($i_start) . "," . intval($i_limit) : '';
@@ -589,6 +590,89 @@ class Church_new_model extends Base_model
             $result = $query->result();
             return $result[0]->totrow;
         }
+
+    
+    
+    /*******************************************************get all  group*****************************************/
+    public function show_group_all($s_where=null,$i_start=null,$i_limit=null,$s_order_by=null)
+	{
+	try
+        {
+           // die('dd');
+		  	$ret_=array();
+			
+			
+                       $s_qry = 'select * from cg_church_prayer_group where 1 '.$s_where.'  ';
+          $s_qry= $s_qry.(trim($s_order_by)!=""?" ORDER BY ".$s_order_by."":"ORDER BY id DESC")." ".(is_numeric($i_start) && is_numeric($i_limit)?" LIMIT ".intval($i_start).",".intval($i_limit):"");
+	
+		            
+          $rs=$this->db->query($s_qry); 
+         
+         $result=$rs->result();
+         $user_id = intval(decrypt($this->session->userdata('user_id')));
+			foreach($result as $key=>$res)
+			{
+				$sql="select cm.id as c from cg_church_prayer_group cp left JOIN cg_church_prayer_group_members cm  on cp.id=cm.i_prayer_group_id where cm.i_prayer_group_id=".$res->id." and cm.s_status='accepted'";
+				$s=$this->db->query($sql);
+				//echo $sql;
+				$mem=$s->result();
+				$result[$key]->members=count($mem);
+				//pr($result);
+				$sql1="select count(cm.id) as c from cg_church_prayer_group_members cm left JOIN cg_church_prayer_group cp  on cp.id=cm.i_prayer_group_id where cm.i_prayer_group_id=".$res->id."  and cm.i_user_id=".$user_id." and cm.s_status='accepted'";
+				$s1=$this->db->query($sql1);
+				//echo $sql1;exit;
+				$mem1=$s1->result();
+				$result[$key]->is_member=$mem1[0]->c;
+				if($mem1[0]->c == 0)
+				{
+					$sql1="select count(cm.id) as c from cg_church_prayer_group_members cm left JOIN cg_church_prayer_group cp  on cp.id=cm.i_prayer_group_id where cm.i_prayer_group_id=".$res->id."  and cm.i_user_id=".$user_id." and cm.s_status='pending'";
+					$s1=$this->db->query($sql1);
+					//echo $sql1;exit;
+					$mems=$s1->result();
+					if($mems[0]->c != 0)
+					{
+						$result[$key]->is_member='pending';
+					}
+				}
+			}
+			//pr($result,1);
+                        
+			return $result;
+         // pr($res_,1);
+		    }
+			catch(Exception $err_obj)
+			{
+				show_error($err_obj->getMessage());
+			}           
+    
+    
+    }
+	
+	
+	public function gettotal_group($s_where)
+    {
+        try
+        {
+          $ret_=0;
+         
+
+           $s_qry = 'select count(*)as total from cg_church_prayer_group where 1 '.$s_where.'   ';
+              // $s_qry= $s_qry.(trim($s_order_by)!=""?" ORDER BY ".$s_order_by."":"ORDER BY id DESC")." ".(is_numeric($i_start) && is_numeric($i_limit)?" LIMIT ".intval($i_start).",".intval($i_limit):"");
+		 
+           //echo ($s_qry);exit;
+		  $rs=$this->db->query($s_qry);
+                  $result = $rs->result_array();
+                 // pr($result,1);
+                 return $result[0]['total'];
+         
+        }
+        catch(Exception $err_obj)
+        {
+            show_error($err_obj->getMessage());
+        }           
+    }
+    /*****************************************************************************************************/
+
 				
 				
 }

@@ -418,8 +418,8 @@ alert(response.success);	//update backbone model
                <div class="shade_box_white" style="padding:8px 0px;">
                    <div class="center-profile">
                        <?php 
-                       $main_image = get_profile_image($arr_profile_info['id'], 'main');
-                       $large_image = get_profile_image($arr_profile_info['id'], 'large');
+                       $main_image = get_profile_image_of_user('main',$arr_profile_info['s_profile_photo'],$arr_profile_info['e_gender']);
+                       $large_image = get_profile_image_of_user( 'large',$arr_profile_info['s_profile_photo'],$arr_profile_info['e_gender']);
                        $large_image_name=end(explode('/',$large_image));
                         $path = BASEPATH . '../uploads/user_profile_image/'.$large_image_name;
                           $no_image_path = base_url().'uploads/user_profile_image/noimage/no-image-av-123.jpg'; 

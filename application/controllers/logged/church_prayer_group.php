@@ -1814,6 +1814,19 @@ class Church_prayer_group extends Base_controller
             
             # view file...
             
+              # view file...
+            ob_start();
+            $content = $this->get_all_prayer_group_AJAX();
+            $content = ob_get_contents();
+            $content_obj = json_decode($content);
+            $data['listingContent'] = $content_obj->html; 
+            $data['no_of_result'] =  $content_obj->no_of_result;
+            ob_end_clean();                                  
+            
+            # view file...
+            
+            
+            
             $VIEW = "logged/church/search-and-join-church-prayer-group.phtml"; 
             parent::_render($data, $VIEW);
         }
@@ -1867,7 +1880,57 @@ class Church_prayer_group extends Base_controller
         echo json_encode( array('html'=>$listingContent));
     }
 	
-	
+	/********************************all prayer grp******************************/
+    	public function get_all_prayer_group_AJAX($page=0)
+    {
+		 $wh	= " AND i_owner_id ='". $_SESSION['logged_church_id']."' ";
+		//$wh1	= " AND inv.i_invited_id='".$this->i_profile_id."'";
+		$data['grpdata']	= $this->church_new_model->show_group_all($wh,$page,$this->pagination_per_page,'');
+		//pr($data['grpdata'],1);
+		//$data['ringdata']	= check_friend_netpal_status($data['ringdata']);
+		
+		$data['pagination_per_page'] = $this->pagination_per_page;
+		//pr($result);
+		$resultCount = count($data['grpdata']);
+		 $total_rows = $this->church_new_model->gettotal_group($wh);
+                
+                
+		$cur_page = $page + $this->pagination_per_page;
+        
+        
+		// getting auction-category listing...
+		$data['no_of_grp'] = $total_rows;
+		$data['no_of_result'] = $total_rows;
+		$data['current_page_1'] = $cur_page;
+
+		 //--- for check end of he page.
+           $view_more = true;
+           $rest_counter = $total_rows-$page;
+		   if($rest_counter<=$this->pagination_per_page)
+			  $view_more = false;
+         //--------- end check
+        # loading the view-part...
+        $AJAX_VIEW_FILE = 'logged/church/all_prayer_group_listing_ajax.phtml';
+        
+        
+   //pr($result);
+		
+		if( $total_rows>0 ) {
+        	$listingContent = $this->load->view($AJAX_VIEW_FILE, $data, true);
+		}
+		else {
+			$listingContent = '';
+		}
+		//echo 1; exit;
+		//echo json_encode( array('html'=>$content, 'current_page'=>$page) );
+        echo json_encode( array('html'=>$listingContent, 
+								'current_page'=>$cur_page, 
+								'no_of_result'=>$data['no_of_result'],
+								'total'=>$total_rows,
+								'view_more'=>$view_more ,
+								'cur_page'=>$data['current_page_1']) );
+    }  
+    /*********************************************************************/
 	public function join_group() 
     {
         try

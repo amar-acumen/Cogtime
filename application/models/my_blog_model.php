@@ -582,6 +582,8 @@ class My_blog_model extends Base_model
 							 U.id AS user_id, 
 							 U.s_first_name,
 							 U.s_last_name ,
+							 U.s_profile_photo,
+							 U.e_gender,
 							  'blog' as s_type  ,
 							 1 as  comment_count ,
 							 B.id as blog_id
@@ -602,6 +604,8 @@ class My_blog_model extends Base_model
 							 U.id AS user_id, 
 							 U.s_first_name,
 							 U.s_last_name ,
+							 U.s_profile_photo,
+							 U.e_gender,
 							 'article' as s_type   ,
 							 (SELECT count(*)  FROM cg_user_blog_post_comments BPC
 							          WHERE BPC.i_blog_post_id = BP.id AND BPC.i_blog_id = BP.i_blog_id )as comment_count ,
@@ -623,6 +627,8 @@ class My_blog_model extends Base_model
 							 U.id AS user_id, 
 							 U.s_first_name,
 							 U.s_last_name ,
+							 U.s_profile_photo,
+							 U.e_gender,
 							 'blog' as s_type  ,
 							 1 as  comment_count,
 							 B.id as blog_id
@@ -642,6 +648,8 @@ class My_blog_model extends Base_model
 							 U.id AS user_id, 
 							 U.s_first_name,
 							 U.s_last_name,
+							 U.s_profile_photo,
+							 U.e_gender,
 							 'article' as s_type   ,
 							 (SELECT count(*)  FROM cg_user_blog_post_comments BPC
 							          WHERE BPC.i_blog_post_id = BP.id AND BPC.i_blog_id = BP.i_blog_id )as comment_count,
@@ -708,6 +716,8 @@ class My_blog_model extends Base_model
 							 U.id AS user_id, 
 							 U.s_first_name,
 							 U.s_last_name ,
+							 U.s_profile_photo,
+							 U.e_gender,
 							 
 							 1 
 							 
@@ -726,6 +736,8 @@ class My_blog_model extends Base_model
 							 U.id AS user_id, 
 							 U.s_first_name,
 							 U.s_last_name ,
+							 U.s_profile_photo,
+							 U.e_gender,
 							 (SELECT count(*)  FROM cg_user_blog_post_comments BPC
 							          WHERE BPC.i_blog_post_id = BP.id AND BPC.i_blog_id = BP.i_blog_id )as comment_count
 							 

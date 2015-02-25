@@ -1196,7 +1196,7 @@ class Ring_home extends Base_controller
 				  foreach($result as $key=> $val){
 					  
 						 $name = $val['s_profile_name'];
-						 $profile_image = get_profile_image($val['i_user_id'],'thumb',$val['s_profile_photo']);
+						 $profile_image = get_profile_image_of_user('thumb',$val['s_profile_photo'],$val['e_gender']);
 						 
 						 $profile_link = get_profile_url($val['i_user_id'],$val['s_profile_name']);
 						

@@ -363,11 +363,7 @@ class Public_profile extends Base_controller
 				$data['postwall_flag']	= true;	
 				$data['show_msg'] = false;
 			}
-					
 			
-			
-			$this->data['right_panel']['netpals_arr'];
-			$this->data['right_panel']['prayer_partner_arr'];
 			## NEWSFEED ##
 			ob_start();
 			$this->newsfeed_pagination_show_more($i_profile_id);
@@ -382,8 +378,7 @@ class Public_profile extends Base_controller
             
             # view file...
 			$VIEW_PG_FILE = "public_profile_new.phtml";
-			//$VIEW_PG_FILE = "public_profile_new.phtml";
-            $VIEW = "{$VIEW_PG_FILE}";
+			$VIEW = "{$VIEW_PG_FILE}";
             parent::_render($data, $VIEW);
         }
         catch(Exception $err_obj)

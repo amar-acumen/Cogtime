@@ -251,11 +251,11 @@ class My_ring_model extends Base_model
           $ret_=0;
          
 				
-		  $s_qry = "SELECT COUNT(tab.ringid) AS i_total FROM ((SELECT r.*, r.id AS ringid, c.s_category_name AS s_category_name, CONCAT(u.s_first_name,' ',u.s_last_name) AS owner_name
+		  $s_qry = "SELECT COUNT(tab.ringid) AS i_total FROM ((SELECT r.*, r.id AS ringid, c.s_category_name AS s_category_name, CONCAT(u.s_first_name,' ',u.s_last_name) AS owner_name,u.s_profile_photo,u.e_gender
 							FROM {$this->db->RING} r LEFT JOIN {$this->db->USERS} AS u 
 								ON r.i_user_id=u.id , {$this->db->RING_CAT} c WHERE r.i_category_id=c.id AND r.i_isenabled=1 "
 						.$s_where.") UNION".
-						"(SELECT r.*, r.id AS ringid, c.s_category_name AS s_category_name, CONCAT(u.s_first_name,' ',u.s_last_name) AS owner_name
+						"(SELECT r.*, r.id AS ringid, c.s_category_name AS s_category_name, CONCAT(u.s_first_name,' ',u.s_last_name) AS owner_name,u.s_profile_photo,u.e_gender
 							FROM {$this->db->RING} r LEFT JOIN {$this->db->USERS} AS u 
 								ON r.i_user_id=u.id , {$this->db->RING_CAT} AS c ,{$this->db->RING_INV_USER} AS inv 
 								WHERE r.i_category_id=c.id AND r.i_isenabled=1 AND inv.i_ring_id=r.id AND inv.i_joined = 1 ".$s_where1.")) AS tab"; 
@@ -384,7 +384,7 @@ class My_ring_model extends Base_model
 		
         $sql    = " SELECT R.*,
 					CONCAT(U.s_first_name,' ',U.s_last_name) as s_profile_name,
-					U.s_profile_photo,
+					U.s_profile_photo,U.e_gender,
 					C.s_country_name,
 					U.id AS user_joined_id,
                     RU.id AS table_id
@@ -419,7 +419,7 @@ class My_ring_model extends Base_model
             $limit = "LIMIT ".intval($start_limit).' , '.intval($end_limit);
         }
         $sql = "SELECT R.*, CONCAT(U.s_first_name,' ',U.s_last_name) AS profile_name,
-                U.s_profile_photo, U.id AS post_owner_user_id, I.id AS table_id, I.dt_joined_date, I.i_invited_id
+                U.s_profile_photo,U.e_gender,U.id AS post_owner_user_id, I.id AS table_id, I.dt_joined_date, I.i_invited_id
                 
                 FROM {$this->db->RING} R 
                 LEFT JOIN {$this->db->RING_INV_USER} I ON R.id=I.i_ring_id
@@ -465,7 +465,7 @@ class My_ring_model extends Base_model
             $limit = "LIMIT ".intval($start_limit).' , '.intval($end_limit);
         }
         $sql = "SELECT R.*, CONCAT(U.s_first_name,' ',U.s_last_name) AS profile_name,
-                U.s_profile_photo, U.id AS post_owner_user_id, I.id AS table_id, I.dt_joined_date, I.i_invited_id
+                U.s_profile_photo,U.e_gender, U.id AS post_owner_user_id, I.id AS table_id, I.dt_joined_date, I.i_invited_id
                 
                 FROM {$this->db->RING} R 
                 LEFT JOIN {$this->db->RING_INV_USER} I ON R.id=I.i_ring_id
@@ -505,7 +505,7 @@ class My_ring_model extends Base_model
           $ret_= array();
          
 				
-		  $s_qry = "SELECT r.*, r.id AS ringid, c.s_category_name AS s_category_name , CONCAT(u.s_first_name,' ',u.s_last_name) AS owner_name,
+		  $s_qry = "SELECT r.*, r.id AS ringid, c.s_category_name AS s_category_name , CONCAT(u.s_first_name,' ',u.s_last_name) AS owner_name,u.s_profile_photo,u.e_gender,
 					(SELECT COUNT(id) FROM {$this->db->USER_RING_POST} WHERE i_ring_id=r.id) AS post,
 					(SELECT COUNT(cm.id) FROM {$this->db->USER_RING_POST} AS po, {$this->db->USER_RING_POST_COMMENTS} AS cm WHERE po.id=cm.i_ring_post_id AND po.i_ring_id=r.id) AS cmt,
 					(SELECT COUNT(lk.id) FROM {$this->db->USER_RING_POST} AS po, {$this->db->USER_RING_POST_LIKE} AS lk WHERE po.id=lk.i_ring_post_id AND po.i_ring_id=r.id) AS lik
@@ -634,7 +634,7 @@ class My_ring_model extends Base_model
         try
         {
           $ret_= array();
-		  $s_qry = "SELECT r.*, u.id AS invitedid , CONCAT(u.s_first_name,' ',u.s_last_name) AS s_profile_name ,u.s_profile_photo AS s_profile_photo 
+		  $s_qry = "SELECT r.*, u.id AS invitedid , CONCAT(u.s_first_name,' ',u.s_last_name) AS s_profile_name ,u.s_profile_photo AS s_profile_photo,u.e_gender 
 							FROM {$this->db->RING_INV_USER} AS r, 
 							{$this->db->USERS} u 
 							WHERE r.i_invited_id=u.id AND r.i_request=1 AND r.i_joined=0 "
@@ -713,7 +713,7 @@ class My_ring_model extends Base_model
         try
         {
           $ret_= array();
-		  $s_qry = "SELECT r.*, u.id AS invitedid , CONCAT(u.s_first_name,' ',u.s_last_name) AS s_profile_name ,u.s_profile_photo AS s_profile_photo 
+		  $s_qry = "SELECT r.*, u.id AS invitedid , CONCAT(u.s_first_name,' ',u.s_last_name) AS s_profile_name ,u.s_profile_photo AS s_profile_photo,u.e_gender 
 							FROM {$this->db->RING_INV_USER} AS r, 
 							{$this->db->USERS} u 
 							WHERE r.i_invited_id=u.id AND r.i_request=0 AND r.i_joined=0 "
@@ -834,7 +834,7 @@ class My_ring_model extends Base_model
 							   r.i_user_id as post_owner_user_id,
 							   
 							   c.s_category_name AS s_category_name , 
-							   CONCAT(u.s_first_name,' ',u.s_last_name) AS owner_name,
+							   CONCAT(u.s_first_name,' ',u.s_last_name) AS owner_name,u.s_profile_photo,u.e_gender,
 							   (SELECT COUNT(id) FROM {$this->db->USER_RING_POST} WHERE i_ring_id=r.id) AS post,
 							 
 							   (SELECT COUNT(cm.id) FROM {$this->db->USER_RING_POST} AS po, {$this->db->USER_RING_POST_COMMENTS} 
@@ -863,7 +863,7 @@ class My_ring_model extends Base_model
 								 'post' as s_type,
 								 c.s_category_name AS s_category_name , 
 								 rp.i_user_id as post_owner_user_id, 
-								 CONCAT(u.s_first_name,' ',u.s_last_name) AS owner_name,
+								 CONCAT(u.s_first_name,' ',u.s_last_name) AS owner_name,u.s_profile_photo,u.e_gender,
 								 
 														 
 							   (SELECT COUNT(cm.id) FROM {$this->db->USER_RING_POST_COMMENTS} 
@@ -899,7 +899,7 @@ class My_ring_model extends Base_model
 								   r.i_user_id as post_owner_user_id,
 								   
 								   c.s_category_name AS s_category_name , 
-								   CONCAT(u.s_first_name,' ',u.s_last_name) AS owner_name,
+								   CONCAT(u.s_first_name,' ',u.s_last_name) AS owner_name,u.s_profile_photo,u.e_gender,
 								   (SELECT COUNT(id) FROM {$this->db->USER_RING_POST} WHERE i_ring_id=r.id) AS post,
 								 
 								   (SELECT COUNT(cm.id) FROM {$this->db->USER_RING_POST} AS po, {$this->db->USER_RING_POST_COMMENTS} 
@@ -937,6 +937,7 @@ class My_ring_model extends Base_model
 								 rp.i_user_id as post_owner_user_id,
 								 c.s_category_name AS s_category_name , 
 								 CONCAT(u.s_first_name,' ',u.s_last_name) AS owner_name,
+								 ,u.s_profile_photo,u.e_gender,
 								 '0' AS post,
 								 '0' AS cmt,
 								 '0' AS lik,
@@ -1063,7 +1064,7 @@ class My_ring_model extends Base_model
           $ret_=0;
          
 				
-		  $s_qry = "SELECT COUNT(tab.ringid) AS i_total FROM ((SELECT r.*, r.id AS ringid, c.s_category_name AS s_category_name, CONCAT(u.s_first_name,' ',u.s_last_name) AS owner_name
+		  $s_qry = "SELECT COUNT(tab.ringid) AS i_total FROM ((SELECT r.*, r.id AS ringid, c.s_category_name AS s_category_name, CONCAT(u.s_first_name,' ',u.s_last_name) AS owner_name,u.s_profile_photo,u.e_gender
 							FROM {$this->db->RING} r LEFT JOIN {$this->db->USERS} AS u 
 								ON r.i_user_id=u.id , {$this->db->RING_CAT} c WHERE r.i_category_id=c.id AND r.i_isenabled=1 "
 						.$s_where.") ) AS tab"; 
@@ -1123,7 +1124,7 @@ class My_ring_model extends Base_model
         try
         {
           $ret_= array();
-		  $s_qry = "SELECT r.*, u.id AS invitedid , CONCAT(u.s_first_name,' ',u.s_last_name) AS s_profile_name ,u.s_profile_photo AS s_profile_photo ,
+		  $s_qry = "SELECT r.*, u.id AS invitedid , CONCAT(u.s_first_name,' ',u.s_last_name) AS s_profile_name ,u.s_profile_photo AS s_profile_photo,u.e_gender ,
 		  rg.s_ring_name
 							FROM {$this->db->USERS} u , 
 							{$this->db->RING_INV_USER} AS r
@@ -1210,7 +1211,7 @@ class My_ring_model extends Base_model
 		  				r.i_invited_id AS invitedid , 
 						rg.i_user_id as guest_id,  
 						CONCAT(u.s_first_name,' ',u.s_last_name) AS s_profile_name ,
-						u.s_profile_photo AS s_profile_photo ,  
+						u.s_profile_photo AS s_profile_photo ,u.e_gender,  
 						rg.s_ring_name
 						
 							FROM 

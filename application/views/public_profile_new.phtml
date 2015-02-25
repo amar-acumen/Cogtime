@@ -74,7 +74,7 @@ if ($this->session->userdata('loggedin') == '' || $this->session->userdata('logg
 
                            <!-- <h2>Profile</h2>-->
                             <div class="profile-sml-sec">
-                                <?php $img = get_profile_image($public_arr_profile_info['id'], 'main'); ?>
+                                <?php $img = get_profile_image_of_user('main',$public_arr_profile_info['s_profile_photo'],$public_arr_profile_info['e_gender']); ?>
                                 <div  class="prfile-sec-photo" style=" background:URL('<?= $img ?>')no-repeat center;width:100px; height:100px;" title="member" ></div>
 
                                 <div class="prfile-sec-content-box-right">
@@ -158,7 +158,7 @@ if ($this->session->userdata('loggedin') == '' || $this->session->userdata('logg
                             </h2>
                             <div class="profile-sml-sec">
 
-                                <?php $img = get_profile_image($public_arr_profile_info['id'], 'main'); ?>
+                                <?php $img = get_profile_image_of_user('main',$public_arr_profile_info['s_profile_photo'],$public_arr_profile_info['e_gender']); ?>
                                 <div  class="prfile-sec-photo" style=" background:URL('<?= $img ?>')no-repeat center;width:100px; height:100px;" title="member" ></div>
                                 <div class="prfile-sec-content-box-right">
                                     <table width="100%" cellspacing="0" cellpadding="0" border="0" class="pro-table">

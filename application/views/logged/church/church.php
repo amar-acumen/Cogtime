@@ -69,6 +69,7 @@ class Church extends Base_controller
         //die('comming soon.........');
         try
         {
+             $_SESSION['logged_church_id'] = $c_id;
             $user_id = intval(decrypt($this->session->userdata('user_id')));
             get_all_church_session($c_id);
             parent::check_is_church_admin($user_id,$c_id);

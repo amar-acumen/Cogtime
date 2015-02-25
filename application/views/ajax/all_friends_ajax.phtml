@@ -1,7 +1,7 @@
 
 	<?php if(count($friends_arr)) { 
             foreach($friends_arr as $k=> $friends){
-                $img = get_profile_image($friends['user_id']);
+                $img = get_profile_image_of_user( 'thumb',$friends['s_profile_photo'],$friends['e_gender']);
 				$CSS = (($k+1) % 7 == 0)?'style="clear:both;"':'';
     ?>
         <li <?=$CSS?> <?=$CSS_ajax?>>
