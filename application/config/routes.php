@@ -657,6 +657,7 @@ $route['church_registration'] = "church_public/church_registration";
 $route['church_registration/(:any)'] = "church_public/church_registration/$1";
 $route['church-successfully-registered'] = "church_public/registration_success";
 $route['church_member'] = "logged/church/church_member";
+$route['church_invited_member'] = "logged/church/church_invited_member";
 $route['church_setting'] = "logged/church/church_setting";
 $route['(:num)/church-wall']="logged/church_wall/index/$1";
 $route['(:num)/church_members'] = "logged/church_members/index/$1";
