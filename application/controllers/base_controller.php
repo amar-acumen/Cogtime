@@ -448,7 +448,6 @@ class Base_controller extends CI_Controller {
             $this->_add_js_arr($logged_chat_js);
         }
 
-
         # fix for "js_files" array...
         /* if( is_array($this->js_files) && count($this->js_files) ) {
           $this->js_files = array_merge($default_js_arr, $this->js_files);
