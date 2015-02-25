@@ -628,7 +628,7 @@ class Church_new_model extends Base_model
     }
 	
 	
-	public function gettotal_group($s_where)
+	public function gettotal_group($s_where=null,$i_start=null,$i_limit=null,$s_order_by=null)
     {
         try
         {
@@ -636,6 +636,8 @@ class Church_new_model extends Base_model
          
 
            $s_qry = 'select count(*)as total from cg_church_prayer_group where 1 '.$s_where.'   ';
+               $s_qry= $s_qry.(trim($s_order_by)!=""?" ORDER BY ".$s_order_by."":"ORDER BY id DESC")." ".(is_numeric($i_start) && is_numeric($i_limit)?" LIMIT ".intval($i_start).",".intval($i_limit):"");
+		 
            //echo ($s_qry);exit;
 		  $rs=$this->db->query($s_qry);
                   $result = $rs->result_array();
