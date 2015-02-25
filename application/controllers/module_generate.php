@@ -102,7 +102,10 @@ class Module_generate extends CI_Controller {
             if($js_indi){
                 $files_indvid_js = array(
                     'chat/js/chat.js',
-                    'js/jquery.gemoticons.js'
+                    'js/jquery.gemoticons.js',
+                    'js/frontend/header_slider.js',
+                    'js/contentslider.js',
+                    'js/jquery.autofill.js'
                   //  'js/jquery.hoverIntent.js',
                   //  'js/frontend/utils.js'
 
