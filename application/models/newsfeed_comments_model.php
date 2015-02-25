@@ -98,7 +98,7 @@ class Newsfeed_comments_model extends CI_Model {
 								   c.s_contents, 
 								   c.dt_created_on, 
 								   CONCAT(u.s_first_name,' ', u.s_last_name) s_profile_name,
-								   u.s_profile_photo, 
+								   u.s_profile_photo,u.e_gender, 
 								  
 								   u.s_first_name as pseudo 
 						FROM %1\$suser_newsfeed_comments c, %1\$susers u 
@@ -115,7 +115,7 @@ class Newsfeed_comments_model extends CI_Model {
 								   c.s_contents, 
 								   c.dt_created_on, 
 								   CONCAT(u.s_first_name,' ', u.s_last_name) s_profile_name,
-								   u.s_profile_photo, 
+								   u.s_profile_photo,u.e_gender, 
 								  
 								   u.s_first_name as pseudo 
 					    FROM %1\$suser_newsfeed_comments c, %1\$susers u 
@@ -237,7 +237,7 @@ class Newsfeed_comments_model extends CI_Model {
 								   
 								   c.dt_liked_on, 
 								   CONCAT(u.s_first_name,' ', u.s_last_name) s_profile_name,
-								   u.s_profile_photo, 
+								   u.s_profile_photo,u.e_gender,
 								  
 								   u.s_first_name as pseudo 
 						FROM %1\$suser_newsfeed_like c, %1\$susers u 
@@ -254,7 +254,7 @@ class Newsfeed_comments_model extends CI_Model {
 								   
 								   c.dt_liked_on, 
 								   CONCAT(u.s_first_name,' ', u.s_last_name) s_profile_name,
-								   u.s_profile_photo, 
+								   u.s_profile_photo,u.e_gender, 
 								  
 								   u.s_first_name as pseudo 
 					    FROM %1\$suser_newsfeed_like c, %1\$susers u 
