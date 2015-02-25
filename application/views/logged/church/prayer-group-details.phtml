@@ -10,7 +10,8 @@
 <div class="container">
   
   <div class="main-page">
-      <h3 class="page-heading"<?= ucfirst(get_church_prayer_group_name_by_grp_id($prayer_group_id)) ?>><a href="<?=base_url().''.$_SESSION['logged_church_id']?>/church-prayer-group" class="back-btn">Back to Prayer Group</a></h3>
+      <h3 class="page-heading"><?= ucfirst(get_church_prayer_group_name_by_grp_id($prayer_group_id)) ?><a href="<?=base_url().''.$_SESSION['logged_church_id']?>/church-prayer-group" class="back-btn">Back to Prayer Group</a></h3>
+      <div class="clr"></div>
     <?php include(APPPATH ."views/logged/church/church_prayer_group_left_panel.phtml");?>
     <div class="activity-right">	
     	<ul class="prayer-notification">
