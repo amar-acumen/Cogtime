@@ -4,7 +4,7 @@ $logged_id=intval(decrypt($this->session->userdata('user_id')));
 			foreach($result_arr as $k=> $val){	
 			
 				 $name = $val['s_profile_name'];
-				 $IMG = get_profile_image($val['i_user_id'],'thumb',$val['s_profile_photo']);
+				 $IMG = get_profile_image_of_user('thumb',$val['s_profile_photo'],$val['e_gender']);
 				 $comment_txt = $val['s_contents'];
 				 $profile_link = get_profile_url($val['i_user_id'],$val['s_profile_name']);	
 				 $url=CheckUserRelation($val['i_user_id']);

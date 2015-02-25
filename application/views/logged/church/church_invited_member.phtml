@@ -1,0 +1,68 @@
+<?php
+
+    include(APPPATH ."views/layouts/church_admin_header.phtml");
+
+?>
+
+<!-- CONTENT SECTION -->
+
+<?php //pr($church_arr); ?>
+
+
+
+<div class="container-body">
+
+   <?php
+
+    //include(APPPATH ."views/layouts/church_admin_left.phtml");
+
+?>
+
+    <div class="right-panel">
+        <!--right-panel equal-height--->
+
+    <h2>Invited Members</h2>
+
+    <!--<div class="vector-search">
+
+        <label>Search :</label>
+
+        <input type="text" >
+
+    </div>-->
+
+    <div class="right-box">
+
+        <div class="church-time-table" style="margin-right:0;" id="table_content">
+                        <?= $result_content ?>
+
+        
+
+
+
+        </div>
+
+    </div>
+
+    
+
+     
+
+    
+
+    </div>
+
+    
+
+    </div>
+
+<!-- /CONTENT SECTION -->
+
+<div class="clr"></div>
+
+<!-- FOOTER SECTION -->
+
+<?php include(APPPATH."views/layouts/church_footer.phtml");?>
+
+<!-- /FOOTER SECTION -->
+

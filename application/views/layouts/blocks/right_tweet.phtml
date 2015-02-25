@@ -2,16 +2,13 @@
 	if($page_name != 'tweets' && $page_name != 'my-tweets' && $home_menu !='1'){ #pr($right_bar['tweet_arr']);
 ?>
  <!-- my tweet -->
-
-
-
 <div class="my_tweet">
       <div class="nw-right-heading">
             <div class="left">
                   <h4>My Chitter Tweets</h4>
             </div>
-            <div class="minus-right right exp-col01" style="display:none;"><img src="images/minus-white.png" alt="" class="plus-minus" /></div>
-            <div class="plus-right right exp-col01"><img src="images/plus-white.png" alt=""  class="plus-minus" /></div>
+            <div class="minus-right right exp-col01" style="display:none;"><img src="images/minus-white.png" alt="" class="plus-minus" width="13" height="10" /></div>
+            <div class="plus-right right exp-col01"><img src="images/plus-white.png" alt=""  class="plus-minus" width="13" height="10"/></div>
       </div>
       <div class="content no-padding" id="switchdiv01" style="display:none;">
             <div class="dot-box" >
@@ -26,7 +23,6 @@
                           <textarea id="ta_rightbar_post_tweet" name="ta_rightbar_post_tweet" cols="" rows="" onfocus="if(this.value=='Max 140 Characters')this.value='';" onblur="if(this.value=='')this.value='Max 140 Characters';" onkeypress="return restrict_carrige(event);" maxlength="140" >Max 140 Characters</textarea>
                           </div>
                           <input name="" type="button" class="wall-comment-submit" value="Post" onclick="post_rightbar_tweet_text('right_bar')" />
-                      
                   </form>
             </div>
             <div class="project_box no-brdr">
@@ -40,15 +36,14 @@
                           $data = json_decode($val['data']);
                           
                           if($val['s_type'] == 'retweeted'){
-							  //$profile_image_filename = get_profile_image($data->tweet_owner_id,'thumb');
 							  $twit_id = getTwitterUsernameById($data->tweet_owner_id);
 							  $rt_profile_link = getTwitterProfileLink($twit_id);
 						  }
-						  $profile_image_filename = get_profile_image($val['i_user_id'],'thumb');
+						  $profile_image_filename = get_profile_image_of_user('thumb',$val['s_profile_photo'],$val['e_gender']);
 						  $profile_link = getTwitterProfileLink($val['s_tweet_id']);
-						  $profile_image_filename = get_profile_image($val['i_user_id'],'thumb');
+						  //$profile_image_filename = get_profile_image($val['i_user_id'],'thumb');
                           
-                          $profile_image_filename = get_profile_image($val['i_user_id'],'thumb');
+                          //$profile_image_filename = get_profile_image($val['i_user_id'],'thumb');
                            $MARK_UNMARK_TXT = ($val['fav_tweet'] == 1)?'Unmark from your favourite tweet?':'Mark this as your favourite tweet?';
 
 						 $tweet_text =  strip_tags(htmlspecialchars_decode($data->s_tweet_text));  
@@ -95,17 +90,7 @@
                <?php 	endforeach;
 			   		 }
 				?>
-				<?php /*if(!empty($data->video) && count($data->video)){ 
-			   ?>
-                <div class="video-image">
-                    <div  class="cogtime-video" id="myvideo_first_thumb_t_<?=$val['id']?>" style="background:url('') no-repeat center;;width:329px; height:212px;" ></div>
-                    <div id="myvideo_big_thumb_t_<?=$val['id']?>" media_id="<?=$val['id']?>"></div> 
-                </div>
-                
-                
-               <?php 	
-			   		 }*/
-				?>
+				
                         </div>
                         <?php } 
                               else if($val['s_type'] == 'retweeted'){
@@ -135,17 +120,7 @@
                <?php 	endforeach;
 			   		 }
 				?>
-				<?php/* if(!empty($data->video) && count($data->video)){ 
-			   ?>
-                <div class="video-image">
-                    <div  class="cogtime-video" id="myvideo_first_thumb_t_<?=$val['id']?>" style="background:url('') no-repeat center;;width:329px; height:212px;" ></div>
-                    <div id="myvideo_big_thumb_t_<?=$val['id']?>" media_id="<?=$val['id']?>"></div> 
-                </div>
-                
-                
-               <?php 	
-			   		 }*/
-				?>
+				
                         </div>
                         <?php } ?>
                         
@@ -315,24 +290,7 @@ $(document).ready(function () {
 var carriage_count = 0;
 function restrict_carrige(e)
 {
-	/*//if(e.keyCode == 13)
-	{
-		$.ajax({
-			type: 'post',
-			url: base_url+'logged/prayer_wall/getCarriageCount',
-			data: {'str':$('#ta_desc').val()},
-			dataType: 'json',
 	
-			success: function (data, status) {
-				
-					if(data.count > 1){
-						return false;
-					}
-				
-				}	// end of success function...
-		});
-	}*/
-	//alert($('#ta_desc').val().replace(/\r/g,"\r").replace(/\n/g,"\n"));
 
 	if(e.keyCode == 13){
 		carriage_count++;

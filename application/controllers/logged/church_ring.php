@@ -1192,7 +1192,7 @@ class Church_ring extends Base_controller
                                                         }
 				}
 				
-				$info['dt_created_on'] 	= get_db_datetime();
+				$info['dt_updated_on'] 	= get_db_datetime();
                                 
 				$_ret = $this->church_ring_model->update_ring($info,$id);
                                 

@@ -1056,13 +1056,13 @@ class My_profile extends Base_controller {
         $this->users_model->edit_info($info, $i_profile_id);
 
         if (($status == '1')) {
-            $s_status = '<img src="' . base_url() . 'images/icons/online.png" alt="" /> Online';
+            $s_status = '<img src="' . base_url() . 'images/icons/online.png" width="12px" height="12px" alt="" /> Online';
         } else if ($status == '2') {
             $s_status = '<img src="' . base_url() . 'images/icons/invisible.png" alt="" /> Invisible';
         } else if ($status == '3') {
             $s_status = '<img src="' . base_url() . 'images/icons/away.png" alt="" /> Away';
         } else
-            $s_status = '<img src="' . base_url() . 'images/icons/offline.png" alt="" /> Offline';
+            $s_status = '<img src="' . base_url() . 'images/icons/offline.png" width="12px" height="12px" alt="" /> Offline';
         #$s_status =($status == 1 )?'Online':($status == 2)?'Invisible':($status == 3)?'Away':'Offline';
         echo json_encode(array('success' => true, 'msg' => 'your status updated successfully', 'status' => $s_status));
     }
@@ -1234,7 +1234,7 @@ $chat_name=get_chat_name_by_id($i_profile_id);
 
         if (($status == '1')) {
 
-            $s_status = '('.$chat_name.') <img src="' . base_url() . 'images/icons/online.png" alt="" /> ';
+            $s_status = '('.$chat_name.') <img src="' . base_url() . 'images/icons/online.png" width="12px" height="12px" alt="" /> ';
 
             ### html online user types
             $user_status_arr = $this->users_model->getUserOnlineStatus($i_profile_id);

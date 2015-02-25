@@ -10,11 +10,25 @@
 <div class="container">
   
   <div class="main-page">
-  	<h3 class="page-heading"><?= ucfirst(get_church_prayer_group_name_by_grp_id($prayer_group_id)) ?><a href="<?=base_url().''.$_SESSION['logged_church_id']?>/church-prayer-group" class="back-btn">Back to Prayer Group</a></h3>
+      <h3 class="page-heading"><?= ucfirst(get_church_prayer_group_name_by_grp_id($prayer_group_id)) ?><a href="<?=base_url().''.$_SESSION['logged_church_id']?>/church-prayer-group" class="back-btn">Back to Prayer Group</a></h3>
+      <div class="clr"></div>
     <?php include(APPPATH ."views/logged/church/church_prayer_group_left_panel.phtml");?>
-    <div class="activity-right">	<div class="prayer-grp-name"><?php foreach($prayer_group_details as $church)			{			?>			<a href="<?=base_url()?>church-prayer-group/<?=$church->id?>"><?=$church->s_group_name?></a>			
+    <div class="activity-right">	
+    	<ul class="prayer-notification">
+        	<li>
+                    <span><a href="<?= base_url().'church-prayer-group-member/'.$prayer_group_id ?>"><?= get_prayer_group_member_count_by_grp_id($prayer_group_id) ?></a></span>
+                Group Member
+            </li>
+            
+            <li>
+            	<span><?= get_prayer_group_post_count_by_grp_id($prayer_group_id) ?></span>
+                Group Post
+            </li>
+        </ul>
+        <div class="clear"></div>
+    <div class="prayer-grp-name"><?php foreach($prayer_group_details as $church)			{			?>			<a href="<?=base_url()?>church-prayer-group/<?=$church->id?>"><?=$church->s_group_name?></a>			
     
-    <p>Denomination- <?= getDenominationNameById($church->i_denomination_id) ?> | <small><?php if($church_admin){?>Created on- <?php echo getShortDate($church->dt_created_on,5);}else {?>Joined on- <?php echo getShortDate($church->dt_joined_on,5);}?></small>   </p>			<?php } ?></div>
+    <p><?//getDenominationNameById($church->i_denomination_id) ?>  <small><?php if($church_admin){?>Created on- <?php echo getShortDate($church->dt_created_on,5);}else {?>Joined on- <?php echo getShortDate($church->dt_joined_on,5);}?></small>   </p>			<?php } ?></div>
         <div class="activity-comment-box">
        	  
             <!--payer notification start-->
@@ -82,7 +96,7 @@
 									<li>
                 
                   
-              		<strong><a class="post-user" href="<?=get_public_profile_url($v->i_user_id, get_username_by_id($v->i_user_id))?>"><?=get_username_by_id($v->i_user_id)?> : </a></strong><span class="post-txt"> <?=$v->s_post_desc?> </span><br> 
+              		<strong><a class="post-user" href="<?=get_public_profile_url($v->i_user_id, get_username_by_id($v->i_user_id))?>"><?=get_username_by_id($v->i_user_id)?> : </a></strong><span class="post-txt"> <?=$v->s_post_desc?> </span>
                    
 					<span class="text-small-4">Posted on: <?=getShortDateWithTime($v->dt_created_on,6)?></span>
                                        <span class="pry-grp"> <?php 

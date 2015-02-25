@@ -264,79 +264,11 @@ $(document).ready(function() {
                                      <div class="lable01" style="width:100px;">	Invite Friends :</div>  
                                     <div class="field03" style="width: 350px;">
                                     
-                                   	  <!--<input type="text" id="invite_frnd" name="invite_frnd" autocomplete="off" style="width:300px;" />
-                                      <input type="hidden" id="h_friend_id"  name="h_friend_id" />-->
+                                   	  
                                       <?php echo get_invitation('ring');?>
                                          <span id="err_invite_frnd" class="error-message"></span> 
 										
                                     </div>
-                                    <!--<div class="clr"></div>
-                                    <div class="lable01" style="width:100px;">&nbsp;</div>  -->
-                                   <!-- <div class="field03" style=" width:360px;">-->
-                                      <!--
-                                         <input name="" type="button" value="Contacts"  class="yellow-btn send-pro-message" /> -->
-                                    
-                                     <!-- <ul class="profile-msg-send">
-                                        <li><a class="send-pro-message" href="javascript:void(0);" >Contacts</a></li>
-                                      </ul>-->
-                                      
-                                      <!--<div class="new-wl" style="margin-top:8px;">
-                                        <div class="comments-number" style="width:97%;">
-                                        <div class="heading">
-                                            <div class="left">
-                                                  <h4><img alt="" src="images/icons/cmnt2.png" class="cmnt" /> Contacts</h4>
-                                                  <img src="images/minus-white.png" alt="" class="wal-minus" />
-                                            </div>
-                                        </div>
-                                    	  <div class="shade_box_white" style="padding:8px 0px;">
-                 						      <div id="contact_list" >
-                                              <div class="selectRecipients" style=" height:80px; min-height: 80px;">
-												 <?php 
-                                                    /*if(count($contact_arr)):
-                                                       $count_total = 1;
-                                                       //pr($contact_arr);
-                                                        foreach($contact_arr as $key=>$val){
-                                                            
-                                                            $img = get_profile_image($val['user_id'], 'thumb');
-                                                            
-                                                            if($val['if_already_friend'] == 'true' || $val['already_added_netpal'] == 'true'){
-                                                                  $profile_link = get_profile_url($val['user_id'],$val['s_displayname']);
-                                                            }
-                                                            else{
-                                                                 $profile_link = get_public_profile_url($val['user_id'],$val['user_profile_name']);
-                                                            }
-                                                            
-                                                            $CSS = ($count_total%4 == 0)?'no-right-mrgn':'';
-                                                                  */
-                                                   ?>
-                                                   <div class="image-block <?#=$CSS?>">
-                                                       
-                                                        <input type="checkbox"  value="<?=$val['user_id']?>_<?=$val['s_displayname']?>" name="<?=intval(decrypt($this->session->userdata('user_id')))?>" id="<?=$key+1?>" />
-                                                        <div class="inside">
-                                                         <!--   <img alt="Friend" class="pro_photo3" src="<?=$img?>" />-->
-                                                          <!--  <a href="<?=$profile_link?>" ><span><p><?=$val['s_first_name']?></p></span></a>                                                        </div>
-                                                    </div>
-                                                  -->
-                                                   
-                                                   <?php	/*$count_total++;	
-                                                              }
-                                                          endif;*/ 
-                                                   ?>
-                                                     
-                                                <!--</div> 
-                                              </div>
-                                              <div class="clr"></div>
-                                              <br />
-                                              <input name="" type="button" value="Done" class="yellow-btn" onclick="javascript:get_selected_contacts();"/>
-                                      		</div>
-                                            <div class="clr"></div>
-            							 </div>
-                                         <div class="clr"></div>
-            						   </div>-->
-                                  
-                                    <!--<div class="lable01" style="width:100px;">&nbsp;</div>  
-                                  
-                                        <div class="clr"></div>-->
                                         <div class="clr"></div>
                                      <div class="lable01" style="width:100px;">&nbsp;</div>  
                                     <div class="field03" style="width: 350px;">
@@ -402,7 +334,7 @@ $(document).ready(function() {
 											 //pr($contact_arr);
 											  foreach($contact_arr as $key=>$val){
 												  
-												  $img = get_profile_image($val['user_id'], 'thumb');
+												  $img = get_profile_image_of_user('thumb',$val['s_profile_photo'],$val['e_gender']);
 												  
 												  if($val['if_already_friend'] == 'true' || $val['already_added_netpal'] == 'true'){
 												   		$profile_link = get_profile_url($val['user_id'],$val['s_displayname']);

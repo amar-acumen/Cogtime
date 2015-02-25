@@ -99,9 +99,9 @@ class Media_comments_model extends CI_Model {
 								   c.s_contents, 
 								   c.dt_created_on, 
 								   CONCAT(u.s_first_name,' ', u.s_last_name) s_profile_name,
-								   u.s_profile_photo, 
-								  
-								   u.s_first_name as pseudo 
+								   u.s_profile_photo, 								  
+								   u.s_first_name as pseudo ,
+								   u.e_gender
 						FROM %1\$suser_media_comments c, %1\$susers u 
 						WHERE c.i_user_id=u.id 
 						    AND c.i_media_id = %2\$s 
@@ -253,7 +253,7 @@ class Media_comments_model extends CI_Model {
 								   
 								   c.dt_liked_on, 
 								   CONCAT(u.s_first_name,' ', u.s_last_name) s_profile_name,
-								   u.s_profile_photo, 
+								   u.s_profile_photo,u.e_gender, 
 								  
 								   u.s_first_name as pseudo 
 						FROM %1\$suser_media_like c, %1\$susers u 

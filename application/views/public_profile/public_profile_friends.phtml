@@ -12,7 +12,7 @@
                         <ul id="friendsSlider" class="jcarousel-skin-tango" >
                         	 <?php #if(count($right_panel['friends_arr']) > 0){
 							    	foreach($right_panel['friends_arr'] as $key=>$val){
-										$img = get_profile_image($val['user_id'], 'thumb');
+										$img = get_profile_image_of_user('thumb',$val['s_profile_photo'],$val['e_gender']);
 										if($val['if_already_friend'] == 'true' || $val['already_added_netpal'] == 'true'){
 											$profile_link = get_profile_url($val['user_id'],$val['s_displayname']);
 										}else{

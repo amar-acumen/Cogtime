@@ -30,10 +30,8 @@ class Base_controller extends CI_Controller {
             parent::__construct();
 
             $this->_set_timezone();
-
             $this->load->helper('common_helper');
             //$this->load->helper('chat_helper'); 
-
             $this->load->model('projects_model');
             $this->load->model('site_settings_model');
             $this->load->model('events_model');
@@ -4905,22 +4903,24 @@ $this->email->message("$body");
                      $ch_name_final = $newstr;
                      $ch_sp_url = 'church/'.$ch_name_final.'/'.$ch_id;
                       $ch_public_url ='church_public/'.$ch_name_final.'/'.$ch_id;
-                     $data = array(
-                        'ch_admin_id' => $ch_admin_id ,
-                        'ch_id' => $ch_id ,
-                        'v_code' => $v_code,
-                         'dt_join_on'=> $dt_join_on,
-                         'ch_sp_url'=>$ch_sp_url,
-                         'ch_name' => $ch_name,
-                         'ch_public_url'=>$ch_public_url
-                     );
-
-              $this->db->insert('cg_church_admin', $data); 
+//                     $data = array(
+//                        'ch_admin_id' => $ch_admin_id ,
+//                        'ch_id' => $ch_id ,
+//                        'v_code' => $v_code,
+//                         'dt_join_on'=> $dt_join_on,
+//                         'ch_sp_url'=>$ch_sp_url,
+//                         'ch_name' => $ch_name,
+//                         'ch_public_url'=>$ch_public_url
+//                     );
+//
+//              $this->db->insert('cg_church_admin', $data); 
               
               
               $data = array(
                'ch_page_url' => $ch_sp_url,
-               'ch_public_url' =>$ch_public_url   
+               'ch_public_url' =>$ch_public_url,
+                  'ch_admin_id' => $ch_admin_id,
+                  'dt_join_on'=> $dt_join_on
                
             );
 
@@ -4940,7 +4940,7 @@ $this->db->update('cg_church', $data);
             
         }
          public function check_is_church_admin($id='',$c_id){
-            $query = $this->db->get_where('cg_church_admin', array('ch_admin_id' => $id,'ch_id'=>$c_id));
+            $query = $this->db->get_where('cg_church', array('ch_admin_id' => $id,'id'=>$c_id));
             $result = $query->result();
 
             if(empty($result)){

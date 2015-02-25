@@ -14,7 +14,19 @@
     <?php include(APPPATH ."views/logged/church/church_prayer_group_left_panel.phtml");?>
 	<div class="activity-right">
 	 <div class="activity-comment-box">
-                                <form id="search_prayer_grp"  action="" method="post" class="create-ring" >
+       <div class="prayer-find">
+    <div class="prayer-search-main">
+	  <form id="search_prayer_grp"  action="" method="post">
+    <input type="text" placeholder="Prayer Group Name" name="txt_name" id="txt_name" value="">
+       <input type="button" value="" id="create_bt" onclick="searchPrayerGrp()" />
+	</form>
+   
+    </div>
+           <div><a href="javascript:void(0);" class="showall-btn" onclick="show_all_prayer();">Show All</a></div>
+	<div class="clear"></div>
+    </div>                         
+                                
+                                <form id="search_prayer_grp"  action="" method="post" class="create-ring" style="display:none;">
 								<div class="lable01"> Prayer Group Name:</div>
                                 <div class="field03">
                                     <input type="text" class="amount-input prayer-No-input" name="txt_name" id="txt_name" />
@@ -40,10 +52,30 @@
                             <ul id="grp_post_list" class="notification-ul grp-table">
      </ul></div>                 
                             </div>
+                            
+                                <!-----------------all payer grp---------------------------------->
+    <div id="pry-all">
+    <div class="prayer-sub-heading">Prayer Groups</div>
+    <div class="all_prayer_grp grp-table" id="listingContent">
+         <?php echo $listingContent; ?>
+    </div>  
+         <?php if ($no_of_result == 0):
+
+                    ?>
+
+                    <div class="shade_box_01" style="padding-top:5px;"><div  class="shade_norecords" style="width:260px;"><p class="blue_bold12">No Prayer Group.</p></div></div>
+
+                <?php endif; ?>	
+
+                <?php if ($no_of_result > $pagination_per_page): ?>
+
+                    <div class="view_more" id="show_more_feeds_div"><a href="javascript:void(0);" id="show_more_feeds_link" page_value="<?= $current_page_1 ?>" onclick="show_more_feeds($(this).attr('page_value'))">[view more] </a> </div>
+
+                <?php endif; ?></div>
+    <!------------------------------------------------------->
 	</div>
     <div class="clear"></div>
-                                              									
-    
+
   </div>
 </div>
 <!-- /CONTENT SECTION -->
@@ -57,6 +89,7 @@
 <!-- /FOOTER SECTION -->
 
 <script type="text/javascript">
+    
 function searchPrayerGrp()
 {
    
@@ -82,7 +115,8 @@ function searchPrayerGrp()
                 
                 $('#data_div').show();
                 if(data.html!='') {
-                            
+                            $('#pry-all').css('display','none');
+                            $('#show_more_feeds_div').css('display','none');
                             $('#grp_post_list').html(data.html);
                         }
                 
@@ -92,9 +126,12 @@ function searchPrayerGrp()
         });
     }
 }
-
+var grp_id = null;
 function sendGrpJoinReq(grp_id){
-	
+	var grp_id = grp_id;
+        //alert(grp_id);
+        var obj;
+        obj = $("#invite_text_"+grp_id);
 	var URL = base_url +'logged/church_prayer_group/join_group';
 		showBusyScreen();
 		if(ajax_req!=null) {
@@ -112,7 +149,12 @@ function sendGrpJoinReq(grp_id){
 							hideBusyScreen();
 							if(data.success== true ) {
 								showUIMsg(data.msg);
-								$('#invite_text_'+grp_id).text('Resend Join Request');
+								$('#invite_text_'+grp_id).hide();
+                                                                $('#invite_text_new'+grp_id).show();
+                                                                
+                                                                
+                                                                obj.hide();
+                                                               // alert('#invite_text_'+grp_id)
 							}
 							else if(data.success==false){
 							    showUIMsg(data.msg);
@@ -124,5 +166,80 @@ function sendGrpJoinReq(grp_id){
 			}
 		});
 	
+       
 }
 </script>
+<script type="text/javascript">
+
+
+
+    var ajax_req_feeds = null;
+
+    function show_more_feeds(page) {
+
+        if (ajax_req_feeds != null) {
+
+            ajax_req_feeds.abort();
+
+        }
+
+        showUILoader_nodialog();
+
+        ajax_req_feeds = $.ajax({
+
+            type: 'get',
+
+            url: base_url + 'logged/church_prayer_group/get_all_prayer_group_AJAX/' + '/' + page,
+
+            dataType: 'json',
+
+            success: function(data, status) {
+
+
+
+                hideUILoader_nodialog();
+
+                if (data.html != '') {
+
+                    $('#listingContent').append(data.html);
+
+                    $('#show_more_feeds_link').attr('page_value', data.current_page);
+
+                }
+
+                else {
+
+                    $('#listingContent').append('<div class="view_more" style="text-align: center;"><p class="blue_bold12" style="font-size:14px;">No More Event.</p></div>');
+
+                    $('#show_more_feeds_div').hide();
+
+                }
+
+
+
+                if (data.view_more == false)
+
+                {
+
+
+
+                    $('#invitaion_rec').append('<div class="view_more" style="text-align: center;"><p class="blue_bold12" style="font-size:14px;">No More Event.</p></div>');
+
+                    $('#show_more_feeds_div').hide();
+
+                }
+
+
+
+
+
+            }	// end of success function...
+
+        });
+
+    }
+    function show_all_prayer(){
+    location.reload();
+    
+    }
+        </script>

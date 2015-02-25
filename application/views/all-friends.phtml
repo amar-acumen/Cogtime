@@ -56,7 +56,7 @@
                 Profile
                 </h2>
                 <div class="profile-sml-sec">
-                     <?php $img = get_profile_image($public_arr_profile_info['id'], 'main');?>
+                     <?php $img = get_profile_image_of_user( 'main',$public_arr_profile_info['s_profile_photo'],$public_arr_profile_info['e_gender']);?>
                                 <div  class="prfile-sec-photo" style=" background:URL('<?=$img?>')no-repeat center;width:100px; height:100px;" title="member" ></div>
                                 
                                 <div class="prfile-sec-content-box-right">
@@ -128,7 +128,7 @@
                              <div class="comments-number-mid">
                               <div class="heading">
                                     <div class="left">
-                                          <h4><img alt="" src="images/icons/cmnt2.png" class="cmnt" /> Send A Message</h4>
+                                          <h4><img alt="" src="images/icons/cmnt2.png" height="20px" width="20px" class="cmnt" /> Send A Message</h4>
                                           <img src="images/minus-white.png" alt="" class="wal-minus" />
                                     </div>
                         		</div>

@@ -69,7 +69,9 @@
                     ?>
 
                     <a href="<?php echo $profile_link ?>"><?php echo $ringval['owner_name'] ?></a> 
-
+                    <?php if(!empty($ringval['dt_updated_on'])){ ?>
+                    | Updated  <?= getShortDate($ringval['dt_updated_on'],5) ?>
+                    <?php  } ?>
                 </p>
 
 
@@ -150,6 +152,14 @@
 
                         </ul>
 
+                    </li>
+                    <li class="left">
+                        <ul class="ring-member-list">
+                             <li>Member (<a href="<?= base_url().'church-rings-members/'.$ringval['ringid'] ?>"><?= get_member_count_by_ring_id($ringval['ringid']) ?></a>)  </li>
+                             <li>|</li>
+                            <li>Rings Post (<a href="javascript:void(0)"><?= get_post_count_by_ring_id($ringval['ringid']) ?></a>) </li>
+                        </ul>
+                        
                     </li>
 
                 </ul>

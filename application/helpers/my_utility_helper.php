@@ -654,6 +654,35 @@ function get_profile_photo_url($id, $user_name = "") {
     return $url;
 }
 
+function get_profile_image_of_user($size = "thumb", $db_image_name = "", $image_gender="") {
+
+    switch ($size) {
+        case 'thumb':
+            if ($image_gender == 'M'):
+                $no_img = 'uploads/no-image/noprofileimage-mini.gif';
+            elseif ($image_gender == 'F'):
+                $no_img = 'uploads/no-image/girl2.jpg';
+            else:
+                $no_img = 'uploads/no-image/noprofileimage-big.gif';
+            endif;
+            break;
+        case 'main':
+            if ($image_gender == 'M'):
+                $no_img = 'uploads/no-image/noprofileimage-big.gif';
+            elseif ($image_gender == 'F'):
+                $no_img = 'uploads/no-image/girl3.png';
+            else:
+                $no_img = 'uploads/no-image/noprofileimage-big.gif';
+            endif;
+            //$no_img = 'uploads/no-image/noprofileimage-thumb.gif';
+            break;
+    }
+
+    $nw_image_name = ($db_image_name == "") ? base_url() . $no_img : base_url() . 'uploads/user_profile_image/' . getThumbName($db_image_name, $size);
+    #$url = base_url()."public-profile/".$id."/".my_url($user_name).".html";
+    return $nw_image_name;
+}
+
 function get_profile_image($id, $size = "thumb", $image_name = "") {
 
     $id = intval($id);
@@ -725,15 +754,15 @@ function check_user_online_hlpr($user_id, $scope = 'own', $relation = 'no', $Img
     if ($relation == 'no' && $scope == 'own') {
         if (is_array($ret_) && count($ret_)) {
             if ($ret_['s_status'] == 1)
-                return '<img src="' . base_url() . 'images/icons/online.png" alt="" />';
+                return '<img src="' . base_url() . 'images/icons/online.png" width="12px" height="12px" alt="" />';
             else if ($ret_['s_status'] == 2)
                 return '<img src="' . base_url() . 'images/icons/invisible.png" alt="" />';
             else if ($ret_['s_status'] == 3)
                 return '<img src="' . base_url() . 'images/icons/away.png" alt="" />';
             else if ($ret_['s_status'] == 0 || $ret_['s_status'] == 4)
-                return '<img src="' . base_url() . 'images/icons/offline.png" alt="" />';
+                return '<img src="' . base_url() . 'images/icons/offline.png" width="12px" height="12px" alt="" />';
         } else
-            return '<img src="' . base_url() . 'images/icons/offline.png" alt="" /> ';
+            return '<img src="' . base_url() . 'images/icons/offline.png" width="12px" height="12px" alt="" /> ';
     }
     elseif ($ImgOnly == true) {
 
@@ -760,11 +789,11 @@ function check_user_online_hlpr($user_id, $scope = 'own', $relation = 'no', $Img
             //echo $show_f_online .',,'.$show_n_online.',,'.$show_p_online ; exit;
 
             if ($ret_['s_status'] == 1 && ($show_f_online == 'Y' || $show_n_online == 'Y' || $show_p_online == 'Y'))
-                return '<img src="' . base_url() . 'images/icons/online.png" alt="" />';
+                return '<img src="' . base_url() . 'images/icons/online.png" width="12px" height="12px" alt="" />';
             else if ($show_f_online == 'N' || $show_n_online == 'N' || $show_p_online == 'N')
-                return '<img src="' . base_url() . 'images/icons/offline.png" alt="" />';
+                return '<img src="' . base_url() . 'images/icons/offline.png" width="12px" height="12px" alt="" />';
         } else
-            return '<img src="' . base_url() . 'images/icons/offline.png" alt="" />';
+            return '<img src="' . base_url() . 'images/icons/offline.png" width="12px" height="12px" alt="" />';
     }
     else {//pr($ret_);
         if (is_array($ret_) && count($ret_) && is_array($status_arr) && count($status_arr)) {
@@ -789,11 +818,11 @@ function check_user_online_hlpr($user_id, $scope = 'own', $relation = 'no', $Img
             //echo $show_f_online .',,'.$show_n_online.',,'.$show_p_online ; exit;
 
             if ($ret_['s_status'] == 1 && ($show_f_online == 'Y' || $show_n_online == 'Y' || $show_p_online == 'Y'))
-                return '<img src="' . base_url() . 'images/icons/online.png" alt="" /> ';
+                return '<img src="' . base_url() . 'images/icons/online.png" width="12px" height="12px" alt="" /> ';
             else if ($show_f_online == 'N' || $show_n_online == 'N' || $show_p_online == 'N')
-                return '<img src="' . base_url() . 'images/icons/offline.png" alt="" />';
+                return '<img src="' . base_url() . 'images/icons/offline.png" width="12px" height="12px" alt="" />';
         } else
-            return '<img src="' . base_url() . 'images/icons/offline.png" alt="" />';
+            return '<img src="' . base_url() . 'images/icons/offline.png" width="12px" height="12px" alt="" />';
     }
 }
 
@@ -804,15 +833,15 @@ function check_user_online_image($user_id) {
     $ret_ = $arr_qry->row_array(); #pr($ret_); exit;
     if (is_array($ret_) && count($ret_)) {
         if ($ret_['s_status'] == 1)
-            return '<img src="' . base_url() . 'images/icons/online.png" alt="" />';
+            return '<img src="' . base_url() . 'images/icons/online.png" width="12px" height="12px" alt="" />';
         else if ($ret_['s_status'] == 2)
-            return '<img src="' . base_url() . 'images/icons/offline.png" alt="" />';
+            return '<img src="' . base_url() . 'images/icons/offline.png" width="12px" height="12px" alt="" />';
         else if ($ret_['s_status'] == 3)
             return '<img src="' . base_url() . 'images/icons/away.png" alt="" />';
         else if ($ret_['s_status'] == 4 || $ret_['s_status'] == 0)
-            return '<img src="' . base_url() . 'images/icons/offline.png" alt="" />';
+            return '<img src="' . base_url() . 'images/icons/offline.png" width="12px" height="12px" alt="" />';
     } else
-        return '<img src="' . base_url() . 'images/icons/offline.png" alt="" />';
+        return '<img src="' . base_url() . 'images/icons/offline.png" width="12px" height="12px" alt="" />';
 }
 
 function get_user_online_status_text($user_id) {
@@ -4633,7 +4662,7 @@ $ci = & get_instance();
 function get_church_by_admin($uid)
 {
 	$ci=& get_instance();
-	$query = $ci->db->get_where('cg_church_admin', array('ch_admin_id' => $uid));
+	$query = $ci->db->get_where('cg_church', array('ch_admin_id' => $uid));
 	$result=$query->result();
 	return $result[0];
 }
@@ -4829,7 +4858,7 @@ function get_active_church_ring_members_count($ring_id = '') {
 /**********************ring counter for perticular church****************************************************/
 function get_church_ring_number_by_id($id){
     $ci=& get_instance();
-	$sql="select count(*) as ring_number from  cg_church_ring  where church_id= $id";
+	$sql="select count(*) as ring_number from  cg_church_ring  where church_id= '".$id."'";
 	$res=$ci->db->query($sql);
 	$s=$res->result_array();
 	
@@ -5003,15 +5032,15 @@ function get_all_church_session($cid){
     }
     else
     {
-        $query = $ci->db->get_where('cg_church_admin', array('ch_admin_id' => $user_id));
+        $query = $ci->db->get_where('cg_church', array('ch_admin_id' => $user_id));
         $result = $query->result();
-
+//pr($result,1);
         $numrow_superadmin = $query->num_rows();
         if($numrowmember==0 && $numrow_superadmin>0)
         {
            
             $_SESSION['charch_super_admin'] = 'yes';
-            $_SESSION['logged_church_id'] = $result[0]->ch_id;
+            $_SESSION['logged_church_id'] = $result[0]->id;
             $_SESSION['subadmin_role'] = '';
            
         }
@@ -5117,4 +5146,29 @@ function check_church_member_by_ring_id($ring, $uid) {
         return true;
     } else
         return false;
+}
+function get_prayer_group_member_count_by_grp_id($gid){
+   $ci = & get_instance();
+    $sql = $ci->db->query('select count(*) as count from cg_church_prayer_group_members where i_prayer_group_id="' . $gid . '" and s_status="accepted"');
+    //echo $sql;
+    $res = $sql->result_array();
+    return $res['0']['count'];
+//    if ($res['0']['count'] > 0) {
+//        return true;
+//    } else
+//        return false;  
+}
+function get_prayer_group_post_count_by_grp_id($gid){
+   $ci = & get_instance();
+    $sql = $ci->db->query('select count(*) as count from cg_church_prayer_group_post where i_prayer_group_id="' . $gid . '" ');
+    //echo $sql;
+    //echo $sql = $ci->db->last_query();
+    $res = $sql->result_array();
+    
+    return $res['0']['count'];
+   // pr($res,1);
+//    if ($res['0']['count'] > 0) {
+//        return true;
+//    } else
+//        return false;  
 }

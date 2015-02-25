@@ -15,9 +15,9 @@
 	   
 	  <?php if($arr_profile_info['s_bio'] !='')
 	  {?>
-        <a href="javascript:void(0);" onclick="open_bio_popup()" id="moods"><img src="images/grey-edit.png" title="Update Mood"></a>
+        <a href="javascript:void(0);" onclick="open_bio_popup()" id="moods"><img src="images/grey-edit.png" height="12px" width="12px" title="Update Mood"></a>
     <?php }else{?>
-	<a href="javascript:void(0);" onclick="open_bio_popup()" id="moods">Set Your Mood [ <img src="images/grey-edit.png" title="Add Mood"> ]</a>
+	<a href="javascript:void(0);" onclick="open_bio_popup()" id="moods">Set Your Mood [ <img src="images/grey-edit.png" height="12px" width="12px" title="Add Mood"> ]</a>
 	<?php }?>
     </div>
     
@@ -27,7 +27,7 @@
     $listarr = array();
 
     if ($arr_profile_info['user_status']['i_isfriend'] == 1)
-        array_push($listarr, '<li><img src="'.base_url().'/images/frnd-small-green.png" style="   float: left;margin-right: 7px;" title="Friends"></li>');
+        array_push($listarr, '<li><img src="'.base_url().'/images/frnd-small-green.png" height="15px" width="19px" style="   float: left;margin-right: 7px;" title="Friends"></li>');
 		
 		else
 		array_push($listarr, '<li><img src="'.base_url().'/images/frnd-small.png" style="   float: left;margin-right: 7px;" title="Friends"></li>');
@@ -104,7 +104,7 @@
         <ul class="online-status-txt" id="online_user_types" >
             <?= ($list_types) ?>
         </ul>
-		 <a  href="javascript:void(0);" id="change-online-slide"  style="float:right;margin-top:-1px;font-weight:normal;color:#000000;padding-right: 34px;" > <img src="images/grey-edit.png"> </a>
+		 <a  href="javascript:void(0);" id="change-online-slide"  style="float:right;margin-top:-1px;font-weight:normal;color:#000000;padding-right: 34px;" > <img src="images/grey-edit.png" height="12px" width="12px"> </a>
         <span class="nw-change-online">
           <!--  <a  href="javascript:void(0);"    class="on-line" ></a>-->
             <!--<a  href="javascript:void(0);"   class="on-line" onclick="updateOnlineStatus()">[update]</a>-->
@@ -129,23 +129,8 @@
                         ?>
                         <input type="checkbox" name="chk_pp" id="chk_pp" <?= ( $arr_profile_info['user_status']['i_isprayerpartner'] == 1) ? 'checked="checked"' : '' ?> value="1" />
                         My Prayer Partners
-
                     <?php } ?></span>
-					
-					<a  href="javascript:void(0);"   onclick="updateOnlineStatus()" style=" background:#013d62;
-   
-    color: #fff;
-    cursor: pointer;
-    float: right;
-    font-family: 'GibsonRegular';
-    font-size: 13px;
-    margin-top: 5px;
-	padding:0 5px;
-	margin-right:5px;
-	text-decoration:none;
-	margin-bottom: 4px;
-	font-weight:normal;
-    ">update</a>
+					<a  href="javascript:void(0);"   onclick="updateOnlineStatus()" style=" background:#013d62;color: #fff;cursor: pointer;float: right;font-family: 'GibsonRegular';font-size: 13px;margin-top: 5px;padding:0 5px;margin-right:5px;text-decoration:none;margin-bottom: 4px;font-weight:normal;">update</a>
             </span>
         </span>         
     </span>
@@ -161,7 +146,7 @@
             <?php
         } else if ($arr_profile_info['e_want_prayer_partner'] == 'Y') {
             ?>
-            <li id="seeking"><a  href="javascript:void(0);"  onclick="show_dialog('optout-as-prayer-partner2');"  title="Enable Prayer Partner"><img src="images/icons/icon-17.png" alt=""/>Prayer Partner</a></li>
+            <li id="seeking"><a  href="javascript:void(0);"  onclick="show_dialog('optout-as-prayer-partner2');"  title="Enable Prayer Partner"><img src="images/icons/icon-17.png" width="20px" height="20px" alt=""/>Prayer Partner</a></li>
         <?php } else if($arr_profile_info['is_pr_partner_q_mail_sent']==Null && $arr_profile_info['e_want_prayer_partner'] == 'N'){
             ?>
             <li id="seeking"><a  href="javascript:void(0);" onclick="" title="Disable Prayer Partner"><img src="images/icon-17-red.png" alt=""/>Prayer Partner</a></li>
@@ -383,7 +368,7 @@ alert(response.success);	//update backbone model
 					var bios=data.s_bio.substr(0,24);
 					 $('#show_save_bio').attr('bio',''+data.s_bio+'');
                     $('#show_save_bio').html('&ldquo;'+bios+'...&rdquo;');
-					$('#moods').html('<img src="images/grey-edit.png" title="Update Mood">');
+					$('#moods').html('<img src="images/grey-edit.png" height="12px" width="12px" title="Update Mood">');
                     $('#s_bio').val('');
                     hideBusyScreen();
                 }
@@ -414,16 +399,11 @@ alert(response.success);	//update backbone model
             </div>
                <div class="shade_box_white" style="padding:8px 0px;">
                    <textarea rows="4" cols="50" name="s_bio" id="s_bio" maxlength="50"></textarea><br><br>
-                 <input name="" type="button" value="Save" class="btn" onclick="save_bio($('#s_bio').val());" />
-              
-            </div>
+                 <input name="" type="button" value="Save" class="btn" onclick="save_bio($('#s_bio').val());" />       </div>
             
       </div>
       <div class="bot"><div>&nbsp;</div></div>
 </div>
-
-
-
 
 <!----------------------------------------display large profile image----------------->
  <div class="lightbox large-img" >
@@ -438,8 +418,8 @@ alert(response.success);	//update backbone model
                <div class="shade_box_white" style="padding:8px 0px;">
                    <div class="center-profile">
                        <?php 
-                       $main_image = get_profile_image($arr_profile_info['id'], 'main');
-                       $large_image = get_profile_image($arr_profile_info['id'], 'large');
+                       $main_image = get_profile_image_of_user('main',$arr_profile_info['s_profile_photo'],$arr_profile_info['e_gender']);
+                       $large_image = get_profile_image_of_user( 'large',$arr_profile_info['s_profile_photo'],$arr_profile_info['e_gender']);
                        $large_image_name=end(explode('/',$large_image));
                         $path = BASEPATH . '../uploads/user_profile_image/'.$large_image_name;
                           $no_image_path = base_url().'uploads/user_profile_image/noimage/no-image-av-123.jpg'; 

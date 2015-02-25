@@ -346,6 +346,7 @@ public function get_by_id($id)
 //						$ret_[$i_cnt]["dt_created_on"]		=	$row->dt_created_on;
 //						$ret_[$i_cnt]["i_country_id"]		=	intval($row->i_country_id);
 						$ret_[$i_cnt]["dt_created_on"]		=	($row->dt_created_on);
+                                                $ret_[$i_cnt]["dt_updated_on"]		=	($row->dt_updated_on);
 						$ret_[$i_cnt]["s_category_name"]	=	$row->s_category_name;
 //						$ret_[$i_cnt]["post"]				=	$row->post;
 //						$ret_[$i_cnt]["cmt"]				=	$row->cmt;
@@ -862,7 +863,7 @@ public function get_by_id($id)
         try
         {
           $ret_= array();
-		  $s_qry = "SELECT r.*, u.id AS invitedid , CONCAT(u.s_first_name,' ',u.s_last_name) AS s_profile_name ,u.s_profile_photo AS s_profile_photo 
+		  $s_qry = "SELECT r.*, u.id AS invitedid , CONCAT(u.s_first_name,' ',u.s_last_name) AS s_profile_name ,u.s_profile_photo AS s_profile_photo,u.e_gender 
 							FROM cg_church_ring_invited_user AS r, 
 							{$this->db->USERS} u 
 							WHERE r.i_invited_id=u.id AND r.i_request=0 AND r.i_joined=0 "
@@ -1679,6 +1680,7 @@ public function get_by_id($id)
 //						$ret_[$i_cnt]["dt_created_on"]		=	$row->dt_created_on;
 //						$ret_[$i_cnt]["i_country_id"]		=	intval($row->i_country_id);
 						$ret_[$i_cnt]["dt_created_on"]		=	($row->dt_created_on);
+                                                $ret_[$i_cnt]["dt_updated_on"]		=	($row->dt_updated_on);
 						$ret_[$i_cnt]["s_category_name"]	=	$row->s_category_name;
 //						$ret_[$i_cnt]["post"]				=	$row->post;
 //						$ret_[$i_cnt]["cmt"]				=	$row->cmt;

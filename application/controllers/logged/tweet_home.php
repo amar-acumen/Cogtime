@@ -42,6 +42,7 @@ class Tweet_home extends Base_controller {
             show_error($err_obj->getMessage());
         }
     }
+    
 
     public function index() {
         try {
@@ -284,12 +285,7 @@ class Tweet_home extends Base_controller {
                                 $photo_uploaded = true;
                             }
                         }
-                        /* else {
-                          // This is a server-side checking for extra safety
-                          // and normally javascript will not allow it.
-                          echo json_encode( array('success'=>'false', 'msg'=>'Photo is blank.') );
-                          exit;
-                          } */
+                       
                     }
         
 					if ($this->input->post('txt_video_url') != '') {
@@ -326,74 +322,7 @@ class Tweet_home extends Base_controller {
             $arr['dt_created_on'] = get_db_datetime();
             $arr['i_owner_id'] = $user_id;
             $arr['u_ip'] = $ip;
-//            $tweet_id = $this->my_tweet_model->insert($arr);
-//
-//
-//            $tweet_trends = get_twitter_tags($message);
-            ## INSERTING TRENDS 
-//            if (count($tweet_trends)) {
-//                foreach ($tweet_trends as $tags) {
-//
-//                    ## check if already exists in db 
-//                    $isExists = $this->my_tweet_model->ifTagExists($tags);
-//
-//                    if ($isExists == 0) {
-//                        $trend = array();
-//                        $trend['s_tags'] = $tags;
-//                        $trend['dt_created_on'] = get_db_datetime();
-//                        $i_trend_id = $this->my_tweet_model->insert_tags($trend);
-//                    } else {
-//                        $i_score = 1 + $this->my_tweet_model->getScore($tags);
-//                        $this->my_tweet_model->update_tags_score($i_score, $tags);
-//                    }
-//                }
-//            }
-
-//            if ($posted_from == 'all_tweet') {
-//                //echo $posted_from;
-//                ob_start();
-//                $this->all_tweets_ajax_pagination($user_id, $page);
-//                $content = ob_get_contents();
-//                $content_obj = json_decode($content);
-//                $_html = $content_obj->html;
-//                $view_more = $content_obj->view_more;
-//                $cur_page = $content_obj->cur_page;
-//                ob_end_clean();
-//            } else if ($posted_from == 'my_tweets') {
-//                //echo $posted_from;
-//                ob_start();
-//                $this->my_tweets_ajax_pagination($user_id, $page);
-//                $content = ob_get_contents();
-//                $content_obj = json_decode($content);
-//                $_html = $content_obj->html;
-//                $view_more = $content_obj->view_more;
-//                $cur_page = $content_obj->cur_page;
-//                ob_end_clean();
-//            } else if ($posted_from == 'right_bar') {
-//
-//                ob_start();
-//                $this->right_tweets_ajax_pagination($user_id, $page);
-//                $content = ob_get_contents();
-//                $content_obj = json_decode($content);
-//                $_html = $content_obj->html;
-//                $view_more = $content_obj->view_more;
-//                $cur_page = $content_obj->cur_page;
-//                ob_end_clean();
-//            }
-//            $right_tweet_text = my_substr(nl2br($json_data['s_tweet_text']), 50);
-//            $right_tweet_date = get_time_elapsed($arr['dt_created_on']);
-//
-//            $tweet_owner_info = $this->my_tweet_model->get_owner_by_tweet_id($tweet_id);
-//            if ($tweet_owner_info['i_owner_id'] != intval(decrypt($this->session->userdata('user_id')))) {
-//                $notification_arr['i_requester_id'] = intval(decrypt($this->session->userdata('user_id')));
-//                $notification_arr['i_accepter_id'] = $tweet_owner_info['i_owner_id'];
-//                $notification_arr['s_type'] = 'tweet_comment';
-//                $notification_arr['dt_created_on'] = get_db_datetime();
-//
-//                $ret = $this->user_notifications_model->insert($notification_arr);
-//            }
-//
-//            $total_my_tweets = $this->my_tweet_model->get_total_my_tweets($user_id);
+           
             $is_abusive = check_abusive_words($message);
             if ($is_abusive > 0) {
                 echo json_encode(array('success' => 'false', 'msg' => "Abusive words are not allowed", 'html' => $_html, 'view_more' => $view_more, 'cur_page' => $cur_page, 'total_my_tweets' => $total_my_tweets));
