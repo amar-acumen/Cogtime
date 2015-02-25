@@ -8,7 +8,7 @@
 <div class="container">
   
   <div class="main-page">
-  	<h3 class="page-heading"> <?=  ucfirst(get_church_prayer_group_name_by_grp_id($prayer_group_id)) ?></h3>
+  	<h3 class="page-heading"> <?=  ucfirst(get_church_prayer_group_name_by_grp_id($prayer_group_id)) ?><a href="<?= base_url().'church-prayer-group/'.$prayer_group_id ?>" class="back-btn">Back to Group</a></h3>
     <?php include(APPPATH ."views/logged/church/church_prayer_group_left_panel.phtml");?>
     <div class="activity-right">
         <div class="activity-comment-box">

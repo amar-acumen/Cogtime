@@ -2120,7 +2120,7 @@ color: #096aa7;
 .searchjoin-btn img{ margin-right:5px;}
 .searchjoin-btn:hover{ color:#2386c4;}
 
-#grp_post_list a{ color:#096aa7; display:inline-block; padding-bottom:4px;}
+#grp_post_list a{ color:#096aa7; display:inline-block; padding-bottom:4px; font-size:13px; text-decoration:none;}
 
 .create-ring .field03 select option{ padding:0 0 0 10px;}
 
@@ -2128,7 +2128,7 @@ color: #096aa7;
 
 .already-member img{ margin-right:5px;}
 
-.grp-table tr td{ padding:15px 0; border-bottom:1px solid #ccc;}
+.grp-table tr td{ padding:10px 0; border-bottom:1px solid #d7d7d7;}
 .grp-table tr td img{ vertical-align:middle;}
 .grp-table thead th.prayer-sub-heading{ font-size:16px; font-weight:normal; border-bottom:1px solid #ccc;}
 .grp-table tr td p{ font-size:12px;}
@@ -2393,12 +2393,15 @@ width: 89px;}
 
 .prayer-search-main{ border:1px solid #d7d7d7; width:398px; height:33px; float:left;}
 
-.prayer-search-main input[type="text"]{ border:none; font-size:12px; color:#3b3b3b; width:350px;padding:0 6px; line-height:33px;}
+.prayer-search-main input[type="text"]{ border:none; font-size:12px; color:#3b3b3b; width:350px;padding:0 6px; line-height:33px; border-right:1px solid #d7d7d7;}
 
-.prayer-search-main input[type="button"]{ background:url(../images/find.png) top right no-repeat; width:17px; height:17px; display:block; border:none; cursor:pointer; float:right; margin:8px 5px 0 0;}
+.prayer-search-main input[type="button"]{ background:url(../images/find-pray.png) 5px 0 no-repeat; width:25px; height:17px; display:block; border:none; cursor:pointer; float:right; margin:8px 5px 0 0;}
 
 .showall-btn{ width:70px; height:27px; line-height:29px; color:#fff; text-align:center; cursor:pointer; font-size:12px; background:#096aa7; border:0; font-family: 'GibsonRegular'; font-weight:normal; float:right; text-decoration:none;}
 
 .showall-btn:hover{ background:#2386c4; }
 .prayer-find{ margin-bottom:20px;}
 .main-payer-section #grp_post_list li{ margin-bottom:5px; }
+
+.all_prayer_grp a{ text-decoration:none; font-size:13px; color:#096aa7;}
+.all_prayer_grp p small{ font-size:12px; color:#878d91;}
