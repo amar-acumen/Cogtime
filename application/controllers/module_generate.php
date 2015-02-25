@@ -49,9 +49,11 @@ class Module_generate extends CI_Controller {
                     'css/IMchat/chat.css',
                     'css/gemoticons.css',
                     //user logged in css
-                    'css/jquery-ui-1.8.2.custom.css',
+                    //'css/jquery-ui-1.8.2.custom.css',
+                    'css/jquery-ui-1.8.13.custom.css',
                     'css/dd.css',
-                    'css/church.css'
+                    'css/church.css',
+                    'css/flexslider.css'
                     //'css/big-slider.css'
                 );
                 $css = '';
@@ -104,7 +106,8 @@ class Module_generate extends CI_Controller {
                     ,'js/jquery.eislideshow.js',
                     'js/jquery.hoverIntent.minified.js',
                     'js/jquery.naviDropDown.1.0.js',
-                    'js/church_login.js'
+                    'js/church_login.js',
+                    'js/frontend/logged/holy_place/prayer_group.js'
 
                 );
                 $js = '';
