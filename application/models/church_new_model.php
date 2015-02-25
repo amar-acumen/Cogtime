@@ -584,7 +584,7 @@ class Church_new_model extends Base_model
 			
                        $s_qry = 'select * from cg_church_prayer_group where 1 '.$s_where.'  ';
           $s_qry= $s_qry.(trim($s_order_by)!=""?" ORDER BY ".$s_order_by."":"ORDER BY id DESC")." ".(is_numeric($i_start) && is_numeric($i_limit)?" LIMIT ".intval($i_start).",".intval($i_limit):"");
-	echo $s_qry;  exit;	 
+	
 		            
           $rs=$this->db->query($s_qry); 
          

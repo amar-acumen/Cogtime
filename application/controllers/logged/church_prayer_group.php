@@ -1886,7 +1886,7 @@ class Church_prayer_group extends Base_controller
 		 $wh	= " AND i_owner_id ='". $_SESSION['logged_church_id']."' ";
 		//$wh1	= " AND inv.i_invited_id='".$this->i_profile_id."'";
 		$data['grpdata']	= $this->church_new_model->show_group_all($wh,$page,$this->pagination_per_page,'');
-		//pr($data['grpdata'],1);
+		pr($data['grpdata'],1);
 		//$data['ringdata']	= check_friend_netpal_status($data['ringdata']);
 		
 		$data['pagination_per_page'] = $this->pagination_per_page;
