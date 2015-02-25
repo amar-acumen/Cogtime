@@ -603,13 +603,13 @@ class Church_new_model extends Base_model
                        $s_qry = 'select * from cg_church_prayer_group where 1 '.$s_where.'  ';
           $s_qry= $s_qry.(trim($s_order_by)!=""?" ORDER BY ".$s_order_by."":"ORDER BY id DESC")." ".(is_numeric($i_start) && is_numeric($i_limit)?" LIMIT ".intval($i_start).",".intval($i_limit):"");
 		 
-		  echo ($s_qry);exit;
+		  //echo ($s_qry);exit;
           //////////end For Pagination//////////                
                 
-          $this->db->trans_begin();///new                
+          //$this->db->trans_begin();///new                
           $rs=$this->db->query($s_qry); 
          // ;
-         $result=$res->result();
+         $result=$rs->result();
 			foreach($result as $key=>$res)
 			{
 				$sql="select cm.id as c from cg_church_prayer_group cp left JOIN cg_church_prayer_group_members cm  on cp.id=cm.i_prayer_group_id where cm.i_prayer_group_id=".$res->id." and cm.s_status='accepted'";
