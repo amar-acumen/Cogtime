@@ -33,7 +33,7 @@
                       
                                      <div id="netpal_record_<?= $r['user_id']?>" class="shade_box_blue" style="padding-top:5px;"> 
                                          <div class="txt_content">
-                                         <a href="<?= $profile_link;?>"><div class="pro_photo2" style="background:url(<?=get_profile_image($r['user_id'],$size ="thumb")?>) no-repeat center;width:60px; height:60px;" ></div></a>
+                                         <a href="<?= $profile_link;?>"><div class="pro_photo2" style="background:url(<?=get_profile_image_of_user('thumb',$r['s_profile_photo'],$r['e_gender'])?>) no-repeat center;width:60px; height:60px;" ></div></a>
                                               <div class="left_div01" style="width:397px;">
                                                     <p class="add-remove-friend"><img src="images/icons/remove.png" alt="" /> <a href="javascript:void(0);" onclick="remove_netpal_id_put_(<?= $r['user_id']?>); show_dialog('delete-page-popup');">Remove</a></p>
                                                      <p class="blue_bold12"><a  href="<?= $profile_link;?>" class="left"><?=$name?> </a> &nbsp;[ <a  class="nogrey_link"> <?=check_user_online_hlpr($r['user_id'], 'public', $relation_arr); ?></a> ] <?=$chat_html?></p>

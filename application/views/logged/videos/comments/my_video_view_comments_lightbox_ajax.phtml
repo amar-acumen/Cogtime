@@ -4,7 +4,7 @@
 			foreach($result_arr as $key=>$val){
 				
 				 $name = $val['s_profile_name'];
-				 $IMG = get_profile_image('thumb',$val['s_profile_photo'],$val['e_gender']);
+				 $IMG = get_profile_image_of_user('thumb',$val['s_profile_photo'],$val['e_gender']);
 				 $comment_txt = $val['s_contents'];
 				 $profile_link = get_profile_url($val['i_user_id'],$val['s_profile_name']);
 				# $comment_txt  = html_entity_decode(htmlspecialchars_decode($val['s_contents']),ENT_QUOTES,'utf-8');

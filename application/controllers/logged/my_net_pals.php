@@ -254,8 +254,7 @@ class My_net_pals extends Base_controller {
 
             $result = $this->netpals_model->fetch_multi($WHERE, intval($page), $this->landing_netpals_pagination_per_page, $ORDER_BY);
             $resultCount = count($result);
-            #echo $this->db->last_query(); 
-            #pr($result);
+            
             $total_rows = $this->netpals_model->gettotal_info($WHERE);
 
             if ((!is_array($result) || !count($result) ) && $total_rows) {
@@ -263,38 +262,7 @@ class My_net_pals extends Base_controller {
 
                 $result = $this->netpals_model->fetch_multi($WHERE, intval($page), $this->landing_netpals_pagination_per_page, $ORDER_BY);
             }
-            ## end seacrh conditions : filter ############
-            #pr($result,1);
-            #Jquery Pagination Starts
-            /*            $this->load->library('jquery_pagination');
-              $config['base_url'] = base_url()."logged/my_net_pals/request_recieved_landing_page_ajax_pagination";
-              $config['total_rows'] = $total_rows;
-              $config['per_page'] = $this->landing_netpals_pagination_per_page;
-              $config['uri_segment'] = 4;
-              $config['num_links'] = 9;
-              $config['page_query_string'] = false;
-              $config['prev_link'] = '&laquo; Previous';
-              $config['next_link'] = 'Next &raquo;';
-
-              $config['cur_tag_open'] = '<li> <span><a href="javascript:void(0)" class="select">';
-              $config['cur_tag_close'] = '</a></span></li>';
-
-              $config['next_tag_open'] = '<li><a href="javascript:void(0)">';
-              $config['next_tag_close'] = '</a></li>';
-
-              $config['prev_tag_open'] = '<li><a href="javascript:void(0)">';
-              $config['prev_tag_close'] = '</a></li>';
-
-              $config['num_tag_open'] = '<li>';
-              $config['num_tag_close'] = '</li>';
-
-              $config['div'] = '#netpal_request_receive'; /* Here #content is the CSS selector for target DIV
-              $config['js_bind'] = "showBusyScreen(); "; /* if you want to bind extra js code
-              $config['js_rebind'] = "hideBusyScreen(); "; /* if you want to rebind extra js code
-
-              $this->jquery_pagination->initialize($config);
-              $data['page_links'] = $this->jquery_pagination->create_links();
-             */
+            
             // getting   listing...
             $data['result_arr'] = $result;
             $data['no_of_result'] = $total_rows;
