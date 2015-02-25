@@ -319,7 +319,7 @@ public function get_by_newsfeed_id($i_word_id,  $i_start_limit="", $i_no_of_page
                         c.i_liked_user_id, 
                         c.dt_liked_on, 
                         CONCAT(u.s_first_name,' ', u.s_last_name) s_profile_name,
-                        u.s_profile_photo, 
+                        u.s_profile_photo,u.e_gender, 
                         u.s_first_name as pseudo,
                         mst_c.s_country_name
                         

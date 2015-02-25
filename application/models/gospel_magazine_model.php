@@ -253,7 +253,7 @@ class Gospel_magazine_model extends Base_model
     }
 	public function get_gospel_likes($s_where)
     {
-		$sql = "SELECT m.* , CONCAT(u.s_first_name,' ',u.s_last_name) s_profile_name , u.id AS post_owner_user_id, u.s_profile_photo
+		$sql = "SELECT m.* , CONCAT(u.s_first_name,' ',u.s_last_name) s_profile_name , u.id AS post_owner_user_id, u.s_profile_photo,u.e_gender
                 FROM {$this->db->GOSPEL_MAGAZINE_LIKE} m , {$this->db->USERS} u
                 WHERE 1 AND u.id=m.i_user_id {$s_where}";
 				
@@ -266,7 +266,7 @@ class Gospel_magazine_model extends Base_model
 	/*************project comments****************/
 	public function get_project_cmnts($s_where)
     {
-        $sql = "SELECT m.* , CONCAT(u.s_first_name,' ',u.s_last_name) s_profile_name , u.id AS post_owner_user_id , u.s_profile_photo
+        $sql = "SELECT m.* , CONCAT(u.s_first_name,' ',u.s_last_name) s_profile_name , u.id AS post_owner_user_id , u.s_profile_photo,u.e_gender
                 FROM {$this->db->CHRISTAN_PROJECT_CMT} m , {$this->db->USERS} u
                 WHERE 1 AND u.id=m.i_user_id {$s_where}
                 ";
@@ -317,7 +317,7 @@ class Gospel_magazine_model extends Base_model
 	
 	public function get_project_likes($s_where)
     {
-		$sql = "SELECT m.* , CONCAT(u.s_first_name,' ',u.s_last_name) s_profile_name , u.id AS post_owner_user_id, u.s_profile_photo
+		$sql = "SELECT m.* , CONCAT(u.s_first_name,' ',u.s_last_name) s_profile_name , u.id AS post_owner_user_id, u.s_profile_photo,u.e_gender
                 FROM {$this->db->CHRISTAN_PROJECT_LIKE} m , {$this->db->USERS} u
                 WHERE 1 AND u.id=m.i_user_id {$s_where}";
 				

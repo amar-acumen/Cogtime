@@ -863,7 +863,7 @@ public function get_by_id($id)
         try
         {
           $ret_= array();
-		  $s_qry = "SELECT r.*, u.id AS invitedid , CONCAT(u.s_first_name,' ',u.s_last_name) AS s_profile_name ,u.s_profile_photo AS s_profile_photo 
+		  $s_qry = "SELECT r.*, u.id AS invitedid , CONCAT(u.s_first_name,' ',u.s_last_name) AS s_profile_name ,u.s_profile_photo AS s_profile_photo,u.e_gender 
 							FROM cg_church_ring_invited_user AS r, 
 							{$this->db->USERS} u 
 							WHERE r.i_invited_id=u.id AND r.i_request=0 AND r.i_joined=0 "
