@@ -1892,8 +1892,8 @@ class Church_prayer_group extends Base_controller
 		$data['pagination_per_page'] = $this->pagination_per_page;
 		//pr($result);
 		$resultCount = count($data['grpdata']);
-		echo $total_rows = $this->church_new_model->gettotal_group($wh);
-                die('d');
+		 $total_rows = $this->church_new_model->gettotal_group($wh);
+                
                 
 		$cur_page = $page + $this->pagination_per_page;
         
