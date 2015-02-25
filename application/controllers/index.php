@@ -257,8 +257,7 @@ class Index extends Base_controller
 										/*'js/jquery.js', // causing conflict with block ui*/
 									   'js/production/frontend/header_slider.js',
 									   'js/production/contentslider.js',
-									   'js/production/jquery.autofill.js',
-									   
+									   'js/production/jquery.autofill.js'
 									   
 									  ));
 			parent::_add_css_arr( array('css/big-slider.css') );
@@ -271,8 +270,7 @@ class Index extends Base_controller
 
             $map->setWidth(475);
             $map->setHeight(180);
-            $map->setZoomLevel(13); 
-            
+            $map->setZoomLevel(13);
                         
                $VIEW = "banner_pages/event_details.phtml";
             parent::_render($data, $VIEW);
