@@ -610,6 +610,7 @@ class Church_new_model extends Base_model
           $rs=$this->db->query($s_qry); 
          // ;
          $result=$rs->result();
+         $user_id = intval(decrypt($this->session->userdata('user_id')));
 			foreach($result as $key=>$res)
 			{
 				$sql="select cm.id as c from cg_church_prayer_group cp left JOIN cg_church_prayer_group_members cm  on cp.id=cm.i_prayer_group_id where cm.i_prayer_group_id=".$res->id." and cm.s_status='accepted'";
