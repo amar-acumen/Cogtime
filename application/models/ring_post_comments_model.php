@@ -266,9 +266,9 @@ class Ring_post_comments_model extends CI_Model {
 								   
 								   c.dt_liked_on, 
 								   CONCAT(u.s_first_name,' ', u.s_last_name) s_profile_name,
-								   u.s_profile_photo, 
-								  
-								   u.s_first_name as pseudo 
+								   u.s_profile_photo, 								  
+								   u.s_first_name as pseudo ,
+								   u.e_gender
 						FROM %1\$suser_ring_post_like c, %1\$susers u 
 						WHERE c.i_liked_user_id=u.id 
 						    AND c.i_ring_post_id = %2\$s 
