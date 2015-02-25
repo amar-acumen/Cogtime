@@ -14,17 +14,18 @@
     <?php include(APPPATH ."views/logged/church/church_prayer_group_left_panel.phtml");?>
 	<div class="activity-right">
 	 <div class="activity-comment-box">
-       <div class="member-sc-main">
-    <div class="search-main">
+       <div class="prayer-find">
+    <div class="prayer-search-main">
 	<form name="search_frm" id="search_frm" method="POST" action="">
     <input type="text" placeholder="Find a member" name="search_data" id="search_data" value="">
        <input type="button" name="search_btn" id="search_btn" onclick="return search_result();">
 	   <input type="hidden" id="search_basic" name="search_basic" value="Y">
 	</form>
-    <div><a href="javascript:void(0);">Show All</a></div>
+   
     </div>
-    
-	<div class="clear"></div></div>                         
+     <div><a href="javascript:void(0);" class="showall-btn">Show All</a></div>
+	<div class="clear"></div>
+    </div>                         
                                 
                                 <form id="search_prayer_grp"  action="" method="post" class="create-ring" >
 								<div class="lable01"> Prayer Group Name:</div>
