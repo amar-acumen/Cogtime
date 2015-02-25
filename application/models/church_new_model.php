@@ -25,7 +25,7 @@ class Church_new_model extends Base_model
 		
 		function get_church_admin_data($c_id)
 		{
-			$query = $this->db->get_where('cg_church_admin',array('ch_id'=>$c_id));
+			$query = $this->db->get_where('cg_church',array('id'=>$c_id));
 			$result = $query->result();
 			
 			return $result[0];
@@ -505,7 +505,7 @@ class Church_new_model extends Base_model
               $query_churchmember = $this->db->query($sql_churchmember);
 			  $numrowmember = $query_churchmember->num_rows();
               $result_churchmember = $query_churchmember->result();
-                $query = $this->db->get_where('cg_church_admin', array('ch_admin_id' => $user_id));
+                $query = $this->db->get_where('cg_church', array('ch_admin_id' => $user_id));
               $result = $query->result();
               return $result;
                     
