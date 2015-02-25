@@ -4858,7 +4858,7 @@ function get_active_church_ring_members_count($ring_id = '') {
 /**********************ring counter for perticular church****************************************************/
 function get_church_ring_number_by_id($id){
     $ci=& get_instance();
-	$sql="select count(*) as ring_number from  cg_church_ring  where church_id= $id";
+	$sql="select count(*) as ring_number from  cg_church_ring  where church_id= '".$id."'";
 	$res=$ci->db->query($sql);
 	$s=$res->result_array();
 	
