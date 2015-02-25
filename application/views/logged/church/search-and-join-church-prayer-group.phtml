@@ -111,7 +111,8 @@ function searchPrayerGrp()
                 
                 $('#data_div').show();
                 if(data.html!='') {
-                            
+                            $('#listingContent').css('display','none');
+                            $('#show_more_feeds_div').css('display','none');
                             $('#grp_post_list').html(data.html);
                         }
                 
