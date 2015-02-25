@@ -616,6 +616,7 @@ class Church_new_model extends Base_model
 				}
 			}
 			//pr($result,1);
+                        echo $s_qry;  exit;
 			return $result;
          // pr($res_,1);
 		    }
