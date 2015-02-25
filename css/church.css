@@ -2009,7 +2009,7 @@ color: #096aa7;
 
 .prayer-grp-name p small{ font-size:12px;}
 
-.post-txt{ font-size:14px !important; padding-bottom:7px; color:#333 !important; display:block;}
+.post-txt{ font-size:14px !important; padding-bottom:4px; color:#333 !important; display:block;}
 
 .post-user{ color:#096aa7; font-size:13px; padding-bottom:8px; font-weight:normal;}
 
@@ -2120,7 +2120,7 @@ color: #096aa7;
 .searchjoin-btn img{ margin-right:5px;}
 .searchjoin-btn:hover{ color:#2386c4;}
 
-#grp_post_list a{ color:#096aa7;}
+#grp_post_list a{ color:#096aa7; display:block; padding-bottom:0;}
 
 .create-ring .field03 select option{ padding:0 0 0 10px;}
 
