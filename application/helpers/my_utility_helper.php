@@ -654,6 +654,35 @@ function get_profile_photo_url($id, $user_name = "") {
     return $url;
 }
 
+function get_profile_image_of_user($size = "thumb", $db_image_name = "", $image_gender="") {
+
+    switch ($size) {
+        case 'thumb':
+            if ($image_gender == 'M'):
+                $no_img = 'uploads/no-image/noprofileimage-mini.gif';
+            elseif ($image_gender == 'F'):
+                $no_img = 'uploads/no-image/girl2.jpg';
+            else:
+                $no_img = 'uploads/no-image/noprofileimage-big.gif';
+            endif;
+            break;
+        case 'main':
+            if ($image_gender == 'M'):
+                $no_img = 'uploads/no-image/noprofileimage-big.gif';
+            elseif ($image_gender == 'F'):
+                $no_img = 'uploads/no-image/girl3.png';
+            else:
+                $no_img = 'uploads/no-image/noprofileimage-big.gif';
+            endif;
+            //$no_img = 'uploads/no-image/noprofileimage-thumb.gif';
+            break;
+    }
+
+    $nw_image_name = ($db_image_name == "") ? base_url() . $no_img : base_url() . 'uploads/user_profile_image/' . getThumbName($db_image_name, $size);
+    #$url = base_url()."public-profile/".$id."/".my_url($user_name).".html";
+    return $nw_image_name;
+}
+
 function get_profile_image($id, $size = "thumb", $image_name = "") {
 
     $id = intval($id);
