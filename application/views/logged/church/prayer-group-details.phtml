@@ -14,7 +14,7 @@
     <?php include(APPPATH ."views/logged/church/church_prayer_group_left_panel.phtml");?>
     <div class="activity-right">	<div class="prayer-grp-name"><?php foreach($prayer_group_details as $church)			{			?>			<a href="<?=base_url()?>church-prayer-group/<?=$church->id?>"><?=$church->s_group_name?></a>			
     
-    <p>Denomination- <?= getDenominationNameById($church->i_denomination_id) ?> | <small><?php if($church_admin){?>Created on- <?php echo getShortDate($church->dt_created_on,5);}else {?>Joined on- <?php echo getShortDate($church->dt_joined_on,5);}?></small>   </p>			<?php } ?></div>
+    <p><?//getDenominationNameById($church->i_denomination_id) ?>  <small><?php if($church_admin){?>Created on- <?php echo getShortDate($church->dt_created_on,5);}else {?>Joined on- <?php echo getShortDate($church->dt_joined_on,5);}?></small>   </p>			<?php } ?></div>
         <div class="activity-comment-box">
        	  
             <!--payer notification start-->
