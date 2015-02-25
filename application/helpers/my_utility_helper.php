@@ -5034,7 +5034,7 @@ function get_all_church_session($cid){
     {
         $query = $ci->db->get_where('cg_church', array('ch_admin_id' => $user_id));
         $result = $query->result();
-
+pr($result,1);
         $numrow_superadmin = $query->num_rows();
         if($numrowmember==0 && $numrow_superadmin>0)
         {
