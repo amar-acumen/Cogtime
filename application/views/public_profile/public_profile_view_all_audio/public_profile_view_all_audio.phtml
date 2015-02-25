@@ -62,7 +62,7 @@
                                 <!--profile -->
                                 <div class="profile-tab first">
                                     <div class="photo-section">
-                                    <?php $img = get_profile_image($public_arr_profile_info['id'], 'main');?>
+                                    <?php $img = get_profile_image_of_user('main',$public_arr_profile_info['s_profile_photo'],$public_arr_profile_info['e_gender']);?>
                                     <div style="background:url(<?=$img?>) no-repeat center;width:144px; height:144px;" title="member" ></div>
                                        
                                     </div>
