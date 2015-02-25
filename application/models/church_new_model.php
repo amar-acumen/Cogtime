@@ -638,25 +638,12 @@ class Church_new_model extends Base_model
            $s_qry = 'select count(*)as total from cg_church_prayer_group where 1 '.$s_where.'   ';
                $s_qry= $s_qry.(trim($s_order_by)!=""?" ORDER BY ".$s_order_by."":"ORDER BY id DESC")." ".(is_numeric($i_start) && is_numeric($i_limit)?" LIMIT ".intval($i_start).",".intval($i_limit):"");
 		 
-           //echo ($s_qry);exit;
+           echo ($s_qry);exit;
 		  $rs=$this->db->query($s_qry);
                   $result = $rs->result_array();
                   pr($result,1);
                   echo $result[0]['total'];
-                  return $result[0]['total'];
-          //$i_cnt=0;
-         // pr($rs->result(),1);
-//          if(is_array($rs->result()))
-//          {
-//              foreach($rs->result() as $row)
-//              {
-//                  $ret_=intval($row->i_total); 
-//              }    
-//              $rs->free_result();          
-//          }
-//          $this->db->trans_commit();///new
-//          unset($s_qry,$rs,$row,$i_cnt,$s_where);
-//          return $ret_;
+         
         }
         catch(Exception $err_obj)
         {
