@@ -50,10 +50,10 @@ class Module_generate extends CI_Controller {
                     'css/gemoticons.css',
                     //user logged in css
                     //'css/jquery-ui-1.8.2.custom.css',
-                    'css/jquery-ui-1.8.13.custom.css',
-                    'css/dd.css',
-                    'css/church.css',
-                    'css/flexslider.css'
+                   // 'css/jquery-ui-1.8.13.custom.css',
+                    //'css/dd.css',
+                    //'css/church.css',
+                    //'css/flexslider.css'
                     //'css/big-slider.css'
                 );
                 $css = '';
