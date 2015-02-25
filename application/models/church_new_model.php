@@ -668,7 +668,7 @@ class Church_new_model extends Base_model
            $s_qry = 'select count(*)as total from cg_church_prayer_group where 1 '.$s_where.'   ';
            //echo ($s_qry);exit;
 		  $rs=$this->db->query($s_qry);
-                  $result = $rs->result();
+                  $result = $rs->result_array();
                   pr($result);
                   echo $result[0]['total'];
                   return $result[0]['total'];
