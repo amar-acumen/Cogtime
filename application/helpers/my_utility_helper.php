@@ -5134,6 +5134,7 @@ function get_prayer_group_post_count_by_grp_id($gid){
     //echo $sql;
     echo $sql = $ci->db->last_query();
     $res = $sql->result_array();
+    pr($res);
     if ($res['0']['count'] > 0) {
         return true;
     } else
