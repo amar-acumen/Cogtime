@@ -248,7 +248,6 @@ class New_public_profile extends Base_controller
 			
             
             # view file...
-			//$VIEW_PG_FILE = "public_profile.phtml";
 			$VIEW_PG_FILE = "public_profile_new.phtml";
             $VIEW = "{$VIEW_PG_FILE}";
             parent::_render($data, $VIEW);
