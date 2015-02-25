@@ -4662,7 +4662,7 @@ $ci = & get_instance();
 function get_church_by_admin($uid)
 {
 	$ci=& get_instance();
-	$query = $ci->db->get_where('cg_church_admin', array('ch_admin_id' => $uid));
+	$query = $ci->db->get_where('cg_church', array('ch_admin_id' => $uid));
 	$result=$query->result();
 	return $result[0];
 }
@@ -5032,7 +5032,7 @@ function get_all_church_session($cid){
     }
     else
     {
-        $query = $ci->db->get_where('cg_church_admin', array('ch_admin_id' => $user_id));
+        $query = $ci->db->get_where('cg_church', array('ch_admin_id' => $user_id));
         $result = $query->result();
 
         $numrow_superadmin = $query->num_rows();

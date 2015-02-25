@@ -92,7 +92,7 @@ if($result_arr){
         ?>
     <?php 
      $user_id = intval(decrypt($this->session->userdata('user_id')));
-    $query = $this->db->get_where('cg_church_admin', array('ch_admin_id' => $user_id,'ch_id'=>$result_arr[0]->id));
+    $query = $this->db->get_where('cg_church', array('ch_admin_id' => $user_id,'id'=>$result_arr[0]->id));
             $result = $query->result();
             //pr($result);
            // echo count($result);

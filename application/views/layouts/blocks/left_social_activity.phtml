@@ -78,14 +78,14 @@
               $query_churchmember = $this->db->query($sql_churchmember);
               $numrowmember = $query_churchmember->num_rows();
               $result_churchmember = $query_churchmember->result();
-              $query = $this->db->get_where('cg_church_admin', array('ch_admin_id' => $user_id));
+              $query = $this->db->get_where('cg_church', array('ch_admin_id' => $user_id));
               $result = $query->result();
 
               $numrow_superadmin = $query->num_rows();
               if($numrow_superadmin>0)
               {
                   ?>
-                    <li><a href="<?= $result[0]->ch_sp_url; ?>" class="" id="" ><?= $result[0]->ch_name; ?><img src="<?= base_url() ?>images/icons/crown.png" width="25px" height="14px" alt="" class="add-new-church"/> </a></li>
+                    <li><a href="<?= $result[0]->ch_page_url; ?>" class="" id="" ><?= $result[0]->s_name; ?><img src="<?= base_url() ?>images/icons/crown.png" width="25px" height="14px" alt="" class="add-new-church"/> </a></li>
                   <?php
               }
               if(count($result_churchmember)>0 )

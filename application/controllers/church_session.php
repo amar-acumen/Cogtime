@@ -141,10 +141,10 @@ get_all_church_session();
                                 /**********************************/
                                 /*****************************************************************/
                                 
-                                $query = $this->db->get_where('cg_church_admin', array('ch_admin_id' => $id));
+                                $query = $this->db->get_where('cg_church', array('ch_admin_id' => $id));
                                  $result = $query->result();
                                  if(!empty($result)){
-                                      $redirect_url = get_unformatted_string_edit($result[0]->ch_sp_url);
+                                      $redirect_url = get_unformatted_string_edit($result[0]->ch_page_url);
                                  }else if(empty($result)){
                                      //die();
                                 $redirect_url = base_url() . "my-wall.html";     

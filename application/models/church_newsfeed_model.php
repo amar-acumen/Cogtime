@@ -25,7 +25,7 @@ class Church_newsfeed_model extends Base_model
 		
 		function get_church_admin_data($c_id)
 		{
-			$query = $this->db->get_where('cg_church_admin',array('ch_id'=>$c_id));
+			$query = $this->db->get_where('cg_church',array('ch'=>$c_id));
 			$result = $query->result();
 			
 			return $result[0];
