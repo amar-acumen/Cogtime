@@ -2120,7 +2120,7 @@ color: #096aa7;
 .searchjoin-btn img{ margin-right:5px;}
 .searchjoin-btn:hover{ color:#2386c4;}
 
-#grp_post_list a{ color:#096aa7; display:block; padding-bottom:0;}
+#grp_post_list a{ color:#096aa7; display:inline-block; padding-bottom:4px;}
 
 .create-ring .field03 select option{ padding:0 0 0 10px;}
 
@@ -2401,3 +2401,4 @@ width: 89px;}
 
 .showall-btn:hover{ background:#2386c4; }
 .prayer-find{ margin-bottom:20px;}
+.main-payer-section #grp_post_list li{ margin-bottom:5px; }
