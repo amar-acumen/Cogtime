@@ -634,22 +634,13 @@ class Church_new_model extends Base_model
         {
           $ret_=0;
          
-				
-//		  $s_qry = "SELECT COUNT(tab.ringid) AS i_total FROM ((SELECT r.*, r.id AS ringid, c.s_category_name AS s_category_name, CONCAT(u.s_first_name,' ',u.s_last_name) AS owner_name
-//							FROM {$this->db->RING} r LEFT JOIN {$this->db->USERS} AS u 
-//								ON r.i_user_id=u.id , {$this->db->RING_CAT} c WHERE r.i_category_id=c.id AND r.i_isenabled=1 "
-//						.$s_where.") UNION".
-//						"(SELECT r.*, r.id AS ringid, c.s_category_name AS s_category_name, CONCAT(u.s_first_name,' ',u.s_last_name) AS owner_name
-//							FROM {$this->db->RING} r LEFT JOIN {$this->db->USERS} AS u 
-//								ON r.i_user_id=u.id , {$this->db->RING_CAT} AS c ,{$this->db->RING_INV_USER} AS inv 
-//								WHERE r.i_category_id=c.id AND r.i_isenabled=1 AND inv.i_ring_id=r.id AND inv.i_joined = 1 ".$s_where1.")) AS tab"; 
-          #echo $s_qry;
+
            $s_qry = 'select count(*)as total from cg_church_prayer_group where 1 '.$s_where.'   ';
            //echo ($s_qry);exit;
 		  $rs=$this->db->query($s_qry);
                   $result = $rs->result_array();
                  // pr($result);
-                 // echo $result[0]['total'];
+                  echo $result[0]['total'];
                   return $result[0]['total'];
           //$i_cnt=0;
          // pr($rs->result(),1);
