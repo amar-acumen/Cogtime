@@ -154,7 +154,7 @@ class My_blog_post_model extends Base_model {
 
     public function get_detail_by_id($id) {
 
-        $sql = sprintf("SELECT p.*, CONCAT(u.s_first_name,' ',u.s_last_name) as user_name FROM " . $this->db->USER_BLOG_POST . " as p LEFT JOIN " . $this->db->USERS . " as u on p.i_user_id=u.id  where p.id = %s", $id);
+        $sql = sprintf("SELECT p.*, CONCAT(u.s_first_name,' ',u.s_last_name) as user_name, u.s_profile_photo,u.e_gender FROM " . $this->db->USER_BLOG_POST . " as p LEFT JOIN " . $this->db->USERS . " as u on p.i_user_id=u.id  where p.id = %s", $id);
         $query = $this->db->query($sql); #echo $this->db->last_query(); exit;
 
         $result_arr = $query->result_array();
@@ -232,7 +232,7 @@ class My_blog_post_model extends Base_model {
 
     public function show_all_comments($s_where, $i_start = null, $i_limit = null, $s_order_by = null) {
         try {
-            $s_qry = "SELECT c.* , CONCAT(u.s_first_name,' ', u.s_last_name) AS s_profile_name 
+            $s_qry = "SELECT c.* , CONCAT(u.s_first_name,' ', u.s_last_name) AS s_profile_name, u.s_profile_photo,u.e_gender 
 						FROM {$this->db->USER_BLOG_POST_COMMENTS} AS c,{$this->db->USERS} u "
                     . $s_where . " AND c.i_user_id=u.id ";
 
@@ -326,7 +326,7 @@ class My_blog_post_model extends Base_model {
     }
 
     public function getCommentsbyArticleId($s_where, $i_start = null, $i_limit = null, $s_order_by = null) {
-        $s_qry = "SELECT c.* , CONCAT(u.s_first_name,' ', u.s_last_name) AS s_profile_name 
+        $s_qry = "SELECT c.* , CONCAT(u.s_first_name,' ', u.s_last_name) AS s_profile_name,u.s_profile_photo,u.e_gender 
 						FROM {$this->db->USER_BLOG_POST_COMMENTS} AS c,{$this->db->USERS} u "
                 . $s_where . " AND c.i_user_id=u.id ";
 
@@ -342,7 +342,8 @@ class My_blog_post_model extends Base_model {
         $s_order_by = ($s_order_by != '') ? 'ORDER BY ' . $s_order_by : 'ORDER BY id DESC';
 
         $sql = " SELECT BP.*, 
-					CONCAT(U.s_first_name,' ', U.s_last_name) AS s_profile_name
+					CONCAT(U.s_first_name,' ', U.s_last_name) AS s_profile_name,
+					U.s_profile_photo,U.e_gender
 					FROM {$this->db->USER_BLOG_POST} BP
 					LEFT JOIN {$this->db->USER_BLOGS} B ON B.id = BP.i_blog_id
 					LEFT JOIN  {$this->db->USERS} U ON U.id = BP.i_user_id 
@@ -385,7 +386,8 @@ class My_blog_post_model extends Base_model {
 
         $sql = " SELECT B.*, 
 					U.id as user_id,
-					CONCAT(U.s_first_name,' ', U.s_last_name) AS s_profile_name
+					CONCAT(U.s_first_name,' ', U.s_last_name) AS s_profile_name,
+					U.s_profile_photo,U.e_gender
 					FROM 
 					{$this->db->USERS} U 
 					LEFT JOIN {$this->db->USER_BLOGS} B ON B.i_user_id = U.id					
@@ -446,7 +448,7 @@ public function get_blog_post_by_user_id($i_user_id, $s_where, $i_start_limit=''
         
     }
       public function get_all_blog_comment_blogid($i_blog_id){
-            {$sql="select distinct c.* ,CONCAT(u.s_first_name,' ', u.s_last_name) s_profile_name, u.s_profile_photo from cg_users u ,cg_user_blog_post_comments c where u.id = c.i_user_id AND c.i_blog_post_id='$i_blog_id' ";}
+            {$sql="select distinct c.* ,CONCAT(u.s_first_name,' ', u.s_last_name) s_profile_name, u.s_profile_photo,u.e_gender from cg_users u ,cg_user_blog_post_comments c where u.id = c.i_user_id AND c.i_blog_post_id='$i_blog_id' ";}
 //echo $sql; exit;
 $query=$this->db->query($sql);
 $result_arr=$query->result_array();
@@ -457,7 +459,7 @@ return $result_arr;
             
         }
         public function get_blog_all_comments($s_where,$i_start_limit='', $i_no_of_page=''){
-            $sql = "select c.*,p.s_post_title,p.s_post_description,u.s_first_name, u.s_last_name from cg_user_blog_post_comments c,cg_user_blog_post p ,cg_users u $s_where and c.i_blog_post_id = p.id and u.id = c.i_user_id ORDER BY c.id DESC limit ".$i_start_limit.",".$i_no_of_page;
+            $sql = "select c.*,p.s_post_title,p.s_post_description,u.s_first_name, u.s_last_name,u.s_profile_photo,u.e_gender from cg_user_blog_post_comments c,cg_user_blog_post p ,cg_users u $s_where and c.i_blog_post_id = p.id and u.id = c.i_user_id ORDER BY c.id DESC limit ".$i_start_limit.",".$i_no_of_page;
             //echo $sql;
             //exit;
             $query=$this->db->query($sql);
