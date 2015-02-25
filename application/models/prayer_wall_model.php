@@ -14,7 +14,7 @@ class Prayer_wall_model extends Base_model
         $s_order_by = ($s_order_by != '')?'ORDER BY '.$s_order_by :'ORDER BY id DESC';
        
         
-         $sql = "SELECT p.*, CONCAT(u.s_first_name,' ',u.s_last_name) posted_by,u.s_profile_photo,mst_c.s_country, 
+         $sql = "SELECT p.*, CONCAT(u.s_first_name,' ',u.s_last_name) posted_by,u.s_profile_photo,u.e_gender,mst_c.s_country, 
                 u.i_city_id,u.i_state_id
                 FROM 
                 {$this->db->BIBLE_PRAYER_REQUEST} p 
@@ -60,7 +60,7 @@ class Prayer_wall_model extends Base_model
     
     public function get_testimonial_detail_by_prayer_wall_id($id)
     {
-        $sql = "SELECT t.*, CONCAT(u.s_first_name,' ',u.s_last_name) posted_by
+        $sql = "SELECT t.*, CONCAT(u.s_first_name,' ',u.s_last_name) posted_by,u.s_profile_photo,u.e_gender
                 FROM {$this->db->BIBLE_PRAYER_REQUEST_TESTIMONIES} t
                 LEFT JOIN {$this->db->BIBLE_PRAYER_REQUEST} p ON t.i_prayer_req_id = p.id
                 LEFT JOIN {$this->db->USERS} u ON u.id = p.i_user_id
@@ -112,6 +112,7 @@ class Prayer_wall_model extends Base_model
       $sql = "SELECT p.*, 
 				   	   CONCAT(u.s_first_name,' ',u.s_last_name) s_profile_name,
 					   u.s_profile_photo,
+					   u.e_gender,
 					   mst_c.s_country, 
                 	   u.i_city_id,
 					   u.i_state_id,
@@ -178,7 +179,7 @@ class Prayer_wall_model extends Base_model
         $sql = "SELECT  p.*,
 						mst_c.s_country,
 						CONCAT(u.s_first_name,' ', u.s_last_name) s_profile_name,
-						u.s_profile_photo
+						u.s_profile_photo,u.e_gender,
                 FROM 
                 {$this->db->BIBLE_PRAYER_REQUEST} p 
 				LEFT JOIN {$this->db->USERS} u on u.id=p.i_user_id 
@@ -211,6 +212,7 @@ class Prayer_wall_model extends Base_model
 								   mst_c.s_country,
 								   CONCAT(u.s_first_name,' ', u.s_last_name) s_profile_name,
 								   u.s_profile_photo,
+								   u.e_gender,
 								   pt.s_description,
 								   pt.dt_insert_date
 								   
@@ -341,7 +343,8 @@ class Prayer_wall_model extends Base_model
 								  p.dt_start_date prayer_req_start_date,
 								  p.dt_end_date prayer_req_end_date,
 								  p.dt_insert_date prayer_req_insert_date,
-								  CONCAT(u.s_first_name,' ',u.s_last_name) posted_by,
+								  CONCAT(u.s_first_name,' ',u.s_last_name) posted_by
+								  ,u.s_profile_photo,u.e_gender,
 								  (SELECT 'Y' FROM {$this->db->BIBLE_PRAYER_REQUEST} p1 WHERE p1.i_user_id = '%5\$s' AND p1.id=p.id
 								  ) as owner_post
 								  
@@ -369,7 +372,7 @@ class Prayer_wall_model extends Base_model
 								  p.dt_start_date prayer_req_start_date,
 								  p.dt_end_date prayer_req_end_date,
 								  p.dt_insert_date prayer_req_insert_date,
-								  CONCAT(u.s_first_name,' ',u.s_last_name) posted_by,
+								  CONCAT(u.s_first_name,' ',u.s_last_name) posted_by,u.s_profile_photo,u.e_gender,
 								  (SELECT 'Y' FROM {$this->db->BIBLE_PRAYER_REQUEST} p1 WHERE p1.i_user_id = '%5\$s' AND p1.id=p.id
 								  ) as owner_post
 								  
@@ -464,7 +467,7 @@ class Prayer_wall_model extends Base_model
                                   p.dt_start_date prayer_req_start_date,
                                   p.dt_end_date prayer_req_end_date,
                                   p.dt_insert_date prayer_req_insert_date,
-                                  CONCAT(u.s_first_name,' ',u.s_last_name) posted_by,
+                                  CONCAT(u.s_first_name,' ',u.s_last_name) posted_by,u.s_profile_photo,u.e_gender,
                                   (SELECT 'Y' FROM {$this->db->BIBLE_PRAYER_REQUEST} p1 WHERE p1.i_user_id = '{$user_id}' AND p1.id=p.id
                                   ) as owner_post
                                   
@@ -532,6 +535,7 @@ class Prayer_wall_model extends Base_model
 				 (SELECT p.*, 
 						   CONCAT(u.s_first_name,' ',u.s_last_name) s_profile_name,
 						   u.s_profile_photo,
+						   u.e_gender,
 						   mst_c.s_country, 
 						   u.i_city_id,
 						   u.i_state_id,
@@ -561,6 +565,7 @@ class Prayer_wall_model extends Base_model
                 (SELECT p.*, 
 						   CONCAT(u.s_first_name,' ',u.s_last_name) s_profile_name,
 						   u.s_profile_photo,
+						   u.e_gender,
 						   mst_c.s_country, 
 						   u.i_city_id,
 						   u.i_state_id,
@@ -592,6 +597,7 @@ class Prayer_wall_model extends Base_model
 				 (SELECT p.*, 
 						   CONCAT(u.s_first_name,' ',u.s_last_name) s_profile_name,
 						   u.s_profile_photo,
+						   u.e_gender,
 						   mst_c.s_country, 
 						   u.i_city_id,
 						   u.i_state_id,

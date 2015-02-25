@@ -45,7 +45,8 @@ class Prayer_commit_model extends CI_Model {
 								   c.dt_created_on, 
 								   mst_c.s_country,
 								   CONCAT(u.s_first_name,' ', u.s_last_name) s_profile_name,
-								   u.s_profile_photo
+								   u.s_profile_photo,
+								   u.e_gender
 								   
 						FROM %1\$sbible_prayer_commitments c, %1\$susers u 
 						LEFT JOIN {$this->db->COUNTRY} mst_c on mst_c.id=u.i_country_id
