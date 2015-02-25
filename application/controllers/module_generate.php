@@ -109,7 +109,6 @@ class Module_generate extends CI_Controller {
                     'js/jquery.naviDropDown.1.0.js',
                     'js/church_login.js',
                     'js/frontend/logged/holy_place/prayer_group.js'
-
                 );
                 $js = '';
                 foreach($files_js as $data){
