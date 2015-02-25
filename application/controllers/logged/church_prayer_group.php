@@ -16,7 +16,7 @@ include(APPPATH.'controllers/base_controller.php');
 class Church_prayer_group extends Base_controller
 {
     
-    private $pagination_per_page =  1;
+    private $pagination_per_page =  10;
 	private $post_pagination_per_page = 5;
 	private $notification_per_page = 15;
 
