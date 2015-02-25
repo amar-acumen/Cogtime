@@ -129,23 +129,8 @@
                         ?>
                         <input type="checkbox" name="chk_pp" id="chk_pp" <?= ( $arr_profile_info['user_status']['i_isprayerpartner'] == 1) ? 'checked="checked"' : '' ?> value="1" />
                         My Prayer Partners
-
                     <?php } ?></span>
-					
-					<a  href="javascript:void(0);"   onclick="updateOnlineStatus()" style=" background:#013d62;
-   
-    color: #fff;
-    cursor: pointer;
-    float: right;
-    font-family: 'GibsonRegular';
-    font-size: 13px;
-    margin-top: 5px;
-	padding:0 5px;
-	margin-right:5px;
-	text-decoration:none;
-	margin-bottom: 4px;
-	font-weight:normal;
-    ">update</a>
+					<a  href="javascript:void(0);"   onclick="updateOnlineStatus()" style=" background:#013d62;color: #fff;cursor: pointer;float: right;font-family: 'GibsonRegular';font-size: 13px;margin-top: 5px;padding:0 5px;margin-right:5px;text-decoration:none;margin-bottom: 4px;font-weight:normal;">update</a>
             </span>
         </span>         
     </span>
@@ -414,16 +399,11 @@ alert(response.success);	//update backbone model
             </div>
                <div class="shade_box_white" style="padding:8px 0px;">
                    <textarea rows="4" cols="50" name="s_bio" id="s_bio" maxlength="50"></textarea><br><br>
-                 <input name="" type="button" value="Save" class="btn" onclick="save_bio($('#s_bio').val());" />
-              
-            </div>
+                 <input name="" type="button" value="Save" class="btn" onclick="save_bio($('#s_bio').val());" />       </div>
             
       </div>
       <div class="bot"><div>&nbsp;</div></div>
 </div>
-
-
-
 
 <!----------------------------------------display large profile image----------------->
  <div class="lightbox large-img" >
