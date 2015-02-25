@@ -2398,8 +2398,6 @@ width: 89px;}
 
 .prayer-search-main input[type="button"]{ background:url(../images/find.png) top right no-repeat; width:17px; height:17px; display:block; border:none; cursor:pointer; float:right; margin:8px 5px 0 0;}
 
-
-
 .showall-btn{ width:70px; height:27px; line-height:29px; color:#fff; text-align:center; cursor:pointer; font-size:12px; background:#096aa7; border:0; font-family: 'GibsonRegular'; font-weight:normal; float:right; text-decoration:none;}
 
 .showall-btn:hover{ background:#2386c4; }
