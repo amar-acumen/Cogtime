@@ -581,34 +581,13 @@ class Church_new_model extends Base_model
            // die('dd');
 		  	$ret_=array();
 			
-			//$language = get_current_language();
 			
-//			$s_qry = "(SELECT r.*, r.id AS ringid, c.s_category_name AS s_category_name, CONCAT(u.s_first_name,' ',u.s_last_name) AS owner_name,
-//							(SELECT COUNT(id) FROM {$this->db->USER_RING_POST} WHERE i_ring_id=r.id) AS post,
-//							(SELECT COUNT(cm.id) FROM {$this->db->USER_RING_POST} AS po, {$this->db->USER_RING_POST_COMMENTS} AS cm WHERE po.id=cm.i_ring_post_id AND po.i_ring_id=r.id) AS cmt,
-//							(SELECT COUNT(lk.id) FROM {$this->db->USER_RING_POST} AS po, {$this->db->USER_RING_POST_LIKE} AS lk WHERE po.id=lk.i_ring_post_id AND po.i_ring_id=r.id) AS lik
-//							FROM {$this->db->RING} r LEFT JOIN {$this->db->USERS} AS u 
-//								ON r.i_user_id=u.id , {$this->db->RING_CAT} c WHERE r.i_category_id=c.id AND r.i_isenabled=1 "
-//						.$s_where.") UNION".
-//						"(SELECT r.*, r.id AS ringid, c.s_category_name AS s_category_name, CONCAT(u.s_first_name,' ',u.s_last_name) AS owner_name,
-//							(SELECT COUNT(id) FROM {$this->db->USER_RING_POST} WHERE i_ring_id=r.id) AS post,
-//							(SELECT COUNT(cm.id) FROM {$this->db->USER_RING_POST} AS po, {$this->db->USER_RING_POST_COMMENTS} AS cm WHERE po.id=cm.i_ring_post_id AND po.i_ring_id=r.id) AS cmt,
-//							(SELECT COUNT(lk.id) FROM {$this->db->USER_RING_POST} AS po, {$this->db->USER_RING_POST_LIKE} AS lk WHERE po.id=lk.i_ring_post_id AND po.i_ring_id=r.id) AS lik
-//							FROM {$this->db->RING} r LEFT JOIN {$this->db->USERS} AS u 
-//								ON r.i_user_id=u.id , {$this->db->RING_CAT} AS c ,{$this->db->RING_INV_USER} AS inv 
-//								WHERE r.i_category_id=c.id AND r.i_isenabled=1 AND inv.i_ring_id=r.id AND inv.i_joined = 1 ".$s_where1.")"; 
-                
-          //////////For Pagination///////////*don't change*/
-          //$s_qry=str_replace("'","''",$s_qry);//for string operation in procedure
                        $s_qry = 'select * from cg_church_prayer_group where 1 '.$s_where.'  ';
           $s_qry= $s_qry.(trim($s_order_by)!=""?" ORDER BY ".$s_order_by."":"ORDER BY id DESC")." ".(is_numeric($i_start) && is_numeric($i_limit)?" LIMIT ".intval($i_start).",".intval($i_limit):"");
 		 
-		  echo ($s_qry);exit;
-          //////////end For Pagination//////////                
-                
-          //$this->db->trans_begin();///new                
+		            
           $rs=$this->db->query($s_qry); 
-         // ;
+         
          $result=$rs->result();
          $user_id = intval(decrypt($this->session->userdata('user_id')));
 			foreach($result as $key=>$res)
