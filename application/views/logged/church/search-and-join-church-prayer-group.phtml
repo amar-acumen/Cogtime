@@ -16,10 +16,10 @@
 	 <div class="activity-comment-box">
        <div class="prayer-find">
     <div class="prayer-search-main">
-	<form name="search_frm" id="search_frm" method="POST" action="">
-    <input type="text" placeholder="Find a member" name="search_data" id="search_data" value="">
-       <input type="button" name="search_btn" id="search_btn" onclick="return search_result();">
-	   <input type="hidden" id="search_basic" name="search_basic" value="Y">
+	  <form id="search_prayer_grp"  action="" method="post">
+    <input type="text" placeholder="Prayer Group Name" name="txt_name" id="txt_name" value="">
+    
+       <input type="button" value="Search" id="create_bt" onclick="searchPrayerGrp()" />
 	</form>
    
     </div>
