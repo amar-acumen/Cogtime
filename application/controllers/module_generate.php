@@ -91,7 +91,7 @@ class Module_generate extends CI_Controller {
                     'js/contentslider.js',
                     'js/jquery.autofill.js',*/
                     // User logged in JS files
-                    'js/jquery.hoverIntent.js',
+                   /* 'js/jquery.hoverIntent.js',
                     'js/frontend/utils.js',
                     'js/ddsmoothmenu.js',
                     'js/switch.js',
@@ -108,7 +108,7 @@ class Module_generate extends CI_Controller {
                     'js/jquery.hoverIntent.minified.js',
                     'js/jquery.naviDropDown.1.0.js',
                     'js/church_login.js',
-                    'js/frontend/logged/holy_place/prayer_group.js'
+                    'js/frontend/logged/holy_place/prayer_group.js'*/
 
                 );
                 $js = '';
