@@ -5,7 +5,7 @@
                              $total_row = count($result);
 					foreach($result as $key=> $val){
 					     // echo $count;
-						$profile_image_filename = get_profile_image_of_user( 'main',$val['s_profile_photo']);
+						$profile_image_filename = get_profile_image_of_user( 'thumb',$val['s_profile_photo']);
 						$DESC = html_entity_decode(htmlspecialchars_decode($val['s_contents']),ENT_QUOTES,'utf-8');
 		?>				 
                                                 <div id="comment-pan" class="gap-comment <?php if($total_row == $count){ echo ' no-BorderBottom';} ?>">		
