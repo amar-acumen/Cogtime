@@ -491,7 +491,7 @@ class Compose_msg extends Base_controller
 				foreach($total_contact_arr as $k=> $val)
 				{	
 						$thumb_html ='';
-						$thumb  = get_profile_image($val['user_id'],'thumb');	
+						$thumb  = get_profile_image_of_user('thumb',$val['s_profile_photo'],$val['e_gender']);	
 						
 						$thumb_html =  '<div class="tweeter-thumb" style="background:url('.$thumb.') no-repeat center;width:36px; height:36px; float:left;" ></div><span style="float:right;width:265px;">'.$val['s_displayname'].'</span>'."\n";
 						
