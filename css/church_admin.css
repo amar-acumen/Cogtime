@@ -348,7 +348,7 @@ float:left;
 
 .admin-menu{  background:#3b3b3b; -webkit-box-shadow: 1px 1px 3px 0px #d7d7d7; box-shadow: 1px 1px 3px 0px #d7d7d7; margin-bottom:21px; border-top:0; font-family: 'GibsonRegular'; border:1px solid #d6d6d6; border-top:0;}
 
-.admin-menu ul{ margin:0; padding:0; overflow:hidden; width:100%;}
+.admin-menu ul{ margin:0; padding:0; width:100%;}
 .admin-menu ul li{ list-style-type:none; color:#48535a; font-size:14px; margin:0 10px; padding:0; float:left; position:relative;}
 .admin-menu ul li a{ margin:0 0 0 0px; padding:12px 3px 11px 3px; color:#fff; text-decoration:none; text-transform:uppercase; display:block; border-bottom:3px solid #3b3b3b;}
 .admin-menu ul li a:hover, .admin-menu ul li a.active{ color:#face01; border-bottom:3px solid #face01;}
