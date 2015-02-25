@@ -571,6 +571,24 @@ class Church_new_model extends Base_model
                  return $result;
         
     }
+	
+	function get_church_invited_members($c_id,$where='',$i_start=0,$order_by='id DESC',$i_limit=0){
+    		$limit = (is_numeric($i_start) && is_numeric($i_limit)) ? " Limit " . intval($i_start) . "," . intval($i_limit) : '';
+        	$order_by =  " ORDER BY {$order_by}" ;
+            $sql = 'select * from cg_church_member_invitation WHERE church_id = "'.$c_id.'" AND '.$where.' '.$order_by.' '.$limit.'';
+				//echo $sql;
+            $query = $this->db->query($sql);
+            $result = $query->result();
+            return $result;
+        }
+	function get_church_invited_members_count($c_id,$where=''){
+	
+            $sql = 'select COUNT(*) AS totrow from cg_church_member_invitation WHERE church_id = '.$c_id.' AND '.$where;
+				//echo $sql;
+            $query = $this->db->query($sql);
+            $result = $query->result();
+            return $result[0]->totrow;
+        }
 				
 				
 }

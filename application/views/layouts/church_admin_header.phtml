@@ -85,7 +85,11 @@
 
           <li><a <?php if($page_location == 'church_setting'){  ?> class="active" <?php } ?> href="<?= base_url().'church_setting' ?>">Manage site</a></li>
 
-          <li><a <?php if($page_location == 'church_member'){  ?> class="active" <?php } ?> href="<?php echo base_url().'church_member'?>">Members</a></li>
+          <li><a <?php if($page_location == 'church_member'){  ?> class="active" <?php } ?> href="<?php echo base_url().'church_member'?>">Members</a>
+		  <ul>
+			<li><a <?php if($page_location == 'church_invited_member'){  ?> class="active" <?php } ?> href="<?php echo base_url().'church_invited_member'?>">Invited Members</a></li>
+			</ul>
+		  </li>
 
           <li><a <?php if($page_location == 'church-subadmin'){  ?> class="active" <?php } ?> href="<?= base_url().'church-subadmin' ?>">Sub Admin</a></li>
 
