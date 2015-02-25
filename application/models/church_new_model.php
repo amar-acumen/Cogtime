@@ -669,8 +669,8 @@ class Church_new_model extends Base_model
            //echo ($s_qry);exit;
 		  $rs=$this->db->query($s_qry);
                   $result = $rs->result_array();
-                  pr($result);
-                  echo $result[0]['total'];
+                 // pr($result);
+                 // echo $result[0]['total'];
                   return $result[0]['total'];
           //$i_cnt=0;
          // pr($rs->result(),1);
