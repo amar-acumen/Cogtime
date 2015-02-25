@@ -5123,20 +5123,23 @@ function get_prayer_group_member_count_by_grp_id($gid){
     $sql = $ci->db->query('select count(*) as count from cg_church_prayer_group_members where i_prayer_group_id="' . $gid . '" and s_status="accepted"');
     //echo $sql;
     $res = $sql->result_array();
-    if ($res['0']['count'] > 0) {
-        return true;
-    } else
-        return false;  
+    return $res['0']['count'];
+//    if ($res['0']['count'] > 0) {
+//        return true;
+//    } else
+//        return false;  
 }
 function get_prayer_group_post_count_by_grp_id($gid){
    $ci = & get_instance();
     $sql = $ci->db->query('select count(*) as count from cg_church_prayer_group_post where i_prayer_group_id="' . $gid . '" ');
     //echo $sql;
-    echo $sql = $ci->db->last_query();
+    //echo $sql = $ci->db->last_query();
     $res = $sql->result_array();
-    pr($res);
-    if ($res['0']['count'] > 0) {
-        return true;
-    } else
-        return false;  
+    
+    return $res['0']['count'];
+   // pr($res,1);
+//    if ($res['0']['count'] > 0) {
+//        return true;
+//    } else
+//        return false;  
 }
