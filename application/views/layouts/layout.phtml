@@ -73,6 +73,7 @@
 					refreshing_node = true;
 					try{clearTimeout(refreshingTimer);}catch(eeeee){}
 					refreshingTimer = setTimeout(function(){
+						conole.log('forcing refreshing node');
 						refreshing_node = false;
 					},35000);
 					$('head').append(obj);
