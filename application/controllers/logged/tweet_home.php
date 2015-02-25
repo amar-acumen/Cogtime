@@ -42,6 +42,7 @@ class Tweet_home extends Base_controller {
             show_error($err_obj->getMessage());
         }
     }
+    
 
     public function index() {
         try {
