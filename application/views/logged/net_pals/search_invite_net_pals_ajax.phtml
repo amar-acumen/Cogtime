@@ -21,7 +21,7 @@
                                 $address['city'] = $r['s_city'];
                             $add=implode(', ',$address);*/
 							$add=get_user_address_info($r['user_id']);
-                            $img = get_profile_image($r['user_id'],$size ='thumb');
+                            $img = get_profile_image_of_user('thumb',$r['s_profile_photo'],$r['e_gender']);
                             
                            // $profile_link = get_profile_url($r['user_id'],$r['s_displayname']);
 							

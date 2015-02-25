@@ -69,57 +69,9 @@ $(function(){
                                 <div id="contact_list" >
 
                                       <div class="selectRecipients" style="width: 450px; height:210px;">
-                                       <!--<?php 
-
-            
-                                          if(count($contacts)):
-                                             $count_total = 1;
-                                              foreach($contacts as $key=>$val){
-                                                  
-                                                  $img = get_profile_image($val['user_id'], 'thumb');
-                                                  
-                                                  if($val['if_already_friend'] == 'true' || $val['already_added_netpal'] == 'true'){
-                                                           $profile_link = get_profile_url($val['user_id'],$val['user_profile_name']);
-                                                  }
-                                                  else{
-                                                       $profile_link = get_public_profile_url($val['user_id'],$val['user_profile_name']);
-                                                  }
-                                                  
-                                                  $CSS = ($count_total%4 == 0)?'no-right-mrgn':'';
-
-                                           if(!in_array($val['user_id'],$arr_invited_id))             
-                                           {
-                                         ?>
-                                         <div class="image-block <?=$CSS?>">
-                                              <input  type="checkbox"  value="<?=encrypt($val['user_id'])?>" id="chkmember<?=$val['user_id']?>" name="chkmember<?=$val['user_id']?>" />
-                                              <div class="inside">
-                                                  <?php /*?><div style="background:url('<?=$img?>') no-repeat center;width:60px; height:60px;" class="pro_photo2"></div><?php */?>
-                                                  <img alt="Friend" src="<?=$img?>" /><br/><br/><br/>
-                                                  <a href="<?=$profile_link?>" ><span><p><?=$val['s_first_name']?></p></span></a>
-                                              </div>
-                                          </div>
-                                        
-                                            
-                                         <?php    $count_total++;    
-                                           }//end if in_array
-										   
-											  }
-											  else:
-										?>
-                                        		No Recipients.
-                                        <?php
-                                                     
-                                                 endif; 
-                                         ?>
-                                              -->
+                                       
                                               <?php
-											  	/*$ring=get_invited($ring_id,cg_ring_invitation,'i_ring_id');
-												
-												foreach($ring as $val)
-												{
-													$ringinvited[]=$val['user_id'];
-												}
-												#pr($ringinvited);*/
+											  	
 												
 											  	echo get_invitation('ring',$ringinvted);
 											  ?>
@@ -128,8 +80,7 @@ $(function(){
                                       
                                       <div class="field03">
                                         <input id="btn_submit" class="btn" type="button" onclick="return invite_ring()" value="Invite" name="btn_submit" />
-                                        <!--<input id="btn_submit" class="btn" type="button" onclick="" value="Cancel" name="btn_submit">
-                                        -->
+                                        
                                       </div>
                                       
                                       
@@ -138,27 +89,7 @@ $(function(){
                                 <div class="clr"></div>
                                 
                                 
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
                               </div><!--inbox_div_blue-->
-                              <?php
-                              //echo $current_page;
-                              //echo "view more: ".$view_more;
-                              //echo "current_page : ".$current_page;
-                              
-                              ?>
-                            
-                              
-                              
                               
                               
                         </div>
@@ -199,16 +130,7 @@ function invite_ring()
     //showBusyScreen();
     var ring_id = $('#ring_id').val();
     
-   /* var csv_recipient_ids = '';
-    i = 0;
-    $(function() {
-        $(':checkbox:checked').each(function(i){
-            if($(this).attr('id').substr(0, 9) == 'chkmember') {
-                csv_recipient_ids += $(this).val()+',';
-            }
-        });
-    });
-    csv_recipient_ids = csv_recipient_ids.substring(0, csv_recipient_ids.length-1);*/
+   
     
   var frnds=$('#frndinv').val();
   var netpals=$('#netpalinv').val();
