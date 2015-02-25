@@ -668,19 +668,19 @@ class Church_new_model extends Base_model
            $s_qry = 'select count(*) from cg_church_prayer_group where 1 '.$s_where.'   ';
            //echo ($s_qry);exit;
 		  $rs=$this->db->query($s_qry);
-          $i_cnt=0;
-         // pr($rs->result(),1);
-          if(is_array($rs->result()))
-          {
-              foreach($rs->result() as $row)
-              {
-                  $ret_=intval($row->i_total); 
-              }    
-              $rs->free_result();          
-          }
-          $this->db->trans_commit();///new
-          unset($s_qry,$rs,$row,$i_cnt,$s_where);
-          return $ret_;
+          //$i_cnt=0;
+          pr($rs->result(),1);
+//          if(is_array($rs->result()))
+//          {
+//              foreach($rs->result() as $row)
+//              {
+//                  $ret_=intval($row->i_total); 
+//              }    
+//              $rs->free_result();          
+//          }
+//          $this->db->trans_commit();///new
+//          unset($s_qry,$rs,$row,$i_cnt,$s_where);
+//          return $ret_;
         }
         catch(Exception $err_obj)
         {
