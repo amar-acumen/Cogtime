@@ -47,7 +47,11 @@ class Module_generate extends CI_Controller {
                 $files_css = array(
                     'css/style.css',
                     'css/IMchat/chat.css',
-                    'css/gemoticons.css'
+                    'css/gemoticons.css',
+                    //user logged in css
+                    'css/jquery-ui-1.8.2.custom.css',
+                    'css/dd.css',
+                    'css/church.css'
                     //'css/big-slider.css'
                 );
                 $css = '';
@@ -83,8 +87,20 @@ class Module_generate extends CI_Controller {
                    /* 'js/frontend/header_slider.js',
                     'js/contentslider.js',
                     'js/jquery.autofill.js',*/
+                    // User logged in JS files
                     'js/jquery.hoverIntent.js',
-                    'js/frontend/utils.js'
+                    'js/frontend/utils.js',
+                    'js/ddsmoothmenu.js',
+                    'js/switch.js','js/animate-collapse.js',
+                    'js/lightbox.js','js/jquery.dd.js','js/jquery-ui-1.8.2.custom.min.js',
+                    'js/stepcarousel.js',
+                    'js/frontend/logged/tweets/tweet_utilities.js',
+                    'js/frontend/logged/christian_news_js.js',
+                    'js/tab.js',
+                    'js/jquery.flexslider.js'
+                    ,'js/jquery.eislideshow.js',
+                    'js/jquery.hoverIntent.minified.js',
+                    'js/jquery.naviDropDown.1.0.js','js/church_login.js'
 
                 );
                 $js = '';
