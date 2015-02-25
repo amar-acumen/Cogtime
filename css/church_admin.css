@@ -352,7 +352,10 @@ float:left;
 .admin-menu ul li{ list-style-type:none; color:#48535a; font-size:14px; margin:0 10px; padding:0; float:left; position:relative;}
 .admin-menu ul li a{ margin:0 0 0 0px; padding:12px 3px 11px 3px; color:#fff; text-decoration:none; text-transform:uppercase; display:block; border-bottom:3px solid #3b3b3b;}
 .admin-menu ul li a:hover, .admin-menu ul li a.active{ color:#face01; border-bottom:3px solid #face01;}
-.admin-menu ul li ul{ position:absolute; width:150px; background:#3b3b3b;}
+.admin-menu ul li ul{ position:absolute; width:150px; background:#3b3b3b; display:none;}
+.admin-menu ul li ul li a{ border:none;}
+.admin-menu ul li ul li a:hover{ border:none;}
+.admin-menu ul li:hover ul{ display:block;}
 .vector-search #err_csv{ float:left;}
 .form-main-service_edit{ margin-bottom:10px; font-family: 'GibsonRegular'; float:left; margin-right:15px; }
 .form-main-service_edit label{ margin-right:15px; line-height:30px;}
