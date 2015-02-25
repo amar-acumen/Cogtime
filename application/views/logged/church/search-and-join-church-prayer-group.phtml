@@ -55,6 +55,7 @@
 	</div>
     <div class="clear"></div>
     <!-----------------all payer grp---------------------------------->
+    <div id="pry-all">
     <div class="prayer-sub-heading">Prayer Groups</div>
     <div class="all_prayer_grp" id="listingContent">
          <?php echo $listingContent; ?>
@@ -71,7 +72,7 @@
 
                     <div class="view_more" id="show_more_feeds_div"><a href="javascript:void(0);" id="show_more_feeds_link" page_value="<?= $current_page_1 ?>" onclick="show_more_feeds($(this).attr('page_value'))">[view more] </a> </div>
 
-                <?php endif; ?>
+                <?php endif; ?></div>
     <!------------------------------------------------------->
   </div>
 </div>
@@ -112,7 +113,7 @@ function searchPrayerGrp()
                 
                 $('#data_div').show();
                 if(data.html!='') {
-                            $('#listingContent').css('display','none');
+                            $('#pry-all').css('display','none');
                             $('#show_more_feeds_div').css('display','none');
                             $('#grp_post_list').html(data.html);
                         }
