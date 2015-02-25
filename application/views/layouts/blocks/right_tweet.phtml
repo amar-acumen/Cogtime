@@ -2,9 +2,6 @@
 	if($page_name != 'tweets' && $page_name != 'my-tweets' && $home_menu !='1'){ #pr($right_bar['tweet_arr']);
 ?>
  <!-- my tweet -->
-
-
-
 <div class="my_tweet">
       <div class="nw-right-heading">
             <div class="left">
@@ -26,7 +23,6 @@
                           <textarea id="ta_rightbar_post_tweet" name="ta_rightbar_post_tweet" cols="" rows="" onfocus="if(this.value=='Max 140 Characters')this.value='';" onblur="if(this.value=='')this.value='Max 140 Characters';" onkeypress="return restrict_carrige(event);" maxlength="140" >Max 140 Characters</textarea>
                           </div>
                           <input name="" type="button" class="wall-comment-submit" value="Post" onclick="post_rightbar_tweet_text('right_bar')" />
-                      
                   </form>
             </div>
             <div class="project_box no-brdr">
@@ -95,17 +91,7 @@
                <?php 	endforeach;
 			   		 }
 				?>
-				<?php /*if(!empty($data->video) && count($data->video)){ 
-			   ?>
-                <div class="video-image">
-                    <div  class="cogtime-video" id="myvideo_first_thumb_t_<?=$val['id']?>" style="background:url('') no-repeat center;;width:329px; height:212px;" ></div>
-                    <div id="myvideo_big_thumb_t_<?=$val['id']?>" media_id="<?=$val['id']?>"></div> 
-                </div>
-                
-                
-               <?php 	
-			   		 }*/
-				?>
+				
                         </div>
                         <?php } 
                               else if($val['s_type'] == 'retweeted'){
@@ -135,17 +121,7 @@
                <?php 	endforeach;
 			   		 }
 				?>
-				<?php/* if(!empty($data->video) && count($data->video)){ 
-			   ?>
-                <div class="video-image">
-                    <div  class="cogtime-video" id="myvideo_first_thumb_t_<?=$val['id']?>" style="background:url('') no-repeat center;;width:329px; height:212px;" ></div>
-                    <div id="myvideo_big_thumb_t_<?=$val['id']?>" media_id="<?=$val['id']?>"></div> 
-                </div>
-                
-                
-               <?php 	
-			   		 }*/
-				?>
+				
                         </div>
                         <?php } ?>
                         
@@ -315,24 +291,7 @@ $(document).ready(function () {
 var carriage_count = 0;
 function restrict_carrige(e)
 {
-	/*//if(e.keyCode == 13)
-	{
-		$.ajax({
-			type: 'post',
-			url: base_url+'logged/prayer_wall/getCarriageCount',
-			data: {'str':$('#ta_desc').val()},
-			dataType: 'json',
 	
-			success: function (data, status) {
-				
-					if(data.count > 1){
-						return false;
-					}
-				
-				}	// end of success function...
-		});
-	}*/
-	//alert($('#ta_desc').val().replace(/\r/g,"\r").replace(/\n/g,"\n"));
 
 	if(e.keyCode == 13){
 		carriage_count++;

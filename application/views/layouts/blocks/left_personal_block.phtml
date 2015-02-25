@@ -11,7 +11,6 @@
       <div class="nw-content" id="switchdiv021" style="display:none;">
           <ul>
               <li class="last"><a href="organizer-day-view.html" class="<?php echo ($page_name=='organizer-day-view')?'select':'';?>">Organizer</a></li>
-               <?php /*?><li class="last"><a href="my-chat-rooms.html" class="<?php echo ($page_name=='my-chat-rooms')?'select':'';?>">My Chat Rooms</a></li><?php */?>
           </ul>
       </div>
       <br class="clr" />
@@ -40,18 +39,14 @@
 </div>
 <!--messaage box-->
 
-
-
-
 <script type="text/javascript"> 
 // to show clock
 $(document).ready(function(arg) {
 
-//get_unread_msg();
-//setInterval(function(){get_unread_msg()},59000);
+get_unread_msg();
+setInterval(function(){get_unread_msg()},59000);
 });
 
- 
 function get_unread_msg() {
 	//alert(1)
 	$.ajax({
@@ -61,13 +56,11 @@ function get_unread_msg() {
 	   success: function(json_response){
 
 			if(json_response.result = 'success') {
-				//alert(json_response.unread_msg_count);
 				$('#unread_msg_count').html(json_response.unread_msg_count);		
 			}
 			
 		},
 		error: function(){
-			//showUIMsg('Some error occurred. Please try again.');
 		}
 	});
 }

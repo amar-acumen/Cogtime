@@ -1949,9 +1949,9 @@ color:#3b3b3b; margin-right:15px; line-height:30px;
 
 #grp_list tr td p small{ font-size:12px; display:block; color:#48535a;}
 
-.count-02{ background-color: #096aa7; border-radius: 15px; height:12px; width:20px; color: #fff; display: inline-block;
+.count-02{ background-color: #096aa7; border-radius: 15px; height:12px; width:17px; color: #fff; display: inline-block;
 
-font-size: 9px;font-weight: bold; margin-left: 10px; padding: 6px 0 2px 0; margin-right:10px; text-align:center;}
+font-size: 10px;font-weight: normal; margin-left: 10px; padding: 4px 0 2px 0; margin-right:10px; text-align:center;}
 
 #show_more_feeds_link{color:#096aa7; cursor:pointer; font-size:15px; text-decoration:none; text-transform:capitalize; }
 
@@ -2009,9 +2009,9 @@ color: #096aa7;
 
 .prayer-grp-name p small{ font-size:12px;}
 
-.post-txt{ font-size:14px !important; padding-bottom:7px; color:#333 !important; display:block;}
+.post-txt{ font-size:14px !important; padding-bottom:4px; color:#333 !important; display:block;}
 
-.post-user{ color:#096aa7; font-size:13px; padding-bottom:8px; font-weight:normal;}
+.post-user{ color:#096aa7; font-size:13px; padding-bottom:8px; font-weight:normal; display:block;}
 
 
 
@@ -2026,8 +2026,7 @@ color: #096aa7;
 .prayer-notification li{ float:left; margin-right:15px; width:120px; border:1px solid #096aa7; text-align:center; color:#878d91; font-family: 'GibsonRegular'; font-size:14px; padding:7px 0; list-style-type:none; }
 
 .prayer-notification li span{ display:block; font-size:16px; color:#096aa7; padding-bottom:0px;}
-
-
+.prayer-notification li span a{ color:#096aa7; text-decoration:none;}
 
 .prayer-tab{ float:right;}
 
@@ -2121,7 +2120,7 @@ color: #096aa7;
 .searchjoin-btn img{ margin-right:5px;}
 .searchjoin-btn:hover{ color:#2386c4;}
 
-#grp_post_list a{ color:#096aa7;}
+#grp_post_list a{ color:#096aa7; display:block; padding-bottom:0;}
 
 .create-ring .field03 select option{ padding:0 0 0 10px;}
 
@@ -2390,3 +2389,15 @@ width: 89px;}
 .post-radio-list{ font-size:14px; color:#3b3b3b;}
 .post-radio-list input[type="radio"]{ float:left; margin-right:5px;}
 .post-radio-list span{ float:left;}
+
+
+.prayer-search-main{ border:1px solid #d7d7d7; width:398px; height:33px; float:left;}
+
+.prayer-search-main input[type="text"]{ border:none; font-size:12px; color:#3b3b3b; width:350px;padding:0 6px; line-height:33px;}
+
+.prayer-search-main input[type="button"]{ background:url(../images/find.png) top right no-repeat; width:17px; height:17px; display:block; border:none; cursor:pointer; float:right; margin:8px 5px 0 0;}
+
+.showall-btn{ width:70px; height:27px; line-height:29px; color:#fff; text-align:center; cursor:pointer; font-size:12px; background:#096aa7; border:0; font-family: 'GibsonRegular'; font-weight:normal; float:right; text-decoration:none;}
+
+.showall-btn:hover{ background:#2386c4; }
+.prayer-find{ margin-bottom:20px;}

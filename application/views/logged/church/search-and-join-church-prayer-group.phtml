@@ -14,7 +14,19 @@
     <?php include(APPPATH ."views/logged/church/church_prayer_group_left_panel.phtml");?>
 	<div class="activity-right">
 	 <div class="activity-comment-box">
-                                <form id="search_prayer_grp"  action="" method="post" class="create-ring" >
+       <div class="prayer-find">
+    <div class="prayer-search-main">
+	  <form id="search_prayer_grp"  action="" method="post">
+    <input type="text" placeholder="Prayer Group Name" name="txt_name" id="txt_name" value="">
+       <input type="button" value="" id="create_bt" onclick="searchPrayerGrp()" />
+	</form>
+   
+    </div>
+     <div><a href="javascript:void(0);" class="showall-btn">Show All</a></div>
+	<div class="clear"></div>
+    </div>                         
+                                
+                                <form id="search_prayer_grp"  action="" method="post" class="create-ring" style="display:none;">
 								<div class="lable01"> Prayer Group Name:</div>
                                 <div class="field03">
                                     <input type="text" class="amount-input prayer-No-input" name="txt_name" id="txt_name" />
