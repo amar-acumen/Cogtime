@@ -402,7 +402,7 @@ $(document).ready(function() {
 											 //pr($contact_arr);
 											  foreach($contact_arr as $key=>$val){
 												  
-												  $img = get_profile_image($val['user_id'], 'thumb');
+												  $img = get_profile_image('thumb',$val['s_profile_photo'],$val['e_gender']);
 												  
 												  if($val['if_already_friend'] == 'true' || $val['already_added_netpal'] == 'true'){
 												   		$profile_link = get_profile_url($val['user_id'],$val['s_displayname']);
