@@ -84,7 +84,7 @@ public function get_all_tweets_by_user_id($i_user_id, $s_where, $i_start_limit='
 					CONCAT(u.s_first_name,' ', u.s_last_name) s_profile_name,
 					u.s_profile_photo,
 					u.s_tweet_id,
-					
+					u.e_gender,
 					t.id,
 					t.i_owner_id,
 					t.data,
@@ -119,7 +119,7 @@ public function get_all_tweets_by_user_id($i_user_id, $s_where, $i_start_limit='
 					CONCAT(u.s_first_name,' ', u.s_last_name) s_profile_name,
 					u.s_profile_photo,
 					u.s_tweet_id,
-					
+					u.e_gender,
 					t.id,
 					t.i_owner_id,
 					t.data,
