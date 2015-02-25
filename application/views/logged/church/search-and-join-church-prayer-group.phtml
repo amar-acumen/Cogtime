@@ -54,8 +54,24 @@
                             </div>
 	</div>
     <div class="clear"></div>
-                                              									
-    
+    <!-----------------all payer grp---------------------------------->
+    <div class="all_prayer_grp">
+         <?php echo $listingContent; ?>
+    </div>  
+         <?php if ($no_of_result == 0):
+
+                    ?>
+
+                    <div class="shade_box_01" style="padding-top:5px;"><div  class="shade_norecords" style="width:260px;"><p class="blue_bold12">No Prayer Group.</p></div></div>
+
+                <?php endif; ?>	
+
+                <?php if ($no_of_result > $pagination_per_page): ?>
+
+                    <div class="view_more" id="show_more_feeds_div"><a href="javascript:void(0);" id="show_more_feeds_link" page_value="<?= $current_page_1 ?>" onclick="show_more_feeds($(this).attr('page_value'))">[view more] </a> </div>
+
+                <?php endif; ?>
+    <!------------------------------------------------------->
   </div>
 </div>
 <!-- /CONTENT SECTION -->
