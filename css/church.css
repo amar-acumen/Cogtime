@@ -2026,8 +2026,7 @@ color: #096aa7;
 .prayer-notification li{ float:left; margin-right:15px; width:120px; border:1px solid #096aa7; text-align:center; color:#878d91; font-family: 'GibsonRegular'; font-size:14px; padding:7px 0; list-style-type:none; }
 
 .prayer-notification li span{ display:block; font-size:16px; color:#096aa7; padding-bottom:0px;}
-
-
+.prayer-notification li span a{ color:#096aa7; text-decoration:none;}
 
 .prayer-tab{ float:right;}
 
