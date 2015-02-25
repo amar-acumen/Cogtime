@@ -665,11 +665,13 @@ class Church_new_model extends Base_model
 //								ON r.i_user_id=u.id , {$this->db->RING_CAT} AS c ,{$this->db->RING_INV_USER} AS inv 
 //								WHERE r.i_category_id=c.id AND r.i_isenabled=1 AND inv.i_ring_id=r.id AND inv.i_joined = 1 ".$s_where1.")) AS tab"; 
           #echo $s_qry;
-           $s_qry = 'select count(*) from cg_church_prayer_group where 1 '.$s_where.'   ';
+           $s_qry = 'select count(*)as total from cg_church_prayer_group where 1 '.$s_where.'   ';
            //echo ($s_qry);exit;
 		  $rs=$this->db->query($s_qry);
+                  $result = $rs->result();
+                  return $result[0]['total'];
           //$i_cnt=0;
-          pr($rs->result(),1);
+         // pr($rs->result(),1);
 //          if(is_array($rs->result()))
 //          {
 //              foreach($rs->result() as $row)
