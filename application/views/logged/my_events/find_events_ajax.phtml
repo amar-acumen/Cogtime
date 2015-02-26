@@ -45,11 +45,11 @@ if ($no_of_result) {
                             <?php
                             if ($this->session->userdata('loggedin')):
                                 ?>
-                                <p style="margin-right:8px;" class="add-remove-friend"><?php if ((show_event_rsvp($val['id']) == TRUE) && $val['event_owner_id'] != $logged_user_id) { ?><span id="send_rsvp_<?= $val['id'] ?>"><img src="<?= base_url() ?>images/icons/send.png" alt="" /> <a  href="javascript:void(0);" onclick="send_rsvp(<?= $val['id'] ?>)">Send RSVP</a></span><?php } ?></p>
+                                <p style="margin-right:8px;" class="add-remove-friend"><?php if ((show_event_rsvp($val['id']) == TRUE) && $val['event_owner_id'] != $logged_user_id) { ?><span id="send_rsvp_<?= $val['id'] ?>"><img src="<?= base_url() ?>images/icons/send.png" width="16" height="13" alt="" /> <a  href="javascript:void(0);" onclick="send_rsvp(<?= $val['id'] ?>)">Send RSVP</a></span><?php } ?></p>
                                 <?php
                             else:
                                 ?>
-                                <p class="add-remove-friend" style="margin-right:8px;"><img alt="" src="images/icons/send.png" /> <a onclick="return show_login_popup('<?= base64_encode(my_current_url()) ?>')" href="javascript:void(0);">Send RSVP</a></p>
+                                <p class="add-remove-friend" style="margin-right:8px;"><img alt="" width="16" height="13" src="images/icons/send.png" /> <a onclick="return show_login_popup('<?= base64_encode(my_current_url()) ?>')" href="javascript:void(0);">Send RSVP</a></p>
                             <?php
                             endif;
                             ?>   

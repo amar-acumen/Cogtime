@@ -51,7 +51,7 @@
                                        <li><img src="images/icons/cmmnt.png" alt="" width="16" height="16" class="icon-img" /> <a href="javascript:void(0);"  class="blue_link comments_div<?=$val['id']?>"  onclick="return show_comments(<?=$val['id']?>)">Comments (<?=$val['total_comments']?>)</a></li>
                                          <?php if((show_event_rsvp($val['id']) == TRUE) ) { 
 									   ?>
-                                      <li  id="send_rsvp_<?=$val['id']?>"><img src="images/icons/send.png" alt=""  class="icon-img" height="16" width="16"/> <a href="javascript:void(0);" class="blue_link" onclick="send_rsvp(<?=$val['id']?>)">Send RSVP</a></li>
+                                      <li  id="send_rsvp_<?=$val['id']?>"><img src="images/icons/send.png" alt=""  class="icon-img" width="16" height="13"/> <a href="javascript:void(0);" class="blue_link" onclick="send_rsvp(<?=$val['id']?>)">Send RSVP</a></li>
                                       <?php } ?>  
                                       </ul>
 									  
