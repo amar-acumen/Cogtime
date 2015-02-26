@@ -5165,7 +5165,7 @@ function get_prayer_group_post_count_by_grp_id($gid){
     return $res['0']['count'];
 }
 
-function get_video_from_url($url)
+function get_video_from_url($url,$width,$height)
 {
     $CI =& get_instance();
     $CI->load->library('embed_video');
@@ -5173,6 +5173,6 @@ function get_video_from_url($url)
     $config['video_url'] = ($url);
     $CI->embed_video->initialize($config);
     $CI->embed_video->prepare();
-    $image_source = $CI->embed_video->get_player(329, 212);
+    $image_source = $CI->embed_video->get_player($width, $height);
     return $image_source;
 }

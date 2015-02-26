@@ -88,15 +88,14 @@ $feed->comments=get_feed_comments($feed->id,'cg_church_newsfeed_comments','i_fee
             			<?php }?>
 
             			 <!--video play-->
-
              			   <?php if(!empty($data_arr->video) && count($data_arr->video)){ 
-                      $video = get_video_from_url($data_arr->video->url);
+                      $video = get_video_from_url($data_arr->video->url, "447","358");
         
             			   ?>
 
                             <div class="video-image">
 
-                                <div  class="cogtime-video" id="myvideo_first_thumb_<?=$feed->id?>" style="background:url('') no-repeat center;;width:447px; height:358px;" ><?php echo $video['html']?></div>
+                                <div  class="cogtime-video" id="myvideo_first_thumb_<?=$feed->id?>"><?php echo $video['html']?></div>
 
                                 <div id="myvideo_big_thumb_1_<?=$feed->id?>" media_id="<?=$feed->id?>"></div>
 
