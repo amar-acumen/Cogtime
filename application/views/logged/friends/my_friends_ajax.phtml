@@ -5,14 +5,7 @@
 
             $add = array();
             $name = $val['s_displayname'];
-            /* if(!empty($val['s_city']))
-              $add['city']=$val['s_city'];
-              if(!empty($val['s_state']))
-              $add['state']=$val['s_state'];
-              if(!empty($val['i_country_id']))
-              $add['country']= get_country_name_by_id($val['i_country_id']);
-
-              $address = implode(', ',$add); */
+            
             $address = get_user_address_info($val['user_id']);
             $chat_name = get_chat_name_by_id($val['user_id']);
             $img = get_profile_image($val['user_id'], 'thumb');
@@ -33,13 +26,7 @@
                         <p class="add-remove-friend"><img alt="" src="images/icons/remove.png" /> <a href="javascript:void(0);" onclick="delete_confirm_(<?= $val['user_id'] ?>)">Remove</a></p>
                         <p class="blue_bold12"><a  href="<?= $profile_link; ?>" class="left"><?= $name ?>&nbsp;(<?= $chat_name ?>) </a>&nbsp; [ <a class="nogrey_link"><?= check_user_online_hlpr($val['user_id'], 'public', $relation_arr); ?></a> ]<?= $chat_html ?></p>
 
-                        <?php /* ?><a class="nogrey_link"><?=check_user_online_image($val['user_id'])?> <?=get_user_online_status_text($val['user_id'])?></a>
-                          <a href="javascript:void(0);"  onclick="window.open('instant-msg.php',   'windowname2',
-                          'resizable=0, location=1, width=385, height=542');    return false;" class="grey_link">
-                          <?=check_user_online_image($val['user_id'])?></a><a href="javascript:void(0);"
-                          onclick="window.open('instant-msg.php',   'windowname2',
-                          'resizable=0, location=1, width=385, height=542');    return false;" class="grey_link">
-                          <?=get_user_online_status_text($val['user_id'])?></a> <?php */ ?>
+                        
                         <p class="location"><?= $address ?></p>
                         <p class="date-time">Connected Since : <?= getShortDateWithTime($val['dt_created_on'], 6) ?> </p>
 
