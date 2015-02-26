@@ -34,7 +34,7 @@
 													if(count($val['skill_donor_list'])){
 														foreach($val['skill_donor_list'] as $d_val){
 															
-															$profile_image = get_profile_image($d_val['post_owner_user_id'],'thumb');
+															$profile_image = get_profile_image_of_user('thumb',$d_val['s_profile_photo'],$d_val['e_gender']);
 															if($d_val['if_already_friend'] == 'true' || $d_val['already_added_netpal'] == 'true'){
 																	  $profile_link = get_profile_url($d_val['post_owner_user_id'],$d_val['s_profile_name']);
 																}else
