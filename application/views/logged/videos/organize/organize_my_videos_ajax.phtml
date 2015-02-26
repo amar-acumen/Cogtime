@@ -33,7 +33,7 @@ if(count($my_videos_album_content)) {
                     <div class="box01" style="width: 132px;">
                           <p class="date-time">Uploaded on :<?php echo getShortDate($video['dt_created_on'],5)?></p>
                           
-                          <p> <img src="images/icons/edit.png" alt="" /> <a  href="javascript:void(0);" class="blue_link" onclick="return organize_edit_video_(<?= $video['id']?>)">Edit </a> &nbsp; <img src="images/icons/delete.png" alt="" /> <a  href="javascript:void(0);" class="blue_link" onclick="return delete_video_id_set_(<?= $video['id']?>);">Delete</a> </p>
+                          <p> <img src="images/icons/edit.png" alt="" width="16" height="16"/> <a  href="javascript:void(0);" class="blue_link" onclick="return organize_edit_video_(<?= $video['id']?>)">Edit </a> &nbsp; <img src="images/icons/delete.png" alt="" width="13" height="15"/> <a  href="javascript:void(0);" class="blue_link" onclick="return delete_video_id_set_(<?= $video['id']?>);">Delete</a> </p>
                     </div>
                     <p><!--<img src="images/icons/play.png" alt="" /> <a  href="javascript:void(0);" class="blue_link"  onclick="return show_dialog('video_div')"><strong>Play</strong></a>--> &nbsp;  &nbsp; <?=$video['image_rank']?> </p>
                    
