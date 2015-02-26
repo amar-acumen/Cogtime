@@ -48,12 +48,13 @@
                             <h4>Members in the Ring</h4>
                             <div class="members-in-ring">
                                <?php
-                               pr($ring_user_arr);
+                              // pr($ring_user_arr);
 							       if(count($ring_user_arr)){
 									  
 									 foreach( array_slice($ring_user_arr,0,8) as $key => $val){
 										
-										 $img = get_profile_image($val['user_joined_id'], 'thumb'); 
+										// $img = get_profile_image($val['user_joined_id'], 'thumb'); 
+                                                                             $img = get_profile_image_of_user('thumb',$val['s_profile_photo'],$val['e_gender']);
 										 
 							   ?>
                                     <div class="member-block">
