@@ -422,10 +422,3 @@ if($('#ta_tweet_report'+id).val() == ''){
 }
 
 
-
-
-$(document).ready(function() {
-
-  show_video();
-});
-
