@@ -12,7 +12,7 @@ $(function()
 });
 </script>
 <!-- CONTENT SECTION -->
-<?php pr($member_arr); ?>
+<?php // pr($member_arr); ?>
 
 <div class="container-body">
    <?php
@@ -42,7 +42,7 @@ $(function()
             <div class="add-member-main"><ul class="member-list">
             <li>
                 
-                <div class="user-pic" style="background:url(<?= get_profile_image( $member_arr[0]->id, 'thumb') ?>) no-repeat;" title="<?= $user_name ?>"></div>
+                <div class="user-pic" style="background:url(<?= get_profile_image_of_user('thumb',$member_arr[0]->s_profile_photo,$member_arr[0]->e_gender) ?>) no-repeat;" title="<?= $user_name ?>"></div>
                 <div class="right-text"><h4><a href="javascript:void(0);"><?php echo  $member_arr[0]->s_first_name.' '.$member_arr[0]->s_last_name?></a></h4>
                 <!--<p class="designetion">CEO &amp; Founder at The Lazeez Hotel and Restaurant</p>
                 <p class="update-time">Added by Joe about 4 months ago</p></div>-->
