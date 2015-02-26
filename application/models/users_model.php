@@ -789,7 +789,7 @@ class Users_model extends Base_model implements InfModel {
                     $this->session->set_userdata('is_admin', $ret_["i_is_admin"]);
                     $this->session->set_userdata('upassword', $ret_["s_password"]);
                     $this->session->set_userdata('IMuserid', ($ret_["id"]));
-                   $s_photo = $this->session->set_userdata('s_profile_photo', ($ret_["s_profile_photo"]));
+                   $this->session->set_userdata('s_profile_photo', ($ret_["s_profile_photo"]));
                     $this->session->set_userdata('e_gender', ($ret_["e_gender"]));
 
                     $this->session->set_userdata('unique_username', $ret_["s_profile_url_suffix"]);
@@ -801,8 +801,7 @@ class Users_model extends Base_model implements InfModel {
 
                     $this->set_user_online($ret_["id"], $_SERVER['REMOTE_ADDR']);
 
-                echo $s_photo;
-                die('ok')
+                echo $_SESSION['s_profile_photo'];
                     ////////end saving logged in user data into session////
                     //////////log report///
 
