@@ -47,6 +47,7 @@ if(count($arr_tweets)){
 			   		 }
 				?>
 				<?php if(!empty($data->video) && count($data->video)){ 
+          $video = get_video_from_url($data_arr->video->url, "329","212");
 			   ?>
                 <div class="video-image">
                     <div  class="cogtime-video" id="myvideo_first_thumb_<?=$val['id']?>" style="background:url('') no-repeat center;;width:329px; height:212px;" ></div>
@@ -80,17 +81,16 @@ if(count($arr_tweets)){
 							$IMG = base_url()."uploads/tweet_photos/".getThumbName($photo_val,'mid');
 			   ?>
 			   <div class="video-image">
-                     <div class="" style="background:url('<?=$IMG?>') no-repeat center;width:329px; height:212px;" ></div> 
+                     <div class="" style="background:url('<?=$IMG?>') no-repeat center;width:329px; height:212px;" ><?php echo $video['html']?></div> 
                 </div>
                <?php 	endforeach;
 			   		 }
 				?>
-				<?php echo '******************';
-        pr($data);exit;
+				<?php 
         if(!empty($data->video) && count($data->video)){ 
-          echo '===='.$data_arr->video->url;
+          
           $video = get_video_from_url($data_arr->video->url, "329","212");
-          pr($video);
+          
 			   ?>
                 <div class="video-image">
                     <div  class="cogtime-video" id="myvideo_first_thumb_<?=$val['id']?>"><?php echo $video['html']?></div>
