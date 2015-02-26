@@ -69,6 +69,7 @@ class My_wall extends Base_controller {
             ));
 
             parent::_add_css_arr(array(//'css/jquery-ui-1.8.2.custom.css',
+                'css/production.css' => array('media' => 'screen')
             ));
 
 
