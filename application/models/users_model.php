@@ -801,7 +801,7 @@ class Users_model extends Base_model implements InfModel {
 
                     $this->set_user_online($ret_["id"], $_SERVER['REMOTE_ADDR']);
 
-                echo $_SESSION['s_profile_photo']; 
+              //  echo $_SESSION['s_profile_photo']; 
                     ////////end saving logged in user data into session////
                     //////////log report///
 
