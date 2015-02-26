@@ -39,7 +39,7 @@
                                                 <div class="img-upload-section">
                                                     <input name="s_edit_photo_<?=$p_val['id']?>" type="file" size="48" class="file-browsing"/>
                                                     <?php if($key != 0){?>
-                                                    <span onclick="removeExtraImageDiv(<?=$p_val['id']?>, <?=$key+1?>)"><img alt="" src="<?= base_url()?>images/icons/close.png" class="close-img" /></span>
+                                                    <span onclick="removeExtraImageDiv(<?=$p_val['id']?>, <?=$key+1?>)"><img alt="" src="<?= base_url()?>images/icons/close.png" class="close-img" width="24" height="24"/></span>
                                                     <?php }?>
                                                   <div class="add-photo">
                                                       <img src="<?=$IMG?>" alt="" height="80" width="122"/>
@@ -171,7 +171,7 @@ var no_of_divs= parseInt( $("div[class^=img-upload-section]:visible").length );
 no_of_divs++;
 //alert(no_of_divs);
 
-var content = '<div id="img_sec'+no_of_divs+'"><div class="img-upload-section"><input name="s_photo[]" type="file" size="48" class="file-browsing"/><span onclick="removeExtraImageDiv(\'hide_only\','+no_of_divs+')"><img alt="" src="<?= base_url()?>images/icons/close.png" class="close-img" /></span></div><input type="hidden" name="db_photo_id" value=""/><div class="clr"></div></div>';
+var content = '<div id="img_sec'+no_of_divs+'"><div class="img-upload-section"><input name="s_photo[]" type="file" size="48" class="file-browsing"/><span onclick="removeExtraImageDiv(\'hide_only\','+no_of_divs+')"><img alt="" src="<?= base_url()?>images/icons/close.png" class="close-img" width="24" height="24" /></span></div><input type="hidden" name="db_photo_id" value=""/><div class="clr"></div></div>';
 
 $(content).appendTo('#add_more_images');
 }// end of add_extra_div

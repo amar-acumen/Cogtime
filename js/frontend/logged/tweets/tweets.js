@@ -43,24 +43,7 @@ var photos = $('input[name="photo[]"]').map(function(){
 		$('.tab_details .sec-detail').filter(':eq(' + index + ')').show();
 		$('.tab_details .title-body').filter(':eq(' + index + ')').show();
 		var v_id=data.i_id;
-		$.ajax({
-		type: 'post',
-		url: base_url+'logged/tweet_home/get_video/',
-		data: ({'media_id' : data.i_id ,'width':329 ,'height':212}),
-
-		dataType: 'json',
-		success: function (response, status) {
-			if(response.result=='success') {
-				hideLoading();
-			   $('#myvideo_first_thumb_'+v_id).html(response.s_image_source.html);
-			   $('#myvideo_first_thumb_'+v_id).attr('i_media_id',response.i_media_id);
-			}
-		},
-		error: function (response, status, e) {
-			hideLoading();
-			showUIMsg('Some error occurred. Please try again.');
-		}
-		});		
+				
 			
 	  }
 	   if(data.view_more==true)
@@ -439,62 +422,3 @@ if($('#ta_tweet_report'+id).val() == ''){
 }
 
 
-
-
-$(document).ready(function() {
-/*
-//  $('#myvideo_big_thumb_1').click(function(){
-$('[id^="myvideo_big_thumb_1_"]').click(function(){ 
-//alert($(this).attr('media_id'));
-  showLoading(); 
-  var media_id =  $(this).attr('media_id');
-  $.ajax({
-		type: 'post',
-		url: base_url+'logged/tweet_home/get_video/',
-		data: ({'media_id' : media_id ,'width':329 ,'height':212}),
-
-		dataType: 'json',
-		success: function (data, status) {
-			if(data.result=='success') {
-				hideLoading();
-			   $('#myvideo_first_thumb_'+media_id).html(data.s_image_source.html);
-			   $('#myvideo_first_thumb_'+media_id).attr('i_media_id',data.i_media_id);
-			}
-		},
-		error: function (data, status, e) {
-			hideLoading();
-			showUIMsg('Some error occurred. Please try again.');
-		}
-	});
-});
-  $('[id^="myvideo_big_thumb_1_"]').trigger('click');*/
-  show_video();
-});
-
-function show_video()
-{
- 
-//alert($(this).attr('media_id'));
-$('[id^="myvideo_big_thumb_1_"]').each(function(){
-  showLoading(); 
-  var media_id =  $(this).attr('media_id');
-  $.ajax({
-		type: 'post',
-		url: base_url+'logged/tweet_home/get_video/',
-		data: ({'media_id' : media_id ,'width':329 ,'height':212}),
-
-		dataType: 'json',
-		success: function (data, status) {
-			if(data.result=='success') {
-				hideLoading();
-			   $('#myvideo_first_thumb_'+media_id).html(data.s_image_source.html);
-			   $('#myvideo_first_thumb_'+media_id).attr('i_media_id',data.i_media_id);
-			}
-		},
-		error: function (data, status, e) {
-			hideLoading();
-			showUIMsg('Some error occurred. Please try again.');
-		}
-	});
-});
-}

@@ -27,8 +27,8 @@ if(count($manage_my_videos_album_content))
                     <div class="box01">
                         <p class="date-time">Created on : <?php echo getShortDate($album['dt_created_on'],5)?></p>
                         <p class="add-remove-friend">
-                            <img src="images/icons/edit.png" alt="" /> <a href="<?php echo get_edit_video_album_url($album['id'],$album['s_name'])?>">Edit  </a>  &nbsp;      
-                            <img src="images/icons/delete.png" alt="" /> <a href="javascript:void(0);" onclick="show_dialog('delete-page-popup');set_del_album_id(<?php echo $album['id']?>)">Delete</a>
+                            <img src="images/icons/edit.png" alt="" width="16" height="16"/> <a href="<?php echo get_edit_video_album_url($album['id'],$album['s_name'])?>">Edit  </a>  &nbsp;      
+                            <img src="images/icons/delete.png" alt="" width="13" height="15"/> <a href="javascript:void(0);" onclick="show_dialog('delete-page-popup');set_del_album_id(<?php echo $album['id']?>)">Delete</a>
                             <?//return delete_video_album_(<?php echo $album['id']?>
                         </p>
                     </div>
