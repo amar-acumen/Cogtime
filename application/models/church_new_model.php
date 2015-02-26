@@ -360,7 +360,7 @@ class Church_new_model extends Base_model
 						  pg_mem.dt_joined_on,
 						  pg.s_group_name,
 						  pg.i_owner_id,
-						  pg_mem.i_prayer_group_id
+						  pg_mem.i_prayer_group_id ,u.e_gender,u.s_profile_photo
 						  FROM  cg_church_prayer_group_members pg_mem
 						  LEFT JOIN cg_church_prayer_group pg ON pg.id = pg_mem.i_prayer_group_id
 						  LEFT JOIN cg_users u ON pg_mem.i_user_id = u.id
@@ -392,7 +392,7 @@ class Church_new_model extends Base_model
 						  pg_mem.dt_joined_on,
 						  pg.s_group_name,
 						  pg.i_owner_id,
-						  pg_mem.i_prayer_group_id
+						  pg_mem.i_prayer_group_id,u.s_profile_photo , u.e_gender
 						  FROM  cg_church_prayer_group_members pg_mem
 						  LEFT JOIN cg_church_prayer_group pg ON pg.id = pg_mem.i_prayer_group_id
 						  LEFT JOIN cg_users u ON pg_mem.i_user_id = u.id
@@ -447,7 +447,7 @@ class Church_new_model extends Base_model
 						  pg_mem.dt_joined_on,
 						  pg.s_group_name,
 						  pg.i_owner_id,
-						  pg_mem.i_prayer_group_id
+						  pg_mem.i_prayer_group_id,u.s_profile_photo,u.e_gender
 						  FROM  cg_church_prayer_group_members pg_mem
 						  LEFT JOIN cg_church_prayer_group pg ON pg.id = pg_mem.i_prayer_group_id
 						  LEFT JOIN cg_users u ON pg_mem.i_user_id = u.id
@@ -479,7 +479,7 @@ class Church_new_model extends Base_model
 						  pg_mem.dt_joined_on,
 						  pg.s_group_name,
 						  pg.i_owner_id,
-						  pg_mem.i_prayer_group_id
+						  pg_mem.i_prayer_group_id,u.s_profile_photo,u.e_gender
 						  FROM  cg_church_prayer_group_members pg_mem
 						  LEFT JOIN cg_church_prayer_group pg ON pg.id = pg_mem.i_prayer_group_id
 						  LEFT JOIN cg_users u ON pg_mem.i_user_id = u.id
