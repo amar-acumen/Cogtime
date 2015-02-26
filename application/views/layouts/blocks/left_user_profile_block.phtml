@@ -1,4 +1,4 @@
-<?= $_SESSION['s_profile_photo']; ?>
+<?= $_SESSION['s_profile_photo'].'hello'; ?>
 <div class="nw-left-profile">
     <a href="javascript:void(0)"  class="nw-profile-link" onclick="show_dialog('large-img');"> <div style="background:url(<?= get_profile_image_of_user('thumb',$_SESSION['s_profile_photo'], $_SESSION['e_gender']);?>) no-repeat center;width:60px; height:60px;" title="member" class="pro_photo4 user_pro_image" ></div></a>
     <p class="wall-name"><a href="my-wall.html"><?= $arr_profile_info['s_profile_name'] ?></a> &nbsp;</p>
