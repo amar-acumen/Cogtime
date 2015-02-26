@@ -1575,8 +1575,8 @@ echo json_encode( array('success'=>'true'));
 				}
 				
 				$invited_member = array(
-					'name' = $name,
-					'email' = $email,
+					'name' => $name,
+					'email' => $email,
 					'invitation_sent_date' => get_db_datetime()
 				);
 			$this->db->insert('cg_church_member_invitation', $invited_member);	
