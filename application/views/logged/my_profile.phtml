@@ -282,9 +282,7 @@ include(APPPATH . "views/layouts/nav.phtml");
                                  <!------------------------------------------>
                                 <div class="prvimg">
                                     <input type="hidden" value="<?= $arr_profile_info['id'] ?>" id="prf_id">
-                                        
-                                    <div style="background:url(<?= get_profile_image($arr_profile_info['id'], 'thumb') ?>) no-repeat center;width:60px; height:60px;" title="member" class="pro_photo4 user_pro_image" ></div>
-<!--                                    <img src="<? get_profile_image($arr_profile_info['id'], 'thumb') ?>">-->
+                                    <div style="background:url(<?= get_profile_image_of_user('thumb',$arr_profile_info['s_profile_photo'],$arr_profile_info['e_gender']) ?>) no-repeat center;width:60px; height:60px;" title="member" class="pro_photo4 user_pro_image" ></div>
                                      <?php
                                       if($arr_profile_info['s_profile_photo'] != ''){
                                      ?>
