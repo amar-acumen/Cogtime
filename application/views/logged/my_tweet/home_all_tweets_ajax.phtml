@@ -5,13 +5,13 @@ if(count($arr_tweets)){
 		$data = json_decode($val['data']);
 		
 		if($val['s_type'] == 'retweeted'){
-			//$profile_image_filename = get_profile_image($data->tweet_owner_id,'thumb');
+			
 			$twit_id = getTwitterUsernameById($data->tweet_owner_id);
 			$rt_profile_link = getTwitterProfileLink($twit_id);
 		}
-		$profile_image_filename = get_profile_image($val['i_user_id'],'thumb');
+		$profile_image_filename = get_profile_image_of_user('thumb',$val['s_profile_poto'],$val['e_gender']);
 		$profile_link = getTwitterProfileLink($val['s_tweet_id']);
-		$profile_image_filename = get_profile_image($val['i_user_id'],'thumb');
+		
 		
 		$MARK_UNMARK_TXT = ($val['fav_tweet'] == 1)?'Unmark from your favourite tweet?':'Mark this as your favourite tweet?';
 		#echo get_twitter_profile_hash_link(my_substr(htmlspecialchars_decode($data->s_tweet_text),280)); exit;
