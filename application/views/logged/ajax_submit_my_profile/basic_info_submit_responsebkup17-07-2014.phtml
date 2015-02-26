@@ -43,20 +43,7 @@
                                     <div class="shade_box_01 frm_box shade_box_blue" style="padding-bottom:17px;">
                                         <div class="lable01">Languages I Speak:</div>  
                                         <div class="field01">
-                                        <?php /*<input name="txt_lang" id="txt_lang" type="text" value="<?=isset($arr_profile_info["s_languages"])? $arr_profile_info["s_languages"]: '' ?>" />*/?>
-										<select name="txt_lang" id="txt_lang" style="width:212px;">
-                                          	<option value="">---</option>
-											<?php
-										if($arr_profile_info['s_languages'] == '')
-										{
-										?>
-											<?php echo makeNetpalLanguage();
-											}
-											else{
-											echo makeNetpalLanguage($arr_profile_info['s_languages']);
-											
-											}?>
-                                          </select>
+                                        <input name="txt_lang" id="txt_lang" type="text" value="<?=isset($arr_profile_info["s_languages"])? $arr_profile_info["s_languages"]: '' ?>" />
                                         <?php echo form_error('txt_lang'); ?>
                                         </div> 
                                         <div class="clr"></div>

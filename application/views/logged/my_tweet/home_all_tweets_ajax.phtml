@@ -1,4 +1,4 @@
- <?php //pr($arr_tweets);pr($arr_tweets[0]['data']);
+ <?php pr($arr_tweets);pr($arr_tweets[0]['data']);
 if(count($arr_tweets)){
 	foreach($arr_tweets as $key=> $val){
 		
@@ -85,10 +85,15 @@ if(count($arr_tweets)){
                <?php 	endforeach;
 			   		 }
 				?>
-				<?php if(!empty($data->video) && count($data->video)){ 
+				<?php 
+        pr($data);
+        if(!empty($data->video) && count($data->video)){ 
+          echo '===='.$data_arr->video->url;
+          $video = get_video_from_url($data_arr->video->url, "329","212");
+          pr($video);
 			   ?>
                 <div class="video-image">
-                    <div  class="cogtime-video" id="myvideo_first_thumb_<?=$val['id']?>" style="background:url('') no-repeat center;;width:329px; height:212px;" ></div>
+                    <div  class="cogtime-video" id="myvideo_first_thumb_<?=$val['id']?>"><?php echo $video['html']?></div>
                     <div id="myvideo_big_thumb_1_<?=$val['id']?>" media_id="<?=$val['id']?>"></div> 
                 </div>
                 
@@ -96,8 +101,7 @@ if(count($arr_tweets)){
                <?php 	
 			   		 }
 				?>
-                          <?php /*?><h2 style=" font-size:13px;color: #ABABAB;"><span>Retweeted by : </span><a href="<?=getTwitterProfileLink($val['s_tweet_id'])?>"><?=$val['s_profile_name']?></a></h2><?php */?>
-                          <?php //$val['s_tweet_id']?>
+                          
                       </div>
                 <?php
 				   }
