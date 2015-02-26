@@ -11,13 +11,13 @@
 									
 									if($type == 'recv')
 									{
-										$LOGO	= get_profile_image($ring_inv_val['invitedid'],'thumb');
+										$LOGO	= get_profile_image_of_user('thumb',$ring_inv_val['s_profile_photo'],$ring_inv_val['e_gender']);
 										$user_id = $ring_inv_val['invitedid'];
 										$label = 'Invitee Name: ';
 										
 									}else
 									{
-										$LOGO	= get_profile_image($ring_inv_val['guest_id'],'thumb');
+										$LOGO	= get_profile_image_of_user('thumb',$ring_inv_val['s_profile_photo'],$ring_inv_val['e_gender']);
 										$user_id = $ring_inv_val['guest_id'];
 										$label = 'Owner Name: ';
 									}

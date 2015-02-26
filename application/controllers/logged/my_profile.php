@@ -345,7 +345,7 @@ class My_profile extends Base_controller {
 
                 //echo "profile img : ".$info['s_profile_photo'];
                 if ($info['s_profile_photo'])
-                    $profile_img = get_profile_image($logged_user_id, 'thumb', $info['s_profile_photo']);
+                    $profile_img = get_profile_image_of_user('thumb',$info['s_profile_photo'],$info['e_gender']);
                 $is_abusive_fnme = 0;
                 $is_abusive_lnme = 0;
                 $is_abusive_web = 0;

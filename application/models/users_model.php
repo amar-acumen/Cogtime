@@ -703,7 +703,7 @@ class Users_model extends Base_model implements InfModel {
 							 i_is_admin,
 							 u.s_password,
 							 u.s_profile_url_suffix,
-							 u.s_chat_display_name
+							 u.s_chat_display_name,u.s_profile_photo,u.e_gender
                             
                              FROM " . $this->db->USERS . "  u
                         
@@ -722,7 +722,7 @@ class Users_model extends Base_model implements InfModel {
 							 i_is_admin,
 							 u.s_password,
 							 u.s_profile_url_suffix,
-							 u.s_chat_display_name
+							 u.s_chat_display_name,u.s_profile_photo,u.e_gender
                             
                              FROM " . $this->db->USERS . "  u
                             
@@ -744,7 +744,7 @@ class Users_model extends Base_model implements InfModel {
 							 i_is_admin,
 							 u.s_password,
 							 u.s_profile_url_suffix,
-							 u.s_chat_display_name
+							 u.s_chat_display_name,u.s_profile_photo,u.e_gender
                             
                              FROM " . $this->db->USERS . "  u
                             
@@ -789,6 +789,8 @@ class Users_model extends Base_model implements InfModel {
                     $this->session->set_userdata('is_admin', $ret_["i_is_admin"]);
                     $this->session->set_userdata('upassword', $ret_["s_password"]);
                     $this->session->set_userdata('IMuserid', ($ret_["id"]));
+                    $this->session->set_userdata('s_profile_photo', ($ret_["s_profile_photo"]));
+                    $this->session->set_userdata('e_gender', ($ret_["e_gender"]));
 
                     $this->session->set_userdata('unique_username', $ret_["s_profile_url_suffix"]);
                     $this->session->set_userdata('display_username', $ret_["s_chat_display_name"]);

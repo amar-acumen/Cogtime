@@ -17,7 +17,7 @@ if(count($arr_rings))
             
             
             
-        $profile_img = get_profile_image($member['post_owner_user_id'],'thumb');
+        $profile_img = get_profile_image_of_user('thumb',$member['s_profile_photo'],$member['e_gender']);
         
         //pr(check_friend_netpal_status($member));
 ?>

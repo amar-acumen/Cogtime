@@ -334,7 +334,8 @@ class Projects_model extends Base_model
 						 CONCAT(U.s_first_name,' ',U.s_last_name) as s_profile_name,
 						 S_REQ.i_user_id as post_owner_user_id,
 						 S_REQ.dt_created_on as donation_dt
-		
+						 U.s_profile_photo,
+						 U.e_gender
 						FROM cg_project_skill_request S_REQ
 						LEFT JOIN {$this->db->PROJECT} P ON P.id = S_REQ.i_project_id
 						LEFT JOIN {$this->db->USERS} U ON S_REQ.i_user_id = U.id
@@ -481,7 +482,9 @@ class Projects_model extends Base_model
 						 CONCAT(U.s_first_name,' ',U.s_last_name) as s_profile_name,
 						 PF.i_user_id as post_owner_user_id,
 						 PF.e_gift_aid_my_donation,
-						 PF.e_dnt_disclose_name
+						 PF.e_dnt_disclose_name,
+						 U.s_profile_photo,
+						 U.e_gender
 		
 						FROM {$this->db->PROJECT_DONATION_HISTORY} PF
 						LEFT JOIN {$this->db->PROJECT} P ON P.id = PF.i_project_id

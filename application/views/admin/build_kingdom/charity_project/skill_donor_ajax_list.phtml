@@ -4,7 +4,7 @@
 	if(count($donor_list)){
 		
 		foreach($donor_list as $k=>$val){
-			$profile_image = get_profile_image($val['post_owner_user_id'],'thumb');
+			$profile_image = get_profile_image_of_user('thumb',$val['s_profile_photo'],$val['e_gender']);
 			$total_day = get_date_diff($val['d_start_date'],$val['d_end_date']);
 ?>
     

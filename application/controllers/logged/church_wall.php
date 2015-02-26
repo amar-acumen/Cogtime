@@ -537,7 +537,7 @@ $_html = ''."Liked by "." (".count_word_like_link($window_id).")";
             //$data['total_comments'] = $this->newsfeed_comments_model->get_total_by_newsfeed_id($feed_id);
             //$comment = $this->load->view('newsfeed/my_profile_single_feed_comment.phtml', $data, true);
 			$com_html='<div id="comment_content_div"'.$cid.'"><div class="txt_content01 comments-number-content"> 
-					 			<a href="javascript:void(0);"><div class="pro_photo" style="background:url('.get_profile_image($arr['i_user_id'],'thumb').') no-repeat center;width:48px; height:48px;"></div></a>
+					 			<a href="javascript:void(0);"><div class="pro_photo" style="background:url('.get_profile_image_of_user('thumb',$arr['s_profile_photo'],$arr['e_gender']).') no-repeat center;width:48px; height:48px;"></div></a>
 									<div class="left-nw-wal">
 										  <p class="blue_bold12"><a href="javascript:void(0);">'.get_username_by_id($arr['i_user_id']).'</a></p>
 										  <p>'.$arr['s_contents'].'</p>
