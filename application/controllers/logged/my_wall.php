@@ -56,19 +56,20 @@ class My_wall extends Base_controller {
             parent::_set_meta_keywords('');
 
 
-            parent::_add_js_arr(array('js/ddsmoothmenu.js',
+            parent::_add_js_arr(array(/*'js/ddsmoothmenu.js',
                 'js/switch.js', 'js/animate-collapse.js', 'js/ModalDialog.js',
                 'js/lightbox.js', 'js/jquery.dd.js', //'js/jquery-ui-1.8.2.custom.min.js',//comment out to reduce page load time-sanhita
                 'js/stepcarousel.js',
-                'js/tab.js',
+                'js/tab.js',*/
                 'js/ajaxupload.js',
                 'js/frontend/wall/wall_photo_upload.js',
                 'js/frontend/wall/wall_helper.js',
-                'js/frontend/logged/tweets/tweet_utilities.js',
+                //'js/frontend/logged/tweets/tweet_utilities.js',
                     /* 'chat/js/chat.js' */
             ));
 
-            parent::_add_css_arr(array('css/jquery-ui-1.8.2.custom.css',
+            parent::_add_css_arr(array(//'css/jquery-ui-1.8.2.custom.css',
+                'css/production.css' => array('media' => 'screen')
             ));
 
 
@@ -727,15 +728,16 @@ class My_wall extends Base_controller {
             parent::_set_meta_keywords('');
 
 
-            parent::_add_js_arr(array('js/ddsmoothmenu.js',
+            parent::_add_js_arr(array(/*'js/ddsmoothmenu.js',
                 'js/switch.js', 'js/animate-collapse.js',
                 'js/lightbox.js', 'js/jquery.dd.js', 'js/jquery-ui-1.8.2.custom.min.js',
-                'js/frontend/logged/tweets/tweet_utilities.js',
-                'js/stepcarousel.js'
+                 'js/stepcarousel.js',*/
+                'js/frontend/logged/tweets/tweet_utilities.js'
+
             ));
 
-            parent::_add_css_arr(array('css/jquery-ui-1.8.2.custom.css',
-                'css/dd.css'));
+            parent::_add_css_arr(array(/*'css/jquery-ui-1.8.2.custom.css',
+                'css/dd.css'*/));
 
             ############################################################
             if (intval($id) <= 0) {

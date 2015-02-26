@@ -764,7 +764,8 @@ class Users_model extends Base_model implements InfModel {
             $this->db->trans_begin(); ///new
             $rs = $this->db->query($s_qry, $stmt_val);
             #echo $this->db->last_query();    
-
+             // $res = $rs->result();
+            //  pr($res,1);
             if (is_array($rs->result())) { ///new
                 foreach ($rs->result() as $row) {
                     $ret_["id"] = $row->id; ////always integer 
@@ -776,7 +777,8 @@ class Users_model extends Base_model implements InfModel {
                     $ret_["s_password"] = $row->s_password;
                     $ret_["s_profile_url_suffix"] = $row->s_profile_url_suffix;
                     $ret_["s_chat_display_name"] = $row->s_chat_display_name;
-
+                        //$ret_["s_profile_photo"] = $row->s_profile_photo;
+                        //$res_["e_gender"]
                     ////////saving logged in user data into session////
 
                     $this->session->set_userdata('login_referrer', '');
@@ -789,8 +791,8 @@ class Users_model extends Base_model implements InfModel {
                     $this->session->set_userdata('is_admin', $ret_["i_is_admin"]);
                     $this->session->set_userdata('upassword', $ret_["s_password"]);
                     $this->session->set_userdata('IMuserid', ($ret_["id"]));
-                   $s_photo = $this->session->set_userdata('s_profile_photo', ($ret_["s_profile_photo"]));
-                    $this->session->set_userdata('e_gender', ($ret_["e_gender"]));
+                   $this->session->set_userdata('s_profile_photo', ($row->s_profile_photo));
+                    $this->session->set_userdata('e_gender', ($row->e_gender));
 
                     $this->session->set_userdata('unique_username', $ret_["s_profile_url_suffix"]);
                     $this->session->set_userdata('display_username', $ret_["s_chat_display_name"]);
@@ -801,8 +803,7 @@ class Users_model extends Base_model implements InfModel {
 
                     $this->set_user_online($ret_["id"], $_SERVER['REMOTE_ADDR']);
 
-                echo $s_photo;
-                die('ok')
+              //  echo $_SESSION['s_profile_photo']; 
                     ////////end saving logged in user data into session////
                     //////////log report///
 
