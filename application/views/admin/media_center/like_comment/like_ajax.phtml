@@ -4,7 +4,7 @@ if(count($result))
 {
     foreach($result as $res)
     {
-        $profile_image = get_profile_image($res['i_liked_user_id'],'thumb');
+        $profile_image = get_profile_image_of_user('thumb',$res['s_profile_photo'],$res['e_gender']);
         $profile_displayname = $res['s_profile_name'];
 
 ?>
