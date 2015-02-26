@@ -140,7 +140,7 @@ class Tweet_home extends Base_controller {
         //--------- end check
 
 
-        $VIEW_FILE = '';//"logged/my_tweet/home_all_tweets_ajax.phtml";
+        $VIEW_FILE = "logged/my_tweet/home_all_tweets_ajax.phtml";
 
         if (is_array($result) && count($result)) {
             $content = $this->load->view($VIEW_FILE, $data, true);
