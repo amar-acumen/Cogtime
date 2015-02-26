@@ -134,7 +134,7 @@ $(document).ready(function() {
                                   <div class="second-lavel">
                                   		<div class="lable02" style="width:95px;"><span class="red-mark">*</span> Start date :</div>
                                         <input type="text"  value="<?=$posted['dt_start_date']?>" name="date_to1" id="date_to1"  readonly="readonly" class="date-field2 "/>
-                                        <img src="../images/icons/cal.png" alt="" onclick="$(this).prev().focus()" class="calender2" />
+                                        <img src="../images/icons/cal.png" alt="" width="15" height="16" onclick="$(this).prev().focus()" class="calender2" />
 										<script type="text/javascript">
                                            $(document).ready(function(arg) {
                                           	   $("#date_to1").datepicker({
@@ -147,7 +147,7 @@ $(document).ready(function() {
                                         
                                         <div class="lable02" style="width:56px;"><span class="red-mark">*</span> To date :</div>
                                         <input type="text" value="<?=$posted['dt_end_date']?>" name="date_to2" id="date_to2"  readonly="readonly" class="date-field2 "/>
-                                        <img src="../images/icons/cal.png" alt="" onclick="$(this).prev().focus()" class="calender2 noMargin" />
+                                        <img src="../images/icons/cal.png" alt="" width="15" height="16" onclick="$(this).prev().focus()" class="calender2 noMargin" />
 										<script type="text/javascript">
                                            $(document).ready(function(arg) {
                                                $("#date_to2").datepicker({
@@ -213,7 +213,7 @@ onKeyUp="limitText(this.form.ta_description,this.form.countdown,500);" style="he
                                               
                                               <div class="lable02" style="width:56px;"><span class="red-mark">*</span> To date :</div>
                                               <input type="text"  value="" name="skill_date_to[]" id=""  readonly="readonly" class="date-field2 datepicker"/>
-                                              <img src="../images/icons/cal.png" alt="" onclick="$(this).prev().focus()" class="calender2 noMargin" />
+                                              <img src="../images/icons/cal.png" alt="" width="15" height="16" onclick="$(this).prev().focus()" class="calender2 noMargin" />
                                           
                                               <div class="clr"></div>
                                               
@@ -264,7 +264,7 @@ onKeyUp="limitText(this.form.ta_description,this.form.countdown,500);" style="he
                                         <div class="second-lavel">
                                               <div class="lable02" style="width:95px;"> <?php if($key == 0){ ?><span class="red-mark">*</span> <?php } ?>From date :</div>
                                               <input type="text" value="<?=getShortDate($s_val['dt_start_date'],3)?>" name="skill_date_from[]" id=""  readonly="readonly" class="date-field2 datepicker"/>
-                                              <img src="../images/icons/cal.png" alt="" onclick="$(this).prev().focus()" class="calender2" />
+                                              <img src="../images/icons/cal.png" alt="" width="15" height="16" onclick="$(this).prev().focus()" class="calender2" />
                                               <script type="text/javascript">
                                                  $(document).ready(function(arg) {
                                                     // $.datepicker.setDefaults($.datepicker.regional['']);
@@ -275,7 +275,7 @@ onKeyUp="limitText(this.form.ta_description,this.form.countdown,500);" style="he
                                               <input type="hidden" name="dbid[]" value="<?=$s_val['id']?>" />
                                               <div class="lable02" style="width:56px;"><?php if($key == 0){ ?><span class="red-mark">*</span> <?php } ?>To date :</div>
                                               <input type="text"  value="<?=getShortDate($s_val['dt_end_date'],3)?>" name="skill_date_to[]" id=""  readonly="readonly" class="date-field2 datepicker"/>
-                                              <img src="../images/icons/cal.png" alt="" onclick="$(this).prev().focus()" class="calender2 noMargin" />
+                                              <img src="../images/icons/cal.png" width="15" height="16" alt="" onclick="$(this).prev().focus()" class="calender2 noMargin" />
                                           
                                               <div class="clr"></div>
                                               
@@ -354,11 +354,11 @@ onKeyUp="limitText(this.form.ta_description,this.form.countdown,500);" style="he
           <div class="second-lavel">
                 <div class="lable02">From date :</div>
                 <input type="text" value="" name="skill_date_from[]" id=""  readonly="readonly" class="date-field2  html_frm_date"/>
-                <img src="../images/icons/cal.png" alt="" onclick="$(this).prev().focus()" class="calender2" />
+                <img src="../images/icons/cal.png" width="15" height="16" alt="" onclick="$(this).prev().focus()" class="calender2" />
                
                 <div class="lable02" style="width:54px;">To date :</div>
                 <input type="text"  value="" name="skill_date_to[]" id=""  readonly="readonly" class="date-field2  html_to_date"/>
-                <img src="../images/icons/cal.png" alt="" onclick="$(this).prev().focus()" class="calender2 noMargin" />
+                <img src="../images/icons/cal.png" alt="" width="15" height="16" onclick="$(this).prev().focus()" class="calender2 noMargin" />
                 
                 <div class="clr"></div>
                 

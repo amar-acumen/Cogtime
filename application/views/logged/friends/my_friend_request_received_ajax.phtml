@@ -17,7 +17,7 @@
 						
 						$address = implode(', ',$add);*/
 						$address=  get_user_address_info($val['i_requester_id']);
-						$img = get_profile_image($val['i_requester_id'], 'thumb');	
+						$img = get_profile_image_of_user('thumb',$val['s_profile_photo'],$val['e_gender']);	
 						$user_id =$val['i_requester_id'];
                         
                        // $profile_link = get_profile_url($val['i_requester_id'],$val['s_displayname']);

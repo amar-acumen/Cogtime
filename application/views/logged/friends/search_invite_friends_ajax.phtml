@@ -15,7 +15,7 @@
               if(!empty($val['s_city']))
                   $add['city']=$val['s_city'];
               $address = get_user_address_info($val['id']);
-              $img = get_profile_image($val['id'], 'thumb');
+              $img = get_profile_image_of_user('thumb',$val['s_profile_photo'],$val['e_gender']);
               
               
 			  
