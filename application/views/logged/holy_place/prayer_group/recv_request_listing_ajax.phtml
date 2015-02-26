@@ -5,7 +5,7 @@
                            
                            $detail_url = get_group_url($val['id'],$val['s_group_name']);
 						   $DATETEXT = ($val['is_owner'] == 'Y')?'Created on':'Joined on';
-						   $profile_image = get_profile_image($val['i_owner_id'],'thumb');
+						   $profile_image = get_profile_image_of_user('thumb',$val['s_profile_photo'],$val['e_gender']);
                   ?>
                       <li id="pg_li_<?=$val['i_prayer_group_id']?>">
                                       <span class="payer-member-name">

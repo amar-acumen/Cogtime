@@ -28,7 +28,7 @@
                             
 							 <?php 
                                     //pr($contacts); 
-                                    $img = get_profile_image($contacts['id'], 'thumb');
+                                    $img = get_profile_image_of_user('thumb',$contacts['s_profile_photo'],$contacts['e_gender']);
                                     if($contacts['if_already_friend'] == 'true' || $contacts['already_added_netpal'] == 'true'){
                                           $profile_link = get_profile_url($contacts['id'],$contacts['user_profile_name']);
                                     }

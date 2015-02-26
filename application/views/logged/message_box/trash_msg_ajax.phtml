@@ -8,7 +8,7 @@
 						   $is_read = $message['i_is_unread'];
 						   
 						   $userid = ($message['type'] != 'i_is_deleted_by_sender')?$message['i_sender_id']: $message['i_receiver_id'];
-						    $PROF_IMG = get_profile_image($userid , 'thumb');
+						    $PROF_IMG = get_profile_image_of_user('thumb',$message['s_profile_photo'],$message['e_gender']);
 						   //$CSS = ($is_read == 1)?'class="unread"':'class="read"';
 				?>        
                      
