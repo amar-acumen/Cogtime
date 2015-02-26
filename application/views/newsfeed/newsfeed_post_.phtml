@@ -234,33 +234,4 @@ function validateFrm(jsondata)
 -->
 </script>
 
-<script language="javascript">
-$(document).ready(function() {
 
-//  $('#myvideo_big_thumb_1').click(function(){
-$('[id^="myvideo_big_thumb_1_"]').click(function(){ 
-//alert($(this).attr('media_id'));
-  showLoading(); 
-  var media_id =  $(this).attr('media_id');
-  $.ajax({
-		type: 'post',
-		url: base_url+'logged/my_wall/get_video/',
-		data: ({'media_id' : media_id ,'width':329 ,'height':212}),
-
-		dataType: 'json',
-		success: function (data, status) {
-			if(data.result=='success') {
-				hideLoading();
-			   $('#myvideo_first_thumb_'+media_id).html(data.s_image_source.html);
-			   $('#myvideo_first_thumb_'+media_id).attr('i_media_id',data.i_media_id);
-			}
-		},
-		error: function (data, status, e) {
-			hideLoading();
-			showUIMsg('Some error occurred. Please try again.');
-		}
-	});
-});
-  $('[id^="myvideo_big_thumb_1_"]').trigger('click');
-});
-</script>
