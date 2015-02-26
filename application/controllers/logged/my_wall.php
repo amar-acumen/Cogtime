@@ -232,8 +232,6 @@ class My_wall extends Base_controller {
                 }
             }
             //code for netpal qualification mail sent end
-            #pr($data['my_projects']);
-            #pr($data['arr_profile_info'] );
             # view file...
 
             $VIEW = "logged/wall/my_wall.phtml";
