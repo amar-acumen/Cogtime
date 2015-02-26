@@ -87,7 +87,9 @@ if(count($arr_tweets)){
                <?php 	endforeach;
 			   		 }
 				?>
-				<?php if(!empty($data->video) && count($data->video)){ 
+				<?php 
+        pr($data);
+        if(!empty($data->video) && count($data->video)){ 
           echo '===='.$data_arr->video->url;
           $video = get_video_from_url($data_arr->video->url, "329","212");
           pr($video);
