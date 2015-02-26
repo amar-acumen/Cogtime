@@ -5161,14 +5161,18 @@ function get_prayer_group_member_count_by_grp_id($gid){
 function get_prayer_group_post_count_by_grp_id($gid){
    $ci = & get_instance();
     $sql = $ci->db->query('select count(*) as count from cg_church_prayer_group_post where i_prayer_group_id="' . $gid . '" ');
-    //echo $sql;
-    //echo $sql = $ci->db->last_query();
     $res = $sql->result_array();
-    
     return $res['0']['count'];
-   // pr($res,1);
-//    if ($res['0']['count'] > 0) {
-//        return true;
-//    } else
-//        return false;  
+}
+
+function get_video_from_url($url)
+{
+    $CI =& get_instance();
+    $CI->load->library('embed_video');
+    $config['zend_library_path'] = APPPATH . "libraries/Zend/";
+    $config['video_url'] = ($url);
+    $CI->embed_video->initialize($config);
+    $CI->embed_video->prepare();
+    $image_source = $CI->embed_video->get_player(329, 212);
+    return $image_source;
 }
