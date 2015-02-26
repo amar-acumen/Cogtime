@@ -48,6 +48,7 @@ class Module_generate extends CI_Controller {
                     'css/style.css',
                     'css/IMchat/chat.css',
                     'css/gemoticons.css',
+                    'css/recaptcha.css',
                     //user logged in css
                     //'css/jquery-ui-1.8.2.custom.css',
                     'css/jquery-ui-1.8.13.custom.css',
@@ -108,7 +109,11 @@ class Module_generate extends CI_Controller {
                     'js/jquery.hoverIntent.minified.js',
                     'js/jquery.naviDropDown.1.0.js',
                     'js/church_login.js',
-                    'js/frontend/logged/holy_place/prayer_group.js'
+                    'js/frontend/logged/holy_place/prayer_group.js',
+                    'js/jquery/ui/jquery.ui.core.js',
+                    'js/jquery.ui.datepicker.js',
+                    'js/jquery.nicescroll.min.js',
+
                 );
                 $js = '';
                 foreach($files_js as $data){
