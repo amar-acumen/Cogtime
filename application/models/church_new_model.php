@@ -126,7 +126,8 @@ class Church_new_model extends Base_model
 		
 		function get_members_by_grpid($gid)
 		{
-			$res=$this->db->get_where('cg_church_prayer_group_members',array('i_prayer_group_id'=>$gid,'s_status'=>'accepted'));
+			//$res=$this->db->get_where('cg_church_prayer_group_members',array('i_prayer_group_id'=>$gid,'s_status'=>'accepted'));
+                        $res = $this->db->query('select cpg.* ,u.s_profile_photo,u.e_gender from cg_church_prayer_group_members AS cpg , cg_users AS u where cpg.i_prayer_group_id = "'.$gid.'" AND s_status="accepted" AND u.id = cpg.i_user_id ');
 			//echo $this->db->last_query();exit;
 			$result=$res->result();
 			return $result;
