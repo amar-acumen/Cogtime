@@ -776,7 +776,7 @@ class Users_model extends Base_model implements InfModel {
                     $ret_["s_password"] = $row->s_password;
                     $ret_["s_profile_url_suffix"] = $row->s_profile_url_suffix;
                     $ret_["s_chat_display_name"] = $row->s_chat_display_name;
-
+                       echo  $ret_["s_profile_photo"]; die('ok');
                     ////////saving logged in user data into session////
 
                     $this->session->set_userdata('login_referrer', '');
