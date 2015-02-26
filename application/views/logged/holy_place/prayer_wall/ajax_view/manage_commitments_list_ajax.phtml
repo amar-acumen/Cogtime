@@ -44,7 +44,7 @@ onKeyUp="limitText(this.form.ta_commit_text,this.form.countdown,140);" style="he
                                   <label class="small">From:</label>
                                   <div class="field04" style="width:235px; float:left;">
                                         <input style="width:170px; float:left; margin-right:4px; " type="text"  value="<?=getShortDate($val['dt_start_time'],11)?>" name="commit_date_to" id="commit_date_to_<?=$val['s_type']?>_<?=$val['commits_id']?>"  readonly="readonly"/>
-                                        <img src="images/icons/cal.png" alt="" onclick="$(this).prev().focus()" style="cursor:pointer; float:left;" />
+                                        <img src="images/icons/cal.png" alt="" width="15" height="16" onclick="$(this).prev().focus()" style="cursor:pointer; float:left;" />
                                         <script type="text/javascript">
                                             $(document).ready(function(arg) {
                                                
@@ -153,7 +153,7 @@ onKeyUp="limitText(this.form.ta_commit_text,this.form.countdown,140);" style="he
                                   
                                   <div class="field04" style="width:235px; float:left;">
                                         <input style="width:170px; float:left; margin-right:4px;"   type="text"  value="<?=getShortDate($val['dt_end_time'],11) ?>" name="commit_date_end" id="commit_date_end_<?=$val['s_type']?>_<?=$val['commits_id']?>"  readonly="readonly"/>
-                                        <img src="images/icons/cal.png" alt="" onclick="$(this).prev().focus()" style="cursor:pointer; float:left;" />
+                                        <img src="images/icons/cal.png" alt="" width="15" height="16" onclick="$(this).prev().focus()" style="cursor:pointer; float:left;" />
                                        
                                         <span id="err_end_date_<?=$val['s_type']?>_<?=$val['commits_id']?>" class="error-message"></span> 
                                   </div>

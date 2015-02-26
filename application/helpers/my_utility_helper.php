@@ -3987,7 +3987,7 @@ function get_pending_requests_count_by_ring_id($id = '') {
 
 function get_all_ring_details_by_id($id) {
     $ci = & get_instance();
-    $q = $ci->db->query("select  * from cg_ring_invited_user where i_request=1 and i_ring_id=$id GROUP BY i_invited_id");
+    $q = $ci->db->query("select  inv.* , u.e_gender , u.s_profile_photo  from cg_ring_invited_user AS inv , cg_users AS u where inv.i_request=1 and inv.i_ring_id=$id AND u.id = inv.i_invited_id  GROUP BY inv.i_invited_id");
     $res = $q->result_array();
     //pr($res,1);
     return $res;
