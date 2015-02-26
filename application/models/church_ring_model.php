@@ -569,7 +569,7 @@ public function get_by_id($id)
             $limit = "LIMIT ".intval($start_limit).' , '.intval($end_limit);
         }
         $sql = "SELECT R.*, CONCAT(U.s_first_name,' ',U.s_last_name) AS profile_name,
-                U.s_profile_photo, U.id AS post_owner_user_id, I.id AS table_id, I.dt_joined_date, I.i_invited_id
+                U.s_profile_photo,U.e_gender, U.id AS post_owner_user_id, I.id AS table_id, I.dt_joined_date, I.i_invited_id
                 
                 FROM cg_church_ring AS R 
                 LEFT JOIN cg_church_ring_invited_user AS I ON R.id=I.i_ring_id
