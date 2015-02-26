@@ -50,7 +50,7 @@ if(count($arr_tweets)){
           $video = get_video_from_url($data_arr->video->url, "329","212");
 			   ?>
                 <div class="video-image">
-                    <div  class="cogtime-video" id="myvideo_first_thumb_<?=$val['id']?>" style="background:url('') no-repeat center;;width:329px; height:212px;" ></div>
+                    <div  class="cogtime-video" id="myvideo_first_thumb_<?=$val['id']?>"><?php echo $video['html']?></div>
                     <div id="myvideo_big_thumb_1_<?=$val['id']?>" media_id="<?=$val['id']?>"></div> 
                 </div>
                 
@@ -81,7 +81,7 @@ if(count($arr_tweets)){
 							$IMG = base_url()."uploads/tweet_photos/".getThumbName($photo_val,'mid');
 			   ?>
 			   <div class="video-image">
-                     <div class="" style="background:url('<?=$IMG?>') no-repeat center;width:329px; height:212px;" ><?php echo $video['html']?></div> 
+                     <div class="" style="background:url('<?=$IMG?>') no-repeat center;width:329px; height:212px;" ></div> 
                 </div>
                <?php 	endforeach;
 			   		 }
@@ -129,7 +129,7 @@ if(count($arr_tweets)){
 					}
 					?>                    
                   <?php   
-				  //echo $val['i_owner_id'] .' == '.$data->tweet_owner_id.' -- '.intval(decrypt($this->session->userdata('user_id'))); 
+				  
 				    if($val['i_owner_id'] != intval(decrypt($this->session->userdata('user_id'))) && $data->tweet_owner_id != intval(decrypt($this->session->userdata('user_id')))){ ?>
                     <li id="li_retweet_block<?=$val['id']?>"><a  href="javascript:void(0);" onclick="slideDownRetweet(<?= $val['id']?>)">retweet</a></li>
                    <?php  }
