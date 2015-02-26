@@ -15,7 +15,7 @@
                 <div class="right_div02">
                       <div class="box01">
                             <p class="date-time"> Created on : <?=getShortDate($albm_val['dt_created_on'], 5)?></p>
-                            <p class="add-remove-friend"> <img src="images/icons/edit.png" alt="" /> <a href="audio-albums/<?=$albm_val['id']?>/edit-audio-album.html" >Edit</a> &nbsp; <img src="images/icons/delete.png" alt="" /> <a  href="javascript:void(0);" onclick="delete_confirm_(<?=$albm_val['id']?>)">Delete</a> </p>
+                            <p class="add-remove-friend"> <img src="images/icons/edit.png" alt="" width="16" height="16"/> <a href="audio-albums/<?=$albm_val['id']?>/edit-audio-album.html" >Edit</a> &nbsp; <img src="images/icons/delete.png" alt="" width="13" height="15"/> <a  href="javascript:void(0);" onclick="delete_confirm_(<?=$albm_val['id']?>)">Delete</a> </p>
                       </div>
                       <input type="hidden" id="hd_album_id<?=$albm_val['id']?>" value="<?=$albm_val['id']?>" />
                       <p style="margin-right:8px;" class="add-remove-friend"><img src="images/icons/org.png" alt="" /> <a  href="<?=get_audio_album_url($albm_val['id'])?>">Organize</a></p>
