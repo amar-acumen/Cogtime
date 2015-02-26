@@ -1,0 +1,152 @@
+<?php
+
+    include(APPPATH ."views/layouts/church_admin_header.phtml");
+
+?>
+
+<!-- CONTENT SECTION -->
+
+<?php //pr($church_arr); ?>
+
+
+
+<div class="container-body">
+
+   <?php
+
+    //include(APPPATH ."views/layouts/church_admin_left.phtml");
+
+?>
+
+    <div class="right-panel">
+        <!--right-panel equal-height--->
+
+    <h2>Add Members</h2>
+
+    <!--<div class="vector-search">
+
+        <label>Search :</label>
+
+        <input type="text" >
+
+    </div>-->
+
+    <div class="right-box">
+	
+
+        <form style="width:412px;" name="importfrm" id="importfrm" action="" method="post" onsubmit="return member_form_validation ();">
+
+        <label>Name1 :</label>
+
+        <input type="text" name="name1" id="name1" value="">
+		
+		<label>Email1 :</label>
+
+        <input type="email" name="email1" id="email1" value="">
+		
+		<label>Name2 :</label>
+
+        <input type="text" name="name1" id="name1" value="">
+		
+		<label>Email2 :</label>
+
+        <input type="email" name="email2" id="email2" value="">
+		
+		<label>Name3 :</label>
+
+        <input type="text" name="name3" id="name3" value="">
+		
+		<label>Email3 :</label>
+
+        <input type="email" name="email3" id="email3" value="">
+		
+		<label>Name4 :</label>
+
+        <input type="text" name="name4" id="name4" value="">
+		
+		<label>Email4 :</label>
+
+        <input type="email" name="email4" id="email4" value="">
+		
+		<label>Name5 :</label>
+
+        <input type="text" name="name5" id="name5" value="">
+		
+		<label>Email5 :</label>
+
+        <input type="email" name="email5" id="email5" value="">
+
+        <input type="submit" value="Submit" class="post-btn">
+
+         <span id="err_csv" class="error-message"></span> 
+
+        </form>
+		
+        </div>
+
+    </div>
+
+    
+
+     
+
+    
+
+    </div>
+
+    
+
+    </div>
+
+<!-- /CONTENT SECTION -->
+
+<div class="clr"></div>
+<script type="text/javascript">
+function member_form_validation () {
+if(jQuery('#name1').val() == '' || jQuery('#email1').val() == '')
+{
+	alert('Please enter name and email.');
+	jQuery('#name1').focus();
+	jQuery('#email1').focus();
+	return false;
+}
+else if(jQuery('#name2').val() == '' || jQuery('#email2').val() == '') {
+	alert('Please enter name and email.');
+	jQuery('#name2').focus();
+	jQuery('#email2').focus();
+	return false;
+}
+else if(jQuery('#name3').val() == '' || jQuery('#email3').val() == '') {
+	alert('Please enter name and email.');
+	jQuery('#name3').focus();
+	jQuery('#email3').focus();
+	return false;
+}
+else if(jQuery('#name4').val() == '' || jQuery('#email4').val() == '') {
+	alert('Please enter name and email.');
+	jQuery('#name4').focus();
+	jQuery('#email4').focus();
+	return false;
+}
+
+else if(jQuery('#name5').val() == '' || jQuery('#email5').val() == '') {
+	alert('Please enter name and email.');
+	jQuery('#name5').focus();
+	jQuery('#email5').focus();
+	return false;
+}
+else {
+	//window.location.href = "<?php echo base_url(); ?>logged/church/church_add_member_form";
+	return true;
+}
+
+
+}
+</script>
+
+<!-- FOOTER SECTION -->
+
+<?php include(APPPATH."views/layouts/church_footer.phtml");?>
+
+<!-- /FOOTER SECTION -->
+
