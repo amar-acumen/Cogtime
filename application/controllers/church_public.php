@@ -78,7 +78,7 @@ class Church_public extends Base_controller
 										  'css/church.css'*/
 
             ) );
-            
+
             
                //$this->session->set_userdata('current_church_id', $c_id);
             $_SESSION['current_church_id'] = $c_id;
