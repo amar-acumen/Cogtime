@@ -10,7 +10,7 @@
   <?php //pr($church_arr); ?>
     <h1><img src="<?=get_church_logo_image($_SESSION['logged_church_id'], 'main', $church_arr[0]->ch_logo)?>" alt="Church" width="259" class="logo" height="40"><?//=$church_arr[0]->s_name?></h1>
     <div class="top-right">
-	 <img src="<?= get_profile_image(decrypt($this->session->userdata('user_id')), 'thumb') ?>" alt="Profile Pic" title="<?=$this->session->userdata('username')?>" width="42" height="42">
+	 <img src="<?= get_profile_image_of_user('thumb',$_SESSION['s_profile_photo'],$_SESSION['e_gender']) ?>" alt="Profile Pic" title="<?=$this->session->userdata('username')?>" width="42" height="42">
       <ul class="logmenu">
           <?php 
           $user_id = decrypt($this->session->userdata('user_id'));
