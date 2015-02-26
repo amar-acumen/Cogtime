@@ -1,15 +1,17 @@
- <?php 
+ <?php //pr($arr_tweets);pr($arr_tweets[0]['data']);
 if(count($arr_tweets)){
 	foreach($arr_tweets as $key=> $val){
 		
 		$data = json_decode($val['data']);
 		
 		if($val['s_type'] == 'retweeted'){
+			//$profile_image_filename = get_profile_image($data->tweet_owner_id,'thumb');
 			$twit_id = getTwitterUsernameById($data->tweet_owner_id);
 			$rt_profile_link = getTwitterProfileLink($twit_id);
 		}
+		$profile_image_filename = get_profile_image($val['i_user_id'],'thumb');
 		$profile_link = getTwitterProfileLink($val['s_tweet_id']);
-		$profile_image_filename = get_profile_image_of_user('thumb',$val['s_profile_photo'],$val['e_gender']);
+		$profile_image_filename = get_profile_image($val['i_user_id'],'thumb');
 		
 		$MARK_UNMARK_TXT = ($val['fav_tweet'] == 1)?'Unmark from your favourite tweet?':'Mark this as your favourite tweet?';
 		#echo get_twitter_profile_hash_link(my_substr(htmlspecialchars_decode($data->s_tweet_text),280)); exit;
@@ -50,7 +52,7 @@ if(count($arr_tweets)){
           $video = get_video_from_url($data_arr->video->url, "329","212");
 			   ?>
                 <div class="video-image">
-                    <div  class="cogtime-video" id="myvideo_first_thumb_<?=$val['id']?>"><?php echo $video['html']?></div>
+                    <div  class="cogtime-video" id="myvideo_first_thumb_<?=$val['id']?>" style="background:url('') no-repeat center;;width:329px; height:212px;" ></div>
                     <div id="myvideo_big_thumb_1_<?=$val['id']?>" media_id="<?=$val['id']?>"></div> 
                 </div>
                 
@@ -129,7 +131,7 @@ if(count($arr_tweets)){
 					}
 					?>                    
                   <?php   
-				  
+				  //echo $val['i_owner_id'] .' == '.$data->tweet_owner_id.' -- '.intval(decrypt($this->session->userdata('user_id'))); 
 				    if($val['i_owner_id'] != intval(decrypt($this->session->userdata('user_id'))) && $data->tweet_owner_id != intval(decrypt($this->session->userdata('user_id')))){ ?>
                     <li id="li_retweet_block<?=$val['id']?>"><a  href="javascript:void(0);" onclick="slideDownRetweet(<?= $val['id']?>)">retweet</a></li>
                    <?php  }
