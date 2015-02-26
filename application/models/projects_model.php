@@ -481,6 +481,8 @@ class Projects_model extends Base_model
 						 PF.f_amount,
 						 CONCAT(U.s_first_name,' ',U.s_last_name) as s_profile_name,
 						 PF.i_user_id as post_owner_user_id,
+						 U.s_profile_photo,
+						 U.e_gender,
 						 PF.e_gift_aid_my_donation,
 						 PF.e_dnt_disclose_name,
 						 U.s_profile_photo,
