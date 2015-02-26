@@ -38,16 +38,11 @@
                             <input type="submit" class="sml_btn" name="reload_search"  style=" background:none repeat scroll 0 0 #013D62;" value="Back" />
                         </form>
                         </div>
-                        <?php /*?><a href="search-invite-prayer-partner.html">BACK</a></div><?php */
-						
-						//echo $this->session->userdata('s_age_from').' -- prof '.$profile_info['s_age'] .'-till -- '.$this->session->userdata('s_age_to')
-						?>
-
                         <div class="heading"><h4>Profile</h4></div>
                         <div class="profile-content">
                           <div class="profile-tab first">
                               <div class="photo-section">
-                                  <?php $img = get_profile_image($profile_info['id'], 'main');?>
+                                  <?php $img = get_profile_image_of_user('main',$profile_info['s_profile_photo'], $profile_info['e_gender']);?>
                                   <div style="background:url(<?=$img?>) no-repeat center;width:144px; height:144px;" title="member" ></div>
                                   
                               </div>

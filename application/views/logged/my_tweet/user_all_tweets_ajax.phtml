@@ -9,9 +9,8 @@ if(count($arr_tweets)){
 			$twit_id = getTwitterUsernameById($data->tweet_owner_id);
 			$rt_profile_link = getTwitterProfileLink($twit_id);
 		}
-		$profile_image_filename = get_profile_image($val['i_user_id'],'thumb');
+		$profile_image_filename = get_profile_image_of_user('thumb',$val['s_profile_photo'],$val['e_gender']);
 		$profile_link = getTwitterProfileLink($val['s_tweet_id']);
-		$profile_image_filename = get_profile_image($val['i_user_id'],'thumb');
 		
 		$MARK_UNMARK_TXT = ($val['fav_tweet'] == 1)?'Unmark from your favourite Chitter?':'Mark this as your favourite Chitter?';
 ?>
