@@ -5,7 +5,6 @@ if(count($arr_tweets)){
 		$data = json_decode($val['data']);
 		
 		if($val['s_type'] == 'retweeted'){
-			//$profile_image_filename = get_profile_image($data->tweet_owner_id,'thumb');
 			$twit_id = getTwitterUsernameById($data->tweet_owner_id);
 			$rt_profile_link = getTwitterProfileLink($twit_id);
 		}
