@@ -241,6 +241,7 @@ function approvedMember()
     </div>-->
 
     <div class="vector-search">
+		<input type="submit" value="Add member" class="post-btn" onclick="invite_member();">
         <span class="sample_csv">
             
             <a href="<?= base_url().'uploads/sample_csv/member_mailid.csv'?>" target="_blank"  >Download sample CSV</a>
@@ -319,6 +320,10 @@ function approvedMember()
 
 
 <script type="text/javascript">
+function invite_member() {
+	window.location.href = "<?php echo base_url(); ?>logged/church/church_add_member_form";
+}
+
 function sample_csv(){
    // alert('dd');
      $.ajax({
