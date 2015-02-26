@@ -37,7 +37,7 @@
 
      
 
-     <div class="user-pic" style="background:url(<?= get_profile_image($user_id, 'thumb') ?>) no-repeat;" title="<?= $user_name ?>"></div>
+     <div class="user-pic" style="background:url(<?= get_profile_image_of_user('thumb',$_SESSION['s_profile_photo'],$_SESSION['e_gender']) ?>) no-repeat;" title="<?= $user_name ?>"></div>
 
       <ul>
 
