@@ -3,7 +3,7 @@
 		  if(count($prayer_commits_info)){
 			  foreach($prayer_commits_info as $commit_val){
 				  $contents = html_entity_decode(htmlspecialchars_decode($commit_val['s_contents']),ENT_QUOTES,'utf-8');
-				  $profile_image_filename = get_profile_image($commit_val['i_user_id'],'thumb');
+				  $profile_image_filename = get_profile_image_of_user('thumb',$commit_val['s_profile_photo'],$commit_val['e_gender']);
  ?> 
                             
             <div class="commitment-box"> 

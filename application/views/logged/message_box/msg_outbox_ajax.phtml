@@ -4,7 +4,7 @@
 						foreach($result_arr as $message) 
 						{
 							
-						   $PROF_IMG = get_profile_image($message['i_receiver_id'] , 'thumb');
+						   $PROF_IMG = get_profile_image_of_user('thumb',$message['s_profile_photo'],$message['e_gender']);
 						   $is_read = $message['i_is_unread'];
 						   //$CSS = ($is_read == 1)?'class="unread"':'class="read"';
 				?>        

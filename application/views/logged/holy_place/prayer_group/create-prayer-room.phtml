@@ -142,7 +142,7 @@
                                  <?php if(count($prayer_member_arr)){
 								  		foreach($prayer_member_arr as $key => $val){
 											
-											$profile_image = get_profile_image($val['post_owner_user_id'],'thumb');
+											$profile_image = get_profile_image_of_user('thumb',$val['s_profile_photo'],$val['e_gender']);
 											
 											
 								  ?>
