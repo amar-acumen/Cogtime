@@ -41,9 +41,7 @@
 						  }
 						  $profile_image_filename = get_profile_image_of_user('thumb',$val['s_profile_photo'],$val['e_gender']);
 						  $profile_link = getTwitterProfileLink($val['s_tweet_id']);
-						  //$profile_image_filename = get_profile_image($val['i_user_id'],'thumb');
-                          
-                          //$profile_image_filename = get_profile_image($val['i_user_id'],'thumb');
+						 
                            $MARK_UNMARK_TXT = ($val['fav_tweet'] == 1)?'Unmark from your favourite tweet?':'Mark this as your favourite tweet?';
 
 						 $tweet_text =  strip_tags(htmlspecialchars_decode($data->s_tweet_text));  
