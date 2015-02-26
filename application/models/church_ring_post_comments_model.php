@@ -101,8 +101,8 @@ class Church_ring_post_comments_model extends CI_Model {
 								   c.dt_created_on, 
 								   CONCAT(u.s_first_name,' ', u.s_last_name) s_profile_name,
 								   u.s_profile_photo, 
-								   u.s_first_name as pseudo 
-								   
+								   u.s_first_name as pseudo, 
+								   u.e_gender
 								   
 						FROM %1\$schurch_ring_post_comments  c, %1\$susers u 
 						WHERE c.i_user_id=u.id 
