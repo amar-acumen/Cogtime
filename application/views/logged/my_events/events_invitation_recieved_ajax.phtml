@@ -9,7 +9,7 @@
 				  $address = $val['s_address'].', '.$val['s_city'].', '.$val['s_state'].', '.$country;
 				  $detail_url = get_events_detail_url($val['id']);
 				 
-				  $profile_img = get_profile_image($val['event_owner_id'], 'thumb');  
+				  $profile_img = get_profile_image_of_user('thumb',$val['s_profile_photo'],$val['e_gender']);  
 				  
 				  $IMG_THUMB_PATH = base_url() ."uploads/events_photo/";
 				  $main_name=getThumbName($val['s_image_1'],'mid_FO'); 

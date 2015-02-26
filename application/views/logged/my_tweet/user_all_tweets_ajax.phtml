@@ -5,7 +5,6 @@ if(count($arr_tweets)){
 		$data = json_decode($val['data']);
 		
 		if($val['s_type'] == 'retweeted'){
-			//$profile_image_filename = get_profile_image($data->tweet_owner_id,'thumb');
 			$twit_id = getTwitterUsernameById($data->tweet_owner_id);
 			$rt_profile_link = getTwitterProfileLink($twit_id);
 		}
@@ -46,9 +45,10 @@ if(count($arr_tweets)){
 			   		 }
 				?>
 				<?php if(!empty($data->video) && count($data->video)){ 
+          $video = get_video_from_url($data->video->url, "329","212");
 			   ?>
                 <div class="video-image">
-                    <div  class="cogtime-video" id="myvideo_first_thumb_<?=$val['id']?>" style="background:url('') no-repeat center;;width:329px; height:212px;" ></div>
+                    <div  class="cogtime-video" id="myvideo_first_thumb_<?=$val['id']?>" ><?php echo $video['html']?></div>
                     <div id="myvideo_big_thumb_1_<?=$val['id']?>" media_id="<?=$val['id']?>"></div> 
                 </div>
                 

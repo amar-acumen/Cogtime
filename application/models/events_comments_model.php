@@ -120,7 +120,7 @@ class Events_comments_model extends CI_Model {
 								   c.dt_created_on, 
 								   CONCAT(u.s_first_name,' ', u.s_last_name) s_profile_name,
 								   u.s_profile_photo, 
-								  
+								   u.e_gender,
 								   u.s_first_name as pseudo 
 					    FROM %1\$sevent_comments c, %1\$susers u 
 						WHERE c.i_user_id=u.id
