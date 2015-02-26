@@ -1145,7 +1145,7 @@ class Prayer_wall extends Base_controller
 	  $content  = '';
 	   if(count($commit_arr))
 	   {
-		     $profile_image_filename = get_profile_image($commit_arr['i_user_id'],'thumb');
+		     $profile_image_filename = get_profile_image_of_user('thumb',$commit_arr['s_profile_photo'],$commit_arr['e_gender']);
 			 $DESC = html_entity_decode(htmlspecialchars_decode($commit_arr['s_description']),ENT_QUOTES,'utf-8');
 			 
 			   $content ='<div class="commitment-box" id="view_commit_'.$commit_arr['id'].'"> 

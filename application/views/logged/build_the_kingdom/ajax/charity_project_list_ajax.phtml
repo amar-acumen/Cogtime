@@ -25,51 +25,7 @@
                                           }
                                     ?>   
                                   </ul>
-                                    <?php /*?><a class="view-time-donors" href="javascript:void(0)" onclick="showTimeDonor(<?=$val['project_id']?>)" >View time donors</a>
-                                     <div class="clr"></div>
-                                    <div class="view-time-donors-content" id="time_donor_<?=$val['project_id']?>">
-                                        
-                                        
-                                         <?php
-													if(count($val['skill_donor_list'])){
-														foreach($val['skill_donor_list'] as $d_val){
-															
-															$profile_image = get_profile_image($d_val['post_owner_user_id'],'thumb');
-															if($d_val['if_already_friend'] == 'true' || $d_val['already_added_netpal'] == 'true'){
-																	  $profile_link = get_profile_url($d_val['post_owner_user_id'],$d_val['s_profile_name']);
-																}else
-																{
-																   $profile_link = get_public_profile_url($d_val['post_owner_user_id'],$d_val['s_profile_name']); 
-																}
-											 ?>
-                                              <div class="" >
-                                                <div class="view-section"> 
-                                                     <a href="<?=$profile_link?>"> <div class="pro_photo3" style="background:url(<?php echo $profile_image;?>) no-repeat center;width:60px; height:60px;" ></div></a>
-                                                      <div class="view-left">
-                                                            <p><a href="javascript:void(0);"><?=$d_val['s_profile_name']?></a></p>
-                                                            <p class="donation-date">Donation Date From: <?=getShortDate($d_val['d_start_date'],5)?> to <?=getShortDate($d_val['d_end_date'],5)?> </p>
-                                                            <p class="donation-date">Skill: <?=$d_val['s_skill_name']?></p>
-                                                      </div>
-                                                      <div class="clr"></div>
-                                                </div>
-                                              </div>
-                                              <?php 	}
-													}
-													else{
-											 ?>
-                                             <div class="" >
-                                              		<div class="view-section" style="border-bottom:none;"> 
-                                                      <div class="view-left" style="margin-left:175px;">
-                                                            <p><strong>No Donors yet.</strong></p>
-                                                      </div>
-                                                      <div class="clr"></div>
-                                                	</div>
-                                              </div>
-                                             
-                                             <?php 
-													}
-											 ?>
-                                    </div> <?php */?>
+                                   
                               </div>       
                                 
                                   <div class="clr"></div>
@@ -83,8 +39,7 @@
                                             <li><a href="javascript:void(0);" onclick="toggleProjectMenu(<?=$val['project_id']?>,'fund')" id="fund_<?=$val['project_id']?>" >Donate</a></li>
                                             <li><a href="javascript:void(0);" onclick="toggleProjectMenu(<?=$val['project_id']?>,'donors')" id="donors_<?=$val['project_id']?>">Donors</a></li>
                                             <li><a href="javascript:void(0);" onclick="toggleProjectMenu(<?=$val['project_id']?>,'info')" id="info_<?=$val['project_id']?>">Request more Information</a></li>
-                                            <?php /*?> <li><a href="javascript:void(0);"  onclick="toggleProjectMenu(<?=$val['project_id']?>,'time')" id="time_<?=$val['project_id']?>">Tithe your Time</a></li><?php */?>
-                                          <!--  <li><a href="javascript:void(0);"  onclick="toggleProjectMenu(<?=$val['project_id']?>,'time')" id="time_<?=$val['project_id']?>">View Skill Chart</a></li>-->
+                                            
                                         </ul>
                                         <div class="clr"></div>
                                         <div class="donate-time-donors-content">
@@ -164,7 +119,7 @@
 													if(count($val['fund_donor_list'])){
 														foreach($val['fund_donor_list'] as $f_val){
 															
-															$profile_image = get_profile_image($f_val['post_owner_user_id'],'thumb');
+															$profile_image = get_profile_image_of_user('thumb',$f_val['s_profile_photo'],$f_val['e_gender']);
 															if($d_val['if_already_friend'] == 'true' || $f_val['already_added_netpal'] == 'true'){
 																	  $profile_link = get_profile_url($f_val['post_owner_user_id'],$f_val['s_profile_name']);
 																}else

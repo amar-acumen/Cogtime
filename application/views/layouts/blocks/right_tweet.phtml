@@ -14,7 +14,7 @@
             <div class="dot-box" >
                   <div class="view-my">
                   <a  href="<?=base_url()?>my-followers.html" class="left">[view my followers]</a>
-                  <!--<a  href="javascript:void(0);" class="right">[follow this tweet]</a> -->
+                  
                   </div>
                   <div class="clr"></div>
                   <form action="" method="post" class="tweet-post">
@@ -41,9 +41,7 @@
 						  }
 						  $profile_image_filename = get_profile_image_of_user('thumb',$val['s_profile_photo'],$val['e_gender']);
 						  $profile_link = getTwitterProfileLink($val['s_tweet_id']);
-						  //$profile_image_filename = get_profile_image($val['i_user_id'],'thumb');
-                          
-                          //$profile_image_filename = get_profile_image($val['i_user_id'],'thumb');
+						 
                            $MARK_UNMARK_TXT = ($val['fav_tweet'] == 1)?'Unmark from your favourite tweet?':'Mark this as your favourite tweet?';
 
 						 $tweet_text =  strip_tags(htmlspecialchars_decode($data->s_tweet_text));  
@@ -59,7 +57,7 @@
 							$new_text =  substrws(htmlspecialchars_decode($data->s_tweet_text), 60); 
 						}
 						
-						#echo substrws("This is my wall and I'm posting my status message here. This is my wall I'm posting my status message here. Lorem", 20); exit;
+					
                   ?>
                   
                      <div style="margin-top: 10px;">
@@ -108,7 +106,7 @@
                                 </span>
                               </p>
                                <p> <span style=" font-size:13px;color: #ABABAB; ">RT <a href="<?=$rt_profile_link?>" style="color: #ABABAB; text-decoration:none;"><?=getTwitterUsernameById($data->tweet_owner_id)?></a> :</span> <?=get_twitter_profile_hash_link($new_text)?></p>
-                             <?php /*?> <p style="font-size:12px;color: #ABABAB;">Retweeted by : <a href="<?=getTwitterProfileLink($val['s_tweet_id'])?>"><?=$val['s_profile_name']?></a></p><?php */?>
+                             
 							 <?php if(!empty($data->photo) && count($data->photo)){ 
 			   			foreach($data->photo as $key=>$photo_val):
 							

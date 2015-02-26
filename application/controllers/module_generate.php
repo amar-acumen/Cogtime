@@ -47,7 +47,13 @@ class Module_generate extends CI_Controller {
                 $files_css = array(
                     'css/style.css',
                     'css/IMchat/chat.css',
-                    'css/gemoticons.css'
+                    'css/gemoticons.css',
+                    //user logged in css
+                    //'css/jquery-ui-1.8.2.custom.css',
+                    'css/jquery-ui-1.8.13.custom.css',
+                    'css/dd.css',
+                    'css/flexslider.css',
+                    'css/church.css'
                     //'css/big-slider.css'
                 );
                 $css = '';
@@ -68,6 +74,7 @@ class Module_generate extends CI_Controller {
                     'assets/js/contrib/jquery-ui-1.10.4.custom.min.js',
                     //'assets/js/contrib/gmap3.min.js',*/
                     'js/jquery-1.7.2.js',
+                    'js/jquery.cookie.js',
                     'js/jquery/ui/jquery.blockUI.js',
                     'js/jquery/ui/jquery.ui.core.js',
                     'js/frontend/utilities.js',
@@ -79,13 +86,29 @@ class Module_generate extends CI_Controller {
                     'js/utilities.js',
                     'js/login.js',
                     'js/notification.js',
-                    'js/utility_js_for_admin_and_fe.js'
+                    'js/utility_js_for_admin_and_fe.js',
                    /* 'js/frontend/header_slider.js',
                     'js/contentslider.js',
-                    'js/jquery.autofill.js',
+                    'js/jquery.autofill.js',*/
+                    // User logged in JS files
                     'js/jquery.hoverIntent.js',
-                    'js/frontend/utils.js'*/
-
+                    'js/frontend/utils.js',
+                    'js/ddsmoothmenu.js',
+                    'js/switch.js',
+                    'js/animate-collapse.js',
+                    'js/lightbox.js',
+                    'js/jquery.dd.js',
+                    //'js/jquery-ui-1.8.2.custom.min.js',
+                    'js/stepcarousel.js',
+                    'js/frontend/logged/tweets/tweet_utilities.js',
+                    'js/frontend/logged/christian_news_js.js',
+                    'js/tab.js',
+                    'js/jquery.flexslider.js'
+                    ,'js/jquery.eislideshow.js',
+                    'js/jquery.hoverIntent.minified.js',
+                    'js/jquery.naviDropDown.1.0.js',
+                    'js/church_login.js',
+                    'js/frontend/logged/holy_place/prayer_group.js'
                 );
                 $js = '';
                 foreach($files_js as $data){
@@ -103,9 +126,11 @@ class Module_generate extends CI_Controller {
                 $files_indvid_js = array(
                     'chat/js/chat.js',
                     'js/jquery.gemoticons.js',
-                    'js/jquery.hoverIntent.js',
-                    'js/frontend/utils.js'
-
+                    'js/frontend/header_slider.js',
+                    'js/contentslider.js',
+                    'js/jquery.autofill.js'
+                  //  'js/jquery.hoverIntent.js',
+                  //  'js/frontend/utils.js'
                 );
                 $js_indvid = '';
                 foreach($files_indvid_js as $data){

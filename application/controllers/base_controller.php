@@ -448,7 +448,6 @@ class Base_controller extends CI_Controller {
             $this->_add_js_arr($logged_chat_js);
         }
 
-
         # fix for "js_files" array...
         /* if( is_array($this->js_files) && count($this->js_files) ) {
           $this->js_files = array_merge($default_js_arr, $this->js_files);
@@ -566,8 +565,8 @@ class Base_controller extends CI_Controller {
             $default_js_arr = array(
                 /*'js/jquery.hoverIntent.js' => 'header',
                 'js/frontend/utils.js' => 'header'*/
-                'js/production/jquery.hoverIntent.js' => 'header',
-                'js/production/utils.js' => 'header'
+                //'js/production/jquery.hoverIntent.js' => 'header',
+                //'js/production/utils.js' => 'header'
             );
 
             if (is_array($this->js_files) && count($this->js_files)) {
