@@ -1536,6 +1536,76 @@ $name = 'member_mailid.csv';
 force_download($name, $data); 
 echo json_encode( array('success'=>'true'));
     }
+	
+	function church_add_member_form() {
+	 try
+        {
+			if($_POST)
+			{
+				if($this->input->post('name1')) {
+					$name = $this->input->post('name1');
+				}
+				if($this->input->post('name2')) {
+					$name = $this->input->post('name2');
+				}
+				if($this->input->post('name3')) {
+					$name = $this->input->post('name3');
+				}
+				if($this->input->post('name4')) {
+					$name = $this->input->post('name4');
+				}
+				if($this->input->post('name5')) {
+					$name = $this->input->post('name5');
+				}
+				
+				if($this->input->post('email1')) {
+					$email = $this->input->post(email1);
+				}
+				if($this->input->post('email2')) {
+					$email = $this->input->post(email2);
+				}
+				if($this->input->post('email3')) {
+					$email = $this->input->post(email3);
+				}
+				if($this->input->post('email4')) {
+					$email = $this->input->post(email4);
+				}
+				if($this->input->post('email5')) {
+					$email = $this->input->post(email5);
+				}
+				
+				$invited_member = array(
+					'name' = $name,
+					'email' = $email,
+					'invitation_sent_date' => get_db_datetime()
+				);
+			$this->db->insert('cg_church_member_invitation', $invited_member);	
+				
+			}
+			else
+			{
+				$user_id = intval(decrypt($this->session->userdata('user_id')));
+				get_all_church_session($c_id);
+				//parent::check_is_church_admin($user_id,$c_id);
+				$posted=array();
+				$this->data["posted"]=$posted;/*don't change*/    
+				$data = $this->data;      
+				//               $this->data["MAIN_MENU_SELECTED"] = 1;
+				parent::check_church_id_empty(TRUE, $_SESSION['logged_church_id'], array('1'));
+				parent::_set_title('::: COGTIME Xtian network :::');
+				parent::_set_meta_desc('');
+				parent::_set_meta_keywords('');
+
+				//$data['church_arr'] =     $this->church_new_model->get_church_info($c_id);
+				$VIEW = "logged/church/church_add_member_form.phtml";
+				parent::_render($data, $VIEW);
+			}
+        }
+        catch(Exception $err_obj)
+        {
+           
+        } 
+	}
     /********************************************************************/
 }   // end of controller...
 
