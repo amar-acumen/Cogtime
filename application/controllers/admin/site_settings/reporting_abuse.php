@@ -155,7 +155,7 @@ class Reporting_abuse extends Admin_base_Controller
 			$total_rows = $this->abuse_model->get_list_count($s_where);
 			
 			
-			pr($result);
+			//pr($result);
 			#Jquery Pagination Starts
            	$this->load->library('jquery_pagination');
             $config['base_url'] = base_url()."admin/site_settings/reporting_abuse/ajax_pagination";

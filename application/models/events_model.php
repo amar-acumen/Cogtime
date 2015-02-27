@@ -25,13 +25,14 @@ class Events_model extends Base_model {
             $sql = sprintf("SELECT E.*, 
 								   C.s_country_name, 
 								   U.s_name, 
-								   U.s_last_name 
+								   U.s_last_name ,
+                                                                   CONCAT(u.s_first_name,' ',u.s_last_name) AS s_profile_name
 								   
 								   
 							FROM {$this->db->EVENTS} E 
 							LEFT JOIN  {$this->db->ADMIN_USER} U 
 							ON U.id = E.i_host_id 
-							LEFT JOIN  {$this->db->MST_COUNTRY} C ON E.i_country_id = C.id 
+							LEFT JOIN  {$this->db->MST_COUNTRY} C ON E.i_country_id = C.id  LEFT JOIN cg_users u ON u.id = E.i_host_id
 							where E.id = %s  {$where_cond} ", $id);
         } else {
             $sql = sprintf("SELECT E.*, 
