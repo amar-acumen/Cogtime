@@ -262,6 +262,7 @@ class Data_messages_model extends Base_model implements InfModel
 			
 	//echo nl2br($s_qry);
 		//query = $this->db->query($sql);
+		pr($result_arr);
 		//$result_arr = $query->result_array();
 
 		//return $result_arr;
