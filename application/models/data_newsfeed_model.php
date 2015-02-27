@@ -433,7 +433,7 @@ return $result_arr;
 public function get_all_comments_wall($s_where,$i_start_limit='', $i_no_of_page=''){
     //die('jj');
     $sql="select c.*,p.i_owner_id,p.data,CONCAT(u.s_first_name,' ',u.s_last_name) AS s_profile_name ,(select (u.s_first_name,' ',u.s_last_name) AS s_invite_name from cg_user_newsfeeds p,cg_users u where p.i_owner_id = u.id  )   from cg_user_newsfeed_comments c,cg_user_newsfeeds p,cg_users u $s_where and c.i_newsfeed_id = p.id  and u.id = c.i_user_id ORDER BY c.id DESC limit ".$i_start_limit.",".$i_no_of_page;
-   // echo $sql; 
+   // echo $sql;  
     $query=$this->db->query($sql);
 $result_arr=$query->result_array();
 //echo $sql;
