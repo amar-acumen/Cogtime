@@ -5107,7 +5107,7 @@ function get_member_by_id($cid)
 {
 	$CI = & get_instance();
     $query=$CI->db->query('select *,u.id AS mid, CONCAT(u.s_first_name, " ", u.s_last_name) AS member_name,cm.id AS cmid from cg_church_member AS cm 
-            LEFT JOIN cg_users AS u ON cm.member_id=u.id WHERE cm.church_id = "'.$cid.'" AND cm.is_deleted=0 AND cm.is_blocked=1 AND cm.is_approved = 1 ');
+            LEFT JOIN cg_users AS u ON cm.member_id=u.id WHERE cm.church_id = "'.$cid.'" AND cm.is_deleted=0 AND cm.is_blocked=1 AND cm.is_approved = 1 ORDER BY u.s_first_name  ');
 	$members=$query->result();
 	return $members;
 }
