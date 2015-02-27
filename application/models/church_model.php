@@ -138,7 +138,7 @@ $this->db->update('cg_church_request', $data);
     {
        
         $limit  = (is_numeric($i_start) && is_numeric($i_limit))?" Limit ".intval($i_start).",".intval($i_limit):'';
-        $sql  =  " SELECT CH.* 
+        $sql  =  " SELECT CH.* , CONCAT(U.s_first_name,' ',U.s_last_name) AS s_profile_name
 						FROM cg_church_request CH
 						LEFT JOIN cg_users U ON U.id = CH.i_user_id
 						{$where} GROUP BY CH.id 

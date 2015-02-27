@@ -53,7 +53,8 @@ class Module_generate extends CI_Controller {
                     //'css/jquery-ui-1.8.2.custom.css',
                     'css/jquery-ui-1.8.13.custom.css',
                     'css/dd.css',
-                    'css/flexslider.css'
+                    'css/flexslider.css',
+                    'css/jquery.fancybox.css'
                     //'css/church.css'
                     //'css/big-slider.css'
                 );
@@ -116,6 +117,7 @@ class Module_generate extends CI_Controller {
                     'js/jquery.naviDropDown.1.0.js',
                     'js/jquery.blueberry.js',
                     'js/jquery.bxslider.min.js',
+                    'js/jquery.fancybox.js'
 
                 );
                 $js = '';
@@ -138,7 +140,14 @@ class Module_generate extends CI_Controller {
                     'js/contentslider.js',
                     'js/jquery.autofill.js',
                     'js/frontend/logged/christian_news_js.js',
-                    'js/frontend/logged/tweets/tweet_utilities.js'
+                    'js/frontend/logged/tweets/tweet_utilities.js',
+                    'js/frontend/public_profile.js',
+                    'js/frontend/logged/my_friends.js',
+                    'js/frontend/logged/my_net_pals.js',
+                    'js/frontend/logged/my_prayer_partner.js',
+                    'js/frontend/logged/message_box/my_message.js',
+                    'js/frontend/logged/video_helper.js',
+                    'js/frontend/logged/events/my_events.js'
                   //  'js/jquery.hoverIntent.js',
                   //  'js/frontend/utils.js'
                 );

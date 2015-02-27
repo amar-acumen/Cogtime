@@ -648,7 +648,7 @@ class Christian_news extends Base_controller
 //                                        'js/switch.js','js/animate-collapse.js',
 //                                        'js/lightbox.js','js/jquery.dd.js','js/jquery-ui-1.8.2.custom.min.js',
 //                                        'js/stepcarousel.js',
-										'js/production/tweets/tweet_utilities.js',
+										'js/production/tweet_utilities.js',
                                         'js/production/christian_news_js.js'
 //										'js/tab.js',
 //										'js/jquery.flexslider.js'
