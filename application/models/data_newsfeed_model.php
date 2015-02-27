@@ -390,7 +390,7 @@ $sql="select distinct c.* from cg_users u ,cg_user_newsfeeds c where 1 and c.i_o
 
 }
 else*/
-{$sql="select distinct c.* ,(SELECT count(*) FROM cg_user_newsfeed_comments RC WHERE RC.i_newsfeed_id = c.id) as total_comments from cg_users u ,cg_user_newsfeeds c ".$s_where." and c.i_owner_id='".$i_user_id."'and u.i_isdeleted='1' ORDER BY c.id DESC  limit ".$i_start_limit.",".$i_no_of_page;}
+{$sql="select distinct c.* ,CONCAT(u.s_first_name,' ',u.s_last_name) AS s_profile_name , (SELECT count(*) FROM cg_user_newsfeed_comments RC WHERE RC.i_newsfeed_id = c.id) as total_comments from cg_users u ,cg_user_newsfeeds c ".$s_where." and c.i_owner_id='".$i_user_id."'and u.i_isdeleted='1' ORDER BY c.id DESC  limit ".$i_start_limit.",".$i_no_of_page;}
 #echo $sql;
 $query=$this->db->query($sql);
 $result_arr=$query->result_array();
@@ -432,8 +432,8 @@ return $result_arr;
 
 public function get_all_comments_wall($s_where,$i_start_limit='', $i_no_of_page=''){
     //die('jj');
-    $sql="select c.*,p.i_owner_id,p.data,CONCAT(u.s_first_name,' ',u.s_last_name) AS s_profile_name  from cg_user_newsfeed_comments c,cg_user_newsfeeds p,cg_users u $s_where and c.i_newsfeed_id = p.id  and u.id = c.i_user_id ORDER BY c.id DESC limit ".$i_start_limit.",".$i_no_of_page;
-   // echo $sql; 
+    $sql="select c.*,p.i_owner_id,p.data,CONCAT(u.s_first_name,' ',u.s_last_name) AS s_profile_name ,(select (u.s_first_name,' ',u.s_last_name) AS s_invite_name from cg_user_newsfeeds p,cg_users u where p.i_owner_id = u.id  )   from cg_user_newsfeed_comments c,cg_user_newsfeeds p,cg_users u $s_where and c.i_newsfeed_id = p.id  and u.id = c.i_user_id ORDER BY c.id DESC limit ".$i_start_limit.",".$i_no_of_page;
+   // echo $sql;  
     $query=$this->db->query($sql);
 $result_arr=$query->result_array();
 //echo $sql;

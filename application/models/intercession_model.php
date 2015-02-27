@@ -617,7 +617,8 @@ class Intercession_model extends Base_model
 	}
 	public function get_commitments_by_id($id)
 	{
-	$sql=$this->db->query("select * from cg_bible_intercession_commitments where i_id_intercession_wall_post=".$id);
+            $sql=$this->db->query("select bic.*,u.s_profile_photo,u.e_gender,CONCAT(u.s_first_name,' ',u.s_last_name) AS s_profile_name from cg_bible_intercession_commitments AS bic , cg_users AS u where  u.id = bic.i_user_id  AND  bic.i_id_intercession_wall_post=".$id);
+	//$sql=$this->db->query("select * from cg_bible_intercession_commitments where i_id_intercession_wall_post=".$id);
 	$res=$sql->result_array();
 	return $res;
 	}

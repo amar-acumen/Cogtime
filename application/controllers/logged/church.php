@@ -1542,15 +1542,17 @@ echo json_encode( array('success'=>'true'));
         {
 			if($_POST)
 			{
-				
+				if(!empty($_POST['val_arr'])) {
+				$post_val_array = $_POST['val_arr'];
 				$invited_member = array(
-					'name' => $name,
-					'email' => $email,
+					'name' => $post_val_array[0],
+					'email' => $post_val_array[1],
 					'invitation_sent_date' => get_db_datetime()
 				);
 			$this->db->insert('cg_church_member_invitation', $invited_member);	
 			$VIEW = "logged/church/church_member.phtml";
-			parent::_render($data, $VIEW);	
+			parent::_render($data, $VIEW);
+				}
 			}
 			else
 			{
