@@ -61,7 +61,7 @@
                                         <th align="center" valign="middle" height="30" class="last" width="40">Actions</th>
                                       </tr>
                                      <?php
-									 	
+									 	pr($info_arr);
 									 if(count($info_arr)){ 
 											foreach($info_arr as $k=> $info){
 												
@@ -187,7 +187,7 @@
 										?>
                                         	 <a href="javascript:void(0);" style="float:left;"><p style="background:url(<?=$img?>) no-repeat center; width:60px; height:60px;border: 3px solid #DCDCDC; " title="banner"></p></a>
                                         
-                                             <p class="abuse-info"><b>Profile Name: <?=$info['s_profile_name']?></b></p>
+                                             <p class="abuse-info"><b>Profile Name: <?=get_username_by_id($info['i_referenced_id'])?></b></p>
                                         
                                         <?php
 										 }
