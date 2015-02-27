@@ -52,10 +52,10 @@ class Photo_albums_model extends Base_model
 	
 	public function get_by_user_id($user_id, $start_limit="", $no_of_page="") {
 		if("$start_limit" == "") {
-			$sql = sprintf('SELECT p.*,CONCAT(u.s_first_name,' ',u.s_last_name) s_profile_name FROM '.$this->db->PHOTO_ALBUM.' p,cg_users u WHERE p.i_user_id=u.id AND p.i_user_id = %s ORDER BY p.id DESC ',$user_id);
+			$sql = sprintf('SELECT p.*,CONCAT(u.s_first_name," ",u.s_last_name) s_profile_name FROM '.$this->db->PHOTO_ALBUM.' p,cg_users u WHERE p.i_user_id=u.id AND p.i_user_id = %s ORDER BY p.id DESC ',$user_id);
 		}
 		else {
-			$sql = sprintf('SELECT p.*,CONCAT(u.s_first_name,' ',u.s_last_name) s_profile_name FROM '.$this->db->PHOTO_ALBUM.' p,cg_users u WHERE p.i_user_id=u.id AND p.i_user_id = %s ORDER BY p.id DESC LIMIT %s, %s', $user_id, $start_limit, $no_of_page);
+			$sql = sprintf('SELECT p.*,CONCAT(u.s_first_name," ",u.s_last_name) s_profile_name FROM '.$this->db->PHOTO_ALBUM.' p,cg_users u WHERE p.i_user_id=u.id AND p.i_user_id = %s ORDER BY p.id DESC LIMIT %s, %s', $user_id, $start_limit, $no_of_page);
 		}
 
 		$query = $this->db->query($sql);
