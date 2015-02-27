@@ -107,6 +107,7 @@ class Events_model extends Base_model {
 
         $sql = " SELECT E.*, 
 							U.s_name,
+                                                        U.s_first_name,
 							U.s_last_name, 
 							C.s_country_name 
 							FROM {$this->db->EVENTS} 
