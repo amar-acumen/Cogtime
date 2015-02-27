@@ -150,7 +150,7 @@ class Messages extends Admin_base_Controller
 			
 			
 			
-			//pr($result,1);
+			pr($result,1);
 			#Jquery Pagination Starts
            	$this->load->library('jquery_pagination');
             $config['base_url'] = base_url()."admin/site_settings/messages/info_ajax_pagination/".$type;
