@@ -21,7 +21,7 @@ class Ring_post_model extends Base_model
 	public function get_by_id($id, $start_limit="", $no_of_page="") {
 		if("$start_limit" == "") {
 			//$sql = sprintf('SELECT * FROM '.$this->db->USER_RING_POST.'  where id = %s',  $id);
-                    $sql = 'select rp.* , u.s_profile_photo , u.e_gender  from cg_user_ring_post AS rp , cg_users u where rp.id = "'.$id.'" AND u.id = rp.i_user_id';
+                    $sql = 'select rp.* , u.s_profile_photo , u.e_gender ,CONCAT(u.s_first_name," ",u.s_last_name) AS s_profile_name  from cg_user_ring_post AS rp , cg_users u where rp.id = "'.$id.'" AND u.id = rp.i_user_id';
 		}
 		else {
                      $sql = 'select rp.* , u.s_profile_photo , u.e_gender  from cg_user_ring_post AS rp , cg_users u where rp.id = "'.$id.'" AND u.id = rp.i_user_id '.$start_limit.', '.$no_of_page.' ';
