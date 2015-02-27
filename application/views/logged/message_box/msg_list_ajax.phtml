@@ -13,7 +13,7 @@ if (is_array($result_arr) && $no_of_result > 0) {
         <li <?= $CSS ?> value="<?= $message['id'] ?>" >
             <div class="check-box-section"><input type="checkbox" name="chk_mail" id="chk_mail<?= $message['id'] ?>" value="<?= $message['id'] ?>" /></div>
             <div class="mail-box-section">
-			<?=get_profile_image_of_user('thumb',$message['s_profile_photo'],$message['e_gender'])?>
+			<?=$message['s_profile_photo']?>
                 <a href="javascript:void(0);"><div class="pro_photo2" style="background:url(<?= $PROF_IMG ?>) no-repeat center;width:60px; height:60px;" ></div></a>
 
                 <?php
