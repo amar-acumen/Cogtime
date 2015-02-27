@@ -32,7 +32,7 @@
                             <!--blog brief start -->
 <?php //pr($blogdata)?>
                             <div class="blog-brief">
-                            	<img src="<?php echo get_profile_image($blogdata[0]['i_user_id'],'thumb',$blogdata[0]['s_profile_photo']);?>" alt="posted by" width="73" height="73" class="blog-posted-by" />
+                            	<img src="<?php echo get_profile_image_of_user('thumb',$blogdata[0]['s_profile_photo'],$blogdata[0]['e_gender']);?>" alt="posted by" width="73" height="73" class="blog-posted-by" />
                             	<div class="right-panel">
                                     <h2><?php echo $blogdata[0]['s_title']?></h2>
                                     <h3>Created by <strong><?php echo $blogdata[0]['s_profile_name']?></strong> on <span><?php echo getShortDate($blogdata[0]['dt_created_on'],5)?></span></h3>

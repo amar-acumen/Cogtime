@@ -96,7 +96,7 @@
 									<li>
                 
                   
-              		<strong><a class="post-user" href="<?=get_public_profile_url($v->i_user_id, get_username_by_id($v->i_user_id))?>"><?=get_username_by_id($v->i_user_id)?> : </a></strong><span class="post-txt"> <?=$v->s_post_desc?> </span>
+              		<strong><a class="post-user" href="<?=get_public_profile_url($v->i_user_id, $v->member_name)?>"><?=$v->member_name?> : </a></strong><span class="post-txt"> <?=$v->s_post_desc?> </span>
                    
 					<span class="text-small-4">Posted on: <?=getShortDateWithTime($v->dt_created_on,6)?></span>
                                        <span class="pry-grp"> <?php 

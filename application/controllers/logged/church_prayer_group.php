@@ -414,7 +414,6 @@ class Church_prayer_group extends Base_controller
 		{
 			$data['prayer_grp_info_arr'] = $this->church_new_model->get_pending_groups_requests_recieved($user_id ,$_SESSION['logged_church_id'],$s_where); 
 		}
-		//pr($data['prayer_grp_info_arr'],1);
 		$data['type'] = 'recv'; //pr($data['prayer_grp_info'],1);
 	
 		$VIEW_FILE = "logged/church/church_prayer_group_recv_invitation_list.phtml";
