@@ -20,7 +20,7 @@
                               <tr>
                                 <td align="left" valign="top"><?=getShortDate($info['dt_created_on'],5)?></td>
                                 <td align="left" valign="top"><a href="javascript:void(0);" onclick="return show_project_details(<?php echo $info['i_project_id'] ?> )"><?=$title?></a></td>
-                                <td align="left" valign="top"><?=$info['i_user_id']?> < <a href="mailto:<?=get_useremail_by_id($info['i_user_id'])?>"><?=get_useremail_by_id($info['i_user_id'])?> </a>></td>
+                                <td align="left" valign="top"><?=get_username_by_id($info['i_user_id'])?> < <a href="mailto:<?=get_useremail_by_id($info['i_user_id'])?>"><?=get_useremail_by_id($info['i_user_id'])?> </a>></td>
                                 <td align="left" valign="top"><?=$desc?></td>
                                 
                               </tr>
