@@ -84,7 +84,8 @@ class Public_profile extends Base_controller
                                        // 'js/jquery.fancybox.js',
 									//	'js/stepcarousel.js'
                                         ));
-                                        
+
+
             parent::_add_css_arr( array(//'css/jquery-ui-1.8.2.custom.css',
                                         //'css/jquery.fancybox.css',
 										'css/skin.css') );
