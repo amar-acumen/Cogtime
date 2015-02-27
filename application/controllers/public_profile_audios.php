@@ -68,21 +68,21 @@ class Public_profile_audios extends Base_controller
             parent::_set_meta_keywords('');
         
             
-            parent::_add_js_arr( array( 'js/ddsmoothmenu.js',
+            parent::_add_js_arr( array( /*'js/ddsmoothmenu.js',
                                         'js/lightbox.js',
                                         'js/tab.js',
                                         'js/jquery.autofill.js',
                                         'js/jquery.lightbox.js',
-										'js/stepcarousel.js',
+										'js/stepcarousel.js',*/
                                         'js/frontend/logged/my_friends.js',
                                         'js/frontend/logged/my_net_pals.js',
                                         'js/frontend/logged/my_prayer_partner.js',
                                         'js/frontend/logged/message_box/my_message.js',
-										'js/frontend/logged/tweets/tweet_utilities.js',
+										'js/production/tweet_utilities.js',
                                         'js/jwplayer/jwplayer.js'
                                         ));
                                         
-            parent::_add_css_arr( array('css/jquery-ui-1.8.2.custom.css') );
+        //    parent::_add_css_arr( array('css/jquery-ui-1.8.2.custom.css') );
                                         
                                         
             # adjusting header & footer sections [End]...
@@ -185,23 +185,23 @@ class Public_profile_audios extends Base_controller
             parent::_set_meta_keywords('');
         
             
-            parent::_add_js_arr( array( 'js/ddsmoothmenu.js',
+            parent::_add_js_arr( array( /*'js/ddsmoothmenu.js',
                                         'js/lightbox.js',
                                         'js/tab.js',
                                         'js/jquery.autofill.js',
                                         'js/jquery.lightbox.js',
-										'js/stepcarousel.js',
+										'js/stepcarousel.js',*/
                                         'js/frontend/logged/my_friends.js',
                                         'js/frontend/logged/my_net_pals.js',
                                         'js/frontend/logged/my_prayer_partner.js',
                                         'js/frontend/logged/message_box/my_message.js',
-										'js/frontend/logged/tweets/tweet_utilities.js',
+										'js/production/tweet_utilities.js',
 										'js/frontend/logged/my_audio/my_audio.js',
 										'js/frontend/logged/my_audio/audio_helper.js',
                                         'js/jwplayer/jwplayer.js'
                                         ));
                                         
-            parent::_add_css_arr( array('css/jquery-ui-1.8.2.custom.css') );
+          //  parent::_add_css_arr( array('css/jquery-ui-1.8.2.custom.css') );
                                         
                                         
             # adjusting header & footer sections [End]...
