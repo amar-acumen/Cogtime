@@ -60,20 +60,20 @@ class Church_public extends Base_controller
         
             
             parent::_add_js_arr( array( 'js/ddsmoothmenu.js',
-                                        'js/switch.js','js/animate-collapse.js',
-                                        'js/lightbox.js','js/jquery.dd.js','js/jquery-ui-1.8.2.custom.min.js',
-                                        'js/stepcarousel.js',
-										'js/frontend/logged/tweets/tweet_utilities.js',
-                                        'js/frontend/logged/christian_news_js.js',
-										'js/tab.js',
-										'js/jquery.flexslider.js'
-										,'js/jquery.eislideshow.js',
-										'js/jquery.hoverIntent.minified.js',
-										'js/jquery.naviDropDown.1.0.js','js/church_login.js'
+//                                        'js/switch.js','js/animate-collapse.js',
+//                                        'js/lightbox.js','js/jquery.dd.js','js/jquery-ui-1.8.2.custom.min.js',
+//                                        'js/stepcarousel.js',
+										'js/production/tweet_utilities.js',
+                                        'js/production/christian_news_js.js'
+//										'js/tab.js',
+//										'js/jquery.flexslider.js'
+//										,'js/jquery.eislideshow.js',
+//										'js/jquery.hoverIntent.minified.js',
+//										'js/jquery.naviDropDown.1.0.js','js/church_login.js'
                                         ));
-                                        
-            parent::_add_css_arr( array('css/jquery-ui-1.8.2.custom.css',
-                                          'css/dd.css',
+//
+            parent::_add_css_arr( array(//'css/jquery-ui-1.8.2.custom.css',
+//                                          'css/dd.css',
 										  'css/church.css') );
             
                //$this->session->set_userdata('current_church_id', $c_id);
