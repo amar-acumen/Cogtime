@@ -459,7 +459,7 @@ return $result_arr;
             
         }
         public function get_blog_all_comments($s_where,$i_start_limit='', $i_no_of_page=''){
-            $sql = "select c.*,p.s_post_title,p.s_post_description,u.s_first_name, u.s_last_name,u.s_profile_photo,u.e_gender from cg_user_blog_post_comments c,cg_user_blog_post p ,cg_users u $s_where and c.i_blog_post_id = p.id and u.id = c.i_user_id ORDER BY c.id DESC limit ".$i_start_limit.",".$i_no_of_page;
+            $sql = "select c.*,p.s_post_title,p.s_post_description,CONCAT(u.s_first_name,' ',u.s_last_name) AS s_profile_name,u.s_profile_photo,u.e_gender from cg_user_blog_post_comments c,cg_user_blog_post p ,cg_users u $s_where and c.i_blog_post_id = p.id and u.id = c.i_user_id ORDER BY c.id DESC limit ".$i_start_limit.",".$i_no_of_page;
             //echo $sql;
             //exit;
             $query=$this->db->query($sql);
