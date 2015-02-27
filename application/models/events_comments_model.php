@@ -214,7 +214,7 @@ class Events_comments_model extends CI_Model {
 	}
           public function get_all_comments($s_where,$i_start_limit='', $i_no_of_page=''){
            // die('dd');
-            $sql = "select c.* ,p.s_title,p.s_address,u.s_first_name, u.s_last_name from cg_event_comments c , cg_events p ,cg_users u  $s_where and c.i_event_id = p.id  and u.id = c.i_user_id ORDER BY c.id DESC limit ".$i_start_limit.",".$i_no_of_page;
+            $sql = "select c.* ,p.s_title,p.s_address,CONCAT(u.s_first_name,' ',u.s_last_name) AS s_profile_name from cg_event_comments c , cg_events p ,cg_users u  $s_where and c.i_event_id = p.id  and u.id = c.i_user_id ORDER BY c.id DESC limit ".$i_start_limit.",".$i_no_of_page;
            
             $query=$this->db->query($sql);
 $result_arr=$query->result_array();

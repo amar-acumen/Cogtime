@@ -37,48 +37,46 @@
         <form style="width:412px;" name="importfrm" id="importfrm" action="" method="post" onsubmit="return member_form_validation ();">
 
         <label>Name1 :</label>
-
-        <input type="text" name="name1" id="name1" value="">
-		
+        <input type="text" name="name" id="name" value="">
+		<span id="name_err" style="display:block;" class="error-message">Please enter name</span>
 		<label>Email1 :</label>
-
-        <input type="email" name="email1" id="email1" value="">
+        <input type="email" name="email" id="email" value="">
+		<span id="email_err" style="display:block;" class="error-message">Please enter email</span>
+		<br>
 		
 		<label>Name2 :</label>
-
         <input type="text" name="name1" id="name1" value="">
-		
+		<span id="name_err_1" style="display:block;" class="error-message">Please enter name</span>
 		<label>Email2 :</label>
-
-        <input type="email" name="email2" id="email2" value="">
+        <input type="email" name="email1" id="email1" value="">
+		<span id="email_err_1" style="display:block;" class="error-message">Please enter email</span>
+		<br>
 		
 		<label>Name3 :</label>
-
-        <input type="text" name="name3" id="name3" value="">
-		
+        <input type="text" name="name2" id="name2" value="">
+		<span id="name_err_2" style="display:block;" class="error-message">Please enter name</span>
 		<label>Email3 :</label>
-
-        <input type="email" name="email3" id="email3" value="">
+        <input type="email" name="email2" id="email2" value="">
+		<span id="email_err_2" style="display:block;" class="error-message">Please enter email</span>
+		<br>
 		
 		<label>Name4 :</label>
-
-        <input type="text" name="name4" id="name4" value="">
-		
+        <input type="text" name="name3" id="name3" value="">
+		<span id="name_err_3" style="display:block;" class="error-message">Please enter name</span>
 		<label>Email4 :</label>
-
-        <input type="email" name="email4" id="email4" value="">
+        <input type="email" name="email3" id="email3" value="">
+		<span id="email_err_3" style="display:none;" class="error-message">Please enter email</span>
+		<br>
 		
 		<label>Name5 :</label>
-
-        <input type="text" name="name5" id="name5" value="">
-		
+        <input type="text" name="name4" id="name4" value="">
+		<span id="name_err_4" style="display:none;" class="error-message">Please enter name</span>
 		<label>Email5 :</label>
-
-        <input type="email" name="email5" id="email5" value="">
-
+        <input type="email" name="email4" id="email4" value="">
+		<span id="email_err_4" style="display:none;" class="error-message">Please enter email</span>
+		<br/>
+		
         <input type="submit" value="Submit" class="post-btn">
-
-         <span id="err_csv" class="error-message"></span> 
 
         </form>
 		
@@ -103,45 +101,74 @@
 <div class="clr"></div>
 <script type="text/javascript">
 function member_form_validation () {
-if(jQuery('#name1').val() == '' || jQuery('#email1').val() == '')
+var e_flag=0;
+var val_arr=[];
+if((jQuery('#name').val() == '' || jQuery('#email').val() == '') || (jQuery('#name').val() == '' && jQuery('#email').val() == ''))
 {
-	alert('Please enter name and email.');
-	jQuery('#name1').focus();
-	jQuery('#email1').focus();
+	e_flag=1;
+	$('#name_err').css("display","block");
+	$('#email_err').css("display","block");
+}
+else
+{
+	val_arr.push(jQuery('#name').val())+','+val_arr.push(jQuery('#email').val());
+}
+if((jQuery('#name1').val() == '' || jQuery('#email1').val() == '') || (jQuery('#name1').val() == '' && jQuery('#email1').val() == '')) {
+	e_flag=1;
+	$('#name_err_1').css("display","block");
+	$('#email_err_1').css("display","block");
+}
+else
+{
+	val_arr.push(jQuery('#name1').val())+','+val_arr.push(jQuery('#email1').val());
+}
+if((jQuery('#name2').val() == '' || jQuery('#email2').val() == '') || (jQuery('#name2').val() == '' && jQuery('#email2').val() == '')) {
+	e_flag=1;
+	$('#name_err_2').css("display","block");
+	$('#email_err_2').css("display","block");
+}
+else
+{
+	val_arr.push(jQuery('#name2').val())+','+val_arr.push(jQuery('#email2').val());
+}
+if((jQuery('#name3').val() == '' || jQuery('#email3').val() == '') || (jQuery('#name3').val() == '' && jQuery('#email3').val() == '')) {
+	e_flag=1;
+	$('#name_err_3').css("display","block");
+	$('#email_err_3').css("display","block");
+}
+else
+{
+	val_arr.push(jQuery('#name3').val())+','+val_arr.push(jQuery('#email3').val());
+}
+if((jQuery('#name4').val() == '' || jQuery('#email4').val() == '') || (jQuery('#name4').val() == '' && jQuery('#email4').val() == '')) {
+	e_flag=1;
+	$('#name_err_4').css("display","block");
+	$('#email_err_4').css("display","block");
+}
+else
+{
+	val_arr.push(jQuery('#name4').val())+','+val_arr.push(jQuery('#email4').val());
+}
+if(e_flag == 1)
+{
 	return false;
 }
-else if(jQuery('#name2').val() == '' || jQuery('#email2').val() == '') {
-	alert('Please enter name and email.');
-	jQuery('#name2').focus();
-	jQuery('#email2').focus();
-	return false;
-}
-else if(jQuery('#name3').val() == '' || jQuery('#email3').val() == '') {
-	alert('Please enter name and email.');
-	jQuery('#name3').focus();
-	jQuery('#email3').focus();
-	return false;
-}
-else if(jQuery('#name4').val() == '' || jQuery('#email4').val() == '') {
-	alert('Please enter name and email.');
-	jQuery('#name4').focus();
-	jQuery('#email4').focus();
-	return false;
+else
+{
+	$.ajax({
+			 type: "POST",
+			 url: "<?php echo base_url(); ?>logged/church/church_add_member_form/",
+			 data: val_arr,
+			 success: function(data){
+				hideBusyScreen(); 
+				window.location.href="logged/church/church_add_member_form/";
+			 }
+		 });
 }
 
-else if(jQuery('#name5').val() == '' || jQuery('#email5').val() == '') {
-	alert('Please enter name and email.');
-	jQuery('#name5').focus();
-	jQuery('#email5').focus();
-	return false;
-}
-else {
-	//window.location.href = "<?php echo base_url(); ?>logged/church/church_add_member_form";
-	return true;
 }
 
 
-}
 </script>
 
 <!-- FOOTER SECTION -->
