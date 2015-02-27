@@ -28,8 +28,7 @@
 										$user_id = $ring_inv_val['invitedid'];
 
 										$label = 'Invitee Name: ';
-										
-										$profile_name = $ring_inv_val['s_profile_name'];
+
 										
 
 									}else
@@ -40,8 +39,7 @@
 										$user_id = $ring_inv_val['guest_id'];
 
 										$label = 'Owner Name: ';
-										
-										$profile_name = $ring_inv_val['s_profile_name'];
+
 									}
 
 									 $logo = get_church_ring_logo_by_id($ring_inv_val['ringid'],'thumb');
@@ -50,7 +48,7 @@
 
 									
 
-									
+									$profile_name = get_username_by_id($user_id);
 
 							?>
 
