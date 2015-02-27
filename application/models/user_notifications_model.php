@@ -38,11 +38,11 @@ class User_notifications_model extends Base_model
 
 	public function get_by_user_id($user_id, $s_where="", $start_limit="", $no_of_page="") {
 		if("$start_limit" == "") {
-			$sql = sprintf('SELECT * FROM '.$this->db->NOTIFICATIONS.'  WHERE i_accepter_id = %s %s ORDER BY id DESC ',$user_id,  $s_where);
+			$sql = sprintf('SELECT n.*,CONCAT(u.s_first_name,' ', u.s_last_name) s_profile_name, u.s_profile_photo, u.e_gender FROM '.$this->db->NOTIFICATIONS.' n,cg_users u  WHERE n.i_requester_id=u.id AND n.i_accepter_id = %s %s ORDER BY n.id DESC ',$user_id,  $s_where);
 		}
 		else {
-			 $sql = sprintf('SELECT * FROM '.$this->db->NOTIFICATIONS
-								.'  WHERE i_accepter_id = %s %s ORDER BY id DESC LIMIT %s, %s ', $user_id, $s_where, $start_limit, $no_of_page);
+			 $sql = sprintf('SELECT n.*,CONCAT(u.s_first_name,' ', u.s_last_name) s_profile_name, u.s_profile_photo, u.e_gender FROM '.$this->db->NOTIFICATIONS
+								.' n,cg_users u  WHERE n.i_requester_id=u.id AND n.i_accepter_id = %s %s ORDER BY n.id DESC LIMIT %s, %s ', $user_id, $s_where, $start_limit, $no_of_page);
 		}
 
 		$query = $this->db->query($sql);

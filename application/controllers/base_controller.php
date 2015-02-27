@@ -1744,9 +1744,9 @@ class Base_controller extends CI_Controller {
 
             foreach ($friend_declined_arr as $key => $val) {
                 if ($key >= 1) {
-                    $notification_message .= '<br/>' . '<span class="blueName">' . get_username_by_id($val['i_requester_id']) . ' has refused your friend request.</span>';
+                    $notification_message .= '<br/>' . '<span class="blueName">' . $val['s_profile_name'] . ' has refused your friend request.</span>';
                 } else
-                    $notification_message .= '<span class="blueName">' . get_username_by_id($val['i_requester_id']) . ' has refused your friend request.</span>';
+                    $notification_message .= '<span class="blueName">' . $val['s_profile_name'] . ' has refused your friend request.</span>';
             }
         }
 
@@ -1755,9 +1755,9 @@ class Base_controller extends CI_Controller {
             foreach ($friend_accepted_arr as $key => $val) {
 
                 if ($key >= 1) {
-                    $notification_message .= '<br/>' . '<span class="blueName">' . get_username_by_id($val['i_requester_id']) . ' has accepted your friend request.</span>';
+                    $notification_message .= '<br/>' . '<span class="blueName">' . $val['s_profile_name'] . ' has accepted your friend request.</span>';
                 } else
-                    $notification_message .= '<span class="blueName">' . get_username_by_id($val['i_requester_id']) . ' has accepted your friend request.</span>';
+                    $notification_message .= '<span class="blueName">' . $val['s_profile_name'] . ' has accepted your friend request.</span>';
             }
         }
 
@@ -1775,9 +1775,9 @@ class Base_controller extends CI_Controller {
 
             foreach ($netpal_declined_arr as $key => $val) {
                 if ($key >= 1) {
-                    $notification_message .= '<br/>' . '<span class="blueName">' . get_username_by_id($val['i_requester_id']) . ' has refused your netpals request. </span>';
+                    $notification_message .= '<br/>' . '<span class="blueName">' . $val['s_profile_name'] . ' has refused your netpals request. </span>';
                 } else
-                    $notification_message .= '<span class="blueName">' . get_username_by_id($val['i_requester_id']) . ' has refused your netpals request. </span>';
+                    $notification_message .= '<span class="blueName">' . $val['s_profile_name'] . ' has refused your netpals request. </span>';
             }
         }
 
@@ -1786,9 +1786,9 @@ class Base_controller extends CI_Controller {
             foreach ($netpal_accepted_arr as $key => $val) {
 
                 if ($key >= 1) {
-                    $notification_message .= '<br/>' . '<span class="blueName">' . get_username_by_id($val['i_requester_id']) . ' has accepted your netpals request. </span>';
+                    $notification_message .= '<br/>' . '<span class="blueName">' . $val['s_profile_name'] . ' has accepted your netpals request. </span>';
                 } else
-                    $notification_message .= '<span class="blueName">' . get_username_by_id($val['i_requester_id']) . ' has accepted your netpals request </span>.';
+                    $notification_message .= '<span class="blueName">' . $val['s_profile_name'] . ' has accepted your netpals request </span>.';
             }
         }
 
@@ -1805,9 +1805,9 @@ class Base_controller extends CI_Controller {
 
             foreach ($prayer_partner_declined_arr as $key => $val) {
                 if ($key >= 1) {
-                    $notification_message .= '<br/>' . '<span class="blueName">' . get_username_by_id($val['i_requester_id']) . ' has refused your </span> <span class="blueName"> prayer partner request.</span>';
+                    $notification_message .= '<br/>' . '<span class="blueName">' . $val['s_profile_name'] . ' has refused your </span> <span class="blueName"> prayer partner request.</span>';
                 } else
-                    $notification_message .= '<span class="blueName">' . get_username_by_id($val['i_requester_id']) . ' has refused your </span> <span class="blueName"> prayer partner request.</span>';
+                    $notification_message .= '<span class="blueName">' . $val['s_profile_name'] . ' has refused your </span> <span class="blueName"> prayer partner request.</span>';
             }
         }
 
@@ -1816,9 +1816,9 @@ class Base_controller extends CI_Controller {
             foreach ($prayer_partner_accepted_arr as $key => $val) {
 
                 if ($key >= 1) {
-                    $notification_message .= '<br/>' . '<span class="blueName">' . get_username_by_id($val['i_requester_id']) . ' has accepted your prayer partner request </span>.';
+                    $notification_message .= '<br/>' . '<span class="blueName">' . $val['s_profile_name'] . ' has accepted your prayer partner request </span>.';
                 } else
-                    $notification_message .= '<span class="blueName">' . get_username_by_id($val['i_requester_id']) . ' has accepted your prayer partner request </span>.';
+                    $notification_message .= '<span class="blueName">' . $val['s_profile_name'] . ' has accepted your prayer partner request </span>.';
             }
         }
 
@@ -1844,9 +1844,9 @@ class Base_controller extends CI_Controller {
             foreach ($photo_comment as $key => $val) {
 
                 if ($key >= 1) {
-                    $notification_message .= '<br/>' . '<span class="blueName">' . get_username_by_id($val['i_requester_id']) . ' has commented on your photo.</span>';
+                    $notification_message .= '<br/>' . '<span class="blueName">' . $val['s_profile_name'] . ' has commented on your photo.</span>';
                 } else
-                    $notification_message .= '<span class="blueName">' . get_username_by_id($val['i_requester_id']) . ' has commented on your photo.</span>';
+                    $notification_message .= '<span class="blueName">' .$val['s_profile_name'] . ' has commented on your photo.</span>';
             }
         }
 
@@ -1858,9 +1858,9 @@ class Base_controller extends CI_Controller {
             foreach ($video_comment as $key => $val) {
 
                 if ($key >= 1) {
-                    $notification_message .= '<br/>' . '<span class="blueName">' . get_username_by_id($val['i_requester_id']) . ' has commented on your video.</span>';
+                    $notification_message .= '<br/>' . '<span class="blueName">' . $val['s_profile_name'] . ' has commented on your video.</span>';
                 } else
-                    $notification_message .= '<span class="blueName">' . get_username_by_id($val['i_requester_id']) . ' has commented on your video.</span>';
+                    $notification_message .= '<span class="blueName">' . $val['s_profile_name'] . ' has commented on your video.</span>';
             }
         }
 
@@ -1872,9 +1872,9 @@ class Base_controller extends CI_Controller {
             foreach ($audio_comment as $key => $val) {
 
                 if ($key >= 1) {
-                    $notification_message .= '<br/>' . '<span class="blueName">' . get_username_by_id($val['i_requester_id']) . ' has commented on your audio.</span>';
+                    $notification_message .= '<br/>' . '<span class="blueName">' . $val['s_profile_name'] . ' has commented on your audio.</span>';
                 } else
-                    $notification_message .= '<span class="blueName">' . get_username_by_id($val['i_requester_id']) . ' has commented on your audio.</span>';
+                    $notification_message .= '<span class="blueName">' . $val['s_profile_name'] . ' has commented on your audio.</span>';
             }
         }
 
@@ -1887,9 +1887,9 @@ class Base_controller extends CI_Controller {
             foreach ($event_comment as $key => $val) {
 
                 if ($key >= 1) {
-                    $notification_message .= '<br/>' . '<span class="blueName">' . get_username_by_id($val['i_requester_id']) . ' has commented on your event.</span>';
+                    $notification_message .= '<br/>' . '<span class="blueName">' . $val['s_profile_name'] . ' has commented on your event.</span>';
                 } else
-                    $notification_message .= '<span class="blueName">' . get_username_by_id($val['i_requester_id']) . ' has commented on your event.</span>';
+                    $notification_message .= '<span class="blueName">' . $val['s_profile_name'] . ' has commented on your event.</span>';
             }
         }
 
@@ -1900,9 +1900,9 @@ class Base_controller extends CI_Controller {
             foreach ($event_invitation as $key => $val) {
 
                 if ($key >= 1) {
-                    $notification_message .= '<br/>' . '<span class="blueName">' . get_username_by_id($val['i_requester_id']) . ' has invited you on his/her event.</span>';
+                    $notification_message .= '<br/>' . '<span class="blueName">' . $val['s_profile_name'] . ' has invited you on his/her event.</span>';
                 } else
-                    $notification_message .= '<span class="blueName">' . get_username_by_id($val['i_requester_id']) . ' has invited you on his/her event.</span>';
+                    $notification_message .= '<span class="blueName">' . $val['s_profile_name'] . ' has invited you on his/her event.</span>';
             }
         }
 
@@ -1914,9 +1914,9 @@ class Base_controller extends CI_Controller {
             foreach ($tweet_comment as $key => $val) {
 
                 if ($key >= 1) {
-                    $notification_message .= '<br/>' . '<span class="blueName">' . get_username_by_id($val['i_requester_id']) . ' has posted on Tweet.</span>';
+                    $notification_message .= '<br/>' . '<span class="blueName">' . $val['s_profile_name'] . ' has posted on Tweet.</span>';
                 } else
-                    $notification_message .= '<span class="blueName">' . get_username_by_id($val['i_requester_id']) . ' has posted on Tweet.</span>';
+                    $notification_message .= '<span class="blueName">' . $val['s_profile_name'] . ' has posted on Tweet.</span>';
             }
         }
 
@@ -1926,9 +1926,9 @@ class Base_controller extends CI_Controller {
             foreach ($retweet as $key => $val) {
 
                 if ($key >= 1) {
-                    $notification_message .= '<br/>' . '<span class="blueName">' . get_username_by_id($val['i_requester_id']) . ' has re-tweeted your post.</span>';
+                    $notification_message .= '<br/>' . '<span class="blueName">' . $val['s_profile_name'] . ' has re-tweeted your post.</span>';
                 } else
-                    $notification_message .= '<span class="blueName">' . get_username_by_id($val['i_requester_id']) . ' has re-tweeted your post.</span>';
+                    $notification_message .= '<span class="blueName">' . $val['s_profile_name'] . ' has re-tweeted your post.</span>';
             }
         }
 
@@ -1941,9 +1941,9 @@ class Base_controller extends CI_Controller {
             foreach ($blog_comment as $key => $val) {
 
                 if ($key >= 1) {
-                    $notification_message .= '<br/>' . '<span class="blueName">' . get_username_by_id($val['i_requester_id']) . ' has commented on an article in blog.</span>';
+                    $notification_message .= '<br/>' . '<span class="blueName">' . $val['s_profile_name'] . ' has commented on an article in blog.</span>';
                 } else
-                    $notification_message .= '<span class="blueName">' . get_username_by_id($val['i_requester_id']) . ' has commented on an article in blog.</span>';
+                    $notification_message .= '<span class="blueName">' . $val['s_profile_name'] . ' has commented on an article in blog.</span>';
             }
         }
 
@@ -1956,9 +1956,9 @@ class Base_controller extends CI_Controller {
             foreach ($ring_comment as $key => $val) {
 
                 if ($key >= 1) {
-                    $notification_message .= '<br/>' . '<span class="blueName">' . get_username_by_id($val['i_requester_id']) . ' has commented on a post of ring you have joined/created.</span>';
+                    $notification_message .= '<br/>' . '<span class="blueName">' . $val['s_profile_name'] . ' has commented on a post of ring you have joined/created.</span>';
                 } else
-                    $notification_message .= '<span class="blueName">' . get_username_by_id($val['i_requester_id']) . ' has commented on a post of ring you have joined/created.</span>';
+                    $notification_message .= '<span class="blueName">' . $val['s_profile_name'] . ' has commented on a post of ring you have joined/created.</span>';
             }
         }
 
@@ -1971,9 +1971,9 @@ class Base_controller extends CI_Controller {
             foreach ($ring_post as $key => $val) {
 
                 if ($key >= 1) {
-                    $notification_message .= '<br/>' . '<span class="blueName">' . get_username_by_id($val['i_requester_id']) . ' has posted in ring you have joined/created.</span>';
+                    $notification_message .= '<br/>' . '<span class="blueName">' . $val['s_profile_name'] . ' has posted in ring you have joined/created.</span>';
                 } else
-                    $notification_message .= '<span class="blueName">' . get_username_by_id($val['i_requester_id']) . ' has posted in ring you have joined/created.</span>';
+                    $notification_message .= '<span class="blueName">' . $val['s_profile_name'] . ' has posted in ring you have joined/created.</span>';
             }
         }
 
@@ -1986,9 +1986,9 @@ class Base_controller extends CI_Controller {
             foreach ($prayer_r_commit as $key => $val) {
 
                 if ($key >= 1) {
-                    $notification_message .= '<br/>' . '<span class="blueName">' . get_username_by_id($val['i_requester_id']) . ' has added his/her commitments to the prayer request you have created.</span>';
+                    $notification_message .= '<br/>' . '<span class="blueName">' . $val['s_profile_name'] . ' has added his/her commitments to the prayer request you have created.</span>';
                 } else
-                    $notification_message .= '<span class="blueName">' . get_username_by_id($val['i_requester_id']) . ' has added his/her commitments to the prayer request you have created.</span>';
+                    $notification_message .= '<span class="blueName">' . $val['s_profile_name'] . ' has added his/her commitments to the prayer request you have created.</span>';
             }
         }
 
@@ -2001,9 +2001,9 @@ class Base_controller extends CI_Controller {
             foreach ($prayer_group_invitation as $key => $val) {
 
                 if ($key >= 1) {
-                    $notification_message .= '<br/>' . '<a href="' . base_url() . 'my-msg-inbox.html"><span class="blueName">' . get_username_by_id($val['i_requester_id']) . ' has invited you to his/her prayer group.</span></a>';
+                    $notification_message .= '<br/>' . '<a href="' . base_url() . 'my-msg-inbox.html"><span class="blueName">' . $val['s_profile_name'] . ' has invited you to his/her prayer group.</span></a>';
                 } else
-                    $notification_message .= '<a href="' . base_url() . 'my-msg-inbox.html"><span class="blueName">' . get_username_by_id($val['i_requester_id']) . 'has invited you to his/her prayer group.</span></a>';
+                    $notification_message .= '<a href="' . base_url() . 'my-msg-inbox.html"><span class="blueName">' . $val['s_profile_name'] . 'has invited you to his/her prayer group.</span></a>';
             }
         }
 
@@ -2016,9 +2016,9 @@ class Base_controller extends CI_Controller {
             foreach ($prayer_group_accept_join_request as $key => $val) {
 
                 if ($key >= 1) {
-                    $notification_message .= '<br/>' . '<a href="' . base_url() . 'my-msg-inbox.html"><span class="blueName">' . get_username_by_id($val['i_requester_id']) . ' has accepted your prayer group invitation</span>.</a>';
+                    $notification_message .= '<br/>' . '<a href="' . base_url() . 'my-msg-inbox.html"><span class="blueName">' . $val['s_profile_name'] . ' has accepted your prayer group invitation</span>.</a>';
                 } else
-                    $notification_message .= '<a href="' . base_url() . 'my-msg-inbox.html"><span class="blueName">' . get_username_by_id($val['i_requester_id']) . ' has accepted your prayer  prayer group invitation</span>.</a>';
+                    $notification_message .= '<a href="' . base_url() . 'my-msg-inbox.html"><span class="blueName">' . $val['s_profile_name'] . ' has accepted your prayer  prayer group invitation</span>.</a>';
             }
         }
         ############################# END prayer_group_invitation accepted ################################################
@@ -2029,9 +2029,9 @@ class Base_controller extends CI_Controller {
             foreach ($prayer_group_deny_join_request as $key => $val) {
 
                 if ($key >= 1) {
-                    $notification_message .= '<br/>' . '<a href="' . base_url() . 'my-msg-inbox.html"><span class="blueName">' . get_username_by_id($val['i_requester_id']) . ' has declined your prayer group invitation</span>.</a>';
+                    $notification_message .= '<br/>' . '<a href="' . base_url() . 'my-msg-inbox.html"><span class="blueName">' . $val['s_profile_name'] . ' has declined your prayer group invitation</span>.</a>';
                 } else
-                    $notification_message .= '<a href="' . base_url() . 'my-msg-inbox.html"><span class="blueName">' . get_username_by_id($val['i_requester_id']) . ' has declined your prayer  prayer group invitation</span>.</a>';
+                    $notification_message .= '<a href="' . base_url() . 'my-msg-inbox.html"><span class="blueName">' . $val['s_profile_name'] . ' has declined your prayer  prayer group invitation</span>.</a>';
             }
         }
         ############################# END prayer_group_invitation accepted ################################################
@@ -2042,9 +2042,9 @@ class Base_controller extends CI_Controller {
             foreach ($prayer_group_chat_room_invitation as $key => $val) {
 
                 if ($key >= 1) {
-                    $notification_message .= '<br/>' . '<a href="' . base_url() . 'my-msg-inbox.html"><span class="blueName">' . get_username_by_id($val['i_requester_id']) . ' has invited you to his/her chat room of prayer group</span>.</a>';
+                    $notification_message .= '<br/>' . '<a href="' . base_url() . 'my-msg-inbox.html"><span class="blueName">' . $val['s_profile_name'] . ' has invited you to his/her chat room of prayer group</span>.</a>';
                 } else
-                    $notification_message .= '<a href="' . base_url() . 'my-msg-inbox.html"><span class="blueName">' . get_username_by_id($val['i_requester_id']) . ' has invited you to his/her chat room of prayer group</span>.</a>';
+                    $notification_message .= '<a href="' . base_url() . 'my-msg-inbox.html"><span class="blueName">' . $val['s_profile_name'] . ' has invited you to his/her chat room of prayer group</span>.</a>';
             }
         }
         ############################# END prayer_group_chat_room_invitation  ################################################
@@ -2056,9 +2056,9 @@ class Base_controller extends CI_Controller {
             foreach ($prayer_group_joining as $key => $val) {
 
                 if ($key >= 1) {
-                    $notification_message .= '<br/>' . '<a href="' . base_url() . 'my-msg-inbox.html"><span class="blueName">' . get_username_by_id($val['i_requester_id']) . ' has sent you request to join your prayer group</span>.</a>';
+                    $notification_message .= '<br/>' . '<a href="' . base_url() . 'my-msg-inbox.html"><span class="blueName">' . $val['s_profile_name'] . ' has sent you request to join your prayer group</span>.</a>';
                 } else
-                    $notification_message .= '<a href="' . base_url() . 'my-msg-inbox.html"><span class="blueName">' . get_username_by_id($val['i_requester_id']) . ' has sent you request to join your prayer group</span>.</a>';
+                    $notification_message .= '<a href="' . base_url() . 'my-msg-inbox.html"><span class="blueName">' . $val['s_profile_name'] . ' has sent you request to join your prayer group</span>.</a>';
             }
         }
         //pr($prayer_group_joining,1);
@@ -2072,9 +2072,9 @@ class Base_controller extends CI_Controller {
             foreach ($etrade_request_recvd as $key => $val) {
 
                 if ($key >= 1) {
-                    $notification_message .= '<br/>' . '<a href="' . base_url() . 'my-msg-inbox.html"><span class="blueName">' . get_username_by_id($val['i_requester_id']) . ' has sent you an etrade request</span>.</a>';
+                    $notification_message .= '<br/>' . '<a href="' . base_url() . 'my-msg-inbox.html"><span class="blueName">' . $val['s_profile_name'] . ' has sent you an etrade request</span>.</a>';
                 } else
-                    $notification_message .= '<a href="' . base_url() . 'my-msg-inbox.html"><span class="blueName">' . get_username_by_id($val['i_requester_id']) . ' has sent you etrade request</span>.</a>';
+                    $notification_message .= '<a href="' . base_url() . 'my-msg-inbox.html"><span class="blueName">' . $val['s_profile_name'] . ' has sent you etrade request</span>.</a>';
             }
         }
 
@@ -2083,9 +2083,9 @@ class Base_controller extends CI_Controller {
             foreach ($etrade_request_accept as $key => $val) {
 
                 if ($key >= 1) {
-                    $notification_message .= '<br/>' . '<a href="' . base_url() . 'my-msg-inbox.html"><span class="blueName">' . get_username_by_id($val['i_requester_id']) . ' has accepted your etrade request</span>.</a>';
+                    $notification_message .= '<br/>' . '<a href="' . base_url() . 'my-msg-inbox.html"><span class="blueName">' . $val['s_profile_name'] . ' has accepted your etrade request</span>.</a>';
                 } else
-                    $notification_message .= '<a href="' . base_url() . 'my-msg-inbox.html"><span class="blueName">' . get_username_by_id($val['i_requester_id']) . ' has accepted your etrade request</span>.</a>';
+                    $notification_message .= '<a href="' . base_url() . 'my-msg-inbox.html"><span class="blueName">' . $val['s_profile_name'] . ' has accepted your etrade request</span>.</a>';
             }
         }
 
@@ -2094,9 +2094,9 @@ class Base_controller extends CI_Controller {
             foreach ($etrade_request_declined as $key => $val) {
 
                 if ($key >= 1) {
-                    $notification_message .= '<br/>' . '<a href="' . base_url() . 'my-msg-inbox.html"><span class="blueName">' . get_username_by_id($val['i_requester_id']) . ' has declined your etrade request</span>.</a>';
+                    $notification_message .= '<br/>' . '<a href="' . base_url() . 'my-msg-inbox.html"><span class="blueName">' . $val['s_profile_name'] . ' has declined your etrade request</span>.</a>';
                 } else
-                    $notification_message .= '<a href="' . base_url() . 'my-msg-inbox.html"><span class="blueName">' . get_username_by_id($val['i_requester_id']) . ' has declined your etrade request</span>.</a>';
+                    $notification_message .= '<a href="' . base_url() . 'my-msg-inbox.html"><span class="blueName">' . $val['s_profile_name'] . ' has declined your etrade request</span>.</a>';
             }
         }
 
@@ -2106,9 +2106,9 @@ class Base_controller extends CI_Controller {
             foreach ($etrade_request_canceled_buyer as $key => $val) {
 
                 if ($key >= 1) {
-                    $notification_message .= '<br/>' . '<a href="' . base_url() . 'my-msg-inbox.html"><span class="blueName">' . get_username_by_id($val['i_requester_id']) . ' has cancelled his/her etrade request</span>.</a>';
+                    $notification_message .= '<br/>' . '<a href="' . base_url() . 'my-msg-inbox.html"><span class="blueName">' . $val['s_profile_name'] . ' has cancelled his/her etrade request</span>.</a>';
                 } else
-                    $notification_message .= '<a href="' . base_url() . 'my-msg-inbox.html"><span class="blueName">' . get_username_by_id($val['i_requester_id']) . ' has cancelled his/her etrade request</span>.</a>';
+                    $notification_message .= '<a href="' . base_url() . 'my-msg-inbox.html"><span class="blueName">' . $val['s_profile_name'] . ' has cancelled his/her etrade request</span>.</a>';
             }
         }
 
@@ -2121,9 +2121,9 @@ class Base_controller extends CI_Controller {
             foreach ($eswap_request_recvd as $key => $val) {
 
                 if ($key >= 1) {
-                    $notification_message .= '<br/>' . '<a href="' . base_url() . 'my-msg-inbox.html"><span class="blueName">' . get_username_by_id($val['i_requester_id']) . ' has sent you an eswap request</span>.</a>';
+                    $notification_message .= '<br/>' . '<a href="' . base_url() . 'my-msg-inbox.html"><span class="blueName">' . $val['s_profile_name'] . ' has sent you an eswap request</span>.</a>';
                 } else
-                    $notification_message .= '<a href="' . base_url() . 'my-msg-inbox.html"><span class="blueName">' . get_username_by_id($val['i_requester_id']) . ' has sent you eswap request</span>.</a>';
+                    $notification_message .= '<a href="' . base_url() . 'my-msg-inbox.html"><span class="blueName">' . $val['s_profile_name'] . ' has sent you eswap request</span>.</a>';
             }
         }
 
@@ -2132,9 +2132,9 @@ class Base_controller extends CI_Controller {
             foreach ($eswap_request_accept as $key => $val) {
 
                 if ($key >= 1) {
-                    $notification_message .= '<br/>' . '<a href="' . base_url() . 'my-msg-inbox.html"><span class="blueName">' . get_username_by_id($val['i_requester_id']) . ' has accepted your eswap request</span>.</a>';
+                    $notification_message .= '<br/>' . '<a href="' . base_url() . 'my-msg-inbox.html"><span class="blueName">' . $val['s_profile_name'] . ' has accepted your eswap request</span>.</a>';
                 } else
-                    $notification_message .= '<a href="' . base_url() . 'my-msg-inbox.html"><span class="blueName">' . get_username_by_id($val['i_requester_id']) . ' has accepted your eswap request</span>.</a>';
+                    $notification_message .= '<a href="' . base_url() . 'my-msg-inbox.html"><span class="blueName">' . $val['s_profile_name'] . ' has accepted your eswap request</span>.</a>';
             }
         }
 
@@ -2143,9 +2143,9 @@ class Base_controller extends CI_Controller {
             foreach ($eswap_request_declined as $key => $val) {
 
                 if ($key >= 1) {
-                    $notification_message .= '<br/>' . '<a href="' . base_url() . 'my-msg-inbox.html"><span class="blueName">' . get_username_by_id($val['i_requester_id']) . ' has declined your eswap request</span>.</a>';
+                    $notification_message .= '<br/>' . '<a href="' . base_url() . 'my-msg-inbox.html"><span class="blueName">' . $val['s_profile_name'] . ' has declined your eswap request</span>.</a>';
                 } else
-                    $notification_message .= '<a href="' . base_url() . 'my-msg-inbox.html"><span class="blueName">' . get_username_by_id($val['i_requester_id']) . ' has declined your eswap request</span>.</a>';
+                    $notification_message .= '<a href="' . base_url() . 'my-msg-inbox.html"><span class="blueName">' . $val['s_profile_name'] . ' has declined your eswap request</span>.</a>';
             }
         }
 
@@ -2156,9 +2156,9 @@ class Base_controller extends CI_Controller {
             foreach ($efreebie_request_recvd as $key => $val) {
 
                 if ($key >= 1) {
-                    $notification_message .= '<br/>' . '<a href="' . base_url() . 'my-msg-inbox.html"><span class="blueName">' . get_username_by_id($val['i_requester_id']) . ' has sent you an efreebie request</span>.</a>';
+                    $notification_message .= '<br/>' . '<a href="' . base_url() . 'my-msg-inbox.html"><span class="blueName">' . $val['s_profile_name'] . ' has sent you an efreebie request</span>.</a>';
                 } else
-                    $notification_message .= '<a href="' . base_url() . 'my-msg-inbox.html"><span class="blueName">' . get_username_by_id($val['i_requester_id']) . ' has sent you efreebie request</span>.</a>';
+                    $notification_message .= '<a href="' . base_url() . 'my-msg-inbox.html"><span class="blueName">' . $val['s_profile_name'] . ' has sent you efreebie request</span>.</a>';
             }
         }
 
@@ -2167,9 +2167,9 @@ class Base_controller extends CI_Controller {
             foreach ($efreebie_request_accept as $key => $val) {
 
                 if ($key >= 1) {
-                    $notification_message .= '<br/>' . '<a href="' . base_url() . 'my-msg-inbox.html"><span class="blueName">' . get_username_by_id($val['i_requester_id']) . ' has accepted your efreebie request</span>.</a>';
+                    $notification_message .= '<br/>' . '<a href="' . base_url() . 'my-msg-inbox.html"><span class="blueName">' . $val['s_profile_name'] . ' has accepted your efreebie request</span>.</a>';
                 } else
-                    $notification_message .= '<a href="' . base_url() . 'my-msg-inbox.html"><span class="blueName">' . get_username_by_id($val['i_requester_id']) . ' has accepted your efreebie request</span>.</a>';
+                    $notification_message .= '<a href="' . base_url() . 'my-msg-inbox.html"><span class="blueName">' . $val['s_profile_name'] . ' has accepted your efreebie request</span>.</a>';
             }
         }
 
@@ -2178,9 +2178,9 @@ class Base_controller extends CI_Controller {
             foreach ($efreebie_request_declined as $key => $val) {
 
                 if ($key >= 1) {
-                    $notification_message .= '<br/>' . '<a href="' . base_url() . 'my-msg-inbox.html"><span class="blueName">' . get_username_by_id($val['i_requester_id']) . ' has declined your efreebie request</span>.</a>';
+                    $notification_message .= '<br/>' . '<a href="' . base_url() . 'my-msg-inbox.html"><span class="blueName">' . $val['s_profile_name'] . ' has declined your efreebie request</span>.</a>';
                 } else
-                    $notification_message .= '<a href="' . base_url() . 'my-msg-inbox.html"><span class="blueName">' . get_username_by_id($val['i_requester_id']) . ' has declined your efreebie request</span>.</a>';
+                    $notification_message .= '<a href="' . base_url() . 'my-msg-inbox.html"><span class="blueName">' . $val['s_profile_name'] . ' has declined your efreebie request</span>.</a>';
             }
         }
         ### etrade
@@ -2191,9 +2191,9 @@ class Base_controller extends CI_Controller {
             foreach ($user_chat_room_invitation as $key => $val) {
 
                 if ($key >= 1) {
-                    $notification_message .= '<br/>' . '<a href="' . base_url() . 'my-msg-inbox.html"><span class="blueName">' . get_username_by_id($val['i_requester_id']) . ' has invited you to his/her chat room.</span>.</a>';
+                    $notification_message .= '<br/>' . '<a href="' . base_url() . 'my-msg-inbox.html"><span class="blueName">' . $val['s_profile_name'] . ' has invited you to his/her chat room.</span>.</a>';
                 } else
-                    $notification_message .= '<a href="' . base_url() . 'my-msg-inbox.html"><span class="blueName">' . get_username_by_id($val['i_requester_id']) . ' has invited you to his/her chat room.</span>.</a>';
+                    $notification_message .= '<a href="' . base_url() . 'my-msg-inbox.html"><span class="blueName">' . $val['s_profile_name'] . ' has invited you to his/her chat room.</span>.</a>';
             }
         }
 
