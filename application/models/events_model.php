@@ -107,12 +107,12 @@ class Events_model extends Base_model {
 
         $sql = " SELECT E.*, 
 							U.s_name,
-                                                        U.s_first_name,
+                                                        CONCAT(u.s_first_name,' ',u.s_last_name) AS s_profile_name,
 							U.s_last_name, 
 							C.s_country_name 
 							FROM {$this->db->EVENTS} 
 							E LEFT JOIN  {$this->db->ADMIN_USER} U ON U.id = E.i_host_id 
-							LEFT JOIN  {$this->db->MST_COUNTRY} C ON E.i_country_id = C.id {$where}  {$s_order_by} {$limit}";
+							LEFT JOIN  {$this->db->MST_COUNTRY} C ON E.i_country_id = C.id  LEFT JOIN  cg_users u  ON u.id = E.i_host_id   {$where}  {$s_order_by} {$limit}";
 
         $query = $this->db->query($sql); //echo $this->db->last_query(); //exit;
         $result_arr = $query->result_array(); //pr($result_arr,1);
