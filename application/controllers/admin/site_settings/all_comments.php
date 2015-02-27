@@ -451,7 +451,7 @@ class All_comments extends Admin_base_Controller
                 $result = $this->prayer_group_model->prayer_wall_all_comment($s_where,$page,$this->pagination_per_page);
             }
 			}
-                   pr($result);     
+                 //  pr($result);     
             #Jquery Pagination Starts
             $this->load->library('jquery_pagination');
             $config['base_url'] = base_url()."admin/site_settings/all_comments/ajax_pagination/".$type;
