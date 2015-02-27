@@ -377,7 +377,7 @@ class Church_new_model extends Base_model
 					"
                 , $this->db->dbprefix, intval($i_user_id), $s_where
         );
-        //echo nl2br($sql); exit;
+        echo nl2br($sql); exit;
         $query = $this->db->query($sql);
         $result_arr = $query->result_array(); //pr($result_arr,1);
         return $result_arr;
