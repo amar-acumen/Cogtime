@@ -46,9 +46,11 @@ if(count($arr_tweets)){
 			   		 }
 				?>
 				<?php if(!empty($data->video) && count($data->video)){ 
+          $video = get_video_from_url($data->video->url, "329","212");
+         
 			   ?>
                 <div class="video-image">
-                    <div  class="cogtime-video" id="myvideo_first_thumb_<?=$val['id']?>" style="background:url('') no-repeat center;;width:329px; height:212px;" ></div>
+                    <div  class="cogtime-video" id="myvideo_first_thumb_<?=$val['id']?>"><?php echo $video['html']?></div>
                     <div id="myvideo_big_thumb_1_<?=$val['id']?>" media_id="<?=$val['id']?>"></div> 
                 </div>
                 
@@ -85,9 +87,10 @@ if(count($arr_tweets)){
 			   		 }
 				?>
 				<?php if(!empty($data->video) && count($data->video)){ 
+          $video = get_video_from_url($data->video->url, "329","212");
 			   ?>
                 <div class="video-image">
-                    <div  class="cogtime-video" id="myvideo_first_thumb_<?=$val['id']?>" style="background:url('') no-repeat center;;width:329px; height:212px;" ></div>
+                    <div  class="cogtime-video" id="myvideo_first_thumb_<?=$val['id']?>" ><?php echo $video['html']?></div>
                     <div id="myvideo_big_thumb_1_<?=$val['id']?>" media_id="<?=$val['id']?>"></div> 
                 </div>
                 

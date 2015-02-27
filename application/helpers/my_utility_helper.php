@@ -3987,7 +3987,7 @@ function get_pending_requests_count_by_ring_id($id = '') {
 
 function get_all_ring_details_by_id($id) {
     $ci = & get_instance();
-    $q = $ci->db->query("select  inv.* , u.e_gender , u.s_profile_photo  from cg_ring_invited_user AS inv , cg_users AS u where inv.i_request=1 and inv.i_ring_id=$id AND u.id = inv.i_invited_id  GROUP BY inv.i_invited_id");
+    $q = $ci->db->query("select  inv.* , u.e_gender , u.s_profile_photo , CONCAT(u.s_first_name,' ',u.s_last_name) AS s_profile_name  from cg_ring_invited_user AS inv , cg_users AS u where inv.i_request=1 and inv.i_ring_id=$id AND u.id = inv.i_invited_id  GROUP BY inv.i_invited_id");
     $res = $q->result_array();
     //pr($res,1);
     return $res;
@@ -5107,7 +5107,7 @@ function get_member_by_id($cid)
 {
 	$CI = & get_instance();
     $query=$CI->db->query('select *,u.id AS mid, CONCAT(u.s_first_name, " ", u.s_last_name) AS member_name,cm.id AS cmid from cg_church_member AS cm 
-            LEFT JOIN cg_users AS u ON cm.member_id=u.id WHERE cm.church_id = "'.$cid.'" AND cm.is_deleted=0 AND cm.is_blocked=1 AND cm.is_approved = 1 ');
+            LEFT JOIN cg_users AS u ON cm.member_id=u.id WHERE cm.church_id = "'.$cid.'" AND cm.is_deleted=0 AND cm.is_blocked=1 AND cm.is_approved = 1 ORDER BY member_name  ASC ');
 	$members=$query->result();
 	return $members;
 }

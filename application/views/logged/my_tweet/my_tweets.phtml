@@ -28,10 +28,9 @@
                                 
                                 <!--tweeter header start -->  
                                 <div style="background:url(images/tweeter-profile-bg.jpg) no-repeat 0 0;" class="tweeter-profile-header">
-                                	
+                                	test
                                     <div class="clr"></div>
-                                    
-                                   <?php //include(APPPATH ."views/logged/my_tweet/tweet_user_detail.phtml");?>
+                                   
                                 </div> 
                                 <!--tweeter header end --> 
                                 <!--tweeter page nav start --> 
@@ -240,7 +239,7 @@ function show_more_tweets(page) {
 				$('#show_more_tweets_link').attr('page_value', data.cur_page);
 				$('#show_more_tweets_link').attr('onclick','');
 				$('#show_more_tweets_link').attr('onclick','show_more_tweets('+data.cur_page+')');
-				show_video();
+				//show_video();
 			}
 			else {
 				$('#tweet_contents').append('<div class="view_more" style="text-align: center;"><p class="blue_bold12" style="font-size:14px;">No More Chitters.</p></div>');

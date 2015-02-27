@@ -4,7 +4,7 @@
 if (count($prayer_grp_info)) {
     foreach ($prayer_grp_info as $key => $val):
 
-        $IMG = ($val['is_owner'] == 'Y') ? '<img src="' . base_url() . 'images/crown.png" alt="" width="15" height="15" />' : '<img src="' . base_url() . 'images/man-24-16.png" alt="" />';
+        $IMG = ($val['is_owner'] == 'Y') ? '<img src="' . base_url() . 'images/crown.png" alt="" width="15" height="15" />' : '<img src="' . base_url() . 'images/man-24-16.png" alt="" width="15" height="15" />';
         $detail_url = get_group_url($val['id'], $val['s_group_name']);
 
         $DATETEXT = ($val['is_owner'] == 'Y') ? 'Created on' : 'Joined on';
@@ -23,11 +23,11 @@ if (count($prayer_grp_info)) {
                     {
                     ?>
                     <a href="javascript:void(0)" title="Delete Group" onclick="show_dialog('delete-group-active');
-                           $('#i_del_id').val('<?php echo $val['id'] ?>');"><img src="<?php echo base_url() ?>images/fe/cross-icon.gif" />
+                           $('#i_del_id').val('<?php echo $val['id'] ?>');"><img src="<?php echo base_url() ?>images/fe/cross-icon.gif" width="10" height="11" />
                     </a>
                     <?php } else {?>
                     <a href="javascript:void(0)" title="Delete Group" onclick="show_dialog('delete-group');
-                            $('#i_del_id').val('<?php echo $val['id'] ?>');"><img src="<?php echo base_url() ?>images/fe/cross-icon.gif" />
+                            $('#i_del_id').val('<?php echo $val['id'] ?>');"><img src="<?php echo base_url() ?>images/fe/cross-icon.gif" width="10" height="11" />
                     </a>
                     <?php } ?>
                        <?php

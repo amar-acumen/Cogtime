@@ -300,7 +300,7 @@ class Media_comments_model extends CI_Model {
 		return $result_arr[0]['count'];
 	}
          function all_media_comments($s_where,$i_start_limit='', $i_no_of_page=''){
-            $sql="select c.*,u.s_first_name, u.s_last_name from cg_user_media_comments c,cg_users u $s_where and u.id = c.i_user_id ORDER BY c.id DESC  limit ".$i_start_limit.",".$i_no_of_page;
+            $sql="select c.*,CONCAT(u.s_first_name,' ',u.s_last_name) AS s_profile_name from cg_user_media_comments c,cg_users u $s_where and u.id = c.i_user_id ORDER BY c.id DESC  limit ".$i_start_limit.",".$i_no_of_page;
             $query = $this->db->query($sql); 
 		$result_arr = $query->result_array();
 

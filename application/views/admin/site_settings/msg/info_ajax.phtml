@@ -26,14 +26,14 @@
                               
                               <tr>
                                 <td align="left" valign="top"><?=getShortDate($info['dt_created_on'],5)?></td>
-                                <td align="left" valign="top"><?=get_username_by_id($info['i_user_id'])?> < <a href="mailto:<?=get_useremail_by_id($info['i_user_id'])?>"><?=get_useremail_by_id($info['i_user_id'])?> </a>></td>
+                                <td align="left" valign="top"><?=$info['s_profile_name']?> < <a href="mailto:<?=get_useremail_by_id($info['i_user_id'])?>"><?=get_useremail_by_id($info['i_user_id'])?> </a>></td>
                                 <td align="left" valign="top"><?=$desc?></td>
                                  <?php
                                 if(array_key_exists("request_type",$info_arr[$i]) && $info_arr[$i]['request_type'] == 'church' && $info_arr[$i]['s_status'] == 0   ){
                                 $id=$info_arr[$i]['id'];
                                     ?>
                                             <input type="hidden"  value="<?= $id; ?>" class="accept_ch">
-                                            <td align="left" valign="top" id="sta<?= $id ?>">Accept &nbsp;<img src="<?= base_url() ?>images/icons/accept.png" class="accpt_img">&nbsp;&nbsp; Deny&nbsp;<img src="<?= base_url() ?>images/fe/cross-icon.gif" class="deny_img"><!--<input type="button" name="accept" value="deny">--></td>
+                                            <td align="left" valign="top" id="sta<?= $id ?>">Accept &nbsp;<img src="<?= base_url() ?>images/icons/accept.png" class="accpt_img">&nbsp;&nbsp; Deny&nbsp;<img src="<?= base_url() ?>images/fe/cross-icon.gif" width="10" height="11" class="deny_img"><!--<input type="button" name="accept" value="deny">--></td>
                                 <?php
                                 }
                                 else if(array_key_exists("request_type",$info_arr[$i]) && $info_arr[$i]['request_type'] == 'church' && $info_arr[$i]['s_status'] == 1   ){

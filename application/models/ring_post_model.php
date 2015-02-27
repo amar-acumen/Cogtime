@@ -21,7 +21,7 @@ class Ring_post_model extends Base_model
 	public function get_by_id($id, $start_limit="", $no_of_page="") {
 		if("$start_limit" == "") {
 			//$sql = sprintf('SELECT * FROM '.$this->db->USER_RING_POST.'  where id = %s',  $id);
-                    $sql = 'select rp.* , u.s_profile_photo , u.e_gender  from cg_user_ring_post AS rp , cg_users u where rp.id = "'.$id.'" AND u.id = rp.i_user_id';
+                    $sql = 'select rp.* , u.s_profile_photo , u.e_gender ,CONCAT(u.s_first_name," ",u.s_last_name) AS s_profile_name  from cg_user_ring_post AS rp , cg_users u where rp.id = "'.$id.'" AND u.id = rp.i_user_id';
 		}
 		else {
                      $sql = 'select rp.* , u.s_profile_photo , u.e_gender  from cg_user_ring_post AS rp , cg_users u where rp.id = "'.$id.'" AND u.id = rp.i_user_id '.$start_limit.', '.$no_of_page.' ';
@@ -208,7 +208,7 @@ return $result_arr;
             
         }
         public function get_all_ring_comments($s_where,$i_start_limit='', $i_no_of_page=''){
-            $sql="select c.* ,p.s_post_title,a.s_ring_name, u.s_first_name, u.s_last_name from cg_user_ring_post_comments c ,cg_user_ring_post p,cg_user_ring a,cg_users u  $s_where and c.i_ring_post_id = p.id and p.i_ring_id = a.id and u.id = c.i_user_id ORDER BY c.id DESC limit ".$i_start_limit.",".$i_no_of_page;
+            $sql="select c.* ,p.s_post_title,a.s_ring_name, CONCAT(u.s_first_name,' ',u.s_last_name) AS s_profile_name from cg_user_ring_post_comments c ,cg_user_ring_post p,cg_user_ring a,cg_users u  $s_where and c.i_ring_post_id = p.id and p.i_ring_id = a.id and u.id = c.i_user_id ORDER BY c.id DESC limit ".$i_start_limit.",".$i_no_of_page;
            //echo $sql;
             $query=$this->db->query($sql);
 $result_arr=$query->result_array();

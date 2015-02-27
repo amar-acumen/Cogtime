@@ -41,14 +41,14 @@ $max_file_size = $max_file_size * 1024 * 1024;
                         if (empty($bg_img_name)) {
                             ?>
                             <!--tweeter header start -->  
-                            <div style="background:url(images/tweeter-profile-bg.jpg) no-repeat 0 0;" class="tweeter-profile-header">
+                            <div style="background:url(images/tweeter-profile-bg.jpg) no-repeat 0 0;" class="tweeter-profile-header">no bg
                                 
                                 <div class="clr"></div>
                                 <div class="edit_twtr_pic" style="display: none"><a href="javascript:void(0);" onclick="show_dialog('edit-bg-image');"><h3>Edit Background Image</h3></a></div>
                                 <?php include(APPPATH . "views/logged/my_tweet/tweet_user_detail.phtml"); ?>
                             </div> 
                         <?php } else { ?>
-                            <div style="background:url(<?php echo $img_url; ?>) no-repeat 0 0;" class="tweeter-profile-header">
+                            <div style="background:url(<?php echo $img_url; ?>) no-repeat 0 0;" class="tweeter-profile-header">bg exists
                                 
                                 <div class="clr"></div>
                                 <div class="edit_twtr_pic" style="display: none"><a href="javascript:void(0);" onclick="show_dialog('edit-bg-image');"><h3>Edit Background Image</h3></a></div>
@@ -344,7 +344,7 @@ onKeyUp="limitTextarea(this.form.wall_msg,this.form.countdown,500);" onkeypress=
                     $('#show_more_tweets_link').attr('page_value', data.cur_page);
                     $('#show_more_tweets_link').attr('onclick', '');
                     $('#show_more_tweets_link').attr('onclick', 'show_more_tweets(' + data.cur_page + ')');
-					show_video();
+					//show_video();
                 }
                 else {
                     $('#tweet_contents').append('<div class="view_more" style="text-align: center;"><p class="blue_bold12" style="font-size:14px;">No More Tweets.</p></div>');
@@ -386,7 +386,7 @@ onKeyUp="limitTextarea(this.form.wall_msg,this.form.countdown,500);" onkeypress=
                         $('#show_more_tweets_link').attr('page_value', data.cur_page);
                         $('#show_more_tweets_link').attr('onclick', '');
                         $('#show_more_tweets_link').attr('onclick', 'show_more_tweets(' + data.cur_page + ')');
-						show_video();
+						//show_video();
                     }
                     else {
                         $('#tweet_contents').html('<div class="view_more" style="text-align: center;" ><p class="blue_bold12" style="font-size:14px;">No Chitters.</p></div>');

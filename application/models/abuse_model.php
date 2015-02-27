@@ -62,7 +62,7 @@ class Abuse_model extends Base_model
     {
         
         $limit  = (is_numeric($i_start) && is_numeric($i_limit))?" Limit ".intval($i_start).",".intval($i_limit):'';
-        $sql    = " SELECT r1.* ,u.s_profile_photo,u.e_gender,
+        $sql    = " SELECT r1.* , u.s_profile_photo, u.e_gender,CONCAT(u.s_first_name,' ',u.s_last_name) AS s_profile_name,
 						(SELECT count(*) as abuse_count FROM cg_abuse_report r WHERE r.i_referenced_id= r1.i_referenced_id )
 						AS abuse_count
 						FROM {$this->db->abuse_report} r1
