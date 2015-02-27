@@ -170,7 +170,7 @@ function show_more_tweets(page) {
 				$('#show_more_tweets_link').attr('page_value', data.cur_page);
 				$('#show_more_tweets_link').attr('onclick','');
 				$('#show_more_tweets_link').attr('onclick','show_more_tweets('+data.cur_page+')');
-				show_video();
+				//show_video();
 			}
 			else {
 				$('#new_tweet_contents').append('<div class="view_more" style="text-align: center;"><p class="blue_bold12" style="font-size:14px;">No More Chitters.</p></div>');
@@ -213,7 +213,7 @@ $(document).ready(function(arg) {
 							$('#show_more_tweets_link').attr('page_value', data.cur_page);
 							$('#show_more_tweets_link').attr('onclick','');
 							$('#show_more_tweets_link').attr('onclick','show_more_tweets('+data.cur_page+')');
-							show_video();
+							//show_video();
 						}
 						else {
 							$('#new_tweet_contents').html('<div class="view_more" style="text-align: center;" ><p class="blue_bold12" style="font-size:14px;">No Tweets.</p></div>');
