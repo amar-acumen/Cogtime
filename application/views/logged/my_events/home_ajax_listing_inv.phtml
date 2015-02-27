@@ -10,7 +10,7 @@
 									$LOGO	= get_profile_image_of_user('thumb',$ring_inv_val['s_profile_photo'],$ring_inv_val['e_gender']);
 									//$ring_detail_link	= base_url().'rings/'.$ring_inv_val['id'].'/ring-home.html';
 									$label = 'Name: ';
-									$title=get_username_by_id($ring_inv_val['i_user_id']);
+									$title=$ring_inv_val['s_profile_name'];
 									$status=get_event_accept_status($ring_inv_val['i_event_id'],$ring_inv_val['i_user_id']);
 							?>
                               

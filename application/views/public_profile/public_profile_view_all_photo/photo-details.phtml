@@ -226,7 +226,7 @@
                 <?php
 				if($photo_detail['s_copied_photo'] != '') {
 				?>
-                <p  class="uploader-info">Originally uploaded by : <a href="<?=get_profile_url($photo_detail['s_copied_photo'])?>" ><?=get_username_by_id($photo_detail['s_copied_photo'])?> </a></p>
+                <p  class="uploader-info">Originally uploaded by : <a href="<?=get_profile_url($photo_detail['s_copied_photo'])?>" ><?=$photo_detail['s_profile_name']?> </a></p>
                 <p>Uploaded on : <?=getShortDate($photo_detail['dt_created_on'],5)?></p>
                 <?php }
 				 else{

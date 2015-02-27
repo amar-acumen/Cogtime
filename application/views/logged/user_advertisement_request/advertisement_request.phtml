@@ -50,7 +50,7 @@ $(document).ready(function(){
             <form method="POST" action="<?= base_url() ?>logged/advertisement_request/add_cogtime_adv?sandbox=1" name="cogtimeAddSub" enctype="multipart/form-data" id="cogtimeAddSub">
        <div class="form-main">
        	<label>Name: </label>
-        <input type="text" name="user" value="<?= get_username_by_id(intval(decrypt($this->session->userdata('user_id')))) ?>" readonly disabled="disabled">
+        <input type="text" name="user" value="<?= $this->session->userdata('username').' '.$this->session->userdata('user_lastname')  ?>" readonly disabled="disabled">
         <span>Required</span>
        </div>
        <div class="clear"></div>
@@ -298,7 +298,7 @@ $(document).ready(function(){
     <form method="POST" action="<?= base_url() ?>logged/advertisement_request/add_media_center_adv?sandbox=1" name="mediaAddSub" enctype="multipart/form-data" id="mediaAddSub">
        <div class="form-main">
         <label>Name: </label>
-        <input type="text" name="mediauser" value="<?= get_username_by_id(intval(decrypt($this->session->userdata('user_id')))) ?>" readonly>
+        <input type="text" name="mediauser" value="<?= $this->session->userdata('username').' '.$this->session->userdata('user_lastname')  ?>" readonly>
         <span>Required</span>
        </div>
        <div class="clear"></div>
