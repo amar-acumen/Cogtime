@@ -70,7 +70,7 @@
 												if($type == 'user'){
 												  $stype = 'user profile'	;
 												  $type_name = get_username_by_id($id);
-												  $img = get_profile_image($id); 
+												  $img = get_profile_image_of_user('thumb',$info['s_profile_photo'],$info['e_gender']); 
 												}
 												else if($type == 'audio'){
 												  $stype = 'user audio'	;

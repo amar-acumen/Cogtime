@@ -388,8 +388,8 @@ $feed->comments=get_feed_comments($feed->id,'cg_church_newsfeed_comments','i_fee
 		<?php $members=get_member_by_id($_SESSION['logged_church_id']);
 		//pr($members);?>
 		<div class="privacy-drop" style="<?=($feed->privacy == 3)?'':'display:none'?>;"> <select class="meminv" multiple="multiple" style="width:299px !important;" name="meminv[]"><?php foreach($members as $k=>$v){ ?>
-									 <?=get_username_by_id($v->member_id)?>
-										<option value="<?=$v->member_id?>" <?=get_viewed($feed->id,$v->member_id)?> ><?=get_username_by_id($v->member_id)?></option> 
+									 <?=$v->member_name?>
+										<option value="<?=$v->member_id?>" <?=get_viewed($feed->id,$v->member_id)?> ><?=$v->member_name?></option> 
 									 <?php }?></select></div>
             <input name="" type="submit" class="wall-comment-submit-nw " value="Edit" />
 

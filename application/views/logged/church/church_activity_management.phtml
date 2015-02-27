@@ -49,8 +49,8 @@
     <label>User:</label> <select id="members" name="members">
 	<option value='-1'>--select---</option>
 	<?php foreach($members as $k=>$v){ ?>
-			 <?=get_username_by_id($v->member_id)?>
-			<option value="<?=$v->member_id?>" <?=get_viewed($feed->id,$v->member_id)?> ><?=get_username_by_id($v->member_id)?></option> 
+			 <?=$v->member_name?>
+			<option value="<?=$v->member_id?>" <?=get_viewed($feed->id,$v->member_id)?> ><?=$v->member_name?></option> 
 		 <?php }?>
 		 <option value="<?=$church_admin->ch_admin_id?>"><?=get_username_by_id($church_admin->ch_admin_id)?></option>
 			</select>

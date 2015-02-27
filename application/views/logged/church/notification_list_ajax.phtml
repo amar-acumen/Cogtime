@@ -9,26 +9,18 @@
 			if($val['s_type'] == 'join'){
 				
 				$img = base_url().'images/man-24-16.png';
-				$text = get_username_by_id($val['i_user_id']).' joined ';
-                                //$action_li = 1;
+				$text = $val['msg'];
 			}
 			else if($val['s_type'] == 'post'){
 				
 				$img = base_url().'images/comment-16.png';
-				$text = get_username_by_id($val['i_user_id']).' Post on ';
-                               // $action_li = 1;
-			}
-			else if($val['s_type'] == 'prayer_meeting'){
-				
-				$img = base_url().'images/Alert.png';
-				$text = 'Prayer meeting due on ';
-                                $action_li = 1;
+				$text = $val['msg'];
 			}
 			else if($val['s_type'] == 'invited'){
 				
 				$img = base_url().'images/man-24-16.png';
 				$pending_img_content = ($val['message_arr']['i_ended'] == '0' )?'<span id="pending_img'.$val['id'].'"><img class="alertred" src="'. base_url().'images/alertred.png"></span>':'';
-				$text = get_username_by_id($val['i_requester_user_id']) .' has invited you to his/her prayer group '.$pending_img_content;
+				$text = $val['msg'].' '.$pending_img_content;
 				$CSS  = 'class="notifical"';
 				$action_li = 1;
 			}
@@ -36,7 +28,7 @@
 				
 				$img = base_url().'images/man-24-16.png';
 				$pending_img_content = ($val['message_arr']['i_ended'] == '0' )?'<span id="pending_img'.$val['id'].'"><img class="alertred" src="'. base_url().'images/alertred.png"></span>':'';
-				$text = get_username_by_id($val['i_requester_user_id']) .' has sent you request to join your prayer group '.$pending_img_content;
+				$text = $val['msg'].' '.$pending_img_content;
 				$CSS  = 'class="notifical"';
 				$action_li = 1;
 			}
