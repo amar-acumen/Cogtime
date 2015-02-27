@@ -292,7 +292,7 @@ function view_tweet_report(id)
 						$('#tweet_contents').html(data.html);
 						$('#count_my_tweets').html(data.total_my_tweets);
 						//alert(11);
-						show_video();
+						//show_video();
 						//$('#new_right_tweet_contents').html(data.html);
 				  }
 				   if(data.view_more==true)
