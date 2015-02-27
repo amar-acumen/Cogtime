@@ -7,51 +7,25 @@
 							
                                                   //  pr($ringdata);
 							if($ringdata)
-
 							{
-
-								//pr($ringdata);
-
+							//pr($ringdata);
 								foreach($ringdata as $ring_inv_val)
-
 								{
-
-									//echo $type.' wsdr';
-
-                                                                    //$LOGO	= base_url().'uploads/church_ring_logo/'.getThumbName($ringval['s_logo'],'thumb');
-
-									//$LOGO	= get_profile_image($ring_inv_val['invitedid'],'thumb');
-
-                                                                    $logo = get_church_ring_logo_by_id($ring_inv_val['ringid'],'thumb');
-
+                                 $logo = get_church_ring_logo_by_id($ring_inv_val['ringid'],'thumb');
 									$ring_detail_link	= base_url().'rings/'.$ring_inv_val['ringid'].'/ring-home.html';
-
 									if($type == 'sent')
-
 										$label = 'Invitee Name: ';
-
 									else 
-
 										$label = 'Owner Name: ';
 
 							?>
-
-                              
-
                                <div class="shade_box_01" style="padding-top:5px;">
 
                                     <div class="txt_content"> <a href="javascript:void(0);"><div class="pro_photo_new" style="background:URL('<?=$logo?>') no-repeat center; width:73px; height:72px; background-color:#fff"></div></a>
-
                                           <div class="left_div01 name-details">
-
-                                                
-
                                                  <p><strong><?=$ring_inv_val['s_ring_name']?></strong></p>
-
                                                 <p class="blue_bold12">
-
 												<?php
-
 													if($ring_inv_val['if_already_friend'] == 'true' || $ring_inv_val['already_added_netpal'] == 'true'){
 
 													$profile_link = get_profile_url($ring_inv_val['invitedid'],$ring_inv_val['s_profile_name']);
@@ -106,7 +80,7 @@
 
 												 ?>
 
-                                                 <img src="images/icons/close.png" alt="" /> 
+                                                 <img src="images/icons/close.png" alt="" width="24" height="24" /> 
 
                                                  <a  href="javascript:void(0);" class="blue_link" onclick="acceptDeclineInvitation('<?php echo encrypt($ring_inv_val['ringid'])?>','<?php echo encrypt($ring_inv_val['invitedid'])?>','<?php echo encrypt($ring_inv_val['id'])?>','decline', '')">Delete</a></p>
 
