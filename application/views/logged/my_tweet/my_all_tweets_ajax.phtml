@@ -47,6 +47,7 @@ if(count($arr_tweets)){
 				?>
 				<?php if(!empty($data->video) && count($data->video)){ 
           $video = get_video_from_url($data->video->url, "329","212");
+          echo 123;
 			   ?>
                 <div class="video-image">
                     <div  class="cogtime-video" id="myvideo_first_thumb_<?=$val['id']?>"><?php echo $video['html']?></div>
@@ -85,7 +86,7 @@ if(count($arr_tweets)){
                <?php 	endforeach;
 			   		 }
 				?>
-				<?php if(!empty($data->video) && count($data->video)){ 
+				<?php if(!empty($data->video) && count($data->video)){ echo 456;
 			   ?>
                 <div class="video-image">
                     <div  class="cogtime-video" id="myvideo_first_thumb_<?=$val['id']?>" style="background:url('') no-repeat center;;width:329px; height:212px;" ></div>
