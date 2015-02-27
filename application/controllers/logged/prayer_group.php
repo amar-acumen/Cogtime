@@ -26,7 +26,8 @@ class Prayer_group extends Base_controller
         try
         {
             parent::__construct();
-               parent::check_login(TRUE, '', array('1')); // put this code on those pages which are not accessable by guest user
+            parent::check_login(TRUE, '', array('1'));
+			   // put this code on those pages which are not accessable by guest user
             # loading reqired model & helpers...
 
             $this->load->model('users_model');
@@ -73,7 +74,7 @@ class Prayer_group extends Base_controller
 
                                         ));
                                         
-            parent::_add_css_arr( array(//'css/jquery-ui-1.8.13.custom.css'
+            parent::_add_css_arr( array('css/jquery-ui-1.8.13.custom.css'
             ) );
           
             $i_user_id = intval(decrypt($this->session->userdata('user_id')));
