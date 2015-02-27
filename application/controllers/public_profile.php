@@ -72,9 +72,9 @@ class Public_profile extends Base_controller
                                         'js/lightbox.js',
 										'js/tab.js',
 										'js/jquery.autofill.js',
-										'js/jquery.bxSlider.js',*/
-										'js/jquery.lightbox.js',
-										'js/frontend/public_profile.js',
+										'js/jquery.bxSlider.js',
+										'js/jquery.lightbox.js',*/
+										//'js/frontend/public_profile.js',
 										'js/frontend/wall/wall_helper.js',
 										'js/frontend/logged/my_friends.js',
 										'js/frontend/logged/my_net_pals.js',
