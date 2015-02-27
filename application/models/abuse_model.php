@@ -68,6 +68,7 @@ class Abuse_model extends Base_model
 						FROM {$this->db->abuse_report} r1
 						LEFT JOIN cg_users u ON u.id = r1.i_given_by_user_id
 						 {$where} ORDER BY id DESC {$limit}";
+                                                 
 
         $query     = $this->db->query($sql); 
         $result_arr = $query->result_array(); //pr($result_arr,1);
