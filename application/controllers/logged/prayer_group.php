@@ -27,7 +27,6 @@ class Prayer_group extends Base_controller
         {
             parent::__construct();
             parent::check_login(TRUE, '', array('1'));
-			parent::_add_css_arr(array('css/production.css'));
 			   // put this code on those pages which are not accessable by guest user
             # loading reqired model & helpers...
 
