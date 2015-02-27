@@ -124,7 +124,7 @@ $(function(){
                             <!--/sub page links -->
                             
                        	  <div class="page_heading">
-                            	<div class="left"><img src="images/icons/ring.png" alt="" /> Create Ring</div>
+                            	<div class="left"><img src="images/icons/ring.png" width="35" heitght="39" alt="" /> Create Ring</div>
                           </div>
                              
                              <div class="frm_box blue_box" style="width: 500px;">
@@ -236,7 +236,7 @@ $(function(){
 
 
 <div class="lightbox contact_div" style="width:500px; ">
-      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="images/close.png" alt="" /></a></div>
+      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="images/close.png" alt="" width="24" height="24" /></a></div>
       <div class="top">
             <div>&nbsp;</div>
       </div>
@@ -262,7 +262,7 @@ $(function(){
 											 //pr($contact_arr);
 											  foreach($contact_arr as $key=>$val){
 												  
-												  $img = get_profile_image($val['user_id'], 'thumb');
+												  $img = get_profile_image('thumb',$val['s_profile_photo'],$val['e_gender']);
 												  
 												  if($val['if_already_friend'] == 'true' || $val['already_added_netpal'] == 'true'){
 												   		$profile_link = get_profile_url($val['user_id'],$val['s_displayname']);

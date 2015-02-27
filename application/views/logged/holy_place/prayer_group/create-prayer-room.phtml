@@ -47,7 +47,7 @@
                                  
                                  <div class="Prayer-Room">From:</div>
 								  <input style="width:150px; float:left;"   type="text"  value="" name="date_to1" id="date_to1"  readonly="readonly" class="amount-input cal_class"/>
-                                  <img src="images/icons/cal.png" alt="" class="cal_img right" onclick="$(this).prev().focus()" style="cursor:pointer; " />
+                                  <img src="images/icons/cal.png" alt="" width="15" height="16" class="cal_img right" onclick="$(this).prev().focus()" style="cursor:pointer; " />
                                  <div class="error-message" id="err_date_to1" style="margin-top:-5px; margin-left:130px;"></div>
 								 <div class="clr"></div>
 
@@ -142,7 +142,7 @@
                                  <?php if(count($prayer_member_arr)){
 								  		foreach($prayer_member_arr as $key => $val){
 											
-											$profile_image = get_profile_image($val['post_owner_user_id'],'thumb');
+											$profile_image = get_profile_image_of_user('thumb',$val['s_profile_photo'],$val['e_gender']);
 											
 											
 								  ?>

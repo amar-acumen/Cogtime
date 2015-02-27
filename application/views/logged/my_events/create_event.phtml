@@ -34,7 +34,7 @@
                 <div id="mid_container">
                     <!--sub page links -->
                     <div class="page_heading">
-                        <div class="left"><img src="images/icons/event.png" alt="" />Event</div>
+                        <div class="left"><img src="images/icons/event.png" alt="" width="35" height="39"/>Event</div>
                     </div>
                     <div class="link-div" style="margin-top:-2px;">
                         <ul>
@@ -110,7 +110,7 @@
                             <div class="lable01" style="width:146px;">Date : </div>  
                             <div class="field03">
                                 <input style="width:131px;" type="text"  value="" name="date_to" id="date_to"  readonly="readonly"/>
-                                <img src="images/icons/cal.png" alt="" onclick="$(this).prev().focus()" style="cursor:pointer; " />
+                                <img src="images/icons/cal.png" alt="" width="15" height="16" onclick="$(this).prev().focus()" style="cursor:pointer; " />
                                 <script type="text/javascript">
                                     /* $(document).ready(function(arg) {
                                      $.datepicker.setDefaults($.datepicker.regional['']);
@@ -188,7 +188,7 @@
                                 <div class="lable01" style="width:146px;">End Date : </div>  
                                 <div class="field03">
                                     <input style="width:131px;" type="text"  value="" name="date_end" id="date_end"  readonly="readonly" onchange="check_lim()"/>
-                                    <img src="images/icons/cal.png" alt="" onclick="$(this).prev().focus()" style="cursor:pointer; " />
+                                    <img src="images/icons/cal.png" alt="" width="15" height="16" onclick="$(this).prev().focus()" style="cursor:pointer; " />
                                     <script type="text/javascript">
                                         /*$(document).ready(function(arg) {
                                          $.datepicker.setDefaults($.datepicker.regional['']);
@@ -483,7 +483,7 @@
                                 //pr($contact_arr);
                                 foreach ($contact_arr as $key => $val) {
 
-                                    $img = get_profile_image($val['user_id'], 'thumb');
+                                    $img = get_profile_image_of_user('thumb',$val['s_profile_photo'],$val['e_gender']);
 
                                     if ($val['if_already_friend'] == 'true' || $val['already_added_netpal'] == 'true') {
                                         $profile_link = get_profile_url($val['user_id'], $val['s_displayname']);
@@ -570,7 +570,7 @@ endif;
 <!-- /FOOTER SECTION -->
 
 <div class="lightbox contact_div" style="width:500px; ">
-    <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="images/close.png" alt="" /></a></div>
+    <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="images/close.png" alt="" width="24" height="24"/></a></div>
     <div class="top">
         <div>&nbsp;</div>
     </div>
@@ -595,7 +595,7 @@ endif;
                         //pr($contact_arr);
                         foreach ($contact_arr as $key => $val) {
 
-                            $img = get_profile_image($val['user_id'], 'thumb');
+                            $img = get_profile_image_of_user('thumb',$val['s_profile_photo'],$val['e_gender']);
 
                             if ($val['if_already_friend'] == 'true' || $val['already_added_netpal'] == 'true') {
                                 $profile_link = get_profile_url($val['user_id'], $val['s_displayname']);

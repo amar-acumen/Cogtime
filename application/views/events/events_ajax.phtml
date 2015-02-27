@@ -44,11 +44,11 @@
                          <?php 
 						 	if($this->session->userdata('loggedin')):
 						 ?>
-                         <p style="margin-right:8px;" class="add-remove-friend"><?php if((show_event_rsvp($val['id']) == TRUE) && $val['event_owner_id'] !=  $logged_user_id) { ?><span id="send_rsvp_<?=$val['id']?>"><img src="<?=base_url()?>images/icons/send.png" alt="" /> <a  href="javascript:void(0);" onclick="send_rsvp(<?=$val['id']?>)">Send RSVP</a></span><?php } ?></p>
+                         <p style="margin-right:8px;" class="add-remove-friend"><?php if((show_event_rsvp($val['id']) == TRUE) && $val['event_owner_id'] !=  $logged_user_id) { ?><span id="send_rsvp_<?=$val['id']?>"><img src="<?=base_url()?>images/icons/send.png" alt="" width="16" height="13"/> <a  href="javascript:void(0);" onclick="send_rsvp(<?=$val['id']?>)">Send RSVP</a></span><?php } ?></p>
                       <?php
 					  		else:
 					   ?>
-                       <p class="add-remove-friend" style="margin-right:8px;"><img alt="" src="images/icons/send.png" /> <a onclick="return show_login_popup('<?=base64_encode(my_current_url())?>')" href="javascript:void(0);">Send RSVP</a></p>
+                       <p class="add-remove-friend" style="margin-right:8px;"><img alt="" src="images/icons/send.png" width="16" height="13"/> <a onclick="return show_login_popup('<?=base64_encode(my_current_url())?>')" href="javascript:void(0);">Send RSVP</a></p>
 					  <?php
 					  		endif;
 					  ?>   
@@ -77,7 +77,7 @@
 													   <div class="heading">
                                                         <div class="left">
                                                               <h4><img class="cmnt" src="images/icons/cmnt2.png" height="20px" width="20px" alt="" /><span  class="comments_div<?=$val['id']?>">  Comments (<?=$val['total_comments']?>) </span></h4>
-                                                              <img class="wal-minus" alt="" src="images/minus-white.png" />
+                                                              <img class="wal-minus" alt="" src="images/minus-white.png" width="13" height="10"/>
                                                         </div>
                                                   </div>
                                                   <DIV ID="post_comment_div<?=$val['id']?>"></DIV>
@@ -93,8 +93,8 @@
                                                   <div class="comments-number-mid">
 													  <div class="heading">
 															<div class="left">
-																  <h4><img alt="" src="images/no.png" class="cmnt" />  Post Comment  </h4>
-																  <img class="wal-minus" alt="" src="images/minus-white.png" />
+																  <h4><img alt="" width="21" height="19" src="images/no.png" class="cmnt" />  Post Comment  </h4>
+																  <img class="wal-minus" alt="" src="images/minus-white.png" width="13" height="10"/>
 															</div>
 													  </div>
 													  

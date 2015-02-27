@@ -414,7 +414,6 @@ class Church_prayer_group extends Base_controller
 		{
 			$data['prayer_grp_info_arr'] = $this->church_new_model->get_pending_groups_requests_recieved($user_id ,$_SESSION['logged_church_id'],$s_where); 
 		}
-		//pr($data['prayer_grp_info_arr'],1);
 		$data['type'] = 'recv'; //pr($data['prayer_grp_info'],1);
 	
 		$VIEW_FILE = "logged/church/church_prayer_group_recv_invitation_list.phtml";
@@ -1379,19 +1378,19 @@ class Church_prayer_group extends Base_controller
             parent::_set_meta_keywords('');
         
             
-            parent::_add_js_arr( array( 'js/ddsmoothmenu.js',
-                                        'js/switch.js','js/animate-collapse.js',
-                                        'js/lightbox.js',
-										'js/jquery-ui-1.8.2.custom.min.js',
-                                        'js/stepcarousel.js',
-										'js/jquery/ui/jquery.ui.core.js',
-										'js/jquery.ui.datepicker.js',
-									    'js/jquery-ui-timepicker-addon.js',
-										'js/tab.js',
-										'js/frontend/logged/holy_place/prayer_group.js'
-                                        ));
-                                        
-            parent::_add_css_arr( array('css/jquery-ui-1.8.13.custom.css','css/jquery-ui-1.8.2.custom.css') );
+//            parent::_add_js_arr( array( 'js/ddsmoothmenu.js',
+//                                        'js/switch.js','js/animate-collapse.js',
+//                                        'js/lightbox.js',
+//										'js/jquery-ui-1.8.2.custom.min.js',
+//                                        'js/stepcarousel.js',
+//										'js/jquery/ui/jquery.ui.core.js',
+//										'js/jquery.ui.datepicker.js',
+//									    'js/jquery-ui-timepicker-addon.js',
+//										'js/tab.js',
+//										'js/frontend/logged/holy_place/prayer_group.js'
+//                                        ));
+//
+//            parent::_add_css_arr( array('css/jquery-ui-1.8.13.custom.css','css/jquery-ui-1.8.2.custom.css') );
           
             $i_user_id = intval(decrypt($this->session->userdata('user_id')));
 			

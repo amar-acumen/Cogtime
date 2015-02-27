@@ -51,7 +51,7 @@
                         <div class="blog">
                             <div class="right cat-name-adjust " >
                                 <div class="right-cat-list"><strong><?= $ring_detail_arr[0]['s_category_name'] ?></strong><?= get_ring_category_name_by_id($ring_detail_arr[0]['i_sub_category_id']) ?></div>
-                                <div class="left-cat-list"><img src="images/category.png" class="cat_icons" alt="" /></div>
+                                <div class="left-cat-list"><img src="images/category.png" width="18" height="31" class="cat_icons" alt="" /></div>
                             </div>
                             <p class="time-posted">Created on <?= getShortDate($ring_detail_arr[0]['dt_created_on'], 5) ?> | Owner : <a href="#"><?= $ring_detail_arr[0]['s_owner_name'] ?></a></p>
                             <div class="clr"></div>
@@ -211,7 +211,7 @@
 
                         <!--my blog articles start -->
                         <div class="my-article">
-                            <div class="title" style="padding-top:25px;"><img alt="" src="images/icons/icon1.png" /> Ring Posts</div>
+                            <div class="title" style="padding-top:25px;"><img alt="" width="28" height="31" src="images/icons/icon1.png" /> Ring Posts</div>
                             <div class="clr"></div>
                             <?php
 //if($ring_detail_arr[0]['i_user_id'] !=intval(decrypt($this->session->userdata('user_id'))))
@@ -267,7 +267,7 @@
 <?php /* ?>VIEW COMMENTS<?php */ ?>
 
 <div class="lightbox view_comments_div " style="width:650px;">
-    <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="<?= base_url() ?>images/close.png" alt="" /></a></div>
+    <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="<?= base_url() ?>images/close.png" alt="" width="24" height="24"/></a></div>
     <div class="top">
         <div>&nbsp;</div>
     </div>
@@ -289,7 +289,7 @@
 
 <?php /* ?>LIKED LIGHT BOX <?php */ ?>
 <div class="lightbox liked_by_div" style="width:500px;">
-    <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="<?= base_url() ?>images/close.png" alt="" /></a></div>
+    <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="<?= base_url() ?>images/close.png" alt="" width="24" height="24"/></a></div>
     <div class="top">
         <div>&nbsp;</div>
     </div>
@@ -402,7 +402,7 @@
 
 <!-- confirm delete ring-->
 <div class="lightbox leave-ring" style="width: 400px; left: 296px;">
-    <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="<?= base_url() ?>images/close.png" alt="" /></a></div>
+    <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="<?= base_url() ?>images/close.png" alt="" width="24" height="24"/></a></div>
     <div class="top"><div>&nbsp;</div></div>
     <div class="mid">
         <div class="heading" style="margin-bottom:0px;">

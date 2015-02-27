@@ -15,7 +15,7 @@
                 $add['country'] = get_country_name_by_id($val['i_country_id']);
 
             $address = implode(', ', $add);
-            $img = get_profile_image($val['user_id'], 'thumb');
+            $img = get_profile_image_of_user('thumb',$val['s_profile_photo'],$val['e_gender']);
 
             if ($val['if_already_friend'] == 'true' || $val['already_added_netpal'] == 'true') {
                 $profile_link = get_profile_url($val['user_id'], $val['s_displayname']);
@@ -39,7 +39,10 @@
                 <div class="txt_content">
                     <a href="<?= $profile_link; ?>"><div class="pro_photo2" style="background:url(<?= $img ?>) no-repeat center;width:60px; height:60px;" ></div></a>
                     <div class="left_div01" style="width:397px;">
-                        <p class="add-remove-friend"><img src="images/icons/remove.png" alt="" /> <a href="javascript:void(0);" onclick="delete_partner(<?= $val['user_id'] ?>)">Remove</a></p>
+                        <p class="add-remove-friend"><img src="images/icons/remove.png" alt="" width="16" height="16" /> <a href="javascript:void(0);" onclick="delete_partner(<?= $val['user_id'] ?>)">Remove</a></p>
+                        <p class="add-remove-friend"><img src="images/icons/remove.png" alt="" width="16" height="16" /> <a href="javascript:void(0);" onclick="delete_partner(<?= $val['user_id'] ?>)">Remove</a></p>
+                        <p class="add-remove-friend"><img src="images/icons/remove.png" alt="" width="16" height="16" /> <a href="javascript:void(0);" onclick="delete_partner(<?= $val['user_id'] ?>)">Remove</a></p>
+                        <p class="add-remove-friend"><img src="images/icons/remove.png" alt="" width="16" height="16" /> <a href="javascript:void(0);" onclick="delete_partner(<?= $val['user_id'] ?>)">Remove</a></p>
                         <p class="blue_bold12"><a  href="<?= $profile_link; ?>" class="left"><?= $name ?> </a> &nbsp;[ <a class="nogrey_link"><?= check_user_online_hlpr($val['user_id'], 'public', $relation_arr); ?></a> ] <?= $chat_html ?>
                         </p>
 

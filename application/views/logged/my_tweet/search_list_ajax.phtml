@@ -2,7 +2,7 @@
 if(count($srch_result)){
 	foreach($srch_result as $key=> $val){
 		
-		$profile_image_filename = get_profile_image($val['userid'],'thumb');
+		$profile_image_filename = get_profile_image_of_user('thumb',$val['s_profile_photo'],$val['e_gender']);
 		$profile_link = getTwitterProfileLink($val['s_tweet_id']);
 ?>
 

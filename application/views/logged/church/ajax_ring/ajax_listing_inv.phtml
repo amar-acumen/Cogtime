@@ -24,7 +24,6 @@
 
 									{
 
-										$LOGO	= get_profile_image($ring_inv_val['invitedid'],'thumb');
 
 										$user_id = $ring_inv_val['invitedid'];
 
@@ -36,7 +35,6 @@
 
 									{
 
-										$LOGO	= get_profile_image($ring_inv_val['guest_id'],'thumb');
 
 										$user_id = $ring_inv_val['guest_id'];
 
@@ -132,7 +130,7 @@
 
                                                   &nbsp;  &nbsp; 
 
-                                                    <img src="images/icons/close.png" alt="" /> 
+                                                    <img src="images/icons/close.png" alt="" width="24" height="24" /> 
 
                                                  <a  href="javascript:void(0);" class="blue_link" onclick="DeclineInvitation('<?=$this->session->userdata('user_id')?>', '<?php echo encrypt($ring_inv_val['ringid'])?>', <?=($ring_inv_val['ringid'])?> , '<?=$type?>')">Delete</a>
 
@@ -142,7 +140,7 @@
 
 												  else{ ?>
 
-                                                   <img src="images/icons/close.png" alt="" /> 
+                                                   <img src="images/icons/close.png" alt="" width="24" height="24" /> 
 
                                                  <a  href="javascript:void(0);" class="blue_link" onclick="DeclineInvitation('<?=encrypt($ring_inv_val['invitedid'])?>', '<?php echo encrypt($ring_inv_val['ringid'])?>', <?=($ring_inv_val['ringid'])?> , 'recv')">Delete</a>
 

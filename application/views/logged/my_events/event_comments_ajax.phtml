@@ -4,7 +4,7 @@ if (!empty($result_arr) && count($result_arr)) {
     foreach ($result_arr as $key => $val) {
 
         $name = $val['s_profile_name'];
-        $IMG = get_profile_image($val['i_user_id'], 'thumb', $val['s_profile_photo']);
+        $IMG = get_profile_image_of_user('thumb',$val['s_profile_photo'],$val['e_gender']);
         $comment_txt = $val['s_contents'];
 
         if ($val['if_already_friend'] == 'true' || $val['already_added_netpal'] == 'true') {

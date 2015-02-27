@@ -230,7 +230,8 @@ class Data_messages_model extends Base_model implements InfModel
 										m.dt_created_on, 
 										u.s_first_name, 
 										u.s_last_name,
-										u.s_profile_photo
+										u.s_profile_photo,
+										u.e_gender
 								FROM %smessages m, %susers u 
 								WHERE u.id = m.i_sender_id AND m.i_receiver_id = %s AND m.i_is_deleted_by_receiver = 0 
 								%s ORDER BY m.dt_created_on DESC', 
@@ -250,7 +251,8 @@ class Data_messages_model extends Base_model implements InfModel
 										m.dt_created_on, 
 										u.s_first_name, 
 										u.s_last_name,
-										u.s_profile_photo 
+										u.s_profile_photo,
+										u.e_gender
 								 FROM %smessages m, %susers u 
 								 WHERE u.id = m.i_sender_id AND m.i_receiver_id = %s AND m.i_is_deleted_by_receiver = 0 %s
 								 ORDER BY m.dt_created_on DESC limit %s, %s', $this->db->dbprefix, $this->db->dbprefix, $i_user_id,$s_where, $i_start_limit, $i_no_of_page); 
@@ -566,7 +568,8 @@ class Data_messages_model extends Base_model implements InfModel
 										u.s_first_name, 
 										u.s_last_name,
 										'i_is_deleted_by_sender' as type,
-										u.s_profile_photo, 
+										u.s_profile_photo,
+										u.e_gender,
 										m.dt_created_on as  msg_dt
 								 FROM cg_messages m, cg_users u 
 								 WHERE u.id = m.i_receiver_id AND m.i_sender_id = %1\$s  AND m.i_is_deleted_by_sender = 1
@@ -589,6 +592,7 @@ class Data_messages_model extends Base_model implements InfModel
 										u.s_last_name,
 										'i_is_deleted_by_receiver' as type,
 										u.s_profile_photo ,
+										u.e_gender,
 										m.dt_created_on as  msg_dt
 								 FROM cg_messages m, cg_users u 
 								 WHERE u.id = m.i_sender_id AND m.i_receiver_id = %1\$s AND m.i_is_deleted_by_receiver = 1 %2\$s

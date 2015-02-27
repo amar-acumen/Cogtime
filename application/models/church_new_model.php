@@ -34,7 +34,7 @@ class Church_new_model extends Base_model
     		$limit = (is_numeric($i_start) && is_numeric($i_limit)) ? " Limit " . intval($i_start) . "," . intval($i_limit) : '';
         	$order_by =  " ORDER BY {$order_by}" ;
             $sql = 'select *,u.id AS mid, CONCAT(u.s_first_name, " ", u.s_last_name) AS member_name,cm.id AS cmid from cg_church_member AS cm 
-            LEFT JOIN cg_users AS u ON cm.member_id=u.id WHERE cm.church_id = '.$c_id.' AND cm.is_deleted=0 '.$where.' '.$order_by.' '.$limit.'';
+            LEFT JOIN cg_users AS u ON cm.member_id=u.id WHERE cm.church_id = '.$c_id.' AND cm.is_deleted=0 AND cm.is_blocked=1 '.$where.' '.$order_by.' '.$limit.'';
 				//echo $sql;
             $query = $this->db->query($sql);
             $result = $query->result();
@@ -126,7 +126,8 @@ class Church_new_model extends Base_model
 		
 		function get_members_by_grpid($gid)
 		{
-			$res=$this->db->get_where('cg_church_prayer_group_members',array('i_prayer_group_id'=>$gid,'s_status'=>'accepted'));
+			//$res=$this->db->get_where('cg_church_prayer_group_members',array('i_prayer_group_id'=>$gid,'s_status'=>'accepted'));
+                        $res = $this->db->query('select cpg.* ,CONCAT(u.s_first_name, " ", u.s_last_name) AS member_name,u.s_profile_photo,u.e_gender from cg_church_prayer_group_members AS cpg , cg_users AS u where cpg.i_prayer_group_id = "'.$gid.'" AND s_status="accepted" AND u.id = cpg.i_user_id ');
 			//echo $this->db->last_query();exit;
 			$result=$res->result();
 			return $result;
@@ -178,7 +179,7 @@ class Church_new_model extends Base_model
 		function get_posts_by_grpid($grp_id)
 		{
 			//$res=$this->db->get_where('cg_church_prayer_group_post',array('i_prayer_group_id'=>$grp_id));
-                    $res = $this->db->query('select * from cg_church_prayer_group_post where i_prayer_group_id = "'.$grp_id.'" ORDER BY dt_created_on DESC');
+                    $res = $this->db->query('select p.*,CONCAT(u.s_first_name, " ", u.s_last_name) AS member_name,u.s_profile_photo,u.e_gender from cg_church_prayer_group_post p,cg_users u where p.i_user_id=u.id AND p.i_prayer_group_id = "'.$grp_id.'" ORDER BY p.dt_created_on DESC');
 			$result=$res->result();
 			return $result;
 		}
@@ -360,7 +361,10 @@ class Church_new_model extends Base_model
 						  pg_mem.dt_joined_on,
 						  pg.s_group_name,
 						  pg.i_owner_id,
-						  pg_mem.i_prayer_group_id
+						  pg_mem.i_prayer_group_id,
+						  CONCAT(u.s_first_name,' ', u.s_last_name) AS member_name,
+						  u.e_gender,
+						  u.s_profile_photo
 						  FROM  cg_church_prayer_group_members pg_mem
 						  LEFT JOIN cg_church_prayer_group pg ON pg.id = pg_mem.i_prayer_group_id
 						  LEFT JOIN cg_users u ON pg_mem.i_user_id = u.id
@@ -370,7 +374,6 @@ class Church_new_model extends Base_model
 						  AND pg_mem.s_status = 'pending' 
 						   %3\$s
 						   group by pg_mem.id 
-					  
 					"
                 , $this->db->dbprefix, intval($i_user_id), $s_where
         );
@@ -392,7 +395,7 @@ class Church_new_model extends Base_model
 						  pg_mem.dt_joined_on,
 						  pg.s_group_name,
 						  pg.i_owner_id,
-						  pg_mem.i_prayer_group_id
+						  pg_mem.i_prayer_group_id,CONCAT(u.s_first_name,' ', u.s_last_name) AS member_name,u.s_profile_photo , u.e_gender
 						  FROM  cg_church_prayer_group_members pg_mem
 						  LEFT JOIN cg_church_prayer_group pg ON pg.id = pg_mem.i_prayer_group_id
 						  LEFT JOIN cg_users u ON pg_mem.i_user_id = u.id
@@ -447,7 +450,7 @@ class Church_new_model extends Base_model
 						  pg_mem.dt_joined_on,
 						  pg.s_group_name,
 						  pg.i_owner_id,
-						  pg_mem.i_prayer_group_id
+						  pg_mem.i_prayer_group_id,CONCAT(u.s_first_name,' ', u.s_last_name) AS member_name,u.s_profile_photo,u.e_gender
 						  FROM  cg_church_prayer_group_members pg_mem
 						  LEFT JOIN cg_church_prayer_group pg ON pg.id = pg_mem.i_prayer_group_id
 						  LEFT JOIN cg_users u ON pg_mem.i_user_id = u.id
@@ -479,7 +482,7 @@ class Church_new_model extends Base_model
 						  pg_mem.dt_joined_on,
 						  pg.s_group_name,
 						  pg.i_owner_id,
-						  pg_mem.i_prayer_group_id
+						  pg_mem.i_prayer_group_id,CONCAT(u.s_first_name,' ', u.s_last_name) AS member_name,u.s_profile_photo,u.e_gender
 						  FROM  cg_church_prayer_group_members pg_mem
 						  LEFT JOIN cg_church_prayer_group pg ON pg.id = pg_mem.i_prayer_group_id
 						  LEFT JOIN cg_users u ON pg_mem.i_user_id = u.id
@@ -516,7 +519,7 @@ class Church_new_model extends Base_model
                 
                 
                 
-                    public function get_my_groups_notificaions($i_user_id, $s_where, $i_start_limit = '', $i_no_of_page = '') {
+	public function get_my_groups_notificaions($i_user_id, $s_where, $i_start_limit = '', $i_no_of_page = '') {
 
         if ($i_start_limit == '' && $i_no_of_page == '') {
             $limit = '';

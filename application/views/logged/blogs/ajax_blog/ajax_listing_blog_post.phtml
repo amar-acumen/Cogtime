@@ -26,10 +26,10 @@ foreach ($blog_post_arr as $blogpostval) {
             <ul class="right-side" style="width:auto;">
 
 
-                <li><a href="javascript:void(0);"  ><img alt="" src="images/icons/edit.png" class="cmnt" style="margin-top:0;">Edit</a></li>
+                <li><a href="javascript:void(0);"  ><img alt="" width="16" height="16" src="images/icons/edit.png" class="cmnt" style="margin-top:0;">Edit</a></li>
                 <li><a href="javascript:void(0);" onclick="show_dialog('delete-page-popup');
 
-                        deleted_article_id_('<?= $blogpostval->id ?>')"><img alt="" src="images/icons/delete.png" class="cmnt" style="margin-top:0;">Delete</a>
+                        deleted_article_id_('<?= $blogpostval->id ?>')"><img alt="" width="13" height="15" src="images/icons/delete.png" class="cmnt" style="margin-top:0;">Delete</a>
                 </li>
             </ul>
             <br class="clear"/>
@@ -43,8 +43,8 @@ foreach ($blog_post_arr as $blogpostval) {
                 <div class="comments-number-mid">
                     <div class="heading" style="margin-bottom: 12px;"> 
                         <div class="left">
-                            <h4><img class="cmnt" src="images/icons/cmnt2.png" alt="" /> Comments (<span class="noOfCmnts_<?= $blogpostval->id ?>" ><?php echo $blogpostval->no_of_comments ?></span>) </h4>
-                            <img class="wal-minus" src="images/minus-white.png" alt="" />
+                            <h4><img class="cmnt" src="images/icons/cmnt2.png" alt="" height="20px" width="20px"/> Comments (<span class="noOfCmnts_<?= $blogpostval->id ?>" ><?php echo $blogpostval->no_of_comments ?></span>) </h4>
+                            <img class="wal-minus" src="images/minus-white.png" alt="" width="13" height="10"/>
                         </div>
                     </div>
                     <DIV id="blog_post_comment_div<?= $blogpostval->id ?>"></DIV>
@@ -60,7 +60,7 @@ foreach ($blog_post_arr as $blogpostval) {
                 <div class="comments-number-mid comment-box-manage">
                     <div class="heading">
                         <div class="left">
-                            <h4><img class="cmnt" src="images/no.png" alt="" />  Comment   </h4>
+                            <h4><img class="cmnt" src="images/no.png" alt="" width="21" height="19"/>  Comment   </h4>
                             <img class="wal-minus" src="images/minus-white.png" alt="" />
                         </div>
                     </div>
@@ -87,7 +87,7 @@ foreach ($blog_post_arr as $blogpostval) {
                     <div class="heading"style="margin-bottom: 12px;">
                         <div class="left">
                             <h4><img alt="" src="images/icons/icon-edit.png" class="cmnt" style="margin-top:-1px;" />  Edit Article  </h4>
-                            <img class="wal-minus" alt="" src="images/minus-white.png" />
+                            <img class="wal-minus" alt="" src="images/minus-white.png" width="13" height="10"/>
                         </div>
                     </div>
 

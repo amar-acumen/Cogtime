@@ -29,7 +29,7 @@
              
               
               $address = implode(', ',$add);
-              $img = get_profile_image($val['user_id'], 'thumb');
+              $img = get_profile_image_of_user('thumb',$val['s_profile_photo'],$val['e_gender']);
 			  $available_status = ($val['is_available'] == 'true')?'':'Max limit reached';
 			  $css =($val['is_available'] == 'true')?'class = "available"':'class = "not-available" ';
 			  $status_img =($val['is_available'] == 'true')?'':'not-available.png ';

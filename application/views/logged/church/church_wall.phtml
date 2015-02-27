@@ -80,8 +80,8 @@
 		<?php $members=get_member_by_id($_SESSION['logged_church_id']);
 		//pr($members);?>
 		<div class="privacy-drop" > <select id="meminv" multiple="multiple" name="meminv[]"><?php foreach($members as $k=>$v){ ?>
-									 <?=get_username_by_id($v->member_id)?>
-										<option value="<?=$v->member_id?>" ><?=get_username_by_id($v->member_id)?></option> 
+									 <?=$v->member_name?>
+										<option value="<?=$v->member_id?>" ><?=$v->member_name?></option> 
 									 <?php }?></select></div>
         <div class="post-update"><input type="submit" class="post-btn" value="Post"></div>
 		</form>
@@ -104,7 +104,7 @@
 <!-- /FOOTER SECTION -->
 
 <div class="lightbox delete-post" style="width:450px;">
-    <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="<?= base_url() ?>images/close.png" alt="" /></a></div>
+    <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="<?= base_url() ?>images/close.png" alt="" width="24" height="24" /></a></div>
     <div class="top"><div>&nbsp;</div></div>
     <div class="mid">
         <div class="heading" style="margin-bottom:0px;">

@@ -65,12 +65,12 @@
                                                  <a href="javascript:void(0);" class="blue_link" onclick="acceptRingInvitation('<?=$this->session->userdata('user_id')?>','<?=encrypt($ring_inv_val['ringid'])?>', <?=($ring_inv_val['ringid'])?>)">Accept</a>  
                                                  
                                                   &nbsp;  &nbsp; 
-                                                    <img src="images/icons/dec.png" alt="" /> 
+                                                    <img src="images/icons/dec.png" alt="" width="14" height="14"/> 
                                                  <a  href="javascript:void(0);" class="blue_link" onclick="DeclineInvitation('<?=$this->session->userdata('user_id')?>', '<?php echo encrypt($ring_inv_val['ringid'])?>', <?=($ring_inv_val['ringid'])?> , $type)">Delete</a>
                                                   <?php }
 												  
 												  else{ ?>
-                                                   <img src="images/icons/dec.png" alt="" /> 
+                                                   <img src="images/icons/dec.png" alt="" width="14" height="14"/> 
                                                  <a  href="javascript:void(0);" class="blue_link" onclick="DeclineInvitation('<?=encrypt($ring_inv_val['invitedid'])?>', '<?php echo encrypt($ring_inv_val['ringid'])?>', <?=($ring_inv_val['ringid'])?> , 'recv')">Delete</a>
                                                   <?php
 												  }

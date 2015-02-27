@@ -1555,9 +1555,9 @@ class Events_model extends Base_model {
 
     public function get_event_inv($id, $page = '', $limit = '') {
         if ($page != '' || $limit != '') {
-            $sql = $this->db->query("select * from cg_event_user_invited where i_event_id =" . $id . " group by i_user_id limit " . $page . "," . $limit);
+            $sql = $this->db->query("select c.*,u.s_profile_photo,u.e_gender from cg_event_user_invited c left join cg_users u on c.i_user_id=u.id  where c.i_event_id =" . $id . " group by c.i_user_id limit " . $page . "," . $limit);
         } else {
-            $sql = $this->db->query("select * from cg_event_user_invited where i_event_id =" . $id . " group by i_user_id ");
+            $sql = $this->db->query("select c.*,u.s_profile_photo,u.e_gender from cg_event_user_invited c left join cg_users u on c.i_user_id=u.id where c.i_event_id =" . $id . " group by c.i_user_id ");
         }
         //$this->db->last_query();exit;
         $result = $sql->result_array();

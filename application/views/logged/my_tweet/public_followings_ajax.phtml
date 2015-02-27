@@ -4,7 +4,7 @@ if(count($arr_followings)){
 		
 			
 		
-		$profile_image_filename = get_profile_image($val['i_accepter_id'],'thumb');
+		$profile_image_filename = get_profile_image_of_user('thumb',$val['s_profile_photo'],$val['e_gender']);
 		$profile_link = getTwitterProfileLink($val['s_tweet_id']);
 		
 ?>

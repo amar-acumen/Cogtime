@@ -50,10 +50,13 @@ if( $feed['s_type'] == 'wall_post' ){
                                   <!-- image -->
                                    
                                    <!--video play-->
-                                   <?php if(!empty($data_arr->video) && count($data_arr->video)){ 
+                                   <?php if(!empty($data_arr->video) && count($data_arr->video)){
+                                   $video = get_video_from_url($data_arr->video->url, "329","212"); 
                                    ?>
                                     <div class="video-image">
-                                        <div  class="cogtime-video" id="myvideo_first_thumb_<?=$feed['id']?>" style="background:url('') no-repeat center;;width:329px; height:212px;" ></div>
+                                        <div  class="cogtime-video" id="myvideo_first_thumb_<?=$feed['id']?>" >
+                                        	<?php echo $video['html']?>
+                                        </div>
                                         <div id="myvideo_big_thumb_1_<?=$feed['id']?>" media_id="<?=$feed['id']?>"></div> 
                                     </div>
                                     
@@ -143,7 +146,7 @@ if( $feed['s_type'] == 'wall_post' ){
                                   <div class="comments-number-mid comment-box-manage-profile">
                                       <div class="heading">
                                             <div class="left">
-                                                  <h4><img alt="" src="images/no.png" class="cmnt" />  Comment  </h4>
+                                                  <h4><img alt="" src="images/no.png" class="cmnt" width="21" height="19" />  Comment  </h4>
                                                   <img class="wal-minus" alt="" src="images/minus-white.png" width="13" height="10" />
                                             </div>
                                       </div>

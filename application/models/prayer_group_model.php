@@ -259,6 +259,7 @@ class Prayer_group_model extends Base_model {
         $sql = "SELECT u.id as post_owner_user_id,
 							   CONCAT(u.s_first_name,' ', u.s_last_name) s_profile_name,
 					 		   u.s_profile_photo,
+							   u.e_gender,
 							   u.dt_created_on as member_since,
 							   pg.*,
 							   pg_mem.*,
@@ -658,6 +659,8 @@ class Prayer_group_model extends Base_model {
 							CONCAT(u.s_first_name,' ', u.s_last_name) s_profile_name,
 							d.s_name,
 							u.id as post_owner_user_id,
+							u.s_profile_photo,
+							u.e_gender,
 							(SELECT count(*) FROM cg_prayer_group_members pg_mem 
 									LEFT JOIN cg_prayer_group pg1 ON pg1.id = pg_mem.i_prayer_group_id
 									WHERE pg_mem.i_prayer_group_id = pg.id
@@ -952,6 +955,7 @@ class Prayer_group_model extends Base_model {
         $sql = "SELECT u.id as post_owner_user_id,
 							   CONCAT(u.s_first_name,' ', u.s_last_name) s_profile_name,
 					 		   u.s_profile_photo,
+							   u.e_gender,
 							   u.dt_created_on as member_since,
 							   pg.*,
 							   pg_mem.*,
@@ -983,7 +987,10 @@ class Prayer_group_model extends Base_model {
 						  pg_mem.dt_joined_on,
 						  pg.s_group_name,
 						  pg.i_owner_id,
-						  pg_mem.i_prayer_group_id
+						  pg_mem.i_prayer_group_id,
+						  CONCAT(u.s_first_name,' ', u.s_last_name) s_profile_name,
+						   u.s_profile_photo,
+						   u.e_gender
 						  FROM  cg_prayer_group_members pg_mem
 						  LEFT JOIN cg_prayer_group pg ON pg.id = pg_mem.i_prayer_group_id
 						  LEFT JOIN cg_users u ON pg_mem.i_user_id = u.id
@@ -1015,7 +1022,10 @@ class Prayer_group_model extends Base_model {
 						  pg_mem.dt_joined_on,
 						  pg.s_group_name,
 						  pg.i_owner_id,
-						  pg_mem.i_prayer_group_id
+						  pg_mem.i_prayer_group_id,
+						  CONCAT(u.s_first_name,' ', u.s_last_name) s_profile_name,
+						   u.s_profile_photo,
+						   u.e_gender
 						  FROM  cg_prayer_group_members pg_mem
 						  LEFT JOIN cg_prayer_group pg ON pg.id = pg_mem.i_prayer_group_id
 						  LEFT JOIN cg_users u ON pg_mem.i_user_id = u.id
@@ -1067,9 +1077,10 @@ class Prayer_group_model extends Base_model {
 
         $sql = sprintf("
 					 (SELECT
-					  pg.*
-					  FROM  cg_prayer_group pg 
+					  pg.*,u.s_profile_photo,u.e_gender
+					  FROM  cg_prayer_group pg,cg_users u 
 					  WHERE  pg.i_isenabled = 1 
+					  AND pg.i_owner_id=u.id
 					  AND pg.i_owner_id != %2\$s 
 					  %3\$s ORDER BY pg.s_group_name ASC)
 					"

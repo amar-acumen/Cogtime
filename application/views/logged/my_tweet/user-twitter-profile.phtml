@@ -66,7 +66,7 @@ $max_file_size = $max_file_size * 1024 * 1024;
                                     <div class="edit_twtr_pic" style="display: none"><a href="javascript:void(0);" onclick="show_dialog('edit-bg-image');"><h3>Edit Background Image</h3></a></div>
                                 <?php } ?>
                                 <div class="img-thumb" <?= $img_css ?> >
-                                    <div style="background:url(<?= get_profile_image($public_profile_info['id'], 'thumb') ?>) no-repeat center;width:73px; height:73px;" title="tweeter profile pic" ></div>
+                                    <div style="background:url(<?= get_profile_image_of_user('thumb',$public_profile_info['s_profile_photo'],$public_profile_info['e_gender']) ?>) no-repeat center;width:73px; height:73px;" title="tweeter profile pic" ></div>
                                 </div>
                                 <h2><?= $public_profile_info['s_profile_name'] ?></h2>
                                 <h3><?= $public_profile_info['s_tweet_id'] ?></h3>
@@ -99,7 +99,7 @@ $max_file_size = $max_file_size * 1024 * 1024;
                                     <div class="edit_twtr_pic" style="display: none"><a href="javascript:void(0);" onclick="show_dialog('edit-bg-image');"><h3>Edit Background Image</h3></a></div>
                                 <?php } ?>
                                 <div class="img-thumb" <?= $img_css ?> >
-                                    <div style="background:url(<?= get_profile_image($public_profile_info['id'], 'thumb') ?>) no-repeat center;width:73px; height:73px;" title="tweeter profile pic" ></div>
+                                    <div style="background:url(<?= get_profile_image_of_user('thumb',$public_profile_info['s_profile_photo'],$public_profile_info['e_gender']) ?>) no-repeat center;width:73px; height:73px;" title="tweeter profile pic" ></div>
                                 </div>
                                 <h2><?= $public_profile_info['s_profile_name'] ?></h2>
                                 <h3><?= $public_profile_info['s_tweet_id'] ?></h3>
@@ -146,7 +146,7 @@ $max_file_size = $max_file_size * 1024 * 1024;
     <form id="frmUploadTweetPhoto"  method="post" action="<?= base_url() . 'logged/my_photos/edit_twt_bg_img' ?>" onsubmit="return false;" enctype="multipart/form-data">
         <div class="lightbox edit-bg-image" style="width:480px;">
             <div class="close"><a href="javascript:void(0)" onclick="
-                    hide_dialog()"><img src="<?php echo base_url() ?>images/close.png" alt="" /></a></div>
+                    hide_dialog()"><img src="<?php echo base_url() ?>images/close.png" alt="" width="24" height="24"/></a></div>
             <div class="top"><div>&nbsp;</div></div>
             <div class="mid">
                 <div class="heading"><div class="left"><h4><img src="<?php echo base_url() ?>images/icons/photo.png" alt="" /> Upload  Photo </h4></div></div>

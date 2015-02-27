@@ -3987,7 +3987,7 @@ function get_pending_requests_count_by_ring_id($id = '') {
 
 function get_all_ring_details_by_id($id) {
     $ci = & get_instance();
-    $q = $ci->db->query("select  * from cg_ring_invited_user where i_request=1 and i_ring_id=$id GROUP BY i_invited_id");
+    $q = $ci->db->query("select  inv.* , u.e_gender , u.s_profile_photo  from cg_ring_invited_user AS inv , cg_users AS u where inv.i_request=1 and inv.i_ring_id=$id AND u.id = inv.i_invited_id  GROUP BY inv.i_invited_id");
     $res = $q->result_array();
     //pr($res,1);
     return $res;
@@ -5107,7 +5107,7 @@ function get_member_by_id($cid)
 {
 	$CI = & get_instance();
     $query=$CI->db->query('select *,u.id AS mid, CONCAT(u.s_first_name, " ", u.s_last_name) AS member_name,cm.id AS cmid from cg_church_member AS cm 
-            LEFT JOIN cg_users AS u ON cm.member_id=u.id WHERE cm.church_id = "'.$cid.'" AND cm.is_deleted=0 ');
+            LEFT JOIN cg_users AS u ON cm.member_id=u.id WHERE cm.church_id = "'.$cid.'" AND cm.is_deleted=0 AND cm.is_blocked=1 AND cm.is_approved = 1 ');
 	$members=$query->result();
 	return $members;
 }
@@ -5161,14 +5161,18 @@ function get_prayer_group_member_count_by_grp_id($gid){
 function get_prayer_group_post_count_by_grp_id($gid){
    $ci = & get_instance();
     $sql = $ci->db->query('select count(*) as count from cg_church_prayer_group_post where i_prayer_group_id="' . $gid . '" ');
-    //echo $sql;
-    //echo $sql = $ci->db->last_query();
     $res = $sql->result_array();
-    
     return $res['0']['count'];
-   // pr($res,1);
-//    if ($res['0']['count'] > 0) {
-//        return true;
-//    } else
-//        return false;  
+}
+
+function get_video_from_url($url,$width,$height)
+{
+    $CI =& get_instance();
+    $CI->load->library('embed_video');
+    $config['zend_library_path'] = APPPATH . "libraries/Zend/";
+    $config['video_url'] = ($url);
+    $CI->embed_video->initialize($config);
+    $CI->embed_video->prepare();
+    $image_source = $CI->embed_video->get_player($width, $height);
+    return $image_source;
 }

@@ -37,8 +37,8 @@
                                     ?>
                                             <select id="frndinv" multiple="multiple" style="width:370px" name="frndinv[]">
 									 <?php foreach($members as $k=>$v){ ?>
-									 <?=get_username_by_id($v->member_id)?>
-										<option value="<?=$v->member_id?>" ><?=get_username_by_id($v->member_id)?></option> 
+									 <?=$v->member_name?>
+										<option value="<?=$v->member_id?>" ><?=$v->member_name?></option> 
 									 <?php }?>
 									 </select>
                                          <span id="err_invite_frnd" class="error-message"></span> 

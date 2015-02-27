@@ -2,7 +2,7 @@
 	if(count($result_arr)){
 		foreach($result_arr as $key=> $val){
 			
-			$profile_image = get_profile_image($val['post_owner_user_id'],'thumb');
+			$profile_image = get_profile_image_of_user('thumb',$val['s_profile_photo'],$val['e_gender']);
 			$s_profile_name = $val['s_first_name'] .' ' .$val['s_last_name'] ;
 											
 			if($val['if_already_friend'] == 'true' || $val['already_added_netpal'] == 'true'){

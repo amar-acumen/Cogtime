@@ -16,7 +16,7 @@
 						
 						
 						$address = implode(', ',$add);
-						$img = get_profile_image($val['i_accepter_id'], 'thumb');	
+						$img = get_profile_image_of_user('thumb',$val['s_profile_photo'],$val['e_gender']);	
 						$user_id =$val['i_accepter_id'];
 						$available_status = ($val['is_available'] == 'true')?'Available':'Max limit reached';
 			  			$css =($val['is_available'] == 'true')?'class = "available"':'class = "not-available" ';
@@ -41,7 +41,7 @@
                   </div>
                    <div class="right_div02">
                         <p class="add-remove-friend"><img src="images/icons/frnd_request.png" alt="" /> <a  href="javascript:void(0);" id="invite_prayer_partner_<?=($val['i_accepter_id'])?>" onclick="invite_prayer_partner_('<?=encrypt($val['id'])?>','false')">Re-send Partner</a></p>
-                        <p class="add-remove-friend"><img src="images/icons/close.png" alt="" /> <a  href="javascript:void(0);" id="cancel_friend_<?=($user_id)?>" onclick="cancel_friend_('<?=$user_id?>')">Cancel</a></p>
+                        <p class="add-remove-friend"><img src="images/icons/close.png" alt="" width="24" height="24"/> <a  href="javascript:void(0);" id="cancel_friend_<?=($user_id)?>" onclick="cancel_friend_('<?=$user_id?>')">Cancel</a></p>
                     </div>
                   <div class="clr"></div>
                </div>

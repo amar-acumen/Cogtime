@@ -1,6 +1,6 @@
 <div id="mid_container">
 <?php
-#pr($arr_rings);
+//pr($arr_rings);
 
 if(count($arr_rings))
 {
@@ -17,7 +17,7 @@ if(count($arr_rings))
             
             
             
-        $profile_img = get_profile_image($member['post_owner_user_id'],'thumb');
+        $profile_img = get_profile_image_of_user('thumb',$member['s_profile_photo'],$member['e_gender']);
         
         //pr(check_friend_netpal_status($member));
 ?>
@@ -51,7 +51,7 @@ if(count($arr_rings))
 												  	if($member['i_user_id'] == intval(decrypt($this->session->userdata('user_id'))))
 													{
                                                   ?>  
-                                                     <p class="add-remove-friend"><img alt="" src="images/icons/remove.png" /> <a href="javascript:void(0);" onclick="delete_confirm_(<?=$member['table_id']?>)" class="blue_link">Remove</a></p>
+                                                     <p class="add-remove-friend"><img alt="" src="images/icons/remove.png" width="16" height="16" /> <a href="javascript:void(0);" onclick="delete_confirm_(<?=$member['table_id']?>)" class="blue_link">Remove</a></p>
                                                    <?php } ?>
                                               </div>
                                               <div class="clr"></div>

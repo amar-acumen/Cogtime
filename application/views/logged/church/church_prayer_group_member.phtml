@@ -13,7 +13,7 @@
     <div class="activity-right">
         <div class="activity-comment-box">
        	  
-            <?php //pr($prayer_member_arr)?>  
+            <?php// pr($prayer_member_arr)?>  
 			<?php 
 			if(!empty($prayer_member_arr)){
 			foreach($prayer_member_arr as $key=>$val)
@@ -29,9 +29,9 @@
 							                        	 	  <li>
                                       <span class="payer-member-name">
                                       
-                                      <div style="background:url(<?=get_profile_image($val->i_user_id,'thumb')?>) no-repeat center;width:30px; height:30px;" class="pro_photo3"></div>
+                                      <div style="background:url(<?=get_profile_image_of_user('thumb',$val->s_profile_photo,$val->e_gender)?>) no-repeat center;width:30px; height:30px;" class="pro_photo3"></div>
                                           <div class="pra-member-content">
-                                              <a href="<?=get_public_profile_url($val->i_user_id, get_username_by_id($val->i_user_id))?>"><?=get_username_by_id($val->i_user_id)?></a>&nbsp;&nbsp; <a href="javascript:void(0);" onclick="delete_member(<?=$val->i_user_id?>,<?=$val->i_prayer_group_id?>)">Remove</a>
+                                              <a href="<?=get_public_profile_url($val->i_user_id, $val->member_name)?>"><?=$val->member_name?></a>&nbsp;&nbsp; <a href="javascript:void(0);" onclick="delete_member(<?=$val->i_user_id?>,<?=$val->i_prayer_group_id?>)">Remove</a>
                                           <ul class="prayer-option">
                                          
                                           <li>Member Since- <?=getShortDateWithTime($val->dt_joined_on,6)?> </li>
