@@ -51,7 +51,7 @@
 
                 </div>
 
-                <?php $is_owner = ($prayer_detail_arr['i_owner_id'] == $logged_user_id) ? '<li><img width="10" alt="" src="images/crown.png"> Group Owner</li><li>I</li>' : ''; ?>
+                <?php $is_owner = ($prayer_detail_arr['i_owner_id'] == $logged_user_id) ? '<li><img width="10" alt="" src="images/crown.png" width="15" height="15" > Group Owner</li><li>I</li>' : ''; ?>
                 <ul class="prayer-option">
                     <?= $is_owner ?>
                     <li>Group Owner- <?= get_user_name_by_id($prayer_detail_arr['i_owner_id']) ?></li>
