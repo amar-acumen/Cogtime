@@ -1129,7 +1129,7 @@ class Prayer_group_model extends Base_model {
     }
     
     public function prayer_wall_all_comment($s_where,$i_start_limit='', $i_no_of_page=''){
-            $sql="select c.*,p.s_subject,p.s_description,u.s_first_name, u.s_last_name from cg_prayer_wall_comments c, cg_bible_prayer_request p,cg_users u $s_where and c.i_prayer_id = p.id and u.id = c.i_user_id ORDER BY c.id DESC limit ".$i_start_limit.",".$i_no_of_page;
+            $sql="select c.*,p.s_subject,p.s_description,CONCAT(u.s_first_name,' ',u.s_last_name) AS s_profile_name from cg_prayer_wall_comments c, cg_bible_prayer_request p,cg_users u $s_where and c.i_prayer_id = p.id and u.id = c.i_user_id ORDER BY c.id DESC limit ".$i_start_limit.",".$i_no_of_page;
         // echo $sql;
             $query=$this->db->query($sql);
 $result_arr=$query->result_array();
