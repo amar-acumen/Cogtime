@@ -1,5 +1,5 @@
 <?php
-pr($info_arr);
+//pr($info_arr);
 if (count($info_arr) != 0) {
     $counter = 0;
     
@@ -11,7 +11,7 @@ if (count($info_arr) != 0) {
             <div class="right-panel">
 <!--                <h5><?php echo $info->s_profile_name ?></h5>-->
                 
-                <p><h5>Sender Name :&nbsp;<?php echo get_username_by_id($info['i_invited_id']); ?></h5></p>
+                <p><h5>Sender Name :&nbsp;<?php echo $info['s_profile_name']; ?></h5></p>
                 <br>
                 <h6>Request sent on: <span><?php echo $info['dt_request_date']; ?></span> </h6>
             </div>
