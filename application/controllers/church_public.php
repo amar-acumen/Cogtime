@@ -131,13 +131,19 @@ class Church_public extends Base_controller
             parent::_set_meta_keywords('');
 
 
-            parent::_add_js_arr(array('js/jquery.autofill.js',
-                'js/lightbox.js',
+            parent::_add_js_arr(array(
+                //'js/jquery.autofill.js',
+               // 'js/lightbox.js',
                 //'js/jquery-1.5.2.js',
                 //'js/no-conflict.js',
-                'js/jquery.dd.js','js/church_login.js'
+               // 'js/jquery.dd.js',
+               // 'js/church_login.js'
             ));
-            parent::_add_css_arr(array('css/recaptcha.css', 'css/dd.css','css/church.css'));
+            parent::_add_css_arr(array(
+                //'css/recaptcha.css'
+                //'css/dd.css',
+                //'css/church.css'
+            ));
 
 
             if ($this->input->post('is_submitted') == 'Y') {
@@ -492,13 +498,18 @@ class Church_public extends Base_controller
         parent::_set_meta_keywords('');
 
 
-        parent::_add_js_arr(array('js/jquery.autofill.js',
-            'js/lightbox.js',
+        parent::_add_js_arr(array(
+            //'js/jquery.autofill.js',
+            //'js/lightbox.js',
             //'js/jquery-1.5.2.js',
             //'js/no-conflict.js',
-            'js/jquery.dd.js','js/church_login.js'
+            //'js/jquery.dd.js',
+            //'js/church_login.js'
         ));
-        parent::_add_css_arr(array('css/recaptcha.css', 'css/dd.css','css/church.css'));
+        parent::_add_css_arr(array(
+            //'css/recaptcha.css',
+            //'css/dd.css','css/church.css'
+        ));
         $c_id =  $_SESSION['current_church_id'];
          $data['church_arr'] =     $this->church_new_model->get_church_info($c_id);
         $VIEW = "church_registration_success.phtml";
