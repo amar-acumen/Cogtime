@@ -233,7 +233,7 @@ class Data_messages_model extends Base_model implements InfModel
 										u.s_profile_photo,
 										u.e_gender
 								FROM %smessages m, %susers u 
-								WHERE u.id = m.i_sender_id AND m.i_receiver_id = %s AND m.i_is_deleted_by_receiver = 0 
+								WHERE m.i_receiver_id = u.id AND m.i_receiver_id = %s AND m.i_is_deleted_by_receiver = 0 
 								%s ORDER BY m.dt_created_on DESC', 
 								$this->db->dbprefix, $this->db->dbprefix, $i_user_id, $s_where);
 			}
