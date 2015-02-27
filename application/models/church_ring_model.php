@@ -1376,7 +1376,7 @@ public function get_by_id($id)
 							FROM 
 							cg_church_ring_invited_user AS r
 							LEFT JOIN cg_church_ring rg ON r.i_ring_id = rg.id
-							LEFT JOIN {$this->db->USERS}  u  ON  rg.i_user_id=u.id AND r.i_user_id=u.id
+							LEFT JOIN {$this->db->USERS}  u  ON  rg.i_user_id=u.id AND r.i_invited_id=u.id
 							WHERE  r.i_request=0 AND r.i_joined=0 "
 						.$s_where."";  #AND i_privacy=2
 						
