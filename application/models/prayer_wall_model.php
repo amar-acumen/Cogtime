@@ -719,7 +719,7 @@ class Prayer_wall_model extends Base_model
 	 
    public function get_comment_by_request_id($prayer_id)
 	 {
-		$query=$this->db->query("select pc.*,u.s_profile_photo,u.e_gender from cg_prayer_wall_comments pc,cg_users u where pc.i_user_id=u.id and pc.i_prayer_id=".$prayer_id);
+		$query=$this->db->query("select pc.*,CONCAT(u.s_first_name,' ', u.s_last_name) s_profile_name,u.s_profile_photo,u.e_gender from cg_prayer_wall_comments pc,cg_users u where pc.i_user_id=u.id and pc.i_prayer_id=".$prayer_id);
 		$res=$query->result_array();
 		return $res;
 	 }  

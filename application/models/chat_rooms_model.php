@@ -719,11 +719,12 @@ class Chat_rooms_model extends Base_model
 						C.*, 
 						UR.i_user_id as owner_id,
 						'Y' is_owner,
-						UR.s_ring_name
+						UR.s_ring_name,
+						CONCAT(u.s_first_name,' ', u.s_last_name) as s_profile_name
 						FROM flashchat.room C 
 						LEFT JOIN cogtime.cg_user_ring UR ON C.room_id = UR.i_room_id 
 						LEFT JOIN cogtime.cg_ring_invited_user RC ON UR.id = RC.i_ring_id
-						
+						LEFT JOIN cogtime.cg_users u ON UR.i_user_id = u.id
 						WHERE C.enable = 1 AND C.member_only = 1 AND C.show_type = 0 
 						AND UR.i_user_id = {$i_profile_id}
 						{$where}
@@ -734,11 +735,12 @@ class Chat_rooms_model extends Base_model
 							C.*,
 							UR.i_user_id as owner_id,
 							'N' is_owner,
-							UR.s_ring_name
+							UR.s_ring_name,
+							CONCAT(u.s_first_name,' ', u.s_last_name) as s_profile_name
 							FROM flashchat.room C 
 							LEFT JOIN cogtime.cg_user_ring UR ON C.room_id = UR.i_room_id 
 							LEFT JOIN cogtime.cg_ring_invited_user RC ON UR.id = RC.i_ring_id
-							
+							LEFT JOIN cogtime.cg_users u ON UR.i_user_id = u.id
 							WHERE  C.enable = 1 AND C.member_only = 1 AND C.show_type = 0 
 							AND RC.i_invited_id in
 							(     SELECT  RC1.i_invited_id from flashchat.room C1 
