@@ -101,8 +101,8 @@ class Module_generate extends CI_Controller {
                     'js/jquery.dd.js',
                     //'js/jquery-ui-1.8.2.custom.min.js',
                     'js/stepcarousel.js',
-                    'js/frontend/logged/tweets/tweet_utilities.js',
-                    'js/frontend/logged/christian_news_js.js',
+                    //'js/frontend/logged/tweets/tweet_utilities.js',
+                    //'js/frontend/logged/christian_news_js.js',
                     'js/tab.js',
                     'js/jquery.flexslider.js'
                     ,'js/jquery.eislideshow.js',
@@ -113,6 +113,9 @@ class Module_generate extends CI_Controller {
                     'js/jquery/ui/jquery.ui.core.js',
                     'js/jquery.ui.datepicker.js',
                     'js/jquery.nicescroll.min.js',
+                    'js/jquery.naviDropDown.1.0.js',
+                    'js/jquery.blueberry.js',
+                    'js/jquery.bxslider.min.js',
 
                 );
                 $js = '';
@@ -133,7 +136,9 @@ class Module_generate extends CI_Controller {
                     'js/jquery.gemoticons.js',
                     'js/frontend/header_slider.js',
                     'js/contentslider.js',
-                    'js/jquery.autofill.js'
+                    'js/jquery.autofill.js',
+                    'js/frontend/logged/christian_news_js.js',
+                    'js/frontend/logged/tweets/tweet_utilities.js'
                   //  'js/jquery.hoverIntent.js',
                   //  'js/frontend/utils.js'
                 );
