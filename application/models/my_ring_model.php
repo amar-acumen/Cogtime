@@ -1364,7 +1364,7 @@ class My_ring_model extends Base_model
     {
         
         $limit  = (is_numeric($i_start) && is_numeric($i_limit))?" Limit ".intval($i_start).",".intval($i_limit):'';
-        $sql  =  " SELECT PR.* 
+        $sql  =  " SELECT PR.* , CONCAT(U.s_first_name,' ',U.s_last_name) AS s_profile_name
 						FROM cg_ring_category_request PR
 						LEFT JOIN cg_users U ON U.id = PR.i_user_id
 						{$where} GROUP BY PR.id 

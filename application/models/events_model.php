@@ -107,11 +107,12 @@ class Events_model extends Base_model {
 
         $sql = " SELECT E.*, 
 							U.s_name,
+                                                        CONCAT(u.s_first_name,' ',u.s_last_name) AS s_profile_name,
 							U.s_last_name, 
 							C.s_country_name 
 							FROM {$this->db->EVENTS} 
 							E LEFT JOIN  {$this->db->ADMIN_USER} U ON U.id = E.i_host_id 
-							LEFT JOIN  {$this->db->MST_COUNTRY} C ON E.i_country_id = C.id {$where}  {$s_order_by} {$limit}";
+							LEFT JOIN  {$this->db->MST_COUNTRY} C ON E.i_country_id = C.id  LEFT JOIN  cg_users u  ON u.id = E.i_host_id   {$where}  {$s_order_by} {$limit}";
 
         $query = $this->db->query($sql); //echo $this->db->last_query(); //exit;
         $result_arr = $query->result_array(); //pr($result_arr,1);
@@ -1555,9 +1556,9 @@ class Events_model extends Base_model {
 
     public function get_event_inv($id, $page = '', $limit = '') {
         if ($page != '' || $limit != '') {
-            $sql = $this->db->query("select c.*,u.s_profile_photo,u.e_gender from cg_event_user_invited c left join cg_users u on c.i_user_id=u.id  where c.i_event_id =" . $id . " group by c.i_user_id limit " . $page . "," . $limit);
+            $sql = $this->db->query("select c.*,CONCAT(u.s_first_name,' ', u.s_last_name) s_profile_name,u.s_profile_photo,u.e_gender from cg_event_user_invited c left join cg_users u on c.i_user_id=u.id  where c.i_event_id =" . $id . " group by c.i_user_id limit " . $page . "," . $limit);
         } else {
-            $sql = $this->db->query("select c.*,u.s_profile_photo,u.e_gender from cg_event_user_invited c left join cg_users u on c.i_user_id=u.id where c.i_event_id =" . $id . " group by c.i_user_id ");
+            $sql = $this->db->query("select c.*,CONCAT(u.s_first_name,' ', u.s_last_name) s_profile_name,u.s_profile_photo,u.e_gender from cg_event_user_invited c left join cg_users u on c.i_user_id=u.id where c.i_event_id =" . $id . " group by c.i_user_id ");
         }
         //$this->db->last_query();exit;
         $result = $sql->result_array();

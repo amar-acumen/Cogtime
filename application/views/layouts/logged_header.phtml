@@ -9,7 +9,6 @@ function after_submit() {
 
 //-->
 </script>
-
 <!-- HEADER SECTION -->
 <div id="header_section">
     <div id="header">
@@ -32,12 +31,9 @@ function after_submit() {
                      <script>
             $(document).ready(function(){
                 $('#online-chat').click(function(){
-                    var address = "<?= base_url() ?>livehelperchatmaster/livehelperchat-master/lhc_web?name=<?=get_username_by_id(intval(decrypt($this->session->userdata('user_id')))) ?>";
+                    var address = "<?= base_url() ?>livehelperchatmaster/livehelperchat-master/lhc_web?name=<?=$this->session->userdata('username').' '.$this->session->userdata('user_lastname') ?>";
                     var con = "width=500,height=500";
-                    
-                    //window.open("<?= base_url() ?>livehelperchatmaster/livehelperchat-master/lhc_web?name=<?=get_username_by_id(intval(decrypt($this->session->userdata('user_id')))) ?>", "livehelperchat-master", "width=500,height=500");
                     window.open (address,'livehelperchatmaster', config = con);
-                    //$('#form-start-chat').submit();
                 });
             });
         </script>

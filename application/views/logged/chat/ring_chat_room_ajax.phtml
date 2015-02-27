@@ -23,13 +23,13 @@
                                                 <?php } 
 												else
 												{?>
-                                                <p> <img alt="" src="images/crown.png" /> <a class="blue_link" href="javascript:void(0);" ><strong><?=$val['name']?></strong></a></p>
+                                                <p> <img alt="" src="images/crown.png" width="15" height="15" /> <a class="blue_link" href="javascript:void(0);" ><strong><?=$val['name']?></strong></a></p>
 												<?php }?>
                                                 <?php /*?><p class="light_blue12">Sub Sub Category Name</p><?php */?>
                                                 
                                                 <p>No. of people at this moment: <span class="blue12"><strong><?=$val['user_numbers']?></strong></span></p>
                                                 <p>Ring Name: <span class="blue12"><?=$val['s_ring_name']?></span></p>
-                                                <p>Ring Owner: <span class="blue12"><?=get_username_by_id($val['owner_id'])?></span></p>
+                                                <p>Ring Owner: <span class="blue12"><?=$val['s_profile_name']?></span></p>
                                           </div>
                                           
                                           

@@ -12,7 +12,7 @@
                 <?=nl2br($DESC)?> 
                 <span>Commented on: <?=get_time_elapsed($val['dt_created_on'])?></span>
             </p>
-            <h2 class="name"><?=get_username_by_id($val['i_user_id'])?></h2>
+            <h2 class="name"><?=$val['s_profile_name']?></h2>
            <!-- <p class="place"><?=$val['s_country']?></p>-->
            <!-- <p class="date-time"><span style="margin-right: 2px;">From: </span><?=getShortDate($val['dt_start_time'], 5)?></p> 
             <p class="date-time"><span style="margin-right: 16px;">To: </span><?=getShortDate($val['dt_end_time'], 5)?></p>-->
