@@ -166,14 +166,13 @@ function view_tweet_reply(id)
 						$('#no_tweets').hide();
 						$('#tweet_contents').html(data.html);
 						$('#count_my_tweets').html(data.total_my_tweets);
-						alert(11);
+						//alert(11);
 						//$('#new_right_tweet_contents').html(data.html);
 				  }
 				   if(data.view_more==true)
 					{
 						cur_page = data.cur_page;
 						 //$('#show_more_div').hide();
-						 alert(22);
 						 $('#mid_container').append('<div class="view_more" id="show_more_div"><a href="javascript:void(0);" id="show_more_tweets_link" page_value="'+cur_page+'" onclick="show_more_tweets('+cur_page+')">[view more] </a> </div>');
 					}
 				  
