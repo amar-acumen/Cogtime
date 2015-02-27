@@ -262,7 +262,6 @@ class Data_messages_model extends Base_model implements InfModel
 			
 	//echo nl2br($s_qry);
 		//query = $this->db->query($sql);
-		pr($result_arr);
 		//$result_arr = $query->result_array();
 
 		//return $result_arr;
@@ -291,7 +290,8 @@ class Data_messages_model extends Base_model implements InfModel
 					
 					$ret_[$i_cnt]["dt_created_on"]		=   $row->dt_created_on;
 					$ret_[$i_cnt]["i_is_unread"]		=	intval($row->i_is_unread);  
-				
+					$ret_[$i_cnt]["s_profile_photo"]	=   $row->s_profile_photo;
+					$ret_[$i_cnt]["e_gender"]		    =   $row->e_gender;
                   $i_cnt++;
               }    
               $rs->free_result();          
