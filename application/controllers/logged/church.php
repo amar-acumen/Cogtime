@@ -1542,37 +1542,6 @@ echo json_encode( array('success'=>'true'));
         {
 			if($_POST)
 			{
-				if($this->input->post('name1')) {
-					$name = $this->input->post('name1');
-				}
-				if($this->input->post('name2')) {
-					$name = $this->input->post('name2');
-				}
-				if($this->input->post('name3')) {
-					$name = $this->input->post('name3');
-				}
-				if($this->input->post('name4')) {
-					$name = $this->input->post('name4');
-				}
-				if($this->input->post('name5')) {
-					$name = $this->input->post('name5');
-				}
-				
-				if($this->input->post('email1')) {
-					$email = $this->input->post(email1);
-				}
-				if($this->input->post('email2')) {
-					$email = $this->input->post(email2);
-				}
-				if($this->input->post('email3')) {
-					$email = $this->input->post(email3);
-				}
-				if($this->input->post('email4')) {
-					$email = $this->input->post(email4);
-				}
-				if($this->input->post('email5')) {
-					$email = $this->input->post(email5);
-				}
 				
 				$invited_member = array(
 					'name' => $name,
@@ -1580,7 +1549,8 @@ echo json_encode( array('success'=>'true'));
 					'invitation_sent_date' => get_db_datetime()
 				);
 			$this->db->insert('cg_church_member_invitation', $invited_member);	
-				
+			$VIEW = "logged/church/church_member.phtml";
+			parent::_render($data, $VIEW);	
 			}
 			else
 			{
