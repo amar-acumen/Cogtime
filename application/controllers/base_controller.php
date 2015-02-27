@@ -526,7 +526,7 @@ class Base_controller extends CI_Controller {
             }
             ////// "meta keywords" setting [End] //////
             ///////// NEW CODE [FOR DEFAULT CSS FILES - BEGIN] /////////
-            print_r($this->css_files);
+           // print_r($this->css_files);
             if (is_array($this->css_files) && count($this->css_files)) {
 
                 foreach ($this->css_files as $key_css => $item_css) {
