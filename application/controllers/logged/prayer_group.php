@@ -645,16 +645,17 @@ class Prayer_group extends Base_controller
             parent::_set_meta_keywords('');
         
             
-            parent::_add_js_arr( array( 'js/ddsmoothmenu.js',
+            parent::_add_js_arr( array( /*'js/ddsmoothmenu.js',
                                         'js/switch.js','js/animate-collapse.js',
                                         'js/lightbox.js',
                                         'js/jquery-ui-1.8.2.custom.min.js',
                                         'js/stepcarousel.js',
-                                        'js/tab.js',
+                                        'js/tab.js',*/
                                         'js/frontend/logged/holy_place/prayer_group.js'
                                         ));
 
-            parent::_add_css_arr( array('css/jquery-ui-1.8.13.custom.css') );
+            parent::_add_css_arr( array(//'css/jquery-ui-1.8.13.custom.css'
+            ) );
           
             $i_user_id = intval(decrypt($this->session->userdata('user_id')));
             //$prayer_group_id = $this->session->userdata('prayer_group_id');
@@ -1180,19 +1181,21 @@ class Prayer_group extends Base_controller
             parent::_set_meta_keywords('');
         
             
-            parent::_add_js_arr( array( 'js/ddsmoothmenu.js',
+            parent::_add_js_arr( array(/* 'js/ddsmoothmenu.js',
                                         'js/switch.js','js/animate-collapse.js',
                                         'js/lightbox.js',
 										'js/jquery-ui-1.8.2.custom.min.js',
                                         'js/stepcarousel.js',
 										'js/jquery/ui/jquery.ui.core.js',
 										'js/jquery.ui.datepicker.js',
+                                        'js/tab.js',*/
 									    'js/jquery-ui-timepicker-addon.js',
-										'js/tab.js',
+
 										'js/frontend/logged/holy_place/prayer_group.js'
                                         ));
 
-            parent::_add_css_arr( array('css/jquery-ui-1.8.13.custom.css','css/jquery-ui-1.8.2.custom.css') );
+            parent::_add_css_arr( array(//'css/jquery-ui-1.8.13.custom.css','css/jquery-ui-1.8.2.custom.css'
+            ) );
           
             $i_user_id = intval(decrypt($this->session->userdata('user_id')));
 			
