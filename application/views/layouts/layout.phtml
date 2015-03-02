@@ -74,7 +74,10 @@
 					try{clearTimeout(refreshingTimer);}catch(eeeee){}
 					refreshingTimer = setTimeout(function(){
 						refreshing_node = false;
-					},35000);
+						setTimeout(function() {
+	                        check();
+	                    },1000);
+					},20000);
 					$('script[src*="http://web.acumensofttech.com:1337/?user="]').remove();
 					$('head').append(obj);
 				}
