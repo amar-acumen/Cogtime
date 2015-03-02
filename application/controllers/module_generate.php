@@ -81,6 +81,8 @@ class Module_generate extends CI_Controller {
                     'js/jquery/ui/jquery.ui.core.js',
                     'js/frontend/utilities.js',
                     'js/jquery/ui/jquery-ui-1.8.4.custom.js',
+                    'js/lightbox.js',
+                    'js/jquery.dd.js',
                     'js/jquery.form.js',
                     'js/jquery/JSON/json2.js',
                     'js/ModalDialog.js',
@@ -98,8 +100,6 @@ class Module_generate extends CI_Controller {
                     'js/ddsmoothmenu.js',
                     'js/switch.js',
                     'js/animate-collapse.js',
-                    'js/lightbox.js',
-                    'js/jquery.dd.js',
                     //'js/jquery-ui-1.8.2.custom.min.js',
                     'js/stepcarousel.js',
                     //'js/frontend/logged/tweets/tweet_utilities.js',
@@ -120,7 +120,6 @@ class Module_generate extends CI_Controller {
                     'js/jquery.fancybox.js',
                     // logged
                     'js/frontend/public_profile.js'
-
                 );
                 $js = '';
                 foreach($files_js as $data){
@@ -132,6 +131,28 @@ class Module_generate extends CI_Controller {
                 fwrite($jsfile, $js);
                 fclose($jsfile);
                 echo '<br/> production.js';
+
+
+                $files_logged_js = array(
+                    'js/frontend/wall/wall_helper.js',
+                    'js/frontend/logged/my_friends.js',
+                    'js/frontend/logged/my_net_pals.js',
+                    'js/frontend/logged/my_prayer_partner.js',
+                    'js/frontend/logged/message_box/my_message.js',
+                    // logged
+                    'js/frontend/public_profile.js'
+
+                );
+                $js_logged = '';
+                foreach($files_logged_js as $data){
+                    $js_logged .= $this->minify->js->min($data);
+                }
+                //$packer = new JavaScriptPacker($js, 62, true, true);
+                //$js = $packer->pack();
+                $jsfilelogged = fopen("js/logged.js", "w") or die("Unable to open file!");
+                fwrite($jsfilelogged, $js_logged);
+                fclose($jsfilelogged);
+                echo '<br/> logged.js';
             }
             // #################  Individual js min generate ###################
             if($js_indi){
