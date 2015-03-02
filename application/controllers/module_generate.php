@@ -49,6 +49,8 @@ class Module_generate extends CI_Controller {
                     'css/IMchat/chat.css',
                     'css/gemoticons.css',
                     'css/recaptcha.css',
+                    'css/jquery-ui-1.8.13.custom.css',
+                    'css/dd.css',
                     //user logged in css
                     //'css/jquery-ui-1.8.2.custom.css',
                     'css/jquery-ui-1.8.13.custom.css',
@@ -68,6 +70,25 @@ class Module_generate extends CI_Controller {
                 fclose($cssfile);
 
                 echo '<br/> production.css';
+
+                $files_css_logged = array(
+                    //user logged in css
+                    //'css/jquery-ui-1.8.2.custom.css',
+                    'css/flexslider.css',
+                    'css/jquery.fancybox.css'
+                    //'css/church.css'
+                    //'css/big-slider.css'
+                );
+                $css_logged = '';
+                foreach($files_css_logged as $data){
+                    $css_logged .= $this->minify->css->min($data);
+                }
+
+                $cssfile_logged = fopen("css/production_logged.css", "w") or die("Unable to open file!");
+                fwrite($cssfile_logged, $css_logged);
+                fclose($cssfile_logged);
+
+                echo '<br/> production_logged.css';
             }
             if($js_prod){
                 $files_js = array(
@@ -121,6 +142,7 @@ class Module_generate extends CI_Controller {
                     // logged
                     'js/frontend/public_profile.js'
                 );
+
                 $js = '';
                 foreach($files_js as $data){
                     $js .= $this->minify->js->min($data);
