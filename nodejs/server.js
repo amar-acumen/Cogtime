@@ -20,7 +20,7 @@ http.createServer(function (req, res) {
 					function(err, rows, fields) {
 					if (!err)
 					{
-						res.writeHead(200, {'Content-Type': 'application/json'});
+						
 						//console.log(typeof(rows)+'sdsds');
 						//var statusList = {"totalRecords": 4 };
 						//res.write(JSON.stringify(statusList, 0, 4));
@@ -34,7 +34,10 @@ http.createServer(function (req, res) {
 								nonZeroFound = true;
 						}
 						if(nonZeroFound || cnt<=0)
+						{
+							res.writeHead(200, {'Content-Type': 'text/html'});
 							res.end("setUpdateStatus('"+JSON.stringify(rows)+"')");
+						}
 						else 
 						{
 							setTimeout(function(){
@@ -47,6 +50,7 @@ http.createServer(function (req, res) {
 					}
 					else 
 					{
+							res.writeHead(200, {'Content-Type': 'text/html'});
 							res.end('setUpdateStatus("error")');
 					}
 				});
