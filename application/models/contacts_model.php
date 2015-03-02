@@ -958,7 +958,7 @@ class Contacts_model extends Base_model implements InfModel
 	
 	  $ret_=array();
 	  ### get all friends
-	$s_qry =  " SELECT  group_concat(DISTINCT u.id separator ',') as user_id
+	$s_qry =  " SELECT  CONCAT_WS(',',DISTINCT u.id,u.s_first_name,u.s_last_name)
 							  FROM 
 							  {$this->db->USER_CONTACTS} c, {$this->db->USERS} u
 							  WHERE 
@@ -971,7 +971,7 @@ class Contacts_model extends Base_model implements InfModel
 							  
 	   ";
 	  $result=$this->db->query($s_qry)->result_array();
-	  
+	  print_r($result);
 	  $friends_id_str = $result[0]['user_id'].', '.$i_user_id;
 	  
 	  
