@@ -1558,6 +1558,24 @@ echo json_encode( array('success'=>'true'));
 					'invitation_sent_date' => get_db_datetime()
 				);
 				$this->db->insert('cg_church_member_invitation', $invited_member);
+				$this->load->model('mail_contents_model');
+				$mail_info = $this->mail_contents_model->get_by_name("church_community_invitation_mail");
+
+				$subject = htmlspecialchars_decode($mail_info['subject'], ENT_QUOTES);
+				$body = htmlspecialchars_decode($mail_info['body'], ENT_QUOTES);
+				$body = sprintf3( $body, array('churchurl'=> base_url().'church_registration_by_email/'.$_SESSION['logged_church_id'].'/1'
+                           ) );
+						   
+				$to      = $invite_val[$i][1];
+				$subject = $subject;
+				$message = $body;
+				$headers = 'From: admin@cogtime.com' . "\r\n" .
+					'Reply-To: admin@cogtime.com' . "\r\n" .
+					'X-Mailer: PHP/' . phpversion() . "\r\n";
+				$headers  .= 'MIME-Version: 1.0' . "\r\n";
+				$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+				mail($to, $subject, $message, $headers);
+				
 				}
 			  }
 			}
