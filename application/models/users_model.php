@@ -780,6 +780,7 @@ class Users_model extends Base_model implements InfModel {
                     $ret_["s_password"] = $row->s_password;
                     $ret_["s_profile_url_suffix"] = $row->s_profile_url_suffix;
                     $ret_["s_chat_display_name"] = $row->s_chat_display_name;
+                    $ret_["s_tweet_bg_img"] = $row->s_tweet_bg_img;
                         //$ret_["s_profile_photo"] = $row->s_profile_photo;
                         //$res_["e_gender"]
                     ////////saving logged in user data into session////
