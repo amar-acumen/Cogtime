@@ -148,7 +148,7 @@ class Church_public extends Base_controller
 
 
             if ($this->input->post('is_submitted') == 'Y') {
-                //pr($_POST);exit;
+                pr($_POST);exit;
 
                 $posted["title"] = trim($this->input->post("title"));
                 $posted["txt_email"] = trim($this->input->post("txt_email"));
@@ -338,7 +338,8 @@ class Church_public extends Base_controller
 						if (isset($_SESSION['invited_member_id']) && $_SESSION['invited_member_id'] != '')
 						{
 							$invited_member = array(
-								'status' => 1 
+								'status' => 1,
+								'invitation_sent_date' => get_db_datetime()
 							);
 							$this->db->update('cg_church_member_invitation', $invited_member, array('id' => $_SESSION['invited_member_id']));
 						}
