@@ -11,7 +11,7 @@
         <p>Group Name:<a href="<?=base_url()?>church-prayer-group/<?=$val['i_prayer_group_id']?>">
           <?=$val['s_group_name']?>
           </a> </p>
-        <p>Invitee Name:<a href="<?=get_public_profile_url($val['i_user_id'], $val['member_name'])?>">
+        <p>Invitee Name:<a href="<?=base_url() . "profile/" . $val['i_user_id'] . "/" . my_url($val['member_name']) . ".html"?>">
           <?=$val['member_name']?>
           </a></p>
         <p> Requested On-

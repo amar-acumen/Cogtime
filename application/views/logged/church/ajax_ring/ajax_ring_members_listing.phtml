@@ -12,7 +12,7 @@ if(count($arr_rings))
         }    
         else
         {
-            $profile_link = get_public_profile_url($member['post_owner_user_id'],$member['profile_name']);
+            $profile_link = base_url() . "profile/" . $member['post_owner_user_id'] . "/" . my_url($member['profile_name']) . ".html";
         }
             
             
