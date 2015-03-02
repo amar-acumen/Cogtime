@@ -3425,7 +3425,7 @@ function get_ring_category_name_by_id($id) {
 
     $ci = get_instance();
     $res = $ci->db->query("SELECT s_category_name
-								 FROM {$ci->db->RING_CAT} AS subcat WHERE  subcat.id = {$id}");
+								 FROM {$ci->db->RING_CAT} AS subcat WHERE  subcat.id = '{$id}'");
     $info = $res->result_array();
     return $info[0]['s_category_name'];
 }
