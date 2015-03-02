@@ -7,7 +7,7 @@ http.createServer(function (req, res) {
 
 	var url_parts = url.parse(req.url, true);
 	console.log(url_parts);
-	var tmp = function(cnt,req1, res1)
+	var tmp = function(cnt,req1, res1){
 				var connection = mysql.createConnection({
 				  host     : '103.227.62.106',
 				  user     : 'acumen',
