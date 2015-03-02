@@ -52,17 +52,17 @@ class Tweets extends Base_controller
             parent::_set_meta_keywords('');
         
             
-            parent::_add_js_arr( array( 'js/ddsmoothmenu.js',
+            parent::_add_js_arr( array( /*'js/ddsmoothmenu.js',
                                         'js/switch.js','js/animate-collapse.js',
                                         'js/lightbox.js','js/jquery-ui-1.8.2.custom.min.js',
                                         'js/stepcarousel.js',
-										'js/jquery.autofill.js',
+										'js/jquery.autofill.js',*/
 										'js/frontend/logged/tweets/tweets.js',
-										'js/tab.js'
+										//'js/tab.js'
                                         ));
                                         
-            parent::_add_css_arr( array('css/jquery-ui-1.8.2.custom.css',
-                                          'css/dd.css') );
+           // parent::_add_css_arr( array('css/jquery-ui-1.8.2.custom.css',
+           //                               'css/dd.css') );
             $i_user_id = intval(decrypt($this->session->userdata('user_id')));
 			
 			 $this->session->set_userdata('search_condition','');
@@ -159,16 +159,16 @@ class Tweets extends Base_controller
             parent::_set_meta_keywords('');
         
             
-            parent::_add_js_arr( array( 'js/ddsmoothmenu.js',
+            parent::_add_js_arr( array( /*'js/ddsmoothmenu.js',
                                         'js/switch.js','js/animate-collapse.js',
                                         'js/lightbox.js','js/jquery-ui-1.8.2.custom.min.js',
-                                        'js/stepcarousel.js',
+                                        'js/stepcarousel.js',*/
 										'js/frontend/logged/tweets/tweets.js',
-										'js/tab.js'
+										//'js/tab.js'
                                         ));
                                         
-            parent::_add_css_arr( array('css/jquery-ui-1.8.2.custom.css',
-                                          'css/dd.css') );
+//            parent::_add_css_arr( array('css/jquery-ui-1.8.2.custom.css',
+//                                          'css/dd.css') );
             $i_user_id = intval(decrypt($this->session->userdata('user_id')));
 			$this->session->set_userdata('search_condition','');
 			$data['pagination_per_page'] = $this->pagination_per_page;
@@ -263,16 +263,16 @@ class Tweets extends Base_controller
             parent::_set_meta_keywords('');
         
             
-            parent::_add_js_arr( array( 'js/ddsmoothmenu.js',
+            parent::_add_js_arr( array( /*'js/ddsmoothmenu.js',
                                         'js/switch.js','js/animate-collapse.js',
                                         'js/lightbox.js','js/jquery-ui-1.8.2.custom.min.js',
-                                        'js/stepcarousel.js',
+                                        'js/stepcarousel.js',*/
 										'js/frontend/logged/tweets/tweets.js',
-										'js/tab.js'
+										//'js/tab.js'
                                         ));
                                         
-            parent::_add_css_arr( array('css/jquery-ui-1.8.2.custom.css',
-                                          'css/dd.css') );
+//            parent::_add_css_arr( array('css/jquery-ui-1.8.2.custom.css',
+//                                          'css/dd.css') );
             $i_user_id = intval(decrypt($this->session->userdata('user_id')));
 			$this->session->set_userdata('search_condition','');
 			$data['pagination_per_page'] = $this->pagination_per_page;
