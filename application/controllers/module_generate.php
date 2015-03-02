@@ -121,7 +121,6 @@ class Module_generate extends CI_Controller {
                     // logged
                     'js/frontend/public_profile.js',
                     'js/frontend/wall/wall_helper.js'
-
                 );
                 $js = '';
                 foreach($files_js as $data){
