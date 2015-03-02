@@ -148,7 +148,7 @@ class Church_public extends Base_controller
 
 
             if ($this->input->post('is_submitted') == 'Y') {
-                pr($_POST);exit;
+                //pr($_POST);exit;
 
                 $posted["title"] = trim($this->input->post("title"));
                 $posted["txt_email"] = trim($this->input->post("txt_email"));
@@ -306,8 +306,7 @@ class Church_public extends Base_controller
                     // echo $USER_ID; exit;
 
                     if ($USER_ID > 0) {
-
-
+					
                         ## inserting into user alert table
                         $this->load->model('user_alert_model');
                         $user_alert['i_user_id'] = $USER_ID;
@@ -335,6 +334,8 @@ class Church_public extends Base_controller
                             );
                         }
                          $this->db->insert('cg_church_member', $data); 
+						 echo '========'.$_SESSION['invited_member_id'];
+
 						if (isset($_SESSION['invited_member_id']) && $_SESSION['invited_member_id'] != '')
 						{
 							$invited_member = array(
@@ -343,6 +344,7 @@ class Church_public extends Base_controller
 							);
 							$this->db->update('cg_church_member_invitation', $invited_member, array('id' => $_SESSION['invited_member_id']));
 						}
+						
                         ## end ##
                         //EMAIL SENDING CODE.[start]
 						 $this->load->helper('html');
