@@ -7,7 +7,7 @@ http.createServer(function (req, res) {
 
 	var url_parts = url.parse(req.url, true);
 	console.log(url_parts);
-	var tmp = function(cnt){
+	var tmp = function(cnt,req1, res1)
 				var connection = mysql.createConnection({
 				  host     : '103.227.62.106',
 				  user     : 'acumen',
@@ -39,8 +39,8 @@ http.createServer(function (req, res) {
 						{
 							setTimeout(function(){
 								cnt--;
-								tmp(cnt);
-							},1000);
+								tmp(cnt,req1,res1);
+								},1000);
 						}
 
 						//res.end('setUpdateStatus('+JSON.stringify(statusList)+')');
@@ -53,7 +53,7 @@ http.createServer(function (req, res) {
 
 				connection.end();
    }
-   tmp(20);
+   tmp(20,req,res);
   
 }).listen(1337, 'web.acumensofttech.com');
 console.log('Server running at http://127.0.0.1:1337/');
