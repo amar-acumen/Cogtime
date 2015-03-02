@@ -53,7 +53,7 @@ http.createServer(function (req, res) {
 
 				connection.end();
    }
-   tmp(20,req,res);
+   tmp(10,req,res);
   
 }).listen(1337, 'web.acumensofttech.com');
 console.log('Server running at http://127.0.0.1:1337/');
