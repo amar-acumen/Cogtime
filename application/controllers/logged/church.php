@@ -1543,15 +1543,22 @@ echo json_encode( array('success'=>'true'));
 			if($_POST)
 			{
 				if(!empty($_POST['val_arr'])) {
-				$post_val_array = $_POST['val_arr'];
-				$invited_member = array(
-					'name' => $post_val_array[0],
-					'email' => $post_val_array[1],
+				foreach( $_POST['val_arr'] As $key => $val) {
+					$invite_val[] = explode('_',$val);
+				
+				}
+				//echo '<pre>';
+				//pr($invite_val);
+				$invite_val_count = count($invite_val);
+				for($i=0; $i<$invite_val_count; $i++){
+					$invited_member = array(
+					'name' => $invite_val[$i][0],
+					'email' => $invite_val[$i][1],
+					'church_id' => $_SESSION['logged_church_id'],
 					'invitation_sent_date' => get_db_datetime()
 				);
-			$this->db->insert('cg_church_member_invitation', $invited_member);	
-			$VIEW = "logged/church/church_member.phtml";
-			parent::_render($data, $VIEW);
+				}
+				$this->db->insert('cg_church_member_invitation', $invited_member);
 				}
 			}
 			else
