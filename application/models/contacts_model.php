@@ -1003,7 +1003,7 @@ class Contacts_model extends Base_model implements InfModel
 		  $common=array();
 		  foreach($rest_user_ID_arr as $k=> $val){
 			  
-			 $mutual_ids =  " SELECT  group_concat(DISTINCT u.id separator ',') as user_id
+			 $mutual_ids =  " SELECT  CONCAT_WS(',',u.id,u.s_first_name,u.s_last_name,u.e_gender,u.s_profile_photo) as user_id
 								FROM 
 								{$this->db->USER_CONTACTS} c, {$this->db->USERS} u
 								WHERE 
