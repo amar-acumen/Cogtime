@@ -76,7 +76,7 @@
         </span>
         
         
-        <div style="float:right;">
+        <div style="float:left;">
         	 <div class="privacy-select">
         <label><input type="radio" name="privacy" value="1" onclick="$('.privacy-drop').slideUp();">Private</label><label><input type="radio" name="privacy" value="2" onclick="$('.privacy-drop').slideUp();" checked>Public to all</label>
          <label> <input type="radio" name="privacy" value="3" onclick="$('.privacy-drop').slideDown();">Public to selected Members</label></div>
@@ -87,7 +87,7 @@
 										<option value="<?=$v->member_id?>" ><?=$v->member_name?></option> 
 									 <?php }?></select></div>
         </div>
-        
+        <div class="clear"></div>
         </div>
        
         <div class="post-update"><input type="submit" class="post-btn" value="Post"></div>
