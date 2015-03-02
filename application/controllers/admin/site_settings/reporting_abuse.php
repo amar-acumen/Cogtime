@@ -274,7 +274,7 @@ class Reporting_abuse extends Admin_base_Controller
 					  $sql = " UPDATE   cg_user_blogs SET `i_isenabled` = {$i_status} WHERE `id` = {$id}"; 
 		  			  $this->db->query($sql);
 					  $blog_info = get_blog_detail_by_id($id);
-					  $user_name = get_username_by_id($blog_info['i_user_id']);
+					  $user_name = $blog_info['s_profile_name'];
 					  $user_email =get_useremail_by_id($blog_info['i_user_id']); 
 					  
 					
