@@ -85,27 +85,7 @@
       </div>
       <div class="clr"></div>
       
-      <form id="frmUploadTweetPhoto"  method="post" action="<?= base_url() . 'logged/my_photos/edit_twt_bg_img' ?>" onsubmit="return false;" enctype="multipart/form-data">
-          <div class="lightbox edit-bg-image" style="width:480px;">
-              <div class="close"><a href="javascript:void(0)" onclick="
-                      hide_dialog()"><img src="<?php echo base_url() ?>images/close.png" alt="" width="24" height="24"/></a></div>
-              <div class="top"><div>&nbsp;</div></div>
-              <div class="mid">
-                  <div class="heading"><div class="left"><h4><img src="<?php echo base_url() ?>images/icons/photo.png" alt="" /> Upload  Photo </h4></div></div>
-                  <div class="frm_box">
-                      <div class="lable01">Browse Photo:</div> 
-                      <div class="field01">                       
-                          <input type="file" name="s_photo" id="s_photo" />
-                          <span id="err_photo" class="error-message"></span>  
-                      </div>
-                      <div class="clr"></div>
-                      <center><input name="add_mphoto_btn" id="add_mphoto_btn" type="submit" value="Upload" class="btn" /></center>
-                  </div>
-
-              </div>
-              <div class="bot"><div>&nbsp;</div></div>
-          </div>
-      </form>
+      <?php include(APPPATH . "views/logged/my_tweet/edit_background.phtml"); ?>
 </div>
 <!-- /CONTENT SECTION -->
 <div class="clr"></div>
