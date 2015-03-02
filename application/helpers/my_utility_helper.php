@@ -3944,7 +3944,7 @@ function get_churchpost_detail_by_id($id) {
 
 function get_blog_detail_by_id($id) {
     $ci = & get_instance();
-    $q = $ci->db->query("select * from cg_user_blogs where id=" . $id);
+    $q = $ci->db->query("select ub.* ,CONCAT(u.s_first_name,' ',u.s_last_name) AS s_profile_name  from cg_user_blogs AS ub , cg_users AS u where ub.id='".$id."' AND u.id = ub.i_user_id" );
     $res = $q->result_array();
 //pr($res,1);
     return $res[0];

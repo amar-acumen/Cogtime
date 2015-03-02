@@ -74,7 +74,7 @@ class Public_profile extends Base_controller
 										'js/jquery.autofill.js',
 										'js/jquery.bxSlider.js',
 										'js/jquery.lightbox.js',*/
-										'js/frontend/public_profile.js',
+										//'js/frontend/public_profile.js',
 										'js/frontend/wall/wall_helper.js',
 										'js/frontend/logged/my_friends.js',
 										'js/frontend/logged/my_net_pals.js',
@@ -84,7 +84,8 @@ class Public_profile extends Base_controller
                                        // 'js/jquery.fancybox.js',
 									//	'js/stepcarousel.js'
                                         ));
-                                        
+
+
             parent::_add_css_arr( array(//'css/jquery-ui-1.8.2.custom.css',
                                         //'css/jquery.fancybox.css',
 										'css/skin.css') );

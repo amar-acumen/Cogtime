@@ -7,7 +7,7 @@ http.createServer(function (req, res) {
 
 	var url_parts = url.parse(req.url, true);
 	console.log(url_parts);
-	var tmp = function(cnt){
+	var tmp = function(cnt,req1, res1){
 				var connection = mysql.createConnection({
 				  host     : '103.227.62.106',
 				  user     : 'acumen',
@@ -20,7 +20,7 @@ http.createServer(function (req, res) {
 					function(err, rows, fields) {
 					if (!err)
 					{
-						res.writeHead(200, {'Content-Type': 'application/json'});
+						
 						//console.log(typeof(rows)+'sdsds');
 						//var statusList = {"totalRecords": 4 };
 						//res.write(JSON.stringify(statusList, 0, 4));
@@ -33,27 +33,31 @@ http.createServer(function (req, res) {
 							)
 								nonZeroFound = true;
 						}
-						if(nonZeroFound || cnt<=0)
+						/*if(nonZeroFound || cnt<=0)
+						{
+							res.writeHead(200, {'Content-Type': 'text/plain'});
 							res.end("setUpdateStatus('"+JSON.stringify(rows)+"')");
+						}
 						else 
 						{
 							setTimeout(function(){
 								cnt--;
-								tmp(cnt);
-							},1000);
-						}
+								tmp(cnt,req1,res1);
+								},1000);
+						}*/
 
 						//res.end('setUpdateStatus('+JSON.stringify(statusList)+')');
 					}
 					else 
 					{
+							res.writeHead(200, {'Content-Type': 'text/plain'});
 							res.end('setUpdateStatus("error")');
 					}
 				});
 
 				connection.end();
    }
-   tmp(20);
+   tmp(1,req,res);
   
 }).listen(1337, 'web.acumensofttech.com');
 console.log('Server running at http://127.0.0.1:1337/');

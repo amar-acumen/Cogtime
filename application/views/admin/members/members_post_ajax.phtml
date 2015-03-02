@@ -88,7 +88,7 @@ echo '<object width="' . $width . '" height="' . $height . '"><param name="movie
 		<?php
 		if(isset($data_arr->wall_owner_id))
 		{
-		echo get_username_by_id($data_arr->wall_owner_id)."'s Wall";
+		echo $data_arr->s_profile_name."'s Wall";
 		}
 		else{
 		echo "Own Wall";
@@ -372,7 +372,7 @@ echo '<object width="' . $width . '" height="' . $height . '"><param name="movie
 		<?php
 	/*	if(isset($data_arr->wall_owner_id))
 		{
-		echo get_username_by_id($data_arr->wall_owner_id)."'s Wall";
+		
 		}
 		else{
 		echo "Own Wall";
