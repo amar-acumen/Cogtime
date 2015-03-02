@@ -1237,7 +1237,7 @@ class Ring_home extends Base_controller
 		
 		$msgarr	= array('s_type'=>'ring_join_request', 'i_referred_media_id'=>$ringid,'i_receiver_id'=>$uid);
 		
-		$this->my_ring_model->accept_invitation($where,$arr,1,$msgarr);
+		//$this->my_ring_model->accept_invitation($where,$arr,1,$msgarr);
 		
 		if($type == 'recv'){
 			ob_start();
