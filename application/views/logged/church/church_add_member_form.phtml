@@ -170,7 +170,7 @@ else{
 			 data: {'val_arr': val_arr},
 			 success: function(data){
 				hideBusyScreen();
-				showUIMsg(data.msg);				
+				showUIMsg('Mail sent successfully');				
 				window.location.href="<?php echo base_url(); ?>logged/church/church_invited_member/";
 			 }
 		 });
