@@ -8,10 +8,10 @@
 				 $comment_txt = $val['s_contents'];
 				 
 				 if($val['if_already_friend'] == 'true' || $val['already_added_netpal'] == 'true'){
-				  	$profile_link = get_profile_url($val['i_user_id'],$val['s_profile_name']);
+				  	$profile_link = base_url() . "profile/" . $val['i_user_id'] . "/" . my_url($val['s_profile_name']) . ".html";
 				  }else
 				  {
-					 $profile_link = get_public_profile_url($val['i_user_id'],$val['s_profile_name']); 
+					 $profile_link = base_url() . "profile/" . $val['i_user_id'] . "/" . my_url($val['s_profile_name']) . ".html"; 
 				  }
 				 
 ?>                            

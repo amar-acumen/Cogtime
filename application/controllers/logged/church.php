@@ -1558,6 +1558,8 @@ echo json_encode( array('success'=>'true'));
 					'invitation_sent_date' => get_db_datetime()
 				);
 				$this->db->insert('cg_church_member_invitation', $invited_member);
+				$id = $this->db->insert_id();
+				
 				$this->load->model('mail_contents_model');
 				$mail_info = $this->mail_contents_model->get_by_name("church_community_invitation_mail");
 
@@ -1574,7 +1576,7 @@ echo json_encode( array('success'=>'true'));
 					'X-Mailer: PHP/' . phpversion() . "\r\n";
 				$headers  .= 'MIME-Version: 1.0' . "\r\n";
 				$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
-				echo $body;
+				//echo $body;
 				mail($to, $subject, $message, $headers);
 				//echo json_encode(array('success'=>true,'arr_messages'=>$arr_messages,'msg'=>'Mail sent successfully'));
 				}
