@@ -32,7 +32,7 @@ $max_file_size = $max_file_size * 1024 * 1024;
                         <?php
                         include(APPPATH . "views/logged/my_tweet/search_panel.phtml");
                         $user_id = intval(decrypt($this->session->userdata('user_id')));
-                        $bg_img_name = get_tweet_bg_img_by_id($user_id);
+                        $bg_img_name = $_SESSION['s_tweet_bg_img'];
                         $bg_img_arr = explode('.', $bg_img_name);
                         $bg_img_name = $bg_img_arr[0];
                         $ext = $bg_img_arr[1];
