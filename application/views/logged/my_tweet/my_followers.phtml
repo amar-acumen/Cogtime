@@ -27,36 +27,40 @@
                              	<?php include(APPPATH ."views/logged/my_tweet/search_panel.phtml");?>
                                 
                                 <!--tweeter header start -->  
-                                <div style="background:url(images/tweeter-profile-bg.jpg) no-repeat 0 0;" class="tweeter-profile-header">
-                                	<?php /*?<div class="follow-section">
-                                    	><span class="follow-btn"><input name="Follow" type="button" value="Follow"></span>
-                                    </div><?php */?>
-                                    <div class="clr"></div>
-                                    
-                                   <?php include(APPPATH ."views/logged/my_tweet/tweet_user_detail.phtml");?>
-                                </div> 
+                                <!--tweeter header start -->  
+                                <?php
+                                  $user_id = intval(decrypt($this->session->userdata('user_id')));
+                                  $bg_img_name = $_SESSION['s_tweet_bg_img'];
+                                  $bg_img_arr = explode('.', $bg_img_name);
+                                  $bg_img_name = $bg_img_arr[0];
+                                  $ext = $bg_img_arr[1];
+                                  //print_r($bg_img_name);
+                                  $img_url = base_url() . 'uploads/user_photos/' . $bg_img_name . '-big.' . $ext;
+                                  if (empty($bg_img_name)) {
+                                  ?>
+                                  <!--tweeter header start -->  
+                                  <div style="background:url(images/tweeter-profile-bg.jpg) no-repeat 0 0;" class="tweeter-profile-header">
+
+                                  <div class="clr"></div>
+                                  <div class="edit_twtr_pic" style="display: none"><a href="javascript:void(0);" onclick="show_dialog('edit-bg-image');"><h3>Edit Background Image</h3></a></div>
+                                  <?php include(APPPATH . "views/logged/my_tweet/tweet_user_detail.phtml"); ?>
+                                  </div> 
+                                  <?php } else { ?>
+                                  <div style="background:url(<?php echo $img_url; ?>) no-repeat 0 0;" class="tweeter-profile-header">
+
+                                  <div class="clr"></div>
+                                  <div class="edit_twtr_pic" style="display: none"><a href="javascript:void(0);" onclick="show_dialog('edit-bg-image');"><h3>Edit Background Image</h3></a></div>
+                                  <?php include(APPPATH . "views/logged/my_tweet/tweet_user_detail.phtml"); ?>
+                                  </div> 
+                                <?php 
+                                } 
+                                ?>
+                                <!--tweeter header end --> 
                                 <!--tweeter header end --> 
                                 <!--tweeter page nav start --> 
                                  <?php include(APPPATH ."views/logged/my_tweet/my_twitter_menu.phtml");?>
                                 <!--tweeter page nav end -->  
-                                <!--write tweet section start -->
-                                <?php /*?><div class="write-tweet">
-                                	<form action="" method="post" enctype="multipart/form-data">
-                                    	<span class="tweet-top-curve"></span>
-                                        <div class="tweet-mid-curve"><textarea  class="tweet-comment-box" id="ta_post_tweet" 
-                                        name="ta_post_tweet" onfocus="if(this.value=='Max 140 Characters')this.value='';" 
-                                            onblur="if(this.value=='')this.value='Max 140 Characters';"  >Max 140 Characters</textarea></div>
-                                            
-                                         <input type="hidden" id="hidden_inputbox" />
-                                        <span class="tweet-bot-curve"></span>
-                                        <input name="Cancel" type="button" value="Cancel" class="tweetCancel">
-                                        <input name="" type="button" value="Tweet" class="tweetSubmit" onclick="post_tweet_text('all_tweet')">
-                                    </form>
-                     
-      
-                                    <div class="clr"></div>
-                                </div><?php */?>
-                                <!--write tweet section end -->
+                                
                             	<div id="new_tweet_contents"><?=$tweets_ajax_content?></div>  
                              </div>
                             <!--my tweeter profile end -->  
@@ -82,6 +86,7 @@
             <div id="bot_corner">&nbsp;</div>
       </div>
       <div class="clr"></div>
+      <?php include(APPPATH . "views/logged/my_tweet/edit_background.phtml"); ?>
 </div>
 <!-- /CONTENT SECTION -->
 <div class="clr"></div>
@@ -97,6 +102,15 @@
 			
 $(document).ready(function(){
 		$("#searchTweeter").autofill({'value':"Type Keyword"}); 
+
+    $(".tweeter-profile-header").hover(
+            function() {
+                $(".edit_twtr_pic").show();
+            },
+            function() {
+                $(".edit_twtr_pic").hide();
+            }
+    );
 	});
 
 </script>

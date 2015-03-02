@@ -39,7 +39,7 @@
 																	  $profile_link = get_profile_url($d_val['post_owner_user_id'],$d_val['s_profile_name']);
 																}else
 																{
-																   $profile_link = get_public_profile_url($d_val['post_owner_user_id'],$d_val['s_profile_name']); 
+																   $profile_link = base_url() . "profile/" . $d_val['post_owner_user_id'] . "/" . my_url($d_val['s_profile_name']) . ".html"; 
 																}
 											 ?>
                                               <div class="" >
@@ -168,7 +168,7 @@
 																	  $profile_link = get_profile_url($f_val['post_owner_user_id'],$f_val['s_profile_name']);
 																}else
 																{
-																   $profile_link = get_public_profile_url($f_val['post_owner_user_id'],$f_val['s_profile_name']); 
+																   $profile_link = base_url() . "profile/" . $f_val['post_owner_user_id'] . "/" . my_url($f_val['s_profile_name']) . ".html"; 
 																}
 											 ?>
                                                 <div class="view-section"> 

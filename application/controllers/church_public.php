@@ -101,10 +101,11 @@ class Church_public extends Base_controller
 
     } // end of index   
     
-  public function church_registration_by_email($churchid,$byrequest)
+  public function church_registration_by_email($churchid,$byrequest,$invited_member_id)
   {
     $_SESSION['current_church_id'] = $churchid;
     $_SESSION['byrequest'] = $byrequest;
+	$_SESSION['invited_member_id'] = $invited_member_id;
     header('location:'.base_url().'church_registration/');
     exit;
   }
@@ -334,7 +335,13 @@ class Church_public extends Base_controller
                             );
                         }
                          $this->db->insert('cg_church_member', $data); 
-
+						if (isset($_SESSION['invited_member_id']) && $_SESSION['invited_member_id'] != '')
+						{
+							$invited_member = array(
+								'status' => 1 
+							);
+							$this->db->update('cg_church_member_invitation', $invited_member, array('id' => $_SESSION['invited_member_id']));
+						}
                         ## end ##
                         //EMAIL SENDING CODE.[start]
 						 $this->load->helper('html');

@@ -6,13 +6,15 @@
 
 
 <script type="text/javascript">
+		
 		var g_sessionid = '';
 		function setUpdateStatus(obj)
 		{
 			var g_statusObj = JSON.parse(obj);
 			//alert(g_statusObj);
 			console.log(g_statusObj);
-		
+			if(typeof g_statusObj!="object")
+				return;
 			for(var v in g_statusObj)
 			{
 				if(g_statusObj[v].item_type == 'notification' && g_statusObj[v].countrow>0)
@@ -37,7 +39,8 @@
 					//get_system_reminders_at_remind_me_time();
 				}			
 			}
-
+			refreshing_node = false;
+			check();
 		}
 		
 		<?php
@@ -54,9 +57,9 @@
 				//console.log(obj.attr('id'));
 				//alert('1'+obj.attr('id'));
 				//console.log('<?=$_SESSION['display_username']?>');
-				obj.attr('src','http://web.acumensofttech.com:1337/?user=<?php echo decrypt($_SESSION['user_id'])?>&displayuser=<?=str_replace(' ','',$_SESSION['display_username'])?>');
+				obj.attr('src','http://web.acumensofttech.com:2337/?user=<?php echo decrypt($_SESSION['user_id'])?>&displayuser=<?=str_replace(' ','',$_SESSION['display_username'])?>');
 				ids=obj.attr('id');
-				obj.load(function(){
+				/*obj.load(function(){
 				console.log('1'+refreshing_node);
 						refreshing_node = false;
 						setTimeout(function() {
@@ -64,9 +67,9 @@
 	                    },1000);
 
 				
-				});
+				});*/
 				//obj.load(function(){alert(1);});
-				$('script[src*="http://web.acumensofttech.com:1337/?user="]').remove();
+				
 				//console.log(ids);
 				if(!refreshing_node)
 				{
@@ -74,18 +77,22 @@
 					try{clearTimeout(refreshingTimer);}catch(eeeee){}
 					refreshingTimer = setTimeout(function(){
 						refreshing_node = false;
-					},35000);
+						check();	                    
+					},20000);
+					$('script[src*="http://web.acumensofttech.com:2337/?user="]').remove();
 					$('head').append(obj);
 				}
 			};
 			
 			$(document).ready(function()
-			{
-				check();
+			{alert(1);
+				check();alert(2);
 			});
 			<?php
 		}
 		?>
+		
+
 		
 	</script>
 <!-- for Facebook -->
