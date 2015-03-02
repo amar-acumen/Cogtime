@@ -466,6 +466,10 @@ class Base_controller extends CI_Controller {
             'css/production.css' => array('media' => 'screen')
         );
 
+        if( ($this->session->userdata('loggedin') !='' || $this->session->userdata('loggedin')!=false )){
+           $default_css_arr['css/production_logged.css'] = array('media' => 'screen');
+        }
+
         # fix for "css_files" array...
         /* if( is_array($this->css_files) && count($this->css_files) ) {
           $this->css_files = array_merge($default_css_arr, $this->js_files);
