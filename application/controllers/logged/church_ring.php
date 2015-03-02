@@ -73,10 +73,10 @@ class Church_ring extends Base_controller
             parent::_set_meta_keywords('');
         
             
-            parent::_add_js_arr( array( 'js/ddsmoothmenu.js',
+            parent::_add_js_arr( array( /*'js/ddsmoothmenu.js',
                                         'js/switch.js','js/animate-collapse.js',
                                         'js/lightbox.js','js/jquery.dd.js','js/jquery-ui-1.8.2.custom.min.js',
-                                        'js/stepcarousel.js',
+                                        'js/stepcarousel.js',*/
 										'js/frontend/logged/tweets/tweet_utilities.js'
                                         ));
                                         
@@ -181,11 +181,11 @@ class Church_ring extends Base_controller
             parent::_set_meta_keywords('');
         
             
-            parent::_add_js_arr( array( 'js/ddsmoothmenu.js',
+            parent::_add_js_arr( array( /*'js/ddsmoothmenu.js',
                                         //'js/switch.js',
                                         'js/animate-collapse.js',
                                         'js/lightbox.js','js/jquery.dd.js','js/jquery-ui-1.8.2.custom.min.js',
-                                        'js/stepcarousel.js',
+                                        'js/stepcarousel.js',*/
 										'js/frontend/logged/events/my_events.js',
 										'js/frontend/logged/tweets/tweet_utilities.js',
 										'js/jquery.textCounter-min.js'
@@ -613,10 +613,10 @@ class Church_ring extends Base_controller
 		parent::_set_meta_keywords('');
                	parent::check_login(TRUE, '', array('1'));
             
-		parent::_add_js_arr( array( 'js/ddsmoothmenu.js',
+		parent::_add_js_arr( array( /*'js/ddsmoothmenu.js',
 									'js/animate-collapse.js',
 									'js/lightbox.js','js/jquery.dd.js','js/jquery-ui-1.8.2.custom.min.js',
-									'js/stepcarousel.js'
+									'js/stepcarousel.js'*/
 									));
 									
 		parent::_add_css_arr( array('css/jquery-ui-1.8.2.custom.css',
@@ -1019,10 +1019,10 @@ class Church_ring extends Base_controller
 		parent::_set_meta_keywords('');
 	
 		
-		parent::_add_js_arr( array( 'js/ddsmoothmenu.js',
+		parent::_add_js_arr( array( /*'js/ddsmoothmenu.js',
 									'js/animate-collapse.js',
 									'js/lightbox.js','js/jquery.dd.js','js/jquery-ui-1.8.2.custom.min.js',
-									'js/stepcarousel.js',
+									'js/stepcarousel.js',*/
 									'js/frontend/logged/events/my_events.js',
 									'js/frontend/logged/tweets/tweet_utilities.js',
 									'js/jquery.textCounter-min.js'
@@ -1494,10 +1494,10 @@ $this->email->message("$body");
             parent::_set_meta_keywords('');
         
             
-            parent::_add_js_arr( array( 'js/ddsmoothmenu.js',
+            parent::_add_js_arr( array(/* 'js/ddsmoothmenu.js',
                                         'js/switch.js','js/animate-collapse.js',
                                         'js/lightbox.js','js/jquery.dd.js','js/jquery-ui-1.8.2.custom.min.js',
-                                        'js/stepcarousel.js',
+                                        'js/stepcarousel.js',*/
 										'js/frontend/logged/tweets/tweet_utilities.js'
                                         ));
                                         
@@ -1595,14 +1595,14 @@ $this->email->message("$body");
 		parent::_set_meta_keywords('');
         
             
-		parent::_add_js_arr( array( 'js/ddsmoothmenu.js',
+		parent::_add_js_arr( array( /*'js/ddsmoothmenu.js',
 									'js/animate-collapse.js',
 									'js/lightbox.js','js/jquery.dd.js','js/jquery-ui-1.8.2.custom.min.js',
-									'js/stepcarousel.js'
+									'js/stepcarousel.js'*/
 									));
 									
-		parent::_add_css_arr( array('css/jquery-ui-1.8.2.custom.css',
-                                          'css/dd.css') );
+		/*parent::_add_css_arr( array('css/jquery-ui-1.8.2.custom.css',
+                                          'css/dd.css') );*/
 		//$data['ring_detail_arr'][0]	= $this->my_ring_model->get_by_id($ring_id);
 		$data['profile_id']	= intval(decrypt($this->session->userdata('user_id')));
 		
@@ -2052,14 +2052,16 @@ $this->email->message("$body");
 		parent::_set_meta_keywords('');
                	parent::check_login(TRUE, '', array('1'));
             
-		parent::_add_js_arr( array( 'js/ddsmoothmenu.js',
-									'js/animate-collapse.js',
-									'js/lightbox.js','js/jquery.dd.js','js/jquery-ui-1.8.2.custom.min.js',
-									'js/stepcarousel.js'
-									));
-									
-		parent::_add_css_arr( array('css/jquery-ui-1.8.2.custom.css',
-                                          'css/dd.css','css/church.css') );
+//		parent::_add_js_arr( array( 'js/ddsmoothmenu.js',
+//									'js/animate-collapse.js',
+//									'js/lightbox.js','js/jquery.dd.js','js/jquery-ui-1.8.2.custom.min.js',
+//									'js/stepcarousel.js'
+//									));
+//
+
+		parent::_add_css_arr( array(//'css/jquery-ui-1.8.2.custom.css',
+                                         //'css/dd.css',
+            'css/church.css') );
 									  
 	//	$this->session->set_userdata('where','');
 		
