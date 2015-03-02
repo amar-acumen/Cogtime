@@ -2320,7 +2320,7 @@ width: 89px;}
 .prayr-grp-edit .page-heading{ border-bottom:none; font-size:14px; padding-bottom:10px; margin-bottom:0;}
 .main-payer-section .prayr-grp-edit textarea{ height:60px; width:98%; padding-top:10px;}
 .prayr-grp-edit .page-heading span{ font-size:13px; letter-spacing:1px; cursor:pointer;}
-.privacy-select{ margin-top:15px; font-size:12px;}
+.privacy-select{ font-size:12px;}
 .privacy-select label{ margin-right:12px; margin-bottom:10px; display:inline-block; color:#3b3b3b;}
 .privacy-select label input[type="radio"]{ margin-right:5px; float:left;}
 
