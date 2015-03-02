@@ -111,7 +111,8 @@ if((jQuery('#name').val() != '' && jQuery('#email').val() == '') || (jQuery('#na
 }
 else if(jQuery('#name').val() != '' && jQuery('#email').val() != '')
 {
-	val_arr.push(jQuery('#name').val())+','+val_arr.push(jQuery('#email').val());
+	val_arr.push(jQuery('#name').val()+'_'+jQuery('#email').val());
+	console.log(val_arr);
 }
 if((jQuery('#name1').val() != '' && jQuery('#email1').val() == '') || (jQuery('#name1').val() == '' && jQuery('#email1').val() != '')) {
 	e_flag=1;
@@ -120,7 +121,9 @@ if((jQuery('#name1').val() != '' && jQuery('#email1').val() == '') || (jQuery('#
 }
 else if (jQuery('#name1').val() != '' && jQuery('#email1').val() != '')
 {
-	val_arr.push(jQuery('#name1').val())+','+val_arr.push(jQuery('#email1').val());
+
+	val_arr.push(jQuery('#name1').val()+'_'+jQuery('#email1').val());
+	console.log(val_arr);
 }
 if((jQuery('#name2').val() != '' && jQuery('#email2').val() == '') || (jQuery('#name2').val() == '' && jQuery('#email2').val() != '')) {
 	e_flag=1;
@@ -129,7 +132,7 @@ if((jQuery('#name2').val() != '' && jQuery('#email2').val() == '') || (jQuery('#
 }
 else if (jQuery('#name2').val() != '' && jQuery('#email2').val() != '')
 {
-	val_arr.push(jQuery('#name2').val())+','+val_arr.push(jQuery('#email2').val());
+	val_arr.push(jQuery('#name2').val()+'_'+jQuery('#email2').val());
 }
 if((jQuery('#name3').val() != '' && jQuery('#email3').val() == '') || (jQuery('#name3').val() == '' && jQuery('#email3').val() != '')) {
 	e_flag=1;
@@ -138,7 +141,7 @@ if((jQuery('#name3').val() != '' && jQuery('#email3').val() == '') || (jQuery('#
 }
 else if(jQuery('#name3').val() != '' && jQuery('#email3').val() != '')
 {
-	val_arr.push(jQuery('#name3').val())+','+val_arr.push(jQuery('#email3').val());
+	val_arr.push(jQuery('#name3').val()+'_'+jQuery('#email3').val());
 }
 if((jQuery('#name4').val() != '' && jQuery('#email4').val() == '') || (jQuery('#name4').val() == '' && jQuery('#email4').val() != '')) {
 	e_flag=1;
@@ -147,7 +150,7 @@ if((jQuery('#name4').val() != '' && jQuery('#email4').val() == '') || (jQuery('#
 }
 else if(jQuery('#name4').val() != '' && jQuery('#email4').val() != '')
 {
-	val_arr.push(jQuery('#name4').val())+','+val_arr.push(jQuery('#email4').val());
+	val_arr.push(jQuery('#name4').val()+'_'+jQuery('#email4').val());
 }
 if(e_flag == 1)
 {
@@ -167,7 +170,7 @@ else{
 			 data: {'val_arr': val_arr},
 			 success: function(data){
 				hideBusyScreen(); 
-				//window.location.href="logged/church/church_add_member_form/";
+				window.location.href="logged/church/church_invited_member/";
 			 }
 		 });
 }

@@ -33,10 +33,9 @@ http.createServer(function (req, res) {
 							)
 								nonZeroFound = true;
 						}
-						if(nonZeroFound || cnt<=0)
+						/*if(nonZeroFound || cnt<=0)
 						{
-							res.writeHead(200, {'Content-Type': 'text/plain'});
-							res.end("setUpdateStatus('"+JSON.stringify(rows)+"')");
+							
 						}
 						else 
 						{
@@ -44,9 +43,9 @@ http.createServer(function (req, res) {
 								cnt--;
 								tmp(cnt,req1,res1);
 								},1000);
-						}
-
-						//res.end('setUpdateStatus('+JSON.stringify(statusList)+')');
+						}*/
+						res.writeHead(200, {'Content-Type': 'text/plain'});
+						res.end("setUpdateStatus('"+JSON.stringify(rows)+"')");
 					}
 					else 
 					{
