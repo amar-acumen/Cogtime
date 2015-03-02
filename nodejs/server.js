@@ -20,7 +20,7 @@ http.createServer(function (req, res) {
 					function(err, rows, fields) {
 					if (!err)
 					{
-						res.writeHead(200, {'Content-Type': 'application/json'});
+						res.writeHead(200, {'Content-Type': 'text/html'});
 						//console.log(typeof(rows)+'sdsds');
 						//var statusList = {"totalRecords": 4 };
 						//res.write(JSON.stringify(statusList, 0, 4));
