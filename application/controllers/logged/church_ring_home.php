@@ -59,10 +59,10 @@ class Church_ring_home extends Base_controller
             parent::_set_meta_keywords('');
         
             
-            parent::_add_js_arr( array( 'js/ddsmoothmenu.js',
+            parent::_add_js_arr( array( /*'js/ddsmoothmenu.js',
                                         'js/animate-collapse.js',
                                         'js/lightbox.js','js/jquery-ui-1.8.2.custom.min.js',
-                                        'js/stepcarousel.js',
+                                        'js/stepcarousel.js',*/
 										'js/frontend/logged/tweets/tweet_utilities.js',
 										'js/frontend/logged/rings/church_ring_helper.js'
                                         ));
@@ -678,11 +678,11 @@ class Church_ring_home extends Base_controller
 		parent::_set_meta_keywords('');
         
             
-		parent::_add_js_arr( array( 'js/ddsmoothmenu.js',
-									'js/switch.js','js/animate-collapse.js',
-									'js/lightbox.js','js/jquery.dd.js','js/jquery-ui-1.8.2.custom.min.js',
-									'js/stepcarousel.js'
-									));
+//		parent::_add_js_arr( array( 'js/ddsmoothmenu.js',
+//									'js/switch.js','js/animate-collapse.js',
+//									'js/lightbox.js','js/jquery.dd.js','js/jquery-ui-1.8.2.custom.min.js',
+//									'js/stepcarousel.js'
+//									));
 									
 		parent::_add_css_arr( array('css/jquery-ui-1.8.2.custom.css',
                                           'css/dd.css') );
@@ -939,16 +939,16 @@ class Church_ring_home extends Base_controller
             parent::_set_meta_keywords('');
         
             
-            parent::_add_js_arr( array( 'js/ddsmoothmenu.js',
+            parent::_add_js_arr( array( /*'js/ddsmoothmenu.js',
                                         'js/switch.js','js/animate-collapse.js',
                                         'js/lightbox.js','js/jquery.dd.js','js/jquery-ui-1.8.2.custom.min.js',
-                                        'js/stepcarousel.js',
+                                        'js/stepcarousel.js',*/
                                         //'js/frontend/logged/my_friends.js'
                                         'js/frontend/logged/message_box/my_message.js'
                                         ));
                                         
-            parent::_add_css_arr( array('css/jquery-ui-1.8.2.custom.css',
-                                        'css/dd.css') );
+//            parent::_add_css_arr( array('css/jquery-ui-1.8.2.custom.css',
+//                                        'css/dd.css') );
             
             
             /////////////////////////////////////////////
@@ -1157,16 +1157,18 @@ class Church_ring_home extends Base_controller
             
 		try
 		  {
-                     parent::_add_js_arr( array( 'js/ddsmoothmenu.js',
+                     parent::_add_js_arr( array(/* 'js/ddsmoothmenu.js',
                                         'js/switch.js','js/animate-collapse.js',
                                         'js/lightbox.js','js/jquery.dd.js','js/jquery-ui-1.8.2.custom.min.js',
                                         'js/stepcarousel.js',
-                                        //'js/frontend/logged/my_friends.js'
-                                        'js/frontend/logged/message_box/my_message.js','js/lightbox.js'
+                                        //'js/frontend/logged/my_friends.js'*/
+                                        'js/frontend/logged/message_box/my_message.js'
+                                        //'js/lightbox.js'
                                         ));
                                         
-            parent::_add_css_arr( array('css/jquery-ui-1.8.2.custom.css',
-                                        'css/dd.css','css/church.css') );
+            parent::_add_css_arr( array(//'css/jquery-ui-1.8.2.custom.css',
+                                        //'css/dd.css',
+                'css/church.css') );
                    // echo $i_media_id;
                    // die('ok');
 			  $data = $this->data; 
@@ -1349,14 +1351,14 @@ class Church_ring_home extends Base_controller
 		parent::_set_meta_keywords('');
         
             
-		parent::_add_js_arr( array( 'js/ddsmoothmenu.js',
-									'js/switch.js','js/animate-collapse.js',
-									'js/lightbox.js','js/jquery.dd.js','js/jquery-ui-1.8.2.custom.min.js',
-									'js/stepcarousel.js'
-									));
-									
-		parent::_add_css_arr( array('css/jquery-ui-1.8.2.custom.css',
-                                          'css/dd.css') );
+//		parent::_add_js_arr( array( 'js/ddsmoothmenu.js',
+//									'js/switch.js','js/animate-collapse.js',
+//									'js/lightbox.js','js/jquery.dd.js','js/jquery-ui-1.8.2.custom.min.js',
+//									'js/stepcarousel.js'
+//									));
+//
+//		parent::_add_css_arr( array('css/jquery-ui-1.8.2.custom.css',
+//                                          'css/dd.css') );
 		$data['ring_detail_arr'][0]	= $this->my_ring_model->get_by_id($ring_id);
 		$data['profile_id']	= intval(decrypt($this->session->userdata('user_id')));
 		$data['pagination_per_page'] = $this->pagination_per_page;
@@ -1629,16 +1631,17 @@ $this->db->update('cg_church_ring_post', $data);
             parent::_set_meta_keywords('');
         
             
-            parent::_add_js_arr( array( 'js/ddsmoothmenu.js',
+            parent::_add_js_arr( array( /*'js/ddsmoothmenu.js',
                                         'js/switch.js','js/animate-collapse.js',
                                         'js/lightbox.js','js/jquery-ui-1.8.2.custom.min.js',
-                                        'js/stepcarousel.js',
+                                        'js/stepcarousel.js',*/
 										'js/frontend/logged/tweets/tweet_utilities.js',
                                        
                                         ));
                                         
-            parent::_add_css_arr( array('css/church.css','css/jquery-ui-1.8.2.custom.css',
-                                          'css/dd.css') );
+            parent::_add_css_arr( array('css/church.css'//,'css/jquery-ui-1.8.2.custom.css',
+                                          //'css/dd.css'
+            ) );
             $i_user_id = intval(decrypt($this->session->userdata('user_id')));
             
              $this->session->set_userdata('search_condition','');

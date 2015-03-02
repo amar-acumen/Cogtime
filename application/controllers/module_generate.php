@@ -119,7 +119,8 @@ class Module_generate extends CI_Controller {
                     'js/jquery.bxslider.min.js',
                     'js/jquery.fancybox.js',
                     // logged
-                    'js/frontend/public_profile.js'
+                    'js/frontend/public_profile.js',
+                    'js/frontend/wall/wall_helper.js'
 
                 );
                 $js = '';
@@ -132,6 +133,27 @@ class Module_generate extends CI_Controller {
                 fwrite($jsfile, $js);
                 fclose($jsfile);
                 echo '<br/> production.js';
+
+
+                $files_logged_js = array(
+                    'js/frontend/logged/my_friends.js',
+                    'js/frontend/logged/my_net_pals.js',
+                    'js/frontend/logged/my_prayer_partner.js',
+                    'js/frontend/logged/message_box/my_message.js',
+                    // logged
+                    'js/frontend/public_profile.js'
+
+                );
+                $js_logged = '';
+                foreach($files_logged_js as $data){
+                    $js_logged .= $this->minify->js->min($data);
+                }
+                //$packer = new JavaScriptPacker($js, 62, true, true);
+                //$js = $packer->pack();
+                $jsfilelogged = fopen("js/logged.js", "w") or die("Unable to open file!");
+                fwrite($jsfilelogged, $js_logged);
+                fclose($jsfilelogged);
+                echo '<br/> logged.js';
             }
             // #################  Individual js min generate ###################
             if($js_indi){

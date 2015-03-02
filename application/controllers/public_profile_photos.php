@@ -174,12 +174,12 @@ class Public_profile_photos extends Base_controller
             parent::_set_meta_keywords('');
         
             
-            parent::_add_js_arr( array( 'js/ddsmoothmenu.js',
+            parent::_add_js_arr( array( /*'js/ddsmoothmenu.js',
                                         'js/lightbox.js',
                                         'js/tab.js',
                                         'js/jquery.autofill.js',
                                         'js/jquery.lightbox.js',
-										'js/stepcarousel.js',
+										'js/stepcarousel.js',*/
                                         'js/frontend/logged/my_friends.js',
                                         'js/frontend/logged/my_net_pals.js',
                                         'js/frontend/logged/my_prayer_partner.js',
@@ -189,7 +189,7 @@ class Public_profile_photos extends Base_controller
 										'js/frontend/logged/my_photo/photo_details.js',
                                         ));
                                         
-            parent::_add_css_arr( array('css/jquery-ui-1.8.2.custom.css') );
+          //  parent::_add_css_arr( array('css/jquery-ui-1.8.2.custom.css') );
                                         
                                         
             # adjusting header & footer sections [End]...
