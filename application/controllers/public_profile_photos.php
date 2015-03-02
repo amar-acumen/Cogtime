@@ -191,7 +191,7 @@ class Public_profile_photos extends Base_controller
                                         
           //  parent::_add_css_arr( array('css/jquery-ui-1.8.2.custom.css') );
                                         
-                                        
+
             # adjusting header & footer sections [End]...
             $data['page_view_type'] = 'public_account';
             

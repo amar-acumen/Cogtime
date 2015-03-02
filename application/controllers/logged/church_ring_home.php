@@ -1642,6 +1642,7 @@ $this->db->update('cg_church_ring_post', $data);
             parent::_add_css_arr( array('css/church.css'//,'css/jquery-ui-1.8.2.custom.css',
                                           //'css/dd.css'
             ) );
+
             $i_user_id = intval(decrypt($this->session->userdata('user_id')));
             
              $this->session->set_userdata('search_condition','');
