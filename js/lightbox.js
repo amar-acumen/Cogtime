@@ -1,4 +1,5 @@
 // JavaScript Document
+<!--
 var dialog = null;
 function show_dialog (id)
 { //alert(id);
@@ -25,3 +26,4 @@ function show_another_dialog (id)
 }
 
 
+//-->
