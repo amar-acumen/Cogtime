@@ -1,12 +1,14 @@
 $(document).ready(function() {
+    if($(".photo-big").length > 0){
+        $(".photo-big").lightbox({
+            fitToScreen: true,
+            scaleImages: true,
+            xScale: 1,
+            yScale: 1,
+            displayDownloadLink: true
+        });
+    }
 
-	$(".photo-big").lightbox({
-		fitToScreen: true,
-		scaleImages: true,
-		xScale: 1,
-		yScale: 1,
-		displayDownloadLink: true
-	});
 	
 	var slider1 =  $('#slider1').bxSlider({
 		displaySlideQty: 8, 

@@ -1,5 +1,5 @@
 // JavaScript Document
-<!-- 
+<!--
 var dialog = null;
 function show_dialog (id)
 { //alert(id);
