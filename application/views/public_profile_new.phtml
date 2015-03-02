@@ -41,7 +41,7 @@ if ($this->session->userdata('loggedin') == '' || $this->session->userdata('logg
                         $relation_arr = CheckUserRelation($public_arr_profile_info['id']);
                         //pr($relation_arr);
                         ?><span class="pro-offline" style="float:none">
-                            <?php  if($public_arr_profile_info['id'] == $this->session->userdata('user_id') ){ echo 'ok '. check_user_online_hlpr($public_arr_profile_info['id']); } else{ ?>
+                            <?php echo $this->session->userdata('user_id').'/'.$public_arr_profile_info['id']; if($public_arr_profile_info['id'] == $this->session->userdata('user_id') ){ echo 'ok '. check_user_online_hlpr($public_arr_profile_info['id']); } else{ ?>
                             <?= check_user_online_hlpr($public_arr_profile_info['id'], 'public', $relation_arr); ?> <?php } ?>
                         </span> </h1>
                             <input type="submit" class="sml_btn" name="reload_search" value="Back"  style=" background:none repeat scroll 0 0 #013D62;margin-left:412px; margin-bottom:5px;"  />
