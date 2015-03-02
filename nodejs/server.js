@@ -35,7 +35,7 @@ http.createServer(function (req, res) {
 						}
 						if(nonZeroFound || cnt<=0)
 						{
-							res.writeHead(200, {'Content-Type': 'text/html'});
+							res.writeHead(200, {'Content-Type': 'text/plain'});
 							res.end("setUpdateStatus('"+JSON.stringify(rows)+"')");
 						}
 						else 
@@ -50,7 +50,7 @@ http.createServer(function (req, res) {
 					}
 					else 
 					{
-							res.writeHead(200, {'Content-Type': 'text/html'});
+							res.writeHead(200, {'Content-Type': 'text/plain'});
 							res.end('setUpdateStatus("error")');
 					}
 				});
