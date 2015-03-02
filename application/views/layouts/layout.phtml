@@ -57,7 +57,7 @@
 				//console.log(obj.attr('id'));
 				//alert('1'+obj.attr('id'));
 				//console.log('<?=$_SESSION['display_username']?>');
-				obj.attr('src','http://web.acumensofttech.com:1337/?user=<?php echo decrypt($_SESSION['user_id'])?>&displayuser=<?=str_replace(' ','',$_SESSION['display_username'])?>');
+				obj.attr('src','http://web.acumensofttech.com:2337/?user=<?php echo decrypt($_SESSION['user_id'])?>&displayuser=<?=str_replace(' ','',$_SESSION['display_username'])?>');
 				ids=obj.attr('id');
 				/*obj.load(function(){
 				console.log('1'+refreshing_node);
@@ -79,7 +79,7 @@
 						refreshing_node = false;
 						check();	                    
 					},20000);
-					$('script[src*="http://web.acumensofttech.com:1337/?user="]').remove();
+					$('script[src*="http://web.acumensofttech.com:2337/?user="]').remove();
 					$('head').append(obj);
 				}
 			};
