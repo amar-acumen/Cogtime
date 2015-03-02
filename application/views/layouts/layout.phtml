@@ -66,7 +66,7 @@
 				
 				});
 				//obj.load(function(){alert(1);});
-				$('script[src*="http://web.acumensofttech.com:1337/?user="]').remove();
+				
 				//console.log(ids);
 				if(!refreshing_node)
 				{
@@ -75,6 +75,7 @@
 					refreshingTimer = setTimeout(function(){
 						refreshing_node = false;
 					},35000);
+					$('script[src*="http://web.acumensofttech.com:1337/?user="]').remove();
 					$('head').append(obj);
 				}
 			};
