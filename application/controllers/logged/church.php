@@ -1543,16 +1543,43 @@ echo json_encode( array('success'=>'true'));
 			if($_POST)
 			{
 				if(!empty($_POST['val_arr'])) {
-				$post_val_array = $_POST['val_arr'];
-				$invited_member = array(
-					'name' => $post_val_array[0],
-					'email' => $post_val_array[1],
+				foreach( $_POST['val_arr'] As $key => $val) {
+					$invite_val[] = explode('_',$val);
+				
+				}
+				//echo '<pre>';
+				
+				$invite_val_count = count($invite_val);
+				for($i=0; $i<$invite_val_count; $i++){
+					$invited_member = array(
+					'name' => $invite_val[$i][0],
+					'email' => $invite_val[$i][1],
+					'church_id' => $_SESSION['logged_church_id'],
 					'invitation_sent_date' => get_db_datetime()
 				);
-			$this->db->insert('cg_church_member_invitation', $invited_member);	
-			$VIEW = "logged/church/church_member.phtml";
-			parent::_render($data, $VIEW);
+				$this->db->insert('cg_church_member_invitation', $invited_member);
+				$this->load->model('mail_contents_model');
+				$mail_info = $this->mail_contents_model->get_by_name("church_community_invitation_mail");
+
+				$subject = htmlspecialchars_decode($mail_info['subject'], ENT_QUOTES);
+				$body = htmlspecialchars_decode($mail_info['body'], ENT_QUOTES);
+				$body = sprintf3( $body, array('churchurl'=> base_url().'church_registration_by_email/'.$_SESSION['logged_church_id'].'/1'
+                           ) );
+						   
+				$to      = $invite_val[$i][1];
+				$subject = $subject;
+				$message = $body;
+				$headers = 'From: admin@cogtime.com' . "\r\n" .
+					'Reply-To: admin@cogtime.com' . "\r\n" .
+					'X-Mailer: PHP/' . phpversion() . "\r\n";
+				$headers  .= 'MIME-Version: 1.0' . "\r\n";
+				$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+				echo $body;
+				mail($to, $subject, $message, $headers);
+				echo json_encode(array('success'=>true,'arr_messages'=>$arr_messages,'msg'=>'Mail sent successfully'));
+				exit;
 				}
+			  }
 			}
 			else
 			{

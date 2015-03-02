@@ -69,20 +69,28 @@
                   
                 </div>
                <!-- upload video div end -->
-        <div class="attch-part"><label>Attach:</label><span>
+        <div class="attch-part"><label>Attach:</label>
+        <span class="pull-left">
         <a href="javascript:void(0);" title="Upload Image" onclick="$('.upload-video').hide();$('.upload-audio').hide();$('.upload-image').show();$('.camera-ico').children('span').addClass('active');$('.video-ico,.audio-ico').children('span').removeClass('active');" class="camera-ico"><span>&nbsp;</span></a>
         <a href="javascript:void(0);" title="Share Video" onclick="$('.upload-video').show();$('.upload-audio').hide();$('.upload-image').hide();$('.video-ico').children('span').addClass('active');$('.camera-ico,.audio-ico').children('span').removeClass('active');" class="video-ico"><span>&nbsp;</span></a>
         <a href="javascript:void(0);" title="Share Audio" onclick="$('.upload-video').hide();$('.upload-audio').show();$('.upload-image').hide();$('.audio-ico').children('span').addClass('active');$('.video-ico,.camera-ico').children('span').removeClass('active');" class="audio-ico" ><span>&nbsp;</span></a>        
-        </span></div>
-        <div class="privacy-select">
+        </span>
+        
+        
+        <div class="pull-left" style="margin-left:100px;">
+        	 <div class="privacy-select">
         <label><input type="radio" name="privacy" value="1" onclick="$('.privacy-drop').slideUp();">Private</label><label><input type="radio" name="privacy" value="2" onclick="$('.privacy-drop').slideUp();" checked>Public to all</label>
-         <label> <input type="radio" name="privacy" value="3" onclick="$('.privacy-drop').slideDown();">Public to selected Members</label></div>
+         <label> <input type="radio" name="privacy" value="3" onclick="$('.privacy-drop').slideDown();">Selected Members</label></div>
 		<?php $members=get_member_by_id($_SESSION['logged_church_id']);
 		//pr($members);?>
 		<div class="privacy-drop" > <select id="meminv" multiple="multiple" name="meminv[]"><?php foreach($members as $k=>$v){ ?>
 									 <?=$v->member_name?>
 										<option value="<?=$v->member_id?>" ><?=$v->member_name?></option> 
 									 <?php }?></select></div>
+        </div>
+        <div class="clear"></div>
+        </div>
+       
         <div class="post-update"><input type="submit" class="post-btn" value="Post"></div>
 		</form>
     </div>	
