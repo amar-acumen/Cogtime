@@ -7,7 +7,7 @@
      </div><?php */?>
     <input type="hidden" id="hd_logged_id" value="<?php echo $_SESSION['username']; ?>"/>
 	<br/>
-   <p style="float:left;"> <a href="javascript:void(0);" class="on-line online-status status-right off-line-text" id="user_status">(<?php echo $arr_profile_info['s_chat_display_name']; ?>)&nbsp;<?= check_user_online_hlpr($arr_profile_info['id']); ?> </a></p>
+   <p style="float:left;"> <a href="javascript:void(0);" class="on-line online-status status-right off-line-text" id="user_status">(<?php echo $arr_profile_info['s_chat_display_name']; ?>)&nbsp;<?= $arr_profile_info.check_user_online_hlpr($arr_profile_info['id']); ?> </a></p>
     <!--Mood Message Start-->
     <div class="mood-message">
         
