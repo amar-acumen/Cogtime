@@ -169,27 +169,7 @@ onKeyUp="limitTextarea(this.form.wall_msg,this.form.countdown,500);" onkeypress=
         <div id="bot_corner">&nbsp;</div>
     </div>
     <div class="clr"></div>
-    <form id="frmUploadTweetPhoto"  method="post" action="<?= base_url() . 'logged/my_photos/edit_twt_bg_img' ?>" onsubmit="return false;" enctype="multipart/form-data">
-        <div class="lightbox edit-bg-image" style="width:480px;">
-            <div class="close"><a href="javascript:void(0)" onclick="
-                    hide_dialog()"><img src="<?php echo base_url() ?>images/close.png" alt="" width="24" height="24"/></a></div>
-            <div class="top"><div>&nbsp;</div></div>
-            <div class="mid">
-                <div class="heading"><div class="left"><h4><img src="<?php echo base_url() ?>images/icons/photo.png" alt="" /> Upload  Photo </h4></div></div>
-                <div class="frm_box">
-                    <div class="lable01">Browse Photo:</div> 
-                    <div class="field01">                       
-                        <input type="file" name="s_photo" id="s_photo" />
-                        <span id="err_photo" class="error-message"></span>  
-                    </div>
-                    <div class="clr"></div>
-                    <center><input name="add_mphoto_btn" id="add_mphoto_btn" type="submit" value="Upload" class="btn" /></center>
-                </div>
-
-            </div>
-            <div class="bot"><div>&nbsp;</div></div>
-        </div>
-    </form>
+    <?php include(APPPATH . "views/logged/my_tweet/edit_background.phtml"); ?>
 </div>
 <!-- /CONTENT SECTION -->
 <div class="clr"></div>
@@ -240,84 +220,12 @@ onKeyUp="limitTextarea(this.form.wall_msg,this.form.countdown,500);" onkeypress=
                     $(".edit_twtr_pic").hide();
                 }
         );
-        var _URL = window.URL || window.webkitURL;
-        $('#s_photo').change(function() {
-            var f = this.files[0];
-            iamge_size = f.size || f.fileSize;
-            // alert(iamge_size);
-            var image, file;
-
-            if ((file = this.files[0])) {
-                image = new Image();
-                image.onload = function() {
-                    image_width = this.width;
-                    image_height = this.height;
-                    //alert("The image width is " + this.width + " and image height is " + this.height);
-                };
-                image.src = _URL.createObjectURL(file);
-            }
-        })
-        var options = {
-            beforeSubmit: showLoad_M, // pre-submit callback 
-            success: validateMultiFrm // post-submit callback 
-        };
-        $('#frmUploadTweetPhoto').submit(function() {
-            var max_file_size = '<?php echo $max_file_size; ?>';
-
-            if (iamge_size > max_file_size) {
-                $('#err_photo').html("Maximum file upload size is 2 MB");
-            }
-            else if (image_width < 700 || image_height < 600) {
-                $('#err_photo').html("Minimum image dimension is 700 X 600");
-            }
-            else
-            {
-                $('#err_photo').html('');
-                $(this).ajaxSubmit(options);
-                return false;
-            }
-
-        });
+        
 
 
     });
-    function showLoad_M()
-    {
-        $('#add_mphoto_btn').val('Uploading...');
-    }
-    function validateMultiFrm(data)
-    {
-        //alert( data);
-        var data = JSON.parse(data);
-        if (data.success == false)
-        {
-            $('.error-message').each(function(i) {
-                $(this).attr('style', 'display:none');
-            });
-
-            $('#add_mphoto_btn').val('Upload');
-
-            for (var id in data.arr_messages) {
-                //alert(data.arr_messages[id]);
-                if ($('#err_' + id) != null) {
-                    $('#err_' + id).html(data.arr_messages[id]);
-                    $('#err_' + id).css('display', 'block');
-                }
-            }
-        }
-        else {
-            // claering form
-            $('#frmUploadTweetPhoto')[0].reset();
-            //$('#select_album1').val($('options:first', '#select_album1').val());
-            $('#add_mphoto_btn').val('Upload');
-            hide_dialog();
-            //$('#album_div').html(data.html);
-            showUIMsg(data.msg);
-            location.reload();
-            //window.location.href= document.URL;
-        }
-        //hideLoading();
-    }
+    
+    
 
 </script>
 <script type="text/javascript">
