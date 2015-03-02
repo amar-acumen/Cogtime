@@ -119,8 +119,8 @@ class Module_generate extends CI_Controller {
                     'js/jquery.bxslider.min.js',
                     'js/jquery.fancybox.js',*/
                     // logged
-                    'js/frontend/public_profile.js',
-                    'js/frontend/wall/wall_helper.js'
+                    'js/frontend/public_profile.js'
+
                 );
                 $js = '';
                 foreach($files_js as $data){
@@ -135,6 +135,7 @@ class Module_generate extends CI_Controller {
 
 
                 $files_logged_js = array(
+                    'js/frontend/wall/wall_helper.js',
                     'js/frontend/logged/my_friends.js',
                     'js/frontend/logged/my_net_pals.js',
                     'js/frontend/logged/my_prayer_partner.js',
