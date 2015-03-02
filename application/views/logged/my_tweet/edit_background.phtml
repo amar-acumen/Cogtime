@@ -49,8 +49,9 @@ $(function(){
           success: validateMultiFrm // post-submit callback 
       };
       $('#frmUploadTweetPhoto').submit(function() {
-          var max_file_size = '<?php echo $max_file_size; ?>';
-
+          var max_file_size = '<?php echo $max_file_size*1000; ?>';
+          iamge_size = (iamge_size*1)/1000;alert(iamge_size);
+          alert(max_file_size);
           if (iamge_size > max_file_size) {
               $('#err_photo').html("Maximum file upload size is 2 MB");
           }
