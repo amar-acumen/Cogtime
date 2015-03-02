@@ -169,8 +169,9 @@ else{
 			 url: "<?php echo base_url(); ?>logged/church/church_add_member_form/",
 			 data: {'val_arr': val_arr},
 			 success: function(data){
-				hideBusyScreen(); 
-				window.location.href="logged/church/church_invited_member/";
+				hideBusyScreen();
+				showUIMsg(data.msg);				
+				window.location.href="<?php echo base_url(); ?>logged/church/church_invited_member/";
 			 }
 		 });
 }
