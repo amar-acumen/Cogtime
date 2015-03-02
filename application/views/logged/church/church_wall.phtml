@@ -80,7 +80,7 @@
         <div class="pull-left" style="margin-left:100px;">
         	 <div class="privacy-select">
         <label><input type="radio" name="privacy" value="1" onclick="$('.privacy-drop').slideUp();">Private</label><label><input type="radio" name="privacy" value="2" onclick="$('.privacy-drop').slideUp();" checked>Public to all</label>
-         <label> <input type="radio" name="privacy" value="3" onclick="$('.privacy-drop').slideDown();">Public to selected Members</label></div>
+         <label> <input type="radio" name="privacy" value="3" onclick="$('.privacy-drop').slideDown();">Selected Members</label></div>
 		<?php $members=get_member_by_id($_SESSION['logged_church_id']);
 		//pr($members);?>
 		<div class="privacy-drop" > <select id="meminv" multiple="multiple" name="meminv[]"><?php foreach($members as $k=>$v){ ?>
