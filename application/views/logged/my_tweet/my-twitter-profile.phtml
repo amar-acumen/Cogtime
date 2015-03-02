@@ -181,14 +181,12 @@ onKeyUp="limitTextarea(this.form.wall_msg,this.form.countdown,500);" onkeypress=
 
 <!-- /lightbox SECTION -->
 <script type="text/javascript">
-    var iamge_size;
-    var image_width;
-    var image_height;
+    
     $(document).ready(function() {
         $("#searchTweeter").autofill({'value': "Type Keyword"});
         //$("#ta_post_tweet").autofill({'value':"Compose New Tweet"});
 
-        $('.tweet-comment-box').focus(function() {
+        $('.tweet-comment-box').focus(function() {alert(1);
             $(this).animate({height: '50px'}, 500);
 			$('.tab_content').css('display','block');
 			
