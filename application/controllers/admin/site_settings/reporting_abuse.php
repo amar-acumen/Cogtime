@@ -256,7 +256,7 @@ class Reporting_abuse extends Admin_base_Controller
 					  $sql = " UPDATE   cg_events SET `i_status` = {$i_status} WHERE `id` = {$id}"; 
 		  			  $this->db->query($sql);
 					  $event_info = get_event_detail_by_id($id);
-					  $user_name = ($event_info['i_user_type'] == 2)?get_admin_nameby_id($event_info['i_host_id']):get_username_by_id($event_info['i_host_id']);
+					  $user_name = ($event_info['i_user_type'] == 2)?get_admin_nameby_id($event_info['i_host_id']):$event_info['s_profile_name'];
 					  $user_email = ($event_info['i_user_type'] == 2)?get_admin_emailby_id($event_info['i_host_id']):get_useremail_by_id($event_info['i_host_id']);
 					  
 					
