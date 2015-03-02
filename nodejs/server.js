@@ -2,7 +2,7 @@ var url = require('url');
 var http = require('http');
 var mysql      = require('mysql');
 var connection = mysql.createConnection({
-				  host     : '103.227.62.106',
+				  host     : 'localhost',
 				  user     : 'acumen',
 				  password : 'eWvo456&',
 				  database : 'admin_cogtime'
