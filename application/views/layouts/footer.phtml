@@ -100,7 +100,7 @@ if (!@$session_data['loggedin']) {
                 </div>
             </div>
             <div class="frm_box login">
-                <form onsubmit="return userAjaxLogin(this.email_login.value, this.password_login.value);" action="" method="post" name="frmLogin" id="frmLogin"> 
+                <form onsubmit="return userAjaxLogin(this.email_login1.value, this.password_login1.value);" action="" method="post" name="frmLogin" id="frmLogin"> 
                     <input name="login_referrer" id="login_referrer" type="hidden" value="<?= @$session_data['login_referrer'] ?>"/>
                     <input name="current_referrer" id="current_referrer" type="hidden" value=""/>
                     <input type="hidden" name="is_submitted" id="is_submitted" value="Y"  />
@@ -108,18 +108,18 @@ if (!@$session_data['loggedin']) {
 
                     <div class="lable01">Email :</div>
                     <div class="field01">
-                        <input name="email_login" id="email_login" type="text" value="<?= ($RemberEmail == '') ? "Email" : $RemberEmail; ?>" />
+                        <input name="email_login1" id="email_login1" type="text" value="<?= ($RemberEmail == '') ? "Email" : $RemberEmail; ?>" />
                     </div> 
-                    <div id="error_msg_email_login" class="error-message"></div> 
+                    <div id="error_msg_email_login1" class="error-message"></div> 
 
 
                     <div class="clr"></div>
 
                     <div class="lable01">Password:</div>
                     <div class="field01">
-                        <input name="password_login" id="password_login" type="password" value="<?= ($RemberPwd == '') ? "Password" : $RemberPwd; ?>" />
+                        <input name="password_login1" id="password_login1" type="password" value="<?= ($RemberPwd == '') ? "Password" : $RemberPwd; ?>" />
                     </div>
-                    <div id="error_msg_password_login" class="error_msg"></div>
+                    <div id="error_msg_password_login1" class="error_msg"></div>
 
                     <div class="clr"></div>
                     <div class="lable01">&nbsp;</div>
