@@ -285,7 +285,14 @@ function show_more_tweets(page) {
 }
 
 $(document).ready(function(arg) {
-	
+	$(".tweeter-profile-header").hover(
+          function() {
+              $(".edit_twtr_pic").show();
+          },
+          function() {
+              $(".edit_twtr_pic").hide();
+          }
+  );
 
  $('#frm_search').submit(function(){ 
 			
