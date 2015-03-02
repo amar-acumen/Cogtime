@@ -1,19 +1,19 @@
 var url = require('url');
 var http = require('http');
 var mysql      = require('mysql');
-
-http.createServer(function (req, res) {
-
-
-	var url_parts = url.parse(req.url, true);
-	console.log(url_parts);
-	var connection = mysql.createConnection({
+var connection = mysql.createConnection({
 				  host     : '103.227.62.106',
 				  user     : 'acumen',
 				  password : 'eWvo456&',
 				  database : 'admin_cogtime'
 				});
 				connection.connect();
+http.createServer(function (req, res) {
+
+
+	var url_parts = url.parse(req.url, true);
+	console.log(url_parts);
+	
 	var tmp = function(cnt,req1, res1){
 				
 					
