@@ -553,8 +553,10 @@ class My_photos extends Base_controller {
                 $photo_name = $this->_upload_tweet_photo();
                 $info['s_tweet_bg_img'] = $photo_name;
                 $i_ret = update_tweet_bg_img_by_id($info, $user_id);
+                
                 //echo json_encode(array('success' => true, 'arr_messages' => $arr_messages, 'msg' => 'Photo Uploaded Successfully.'));
                 if ($i_ret) {
+                    $this->session->set_userdata('s_tweet_bg_img', $info['s_tweet_bg_img']);
                     echo json_encode(array('success' => true, 'arr_messages' => $arr_messages, 'msg' => 'Image Upldated Successfully.'));
                 } else {
                     echo json_encode(array('success' => false, 'arr_messages' => $arr_messages, 'msg' => 'Some error occurred'));

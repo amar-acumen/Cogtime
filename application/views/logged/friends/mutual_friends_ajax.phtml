@@ -2,20 +2,23 @@
  <?php   
  if(count($result_arr) != 0)
  {
-foreach($result_arr as $k=>$m)	{
+foreach($result_arr as $key=>$m)	{
 									$i=$i+1;
-									$name=get_user_name_by_id($k);
-									$profile_link = get_public_profile_url($k,$name);
-									 $img = get_profile_image($k, 'thumb');
-									 $ct=get_mutual_count($m);
-    ?>  <div class="shade_box_blue" style="padding-top:5px;" id="friend_record_<?=$k?>"> 
+									$k=array();
+									$k=explode(',',$key);
+									$name=$k[1].' '.$k[2];
+									$profile_link = base_url() . "profile/" . $k[0] . "/" . my_url($name) . ".html";
+								    $img = get_profile_image($k[0],'thumb');
+								    $ct=get_mutual_count($m);
+									$address = get_user_address_info($k[0]); 
+    ?>  <div class="shade_box_blue" style="padding-top:5px;" id="friend_record_<?=$k[0]?>"> 
                                          <div class="txt_content compact-box">
                                          <a href="<?= $profile_link;?>"><div class="pro_photo2" style="background:url(<?=$img?>) no-repeat center;width:60px; height:60px;" ></div></a>
                                               <div class="left_div01" >
                                                    
                          <p class="blue_bold12"><a  href="<?= $profile_link;?>" ><?=$name?> </a></p>
-								<?php $val=get_user_details_by_id($k);?>
-								<?php $address = get_user_address_info($k); ?>
+								<?php $val=get_user_details_by_id($k[0]);?>
+								<?php $address = get_user_address_info($k[0]); ?>
 								
                        <p class="location"><?=$address?></p>
 					
@@ -48,12 +51,12 @@ foreach($result_arr as $k=>$m)	{
 						<?php
 						}
 						?>
-						<p class="nw-date-time" ><?=get_mutual_count($m)?> Mutual Friend<?=($ct==1)?' ':'s '?></p>
+						<p class="nw-date-time" ><?=$ct?> Mutual Friend<?=($ct==1)?' ':'s '?></p>
 												 
                                               </div>
 											<div class="right_div02">
 		
-                                            <p class="add-remove-friend"><a href="javascript:void(0);" id="#invite_friend_(<?=$k?>)" class="add-as-friend" onclick="invite_friend_('<?=encrypt($k)?>')">[add as friend]</a></p>
+                                            <p class="add-remove-friend"><a href="javascript:void(0);" id="#invite_friend_(<?=$k[0]?>)" class="add-as-friend" onclick="invite_friend_('<?=encrypt($k[0])?>')">[add as friend]</a></p>
                                      </div> 
 											   
 											
