@@ -1548,7 +1548,7 @@ echo json_encode( array('success'=>'true'));
 				
 				}
 				//echo '<pre>';
-				//pr($invite_val);
+				
 				$invite_val_count = count($invite_val);
 				for($i=0; $i<$invite_val_count; $i++){
 					$invited_member = array(
@@ -1557,9 +1557,9 @@ echo json_encode( array('success'=>'true'));
 					'church_id' => $_SESSION['logged_church_id'],
 					'invitation_sent_date' => get_db_datetime()
 				);
-				}
 				$this->db->insert('cg_church_member_invitation', $invited_member);
 				}
+			  }
 			}
 			else
 			{
