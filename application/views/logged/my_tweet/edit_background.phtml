@@ -71,4 +71,39 @@ var _URL = window.URL || window.webkitURL;
 
         });
 });
+
+
+function validateMultiFrm(data)
+{
+    //alert( data);
+    var data = JSON.parse(data);
+    if (data.success == false)
+    {
+        $('.error-message').each(function(i) {
+            $(this).attr('style', 'display:none');
+        });
+
+        $('#add_mphoto_btn').val('Upload');
+
+        for (var id in data.arr_messages) {
+            //alert(data.arr_messages[id]);
+            if ($('#err_' + id) != null) {
+                $('#err_' + id).html(data.arr_messages[id]);
+                $('#err_' + id).css('display', 'block');
+            }
+        }
+    }
+    else {
+        // claering form
+        $('#frmUploadTweetPhoto')[0].reset();
+        //$('#select_album1').val($('options:first', '#select_album1').val());
+        $('#add_mphoto_btn').val('Upload');
+        hide_dialog();
+        //$('#album_div').html(data.html);
+        showUIMsg(data.msg);
+        location.reload();
+        //window.location.href= document.URL;
+    }
+    //hideLoading();
+}
 </script>
