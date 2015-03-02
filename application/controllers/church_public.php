@@ -344,7 +344,8 @@ class Church_public extends Base_controller
 							);
 							$this->db->update('cg_church_member_invitation', $invited_member, array('id' => $_SESSION['invited_member_id']));
 						}
-						
+						$last_id = $this->db->insert_id();
+						 echo '*******'.$last_id;
                         ## end ##
                         //EMAIL SENDING CODE.[start]
 						 $this->load->helper('html');
