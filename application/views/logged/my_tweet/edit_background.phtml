@@ -50,7 +50,7 @@ $(function(){
       };
       $('#frmUploadTweetPhoto').submit(function() {
           var max_file_size = '<?php echo $max_file_size*1000; ?>';
-
+          iamge_size = iamge_size/1000;
           if (iamge_size > max_file_size) {
               $('#err_photo').html("Maximum file upload size is 2 MB");
           }
