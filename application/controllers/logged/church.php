@@ -384,13 +384,13 @@ function unblock_member () {
             ## seacrh conditions : filter ############
 
             $c_id = $_SESSION['logged_church_id'];
-            $where = ' status = "0"';
+            //$where = '';
             $order_by = " id DESC ";
-            $result = $this->church_new_model->get_church_invited_members($c_id,$where,$page, $order_by, $this->pagination_per_page);
+            $result = $this->church_new_model->get_church_invited_members($c_id,$page, $order_by, $this->pagination_per_page);
             $resultCount = count($result);
              //echo $this->db->last_query(); 
             
-            $total_rows = $this->church_new_model->get_church_invited_members_count($c_id,$where);
+            $total_rows = $this->church_new_model->get_church_invited_members_count($c_id);
 
             if ((!is_array($result) || !count($result) ) && $total_rows) {
                 $page = $page - $this->pagination_per_page;

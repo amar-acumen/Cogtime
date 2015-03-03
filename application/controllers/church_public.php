@@ -181,14 +181,7 @@ class Church_public extends Base_controller
 				{
 				$containsLetter  = preg_match('/[a-zA-Z]/',    $posted["txt_chat_display_name"]);
 				$containsDigit   = preg_match('/\d/',          $posted["txt_chat_display_name"]);
-//				if($containsLetter == 1)
-//				{
-//				$data['error_chatname']="*your chat name must contain atleast 1 digit.";
-//				}
-				if($containsDigit == 1)
-				{
-				$data['error_chatname']="*your chat name must contain atleast 1 letter.";
-				}
+
 				}
 				}
                         /******************************************************/
@@ -297,7 +290,7 @@ class Church_public extends Base_controller
                     $info['s_chat_display_name'] = get_formatted_string($posted['txt_chat_display_name']);
                     $info['s_tweet_id'] = '@' . $info['s_chat_display_name'];
                     $info['dt_dob'] = date('Y-m-d',mktime(0,0,0,$posted["month"],$posted["day"],$posted["year"]));
-                     // pr($info,1);
+                      //pr($info,1);
                     $USER_ID = $this->users_model->sign_up($info);
 
 
@@ -333,19 +326,18 @@ class Church_public extends Base_controller
                                'is_deleted' => 0
                             );
                         }
-                         $this->db->insert('cg_church_member', $data); 
-						 echo '========'.$_SESSION['invited_member_id'];
+                         $this->db->insert('cg_church_member', $data);
 
 						if (isset($_SESSION['invited_member_id']) && $_SESSION['invited_member_id'] != '')
 						{
 							$invited_member = array(
-								'status' => 1,
-								'invitation_sent_date' => get_db_datetime()
+								'status' => '1',
+								'joined_on_date' => get_db_datetime()
 							);
 							$this->db->update('cg_church_member_invitation', $invited_member, array('id' => $_SESSION['invited_member_id']));
+							//echo $this->db->last_query();
 						}
-						$last_id = $this->db->insert_id();
-						 echo '*******'.$last_id;
+						
                         ## end ##
                         //EMAIL SENDING CODE.[start]
 						 $this->load->helper('html');
@@ -395,7 +387,7 @@ class Church_public extends Base_controller
 						$this->email->message("$body");
                         //send_mail($arr);
 						$this->email->send();
-                        $this->email->print_debugger();exit;
+                        //$this->email->print_debugger();exit;
                         //EMAIL SENDING CODE.[end]
 
                         unset($info, $posted);
