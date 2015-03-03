@@ -180,13 +180,12 @@ class CI_DB_mysql_driver extends CI_DB {
 	}*/
 
 	function _execute($sql)
-	{
+	{echo '+++++++++++++++++++++++'.$sql;
 		$sql = $this->_prep_query($sql);
 		$msc = microtime(true);
 
 		$ret = @mysql_query($sql, $this->conn_id);
 
-		$this->load->helper('file');
 		$msc = microtime(true)-$msc;
 
 		$file = "./query_time.txt";
