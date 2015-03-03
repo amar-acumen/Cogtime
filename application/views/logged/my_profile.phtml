@@ -755,8 +755,8 @@ $(document).ready(function(){
         default:
             $(this).val('');
             // error message here
-           // alert("not an image");
-           $('#err_profile_pic').html('Please enter valid image (jpeg,jpg,png,gif)');
+          alert("not an image");
+           $('#err_profile_pic').css('display','block').html('Please enter valid image (jpeg,jpg,png,gif)');
             break;
     }
 });
