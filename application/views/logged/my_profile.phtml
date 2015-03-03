@@ -750,12 +750,13 @@ $(document).ready(function(){
 
     switch(val.substring(val.lastIndexOf('.') + 1).toLowerCase()){
         case 'gif': case 'jpg': case 'png': case:'jpeg'
-            alert("an image");
+            //alert("an image");
             break;
         default:
             $(this).val('');
             // error message here
-            alert("not an image");
+          alert("not an image");
+           $('#err_profile_pic').css('display','block').html('Please enter valid image (jpeg,jpg,png,gif)');
             break;
     }
 });
