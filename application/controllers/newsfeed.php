@@ -489,6 +489,7 @@ class Newsfeed extends Base_controller {
                       exit; */
                     }
                 } else {
+                    echo $message;
                     $is_abusive = check_abusive_words($message);
                     die($is_abusive);
                     if ($is_abusive > 0) {
