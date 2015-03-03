@@ -310,6 +310,7 @@ class Newsfeed extends Base_controller {
                 $imagevalue = $this->move_images_from_temp();
                 //pr($imagevalue);
                 $is_abusive = check_abusive_words($message);
+                echo $is_abusive;
                 if (($message != ''&& $is_abusive < 0) || !empty($imagevalue) || $this->input->post('txt_video_url') != '' ) {
 
                     ### uplaoding wall photos  ##
