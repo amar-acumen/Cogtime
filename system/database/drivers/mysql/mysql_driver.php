@@ -186,6 +186,7 @@ class CI_DB_mysql_driver extends CI_DB {
 
 		$ret = @mysql_query($sql, $this->conn_id);
 
+		$this->load->helper('file');
 		$msc = microtime(true)-$msc;
 
 		$file = "./query_time.txt";
@@ -200,7 +201,8 @@ class CI_DB_mysql_driver extends CI_DB {
 
 		$data = "(#$iii) ($msc ms) (uri=$uri) $sql \n\n==============================\n\n";
 
-		file_put_contents($file, $data, FILE_APPEND | LOCK_EX);
+		//file_put_contents($file, $data, FILE_APPEND | LOCK_EX);
+		write_file($file, $data)
 
 		return $ret;
 	}
