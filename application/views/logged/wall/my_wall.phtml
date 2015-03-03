@@ -120,7 +120,7 @@
                     <div id="comment_result_div">
                         <?php if(!empty($result_newsfeed_content)){ ?>
                         
-                        <?php echo '';//$result_newsfeed_content; ?>
+                        <?= $result_newsfeed_content ?>
                         <?php } ?>
                     <?php if(empty($result_newsfeed_content)) {?> <div id="noPost" style=" text-align: center; font-size: 19px; font-style: italic; font-weight: bold; padding-top: 55px; color: #5fbdb6; ">Be the first to post on the wall</div> <?php } ?>
                     
@@ -140,7 +140,7 @@
                             <h4>My Prayer Requests &amp; Commitments</h4>
                         </div>
                     </div>
-                    <div id="prayer_result_div"><?php //echo $prayer_req_ajax_content ?></div>
+                    <div id="prayer_result_div"><?= $prayer_req_ajax_content ?></div>
                     <?php if ($prayer_no_of_result > 4): ?>
 
                         <div class="view_more" id="show_more_prayer_div"><a href="javascript:void(0);" id="show_more_prayer_link" page_value="<?= $prayer_current_page ?>" onclick="show_more_prayer($(this).attr('page_value'))">[view more] </a> </div>
@@ -150,7 +150,7 @@
 <?php 
 }
 ?>
-<!---->
+<!--------------------------------------------------------------------------->
 				<?php $event=get_events_by_user(intval(decrypt($_SESSION['user_id'])),'my_wall');
 				if($event != null){
 				
