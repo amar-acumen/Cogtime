@@ -28,7 +28,7 @@ class Base_controller extends CI_Controller {
             
           //  die('ok');
             parent::__construct();
-
+            $this->output->set_header("Cache-Control: private, max-age=60");//for caching 
             $this->_set_timezone();
             $this->load->helper('common_helper');
             //$this->load->helper('chat_helper'); 
@@ -4428,7 +4428,8 @@ if($type == 'organizer-day-view' || $type == 'organizer-week-view' || $type == '
 
         $zone_val = $this->input->post('zone_val');
         $time = getUserLocalTime($zone_val);
-        $time_html = 'Time: ' . $time;
+        //$time_html = 'Time: ' . $time;
+        $time_html = $time;
         echo json_encode(array('result' => 'success', 'time' => $time_html));
         exit;
     }
