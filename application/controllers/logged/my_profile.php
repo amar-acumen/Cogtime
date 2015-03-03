@@ -1137,6 +1137,7 @@ class My_profile extends Base_controller {
 
         $logged_user_id = intval(decrypt($this->session->userdata('user_id')));
         $arr_profile_info = $this->users_model->fetch_this($logged_user_id);
+        $_SESSION['s_profile_photo'] = $arr_profile_info['s_profile_photo'];
         $where = " i_country_id='" . $arr_profile_info["i_country_id"] . "'";
 
         $data['state'] = makeOptionState($where, encrypt($arr_profile_info["i_state_id"]));
