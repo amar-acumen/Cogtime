@@ -744,19 +744,18 @@ include(APPPATH . "views/layouts/nav.phtml");
 </div>
 <script type="text/javascript">
 $(document).ready(function(){
-   $("#txt_profile_pic").change(function() {
+  $("#txt_profile_pic").change(function() {
 
     var val = $(this).val();
 
     switch(val.substring(val.lastIndexOf('.') + 1).toLowerCase()){
-        case 'gif': case 'jpg': case 'png': case:'jpeg'
-            //alert("an image");
+        case 'gif': case 'jpg': case 'png':  case 'jpeg':
+            alert("an image");
             break;
         default:
             $(this).val('');
             // error message here
-          alert("not an image");
-           $('#err_profile_pic').css('display','block').html('Please enter valid image (jpeg,jpg,png,gif)');
+            alert("not an image");
             break;
     }
 });
