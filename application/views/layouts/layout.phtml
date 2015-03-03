@@ -10,9 +10,12 @@
 		var g_sessionid = '';
 		function setUpdateStatus(obj)
 		{
+
 			var g_statusObj = JSON.parse(obj);
 			//alert(g_statusObj);
 			console.log(g_statusObj);
+			console.log('----------');
+			console.log(obj);
 			if(typeof g_statusObj!="object")
 				return;
 			for(var v in g_statusObj)
