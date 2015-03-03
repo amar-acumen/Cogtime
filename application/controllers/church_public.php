@@ -525,14 +525,6 @@ class Church_public extends Base_controller
         $info = $this->users_model->fetch_this($id);
         $USER_ID = $id;
         if ($info['i_status'] == 1) {
-		pr($_SESSION);exit;
-			if($_SESSION['first_login'] == 'yes') {
-				echo '========'.$_SESSION['is_first_login_checked'];exit;
-				$INDEX_PG = base_url() . '?status=active';
-				header("location:" . $INDEX_PG);
-			}
-			else {
-			echo 'ELSESELSE';exit;
             ## AUTO LOGIN for user ##
             //pr($info,1);;
             $this->session->set_userdata('login_referrer', '');
@@ -599,7 +591,7 @@ class Church_public extends Base_controller
             $SUCCESS_PG = base_url() . 'my-wall.html'; #."inscription-success.html";
 
             header("location:" . $SUCCESS_PG);
-			}
+			
         } else {
             header("location:" . base_url());
         }
