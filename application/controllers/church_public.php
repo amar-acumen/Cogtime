@@ -527,12 +527,12 @@ class Church_public extends Base_controller
         if ($info['i_status'] == 1) {
 		pr($_SESSION);
 			if($_SESSION['first_login'] == 'yes') {
-				echo '========'.$_SESSION['is_first_login_checked'];
+				echo '========'.$_SESSION['is_first_login_checked'];exit;
 				$INDEX_PG = base_url() . '?status=active';
 				header("location:" . $INDEX_PG);
 			}
 			else {
-			echo 'ELSESELSE';
+			echo 'ELSESELSE';exit;
             ## AUTO LOGIN for user ##
             //pr($info,1);;
             $this->session->set_userdata('login_referrer', '');
