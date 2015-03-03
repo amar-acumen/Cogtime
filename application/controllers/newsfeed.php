@@ -310,7 +310,7 @@ class Newsfeed extends Base_controller {
                 $imagevalue = $this->move_images_from_temp();
                 //pr($imagevalue);
                 $is_abusive = check_abusive_words($message);
-                echo $is_abusive;
+               // echo $is_abusive;
                 if (($message != ''&& $is_abusive < 0) || !empty($imagevalue) || $this->input->post('txt_video_url') != '' ) {
 
                     ### uplaoding wall photos  ##
@@ -491,7 +491,7 @@ class Newsfeed extends Base_controller {
                     }
                 } else {
                     echo $message;
-                    $is_abusive = check_abusive_words($message);
+                      $is_abusive = check_abusive_words($message);
                     die($is_abusive);
                     if ($is_abusive > 0) {
                             echo json_encode(array('success' => FALSE, 'feed' => $feed, 'msg' => 'Abusive words are not allowed', 'vid_msg' => ''));
