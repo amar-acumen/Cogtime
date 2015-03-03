@@ -311,7 +311,7 @@ class Newsfeed extends Base_controller {
                 //pr($imagevalue);
                 $is_abusive = check_abusive_words($message);
                // echo $is_abusive;
-                if (($message != ''&& $is_abusive < 0) || !empty($imagevalue) || $this->input->post('txt_video_url') != '' ) {
+                if (($message != ''&& $is_abusive == 0) || !empty($imagevalue) || $this->input->post('txt_video_url') != '' ) {
 
                     ### uplaoding wall photos  ##
                     if (1) {
@@ -492,11 +492,11 @@ class Newsfeed extends Base_controller {
                 } else {
                     //echo $message;
                       $is_abusive = check_abusive_words($message);
-                    echo $is_abusive;die();
-                    die($is_abusive);
+                    //echo $is_abusive;die();
+                    //die($is_abusive);
                     if ($is_abusive > 0) {
                             echo json_encode(array('success' => FALSE, 'feed' => $feed, 'msg' => 'Abusive words are not allowed', 'vid_msg' => ''));
-                        }else{
+                        }else if($is_abusive == '' && $is_abusive  == 0 ) {
                     #echo json_encode( array('success'=>FALSE, 'msg'=>"Please enter some text!", 'vid_msg'=>$video_url_messages) );
                     echo json_encode(array('success' => FALSE, 'msg' => "Please enter some text!", 'vid_msg' => $video_url_messages));
                     exit;
