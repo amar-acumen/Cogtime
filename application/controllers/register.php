@@ -108,10 +108,10 @@ class Register extends Base_controller {
 //				{
 //				$data['error_chatname']="*your chat name must contain atleast 1 digit.";
 //				}
-				if($containsDigit == 1)
+				/*if($containsDigit == 1)
 				{
 				$data['error_chatname']="*your chat name must contain atleast 1 letter.";
-				}
+				}*/
 				}
 				}
                         /******************************************************/
@@ -418,16 +418,21 @@ The Cogtime Team</p>";
     }
 
     public function signup_confirm($id, $code) {
-	pr($_SESSION);
-	echo '========'.$_SESSION['first_login'];exit;
         $sql = "UPDATE {$this->db->USERS} SET i_status=1 WHERE id='" . $id . "' AND s_verification_code='" . $code . "'";
         $this->db->query($sql);
         $info = $this->users_model->fetch_this($id);
         $USER_ID = $id;
         if ($info['i_status'] == 1) {
-
-            ## AUTO LOGIN for user ##
-            //pr($info,1);;
+			
+			$info1 = $this->db->query('select * from cg_users where id= "'.$id.'"');
+			$res = $info1->result();
+			//pr($res,1);
+			if ($res[0]->is_first_login_checked == 1) {
+			
+				$INDEX_PG = base_url() . '?status=active';
+				header("location:" . $INDEX_PG);
+			}else{
+			
             $this->session->set_userdata('login_referrer', '');
             $this->session->set_userdata('loggedin', true);
             $this->session->set_userdata('user_id', encrypt($USER_ID));
@@ -491,6 +496,7 @@ The Cogtime Team</p>";
             $SUCCESS_PG = base_url() . 'my-wall.html'; #."inscription-success.html";
 
             header("location:" . $SUCCESS_PG);
+			}
         } else {
             header("location:" . base_url());
         }

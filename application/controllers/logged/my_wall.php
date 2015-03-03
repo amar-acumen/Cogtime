@@ -74,6 +74,10 @@ class My_wall extends Base_controller {
 
 
             $i_profile_id = intval(decrypt($this->session->userdata('user_id')));
+			/**********************update login status *********************/
+			$sql1 = "UPDATE {$this->db->USERS} SET is_first_login_checked='1' WHERE id='" . $i_profile_id . "'";
+			$this->db->query($sql1);
+			/**********************************************/
             $data['page_view_type'] = 'myaccount';
             $this->load->model('users_model');
             $arr_profile_info = $this->users_model->fetch_this($i_profile_id);
