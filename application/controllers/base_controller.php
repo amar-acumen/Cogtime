@@ -77,7 +77,7 @@ class Base_controller extends CI_Controller {
                 //$re=array();
                 //$re=$this->projects_model->get_list('','0','2');
                 //$this->data['latest_charity_project']=$this->projects_model->get_project();
-                $this->data['latest_admin_events'] = '';//$this->events_model->get_latest_admin_events();
+                $this->data['latest_admin_events'] = $this->events_model->get_latest_admin_events();
                 #pr($re);
             } else {
                 $this->data['loggedin'] = false;
