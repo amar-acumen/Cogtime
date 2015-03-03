@@ -425,9 +425,10 @@ The Cogtime Team</p>";
         if ($info['i_status'] == 1) {
 			$sql1 = "UPDATE {$this->db->USERS} SET is_first_login_checked='1' WHERE id='" . $id . "'";
 			$this->db->query($sql1);
-			$info1 = $this->users_model->fetch_this($id);
-			pr($info1,1);
-			if ($info1['is_first_login_checked'] == 1) {
+			$info1 = $this->query('select * from cg_users where id= "'.$id.'"');
+			$res = $info1->result();
+			pr($res,1);
+			if ($res['is_first_login_checked'] == 1) {
 			//echo 'fine';
 			die('ok');
 				$INDEX_PG = base_url() . '?status=active';
