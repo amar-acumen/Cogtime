@@ -525,7 +525,12 @@ class Church_public extends Base_controller
         $info = $this->users_model->fetch_this($id);
         $USER_ID = $id;
         if ($info['i_status'] == 1) {
-
+			if($_SESSION['first_login'] == 'yes') {
+				echo '========'.$_SESSION['is_first_login_checked'];
+				$INDEX_PG = base_url() . '?status=active';
+				header("location:" . $INDEX_PG);
+			}
+			else {
             ## AUTO LOGIN for user ##
             //pr($info,1);;
             $this->session->set_userdata('login_referrer', '');
@@ -548,6 +553,7 @@ class Church_public extends Base_controller
             $this->session->set_userdata('display_username', $info["s_chat_display_name"]);
 
             //$_SESSION['username'] = 'jhon';
+			//echo '========'.$_SESSION['first_login'];exit;
             ### generating five fruits
             $this->load->model('bible_fruits_model');
             $this->bible_fruits_model->generate_fruit_list_per_user_id_date();
@@ -591,6 +597,7 @@ class Church_public extends Base_controller
             $SUCCESS_PG = base_url() . 'my-wall.html'; #."inscription-success.html";
 
             header("location:" . $SUCCESS_PG);
+			}
         } else {
             header("location:" . base_url());
         }
