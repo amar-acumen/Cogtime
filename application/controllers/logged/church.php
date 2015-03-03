@@ -637,27 +637,15 @@ function general_setting(){
             /*$subject = sprintf3( $subject, array('sender_name'=> $profile_info["s_first_name"],
                               'project_name'=> $project_name
                            ));*/
-			$body = '';
-            $body .= htmlspecialchars_decode($mail_info['body'], ENT_QUOTES);
-            //$body = sprintf3( $body, array('churchurl'=> base_url().'church_registration_by_email/'.$_SESSION['logged_church_id'].'/1) );
+            $body = htmlspecialchars_decode($mail_info['body'], ENT_QUOTES);
+			//$body .= sprintf3( $body, array('churchurl'=> base_url().'church_registration_by_email/'.$_SESSION['logged_church_id'].'/1/'.$add_mem_id) );
+			$body = sprintf3( $body, array('churchurl'=> base_url().'church_registration_by_email/'.$_SESSION['logged_church_id'].'/1') );
 			
             if (($handle = fopen($destfile, "r")) !== FALSE) {
                 while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
                     $num = count($data);
                     $row++;
-					if($row>2)
-					{
-						$invite_mem_info = array(
-							'name' => $data[0],
-							'email' => $data[1],
-							'church_id' => $_SESSION['logged_church_id'],
-							'invitation_sent_date' => get_db_datetime()
-							);
-						$this->db->insert('cg_church_member_invitation', $invite_mem_info);
-						//echo $this->db->last_query();
-						$add_mem_id = $this->db->insert_id();
-						$body .= sprintf3( $body, array('churchurl'=> base_url().'church_registration_by_email/'.$_SESSION['logged_church_id'].'/1/'.$add_mem_id) );
-					}
+					
                     for ($c=0; $c < 1; $c++) {
                         $to      = $data[$c];
                         $subject = $subject;
@@ -669,6 +657,20 @@ function general_setting(){
                         $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
                         mail($to, $subject, $message, $headers);
                     }
+					
+					if($row>2)
+					{
+						$invite_mem_info = array(
+							'name' => $data[0],
+							'email' => $data[1],
+							'church_id' => $_SESSION['logged_church_id'],
+							'invitation_sent_date' => get_db_datetime()
+							);
+						$this->db->insert('cg_church_member_invitation', $invite_mem_info);
+						//echo $this->db->last_query();
+						//$add_mem_id = $this->db->insert_id();
+						
+					}
                 }
                 fclose($handle);
             }
