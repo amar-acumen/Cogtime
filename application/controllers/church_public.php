@@ -148,7 +148,7 @@ class Church_public extends Base_controller
 
 
             if ($this->input->post('is_submitted') == 'Y') {
-                //pr($_POST);exit;
+                pr($_POST);exit;
 
                 $posted["title"] = trim($this->input->post("title"));
                 $posted["txt_email"] = trim($this->input->post("txt_email"));
