@@ -496,7 +496,7 @@ class Newsfeed extends Base_controller {
                     //die($is_abusive);
                     if ($is_abusive > 0) {
                             echo json_encode(array('success' => FALSE, 'feed' => $feed, 'msg' => 'Abusive words are not allowed', 'vid_msg' => ''));
-                        }else if($is_abusive == '' && $is_abusive  == 0 ) {
+                        }else if($message == '' && $is_abusive  == 0 ) {
                     #echo json_encode( array('success'=>FALSE, 'msg'=>"Please enter some text!", 'vid_msg'=>$video_url_messages) );
                     echo json_encode(array('success' => FALSE, 'msg' => "Please enter some text!", 'vid_msg' => $video_url_messages));
                     exit;
