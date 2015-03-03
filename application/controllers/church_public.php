@@ -148,7 +148,7 @@ class Church_public extends Base_controller
 
 
             if ($this->input->post('is_submitted') == 'Y') {
-                pr($_POST);exit;
+                pr($_POST);
 
                 $posted["title"] = trim($this->input->post("title"));
                 $posted["txt_email"] = trim($this->input->post("txt_email"));
@@ -185,10 +185,10 @@ class Church_public extends Base_controller
 //				{
 //				$data['error_chatname']="*your chat name must contain atleast 1 digit.";
 //				}
-				if($containsDigit == 1)
+				/*if($containsDigit == 1)
 				{
 				$data['error_chatname']="*your chat name must contain atleast 1 letter.";
-				}
+				}*/
 				}
 				}
                         /******************************************************/
