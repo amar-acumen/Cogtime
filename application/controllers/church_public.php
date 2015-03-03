@@ -338,6 +338,7 @@ class Church_public extends Base_controller
 								'invitation_sent_date' => get_db_datetime()
 							);
 							$this->db->update('cg_church_member_invitation', $invited_member, array('id' => $_SESSION['invited_member_id']));
+							echo $this->db->last_query();
 							$last_id = $this->db->insert_id();
 						 echo '*******'.$last_id;
 						}
