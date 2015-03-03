@@ -525,7 +525,7 @@ class Church_public extends Base_controller
         $info = $this->users_model->fetch_this($id);
         $USER_ID = $id;
         if ($info['i_status'] == 1) {
-		pr($_SESSION);
+		pr($_SESSION);exit;
 			if($_SESSION['first_login'] == 'yes') {
 				echo '========'.$_SESSION['is_first_login_checked'];exit;
 				$INDEX_PG = base_url() . '?status=active';
