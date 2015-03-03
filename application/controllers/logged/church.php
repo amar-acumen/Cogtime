@@ -639,8 +639,7 @@ function general_setting(){
                            ));*/
 
             $body = htmlspecialchars_decode($mail_info['body'], ENT_QUOTES);
-            //$body = sprintf3( $body, array('churchurl'=> base_url().'church_registration_by_email/'.$_SESSION['logged_church_id'].'/1'
-                           ) );
+            //$body = sprintf3( $body, array('churchurl'=> base_url().'church_registration_by_email/'.$_SESSION['logged_church_id'].'/1) );
 			
             if (($handle = fopen($destfile, "r")) !== FALSE) {
                 while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
