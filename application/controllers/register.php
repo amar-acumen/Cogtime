@@ -426,12 +426,14 @@ The Cogtime Team</p>";
 			$sql1 = "UPDATE {$this->db->USERS} SET is_first_login_checked='1' WHERE id='" . $id . "'";
 			$this->db->query($sql1);
 			$info1 = $this->users_model->fetch_this($id);
+			pr($info1,1)
 			if ($info1['is_first_login_checked'] == 1) {
 			//echo 'fine';
 			die('ok');
 				$INDEX_PG = base_url() . '?status=active';
 				header("location:" . $INDEX_PG);
 			}else{
+			die('error');
             ## AUTO LOGIN for user ##
             //pr($info,1);;
             $this->session->set_userdata('login_referrer', '');
