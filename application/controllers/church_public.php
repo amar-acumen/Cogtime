@@ -263,7 +263,6 @@ class Church_public extends Base_controller
 
 
                 if ($this->form_validation->run() == FALSE || $data['error_zone'] != '' || $data['error_title'] != '' || $data['error_password'] != '' || $data['error_password'] != '' || $data['error_ssc'] != '' || $data['error_chatname'] != '' || $data['dob'] != '') {
-				
                     ////////Display the add form with posted values within it////
                     $this->data["posted"] = $posted; /* don't change */
                 } else {
@@ -291,7 +290,7 @@ class Church_public extends Base_controller
                     $info['s_chat_display_name'] = get_formatted_string($posted['txt_chat_display_name']);
                     $info['s_tweet_id'] = '@' . $info['s_chat_display_name'];
                     $info['dt_dob'] = date('Y-m-d',mktime(0,0,0,$posted["month"],$posted["day"],$posted["year"]));
-                      pr($info,1);
+                      //pr($info,1);
                     $USER_ID = $this->users_model->sign_up($info);
 
 
@@ -319,6 +318,7 @@ class Church_public extends Base_controller
                         }
                         else
                         {
+						echo 'CSV';
                             $data = array(
                                'church_id' => $_SESSION['current_church_id'] ,
                                'member_id' => $USER_ID ,
@@ -332,15 +332,16 @@ class Church_public extends Base_controller
 
 						if (isset($_SESSION['invited_member_id']) && $_SESSION['invited_member_id'] != '')
 						{
-						echo 'invited';
+						echo 'invited===========';
 							$invited_member = array(
 								'status' => 1,
 								'invitation_sent_date' => get_db_datetime()
 							);
 							$this->db->update('cg_church_member_invitation', $invited_member, array('id' => $_SESSION['invited_member_id']));
-						}
-						$last_id = $this->db->insert_id();
+							$last_id = $this->db->insert_id();
 						 echo '*******'.$last_id;
+						}
+						
                         ## end ##
                         //EMAIL SENDING CODE.[start]
 						 $this->load->helper('html');
