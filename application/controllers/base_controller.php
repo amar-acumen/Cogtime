@@ -24,7 +24,8 @@ class Base_controller extends CI_Controller {
     public $translation_container = null;
 
     public function __construct() {
-        try {            
+        try {
+                    
           //  die('ok');
             parent::__construct();
             $this->output->set_header("Cache-Control: private, max-age=60");//for caching 
