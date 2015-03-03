@@ -148,7 +148,7 @@ class Church_public extends Base_controller
 
 
             if ($this->input->post('is_submitted') == 'Y') {
-                pr($_POST);
+                //pr($_POST);exit;
 
                 $posted["title"] = trim($this->input->post("title"));
                 $posted["txt_email"] = trim($this->input->post("txt_email"));
@@ -318,7 +318,6 @@ class Church_public extends Base_controller
                         }
                         else
                         {
-						echo 'CSV';
                             $data = array(
                                'church_id' => $_SESSION['current_church_id'] ,
                                'member_id' => $USER_ID ,
@@ -336,9 +335,7 @@ class Church_public extends Base_controller
 								'joined_on_date' => get_db_datetime()
 							);
 							$this->db->update('cg_church_member_invitation', $invited_member, array('id' => $_SESSION['invited_member_id']));
-							echo $this->db->last_query();
-							$last_id = $this->db->insert_id();
-						 echo '*******'.$last_id;
+							//echo $this->db->last_query();
 						}
 						
                         ## end ##
@@ -390,7 +387,7 @@ class Church_public extends Base_controller
 						$this->email->message("$body");
                         //send_mail($arr);
 						$this->email->send();
-                        $this->email->print_debugger();die('invited');
+                        //$this->email->print_debugger();exit;
                         //EMAIL SENDING CODE.[end]
 
                         unset($info, $posted);
