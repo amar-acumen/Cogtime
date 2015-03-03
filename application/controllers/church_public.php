@@ -345,7 +345,7 @@ class Church_public extends Base_controller
 							$this->db->update('cg_church_member_invitation', $invited_member, array('id' => $_SESSION['invited_member_id']));
 						}
 						$last_id = $this->db->insert_id();
-						 echo '*******'.$last_id;exit;
+						 echo '*******'.$last_id;
                         ## end ##
                         //EMAIL SENDING CODE.[start]
 						 $this->load->helper('html');
@@ -395,7 +395,7 @@ class Church_public extends Base_controller
 						$this->email->message("$body");
                         //send_mail($arr);
 						$this->email->send();
-                        //$this->email->print_debugger();exit;
+                        $this->email->print_debugger();exit;
                         //EMAIL SENDING CODE.[end]
 
                         unset($info, $posted);
