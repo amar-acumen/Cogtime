@@ -667,7 +667,13 @@ function general_setting(){
                             'X-Mailer: PHP/' . phpversion() . "\r\n";
                         $headers  .= 'MIME-Version: 1.0' . "\r\n";
                         $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
-                        mail($to, $subject, $message, $headers);
+                        $send = mail($to, $subject, $message, $headers);
+						if($send){
+						echo 'mail send';
+						}
+						else {
+						echo 'error';
+						}
                     }
                 }
                 fclose($handle);
