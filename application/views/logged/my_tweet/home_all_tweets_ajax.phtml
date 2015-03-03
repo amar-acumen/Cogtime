@@ -1,4 +1,4 @@
- <?php pr($arr_tweets);//pr($arr_tweets[0]['data']);
+ <?php //pr($arr_tweets);//pr($arr_tweets[0]['data']);
 if(count($arr_tweets)){
 	foreach($arr_tweets as $key=> $val){
 		
@@ -9,7 +9,7 @@ if(count($arr_tweets)){
 			$twit_id = getTwitterUsernameById($data->tweet_owner_id);
 			$rt_profile_link = getTwitterProfileLink($twit_id);
 		}
-		echo $profile_image_filename = get_profile_image_of_user('thumb',$val['s_profile_poto'],$val['e_gender']);
+		 $profile_image_filename = get_profile_image_of_user('thumb',$val['s_profile_photo'],$val['e_gender']);
 		$profile_link = getTwitterProfileLink($val['s_tweet_id']);
 		
 		
