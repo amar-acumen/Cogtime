@@ -140,7 +140,7 @@
                             <h4>My Prayer Requests &amp; Commitments</h4>
                         </div>
                     </div>
-                    <div id="prayer_result_div"><?= //$prayer_req_ajax_content ?></div>
+                    <div id="prayer_result_div"><?php //echo $prayer_req_ajax_content ?></div>
                     <?php if ($prayer_no_of_result > 4): ?>
 
                         <div class="view_more" id="show_more_prayer_div"><a href="javascript:void(0);" id="show_more_prayer_link" page_value="<?= $prayer_current_page ?>" onclick="show_more_prayer($(this).attr('page_value'))">[view more] </a> </div>
