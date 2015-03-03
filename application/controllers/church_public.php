@@ -520,7 +520,90 @@ class Church_public extends Base_controller
     }
 
     public function signup_confirm($id, $code) {
-        
+        $sql = "UPDATE {$this->db->USERS} SET i_status=1 WHERE id='" . $id . "' AND s_verification_code='" . $code . "'";
+        $this->db->query($sql);
+        $info = $this->users_model->fetch_this($id);
+        $USER_ID = $id;
+		//echo '====='.$info['i_status'];exit;
+        if ($info['i_status'] == 1) {
+		//pr($_SESSION);exit;
+			if($_SESSION['first_login'] == 'yes') {
+				echo '========'.$_SESSION['is_first_login_checked'];exit;
+				$INDEX_PG = base_url() . '?status=active';
+				header("location:" . $INDEX_PG);
+			}
+			else {
+			//echo 'ELSESELSE';exit;
+            ## AUTO LOGIN for user ##
+            //pr($info,1);;
+            $this->session->set_userdata('login_referrer', '');
+            $this->session->set_userdata('loggedin', true);
+            $this->session->set_userdata('user_id', encrypt($USER_ID));
+            $this->session->set_userdata('username', $info["s_first_name"]);
+            $this->session->set_userdata('user_type', $info["i_user_type"]);
+            $this->session->set_userdata('email', $info["s_email"]);
+            $this->session->set_userdata('user_lastname', $info["s_last_name"]);
+            $this->session->set_userdata('is_admin', $info["i_is_admin"]);
+
+            #### first login show salavation message ###
+            $this->session->set_userdata('first_login', 'yes');
+            $this->users_model->set_user_online($USER_ID, $_SERVER['REMOTE_ADDR']);
+
+            $this->session->set_userdata('upassword', $info["s_password"]);
+            $this->session->set_userdata('IMuserid', ($info["id"]));
+
+            $this->session->set_userdata('unique_username', $info["s_profile_url_suffix"]);
+            $this->session->set_userdata('display_username', $info["s_chat_display_name"]);
+
+            //$_SESSION['username'] = 'jhon';
+			//echo '========'.$_SESSION['first_login'];exit;
+            ### generating five fruits
+            $this->load->model('bible_fruits_model');
+            $this->bible_fruits_model->generate_fruit_list_per_user_id_date();
+            ### generating five fruits
+
+            $this->session->set_userdata('is_first_login_checked', 'false');
+			 $this->load->helper('html');
+			$this->load->library('email');
+            $this->load->model('mail_contents_model');
+            $mail_info = $this->mail_contents_model->get_by_name("acknowledgement");
+            $body = htmlspecialchars_decode($mail_info['body'], ENT_QUOTES);
+
+            $body = sprintf3($body, array('email' => $info["s_email"],
+                /* 'password'=>$posted["txt_password"], */
+                'member_name' => $info["s_first_name"],
+                'url' => base_url()
+                    ));
+
+		$email_setting  = array('mailtype'=>'html','charset'  => 'utf-8',
+                  'priority' => '1');
+				  $this->email->initialize($email_setting);
+            //echo $body;
+
+            $arr['subject'] = htmlspecialchars_decode($mail_info['subject'], ENT_QUOTES);
+            $arr['to'] = $info["s_email"];
+            //$arr['bcc']        = 'aradhana.online19@gmail.com';
+            $arr['from_email'] = 'no-reply@cogtime.com';
+            $arr['from_name'] = 'admin@cogtime.com'; //$this->site_settings_model->get('s_mail_from_name');
+            $arr['message'] = $body;
+            //pr($arr); exit;
+			$this->email->from( $arr['from_email'], $arr['from_name']);
+					$this->email->subject($arr['subject']);
+						
+						$this->email->to($arr['to']);
+						$this->email->bcc($arr['bcc']);
+						$this->email->message("$body");
+                        //send_mail($arr);
+						$this->email->send();
+           // send_mail($arr);
+            // $this->set_user_online($USER_ID, $_SERVER['REMOTE_ADDR']);
+            $SUCCESS_PG = base_url() . 'my-wall.html'; #."inscription-success.html";
+
+            header("location:" . $SUCCESS_PG);
+			}
+        } else {
+            header("location:" . base_url());
+        }
     }
 
  
