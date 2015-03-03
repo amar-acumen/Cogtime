@@ -338,6 +338,7 @@ class Church_public extends Base_controller
 
 						if (isset($_SESSION['invited_member_id']) && $_SESSION['invited_member_id'] != '')
 						{
+						echo 'invited';
 							$invited_member = array(
 								'status' => 1,
 								'invitation_sent_date' => get_db_datetime()
