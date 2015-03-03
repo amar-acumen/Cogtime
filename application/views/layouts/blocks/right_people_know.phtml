@@ -9,8 +9,7 @@
                                     </div>
                                     <div class="content" id="switchdiv022" style="display:none;">
 									<?php 
- $friends='';//get_friends_by_id($_SESSION['user_id']);
- 
+ $friends=get_friends_by_id($_SESSION['user_id']);
  if($friends != 0)
  {
  $val=get_mutual_friends($_SESSION['user_id']);
