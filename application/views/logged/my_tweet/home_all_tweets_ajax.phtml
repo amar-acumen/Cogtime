@@ -9,7 +9,7 @@ if(count($arr_tweets)){
 			$twit_id = getTwitterUsernameById($data->tweet_owner_id);
 			$rt_profile_link = getTwitterProfileLink($twit_id);
 		}
-		$profile_image_filename = get_profile_image_of_user('thumb',$val['s_profile_poto'],$val['e_gender']);
+		echo $profile_image_filename = get_profile_image_of_user('thumb',$val['s_profile_poto'],$val['e_gender']);
 		$profile_link = getTwitterProfileLink($val['s_tweet_id']);
 		
 		
