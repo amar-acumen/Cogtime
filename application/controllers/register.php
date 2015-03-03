@@ -427,16 +427,13 @@ The Cogtime Team</p>";
 			$this->db->query($sql1);
 			$info1 = $this->db->query('select * from cg_users where id= "'.$id.'"');
 			$res = $info1->result();
-			pr($res,1);
-			if ($res['is_first_login_checked'] == 1) {
-			//echo 'fine';
-			die('ok');
+			//pr($res,1);
+			if ($res[0]->is_first_login_checked == 1) {
+			
 				$INDEX_PG = base_url() . '?status=active';
 				header("location:" . $INDEX_PG);
 			}else{
-			die('error');
-            ## AUTO LOGIN for user ##
-            //pr($info,1);;
+			
             $this->session->set_userdata('login_referrer', '');
             $this->session->set_userdata('loggedin', true);
             $this->session->set_userdata('user_id', encrypt($USER_ID));
