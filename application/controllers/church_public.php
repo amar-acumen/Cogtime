@@ -524,6 +524,7 @@ class Church_public extends Base_controller
         $this->db->query($sql);
         $info = $this->users_model->fetch_this($id);
         $USER_ID = $id;
+		echo '====='.$info['i_status'];exit;
         if ($info['i_status'] == 1) {
 		pr($_SESSION);exit;
 			if($_SESSION['first_login'] == 'yes') {
