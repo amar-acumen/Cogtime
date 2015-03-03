@@ -28,7 +28,7 @@ class Base_controller extends CI_Controller {
             
           //  die('ok');
             parent::__construct();
-
+            $this->output->set_header("Cache-Control: private, max-age=60");//for caching 
             $this->_set_timezone();
             $this->load->helper('common_helper');
             //$this->load->helper('chat_helper'); 
