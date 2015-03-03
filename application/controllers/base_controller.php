@@ -4428,7 +4428,8 @@ if($type == 'organizer-day-view' || $type == 'organizer-week-view' || $type == '
 
         $zone_val = $this->input->post('zone_val');
         $time = getUserLocalTime($zone_val);
-        $time_html = 'Time: ' . $time;
+        //$time_html = 'Time: ' . $time;
+        $time_html = $time;
         echo json_encode(array('result' => 'success', 'time' => $time_html));
         exit;
     }
