@@ -427,9 +427,11 @@ The Cogtime Team</p>";
 			$this->db->query($sql1);
 			$info1 = $this->users_model->fetch_this($id);
 			if ($info1['is_first_login_checked'] == 1) {
+			//echo 'fine';
+			die('ok');
 				$INDEX_PG = base_url() . '?status=active';
 				header("location:" . $INDEX_PG);
-			}
+			}else{
             ## AUTO LOGIN for user ##
             //pr($info,1);;
             $this->session->set_userdata('login_referrer', '');
@@ -495,6 +497,7 @@ The Cogtime Team</p>";
             $SUCCESS_PG = base_url() . 'my-wall.html'; #."inscription-success.html";
 
             header("location:" . $SUCCESS_PG);
+			}
         } else {
             header("location:" . base_url());
         }
