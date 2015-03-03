@@ -108,10 +108,10 @@ class Register extends Base_controller {
 //				{
 //				$data['error_chatname']="*your chat name must contain atleast 1 digit.";
 //				}
-				if($containsDigit == 1)
+				/*if($containsDigit == 1)
 				{
 				$data['error_chatname']="*your chat name must contain atleast 1 letter.";
-				}
+				}*/
 				}
 				}
                         /******************************************************/
