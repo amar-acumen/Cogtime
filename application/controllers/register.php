@@ -418,8 +418,6 @@ The Cogtime Team</p>";
     }
 
     public function signup_confirm($id, $code) {
-	pr($_SESSION);
-	echo '========'.$_SESSION['first_login'];exit;
         $sql = "UPDATE {$this->db->USERS} SET i_status=1 WHERE id='" . $id . "' AND s_verification_code='" . $code . "'";
         $this->db->query($sql);
         $info = $this->users_model->fetch_this($id);
