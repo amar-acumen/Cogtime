@@ -52,7 +52,7 @@ var photos = $('input[name="photo[]"]').map(function(){
 			 //$('#show_more_div').hide();
 			 $('#mid_container').append('<div class="view_more" id="show_more_div"><a href="javascript:void(0);" id="show_more_tweets_link" page_value="'+cur_page+'" onclick="show_more_tweets('+cur_page+')">[view more] </a> </div>');
 		}
-	show_video();
+	//show_video();
     }
 	 
    hideUILoader_nodialog();
