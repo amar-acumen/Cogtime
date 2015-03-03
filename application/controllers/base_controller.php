@@ -27,9 +27,9 @@ class Base_controller extends CI_Controller {
         try {                    
           //  die('ok');
             parent::__construct();
-            $this->output->set_header("Cache-Control: private, max-age=60");//for caching 
-            $this->output->set_header("Date: ".gmdate('D, d M Y H:i:s \G\M\T', time() + 0));
-            $this->output->set_header("Expires: ".gmdate('D, d M Y H:i:s \G\M\T', time() + 60));
+            //$this->output->set_header("Cache-Control: private, max-age=60");//for caching 
+            //$this->output->set_header("Date: ".gmdate('D, d M Y H:i:s \G\M\T', time() + 0));
+            //$this->output->set_header("Expires: ".gmdate('D, d M Y H:i:s \G\M\T', time() + 60));
             $this->_set_timezone();
             $this->load->helper('common_helper');
             //$this->load->helper('chat_helper'); 
