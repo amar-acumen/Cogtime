@@ -69,8 +69,18 @@
                                           
                                         </div><span class="error-message" id="err_blog_desc"></span>
                                         <div class="clr"></div>
+                                         <p style=" clear:both; float:left"> <span id="text_count"><?php echo strlen($blogdata[0]['s_description']) ?></span> Characters</p>
                                       <input name="" type="submit" class="wall-comment-submit-nw " value="Update" onclick="" />
                                     </form>
+                                                                        <script type="text/javascript">
+   $(document).ready(function(){
+// $("#text_countt").html('500')
+$("#blog_desc").keyup(function(){
+$("#text_count").text("Characters left: " + (500 - $(this).val().length));
+});
+});
+
+  </script>
                                  </div>
                             </div> 
                             
