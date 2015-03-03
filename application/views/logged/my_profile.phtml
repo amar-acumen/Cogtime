@@ -752,6 +752,7 @@ $(document).ready(function(){
     switch(val.substring(val.lastIndexOf('.') + 1).toLowerCase()){
         case 'gif': case 'jpg': case 'png':  case 'jpeg':
             alert("an image");
+             $('#err_profile_pic').html('');
             break;
         default:
             $(this).val('');
