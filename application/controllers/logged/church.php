@@ -658,7 +658,6 @@ function general_setting(){
 						$add_mem_id = $this->db->insert_id();
 						$body .= sprintf3( $body, array('churchurl'=> base_url().'church_registration_by_email/'.$_SESSION['logged_church_id'].'/1/'.$add_mem_id) );
 					}
-					echo $body;
                     for ($c=0; $c < 1; $c++) {
                         $to      = $data[$c];
                         $subject = $subject;
