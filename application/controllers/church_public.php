@@ -211,7 +211,7 @@ class Church_public extends Base_controller
                 $this->form_validation->set_rules('txt_chat_display_name', 'txt_chat_display_name', 'trim|required|callback_check_availability|callback_check_void_space_chat_name');
                    
                  /************************Arif***************************/
-                        $this->form_validation->set_rules('day', 'Birth date', 'trim|required'); 
+            $this->form_validation->set_rules('day', 'Birth date', 'trim|required'); 
 			$this->form_validation->set_rules('month','Birth date', 'trim|required'); 
 			$this->form_validation->set_rules('year', 'Birth date', 'trim|required'); 
                         /***************************************************/
@@ -345,7 +345,7 @@ class Church_public extends Base_controller
 							$this->db->update('cg_church_member_invitation', $invited_member, array('id' => $_SESSION['invited_member_id']));
 						}
 						$last_id = $this->db->insert_id();
-						 echo '*******'.$last_id;
+						 echo '*******'.$last_id;exit;
                         ## end ##
                         //EMAIL SENDING CODE.[start]
 						 $this->load->helper('html');
