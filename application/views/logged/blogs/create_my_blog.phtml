@@ -60,8 +60,18 @@
                                           
                                         </div><span class="error-message" id="err_blog_desc"></span>
                                         <div class="clr"></div>
+                                        <p style=" clear:both; float:left"> <span id="text_count">500</span> Characters</p>
                                       <input name="" type="submit" class="wall-comment-submit" value="Create" onclick="" />
                                     </form>
+  <script type="text/javascript">
+   $(document).ready(function(){
+// $("#text_countt").html('500')
+$("#blog_desc").keyup(function(){
+$("#text_count").text("Characters left: " + (500 - $(this).val().length));
+});
+});
+
+  </script>
                                      <!--<div style="text-align:right;"><input name="" type="button" value="Post" class="btn" /></div> -->
                                  </div>
                             </div> 
