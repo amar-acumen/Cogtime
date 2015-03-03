@@ -56,12 +56,22 @@
                                         </div>
                                         <div class="clr"></div>
                                         <div class="wall-comment-box" style="height: 98px;">
-                                          <textarea name="blog_desc" id="blog_desc" cols="" rows="" onfocus="if(this.value=='Max 500 Characters')this.value='';" onblur="if(this.value=='')this.value='Max 500 Characters';" >Max 500 Characters</textarea>
+                                            <textarea name="blog_desc" id="blog_desc" cols="" rows="" maxlength="500" onfocus="if(this.value=='Max 500 Characters')this.value='';" onblur="if(this.value=='')this.value='Max 500 Characters';" >Max 500 Characters</textarea>
                                           
                                         </div><span class="error-message" id="err_blog_desc"></span>
                                         <div class="clr"></div>
+                                        <p style=" clear:both; float:left"> <span id="text_count">500</span> Characters</p>
                                       <input name="" type="submit" class="wall-comment-submit" value="Create" onclick="" />
                                     </form>
+  <script type="text/javascript">
+   $(document).ready(function(){
+// $("#text_countt").html('500')
+$("#blog_desc").keyup(function(){
+$("#text_count").text("Characters left: " + (500 - $(this).val().length));
+});
+});
+
+  </script>
                                      <!--<div style="text-align:right;"><input name="" type="button" value="Post" class="btn" /></div> -->
                                  </div>
                             </div> 

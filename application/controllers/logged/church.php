@@ -384,13 +384,13 @@ function unblock_member () {
             ## seacrh conditions : filter ############
 
             $c_id = $_SESSION['logged_church_id'];
-            $where = ' status = "0"';
+            //$where = '';
             $order_by = " id DESC ";
-            $result = $this->church_new_model->get_church_invited_members($c_id,$where,$page, $order_by, $this->pagination_per_page);
+            $result = $this->church_new_model->get_church_invited_members($c_id,$page, $order_by, $this->pagination_per_page);
             $resultCount = count($result);
              //echo $this->db->last_query(); 
             
-            $total_rows = $this->church_new_model->get_church_invited_members_count($c_id,$where);
+            $total_rows = $this->church_new_model->get_church_invited_members_count($c_id);
 
             if ((!is_array($result) || !count($result) ) && $total_rows) {
                 $page = $page - $this->pagination_per_page;
@@ -1558,15 +1558,14 @@ echo json_encode( array('success'=>'true'));
 					'invitation_sent_date' => get_db_datetime()
 				);
 				$this->db->insert('cg_church_member_invitation', $invited_member);
-				$id = $this->db->insert_id();
+				$invte_id = $this->db->insert_id(); 
 				
 				$this->load->model('mail_contents_model');
 				$mail_info = $this->mail_contents_model->get_by_name("church_community_invitation_mail");
 
 				$subject = htmlspecialchars_decode($mail_info['subject'], ENT_QUOTES);
 				$body = htmlspecialchars_decode($mail_info['body'], ENT_QUOTES);
-				$body = sprintf3( $body, array('churchurl'=> base_url().'church_registration_by_email/'.$_SESSION['logged_church_id'].'/1'
-                           ) );
+				$body = sprintf3( $body, array('churchurl'=> base_url().'church_registration_by_email/'.$_SESSION['logged_church_id'].'/1/'.$invte_id) );
 						   
 				$to      = $invite_val[$i][1];
 				$subject = $subject;

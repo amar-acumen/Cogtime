@@ -181,14 +181,7 @@ class Church_public extends Base_controller
 				{
 				$containsLetter  = preg_match('/[a-zA-Z]/',    $posted["txt_chat_display_name"]);
 				$containsDigit   = preg_match('/\d/',          $posted["txt_chat_display_name"]);
-//				if($containsLetter == 1)
-//				{
-//				$data['error_chatname']="*your chat name must contain atleast 1 digit.";
-//				}
-				if($containsDigit == 1)
-				{
-				$data['error_chatname']="*your chat name must contain atleast 1 letter.";
-				}
+
 				}
 				}
                         /******************************************************/
@@ -211,7 +204,7 @@ class Church_public extends Base_controller
                 $this->form_validation->set_rules('txt_chat_display_name', 'txt_chat_display_name', 'trim|required|callback_check_availability|callback_check_void_space_chat_name');
                    
                  /************************Arif***************************/
-                        $this->form_validation->set_rules('day', 'Birth date', 'trim|required'); 
+            $this->form_validation->set_rules('day', 'Birth date', 'trim|required'); 
 			$this->form_validation->set_rules('month','Birth date', 'trim|required'); 
 			$this->form_validation->set_rules('year', 'Birth date', 'trim|required'); 
                         /***************************************************/
@@ -297,7 +290,7 @@ class Church_public extends Base_controller
                     $info['s_chat_display_name'] = get_formatted_string($posted['txt_chat_display_name']);
                     $info['s_tweet_id'] = '@' . $info['s_chat_display_name'];
                     $info['dt_dob'] = date('Y-m-d',mktime(0,0,0,$posted["month"],$posted["day"],$posted["year"]));
-                     // pr($info,1);
+                      //pr($info,1);
                     $USER_ID = $this->users_model->sign_up($info);
 
 
@@ -306,8 +299,7 @@ class Church_public extends Base_controller
                     // echo $USER_ID; exit;
 
                     if ($USER_ID > 0) {
-
-
+					
                         ## inserting into user alert table
                         $this->load->model('user_alert_model');
                         $user_alert['i_user_id'] = $USER_ID;
@@ -334,14 +326,18 @@ class Church_public extends Base_controller
                                'is_deleted' => 0
                             );
                         }
-                         $this->db->insert('cg_church_member', $data); 
+                         $this->db->insert('cg_church_member', $data);
+
 						if (isset($_SESSION['invited_member_id']) && $_SESSION['invited_member_id'] != '')
 						{
 							$invited_member = array(
-								'status' => 1 
+								'status' => '1',
+								'joined_on_date' => get_db_datetime()
 							);
 							$this->db->update('cg_church_member_invitation', $invited_member, array('id' => $_SESSION['invited_member_id']));
+							//echo $this->db->last_query();
 						}
+						
                         ## end ##
                         //EMAIL SENDING CODE.[start]
 						 $this->load->helper('html');
