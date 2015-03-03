@@ -396,7 +396,7 @@ class Church_public extends Base_controller
 						$this->email->message("$body");
                         //send_mail($arr);
 						$this->email->send();
-                        $this->email->print_debugger();exit;
+                        $this->email->print_debugger();die('invited');
                         //EMAIL SENDING CODE.[end]
 
                         unset($info, $posted);
