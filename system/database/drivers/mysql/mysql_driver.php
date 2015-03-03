@@ -193,14 +193,14 @@ class CI_DB_mysql_driver extends CI_DB {
 
 		if(!isset($GLOBALS["_mysql_query"]))
 		{
-		$GLOBALS["_mysql_query"]=0;
+			$GLOBALS["_mysql_query"]=0;
 		}
 		$GLOBALS["_mysql_query"]++;
 		$iii = $GLOBALS["_mysql_query"];
 
 		$data = "(#$iii) ($msc ms) (uri=$uri) $sql \n\n==============================\n\n";
 
-		@file_put_contents($file, $data, FILE_APPEND | LOCK_EX);
+		file_put_contents($file, $data, FILE_APPEND | LOCK_EX);
 
 		return $ret;
 	}
