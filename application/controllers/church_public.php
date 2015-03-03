@@ -327,15 +327,13 @@ class Church_public extends Base_controller
                                'is_deleted' => 0
                             );
                         }
-                         $this->db->insert('cg_church_member', $data); 
-						 echo '========'.$_SESSION['invited_member_id'];
+                         $this->db->insert('cg_church_member', $data);
 
 						if (isset($_SESSION['invited_member_id']) && $_SESSION['invited_member_id'] != '')
 						{
-						echo 'invited===========';
 							$invited_member = array(
-								'status' => 1,
-								'invitation_sent_date' => get_db_datetime()
+								'status' => '1',
+								'joined_on_date' => get_db_datetime()
 							);
 							$this->db->update('cg_church_member_invitation', $invited_member, array('id' => $_SESSION['invited_member_id']));
 							echo $this->db->last_query();
