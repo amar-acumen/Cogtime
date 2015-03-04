@@ -2436,6 +2436,15 @@ width: 89px;}
 }
 #register_l .frm_box .field01 input[type="text"] {
 	width:300px;
+	background: url("../images/fld.png") repeat-x scroll 0 0 #ffffff;
+border: 1px solid #d3d3d3;
+color: #48535a;
+font-family: "GibsonRegular";
+font-size: 12px;
+font-weight: normal;
+height: auto;
+margin: 0;
+padding: 3px 5px;
 }
 #register_r p {
 	font-size:14px;
@@ -2576,4 +2585,102 @@ width: 89px;}
 	width:230px;
 	height:auto;
 	float:left;
+}
+
+.church-register-main {
+	margin-bottom:20px;
+	padding-top:20px;
+	border-top:1px solid #ccc;
+	display:block;
+	font-size:15px;
+	color:#0f4989;
+}
+.church-register-main input[type="radio"] {
+	vertical-align:text-top;
+}
+.frm_box {
+    background-color: #f2f2f2;
+    padding: 10px;
+}
+
+.frm_box {
+	background-color:#f2f2f2;
+	padding:10px;
+}
+.frm_box .lable01 {
+	float:left;
+	width:148px;
+	font-size:12px;
+	line-height:24px;
+	margin:4px 0px;
+	color:#494949;
+	background-color:inherit;
+	font-weight:normal;
+	padding-right:15px;
+	text-align:right;
+}
+.frm_box .lable02 {
+	float:left;
+	width:110px;
+	font-size:12px;
+	line-height:24px;
+	margin:4px 0px;
+	color:#004084;
+	background-color:inherit;
+	padding-right:15px;
+	text-align:right;
+}
+.frm_box .field01 {
+	float:left;
+	width:270px;
+	margin:4px 0px;
+	font-size:12px;
+	line-height:24px;
+}
+.frm_box .field01 img {
+	vertical-align:middle;
+}
+.frm_box .field03 {
+	float:left;
+	width:420px;
+	margin:4px 0px;
+	font-size:12px;
+	line-height:24px;
+}
+.frm_box .field03 input[type=text], frm_box .field03 textarea {
+	width:400px;
+}
+.frm_box .field04 {
+	float:left;
+	width:220px;
+	margin:4px 0px;
+	font-size:12px;
+	line-height:24px;
+}
+.frm_box .field04 input[type=text], frm_box .field03 textarea {
+	width:200px;
+}
+.frm_box .field02 {
+	float:left;
+	width:220px;
+	margin:4px 0px;
+	font-size:12px;
+	line-height:24px;
+}
+.frm_box .error_txt {
+	color:#ff0000;
+	background-color:inherit;
+	font-size:11px;
+}
+.error_txt {
+	color:#ff0000;
+	background-color:inherit;
+}
+
+
+#container {
+    height: auto;
+    margin: 0 auto;
+    padding: 0;
+    width: 1002px;
 }
