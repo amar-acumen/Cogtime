@@ -58,13 +58,13 @@ class Base_controller extends CI_Controller {
                 $this->data['logged_in_state'] = 'Y';
 
                 # get scrolling news #
-                $this->_set_latest_news();
+                //$this->_set_latest_news();
 
 
                 # get total unread messages #
                 $logged_user_id = intval(decrypt($this->session->userdata('user_id')));
                 //$this->_get_total_unread_msgs($logged_user_id);
-               // $this->_set_left_panel_data($logged_user_id);
+                //$this->_set_left_panel_data($logged_user_id);
                // $this->get_user_all_tweets($logged_user_id);
                 //$this->salavtion_popup_content();
 
