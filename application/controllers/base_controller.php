@@ -33,10 +33,10 @@ class Base_controller extends CI_Controller {
             $this->_set_timezone();
             $this->load->helper('common_helper');
             //$this->load->helper('chat_helper'); 
-            $this->load->model('projects_model');
+            //$this->load->model('projects_model');
             $this->load->model('site_settings_model');
             $this->load->model('events_model');
-            $this->data['site_settings_arr'] = $this->site_settings_model->get_by_id(1);
+            $this->data['site_settings_arr'] = array();//$this->site_settings_model->get_by_id(1);
 
             //pr($this->data['site_settings_arr']);
             /* values required for all controllers will be generated here */
