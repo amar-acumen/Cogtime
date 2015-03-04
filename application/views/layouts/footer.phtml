@@ -477,7 +477,17 @@ window.onload=function(){
     get_unread_msg();
     setInterval(function(){get_unread_msg()},59000);
     
-    
+    <?php
+    if($latest_emergency_intercession)
+    {
+        ?>
+        getPrayerClickCommit('<?= $latest_emergency_intercession[0]['id'] ?>');
+        setInterval(function() {
+            getPrayerClickCommit('<?= $latest_emergency_intercession[0]['id'] ?>')
+        }, 59000);
+        <?php
+    }
+    ?>
    
 }
 
