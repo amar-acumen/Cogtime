@@ -1319,10 +1319,10 @@ class Base_controller extends CI_Controller {
         $this->load->model('prayer_group_model');
         $this->load->model('my_ring_model');
 
-        $prayer_count = $this->my_prayer_partner_model->total_pending_prayer_partner_recieved($i_profile_id);
-        $netpal_count = $this->netpals_model->total_pending_netpal_received($i_profile_id);
-        $friend_count = $this->contacts_model->total_pending_friend_recieved($i_profile_id);
-        $prayergrp_notification_count = $this->prayer_group_model->get_total_pending_groups_requests($i_profile_id);
+        $prayer_count = 0;//$this->my_prayer_partner_model->total_pending_prayer_partner_recieved($i_profile_id);
+        $netpal_count = 0;//$this->netpals_model->total_pending_netpal_received($i_profile_id);
+        $friend_count = 0;//$this->contacts_model->total_pending_friend_recieved($i_profile_id);
+        $prayergrp_notification_count = 0;//$this->prayer_group_model->get_total_pending_groups_requests($i_profile_id);
 
         $wh_ring_inv_count = ' AND r.i_invited_id="' . $i_profile_id . '"';
         $wh = " AND rg.i_user_id = '" . $i_profile_id . "'";
@@ -1331,7 +1331,7 @@ class Base_controller extends CI_Controller {
                 $this->my_ring_model->gettotal_ring_inv_nw($wh_ring_inv_count);
 
 
-        $prayer_room_notification_count = $this->prayer_group_model->getTotalPrayerRoom($i_profile_id);
+        $prayer_room_notification_count = 0;//$this->prayer_group_model->getTotalPrayerRoom($i_profile_id);
 
         $arr_profile_info['prayer_count'] = $prayer_count;
         $arr_profile_info['netpal_count'] = $netpal_count;
@@ -3862,7 +3862,7 @@ if($type == 'organizer-day-view' || $type == 'organizer-week-view' || $type == '
         $this->load->model("manage_advertisement_model");
         $s_where = " WHERE A.i_status  = 1 and A.p_loc ='$type'";
         $order_by = " `id` DESC ";
-        $this->data['advertisement_detail'] = $this->manage_advertisement_model->fetch_multi($s_where, 0, 1, $order_by);
+        $this->data['advertisement_detail'] = array();//$this->manage_advertisement_model->fetch_multi($s_where, 0, 1, $order_by);
 
         #pr($this->data['advertisement_detail']);
     }
