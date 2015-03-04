@@ -473,6 +473,7 @@ $('#user_local_time').html(timestring);
 }
 
 window.onload=function(){
+    startChatSession();
     get_user_clock();
     get_unread_msg();
     setInterval(function(){get_unread_msg()},59000);
