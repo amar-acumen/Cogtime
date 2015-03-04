@@ -88,46 +88,46 @@ class My_wall extends Base_controller {
             $this->session->unset_userdata('first_login');
             #### FOR THE FIRST LOGIN ONLY after registration 
 
-            $data['is_first_login_in_a_day'] = '';
+            $data['is_first_login_in_a_day'] = array();
 
             if ($this->session->userdata('is_first_login_checked') == 'false') {
-                $data['is_first_login_in_a_day'] = '';//$this->users_model->check_user_first_login_in_a_day($i_profile_id);
+                $data['is_first_login_in_a_day'] = array();//$this->users_model->check_user_first_login_in_a_day($i_profile_id);
                 //echo $data['is_first_login_in_a_day'];
             }
 
 
             if ($data['is_first_login_in_a_day'] == 'true') {
                 //$this->bible_fruits_model->generate_fruit_list_per_user_id_date();
-                $data['five_fruits_arr'] =	'';// $this->bible_fruits_model->get_fruit_list($i_profile_id);
+                $data['five_fruits_arr'] =	array();// $this->bible_fruits_model->get_fruit_list($i_profile_id);
             } else {
-                $data['five_fruits_arr'] = ''; //$this->bible_fruits_model->get_fruit_list($i_profile_id);
+                $data['five_fruits_arr'] = array(); //$this->bible_fruits_model->get_fruit_list($i_profile_id);
             }
             
 
 
             $s_inter_where = 'WHERE 1 AND i.i_is_enable  = 1 AND i.e_request_type = "On Going"';
-            $data['latest_intercession'] = '';//$this->intercession_model->get_all_intercession($s_inter_where, 0, 1);
+            $data['latest_intercession'] = array();//$this->intercession_model->get_all_intercession($s_inter_where, 0, 1);
 
             /* 	$rand_verse_id = rand(1, 31102);
               $s_verse_where = " AND v.id =  {$rand_verse_id}";
               $data['rand_bible_verse'] = $this->holy_place_model->get_bible($s_verse_where); */
 
-            $data['rand_bible_verse'] = '';//$this->holy_place_model->getDayverse();
+            $data['rand_bible_verse'] = array();//$this->holy_place_model->getDayverse();
 
 
             #### prayer click
             $curr_date = date('Y-m-d h:i:s');
 
             $emergncy_whr = 'WHERE 1 AND i.i_is_enable  = 1 AND i.e_request_type = "Emergency" AND DATE(i.dt_end_date) >= "' . $curr_date . '"';
-            $data['latest_emergency_intercession'] =''; //$this->intercession_model->get_all_intercession($emergncy_whr, 0, 1);
+            $data['latest_emergency_intercession'] =array(); //$this->intercession_model->get_all_intercession($emergncy_whr, 0, 1);
 
             if (count($data['latest_emergency_intercession'])) {
-                $data['total_commits'] = '';//$this->intercession_model->get_total_by_request_id($data['latest_emergency_intercession'][0]['id']);
-                $data['isCommitExists'] = '';//$this->intercession_model->CheckIfCommitexists($data['latest_emergency_intercession'][0]['id'], $i_profile_id);
+                $data['total_commits'] = array();//$this->intercession_model->get_total_by_request_id($data['latest_emergency_intercession'][0]['id']);
+                $data['isCommitExists'] = array();//$this->intercession_model->CheckIfCommitexists($data['latest_emergency_intercession'][0]['id'], $i_profile_id);
             }
 
 
-            $skippedPrayerClick = '';//$this->intercession_model->getSkippedPrayerClick_IDs();
+            $skippedPrayerClick = array();//$this->intercession_model->getSkippedPrayerClick_IDs();
             // pr($skippedPrayerClick);
 
             if (in_array($data['latest_emergency_intercession'][0]['id'], $skippedPrayerClick))
@@ -153,14 +153,14 @@ class My_wall extends Base_controller {
             $content = ob_get_contents();
             $content_obj = json_decode($content);*/
             $data['prayer_req_ajax_content'] = array();//$content_obj->html;
-            $data['prayer_no_of_result'] = '';$content_obj->no_of_result;
+            $data['prayer_no_of_result'] = array();$content_obj->no_of_result;
             ob_end_clean();
             ## prayer request
             ##project section
             $id = intval(decrypt($this->session->userdata('user_id')));
             $data['user_id'] = $id;
             $data['my_projects'] = array();//$this->projects_model->get_my_project($id); //charity project is hidden now
-            $data['my_project_count'] = '';//$this->projects_model->get_my_project_count($id);//charity project is hidden now
+            $data['my_project_count'] = array();//$this->projects_model->get_my_project_count($id);//charity project is hidden now
 
             
             //code for netpal qualification mail sent start
