@@ -633,7 +633,7 @@ function general_setting(){
             $this->load->model('mail_contents_model');
             $mail_info = $this->mail_contents_model->get_by_name("church_community_invitation_mail");
 
-            $subject = htmlspecialchars_decode($mail_info['subject'], ENT_QUOTES);
+            $subject = 'test';
             /*$subject = sprintf3( $subject, array('sender_name'=> $profile_info["s_first_name"],
                               'project_name'=> $project_name
                            ));*/
