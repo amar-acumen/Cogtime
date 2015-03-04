@@ -1,7 +1,7 @@
        
 <table width="100%" border="0" cellspacing="0" cellpadding="0" class="admin-table">
                           <tr>
-                            <th align="center" valign="middle" height="30" width="140">Banner Image</th>
+                            <th align="center" valign="middle" height="30" width="140">Banner Image1</th>
                             <th align="left" valign="middle" height="30" width="240">Title</th>
                             <th align="left" valign="middle" height="30" width="470">Text</th>
                             <th align="center" valign="middle" height="30" class="last"  width="30">Actions</th>
@@ -35,9 +35,9 @@
                             <td align="left" valign="top"><?=$title ?></td>
                             <td align="left" valign="top"><?= $desc ?> </td>
                             <td align="center" valign="middle" class="last"><input name="" title="Edit" type="button" class="edit-button"  value="" onclick="window.location='<?= admin_base_url() ?>site_settings/hp_banners/edit_information/<?= $id;?>'"/>
-                           <?php if($SHOW == '1'){?>
+                           
                                  <input name="" title="Delete" type="button" class="delete-button"  value="" onclick="delete_confirm_(<?= $id ?>);"/>
-                             <?php } ?>
+                            
                             </td>
                            
                           </tr>
