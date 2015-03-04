@@ -80,8 +80,8 @@ class My_wall extends Base_controller {
 			/**********************************************/
             $data['page_view_type'] = 'myaccount';
             $this->load->model('users_model');
-            $arr_profile_info = $this->users_model->fetch_this($i_profile_id);
-            $data['arr_profile_info'] = $arr_profile_info;
+            //$arr_profile_info = $this->users_model->fetch_this($i_profile_id);
+            $data['arr_profile_info'] = array();//$arr_profile_info;
 
             #### FOR THE FIRST LOGIN ONLY after registration 
             $data['first_login'] = $this->session->userdata('first_login');
@@ -91,43 +91,43 @@ class My_wall extends Base_controller {
             $data['is_first_login_in_a_day'] = '';
 
             if ($this->session->userdata('is_first_login_checked') == 'false') {
-                $data['is_first_login_in_a_day'] = $this->users_model->check_user_first_login_in_a_day($i_profile_id);
+                $data['is_first_login_in_a_day'] = '';//$this->users_model->check_user_first_login_in_a_day($i_profile_id);
                 //echo $data['is_first_login_in_a_day'];
             }
 
 
             if ($data['is_first_login_in_a_day'] == 'true') {
-                $this->bible_fruits_model->generate_fruit_list_per_user_id_date();
-                $data['five_fruits_arr'] = $this->bible_fruits_model->get_fruit_list($i_profile_id);
+                //$this->bible_fruits_model->generate_fruit_list_per_user_id_date();
+                $data['five_fruits_arr'] =	'';// $this->bible_fruits_model->get_fruit_list($i_profile_id);
             } else {
-                $data['five_fruits_arr'] = $this->bible_fruits_model->get_fruit_list($i_profile_id);
+                $data['five_fruits_arr'] = ''; //$this->bible_fruits_model->get_fruit_list($i_profile_id);
             }
             
 
 
             $s_inter_where = 'WHERE 1 AND i.i_is_enable  = 1 AND i.e_request_type = "On Going"';
-            $data['latest_intercession'] = $this->intercession_model->get_all_intercession($s_inter_where, 0, 1);
+            $data['latest_intercession'] = '';//$this->intercession_model->get_all_intercession($s_inter_where, 0, 1);
 
             /* 	$rand_verse_id = rand(1, 31102);
               $s_verse_where = " AND v.id =  {$rand_verse_id}";
               $data['rand_bible_verse'] = $this->holy_place_model->get_bible($s_verse_where); */
 
-            $data['rand_bible_verse'] = $this->holy_place_model->getDayverse();
+            $data['rand_bible_verse'] = '';//$this->holy_place_model->getDayverse();
 
 
             #### prayer click
             $curr_date = date('Y-m-d h:i:s');
 
             $emergncy_whr = 'WHERE 1 AND i.i_is_enable  = 1 AND i.e_request_type = "Emergency" AND DATE(i.dt_end_date) >= "' . $curr_date . '"';
-            $data['latest_emergency_intercession'] = $this->intercession_model->get_all_intercession($emergncy_whr, 0, 1);
+            $data['latest_emergency_intercession'] =''; //$this->intercession_model->get_all_intercession($emergncy_whr, 0, 1);
 
             if (count($data['latest_emergency_intercession'])) {
-                $data['total_commits'] = $this->intercession_model->get_total_by_request_id($data['latest_emergency_intercession'][0]['id']);
-                $data['isCommitExists'] = $this->intercession_model->CheckIfCommitexists($data['latest_emergency_intercession'][0]['id'], $i_profile_id);
+                $data['total_commits'] = '';//$this->intercession_model->get_total_by_request_id($data['latest_emergency_intercession'][0]['id']);
+                $data['isCommitExists'] = '';//$this->intercession_model->CheckIfCommitexists($data['latest_emergency_intercession'][0]['id'], $i_profile_id);
             }
 
 
-            $skippedPrayerClick = $this->intercession_model->getSkippedPrayerClick_IDs();
+            $skippedPrayerClick = '';//$this->intercession_model->getSkippedPrayerClick_IDs();
             // pr($skippedPrayerClick);
 
             if (in_array($data['latest_emergency_intercession'][0]['id'], $skippedPrayerClick))
@@ -137,10 +137,10 @@ class My_wall extends Base_controller {
             #### prayer click
             ## NEWSFEED ##
             ob_start();
-            $this->newsfeed_pagination_show_more($i_profile_id);
+            /*$this->newsfeed_pagination_show_more($i_profile_id);
             $content = ob_get_contents();
-            $content_obj = json_decode($content);
-            $data['result_newsfeed_content'] = $content_obj->html;
+            $content_obj = json_decode($content);*/
+            $data['result_newsfeed_content'] = array();//$content_obj->html;
             ob_end_clean();
 
             ## END NEWSFEED ##
@@ -149,22 +149,22 @@ class My_wall extends Base_controller {
 
 
             ob_start();
-            $this->my_all_prayer_request_ajax_pagination($i_profile_id, 0);
+            /*$this->my_all_prayer_request_ajax_pagination($i_profile_id, 0);
             $content = ob_get_contents();
-            $content_obj = json_decode($content);
-            $data['prayer_req_ajax_content'] = $content_obj->html;
-            $data['prayer_no_of_result'] = $content_obj->no_of_result;
+            $content_obj = json_decode($content);*/
+            $data['prayer_req_ajax_content'] = array();//$content_obj->html;
+            $data['prayer_no_of_result'] = '';$content_obj->no_of_result;
             ob_end_clean();
             ## prayer request
             ##project section
             $id = intval(decrypt($this->session->userdata('user_id')));
             $data['user_id'] = $id;
-            $data['my_projects'] = $this->projects_model->get_my_project($id);
-            $data['my_project_count'] = $this->projects_model->get_my_project_count($id);
+            $data['my_projects'] = array();//$this->projects_model->get_my_project($id); //charity project is hidden now
+            $data['my_project_count'] = '';//$this->projects_model->get_my_project_count($id);//charity project is hidden now
 
             
             //code for netpal qualification mail sent start
-            $is_netpal_mail_sent = get_is_netpal_q_mail_sent($i_profile_id);
+           /* $is_netpal_mail_sent = get_is_netpal_q_mail_sent($i_profile_id);
             if ($is_netpal_mail_sent == 0 || $is_netpal_mail_sent == '') {
                 $qualification_params = array();
                 $qualification_params = get_user_netpal_qualifications_by_id($i_profile_id);
@@ -234,7 +234,7 @@ class My_wall extends Base_controller {
                     //send_mail($arr);
                     update_netpal_mail_sent_status($i_profile_id);
                 }
-            }
+            }*/
             //code for netpal qualification mail sent end
             # view file...
 
