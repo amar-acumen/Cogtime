@@ -353,7 +353,7 @@ class Admin_base_controller extends Base_Controller
 		$priv_str = implode(', ',$priviledge_arr);
 		
 		#### get submenu arr by priviledge id ####
-		$where = " AND M.i_prviledge_id in ( ".$priv_str.")";
+		$where = " AND M.i_prviledge_id in ( '".$priv_str."')";
 		$menu_arr = $this->admin_groups_model->getMenuDetail($where);
 		
 		//pr($menu_arr,1);
