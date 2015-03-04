@@ -47,7 +47,7 @@ class My_wall extends Base_controller {
 
     public function index($s_member_type = '') {
         try {
-
+            $GLOBALS["_mysql_query"]=0;
             $posted = array();
             $this->data["posted"] = $posted; /* don't change */
             $data = $this->data;
