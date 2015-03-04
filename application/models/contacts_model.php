@@ -956,7 +956,7 @@ class Contacts_model extends Base_model implements InfModel
    
    public function get_mutual_friends_by_user($i_user_id) {
 	
-	  $ret_=array();
+	  /*$ret_=array();
 	  ### get all friends
 	$s_qry =  " SELECT  group_concat(DISTINCT u.id separator ',') as user_id
 							  FROM 
@@ -1038,8 +1038,44 @@ class Contacts_model extends Base_model implements InfModel
 		  }
 	  }
 	 // pr($common);  
-  return $common;
+  return $common;*/
+  return array();
 	}
+
+
+  /*public function get_mutual_friends_by_user($i_user_id) {
+
+      $s_qry =  " SELECT  group_concat(DISTINCT u.id separator ',') as user_id
+                    FROM 
+                    {$this->db->USER_CONTACTS} c, {$this->db->USERS} u
+                    WHERE 
+                    1
+                    AND c.s_status = 'accepted' 
+                    AND u.i_status=1 
+                    AND
+                    ((c.i_requester_id = {$i_user_id} AND u.id=c.i_accepter_id ) 
+                    OR (c.i_accepter_id = {$i_user_id} AND u.id=c.i_requester_id ))";
+      $result=$this->db->query($s_qry)->result_array();
+      $frnds = explode(',', $result[0]['user_id']);
+      $frndcount = count($frnds);
+
+      for($i=0;$i<$frndcount;$i++){
+          $s_qry =  " SELECT  u.id as mutual_id
+                    FROM 
+                    {$this->db->USER_CONTACTS} c, {$this->db->USERS} u
+                    WHERE 
+                    1
+                    AND c.s_status = 'accepted' 
+                    AND u.i_status=1 
+                    AND
+                    ((c.i_requester_id = {$frnds[$i]} AND u.id=c.i_accepter_id ) 
+                    OR (c.i_accepter_id = {$frnds[$i]} AND u.id=c.i_requester_id ))
+                    AND u.id NOT IN({$result[0]['user_id']})";
+          $result=$this->db->query($s_qry)->result_array();
+          $common[$mutual_ids_arr['0']['user_id']]=$common_ids_arr['0']['cuser_id'];
+      }
+
+  }*/
    public function __destruct()
     {}   
 
