@@ -440,7 +440,8 @@ class Base_controller extends CI_Controller {
 
         $objclass = $router->fetch_class();
         $objmethod = $router->fetch_method();
-
+        echo $objclass;
+        echo $objmethod;
         $this->_add_js_arr($default_js_arr);
 
         if ($this->session->userdata('loggedin') != '' && $this->session->userdata('loggedin') != false && $this->session->userdata('is_admin') == '') {
