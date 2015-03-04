@@ -1297,7 +1297,7 @@ class Base_controller extends CI_Controller {
 		$arr_profile_info['e_want_prayer_partner']=$this->session->userdata('e_want_prayer_partner');
 		$arr_profile_info['e_want_net_pal']=$this->session->userdata('e_want_net_pal');
 		$arr_profile_info['s_time']=$this->session->userdata('s_time');
-        //$arr_profile_info = $this->users_model->fetch_this($i_profile_id);
+        $arr_profile_info = $this->users_model->fetch_this($i_profile_id);
 		//pr($arr_profile_info,1);
 
         $this->load->model('my_prayer_partner_model');
