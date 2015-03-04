@@ -436,6 +436,10 @@ class Base_controller extends CI_Controller {
             'js/production.js' => 'header'
         );
 
+        $router =& load_class('Router', 'core');
+
+        $objclass = $router->fetch_class();
+        $objmethod = $router->fetch_method();
 
         $this->_add_js_arr($default_js_arr);
 
