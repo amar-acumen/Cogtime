@@ -126,8 +126,8 @@ class Module_generate extends CI_Controller {
                     //'js/frontend/logged/tweets/tweet_utilities.js',
                     //'js/frontend/logged/christian_news_js.js',
                     'js/tab.js',
-                    //'js/jquery.flexslider.js'
-                   // ,'js/jquery.eislideshow.js',
+                    'js/jquery.flexslider.js'
+                    ,'js/jquery.eislideshow.js',
                     'js/jquery.hoverIntent.minified.js',
                     'js/jquery.naviDropDown.1.0.js',
                     'js/church_login.js',
