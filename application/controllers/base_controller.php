@@ -441,12 +441,12 @@ class Base_controller extends CI_Controller {
             'js/production.js' => 'header'
         );
 
-        if($objclass == 'index' && $objmethod == 'index'){
+       /* if($objclass == 'index' && $objmethod == 'index'){
             $default_js_arr['js/production/contentslider.js'] = 'header';
         }else{
             $default_js_arr['js/production/stepcarousel.js'] = 'header';
 
-        }
+        }*/
 
 
         $this->_add_js_arr($default_js_arr);
