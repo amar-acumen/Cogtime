@@ -35,7 +35,7 @@ var chatBoxes = new Array();
 //};
 $(document).ready(function() {
     originalTitle = document.title;
-	startChatSession();
+	//startChatSession();
     $([window, document]).blur(function() {
         windowFocus = false;
     }).focus(function() {
