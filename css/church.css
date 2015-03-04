@@ -2436,6 +2436,15 @@ width: 89px;}
 }
 #register_l .frm_box .field01 input[type="text"] {
 	width:300px;
+	background: url("../images/fld.png") repeat-x scroll 0 0 #ffffff;
+border: 1px solid #d3d3d3;
+color: #48535a;
+font-family: "GibsonRegular";
+font-size: 12px;
+font-weight: normal;
+height: auto;
+margin: 0;
+padding: 3px 5px;
 }
 #register_r p {
 	font-size:14px;
@@ -2666,4 +2675,12 @@ width: 89px;}
 .error_txt {
 	color:#ff0000;
 	background-color:inherit;
+}
+
+
+#container {
+    height: auto;
+    margin: 0 auto;
+    padding: 0;
+    width: 1002px;
 }
