@@ -1290,6 +1290,12 @@ class Base_controller extends CI_Controller {
     protected function _set_left_panel_data($i_profile_id) {
         $this->load->model('users_model');
 		$arr_profile_info =array();
+		$arr_profile_info['s_profile_name']=$this->session->userdata('username').' '.$this->session->userdata('user_lastname');
+		$arr_profile_info['s_chat_display_name']=$this->session->userdata('s_chat_display_name');
+		$arr_profile_info['s_bio']=$this->session->userdata('s_bio');
+		$arr_profile_info['id']=decrypt($this->session->userdata('user_id'));
+		$arr_profile_info['e_want_prayer_partner']=$this->session->userdata('e_want_prayer_partner');
+		$arr_profile_info['e_want_net_pal']=$this->session->userdata('e_want_net_pal');
         //$arr_profile_info = $this->users_model->fetch_this($i_profile_id);
 		//pr($arr_profile_info,1);
 
