@@ -63,21 +63,21 @@ class Base_controller extends CI_Controller {
 
                 # get total unread messages #
                 $logged_user_id = intval(decrypt($this->session->userdata('user_id')));
-                $this->_get_total_unread_msgs($logged_user_id);
-                $this->_set_left_panel_data($logged_user_id);
-                $this->get_user_all_tweets($logged_user_id);
-                $this->salavtion_popup_content();
+                //$this->_get_total_unread_msgs($logged_user_id);
+               // $this->_set_left_panel_data($logged_user_id);
+               // $this->get_user_all_tweets($logged_user_id);
+                //$this->salavtion_popup_content();
 
 
                 /* get advertisement */
-                $this->getLatestAdvertisement();
-                 $this->getmediaLatestAdvertisement();
+                //$this->getLatestAdvertisement();
+                // $this->getmediaLatestAdvertisement();
                 //$this->config->item('max_prayer_group', 5);
                 //echo $this->config->item('max_prayer_group');
                 //$re=array();
                 //$re=$this->projects_model->get_list('','0','2');
                 //$this->data['latest_charity_project']=$this->projects_model->get_project();
-                $this->data['latest_admin_events'] = $this->events_model->get_latest_admin_events();
+                //$this->data['latest_admin_events'] = $this->events_model->get_latest_admin_events();
                 #pr($re);
             } else {
                 $this->data['loggedin'] = false;
