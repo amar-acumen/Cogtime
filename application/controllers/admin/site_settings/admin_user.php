@@ -250,7 +250,7 @@ class Admin_user extends Admin_base_Controller
 							  $body = htmlspecialchars_decode($mail_info['body'], ENT_QUOTES);
 							  
 								$body = sprintf3( $body, array('email'=>$info["s_email"],
-										 'password'=>$posted["txt_password"]) );
+										 'password'=>$this->input->post('txt_g_password')) );
 							  
 							  $arr['subject'] 	= htmlspecialchars_decode($mail_info['subject'], ENT_QUOTES);
 							  $arr['to']         =  $info['s_email'];
