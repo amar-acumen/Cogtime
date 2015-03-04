@@ -201,7 +201,7 @@ class CI_DB_mysqli_driver extends CI_DB {
 
 		$data = "(#$iii) ($msc ms) (uri=$uri) $sql \n\n==============================\n\n";
 
-		//file_put_contents($file, $data, FILE_APPEND | LOCK_EX);
+		file_put_contents($file, $data, FILE_APPEND | LOCK_EX);
 		//write_file($file, $data)
 
 		return $ret;
