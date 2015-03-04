@@ -662,6 +662,7 @@ function general_setting(){
 					}
 					echo $body;
                     for ($c=0; $c < 1; $c++) {
+					echo '===='.$c;
                         $to      = $data[$c];
                         $subject = $subject;
                         $message = $body;
@@ -670,7 +671,6 @@ function general_setting(){
                             'X-Mailer: PHP/' . phpversion() . "\r\n";
                         $headers  .= 'MIME-Version: 1.0' . "\r\n";
                         $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
-						
                         mail($to, $subject, $message, $headers);
                     }
 					
