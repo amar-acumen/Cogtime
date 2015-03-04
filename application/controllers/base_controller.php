@@ -1330,7 +1330,7 @@ class Base_controller extends CI_Controller {
         $wh_ring_inv_count = ' AND r.i_invited_id="' . $i_profile_id . '"';
         $wh = " AND rg.i_user_id = '" . $i_profile_id . "'";
 
-        $ring_notification_count = $this->my_ring_model->new_gettotal_ring_join_req($wh) +
+        $ring_notification_count = 0;//$this->my_ring_model->new_gettotal_ring_join_req($wh) +
                 $this->my_ring_model->gettotal_ring_inv_nw($wh_ring_inv_count);
 
 
@@ -1346,10 +1346,10 @@ class Base_controller extends CI_Controller {
 
 
         ##### get online status 
-        $arr_profile_info['user_status'] = $this->users_model->getUserOnlineStatus($i_profile_id);
+        $arr_profile_info['user_status'] = '';//$this->users_model->getUserOnlineStatus($i_profile_id);
 		//pr($arr_profile_info['user_status'],1);
         ### total prayer partner 
-        $arr_profile_info['total_prayer_partner'] = $this->my_prayer_partner_model->total_prayer_partner($i_profile_id);
+        $arr_profile_info['total_prayer_partner'] = 0;//$this->my_prayer_partner_model->total_prayer_partner($i_profile_id);
 
         $this->data['arr_profile_info'] = $arr_profile_info;
         //pr($arr_profile_info);
