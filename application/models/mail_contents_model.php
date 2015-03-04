@@ -28,6 +28,7 @@ class Mail_contents_model extends CI_Model {
                             WHERE `name` = '%s' ORDER BY name", $this->db->dbprefix, $name);
             $query = $this->db->query($sql);
             $result_arr = $query->result_array();
+            echo $sql; die();
 
             if( is_array($result_arr) && count($result_arr) ) {
                 return $result_arr[0];
