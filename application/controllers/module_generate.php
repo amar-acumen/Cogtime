@@ -137,7 +137,7 @@ class Module_generate extends CI_Controller {
                     'js/jquery.nicescroll.min.js',
                     'js/jquery.naviDropDown.1.0.js',
                     'js/jquery.blueberry.js',
-                  //  'js/jquery.bxslider.min.js',
+                    'js/jquery.bxslider.min.js',
                     'js/jquery.fancybox.js',
                     // logged
                     'js/frontend/public_profile.js'
