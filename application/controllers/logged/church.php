@@ -638,14 +638,29 @@ function general_setting(){
                               'project_name'=> $project_name
                            ));*/
             $body = htmlspecialchars_decode($mail_info['body'], ENT_QUOTES);
-			//$body .= sprintf3( $body, array('churchurl'=> base_url().'church_registration_by_email/'.$_SESSION['logged_church_id'].'/1/'.$add_mem_id) );
-			$body = sprintf3( $body, array('churchurl'=> base_url().'church_registration_by_email/'.$_SESSION['logged_church_id'].'/1') );
 			
+			$body = sprintf3( $body, array('churchurl'=> base_url().'church_registration_by_email/'.$_SESSION['logged_church_id'].'/1') );
+			echo $body;
             if (($handle = fopen($destfile, "r")) !== FALSE) {
                 while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
                     $num = count($data);
                     $row++;
 					
+					if($row>2)
+					{
+						$invite_mem_info = array(
+							'name' => $data[0],
+							'email' => $data[1],
+							'church_id' => $_SESSION['logged_church_id'],
+							'invitation_sent_date' => get_db_datetime()
+							);
+						$this->db->insert('cg_church_member_invitation', $invite_mem_info);
+						//echo $this->db->last_query();
+						$add_mem_id = $this->db->insert_id();
+						
+						//$body = sprintf3( $body, array('churchurl'=> base_url().'church_registration_by_email/'.$_SESSION['logged_church_id'].'/1/'.$add_mem_id) );
+						
+					}
                     for ($c=0; $c < 1; $c++) {
                         $to      = $data[$c];
                         $subject = $subject;
@@ -658,19 +673,7 @@ function general_setting(){
                         mail($to, $subject, $message, $headers);
                     }
 					
-					if($row>2)
-					{
-						$invite_mem_info = array(
-							'name' => $data[0],
-							'email' => $data[1],
-							'church_id' => $_SESSION['logged_church_id'],
-							'invitation_sent_date' => get_db_datetime()
-							);
-						$this->db->insert('cg_church_member_invitation', $invite_mem_info);
-						//echo $this->db->last_query();
-						//$add_mem_id = $this->db->insert_id();
-						
-					}
+					
                 }
                 fclose($handle);
             }
