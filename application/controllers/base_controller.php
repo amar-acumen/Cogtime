@@ -415,6 +415,11 @@ class Base_controller extends CI_Controller {
 
     protected function _add_default_js_files() {
         ///////// NEW CODE [FOR DEFAULT JS FILES - BEGIN] /////////
+        $router =& load_class('Router', 'core');
+
+        $objclass = $router->fetch_class();
+        $objmethod = $router->fetch_method();
+
         $default_js_arr = array(
             //'js/jquery-1.7.2.js' => 'header',
             //'js/jquery.js' => 'header', // causing conflict with block ui
@@ -436,12 +441,11 @@ class Base_controller extends CI_Controller {
             'js/production.js' => 'header'
         );
 
-        $router =& load_class('Router', 'core');
+        if($objclass == 'index' && $objmethod == 'index'){
+            $default_css_arr['js/production/contentslider.js'] = 'header';
+        }
 
-        $objclass = $router->fetch_class();
-        $objmethod = $router->fetch_method();
-        echo $objclass;
-        echo $objmethod;
+
         $this->_add_js_arr($default_js_arr);
 
         if ($this->session->userdata('loggedin') != '' && $this->session->userdata('loggedin') != false && $this->session->userdata('is_admin') == '') {
