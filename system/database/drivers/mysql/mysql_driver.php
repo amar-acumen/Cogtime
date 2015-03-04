@@ -179,6 +179,7 @@ class CI_DB_mysql_driver extends CI_DB {
 		return @mysql_query($sql, $this->conn_id);
 	}
 
+	
 	// --------------------------------------------------------------------
 
 	/**

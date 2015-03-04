@@ -24,11 +24,12 @@ class Base_controller extends CI_Controller {
     public $translation_container = null;
 
     public function __construct() {
-        try {
-            
+        try {                    
           //  die('ok');
             parent::__construct();
-
+            //$this->output->set_header("Cache-Control: private, max-age=60");//for caching 
+            //$this->output->set_header("Date: ".gmdate('D, d M Y H:i:s \G\M\T', time() + 0));
+            //$this->output->set_header("Expires: ".gmdate('D, d M Y H:i:s \G\M\T', time() + 60));
             $this->_set_timezone();
             $this->load->helper('common_helper');
             //$this->load->helper('chat_helper'); 
@@ -1288,7 +1289,8 @@ class Base_controller extends CI_Controller {
 
     protected function _set_left_panel_data($i_profile_id) {
         $this->load->model('users_model');
-        $arr_profile_info = $this->users_model->fetch_this($i_profile_id);
+		$arr_profile_info =array();
+        //$arr_profile_info = $this->users_model->fetch_this($i_profile_id);
 
         $this->load->model('my_prayer_partner_model');
         $this->load->model('netpals_model');
@@ -1328,7 +1330,7 @@ class Base_controller extends CI_Controller {
         $this->data['arr_profile_info'] = $arr_profile_info;
         //pr($arr_profile_info);
 
-        $this->data['user_local_time_to_display'] = getUserLocalTime($arr_profile_info['s_time']);
+        //$this->data['user_local_time_to_display'] = getUserLocalTime($arr_profile_info['s_time']);
         
     }
 
@@ -4428,7 +4430,8 @@ if($type == 'organizer-day-view' || $type == 'organizer-week-view' || $type == '
 
         $zone_val = $this->input->post('zone_val');
         $time = getUserLocalTime($zone_val);
-        $time_html = 'Time: ' . $time;
+        //$time_html = 'Time: ' . $time;
+        $time_html = $time;
         echo json_encode(array('result' => 'success', 'time' => $time_html));
         exit;
     }

@@ -705,3 +705,24 @@ function closePersonalInfoDiv()
 
 }
 
+
+$(document).ready(function(){
+  $("#txt_profile_pic").change(function() {
+
+    var val = $(this).val();
+    //alert(val); 
+
+    switch(val.substring(val.lastIndexOf('.') + 1).toLowerCase()){
+        case 'gif': case 'jpg': case 'png':  case 'jpeg':
+           // alert("an image");
+             $('#err_profile_pic').html('');
+            break;
+        default:
+            $(this).val('');
+            // error message here
+            $('#err_profile_pic').html('Please enter valid image (jpg,jpeg,png,gif)');
+           // alert("not an image");
+            break;
+    }
+});
+})

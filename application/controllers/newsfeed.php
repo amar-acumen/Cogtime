@@ -309,7 +309,9 @@ class Newsfeed extends Base_controller {
                 #pr($this->input->post('photo[]'));
                 $imagevalue = $this->move_images_from_temp();
                 //pr($imagevalue);
-                if ($message != '' || !empty($imagevalue) || $this->input->post('txt_video_url') != '') {
+                $is_abusive = check_abusive_words($message);
+               // echo $is_abusive;
+                if (($message != ''&& $is_abusive == 0) || !empty($imagevalue) || $this->input->post('txt_video_url') != '' ) {
 
                     ### uplaoding wall photos  ##
                     if (1) {
@@ -465,12 +467,8 @@ class Newsfeed extends Base_controller {
                                 $feed = base64_encode($this->load->view('newsfeed/my_profile_single_feed.phtml', $data, true));
                             }
                         }
-                        $is_abusive = check_abusive_words($message);
-                        if ($is_abusive > 0) {
-                            echo json_encode(array('success' => FALSE, 'feed' => $feed, 'msg' => 'Abusive words are not allowed', 'vid_msg' => ''));
-                        } else {
-                            echo json_encode(array('success' => TRUE, 'feed' => $feed, 'msg' => 'Post Published!', 'vid_msg' => ''));
-                        }
+                        //$is_abusive = check_abusive_words($message);
+                        echo json_encode(array('success' => TRUE, 'feed' => $feed, 'msg' => 'Post Published!', 'vid_msg' => ''));
 
                         //echo json_encode( array('success'=>TRUE,'msg'=>'Post Published!' , 'vid_msg'=>''));
                         exit;
@@ -492,9 +490,17 @@ class Newsfeed extends Base_controller {
                       exit; */
                     }
                 } else {
+                    //echo $message;
+                      $is_abusive = check_abusive_words($message);
+                    //echo $is_abusive;die();
+                    //die($is_abusive);
+                    if ($is_abusive > 0) {
+                            echo json_encode(array('success' => FALSE, 'feed' => $feed, 'msg' => 'Abusive words are not allowed', 'vid_msg' => ''));
+                        }else if($message == '' && $is_abusive  == 0 ) {
                     #echo json_encode( array('success'=>FALSE, 'msg'=>"Please enter some text!", 'vid_msg'=>$video_url_messages) );
                     echo json_encode(array('success' => FALSE, 'msg' => "Please enter some text!", 'vid_msg' => $video_url_messages));
                     exit;
+                        }
                 }
             } else {
 

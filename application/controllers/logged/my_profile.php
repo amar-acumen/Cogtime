@@ -1137,6 +1137,7 @@ class My_profile extends Base_controller {
 
         $logged_user_id = intval(decrypt($this->session->userdata('user_id')));
         $arr_profile_info = $this->users_model->fetch_this($logged_user_id);
+        $_SESSION['s_profile_photo'] = $arr_profile_info['s_profile_photo'];
         $where = " i_country_id='" . $arr_profile_info["i_country_id"] . "'";
 
         $data['state'] = makeOptionState($where, encrypt($arr_profile_info["i_state_id"]));
@@ -1277,10 +1278,10 @@ $chat_name=get_chat_name_by_id($i_profile_id);
         $s_bio = get_formatted_string($this->input->post('s_bio'));
 
         $id = intval(decrypt($this->session->userdata('user_id')));
-
+		
         $SQL = "update cg_users set s_bio = '" . $s_bio . "' WHERE id='" . $id . "' ";
         $this->db->query($SQL);
-
+		$this->session->set_userdata('s_bio', ($s_bio));
 
         echo json_encode(array('success' => true, 'msg' => 'your mood has been updated successfully', 's_bio' => $s_bio));
     }

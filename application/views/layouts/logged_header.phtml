@@ -19,8 +19,8 @@ function after_submit() {
                 <span id="user_local_time">
                  Time: 
                  <? 
-                    $UserLocalTime = explode(' ',getUserLocalTime($arr_profile_info['s_time']));
-                    echo $UserLocalTime[3];
+                    $UserLocalTime = explode(' ',getUserLocalTime($this->session->userdata('s_time')));
+                    //echo $UserLocalTime[3];
                  ?>
                 </span> | <a href="<?=base_url().'logout'?>">Logout</a><br />
                   <ul>

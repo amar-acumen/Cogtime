@@ -173,12 +173,40 @@ class CI_DB_mysqli_driver extends CI_DB {
 	 * @param	string	an SQL query
 	 * @return	resource
 	 */
-	function _execute($sql)
+	/*function _execute($sql)
 	{
 		$sql = $this->_prep_query($sql);
 		$result = @mysqli_query($this->conn_id, $sql);
 		return $result;
+	}*/
+
+	function _execute($sql)
+	{
+		$sql = $this->_prep_query($sql);
+		$msc = microtime(true);
+
+		$ret = @mysqli_query($this->conn_id, $sql);
+
+		$msc = microtime(true)-$msc;
+
+		$file = "./query_time.txt";
+		$uri = $_SERVER['REQUEST_URI'];
+
+		if(!isset($GLOBALS["_mysql_query"]))
+		{
+			$GLOBALS["_mysql_query"]=0;
+		}
+		$GLOBALS["_mysql_query"]++;
+		$iii = $GLOBALS["_mysql_query"];
+
+		$data = "(#$iii) ($msc ms) (uri=$uri) $sql \n\n==============================\n\n";
+
+		file_put_contents($file, $data, FILE_APPEND | LOCK_EX);
+		//write_file($file, $data)
+
+		return $ret;
 	}
+
 
 	// --------------------------------------------------------------------
 

@@ -453,12 +453,12 @@ if (!@$session_data['loggedin']) {
 
 //show current time
 
-var currenttime = '<? print $user_local_time_to_display ?>' //PHP method of getting server date
+//var currenttime = '<? //print $user_local_time_to_display ?>' //PHP method of getting server date
 
 ///////////Stop editting here/////////////////////////////////
 
 var montharray=new Array("January","February","March","April","May","June","July","August","September","October","November","December")
-var serverdate=new Date(currenttime)
+//var serverdate=new Date(currenttime)
 
 function padlength(what){
 var output=(what.toString().length==1)? "0"+what : what
@@ -473,7 +473,7 @@ $('#user_local_time').html(timestring);
 }
 
 window.onload=function(){
-setInterval("displaytime()", 1000)
+    get_user_clock();
 }
 
 
@@ -501,6 +501,28 @@ $(document).ready(function(arg) {
 		}
 	});
 }*/
+
+function get_user_clock() {//return false;
+    $.ajax({
+       type: "post",
+       url: '<?=base_url()?>base_controller/getUserClock',
+       data: {zone_val:'<?=$this->session->userdata('s_time')?>'},
+       dataType:"json",
+       success: function(json_response){
+
+            if(json_response.result = 'success') {
+                //$('#user_local_time').html(json_response.time); 
+                currenttime = json_response.time //PHP method of getting server date   
+                serverdate=new Date(currenttime);
+                setInterval("displaytime()", 1000);
+            }
+            
+        },
+        error: function(){
+            //showUIMsg('Some error occurred. Please try again.');
+        }
+    });
+}
 
 </script>
     
