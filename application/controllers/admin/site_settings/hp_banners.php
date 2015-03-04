@@ -713,6 +713,28 @@ class Hp_banners extends Admin_base_Controller {
 
         return TRUE;
     }
+    function show_banner(){
+        $id = $this->input->post('id');
+        $data = array(
+               'is_hide' => 0
+              
+            );
+
+$this->db->where('id', $id);
+$this->db->update('cg_hp_banners', $data); 
+ echo json_encode(array('success' => 'true', 'msg' => 'Status change successfully..'));
+    }
+    function hide_banner(){
+        $id = $this->input->post('id');
+        $data = array(
+               'is_hide' => 1
+              
+            );
+
+$this->db->where('id', $id);
+$this->db->update('cg_hp_banners', $data); 
+ echo json_encode(array('success' => 'true', 'msg' => 'Status change successfully..'));
+    }
 
 }
 

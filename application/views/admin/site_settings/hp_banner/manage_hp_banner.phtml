@@ -51,7 +51,8 @@ $('#delete').click(function () {
 						  $desc =  html_entity_decode(htmlspecialchars_decode($info['s_desc']),ENT_QUOTES,'utf-8');
 						  $image_rank= $info['image_rank'];
 						  $url = $info['s_url'];
-						  $SHOW = ($row > 6 )?'1':'1';			   
+						  $SHOW = ($row > 6 )?'1':'1';	
+                                                  $status = $info['is_hide'];
 						  
 			   ?>
                           
@@ -64,6 +65,11 @@ $('#delete').click(function () {
                              <?php if($SHOW == '1'){?>
                             <input name="" title="Delete" type="button" class="delete-button"  value="" onclick="delete_confirm_(<?= $id ?>);"/>
                              <?php } ?>
+                            <?php if($status == 1) { ?>
+                            <input name="" title="show" type="button" class="btn-03"  value="Show" id="show<?= $id ?>" onclick="show_confirm_(<?= $id ?>);"/>
+                            <?php }else{ ?>
+                            <input name="" title="hide" type="button" class="btn-03"  value="Hide" id="hide<?= $id ?>" onclick="hide_confirm_(<?= $id ?>);"/>
+                            <?php } ?>
                             </td>
                           </tr>
                         
@@ -122,3 +128,39 @@ $('#delete').click(function () {
       <div class="bot"><div>&nbsp;</div></div>
 </div>
 <!--popup one end-->
+<script type="text/javascript">
+function show_confirm_(id){
+     showBusyScreen()
+   $.ajax({
+          url : admin_base_url+'site_settings/hp_banners/show_banner',
+          type : 'post',
+          data : ({'id' : id}),
+          success : function(data)
+          {
+                showUIMsg(data.msg);
+              hideBusyScreen();
+            
+              location.reload();
+              // $('.send_success1').css('display','block');
+             
+          }
+      }); 
+}
+function hide_confirm_(id){
+    showBusyScreen()
+   $.ajax({
+          url : admin_base_url+'site_settings/hp_banners/hide_banner',
+          type : 'post',
+          data : ({'id' : id}),
+          success : function(data)
+          {
+               showUIMsg(data.msg);
+              hideBusyScreen();
+             
+              location.reload();
+              // $('.send_success1').css('display','block');
+             
+          }
+      }); 
+}
+</script>
