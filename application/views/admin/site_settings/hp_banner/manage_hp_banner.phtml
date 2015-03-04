@@ -132,7 +132,7 @@ $('#delete').click(function () {
 function show_confirm_(id){
      showBusyScreen()
    $.ajax({
-          url : admin_base_url+'/site_settings/hp_banners/show_banner',
+          url : admin_base_url+'site_settings/hp_banners/show_banner',
           type : 'post',
           data : ({'id' : id}),
           success : function(data)
@@ -148,12 +148,13 @@ function show_confirm_(id){
 function hide_confirm_(id){
     showBusyScreen()
    $.ajax({
-          url : admin_base_url+'/site_settings/hp_banners/hide_banner',
+          url : admin_base_url+'site_settings/hp_banners/hide_banner',
           type : 'post',
           data : ({'id' : id}),
           success : function(data)
           {
               hideBusyScreen();
+              showUIMsg(data.msg);
               location.reload();
               // $('.send_success1').css('display','block');
              
