@@ -662,6 +662,7 @@ function general_setting(){
 					}
                     for ($c=0; $c < 1; $c++) {
                         $to      = $data[$c];
+						echo $to;
                         $subject = $subject;
                         $message = $body;
                         $headers = 'From: admin@cogtime.com' . "\r\n" .
