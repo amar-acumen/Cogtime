@@ -91,7 +91,7 @@ class Index extends Base_controller
 			
             $data['hp_cms_content']=$this->hp_cms_model->get_by_id(1);
 			//$s_where=" where id<>3 and id<>4";
-            $s_where="where is_hide = 0";
+            $s_where=" where is_hide = 0";
 			$data['hp_banner']=$this->manage_hp_banner_model->fetch_multi($s_where);
 			
 			$cur_time = date('Y-m-d');
