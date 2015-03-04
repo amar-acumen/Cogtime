@@ -1,6 +1,5 @@
 $(document).ready(function() {
     stepcarousel= null;
-	
 	//big slider control start
 	featuredcontentslider.init({
 	id: "slider1",  //id of main slider DIV
