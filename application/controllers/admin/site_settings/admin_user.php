@@ -439,6 +439,7 @@ class Admin_user extends Admin_base_Controller
 			{
 				//echo $NEW_PASSWD;
 				 $pass_arr['s_password'] = get_salted_password($NEW_PASSWD); 
+                                 pr($pass_arr,1);
 				 $this->admins_user_model->update($pass_arr,$ID);
 				
 				## sending mail to the user and super-admin .. key individual_password_reset_user
