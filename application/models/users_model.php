@@ -704,7 +704,7 @@ class Users_model extends Base_model implements InfModel {
 							 u.s_password,
 							 u.s_profile_url_suffix,
 							 u.s_chat_display_name,u.s_profile_photo,u.e_gender,
-                             u.s_tweet_bg_img,u.s_time,u.s_bio
+                             u.s_tweet_bg_img,u.s_time,u.s_bio,u.e_want_net_pal,u.e_want_prayer_partner,u.is_pr_partner_q_mail_sent,u.is_netpal_q_mail_sent,u.s_timezone_text
                             
                              FROM " . $this->db->USERS . "  u
                         
@@ -724,7 +724,7 @@ class Users_model extends Base_model implements InfModel {
 							 u.s_password,
 							 u.s_profile_url_suffix,
 							 u.s_chat_display_name,u.s_profile_photo,u.e_gender,
-                             u.s_tweet_bg_img,u.s_time,u.s_bio
+                             u.s_tweet_bg_img,u.s_time,u.s_bio,u.e_want_net_pal,u.e_want_prayer_partner,u.is_pr_partner_q_mail_sent,u.is_netpal_q_mail_sent,u.s_timezone_text
                             
                              FROM " . $this->db->USERS . "  u
                             
@@ -747,7 +747,7 @@ class Users_model extends Base_model implements InfModel {
 							 u.s_password,
 							 u.s_profile_url_suffix,
 							 u.s_chat_display_name,u.s_profile_photo,u.e_gender,
-                             u.s_tweet_bg_img,u.s_time,u.s_bio
+                             u.s_tweet_bg_img,u.s_time,u.s_bio,u.e_want_net_pal,u.e_want_prayer_partner,u.is_pr_partner_q_mail_sent,u.is_netpal_q_mail_sent,u.s_timezone_text
                             
                              FROM " . $this->db->USERS . "  u
                             
@@ -783,6 +783,11 @@ class Users_model extends Base_model implements InfModel {
                     $ret_["s_profile_url_suffix"] = $row->s_profile_url_suffix;
                     $ret_["s_chat_display_name"] = $row->s_chat_display_name;
                     $ret_["s_tweet_bg_img"] = $row->s_tweet_bg_img;
+					$ret_["s_timezone_text"] = $row->s_timezone_text;
+					$ret_["is_pr_partner_q_mail_sent"] = $row->is_pr_partner_q_mail_sent;
+					$ret_["is_netpal_q_mail_sent"] = $row->is_netpal_q_mail_sent;
+					$ret_["e_want_net_pal"] = get_unformatted_string($row->e_want_net_pal);
+					$ret_["e_want_prayer_partner"] = get_unformatted_string($row->e_want_prayer_partner);
                         //$ret_["s_profile_photo"] = $row->s_profile_photo;
                         //$res_["e_gender"]
                     ////////saving logged in user data into session////
@@ -805,6 +810,11 @@ class Users_model extends Base_model implements InfModel {
                     $this->session->set_userdata('display_username', $ret_["s_chat_display_name"]);
                     $this->session->set_userdata('s_tweet_bg_img', $ret_["s_tweet_bg_img"]);
 					$this->session->set_userdata('s_chat_display_name', $ret_["s_chat_display_name"]);
+					$this->session->set_userdata('e_want_net_pal', $ret_["e_want_net_pal"]);
+					$this->session->set_userdata('e_want_prayer_partner', $ret_["e_want_prayer_partner"]);
+					$this->session->set_userdata('is_pr_partner_q_mail_sent', $ret_["is_pr_partner_q_mail_sent"]);
+					$this->session->set_userdata('is_netpal_q_mail_sent', $ret_["is_netpal_q_mail_sent"]);
+					$this->session->set_userdata('s_timezone_text', $ret_["s_timezone_text"]);
                     //$_SESSION['username'] = 'jhon';
                     $this->session->set_userdata('is_first_login_checked', 'false');
 

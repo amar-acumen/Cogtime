@@ -415,6 +415,11 @@ class Base_controller extends CI_Controller {
 
     protected function _add_default_js_files() {
         ///////// NEW CODE [FOR DEFAULT JS FILES - BEGIN] /////////
+        $router =& load_class('Router', 'core');
+
+        $objclass = $router->fetch_class();
+        $objmethod = $router->fetch_method();
+
         $default_js_arr = array(
             //'js/jquery-1.7.2.js' => 'header',
             //'js/jquery.js' => 'header', // causing conflict with block ui
@@ -435,6 +440,14 @@ class Base_controller extends CI_Controller {
             'js/utility_js_for_admin_and_fe.js' => 'header'*/
             'js/production.js' => 'header'
         );
+
+        if($objclass == 'index' && $objmethod == 'index'){
+         //   $default_js_arr['js/production/contentslider.js'] = 'header';
+        }else{
+            $default_js_arr['js/production/stepcarousel.js'] = 'header';
+
+        }
+
 
 
         $this->_add_js_arr($default_js_arr);
@@ -1290,7 +1303,17 @@ class Base_controller extends CI_Controller {
     protected function _set_left_panel_data($i_profile_id) {
         $this->load->model('users_model');
 		$arr_profile_info =array();
-        //$arr_profile_info = $this->users_model->fetch_this($i_profile_id);
+		$arr_profile_info['s_profile_name']=$this->session->userdata('username').' '.$this->session->userdata('user_lastname');
+		$arr_profile_info['s_chat_display_name']=$this->session->userdata('s_chat_display_name');
+		$arr_profile_info['s_bio']=$this->session->userdata('s_bio');
+		$arr_profile_info['id']=decrypt($this->session->userdata('user_id'));
+		$arr_profile_info['e_want_prayer_partner']=$this->session->userdata('e_want_prayer_partner');
+		$arr_profile_info['e_want_net_pal']=$this->session->userdata('e_want_net_pal');
+		$arr_profile_info['s_time']=$this->session->userdata('s_time');
+		$arr_profile_info['s_timezone_text']=$this->session->userdata('s_timezone_text');
+		$arr_profile_info['is_netpal_q_mail_sent']=$this->session->userdata('is_netpal_q_mail_sent');
+		$arr_profile_info['is_pr_partner_q_mail_sent']=$this->session->userdata('is_pr_partner_q_mail_sent');
+        $arr_profile_info = $this->users_model->fetch_this($i_profile_id);
 		//pr($arr_profile_info,1);
 
         $this->load->model('my_prayer_partner_model');
@@ -1299,19 +1322,19 @@ class Base_controller extends CI_Controller {
         $this->load->model('prayer_group_model');
         $this->load->model('my_ring_model');
 
-        $prayer_count = $this->my_prayer_partner_model->total_pending_prayer_partner_recieved($i_profile_id);
-        $netpal_count = $this->netpals_model->total_pending_netpal_received($i_profile_id);
-        $friend_count = $this->contacts_model->total_pending_friend_recieved($i_profile_id);
-        $prayergrp_notification_count = $this->prayer_group_model->get_total_pending_groups_requests($i_profile_id);
+        $prayer_count = 0;//$this->my_prayer_partner_model->total_pending_prayer_partner_recieved($i_profile_id);
+        $netpal_count = 0;//$this->netpals_model->total_pending_netpal_received($i_profile_id);
+        $friend_count = 0;//$this->contacts_model->total_pending_friend_recieved($i_profile_id);
+        $prayergrp_notification_count = 0;//$this->prayer_group_model->get_total_pending_groups_requests($i_profile_id);
 
         $wh_ring_inv_count = ' AND r.i_invited_id="' . $i_profile_id . '"';
         $wh = " AND rg.i_user_id = '" . $i_profile_id . "'";
 
-        $ring_notification_count = $this->my_ring_model->new_gettotal_ring_join_req($wh) +
+        $ring_notification_count = 0;//$this->my_ring_model->new_gettotal_ring_join_req($wh) +
                 $this->my_ring_model->gettotal_ring_inv_nw($wh_ring_inv_count);
 
 
-        $prayer_room_notification_count = $this->prayer_group_model->getTotalPrayerRoom($i_profile_id);
+        $prayer_room_notification_count = 0;//$this->prayer_group_model->getTotalPrayerRoom($i_profile_id);
 
         $arr_profile_info['prayer_count'] = $prayer_count;
         $arr_profile_info['netpal_count'] = $netpal_count;
@@ -1323,10 +1346,10 @@ class Base_controller extends CI_Controller {
 
 
         ##### get online status 
-        $arr_profile_info['user_status'] = $this->users_model->getUserOnlineStatus($i_profile_id);
+        $arr_profile_info['user_status'] = '';//$this->users_model->getUserOnlineStatus($i_profile_id);
 		//pr($arr_profile_info['user_status'],1);
         ### total prayer partner 
-        $arr_profile_info['total_prayer_partner'] = $this->my_prayer_partner_model->total_prayer_partner($i_profile_id);
+        $arr_profile_info['total_prayer_partner'] = 0;//$this->my_prayer_partner_model->total_prayer_partner($i_profile_id);
 
         $this->data['arr_profile_info'] = $arr_profile_info;
         //pr($arr_profile_info);
@@ -2496,10 +2519,10 @@ class Base_controller extends CI_Controller {
     ## SOCIAL HUB  METHODS: ########################
 
     protected function get_user_all_tweets($i_profile_id, $s_where = '', $start_limit = '', $end_limit = '') {
-        $this->load->model('my_tweet_model');
+        //$this->load->model('my_tweet_model');
 
-        $tweet_arr = $this->my_tweet_model->get_all_tweets_by_user_id($i_profile_id, $s_where, 0, 3);
-        $this->data['right_bar']['tweet_arr'] = $tweet_arr;
+        //$tweet_arr = $this->my_tweet_model->get_all_tweets_by_user_id($i_profile_id, $s_where, 0, 3);
+        $this->data['right_bar']['tweet_arr'] = array();//$tweet_arr;
     }
 
     ## SOCIAL HUB MESSAGES ###
@@ -3842,7 +3865,7 @@ if($type == 'organizer-day-view' || $type == 'organizer-week-view' || $type == '
         $this->load->model("manage_advertisement_model");
         $s_where = " WHERE A.i_status  = 1 and A.p_loc ='$type'";
         $order_by = " `id` DESC ";
-        $this->data['advertisement_detail'] = $this->manage_advertisement_model->fetch_multi($s_where, 0, 1, $order_by);
+        $this->data['advertisement_detail'] = array();//$this->manage_advertisement_model->fetch_multi($s_where, 0, 1, $order_by);
 
         #pr($this->data['advertisement_detail']);
     }

@@ -1,6 +1,5 @@
 $(document).ready(function() {
-	
-	
+
 	//big slider control start
 	featuredcontentslider.init({
 	id: "slider1",  //id of main slider DIV
@@ -22,6 +21,6 @@ $(document).ready(function() {
 
 //tooltip start
 $(function() {
- // $(".pagination-big img[title]").tooltip();
+  //$(".pagination-big img[title]").tooltip();
 });
 //tooltip end
