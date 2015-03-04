@@ -122,12 +122,12 @@ class Module_generate extends CI_Controller {
                     'js/switch.js',
                     'js/animate-collapse.js',
                     //'js/jquery-ui-1.8.2.custom.min.js',
-                    'js/stepcarousel.js',
+                    //'js/stepcarousel.js',
                     //'js/frontend/logged/tweets/tweet_utilities.js',
                     //'js/frontend/logged/christian_news_js.js',
                     'js/tab.js',
-                    'js/jquery.flexslider.js'
-                    ,'js/jquery.eislideshow.js',
+                    //'js/jquery.flexslider.js'
+                   // ,'js/jquery.eislideshow.js',
                     'js/jquery.hoverIntent.minified.js',
                     'js/jquery.naviDropDown.1.0.js',
                     'js/church_login.js',
