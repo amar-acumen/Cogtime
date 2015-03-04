@@ -2667,3 +2667,11 @@ width: 89px;}
 	color:#ff0000;
 	background-color:inherit;
 }
+
+
+#container {
+    height: auto;
+    margin: 0 auto;
+    padding: 0;
+    width: 1002px;
+}
