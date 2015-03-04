@@ -113,7 +113,7 @@ class Module_generate extends CI_Controller {
                     'js/notification.js',
                     'js/utility_js_for_admin_and_fe.js',
                    // 'js/frontend/header_slider.js',
-                    'js/contentslider.js',
+                    //'js/contentslider.js',
                     /* 'js/jquery.autofill.js',*/
                     // User logged in JS files
                     'js/jquery.hoverIntent.js',

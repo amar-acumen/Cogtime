@@ -415,6 +415,11 @@ class Base_controller extends CI_Controller {
 
     protected function _add_default_js_files() {
         ///////// NEW CODE [FOR DEFAULT JS FILES - BEGIN] /////////
+        $router =& load_class('Router', 'core');
+
+        $objclass = $router->fetch_class();
+        $objmethod = $router->fetch_method();
+
         $default_js_arr = array(
             //'js/jquery-1.7.2.js' => 'header',
             //'js/jquery.js' => 'header', // causing conflict with block ui
@@ -435,6 +440,10 @@ class Base_controller extends CI_Controller {
             'js/utility_js_for_admin_and_fe.js' => 'header'*/
             'js/production.js' => 'header'
         );
+
+        if($objclass == 'index' && $objmethod == 'index'){
+            $default_js_arr['js/production/contentslider.js'] = 'header';
+        }
 
 
         $this->_add_js_arr($default_js_arr);
@@ -1290,7 +1299,14 @@ class Base_controller extends CI_Controller {
     protected function _set_left_panel_data($i_profile_id) {
         $this->load->model('users_model');
 		$arr_profile_info =array();
-        $arr_profile_info = $this->users_model->fetch_this($i_profile_id);
+		$arr_profile_info['s_profile_name']=$this->session->userdata('username').' '.$this->session->userdata('user_lastname');
+		$arr_profile_info['s_chat_display_name']=$this->session->userdata('s_chat_display_name');
+		$arr_profile_info['s_bio']=$this->session->userdata('s_bio');
+		$arr_profile_info['id']=decrypt($this->session->userdata('user_id'));
+		$arr_profile_info['e_want_prayer_partner']=$this->session->userdata('e_want_prayer_partner');
+		$arr_profile_info['e_want_net_pal']=$this->session->userdata('e_want_net_pal');
+		$arr_profile_info['s_time']=$this->session->userdata('s_time');
+        //$arr_profile_info = $this->users_model->fetch_this($i_profile_id);
 		//pr($arr_profile_info,1);
 
         $this->load->model('my_prayer_partner_model');
