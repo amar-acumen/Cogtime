@@ -2407,3 +2407,173 @@ width: 89px;}
 .all_prayer_grp p small{ font-size:12px; color:#878d91;}
 .video-image{ margin:0px auto; text-align:center;}
 .privacy-select label{ width:auto;} 
+
+/****** Church Regestration***************/
+
+#register_l {
+	width:590px;
+	float:left;
+	padding:5px 15px;
+	min-height:500px;
+}
+#register_r {
+	width:290px;
+	font-size:14px;
+	line-height:24px;
+	float:right;
+	padding:5px 20px;
+	background:url(../images/logo.png) no-repeat center bottom;
+	padding-bottom:100px;
+}
+#register_l h1, #register_r h1 {
+	font-size:18px;
+	font-weight:normal;
+	padding-bottom:20px;
+	color:#0f4989;
+}
+#register_l .frm_box .field01 {
+	width:353px;
+}
+#register_l .frm_box .field01 input[type="text"] {
+	width:300px;
+}
+#register_r p {
+	font-size:14px;
+	line-height:24px;
+	padding-bottom:18px;
+}
+#register_r ul {
+	list-style-type:none;
+}
+#register_r ul li {
+	list-style-type:none;
+	color:#004084;
+	padding-bottom:5px;
+}
+#right_container {
+	margin:0;
+	padding:0;
+	width:250px;
+	height:auto;
+	float:right;
+}
+#right_container .heading {
+	margin:0;
+	padding:8px 10px 8px;
+	width:230px;
+	height:16px;
+	float:left;
+	background-color:#013d62;
+	font-size:16px;
+}
+#right_container .heading h4 {
+	font-weight:normal;
+	font-size:16px;
+	line-height:16px;
+	font-family:'GibsonRegular';
+	color:#fff;
+}
+#right_container .content {
+	padding:0 0 9px 0;
+	width:250px;
+	height:auto;
+	float:left;
+}
+#right_container .my_tweet {
+	margin:0 0 10px 0;
+	padding:0;
+	width:250px;
+	height:auto;
+	float:left;
+	background-color:#62c3bc;
+}
+#right_container .txt_content {
+	padding:10px 0 0px;
+	clear:both;
+}
+.search_box {
+	background:url(../images/search.png) no-repeat;
+	width:168px;
+	height:25px;
+	float:left;
+	margin-right:8px;
+	margin-top:5px;
+}
+.search_box input[type=text] {
+	width:129px;
+	border:0px;
+	margin:1px;
+	padding-bottom:0px;
+	color:#aaaaaa;
+	float:left;
+}
+.search_box input[type=button] {
+	background:none;
+	text-decoration:none;
+	outline:none;
+	border:0px;
+	cursor:pointer;
+	height:23px;
+	line-height:0px;
+	font-size:12px;
+	width:25px;
+	display:block;
+	overflow:hidden;
+	text-indent:-999px;
+	margin:0px;
+	padding:0px;
+	float:left;
+}
+.search_box input[type=submit] {
+	background:none;
+	text-decoration:none;
+	outline:none;
+	border:0px;
+	cursor:pointer;
+	height:23px;
+	line-height:0px;
+	font-size:12px;
+	width:25px;
+	display:block;
+	overflow:hidden;
+	text-indent:-999px;
+	margin:0px;
+	padding:0px;
+	float:left;
+}
+.left05 {
+	width:92px;
+	font-size:11px;
+	text-align:right;
+	color:#2e81cd;
+	float:left;
+	line-height:25px;
+	padding-top:4px;
+}
+#right_container .advt {
+	margin:0;
+	padding:25px;
+	width:200px;
+	height:auto;
+	float:left;
+	text-align:right;
+	font-weight:normal;
+	font-size:11px;
+	line-height:16px;
+	font-family:'GibsonRegular';
+	color:#909090;
+}
+#right_container .cogtime_projects {
+	margin:0;
+	padding:0;
+	width:250px;
+	height:auto;
+	float:left;
+}
+#right_container .project_box {
+	margin:0;
+	padding:10px;
+	width:230px;
+	height:auto;
+	float:left;
+}
