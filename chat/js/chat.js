@@ -30,11 +30,12 @@ var chatboxFocus = new Array();
 var newMessages = new Array();
 var newMessagesWin = new Array();
 var chatBoxes = new Array();
-window.onload=function(){
-startChatSession();
-};
+//window.onload=function(){
+//startChatSession();
+//};
 $(document).ready(function() {
     originalTitle = document.title;
+	startChatSession();
     $([window, document]).blur(function() {
         windowFocus = false;
     }).focus(function() {
