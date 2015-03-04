@@ -447,6 +447,7 @@ class Base_controller extends CI_Controller {
             $default_js_arr['js/production/stepcarousel.js'] = 'header';
 
         }*/
+        
 
 
         $this->_add_js_arr($default_js_arr);
