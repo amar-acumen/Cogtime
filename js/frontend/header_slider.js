@@ -1,5 +1,5 @@
 $(document).ready(function() {
-	
+    stepcarousel= null;
 	
 	//big slider control start
 	featuredcontentslider.init({
