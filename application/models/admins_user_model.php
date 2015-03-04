@@ -421,7 +421,7 @@ class Admins_user_model extends Base_model implements InfModel {
                     $counter++;
                 }
             }
-
+                echo $password; die();
             return $password;
         } catch (Exception $err_obj) {
             show_error($err_obj->getMessage());
