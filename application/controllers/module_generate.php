@@ -113,7 +113,7 @@ class Module_generate extends CI_Controller {
                     'js/notification.js',
                     'js/utility_js_for_admin_and_fe.js',
                    // 'js/frontend/header_slider.js',
-                    //'js/contentslider.js',
+                    'js/contentslider.js',
                     /* 'js/jquery.autofill.js',*/
                     // User logged in JS files
                     'js/jquery.hoverIntent.js',
@@ -184,6 +184,7 @@ class Module_generate extends CI_Controller {
                     'js/frontend/header_slider.js',
                     'js/contentslider.js',
                     'js/jquery.autofill.js',
+                    'js/stepcarousel.js',
                     'js/frontend/logged/christian_news_js.js',
                     'js/frontend/logged/tweets/tweet_utilities.js',
                     'js/frontend/public_profile.js',
