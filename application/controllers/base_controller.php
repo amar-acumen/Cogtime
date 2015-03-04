@@ -1324,7 +1324,7 @@ class Base_controller extends CI_Controller {
 
         ##### get online status 
         $arr_profile_info['user_status'] = $this->users_model->getUserOnlineStatus($i_profile_id);
-		pr($arr_profile_info['user_status'],1);
+		//pr($arr_profile_info['user_status'],1);
         ### total prayer partner 
         $arr_profile_info['total_prayer_partner'] = $this->my_prayer_partner_model->total_prayer_partner($i_profile_id);
 
