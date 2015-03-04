@@ -68,7 +68,6 @@ class Base_controller extends CI_Controller {
                 $this->get_user_all_tweets($logged_user_id);
                 //$this->salavtion_popup_content();
 
-
                 /* get advertisement */
                 //$this->getLatestAdvertisement();
                 // $this->getmediaLatestAdvertisement();
