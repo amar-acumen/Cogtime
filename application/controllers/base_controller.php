@@ -36,7 +36,7 @@ class Base_controller extends CI_Controller {
             //$this->load->model('projects_model');
             $this->load->model('site_settings_model');
             $this->load->model('events_model');
-            $this->data['site_settings_arr'] = array();//$this->site_settings_model->get_by_id(1);
+            $this->data['site_settings_arr'] = $this->site_settings_model->get_by_id(1);
 
             //pr($this->data['site_settings_arr']);
             /* values required for all controllers will be generated here */
@@ -64,8 +64,8 @@ class Base_controller extends CI_Controller {
                 # get total unread messages #
                 $logged_user_id = intval(decrypt($this->session->userdata('user_id')));
                 //$this->_get_total_unread_msgs($logged_user_id);
-                //$this->_set_left_panel_data($logged_user_id);
-               // $this->get_user_all_tweets($logged_user_id);
+                $this->_set_left_panel_data($logged_user_id);
+                $this->get_user_all_tweets($logged_user_id);
                 //$this->salavtion_popup_content();
 
 
