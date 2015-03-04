@@ -449,6 +449,7 @@ class Base_controller extends CI_Controller {
         }*/
 
 
+
         $this->_add_js_arr($default_js_arr);
 
         if ($this->session->userdata('loggedin') != '' && $this->session->userdata('loggedin') != false && $this->session->userdata('is_admin') == '') {
@@ -1309,7 +1310,10 @@ class Base_controller extends CI_Controller {
 		$arr_profile_info['e_want_prayer_partner']=$this->session->userdata('e_want_prayer_partner');
 		$arr_profile_info['e_want_net_pal']=$this->session->userdata('e_want_net_pal');
 		$arr_profile_info['s_time']=$this->session->userdata('s_time');
-        //$arr_profile_info = $this->users_model->fetch_this($i_profile_id);
+		$arr_profile_info['s_timezone_text']=$this->session->userdata('s_timezone_text');
+		$arr_profile_info['is_netpal_q_mail_sent']=$this->session->userdata('is_netpal_q_mail_sent');
+		$arr_profile_info['is_pr_partner_q_mail_sent']=$this->session->userdata('is_pr_partner_q_mail_sent');
+        $arr_profile_info = $this->users_model->fetch_this($i_profile_id);
 		//pr($arr_profile_info,1);
 
         $this->load->model('my_prayer_partner_model');
@@ -1326,7 +1330,8 @@ class Base_controller extends CI_Controller {
         $wh_ring_inv_count = ' AND r.i_invited_id="' . $i_profile_id . '"';
         $wh = " AND rg.i_user_id = '" . $i_profile_id . "'";
 
-        $ring_notification_count = 0;//$this->my_ring_model->new_gettotal_ring_join_req($wh) + $this->my_ring_model->gettotal_ring_inv_nw($wh_ring_inv_count);
+        $ring_notification_count = $this->my_ring_model->new_gettotal_ring_join_req($wh) +
+                $this->my_ring_model->gettotal_ring_inv_nw($wh_ring_inv_count);
 
 
         $prayer_room_notification_count = 0;//$this->prayer_group_model->getTotalPrayerRoom($i_profile_id);
@@ -1341,10 +1346,10 @@ class Base_controller extends CI_Controller {
 
 
         ##### get online status 
-        $arr_profile_info['user_status'] = '';//$this->users_model->getUserOnlineStatus($i_profile_id);
+        $arr_profile_info['user_status'] = $this->users_model->getUserOnlineStatus($i_profile_id);
 		//pr($arr_profile_info['user_status'],1);
         ### total prayer partner 
-        $arr_profile_info['total_prayer_partner'] = 0;//$this->my_prayer_partner_model->total_prayer_partner($i_profile_id);
+        $arr_profile_info['total_prayer_partner'] = $this->my_prayer_partner_model->total_prayer_partner($i_profile_id);
 
         $this->data['arr_profile_info'] = $arr_profile_info;
         //pr($arr_profile_info);
