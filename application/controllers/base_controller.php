@@ -1291,6 +1291,7 @@ class Base_controller extends CI_Controller {
         $this->load->model('users_model');
 		$arr_profile_info =array();
         //$arr_profile_info = $this->users_model->fetch_this($i_profile_id);
+		//pr($arr_profile_info,1);
 
         $this->load->model('my_prayer_partner_model');
         $this->load->model('netpals_model');
@@ -1323,7 +1324,7 @@ class Base_controller extends CI_Controller {
 
         ##### get online status 
         $arr_profile_info['user_status'] = $this->users_model->getUserOnlineStatus($i_profile_id);
-
+		//pr($arr_profile_info['user_status'],1);
         ### total prayer partner 
         $arr_profile_info['total_prayer_partner'] = $this->my_prayer_partner_model->total_prayer_partner($i_profile_id);
 

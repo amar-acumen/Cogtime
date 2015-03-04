@@ -7,7 +7,7 @@
      </div><?php */?>
     <input type="hidden" id="hd_logged_id" value="<?php echo $_SESSION['username']; ?>"/>
 	<br/>
-   <p style="float:left;"> <a href="javascript:void(0);" class="on-line online-status status-right off-line-text" id="user_status">(<?php echo $_SESSION['s_chat_display_name']; ?>)&nbsp;<?= check_user_online_hlpr(decrypt($_SESSION['user_id'])); ?> </a></p>
+   <p style="float:left;"> <a href="javascript:void(0);" class="on-line online-status status-right off-line-text" id="user_status">(<?php echo $_SESSION['s_chat_display_name']; ?>)&nbsp;<?= check_user_online_hlpr($arr_profile_info['id']); ?> </a></p>
     <!--Mood Message Start-->
     <div class="mood-message">
         
@@ -25,7 +25,7 @@
     <?php
     $list_types = '';
     $listarr = array();
-
+	pr($arr_profile_info['user_status']);
     if ($arr_profile_info['user_status']['i_isfriend'] == 1)
         array_push($listarr, '<li><img src="'.base_url().'/images/frnd-small-green.png" height="15px" width="19px" style="   float: left;margin-right: 7px;" title="Friends"></li>');
 		
