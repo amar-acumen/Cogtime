@@ -442,7 +442,7 @@ class Base_controller extends CI_Controller {
         );
 
         if($objclass == 'index' && $objmethod == 'index'){
-            $default_css_arr['js/production/contentslider.js'] = 'header';
+            $default_js_arr['js/production/contentslider.js'] = 'header';
         }
 
 
