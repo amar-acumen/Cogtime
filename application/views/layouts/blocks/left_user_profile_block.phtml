@@ -1,19 +1,19 @@
 <?// $_SESSION['s_profile_photo'].'hello'; ?>
 <div class="nw-left-profile">
     <a href="javascript:void(0)"  class="nw-profile-link" onclick="show_dialog('large-img');"> <div style="background:url(<?= get_profile_image_of_user('thumb',$_SESSION['s_profile_photo'], $_SESSION['e_gender']);?>) no-repeat center;width:60px; height:60px;" title="member" class="pro_photo4 user_pro_image" ></div></a>
-    <p class="wall-name"><a href="my-wall.html"><?= $arr_profile_info['s_profile_name'] ?></a> &nbsp;</p>
+    <p class="wall-name"><a href="my-wall.html"><?= $_SESSION['username'].' '.$_SESSION['user_lastname']?></a> &nbsp;</p>
      <?php /*?><div class="online-display">
         <?=show_profile_rating($arr_profile_info['id'])?>
      </div><?php */?>
     <input type="hidden" id="hd_logged_id" value="<?php echo $_SESSION['username']; ?>"/>
 	<br/>
-   <p style="float:left;"> <a href="javascript:void(0);" class="on-line online-status status-right off-line-text" id="user_status">(<?php echo $arr_profile_info['s_chat_display_name']; ?>)&nbsp;<?= check_user_online_hlpr($arr_profile_info['id']); ?> </a></p>
+   <p style="float:left;"> <a href="javascript:void(0);" class="on-line online-status status-right off-line-text" id="user_status">(<?php echo $_SESSION['s_chat_display_name']; ?>)&nbsp;<?= check_user_online_hlpr(decrypt($_SESSION['user_id'])); ?> </a></p>
     <!--Mood Message Start-->
     <div class="mood-message">
         
-       <p id="show_save_bio" style="float:left;padding-right:5px" bio="<?=$arr_profile_info['s_bio']?>" title="<?=$arr_profile_info['s_bio']?>"><?= ($arr_profile_info['s_bio'] =='')? '' : '&ldquo;'.my_substr($arr_profile_info['s_bio'],25).'&rdquo;' ?></p>
+       <p id="show_save_bio" style="float:left;padding-right:5px" bio="<?=$_SESSION['s_bio']?>" title="<?=$_SESSION['s_bio']?>"><?= ($_SESSION['s_bio'] =='')? '' : '&ldquo;'.my_substr($_SESSION['s_bio'],25).'&rdquo;' ?></p>
 	   
-	  <?php if($arr_profile_info['s_bio'] !='')
+	  <?php if($_SESSION['s_bio'] !='')
 	  {?>
         <a href="javascript:void(0);" onclick="open_bio_popup()" id="moods"><img src="images/grey-edit.png" height="12px" width="12px" title="Update Mood"></a>
     <?php }else{?>
