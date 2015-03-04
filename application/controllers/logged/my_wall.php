@@ -47,7 +47,7 @@ class My_wall extends Base_controller {
 
     public function index($s_member_type = '') {
         try {
-            $GLOBALS["_mysql_query"]=0;
+            
             $posted = array();
             $this->data["posted"] = $posted; /* don't change */
             $data = $this->data;
@@ -102,8 +102,7 @@ class My_wall extends Base_controller {
             } else {
                 $data['five_fruits_arr'] = $this->bible_fruits_model->get_fruit_list($i_profile_id);
             }
-            //pr($data['five_fruits_arr']);
-            //$data['five_fruits_arr'] = $this->bible_fruits_model->get_fruit_list($i_profile_id);
+            
 
 
             $s_inter_where = 'WHERE 1 AND i.i_is_enable  = 1 AND i.e_request_type = "On Going"';
