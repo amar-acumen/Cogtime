@@ -1313,7 +1313,7 @@ class Base_controller extends CI_Controller {
 		$arr_profile_info['s_timezone_text']=$this->session->userdata('s_timezone_text');
 		$arr_profile_info['is_netpal_q_mail_sent']=$this->session->userdata('is_netpal_q_mail_sent');
 		$arr_profile_info['is_pr_partner_q_mail_sent']=$this->session->userdata('is_pr_partner_q_mail_sent');
-        //$arr_profile_info = $this->users_model->fetch_this($i_profile_id);
+        $arr_profile_info = $this->users_model->fetch_this($i_profile_id);
 		//pr($arr_profile_info,1);
 
         $this->load->model('my_prayer_partner_model');
