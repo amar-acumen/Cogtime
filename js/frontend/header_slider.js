@@ -22,6 +22,6 @@ $(document).ready(function() {
 
 //tooltip start
 $(function() {
-  $(".pagination-big img[title]").tooltip();
+ // $(".pagination-big img[title]").tooltip();
 });
 //tooltip end
