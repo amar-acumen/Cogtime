@@ -438,13 +438,13 @@ float:left;
 .church-close-time tr td{ border-bottom:1px solid #d7d7d7;font-size:12px; color:#333; padding:4px 10px; text-align:center; border-left:1px solid #d7d7d7;}
 .church-close-time tr td.day-colum{ text-align:left; background:#f4f4f4; color:#013d62; font-size:14px;}
 
-.add-newmember{font-family: 'GibsonRegular'; }
+.add-newmember{font-family: 'GibsonRegular'; width:auto !important; }
 
 .add-newmember .lable01{ float:left; width:150px; margin-right:20px; text-align:right; color:#48535a; line-height:26px; font-size:13px;}
 
 .add-newmember .field03{ float:left; margin-bottom:20px; width:370px;}
 
-.add-newmember .field03 input[type="text"]{ border:1px solid #d7d7d7; height:28px; width:98%; padding:0 1%; line-height:28px; font-family: 'GibsonRegular'; font-size:14px; color:#48535a;}
+.add-newmember .field03 input[type="text"], .field03 input[type="email"]{ border:1px solid #d7d7d7; height:28px; width:98%; padding:0 1%; line-height:28px; font-family: 'GibsonRegular'; font-size:14px; color:#48535a;}
 
 .add-newmember .field03 select{ border:1px solid #d7d7d7; height:28px; width:100%; line-height:28px; font-family: 'GibsonRegular'; font-size:14px; color:#48535a;}
 
