@@ -1330,7 +1330,7 @@ class Base_controller extends CI_Controller {
         $this->data['arr_profile_info'] = $arr_profile_info;
         //pr($arr_profile_info);
 
-        $this->data['user_local_time_to_display'] = getUserLocalTime($arr_profile_info['s_time']);
+        //$this->data['user_local_time_to_display'] = getUserLocalTime($arr_profile_info['s_time']);
         
     }
 
