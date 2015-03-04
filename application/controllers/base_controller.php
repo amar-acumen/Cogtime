@@ -1289,7 +1289,7 @@ class Base_controller extends CI_Controller {
 
     protected function _set_left_panel_data($i_profile_id) {
         $this->load->model('users_model');
-        $arr_profile_info = $this->users_model->fetch_this($i_profile_id);
+        //$arr_profile_info = $this->users_model->fetch_this($i_profile_id);
 
         $this->load->model('my_prayer_partner_model');
         $this->load->model('netpals_model');
@@ -1329,7 +1329,7 @@ class Base_controller extends CI_Controller {
         $this->data['arr_profile_info'] = $arr_profile_info;
         //pr($arr_profile_info);
 
-        $this->data['user_local_time_to_display'] = getUserLocalTime($arr_profile_info['s_time']);
+        //$this->data['user_local_time_to_display'] = getUserLocalTime($arr_profile_info['s_time']);
         
     }
 

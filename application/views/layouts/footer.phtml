@@ -506,7 +506,7 @@ function get_user_clock() {//return false;
     $.ajax({
        type: "post",
        url: '<?=base_url()?>base_controller/getUserClock',
-       data: {zone_val:'<?=$arr_profile_info['s_time']?>'},
+       data: {zone_val:'<?=$_SESSION['s_time']?>'},
        dataType:"json",
        success: function(json_response){
 
