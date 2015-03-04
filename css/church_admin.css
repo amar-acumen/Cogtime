@@ -449,3 +449,5 @@ float:left;
 .add-newmember .field03 select{ border:1px solid #d7d7d7; height:28px; width:100%; line-height:28px; font-family: 'GibsonRegular'; font-size:14px; color:#48535a;}
 
 .add-newmember .field03 textarea{ border:1px solid #d7d7d7; width:98%; padding:10px 1%; font-family: 'GibsonRegular'; font-size:14px; color:#48535a; }
+#importfrm .add-newmember{ width:auto;}
+.clr{ clear:both;}
