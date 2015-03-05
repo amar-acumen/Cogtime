@@ -137,10 +137,10 @@ class My_wall extends Base_controller {
             #### prayer click
             ## NEWSFEED ##
             ob_start();
-            $this->newsfeed_pagination_show_more($i_profile_id);
-            $content = ob_get_contents();
-            $content_obj = json_decode($content);
-            $data['result_newsfeed_content'] = $content_obj->html;
+            //$this->newsfeed_pagination_show_more($i_profile_id);
+            //$content = ob_get_contents();
+            //$content_obj = json_decode($content);
+            $data['result_newsfeed_content'] = '';//$content_obj->html;
             ob_end_clean();
 
             ## END NEWSFEED ##
@@ -149,11 +149,11 @@ class My_wall extends Base_controller {
 
 
             ob_start();
-            $this->my_all_prayer_request_ajax_pagination($i_profile_id, 0);
-            $content = ob_get_contents();
-            $content_obj = json_decode($content);
-            $data['prayer_req_ajax_content'] = $content_obj->html;
-            $data['prayer_no_of_result'] = $content_obj->no_of_result;
+            //$this->my_all_prayer_request_ajax_pagination($i_profile_id, 0);
+            //$content = ob_get_contents();
+            //$content_obj = json_decode($content);
+            $data['prayer_req_ajax_content'] = '';//$content_obj->html;
+            $data['prayer_no_of_result'] = '';//$content_obj->no_of_result;
             ob_end_clean();
             ## prayer request
             ##project section
@@ -164,7 +164,7 @@ class My_wall extends Base_controller {
 
             
             //code for netpal qualification mail sent start
-            $is_netpal_mail_sent = get_is_netpal_q_mail_sent($i_profile_id);
+            /*$is_netpal_mail_sent = get_is_netpal_q_mail_sent($i_profile_id);
             if ($is_netpal_mail_sent == 0 || $is_netpal_mail_sent == '') {
                 $qualification_params = array();
                 $qualification_params = get_user_netpal_qualifications_by_id($i_profile_id);
@@ -234,7 +234,7 @@ class My_wall extends Base_controller {
                     //send_mail($arr);
                     update_netpal_mail_sent_status($i_profile_id);
                 }
-            }
+            }*/
             //code for netpal qualification mail sent end
             # view file...
 
