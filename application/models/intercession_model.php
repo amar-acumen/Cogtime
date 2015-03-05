@@ -61,7 +61,7 @@ class Intercession_model extends Base_model
                 LEFT JOIN {$this->db->ADMIN_USER} a on i.i_user_id=a.id
                 {$where} GROUP BY i.id {$s_order_by} {$limit}";
                
-        echo $sql ;
+        //echo $sql ;
         $res = $this->db->query($sql)->result_array();
   // pr($res,1);
        if(count($res)){
