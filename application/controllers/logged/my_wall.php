@@ -140,7 +140,7 @@ class My_wall extends Base_controller {
             //$this->newsfeed_pagination_show_more($i_profile_id);
             //$content = ob_get_contents();
             //$content_obj = json_decode($content);
-            $data['result_newsfeed_content'] = '';//$content_obj->html;
+            $data['result_newsfeed_content'] = '';$content_obj->html;
             ob_end_clean();
 
             ## END NEWSFEED ##
@@ -149,11 +149,11 @@ class My_wall extends Base_controller {
 
 
             ob_start();
-            //$this->my_all_prayer_request_ajax_pagination($i_profile_id, 0);
-            //$content = ob_get_contents();
-            //$content_obj = json_decode($content);
-            $data['prayer_req_ajax_content'] = '';//$content_obj->html;
-            $data['prayer_no_of_result'] = '';//$content_obj->no_of_result;
+            $this->my_all_prayer_request_ajax_pagination($i_profile_id, 0);
+            $content = ob_get_contents();
+            $content_obj = json_decode($content);
+            $data['prayer_req_ajax_content'] = $content_obj->html;
+            $data['prayer_no_of_result'] = $content_obj->no_of_result;
             ob_end_clean();
             ## prayer request
             ##project section
