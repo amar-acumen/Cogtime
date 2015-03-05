@@ -25,7 +25,7 @@ class Base_controller extends CI_Controller {
         try {                    
           //  die('ok');
             parent::__construct();
-            
+
             //$this->output->set_header("Cache-Control: private, max-age=60");//for caching 
             //$this->output->set_header("Date: ".gmdate('D, d M Y H:i:s \G\M\T', time() + 0));
             //$this->output->set_header("Expires: ".gmdate('D, d M Y H:i:s \G\M\T', time() + 60));
@@ -2518,10 +2518,10 @@ class Base_controller extends CI_Controller {
     ## SOCIAL HUB  METHODS: ########################
 
     protected function get_user_all_tweets($i_profile_id, $s_where = '', $start_limit = '', $end_limit = '') {
-        //$this->load->model('my_tweet_model');
+        $this->load->model('my_tweet_model');
 
-        //$tweet_arr = $this->my_tweet_model->get_all_tweets_by_user_id($i_profile_id, $s_where, 0, 3);
-        $this->data['right_bar']['tweet_arr'] = array();//$tweet_arr;
+        $tweet_arr = $this->my_tweet_model->get_all_tweets_by_user_id($i_profile_id, $s_where, 0, 3);
+        $this->data['right_bar']['tweet_arr'] = $tweet_arr;
     }
 
     ## SOCIAL HUB MESSAGES ###
