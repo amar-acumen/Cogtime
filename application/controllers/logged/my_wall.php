@@ -80,8 +80,8 @@ class My_wall extends Base_controller {
 			/**********************************************/
             $data['page_view_type'] = 'myaccount';
             $this->load->model('users_model');
-            //$arr_profile_info = $this->users_model->fetch_this($i_profile_id);
-            //$data['arr_profile_info'] = $arr_profile_info;
+            $arr_profile_info = $this->users_model->fetch_this($i_profile_id);
+            $data['arr_profile_info'] = $arr_profile_info;
 
             #### FOR THE FIRST LOGIN ONLY after registration 
             $data['first_login'] = $this->session->userdata('first_login');
@@ -105,7 +105,7 @@ class My_wall extends Base_controller {
             
 
 
-            /*$s_inter_where = 'WHERE 1 AND i.i_is_enable  = 1 AND i.e_request_type = "On Going"';
+            $s_inter_where = 'WHERE 1 AND i.i_is_enable  = 1 AND i.e_request_type = "On Going"';
             $data['latest_intercession'] = $this->intercession_model->get_intercession_for_wall($s_inter_where, 0, 1);
 
             /* 	$rand_verse_id = rand(1, 31102);
@@ -118,7 +118,7 @@ class My_wall extends Base_controller {
             #### prayer click
             $curr_date = date('Y-m-d h:i:s');
 
-           /* $emergncy_whr = 'WHERE 1 AND i.i_is_enable  = 1 AND i.e_request_type = "Emergency" AND DATE(i.dt_end_date) >= "' . $curr_date . '"';
+            $emergncy_whr = 'WHERE 1 AND i.i_is_enable  = 1 AND i.e_request_type = "Emergency" AND DATE(i.dt_end_date) >= "' . $curr_date . '"';
             $data['latest_emergency_intercession'] = $this->intercession_model->get_all_intercession($emergncy_whr, 0, 1);
 
             if (count($data['latest_emergency_intercession'])) {
@@ -133,7 +133,7 @@ class My_wall extends Base_controller {
             if (in_array($data['latest_emergency_intercession'][0]['id'], $skippedPrayerClick))
                 $data['show_PC'] = false;
             else
-                $data['show_PC'] = true;*/
+                $data['show_PC'] = true;
             #### prayer click
 
             ## NEWSFEED ##
