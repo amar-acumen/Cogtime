@@ -1321,19 +1321,19 @@ class Base_controller extends CI_Controller {
         $this->load->model('prayer_group_model');
         $this->load->model('my_ring_model');
 
-        $prayer_count = 0;//$this->my_prayer_partner_model->total_pending_prayer_partner_recieved($i_profile_id);
-        $netpal_count = 0;//$this->netpals_model->total_pending_netpal_received($i_profile_id);
-        $friend_count = 0;//$this->contacts_model->total_pending_friend_recieved($i_profile_id);
-        $prayergrp_notification_count = 0;//$this->prayer_group_model->get_total_pending_groups_requests($i_profile_id);
+        $prayer_count = $this->my_prayer_partner_model->total_pending_prayer_partner_recieved($i_profile_id);
+        $netpal_count = $this->netpals_model->total_pending_netpal_received($i_profile_id);
+        $friend_count = $this->contacts_model->total_pending_friend_recieved($i_profile_id);
+        $prayergrp_notification_count = $this->prayer_group_model->get_total_pending_groups_requests($i_profile_id);
 
         $wh_ring_inv_count = ' AND r.i_invited_id="' . $i_profile_id . '"';
         $wh = " AND rg.i_user_id = '" . $i_profile_id . "'";
 
-        $ring_notification_count = 0;//$this->my_ring_model->new_gettotal_ring_join_req($wh) +
+        $ring_notification_count = $this->my_ring_model->new_gettotal_ring_join_req($wh) +
                 $this->my_ring_model->gettotal_ring_inv_nw($wh_ring_inv_count);
 
 
-        $prayer_room_notification_count = 0;//$this->prayer_group_model->getTotalPrayerRoom($i_profile_id);
+        $prayer_room_notification_count = $this->prayer_group_model->getTotalPrayerRoom($i_profile_id);
 
         $arr_profile_info['prayer_count'] = $prayer_count;
         $arr_profile_info['netpal_count'] = $netpal_count;
