@@ -954,7 +954,7 @@ class Contacts_model extends Base_model implements InfModel
 	   return $rs;
    }
    
-   public function get_mutual_friends_by_user($i_user_id) {
+   /*public function get_mutual_friends_by_user($i_user_id) {
 	
 	  $ret_=array();
 	  ### get all friends
@@ -1040,10 +1040,10 @@ class Contacts_model extends Base_model implements InfModel
 	 // pr($common);  
   return $common;
   
-	}
+	}*/
 
 
-  /*public function get_mutual_friends_by_user($i_user_id) {
+  public function get_mutual_friends_by_user($i_user_id) {
       $s_qry = "select group_concat( tab1.user_id separator ',') as frnd_id from 
                   (
                       (select DISTINCT i_accepter_id as user_id
@@ -1091,7 +1091,8 @@ class Contacts_model extends Base_model implements InfModel
           $result1[]  = $this->db->query($s_qry1)->result_array();
       }
       return $result1;
-  }*/
+  }
+  
    public function __destruct()
     {}   
 
