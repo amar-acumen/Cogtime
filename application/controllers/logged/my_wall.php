@@ -164,7 +164,7 @@ class My_wall extends Base_controller {
 
             
             //code for netpal qualification mail sent start
-            /*$is_netpal_mail_sent = get_is_netpal_q_mail_sent($i_profile_id);
+            $is_netpal_mail_sent = get_is_netpal_q_mail_sent($i_profile_id);
             if ($is_netpal_mail_sent == 0 || $is_netpal_mail_sent == '') {
                 $qualification_params = array();
                 $qualification_params = get_user_netpal_qualifications_by_id($i_profile_id);
@@ -234,7 +234,7 @@ class My_wall extends Base_controller {
                     //send_mail($arr);
                     update_netpal_mail_sent_status($i_profile_id);
                 }
-            }*/
+            }
             //code for netpal qualification mail sent end
             # view file...
 
