@@ -1039,42 +1039,58 @@ class Contacts_model extends Base_model implements InfModel
 	  }
 	 // pr($common);  
   return $common;
-  return array();
+  
 	}
 
 
   /*public function get_mutual_friends_by_user($i_user_id) {
+      $s_qry = "select group_concat( tab1.user_id separator ',') as frnd_id from 
+                  (
+                      (select DISTINCT i_accepter_id as user_id
+                                             from cg_user_contacts where (i_requester_id ='" . $i_user_id . "') 
+                                             AND s_status='accepted' ORDER BY RAND())
+                      UNION
+                      (select DISTINCT i_requester_id as user_id
+                                             from cg_user_contacts where (i_accepter_id='" . $i_user_id . "') 
+                                             AND s_status='accepted' ORDER BY RAND())
+                  ) as tab1";
 
-      $s_qry =  " SELECT  group_concat(DISTINCT u.id separator ',') as user_id
-                    FROM 
-                    {$this->db->USER_CONTACTS} c, {$this->db->USERS} u
-                    WHERE 
-                    1
-                    AND c.s_status = 'accepted' 
-                    AND u.i_status=1 
-                    AND
-                    ((c.i_requester_id = {$i_user_id} AND u.id=c.i_accepter_id ) 
-                    OR (c.i_accepter_id = {$i_user_id} AND u.id=c.i_requester_id ))";
+
+      
+
       $result=$this->db->query($s_qry)->result_array();
-      $frnds = explode(',', $result[0]['user_id']);
+      $frnds = explode(',', $result[0]['user_id'].','.$result[1]['user_id']);
       $frndcount = count($frnds);
 
-      for($i=0;$i<$frndcount;$i++){
-          $s_qry =  " SELECT  u.id as mutual_id
-                    FROM 
-                    {$this->db->USER_CONTACTS} c, {$this->db->USERS} u
-                    WHERE 
-                    1
-                    AND c.s_status = 'accepted' 
-                    AND u.i_status=1 
-                    AND
-                    ((c.i_requester_id = {$frnds[$i]} AND u.id=c.i_accepter_id ) 
-                    OR (c.i_accepter_id = {$frnds[$i]} AND u.id=c.i_requester_id ))
-                    AND u.id NOT IN({$result[0]['user_id']})";
-          $result=$this->db->query($s_qry)->result_array();
-          $common[$mutual_ids_arr['0']['user_id']]=$common_ids_arr['0']['cuser_id'];
-      }
+      for($i=0;$i<10;$i++)
+      {
+          $s_qry1 = "select u.id user_id, 
+                         u.s_email,
+                        
+                         u.s_last_name,
+                         u.s_first_name ,
+                        
+                         u.s_profile_photo,
+                         u.e_gender,
+                         u.i_country_id, 
+                         u.i_user_type,
+                         u.s_city,
+                         u.s_state,
+                         u.i_status,
+                         u.dt_created_on from 
+                          (
+                              (select DISTINCT i_accepter_id as user_id
+                                                     from cg_user_contacts AS c, cg_users AS u  where (c.i_requester_id ='" . $frnds[$i] . "') 
+                                                     AND s_status='accepted' ORDER BY RAND() LIMIT 0,1)
+                              UNION
+                              (select DISTINCT i_requester_id as user_id
+                                                     from cg_user_contacts AS c, cg_users AS u where (c.i_accepter_id='" . $frnds[$i] . "') 
+                                                     AND s_status='accepted' ORDER BY RAND() LIMIT 0,1)
+                          ) as tab1"; 
 
+          $result1[]  = $this->db->query($s_qry1)->result_array();
+      }
+      return $result1;
   }*/
    public function __destruct()
     {}   
