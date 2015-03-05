@@ -46,6 +46,38 @@ class Intercession_model extends Base_model
         //pr($res,1);
         return $res;
     }
+
+    //onlyfor wall section
+
+    public function get_intercession_for_wall($where='',$i_start=null,$i_limit=null,$s_order_by='')
+    {
+        $limit  = (is_numeric($i_start) && is_numeric($i_limit))?" Limit ".intval($i_start).",".intval($i_limit):'';
+        $s_order_by = ($s_order_by != '')?'ORDER BY '.$s_order_by :'ORDER BY id DESC';
+        
+        $curr_date = date('Y-m-d');
+         
+        $sql = "SELECT i.*, CONCAT(a.s_name,' ',a.s_last_name) posted_by_admin, 
+                FROM {$this->db->BIBLE_INTERCESSION} i
+                LEFT JOIN {$this->db->ADMIN_USER} a on i.i_user_id=a.id
+                {$where} GROUP BY i.id {$s_order_by} {$limit}";
+               
+              //echo nl2br($sql) ;
+        $res = $this->db->query($sql)->result_array();
+  // pr($res,1);
+       if(count($res)){
+            foreach($res as $key=>$val)
+            {
+                $res[$key]['testimony'] = $this->if_testimony_exists_against_intercession($val['id']);
+                $res[$key]['commit_exists'] = $this->CheckIfCommitexists($val['id'] , intval(decrypt($this->session->userdata('user_id'))));
+                $res[$key]['total_commitments'] = $this->get_total_by_request_id($val['id']);
+                
+            }
+       }
+        //pr($res,1);
+        return $res;
+    }
+
+    //only for wall section
     
     public function if_testimony_exists_against_intercession($id)
     {

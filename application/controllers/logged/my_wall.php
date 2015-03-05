@@ -106,7 +106,7 @@ class My_wall extends Base_controller {
 
 
             $s_inter_where = 'WHERE 1 AND i.i_is_enable  = 1 AND i.e_request_type = "On Going"';
-            $data['latest_intercession'] = array();//$this->intercession_model->get_all_intercession($s_inter_where, 0, 1);
+            $data['latest_intercession'] = $this->intercession_model->get_intercession_for_wall($s_inter_where, 0, 1);
 
             /* 	$rand_verse_id = rand(1, 31102);
               $s_verse_where = " AND v.id =  {$rand_verse_id}";
