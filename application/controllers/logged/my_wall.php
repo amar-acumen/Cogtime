@@ -135,12 +135,13 @@ class My_wall extends Base_controller {
             else
                 $data['show_PC'] = true;
             #### prayer click
+            
             ## NEWSFEED ##
             ob_start();
-            //$this->newsfeed_pagination_show_more($i_profile_id);
-            //$content = ob_get_contents();
-            //$content_obj = json_decode($content);
-            $data['result_newsfeed_content'] = '';$content_obj->html;
+            $this->newsfeed_pagination_show_more($i_profile_id);
+            $content = ob_get_contents();
+            $content_obj = json_decode($content);
+            $data['result_newsfeed_content'] = $content_obj->html;
             ob_end_clean();
 
             ## END NEWSFEED ##
