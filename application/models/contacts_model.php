@@ -1090,7 +1090,7 @@ class Contacts_model extends Base_model implements InfModel
 
           $result1  = $this->db->query($s_qry1)->result_array();
           $ret[$j]      = $result1[0];
-          $j++
+          $j++;
           $ret[$j]      = $result1[1];
           $j++;
       }
