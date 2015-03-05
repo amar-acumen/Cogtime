@@ -56,7 +56,7 @@ class Intercession_model extends Base_model
         
         $curr_date = date('Y-m-d');
          
-        $sql = "SELECT i.*, CONCAT(a.s_name,' ',a.s_last_name) posted_by_admin, 
+        $sql = "SELECT i.*, CONCAT(a.s_name,' ',a.s_last_name) posted_by_admin 
                 FROM {$this->db->BIBLE_INTERCESSION} i
                 LEFT JOIN {$this->db->ADMIN_USER} a on i.i_user_id=a.id
                 {$where} GROUP BY i.id {$s_order_by} {$limit}";
