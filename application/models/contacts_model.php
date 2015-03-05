@@ -1059,7 +1059,7 @@ class Contacts_model extends Base_model implements InfModel
       
 
       $result=$this->db->query($s_qry)->result_array();
-      $frnds = explode(',', $result[0]['user_id'].','.$result[1]['user_id']);
+      $frnds = explode(',', $result[0]['user_id']); pr($frnds);
       $frndcount = count($frnds);
 
       for($i=0;$i<10;$i++)
