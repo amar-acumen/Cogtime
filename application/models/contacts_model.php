@@ -1061,7 +1061,7 @@ class Contacts_model extends Base_model implements InfModel
       $result=$this->db->query($s_qry)->result_array();
       $frnds = explode(',', $result[0]['frnd_id']); pr($result);
       $frndcount = count($frnds);
-
+      $j = 0;
       for($i=0;$i<10;$i++)
       {
           $s_qry1 = "select u.id user_id, 
@@ -1081,14 +1081,18 @@ class Contacts_model extends Base_model implements InfModel
                           (
                               (select DISTINCT i_accepter_id as user_id
                                                      from cg_user_contacts AS c  where (c.i_requester_id ='" . $frnds[$i] . "') 
-                                                     AND s_status='accepted' ORDER BY RAND() LIMIT 0,1)
+                                                     AND s_status='accepted' AND user_id NOT IN(".$result[0]['frnd_id'].','.$i_user_id.")  ORDER BY RAND() LIMIT 0,1)
                               UNION
                               (select DISTINCT i_requester_id as user_id
                                                      from cg_user_contacts AS c where (c.i_accepter_id='" . $frnds[$i] . "') 
-                                                     AND s_status='accepted' ORDER BY RAND() LIMIT 0,1)
+                                                     AND s_status='accepted' AND user_id NOT IN(".$result[0]['frnd_id'].','.$i_user_id.") ORDER BY RAND() LIMIT 0,1)
                           ) as tab1, cg_users AS u WHERE u.id=tab1.user_id"; 
 
-          $result1[]  = $this->db->query($s_qry1)->result_array();
+          $result1  = $this->db->query($s_qry1)->result_array();
+          $ret[$j]      = $result1[0];
+          $j++
+          $ret[$j]      = $result1[1];
+          $j++;
       }
       return $result1;
   }
