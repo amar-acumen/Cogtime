@@ -79,7 +79,7 @@ if( $feed['s_type'] == 'wall_post' ){
               <!-- image -->
               <!--video play-->
  			   <?php if(!empty($data_arr->video) && count($data_arr->video)){ 
-          $video = '';//get_video_from_url($data_arr->video->url,'329','212');
+          $video = get_video_from_url($data_arr->video->url,'329','212');
 			   ?>
                 <div class="video-image">
                     <div  class="cogtime-video" id="myvideo_first_thumb_<?=$feed['id']?>" style="background:url('') no-repeat center;;width:329px; height:212px;" ><?php echo $video['html']?></div>
