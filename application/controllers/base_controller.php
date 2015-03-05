@@ -17,8 +17,6 @@ class Base_controller extends CI_Controller {
 
     protected $language;
     protected $data = array();
-
-
     /* session variables */
     protected $ses_user = array();
     public $translation_container = null;
