@@ -342,10 +342,12 @@ function change_status_(id,status)
 				//hide_dialog();
                                      // hideBusyScreen();
 			
-            hideBusyScreen();
+            
             if(data.status==0)
+                hideBusyScreen();
                 var now_status = 'Enable';
             else
+                hideBusyScreen();
                 var now_status = 'Disable';
         
         
