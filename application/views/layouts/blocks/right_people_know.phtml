@@ -10,7 +10,8 @@
                                     <div class="content" id="switchdiv022" style="display:none;">
 									<?php 
  //$friends=get_friends_by_id($_SESSION['user_id']);
-pr($people_you_may_know);
+//pr($people_you_may_know);
+
  if($people_you_may_know)
  {
  	
@@ -22,13 +23,12 @@ pr($people_you_may_know);
 										$k = $people_you_may_know[$i];
 										$profile_link = base_url() . "profile/" . $k['user_id'] . "/" . my_url($k['name']) . ".html";
 										$img = get_profile_image_of_user('thumb',$k['s_profile_photo'],$k['e_gender']);
-										//$ct=get_mutual_count($m);
-									
+										
 									?>
 									    <div class="project_box">
                                                 <a href="javascript:void(0);"><img src="<?=$img?>" alt="" class="pro_photo3" /></a>
-                                                <p class="grey-link"><a href="<?=$profile_link?>"><?=$name?></a></p>
-												<p class="nw-date-time"><?=$ct?> Mutual Friend<?=($ct==1)?' ':'s '?></p>
+                                                <p class="grey-link"><a href="<?=$profile_link?>"><?=$k['name']?></a></p>
+												<p class="nw-date-time"><?=$k['mutualfrnd']?> Mutual Friend<?=($k['mutualfrnd']==1)?' ':'s '?></p>
                                                 <p><a href="javascript:void(0);" id="#invite_friend_(<?=$k?>)" class="add-as-friend" onclick="invite_friend_('<?=encrypt($k)?>')">[add as friend]</a></p>
 												
                                           </div>

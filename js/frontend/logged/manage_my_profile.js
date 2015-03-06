@@ -365,16 +365,17 @@ function validateSkillFrm(data)
 {
 
     var result_obj = JSON.parse(data);
-
+	$('#skill_section').html(result_obj.html);
+	
     if (result_obj.result == 'success') {
-        $.ajax({
+        /*$.ajax({
             "type": "post",
             "url": base_url + 'logged/my_profile/ajax_skill_submit',
             "success": function(response)
             {
                 $('#skill_section').html(response);
             }
-        });
+        });*/
 
         closeDiv('5');
         showUIMsg(result_obj.msg);
