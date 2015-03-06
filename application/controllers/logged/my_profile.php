@@ -915,7 +915,7 @@ class My_profile extends Base_controller {
                         if (!empty($DELETED_IDS_ARR) && in_array($arr_db_id[$i], $DELETED_IDS_ARR)) {
 							echo 2;
                             $this->skill_model->delete_info_db($arr_db_id[$i]);
-							echo $this->db->last_query().' ==  ';exit;
+							echo $this->db->last_query().' ==  ';
                         } else {
 							echo 3;
                             $info['s_name'] = get_formatted_string($arr_skill_name[$i]);
