@@ -9,20 +9,18 @@
                                     </div>
                                     <div class="content" id="switchdiv022" style="display:none;">
 									<?php 
- $friends=get_friends_by_id($_SESSION['user_id']);
- if($friends != 0)
+ //$friends=get_friends_by_id($_SESSION['user_id']);
+pr($people_you_may_know);
+ if($people_you_may_know)
  {
- $val=get_mutual_friends($_SESSION['user_id']);
- //pr($val,1);?>
+ 	
+ ?>
 									<?php 
 									//$vals=array_slice($val,'0','2');
-									$i=0;
-									foreach($val as $key=>$m)
+									
+									/*for($i=0;$i<3;$i++)
 									{
-										 $i=$i+1;
-										 $k=array();
-										 $k=explode(',',$key);
-										 $name=$k[1].' '.$k[2];
+
 										 $profile_link = base_url() . "profile/" . $k[0] . "/" . my_url($name) . ".html";
 										 $img = get_profile_image_of_user('thumb',$k[4],$k[3]);
 										 $ct=get_mutual_count($m);
@@ -70,7 +68,8 @@
                                           </div>
                                           <?php 
 
-										  }?>
+										  }*/
+										  ?>
                                       
                                           <div class="clr"></div>
 									  <?php
