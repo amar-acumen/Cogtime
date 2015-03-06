@@ -910,7 +910,6 @@ class My_profile extends Base_controller {
                     ## CHECKING BLANK ARRAY
                     if (trim($arr_skill_name[$i]) != '') {
                         if (!empty($DELETED_IDS_ARR) && in_array($arr_db_id[$i], $DELETED_IDS_ARR)) {
-							pr($arr_db_id);
                             $this->skill_model->delete_info_db($arr_db_id[$i]);
                         } else {
                             $info['s_name'] = get_formatted_string($arr_skill_name[$i]);
@@ -919,7 +918,7 @@ class My_profile extends Base_controller {
 
                             # modify user-profile info...                    
                             $result = $this->skill_model->edit_skill_info($info, $logged_user_id, $arr_db_id[$i]);
-                            echo $this->db->last_query().' ==  ';exit;
+                            //echo $this->db->last_query().' ==  ';exit;
                         }
                     }   // end of 'if any field in a div exists
                     else {
