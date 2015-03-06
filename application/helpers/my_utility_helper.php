@@ -5176,3 +5176,10 @@ function get_video_from_url($url,$width,$height)
     $image_source = $CI->embed_video->get_player($width, $height);
     return $image_source;
 }
+function get_blog_info_by_id($id) {
+
+    $ci = get_instance();
+    $ci->load->model('my_blog_model');
+    $info = $ci->my_blog_model->get_by_id($id);
+    return $info;
+}

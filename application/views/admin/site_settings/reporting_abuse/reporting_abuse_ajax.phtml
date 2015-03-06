@@ -226,10 +226,50 @@ echo '<object width="' . $width . '" height="' . $height . '"><param name="movie
 										 }else if($type == 'blog'){ 
 										 	//$img = get_video_snap_by_id($id);
 										?>
-                                        <a href="javascript:void(0);" style="float:left;"><p> <?=get_blog_name_by_id($id)?></p></a>
+                                                   <a href="javascript:void(0);" style="float:left;" onclick="show_dialog('report_block<?= $id?>')"><p> <?=get_blog_name_by_id($id)?></p></a>
                                         
                                         <br/>
                                         <p class="" style="float:right;margin-top:20px"><b>Blog Author : <?=$info['i_abuser_name']?></b></p>
+                                        
+                                        <!-----------------------------pop up box---------------------------------->
+                                         <div class="lightbox report_block<?= $id?>" style="width: 500px; left: 100px;">
+      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="<?=base_url()?>images/close.png" alt="" width="24" height="24" /></a></div>
+      <div class="top"><div>&nbsp;</div></div>
+      <div class="mid">
+          <?php $blog_details = get_blog_info_by_id($id);
+          pr($blog_details);
+          ?>
+            <div class="heading" style="margin-bottom:0px;">
+                  <div class="left">
+                        <h4></h4>
+                  </div>
+            </div>
+               <div class="shade_box_white" style="padding:8px 0px;">
+               <div style="padding-bottom:10px;">
+               <p class="center-text" style="line-height:23px; color:#494949; font-size:16px; text-align:center;">
+                  <!-----contain start---->
+                  
+               <?php /*?><h1><?=$title?></h1><?php */?>
+               <?php /*?><span class="pull-left">Created On: <?=$val['dt_created_on'] ?></span><?php */?>
+               <span class="venue"></span>
+               
+               
+               <div class="clr"></div>
+
+               
+                 <!--right part -->
+               
+                               <?php// } ?>
+                        </div>
+                        <!--/right part -->
+               
+               </div>
+             
+               <div class="clr"></div>
+            </div>
+            
+      </div>
+                                        <!------------------------------------------------------------------>
                
                                         <?php
 										 }
