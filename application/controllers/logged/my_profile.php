@@ -640,8 +640,16 @@ class My_profile extends Base_controller {
                         $this->education_model->delete_info_db($arr_db_id[$i]);
                     }
                 }
+				
+				$logged_user_id = intval(decrypt($this->session->userdata('user_id')));
+				$arr_profile_info = $this->users_model->fetch_this($logged_user_id);
+				$data['arr_profile_info'] = $arr_profile_info;
+
+				$edit_edu_info_html = $this->load->view('logged/ajax_submit_my_profile/edu_submit_response.phtml', $data, true);
+				
                 echo json_encode(array('result' => 'success',
                     'redirect' => $REDIRECT,
+					'html' => $edit_edu_info_html,
                     'msg' => $SUCCESS_MSG));
                 exit;
             }
@@ -1196,7 +1204,7 @@ class My_profile extends Base_controller {
     }
 
     //-------------------------------------- education ----------------------------------------------
-    function ajax_edu_submit() {
+    /*function ajax_edu_submit() {
         $logged_user_id = intval(decrypt($this->session->userdata('user_id')));
         $arr_profile_info = $this->users_model->fetch_this($logged_user_id);
         $data['arr_profile_info'] = $arr_profile_info;
@@ -1213,10 +1221,10 @@ class My_profile extends Base_controller {
           $cwhere1	= " i_state_id='".$arr_profile_info["education_arr"][$i]["s_school_state"]."'";
           $data['scity'.$i] 	= makeOptionCity($cwhere1,encrypt($arr_profile_info["education_arr"][$i]["s_school_city"]));
           echo $data['scity'.$i];
-          } */
+          } 
         $this->load->view('logged/ajax_submit_my_profile/edu_submit_response.phtml', $data);
         //$this->load->view('logged/my_profile_edu_part.phtml',$data);
-    }
+    }*/
 
     //-------------------------------------- work ----------------------------------------------
     function ajax_work_submit() {
