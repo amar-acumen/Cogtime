@@ -1124,11 +1124,11 @@ class Contacts_model extends Base_model implements InfModel
                   (
                       (select DISTINCT i_accepter_id as user_id
                                              from cg_user_contacts where (i_requester_id ='" . $uid2 . "') 
-                                             AND s_status='accepted' AND i_accepter_id IN ('".$result1[0]['frnd_id']."'))
+                                             AND s_status='accepted' AND i_accepter_id IN (".$result1[0]['frnd_id']."))
                       UNION
                       (select DISTINCT i_requester_id as user_id
                                              from cg_user_contacts where (i_accepter_id='" . $uid2 . "') 
-                                             AND s_status='accepted' AND i_requester_id IN ('".$result1[0]['frnd_id']."'))
+                                             AND s_status='accepted' AND i_requester_id IN (".$result1[0]['frnd_id']."))
                   ) as tab1";
 
 
