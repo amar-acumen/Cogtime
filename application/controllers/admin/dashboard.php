@@ -118,7 +118,16 @@ class Dashboard extends Admin_base_Controller
 	} 
         function admin_logout(){
             $admin_id = $this->input->post('admin_id');
-               echo json_encode(array('result'=>'success'));
+            $query = $this->db->get_where('cg_admin_user', array('id' => $admin_id));
+            $result = $query->result();
+            $status = $result[0]->i_status;
+            if($status == 2){
+                 $this->users_model->logout();
+                 echo json_encode(array('result'=>'success'));
+            }else{
+                echo json_encode(array('result'=>'nologout'));
+            }
+               
         }
 	
 }   // end of controller...

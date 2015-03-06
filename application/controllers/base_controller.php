@@ -1330,7 +1330,7 @@ class Base_controller extends CI_Controller {
         $wh = " AND rg.i_user_id = '" . $i_profile_id . "'";
 
         $ring_notification_count = $this->my_ring_model->new_gettotal_ring_join_req($wh) +
-                $this->my_ring_model->gettotal_ring_inv_nw($wh_ring_inv_count);
+        $this->my_ring_model->gettotal_ring_inv_nw($wh_ring_inv_count);
 
 
         $prayer_room_notification_count = $this->prayer_group_model->getTotalPrayerRoom($i_profile_id);
@@ -1353,7 +1353,7 @@ class Base_controller extends CI_Controller {
         $this->data['arr_profile_info'] = $arr_profile_info;
         //pr($arr_profile_info);
 
-        //$this->data['user_local_time_to_display'] = getUserLocalTime($arr_profile_info['s_time']);
+        $this->data['people_you_may_know'] = $this->contacts_model->get_mutual_friends_by_user_for_wall($i_profile_id);
         
     }
 
