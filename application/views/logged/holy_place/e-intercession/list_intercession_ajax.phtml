@@ -1,5 +1,5 @@
 <?php
-pr($arr_prayer_request); 
+#pr($arr_prayer_request); 
 if (count($arr_prayer_request)) {
     foreach ($arr_prayer_request as $key => $val) {
 
@@ -17,7 +17,7 @@ if (count($arr_prayer_request)) {
                 <p class="quoted-text"><a href="<?= base_url() ?>e-intercession/<?= $val['id'] ?>/e-intercession-request-detail.html"><?= ($s_subject) ?></a></p> 
                 <p class="quoted-text">
                     <a href="<?= base_url() ?>e-intercession/<?= $val['id'] ?>/e-intercession-request-detail.html"><?= nl2br($DESC) ?></a> 
-                    <span style="color:#013D62; font-size:13px;">Location: <?= ($val['s_city']) . ', ' . ($val['s_state']) . ', ' . get_countryname($val['i_country_id']) ?></span>
+                    <span style="color:#013D62; font-size:13px;">Location: <?= (get_city_name_by_id($val['i_city_id'])) . ', ' . (get_state_name_by_id($val['i_state_id'])) . ', ' . get_countryname($val['i_country_id']) ?></span>
                     <span>Updated on: <?= get_time_elapsed($val['dt_insert_date']) ?></span>
                 </p>
                 <?php /* ?><h2 class="name"><?=$val['posted_by_admin']?></h2><?php */ ?>
