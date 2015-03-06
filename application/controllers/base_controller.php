@@ -1333,7 +1333,7 @@ class Base_controller extends CI_Controller {
         //$this->my_ring_model->gettotal_ring_inv_nw($wh_ring_inv_count);
 
 
-        $prayer_room_notification_count = $this->prayer_group_model->getTotalPrayerRoom($i_profile_id);
+       // $prayer_room_notification_count = $this->prayer_group_model->getTotalPrayerRoom($i_profile_id);
 //
         $arr_profile_info['prayer_count'] = '';//$prayer_count;
         $arr_profile_info['netpal_count'] = '';//$netpal_count;
