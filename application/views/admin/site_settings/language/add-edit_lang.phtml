@@ -102,12 +102,13 @@ function validateFrm(data)
 		}
 			showUIMsg(data.msg);
 				hideBusyScreen();
-                                if(data.msg == 'Error!'){
+                                
+			}
+                        if(data.msg == 'Error!'){
                                     
                                 }else if(data.msg == 'New Language has been added successfully.'){
                                    window.location.href=admin_base_url + "site-settings/languages.html"; 
                                 }
-			}
 			
 		}
 </script>
