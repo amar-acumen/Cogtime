@@ -230,7 +230,7 @@ function validateEduFrm(data)
     var result_obj = JSON.parse(data);
     //alert(data);
 	
-	$('#education_section').html(response);
+	$('#education_section').html(result_obj.html);
     if (result_obj.result == 'success') {
 
         showUIMsg(result_obj.msg);
