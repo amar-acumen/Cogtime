@@ -104,7 +104,7 @@ function validateFrm(data)
 				hideBusyScreen();
                                 if(data.msg == 'Error!'){
                                     
-                                }else{
+                                }else if(data.msg == 'New Language has been added successfully.'){
                                    window.location.href=admin_base_url + "site-settings/languages.html"; 
                                 }
 			}
