@@ -164,6 +164,7 @@ function validateBasicFrm(data)
 {
 
     var result_obj = JSON.parse(data);
+	
 
     if (result_obj.result == 'success') {
         $.ajax({
@@ -228,11 +229,13 @@ function validateEduFrm(data)
 
     var result_obj = JSON.parse(data);
     //alert(data);
+	
+	$('#education_section').html(result_obj.html);
     if (result_obj.result == 'success') {
 
         showUIMsg(result_obj.msg);
 
-        $.ajax({
+        /*$.ajax({
             "type": "post",
             "url": base_url + 'logged/my_profile/ajax_edu_submit',
             "success": function(response)
@@ -240,7 +243,7 @@ function validateEduFrm(data)
                 //console.log(response);
                 $('#education_section').html(response);
             }
-        });
+        });*/
 
         closeDiv('3');
         showUIMsg(result_obj.msg);
