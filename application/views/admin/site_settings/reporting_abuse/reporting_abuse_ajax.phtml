@@ -295,11 +295,11 @@ echo '<object width="' . $width . '" height="' . $height . '"><param name="movie
       <div class="top"><div>&nbsp;</div></div>
       <div class="mid">
           <?php $article_details = get_article_deatil_by_id($id);
-         pr($article_details);
+        // pr($article_details);
           ?>
             <div class="heading" style="margin-bottom:0px;">
                   <div class="left">
-                        <h4><?// $blog_details['s_title']; ?></h4>
+                        <h4><?= $article_details['s_post_title']; ?></h4>
                   </div>
             </div>
                <div class="shade_box_white" style="padding:8px 0px;">
@@ -307,13 +307,15 @@ echo '<object width="' . $width . '" height="' . $height . '"><param name="movie
                <p class="left" style="line-height:23px; color:#494949; font-size:16px; text-align:center;">
                    
                   <!-----contain start---->
-                  <?// $blog_details['s_description'] ?>
+                  <?= $article_details['s_post_title'] ?>
                </p>
                  <div class="clr"></div>
                <p>
-                   <span><b>Created On:</b> <?//$blog_details['dt_created_on'] ?> </span>
+                   <span><b>Blog : </b> <?= get_blog_name_by_id($article_details['i_blog_id']); ?></span>
                    <div class="clr"></div>
-                   <span><b>Views : </b> <?//$blog_details['i_view_count']; ?></span>
+                   <span><b>Created On:</b> <?= $article_details['dt_created_on'] ?> </span>
+                   
+                   
                </p>
                <?php /*?><h1><?=$title?></h1><?php */?>
                <?php /*?><span class="pull-left">Created On: <?=$val['dt_created_on'] ?></span><?php */?>
