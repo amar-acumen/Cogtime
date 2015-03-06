@@ -908,12 +908,13 @@ class My_profile extends Base_controller {
 			echo 'ELSELSLE';
 			echo '========'.$total_divs;
                 for ($i = 0; $i < $total_divs; $i++) {
-						pr($arr_skill_name);
+						
                     ## CHECKING BLANK ARRAY
                     if (trim($arr_skill_name[$i]) != '') {
 					echo 1;
                         if (!empty($DELETED_IDS_ARR) && in_array($arr_db_id[$i], $DELETED_IDS_ARR)) {
 							echo 2;
+							pr($arr_db_id);
                             $this->skill_model->delete_info_db($arr_db_id[$i]);
                         } else {
 							echo 3;
