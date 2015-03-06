@@ -14,25 +14,21 @@ pr($people_you_may_know);
  if($people_you_may_know)
  {
  	
- ?>
-									<?php 
+ ?>									<?php 
 									//$vals=array_slice($val,'0','2');
 									
-									/*for($i=0;$i<3;$i++)
+									for($i=0;$i<3;$i++)
 									{
-
-										 $profile_link = base_url() . "profile/" . $k[0] . "/" . my_url($name) . ".html";
-										 $img = get_profile_image_of_user('thumb',$k[4],$k[3]);
-										 $ct=get_mutual_count($m);
-										 $address = get_user_address_info($k[0]); 
-									?>
+										$k = $people_you_may_know[$i];
+										$profile_link = base_url() . "profile/" . $k['user_id'] . "/" . my_url($k['name']) . ".html";
+										$img = get_profile_image_of_user('thumb',$k['s_profile_photo'],$k['e_gender']);
+										//$ct=get_mutual_count($m);
 									
-                                          <div class="project_box">
+									?>
+									    <div class="project_box">
                                                 <a href="javascript:void(0);"><img src="<?=$img?>" alt="" class="pro_photo3" /></a>
                                                 <p class="grey-link"><a href="<?=$profile_link?>"><?=$name?></a></p>
-												<p class="location"><?=$address?></p>
-												
-                                                <p class="nw-date-time"><?=$ct?> Mutual Friend<?=($ct==1)?' ':'s '?></p>
+												<p class="nw-date-time"><?=$ct?> Mutual Friend<?=($ct==1)?' ':'s '?></p>
                                                 <p><a href="javascript:void(0);" id="#invite_friend_(<?=$k?>)" class="add-as-friend" onclick="invite_friend_('<?=encrypt($k)?>')">[add as friend]</a></p>
 												
                                           </div>
@@ -40,9 +36,8 @@ pr($people_you_may_know);
 										  if($i>1)
 										 break;
 										  }?>
-                                        
                                           <div class="clr"></div>
-										  <?php if(count($val)>2){?>
+										  <?php if(count($people_you_may_know)>2){?>
                                           <div class="view_more"><a href="<?=base_url()?>mutual-friends">[see all]</a></div>
 										  <?}?>
                                     </div>
@@ -68,13 +63,14 @@ pr($people_you_may_know);
                                           </div>
                                           <?php 
 
-										  }*/
+										  }
 										  ?>
                                       
                                           <div class="clr"></div>
 									  <?php
 									  }?>
                               </div>
+                              
 							
 <!--/ people you may know -->
 <script type="text/javascript">
