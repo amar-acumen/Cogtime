@@ -1066,10 +1066,7 @@ class Contacts_model extends Base_model implements InfModel
       {
           $s_qry1 = "select u.id user_id, 
                          u.s_email,
-                        
-                         u.s_last_name,
-                         u.s_first_name ,
-                        
+                         CONCAT(u.s_first_name ,' ', u.s_last_name) AS name,
                          u.s_profile_photo,
                          u.e_gender,
                          u.i_country_id, 
