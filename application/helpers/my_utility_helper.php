@@ -4343,7 +4343,7 @@ function get_events_by_user($userid, $type) {
     if ((($res['0']['i_friend_privacy'] == '0') && ($res['0']['i_netpal_privacy'] == '0') && ($res['0']['i_prayer_partner_privacy'] == '0') && ($res['0']['i_ring_privacy'] == '0') && ($res['0']['i_prayer_group_privacy'] == '0')) || $type == "my_wall") {
         $dt = new DateTime();
         $d = $dt->format('Y-m-d H:i:s');
-        $q1 = $ci->db->query("select * from cg_events where i_host_id='$userid' and i_status='1' and dt_end_time > '$d'");
+        $q1 = $ci->db->query("select s_image_1,i_country_id,s_address,s_city,s_title,s_desc,dt_updated_on,dt_start_time,dt_end_time from cg_events where i_host_id='$userid' and i_status='1' and dt_end_time > '$d'");
         $res1 = $q1->result_array();
         // echo $ci->db->last_query();
         //pr($res1,1);
