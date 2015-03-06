@@ -558,7 +558,7 @@ public function get_by_newsfeed_id($i_word_id,  $i_start_limit="", $i_no_of_page
         //$sql = "SELECT * FROM {$this->db->MC_AUDIO_CAT}";
 		
 		$sql = "SELECT TAB1.*, (SELECT COUNT(*) FROM {$this->db->MC_AUDIO} WHERE i_category_id = TAB1.id) AS CAT_COUNT
-					FROM {$this->db->MC_AUDIO_CAT} AS TAB1";
+					FROM {$this->db->MC_AUDIO_CAT} AS TAB1 where TAB1.is_hidden = 0 ";
 		
         $res = $this->db->query($sql)->result_array();
         return $res;
