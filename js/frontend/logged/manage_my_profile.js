@@ -164,16 +164,18 @@ function validateBasicFrm(data)
 {
 
     var result_obj = JSON.parse(data);
+	
+	$('#basic_info_section').html(result_obj.html);
 
     if (result_obj.result == 'success') {
-        $.ajax({
+        /*$.ajax({
             "type": "post",
             "url": base_url + 'logged/my_profile/ajax_basic_info_submit',
             "success": function(response)
             {
                 $('#basic_info_section').html(response);
             }
-        });
+        });*/
 
         closeDiv('2');
         showUIMsg(result_obj.msg);
