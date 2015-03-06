@@ -1101,7 +1101,7 @@ class Contacts_model extends Base_model implements InfModel
 
   public function get_number_of_mutual_friends($uid1,$uid2)
   {
-      $s_qry1 = "select group_concat( tab1.user_id separator ',') as frnd_id from 
+      echo $s_qry1 = "select group_concat( tab1.user_id separator ',') as frnd_id from 
                   (
                       (select DISTINCT i_accepter_id as user_id
                                              from cg_user_contacts where (i_requester_id ='" . $uid1 . "') 
@@ -1117,7 +1117,7 @@ class Contacts_model extends Base_model implements InfModel
 
       $result1=$this->db->query($s_qry1)->result_array();
 
-      $s_qry2 = "select COUNT(tab1.user_id) as frnd_id from 
+      echo $s_qry2 = "select COUNT(tab1.user_id) as frnd_id from 
                   (
                       (select DISTINCT i_accepter_id as user_id
                                              from cg_user_contacts where (i_requester_id ='" . $uid2 . "') 
@@ -1130,7 +1130,7 @@ class Contacts_model extends Base_model implements InfModel
 
 
       
-
+      exit;
       $result2=$this->db->query($s_qry2)->result_array();
       
       return $result2['frnd_id'];
