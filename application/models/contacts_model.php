@@ -1066,10 +1066,7 @@ class Contacts_model extends Base_model implements InfModel
       {
           $s_qry1 = "select u.id user_id, 
                          u.s_email,
-                        
-                         u.s_last_name,
-                         u.s_first_name ,
-                        
+                         CONCAT(u.s_first_name ,' ', u.s_last_name) AS name,
                          u.s_profile_photo,
                          u.e_gender,
                          u.i_country_id, 
@@ -1120,23 +1117,24 @@ class Contacts_model extends Base_model implements InfModel
 
       $result1=$this->db->query($s_qry1)->result_array();
 
-      $s_qry2 = "select COUNT(tab1.user_id) as frnd_id from 
+      $s_qry2 = "select tab1.user_id AS frnd_id from 
                   (
-                      (select DISTINCT i_accepter_id as user_id
+                      (select GROUP_CONCAT(DISTINCT i_accepter_id) as user_id
                                              from cg_user_contacts where (i_requester_id ='" . $uid2 . "') 
-                                             AND s_status='accepted' AND i_accepter_id IN ('".$result1[0]['frnd_id']."'))
+                                             AND s_status='accepted' AND i_accepter_id IN (".$result1[0]['frnd_id']."))
                       UNION
-                      (select DISTINCT i_requester_id as user_id
+                      (select GROUP_CONCAT(DISTINCT i_requester_id) as user_id
                                              from cg_user_contacts where (i_accepter_id='" . $uid2 . "') 
-                                             AND s_status='accepted' AND i_requester_id IN ('".$result1[0]['frnd_id']."'))
+                                             AND s_status='accepted' AND i_requester_id IN (".$result1[0]['frnd_id']."))
                   ) as tab1";
 
 
       
-
-      $result2=$this->db->query($s_qry2)->result_array();
       
-      return $result2['frnd_id'];
+      $result2=$this->db->query($s_qry2)->result_array();
+      $mutualfrnd = count(explode(',', $result2[0]['frnd_id'])) + count(explode(',', $result2[1]['frnd_id']));
+      
+      return $mutualfrnd;
   }
 
    public function __destruct()
