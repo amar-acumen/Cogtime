@@ -28,8 +28,12 @@ $(document).ready(function(){
 				  
 						
 						if(data.result == 'success'){
-                                                    alert('ok')
-                                                }		
+                                                    //alert('ok')
+                                                    location.reload();
+                                                }
+                                                else if(data.result == 'nologout'){
+                                                    
+                                                }
 					  
 					  }
 					  });
