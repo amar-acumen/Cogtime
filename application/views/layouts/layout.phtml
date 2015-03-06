@@ -27,12 +27,10 @@
                     if(g_statusObj[v].item_type == 'chat' && g_statusObj[v].countrow>0)
                     {
                         //chatHeartBesat
+						console.log('chat');
                         chatHeartbeat();
                     }
-                    if((g_statusObj[v].item_type == 'prayer_partner' && g_statusObj[v].countrow>0) || (g_statusObj[v].item_type == 'friends' && g_statusObj[v].countrow>0) || (g_statusObj[v].item_type == 'net_pal' && g_statusObj[v].countrow>0) || (g_statusObj[v].item_type == 'prayer_group' && g_statusObj[v].countrow>0) ||  (g_statusObj[v].item_type == 'ring_notification' && g_statusObj[v].countrow>0) || (g_statusObj[v].item_type == 'ring_inv_notification' && g_statusObj[v].countrow>0))
-                    {
-                        get_new_request_notification();
-                    }
+                   
                     if((g_statusObj[v].item_type == 'events' && g_statusObj[v].countrow>0) || (g_statusObj[v].item_type == 'organizer' && g_statusObj[v].countrow>0))
                     {
                         //get_system_reminders_at_remind_me_time();
