@@ -1091,14 +1091,15 @@ class Contacts_model extends Base_model implements InfModel
           {
             $result1[0]['mutualfrnd'] = $this->get_number_of_mutual_friends($frnds[$i],$i_user_id);
             $ret[$j]      = $result1[0];
+            $j++;
           }
           if(count($result1[1])>0)
           {
-            $j++;
             $result1[1]['mutualfrnd'] = $this->get_number_of_mutual_friends($frnds[$i],$i_user_id);
             $ret[$j]      = $result1[1]; 
+            $j++;
           }
-          $j++;
+          
       }
       return $ret;
   }
