@@ -920,7 +920,7 @@ class My_profile extends Base_controller {
 
                             # modify user-profile info...                    
                             $result = $this->skill_model->edit_skill_info($info, $logged_user_id, $arr_db_id[$i]);
-                            //echo $this->db->last_query().' ==  ';exit;
+                            echo $this->db->last_query().' ==  ';exit;
                         }
                     }   // end of 'if any field in a div exists
                     else {
@@ -933,7 +933,6 @@ class My_profile extends Base_controller {
 				pr($data['arr_profile_info']);
 
 				$edit_skill_info_html = $this->load->view('logged/ajax_submit_my_profile/skill_submit_response.phtml', $data, true);
-		
                 echo json_encode(array('result' => 'success',
                     'redirect' => $REDIRECT,
 					'html' => $edit_skill_info_html,
