@@ -45,6 +45,7 @@ function processRequest(url_parts,res,cnt)
 										var cnt_new = (new Date()).getTime();
 										if(nonZeroFound)
 										{
+											console.log('1');
 											res.writeHead(200, {'Content-Type': 'text/plain'});
 											res.end("setUpdateStatus('"+JSON.stringify(rows)+"');");
 										}
