@@ -389,6 +389,8 @@ class My_profile extends Base_controller {
                 } else {
                     // pr($info, 1);
                     $this->users_model->edit_info($info, $logged_user_id);
+					$_SESSION['s_time'] = $info['s_time'];
+					$arr_profile_info['s_time']=$_SESSION['s_time'];
 					$logged_user_id = intval(decrypt($this->session->userdata('user_id')));
 					$arr_profile_info = $this->users_model->fetch_this($logged_user_id);
 					$_SESSION['s_profile_photo'] = $arr_profile_info['s_profile_photo'];
@@ -910,7 +912,6 @@ class My_profile extends Base_controller {
                     ## CHECKING BLANK ARRAY
                     if (trim($arr_skill_name[$i]) != '') {
                         if (!empty($DELETED_IDS_ARR) && in_array($arr_db_id[$i], $DELETED_IDS_ARR)) {
-							pr($arr_db_id);
                             $this->skill_model->delete_info_db($arr_db_id[$i]);
                         } else {
                             $info['s_name'] = get_formatted_string($arr_skill_name[$i]);
@@ -919,7 +920,7 @@ class My_profile extends Base_controller {
 
                             # modify user-profile info...                    
                             $result = $this->skill_model->edit_skill_info($info, $logged_user_id, $arr_db_id[$i]);
-                            echo $this->db->last_query().' ==  ';exit;
+                            //echo $this->db->last_query().' ==  ';exit;
                         }
                     }   // end of 'if any field in a div exists
                     else {

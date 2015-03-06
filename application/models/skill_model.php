@@ -654,9 +654,9 @@ class Skill_model extends Base_model implements InfModel
                 
                 $this->db->trans_begin();///new  
                 $this->db->query($q);
-                echo $this->db->last_query();
+                //echo $this->db->last_query();
                 $i_ret_=$this->db->affected_rows();  
-                echo "result_model : ".$i_ret_; exit;     
+                //echo "result_model : ".$i_ret_;  
                 if($i_ret_)
                 {
 
