@@ -1086,8 +1086,12 @@ class Contacts_model extends Base_model implements InfModel
                           ) as tab1, cg_users AS u WHERE u.id=tab1.user_id"; 
 
           $result1  = $this->db->query($s_qry1)->result_array();
-          $result1[0]['mutualfrnd'] = $this->get_number_of_mutual_friends($frnds[$i],$i_user_id);
-          $ret[$j]      = $result1[0];
+
+          if(count($result1[0])>0)
+          {
+            $result1[0]['mutualfrnd'] = $this->get_number_of_mutual_friends($frnds[$i],$i_user_id);
+            $ret[$j]      = $result1[0];
+          }
           if(count($result1[1])>0)
           {
             $j++;
@@ -1101,7 +1105,7 @@ class Contacts_model extends Base_model implements InfModel
 
   public function get_number_of_mutual_friends($uid1,$uid2)
   {
-      echo $s_qry1 = "select group_concat( tab1.user_id separator ',') as frnd_id from 
+      $s_qry1 = "select group_concat( tab1.user_id separator ',') as frnd_id from 
                   (
                       (select DISTINCT i_accepter_id as user_id
                                              from cg_user_contacts where (i_requester_id ='" . $uid1 . "') 
@@ -1117,23 +1121,24 @@ class Contacts_model extends Base_model implements InfModel
 
       $result1=$this->db->query($s_qry1)->result_array();
 
-      echo $s_qry2 = "select COUNT(tab1.user_id) as frnd_id from 
+      $s_qry2 = "select tab1.user_id AS frnd_id from 
                   (
-                      (select DISTINCT i_accepter_id as user_id
+                      (select GROUP_CONCAT(DISTINCT i_accepter_id) as user_id
                                              from cg_user_contacts where (i_requester_id ='" . $uid2 . "') 
                                              AND s_status='accepted' AND i_accepter_id IN (".$result1[0]['frnd_id']."))
                       UNION
-                      (select DISTINCT i_requester_id as user_id
+                      (select GROUP_CONCAT(DISTINCT i_requester_id) as user_id
                                              from cg_user_contacts where (i_accepter_id='" . $uid2 . "') 
                                              AND s_status='accepted' AND i_requester_id IN (".$result1[0]['frnd_id']."))
                   ) as tab1";
 
 
       
-      exit;
-      $result2=$this->db->query($s_qry2)->result_array();
       
-      return $result2['frnd_id'];
+      $result2=$this->db->query($s_qry2)->result_array();
+      $mutualfrnd = count(explode(',', $result2[0]['frnd_id'])) + count(explode(',', $result2[1]['frnd_id']));
+      
+      return $mutualfrnd;
   }
 
    public function __destruct()

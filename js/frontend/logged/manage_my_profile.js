@@ -523,10 +523,18 @@ function closeExtraWorkDiv(obj)
         $(divID).hide();
     } else {
         $(divID).remove();
+    }
+
+
+
+
+
+
+
+
 
 
 }
-
 function current_emp(obj)
 {
     $('.year_to').removeAttr('disabled');
