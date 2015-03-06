@@ -931,7 +931,7 @@ class My_profile extends Base_controller {
 				$arr_profile_info = $this->users_model->fetch_this($logged_user_id);
 				$data['arr_profile_info'] = $arr_profile_info;
 
-				$edit_skill_info_html = $this->load->view('logged/ajax_submit_my_profile/skill_submit_response.phtml', $data);
+				$edit_skill_info_html = $this->load->view('logged/ajax_submit_my_profile/skill_submit_response.phtml', $data, true);
 		
                 echo json_encode(array('result' => 'success',
                     'redirect' => $REDIRECT,
