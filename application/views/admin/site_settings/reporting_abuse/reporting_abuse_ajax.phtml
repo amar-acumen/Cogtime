@@ -284,13 +284,13 @@ echo '<object width="' . $width . '" height="' . $height . '"><param name="movie
 										 else if($type == 'article'){ 
 										 	//$img = get_video_snap_by_id($id);
 										?>
-                                        <a href="javascript:void(0);" style="float:left;"><p> <?php $article=get_article_deatil_by_id($id); echo $article['s_post_title']?></p></a>
+                                        <a href="javascript:void(0);" style="float:left;" onclick="show_dialog('article_block<?= $id?>')"><p> <?php $article=get_article_deatil_by_id($id); echo $article['s_post_title']?></p></a>
                                         
                                         
                                         <p style="float:right;margin-top:20px"><b>Article posted by : <?=$info['i_abuser_name']?></b></p><br/>
                                         
                                           <!-----------------------------pop up box---------------------------------->
-                                         <div class="lightbox report_block<?= $id?>" style="width: 500px; left: 100px;">
+                                         <div class="lightbox article_block<?= $id?>" style="width: 500px; left: 100px;">
       <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="<?=base_url()?>images/close.png" alt="" width="24" height="24" /></a></div>
       <div class="top"><div>&nbsp;</div></div>
       <div class="mid">
