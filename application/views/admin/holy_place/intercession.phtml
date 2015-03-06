@@ -339,7 +339,8 @@ function change_status_(id,status)
         success : function(data)
         {
 			if(status == 0)
-				hide_dialog();
+				//hide_dialog();
+                                     // hideBusyScreen();
 			
             hideBusyScreen();
             if(data.status==0)
