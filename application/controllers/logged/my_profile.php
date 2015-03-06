@@ -389,9 +389,32 @@ class My_profile extends Base_controller {
                 } else {
                     // pr($info, 1);
                     $this->users_model->edit_info($info, $logged_user_id);
+					$logged_user_id = intval(decrypt($this->session->userdata('user_id')));
+					$arr_profile_info = $this->users_model->fetch_this($logged_user_id);
+					$_SESSION['s_profile_photo'] = $arr_profile_info['s_profile_photo'];
+					$where = " i_country_id='" . $arr_profile_info["i_country_id"] . "'";
+
+					$data['state'] = makeOptionState($where, encrypt($arr_profile_info["i_state_id"]));
+					$where1 = " i_state_id='" . $arr_profile_info["i_state_id"] . "'";
+					$data['city'] = makeOptionCity($where1, encrypt($arr_profile_info["i_city_id"]));
+					$data['arr_profile_info'] = $arr_profile_info;
+					$cwhere = " i_country_id='" . $arr_profile_info["i_church_country_id"] . "'";
+					$data['cstate'] = makeOptionState($cwhere, encrypt($arr_profile_info["i_church_state_id"]));
+					$cwhere1 = " i_state_id='" . $arr_profile_info["i_church_state_id"] . "'";
+					$data['ccity'] = makeOptionCity($cwhere1, encrypt($arr_profile_info["i_church_city_id"]));
+
+				  
+					// $data['arr_profile_info'] = $arr_profile_info;
+
+					
+					//  pr($data);
+
+
+					$edit_personal_info_html = $this->load->view('logged/ajax_submit_my_profile/personal_info_submit_response.phtml', $data, true);
                     echo json_encode(array('result' => 'success',
                         'redirect' => $REDIRECT,
                         'msg' => $SUCCESS_MSG,
+						'html' => $edit_personal_info_html,
                         'profile_img' => $profile_img,
                         'is_wan_prayer_partner' => $info['e_want_prayer_partner']
                     ));
@@ -1132,7 +1155,7 @@ class My_profile extends Base_controller {
     //========================================= end of ajax for cancelling =======================================
     //========================================= ajax for submit =======================================
     //-------------------------------------- personal info ----------------------------------------------
-    function ajax_personal_info_submit() {
+    /*function ajax_personal_info_submit() {
 
 
         $logged_user_id = intval(decrypt($this->session->userdata('user_id')));
@@ -1149,15 +1172,15 @@ class My_profile extends Base_controller {
         $cwhere1 = " i_state_id='" . $arr_profile_info["i_church_state_id"] . "'";
         $data['ccity'] = makeOptionCity($cwhere1, encrypt($arr_profile_info["i_church_city_id"]));
 
-        /*         * ************************************* */
+      
         // $data['arr_profile_info'] = $arr_profile_info;
 
-        /*         * ************************************ */
+        
         //  pr($data);
 
 
         $this->load->view('logged/ajax_submit_my_profile/personal_info_submit_response.phtml', $data);
-    }
+    }*/
 
     //-------------------------------------- personal info ----------------------------------------------
     function ajax_basic_info_submit() {
