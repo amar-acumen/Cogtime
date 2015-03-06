@@ -61,6 +61,7 @@ function validateFrm(data)
 		//closeDiv('1');
 		
 		  showUIMsg(result_obj.msg);
+		  get_user_clock();
 		
 	}
 
