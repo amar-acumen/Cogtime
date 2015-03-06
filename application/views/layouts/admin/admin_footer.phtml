@@ -10,3 +10,29 @@
 <!-- ############ Loading Section [Start] ########### -->
 <div id="loading_dialog" class="modal_dialog" style="width:auto; padding:20px; background:transparent;border:none; display:none;"> <?php /*?><img src="<?= base_url() ?>images/loading_big.gif" width="50"/> <?php */?></div>
 <!-- ############ Loading Section [End] ########### -->
+<?php 
+ $logged_admin_id = intval(decrypt($this->session->userdata('user_id')));
+
+?>
+<script type="text/javascript">
+$(document).ready(function(){
+    setTimeout(function(){ 
+        $.ajax({
+				type: 'post',
+			   // url: base_url+'logged/prayer_group/generate_friend_search_listing_AJAX/'+group_id,
+				url: admin_base_url+'dashboard/admin_logout',
+				dataType: 'json',
+				data: {'admin_id':<?=$logged_admin_id ?>
+					   },
+			   success: function (data, status) {
+				  
+						
+						if(data.result == 'success'){
+                                                    alert('ok')
+                                                }		
+					  
+					  }
+					  });
+         }, 3000);
+})
+</script>
