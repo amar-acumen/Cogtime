@@ -62,6 +62,7 @@ function validateFrm(data)
 		
 		  showUIMsg(result_obj.msg);
 		  get_user_clock();
+		  location.reload();
 		
 	}
 
