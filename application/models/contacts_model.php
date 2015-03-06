@@ -1124,7 +1124,7 @@ class Contacts_model extends Base_model implements InfModel
 
       $result1=$this->db->query($s_qry1)->result_array();
 
-      echo $s_qry2 = "select tab1.user_id AS frnd_id from 
+      $s_qry2 = "select tab1.user_id AS frnd_id from 
                   (
                       (select GROUP_CONCAT(DISTINCT i_accepter_id) as user_id
                                              from cg_user_contacts where (i_requester_id ='" . $uid2 . "') 
