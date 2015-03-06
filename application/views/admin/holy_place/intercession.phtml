@@ -338,20 +338,18 @@ function change_status_(id,status)
         dataType : 'json',
         success : function(data)
         {
+             hideBusyScreen();
 			if(status == 0)
 				//hide_dialog();
                                      // hideBusyScreen();
 			
-            
-            if(data.status==0){
-                hideBusyScreen();
+            hideBusyScreen();
+            if(data.status==0)
                 var now_status = 'Enable';
-            }
-            else{
-                hideBusyScreen();
+            else
                 var now_status = 'Disable';
         
-    }
+        
         //alert(data.status);
             $('#status_'+id).attr('value',now_status);
             $('#status_'+id).attr('onclick','');
