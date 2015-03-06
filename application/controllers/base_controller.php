@@ -1326,21 +1326,21 @@ class Base_controller extends CI_Controller {
         //$friend_count = $this->contacts_model->total_pending_friend_recieved($i_profile_id);
        // $prayergrp_notification_count = $this->prayer_group_model->get_total_pending_groups_requests($i_profile_id);
 
-        $wh_ring_inv_count = ' AND r.i_invited_id="' . $i_profile_id . '"';
-        $wh = " AND rg.i_user_id = '" . $i_profile_id . "'";
+       // $wh_ring_inv_count = ' AND r.i_invited_id="' . $i_profile_id . '"';
+       // $wh = " AND rg.i_user_id = '" . $i_profile_id . "'";
 
         //$ring_notification_count = $this->my_ring_model->new_gettotal_ring_join_req($wh) +
-        $this->my_ring_model->gettotal_ring_inv_nw($wh_ring_inv_count);
+        //$this->my_ring_model->gettotal_ring_inv_nw($wh_ring_inv_count);
 
 
         $prayer_room_notification_count = $this->prayer_group_model->getTotalPrayerRoom($i_profile_id);
-
+//
         $arr_profile_info['prayer_count'] = '';//$prayer_count;
         $arr_profile_info['netpal_count'] = '';//$netpal_count;
         $arr_profile_info['friend_count'] = '';//$friend_count;
         $arr_profile_info['prayergrp_notification_count'] ='';// $prayergrp_notification_count;
         $arr_profile_info['ring_notification_count'] = '';//$ring_notification_count;
-        $arr_profile_info['prayer_room_notification_count'] = $prayer_room_notification_count;
+        $arr_profile_info['prayer_room_notification_count'] = '';$prayer_room_notification_count;
 
 
 
