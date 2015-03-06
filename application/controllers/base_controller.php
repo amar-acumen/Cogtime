@@ -1352,9 +1352,9 @@ class Base_controller extends CI_Controller {
 
         $this->data['arr_profile_info'] = $arr_profile_info;
         //pr($arr_profile_info);
-        if($this->ses_user['is_admin']==0)
-          $this->data['people_you_may_know'] = array();//$this->contacts_model->get_mutual_friends_by_user_for_wall($i_profile_id);
-        
+        if($this->session->userdata('loggedin') && $this->session->userdata('is_admin') != 1 && $this->session->userdata('is_admin') != 2)
+          $this->data['people_you_may_know'] = $this->contacts_model->get_mutual_friends_by_user_for_wall($i_profile_id);
+
         
     }
 
