@@ -913,7 +913,7 @@ class Holy_place_model extends Base_model
 			}	
 		$sql3=$this->db->query("update {$this->db->day_verse} set publish_status=true where id=1");	
 		}
-        $sql = "SELECT * FROM {$this->db->day_verse} where publish_status=1";
+        $sql = "SELECT s_book_name,bible_chapter_no,bible_verse_no,s_verse FROM {$this->db->day_verse} where publish_status=1";
               
         $res = $this->db->query($sql)->result_array();
         return $res[0];
