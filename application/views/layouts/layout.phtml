@@ -29,11 +29,7 @@
                         //chatHeartBesat
                         chatHeartbeat();
                     }
-                    if(g_statusObj[v].item_type == 'prayer_partner' && g_statusObj[v].countrow>0)
-                    {
-                        get_new_request_notification();
-                    }
-                    if((g_statusObj[v].item_type == 'prayer_partner' && g_statusObj[v].countrow>0) || (g_statusObj[v].item_type == 'friends' && g_statusObj[v].countrow>0) || (g_statusObj[v].item_type == 'net_pal' && g_statusObj[v].countrow>0))
+                    if((g_statusObj[v].item_type == 'prayer_partner' && g_statusObj[v].countrow>0) || (g_statusObj[v].item_type == 'friends' && g_statusObj[v].countrow>0) || (g_statusObj[v].item_type == 'net_pal' && g_statusObj[v].countrow>0) || (g_statusObj[v].item_type == 'prayer_group' && g_statusObj[v].countrow>0) ||  (g_statusObj[v].item_type == 'ring_notification' && g_statusObj[v].countrow>0) || (g_statusObj[v].item_type == 'ring_inv_notification' && g_statusObj[v].countrow>0))
                     {
                         get_new_request_notification();
                     }
