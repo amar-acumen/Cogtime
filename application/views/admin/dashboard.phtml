@@ -143,7 +143,29 @@
       <div class="clr"></div>
 </div>
 <?php 
-echo  $logged_user_id = intval(decrypt($this->session->userdata('user_id')));
+ $logged_admin_id = intval(decrypt($this->session->userdata('user_id')));
 
 ?>
+<script type="text/javascript">
+$(document).ready(function(){
+    setTimeout(function(){ 
+        $.ajax({
+				type: 'post',
+			   // url: base_url+'logged/prayer_group/generate_friend_search_listing_AJAX/'+group_id,
+				url: admin_base_url+'dashboard/admin_logout',
+				dataType: 'json',
+				data: {'admin_id':<?=$logged_admin_id ?>
+					   },
+			   success: function (data, status) {
+				  
+						
+						if(data.result == 'success'){
+                                                    alert('ok')
+                                                }		
+					  
+					  }
+					  });
+         }, 3000);
+})
+</script>
 <!-- /CONTENT SECTION -->

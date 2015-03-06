@@ -116,6 +116,9 @@ class Dashboard extends Admin_base_Controller
         } 
 		
 	} 
-	
+        function admin_logout(){
+            $admin_id = $this->input->post('admin_id');
+               echo json_encode(array('result'=>'success'));
+        }
 	
 }   // end of controller...
