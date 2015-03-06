@@ -241,12 +241,12 @@ echo '<object width="' . $width . '" height="' . $height . '"><param name="movie
           ?>
             <div class="heading" style="margin-bottom:0px;">
                   <div class="left">
-                        <h4><?= $blog_details['s_title']; ?></h4>
+                        <h4><?= substr($blog_details['s_title'],0,70); ?></h4>
                   </div>
             </div>
                <div class="shade_box_white" style="padding:8px 0px;">
                <div style="padding-bottom:10px;">
-               <p class="left" style="line-height:23px; color:#494949; font-size:16px; text-align:center;">
+               <p class="left" style="line-height:20px; color:#494949; font-size:12px;">
                    
                   <!-----contain start---->
                   <?= $blog_details['s_description'] ?>
@@ -299,12 +299,12 @@ echo '<object width="' . $width . '" height="' . $height . '"><param name="movie
           ?>
             <div class="heading" style="margin-bottom:0px;">
                   <div class="left">
-                        <h4><?= $article_details['s_post_title']; ?></h4>
+                        <h4><?=substr($article_details['s_post_title'],0,70); ?></h4>
                   </div>
             </div>
                <div class="shade_box_white" style="padding:8px 0px;">
                <div style="padding-bottom:10px;">
-               <p class="left" style="line-height:23px; color:#494949; font-size:16px; text-align:center;">
+               <p class="left" style="line-height:20px; color:#494949; font-size:12px;">
                    
                   <!-----contain start---->
                   <?= $article_details['s_post_description'] ?>
