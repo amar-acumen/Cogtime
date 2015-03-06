@@ -1069,10 +1069,7 @@ class Contacts_model extends Base_model implements InfModel
                          CONCAT(u.s_first_name ,' ', u.s_last_name) AS name,
                          u.s_profile_photo,
                          u.e_gender,
-                         u.i_country_id, 
                          u.i_user_type,
-                         u.s_city,
-                         u.s_state,
                          u.i_status,
                          u.dt_created_on from 
                           (
