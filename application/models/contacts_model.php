@@ -1086,8 +1086,12 @@ class Contacts_model extends Base_model implements InfModel
                           ) as tab1, cg_users AS u WHERE u.id=tab1.user_id"; 
 
           $result1  = $this->db->query($s_qry1)->result_array();
-          $result1[0]['mutualfrnd'] = $this->get_number_of_mutual_friends($frnds[$i],$i_user_id);
-          $ret[$j]      = $result1[0];
+
+          if(count($result1[0])>0)
+          {
+            $result1[0]['mutualfrnd'] = $this->get_number_of_mutual_friends($frnds[$i],$i_user_id);
+            $ret[$j]      = $result1[0];
+          }
           if(count($result1[1])>0)
           {
             $j++;

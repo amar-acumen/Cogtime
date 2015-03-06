@@ -363,7 +363,7 @@ function modify_my_skill_profile_ajax()
 // validate ajax-submission...
 function validateSkillFrm(data)
 {
-alert(data);
+
     var result_obj = JSON.parse(data);
 	$('#skill_section').html(result_obj.html);
 	
@@ -523,10 +523,18 @@ function closeExtraWorkDiv(obj)
         $(divID).hide();
     } else {
         $(divID).remove();
+    }
+
+
+
+
+
+
+
+
 
 
 }
-
 function current_emp(obj)
 {
     $('.year_to').removeAttr('disabled');
