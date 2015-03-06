@@ -927,8 +927,15 @@ class My_profile extends Base_controller {
                         $this->skill_model->delete_info_db($arr_db_id[$i]);
                     }
                 }
+				$logged_user_id = intval(decrypt($this->session->userdata('user_id')));
+				$arr_profile_info = $this->users_model->fetch_this($logged_user_id);
+				$data['arr_profile_info'] = $arr_profile_info;
+
+				$edit_skill_info_html = $this->load->view('logged/ajax_submit_my_profile/skill_submit_response.phtml', $data);
+		
                 echo json_encode(array('result' => 'success',
                     'redirect' => $REDIRECT,
+					'html' => $edit_skill_info_html,
                     'msg' => $SUCCESS_MSG));
                 exit;
             }
@@ -1236,13 +1243,13 @@ class My_profile extends Base_controller {
     }
 
     //-------------------------------------- skill ----------------------------------------------
-    function ajax_skill_submit() {
+    /*function ajax_skill_submit() {
         $logged_user_id = intval(decrypt($this->session->userdata('user_id')));
         $arr_profile_info = $this->users_model->fetch_this($logged_user_id);
         $data['arr_profile_info'] = $arr_profile_info;
 
         $this->load->view('logged/ajax_submit_my_profile/skill_submit_response.phtml', $data);
-    }
+    }*/
 
     //========================================= end of ajax for submit ======================================= 
 
