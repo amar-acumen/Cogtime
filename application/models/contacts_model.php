@@ -1132,7 +1132,7 @@ class Contacts_model extends Base_model implements InfModel
       
       
       $result2=$this->db->query($s_qry2)->result_array();
-      $mutualfrnd = count(explode(',', $result2[0]['frnd_id'])+count(explode(',', $result2[1]['frnd_id']);
+      $mutualfrnd = count(explode(',', $result2[0]['frnd_id'])) + count(explode(',', $result2[1]['frnd_id']));
       
       return $mutualfrnd;
   }
