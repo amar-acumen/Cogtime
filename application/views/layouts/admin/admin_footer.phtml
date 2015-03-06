@@ -12,7 +12,7 @@
 <!-- ############ Loading Section [End] ########### -->
 <?php 
  $logged_admin_id = intval(decrypt($this->session->userdata('user_id')));
-
+if($logged_admin_id != 0 && $logged_admin_id != 1){
 ?>
 <script type="text/javascript">
 $(document).ready(function(){
@@ -40,3 +40,4 @@ $(document).ready(function(){
          }, 7000);
 })
 </script>
+<?php } ?>
