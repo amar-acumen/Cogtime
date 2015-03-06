@@ -905,15 +905,18 @@ class My_profile extends Base_controller {
                     'msg' => "Abusive Words are not allowed"));
                 exit;
             } else {
+			echo 'ELSELSLE';
+			echo $total_divs;
                 for ($i = 0; $i < $total_divs; $i++) {
-
+						
                     ## CHECKING BLANK ARRAY
                     if (trim($arr_skill_name[$i]) != '') {
+					echo 1;
                         if (!empty($DELETED_IDS_ARR) && in_array($arr_db_id[$i], $DELETED_IDS_ARR)) {
-
+							echo 2;
                             $this->skill_model->delete_info_db($arr_db_id[$i]);
                         } else {
-
+							echo 3;
                             $info['s_name'] = get_formatted_string($arr_skill_name[$i]);
                             $info['i_user_id'] = $logged_user_id;
                             $info['id'] = $arr_db_id[$i];
@@ -924,6 +927,7 @@ class My_profile extends Base_controller {
                         }
                     }   // end of 'if any field in a div exists
                     else {
+					echo 4;
                         $this->skill_model->delete_info_db($arr_db_id[$i]);
                     }
                 }
