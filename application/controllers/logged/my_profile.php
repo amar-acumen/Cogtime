@@ -905,15 +905,19 @@ class My_profile extends Base_controller {
                     'msg' => "Abusive Words are not allowed"));
                 exit;
             } else {
+			echo 'ELSELSLE';
+			echo '========'.$total_divs;
                 for ($i = 0; $i < $total_divs; $i++) {
-
+						
                     ## CHECKING BLANK ARRAY
                     if (trim($arr_skill_name[$i]) != '') {
+					echo 1;
                         if (!empty($DELETED_IDS_ARR) && in_array($arr_db_id[$i], $DELETED_IDS_ARR)) {
-
+							echo 2;
+							pr($arr_db_id);
                             $this->skill_model->delete_info_db($arr_db_id[$i]);
                         } else {
-
+							echo 3;
                             $info['s_name'] = get_formatted_string($arr_skill_name[$i]);
                             $info['i_user_id'] = $logged_user_id;
                             $info['id'] = $arr_db_id[$i];
@@ -924,13 +928,13 @@ class My_profile extends Base_controller {
                         }
                     }   // end of 'if any field in a div exists
                     else {
+					echo 4;
                         $this->skill_model->delete_info_db($arr_db_id[$i]);
                     }
                 }
 				$logged_user_id = intval(decrypt($this->session->userdata('user_id')));
 				$arr_profile_info = $this->users_model->fetch_this($logged_user_id);
 				$data['arr_profile_info'] = $arr_profile_info;
-				pr($data['arr_profile_info']);
 
 				$edit_skill_info_html = $this->load->view('logged/ajax_submit_my_profile/skill_submit_response.phtml', $data, true);
                 echo json_encode(array('result' => 'success',

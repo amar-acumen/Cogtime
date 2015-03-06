@@ -241,12 +241,14 @@ echo '<object width="' . $width . '" height="' . $height . '"><param name="movie
           ?>
             <div class="heading" style="margin-bottom:0px;">
                   <div class="left">
-                        <h4><?= $blog_details['s_title']; ?></h4>
+                        <h4><?php
+                        $s_title = $blog_details['s_title'];
+                      echo   substr(".$s_title.", 0, 50); ?></h4>
                   </div>
             </div>
                <div class="shade_box_white" style="padding:8px 0px;">
                <div style="padding-bottom:10px;">
-               <p class="left" style="line-height:23px; color:#494949; font-size:16px; text-align:center;">
+               <p class="left" style="line-height:20px; color:#494949; font-size:12px;">
                    
                   <!-----contain start---->
                   <?= $blog_details['s_description'] ?>
@@ -284,36 +286,41 @@ echo '<object width="' . $width . '" height="' . $height . '"><param name="movie
 										 else if($type == 'article'){ 
 										 	//$img = get_video_snap_by_id($id);
 										?>
-                                        <a href="javascript:void(0);" style="float:left;"><p> <?php $article=get_article_deatil_by_id($id); echo $article['s_post_title']?></p></a>
+                                        <a href="javascript:void(0);" style="float:left;" onclick="show_dialog('article_block<?= $id?>')"><p> <?php $article=get_article_deatil_by_id($id); echo $article['s_post_title']?></p></a>
                                         
                                         
                                         <p style="float:right;margin-top:20px"><b>Article posted by : <?=$info['i_abuser_name']?></b></p><br/>
                                         
                                           <!-----------------------------pop up box---------------------------------->
-                                         <div class="lightbox report_block<?= $id?>" style="width: 500px; left: 100px;">
+                                         <div class="lightbox article_block<?= $id?>" style="width: 500px; left: 100px;">
       <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="<?=base_url()?>images/close.png" alt="" width="24" height="24" /></a></div>
       <div class="top"><div>&nbsp;</div></div>
       <div class="mid">
           <?php $article_details = get_article_deatil_by_id($id);
-         pr($article_details);
+        // pr($article_details);
           ?>
             <div class="heading" style="margin-bottom:0px;">
                   <div class="left">
-                        <h4><?// $blog_details['s_title']; ?></h4>
+                        <h4><?php 
+                            $title = $article_details['s_post_title']; 
+                            
+                          echo   substr(".$title.", 0, 50); ?></h4>
                   </div>
             </div>
                <div class="shade_box_white" style="padding:8px 0px;">
                <div style="padding-bottom:10px;">
-               <p class="left" style="line-height:23px; color:#494949; font-size:16px; text-align:center;">
+               <p class="left" style="line-height:20px; color:#494949; font-size:12px;">
                    
                   <!-----contain start---->
-                  <?// $blog_details['s_description'] ?>
+                  <?= $article_details['s_post_description'] ?>
                </p>
                  <div class="clr"></div>
                <p>
-                   <span><b>Created On:</b> <?//$blog_details['dt_created_on'] ?> </span>
+                   <span><b>Blog : </b> <?= get_blog_name_by_id($article_details['i_blog_id']); ?></span>
                    <div class="clr"></div>
-                   <span><b>Views : </b> <?//$blog_details['i_view_count']; ?></span>
+                   <span><b>Created On:</b> <?= $article_details['dt_created_date'] ?> </span>
+                   
+                   
                </p>
                <?php /*?><h1><?=$title?></h1><?php */?>
                <?php /*?><span class="pull-left">Created On: <?=$val['dt_created_on'] ?></span><?php */?>
