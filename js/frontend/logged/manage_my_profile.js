@@ -37,7 +37,7 @@ function validateFrm(data)
 			$('.seeking-prayer-partner').attr('style','display:none;');
 		}
 			
-		$('#personal_info_section').html(response_obj.html);
+		$('#personal_info_section').html(result_obj.html);
 		
 		/*$.ajax({
 			"type" : "post",
