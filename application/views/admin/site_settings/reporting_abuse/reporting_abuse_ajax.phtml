@@ -307,13 +307,13 @@ echo '<object width="' . $width . '" height="' . $height . '"><param name="movie
                <p class="left" style="line-height:23px; color:#494949; font-size:16px; text-align:center;">
                    
                   <!-----contain start---->
-                  <?= $article_details['s_post_title'] ?>
+                  <?= $article_details['s_post_description'] ?>
                </p>
                  <div class="clr"></div>
                <p>
                    <span><b>Blog : </b> <?= get_blog_name_by_id($article_details['i_blog_id']); ?></span>
                    <div class="clr"></div>
-                   <span><b>Created On:</b> <?= $article_details['dt_created_on'] ?> </span>
+                   <span><b>Created On:</b> <?= $article_details['dt_created_date'] ?> </span>
                    
                    
                </p>
