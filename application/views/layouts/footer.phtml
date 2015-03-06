@@ -493,32 +493,6 @@ window.onload=function(){
    
 }
 
-
-$(document).ready(function(arg) {
-//get_user_clock();
-//setInterval(function(){get_user_clock()},1000);
-
-});
- 
-/*function get_user_clock() {//return false;
-	$.ajax({
-	   type: "post",
-	   url: '<?=base_url()?>base_controller/getUserClock',
-	   data: {zone_val:'<?=$arr_profile_info['s_time']?>'},
-	   dataType:"json",
-	   success: function(json_response){
-
-			if(json_response.result = 'success') {
-				$('#user_local_time').html(json_response.time);		
-			}
-			
-		},
-		error: function(){
-			//showUIMsg('Some error occurred. Please try again.');
-		}
-	});
-}*/
-
 function get_user_clock() {//return false;
     $.ajax({
        type: "post",
