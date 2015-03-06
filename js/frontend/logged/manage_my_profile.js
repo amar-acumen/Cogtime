@@ -37,8 +37,9 @@ function validateFrm(data)
 			$('.seeking-prayer-partner').attr('style','display:none;');
 		}
 			
-	
-		$.ajax({
+		$('#personal_info_section').html(result_obj.html);
+		
+		/*$.ajax({
 			"type" : "post",
 		
 			"url"  : base_url+'logged/my_profile/ajax_personal_info_submit',
@@ -47,7 +48,7 @@ function validateFrm(data)
 				$('#personal_info_section').html(response);
                               
 			}
-		});
+		});*/
                 
 //                $.ajax({
 //			"type" : "post",
