@@ -389,6 +389,7 @@ class My_profile extends Base_controller {
                 } else {
                     // pr($info, 1);
                     $this->users_model->edit_info($info, $logged_user_id);
+					$_SESSION['s_time'] = $info['s_time'];
 					$logged_user_id = intval(decrypt($this->session->userdata('user_id')));
 					$arr_profile_info = $this->users_model->fetch_this($logged_user_id);
 					$_SESSION['s_profile_photo'] = $arr_profile_info['s_profile_photo'];
