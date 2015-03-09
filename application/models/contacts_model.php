@@ -1062,7 +1062,7 @@ class Contacts_model extends Base_model implements InfModel
       $frnds = explode(',', $result[0]['frnd_id']); 
       $frndcount = count($frnds);
       $ret = array();
-      if($frndcount>0)
+      if($result[0]['frnd_id']!='')
       {   $j = 0;
           for($i=0;$i<3;$i++)
           {
