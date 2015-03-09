@@ -15,7 +15,7 @@ class Holy_place_model extends Base_model
 	{
 		$limit  = (is_numeric($i_start) && is_numeric($i_limit))?" Limit ".intval($i_start).",".intval($i_limit):'';
         $s_order_by = ($s_order_by != '')?'ORDER BY '.$s_order_by :'ORDER BY b.id';
-        $sql = "SELECT v.id AS verseid FROM 
+        $sql = "SELECT *,v.id AS verseid FROM 
                 {$this->db->BIBLE_BOOK} AS b, 
 				{$this->db->BIBLE_CHAPTER} AS c ,
 				{$this->db->BIBLE_VERSES} AS v 
