@@ -79,7 +79,7 @@ class Holy_place_model extends Base_model
 		 $sql = "SELECT *,v.id AS verseid FROM {$this->db->BIBLE_CHAPTER} AS c ,{$this->db->BIBLE_VERSES} AS v 
 				WHERE c.id=v.i_chapter_id".$wh;
                 /*LEFT JOIN {$this->db->USERS} u on u.id=p.i_user_id*/
-			//echo $sql ;                        exit()
+			echo $sql ;                        exit();
         $res = $this->db->query($sql)->result_array();
        // pr($res);
 		$i='';
