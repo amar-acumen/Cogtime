@@ -362,7 +362,7 @@ class My_ring_model extends Base_model
 		 $sql = "DELETE FROM ".$this->db->RING_INV_USER." WHERE i_ring_id='".$id."' AND i_invited_id='".$inv_id."'";
 		 $this->db->query($sql);
 		 
-		echo $this->db->last_query(); exit;
+		//echo $this->db->last_query(); exit;
 	}
 	
 	
