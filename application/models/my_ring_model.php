@@ -359,7 +359,7 @@ class My_ring_model extends Base_model
 	
 	     $inv_id	 = intval(decrypt($this->session->userdata('user_id')));
 		 //$sql = sprintf( 'DELETE FROM '.$this->db->RING_INV_USER.' WHERE i_ring_id=%s AND i_invited_id=%s', $id,$inv_id );
-		 $sql = "DELETE FROM ".$this->db->RING_INV_USER." WHERE i_ring_id='".$id."' AND i_invited_id='".$inv_id."'";
+		 $sql = "DELETE FROM ".$this->db->RING_INV_USER." WHERE i_ring_id='".mysql_real_escape_string($id)."' AND i_invited_id='".mysql_real_escape_string($inv_id)."'";
 		 $this->db->query($sql);
 		 
 		//echo $this->db->last_query(); exit;
