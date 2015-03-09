@@ -356,7 +356,7 @@ class My_ring_model extends Base_model
 		 $sql = "DELETE FROM ".$this->db->USER_RING_POST_COMMENTS." WHERE i_ring_post_id='".$id."'";
 		 $this->db->query($sql);
 		 //$sql = sprintf( 'DELETE FROM '.$this->db->USER_RING_POST_LIKE.' WHERE i_ring_id=%s', $id );
-		 $sql = "DELETE FROM ".$this->db->USER_RING_POST_LIKE." WHERE i_ring_id='".$id."'";
+		 $sql = "DELETE FROM ".$this->db->USER_RING_POST_LIKE." WHERE i_ring_post_id='".$id."'";
 		 $this->db->query($sql);
 		#echo $this->db->last_query(); exit;
 	}
@@ -942,8 +942,7 @@ class My_ring_model extends Base_model
 								   r.i_sub_category_id, 
 								 rp.i_user_id as post_owner_user_id,
 								 c.s_category_name AS s_category_name , 
-								 CONCAT(u.s_first_name,' ',u.s_last_name) AS owner_name,
-								 ,u.s_profile_photo,u.e_gender,
+								 CONCAT(u.s_first_name,' ',u.s_last_name) AS owner_name,u.s_profile_photo,u.e_gender,
 								 '0' AS post,
 								 '0' AS cmt,
 								 '0' AS lik,
