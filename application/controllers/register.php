@@ -417,7 +417,7 @@ The Cogtime Team</p>";
         parent::_render($data, $VIEW);
     }
 
-    public function signup_confirm($id, $code) {
+    public function signup_confirm123($id, $code) {
         echo 3;exit;
         $sql = "UPDATE {$this->db->USERS} SET i_status=1 WHERE id='" . $id . "' AND s_verification_code='" . $code . "'";
         $this->db->query($sql);
