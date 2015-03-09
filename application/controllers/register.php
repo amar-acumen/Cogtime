@@ -451,6 +451,18 @@ The Cogtime Team</p>";
 
             $this->session->set_userdata('unique_username', $info["s_profile_url_suffix"]);
             $this->session->set_userdata('display_username', $info["s_chat_display_name"]);
+            $this->session->set_userdata('s_profile_photo', ($info['s_profile_photo']));
+            $this->session->set_userdata('e_gender', ($info['e_gender'] ));
+            $this->session->set_userdata('s_time', ($info['s_time'] ));
+            $this->session->set_userdata('s_bio', ($info['s_bio'] ));
+
+            $this->session->set_userdata('s_tweet_bg_img', $info["s_tweet_bg_img"]);
+            $this->session->set_userdata('s_chat_display_name', $info["s_chat_display_name"]);
+            $this->session->set_userdata('e_want_net_pal', $info["e_want_net_pal"]);
+            $this->session->set_userdata('e_want_prayer_partner', $info["e_want_prayer_partner"]);
+            $this->session->set_userdata('is_pr_partner_q_mail_sent', $info["is_pr_partner_q_mail_sent"]);
+            $this->session->set_userdata('is_netpal_q_mail_sent', $info["is_netpal_q_mail_sent"]);
+            $this->session->set_userdata('s_timezone_text', $info["s_timezone_text"]);
 
             //$_SESSION['username'] = 'jhon';
             ### generating five fruits
