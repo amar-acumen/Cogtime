@@ -417,7 +417,7 @@ The Cogtime Team</p>";
         parent::_render($data, $VIEW);
     }
 
-    public function signup_confirm($id, $code) {
+    public function signup_confirm($id, $code) {echo 3;exit;
         $sql = "UPDATE {$this->db->USERS} SET i_status=1 WHERE id='" . $id . "' AND s_verification_code='" . $code . "'";
         $this->db->query($sql);
         $info = $this->users_model->fetch_this($id);
@@ -426,7 +426,7 @@ The Cogtime Team</p>";
 			
 			$info1 = $this->db->query('select * from cg_users where id= "'.$id.'"');
 			$res = $info1->result();
-			//pr($res,1);
+			pr($res,1);
 			if ($res[0]->is_first_login_checked == 1) {
 			echo 1;exit;
 				$INDEX_PG = base_url() . '?status=active';
@@ -483,9 +483,9 @@ The Cogtime Team</p>";
                 'url' => base_url()
                     ));
 
-		$email_setting  = array('mailtype'=>'html','charset'  => 'utf-8',
+		    $email_setting  = array('mailtype'=>'html','charset'  => 'utf-8',
                   'priority' => '1');
-				  $this->email->initialize($email_setting);
+			$this->email->initialize($email_setting);
             //echo $body;
 
             $arr['subject'] = htmlspecialchars_decode($mail_info['subject'], ENT_QUOTES);
