@@ -52,7 +52,7 @@ public function get_all_tweets_by_user_id($i_user_id, $s_where, $i_start_limit='
 						 t.data,
 						 t.s_type,
 						 t.dt_created_on,
-						 (SELECT COUNT(*) as count FROM cg_tweets_fav ft WHERE ft.i_tweet_id = t.id AND ft.i_user_id = {$i_user_id})
+						 (SELECT COUNT(*) as count FROM cg_tweets_fav ft WHERE ft.i_tweet_id = t.id )
 						 as fav_tweet,
 						 
 						  (SELECT COUNT(*) as count FROM cg_tweets_replys tr WHERE tr.i_tweet_id = t.id )
@@ -87,7 +87,7 @@ public function get_all_tweets_by_user_id($i_user_id, $s_where, $i_start_limit='
 					t.data,
 					t.s_type,
 					t.dt_created_on,
-					(SELECT COUNT(*) as count FROM cg_tweets_fav ft WHERE ft.i_tweet_id = t.id AND ft.i_user_id = {$i_user_id})
+					(SELECT COUNT(*) as count FROM cg_tweets_fav ft WHERE ft.i_tweet_id = t.id )
 						 as fav_tweet,
 					
 					(SELECT COUNT(*) as count FROM cg_tweets_replys tr WHERE tr.i_tweet_id = t.id )
@@ -121,7 +121,7 @@ public function get_all_tweets_by_user_id($i_user_id, $s_where, $i_start_limit='
 					t.data,
 					t.s_type,
 					t.dt_created_on,
-					(SELECT COUNT(*) as count FROM cg_tweets_fav ft WHERE ft.i_tweet_id = t.id AND ft.i_user_id = {$i_user_id})
+					(SELECT COUNT(*) as count FROM cg_tweets_fav ft WHERE ft.i_tweet_id = t.id)
 						 as fav_tweet,
 					
 					 (SELECT COUNT(*) as count FROM cg_tweets_replys tr WHERE tr.i_tweet_id = t.id )
