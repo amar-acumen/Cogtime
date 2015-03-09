@@ -23,7 +23,7 @@ class Base_controller extends CI_Controller {
 
     public function __construct() {
         try {                    
-            die($this->session->userdata('s_time').'===');
+          //  die('ok');
             parent::__construct();
 
             //$this->output->set_header("Cache-Control: private, max-age=60");//for caching 
@@ -49,7 +49,7 @@ class Base_controller extends CI_Controller {
             //$this->show_system_reminder_popup_at_remind_me_time();
             # if not logged in yet...
             $this->data['logged_in_state'] = 'N';
-
+            echo '===='.$this->session->userdata('s_time');
             if ($this->session->userdata('loggedin') != '' || $this->session->userdata('loggedin') != false) {
                 $this->data['loggedin'] = true;
 
