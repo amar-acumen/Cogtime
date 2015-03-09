@@ -36,7 +36,8 @@
                           $data = json_decode($val['data']);
                           
                           if($val['s_type'] == 'retweeted'){
-							  echo $twit_id = getTwitterUsernameById($data->tweet_owner_id);
+							  // $twit_id = getTwitterUsernameById($data->tweet_owner_id);
+                                                           echo $twit_id = $val['s_tweet_id'];
 							  $rt_profile_link = getTwitterProfileLink($twit_id);
 						  }
 						  $profile_image_filename = get_profile_image_of_user('thumb',$val['s_profile_photo'],$val['e_gender']);

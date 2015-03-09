@@ -768,7 +768,7 @@ class Users_model extends Base_model implements InfModel {
             $rs = $this->db->query($s_qry, $stmt_val);
             #echo $this->db->last_query();    
              // $res = $rs->result();
-             // pr($res,1);
+              pr($res,1);
             if (is_array($rs->result())) { ///new
                 foreach ($rs->result() as $row) {
                     $ret_["id"] = $row->id; ////always integer 
@@ -1317,8 +1317,7 @@ class Users_model extends Base_model implements InfModel {
                     . " WHERE `i_user_id` = {$i_user_id} "
                     . " ORDER BY `id` ASC ";
 
-
-            $this->db->trans_begin(); ///new                
+       
             $rs = $this->db->query($s_qry); //echo $this->db->last_query();
             $i_cnt = 0;
             if (is_array($rs->result())) {
@@ -1326,7 +1325,7 @@ class Users_model extends Base_model implements InfModel {
 
                 $rs->free_result();
             }
-            $this->db->trans_commit();    ///new
+           
             unset($s_qry, $rs, $row, $i_cnt);
             // pr($ret_);
             return $ret_;
@@ -1343,9 +1342,7 @@ class Users_model extends Base_model implements InfModel {
                     . " FROM " . $this->db->USER_SKILL
                     . " WHERE `i_user_id` = {$i_user_id} "
                     . " ORDER BY `id` ASC ";
-
-
-            $this->db->trans_begin(); ///new                
+         
             $rs = $this->db->query($s_qry);
 
             $i_cnt = 0;
@@ -1354,7 +1351,7 @@ class Users_model extends Base_model implements InfModel {
 
                 $rs->free_result();
             }
-            $this->db->trans_commit();    ///new
+            
             unset($s_qry, $rs, $row, $i_cnt);
 
             return $ret_;
