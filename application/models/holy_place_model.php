@@ -42,7 +42,7 @@ class Holy_place_model extends Base_model
         $s_order_by = ($s_order_by != '')?'ORDER BY '.$s_order_by :'ORDER BY b.id';
        
         
-        $sql = "SELECT s_book_name ,s_testament  FROM 
+        $sql = "SELECT * FROM 
                 {$this->db->BIBLE_BOOK} AS b WHERE 1 {$where} {$s_order_by} {$limit}";
                 /*LEFT JOIN {$this->db->USERS} u on u.id=p.i_user_id*/
 				
