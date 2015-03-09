@@ -428,11 +428,11 @@ The Cogtime Team</p>";
 			$res = $info1->result();
 			//pr($res,1);
 			if ($res[0]->is_first_login_checked == 1) {
-			
+			echo 1;exit;
 				$INDEX_PG = base_url() . '?status=active';
 				header("location:" . $INDEX_PG);
 			}else{
-			
+			echo 2;exit;
             $this->session->set_userdata('login_referrer', '');
             $this->session->set_userdata('loggedin', true);
             $this->session->set_userdata('user_id', encrypt($USER_ID));
