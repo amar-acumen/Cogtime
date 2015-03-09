@@ -353,7 +353,7 @@ class My_ring_model extends Base_model
 		 $sql = "DELETE FROM ".$this->db->USER_RING_POST." WHERE i_ring_id='".$id."'";
 		 $this->db->query($sql);
 		 //$sql = sprintf( 'DELETE FROM '.$this->db->USER_RING_POST_COMMENTS.' WHERE i_ring_id=%s', $id );
-		 $sql = "DELETE FROM ".$this->db->USER_RING_POST_COMMENTS." WHERE i_ring_id='".$id."'";
+		 $sql = "DELETE FROM ".$this->db->USER_RING_POST_COMMENTS." WHERE i_ring_post_id='".$id."'";
 		 $this->db->query($sql);
 		 //$sql = sprintf( 'DELETE FROM '.$this->db->USER_RING_POST_LIKE.' WHERE i_ring_id=%s', $id );
 		 $sql = "DELETE FROM ".$this->db->USER_RING_POST_LIKE." WHERE i_ring_id='".$id."'";
