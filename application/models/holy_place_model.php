@@ -76,7 +76,7 @@ class Holy_place_model extends Base_model
 	{
 		if($verseid	!= '')
 			$wh	= " AND v.id='".$verseid."'";
-		 $sql = "SELECT *,v.id AS verseid FROM {$this->db->BIBLE_CHAPTER} AS c ,{$this->db->BIBLE_VERSES} AS v 
+		 $sql = "SELECT c.i_book_id ,c.s_chapter,v.i_chapter_id ,v.i_verses ,v.s_text , v.id AS verseid FROM {$this->db->BIBLE_CHAPTER} AS c ,{$this->db->BIBLE_VERSES} AS v 
 				WHERE c.id=v.i_chapter_id".$wh;
                 /*LEFT JOIN {$this->db->USERS} u on u.id=p.i_user_id*/
 			echo $sql ;                        exit();
