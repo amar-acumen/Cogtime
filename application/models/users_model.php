@@ -768,7 +768,7 @@ class Users_model extends Base_model implements InfModel {
             $rs = $this->db->query($s_qry, $stmt_val);
             #echo $this->db->last_query();    
              // $res = $rs->result();
-            //  pr($res,1);
+              pr($res,1);
             if (is_array($rs->result())) { ///new
                 foreach ($rs->result() as $row) {
                     $ret_["id"] = $row->id; ////always integer 
