@@ -29,6 +29,7 @@ include(APPPATH . "views/layouts/nav.phtml");
                             <div class="left"><h4><img src="<?php echo base_url(); ?>images/icons/profile.png" alt=" " width="25" height="26" />  Basic Information</h4> </div>
                             <div class="right"><img src="<?php echo base_url(); ?>images/icons/edit.png" alt=" " width="16" height="16"/>  <a onclick="showDiv('1')" href="javascript:void(0);" class="white-link"><strong>Edit</strong></a></div>
                         </div>
+                        <?php pr($arr_profile_info,1);?>
                         <div id="profile_info_div" class="shade_box_01 frm_box shade_box_blue" style="padding-bottom:17px;">
                             <div class="lable01">Title:</div>  
                             <div class="field01"><?= $arr_profile_info['e_title'] ?></div> 
