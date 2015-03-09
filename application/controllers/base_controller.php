@@ -23,7 +23,7 @@ class Base_controller extends CI_Controller {
 
     public function __construct() {
         try {                    
-          //  die('ok');
+            die($this->session->userdata('s_time').'===');
             parent::__construct();
 
             //$this->output->set_header("Cache-Control: private, max-age=60");//for caching 
