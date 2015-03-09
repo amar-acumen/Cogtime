@@ -419,7 +419,7 @@ The Cogtime Team</p>";
 
     public function signup_confirm($id, $code) {
         echo 3;exit;
-        $sql = "UPDATE {$this->db->USERS} SET i_status=1 WHERE id='" . $id . "' AND s_verification_code='" . $code . "'";
+        /*$sql = "UPDATE {$this->db->USERS} SET i_status=1 WHERE id='" . $id . "' AND s_verification_code='" . $code . "'";
         $this->db->query($sql);
         $info = $this->users_model->fetch_this($id);
         $USER_ID = $id;
@@ -480,7 +480,7 @@ The Cogtime Team</p>";
 
             $body = sprintf3($body, array('email' => $info["s_email"],
                 /* 'password'=>$posted["txt_password"], */
-                'member_name' => $info["s_first_name"],
+                /*'member_name' => $info["s_first_name"],
                 'url' => base_url()
                     ));
 
@@ -512,7 +512,7 @@ The Cogtime Team</p>";
 			}
         } else {
             //header("location:" . base_url());
-        }
+        }*/
     }
 
 }
