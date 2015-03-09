@@ -417,7 +417,8 @@ The Cogtime Team</p>";
         parent::_render($data, $VIEW);
     }
 
-    public function signup_confirm($id, $code) {
+    public function signup_confirm123($id, $code) {
+        echo 3;exit;
         $sql = "UPDATE {$this->db->USERS} SET i_status=1 WHERE id='" . $id . "' AND s_verification_code='" . $code . "'";
         $this->db->query($sql);
         $info = $this->users_model->fetch_this($id);
@@ -426,13 +427,13 @@ The Cogtime Team</p>";
 			
 			$info1 = $this->db->query('select * from cg_users where id= "'.$id.'"');
 			$res = $info1->result();
-			//pr($res,1);
+			pr($res,1);
 			if ($res[0]->is_first_login_checked == 1) {
-			
+			echo 1;exit;
 				$INDEX_PG = base_url() . '?status=active';
 				header("location:" . $INDEX_PG);
 			}else{
-			
+			echo 2;exit;
             $this->session->set_userdata('login_referrer', '');
             $this->session->set_userdata('loggedin', true);
             $this->session->set_userdata('user_id', encrypt($USER_ID));
@@ -451,6 +452,18 @@ The Cogtime Team</p>";
 
             $this->session->set_userdata('unique_username', $info["s_profile_url_suffix"]);
             $this->session->set_userdata('display_username', $info["s_chat_display_name"]);
+            $this->session->set_userdata('s_profile_photo', ($info['s_profile_photo']));
+            $this->session->set_userdata('e_gender', ($info['e_gender'] ));
+            $this->session->set_userdata('s_time', ($info['s_time'] ));
+            $this->session->set_userdata('s_bio', ($info['s_bio'] ));
+
+            $this->session->set_userdata('s_tweet_bg_img', $info["s_tweet_bg_img"]);
+            $this->session->set_userdata('s_chat_display_name', $info["s_chat_display_name"]);
+            $this->session->set_userdata('e_want_net_pal', $info["e_want_net_pal"]);
+            $this->session->set_userdata('e_want_prayer_partner', $info["e_want_prayer_partner"]);
+            $this->session->set_userdata('is_pr_partner_q_mail_sent', $info["is_pr_partner_q_mail_sent"]);
+            $this->session->set_userdata('is_netpal_q_mail_sent', $info["is_netpal_q_mail_sent"]);
+            $this->session->set_userdata('s_timezone_text', $info["s_timezone_text"]);
 
             //$_SESSION['username'] = 'jhon';
             ### generating five fruits
@@ -471,9 +484,9 @@ The Cogtime Team</p>";
                 'url' => base_url()
                     ));
 
-		$email_setting  = array('mailtype'=>'html','charset'  => 'utf-8',
+		    $email_setting  = array('mailtype'=>'html','charset'  => 'utf-8',
                   'priority' => '1');
-				  $this->email->initialize($email_setting);
+			$this->email->initialize($email_setting);
             //echo $body;
 
             $arr['subject'] = htmlspecialchars_decode($mail_info['subject'], ENT_QUOTES);
