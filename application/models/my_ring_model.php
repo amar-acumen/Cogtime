@@ -358,10 +358,11 @@ class My_ring_model extends Base_model
 	public function leave_ring($id) {
 	
 	     $inv_id	 = intval(decrypt($this->session->userdata('user_id')));
-		 $sql = sprintf( 'DELETE FROM '.$this->db->RING_INV_USER.' WHERE i_ring_id=%s AND i_invited_id=%s', $id,$inv_id );
+		 //$sql = sprintf( 'DELETE FROM '.$this->db->RING_INV_USER.' WHERE i_ring_id=%s AND i_invited_id=%s', $id,$inv_id );
+		 $sql = "DELETE FROM ".$this->db->RING_INV_USER." WHERE i_ring_id='".$id."' AND i_invited_id='".$inv_id."'";
 		 $this->db->query($sql);
 		 
-		#echo $this->db->last_query(); exit;
+		echo $this->db->last_query(); exit;
 	}
 	
 	
