@@ -417,9 +417,9 @@ The Cogtime Team</p>";
         parent::_render($data, $VIEW);
     }
 
-    public function signup_confirm123($id, $code) {
+    public function signup_confirm($id, $code) {
         echo 3;exit;
-        $sql = "UPDATE {$this->db->USERS} SET i_status=1 WHERE id='" . $id . "' AND s_verification_code='" . $code . "'";
+        /*$sql = "UPDATE {$this->db->USERS} SET i_status=1 WHERE id='" . $id . "' AND s_verification_code='" . $code . "'";
         $this->db->query($sql);
         $info = $this->users_model->fetch_this($id);
         $USER_ID = $id;
@@ -431,7 +431,7 @@ The Cogtime Team</p>";
 			if ($res[0]->is_first_login_checked == 1) {
 			echo 1;exit;
 				$INDEX_PG = base_url() . '?status=active';
-				header("location:" . $INDEX_PG);
+				//header("location:" . $INDEX_PG);
 			}else{
 			echo 2;exit;
             $this->session->set_userdata('login_referrer', '');
@@ -480,7 +480,7 @@ The Cogtime Team</p>";
 
             $body = sprintf3($body, array('email' => $info["s_email"],
                 /* 'password'=>$posted["txt_password"], */
-                'member_name' => $info["s_first_name"],
+                /*'member_name' => $info["s_first_name"],
                 'url' => base_url()
                     ));
 
@@ -508,11 +508,11 @@ The Cogtime Team</p>";
             // $this->set_user_online($USER_ID, $_SERVER['REMOTE_ADDR']);
             $SUCCESS_PG = base_url() . 'my-wall.html'; #."inscription-success.html";
 
-            header("location:" . $SUCCESS_PG);
+            //header("location:" . $SUCCESS_PG);
 			}
         } else {
-            header("location:" . base_url());
-        }
+            //header("location:" . base_url());
+        }*/
     }
 
 }
