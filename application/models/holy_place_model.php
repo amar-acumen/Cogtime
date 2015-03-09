@@ -21,7 +21,7 @@ class Holy_place_model extends Base_model
 				{$this->db->BIBLE_VERSES} AS v 
 				WHERE b.id=c.i_book_id AND c.id=v.i_chapter_id {$where} {$s_order_by} {$limit}";
                 /*LEFT JOIN {$this->db->USERS} u on u.id=p.i_user_id*/
-		//echo $sql;exit;		
+		echo $sql;exit;		
 		
         $res = $this->db->query($sql)->result_array();
         return $res;
