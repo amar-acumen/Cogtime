@@ -84,7 +84,7 @@ class My_profile extends Base_controller {
             $where1 = " i_state_id='" . $arr_profile_info["i_state_id"] . "'";
             $data['city'] = makeOptionCity($where1, encrypt($arr_profile_info["i_city_id"]));
 
-            $data['arr_profile_info'] = $arr_profile_info;
+            $data['arr_profile_info_for_my_profile'] = $arr_profile_info;
 
 
             $cwhere = " i_country_id='" . $arr_profile_info["i_church_country_id"] . "'";
@@ -92,7 +92,7 @@ class My_profile extends Base_controller {
             $cwhere1 = " i_state_id='" . $arr_profile_info["i_church_state_id"] . "'";
             $data['ccity'] = makeOptionCity($cwhere1, encrypt($arr_profile_info["i_church_city_id"]));
 
-            pr($data['arr_profile_info']);
+            
             # view file...
             $VIEW_PG_FILE = "my_profile.phtml";
             $VIEW = "logged/{$VIEW_PG_FILE}";
