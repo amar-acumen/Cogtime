@@ -135,7 +135,8 @@
                                 <li><a  href="javascript:void(0);" class="left" onclick="view_tweet_reply(<?= $val['id']?>)">[reply]</a></li>
 								
 				<?php 
-				$fav=check_fav($val['id']);
+                                echo $val['fav_tweet'].'/';
+				echo $fav=check_fav($val['id']);
 				if($fav == 0)
 					{
 					?>
