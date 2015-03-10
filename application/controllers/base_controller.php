@@ -445,7 +445,6 @@ class Base_controller extends CI_Controller {
            // $default_js_arr['js/production/contentslider.js'] = 'header';
            // $default_js_arr['js/production.js'] = 'header';
         }else{
-            $default_js_arr['js/production.js'] = 'header';
             $default_js_arr['js/production/stepcarousel.js'] = 'header';
 
         }
