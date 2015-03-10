@@ -3872,7 +3872,10 @@ function get_friends_by_id($id) {
 
 function get_friend_suggestion() {
     $ci = get_instance();
-    $q = $ci->db->query("select distinct u.id from cg_users u,cg_user_contacts e where 1 AND e.i_accepter_id=u.id AND e.s_status='accepted' AND u.i_status=1 and u.i_isdeleted=1 ORDER BY RAND() LIMIT 2"); #echo $ci->db->last_query();
+    $q = $ci->db->query("select distinct u.id, u.s_profile_photo, u.e_gender,CONCAT(u.s_first_name,' ',u.s_last_name) AS s_profile_name  
+        from cg_users u,cg_user_contacts e where 1 
+        AND e.i_accepter_id=u.id AND e.s_status='accepted' 
+    AND u.i_status=1 and u.i_isdeleted=1 ORDER BY RAND() LIMIT 2"); #echo $ci->db->last_query();
     $res = $q->result_array();
     return $res;
 }
@@ -5183,3 +5186,18 @@ function get_blog_info_by_id($id) {
     $info = $ci->my_blog_model->get_by_id($id);
     return $info;
 }
+
+function get_userinfo_for_newsfeed($i_user_id = NULL) {
+    try {
+        $ci = & get_instance();
+        $sql = $ci->db->query("select CONCAT(u.s_first_name,' ',u.s_last_name) AS s_profile_name,
+            u.s_profile_photo,u.e_gender from cg_users AS u where id='" . $i_user_id . "'");
+        //echo $sql;
+        $res = $sql->result_array();
+        //pr($res);exit;
+    return $res['0'];
+    } catch (Exception $err_obj) {
+        show_error($err_obj->getMessage());
+    }
+}
+

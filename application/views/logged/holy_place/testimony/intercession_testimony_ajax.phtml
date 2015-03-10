@@ -22,7 +22,7 @@ if(count($arr_testimony))
     <div class="commitment-prayer-for">
         <?php /*?><p class="name">Pray For: <span><?=$testimony['posted_by']?></span> </p><?php */?>
         
-         <p class="quoted-text"><a href="<?=base_url()?>e-intercession/<?=$testimony['id']?>/e-intercession-request-detail.html"><?=($s_subject)?></a></p> 
+         <p class="quoted-text"><a href="<?=base_url()?>e-intercession/<?=$testimony['prayer_wall_req_id']?>/e-intercession-request-detail.html"><?=($s_subject)?></a></p> 
         <p class="quoted-text">
             <a href="<?=base_url()?>e-intercession/<?=$testimony['prayer_wall_req_id']?>/e-intercession-request-detail.html"><?=nl2br(my_substr($testimony['intercession_desc'],250))?></a> 
             <span class="place" style="color: #011F31; font-size: 14px; margin-top: 2px;">Location: <?=$testimony['country'].' '.$testimony['s_state']?></span>

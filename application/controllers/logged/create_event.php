@@ -59,7 +59,7 @@ class Create_event extends Base_controller {
                 'js/lightbox.js', 'js/jquery-ui-1.8.2.custom.min.js',
                 'js/stepcarousel.js', 'js/jquery.dd.js',*/
                 'js/production/tweet_utilities.js',
-                'js/production/events/my_events.js',
+                'js/production/my_events.js',
 				'js/jquery-ui-timepicker-addon.js'
             ));
 

@@ -180,13 +180,13 @@ class Public_profile_photos extends Base_controller
                                         'js/jquery.autofill.js',
                                         'js/jquery.lightbox.js',
 										'js/stepcarousel.js',*/
-                                        'js/frontend/logged/my_friends.js',
-                                        'js/frontend/logged/my_net_pals.js',
-                                        'js/frontend/logged/my_prayer_partner.js',
-                                        'js/frontend/logged/message_box/my_message.js',
-										'js/frontend/logged/tweets/tweet_utilities.js',
-										'js/frontend/logged/my_photo/photo_helper.js',
-										'js/frontend/logged/my_photo/photo_details.js',
+                                        'js/production/my_friends.js',
+                                        'js/production/my_net_pals.js',
+                                        'js/production/my_prayer_partner.js',
+                                        'js/production/my_message.js',
+										'js/production/tweet_utilities.js',
+										'js/production/photo_helper.js',
+										'js/production/photo_details.js',
                                         ));
                                         
           //  parent::_add_css_arr( array('css/jquery-ui-1.8.2.custom.css') );

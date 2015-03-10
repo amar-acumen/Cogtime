@@ -53,7 +53,7 @@
       <div class="clr"></div>
 </div>
 <!-- /CONTENT SECTION -->
-<script type="">
+<script type="text/javascript">
 $(document).ready(function(arg){
 
 var lang_title=$('#txt_title').val();
@@ -102,7 +102,13 @@ function validateFrm(data)
 		}
 			showUIMsg(data.msg);
 				hideBusyScreen();
+                                
 			}
-			window.location.href=admin_base_url + "site-settings/languages.html";
+                        if(data.msg == 'Error!'){
+                                    
+                                }else if(data.msg == 'New Language has been added successfully.'){
+                                   window.location.href=admin_base_url + "site-settings/languages.html"; 
+                                }
+			
 		}
 </script>

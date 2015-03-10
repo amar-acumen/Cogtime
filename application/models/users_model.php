@@ -78,7 +78,7 @@ class Users_model extends Base_model implements InfModel {
             $s_qry = $s_qry . (trim($s_order_by) != "" ? " ORDER BY " . $s_order_by . "" : "ORDER BY id asc") . " " . (is_numeric($i_start) && is_numeric($i_limit) ? " LIMIT " . intval($i_start) . "," . intval($i_limit) : "");
             //////////end For Pagination//////////                
 
-            $this->db->trans_begin(); ///new                
+                      
             $rs = $this->db->query($s_qry);
             //echo $this->db->last_query() ."<br /><br />"; 
             $i_cnt = 0;
@@ -197,7 +197,7 @@ class Users_model extends Base_model implements InfModel {
                 }
                 $rs->free_result();
             }
-            $this->db->trans_commit(); ///new
+            
             // pr($ret_);                   
 
             unset($s_qry, $rs, $row, $i_cnt, $s_where, $i_start, $i_limit, $artist_name, $s_name);
@@ -219,7 +219,7 @@ class Users_model extends Base_model implements InfModel {
                     . " ORDER BY `id` ASC ";
 
 
-            $this->db->trans_begin(); ///new                
+                       
             $rs = $this->db->query($s_qry);
             $i_cnt = 0;
             if (is_array($rs->result())) {
@@ -227,7 +227,7 @@ class Users_model extends Base_model implements InfModel {
 
                 $rs->free_result();
             }
-            $this->db->trans_commit();    ///new
+            
             unset($s_qry, $rs, $row, $i_cnt);
 
             return $ret_;
@@ -246,7 +246,7 @@ class Users_model extends Base_model implements InfModel {
                     . " ORDER BY `id` ASC ";
 
 
-            $this->db->trans_begin(); ///new                
+                 
             $rs = $this->db->query($s_qry); #echo $this->db->last_query();
             $i_cnt = 0;
             if (is_array($rs->result())) {
@@ -254,7 +254,7 @@ class Users_model extends Base_model implements InfModel {
 
                 $rs->free_result();
             }
-            $this->db->trans_commit();    ///new
+           
             unset($s_qry, $rs, $row, $i_cnt);
             // pr($ret_);
             return $ret_;
@@ -273,7 +273,7 @@ class Users_model extends Base_model implements InfModel {
                     . " ORDER BY `id` ASC ";
 
 
-            $this->db->trans_begin(); ///new                
+                       
             $rs = $this->db->query($s_qry);
 
             $i_cnt = 0;
@@ -282,7 +282,7 @@ class Users_model extends Base_model implements InfModel {
 
                 $rs->free_result();
             }
-            $this->db->trans_commit();    ///new
+           
             unset($s_qry, $rs, $row, $i_cnt);
 
             return $ret_;
@@ -387,7 +387,7 @@ class Users_model extends Base_model implements InfModel {
 
 
 
-                $this->db->trans_begin(); ///new                       
+                            
                 $rs = $this->db->query($s_qry, array(intval($i_id)));
                 # echo $this->db->last_query() ."<br />";
 
@@ -517,7 +517,7 @@ class Users_model extends Base_model implements InfModel {
 
                     $rs->free_result();
                 }
-                $this->db->trans_commit(); ///new
+                
                 unset($s_qry, $rs, $row, $i_id);
                 #dump($ret_); 
             }
@@ -764,11 +764,10 @@ class Users_model extends Base_model implements InfModel {
 
 
 
-            $this->db->trans_begin(); ///new
+            
             $rs = $this->db->query($s_qry, $stmt_val);
             #echo $this->db->last_query();    
-             // $res = $rs->result();
-            //  pr($res,1);
+             
             if (is_array($rs->result())) { ///new
                 foreach ($rs->result() as $row) {
                     $ret_["id"] = $row->id; ////always integer 
@@ -841,7 +840,7 @@ class Users_model extends Base_model implements InfModel {
                 }
                 $rs->free_result();
             }
-            $this->db->trans_commit(); ///new
+            
             unset($s_qry, $rs, $row, $login_data, $stmt_val);
 
             return $ret_;
@@ -951,11 +950,11 @@ class Users_model extends Base_model implements InfModel {
                 $s_qry.=" binary s_email=? AND i_isdeleted=1";
 
 
-                $this->db->trans_begin(); ///new   
+               
                 $rs = $this->db->query($s_qry, array(
                     get_formatted_string($email)
                 ));
-                $this->db->trans_commit(); ///new   
+               
                 //$sql = sprintf("SELECT count(*) count FROM %susers where email = '%s'", $this->db->dbprefix, $email);
             } else {
                 //$sql = sprintf("SELECT count(*) count FROM %susers where email = '%s' and email != '%s'", $this->db->dbprefix, $email, $current_email);
@@ -964,12 +963,12 @@ class Users_model extends Base_model implements InfModel {
                 $s_qry.=" binary s_email=? ";
                 $s_qry.=" AND id!=? ";
 
-                $this->db->trans_begin(); ///new   
+                
                 $rs = $this->db->query($s_qry, array(
                     get_formatted_string($email),
                     intval($i_user_id)
                 ));
-                $this->db->trans_commit(); ///new   
+                
             }
 
 
@@ -1007,11 +1006,11 @@ class Users_model extends Base_model implements InfModel {
                 $s_qry.=" binary s_username=? ";
 
 
-                $this->db->trans_begin(); ///new   
+                
                 $rs = $this->db->query($s_qry, array(
                     get_formatted_string($username)
                 ));
-                $this->db->trans_commit(); ///new   
+               
                 //$sql = sprintf("SELECT count(*) count FROM %susers where email = '%s'", $this->db->dbprefix, $email);
             } else {
                 //$sql = sprintf("SELECT count(*) count FROM %susers where email = '%s' and email != '%s'", $this->db->dbprefix, $email, $current_email);
@@ -1020,12 +1019,12 @@ class Users_model extends Base_model implements InfModel {
                 $s_qry.=" binary s_username=? ";
                 $s_qry.=" AND id!=? ";
 
-                $this->db->trans_begin(); ///new   
+               
                 $rs = $this->db->query($s_qry, array(
                     get_formatted_string($username),
                     intval($i_user_id)
                 ));
-                $this->db->trans_commit(); ///new   
+                
             }
 
 
@@ -1292,7 +1291,7 @@ class Users_model extends Base_model implements InfModel {
                     . " ORDER BY `id` ASC ";
 
 
-            $this->db->trans_begin(); ///new                
+                  
             $rs = $this->db->query($s_qry); //echo $this->db->last_query();
             $i_cnt = 0;
             if (is_array($rs->result())) {
@@ -1300,7 +1299,7 @@ class Users_model extends Base_model implements InfModel {
 
                 $rs->free_result();
             }
-            $this->db->trans_commit();    ///new
+            
             unset($s_qry, $rs, $row, $i_cnt);
 
             return $ret_;
@@ -1317,8 +1316,7 @@ class Users_model extends Base_model implements InfModel {
                     . " WHERE `i_user_id` = {$i_user_id} "
                     . " ORDER BY `id` ASC ";
 
-
-            $this->db->trans_begin(); ///new                
+       
             $rs = $this->db->query($s_qry); //echo $this->db->last_query();
             $i_cnt = 0;
             if (is_array($rs->result())) {
@@ -1326,7 +1324,7 @@ class Users_model extends Base_model implements InfModel {
 
                 $rs->free_result();
             }
-            $this->db->trans_commit();    ///new
+           
             unset($s_qry, $rs, $row, $i_cnt);
             // pr($ret_);
             return $ret_;
@@ -1343,9 +1341,7 @@ class Users_model extends Base_model implements InfModel {
                     . " FROM " . $this->db->USER_SKILL
                     . " WHERE `i_user_id` = {$i_user_id} "
                     . " ORDER BY `id` ASC ";
-
-
-            $this->db->trans_begin(); ///new                
+         
             $rs = $this->db->query($s_qry);
 
             $i_cnt = 0;
@@ -1354,7 +1350,7 @@ class Users_model extends Base_model implements InfModel {
 
                 $rs->free_result();
             }
-            $this->db->trans_commit();    ///new
+            
             unset($s_qry, $rs, $row, $i_cnt);
 
             return $ret_;
@@ -1630,7 +1626,7 @@ class Users_model extends Base_model implements InfModel {
 
                 #cn.s_country_name  , {$this->db->MST_COUNTRY} cn 
 
-                $this->db->trans_begin(); ///new                       
+                      
                 $rs = $this->db->query($s_qry); #echo $this->db->last_query(); exit;
                 if (is_array($rs->result())) {
                     foreach ($rs->result() as $row) {
@@ -1646,7 +1642,7 @@ class Users_model extends Base_model implements InfModel {
                     }
                     $rs->free_result();
                 }
-                $this->db->trans_commit(); ///new
+                
                 unset($s_qry, $rs, $row, $i_me, $i_him);
             }
             return $ret_;
@@ -1687,7 +1683,7 @@ class Users_model extends Base_model implements InfModel {
 
                 #cn.s_country_name  , {$this->db->MST_COUNTRY} cn 
 
-                $this->db->trans_begin(); ///new                       
+                      
                 $rs = $this->db->query($s_qry); #echo $this->db->last_query(); exit;
                 if (is_array($rs->result())) {
                     foreach ($rs->result() as $row) {
@@ -1703,7 +1699,7 @@ class Users_model extends Base_model implements InfModel {
                     }
                     $rs->free_result();
                 }
-                $this->db->trans_commit(); ///new
+                
                 unset($s_qry, $rs, $row, $i_me, $i_him);
             }
             return $ret_;
@@ -1745,7 +1741,7 @@ class Users_model extends Base_model implements InfModel {
 
                 $s_qry = "SELECT s_first_name , s_last_name , s_email FROM " . $this->db->USERS . " WHERE id=?";
 
-                $this->db->trans_begin(); ///new                       
+                            
                 $rs = $this->db->query($s_qry, array(intval($i_id)));
                 # echo $this->db->last_query() ."<br />";
 
@@ -1767,7 +1763,7 @@ class Users_model extends Base_model implements InfModel {
 
                     $rs->free_result();
                 }
-                $this->db->trans_commit(); ///new
+                
                 unset($s_qry, $rs, $row, $i_id);
                 #dump($ret_); 
             }
@@ -1942,23 +1938,23 @@ class Users_model extends Base_model implements InfModel {
                 $s_qry.=" binary s_chat_display_name=? ";
 
 
-                $this->db->trans_begin(); ///new   
+               
                 $rs = $this->db->query($s_qry, array(
                     get_formatted_string($email)
                 ));
-                $this->db->trans_commit(); ///new   
+                
             } else {
 
                 $s_qry = "SELECT COUNT(*) i_count FROM " . $this->db->USERS . " WHERE ";
                 $s_qry.=" binary s_chat_display_name=? ";
                 $s_qry.=" AND id!=? ";
 
-                $this->db->trans_begin(); ///new   
+                
                 $rs = $this->db->query($s_qry, array(
                     get_formatted_string($email),
                     intval($i_user_id)
                 ));
-                $this->db->trans_commit(); ///new   
+               
             }
 
 

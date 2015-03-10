@@ -21,7 +21,7 @@
 									for($i=0;$i<3;$i++)
 									{
 										$k = $people_you_may_know[$i];
-										$profile_link = base_url() . "profile/" . $k['user_id'] . "/" . my_url($k['name']) . ".html";
+										$profile_link =get_profile_url( $k['user_id'] , my_url($k['name']) );
 										$img = get_profile_image_of_user('thumb',$k['s_profile_photo'],$k['e_gender']);
 										
 									?>
@@ -49,9 +49,9 @@
 									foreach($vals as $val)
 									{
 					
-									$name=get_user_name_by_id($val['id']);
-									$profile_link = get_profile_url($val['id'],$name);
-									 $img = get_profile_image($val['id'], 'thumb');
+									$name=$val['s_profile_name'];
+									$profile_link = get_profile_url($val['id'],$val['s_profile_name']);
+									 $img = get_profile_image_of_user('thumb',$val['s_profile_photo'],$val['e_gender']);
 									// $ct=get_mutual_count($m);
 									?>
                                           <div class="project_box">

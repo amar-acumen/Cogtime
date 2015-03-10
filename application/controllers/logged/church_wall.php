@@ -30,7 +30,7 @@ class Church_wall extends Base_controller
             parent::_add_church_css_arr (array('css/church.css','css/wall-slider.css','css/jquery.multiselect.css','css/jquery.multiselect.filter.css','css/jquery-ui-1.8.2.custom.css'));
 			 parent::_add_js_arr(array(
                 'js/lightbox.js',
-                'js/ajaxupload.js',
+//                'js/ajaxupload.js',
                 'js/frontend/wall/wall_photo_upload.js',
                 'js/frontend/wall/wall_video_upload.js',
 				'js/church-wall-slider.js',
@@ -106,7 +106,7 @@ class Church_wall extends Base_controller
 	public function post_his_church_wall($refresh_list = 0, $photo_sent = 0, $url_sent = 0) {
         try {
             parent::_add_js_arr(array(
-                'js/ajaxupload.js',
+//                'js/ajaxupload.js',
                 'js/frontend/wall/wall_photo_upload.js',
                 'js/frontend/wall/wall_video_upload.js'
             ));
@@ -567,7 +567,7 @@ $_html = ''."Liked by "." (".count_word_like_link($window_id).")";
     public function update_his_church_wall($refresh_list = 0, $photo_sent = 0, $url_sent = 0) {
         try {
             parent::_add_js_arr(array(
-                'js/ajaxupload.js',
+//                'js/ajaxupload.js',
                 'js/frontend/wall/wall_photo_upload.js',
                 'js/frontend/wall/wall_video_upload.js'
             ));

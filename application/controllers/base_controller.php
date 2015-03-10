@@ -49,7 +49,7 @@ class Base_controller extends CI_Controller {
             //$this->show_system_reminder_popup_at_remind_me_time();
             # if not logged in yet...
             $this->data['logged_in_state'] = 'N';
-
+            
             if ($this->session->userdata('loggedin') != '' || $this->session->userdata('loggedin') != false) {
                 $this->data['loggedin'] = true;
 
@@ -420,7 +420,7 @@ class Base_controller extends CI_Controller {
         $objmethod = $router->fetch_method();
 
         $default_js_arr = array(
-            //'js/jquery-1.7.2.js' => 'header',
+            //'js/production/jquery-1.7.2.js' => 'header',
             //'js/jquery.js' => 'header', // causing conflict with block ui
             //'js/frontend/header_slider.js'=>'header',
             //'js/contentslider.js'=>'header',
@@ -440,12 +440,14 @@ class Base_controller extends CI_Controller {
             'js/production.js' => 'header'
         );
 
-        if($objclass == 'index' && $objmethod == 'index'){
-         //   $default_js_arr['js/production/contentslider.js'] = 'header';
+
+       /* if($objclass == 'index' && $objmethod == 'index'){
+           // $default_js_arr['js/production/contentslider.js'] = 'header';
+           // $default_js_arr['js/production.js'] = 'header';
         }else{
             $default_js_arr['js/production/stepcarousel.js'] = 'header';
 
-        }
+        }*/
 
 
 
@@ -1312,7 +1314,7 @@ class Base_controller extends CI_Controller {
 		$arr_profile_info['s_timezone_text']=$this->session->userdata('s_timezone_text');
 		$arr_profile_info['is_netpal_q_mail_sent']=$this->session->userdata('is_netpal_q_mail_sent');
 		$arr_profile_info['is_pr_partner_q_mail_sent']=$this->session->userdata('is_pr_partner_q_mail_sent');
-        $arr_profile_info = $this->users_model->fetch_this($i_profile_id);
+    //$arr_profile_info = $this->users_model->fetch_this($i_profile_id);
 		//pr($arr_profile_info,1);
 
         $this->load->model('my_prayer_partner_model');

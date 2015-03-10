@@ -90,6 +90,7 @@ class Module_generate extends CI_Controller {
 
                 echo '<br/> production_logged.css';
             }
+
             if($js_prod){
                 $files_js = array(
                     /*'assets/js/contrib/perfect-scrollbar-0.4.10.with-mousewheel.min.js',
@@ -97,6 +98,7 @@ class Module_generate extends CI_Controller {
                     'assets/js/contrib/jquery-ui-1.10.4.custom.min.js',
                     //'assets/js/contrib/gmap3.min.js',*/
                     'js/jquery-1.7.2.js',
+                    'js/jquery.js',
                     'js/jquery.cookie.js',
                     'js/jquery/ui/jquery.blockUI.js',
                     'js/jquery/ui/jquery.ui.core.js',
@@ -112,9 +114,9 @@ class Module_generate extends CI_Controller {
                     'js/login.js',
                     'js/notification.js',
                     'js/utility_js_for_admin_and_fe.js',
-                   // 'js/contentslider.js',
-                   // 'js/frontend/header_slider.js',
-                    /* 'js/jquery.autofill.js',*/
+                    'js/frontend/header_slider.js',
+                    'js/contentslider.js',
+                     'js/jquery.autofill.js',
                     // User logged in JS files
                     'js/jquery.hoverIntent.js',
                     'js/frontend/utils.js',
@@ -122,7 +124,7 @@ class Module_generate extends CI_Controller {
                     'js/switch.js',
                     'js/animate-collapse.js',
                     //'js/jquery-ui-1.8.2.custom.min.js',
-                    //'js/stepcarousel.js',
+                    'js/stepcarousel.js',
                     //'js/frontend/logged/tweets/tweet_utilities.js',
                     //'js/frontend/logged/christian_news_js.js',
                     'js/tab.js',
@@ -140,7 +142,8 @@ class Module_generate extends CI_Controller {
                     'js/jquery.bxslider.min.js',
                     'js/jquery.fancybox.js',
                     // logged
-                    'js/frontend/public_profile.js'
+                    'js/frontend/public_profile.js',
+                    'js/ajaxupload.js'
                 );
 
                 $js = '';
@@ -156,13 +159,15 @@ class Module_generate extends CI_Controller {
 
 
                 $files_logged_js = array(
+                    'js/frontend/wall/wall_photo_upload.js',
                     'js/frontend/wall/wall_helper.js',
                     'js/frontend/logged/my_friends.js',
                     'js/frontend/logged/my_net_pals.js',
                     'js/frontend/logged/my_prayer_partner.js',
                     'js/frontend/logged/message_box/my_message.js',
+                    'js/frontend/logged/tweets/tweet_utilities.js'
                     // logged
-                    'js/frontend/public_profile.js'
+                  //  'js/frontend/public_profile.js'
 
                 );
                 $js_logged = '';
@@ -179,6 +184,7 @@ class Module_generate extends CI_Controller {
             // #################  Individual js min generate ###################
             if($js_indi){
                 $files_indvid_js = array(
+                    'js/jquery-1.7.2.js',
                     'chat/js/chat.js',
                     'js/jquery.gemoticons.js',
                     'js/frontend/header_slider.js',
@@ -193,7 +199,13 @@ class Module_generate extends CI_Controller {
                     'js/frontend/logged/my_prayer_partner.js',
                     'js/frontend/logged/message_box/my_message.js',
                     'js/frontend/logged/video_helper.js',
-                    'js/frontend/logged/events/my_events.js'
+                    'js/frontend/logged/events/my_events.js',
+                    'js/frontend/wall/wall_photo_upload.js',
+                    'js/frontend/wall/wall_helper.js',
+                    'js/frontend/logged/my_audio/my_audio.js',
+                    'js/frontend/logged/my_audio/audio_helper.js',
+                    'js/frontend/logged/my_photo/photo_helper.js',
+                    'js/frontend/logged/my_photo/photo_details.js',
                   //  'js/jquery.hoverIntent.js',
                   //  'js/frontend/utils.js'
                 );

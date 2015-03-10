@@ -36,11 +36,18 @@
                           $data = json_decode($val['data']);
                           
                           if($val['s_type'] == 'retweeted'){
-							  $twit_id = getTwitterUsernameById($data->tweet_owner_id);
-							  $rt_profile_link = getTwitterProfileLink($twit_id);
+							  // $twit_id = getTwitterUsernameById($data->tweet_owner_id);
+                                                            $twit_id = $val['s_tweet_id'];
+                                                           $count = strlen($twit_id);
+							 // $rt_profile_link = getTwitterProfileLink($twit_id);
+                                                           $rt_profile_link = base_url() . "user-twitter-profile/" . intval(decrypt($this->session->userdata('user_id'))) . '/' . substr($twit_id, 1, $count) . ".html";
 						  }
 						  $profile_image_filename = get_profile_image_of_user('thumb',$val['s_profile_photo'],$val['e_gender']);
-						  $profile_link = getTwitterProfileLink($val['s_tweet_id']);
+                                                  $twit_id = $val['s_tweet_id'];
+                                                           $count = strlen($twit_id);
+							 // $rt_profile_link = getTwitterProfileLink($twit_id);
+                                                           $profile_link = base_url() . "user-twitter-profile/" . intval(decrypt($this->session->userdata('user_id'))) . '/' . substr($twit_id, 1, $count) . ".html";
+						 // $profile_link = getTwitterProfileLink($val['s_tweet_id']);
 						 
                            $MARK_UNMARK_TXT = ($val['fav_tweet'] == 1)?'Unmark from your favourite tweet?':'Mark this as your favourite tweet?';
 
@@ -105,7 +112,7 @@
                                 <?php } ?>
                                 </span>
                               </p>
-                               <p> <span style=" font-size:13px;color: #ABABAB; ">RT <a href="<?=$rt_profile_link?>" style="color: #ABABAB; text-decoration:none;"><?=getTwitterUsernameById($data->tweet_owner_id)?></a> :</span> <?=get_twitter_profile_hash_link($new_text)?></p>
+                               <p> <span style=" font-size:13px;color: #ABABAB; ">RT <a href="<?=$rt_profile_link?>" style="color: #ABABAB; text-decoration:none;"><?php echo $val['s_tweet_id']; //getTwitterUsernameById($data->tweet_owner_id)?></a> :</span> <?=get_twitter_profile_hash_link($new_text)?></p>
                              
 							 <?php if(!empty($data->photo) && count($data->photo)){ 
 			   			foreach($data->photo as $key=>$photo_val):
@@ -128,7 +135,9 @@
                                 <li><a  href="javascript:void(0);" class="left" onclick="view_tweet_reply(<?= $val['id']?>)">[reply]</a></li>
 								
 				<?php 
-				$fav=check_fav($val['id']);
+                                //echo $val['fav_tweet'].'/';
+				// $fav=check_fav($val['id']);
+                                $fav=$val['fav_tweet'];
 				if($fav == 0)
 					{
 					?>
@@ -330,7 +339,8 @@ $('[id^="myvideo_big_thumb_t_"]').click(function(){
 });
   $('[id^="myvideo_big_thumb_t_"]').trigger('click');
 });
-</script>                             
+</script>  
+
 <?php 
 	}
 ?>                           

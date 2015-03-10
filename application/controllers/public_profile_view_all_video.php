@@ -70,7 +70,7 @@ class Public_profile_view_all_video extends Base_controller
                                         'js/production/my_prayer_partner.js',
                                         'js/production/my_message.js',
 										'js/production/tweet_utilities.js',
-                                        'js/jquery.fancybox.js'
+                                       // 'js/jquery.fancybox.js'
                                         ));
                                         
           //  parent::_add_css_arr( array('css/jquery-ui-1.8.2.custom.css',

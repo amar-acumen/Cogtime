@@ -135,7 +135,8 @@ class My_ring_model extends Base_model
 	
 	public function get_by_id($id) 
     {
-		$sql = sprintf('SELECT * FROM '.$this->db->RING.'  where id = %s',  $id);
+		//$sql = sprintf('SELECT * FROM '.$this->db->RING.'  where id = %s',  $id);
+		$sql = "SELECT * FROM ".$this->db->RING."  where id = '".$id."'"; 
 		$query = $this->db->query($sql); #echo $this->db->last_query(); exit;
 		$result_arr = $query->result_array();
 		#pr($result_arr[0]);
@@ -342,15 +343,20 @@ class My_ring_model extends Base_model
 	
 	public function delete_by_id($id) {
 	
-	     $sql = sprintf( 'DELETE FROM '.$this->db->RING.' WHERE id=%s', $id );
+	     //$sql = sprintf( 'DELETE FROM '.$this->db->RING.' WHERE id=%s', $id );
+		 $sql = "DELETE FROM ".$this->db->RING." WHERE id='".$id."'";
 		 $this->db->query($sql);
-		 $sql = sprintf( 'DELETE FROM '.$this->db->RING_INV_USER.' WHERE i_ring_id=%s', $id );
+		 //$sql = sprintf( 'DELETE FROM '.$this->db->RING_INV_USER.' WHERE i_ring_id=%s', $id );
+		 $sql = "DELETE FROM ".$this->db->RING_INV_USER." WHERE i_ring_id='".$id."'";
 		 $this->db->query($sql);
-		 $sql = sprintf( 'DELETE FROM '.$this->db->USER_RING_POST.' WHERE i_ring_id=%s', $id );
+		 //$sql = sprintf( 'DELETE FROM '.$this->db->USER_RING_POST.' WHERE i_ring_id=%s', $id );
+		 $sql = "DELETE FROM ".$this->db->USER_RING_POST." WHERE i_ring_id='".$id."'";
 		 $this->db->query($sql);
-		 $sql = sprintf( 'DELETE FROM '.$this->db->USER_RING_POST_COMMENTS.' WHERE i_ring_id=%s', $id );
+		 //$sql = sprintf( 'DELETE FROM '.$this->db->USER_RING_POST_COMMENTS.' WHERE i_ring_id=%s', $id );
+		 $sql = "DELETE FROM ".$this->db->USER_RING_POST_COMMENTS." WHERE i_ring_post_id='".$id."'";
 		 $this->db->query($sql);
-		 $sql = sprintf( 'DELETE FROM '.$this->db->USER_RING_POST_LIKE.' WHERE i_ring_id=%s', $id );
+		 //$sql = sprintf( 'DELETE FROM '.$this->db->USER_RING_POST_LIKE.' WHERE i_ring_id=%s', $id );
+		 $sql = "DELETE FROM ".$this->db->USER_RING_POST_LIKE." WHERE i_ring_post_id='".$id."'";
 		 $this->db->query($sql);
 		#echo $this->db->last_query(); exit;
 	}
@@ -358,19 +364,19 @@ class My_ring_model extends Base_model
 	public function leave_ring($id) {
 	
 	     $inv_id	 = intval(decrypt($this->session->userdata('user_id')));
-		 $sql = sprintf( 'DELETE FROM '.$this->db->RING_INV_USER.' WHERE i_ring_id=%s AND i_invited_id=%s', $id,$inv_id );
+		 //$sql = sprintf( 'DELETE FROM '.$this->db->RING_INV_USER.' WHERE i_ring_id=%s AND i_invited_id=%s', $id,$inv_id );
+		 $sql = "DELETE FROM ".$this->db->RING_INV_USER." WHERE i_ring_id='".$id."' AND i_invited_id='".$inv_id."'";
 		 $this->db->query($sql);
 		 
-		#echo $this->db->last_query(); exit;
+		//echo $this->db->last_query(); exit;
 	}
 	
 	
 	public function change_status($status ,$id) {
 		
 	  if($status !='' && $id !=''){	
-		  $sql = sprintf( "UPDATE {$this->db->RING} SET `i_isenabled` = '%s'
-						   WHERE `id` ='%s'"
-					  , $status, $id );
+		  //$sql = sprintf( "UPDATE {$this->db->RING} SET `i_isenabled` = '%s' WHERE `id` ='%s'" , $status, $id );
+		  $sql = "UPDATE {$this->db->RING} SET `i_isenabled` = '".$status."' WHERE `id` ='".$id."'";
 		  $this->db->query($sql);// echo $this->db->last_query();exit;
 		  return true;
 	  }
@@ -936,8 +942,7 @@ class My_ring_model extends Base_model
 								   r.i_sub_category_id, 
 								 rp.i_user_id as post_owner_user_id,
 								 c.s_category_name AS s_category_name , 
-								 CONCAT(u.s_first_name,' ',u.s_last_name) AS owner_name,
-								 ,u.s_profile_photo,u.e_gender,
+								 CONCAT(u.s_first_name,' ',u.s_last_name) AS owner_name,u.s_profile_photo,u.e_gender,
 								 '0' AS post,
 								 '0' AS cmt,
 								 '0' AS lik,
