@@ -17,13 +17,17 @@ pr($people_you_may_know);
  	
  ?>									<?php 
 									//$vals=array_slice($val,'0','2');
-									
+									 $logged_user_id = intval(decrypt($this->session->userdata('user_id')));
 									for($i=0;$i<3;$i++)
 									{
 										$k = $people_you_may_know[$i];
 										$profile_link =get_profile_url( $k['user_id'] , my_url($k['name']) );
 										$img = get_profile_image_of_user('thumb',$k['s_profile_photo'],$k['e_gender']);
-										
+										/*********************already friend***************************/
+                                                           $fr = "SELECT COUNT(*) AS check_count FROM cg_user_contacts WHERE i_requester_id ='".$logged_user_id."'  AND i_accepter_id = '".$k['user_id']."' AND s_status = 'pending' ";
+                                                                echo $result1['check_count']  = $this->db->query($fr)->result_array();
+              
+                                                                                   /****************************************************/
 									?>
 									    <div class="project_box">
                                                 <a href="javascript:void(0);"><img src="<?=$img?>" alt="" class="pro_photo3" /></a>
