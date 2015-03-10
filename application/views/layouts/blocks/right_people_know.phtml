@@ -10,7 +10,7 @@
                                     <div class="content" id="switchdiv022" style="display:none;">
 									<?php 
  //$friends=get_friends_by_id($_SESSION['user_id']);
-pr($people_you_may_know); 
+//pr($people_you_may_know); 
 
  if($people_you_may_know)
  {
@@ -24,8 +24,9 @@ pr($people_you_may_know);
 										$profile_link =get_profile_url( $k['user_id'] , my_url($k['name']) );
 										$img = get_profile_image_of_user('thumb',$k['s_profile_photo'],$k['e_gender']);
 										/*********************already friend***************************/
-                                                           $fr = "SELECT COUNT(*) AS check_count FROM cg_user_contacts WHERE i_requester_id ='".$logged_user_id."'  AND i_accepter_id = '".$k['user_id']."' AND s_status = 'pending' ";
-                                                                echo $result1['check_count']  = $this->db->query($fr)->result_array();
+                                                         echo  $fr = "SELECT COUNT(*) AS check_count FROM cg_user_contacts WHERE i_requester_id ='".$logged_user_id."'  AND i_accepter_id = '".$k['user_id']."' AND s_status = 'pending' ";
+                                                                 $result1  = $this->db->query($fr)->result_array();
+                                                                 pr($result1);
               
                                                                                    /****************************************************/
 									?>
