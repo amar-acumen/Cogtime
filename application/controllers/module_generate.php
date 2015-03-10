@@ -215,7 +215,9 @@ class Module_generate extends CI_Controller {
                     'js/frontend/logged/holy_place/intercession.js',
                     'js/frontend/logged/my_videos.js',
                     'js/frontend/logged/organize_my_videos.js',
-                    'js/frontend/logged/tweets/tweet-photo-upload.js'
+                    'js/frontend/logged/tweets/tweet-photo-upload.js',
+                    'js/frontend/logged/rings/ring_helper.js',
+                    'js/frontend/logged/tweets/tweet-prayerwall.js'
                   //  'js/jquery.hoverIntent.js',
                   //  'js/frontend/utils.js'
                 );
