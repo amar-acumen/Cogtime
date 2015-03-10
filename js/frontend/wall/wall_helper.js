@@ -15,6 +15,7 @@ function show_post_comment_box(i_newsfeed_id)
     }
 }
 
+
 var ajax_comment_post = null;	
 function post_comment(id) 
 {
