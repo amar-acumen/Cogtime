@@ -32,9 +32,8 @@ function processRequest(url_parts,res,cnt)
 									}
 									else
 									{
-										res.writeHead(200, {'Content-Type': 'text/plain'});
-										res.end("setUpdateStatus('check');");
-										/*var nonZeroFound = false;
+										
+										var nonZeroFound = false;
 										for(var i=0;i<rows.length;i++)
 										{
 											if(rows[i].countrow*1>0 
@@ -60,7 +59,7 @@ function processRequest(url_parts,res,cnt)
 											setTimeout(function(){
 												processRequest(url_parts,res,cnt);
 											},1000);
-										}*/
+										}
 									}
 								});
 		}
