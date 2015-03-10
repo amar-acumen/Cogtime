@@ -24,6 +24,7 @@ class Holy_place_model extends Base_model
 		//echo $sql;exit; 		
 		
         $res = $this->db->query($sql)->result_array();
+		pr($res,1);
         return $res;
 	}
 	
