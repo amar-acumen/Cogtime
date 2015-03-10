@@ -27,11 +27,11 @@ foreach ($blog_post_arr as $blogpostval) {
                 <?php
                  }else{
                      ?>
-              <li> Comments (<?php echo $blogpostval->no_of_comments ?>)</li> 
+                <li><span><a href="javascript:void(0);"> Comments (<?php echo $blogpostval->no_of_comments ?>)</a></span></li> 
                          <?php
                  }
                 ?>
-                <li> <span><a href="javascript:void(0);" >Comment</a></span></li>
+                <li class="open_bg"> <span><a href="javascript:void(0);" >Comment</a></span></li>
             </ul>
             <ul class="right-side" style="width:auto;">
 
