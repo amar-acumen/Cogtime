@@ -419,6 +419,7 @@ class Base_controller extends CI_Controller {
         $objclass = $router->fetch_class();
         $objmethod = $router->fetch_method();
 
+
         $default_js_arr = array(
             'js/production/jquery-1.7.2.js' => 'header',
             //'js/jquery.js' => 'header', // causing conflict with block ui
