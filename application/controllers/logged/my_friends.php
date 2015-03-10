@@ -1022,7 +1022,7 @@ class My_friends extends Base_controller
             $info['s_status']    =    'pending' ; 
 			
 			$is_exists = $this->contacts_model->friend_request_already_sent($info['i_requester_id'], $info['i_accepter_id']);
-			
+			echo $is_exists; die();
 			if($is_exists){
              	$_ret_id = 1;
 			}else
