@@ -20,8 +20,18 @@
                                     
                                 <div class="my-blog-cmt"> 
                                			<ul class="left-side">
-                                                <li class="first"><span><a href="javascript:void(0);" onclick="show_comments('<?php echo $blogpostval->id?>')">Comments (<span class="noOfCmnts_<?=$blogpostval->id?>"><?php echo $blogpostval->no_of_comments?></span>)</a></span></li> 
-                                                <li> <span><a href="javascript:void(0);" >Comment</a></span></li>
+                                                  <?php 
+                 if($blogpostval->no_of_comments != 0){
+                 ?>  
+                                                <li class="first open_bg"><span><a href="javascript:void(0);" onclick="show_comments('<?php echo $blogpostval->id?>')">Comments (<span class="noOfCmnts_<?=$blogpostval->id?>"><?php echo $blogpostval->no_of_comments?></span>)</a></span></li>
+                                                <?php
+                 }else{
+                     ?>
+                <li><span><a href="javascript:void(0);"> Comments (<?php echo $blogpostval->no_of_comments ?>)</a></span></li> 
+                         <?php
+                 }
+                ?>
+                                                <li class="open_bg"> <span><a href="javascript:void(0);" >Comment</a></span></li>
 												<?php if($logged_id != $blogpostval->i_user_id): ?>
 												<li> <span><a href="javascript:void(0);" >Report Abuse</a></span></li>
 												<?php endif; ?>
@@ -145,7 +155,7 @@
 
                             </div>
                                 <script type="text/javascript">
-								 	$('.left-side li').click(function(){
+								 	$('.left-side open_bg').click(function(){
 										$('.new-wl > .comments-number').css('display','none');
 										$('.new-wl-right > .comments-number').css('display','none');
 										var index=$(this).index();
