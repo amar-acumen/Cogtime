@@ -238,8 +238,9 @@ function showscroll()
 function scrollToGivenPosition(elementId)
 {
 alert(elementId);
-alert($(elementId).position().top);
-	var lastElementTop = ($(elementId).position().top)*1;
+alert(lastElementPosition);
+	var lastElementPosition = $(elementId).position();
+	var lastElementTop = (lastElementPosition.top)*1;
 	
 	$("#table_content").scrollTop(lastElementTop);
 }
