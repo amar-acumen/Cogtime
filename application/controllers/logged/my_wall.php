@@ -64,7 +64,7 @@ class My_wall extends Base_controller {
                 'js/ajaxupload.js',
                 'js/frontend/wall/wall_photo_upload.js',
                 'js/frontend/wall/wall_helper.js',
-                //'js/frontend/logged/tweets/tweet_utilities.js',
+                'js/frontend/logged/tweets/tweet_utilities.js',
                     /* 'chat/js/chat.js' */
             ));
 
@@ -80,8 +80,8 @@ class My_wall extends Base_controller {
 			/**********************************************/
             $data['page_view_type'] = 'myaccount';
             $this->load->model('users_model');
-            $arr_profile_info = $this->users_model->fetch_this($i_profile_id);
-            $data['arr_profile_info'] = $arr_profile_info;
+            //$arr_profile_info = $this->users_model->fetch_this($i_profile_id);
+            //$data['arr_profile_info'] = $arr_profile_info;
 
             #### FOR THE FIRST LOGIN ONLY after registration 
             $data['first_login'] = $this->session->userdata('first_login');

@@ -31,52 +31,52 @@ include(APPPATH . "views/layouts/nav.phtml");
                         </div>
                         <div id="profile_info_div" class="shade_box_01 frm_box shade_box_blue" style="padding-bottom:17px;">
                             <div class="lable01">Title:</div>  
-                            <div class="field01"><?= $arr_profile_info['e_title'] ?></div> 
+                            <div class="field01"><?= $arr_profile_info_for_my_profile['e_title'] ?></div> 
                             <div class="clr"></div>
                             <div class="lable01">First Name:</div>  
-                            <div class="field01"><?= $arr_profile_info['s_first_name'] ?> </div> 
+                            <div class="field01"><?= $arr_profile_info_for_my_profile['s_first_name'] ?> </div> 
                             <div class="clr"></div>
                             <div class="lable01">Last Name:</div>  
-                            <div class="field01"><?= $arr_profile_info['s_last_name'] ?></div> 
+                            <div class="field01"><?= $arr_profile_info_for_my_profile['s_last_name'] ?></div> 
                             <div class="clr"></div>
                             <div class="lable01">Chat Name:</div>  
-                            <div class="field01"><?= $arr_profile_info['s_chat_display_name'] ?></div> 
+                            <div class="field01"><?= $arr_profile_info_for_my_profile['s_chat_display_name'] ?></div> 
                             <div class="clr"></div>
                             <div class="clr"></div>
                             <div class="lable01">Country:</div>  
-                            <div class="field01"><?= get_countryname($arr_profile_info['i_country_id']) ?></div> 
+                            <div class="field01"><?= get_countryname($arr_profile_info_for_my_profile['i_country_id']) ?></div> 
                             <div class="clr"></div>
                             <div class="lable01">State:</div>  
-                            <div class="field01"><?= get_statename($arr_profile_info['i_state_id']) ?></div> 
+                            <div class="field01"><?= get_statename($arr_profile_info_for_my_profile['i_state_id']) ?></div> 
                             <div class="clr"></div>
                             <div class="lable01">City:</div>  
-                            <div class="field01"><?= get_cityname($arr_profile_info['i_city_id']) ?></div> 
+                            <div class="field01"><?= get_cityname($arr_profile_info_for_my_profile['i_city_id']) ?></div> 
                             <div class="clr"></div>
 
                             <div class="clr"></div>
                             <div class="lable01">Gender:</div>  
-                            <div class="field01"><?= $arr_profile_info['s_gender'] ?></div> 
+                            <div class="field01"><?= $arr_profile_info_for_my_profile['s_gender'] ?></div> 
                             <div class="clr"></div>
                             <div class="lable01">Timezone:</div>  
                             <div class="field01">
-							<?php if($arr_profile_info['s_timezone_text'] == '')
+							<?php if($arr_profile_info_for_my_profile['s_timezone_text'] == '')
 								{
-								echo get_time_zone_by_value($arr_profile_info['s_time']);
+								echo get_time_zone_by_value($arr_profile_info_for_my_profile['s_time']);
 								}							 
 								else
 								{
-								echo $arr_profile_info['s_timezone_text'];
+								echo $arr_profile_info_for_my_profile['s_timezone_text'];
 								}
 ?></div> 
                             <div class="clr"></div>
                             <div class="lable01">Date of Birth:</div>  
                             <div class="field01">
                                 <?php
-                                //echo $arr_profile_info['dt_dob'] ;
-                                if ($arr_profile_info['dt_dob'] == '0000-00-00') {
+                                //echo $arr_profile_info_for_my_profile['dt_dob'] ;
+                                if ($arr_profile_info_for_my_profile['dt_dob'] == '0000-00-00') {
                                     echo "";
                                 } else {
-                                    echo getShortDate($arr_profile_info['dt_dob'], '1');
+                                    echo getShortDate($arr_profile_info_for_my_profile['dt_dob'], '1');
                                 }
                                 ?>
                             </div> <!--- Arif---->
@@ -86,20 +86,20 @@ include(APPPATH . "views/layouts/nav.phtml");
                               <div class="clr"></div>
                              */ ?>
                             <div class="lable01">Want to be Prayer Partner:</div>  
-                            <div class="field01"><?= $arr_profile_info['s_want_prayer_partner'] ?></div> 
+                            <div class="field01"><?= $arr_profile_info_for_my_profile['s_want_prayer_partner'] ?></div> 
                             <div class="clr"></div>
                             <div class="lable01">Want to be Net Pal:</div>  
-                            <div class="field01"><?= $arr_profile_info['s_want_net_pal'] ?></div> 
+                            <div class="field01"><?= $arr_profile_info_for_my_profile['s_want_net_pal'] ?></div> 
                             <div class="clr"></div>
                             <div class="lable01">My Website:</div>  
-                            <div class="field01"><a  href="javascript:void(0);" class="blue_link"><?= $arr_profile_info['s_website'] ?></a> </div> 
+                            <div class="field01"><a  href="javascript:void(0);" class="blue_link"><?= $arr_profile_info_for_my_profile['s_website'] ?></a> </div> 
                             <div class="clr"></div>
 
                             <?php
-                            //pr($arr_profile_info);
-                            $p_url = get_profile_url($arr_profile_info['id'], $arr_profile_info['s_profile_name']); ?>
+                            //pr($arr_profile_info_for_my_profile);
+                            $p_url = get_profile_url($arr_profile_info_for_my_profile['id'], $arr_profile_info_for_my_profile['s_profile_name']); ?>
                             <div class="lable01">My Profile URL:</div>  
-                            <div class="field01"><a  href="<?= $p_url ?>" class="blue_link"><?= $p_url ?><?php /* ?>www.xtiannetwork.com/<?=$arr_profile_info['s_profile_url_suffix']?><?php */ ?></a> </div> 
+                            <div class="field01"><a  href="<?= $p_url ?>" class="blue_link"><?= $p_url ?><?php /* ?>www.xtiannetwork.com/<?=$arr_profile_info_for_my_profile['s_profile_url_suffix']?><?php */ ?></a> </div> 
 
                             <div class="clr"></div>
 
@@ -111,26 +111,26 @@ include(APPPATH . "views/layouts/nav.phtml");
 
                             <div id="basic_info_div" class="shade_box_01 frm_box shade_box_blue" style="padding-bottom:17px;">
                                 <div class="lable01">Languages I Speak:</div>  
-                                <div class="field01"><?= $arr_profile_info['s_languages'] ?></div>
+                                <div class="field01"><?= $arr_profile_info_for_my_profile['s_languages'] ?></div>
 
                                 <div class="clr"></div>
                                 <div class="lable01">About Me:</div>  
-                                <div class="field01"><?= nl2br($arr_profile_info['s_about_me']) ?></div> 
+                                <div class="field01"><?= nl2br($arr_profile_info_for_my_profile['s_about_me']) ?></div> 
                                 <div class="clr"></div>
 
                                 <p class="lable01" style="font-weight: bold; font-size: 12px;">Church Details</p>
                                 <div class="clr"></div>
                                 <div class="lable01">Church Name:</div>  
-                                <div class="field01"><?= $arr_profile_info['s_church_name'] ?></div> 
+                                <div class="field01"><?= $arr_profile_info_for_my_profile['s_church_name'] ?></div> 
                                 <div class="clr"></div>
                                 <div class="lable01">Location:</div>  
-                                <div class="field01"><?= $arr_profile_info['s_church_location'] ?></div> 
+                                <div class="field01"><?= $arr_profile_info_for_my_profile['s_church_location'] ?></div> 
                                 <div class="clr"></div>
                                 <div class="lable01">Phone:</div>  
-                                <div class="field01"><?= $arr_profile_info['s_church_phone'] ?></div> 
+                                <div class="field01"><?= $arr_profile_info_for_my_profile['s_church_phone'] ?></div> 
                                 <div class="clr"></div>
                                 <div class="lable01">Denomination:</div>  
-                                <div class="field01"><?= $arr_profile_info['s_name'] ?></div> 
+                                <div class="field01"><?= $arr_profile_info_for_my_profile['s_name'] ?></div> 
                                 <div class="clr"></div>
                                 <!--<div class="lable01">Profile Photo:</div>  
                                 <div class="field01"><a href="javascript:void(0);" onclick="showDiv('2')" class="blue_link"><strong>[change]</strong></a></div> 
@@ -155,9 +155,9 @@ include(APPPATH . "views/layouts/nav.phtml");
                                 <div class="field01">
                                     <select name="txt_title" id="txt_title" style="width:60px;">
                                         <option value="-1" >---</option>
-                                        <option value="Mr" <?php echo $selected = ($arr_profile_info["e_title"] == 'Mr') ? 'selected' : '' ?>>Mr.</option>
-                                        <option value="Mrs" <?php echo $selected = ($arr_profile_info["e_title"] == 'Mrs') ? 'selected' : '' ?>>Mrs.</option>
-                                        <option value="Ms" <?php echo $selected = ($arr_profile_info["e_title"] == 'Ms') ? 'selected' : '' ?>>Ms.</option>
+                                        <option value="Mr" <?php echo $selected = ($arr_profile_info_for_my_profile["e_title"] == 'Mr') ? 'selected' : '' ?>>Mr.</option>
+                                        <option value="Mrs" <?php echo $selected = ($arr_profile_info_for_my_profile["e_title"] == 'Mrs') ? 'selected' : '' ?>>Mrs.</option>
+                                        <option value="Ms" <?php echo $selected = ($arr_profile_info_for_my_profile["e_title"] == 'Ms') ? 'selected' : '' ?>>Ms.</option>
                                     </select>
 
                                     <script type="text/javascript">
@@ -173,7 +173,7 @@ include(APPPATH . "views/layouts/nav.phtml");
 
                                 <div class="lable01">First Name:</div>  
                                 <div class="field01">
-                                    <input name="txt_fname" id="txt_fname" type="text" value="<?= isset($arr_profile_info["s_first_name"]) ? $arr_profile_info["s_first_name"] : '' ?>" />
+                                    <input name="txt_fname" id="txt_fname" type="text" value="<?= isset($arr_profile_info_for_my_profile["s_first_name"]) ? $arr_profile_info_for_my_profile["s_first_name"] : '' ?>" />
                                     <?php /* ?><?php echo form_error('txt_fname'); ?><?php */ ?>
                                     <div class="error-message" id="err_fname"></div>
                                 </div> 
@@ -181,7 +181,7 @@ include(APPPATH . "views/layouts/nav.phtml");
 
                                 <div class="lable01">Last Name:</div>  
                                 <div class="field01">
-                                    <input name="txt_lname" id="txt_lname" type="text" value="<?= isset($arr_profile_info["s_last_name"]) ? $arr_profile_info["s_last_name"] : '' ?>" />
+                                    <input name="txt_lname" id="txt_lname" type="text" value="<?= isset($arr_profile_info_for_my_profile["s_last_name"]) ? $arr_profile_info_for_my_profile["s_last_name"] : '' ?>" />
                                     <?php echo form_error('txt_lname'); ?>
                                     <div class="error-message" id="err_lname"></div>
                                 </div> 
@@ -191,7 +191,7 @@ include(APPPATH . "views/layouts/nav.phtml");
 
                                     <select name="txt_country" id="txt_country" style="width:150px; margin-bottom:6px;" onchange="showState(this.value);">
                                         <option value="-1">---</option>
-                                        <?= makeOptionCountryNew('', encrypt($arr_profile_info["i_country_id"])); ?>
+                                        <?= makeOptionCountryNew('', encrypt($arr_profile_info_for_my_profile["i_country_id"])); ?>
                                     </select>
                                     <?php echo form_error('txt_country'); ?>
                                     <div class="error-message" id="err_country"></div>
@@ -226,8 +226,8 @@ include(APPPATH . "views/layouts/nav.phtml");
 
                                     <select name="txt_gender" id="txt_gender" style="width: 70px;">
                                         <option value="-1">---</option>
-                                        <option value="M" <?php echo $selected = ($arr_profile_info["s_gender"] == 'Male') ? 'Selected' : ''; ?>>Male</option>
-                                        <option value="F" <?php echo $selected = ($arr_profile_info["s_gender"] == 'Female') ? 'Selected' : ''; ?>>Female</option>
+                                        <option value="M" <?php echo $selected = ($arr_profile_info_for_my_profile["s_gender"] == 'Male') ? 'Selected' : ''; ?>>Male</option>
+                                        <option value="F" <?php echo $selected = ($arr_profile_info_for_my_profile["s_gender"] == 'Female') ? 'Selected' : ''; ?>>Female</option>
                                     </select>
                                     <?php echo form_error('txt_gender'); ?>
                                     <div class="error-message" id="err_gender"></div>
@@ -239,8 +239,8 @@ include(APPPATH . "views/layouts/nav.phtml");
 
                                     <?php
                                     # getting day-month-yr extracted from db DOB...
-                                    if ($arr_profile_info['dt_dob'] != '0000-00-00') {
-                                        $DOB_TSTAMP = strtotime($arr_profile_info['dt_dob']);
+                                    if ($arr_profile_info_for_my_profile['dt_dob'] != '0000-00-00') {
+                                        $DOB_TSTAMP = strtotime($arr_profile_info_for_my_profile['dt_dob']);
                                         $DOB_DAY = date("j", $DOB_TSTAMP);
                                         $DOB_MONTH = date("n", $DOB_TSTAMP);
                                         $DOB_YR = date("Y", $DOB_TSTAMP);
@@ -271,7 +271,7 @@ include(APPPATH . "views/layouts/nav.phtml");
                                 <div class="field01">
 
                                     <?php
-                                    $IMG = base_url() . "uploads/user_profile_image/" . getThumbName($arr_profile_info['s_profile_photo'], 'thumb');
+                                    $IMG = base_url() . "uploads/user_profile_image/" . getThumbName($arr_profile_info_for_my_profile['s_profile_photo'], 'thumb');
                                     ?>
                                     <input name="txt_profile_pic" id="txt_profile_pic" type="file" size="25" />
 
@@ -281,11 +281,11 @@ include(APPPATH . "views/layouts/nav.phtml");
                                 </div> 
                                  <!------------------------------------------>
                                 <div class="prvimg">
-                                    <input type="hidden" value="<?= $arr_profile_info['id'] ?>" id="prf_id">
-                                    <div style="background:url(<?= get_profile_image_of_user('thumb',$arr_profile_info['s_profile_photo'],$arr_profile_info['e_gender']) ?>) no-repeat center;width:60px; height:60px;" title="member" class="pro_photo4 user_pro_image" ></div>
+                                    <input type="hidden" value="<?= $arr_profile_info_for_my_profile['id'] ?>" id="prf_id">
+                                    <div style="background:url(<?= get_profile_image_of_user('thumb',$arr_profile_info_for_my_profile['s_profile_photo'],$arr_profile_info_for_my_profile['e_gender']) ?>) no-repeat center;width:60px; height:60px;" title="member" class="pro_photo4 user_pro_image" ></div>
                                     
                                      <?php
-                                      if($arr_profile_info['s_profile_photo'] != ''){
+                                      if($arr_profile_info_for_my_profile['s_profile_photo'] != ''){
                                      ?>
                                       <a href="javascript:void(0)" onclick="show_dialog('image-delete');">Remove</a><?php } ?>
                                     
@@ -298,7 +298,7 @@ include(APPPATH . "views/layouts/nav.phtml");
                                     <select name="time_zone" id="time_zone" style="width:312px;" onchange="get_time_text()">
                                         <option value="-1">Select</option>
 
-                                        <?= makeOptionTimezones($arr_profile_info['s_time'],$arr_profile_info['s_timezone_text']) ?>
+                                        <?= makeOptionTimezones($arr_profile_info_for_my_profile['s_time'],$arr_profile_info_for_my_profile['s_timezone_text']) ?>
 
                                     </select>
 
@@ -322,8 +322,8 @@ include(APPPATH . "views/layouts/nav.phtml");
                                 <div class="lable01">Want to be Prayer Partner:</div>  
                                 <div class="field01">
                                     <select name="txt_prayer_ptnr" id="txt_prayer_ptnr" style="width:55px;">
-                                        <option value="Y" <?php echo $selected = ($arr_profile_info["s_want_prayer_partner"] == 'Yes') ? 'selected' : '' ?>>Yes</option>
-                                        <option value="N" <?php echo $selected = ($arr_profile_info["s_want_prayer_partner"] == 'No') ? 'selected' : '' ?>>No</option>
+                                        <option value="Y" <?php echo $selected = ($arr_profile_info_for_my_profile["s_want_prayer_partner"] == 'Yes') ? 'selected' : '' ?>>Yes</option>
+                                        <option value="N" <?php echo $selected = ($arr_profile_info_for_my_profile["s_want_prayer_partner"] == 'No') ? 'selected' : '' ?>>No</option>
                                     </select>
 
                                 </div> 
@@ -331,8 +331,8 @@ include(APPPATH . "views/layouts/nav.phtml");
                                 <div class="lable01">Want to be Net Pal:</div>  
                                 <div class="field01">
                                     <select name="txt_net_pal" id="txt_net_pal" style="width:55px;">
-                                        <option value="Y" <?php echo $selected = ($arr_profile_info["s_want_net_pal"] == 'Yes') ? 'selected' : '' ?>>Yes</option>
-                                        <option value="N" <?php echo $selected = ($arr_profile_info["s_want_net_pal"] == 'No') ? 'selected' : '' ?>>No</option>
+                                        <option value="Y" <?php echo $selected = ($arr_profile_info_for_my_profile["s_want_net_pal"] == 'Yes') ? 'selected' : '' ?>>Yes</option>
+                                        <option value="N" <?php echo $selected = ($arr_profile_info_for_my_profile["s_want_net_pal"] == 'No') ? 'selected' : '' ?>>No</option>
                                     </select>
 
                                 </div>
@@ -340,7 +340,7 @@ include(APPPATH . "views/layouts/nav.phtml");
 
                                 <div class="lable01">My Website:</div>  
                                 <div class="field01">
-                                    <input name="txt_website" id="txt_website" type="text"  value="<?= $arr_profile_info['s_website'] ?>"/>
+                                    <input name="txt_website" id="txt_website" type="text"  value="<?= $arr_profile_info_for_my_profile['s_website'] ?>"/>
                                     <?php echo form_error('txt_website'); ?>
                                     <div class="error-message" id="err_website"></div >
                                 </div> 
@@ -348,7 +348,7 @@ include(APPPATH . "views/layouts/nav.phtml");
 
                                 <div class="lable01">My Profile URL:</div>  
                                 <div class="field01">www.xtiannetwork.com/ &nbsp;  
-                                    <input name="txt_profile_url" id="txt_profile_url" value="<?= $arr_profile_info['s_profile_url_suffix'] ?>" type="text"  style="width:113px;"/>
+                                    <input name="txt_profile_url" id="txt_profile_url" value="<?= $arr_profile_info_for_my_profile['s_profile_url_suffix'] ?>" type="text"  style="width:113px;"/>
                                     <?php echo form_error('txt_profile_url'); ?>
                                     <div class="error-message" id="err_profile_url"></div >
                                 </div> 
@@ -374,16 +374,16 @@ include(APPPATH . "views/layouts/nav.phtml");
                             <div class="shade_box_01 frm_box shade_box_blue" style="padding-bottom:17px;">
                                 <div class="lable01">Languages I Speak:</div>  
                                 <div class="field01">
-                                    <? /* <input name="txt_lang" id="txt_lang" type="text" value="<?=isset($arr_profile_info["s_languages"])? $arr_profile_info["s_languages"]: '' ?>" /> */ ?>
+                                    <? /* <input name="txt_lang" id="txt_lang" type="text" value="<?=isset($arr_profile_info_for_my_profile["s_languages"])? $arr_profile_info_for_my_profile["s_languages"]: '' ?>" /> */ ?>
                                     <select name="txt_lang" id="txt_lang" style="width:212px;">
                                         <option value="">---</option>
                                         <?php
-                                        if ($arr_profile_info['s_languages'] == '') {
+                                        if ($arr_profile_info_for_my_profile['s_languages'] == '') {
                                             ?>
                                             <?php
                                             echo makeNetpalLanguage();
                                         } else {
-                                            echo makeNetpalLanguage($arr_profile_info['s_languages']);
+                                            echo makeNetpalLanguage($arr_profile_info_for_my_profile['s_languages']);
                                         }
                                         ?>
                                     </select>
@@ -392,7 +392,7 @@ include(APPPATH . "views/layouts/nav.phtml");
                                 <div class="clr"></div>
                                 <div class="lable01">About Me:</div>  
                                 <div class="field01">
-                                    <textarea style="height: 60px;" rows="" cols="" name="txt_about" id="txt_about"><?= isset($arr_profile_info["s_about_me"]) ? get_unformatted_string_edit(br2nl($arr_profile_info["s_about_me"])) : '' ?></textarea>
+                                    <textarea style="height: 60px;" rows="" cols="" name="txt_about" id="txt_about"><?= isset($arr_profile_info_for_my_profile["s_about_me"]) ? get_unformatted_string_edit(br2nl($arr_profile_info_for_my_profile["s_about_me"])) : '' ?></textarea>
                                     <?php echo form_error('txt_about'); ?>
                                 </div> 
                                 <div class="clr"></div>
@@ -402,14 +402,14 @@ include(APPPATH . "views/layouts/nav.phtml");
 
                                 <div class="lable01">Church Name:</div>  
                                 <div class="field01">
-                                    <input name="txt_cname" id="txt_cname" type="text" value="<?= isset($arr_profile_info["s_church_name"]) ? $arr_profile_info["s_church_name"] : '' ?>" />
+                                    <input name="txt_cname" id="txt_cname" type="text" value="<?= isset($arr_profile_info_for_my_profile["s_church_name"]) ? $arr_profile_info_for_my_profile["s_church_name"] : '' ?>" />
                                     <?php echo form_error('txt_cname'); ?>
                                 </div> 
                                 <div class="clr"></div>
 
                                 <div class="lable01">Address:</div>  
                                 <div class="field01">
-                                    <input name="txt_caddress" id="txt_caddress" type="text" value="<?= isset($arr_profile_info["s_church_address"]) ? $arr_profile_info["s_church_address"] : '' ?>" />
+                                    <input name="txt_caddress" id="txt_caddress" type="text" value="<?= isset($arr_profile_info_for_my_profile["s_church_address"]) ? $arr_profile_info_for_my_profile["s_church_address"] : '' ?>" />
 
                                     <?php echo form_error('txt_caddress'); ?>
                                 </div> 
@@ -420,7 +420,7 @@ include(APPPATH . "views/layouts/nav.phtml");
 
                                     <select name="txt_ccountry" id="txt_ccountry" style="width:238px; margin-bottom:6px;" onchange="showChurchState(this.value);">
                                         <option value="-1">---</option>
-                                        <?= makeOptionCountryNew('', encrypt($arr_profile_info["i_church_country_id"])); ?>
+                                        <?= makeOptionCountryNew('', encrypt($arr_profile_info_for_my_profile["i_church_country_id"])); ?>
 
                                     </select>
                                     <?php echo form_error('txt_ccountry'); ?>
@@ -454,28 +454,28 @@ include(APPPATH . "views/layouts/nav.phtml");
                                 <?php /* ?> 
                                   <div class="lable01">City:</div>
                                   <div class="field01">
-                                  <input name="txt_ccity" id="txt_ccity" type="text" value="<?=isset($arr_profile_info["s_church_city"])? $arr_profile_info["s_church_city"]: '' ?>" />
+                                  <input name="txt_ccity" id="txt_ccity" type="text" value="<?=isset($arr_profile_info_for_my_profile["s_church_city"])? $arr_profile_info_for_my_profile["s_church_city"]: '' ?>" />
                                   <?php echo form_error('txt_ccity'); ?>
                                   </div>
                                   <div class="clr"></div>
 
                                   <div class="lable01">State:</div>
                                   <div class="field01">
-                                  <input name="txt_cstate"  id="txt_cstate" type="text" value="<?=isset($arr_profile_info["s_church_state"])? $arr_profile_info["s_church_state"]: '' ?>" />
+                                  <input name="txt_cstate"  id="txt_cstate" type="text" value="<?=isset($arr_profile_info_for_my_profile["s_church_state"])? $arr_profile_info_for_my_profile["s_church_state"]: '' ?>" />
                                   <?php echo form_error('txt_cstate'); ?>
                                   </div> <?php */ ?>
                                 <div class="clr"></div>
 
                                 <div class="lable01">Postcode:</div>  
                                 <div class="field01">
-                                    <input name="txt_cpostcode" id="txt_cpostcode" type="text" value="<?= isset($arr_profile_info["s_church_postcode"]) ? $arr_profile_info["s_church_postcode"] : '' ?>" />
+                                    <input name="txt_cpostcode" id="txt_cpostcode" type="text" value="<?= isset($arr_profile_info_for_my_profile["s_church_postcode"]) ? $arr_profile_info_for_my_profile["s_church_postcode"] : '' ?>" />
                                     <?php echo form_error('txt_cpostcode'); ?>
                                 </div> 
                                 <div class="clr"></div>
 
                                 <div class="lable01">Phone:</div>  
                                 <div class="field01">
-                                    <input name="txt_cphone" id="txt_cphone" type="text"  value="<?= isset($arr_profile_info["s_church_phone"]) ? $arr_profile_info["s_church_phone"] : '' ?>"/>
+                                    <input name="txt_cphone" id="txt_cphone" type="text"  value="<?= isset($arr_profile_info_for_my_profile["s_church_phone"]) ? $arr_profile_info_for_my_profile["s_church_phone"] : '' ?>"/>
                                     <?php echo form_error('txt_cphone'); ?>
                                 </div> 
                                 <div class="clr"></div>
@@ -484,7 +484,7 @@ include(APPPATH . "views/layouts/nav.phtml");
                                 <div class="field01">
                                     <select name="txt_denomination" id="txt_denomination" style="width:260px;">
                                         <option value="<?= encrypt(0) ?>">---</option>
-                                        <?= makeOptionDenomination(encrypt($arr_profile_info['i_id_denomination'])); ?>
+                                        <?= makeOptionDenomination(encrypt($arr_profile_info_for_my_profile['i_id_denomination'])); ?>
                                     </select>
 
 
@@ -526,14 +526,14 @@ include(APPPATH . "views/layouts/nav.phtml");
                         </div>
                         <div class="shade_box_01 frm_box shade_box_blue" style="padding-bottom:17px;">
                             <?php
-                            $count = count($arr_profile_info['skill_arr']);
+                            $count = count($arr_profile_info_for_my_profile['skill_arr']);
                             if ($count < 2)
                                 $count = 2;
 
                             for ($i = 0; $i < $count; $i++) :
                                 ?>
                                 <div class="lable01">Skill <?php echo $i + 1; ?>:</div>  
-                                <div class="field01"><?php echo isset($arr_profile_info['skill_arr'][$i]['s_name']) ? $arr_profile_info['skill_arr'][$i]['s_name'] : ''; ?></div> 
+                                <div class="field01"><?php echo isset($arr_profile_info_for_my_profile['skill_arr'][$i]['s_name']) ? $arr_profile_info_for_my_profile['skill_arr'][$i]['s_name'] : ''; ?></div> 
                                 <div class="clr"></div>
 
                                 <?php
@@ -553,7 +553,7 @@ include(APPPATH . "views/layouts/nav.phtml");
                                 for ($i = 0; $i < $count; $i++) :
                                     $close_div_val = $i + 1;
 
-                                    $db_skill_id = isset($arr_profile_info["skill_arr"][$i]["id"]) ? $arr_profile_info["skill_arr"][$i]['id'] : '0';
+                                    $db_skill_id = isset($arr_profile_info_for_my_profile["skill_arr"][$i]["id"]) ? $arr_profile_info_for_my_profile["skill_arr"][$i]['id'] : '0';
                                     ?>
                                     <!------------------------skill div----------------------------->
                                     <div id="<?php echo "skill_div_" . $close_div_val; ?>"> 
@@ -564,7 +564,7 @@ include(APPPATH . "views/layouts/nav.phtml");
                                         ?>
                                         <div class="lable01">Skill <?php echo $i + 1; ?>:</div>  
                                         <div class="field01">
-                                            <input name="txt_skill[]" type="text" style="width:230px;" value="<?php echo isset($arr_profile_info['skill_arr'][$i]['s_name']) ? $arr_profile_info['skill_arr'][$i]['s_name'] : ''; ?>" /> 
+                                            <input name="txt_skill[]" type="text" style="width:230px;" value="<?php echo isset($arr_profile_info_for_my_profile['skill_arr'][$i]['s_name']) ? $arr_profile_info_for_my_profile['skill_arr'][$i]['s_name'] : ''; ?>" /> 
                                         </div> 
                                         <div class="clr"></div>
                                         <input type="hidden" name="skill_db_id[]" id="dbId" value="<?php echo $db_skill_id; ?>" />
@@ -595,9 +595,9 @@ include(APPPATH . "views/layouts/nav.phtml");
                             </div>
 
                             <?php /* ?> //////////// NEW FIELD(S) [BEGIN] //////////// <?php */ ?>
-                            <input type="hidden" name="actual_skill_divs" id="actual_skill_divs" value="<?= count($arr_profile_info['skill_arr']) ?>" />
+                            <input type="hidden" name="actual_skill_divs" id="actual_skill_divs" value="<?= count($arr_profile_info_for_my_profile['skill_arr']) ?>" />
                             <input type="hidden" name="deleted_skill_ids" id="deleted_skill_divs" value="" />
-                            <input type="hidden" name="skill_div_id_order"  id="skill_div_id_order" value="<?= (count($arr_profile_info['skill_arr']) == 0) ? '2' : count($arr_profile_info['skill_arr']); ?>" />
+                            <input type="hidden" name="skill_div_id_order"  id="skill_div_id_order" value="<?= (count($arr_profile_info_for_my_profile['skill_arr']) == 0) ? '2' : count($arr_profile_info_for_my_profile['skill_arr']); ?>" />
                             <?php /* ?> //////////// NEW FIELD(S) [END] //////////// <?php */ ?>
                         </form>
                     </div>
