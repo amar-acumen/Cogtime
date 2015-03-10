@@ -1026,14 +1026,14 @@ class Events_model extends Base_model {
 					FROM cg_admin_user a, cg_events e
 					
 					WHERE a.i_status='1' AND a.e_disabled ='no' AND e.i_status = 1 AND e.i_host_id = a.id AND e.i_user_type = 2 AND e.dt_end_time >  NOW()
-					 ".$s_where." )
+					 ".mysql_real_escape_string($s_where)." )
 			     UNION
 				 
 				 (SELECT 
 					  e.id
 					  FROM cg_users u, cg_events e
 					  WHERE u.i_status='1' AND u.i_isdeleted ='1' AND e.i_status = 1 AND e.i_host_id = u.id AND e.i_user_type = 1 AND e.dt_end_time >  NOW()
-					  ".$s_where."
+					  ".mysql_real_escape_string($s_where)."
 				   )
 				 
 

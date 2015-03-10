@@ -36,19 +36,19 @@ class My_msg_outbox extends Base_controller {
             parent::_set_meta_keywords('');
 
 
-            parent::_add_js_arr(array('js/ddsmoothmenu.js',
+            parent::_add_js_arr(array(/*'js/ddsmoothmenu.js',
                 'js/switch.js', 'js/animate-collapse.js',
                 'js/lightbox.js', 'js/jquery.dd.js',
                 'js/stepcarousel.js',
-                'js/jquery.ui.datepicker.js',
-                'js/frontend/logged/message_box/my_outbox_message.js',
-                'js/frontend/logged/tweets/tweet_utilities.js',
+                'js/jquery.ui.datepicker.js',*/
+                'js/production/my_outbox_message.js',
+                'js/production/tweet_utilities.js',
             ));
 
             parent::_add_css_arr(array(
                 'css/jquery-ui-1.8.13.custom.css',
-                'css/jquery-ui-1.8.2.custom.css',
-                'css/dd.css'));
+                /*'css/jquery-ui-1.8.2.custom.css',
+                'css/dd.css'*/));
 
 
             /////////////////////////////////////////////
@@ -275,18 +275,18 @@ class My_msg_outbox extends Base_controller {
             parent::_set_meta_keywords('');
 
 
-            parent::_add_js_arr(array('js/ddsmoothmenu.js',
+            parent::_add_js_arr(array(/*'js/ddsmoothmenu.js',
                 'js/switch.js', 'js/animate-collapse.js',
                 'js/lightbox.js', 'js/jquery.dd.js', 'js/jquery-ui-1.8.2.custom.min.js',
                 'js/stepcarousel.js',
-                'js/jquery.ui.datepicker.js',
-                'js/frontend/logged/message_box/my_trash_message.js',
-                'js/frontend/logged/tweets/tweet_utilities.js',
+                'js/jquery.ui.datepicker.js',*/
+                'js/production/my_trash_message.js',
+                'js/production/tweet_utilities.js',
             ));
 
             parent::_add_css_arr(array(
-                'css/jquery-ui-1.8.13.custom.css', 'css/jquery-ui-1.8.2.custom.css',
-                'css/dd.css'));
+                'css/jquery-ui-1.8.13.custom.css'/*, 'css/jquery-ui-1.8.2.custom.css',
+                'css/dd.css'*/));
 
 
             /////////////////////////////////////////////

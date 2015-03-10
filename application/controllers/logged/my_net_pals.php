@@ -47,18 +47,18 @@ class My_net_pals extends Base_controller {
             parent::_set_meta_keywords('');
 
 
-            parent::_add_js_arr(array('js/ddsmoothmenu.js',
+            parent::_add_js_arr(array(/*'js/ddsmoothmenu.js',
                 'js/switch.js', 'js/animate-collapse.js',
                 'js/lightbox.js', 'js/jquery.dd.js', 'js/jquery-ui-1.8.2.custom.min.js',
                 'js/stepcarousel.js',
                 'js/jquery.form.js',
-                'js/jquery/JSON/json2.js',
-                'js/frontend/logged/tweets/tweet_utilities.js',
-                'js/frontend/logged/my_net_pals.js'
+                'js/jquery/JSON/json2.js',*/
+                'js/production/tweet_utilities.js',
+                'js/production/my_net_pals.js'
             ));
 
-            parent::_add_css_arr(array('css/jquery-ui-1.8.2.custom.css',
-                'css/dd.css'));
+//            parent::_add_css_arr(array('css/jquery-ui-1.8.2.custom.css',
+//                'css/dd.css'));
 
             $i_profile_id = intval(decrypt($this->session->userdata('user_id')));
             $data['page_view_type'] = 'myaccount';
@@ -293,19 +293,19 @@ class My_net_pals extends Base_controller {
         parent::_set_meta_keywords('');
 
 
-        parent::_add_js_arr(array('js/ddsmoothmenu.js',
+        parent::_add_js_arr(array(/*'js/ddsmoothmenu.js',
             'js/switch.js',
             'js/animate-collapse.js',
             'js/lightbox.js',
             'js/jquery.dd.js',
             'js/jquery-ui-1.8.2.custom.min.js',
-            'js/stepcarousel.js',
-            'js/frontend/logged/tweets/tweet_utilities.js',
-            'js/frontend/logged/my_net_pals.js'
+            'js/stepcarousel.js',*/
+            'js/production/tweet_utilities.js',
+            'js/production/my_net_pals.js'
         ));
 
-        parent::_add_css_arr(array('css/jquery-ui-1.8.2.custom.css',
-            'css/dd.css'));
+//        parent::_add_css_arr(array('css/jquery-ui-1.8.2.custom.css',
+//            'css/dd.css'));
 
         $i_profile_id = intval(decrypt($this->session->userdata('user_id')));
         //$total_user = $this->my_prayer_partner_model->get_prayerPartnerId_by_user_id($i_profile_id);
@@ -742,19 +742,19 @@ class My_net_pals extends Base_controller {
         parent::_set_meta_keywords('');
 
 
-        parent::_add_js_arr(array('js/ddsmoothmenu.js',
+        parent::_add_js_arr(array(/*'js/ddsmoothmenu.js',
             'js/switch.js',
             'js/animate-collapse.js',
             'js/lightbox.js',
             'js/jquery.dd.js',
             'js/jquery-ui-1.8.2.custom.min.js',
-            'js/stepcarousel.js',
-            'js/frontend/logged/tweets/tweet_utilities.js',
-            'js/frontend/logged/my_net_pals.js'
+            'js/stepcarousel.js',*/
+            'js/production/tweet_utilities.js',
+            'js/production/my_net_pals.js'
         ));
 
-        parent::_add_css_arr(array('css/jquery-ui-1.8.2.custom.css',
-            'css/dd.css'));
+//        parent::_add_css_arr(array('css/jquery-ui-1.8.2.custom.css',
+//            'css/dd.css'));
 
         $i_profile_id = intval(decrypt($this->session->userdata('user_id')));
         $arr_profile_info = $this->users_model->fetch_this($i_profile_id);
