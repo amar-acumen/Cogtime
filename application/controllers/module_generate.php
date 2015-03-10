@@ -133,7 +133,7 @@ class Module_generate extends CI_Controller {
                     'js/jquery.hoverIntent.minified.js',
                     'js/jquery.naviDropDown.1.0.js',
                     'js/church_login.js',
-                    'js/frontend/logged/holy_place/prayer_group.js',
+                    //'js/frontend/logged/holy_place/prayer_group.js',
                     'js/jquery/ui/jquery.ui.core.js',
                     'js/jquery.ui.datepicker.js',
                     'js/jquery.nicescroll.min.js',
@@ -217,7 +217,8 @@ class Module_generate extends CI_Controller {
                     'js/frontend/logged/organize_my_videos.js',
                     'js/frontend/logged/tweets/tweet-photo-upload.js',
                     'js/frontend/logged/rings/ring_helper.js',
-                    'js/frontend/logged/tweets/tweet-prayerwall.js'
+                    'js/frontend/logged/tweets/tweet-prayerwall.js',
+                    'js/frontend/logged/holy_place/prayer_group.js'
                   //  'js/jquery.hoverIntent.js',
                   //  'js/frontend/utils.js'
                 );
