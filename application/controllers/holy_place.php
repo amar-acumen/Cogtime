@@ -321,7 +321,7 @@ class Holy_place extends Base_controller
 		
 		$wh	= "";
 		$data['bible_data']	= $this->holy_place_model->get_bible($wh,$page,$this->pagination_per_page,'');
-		
+		pr($data['bible_data']);
 		
 		$data['pagination_per_page'] = $this->pagination_per_page;
 		//pr($result);
