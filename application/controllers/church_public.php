@@ -166,13 +166,13 @@ class Church_public extends Base_controller
 
                 $posted["txt_chat_display_name"] = trim($this->input->post("txt_chat_display_name"));
                 
-                 /**********Arif***************/
+               
                 $posted["day"]=trim($this->input->post("day"));
 			$posted["month"]=trim($this->input->post("month"));
 			$posted["year"]=trim($this->input->post("year"));
-                /***************************/
+             
        
-                /**************new chat name validation 10-12-2014*****************************/
+               
                 if($posted["txt_chat_display_name"] != '')
 				{
 				
@@ -184,7 +184,7 @@ class Church_public extends Base_controller
 
 				}
 				}
-                        /******************************************************/
+                       
                 $this->form_validation->set_message('required', "Please provide" . " %s");
                 $this->form_validation->set_message('valid_email', "must contain a valid email address.");
                 //$this->form_validation->set_message('matches', "* Password verification failed.");
@@ -203,11 +203,11 @@ class Church_public extends Base_controller
 
                 $this->form_validation->set_rules('txt_chat_display_name', 'txt_chat_display_name', 'trim|required|callback_check_availability|callback_check_void_space_chat_name');
                    
-                 /************************Arif***************************/
+               
             $this->form_validation->set_rules('day', 'Birth date', 'trim|required'); 
 			$this->form_validation->set_rules('month','Birth date', 'trim|required'); 
 			$this->form_validation->set_rules('year', 'Birth date', 'trim|required'); 
-                        /***************************************************/
+                       
                 if ($posted["txt_password"] == '') {
                     $data['error_password'] = "* Required Field.";
                 }
@@ -238,14 +238,14 @@ class Church_public extends Base_controller
                 if ($posted["title"] == '-1') {
                     $data['error_title'] = '* Required Field.';
                 }
-                  /**************Arif**************/
+                  
                  if($posted["day"] == '-1' || $posted["month"] == '-1' || $posted["year"] == '-1'){
                 $data['dob'] = "* Required Field.";
             }
            if((date("Y")-$posted["year"]) < 18){
                 $data['dob'] = "your age should be 18+ ";
             }
-                /******************************/
+               
                 if ($posted["s_language"] == '-1') {
                     $data['txt_lang'] = '* Required Field.';
                 }
@@ -440,9 +440,9 @@ class Church_public extends Base_controller
             //pr($data["captcha"]);
 
 
-            /*             * ******************* Generating recaptcha html ********************* */
+          
             $data['recaptcha_html'] = recaptcha_get_html($this->config->item('recaptcha_public_key'));
-            /*             * ******************************************************************** */
+         
             $c_id =  $_SESSION['current_church_id'];
             $data['church_arr'] =     $this->church_new_model->get_church_info($c_id);
             ### fetch private policy and terms and conditions
