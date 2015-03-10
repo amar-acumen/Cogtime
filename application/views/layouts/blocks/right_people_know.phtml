@@ -58,7 +58,7 @@
                                                 <a href="javascript:void(0);"><img src="<?=$img?>" alt="" class="pro_photo3" /></a>
                                                 <p class="grey-link"><a href="<?=$profile_link?>"><?=$name?></a></p>
                                          
-                                                <p><a href="javascript:void(0);" id="#invite_friend_(<?=$val['id']?>)" class="add-as-friend" onclick="invite_friend_('<?=encrypt($val['id'])?>')">[add as friend]</a></p>
+                                                <p><a href="javascript:void(0);" id="invite_friend_(<?=$val['id']?>)" class="add-as-friend" onclick="invite_friend_('<?=encrypt($val['id'])?>')">[add as friend]</a></p>
                                           </div>
                                           <?php 
 
@@ -91,7 +91,7 @@ function invite_friend_(id)
 							hideBusyScreen();
 							if(result_obj.success== true ) {
 								showUIMsg(result_obj.msg);
-                                                                alert('#invite_friend_'+result_obj.u_id);
+                                                              //  alert('#invite_friend_'+result_obj.u_id);
 								$('#invite_friend_'+result_obj.u_id).text(result_obj.html_txt);
 							}
 							else if(result_obj.success==false){
