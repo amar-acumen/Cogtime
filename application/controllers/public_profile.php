@@ -146,7 +146,7 @@ class Public_profile extends Base_controller
 				# CHECKING IS FRIEND ALREADY #
 				$is_friend_arr =$this->users_model->if_already_friend($i_profile_id,$logged_user_id);
 				if(count($is_friend_arr) >0 ){
-					$data['if_already_friend'] = 'true';
+					$data['if_already_friend'] = true;
 				}
 				# checking friend request already sent
 				else{
@@ -156,7 +156,7 @@ class Public_profile extends Base_controller
 						$data['display_becomefriend']     ='false';
 						$data['if_already_friend']     ='';
 					}else{
-					    $data['if_already_friend']     ='false';
+					    $data['if_already_friend']     =false;
 					}
 				}
 				
