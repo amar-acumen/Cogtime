@@ -133,7 +133,7 @@ class Module_generate extends CI_Controller {
                     'js/jquery.hoverIntent.minified.js',
                     'js/jquery.naviDropDown.1.0.js',
                     'js/church_login.js',
-                    'js/frontend/logged/holy_place/prayer_group.js',
+                    //'js/frontend/logged/holy_place/prayer_group.js',
                     'js/jquery/ui/jquery.ui.core.js',
                     'js/jquery.ui.datepicker.js',
                     'js/jquery.nicescroll.min.js',
@@ -217,10 +217,15 @@ class Module_generate extends CI_Controller {
                     'js/frontend/logged/organize_my_videos.js',
                     'js/frontend/logged/tweets/tweet-photo-upload.js',
                     'js/frontend/logged/rings/ring_helper.js',
-                    'js/frontend/logged/tweets/tweet-prayerwall.js'
+                    'js/frontend/logged/tweets/tweet-prayerwall.js',
+                    'js/frontend/logged/holy_place/prayer_group.js',
+                    'js/frontend/logged/organizer/organizer.js',
+                    'js/frontend/logged/my_photo/organize_photo.js',
+                    'js/frontend/logged/my_audio/organize_audio.js',
                   //  'js/jquery.hoverIntent.js',
                   //  'js/frontend/utils.js'
                 );
+
                 $js_indvid = '';
                 foreach($files_indvid_js as $data){
 

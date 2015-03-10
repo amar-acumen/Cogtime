@@ -69,8 +69,8 @@ class Prayer_group extends Base_controller
                                         'js/lightbox.js',
 										'js/jquery-ui-1.8.2.custom.min.js',
                                         'js/stepcarousel.js',
-										'js/tab.js',
-										'js/frontend/logged/holy_place/prayer_group.js',*/
+										'js/tab.js',*/
+										'js/production/prayer_group.js',
 
                                         ));
                                         
@@ -139,8 +139,8 @@ class Prayer_group extends Base_controller
                                         'js/lightbox.js',
 										'js/jquery-ui-1.8.2.custom.min.js',
                                         'js/stepcarousel.js',
-										'js/tab.js',
-										'js/frontend/logged/holy_place/prayer_group.js',*/
+										'js/tab.js',*/
+										'js/production/prayer_group.js',
 
                                         ));
                                         
@@ -326,14 +326,14 @@ class Prayer_group extends Base_controller
             parent::_set_meta_keywords('');
         
             
-//            parent::_add_js_arr( array( 'js/ddsmoothmenu.js',
-//                                        'js/switch.js','js/animate-collapse.js',
-//                                        'js/lightbox.js',
-//                                        'js/jquery-ui-1.8.2.custom.min.js',
-//                                        'js/stepcarousel.js',
-//                                        'js/tab.js',
-//                                        'js/frontend/logged/holy_place/prayer_group.js'
-//                                        ));
+            parent::_add_js_arr( array( /*'js/ddsmoothmenu.js',
+                                        'js/switch.js','js/animate-collapse.js',
+                                        'js/lightbox.js',
+                                        'js/jquery-ui-1.8.2.custom.min.js',
+                                        'js/stepcarousel.js',
+                                        'js/tab.js',*/
+                                        'js/production/prayer_group.js'
+                                        ));
                                         
          // parent::_add_css_arr( array(//'css/jquery-ui-1.8.13.custom.css'
        // ) );
@@ -653,7 +653,7 @@ class Prayer_group extends Base_controller
                                         'js/jquery-ui-1.8.2.custom.min.js',
                                         'js/stepcarousel.js',
                                         'js/tab.js',*/
-                                        'js/frontend/logged/holy_place/prayer_group.js'
+                                        'js/production/prayer_group.js'
                                         ));
 
            // parent::_add_css_arr( array(//'css/jquery-ui-1.8.13.custom.css'
@@ -1193,7 +1193,7 @@ class Prayer_group extends Base_controller
                                         'js/tab.js',*/
 									    'js/jquery-ui-timepicker-addon.js',
 
-										'js/frontend/logged/holy_place/prayer_group.js'
+										'js/production/prayer_group.js'
                                         ));
 
            // parent::_add_css_arr( array(//'css/jquery-ui-1.8.13.custom.css','css/jquery-ui-1.8.2.custom.css'
@@ -1607,11 +1607,12 @@ class Prayer_group extends Base_controller
                                         'js/jquery-ui-1.8.2.custom.min.js',
                                         'js/stepcarousel.js',
                                         'js/tab.js',*/
-                                        'js/frontend/logged/holy_place/prayer_group.js',
+                                        'js/production/prayer_group.js',
                                         ));
 
           //  parent::_add_css_arr( array(//'css/jquery-ui-1.8.13.custom.css'
           //  ) );
+
           
             $i_user_id = intval(decrypt($this->session->userdata('user_id')));
 			
