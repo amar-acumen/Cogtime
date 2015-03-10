@@ -142,8 +142,8 @@ class Module_generate extends CI_Controller {
                     'js/jquery.bxslider.min.js',
                     'js/jquery.fancybox.js',
                     // logged
-                    'js/frontend/public_profile.js',
-                    'js/ajaxupload.js',
+                    'js/frontend/public_profile.js'
+                    //'js/ajaxupload.js',
                 );
 
                 $js = '';
