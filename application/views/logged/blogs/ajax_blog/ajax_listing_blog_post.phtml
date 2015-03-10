@@ -18,8 +18,8 @@ foreach ($blog_post_arr as $blogpostval) {
 
 
 
-        <div class="my-blog-cmt<?php if($blogpostval->no_of_comments == 0){ echo '1'; } ?>"> 
-            <ul class="left-side">
+        <div class="my-blog-cmt"> 
+            <ul class="left-side<?php if($blogpostval->no_of_comments == 0){ echo '1'; } ?>">
                  <?php 
                  if($blogpostval->no_of_comments != 0){
                  ?>
