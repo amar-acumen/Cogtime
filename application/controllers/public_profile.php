@@ -146,17 +146,17 @@ class Public_profile extends Base_controller
 				# CHECKING IS FRIEND ALREADY #
 				$is_friend_arr =$this->users_model->if_already_friend($i_profile_id,$logged_user_id);
 				if(count($is_friend_arr) >0 ){
-					$data['if_already_friend'] = 'true';
+					$data['if_already_friend'] = true;
 				}
 				# checking friend request already sent
 				else{
 					$is_friend_req_alrdy_snt = $this->users_model->friend_request_already_sent($logged_user_id,$i_profile_id);
 					#pr($is_friend_req_alrdy_snt);
 					if($is_friend_req_alrdy_snt){
-						$data['display_becomefriend']     ='false';
+						$data['display_becomefriend']     =false;
 						$data['if_already_friend']     ='';
 					}else{
-					    $data['if_already_friend']     ='false';
+					    $data['if_already_friend']     =false;
 					}
 				}
 				
@@ -192,14 +192,14 @@ class Public_profile extends Base_controller
 																						$logged_user_id , $i_profile_id);
 			  
 					if(count($get_friend_req_sent_status_me_him) > 0  ) { 
-						 $data['prayer_partner']['display_becomeprayer_partner']     =false;//'false';
+						 $data['prayer_partner']['display_becomeprayer_partner']     ='false';
 					 }
 							  
 					 
 					$get_friend_status_me_him = $this->my_prayer_partner_model->get_prayer_partner_accepted_me_him(
 														  $logged_user_id , $i_profile_id);
 					if(count($get_friend_status_me_him) > 0  ) { 
-						   $data['prayer_partner']['display_alreadyprayer_partner']     =true;//'true';
+						   $data['prayer_partner']['display_alreadyprayer_partner']     ='true';
 					 }
 							  
 					$total_PP_arr = $this->my_prayer_partner_model->get_prayerPartnerId_by_user_id($i_profile_id);

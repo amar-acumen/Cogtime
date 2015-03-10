@@ -213,10 +213,10 @@ if ($this->session->userdata('loggedin') == '' || $this->session->userdata('logg
                             <?php
                             endif;
 
-                            if ($if_already_friend == 'false') :
+                            if ($if_already_friend === false) :
                                 ?>
                                 <li><a href="javascript:void(0);" id="invite_friend_<?= ($public_arr_profile_info['id']) ?>" onclick="invite_friend_('<?= encrypt($public_arr_profile_info['id']) ?>')"  class="addfriend">Send Friend Request</a></li>
-                            <?php elseif ($display_becomefriend == 'false'): ?>
+                            <?php elseif ($display_becomefriend === false): ?>
                                 <li><a href="javascript:void(0);" id="invite_friend_<?= ($public_arr_profile_info['id']) ?>" onclick="invite_friend_('<?= encrypt($public_arr_profile_info['id']) ?>')"  class="addfriend">Re-send Friend Request</a></li>
                             <?php endif; ?>
 
