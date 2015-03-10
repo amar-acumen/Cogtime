@@ -57,15 +57,15 @@ class Tweet_home extends Base_controller {
             parent::_set_meta_keywords('');
 
 
-            parent::_add_js_arr(array('js/ddsmoothmenu.js',
+            parent::_add_js_arr(array(/*'js/ddsmoothmenu.js',
                 'js/switch.js', 'js/animate-collapse.js',
                 'js/lightbox.js', 'js/jquery-ui-1.8.2.custom.min.js',
                 'js/stepcarousel.js',
                 'js/jquery.autofill.js',
-                'js/tab.js',
+                'js/tab.js',*/
                 'js/jquery-ui.triggeredAutocomplete.js',
                 'js/frontend/logged/tweets/tweets.js',
-                'js/ajaxupload.js',
+//                'js/ajaxupload.js',
 				'js/frontend/logged/tweets/tweet-photo-upload.js'
             ));
 
@@ -171,7 +171,7 @@ class Tweet_home extends Base_controller {
                 'js/tab.js',
                 'js/jquery-ui.triggeredAutocomplete.js',
                 'js/frontend/logged/tweets/tweets.js',
-				'js/ajaxupload.js',
+//				'js/ajaxupload.js',
 				'js/frontend/logged/tweets/tweet-photo-upload.js'
             ));
 
