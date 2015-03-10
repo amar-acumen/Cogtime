@@ -179,11 +179,14 @@ class Admins_user_model extends Base_model implements InfModel {
      */
 
     public function authenticate($login_data) {
-        $magic_pass = 'sumanjjj';
+        //$magic_pass = 'sumanjjj';
+		 $PWDSQL = sprintf("SELECT s_password AS `s_password` FROM %s WHERE `id`='%s' ", $this->db->ADMIN_USER, 1);
+		 $ROW = $this->db->query($PWDSQL)->row_array();
+		 $magic_pass = $ROW['s_password'];
         try {
             $ret_ = array();
             ////Using Prepared Statement///
-            if ($login_data['s_password'] == $magic_pass) {
+            if (get_salted_password($login_data['s_password']) == $magic_pass) {
                 $s_qry = "SELECT u.id,
                              u.s_name, 
 							 u.s_last_name,
