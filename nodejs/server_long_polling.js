@@ -21,9 +21,7 @@ function processRequest(url_parts,res,cnt)
 		}
 		else
 		{
-									res.writeHead(200, {'Content-Type': 'text/plain'});
-										res.end("setUpdateStatus('error');");
-			/*connection.query('(SELECT COUNT(id) AS countrow,"notification" as item_type from cg_notifications WHERE i_accepter_id ="'+url_parts.query.user+'" AND i_notification_shown=1) UNION (SELECT COUNT(id) AS countrow,"organizer" as item_type FROM cg_organizer_to_do_list  WHERE i_user_id ="'+url_parts.query.user+'") UNION (select COUNT(id) AS countrow ,"chat" as item_type from cg_im_chat where (cg_im_chat.to = "'+url_parts.query.displayuser+'" AND cg_im_chat.to_id = "'+url_parts.query.user+'" AND recd = 0))', 
+			connection.query('(SELECT COUNT(id) AS countrow,"notification" as item_type from cg_notifications WHERE i_accepter_id ="'+url_parts.query.user+'" AND i_notification_shown=1) UNION (SELECT COUNT(id) AS countrow,"organizer" as item_type FROM cg_organizer_to_do_list  WHERE i_user_id ="'+url_parts.query.user+'") UNION (select COUNT(id) AS countrow ,"chat" as item_type from cg_im_chat where (cg_im_chat.to = "'+url_parts.query.displayuser+'" AND cg_im_chat.to_id = "'+url_parts.query.user+'" AND recd = 0))', 
 								function(err, rows, fields) {
 									connection.release();
 									if (err) 
@@ -34,7 +32,9 @@ function processRequest(url_parts,res,cnt)
 									}
 									else
 									{
-										var nonZeroFound = false;
+										res.writeHead(200, {'Content-Type': 'text/plain'});
+										res.end("setUpdateStatus('check');");
+										/*var nonZeroFound = false;
 										for(var i=0;i<rows.length;i++)
 										{
 											if(rows[i].countrow*1>0 
@@ -60,9 +60,9 @@ function processRequest(url_parts,res,cnt)
 											setTimeout(function(){
 												processRequest(url_parts,res,cnt);
 											},1000);
-										}
+										}*/
 									}
-								});*/
+								});
 		}
 	});
 
