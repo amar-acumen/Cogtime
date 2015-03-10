@@ -1612,6 +1612,7 @@ class Prayer_group extends Base_controller
 
           //  parent::_add_css_arr( array(//'css/jquery-ui-1.8.13.custom.css'
           //  ) );
+
           
             $i_user_id = intval(decrypt($this->session->userdata('user_id')));
 			

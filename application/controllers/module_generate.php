@@ -222,6 +222,7 @@ class Module_generate extends CI_Controller {
                   //  'js/jquery.hoverIntent.js',
                   //  'js/frontend/utils.js'
                 );
+
                 $js_indvid = '';
                 foreach($files_indvid_js as $data){
 
