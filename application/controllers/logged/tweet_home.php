@@ -64,9 +64,9 @@ class Tweet_home extends Base_controller {
                 'js/jquery.autofill.js',
                 'js/tab.js',*/
                 'js/jquery-ui.triggeredAutocomplete.js',
-                'js/frontend/logged/tweets/tweets.js',
+                'js/production/tweets.js',
 //                'js/ajaxupload.js',
-				'js/frontend/logged/tweets/tweet-photo-upload.js'
+				'js/production/tweet-photo-upload.js'
             ));
 
             parent::_add_css_arr(array('css/jquery-ui-1.8.13.custom.css',
@@ -163,20 +163,20 @@ class Tweet_home extends Base_controller {
             parent::_set_meta_keywords('');
 
 
-            parent::_add_js_arr(array('js/ddsmoothmenu.js',
+            parent::_add_js_arr(array(/*'js/ddsmoothmenu.js',
                 'js/switch.js', 'js/animate-collapse.js',
                 'js/lightbox.js', 'js/jquery-ui-1.8.2.custom.min.js',
                 'js/stepcarousel.js',
                 'js/jquery.autofill.js',
-                'js/tab.js',
+                'js/tab.js',*/
                 'js/jquery-ui.triggeredAutocomplete.js',
-                'js/frontend/logged/tweets/tweets.js',
+                'js/production/tweets.js',
 //				'js/ajaxupload.js',
-				'js/frontend/logged/tweets/tweet-photo-upload.js'
+				'js/production/tweet-photo-upload.js'
             ));
 
-            parent::_add_css_arr(array('css/jquery-ui-1.8.13.custom.css',
-                'css/dd.css'));
+//            parent::_add_css_arr(array('css/jquery-ui-1.8.13.custom.css',
+//                'css/dd.css'));
             $i_user_id = intval(decrypt($this->session->userdata('user_id')));
             $this->session->set_userdata('search_condition', '');
             $data['pagination_per_page'] = $this->pagination_per_page;
@@ -629,16 +629,16 @@ class Tweet_home extends Base_controller {
             parent::_set_meta_keywords('');
 
 
-            parent::_add_js_arr(array('js/ddsmoothmenu.js',
+            parent::_add_js_arr(array(/*'js/ddsmoothmenu.js',
                 'js/switch.js', 'js/animate-collapse.js',
                 'js/lightbox.js', 'js/jquery-ui-1.8.2.custom.min.js',
                 'js/stepcarousel.js',
                 'js/jquery.autofill.js',
-                'js/tab.js',
+                'js/tab.js',*/
                 //'js/jquery-sew-master/jquery.caretposition.js',
                 //'js/jquery-sew-master/jquery.sew.js',
                 'js/jquery-ui.triggeredAutocomplete.js',
-                'js/frontend/logged/tweets/tweets.js'
+                'js/production/tweets.js'
             ));
 
             parent::_add_css_arr(array('css/jquery-ui-1.8.13.custom.css',
@@ -952,16 +952,16 @@ class Tweet_home extends Base_controller {
             parent::_set_meta_keywords('');
 
 
-            parent::_add_js_arr(array('js/ddsmoothmenu.js',
+            parent::_add_js_arr(array(/*'js/ddsmoothmenu.js',
                 'js/switch.js', 'js/animate-collapse.js',
                 'js/lightbox.js', 'js/jquery-ui-1.8.2.custom.min.js',
                 'js/stepcarousel.js',
                 'js/jquery.autofill.js',
-                'js/tab.js',
+                'js/tab.js',*/
                 //'js/jquery-sew-master/jquery.caretposition.js',
                 //'js/jquery-sew-master/jquery.sew.js',
                 'js/jquery-ui.triggeredAutocomplete.js',
-                'js/frontend/logged/tweets/tweets.js'
+                'js/production/tweets.js'
             ));
 
             parent::_add_css_arr(array('css/jquery-ui-1.8.13.custom.css',
@@ -1055,16 +1055,16 @@ class Tweet_home extends Base_controller {
             parent::_set_meta_keywords('');
 
 
-            parent::_add_js_arr(array('js/ddsmoothmenu.js',
+            parent::_add_js_arr(array(/*'js/ddsmoothmenu.js',
                 'js/switch.js', 'js/animate-collapse.js',
                 'js/lightbox.js', 'js/jquery-ui-1.8.2.custom.min.js',
                 'js/stepcarousel.js',
                 'js/jquery.autofill.js',
-                'js/tab.js',
+                'js/tab.js',*/
                 //'js/jquery-sew-master/jquery.caretposition.js',
                 //'js/jquery-sew-master/jquery.sew.js',
                 'js/jquery-ui.triggeredAutocomplete.js',
-                'js/frontend/logged/tweets/tweets.js'
+                'js/production/tweets.js'
             ));
 
             parent::_add_css_arr(array('css/jquery-ui-1.8.13.custom.css',
@@ -1144,18 +1144,18 @@ class Tweet_home extends Base_controller {
             parent::_set_meta_keywords('');
 
 
-            parent::_add_js_arr(array('js/ddsmoothmenu.js',
+            parent::_add_js_arr(array(/*'js/ddsmoothmenu.js',
                 'js/switch.js', 'js/animate-collapse.js',
                 'js/lightbox.js', 'js/jquery-ui-1.8.2.custom.min.js',
                 'js/stepcarousel.js',
                 'js/jquery.autofill.js',
-                'js/tab.js',
+                'js/tab.js',*/
                 'js/jquery-ui.triggeredAutocomplete.js',
-                'js/frontend/logged/tweets/tweets.js'
+                'js/production/tweets.js'
             ));
 
-            parent::_add_css_arr(array('css/jquery-ui-1.8.13.custom.css',
-                'css/dd.css'));
+//            parent::_add_css_arr(array('css/jquery-ui-1.8.13.custom.css',
+//                'css/dd.css'));
 
 
             $i_user_id = intval(decrypt($this->session->userdata('user_id')));
@@ -1234,18 +1234,18 @@ class Tweet_home extends Base_controller {
             parent::_set_meta_keywords('');
 
 
-            parent::_add_js_arr(array('js/ddsmoothmenu.js',
+            parent::_add_js_arr(array(/*'js/ddsmoothmenu.js',
                 'js/switch.js', 'js/animate-collapse.js',
                 'js/lightbox.js', 'js/jquery-ui-1.8.2.custom.min.js',
                 'js/stepcarousel.js',
                 'js/jquery.autofill.js',
-                'js/tab.js',
+                'js/tab.js',*/
                 'js/jquery-ui.triggeredAutocomplete.js',
-                'js/frontend/logged/tweets/tweets.js'
+                'js/production/tweets.js'
             ));
 
-            parent::_add_css_arr(array('css/jquery-ui-1.8.13.custom.css',
-                'css/dd.css'));
+//            parent::_add_css_arr(array('css/jquery-ui-1.8.13.custom.css',
+//                'css/dd.css'));
 
 
             $i_user_id = intval(decrypt($this->session->userdata('user_id')));
@@ -1325,20 +1325,20 @@ class Tweet_home extends Base_controller {
             parent::_set_meta_keywords('');
 
 
-            parent::_add_js_arr(array('js/ddsmoothmenu.js',
+            parent::_add_js_arr(array(/*'js/ddsmoothmenu.js',
                 'js/switch.js', 'js/animate-collapse.js',
                 'js/lightbox.js', 'js/jquery-ui-1.8.2.custom.min.js',
                 'js/stepcarousel.js',
                 'js/jquery.autofill.js',
-                'js/tab.js',
+                'js/tab.js',*/
                 //'js/jquery-sew-master/jquery.caretposition.js',
                 //'js/jquery-sew-master/jquery.sew.js',
                 'js/jquery-ui.triggeredAutocomplete.js',
-                'js/frontend/logged/tweets/tweets.js'
+                'js/production/tweets.js'
             ));
 
-            parent::_add_css_arr(array('css/jquery-ui-1.8.13.custom.css',
-                'css/dd.css'));
+//            parent::_add_css_arr(array('css/jquery-ui-1.8.13.custom.css',
+//                'css/dd.css'));
 
 
             $i_user_id = intval(decrypt($this->session->userdata('user_id')));

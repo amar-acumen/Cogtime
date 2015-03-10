@@ -57,7 +57,7 @@ class Tweets extends Base_controller
                                         'js/lightbox.js','js/jquery-ui-1.8.2.custom.min.js',
                                         'js/stepcarousel.js',
 										'js/jquery.autofill.js',*/
-										'js/frontend/logged/tweets/tweets.js',
+										'js/production/tweets.js',
 										//'js/tab.js'
                                         ));
                                         
@@ -163,7 +163,7 @@ class Tweets extends Base_controller
                                         'js/switch.js','js/animate-collapse.js',
                                         'js/lightbox.js','js/jquery-ui-1.8.2.custom.min.js',
                                         'js/stepcarousel.js',*/
-										'js/frontend/logged/tweets/tweets.js',
+										'js/production/tweets.js',
 										//'js/tab.js'
                                         ));
                                         
@@ -267,7 +267,7 @@ class Tweets extends Base_controller
                                         'js/switch.js','js/animate-collapse.js',
                                         'js/lightbox.js','js/jquery-ui-1.8.2.custom.min.js',
                                         'js/stepcarousel.js',*/
-										'js/frontend/logged/tweets/tweets.js',
+										'js/production/tweets.js',
 										//'js/tab.js'
                                         ));
                                         
