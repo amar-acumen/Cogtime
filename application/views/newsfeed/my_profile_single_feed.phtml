@@ -9,15 +9,17 @@ $msg_id = $feed['id'];
 #echo ' ==> '.show_delete_link($msg_id);	
 //pr($feed);
 if( $feed['s_type'] == 'wall_post' ){
-	$profile_image_filename = get_profile_image_of_user('thumb',$feed['s_profile_photo'],$feed['e_gender']);
-	//$user_primary_info['s_picture'];
-	$profile_displayname = $feed['s_profile_name'];
-	$profile_url = get_profile_url($feed['user_id'],$feed['s_profile_name']);
-	if($data_arr->wall_owner_id > 0  && $data_arr->wall_owner_id != ''){
-		  $wall_owner_name = get_username_by_id($data_arr->wall_owner_id);
-	}
-	$posting_user_name = get_username_by_id($data_arr->user_id);
-	$logged_user_id = intval(decrypt($this->session->userdata('user_id')));
+  $user_primary_info = get_userinfo_for_newsfeed($data_arr->user_id);
+  
+  $profile_image_filename = get_profile_image_of_user('thumb',$user_primary_info['s_profile_photo'],$user_primary_info['e_gender']);
+  //$user_primary_info['s_picture'];
+  $profile_displayname = $user_primary_info['s_profile_name'];
+  $profile_url = get_profile_url($data_arr->user_id, $user_primary_info['s_profile_name']);
+  if($data_arr->wall_owner_id > 0  && $data_arr->wall_owner_id != ''){
+      $wall_owner_name = get_username_by_id($data_arr->wall_owner_id);
+  }
+  $posting_user_name = $user_primary_info['s_profile_name'];
+  $logged_user_id = intval(decrypt($this->session->userdata('user_id')));
 	
 ?>
 

@@ -237,11 +237,7 @@ function showscroll()
 }
 function scrollToGivenPosition(elementId)
 {
-alert(elementId);
-
-	var lastElementPosition = $('#div_7376').position().top;
-	alert(lastElementPosition);
-	//var lastElementTop = (lastElementPosition.top)*1;
+	var lastElementTop = ($(elementId).position().top)*1;
 	
 	$("#table_content").scrollTop(lastElementTop);
 }

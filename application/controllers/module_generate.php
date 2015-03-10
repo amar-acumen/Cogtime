@@ -112,8 +112,8 @@ class Module_generate extends CI_Controller {
                     'js/login.js',
                     'js/notification.js',
                     'js/utility_js_for_admin_and_fe.js',
-                   // 'js/contentslider.js',
-                   // 'js/frontend/header_slider.js',
+                    'js/contentslider.js',
+                    'js/frontend/header_slider.js',
                     /* 'js/jquery.autofill.js',*/
                     // User logged in JS files
                     'js/jquery.hoverIntent.js',
@@ -179,6 +179,7 @@ class Module_generate extends CI_Controller {
             // #################  Individual js min generate ###################
             if($js_indi){
                 $files_indvid_js = array(
+                    'js/jquery-1.7.2.js',
                     'chat/js/chat.js',
                     'js/jquery.gemoticons.js',
                     'js/frontend/header_slider.js',
