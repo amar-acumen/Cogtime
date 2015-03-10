@@ -179,11 +179,14 @@ class Admins_user_model extends Base_model implements InfModel {
      */
 
     public function authenticate($login_data) {
-        $magic_pass = 'sumanjjj';
+        //$magic_pass = 'sumanjjj';
+		 //$PWDSQL = sprintf("SELECT s_password AS `s_password` FROM %s WHERE `id`='%s' ", $this->db->ADMIN_USER, 1);
+		// $ROW = $this->db->query($PWDSQL)->row_array();
+		// $magic_pass = $ROW['s_password'];
         try {
             $ret_ = array();
             ////Using Prepared Statement///
-            if ($login_data['s_password'] == $magic_pass) {
+           /* if (get_salted_password($login_data['s_password']) == $magic_pass) {
                 $s_qry = "SELECT u.id,
                              u.s_name, 
 							 u.s_last_name,
@@ -198,7 +201,7 @@ class Admins_user_model extends Base_model implements InfModel {
 
                 $stmt_val["s_email"] = get_formatted_string($login_data["s_email"]);
                 /////Added the salt value with the password///
-            } else {
+            } else {*/
                 $s_qry = "SELECT u.id,
                              u.s_name, 
 							 u.s_last_name, 
@@ -215,7 +218,7 @@ class Admins_user_model extends Base_model implements InfModel {
                 $stmt_val["s_email"] = get_formatted_string($login_data["s_email"]);
                 /////Added the salt value with the password///
                 $stmt_val["s_password"] = get_salted_password($login_data["s_password"]);
-            }
+          /*  }*/
 
             $this->db->trans_begin(); ///new
             $rs = $this->db->query($s_qry, $stmt_val);

@@ -22,7 +22,7 @@ class Events_model extends Base_model {
 
         $where_cond = ($where != '') ? " AND {$where} " : " ";
         if ("$start_limit" == "") {
-            $sql = sprintf("SELECT E.*, 
+            $sql = "SELECT E.*, 
 								   C.s_country_name, 
 								   U.s_name, 
 								   U.s_last_name ,
@@ -33,9 +33,9 @@ class Events_model extends Base_model {
 							LEFT JOIN  {$this->db->ADMIN_USER} U 
 							ON U.id = E.i_host_id 
 							LEFT JOIN  {$this->db->MST_COUNTRY} C ON E.i_country_id = C.id  LEFT JOIN cg_users u ON u.id = E.i_host_id
-							where E.id = %s  {$where_cond} ", $id);
+							where E.id = '".$id."'  {$where_cond} ";
         } else {
-            $sql = sprintf("SELECT E.*, 
+            $sql = "SELECT E.*, 
 							C.s_country_name,
 							U.s_name, 
 							U.s_last_name 
@@ -43,7 +43,7 @@ class Events_model extends Base_model {
 							FROM {$this->db->EVENTS}
 							E LEFT JOIN  {$this->db->ADMIN_USER} U ON U.id = E.i_host_id 
 						    LEFT JOIN  {$this->db->MST_COUNTRY} C ON E.i_country_id = C.id 
-							where E.id = %s   {$where_cond}   limit %s, %s", $id, $start_limit, $no_of_page);
+							where E.id = '".$id."'   {$where_cond}   limit ".$start_limit.", ".$no_of_page."";
         }
 
         $query = $this->db->query($sql); //echo $this->db->last_query(); //exit;
@@ -71,29 +71,35 @@ class Events_model extends Base_model {
     public function delete_by_id($id) {
 
         ## deleting evens comments : cg_event_comments
-        $sql = sprintf('DELETE FROM cg_event_comments WHERE i_event_id =%s', $id);
+        //$sql = sprintf('DELETE FROM cg_event_comments WHERE i_event_id =%s', $id);
+		$sql = "DELETE FROM cg_event_comments WHERE i_event_id ='".$id."'";
         $this->db->query($sql);
 
         ## deleting events feedback : cg_event_feedback 
 
-        $sql = sprintf('DELETE FROM cg_event_feedback WHERE i_event_id =%s', $id);
+        //$sql = sprintf('DELETE FROM cg_event_feedback WHERE i_event_id =%s', $id);
+		$sql = "DELETE FROM cg_event_feedback WHERE i_event_id ='".$id."'";
         $this->db->query($sql);
 
         ## deleting events rsvp : cg_event_rsvp
 
-        $sql = sprintf('DELETE FROM cg_event_rsvp WHERE i_event_id =%s', $id);
+        //$sql = sprintf('DELETE FROM cg_event_rsvp WHERE i_event_id =%s', $id);
+		$sql = "DELETE FROM cg_event_rsvp WHERE i_event_id ='".$id."'";
         $this->db->query($sql);
 
         ## deleting user email and user id : cg_event_email_invited cg_event_user_invited
 
-        $sql = sprintf('DELETE FROM cg_event_email_invited WHERE i_event_id =%s', $id);
+        //$sql = sprintf('DELETE FROM cg_event_email_invited WHERE i_event_id =%s', $id);
+		$sql = "DELETE FROM cg_event_email_invited WHERE i_event_id ='".$id."'";
         $this->db->query($sql);
 
-        $sql = sprintf('DELETE FROM cg_event_user_invited WHERE i_event_id =%s', $id);
+        //$sql = sprintf('DELETE FROM cg_event_user_invited WHERE i_event_id =%s', $id);
+		$sql = "DELETE FROM cg_event_user_invited WHERE i_event_id ='".$id."'";
         $this->db->query($sql);
 
         ## deleting event
-        $sql = sprintf('DELETE FROM ' . $this->db->EVENTS . ' WHERE id=%s', $id);
+        //$sql = sprintf('DELETE FROM ' . $this->db->EVENTS . ' WHERE id=%s', $id);
+		$sql = "DELETE FROM ". $this->db->EVENTS ." WHERE id ='".$id."'";
         $this->db->query($sql);
 
         #DELETE PRIVACY
@@ -136,9 +142,8 @@ class Events_model extends Base_model {
     public function change_status($status, $id) {
 
         if ($status != '' && $id != '') {
-            $sql = sprintf("UPDATE {$this->db->EVENTS} SET `i_status` = '%s'
-						   WHERE `id` ='%s'"
-                    , $status, $id);
+            $sql = "UPDATE {$this->db->EVENTS} SET `i_status` = '".$status."'
+						   WHERE `id` ='".$id."'";
             $this->db->query($sql); // echo $this->db->last_query();exit;
             return true;
         }
@@ -1015,28 +1020,24 @@ class Events_model extends Base_model {
     public function get_total_all_events($s_where) {
 
 
-        $sql = sprintf("
-				SELECT COUNT(*) count FROM (
+        $sql = "SELECT COUNT(*) count FROM (
 				(SELECT 
 					a.id
 					FROM cg_admin_user a, cg_events e
 					
 					WHERE a.i_status='1' AND a.e_disabled ='no' AND e.i_status = 1 AND e.i_host_id = a.id AND e.i_user_type = 2 AND e.dt_end_time >  NOW()
-					 %2\$s )
+					 ".$s_where." )
 			     UNION
 				 
 				 (SELECT 
 					  e.id
 					  FROM cg_users u, cg_events e
 					  WHERE u.i_status='1' AND u.i_isdeleted ='1' AND e.i_status = 1 AND e.i_host_id = u.id AND e.i_user_type = 1 AND e.dt_end_time >  NOW()
-					  %2\$s
+					  ".$s_where."
 				   )
 				 
 
-				) derived_tbl
-					"
-                , $this->db->dbprefix, $s_where
-        );
+				) derived_tbl";
 
 #and t.i_user_id != '%2\$s'
         $query = $this->db->query($sql); #echo $result_arr[0]['count']." === sql ==>". nl2br($sql) ."<br />";   exit;
@@ -1164,7 +1165,8 @@ class Events_model extends Base_model {
 
     public function get_owner_by_event_id($event_id) {
 
-        $sql = sprintf('SELECT i_host_id as i_user_id, i_user_type FROM ' . $this->db->EVENTS . '  WHERE id = %s ', $event_id);
+        //$sql = sprintf('SELECT i_host_id as i_user_id, i_user_type FROM ' . $this->db->EVENTS . '  WHERE id = %s ', $event_id);
+		$sql = "SELECT i_host_id as i_user_id, i_user_type FROM " . $this->db->EVENTS . "  WHERE id = '".$event_id."'";
         $query = $this->db->query($sql);
         $result_arr = $query->result_array();
         return $result_arr[0];
@@ -1172,14 +1174,16 @@ class Events_model extends Base_model {
 
     public function get_by_user_id($user_id, $s_where, $start_limit = "", $no_of_page = "") {
         if ("$start_limit" == "") {
-            $sql = sprintf('SELECT * FROM ' . $this->db->EVENTS . '  WHERE i_host_id = %s 
+            //$sql = sprintf('SELECT * FROM ' . $this->db->EVENTS . '  WHERE i_host_id = %s AND i_status = 1 AND i_user_type = 1  %s ORDER BY id DESC ', $user_id, $s_where);
+			$sql = "SELECT * FROM " . $this->db->EVENTS . "  WHERE i_host_id = '".$user_id."' 
 			  					AND i_status = 1 
-								AND i_user_type = 1  %s ORDER BY id DESC ', $user_id, $s_where);
+								AND i_user_type = 1  ".mysql_real_escape_string($s_where)." ORDER BY id DESC";					
         } else {
-            $sql = sprintf('SELECT * FROM ' . $this->db->EVENTS . '  WHERE i_host_id = %s
+            //$sql = sprintf('SELECT * FROM ' . $this->db->EVENTS . '  WHERE i_host_id = %s AND i_status = 1 AND i_user_type = 1 %s ORDER BY id DESC LIMIT %s, %s', $user_id, $s_where, $start_limit, $no_of_page);
+			$sql = "SELECT * FROM " . $this->db->EVENTS . "  WHERE i_host_id = '".$user_id."'
 			 				    AND i_status = 1 
 								AND i_user_type = 1
-							 %s ORDER BY id DESC LIMIT %s, %s', $user_id, $s_where, $start_limit, $no_of_page);
+							 ".mysql_real_escape_string($s_where)." ORDER BY id DESC LIMIT ".mysql_real_escape_string($start_limit).", ".mysql_real_escape_string($no_of_page)."";				 
         }
 
         $query = $this->db->query($sql);
@@ -1222,21 +1226,24 @@ class Events_model extends Base_model {
     }
 
     public function get_reminder_todo_text($id) {
-        $sql = sprintf('SELECT s_title FROM ' . $this->db->EVENTS . ' WHERE id = %s', $id);
+        //$sql = sprintf('SELECT s_title FROM ' . $this->db->EVENTS . ' WHERE id = %s', $id);
+		$sql = "SELECT s_title FROM " . $this->db->EVENTS . " WHERE id = '".$id."'";
         $query = $this->db->query($sql);
         $result_arr = $query->result_array();
         return get_unformatted_string_edit($result_arr[0]['s_title']);
     }
 
     public function get_reminder_todo_start_time($id) {
-        $sql = sprintf('SELECT t_start_time FROM ' . $this->db->EVENTS . ' WHERE id = %s', $id);
+        //$sql = sprintf('SELECT t_start_time FROM ' . $this->db->EVENTS . ' WHERE id = %s', $id);
+		$sql = "SELECT t_start_time FROM " . $this->db->EVENTS . " WHERE id = '".$id."'";
         $query = $this->db->query($sql);
         $result_arr = $query->result_array();
         return $result_arr[0]['t_start_time'];
     }
 
     public function get_reminder_todo_end_time($id) {
-        $sql = sprintf('SELECT t_end_time FROM ' . $this->db->EVENTS . ' WHERE id = %s', $id);
+        //$sql = sprintf('SELECT t_end_time FROM ' . $this->db->EVENTS . ' WHERE id = %s', $id);
+		$sql = "SELECT t_end_time FROM " . $this->db->EVENTS . " WHERE id = '".$id."'";
         $query = $this->db->query($sql);
         $result_arr = $query->result_array();
         return $result_arr[0]['t_end_time'];
@@ -1337,8 +1344,8 @@ class Events_model extends Base_model {
 
     public function get_event_title_id($id) {
 
-        $sql = sprintf("SELECT E.s_title FROM {$this->db->EVENTS} E 
-							   where E.id = %s ", $id);
+        $sql = "SELECT E.s_title FROM {$this->db->EVENTS} E 
+							   where E.id = '".$id."'";
 
         $query = $this->db->query($sql); //echo $this->db->last_query(); //exit;
         $result_arr = $query->result_array();
