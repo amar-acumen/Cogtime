@@ -91,7 +91,7 @@ function invite_friend_(id)
 							hideBusyScreen();
 							if(result_obj.success== true ) {
 								showUIMsg(result_obj.msg);
-								//$('#invite_friend_'+result_obj.u_id).html(result_obj.html_txt);
+								$('#invite_friend_'+result_obj.u_id).html(result_obj.html_txt);
 							}
 							else if(result_obj.success==false){
 							    showUIMsg(result_obj.msg);
