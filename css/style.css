@@ -7225,7 +7225,7 @@ width: expression(this.width > 127 ? 127: true);
 	padding:15px;
 	text-align:center;
 	background-position:center center !important;
-	background-size:cover !important;
+	background-size:cover !important; 
 }
 .follow-section {
 	float:right;

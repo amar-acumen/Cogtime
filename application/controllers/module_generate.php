@@ -116,7 +116,7 @@ class Module_generate extends CI_Controller {
                     'js/utility_js_for_admin_and_fe.js',
                     'js/frontend/header_slider.js',
                     'js/contentslider.js',
-                    /* 'js/jquery.autofill.js',*/
+                     'js/jquery.autofill.js',
                     // User logged in JS files
                     'js/jquery.hoverIntent.js',
                     'js/frontend/utils.js',
@@ -124,7 +124,7 @@ class Module_generate extends CI_Controller {
                     'js/switch.js',
                     'js/animate-collapse.js',
                     //'js/jquery-ui-1.8.2.custom.min.js',
-                    //'js/stepcarousel.js',
+                    'js/stepcarousel.js',
                     //'js/frontend/logged/tweets/tweet_utilities.js',
                     //'js/frontend/logged/christian_news_js.js',
                     'js/tab.js',
@@ -139,8 +139,8 @@ class Module_generate extends CI_Controller {
                     'js/jquery.nicescroll.min.js',
                     'js/jquery.naviDropDown.1.0.js',
                     'js/jquery.blueberry.js',
-                    /*'js/jquery.bxslider.min.js',
-                    'js/jquery.fancybox.js',*/
+                    'js/jquery.bxslider.min.js',
+                    'js/jquery.fancybox.js',
                     // logged
                     'js/frontend/public_profile.js'
                 );
