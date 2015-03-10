@@ -1,4 +1,4 @@
- <div class="img-thumb" style="margin-top:40px;"><div style="background:url(<?=get_profile_image_of_user('thumb',$_SESSION['s_profile_photo'],$_SESSION['e_gender'])?>) no-repeat center;width:73px; height:73px;" title="tweeter profile pic" ></div></div>
-  <h2><?=$_SESSION['s_profile_name']?></h2>
-  <h3><?=$_SESSION['s_tweet_id']?></h3>
+ <div class="img-thumb" style="margin-top:40px;"><div style="background:url(<?=get_profile_image_of_user('thumb',$arr_profile_info['s_profile_photo'],$arr_profile_info['e_gender'])?>) no-repeat center;width:73px; height:73px;" title="tweeter profile pic" ></div></div>
+  <h2><?=$arr_profile_info['s_profile_name']?></h2>
+  <h3><?=$arr_profile_info['s_tweet_id']?></h3>
   <?php //pr($arr_profile_info) ?>
