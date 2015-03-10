@@ -389,6 +389,7 @@ class Events_model extends Base_model {
         //$curr_date = date('Y-m-d');
 
         if ("$i_start_limit" == "") {
+		echo 'FIIFIFIF';
             $sql = sprintf("
 				  (SELECT 
 					u.id i_user_id,
@@ -481,7 +482,7 @@ class Events_model extends Base_model {
             );
         } else {
 
-
+			echo 'ELSLESLELS';
 
             $sql = sprintf("
 					(SELECT 
