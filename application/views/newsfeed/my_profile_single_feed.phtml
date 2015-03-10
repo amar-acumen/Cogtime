@@ -11,7 +11,7 @@ $msg_id = $feed['id'];
 if( $feed['s_type'] == 'wall_post' ){
   $user_primary_info = get_userinfo_for_newsfeed($data_arr->user_id);
   
-  $profile_image_filename = get_profile_image($data_arr->user_id,'thumb');
+  $profile_image_filename = get_profile_image_of_user('thumb',$user_primary_info['s_profile_photo'],$user_primary_info['e_gender']);
   //$user_primary_info['s_picture'];
   $profile_displayname = $user_primary_info['s_profile_name'];
   $profile_url = get_profile_url($data_arr->user_id, $user_primary_info['s_profile_name']);

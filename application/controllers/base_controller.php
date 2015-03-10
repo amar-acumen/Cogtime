@@ -420,7 +420,7 @@ class Base_controller extends CI_Controller {
         $objmethod = $router->fetch_method();
 
         $default_js_arr = array(
-            'js/production/jquery-1.7.2.js' => 'header',
+            //'js/production/jquery-1.7.2.js' => 'header',
             //'js/jquery.js' => 'header', // causing conflict with block ui
             //'js/frontend/header_slider.js'=>'header',
             //'js/contentslider.js'=>'header',
@@ -437,15 +437,14 @@ class Base_controller extends CI_Controller {
             'js/login.js' => 'header',
             'js/notification.js' => 'header',
             'js/utility_js_for_admin_and_fe.js' => 'header'*/
-            //'js/production.js' => 'header'
+            'js/production.js' => 'header'
         );
-        
+
 
         if($objclass == 'index' && $objmethod == 'index'){
-            $default_js_arr['js/production/contentslider.js'] = 'header';
-            $default_js_arr['js/production.js'] = 'header';
+           // $default_js_arr['js/production/contentslider.js'] = 'header';
+           // $default_js_arr['js/production.js'] = 'header';
         }else{
-            $default_js_arr['js/production.js'] = 'header';
             $default_js_arr['js/production/stepcarousel.js'] = 'header';
 
         }
