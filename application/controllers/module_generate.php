@@ -202,6 +202,10 @@ class Module_generate extends CI_Controller {
                     'js/frontend/logged/events/my_events.js',
                     'js/frontend/wall/wall_photo_upload.js',
                     'js/frontend/wall/wall_helper.js',
+                    'js/frontend/logged/my_audio/my_audio.js',
+                    'js/frontend/logged/my_audio/audio_helper.js',
+                    'js/frontend/logged/my_photo/photo_helper.js',
+                    'js/frontend/logged/my_photo/photo_details.js',
                   //  'js/jquery.hoverIntent.js',
                   //  'js/frontend/utils.js'
                 );
