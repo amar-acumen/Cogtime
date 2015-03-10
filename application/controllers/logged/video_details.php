@@ -64,7 +64,7 @@ class Video_details extends Base_controller
             parent::_set_meta_keywords('');
         
             
-            parent::_add_js_arr( array( 'js/ddsmoothmenu.js',
+            parent::_add_js_arr( array( /*'js/ddsmoothmenu.js',
                                         'js/switch.js',
                                         'js/animate-collapse.js',
                                         'js/lightbox.js',
@@ -72,15 +72,15 @@ class Video_details extends Base_controller
                                         'js/jquery-ui-1.8.2.custom.min.js',
                                         'js/stepcarousel.js',
                                         'js/jquery.form.js',
-                                        'js/jquery/JSON/json2.js',
-                                        'js/frontend/logged/my_videos.js',
-                                        'js/frontend/logged/organize_my_videos.js',
-										'js/frontend/logged/tweets/tweet_utilities.js',
-                                        'js/frontend/logged/video_helper.js'
+                                        'js/jquery/JSON/json2.js',*/
+                                        'js/production/my_videos.js',
+                                        'js/production/organize_my_videos.js',
+										'js/production/tweet_utilities.js',
+                                        'js/production/video_helper.js'
                                         ));
                                         
-            parent::_add_css_arr( array('css/jquery-ui-1.8.2.custom.css',
-                                        'css/dd.css') );
+//            parent::_add_css_arr( array('css/jquery-ui-1.8.2.custom.css',
+//                                        'css/dd.css') );
             # adjusting header & footer sections [End]...
 
             $data['page_view_type'] = 'myaccount';
