@@ -1074,7 +1074,7 @@ class My_friends extends Base_controller
 					$this->email->send();
 					}
                                         if($_ret_id == 1){
-                                            echo json_encode( array('success'=>TRUE, 'msg'=>'Friend request sent Resuccessfully.' , 'html_txt'=>"Re-send Friend Request" , 'u_id' => $user_id) );
+                                            echo json_encode( array('success'=>TRUE, 'msg'=>'Friend request Resent successfully.' , 'html_txt'=>"Re-send Friend Request" , 'u_id' => $user_id) );
                                         }else{
                                             echo json_encode( array('success'=>TRUE, 'msg'=>'Friend request sent successfully.' , 'html_txt'=>"Re-send Friend Request" , 'u_id' => $user_id) );
                                         }
