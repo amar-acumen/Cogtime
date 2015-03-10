@@ -222,6 +222,8 @@ class Module_generate extends CI_Controller {
                     'js/frontend/logged/organizer/organizer.js',
                     'js/frontend/logged/my_photo/organize_photo.js',
                     'js/frontend/logged/my_audio/organize_audio.js',
+                    'js/frontend/logged/manage_my_profile.js',
+                    'js/frontend/logged/my_photo/my_photo.js',
                   //  'js/jquery.hoverIntent.js',
                   //  'js/frontend/utils.js'
                 );
