@@ -67,11 +67,11 @@
                                             
                                              <?php ## prayer partner
 											 if($is_hit_frm_pp){  
-												 if($prayer_partner['display_becomeprayer_partner'] == false): ?>
+												 if($prayer_partner['display_becomeprayer_partner'] == 'false'): ?>
 													<li> <a  href="javascript:void(0);" id="invite_prayer_partner_<?=($public_arr_profile_info['id'])?>" onclick="invite_prayer_partner_('<?=encrypt($public_arr_profile_info['id'])?>','<?=$prayer_partner['display_becomeprayer_partner']?>')">Re-send Partner Request</a></li>
 												  
 																								
-											  <?php elseif($prayer_partner['display_alreadyprayer_partner'] == true):?>
+											  <?php elseif($prayer_partner['display_alreadyprayer_partner'] == 'true'):?>
 													<li><a href="javascript:void(0);"> Already Your Partner </a></li>
 											  
 											 

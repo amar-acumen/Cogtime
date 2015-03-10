@@ -192,14 +192,14 @@ class Public_profile extends Base_controller
 																						$logged_user_id , $i_profile_id);
 			  
 					if(count($get_friend_req_sent_status_me_him) > 0  ) { 
-						 $data['prayer_partner']['display_becomeprayer_partner']     =false;//'false';
+						 $data['prayer_partner']['display_becomeprayer_partner']     ='false';
 					 }
 							  
 					 
 					$get_friend_status_me_him = $this->my_prayer_partner_model->get_prayer_partner_accepted_me_him(
 														  $logged_user_id , $i_profile_id);
 					if(count($get_friend_status_me_him) > 0  ) { 
-						   $data['prayer_partner']['display_alreadyprayer_partner']     =true;//'true';
+						   $data['prayer_partner']['display_alreadyprayer_partner']     ='true';
 					 }
 							  
 					$total_PP_arr = $this->my_prayer_partner_model->get_prayerPartnerId_by_user_id($i_profile_id);
