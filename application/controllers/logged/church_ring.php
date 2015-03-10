@@ -186,8 +186,8 @@ class Church_ring extends Base_controller
                                         'js/animate-collapse.js',
                                         'js/lightbox.js','js/jquery.dd.js','js/jquery-ui-1.8.2.custom.min.js',
                                         'js/stepcarousel.js',*/
-										'js/frontend/logged/events/my_events.js',
-										'js/frontend/logged/tweets/tweet_utilities.js',
+										'js/production/my_events.js',
+										'js/production/tweet_utilities.js',
 										'js/jquery.textCounter-min.js'
                                         ));
                                         
@@ -1023,8 +1023,8 @@ class Church_ring extends Base_controller
 									'js/animate-collapse.js',
 									'js/lightbox.js','js/jquery.dd.js','js/jquery-ui-1.8.2.custom.min.js',
 									'js/stepcarousel.js',*/
-									'js/frontend/logged/events/my_events.js',
-									'js/frontend/logged/tweets/tweet_utilities.js',
+									'js/production/my_events.js',
+									'js/production/tweet_utilities.js',
 									'js/jquery.textCounter-min.js'
 									));
 									
