@@ -24,9 +24,9 @@
 										$profile_link =get_profile_url( $k['user_id'] , my_url($k['name']) );
 										$img = get_profile_image_of_user('thumb',$k['s_profile_photo'],$k['e_gender']);
 										/*********************already friend***************************/
-                                                         echo  $fr = "SELECT COUNT(*) AS check_count FROM cg_user_contacts WHERE i_requester_id ='".$logged_user_id."'  AND i_accepter_id = '".$k['user_id']."' AND s_status = 'pending' ";
+                                                           $fr = "SELECT COUNT(*) AS check_count FROM cg_user_contacts WHERE i_requester_id ='".$logged_user_id."'  AND i_accepter_id = '".$k['user_id']."' AND s_status = 'pending' ";
                                                                  $result1  = $this->db->query($fr)->result_array();
-                                                                 pr($result1);
+                                                              echo   $check_count = $result1[0]['check_count'];
               
                                                                                    /****************************************************/
 									?>
