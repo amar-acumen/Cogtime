@@ -26,7 +26,7 @@
 										/*********************already friend***************************/
                                                            $fr = "SELECT COUNT(*) AS check_count FROM cg_user_contacts WHERE i_requester_id ='".$logged_user_id."'  AND i_accepter_id = '".$k['user_id']."' AND s_status = 'pending' ";
                                                                  $result1  = $this->db->query($fr)->result_array();
-                                                              echo   $check_count = $result1[0]['check_count'];
+                                                                $check_count = $result1[0]['check_count'];
               
                                                                                    /****************************************************/
 									?>
@@ -34,8 +34,13 @@
                                                 <a href="javascript:void(0);"><img src="<?=$img?>" alt="" class="pro_photo3" /></a>
                                                 <p class="grey-link"><a href="<?=$profile_link?>"><?=$k['name']?></a></p>
 												<p class="nw-date-time"><?=$k['mutualfrnd']?> Mutual Friend<?=($k['mutualfrnd']==1)?' ':'s '?></p>
+                                                                                                <?php
+                                                                                                if($check_count == 0){
+                                                                                                ?>
                                                 <p><a href="javascript:void(0);" id="invite_friend_<?=$k['user_id']?>" class="add-as-friend" onclick="invite_friend_('<?=encrypt($k['user_id'])?>')">[add as friend]</a></p>
-												
+                                                                                                <?php }else{ ?>	
+                                                <p><a href="javascript:void(0);" id="invite_friend_<?=$k['user_id']?>" class="add-as-friend" >[Friend request sent]</a></p>
+                                                                                                <?php } ?>
                                           </div>
                                           <?php 
 										  
