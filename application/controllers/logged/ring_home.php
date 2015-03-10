@@ -57,16 +57,16 @@ class Ring_home extends Base_controller
             parent::_set_meta_keywords('');
         
             
-            parent::_add_js_arr( array( 'js/ddsmoothmenu.js',
+            parent::_add_js_arr( array( /*'js/ddsmoothmenu.js',
                                         'js/switch.js','js/animate-collapse.js',
                                         'js/lightbox.js','js/jquery-ui-1.8.2.custom.min.js',
-                                        'js/stepcarousel.js',
-										'js/frontend/logged/tweets/tweet_utilities.js',
-										'js/frontend/logged/rings/ring_helper.js'
+                                        'js/stepcarousel.js',*/
+										'js/production/tweet_utilities.js',
+										'js/production/ring_helper.js'
                                         ));
                                         
-            parent::_add_css_arr( array('css/jquery-ui-1.8.2.custom.css',
-                                          'css/dd.css') );
+//            parent::_add_css_arr( array('css/jquery-ui-1.8.2.custom.css',
+//                                          'css/dd.css') );
 										  
 			$ring_members	= $this->my_ring_model->get_all_ring_members_by_ring_id($i_ring_id,'','','');
 			foreach($ring_members as $arr)
@@ -662,10 +662,11 @@ class Ring_home extends Base_controller
 		parent::_set_meta_keywords('');
         
             
-		parent::_add_js_arr( array( 'js/ddsmoothmenu.js',
+		parent::_add_js_arr( array( /*'js/ddsmoothmenu.js',
 									'js/switch.js','js/animate-collapse.js',
 									'js/lightbox.js','js/jquery.dd.js','js/jquery-ui-1.8.2.custom.min.js',
-									'js/stepcarousel.js','js/frontend/logged/tweets/tweet_utilities.js'
+									'js/stepcarousel.js',*/
+                                    'js/production/tweet_utilities.js'
 									));
 									
 		parent::_add_css_arr( array('css/jquery-ui-1.8.2.custom.css',
@@ -923,16 +924,16 @@ class Ring_home extends Base_controller
             parent::_set_meta_keywords('');
         
             
-            parent::_add_js_arr( array( 'js/ddsmoothmenu.js',
+            parent::_add_js_arr( array( /*'js/ddsmoothmenu.js',
                                         'js/switch.js','js/animate-collapse.js',
                                         'js/lightbox.js','js/jquery.dd.js','js/jquery-ui-1.8.2.custom.min.js',
-                                        'js/stepcarousel.js',
+                                        'js/stepcarousel.js',*/
                                         //'js/frontend/logged/my_friends.js'
-                                        'js/frontend/logged/message_box/my_message.js','js/frontend/logged/tweets/tweet_utilities.js'
+                                        'js/production/my_message.js','js/production/tweet_utilities.js'
                                         ));
                                         
-            parent::_add_css_arr( array('css/jquery-ui-1.8.2.custom.css',
-                                        'css/dd.css') );
+//            parent::_add_css_arr( array('css/jquery-ui-1.8.2.custom.css',
+//                                        'css/dd.css') );
             
             
             /////////////////////////////////////////////
@@ -1297,14 +1298,15 @@ class Ring_home extends Base_controller
 		parent::_set_meta_keywords('');
         
             
-		parent::_add_js_arr( array( 'js/ddsmoothmenu.js',
+		parent::_add_js_arr( array( /*'js/ddsmoothmenu.js',
 									'js/switch.js','js/animate-collapse.js',
 									'js/lightbox.js','js/jquery.dd.js','js/jquery-ui-1.8.2.custom.min.js',
-									'js/stepcarousel.js','js/frontend/logged/tweets/tweet_utilities.js'
+									'js/stepcarousel.js',*/
+                                    'js/production/tweet_utilities.js'
 									));
 									
-		parent::_add_css_arr( array('css/jquery-ui-1.8.2.custom.css',
-                                          'css/dd.css') );
+//		parent::_add_css_arr( array('css/jquery-ui-1.8.2.custom.css',
+//                                          'css/dd.css') );
 		$data['ring_detail_arr'][0]	= $this->my_ring_model->get_by_id($ring_id);
 		$data['profile_id']	= intval(decrypt($this->session->userdata('user_id')));
 		$data['pagination_per_page'] = $this->pagination_per_page;
