@@ -127,7 +127,7 @@ class Module_generate extends CI_Controller {
                     //'js/stepcarousel.js',
                     //'js/frontend/logged/tweets/tweet_utilities.js',
                     //'js/frontend/logged/christian_news_js.js',
-                    /*'js/tab.js',
+                    'js/tab.js',
                     'js/jquery.flexslider.js'
                     ,'js/jquery.eislideshow.js',
                     'js/jquery.hoverIntent.minified.js',
@@ -142,7 +142,7 @@ class Module_generate extends CI_Controller {
                     'js/jquery.bxslider.min.js',
                     'js/jquery.fancybox.js',
                     // logged
-                    'js/frontend/public_profile.js'*/
+                    'js/frontend/public_profile.js'
                 );
 
                 $js = '';
