@@ -212,6 +212,7 @@ class Module_generate extends CI_Controller {
                     'js/frontend/logged/build_kingdom/tithe_time.js',
                     'js/frontend/logged/rings/church_ring_helper.js',
                     'js/frontend/logged/events/edit_events.js',
+                    'js/frontend/logged/holy_place/intercession.js',
                   //  'js/jquery.hoverIntent.js',
                   //  'js/frontend/utils.js'
                 );
