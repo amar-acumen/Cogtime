@@ -437,12 +437,15 @@ class Base_controller extends CI_Controller {
             'js/login.js' => 'header',
             'js/notification.js' => 'header',
             'js/utility_js_for_admin_and_fe.js' => 'header'*/
-            'js/production.js' => 'header'
+            //'js/production.js' => 'header'
         );
+        
 
         if($objclass == 'index' && $objmethod == 'index'){
             $default_js_arr['js/production/contentslider.js'] = 'header';
+            $default_js_arr['js/production.js'] = 'header';
         }else{
+            $default_js_arr['js/production.js'] = 'header';
             $default_js_arr['js/production/stepcarousel.js'] = 'header';
 
         }
