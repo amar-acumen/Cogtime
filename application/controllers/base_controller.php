@@ -530,7 +530,7 @@ class Base_controller extends CI_Controller {
             $data['header']['header_html'] .= '<title>' . $this->title . '</title>' . "\n";
 
             // NEW CODE [ meta content-type and base href] - START
-            $data['header']['header_html'] .= '<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />' . "\n";
+           // $data['header']['header_html'] .= '<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />' . "\n";
             $data['header']['header_html'] .= "<base href=\"" . base_url() . "\" />\n";
             // NEW CODE [ meta content-type and base href] - END
 
