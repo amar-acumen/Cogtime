@@ -239,7 +239,7 @@ function scrollToGivenPosition(elementId)
 {
 alert(elementId);
 
-	var lastElementPosition = $(elementId).position();
+	var lastElementPosition = $('"'+elementId+'"').position();
 	alert(lastElementPosition);
 	var lastElementTop = (lastElementPosition.top)*1;
 	
