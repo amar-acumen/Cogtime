@@ -96,9 +96,9 @@ class My_events extends Base_controller {
         $cur_time = date('Y-m-d');
         $s_where = " AND e.dt_end_time >= '" . $cur_time . "'";
         $result = $this->events_model->get_my_events($i_user_id, $s_where, intval($page), $this->pagination_per_page);
-        echo $this->db->last_query();
+        //echo $this->db->last_query();
         $total_rows = $this->events_model->get_total_my_events($i_user_id, $s_where);
-        pr($result,1);
+        //pr($result,1);
         $data['arr_events'] = $result;
         $data['no_of_result'] = $total_rows;
         $data['current_page_1'] = $cur_page;
