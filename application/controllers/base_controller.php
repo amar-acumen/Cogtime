@@ -441,13 +441,13 @@ class Base_controller extends CI_Controller {
         );
 
 
-        if($objclass == 'index' && $objmethod == 'index'){
+       /* if($objclass == 'index' && $objmethod == 'index'){
            // $default_js_arr['js/production/contentslider.js'] = 'header';
            // $default_js_arr['js/production.js'] = 'header';
         }else{
             $default_js_arr['js/production/stepcarousel.js'] = 'header';
 
-        }
+        }*/
 
 
 
