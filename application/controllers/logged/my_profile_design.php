@@ -60,7 +60,7 @@ class My_profile extends Base_controller {
 
 
             parent::_add_js_arr(array(
-                'js/ddsmoothmenu.js',
+                /*'js/ddsmoothmenu.js',
                 'js/switch.js',
                 'js/animate-collapse.js',
                 'js/lightbox.js',
@@ -68,9 +68,9 @@ class My_profile extends Base_controller {
                 'js/jquery-ui-1.8.2.custom.min.js',
                 'js/stepcarousel.js',
                 'js/jquery.form.js',
-                'js/jquery/JSON/json2.js',
-                'js/frontend/logged/manage_my_profile.js',
-                'js/frontend/logged/tweets/tweet_utilities.js'
+                'js/jquery/JSON/json2.js',*/
+                'js/production/manage_my_profile.js',
+                'js/production/tweet_utilities.js'
             ));
 
             parent::_add_css_arr(array('css/jquery-ui-1.8.2.custom.css',
