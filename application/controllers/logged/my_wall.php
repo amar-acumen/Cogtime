@@ -62,11 +62,11 @@ class My_wall extends Base_controller {
                 'js/stepcarousel.js',
                 'js/tab.js',*/
 //                'js/ajaxupload.js',
-               /* 'js/frontend/wall/wall_photo_upload.js',
-                'js/frontend/wall/wall_helper.js',
-                'js/frontend/logged/tweets/tweet_utilities.js',*/
+                'js/production/wall_photo_upload.js',
+                'js/production/wall_helper.js',
+                'js/production/tweet_utilities.js',
                     /* 'chat/js/chat.js' */
-                'js/logged.js'
+                //'js/logged.js'
             ));
 
             parent::_add_css_arr(array(//'css/jquery-ui-1.8.2.custom.css',
