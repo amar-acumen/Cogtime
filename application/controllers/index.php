@@ -63,7 +63,7 @@ class Index extends Base_controller
 										/*'js/jquery.js', // causing conflict with block ui*/
                                         //'js/production/header_slider.js',
                                         //'js/production/contentslider.js',
-                                        'js/production/jquery.autofill.js'
+                                       // 'js/production/jquery.autofill.js'
 									   
 									   
 									  ));
@@ -258,7 +258,7 @@ class Index extends Base_controller
 										/*'js/jquery.js', // causing conflict with block ui*/
 									   //'js/production/header_slider.js',
 									   //'js/production/contentslider.js',
-									   'js/production/jquery.autofill.js'
+									  // 'js/production/jquery.autofill.js'
 									   
 									  ));
 			parent::_add_css_arr( array('css/big-slider.css') );
