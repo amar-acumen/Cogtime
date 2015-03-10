@@ -617,6 +617,7 @@ class My_photos extends Base_controller {
             $handle->image_resize = true;
             $handle->image_x = 800;
             $handle->image_y = 536;
+            $handle->image_ratio_crop = true;
             $handle->Process($this->upload_path);
 
 
@@ -624,12 +625,14 @@ class My_photos extends Base_controller {
             $handle->image_resize = true;
             $handle->image_x = 400;
             $handle->image_y = 100;
+            $handle->image_ratio_crop = true;
             $handle->Process($this->upload_path);
 
             $handle = new Upload($thumb_file_array);
             $handle->image_resize = true;
             $handle->image_x = 110;
             $handle->image_y = 60;
+            $handle->image_ratio_crop = true;
             $handle->Process($this->upload_path);
 
             return $db_img_name;
