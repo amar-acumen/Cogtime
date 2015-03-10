@@ -68,10 +68,10 @@ class My_photos extends Base_controller {
                 //'js/uploadify/jquery.uploadify.min.js'
                 //'js/uploadify/jquery.uploadify.js'
                 'uploadify/swfobject.js',
-                'js/frontend/logged/tweets/tweet_utilities.js',
+                'js/production/tweet_utilities.js',
                 'uploadify/jquery.uploadify.js',
-                'js/frontend/logged/my_photo/my_photo.js',
-                'js/frontend/logged/my_photo/photo_helper.js'
+                'js/production/my_photo.js',
+                'js/production/photo_helper.js'
             ));
 
             parent::_add_css_arr(array('css/jquery-ui-1.8.2.custom.css',
@@ -339,21 +339,21 @@ class My_photos extends Base_controller {
 
 
             parent::_add_js_arr(array(
-                'js/ddsmoothmenu.js',
+                /*'js/ddsmoothmenu.js',
                 'js/switch.js', 'js/animate-collapse.js',
                 'js/lightbox.js', 'js/jquery.dd.js', 'js/jquery-ui-1.8.2.custom.min.js',
-                'js/stepcarousel.js',
+                'js/stepcarousel.js',*/
                 //'js/uploadify/jquery.uploadify.min.js'
                 //'js/uploadify/jquery.uploadify.js'
                 'uploadify/swfobject.js',
                 'uploadify/jquery.uploadify.js',
-                'js/frontend/logged/tweets/tweet_utilities.js',
-                'js/frontend/logged/my_photo/my_photo.js',
-                'js/frontend/logged/my_photo/photo_helper.js'
+                'js/production/tweet_utilities.js',
+                'js/production/my_photo.js',
+                'js/production/photo_helper.js'
             ));
 
-            parent::_add_css_arr(array('css/jquery-ui-1.8.2.custom.css',
-                'css/dd.css'));
+//            parent::_add_css_arr(array('css/jquery-ui-1.8.2.custom.css',
+//                'css/dd.css'));
             # adjusting header & footer sections [End]...
 
             $data['page_view_type'] = 'myaccount';

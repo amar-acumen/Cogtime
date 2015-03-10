@@ -49,19 +49,19 @@ class My_friends extends Base_controller
             parent::_set_meta_keywords('');
 		
 			
-            parent::_add_js_arr( array( 'js/ddsmoothmenu.js',
+            parent::_add_js_arr( array( /*'js/ddsmoothmenu.js',
 										'js/switch.js','js/animate-collapse.js',
 										'js/lightbox.js','js/jquery.dd.js','js/jquery-ui-1.8.2.custom.min.js',
 										'js/stepcarousel.js',
 										'js/jquery.form.js',
-                                		'js/jquery/JSON/json2.js',
-										'js/frontend/logged/delete_friend.js'
-										,'js/frontend/logged/my_friends.js',
-										'js/frontend/logged/tweets/tweet_utilities.js',
+                                		'js/jquery/JSON/json2.js',*/
+										'js/production/delete_friend.js'
+										,'js/production/my_friends.js',
+										'js/production/tweet_utilities.js',
 										));
 										
-            parent::_add_css_arr( array('css/jquery-ui-1.8.2.custom.css',
-			  							'css/dd.css') );
+//            parent::_add_css_arr( array('css/jquery-ui-1.8.2.custom.css',
+//			  							'css/dd.css') );
             
 			$i_profile_id = intval(decrypt($this->session->userdata('user_id')));
 			$data['page_view_type'] = 'myaccount';
@@ -280,16 +280,16 @@ class My_friends extends Base_controller
 		parent::_set_meta_keywords('');
 	
 		
-		parent::_add_js_arr( array( 'js/ddsmoothmenu.js',
+		parent::_add_js_arr( array( /*'js/ddsmoothmenu.js',
 									'js/switch.js','js/animate-collapse.js',
 									'js/lightbox.js','js/jquery.dd.js','js/jquery-ui-1.8.2.custom.min.js',
-									'js/stepcarousel.js',
-									'js/frontend/logged/my_friends.js',
-									'js/frontend/logged/tweets/tweet_utilities.js',
+									'js/stepcarousel.js',*/
+									'js/production/my_friends.js',
+									'js/production/tweet_utilities.js',
 									));
 									
-		parent::_add_css_arr( array('css/jquery-ui-1.8.2.custom.css',
-									'css/dd.css') );
+//		parent::_add_css_arr( array('css/jquery-ui-1.8.2.custom.css',
+//									'css/dd.css') );
 		
 		$i_profile_id = intval(decrypt($this->session->userdata('user_id')));
 		$arr_profile_info = $this->users_model->fetch_this($i_profile_id);
@@ -502,17 +502,17 @@ class My_friends extends Base_controller
 		parent::_set_meta_keywords('');
 	
 		
-		parent::_add_js_arr( array( 'js/ddsmoothmenu.js',
+		parent::_add_js_arr( array( /*'js/ddsmoothmenu.js',
 									'js/switch.js','js/animate-collapse.js',
 									'js/lightbox.js','js/jquery.dd.js','js/jquery-ui-1.8.2.custom.min.js',
-									'js/stepcarousel.js',
-									'js/frontend/logged/my_friends.js',
-									'js/frontend/logged/tweets/tweet_utilities.js',
+									'js/stepcarousel.js',*/
+									'js/production/my_friends.js',
+									'js/production/tweet_utilities.js',
 									'js/autocomplete/jquery.autocomplete.js'
 									));
 									
-		parent::_add_css_arr( array('css/jquery-ui-1.8.2.custom.css',
-									'css/dd.css',
+		parent::_add_css_arr( array(/*'css/jquery-ui-1.8.2.custom.css',
+									'css/dd.css',*/
 									'css/jquery.autocomplete.css') );
 		
 		$i_profile_id = intval(decrypt($this->session->userdata('user_id')));
@@ -1473,12 +1473,12 @@ class My_friends extends Base_controller
 		parent::_set_meta_keywords('');
 	
 		
-		parent::_add_js_arr( array( 'js/ddsmoothmenu.js',
+		parent::_add_js_arr( array( /*'js/ddsmoothmenu.js',
 									'js/switch.js','js/animate-collapse.js',
 									'js/lightbox.js','js/jquery.dd.js','js/jquery-ui-1.8.2.custom.min.js',
-									'js/stepcarousel.js',
-									'js/frontend/logged/my_friends.js',
-									'js/frontend/logged/tweets/tweet_utilities.js',
+									'js/stepcarousel.js',*/
+									'js/production/my_friends.js',
+									'js/production/tweet_utilities.js',
 									));
 									
 		parent::_add_css_arr( array('css/jquery-ui-1.8.2.custom.css',
@@ -1549,7 +1549,7 @@ $this->email->initialize($email_setting);
       <tr>
         <td align="left" valign="middle" style="color:#d3edfd; font-family:Arial, Helvetica, sans-serif; font-size:12px;"> <a href="http://acumencs.com/drandpt-arabic/contact-us/" style="color:#d3edfd; text-decoration:none;"></a></td>
         
-        <td align="right" style="color:#013d62; font-family:Arial, Helvetica, sans-serif; font-size:12px; text-align="center" ">© All Rights Reserved<span style="color:#525252;"><strong> COGTIME 2014  </strong></span></td>
+        <td align="right" style="color:#013d62; font-family:Arial, Helvetica, sans-serif; font-size:12px; text-align="center" ">ï¿½ All Rights Reserved<span style="color:#525252;"><strong> COGTIME 2014  </strong></span></td>
       </tr>
     </table></td>
   </tr>
@@ -1624,12 +1624,12 @@ $this->email->send();
 		parent::_set_meta_keywords('');
 	
 		
-		parent::_add_js_arr( array( 'js/ddsmoothmenu.js',
+		parent::_add_js_arr( array( /*'js/ddsmoothmenu.js',
 									'js/switch.js','js/animate-collapse.js',
 									'js/lightbox.js','js/jquery.dd.js','js/jquery-ui-1.8.2.custom.min.js',
-									'js/stepcarousel.js',
-									'js/frontend/logged/my_friends.js',
-									'js/frontend/logged/tweets/tweet_utilities.js',
+									'js/stepcarousel.js',*/
+									'js/production/my_friends.js',
+									'js/production/tweet_utilities.js',
 									));
 									
 		parent::_add_css_arr( array('css/jquery-ui-1.8.2.custom.css',

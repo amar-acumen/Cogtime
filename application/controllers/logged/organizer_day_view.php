@@ -51,17 +51,17 @@ class Organizer_day_view extends Base_controller
             parent::_set_meta_keywords('');
         
             
-            parent::_add_js_arr( array( 'js/ddsmoothmenu.js',
+            parent::_add_js_arr( array( /*'js/ddsmoothmenu.js',
                                         'js/switch.js','js/animate-collapse.js',
                                         'js/lightbox.js','js/jquery.dd.js',
                                         'js/stepcarousel.js',
-										'js/frontend/logged/organizer/organizer.js',
-										'js/frontend/logged/tweets/tweet_utilities.js',
-										'js/tab.js',
+										'js/frontend/logged/organizer/organizer.js',*/
+										'js/production/tweet_utilities.js',
+//										'js/tab.js',
 										'js/jquery.jcarousel.min.js',
-										'js/jquery-ui-1.8.2.custom.min.js',
+//										'js/jquery-ui-1.8.2.custom.min.js',
 										'js/jquery.mCustomScrollbar.min.js',
-										'js/frontend/logged/organizer/organizer.js'
+										'js/production/organizer.js'
 										
                                         ));
                                         
@@ -972,18 +972,18 @@ class Organizer_day_view extends Base_controller
             parent::_set_meta_keywords('');
         
             
-            parent::_add_js_arr( array( 'js/ddsmoothmenu.js',
+            parent::_add_js_arr( array( /*'js/ddsmoothmenu.js',
                                         'js/switch.js','js/animate-collapse.js',
                                         'js/lightbox.js','js/jquery.dd.js',
                                         'js/stepcarousel.js',
-										'js/frontend/logged/organizer/organizer.js',
-										'js/frontend/logged/tweets/tweet_utilities.js',
-										'js/tab.js',
+										'js/frontend/logged/organizer/organizer.js',*/
+										'js/production/tweet_utilities.js',
+//										'js/tab.js',
 										'js/jquery.jcarousel.min.js',
 										'js/jquery-ui-1.8.2.custom.min.js',
 										'js/jquery.mCustomScrollbar.min.js',
-										'js/jquery.ui.datepicker.js',
-										'js/frontend/logged/organizer/organizer.js'
+//										'js/jquery.ui.datepicker.js',
+										'js/production/organizer.js'
 										
                                         ));
                                         
@@ -1244,17 +1244,17 @@ class Organizer_day_view extends Base_controller
             parent::_set_meta_keywords('');
         
             
-              parent::_add_js_arr( array( 'js/ddsmoothmenu.js',
+              parent::_add_js_arr( array( /*'js/ddsmoothmenu.js',
                                         'js/switch.js','js/animate-collapse.js',
                                         'js/lightbox.js','js/jquery.dd.js',
                                         'js/stepcarousel.js',
-										'js/frontend/logged/organizer/organizer.js',
-										'js/frontend/logged/tweets/tweet_utilities.js',
-										'js/tab.js',
+										'js/frontend/logged/organizer/organizer.js',*/
+										'js/production/tweet_utilities.js',
+//										'js/tab.js',
 										'js/jquery.jcarousel.min.js',
-										'js/jquery-ui-1.8.2.custom.min.js',
+//										'js/jquery-ui-1.8.2.custom.min.js',
 										'js/jquery.mCustomScrollbar.min.js',
-										'js/frontend/logged/organizer/organizer.js'
+										'js/production/organizer.js'
 										
                                         ));
                                         

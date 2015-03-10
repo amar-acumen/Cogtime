@@ -49,21 +49,21 @@ class Organize_photo extends Base_controller
         
             
             parent::_add_js_arr( array( 
-										'js/ddsmoothmenu.js',
+										/*'js/ddsmoothmenu.js',
                                         'js/switch.js','js/animate-collapse.js',
-                                        'js/lightbox.js','js/jquery.dd.js','js/jquery-ui-1.8.2.custom.min.js',
+                                        'js/lightbox.js','js/jquery.dd.js','js/jquery-ui-1.8.2.custom.min.js',*/
                                         
 										'js/thickbox.js',
-										'js/stepcarousel.js',
-										'js/frontend/logged/tweets/tweet_utilities.js',
-										'js/frontend/logged/my_photo/organize_photo.js',
+//										'js/stepcarousel.js',
+										'js/production/tweet_utilities.js',
+										'js/production/organize_photo.js',
 										
 										'uploadify/swfobject.js',
                                         'uploadify/jquery.uploadify.js'
                                         ));
                                         
-            parent::_add_css_arr( array('css/jquery-ui-1.8.2.custom.css',
-                                          'css/dd.css','css/thickbox.css','uploadify/uploadify.css') );
+            parent::_add_css_arr( array(/*'css/jquery-ui-1.8.2.custom.css',
+                                          'css/dd.css',*/'css/thickbox.css','uploadify/uploadify.css') );
 										  
 			############################################################
 			$i_user_id = intval(decrypt($this->session->userdata('user_id')));

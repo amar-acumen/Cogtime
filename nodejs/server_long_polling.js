@@ -37,7 +37,7 @@ function processRequest(url_parts,res,cnt)
 										for(var i=0;i<rows.length;i++)
 										{
 											if(rows[i].countrow*1>0 
-												&& rows[i].item_type!='events' && rows[i].item_type!='organizer' 
+												&& rows[i].item_type!='organizer' 
 											)
 											{
 												nonZeroFound = true;

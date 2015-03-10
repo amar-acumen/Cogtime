@@ -47,20 +47,20 @@ class Organize_calender_view extends Base_controller
             parent::_set_meta_keywords('');
         
             
-            parent::_add_js_arr( array( 'js/ddsmoothmenu.js',
+            parent::_add_js_arr( array( /*'js/ddsmoothmenu.js',
                                         'js/switch.js','js/animate-collapse.js',
                                         'js/lightbox.js',
                                         'js/stepcarousel.js',
-										'js/tab.js',
-										'js/frontend/logged/tweets/tweet_utilities.js',
+										'js/tab.js',*/
+										'js/production/tweet_utilities.js',
 										'js/jquery.jcarousel.min.js',
-										'js/jquery-ui-1.8.2.custom.min.js',
+//										'js/jquery-ui-1.8.2.custom.min.js',
 										'js/jquery.mCustomScrollbar.min.js',
-										'js/frontend/logged/organizer/organizer.js'
+										'js/production/organizer.js'
 										
                                         ));
                                         
-            parent::_add_css_arr( array('css/date/jquery-ui-1.8.2.custom.css',
+            parent::_add_css_arr( array(/*'css/date/jquery-ui-1.8.2.custom.css',*/
                                           'css/jquery.mCustomScrollbar.css') );
 										  
             $i_profile_id = intval(decrypt($this->session->userdata('user_id')));

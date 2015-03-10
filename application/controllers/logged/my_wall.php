@@ -61,7 +61,7 @@ class My_wall extends Base_controller {
                 'js/lightbox.js', 'js/jquery.dd.js', //'js/jquery-ui-1.8.2.custom.min.js',//comment out to reduce page load time-sanhita
                 'js/stepcarousel.js',
                 'js/tab.js',*/
-               'js/ajaxupload.js',
+               //'js/ajaxupload.js',
                 'js/production/wall_photo_upload.js',
                 'js/production/wall_helper.js',
                 'js/production/tweet_utilities.js',
@@ -737,7 +737,7 @@ class My_wall extends Base_controller {
                 'js/switch.js', 'js/animate-collapse.js',
                 'js/lightbox.js', 'js/jquery.dd.js', 'js/jquery-ui-1.8.2.custom.min.js',
                  'js/stepcarousel.js',*/
-                'js/frontend/logged/tweets/tweet_utilities.js'
+                'js/production/tweet_utilities.js'
 
             ));
 
