@@ -1133,7 +1133,6 @@ class E_freebie extends Base_controller
 //									'js/stepcarousel.js',
 //									'js/tab.js'
 									));
-
 									
 //		parent::_add_css_arr( array('css/jquery-ui-1.8.2.custom.css',
 //                                          'css/dd.css') );
