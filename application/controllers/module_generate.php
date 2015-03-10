@@ -164,7 +164,8 @@ class Module_generate extends CI_Controller {
                     'js/frontend/logged/my_friends.js',
                     'js/frontend/logged/my_net_pals.js',
                     'js/frontend/logged/my_prayer_partner.js',
-                    'js/frontend/logged/message_box/my_message.js'
+                    'js/frontend/logged/message_box/my_message.js',
+                    'js/frontend/logged/tweets/tweet_utilities.js'
                     // logged
                   //  'js/frontend/public_profile.js'
 

@@ -66,7 +66,7 @@ class My_wall extends Base_controller {
                 'js/frontend/wall/wall_helper.js',
                 'js/frontend/logged/tweets/tweet_utilities.js',*/
                     /* 'chat/js/chat.js' */
-                'chat/logged.js'
+                'js/logged.js'
             ));
 
             parent::_add_css_arr(array(//'css/jquery-ui-1.8.2.custom.css',
