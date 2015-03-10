@@ -70,14 +70,15 @@ class New_public_profile extends Base_controller
 //										'js/jquery.lightbox.js',
 //										'js/frontend/public_profile.js',
 //										'js/ajaxupload.js',
-										'js/frontend/wall/wall_photo_upload.js',
-										'js/frontend/wall/wall_helper.js',
-										'js/frontend/logged/my_friends.js',
-										'js/frontend/logged/my_net_pals.js',
-										'js/frontend/logged/my_prayer_partner.js',
-										'js/frontend/logged/message_box/my_message.js',
+										'js/production/wall_photo_upload.js',
+										'js/production/wall_helper.js',
+										'js/production/my_friends.js',
+										'js/production/my_net_pals.js',
+										'js/production/my_prayer_partner.js',
+										'js/production/my_message.js',
 										'js/production/tweet_utilities.js',
 //                                        'js/jquery.fancybox.js'
+                                       //'js/logged.js'
                                         ));
 //
 //            parent::_add_css_arr( array('css/jquery-ui-1.8.2.custom.css',
