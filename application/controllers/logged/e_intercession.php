@@ -52,17 +52,17 @@ class E_intercession extends Base_controller {
             parent::_set_meta_keywords('');
 
 
-            parent::_add_js_arr(array('js/ddsmoothmenu.js',
+            parent::_add_js_arr(array(/*'js/ddsmoothmenu.js',
                 'js/switch.js', 'js/animate-collapse.js',
                 'js/lightbox.js', 'js/jquery.dd.js',
                 'js/jquery-ui-1.8.2.custom.min.js',
                 'js/stepcarousel.js',
                 'js/jquery/ui/jquery.ui.core.js',
-                'js/jquery.ui.datepicker.js',
+                'js/jquery.ui.datepicker.js',*/
                 'js/jquery-ui-timepicker-addon.js',
                 'js/jquery-ui-sliderAccess.js',
                 'js/tab.js',
-                'js/frontend/logged/holy_place/intercession.js',
+                'js/production/intercession.js',
                 'js/autocomplete/jquery.autocomplete.js'
             ));
 
@@ -251,21 +251,22 @@ public function all_request_ajax_pagination($page=0)
             parent::_set_meta_keywords('');
         
             
-            parent::_add_js_arr( array( 'js/ddsmoothmenu.js',
+            parent::_add_js_arr( array( /*'js/ddsmoothmenu.js',
                                         'js/switch.js','js/animate-collapse.js',
                                         'js/lightbox.js','js/jquery.dd.js',
 										'js/jquery-ui-1.8.2.custom.min.js',
                                         'js/stepcarousel.js',
 										'js/jquery/ui/jquery.ui.core.js',
-										'js/jquery.ui.datepicker.js',
+										'js/jquery.ui.datepicker.js',*/
 									    'js/jquery-ui-timepicker-addon.js',
 										'js/jquery-ui-sliderAccess.js',
 										'js/tab.js',
-										'js/frontend/logged/holy_place/intercession.js',
+										'js/production/intercession.js',
 										'js/autocomplete/jquery.autocomplete.js'
                                         ));
                                         
-            parent::_add_css_arr( array('css/jquery-ui-1.8.2.custom.css','css/jquery.autocomplete.css') );
+            parent::_add_css_arr( array(/*'css/jquery-ui-1.8.2.custom.css',*/
+                'css/jquery.autocomplete.css') );
           
             $i_user_id = intval(decrypt($this->session->userdata('user_id')));
 			$data['home_pagination_per_page'] =  $this->home_pagination_per_page;
@@ -637,18 +638,18 @@ public function all_request_ajax_pagination($page=0)
             parent::_set_meta_keywords('');
 
 
-            parent::_add_js_arr(array('js/ddsmoothmenu.js',
+            parent::_add_js_arr(array(/*'js/ddsmoothmenu.js',
                 'js/switch.js', 'js/animate-collapse.js',
                 'js/lightbox.js',
                 'js/jquery-ui-1.8.2.custom.min.js',
                 'js/jquery/ui/jquery.ui.core.js',
-                'js/jquery.ui.datepicker.js',
+                'js/jquery.ui.datepicker.js',*/
                 'js/jquery-ui-timepicker-addon.js',
-                'js/stepcarousel.js',
+//                'js/stepcarousel.js',
                 'js/jquery-ui.triggeredAutocomplete.js',
                 'js/jquery-ui-sliderAccess.js',
-                'js/tab.js',
-                'js/frontend/logged/holy_place/intercession.js',
+//                'js/tab.js',
+                'js/production/intercession.js',
                 'js/autocomplete/jquery.autocomplete.js'
             ));
 
