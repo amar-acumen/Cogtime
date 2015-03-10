@@ -1185,7 +1185,7 @@ class Events_model extends Base_model {
 								AND i_user_type = 1
 							 ".mysql_real_escape_string($s_where)." ORDER BY id DESC LIMIT ".mysql_real_escape_string($start_limit).", ".mysql_real_escape_string($no_of_page)."";				 
         }
-		echo nl2br($sql);exit;
+		//echo nl2br($sql);exit;
 
         $query = $this->db->query($sql);
         $result_arr = $query->result_array();
