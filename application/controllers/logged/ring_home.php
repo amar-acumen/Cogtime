@@ -665,7 +665,7 @@ class Ring_home extends Base_controller
 		parent::_add_js_arr( array( 'js/ddsmoothmenu.js',
 									'js/switch.js','js/animate-collapse.js',
 									'js/lightbox.js','js/jquery.dd.js','js/jquery-ui-1.8.2.custom.min.js',
-									'js/stepcarousel.js'
+									'js/stepcarousel.js','js/frontend/logged/tweets/tweet_utilities.js'
 									));
 									
 		parent::_add_css_arr( array('css/jquery-ui-1.8.2.custom.css',
@@ -928,7 +928,7 @@ class Ring_home extends Base_controller
                                         'js/lightbox.js','js/jquery.dd.js','js/jquery-ui-1.8.2.custom.min.js',
                                         'js/stepcarousel.js',
                                         //'js/frontend/logged/my_friends.js'
-                                        'js/frontend/logged/message_box/my_message.js'
+                                        'js/frontend/logged/message_box/my_message.js','js/frontend/logged/tweets/tweet_utilities.js'
                                         ));
                                         
             parent::_add_css_arr( array('css/jquery-ui-1.8.2.custom.css',
@@ -1300,7 +1300,7 @@ class Ring_home extends Base_controller
 		parent::_add_js_arr( array( 'js/ddsmoothmenu.js',
 									'js/switch.js','js/animate-collapse.js',
 									'js/lightbox.js','js/jquery.dd.js','js/jquery-ui-1.8.2.custom.min.js',
-									'js/stepcarousel.js'
+									'js/stepcarousel.js','js/frontend/logged/tweets/tweet_utilities.js'
 									));
 									
 		parent::_add_css_arr( array('css/jquery-ui-1.8.2.custom.css',
