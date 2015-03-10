@@ -653,7 +653,7 @@ public function all_request_ajax_pagination($page=0)
                 'js/autocomplete/jquery.autocomplete.js'
             ));
 
-            parent::_add_css_arr(array('css/jquery-ui-1.8.2.custom.css',
+            parent::_add_css_arr(array(/*'css/jquery-ui-1.8.2.custom.css',*/
                 'css/jquery.autocomplete.css'));
 
             $i_user_id = intval(decrypt($this->session->userdata('user_id')));
