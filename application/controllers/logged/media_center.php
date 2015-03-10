@@ -62,13 +62,13 @@ class Media_center extends Base_controller
 			parent::_set_meta_keywords('');
 		
 			
-			parent::_add_js_arr( array( 'js/ddsmoothmenu.js',
+			parent::_add_js_arr( array( /*'js/ddsmoothmenu.js',
 										'js/switch.js','js/animate-collapse.js',
 										'js/lightbox.js','js/jquery.dd.js','js/jquery-ui-1.8.2.custom.min.js',
 										'js/stepcarousel.js',
-										'js/jquery.autofill.js',
-										'js/frontend/logged/tweets/tweet_utilities.js',
-										'js/tab.js',
+										'js/jquery.autofill.js',*/
+										'js/production/tweet_utilities.js',
+//										'js/tab.js',
 										'js/jquery.eislideshow.js',
 										'js/jquery.hoverIntent.minified.js',
 										'js/jquery.naviDropDown.1.0.js',
@@ -76,8 +76,8 @@ class Media_center extends Base_controller
                                                                                  'js/jquery.fitvids.js'  
 										));
 										
-			parent::_add_css_arr( array('css/jquery-ui-1.8.2.custom.css',
-											  'css/dd.css') );
+//			parent::_add_css_arr( array('css/jquery-ui-1.8.2.custom.css',
+//											  'css/dd.css') );
 				
 				
 			# view file...

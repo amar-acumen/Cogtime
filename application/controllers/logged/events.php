@@ -52,12 +52,12 @@ class Events extends Base_controller {
             parent::_set_title('::: COGTIME Xtian network :::');
             parent::_set_meta_desc('');
             parent::_set_meta_keywords('');
-            parent::_add_js_arr(array('js/ddsmoothmenu.js',
+            parent::_add_js_arr(array(/*'js/ddsmoothmenu.js',
                 'js/ModalDialog.js',
                 'js/lightbox.js',
                 'js/jquery.autofill.js',
-                'js/stepcarousel.js',
-                'js/frontend/logged/events/events_helper.js','js/frontend/logged/tweets/tweet_utilities.js'
+                'js/stepcarousel.js',*/
+                'js/production/events_helper.js','js/production/tweet_utilities.js'
             ));
 
 
@@ -139,14 +139,14 @@ class Events extends Base_controller {
             parent::_set_title('::: COGTIME Xtian network :::');
             parent::_set_meta_desc('');
             parent::_set_meta_keywords('');
-            parent::_add_js_arr(array('js/ddsmoothmenu.js',
+            parent::_add_js_arr(array(/*'js/ddsmoothmenu.js',
                 'js/ModalDialog.js',
                 'js/lightbox.js',
-                'js/jquery.autofill.js',
-                'js/thickbox.js', 'js/stepcarousel.js',
-                'js/frontend/logged/events/events_helper.js','js/frontend/logged/tweets/tweet_utilities.js'));
+                'js/jquery.autofill.js',*/
+                'js/thickbox.js', //'js/stepcarousel.js',
+                'js/production/events_helper.js','js/production/tweet_utilities.js'));
 
-            parent::_add_css_arr(array('css/jquery-ui-1.8.2.custom.css',
+            parent::_add_css_arr(array(/*'css/jquery-ui-1.8.2.custom.css',*/
                 'css/thickbox.css'));
 
 
@@ -597,20 +597,20 @@ class Events extends Base_controller {
             parent::_set_meta_keywords('');
 
 
-            parent::_add_js_arr(array('js/ddsmoothmenu.js',
+            parent::_add_js_arr(array(/*'js/ddsmoothmenu.js',
                 'js/switch.js', 'js/animate-collapse.js',
                 'js/lightbox.js',
                 'js/jquery-ui-1.8.2.custom.min.js',
                 'js/stepcarousel.js',
                 'js/jquery/ui/jquery.ui.core.js',
-                'js/jquery.ui.datepicker.js',
-                'js/frontend/logged/tweets/tweet_utilities.js',
-                'js/tab.js',
+                'js/jquery.ui.datepicker.js',*/
+                'js/production/tweet_utilities.js',
+//                'js/tab.js',
                 'js/autocomplete/jquery.autocomplete.js'
             ));
 
-            parent::_add_css_arr(array('css/jquery-ui-1.8.2.custom.css',
-                'css/dd.css',
+            parent::_add_css_arr(array(/*'css/jquery-ui-1.8.2.custom.css',
+                'css/dd.css',*/
                 'css/jquery.autocomplete.css'
             ));
 
