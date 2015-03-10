@@ -32,6 +32,7 @@ function processRequest(url_parts,res,cnt)
 									}
 									else
 									{
+										
 										var nonZeroFound = false;
 										for(var i=0;i<rows.length;i++)
 										{
