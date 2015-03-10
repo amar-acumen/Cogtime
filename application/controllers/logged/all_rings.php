@@ -62,7 +62,7 @@ class All_rings extends Base_controller
                                     'js/lightbox.js',
                                     'js/jquery.dd.js',
                                     'js/jquery-ui-1.8.2.custom.min.js',*/
-									'js/frontend/logged/tweets/tweet_utilities.js',
+									'js/production/tweet_utilities.js',
                                     //'js/stepcarousel.js'
                                     ));
                                     

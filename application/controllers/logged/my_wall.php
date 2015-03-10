@@ -61,11 +61,12 @@ class My_wall extends Base_controller {
                 'js/lightbox.js', 'js/jquery.dd.js', //'js/jquery-ui-1.8.2.custom.min.js',//comment out to reduce page load time-sanhita
                 'js/stepcarousel.js',
                 'js/tab.js',*/
-                'js/ajaxupload.js',
-                'js/frontend/wall/wall_photo_upload.js',
-                'js/frontend/wall/wall_helper.js',
-                'js/frontend/logged/tweets/tweet_utilities.js',
+//                'js/ajaxupload.js',
+                'js/production/wall_photo_upload.js',
+                'js/production/wall_helper.js',
+                'js/production/tweet_utilities.js',
                     /* 'chat/js/chat.js' */
+                //'js/logged.js'
             ));
 
             parent::_add_css_arr(array(//'css/jquery-ui-1.8.2.custom.css',

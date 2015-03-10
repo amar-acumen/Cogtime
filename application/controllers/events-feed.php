@@ -64,7 +64,7 @@ class Events extends Base_controller
 										'js/lightbox.js',	
 										'js/jquery.autofill.js',
 										 'js/stepcarousel.js',*/
-										'js/frontend/logged/events/events_helper.js'
+										'js/production/events_helper.js'
 										));
 										
     		 
@@ -168,7 +168,7 @@ class Events extends Base_controller
 										'js/lightbox.js',	
 										'js/jquery.autofill.js',
 										'js/thickbox.js','js/stepcarousel.js',*/
-										'js/frontend/logged/events/events_helper.js'));
+										'js/production/events_helper.js'));
 			
 			parent::_add_css_arr( array(/*'css/jquery-ui-1.8.2.custom.css',
                                           'css/thickbox.css'*/) );

@@ -29,7 +29,7 @@ class Church_wall extends Base_controller
             parent::__construct();
             parent::_add_church_css_arr (array('css/church.css'));
 			 parent::_add_js_arr(array(
-                'js/ajaxupload.js',
+//                'js/ajaxupload.js',
                 'js/frontend/wall/wall_photo_upload.js',
                 'js/frontend/wall/wall_video_upload.js'));
                parent::check_login(TRUE, '', array('1')); // put this code on those pages which are not accessable by guest user
@@ -102,7 +102,7 @@ class Church_wall extends Base_controller
 	public function post_his_church_wall($refresh_list = 0, $photo_sent = 0, $url_sent = 0) {
         try {
             parent::_add_js_arr(array(
-                'js/ajaxupload.js',
+//                'js/ajaxupload.js',
                 'js/frontend/wall/wall_photo_upload.js',
                 'js/frontend/wall/wall_video_upload.js'
             ));
