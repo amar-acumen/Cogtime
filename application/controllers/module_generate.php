@@ -90,6 +90,7 @@ class Module_generate extends CI_Controller {
 
                 echo '<br/> production_logged.css';
             }
+
             if($js_prod){
                 $files_js = array(
                     /*'assets/js/contrib/perfect-scrollbar-0.4.10.with-mousewheel.min.js',
