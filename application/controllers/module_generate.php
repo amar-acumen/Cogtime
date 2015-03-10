@@ -96,7 +96,7 @@ class Module_generate extends CI_Controller {
                     'assets/js/contrib/jquery.mCustomScrollbar.concat.min.js',
                     'assets/js/contrib/jquery-ui-1.10.4.custom.min.js',
                     //'assets/js/contrib/gmap3.min.js',*/
-                    'js/jquery-1.7.2.js',
+                    //'js/jquery-1.7.2.js',
                     'js/jquery.cookie.js',
                     'js/jquery/ui/jquery.blockUI.js',
                     'js/jquery/ui/jquery.ui.core.js',
@@ -179,6 +179,7 @@ class Module_generate extends CI_Controller {
             // #################  Individual js min generate ###################
             if($js_indi){
                 $files_indvid_js = array(
+                    'js/jquery-1.7.2.js',
                     'chat/js/chat.js',
                     'js/jquery.gemoticons.js',
                     'js/frontend/header_slider.js',
