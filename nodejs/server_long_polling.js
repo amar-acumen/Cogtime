@@ -2,7 +2,7 @@ var url = require('url');
 var http = require('http');
 var mysql      = require('mysql');
 var pool = mysql.createPool({
-				  host     : '103.227.62.106',
+				  host     : 'localhost',//'103.227.62.106',
 				  user     : 'acumen',
 				  password : 'eWvo456&',
 				  database : 'admin_cogtime'
