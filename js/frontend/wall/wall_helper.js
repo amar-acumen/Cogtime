@@ -1,4 +1,4 @@
-<!--Script for wall and newsfeeds-->
+//<!--Script for wall and newsfeeds-->
 // Post comments on a feed //
 
 
