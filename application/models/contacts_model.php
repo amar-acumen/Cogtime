@@ -1099,9 +1099,9 @@ class Contacts_model extends Base_model implements InfModel
                 $j++;
               }
               /*********************already friend***************************/
-//              $fr = "SELECT COUNT(*) AS check_count FROM %s WHERE i_requester_id ='".$i_user_id."'  AND i_accepter_id = '".$result1[$i]['user_id']."' AND s_status = 'pending' ";
-//               $check_count  = $this->db->query($fr)->result_array();
-//               $ret[]=$check_count[0]['check_count'];
+              $fr = "SELECT COUNT(*) AS check_count FROM cg_user_contacts WHERE i_requester_id ='".$i_user_id."'  AND i_accepter_id = '".$result1[$i]['user_id']."' AND s_status = 'pending' ";
+               $check_count  = $this->db->query($fr)->result_array();
+               $ret[]=$check_count[0]['check_count'];
               /****************************************************/
               
           }  
