@@ -139,8 +139,8 @@ class Prayer_group extends Base_controller
                                         'js/lightbox.js',
 										'js/jquery-ui-1.8.2.custom.min.js',
                                         'js/stepcarousel.js',
-										'js/tab.js',
-										'js/frontend/logged/holy_place/prayer_group.js',*/
+										'js/tab.js',*/
+										'js/production/prayer_group.js',
 
                                         ));
                                         
