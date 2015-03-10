@@ -153,7 +153,7 @@ class Public_profile extends Base_controller
 					$is_friend_req_alrdy_snt = $this->users_model->friend_request_already_sent($logged_user_id,$i_profile_id);
 					#pr($is_friend_req_alrdy_snt);
 					if($is_friend_req_alrdy_snt){
-						$data['display_becomefriend']     ='false';
+						$data['display_becomefriend']     =false;
 						$data['if_already_friend']     ='';
 					}else{
 					    $data['if_already_friend']     =false;
