@@ -213,6 +213,8 @@ class Module_generate extends CI_Controller {
                     'js/frontend/logged/rings/church_ring_helper.js',
                     'js/frontend/logged/events/edit_events.js',
                     'js/frontend/logged/holy_place/intercession.js',
+                    'js/frontend/logged/my_videos.js',
+                    'js/frontend/logged/organize_my_videos.js',
                   //  'js/jquery.hoverIntent.js',
                   //  'js/frontend/utils.js'
                 );

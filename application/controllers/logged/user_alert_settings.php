@@ -47,17 +47,17 @@ class User_alert_settings extends Base_controller
             parent::_set_meta_keywords('');
         
             
-            parent::_add_js_arr( array( 'js/ddsmoothmenu.js',
+            parent::_add_js_arr( array( /*'js/ddsmoothmenu.js',
                                         'js/switch.js','js/animate-collapse.js',
                                         'js/lightbox.js','js/jquery.dd.js','js/jquery-ui-1.8.2.custom.min.js',
-                                        'js/stepcarousel.js',
-										'js/frontend/logged/tweets/tweet_utilities.js',
+                                        'js/stepcarousel.js',*/
+										'js/production/tweet_utilities.js',
 										//'js/frontend/logged/notifcations/user_alerts.js'
 										
                                         ));
                                         
-            parent::_add_css_arr( array('css/jquery-ui-1.8.2.custom.css',
-                                          'css/dd.css') );
+//            parent::_add_css_arr( array('css/jquery-ui-1.8.2.custom.css',
+//                                          'css/dd.css') );
 										  
             $i_profile_id = intval(decrypt($this->session->userdata('user_id')));
          	$data['arr_alert_arr'] = $this->user_alert_model->get_by_user_id($i_profile_id);

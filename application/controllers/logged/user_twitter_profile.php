@@ -55,20 +55,21 @@ class User_twitter_profile extends Base_controller
             parent::_set_meta_keywords('');
         
             
-            parent::_add_js_arr( array( 'js/ddsmoothmenu.js',
+            parent::_add_js_arr( array( /*'js/ddsmoothmenu.js',
                                         'js/switch.js','js/animate-collapse.js',
                                         'js/lightbox.js','js/jquery-ui-1.8.2.custom.min.js',
                                         'js/stepcarousel.js',
 										'js/jquery.autofill.js',
 										
-										'js/tab.js',
+										'js/tab.js',*/
 										'js/jquery-ui.triggeredAutocomplete.js',
-										'js/frontend/logged/tweets/tweets.js'
+										'js/production/tweets.js'
                                         ));
                                         
-            parent::_add_css_arr( array('css/jquery-ui-1.8.2.custom.css',
+            parent::_add_css_arr( array(//'css/jquery-ui-1.8.2.custom.css',
 										'css/jquery.autocomplete.css',
-                                          'css/dd.css') );
+                                          //'css/dd.css'
+            ) );
            
 			
 			
@@ -170,18 +171,18 @@ class User_twitter_profile extends Base_controller
             parent::_set_meta_keywords('');
         
             
-            parent::_add_js_arr( array( 'js/ddsmoothmenu.js',
+            parent::_add_js_arr( array( /*'js/ddsmoothmenu.js',
                                         'js/switch.js','js/animate-collapse.js',
                                         'js/lightbox.js','js/jquery-ui-1.8.2.custom.min.js',
                                         'js/stepcarousel.js',
 										'js/jquery.autofill.js',
-										'js/tab.js',
+										'js/tab.js',*/
 										'js/jquery-ui.triggeredAutocomplete.js',
-										'js/frontend/logged/tweets/tweets.js'
+										'js/production/tweets.js'
                                         ));
                                         
-            parent::_add_css_arr( array('css/jquery-ui-1.8.2.custom.css',
-                                          'css/dd.css') );
+//            parent::_add_css_arr( array('css/jquery-ui-1.8.2.custom.css',
+//                                          'css/dd.css') );
 										  
 										  
            
@@ -276,18 +277,18 @@ class User_twitter_profile extends Base_controller
             parent::_set_meta_keywords('');
         
             
-            parent::_add_js_arr( array( 'js/ddsmoothmenu.js',
+            parent::_add_js_arr( array( /*'js/ddsmoothmenu.js',
                                         'js/switch.js','js/animate-collapse.js',
                                         'js/lightbox.js','js/jquery-ui-1.8.2.custom.min.js',
                                         'js/stepcarousel.js',
 										'js/jquery.autofill.js',
-										'js/tab.js',
+										'js/tab.js',*/
 										'js/jquery-ui.triggeredAutocomplete.js',
-										'js/frontend/logged/tweets/tweets.js'
+										'js/production/tweets.js'
                                         ));
                                         
-            parent::_add_css_arr( array('css/jquery-ui-1.8.2.custom.css',
-                                          'css/dd.css') );
+//            parent::_add_css_arr( array('css/jquery-ui-1.8.2.custom.css',
+//                                          'css/dd.css') );
 										  
 										  
           
