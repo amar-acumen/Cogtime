@@ -581,16 +581,16 @@ class Create_event extends Base_controller {
             parent::_set_meta_keywords('');
 
 
-            parent::_add_js_arr(array('js/ddsmoothmenu.js',
+            parent::_add_js_arr(array(/*'js/ddsmoothmenu.js',
                 'js/switch.js', 'js/animate-collapse.js',
                 'js/lightbox.js', 'js/jquery-ui-1.8.2.custom.min.js',
-                'js/stepcarousel.js', 'js/jquery.dd.js',
-                'js/frontend/logged/events/edit_events.js',
+                'js/stepcarousel.js', 'js/jquery.dd.js',*/
+                'js/production/edit_events.js',
 				'js/jquery-ui-timepicker-addon.js'
             ));
 
-            parent::_add_css_arr(array('css/jquery-ui-1.8.2.custom.css',
-                'css/dd.css'));
+//            parent::_add_css_arr(array('css/jquery-ui-1.8.2.custom.css',
+//                'css/dd.css'));
 
             $i_user_id = intval(decrypt($this->session->userdata('user_id')));
 

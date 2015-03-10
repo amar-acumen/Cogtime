@@ -54,19 +54,19 @@ class prayer_partner_public_profile extends Base_controller
             parent::_set_meta_keywords('');
         
             
-            parent::_add_js_arr( array('js/ddsmoothmenu.js',
+            parent::_add_js_arr( array(/*'js/ddsmoothmenu.js',
 										'js/switch.js','js/animate-collapse.js',
 										'js/lightbox.js','js/jquery.dd.js','js/jquery-ui-1.8.2.custom.min.js',
-										'js/stepcarousel.js',
-										'js/frontend/logged/my_friends.js',
-										'js/frontend/logged/my_net_pals.js',
-										'js/frontend/logged/my_prayer_partner.js',
-										'js/frontend/logged/message_box/my_message.js',
-										'js/tab.js',
+										'js/stepcarousel.js',*/
+										'js/production/my_friends.js',
+										'js/production/my_net_pals.js',
+										'js/production/my_prayer_partner.js',
+										'js/production/my_message.js',
+										//'js/tab.js',
 										
                                         ));
                                         
-            parent::_add_css_arr( array('css/jquery-ui-1.8.2.custom.css') );
+           // parent::_add_css_arr( array('css/jquery-ui-1.8.2.custom.css') );
             # adjusting header & footer sections [End]...
 			$data['page_view_type'] = 'public_account';
 			

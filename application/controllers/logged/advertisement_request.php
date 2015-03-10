@@ -51,19 +51,19 @@ class Advertisement_request extends Base_controller {
             parent::_set_meta_keywords('');
 
 
-            parent::_add_js_arr(array('js/ddsmoothmenu.js',
+            parent::_add_js_arr(array(/*'js/ddsmoothmenu.js',
                 'js/switch.js', 'js/animate-collapse.js',
                 'js/lightbox.js',
                 'js/jquery-ui-1.8.2.custom.min.js',
                 'js/stepcarousel.js',
                 'js/jquery/ui/jquery.ui.core.js',
-                'js/jquery.ui.datepicker.js',
+                'js/jquery.ui.datepicker.js',*/
                 'js/jquery-ui-timepicker-addon.js',
                 'js/jquery-ui.triggeredAutocomplete.js',
                 'js/jquery-ui-sliderAccess.js',
-                'js/tab.js',
-                'js/frontend/logged/holy_place/prayer_wall.js',
-                'js/frontend/logged/tweets/tweets.js',
+//                'js/tab.js',
+                'js/production/prayer_wall.js',
+                'js/production/tweets.js',
                 'js/autocomplete/jquery.autocomplete.js'
             ));
 

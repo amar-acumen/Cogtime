@@ -2,7 +2,7 @@ var url = require('url');
 var http = require('http');
 var mysql      = require('mysql');
 var pool = mysql.createPool({
-				  host     : '103.227.62.106',
+				  host     : 'localhost',//'103.227.62.106',
 				  user     : 'acumen',
 				  password : 'eWvo456&',
 				  database : 'admin_cogtime'
@@ -21,7 +21,7 @@ function processRequest(url_parts,res,cnt)
 		}
 		else
 		{
-			connection.query(	'(SELECT COUNT(*) AS countrow,"notification" as item_type from cg_notifications WHERE i_accepter_id ="'+url_parts.query.user+'" AND i_notification_shown=1) UNION (SELECT COUNT(*) AS countrow,"events" as item_type FROM cg_events  WHERE i_host_id = "'+url_parts.query.user+'" AND i_status = 1 AND i_user_type = 1 ) UNION (SELECT COUNT(*) AS countrow,"organizer" as item_type FROM cg_organizer_to_do_list  WHERE i_user_id ="'+url_parts.query.user+'") UNION (select COUNT(*) AS countrow ,"chat" as item_type from cg_im_chat where (cg_im_chat.to = "'+url_parts.query.displayuser+'" AND cg_im_chat.to_id = "'+url_parts.query.user+'" AND recd = 0))', 
+			connection.query('(SELECT COUNT(id) AS countrow,"notification" as item_type from cg_notifications WHERE i_accepter_id ="'+url_parts.query.user+'" AND i_notification_shown=1) UNION (SELECT COUNT(id) AS countrow,"organizer" as item_type FROM cg_organizer_to_do_list  WHERE i_user_id ="'+url_parts.query.user+'") UNION (select COUNT(id) AS countrow ,"chat" as item_type from cg_im_chat where (cg_im_chat.to = "'+url_parts.query.displayuser+'" AND cg_im_chat.to_id = "'+url_parts.query.user+'" AND recd = 0))', 
 								function(err, rows, fields) {
 									connection.release();
 									if (err) 
@@ -32,6 +32,7 @@ function processRequest(url_parts,res,cnt)
 									}
 									else
 									{
+										
 										var nonZeroFound = false;
 										for(var i=0;i<rows.length;i++)
 										{

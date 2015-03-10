@@ -58,12 +58,12 @@ class Church_ring_home extends Base_controller
             parent::_set_meta_keywords('');
         
             
-            parent::_add_js_arr( array( 'js/ddsmoothmenu.js',
+            parent::_add_js_arr( array( /*'js/ddsmoothmenu.js',
                                         'js/animate-collapse.js',
                                         'js/lightbox.js','js/jquery-ui-1.8.2.custom.min.js',
-                                        'js/stepcarousel.js',
-										'js/frontend/logged/tweets/tweet_utilities.js',
-										'js/frontend/logged/rings/church_ring_helper.js'
+                                        'js/stepcarousel.js',*/
+										'js/production/tweet_utilities.js',
+										'js/production/church_ring_helper.js'
                                         ));
                                         
 //            parent::_add_css_arr( array('css/church.css') );

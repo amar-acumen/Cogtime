@@ -75,7 +75,7 @@ class Create_church_space extends Base_controller
 									    'js/jquery-ui-timepicker-addon.js',
 										'js/jquery-ui-sliderAccess.js',
 										'js/production/tweet_utilities.js',
-										'js/frontend/logged/build_kingdom/tithe_time.js',
+										'js/production/tithe_time.js',
 										//'js/tab.js',
 										//'js/ModalDialog.js',
                                         ));

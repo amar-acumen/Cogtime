@@ -64,16 +64,16 @@ class E_trade extends Base_controller
             parent::_set_meta_keywords('');
         
             
-            parent::_add_js_arr( array( 'js/ddsmoothmenu.js',
+            parent::_add_js_arr( array( /*'js/ddsmoothmenu.js',
                                         'js/switch.js','js/animate-collapse.js',
-                                        'js/lightbox.js','js/jquery.dd.js','js/jquery-ui-1.8.2.custom.min.js',
-										'js/frontend/logged/tweets/tweet_utilities.js',
-                                        'js/stepcarousel.js',
-                                        'js/tab.js'
+                                        'js/lightbox.js','js/jquery.dd.js','js/jquery-ui-1.8.2.custom.min.js',*/
+										'js/production/tweet_utilities.js',
+//                                        'js/stepcarousel.js',
+//                                        'js/tab.js'
                                         ));
                                         
-            parent::_add_css_arr( array('css/jquery-ui-1.8.2.custom.css',
-                                          'css/dd.css') );
+//            parent::_add_css_arr( array('css/jquery-ui-1.8.2.custom.css',
+//                                          'css/dd.css') );
     
             
             # view file...
@@ -230,16 +230,16 @@ class E_trade extends Base_controller
             parent::_set_meta_keywords('');
         
             
-            parent::_add_js_arr( array( 'js/ddsmoothmenu.js',
+            parent::_add_js_arr( array( /*'js/ddsmoothmenu.js',
                                         'js/switch.js','js/animate-collapse.js',
-                                        'js/lightbox.js','js/jquery.dd.js','js/jquery-ui-1.8.2.custom.min.js',
-										'js/frontend/logged/tweets/tweet_utilities.js',
-                                        'js/stepcarousel.js',
-                                        'js/tab.js'
+                                        'js/lightbox.js','js/jquery.dd.js','js/jquery-ui-1.8.2.custom.min.js',*/
+										'js/production/tweet_utilities.js',
+//                                        'js/stepcarousel.js',
+//                                        'js/tab.js'
                                         ));
                                         
-            parent::_add_css_arr( array('css/jquery-ui-1.8.2.custom.css',
-                                          'css/dd.css') );
+//            parent::_add_css_arr( array('css/jquery-ui-1.8.2.custom.css',
+//                                          'css/dd.css') );
 			
 			$data['swap_menu'] =2 ;
 			ob_start();
@@ -786,12 +786,12 @@ class E_trade extends Base_controller
             parent::_set_meta_keywords('');
         
             
-            parent::_add_js_arr( array( 'js/ddsmoothmenu.js',
+            parent::_add_js_arr( array( /*'js/ddsmoothmenu.js',
                                         'js/switch.js','js/animate-collapse.js',
-                                        'js/lightbox.js','js/jquery.dd.js','js/jquery-ui-1.8.2.custom.min.js',
-										'js/frontend/logged/tweets/tweet_utilities.js',
-                                        'js/stepcarousel.js',
-                                        'js/tab.js'
+                                        'js/lightbox.js','js/jquery.dd.js','js/jquery-ui-1.8.2.custom.min.js',*/
+										'js/production/tweet_utilities.js',
+//                                        'js/stepcarousel.js',
+//                                        'js/tab.js'
                                         ));
                                         
             parent::_add_css_arr( array('css/jquery-ui-1.8.2.custom.css',
@@ -1052,16 +1052,16 @@ class E_trade extends Base_controller
             parent::_set_meta_keywords('');
         
             
-            parent::_add_js_arr( array( 'js/ddsmoothmenu.js',
+            parent::_add_js_arr( array( /*'js/ddsmoothmenu.js',
                                         'js/switch.js','js/animate-collapse.js',
-                                        'js/lightbox.js','js/jquery.dd.js','js/jquery-ui-1.8.2.custom.min.js',
-										'js/frontend/logged/tweets/tweet_utilities.js',
-                                        'js/stepcarousel.js',
-                                        'js/tab.js'
+                                        'js/lightbox.js','js/jquery.dd.js','js/jquery-ui-1.8.2.custom.min.js',*/
+										'js/production/tweet_utilities.js',
+//                                        'js/stepcarousel.js',
+//                                        'js/tab.js'
                                         ));
                                         
-            parent::_add_css_arr( array('css/jquery-ui-1.8.2.custom.css',
-                                          'css/dd.css') );
+//            parent::_add_css_arr( array('css/jquery-ui-1.8.2.custom.css',
+//                                          'css/dd.css') );
     
             
             # view file...
@@ -1210,16 +1210,16 @@ class E_trade extends Base_controller
 		parent::_set_meta_keywords('');
 	
 		
-		parent::_add_js_arr( array( 'js/ddsmoothmenu.js',
+		parent::_add_js_arr( array( /*'js/ddsmoothmenu.js',
 									'js/switch.js','js/animate-collapse.js',
-									'js/lightbox.js','js/jquery.dd.js','js/jquery-ui-1.8.2.custom.min.js',
-									'js/frontend/logged/tweets/tweet_utilities.js',
-									'js/stepcarousel.js',
-									'js/tab.js'
+									'js/lightbox.js','js/jquery.dd.js','js/jquery-ui-1.8.2.custom.min.js',*/
+									'js/production/tweet_utilities.js',
+//									'js/stepcarousel.js',
+//									'js/tab.js'
 									));
 									
-		parent::_add_css_arr( array('css/jquery-ui-1.8.2.custom.css',
-                                          'css/dd.css') );
+//		parent::_add_css_arr( array('css/jquery-ui-1.8.2.custom.css',
+//                                          'css/dd.css') );
 										  
 		$data['info']	= $this->e_trade_model->get_by_id($id);	
 							  

@@ -74,10 +74,10 @@ class Public_profile_audios extends Base_controller
                                         'js/jquery.autofill.js',
                                         'js/jquery.lightbox.js',
 										'js/stepcarousel.js',*/
-                                        'js/frontend/logged/my_friends.js',
-                                        'js/frontend/logged/my_net_pals.js',
-                                        'js/frontend/logged/my_prayer_partner.js',
-                                        'js/frontend/logged/message_box/my_message.js',
+                                        'js/production/my_friends.js',
+                                        'js/production/my_net_pals.js',
+                                        'js/production/my_prayer_partner.js',
+                                        'js/production/my_message.js',
 										'js/production/tweet_utilities.js',
                                         'js/jwplayer/jwplayer.js'
                                         ));
@@ -191,13 +191,13 @@ class Public_profile_audios extends Base_controller
                                         'js/jquery.autofill.js',
                                         'js/jquery.lightbox.js',
 										'js/stepcarousel.js',*/
-                                        'js/frontend/logged/my_friends.js',
-                                        'js/frontend/logged/my_net_pals.js',
-                                        'js/frontend/logged/my_prayer_partner.js',
-                                        'js/frontend/logged/message_box/my_message.js',
+                                        'js/production/my_friends.js',
+                                        'js/production/my_net_pals.js',
+                                        'js/production/my_prayer_partner.js',
+                                        'js/production/my_message.js',
 										'js/production/tweet_utilities.js',
-										'js/frontend/logged/my_audio/my_audio.js',
-										'js/frontend/logged/my_audio/audio_helper.js',
+										'js/production/my_audio.js',
+										'js/production/audio_helper.js',
                                         'js/jwplayer/jwplayer.js'
                                         ));
                                         

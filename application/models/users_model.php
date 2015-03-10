@@ -704,7 +704,7 @@ class Users_model extends Base_model implements InfModel {
 							 u.s_password,
 							 u.s_profile_url_suffix,
 							 u.s_chat_display_name,u.s_profile_photo,u.e_gender,
-                             u.s_tweet_bg_img,u.s_time,u.s_bio,u.e_want_net_pal,u.e_want_prayer_partner,u.is_pr_partner_q_mail_sent,u.is_netpal_q_mail_sent,u.s_timezone_text
+                             u.s_tweet_bg_img,u.s_time,u.s_bio,u.e_want_net_pal,u.e_want_prayer_partner,u.is_pr_partner_q_mail_sent,u.is_netpal_q_mail_sent,u.s_timezone_text,u.s_tweet_id
                             
                              FROM " . $this->db->USERS . "  u
                         
@@ -724,7 +724,7 @@ class Users_model extends Base_model implements InfModel {
 							 u.s_password,
 							 u.s_profile_url_suffix,
 							 u.s_chat_display_name,u.s_profile_photo,u.e_gender,
-                             u.s_tweet_bg_img,u.s_time,u.s_bio,u.e_want_net_pal,u.e_want_prayer_partner,u.is_pr_partner_q_mail_sent,u.is_netpal_q_mail_sent,u.s_timezone_text
+                             u.s_tweet_bg_img,u.s_time,u.s_bio,u.e_want_net_pal,u.e_want_prayer_partner,u.is_pr_partner_q_mail_sent,u.is_netpal_q_mail_sent,u.s_timezone_text,u.s_tweet_id
                             
                              FROM " . $this->db->USERS . "  u
                             
@@ -747,7 +747,7 @@ class Users_model extends Base_model implements InfModel {
 							 u.s_password,
 							 u.s_profile_url_suffix,
 							 u.s_chat_display_name,u.s_profile_photo,u.e_gender,
-                             u.s_tweet_bg_img,u.s_time,u.s_bio,u.e_want_net_pal,u.e_want_prayer_partner,u.is_pr_partner_q_mail_sent,u.is_netpal_q_mail_sent,u.s_timezone_text
+                             u.s_tweet_bg_img,u.s_time,u.s_bio,u.e_want_net_pal,u.e_want_prayer_partner,u.is_pr_partner_q_mail_sent,u.is_netpal_q_mail_sent,u.s_timezone_text,u.s_tweet_id
                             
                              FROM " . $this->db->USERS . "  u
                             
@@ -808,6 +808,8 @@ class Users_model extends Base_model implements InfModel {
                     $this->session->set_userdata('unique_username', $ret_["s_profile_url_suffix"]);
                     $this->session->set_userdata('display_username', $ret_["s_chat_display_name"]);
                     $this->session->set_userdata('s_tweet_bg_img', $ret_["s_tweet_bg_img"]);
+                     $this->session->set_userdata('s_tweet_id', ($row->s_tweet_id));
+                      $this->session->set_userdata('s_profile_name', ($row->s_profile_name));
 					$this->session->set_userdata('s_chat_display_name', $ret_["s_chat_display_name"]);
 					$this->session->set_userdata('e_want_net_pal', $ret_["e_want_net_pal"]);
 					$this->session->set_userdata('e_want_prayer_partner', $ret_["e_want_prayer_partner"]);

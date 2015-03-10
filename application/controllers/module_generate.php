@@ -142,8 +142,8 @@ class Module_generate extends CI_Controller {
                     'js/jquery.bxslider.min.js',
                     'js/jquery.fancybox.js',
                     // logged
-                    'js/frontend/public_profile.js',
-                    'js/ajaxupload.js'
+                    'js/frontend/public_profile.js'
+                    //'js/ajaxupload.js',
                 );
 
                 $js = '';
@@ -202,6 +202,17 @@ class Module_generate extends CI_Controller {
                     'js/frontend/logged/events/my_events.js',
                     'js/frontend/wall/wall_photo_upload.js',
                     'js/frontend/wall/wall_helper.js',
+                    'js/frontend/logged/my_audio/my_audio.js',
+                    'js/frontend/logged/my_audio/audio_helper.js',
+                    'js/frontend/logged/my_photo/photo_helper.js',
+                    'js/frontend/logged/my_photo/photo_details.js',
+                    'js/frontend/logged/events/events_helper.js',
+                    'js/frontend/logged/holy_place/prayer_wall.js',
+                    'js/frontend/logged/tweets/tweets.js',
+                    'js/frontend/logged/build_kingdom/tithe_time.js',
+                    'js/frontend/logged/rings/church_ring_helper.js',
+                    'js/frontend/logged/events/edit_events.js',
+                    'js/frontend/logged/holy_place/intercession.js',
                   //  'js/jquery.hoverIntent.js',
                   //  'js/frontend/utils.js'
                 );

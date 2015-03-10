@@ -1,9 +1,10 @@
-<!--Script for wall and newsfeeds-->
+//<!--Script for wall and newsfeeds-->
 // Post comments on a feed //
 
 
 function show_post_comment_box(i_newsfeed_id)
 {
+    console.log(i_newsfeed_id);
     if(i_newsfeed_id != undefined){
         $('#i_newsfeed_id').val(i_newsfeed_id);
         $('.feed_comment_box').attr('id','feed_comment_box_'+i_newsfeed_id);
@@ -14,6 +15,7 @@ function show_post_comment_box(i_newsfeed_id)
         //show_dialog('comment_div');
     }
 }
+
 
 var ajax_comment_post = null;	
 function post_comment(id) 

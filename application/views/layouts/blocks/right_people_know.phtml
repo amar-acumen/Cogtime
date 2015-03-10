@@ -10,7 +10,7 @@
                                     <div class="content" id="switchdiv022" style="display:none;">
 									<?php 
  //$friends=get_friends_by_id($_SESSION['user_id']);
-
+pr($people_you_may_know); 
 
  if($people_you_may_know)
  {
@@ -29,7 +29,7 @@
                                                 <a href="javascript:void(0);"><img src="<?=$img?>" alt="" class="pro_photo3" /></a>
                                                 <p class="grey-link"><a href="<?=$profile_link?>"><?=$k['name']?></a></p>
 												<p class="nw-date-time"><?=$k['mutualfrnd']?> Mutual Friend<?=($k['mutualfrnd']==1)?' ':'s '?></p>
-                                                <p><a href="javascript:void(0);" id="#invite_friend_(<?=$k?>)" class="add-as-friend" onclick="invite_friend_('<?=encrypt($k)?>')">[add as friend]</a></p>
+                                                <p><a href="javascript:void(0);" id="invite_friend_<?=$k['user_id']?>" class="add-as-friend" onclick="invite_friend_('<?=encrypt($k['user_id'])?>')">[add as friend]</a></p>
 												
                                           </div>
                                           <?php 
@@ -58,7 +58,7 @@
                                                 <a href="javascript:void(0);"><img src="<?=$img?>" alt="" class="pro_photo3" /></a>
                                                 <p class="grey-link"><a href="<?=$profile_link?>"><?=$name?></a></p>
                                          
-                                                <p><a href="javascript:void(0);" id="#invite_friend_(<?=$val['id']?>)" class="add-as-friend" onclick="invite_friend_('<?=encrypt($val['id'])?>')">[add as friend]</a></p>
+                                                <p><a href="javascript:void(0);" id="invite_friend_(<?=$val['id']?>)" class="add-as-friend" onclick="invite_friend_('<?=encrypt($val['id'])?>')">[add as friend]</a></p>
                                           </div>
                                           <?php 
 
@@ -91,7 +91,8 @@ function invite_friend_(id)
 							hideBusyScreen();
 							if(result_obj.success== true ) {
 								showUIMsg(result_obj.msg);
-								//$('#invite_friend_'+result_obj.u_id).html(result_obj.html_txt);
+                                                              //  alert('#invite_friend_'+result_obj.u_id);
+								$('#invite_friend_'+result_obj.u_id).text(result_obj.html_txt);
 							}
 							else if(result_obj.success==false){
 							    showUIMsg(result_obj.msg);

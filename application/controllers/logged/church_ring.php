@@ -77,11 +77,11 @@ class Church_ring extends Base_controller
                                         'js/switch.js','js/animate-collapse.js',
                                         'js/lightbox.js','js/jquery.dd.js','js/jquery-ui-1.8.2.custom.min.js',
                                         'js/stepcarousel.js',*/
-										'js/frontend/logged/tweets/tweet_utilities.js'
+										'js/production/tweet_utilities.js'
                                         ));
                                         
-            parent::_add_css_arr( array('css/jquery-ui-1.8.2.custom.css',
-                                          'css/dd.css') );
+//            parent::_add_css_arr( array('css/jquery-ui-1.8.2.custom.css',
+//                                          'css/dd.css') );
             
            
 		   
@@ -1498,11 +1498,11 @@ $this->email->message("$body");
                                         'js/switch.js','js/animate-collapse.js',
                                         'js/lightbox.js','js/jquery.dd.js','js/jquery-ui-1.8.2.custom.min.js',
                                         'js/stepcarousel.js',*/
-										'js/frontend/logged/tweets/tweet_utilities.js'
+										'js/production/tweet_utilities.js'
                                         ));
                                         
-            parent::_add_css_arr( array('css/jquery-ui-1.8.2.custom.css',
-                                          'css/dd.css') );
+//            parent::_add_css_arr( array('css/jquery-ui-1.8.2.custom.css',
+//                                          'css/dd.css') );
             
            
 		   

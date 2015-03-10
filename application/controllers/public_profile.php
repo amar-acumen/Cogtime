@@ -1121,10 +1121,10 @@ class Public_profile extends Base_controller
 										'js/jquery.autofill.js',
 										'js/jquery.lightbox.js',*/
 										//'js/frontend/public_profile.js',
-										'js/frontend/logged/my_friends.js',
-										'js/frontend/logged/my_net_pals.js',
-										'js/frontend/logged/my_prayer_partner.js',
-										'js/frontend/logged/message_box/my_message.js',
+										'js/production/my_friends.js',
+										'js/production/my_net_pals.js',
+										'js/production/my_prayer_partner.js',
+										'js/production/my_message.js',
 										'js/production/tweet_utilities.js',
 										//'js/stepcarousel.js'
                                         ));
@@ -1294,10 +1294,10 @@ class Public_profile extends Base_controller
 										'js/jquery.autofill.js',
 										'js/jquery.lightbox.js',*/
 										//'js/frontend/public_profile.js',
-										'js/frontend/logged/my_friends.js',
-										'js/frontend/logged/my_net_pals.js',
-										'js/frontend/logged/my_prayer_partner.js',
-										'js/frontend/logged/message_box/my_message.js',
+										'js/production/my_friends.js',
+										'js/production/my_net_pals.js',
+										'js/production/my_prayer_partner.js',
+										'js/production/my_message.js',
 										'js/production/tweet_utilities.js',
 									//	'js/stepcarousel.js'
                                         ));
