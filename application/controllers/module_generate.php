@@ -143,7 +143,7 @@ class Module_generate extends CI_Controller {
                     'js/jquery.fancybox.js',
                     // logged
                     'js/frontend/public_profile.js',
-                    'js/ajaxupload.js'
+                    'js/ajaxupload.js',
                 );
 
                 $js = '';
@@ -206,6 +206,12 @@ class Module_generate extends CI_Controller {
                     'js/frontend/logged/my_audio/audio_helper.js',
                     'js/frontend/logged/my_photo/photo_helper.js',
                     'js/frontend/logged/my_photo/photo_details.js',
+                    'js/frontend/logged/events/events_helper.js',
+                    'js/frontend/logged/holy_place/prayer_wall.js',
+                    'js/frontend/logged/tweets/tweets.js',
+                    'js/frontend/logged/build_kingdom/tithe_time.js',
+                    'js/frontend/logged/rings/church_ring_helper.js',
+                    'js/frontend/logged/events/edit_events.js',
                   //  'js/jquery.hoverIntent.js',
                   //  'js/frontend/utils.js'
                 );

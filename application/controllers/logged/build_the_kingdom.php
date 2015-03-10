@@ -63,22 +63,22 @@ class Build_the_kingdom extends Base_controller
             parent::_set_meta_keywords('');
         
             
-            parent::_add_js_arr( array( 'js/ddsmoothmenu.js',
+            parent::_add_js_arr( array( /*'js/ddsmoothmenu.js',
                                         'js/switch.js','js/animate-collapse.js',
                                         'js/lightbox.js',
 										'js/jquery-ui-1.8.2.custom.min.js',
                                         'js/stepcarousel.js',
 										'js/jquery/ui/jquery.ui.core.js',
-										'js/jquery.ui.datepicker.js',
+										'js/jquery.ui.datepicker.js',*/
 									    'js/jquery-ui-timepicker-addon.js',
 										'js/jquery-ui-sliderAccess.js',
-										'js/frontend/logged/tweets/tweet_utilities.js',
-										'js/frontend/logged/build_kingdom/tithe_time.js',
-										'js/tab.js',
-										'js/ModalDialog.js',
+										'js/production/tweet_utilities.js',
+										'js/production/tithe_time.js',
+										//'js/tab.js',
+										//'js/ModalDialog.js',
                                         ));
                                         
-            parent::_add_css_arr( array('css/jquery-ui-1.8.2.custom.css') );
+//            parent::_add_css_arr( array('css/jquery-ui-1.8.2.custom.css') );
           
             $i_user_id = intval(decrypt($this->session->userdata('user_id')));
 			
@@ -112,19 +112,19 @@ class Build_the_kingdom extends Base_controller
             parent::_set_meta_keywords('');
         
             
-            parent::_add_js_arr( array( 'js/ddsmoothmenu.js',
+            parent::_add_js_arr( array( /*'js/ddsmoothmenu.js',
                                         'js/switch.js',
 										'js/animate-collapse.js',
                                         'js/lightbox.js',
 										'js/jquery-ui-1.8.2.custom.min.js',
                                         'js/stepcarousel.js',
-										'js/jquery.ui.datepicker.js',
-										'js/frontend/logged/tweets/tweet_utilities.js',
-										'js/frontend/logged/build_kingdom/charity_project.js',
-										'js/tab.js'
+										'js/jquery.ui.datepicker.js',*/
+										'js/production/tweet_utilities.js',
+										'js/production/charity_project.js',
+										//'js/tab.js'
                                         ));
                                         
-            parent::_add_css_arr( array('css/jquery-ui-1.8.2.custom.css') );
+//            parent::_add_css_arr( array('css/jquery-ui-1.8.2.custom.css') );
           
             $i_user_id = intval(decrypt($this->session->userdata('user_id')));
 			
@@ -702,16 +702,16 @@ class Build_the_kingdom extends Base_controller
             parent::_set_meta_keywords('');
         
             
-            parent::_add_js_arr( array( 'js/ddsmoothmenu.js',
+            parent::_add_js_arr( array( /*'js/ddsmoothmenu.js',
                                         'js/switch.js',
 										'js/animate-collapse.js',
                                         'js/lightbox.js',
 										'js/jquery-ui-1.8.2.custom.min.js',
                                         'js/stepcarousel.js',
-										'js/jquery.ui.datepicker.js',
-										'js/frontend/logged/tweets/tweet_utilities.js',
-										'js/frontend/logged/build_kingdom/charity_project.js',
-										'js/tab.js'
+										'js/jquery.ui.datepicker.js',*/
+										'js/production/tweet_utilities.js',
+										'js/production/charity_project.js',
+										//'js/tab.js'
                                         ));
                                         
             parent::_add_css_arr( array('css/jquery-ui-1.8.2.custom.css') );
@@ -933,21 +933,21 @@ class Build_the_kingdom extends Base_controller
             parent::_set_meta_keywords('');
         
             
-            parent::_add_js_arr( array( 'js/ddsmoothmenu.js',
+            parent::_add_js_arr( array( /*'js/ddsmoothmenu.js',
                                         'js/switch.js','js/animate-collapse.js',
                                         'js/lightbox.js',
 										'js/jquery-ui-1.8.2.custom.min.js',
                                         'js/stepcarousel.js',
 										'js/jquery/ui/jquery.ui.core.js',
-										'js/jquery.ui.datepicker.js',
+										'js/jquery.ui.datepicker.js',*/
 									    'js/jquery-ui-timepicker-addon.js',
 										'js/jquery-ui-sliderAccess.js',
-										'js/frontend/logged/tweets/tweet_utilities.js',
-										'js/frontend/logged/build_kingdom/tithe_time.js',
-										'js/tab.js'
+										'js/production/tweet_utilities.js',
+										'js/production/tithe_time.js',
+									//	'js/tab.js'
                                         ));
                                         
-            parent::_add_css_arr( array('css/jquery-ui-1.8.2.custom.css') );
+//            parent::_add_css_arr( array('css/jquery-ui-1.8.2.custom.css') );
           	
 			$i_user_id = intval(decrypt($this->session->userdata('user_id')));
             
@@ -1195,19 +1195,19 @@ class Build_the_kingdom extends Base_controller
             parent::_set_meta_keywords('');
         
             
-            parent::_add_js_arr( array( 'js/ddsmoothmenu.js',
+            parent::_add_js_arr( array( /*'js/ddsmoothmenu.js',
                                         'js/switch.js','js/animate-collapse.js',
                                         'js/lightbox.js',
 										'js/jquery-ui-1.8.2.custom.min.js',
                                         'js/stepcarousel.js',
 										'js/jquery/ui/jquery.ui.core.js',
-										'js/jquery.ui.datepicker.js',
-										'js/frontend/logged/tweets/tweet_utilities.js',
-										'js/frontend/logged/build_kingdom/church.js',
-										'js/tab.js'
+										'js/jquery.ui.datepicker.js',*/
+										'js/production/tweet_utilities.js',
+										'js/production/church.js',
+										//'js/tab.js'
                                         ));
                                         
-            parent::_add_css_arr( array('css/jquery-ui-1.8.2.custom.css') );
+//            parent::_add_css_arr( array('css/jquery-ui-1.8.2.custom.css') );
           
             $i_user_id = intval(decrypt($this->session->userdata('user_id')));
 			
@@ -1368,20 +1368,20 @@ class Build_the_kingdom extends Base_controller
             parent::_set_meta_keywords('');
         
             
-            parent::_add_js_arr( array( 'js/ddsmoothmenu.js',
+            parent::_add_js_arr( array( /*'js/ddsmoothmenu.js',
                                         'js/switch.js','js/animate-collapse.js',
                                         'js/lightbox.js',
 										'js/jquery-ui-1.8.2.custom.min.js',
                                         'js/stepcarousel.js',
 										'js/jquery/ui/jquery.ui.core.js',
-										'js/jquery.ui.datepicker.js',
-										'js/frontend/logged/tweets/tweet_utilities.js',
-										'js/tab.js',
+										'js/jquery.ui.datepicker.js',*/
+										'js/production/tweet_utilities.js',
+										//'js/tab.js',
 										'js/autocomplete/jquery.autocomplete.js'
                                         ));
                                         
-            parent::_add_css_arr( array('css/jquery-ui-1.8.2.custom.css',
-											'css/dd.css',
+            parent::_add_css_arr( array(/*'css/jquery-ui-1.8.2.custom.css',
+											'css/dd.css',*/
 									'css/jquery.autocomplete.css'
 										) );
           
@@ -1518,18 +1518,18 @@ class Build_the_kingdom extends Base_controller
             parent::_set_meta_keywords('');
         
             
-            parent::_add_js_arr( array( 'js/ddsmoothmenu.js',
+            parent::_add_js_arr( array( /*'js/ddsmoothmenu.js',
                                         'js/switch.js','js/animate-collapse.js',
                                         'js/lightbox.js',
 										'js/jquery-ui-1.8.2.custom.min.js',
                                         'js/stepcarousel.js',
 										'js/jquery/ui/jquery.ui.core.js',
-										'js/jquery.ui.datepicker.js',
+										'js/jquery.ui.datepicker.js',*/
 										'js/frontend/logged/tweets/tweet_utilities.js',
-										'js/tab.js'
+									//	'js/tab.js'
                                         ));
                                         
-            parent::_add_css_arr( array('css/jquery-ui-1.8.2.custom.css') );
+//            parent::_add_css_arr( array('css/jquery-ui-1.8.2.custom.css') );
           
             $i_user_id = intval(decrypt($this->session->userdata('user_id')));
 			$this->session->set_userdata('search_condition','');

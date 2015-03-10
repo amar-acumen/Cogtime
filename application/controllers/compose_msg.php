@@ -55,7 +55,7 @@ class Compose_msg extends Base_controller
 										//'js/stepcarousel.js',
 										//'js/frontend/logged/my_friends.js'
 										'js/production/tweet_utilities.js',
-										'js/frontend/logged/message_box/my_message.js'
+										'js/production/my_message.js'
 										));
 										
 			parent::_add_css_arr( array(
