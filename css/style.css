@@ -7268,7 +7268,7 @@ width: expression(this.width > 127 ? 127: true);
 	font-family: 'GibsonRegular';
 }
 .tweeter-profile-header h3 {
-	color:#fff;
+	color:#ccc;
 	font-size:22px;
 	line-height:30px;
 	font-family: 'GibsonRegular';

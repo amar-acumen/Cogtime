@@ -90,6 +90,7 @@ class Module_generate extends CI_Controller {
 
                 echo '<br/> production_logged.css';
             }
+
             if($js_prod){
                 $files_js = array(
                     /*'assets/js/contrib/perfect-scrollbar-0.4.10.with-mousewheel.min.js',
@@ -97,6 +98,7 @@ class Module_generate extends CI_Controller {
                     'assets/js/contrib/jquery-ui-1.10.4.custom.min.js',
                     //'assets/js/contrib/gmap3.min.js',*/
                     'js/jquery-1.7.2.js',
+                    'js/jquery.js',
                     'js/jquery.cookie.js',
                     'js/jquery/ui/jquery.blockUI.js',
                     'js/jquery/ui/jquery.ui.core.js',
@@ -112,8 +114,8 @@ class Module_generate extends CI_Controller {
                     'js/login.js',
                     'js/notification.js',
                     'js/utility_js_for_admin_and_fe.js',
-                    'js/contentslider.js',
                     'js/frontend/header_slider.js',
+                    'js/contentslider.js',
                     /* 'js/jquery.autofill.js',*/
                     // User logged in JS files
                     'js/jquery.hoverIntent.js',
