@@ -1014,7 +1014,7 @@ class My_friends extends Base_controller
         try
         {
             $user_id = intval(decrypt($this->input->post('frnd_id')));   //acceptor ID
-
+             echo $user_id;
             $this->load->model('contacts_model');
             
             $info['i_requester_id']    =    intval(decrypt($this->session->userdata('user_id'))); 
