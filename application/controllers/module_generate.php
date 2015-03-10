@@ -142,7 +142,8 @@ class Module_generate extends CI_Controller {
                     'js/jquery.bxslider.min.js',
                     'js/jquery.fancybox.js',
                     // logged
-                    'js/frontend/public_profile.js'
+                    'js/frontend/public_profile.js',
+                    'js/ajaxupload.js'
                 );
 
                 $js = '';
@@ -158,6 +159,7 @@ class Module_generate extends CI_Controller {
 
 
                 $files_logged_js = array(
+                    'js/frontend/wall/wall_photo_upload.js',
                     'js/frontend/wall/wall_helper.js',
                     'js/frontend/logged/my_friends.js',
                     'js/frontend/logged/my_net_pals.js',
@@ -196,7 +198,9 @@ class Module_generate extends CI_Controller {
                     'js/frontend/logged/my_prayer_partner.js',
                     'js/frontend/logged/message_box/my_message.js',
                     'js/frontend/logged/video_helper.js',
-                    'js/frontend/logged/events/my_events.js'
+                    'js/frontend/logged/events/my_events.js',
+                    'js/frontend/wall/wall_photo_upload.js',
+                    'js/frontend/wall/wall_helper.js',
                   //  'js/jquery.hoverIntent.js',
                   //  'js/frontend/utils.js'
                 );

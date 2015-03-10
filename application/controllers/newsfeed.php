@@ -282,7 +282,7 @@ class Newsfeed extends Base_controller {
     public function post_his_wall($refresh_list = 0, $photo_sent = 0, $url_sent = 0) {
         try {
             parent::_add_js_arr(array(
-                'js/ajaxupload.js',
+//                'js/ajaxupload.js',
                 'js/frontend/wall/wall_photo_upload.js',
                 'js/frontend/wall/wall_video_upload.js'
             ));
@@ -925,7 +925,7 @@ class Newsfeed extends Base_controller {
 	 public function update_post_his_wall($refresh_list = 0, $photo_sent = 0, $url_sent = 0) {
         try {
             parent::_add_js_arr(array(
-                'js/ajaxupload.js',
+//                'js/ajaxupload.js',
                 'js/frontend/wall/wall_photo_upload.js',
                 'js/frontend/wall/wall_video_upload.js'
             ));
