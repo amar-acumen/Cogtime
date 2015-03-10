@@ -57,7 +57,7 @@ class Events extends Base_controller {
                 'js/lightbox.js',
                 'js/jquery.autofill.js',
                 'js/stepcarousel.js',
-                'js/frontend/logged/events/events_helper.js'
+                'js/frontend/logged/events/events_helper.js','js/frontend/logged/tweets/tweet_utilities.js'
             ));
 
 
@@ -144,7 +144,7 @@ class Events extends Base_controller {
                 'js/lightbox.js',
                 'js/jquery.autofill.js',
                 'js/thickbox.js', 'js/stepcarousel.js',
-                'js/frontend/logged/events/events_helper.js'));
+                'js/frontend/logged/events/events_helper.js','js/frontend/logged/tweets/tweet_utilities.js'));
 
             parent::_add_css_arr(array('css/jquery-ui-1.8.2.custom.css',
                 'css/thickbox.css'));
@@ -375,7 +375,7 @@ class Events extends Base_controller {
                 'js/lightbox.js', 'js/jquery.dd.js', 'js/jquery-ui-1.8.2.custom.min.js',
                 'js/stepcarousel.js',
                 //'js/frontend/logged/my_friends.js'
-                'js/frontend/logged/message_box/my_message.js'
+                'js/frontend/logged/message_box/my_message.js','js/frontend/logged/tweets/tweet_utilities.js'
             ));
 
             parent::_add_css_arr(array('css/jquery-ui-1.8.2.custom.css',
@@ -508,7 +508,7 @@ class Events extends Base_controller {
                 'js/lightbox.js', 'js/jquery.dd.js', 'js/jquery-ui-1.8.2.custom.min.js',
                 'js/stepcarousel.js',
                 //'js/frontend/logged/my_friends.js'
-                'js/frontend/logged/message_box/my_message.js'
+                'js/frontend/logged/message_box/my_message.js','js/frontend/logged/tweets/tweet_utilities.js'
             ));
 
             parent::_add_css_arr(array('css/jquery-ui-1.8.2.custom.css',
