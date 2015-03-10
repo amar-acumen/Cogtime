@@ -5187,3 +5187,17 @@ function get_blog_info_by_id($id) {
     return $info;
 }
 
+function get_userinfo_for_newsfeed($i_user_id = NULL) {
+    try {
+        $ci = & get_instance();
+        $sql = $ci->db->query("select CONCAT(u.s_first_name, ,' ',u.s_last_name) AS s_profile_name,
+            u.s_profile_photo,u.e_gender from cg_users where id='" . $memid . "' and is_councillor='1'");
+        //echo $sql;
+        $res = $sql->result_array();
+        //pr($res);exit;
+    return $res['0'];
+    } catch (Exception $err_obj) {
+        show_error($err_obj->getMessage());
+    }
+}
+
