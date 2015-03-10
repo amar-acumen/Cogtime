@@ -62,7 +62,7 @@ class Index extends Base_controller
             parent::_add_js_arr( array( //'js/jquery-1.7.2.js',
 										/*'js/jquery.js', // causing conflict with block ui*/
                                         'js/production/header_slider.js',
-                                        'js/production/contentslider.js',
+                                        //'js/production/contentslider.js',
                                         'js/production/jquery.autofill.js'
 									   
 									   
@@ -257,7 +257,7 @@ class Index extends Base_controller
             parent::_add_js_arr( array( //'js/jquery-1.7.2.js',
 										/*'js/jquery.js', // causing conflict with block ui*/
 									   'js/production/header_slider.js',
-									   'js/production/contentslider.js',
+									   //'js/production/contentslider.js',
 									   'js/production/jquery.autofill.js'
 									   
 									  ));
