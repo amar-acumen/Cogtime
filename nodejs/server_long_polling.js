@@ -1,9 +1,6 @@
 var url = require('url');
 var http = require('http');
 var mysql      = require('mysql');
-var options = {.....};
-options.agent = false;
-var req = http.request(options) ;
 var pool = mysql.createPool({
 				  host     : 'localhost',//'103.227.62.106',
 				  user     : 'acumen',
