@@ -63,7 +63,7 @@ class My_wall extends Base_controller {
                 'js/tab.js',*/
                'js/ajaxupload.js',
                 'js/production/wall_photo_upload.js',
-                'js/production/wall_helper.js',
+                'js/frontend/wall/wall_helper.js',
                 'js/production/tweet_utilities.js',
                     /* 'chat/js/chat.js' */
                 //'js/logged.js'
