@@ -4,13 +4,15 @@
 
 function show_post_comment_box(i_newsfeed_id)
 {
-	$('#i_newsfeed_id').val(i_newsfeed_id);
-	$('.feed_comment_box').attr('id','feed_comment_box_'+i_newsfeed_id); 
-	
-	$('.new-wl > .comments-number').css('display','none');
-	$('.new-wl-right > .comments-number').css('display','none');
-	$('#post-comment-box'+i_newsfeed_id).slideDown('slow');
-	//show_dialog('comment_div');
+    if(i_newsfeed_id != undefined){
+        $('#i_newsfeed_id').val(i_newsfeed_id);
+        $('.feed_comment_box').attr('id','feed_comment_box_'+i_newsfeed_id);
+
+        $('.new-wl > .comments-number').css('display','none');
+        $('.new-wl-right > .comments-number').css('display','none');
+        $('#post-comment-box'+i_newsfeed_id).slideDown('slow');
+        //show_dialog('comment_div');
+    }
 }
 
 var ajax_comment_post = null;	
