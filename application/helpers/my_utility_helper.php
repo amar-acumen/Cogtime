@@ -5183,3 +5183,9 @@ function get_blog_info_by_id($id) {
     $info = $ci->my_blog_model->get_by_id($id);
     return $info;
 }
+
+function get_profile_url($id, $user_name = "") {
+
+    $url = base_url() . "public-profile/" . $id . "/" . my_url($user_name) . ".html";
+    return $url;
+}

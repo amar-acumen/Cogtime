@@ -9,11 +9,10 @@ $msg_id = $feed['id'];
 #echo ' ==> '.show_delete_link($msg_id);	
 //pr($feed);
 if( $feed['s_type'] == 'wall_post' ){
-	$user_primary_info = get_primary_user_info($data_arr->user_id);
 	$profile_image_filename = get_profile_image($data_arr->user_id,'thumb');
 	//$user_primary_info['s_picture'];
-	$profile_displayname = $user_primary_info['s_profile_name'];
-	$profile_url = $user_primary_info['s_profile_url'];
+	$profile_displayname = $data_arr->s_profile_name;
+	$profile_url = get_profile_url($data_arr->user_id,$data_arr->s_profile_name);
 	if($data_arr->wall_owner_id > 0  && $data_arr->wall_owner_id != ''){
 		  $wall_owner_name = get_username_by_id($data_arr->wall_owner_id);
 	}
