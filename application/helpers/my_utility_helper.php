@@ -2611,7 +2611,7 @@ function insert_privacy($itemid, $post, $table, $field, $post_alias = '') {
             $CI->db->insert($table, $arrinsert);
           
         }
-		  echo $CI->db->last_query();exit;
+		 // echo $CI->db->last_query();exit;
     }
 }
 
