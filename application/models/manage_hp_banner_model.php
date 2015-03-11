@@ -46,7 +46,7 @@ class Manage_hp_banner_model extends Base_model implements InfModel
 		$s_qry="SELECT * FROM ".$this->tbl;
         $s_qry.=($s_where!=""?$s_where:"" )." ORDER BY {$s_order_by} ".(is_numeric($i_start) && is_numeric($i_limit)?" Limit ".intval($i_start).",".intval($i_limit):"" );
 		//echo $s_qry;
-		$this->db->trans_begin();///new  
+		
 		$rs=$this->db->query($s_qry);
 		$i_cnt=0;
 		
@@ -66,7 +66,7 @@ class Manage_hp_banner_model extends Base_model implements InfModel
 	 $rs->free_result();          
 			
 		}
-		$this->db->trans_commit();    ///new
+		
 		unset($s_qry,$rs,$s_where,$i_start,$i_limit);
 		return $ret_;
 
@@ -96,7 +96,7 @@ class Manage_hp_banner_model extends Base_model implements InfModel
               }
               $rs->free_result();          
           }
-          $this->db->trans_commit();///new
+          
           unset($s_qry,$rs,$row,$i_cnt,$s_where);
           return $ret_;
         }
@@ -258,7 +258,7 @@ class Manage_hp_banner_model extends Base_model implements InfModel
               }
               $rs->free_result();          
           }
-          $this->db->trans_commit();///new
+          
           unset($s_qry,$rs,$row,$i_cnt,$s_where);
           return $ret_;
 			
