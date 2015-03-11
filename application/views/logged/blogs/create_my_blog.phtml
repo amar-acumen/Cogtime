@@ -210,7 +210,7 @@ $("#text_count").text("Characters left: " + (500 - $(this).val().length));
                <div style="padding-bottom:10px;">
                <p class="center-text" style="line-height:23px; color:#494949;">Do you really want to delete the article?</p>
                </div>
-               <form action="" method="post" enctype="multipart/form-data">
+               <form method="post" enctype="multipart/form-data">
                   <input type="hidden" name="i_del_id" id="i_del_id" value="" />
                  <input name="" type="button" value="Yes" class="btn" style="margin-left:105px;" onClick="delete_article_()"/>
                     <input name="" type="button" value="No" class="btn" onclick="hide_dialog()"/>

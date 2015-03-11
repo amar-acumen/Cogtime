@@ -100,7 +100,7 @@ if (!@$session_data['loggedin']) {
                 </div>
             </div>
             <div class="frm_box login">
-                <form onsubmit="return userAjaxLogin(this.email_login1.value, this.password_login1.value);" action="" method="post" name="frmLogin" id="frmLogin"> 
+                <form onsubmit="return userAjaxLogin(this.email_login1.value, this.password_login1.value);" method="post" name="frmLogin" id="frmLogin"> 
                     <input name="login_referrer" id="login_referrer" type="hidden" value="<?= @$session_data['login_referrer'] ?>"/>
                     <input name="current_referrer" id="current_referrer" type="hidden" value=""/>
                     <input type="hidden" name="is_submitted" id="is_submitted" value="Y"  />
@@ -417,7 +417,7 @@ if (!@$session_data['loggedin']) {
             </div>
            <p class="bold-text">Are you sure you want to quit yourself from Prayer Partner Zone?</p>
            
-           <form enctype="multipart/form-data" method="post" action="" >
+           <form enctype="multipart/form-data" method="post" >
             <input class="btn" type="button" style="margin-left:146px;" value="Yes" name="" onclick="chnge_pp_status('Y')" />
             <input class="btn" type="button" onclick="hide_dialog()" value="No" name="" />
            </form>
@@ -440,7 +440,7 @@ if (!@$session_data['loggedin']) {
             </div>
            <p class="bold-text">Are you sure you want to enlist yourself as Prayer Partner?</p>
            
-           <form enctype="multipart/form-data" method="post" action="" >
+           <form enctype="multipart/form-data" method="post" >
             <input class="btn" type="button" style="margin-left:146px;" value="Yes" name="" onclick="chnge_pp_status('N')" />
             <input class="btn" type="button" onclick="hide_dialog()" value="No" name="" />
            </form>

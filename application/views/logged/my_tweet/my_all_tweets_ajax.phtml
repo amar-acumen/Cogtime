@@ -137,7 +137,7 @@ if(count($arr_tweets)){
                     <!--reply block start -->
                     <div class="insideTweeterBlock" id="tweet_reply_block<?=$val['id']?>">
                      <div id="tweet_reply<?=$val['id']?>"></div>
-                      <form action="" method="post">
+                      <form method="post">
                           <textarea class="big-box" name="ta_tweet_reply<?=$val['id']?>" id="ta_tweet_reply<?=$val['id']?>" onfocus="get_reply_name(($(this).val()),<?=$val['id']?>)" onblur="if(this.value=='')this.value='Max 140 Characters';" ><?=$val['s_tweet_id']?>:</textarea>
                           <input name="post" type="button" value="Post" class="small-blue-btn left" onclick="post_reply(<?=$val['id']?>,'<?=$val['s_tweet_id']?>')"/>
                           <div class="clr"></div>

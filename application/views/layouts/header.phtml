@@ -53,7 +53,7 @@ function after_submit() {
                   
                   
                   
-                          <form onsubmit="return userLogin(this.email_login.value, this.password_login.value);" action="" method="post" name="frmLogin" id="frmLogin">
+                          <form onsubmit="return userLogin(this.email_login.value, this.password_login.value);" method="post" name="frmLogin" id="frmLogin">
                           
                           <input name="login_referrer" id="login_referrer" type="hidden" value="<?=@$session_data['login_referrer']?>"/>
                           <input name="current_referrer" id="current_referrer" type="hidden" value=""/>

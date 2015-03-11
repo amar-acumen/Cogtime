@@ -88,7 +88,7 @@
   									<input type="hidden" name="blog_id" id="blog_id" value="<?=$blog_id?>" />                               
                                   
                                      
-                                    <form action="" method="post" class="wall-comment-form">
+                                    <form method="post" class="wall-comment-form">
                                     	<label class="white-text">Article Title:</label>
                                         <div class="text-field-bg">
                                         <input name="blogpost_title" id="blogpost_title" type="text"  onfocus="if(this.value=='Type title here')this.value='';" onblur="if(this.value=='')this.value='Type title here';" value="Type title here" style="width: 460px;"/>
@@ -315,7 +315,7 @@
                <div style="padding-bottom:10px;">
                <p class="center-text" style="line-height:23px; color:#494949;">Do you really want to delete the article?</p>
                </div>
-               <form action="" method="post" enctype="multipart/form-data">
+               <form method="post" enctype="multipart/form-data">
                   <input type="hidden" name="i_del_id" id="i_del_id" value="" />
                  <input name="" type="button" value="Yes" class="popup-yes" style="margin-left:105px;" onClick="delete_article_()"/>
                     <input name="" type="button" value="No" class="popup-no" onclick="hide_dialog()"/>
