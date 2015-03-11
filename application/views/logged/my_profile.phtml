@@ -279,7 +279,7 @@ include(APPPATH . "views/layouts/nav.phtml");
                                    <?php echo form_error('profile_pic'); ?>
                                     <div class="error-message" id="err_profile_pic"></div>
                                 </div> 
-                                 <!------------------------------------------>
+                                 
                                 <div class="prvimg">
                                     <input type="hidden" value="<?= $arr_profile_info_for_my_profile['id'] ?>" id="prf_id">
                                     <div style="background:url(<?= get_profile_image_of_user('thumb',$arr_profile_info_for_my_profile['s_profile_photo'],$arr_profile_info_for_my_profile['e_gender']) ?>) no-repeat center;width:60px; height:60px;" title="member" class="pro_photo4 user_pro_image" ></div>
@@ -290,7 +290,7 @@ include(APPPATH . "views/layouts/nav.phtml");
                                       <a href="javascript:void(0)" onclick="show_dialog('image-delete');">Remove</a><?php } ?>
                                     
                                 </div>
-                                <!---------------------------------------------->
+                                
                                 
                                 
                                 <div class="lable01">Time Zone:</div>
@@ -364,7 +364,7 @@ include(APPPATH . "views/layouts/nav.phtml");
 
                             </div>
 
-                            <!-------------------------------->
+                            
 
                             <!--                                   <div class="heading01"> 
                                                                      <div class="left"><h4><img src="<?php echo base_url(); ?>images/icons/info.png" alt=" " />  Basic Information</h4> </div>
@@ -503,7 +503,7 @@ include(APPPATH . "views/layouts/nav.phtml");
 
                             <!--FORM TO MODIFY basic Information-->
 
-                            <!----------------------------------->
+                            
 
 
                         </form>
@@ -555,7 +555,7 @@ include(APPPATH . "views/layouts/nav.phtml");
 
                                     $db_skill_id = isset($arr_profile_info_for_my_profile["skill_arr"][$i]["id"]) ? $arr_profile_info_for_my_profile["skill_arr"][$i]['id'] : '0';
                                     ?>
-                                    <!------------------------skill div----------------------------->
+                                    <!--skill div-->
                                     <div id="<?php echo "skill_div_" . $close_div_val; ?>"> 
                                         <?php
                                         if ($i > 1) {
@@ -570,7 +570,7 @@ include(APPPATH . "views/layouts/nav.phtml");
                                         <input type="hidden" name="skill_db_id[]" id="dbId" value="<?php echo $db_skill_id; ?>" />
 
                                     </div>  
-                                    <!------------------------/skill div----------------------------->
+                                    <!--/skill div-->
 
                                     <?php
                                 endfor;
