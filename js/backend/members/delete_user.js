@@ -36,12 +36,12 @@ function delete_confirm_(file_id, i_user_type)
 	if(status=="Enable")
 	{
 		var now_status="2"; // 1: active , 2: inactive
-		var now_status_name='Enable';
+		var now_status_name='Disable';
 	}
 	else
 	{
 		var now_status="1"; 
-		var now_status_name='Suspend';
+		var now_status_name='Enable';
 	}
 	//alert(now_status_name);
 	$.ajax({
