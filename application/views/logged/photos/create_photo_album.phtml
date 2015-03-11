@@ -172,21 +172,28 @@ $(function(){
                                     <div class="lable01">Name:</div>  
                                     <div class="field01">
                                     <input name="txt_name" id="txt_name" type="text" />
-                                    <span id="err_name" class="error-message"></span>  
+                                    <span id="err_name" class="error-message" style="display:block;">
+                                      <?php echo form_error('txt_name'); ?>
+                                    </span>  
                                     </div> 
                                     <div class="clr"></div>
                                     
                                      <div class="lable01">Browse Photo:</div> 
                                      <div class="field01">
                                      <input name="s_photo" id="s_photo" type="file" />
-                                     <span id="err_album_photo" class="error-message"></span>  
+                                     <span id="err_album_photo" class="error-message" style="display:block;">
+                                      <?php echo form_error('s_photo'); ?>
+                                     </span>  
                                      </div>
                                     <div class="clr"></div>
                                     
                                     <div class="lable01">Description:</div>  
                                     <div class="field01">
                                     <textarea name="txt_add_desc"  id="txt_add_desc" cols="" rows="" style="height:125px;" maxlength="250"></textarea>
-                                    <span id="err_desc" class="error-message"></span> 
+                                    <span id="err_desc" class="error-message" style="display:block;">
+                                      <?php echo form_error('txt_add_desc'); ?>
+                                    </span> 
+
                                     <span style="font-size: 11px;font-style: italic;line-height: 13px;">(Max 250 characters.)</span> 
                                     </div> 
                                     <div class="clr"></div>
