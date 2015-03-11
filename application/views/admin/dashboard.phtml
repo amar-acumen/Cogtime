@@ -47,7 +47,7 @@
                             <div class="group-block">
                               <h3 class="member-heading">Members</h3>
                                 <ul>
-                                  <li><a href="javascript:void(0);">Registered Members</a> <span>(<?=$total_user?>)</span></li>
+                                  <li><a href="<?= admin_base_url().'members/members.html' ?>">Registered Members</a> <span>(<?=$total_user?>)</span></li>
                                   <li><a href="javascript:void(0);">Online Users</a> <span>(<?=$total_online_user?>)</span></li>
                                 </ul>
 
@@ -56,9 +56,9 @@
                              <div class="group-block">
                               <h3 class="social-heading">Social hubs</h3>
                                 <ul>
-                                  <li><a href="javascript:void(0);">Blogs</a> <span>(<?=$total_blogs?>)</span></li>
-                                  <li><a href="javascript:void(0);">Rings</a> <span>(<?=$total_rings?>)</span></li>
-                                  <li><a href="javascript:void(0);">Events</a> <span>(<?=$total_events?>)</span></li>                                  
+                                  <li><a href="<?= admin_base_url().'blogs.html' ?>">Blogs</a> <span>(<?=$total_blogs?>)</span></li>
+                                  <li><a href="<?= admin_base_url().'rings.html' ?>">Rings</a> <span>(<?=$total_rings?>)</span></li>
+                                  <li><a href="<?= admin_base_url().'events.html' ?>">Events</a> <span>(<?=$total_events?>)</span></li>                                  
                                 </ul>
 
                             </div>
@@ -67,9 +67,9 @@
                              <div class="group-block">
                               <h3 class="media-heading">Media center</h3>
                                 <ul>
-                                  <li><a href="javascript:void(0);">Read</a> <span>(<?=round($total_ch_news)?>)</span></li>
-                                  <li><a href="javascript:void(0);">Watch</a> <span>(<?=round($total_mc_videos)?>)</span></li>
-                                  <li><a href="javascript:void(0);">Listen</a> <span>(<?=round($total_gospel_mag)?>)</span></li>
+                                  <li><a href="<?= admin_base_url().'0/media_article.html' ?>">Read</a> <span>(<?=round($total_ch_news)?>)</span></li>
+                                  <li><a href="<?= admin_base_url().'0/media-center-landing-videos.html' ?>">Watch</a> <span>(<?=round($total_mc_videos)?>)</span></li>
+                                  <li><a href="<?= admin_base_url().'0/audio.html' ?>">Listen</a> <span>(<?=round($total_gospel_mag)?>)</span></li>
                                 </ul>
 
                             </div>
@@ -77,8 +77,8 @@
                              <div class="group-block">
                               <h3 class="kingdom-heading">Build the kingdom</h3>
                                 <ul>
-                                  <li><a href="javascript:void(0);">Bible Quiz</a> <span>(<?=$total_quiz?>)</span></li>
-                                  <li><a href="javascript:void(0);">Churches</a> <span>(<?=$total_church?>)</span></li>
+                                  <li><a href="<?= admin_base_url().'bible-quiz.html' ?>">Bible Quiz</a> <span>(<?=$total_quiz?>)</span></li>
+                                  <li><a href="<?= admin_base_url().'churches.html' ?>">Churches</a> <span>(<?=$total_church?>)</span></li>
                                 </ul>
 
                             </div>
@@ -87,8 +87,8 @@
                              <div class="group-block">
                               <h3 class="holy-heading">Holy place</h3>
                                 <ul>
-                                  <li><a href="javascript:void(0);">Prayer Requests</a> <span>(<?=$total_prayer_req;?>v</span></li>
-                                  <li><a href="javascript:void(0);">e-Intercessions</a> <span>(<?=$total_intercession?>)</span></li>
+                                  <li><a href="javascript:void(0);">Prayer Requests</a> <span>(<?=$total_prayer_req;?>v)</span></li>
+                                  <li><a href="<?= admin_base_url().'holy-place/intercession.html' ?>">e-Intercessions</a> <span>(<?=$total_intercession?>)</span></li>
                                   <li><a href="javascript:void(0);">Testimonies</a> <span>(<?=$total_testimonies;?>)</span></li>
                                 </ul>
 
