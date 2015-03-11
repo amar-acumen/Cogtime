@@ -149,7 +149,7 @@ class Help_center extends Admin_base_Controller
 				
                 if($posted_by!='')
                 {
-                    $where.= " AND c.i_posted_by= {$posted_by}";
+                    $where.= " AND u.s_name LIKE '%".$posted_by."%'";
                 }
                 
                 
