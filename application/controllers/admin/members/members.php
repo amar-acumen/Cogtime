@@ -207,7 +207,7 @@ class Members extends Admin_base_Controller {
               }else{
                   $info['i_status'] = 1; 
               }
-                  
+                   
 
         $_ret = $this->users_model->edit_info($info, $id);
 
