@@ -113,7 +113,7 @@ foreach ($query->result() as $row){
                    
                </div></div></div>
     
-    <!------------------------------------->
+    
     <?php
     $i++;
 }
@@ -193,7 +193,7 @@ foreach ($query->result() as $row){
       <td class="textleft"><?= $result1[0]->s_category_name ?></td>
       <td class="textleft"><?= $row->s_category_name?></td>
       <td><a href="javascript:void(0);" class="edit" title="Edit" onclick="show_dialog('edit_sub_cat<?= $row->id ?>')">Edit</a> <a href="javascript:void(0);" class="delete" title="Delete" onclick="show_dialog('del_sub_cat<?= $row->id ?>')">Delete</a></td>
-     <!------------delete pop------------------->
+     <!--delete pop-->
      <div  class="lightbox del_sub_cat<?= $row->id ?>">
       <div class="close"><a onclick="hide_dialog()" href="javascript:void(0)"><img alt="" src="<?= base_url() ?>images/close.png" ></a></div>
       <div class="top"><div>&nbsp;</div></div>
@@ -265,9 +265,6 @@ foreach ($query->result() as $row){
                    
                    
                </div></div></div>
-    
-    <!------------------------------------->
-    
     
     
     

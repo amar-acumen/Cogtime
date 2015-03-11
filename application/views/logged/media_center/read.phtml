@@ -215,7 +215,7 @@ echo $img[1];
                 <? } 
                 }
                 ?>
-		<!-------------------cat1 end-------------------------->		
+		<!--cat1 end-->		
                 <?
                 
                 $query = $this->db->get_where('cg_christian_news_cat', array('id' => 2));
@@ -359,7 +359,7 @@ echo $img[1];
                }
                ?>   
                
-		<!-------------------cat2 end-------------------------->	   
+		<!--cat2 end-->	   
 			   
 			   
                      <?
@@ -505,7 +505,7 @@ echo $img[1];
                                       }
                                                              
                                                              ?>
-                                                                <!-------------------->
+                                                                
                                  
                                  <span><a href="<?= base_url().$cat4_article[0]['id']."/".my_url($cat4_article[0]['cat_name'])."/christian-news-details/".my_url($cat4_article[0]['s_title']).".html"?>" title="<?=$val['s_title']?>"><?=my_substr(strip_tags(get_unformatted_string_edit($cat4_article[0]['s_title'])),30)?></a></span>
                             </div>
@@ -529,7 +529,7 @@ echo $img[1];
                    
                      <? } 
                      }?> 
-                     <!----------------cat 4 end-------------------------------------->
+                     <!--cat 4 end-->
                      
                      <?
 				
@@ -591,7 +591,7 @@ echo $img[1];
                                       }
                                                                              
                                                                              ?>
-                                                                <!----------------------------------->
+                                                               
                                  
                                  <span><a href="<?= base_url().$cat5_article[0]['id']."/".my_url($cat5_article[0]['cat_name'])."/christian-news-details/".my_url($cat5_article[0]['s_title']).".html"?>" title="<?=$val['s_title']?>"><?=my_substr(strip_tags(get_unformatted_string_edit($cat5_article[0]['s_title'])),30)?></a></span>
                             </div>
@@ -615,7 +615,7 @@ echo $img[1];
                                                 
                                                 }
                                                 ?>
-                                                <!------------cat5 end------------------------->
+                                                <!--cat5 end-->
                                                 <?
                                                  $query = $this->db->get_where('cg_christian_news_cat', array('id' => 6));
                                         foreach ($query->result() as $row)
@@ -677,7 +677,7 @@ echo $img[1];
                                                                              
                                                                              
                                                                            ?>
-                                                                  <!------------------------------->
+                                                                 
                                  <span><a href="<?= base_url().$cat6_article[0]['id']."/".my_url($cat6_article[0]['cat_name'])."/christian-news-details/".my_url($cat6_article[0]['s_title']).".html"?>" title="<?=$val['s_title']?>"><?=my_substr(strip_tags(get_unformatted_string_edit($cat6_article[0]['s_title'])),30)?></a></span>
                             </div>
                              <div class="clr"></div>
@@ -701,7 +701,7 @@ echo $img[1];
                                                 
                                                 }
 						?>
-                                                <!----------end cat 6-------------->
+                                                <!--end cat 6-->
                         	  </div>			 
                      </div>
              <div class="media-center-right">
@@ -748,7 +748,7 @@ echo $img[1];
 						  <div class="dev-main">
 							  <div></div>	
                                                           
-                                                                  <!-------------------new add 8-1-2015------------------------------>
+                                                                  <!--new add 8-1-2015-->
                                                         <?php
                                                           if(is_file(BASEPATH.'../uploads/media_center_article/' . getThumbName($val['s_image'], 'thumb')))
                                                                              {
@@ -807,7 +807,7 @@ echo $img[1];
               
               }
               ?>
-              <!------------------cat 11 end-------------------------------->
+              <!--cat 11 end-->
               <?
               $query = $this->db->get_where('cg_christian_news_cat', array('id' => 7));
                                         foreach ($query->result() as $row)
@@ -833,7 +833,7 @@ echo $img[1];
                                                           if(is_file(BASEPATH.'../uploads/media_center_article/' . getThumbName($val['s_image'], 'thumb')))
                                                                              {
                                                           ?>
-                                                                  <!-------------------------------------------------->
+                                                                  
 			   <div class="div_back_pic_104" style=" background:url('<?=$IMG?>') no-repeat center;width:104px, height:104px; "></div>
                                                                              <?php }
                                                                              
@@ -882,7 +882,7 @@ echo $img[1];
               <? } 
               }
               ?>
-              <!----------------------cat 7 end------------------------------------>
+              <!--cat 7 end-->
               <?
                    $query = $this->db->get_where('cg_christian_news_cat', array('id' => 8));
                                         foreach ($query->result() as $row)
@@ -902,12 +902,12 @@ echo $img[1];
 					$IMG = base_url() . 'uploads/media_center_article/' . getThumbName($val['s_image'], 'thumb');
 					?>   
                   <div class="dev-main">
-                              <!-------------------new add 8-1-2015------------------------------>
+                              <!--new add 8-1-2015-->
                                                         <?php
                                                           if(is_file(BASEPATH.'../uploads/media_center_article/' . getThumbName($val['s_image'], 'thumb')))
                                                                              {
                                                           ?>
-                                                                  <!-------------------------------------------------->
+                                                                  
 				  <div class="div_back_pic_104" style=" background:url('<?=$IMG?>') no-repeat center;width:104px, height:104px; "></div>
                                                                              <?php }
                                                                              
