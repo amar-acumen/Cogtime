@@ -50,11 +50,7 @@ class Create_photo_album extends Base_controller
             parent::_set_meta_keywords('');
         
             
-            parent::_add_js_arr( array( /*'js/ddsmoothmenu.js',
-                                        'js/switch.js','js/animate-collapse.js',
-                                        'js/lightbox.js','js/jquery.dd.js','js/jquery-ui-1.8.2.custom.min.js',*/
-										'js/production/tweet_utilities.js',
-                                        //'js/stepcarousel.js'
+            parent::_add_js_arr( array( 'js/production/tweet_utilities.js',
                                         ));
                                         
           //  parent::_add_css_arr( array('css/jquery-ui-1.8.2.custom.css',
@@ -70,9 +66,49 @@ class Create_photo_album extends Base_controller
             
             parent::_set_all_photo_album_data($i_user_id);
             
-            # view file...
-            $VIEW = "logged/photos/create_photo_album.phtml"; 
-            parent::_render($data, $VIEW);
+            if(count($_POST)>0)
+            {
+            	$this->load->helper(array('form', 'url'));
+
+				$this->load->library('form_validation');
+				$this->form_validation->set_message('rule', '* Required Field.');
+				$this->form_validation->set_rules('txt_name', 'txt_name', 'required');
+				$this->form_validation->set_rules('txt_add_desc', 'txt_add_desc', 'required');
+				
+
+				
+				if ($this->form_validation->run() == TRUE)
+				{
+					$info = array();
+				
+					$info['i_user_id'] = intval(decrypt($this->session->userdata('user_id')));	 
+					$info['s_name'] = get_formatted_string($this->input->post('txt_name')); 
+					$info['s_desc'] = get_formatted_string($this->input->post('txt_add_desc')); 
+					$info['e_privacy'] = get_formatted_string($this->input->post('privacy')); 
+					$info['s_photo'] = $this->_upload_photo();
+					$info['dt_created_on'] = get_db_datetime();
+					
+					$_ret = $this->photo_albums_model->insert($info);
+					
+					###########################Privacy settings###################################
+					insert_privacy($_ret,$_POST,$this->db->photoalbum_privacy,'i_photo_album_id');
+					###########################Privacy settings###################################
+					header('location:manage-my-photo.html');
+					exit;
+				}
+				else
+				{
+					$VIEW = "logged/photos/create_photo_album.phtml"; 
+	            	parent::_render($data, $VIEW);
+				}
+            }
+            else
+            {
+            	 # view file...
+	            $VIEW = "logged/photos/create_photo_album.phtml"; 
+	            parent::_render($data, $VIEW);
+            }
+           
         }
         catch(Exception $err_obj)
         {
@@ -126,6 +162,8 @@ class Create_photo_album extends Base_controller
 				$arr_messages['album_photo'] = "* Required Field.";
 			}
 			$flag	= 0;
+			
+			
 			
 		   //pr($arr_messages);
 			if( count($arr_messages)==0 ) {
