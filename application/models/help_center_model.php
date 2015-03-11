@@ -29,7 +29,7 @@ function get_all_help( $where ,$i_start=null,$i_limit=null, $order_by)
     if($where == ''){ $where = ' WHERE 1';}
      $limit  = (is_numeric($i_start) && is_numeric($i_limit))?" Limit ".intval($i_start).",".intval($i_limit):'';
      $order_by = 'order by c.id ASC';
- $sql = "select c.* , ct.cat_name from cg_help_center c,cg_help_center_category ct $where and c.h_cat = ct.id  $order_by $limit";
+ $sql = "select c.* , ct.cat_name from cg_help_center c,cg_help_center_category ct, u.cg_admin_user $where and c.h_cat = ct.id AND u.id = c.i_posted_by  $order_by $limit";
    $query = $this->db->query($sql); #echo $this->db->last_query(); exit;
    //die();		
     $result_arr = $query->result_array();
