@@ -75,7 +75,7 @@ class Create_photo_album extends Base_controller
 				$this->form_validation->set_rules('txt_name', 'txt_name', 'required');
 				$this->form_validation->set_rules('txt_add_desc', 'txt_add_desc', 'required');
 				$this->form_validation->set_rules('s_photo', 's_photo', 'callback_fileupload');
-				
+				$this->form_validation->set_rules('privacy', 'privacy', 'callback_check_privacy');
 
 				
 				if ($this->form_validation->run() == TRUE)
@@ -117,6 +117,16 @@ class Create_photo_album extends Base_controller
         } 
 
     } 
+    public function check_privacy()
+    {
+    	if($_POST['privacy']=='-1')
+    	{
+    		$this->form_validation->set_message('check_privacy', "* Required Field.");
+			return false;
+    	}
+    	else 
+    		return true;
+    }
 	public function fileupload()
 	{
 		if( isset($_FILES['s_photo']['name']) && $_FILES['s_photo']['name']!='') {
