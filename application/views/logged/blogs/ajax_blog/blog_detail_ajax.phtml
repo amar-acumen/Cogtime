@@ -84,7 +84,7 @@
                                                 </div>
                                                   <div class="txt_content01 comments-number-content"> 
                                                    <form action="<?php echo base_url()?>logged/my_blog/add_blog_post_cmnts" method="post" id="postcmnts_frm<?=$blogpostval->id?>">
-                                                      <textarea name="postcmnts_txt" id="postcmnts_txt<?=$blogpostval->id?>" class="wal-comment-textarea" cols="" rows=""></textarea>
+                                                      <textarea name="postcmnts_txt" id="postcmnts_txt<?=$blogpostval->id?>" class="wal-comment-textarea"></textarea>
                                                       <span id="err_postcmnts_txt<?=$blogpostval->id?>"></span>
                                                       <input type="hidden"  name="comment_blog_id" value="<?=$blogpostval->i_blog_id?>" />
                                                       <input type="hidden" name="postcmnts_postid" value="<?=$blogpostval->id?>" />
