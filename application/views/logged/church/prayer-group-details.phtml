@@ -34,7 +34,7 @@
             <!--payer notification start-->
                 <div class="main-payer-section">
                     <div>
-                        <!-----------------only grp member can access------------------------------------------->
+                        <!--only grp member can access-->
                         <?php 
                         //echo $_SESSION['subadmin_role'];
                        // echo ;
@@ -83,7 +83,7 @@
                         <?php 
                          }
                         ?>
-                        <!----------------------------------------------------------------->
+                        
                         
                         <div>
                             <ul class="notification-ul" id="grp_post_list">
@@ -111,7 +111,7 @@
                                         
 					</li>
                                        
-                 <!--------------------------delete popup------------------------------------------->
+                 <!--delete popup-->
                  <div  class="lightbox pry-delete<?=$v->id ?>">
       <div class="close"><a onclick="hide_dialog()" href="javascript:void(0)"><img alt="" src="<?= base_url() ?>images/close.png"></a></div>
       <div class="top"><div>&nbsp;</div></div>
@@ -138,8 +138,8 @@
       </div>
       <div class="bot"><div>&nbsp;</div></div>
 </div>
-                 <!------------------------------------------------------------------------->
-                 <!----------------------comment edit--------------------------------------->
+                
+                 <!--comment edit-->
                  <div id="edit-post-box<?=$v->id ?>" class="" style="display: none;">
                         <div class="prayr-grp-edit">
                              <h3 class="page-heading">POST <span onclick="show_hidden('<?=$v->id ?>')" class="pull-right">[Hide-]</span></h3>

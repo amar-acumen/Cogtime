@@ -384,7 +384,7 @@ $("#text_count").text("Characters left: " + (500 - $(this).val().length));
     <div class="church-setting-main">
 		<h3>Please Add Daily Church Service</h3>
         
-               <!---------------------------------------->
+               
                <form action="<?= base_url().'logged/church/add_service' ?>" method="POST" name="Service[]" class="church_serv_main">
                  <div class="church_serv" id="first_elem">
                      
@@ -448,10 +448,7 @@ $("#text_count").text("Characters left: " + (500 - $(this).val().length));
        foreach ($service_arr as $val){
    ?>
     <tr>
-          <!------------------------------------------->
-    
-    <!--------------------------------------------------->
-        
+       
         
         
      
@@ -466,7 +463,7 @@ $("#text_count").text("Characters left: " + (500 - $(this).val().length));
       
     </tr>
    
-            <!----------------------pop up for delete------------------------------------> 
+            <!--pop up for delete--> 
       <div class="lightbox ser-delete<?= $val->id ?>" style="width: 400px; left: 100px;">
       <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="<?=base_url()?>images/close.png" alt="" width="24" height="24" /></a></div>
       <div class="top"><div>&nbsp;</div></div>
@@ -493,8 +490,8 @@ $("#text_count").text("Characters left: " + (500 - $(this).val().length));
       </div>
       <div class="bot"><div>&nbsp;</div></div>
 </div>
-    <!---------------------------------------------->
-    <!----------------------------edit --------------------------------------->
+   
+    <!--edit -->
      <div class="lightbox lightdesign edt_service<?= $val->id ?>" style="width: 650px; left: 100px;">
       <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="<?=base_url()?>images/close.png" alt="" width="24" height="24" /></a></div>
       <div class="top"><div>&nbsp;</div></div>

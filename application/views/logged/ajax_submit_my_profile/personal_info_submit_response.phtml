@@ -67,7 +67,7 @@
         <div class="lable01">My Profile URL:</div>  
         <div class="field01"><a  href="javascript:void(0);" class="blue_link">www.xtiannetwork.com/<?= $arr_profile_info['s_profile_url_suffix'] ?></a> </div> 
         <div class="clr"></div>
-        <!----------------------->
+        
         <div id="basic_info_div" class="shade_box_01 frm_box shade_box_blue" style="padding-bottom:17px;">
             <div class="lable01">Languages I Speak:</div>  
             <div class="field01"><?= $arr_profile_info['s_languages'] ?></div> 
@@ -97,7 +97,7 @@
 
 
         </div>
-        <!----------------------------------->
+        
 
     </div>
 </div>
@@ -248,7 +248,7 @@
                 <?php echo form_error('profile_pic'); ?>
         <div class="error-message" id="err_profile_pic"></div>
             </div> 
-             <!------------------------------------------>
+            
                                 <div class="prvimg">
                                     <input type="hidden" value="<?= $arr_profile_info['id'] ?>" id="prf_id">
                                         <div style="background:url(<?= get_profile_image_of_user( 'thumb',$arr_profile_info['s_profile_photo'],$arr_profile_info['e_gender']) ?>) no-repeat center;width:60px; height:60px;" title="member" class="pro_photo4 user_pro_image" ></div>
@@ -259,7 +259,7 @@
                                       <a href="javascript:void(0)" onclick="show_dialog('image-delete');">Remove</a><?php } ?>
                                     
                                 </div>
-                                <!---------------------------------------------->
+                                
             
             <div class="clr"></div>
             <div class="lable01">Time Zone:</div>

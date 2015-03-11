@@ -16,7 +16,7 @@
 											<div class="clr"></div>
                                             <div id="map_div<?=$val['id']?>" style="display:none;"></div>
                                             
-                                            <!---------------------------------------new added----------------->
+                                            <!--new added-->
                                              <?php 
                                                 $user_id = intval(decrypt($this->session->userdata('user_id')));
                                               $query = $this->db->get_where('cg_church', array('ch_admin_id' => $user_id));
@@ -124,7 +124,7 @@
             <?php
         
     }?>
-                                            <!----------------------------------------------------------->
+                                           
 										</li>
 						<?php
 									}
