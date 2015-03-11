@@ -38,7 +38,7 @@ function get_all_help( $where ,$i_start=null,$i_limit=null, $order_by)
 }
 function get_total_help($s_where){
     
-    $sql = "select count(*) as total_help from cg_help_center c $s_where";
+    $sql = "select count(*) as total_help from cg_help_center c , cg_admin_user as u $s_where";
     $query = $this->db->query($sql); #echo $this->db->last_query(); exit;
 		$result_arr = $query->result_array();
                // pr($result_arr,1);
