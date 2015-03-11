@@ -104,7 +104,9 @@
 			
 			$(window).load(function()
 			{
-				check();
+				setTimeout(function() {
+	                        check();
+	                    },1000);
 			});
 			<?php
 		}
