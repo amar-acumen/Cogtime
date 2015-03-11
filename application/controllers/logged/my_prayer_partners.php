@@ -1553,7 +1553,7 @@ class My_prayer_partners extends Base_controller {
                                     . '<input type="hidden" class="prev_desc_' . $i . '"  value="' . nl2br($r['s_desc']) . '">'
                                     . '<div style="clear:both;display:none" class="edit-prayer-partner">'
                                     . ' <p style="padding-top:8px; clear:both;" class="blue12">Edit Prayer Points</p>
-                                    <p><textarea class="text_area_prayer_point" id="text_area_edit_prayer_point_' . $i . '" cols="" rows="" style="width:428px; height:100px;">' . nl2br($r['s_desc']) . '</textarea></p>'
+                                    <p><textarea class="text_area_prayer_point" id="text_area_edit_prayer_point_' . $i . '" style="width:428px; height:100px;">' . nl2br($r['s_desc']) . '</textarea></p>'
                                     . '<p class="blue12" style="padding-bottom:8px;"></p>'
                                     . '<p><input name="update_btn"  type="button" value="Update" class="btn update_btn" onclick="edit_prayer_partner_(' . $frnd_id . ',' . $i . ')" /></p>'
                                     . '</div>'
@@ -1576,7 +1576,7 @@ class My_prayer_partners extends Base_controller {
                                     . '<input type="hidden" class="prev_desc_' . $i . '"  value="' . nl2br($r['s_desc']) . '">'
                                     . '<div style="clear:both;display:none" class="edit-prayer-partner">'
                                     . ' <p style="padding-top:8px; clear:both;" class="blue12">Edit Prayer Points</p>
-                                    <p><textarea class="text_area_prayer_point" id="text_area_edit_prayer_point_' . $i . '" cols="" rows="" style="width:428px; height:100px;">' . nl2br($r['s_desc']) . '</textarea></p>'
+                                    <p><textarea class="text_area_prayer_point" id="text_area_edit_prayer_point_' . $i . '" style="width:428px; height:100px;">' . nl2br($r['s_desc']) . '</textarea></p>'
                                     . '<p class="blue12" style="padding-bottom:8px;"></p>'
                                     . '<p><input name="update_btn"  type="button" value="Update" class="btn update_btn" onclick="edit_prayer_partner_(' . $frnd_id . ',' . $i . ')" /></p>'
                                     . '</div>'
@@ -1607,7 +1607,7 @@ class My_prayer_partners extends Base_controller {
                                     . '<input type="hidden" class="prev_desc_' . $j . '"  value="' . nl2br($r['s_desc']) . '">'
                                     . '<div style="clear:both;display:none" class="edit-prayer-partner">'
                                     . ' <p style="padding-top:8px; clear:both;" class="blue12">Edit Prayer Points</p>
-                                    <p><textarea class="text_area_prayer_point" id="text_area_edit_prayer_point_' . $j . '" cols="" rows="" style="width:428px; height:100px;">' . nl2br($r['s_desc']) . '</textarea></p>'
+                                    <p><textarea class="text_area_prayer_point" id="text_area_edit_prayer_point_' . $j . '" style="width:428px; height:100px;">' . nl2br($r['s_desc']) . '</textarea></p>'
                                     . '<p class="blue12" style="padding-bottom:8px;"></p>'
                                     . '<p><input name="update_btn"  type="button" value="Update" class="btn update_btn" onclick="edit_prayer_partner_(' . $frnd_id . ',' . $j . ')" /></p>'
                                     . '</div>'
@@ -1630,7 +1630,7 @@ class My_prayer_partners extends Base_controller {
                                     . '<input type="hidden" class="prev_desc_' . $j . '"  value="' . nl2br($r['s_desc']) . '">'
                                     . '<div style="clear:both;display:none" class="edit-prayer-partner">'
                                     . ' <p style="padding-top:8px; clear:both;" class="blue12">Edit Prayer Points</p>
-                                    <p><textarea class="text_area_prayer_point" id="text_area_edit_prayer_point_' . $j . '" cols="" rows="" style="width:428px; height:100px;">' . nl2br($r['s_desc']) . '</textarea></p>'
+                                    <p><textarea class="text_area_prayer_point" id="text_area_edit_prayer_point_' . $j . '" style="width:428px; height:100px;">' . nl2br($r['s_desc']) . '</textarea></p>'
                                     . '<p class="blue12" style="padding-bottom:8px;"></p>'
                                     . '<p><input name="update_btn"  type="button" value="Update" class="btn update_btn" onclick="edit_prayer_partner_(' . $frnd_id . ',' . $j . ')" /></p>'
                                     . '</div>'

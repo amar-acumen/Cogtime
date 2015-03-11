@@ -136,8 +136,8 @@ if( $feed['s_type'] == 'wall_post' ){
                     <div class="comments-number-mid">
                         <div class="heading">
                               <div class="left">
-                                    <h4><img alt="" src="images/heart2.png" height="19px" width="20px" class="cmnt" /> <span class="liked_by_<?=$feed['id']?>">Liked by (<?=count_like_link($feed['id'])?>) </span></h4>
-                                     <img class="wal-minus" alt="" src="images/minus-white.png" width="13" height="10"/>
+                                    <h4><img alt="heart2" src="images/heart2.png" height="19" width="20" class="cmnt" /> <span class="liked_by_<?=$feed['id']?>">Liked by (<?=count_like_link($feed['id'])?>) </span></h4>
+                                     <img class="wal-minus" alt="minus-white" src="images/minus-white.png" width="13" height="10"/>
                               </div>
                         </div>
                               <div class="shade_box_white" id="like_content_div<?=$feed['id']?>"></div>
@@ -167,7 +167,7 @@ if( $feed['s_type'] == 'wall_post' ){
               <!--  text div start -->
 			   <div class=" comment-content nw-comment-content">
                 <div class="write-text">
-                <textarea name="wall_msg" id="wall_msg" cols="" rows="" onfocus="if(this.value=='Max 500 Characters')this.value='';" onblur="if(this.value=='')this.value='Max 500 Characters';" maxlength ="500" 
+                <textarea name="wall_msg" id="wall_msg" onfocus="if(this.value=='Max 500 Characters')this.value='';" onblur="if(this.value=='')this.value='Max 500 Characters';" maxlength ="500" 
                 onKeyDown="limitTextarea(this.form.wall_msg,this.form.countdown,500);" 
 onKeyUp="limitTextarea(this.form.wall_msg,this.form.countdown,500);" onkeypress="return restrict_carrige(event);"  ><?php if($data_arr->message != ''){ echo $data_arr->message;} else echo"Max 500 Characters";?></textarea>
  <p style=" clear:both; float:left"> <span id="text_count"><?=strlen($data_arr->message)?></span> Characters</p>
@@ -309,7 +309,7 @@ onKeyUp="limitTextarea(this.form.wall_msg,this.form.countdown,500);" onkeypress=
                                   </div>
                             </div>
                               <div class="txt_content01 comments-number-content content-width"> 
-                              <textarea  id="feed_comment_box_<?=$feed['id']?>" cols="" rows="" style="width:461px; height:100px; margin-bottom:10px;"></textarea>
+                              <textarea  id="feed_comment_box_<?=$feed['id']?>" style="width:461px; height:100px; margin-bottom:10px;"></textarea>
                               <input type="hidden" name="i_newsfeed_id" id="i_newsfeed_id" value=""/>
                               <input class="yellow-btn" id="post_comment_button" type="button"  value="Post" name="" onclick="post_comment(<?=$feed['id']?>);" />
                               
