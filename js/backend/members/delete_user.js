@@ -33,7 +33,7 @@ function delete_confirm_(file_id, i_user_type)
 	var status=$('#status'+id).val();
 //alert(status);
 	showBusyScreen();
-	if(status=="Suspend")
+	if(status=="Enable")
 	{
 		var now_status="2"; // 1: active , 2: inactive
 		var now_status_name='Enable';
