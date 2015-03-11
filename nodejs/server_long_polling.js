@@ -70,7 +70,7 @@ function processRequest(url_parts,res,cnt)
 http.createServer(function(req, res) {
 	
 	var url_parts = url.parse(req.url, true);
-	var cnt = (new Date()).getTime()+1000;
+	var cnt = (new Date()).getTime()+5000;
 	processRequest(url_parts,res,cnt);
 	
 	
