@@ -75,7 +75,7 @@ class My_events extends Base_controller {
             $content = ob_get_contents();
             $content_obj = json_decode($content);
             $data['events_ajax_content'] = $content_obj->html;
-			pr($data['events_ajax_content'],1);
+			
             $data['no_of_result'] = $content_obj->no_of_result;
             ob_end_clean();
 
@@ -112,7 +112,7 @@ class My_events extends Base_controller {
             $view_more = false;
         //--------- end check
 
-		pr($data,1);
+		//pr($data,1);
         $VIEW_FILE = "logged/my_events/my_events_ajax.phtml";
 
         if (is_array($result) && count($result)) {
