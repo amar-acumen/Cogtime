@@ -165,7 +165,7 @@ class Hp_banners extends Admin_base_Controller {
                     if ($uploaded_width < $this->config->item('hp_banner_width_limit') ||
                             $uploaded_height < $this->config->item('hp_banner_height_limit')) {
 
-                        $data["file_error_$fileElementName"] = "<div class=\"error_massage\" id=\"err_msg\">* Incorrect image dimension.</div>";
+                        $data["file_error_$fileElementName"] = "<div class=\"error_massage\" id=\"err_msg\">* incorrect image extension.</div>";
                     }
                     //// check for uploaded banner file's dimension [End]...  
                 } else {
@@ -263,7 +263,7 @@ class Hp_banners extends Admin_base_Controller {
                     if ($uploaded_width < $this->config->item('hp_banner_width_limit') ||
                             $uploaded_height < $this->config->item('hp_banner_height_limit')) {
 
-                        $data["file_error_$fileElementName"] = "<div class=\"error_massage\" id=\"err_msg\">* Incorrect image dimension.</div>";
+                        $data["file_error_$fileElementName"] = "<div class=\"error_massage\" id=\"err_msg\">* incorrect image extension.</div>";
                     }
                     //// check for uploaded banner file's dimension [End]...    
                 }
