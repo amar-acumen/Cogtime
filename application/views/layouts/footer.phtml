@@ -489,6 +489,12 @@ window.onload=function(){
         }, 59000);
         <?php
     }
+    if($_SESSION['user_id']!='')
+    {
+        ?>
+            check();
+        <?php
+    }
     ?>
    
 }
