@@ -71,7 +71,7 @@ class Create_photo_album extends Base_controller
             	$this->load->helper(array('form', 'url'));
 
 				$this->load->library('form_validation');
-
+				$this->form_validation->set_message('rule', '* Required Field.');
 				$this->form_validation->set_rules('txt_name', 'txt_name', 'required');
 				$this->form_validation->set_rules('txt_add_desc', 'txt_add_desc', 'required');
 				
