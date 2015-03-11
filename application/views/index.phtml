@@ -7,7 +7,7 @@
 
 <!-- CONTENT SECTION  A-->
 <!-- CONTENT SECTION -->
-<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+
 <style type="text/css">
 .lightbox.event-news-pop{ z-index:999999999999 !important; text-align:left;}
 .lightbox.event-news-pop h1{ font-size:18px; color:#096aa7; padding-bottom:10px;}
@@ -89,48 +89,7 @@
                <span class="pull-left">Start Time: <?=$val['dt_start_time'] ?></span>
                <span class="pull-right">Close Time : <?=$val['dt_end_time'] ?></span>
                  <!--right part -->
-                 <div class="pre-time-map" style=" display: none">                               
-
-
-                            
-
-                                    <?php 
-                                    //$add =  $address = str_replace(" ", "+", $val['s_address']);
-                                    $address =  $val['s_city'] . '+' . $val['s_state'] . '+' . get_country_name_by_id($val['i_country_id']).'+'.$val['s_postcode'];
-                                    $reg = get_country_name_by_id($val['i_country_id']);
-$url = "http://maps.google.com/maps/api/geocode/json?address=$address&sensor=false&region=$reg";
-$ch = curl_init();
-curl_setopt($ch, CURLOPT_URL, $url);
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-curl_setopt($ch, CURLOPT_PROXYPORT, 3128);
-curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
-curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
-$response = curl_exec($ch);
-curl_close($ch);
-$response_a = json_decode($response);
- $lat = $response_a->results[0]->geometry->location->lat;
-
- $long = $response_a->results[0]->geometry->location->lng;
-                                     // echo $mapshow->printGMapsJS();
-                                     // echo $mapshow->showMap(false); 
-                                    ?>
-                            
-                            <script type="text/javascript">
-                            var map;
-function initialize() {
-  var mapOptions = {
-    zoom: 16, 
-    center: new google.maps.LatLng(<?= $lat ?>, <?= $long ?>)
-  };
-  map = new google.maps.Map(document.getElementById('map-canvas<?= $val['id']?>'),
-      mapOptions);
-}
-
-google.maps.event.addDomListener(window, 'load', initialize);
-                            
-                            </script>
-                            <div id="map-canvas<?= $val['id']?>">  </div>
-                                </div>
+                
                                <?php// } ?>
                         </div>
                         <!--/right part -->
