@@ -321,7 +321,7 @@ public function get_by_id($id)
 		  //echo ($s_qry);exit;
           //////////end For Pagination//////////                
                 
-          $this->db->trans_begin();///new                
+                
           $rs=$this->db->query($s_qry); 
          // ;
           $i_cnt=0;
@@ -358,7 +358,7 @@ public function get_by_id($id)
               }    
               $rs->free_result();          
           }
-          $this->db->trans_commit();///new
+          
 		  
 		  					
 		  
@@ -404,7 +404,7 @@ public function get_by_id($id)
               }    
               $rs->free_result();          
           }
-          $this->db->trans_commit();///new
+          
           unset($s_qry,$rs,$row,$i_cnt,$s_where);
           return $ret_;
         }
@@ -668,7 +668,7 @@ public function get_by_id($id)
 						
 		  $s_qry= $s_qry.(trim($s_order_by)!=""?" ORDER BY ".$s_order_by."":"ORDER BY ringid DESC")." ".(is_numeric($i_start) && is_numeric($i_limit)?" LIMIT ".intval($i_start).",".intval($i_limit):"");
          // echo $s_qry;exit;
-		  $this->db->trans_begin();///new                
+		   
           $rs=$this->db->query($s_qry); 
 		  $i_cnt=0;
 		  
@@ -703,7 +703,7 @@ public function get_by_id($id)
               }    
               $rs->free_result();          
           }
-          $this->db->trans_commit();///new
+          
 		  //pr($ret_);
 		  //exit;
           unset($s_qry,$rs,$row,$i_cnt,$s_where,$i_start,$i_limit);
@@ -737,7 +737,7 @@ public function get_by_id($id)
               }    
               $rs->free_result();          
           }
-          $this->db->trans_commit();///new
+          
           unset($s_qry,$rs,$row,$i_cnt,$s_where);
           return $ret_;
         }
@@ -753,7 +753,7 @@ public function get_by_id($id)
 		$arr	= array();
 		$uid	= intval(decrypt($this->session->userdata('user_id')));
 		$s_qry = "SELECT * FROM cg_church_ring_invited_user AS inv WHERE i_invited_id='{$uid}' {$where}";
-		$this->db->trans_begin();///new                
+		
         $rs=$this->db->query($s_qry); 
 		$i_cnt=0;
 		  
@@ -792,7 +792,7 @@ public function get_by_id($id)
 						
 		  $s_qry= $s_qry.(trim($s_order_by)!=""?" ORDER BY ".$s_order_by."":" ORDER BY r.i_ring_id DESC")." ".(is_numeric($i_start) && is_numeric($i_limit)?" LIMIT ".intval($i_start).",".intval($i_limit):"");
           //echo $s_qry;exit;
-		  $this->db->trans_begin();///new                
+		 
           $rs=$this->db->query($s_qry); 
 		  $i_cnt=0;
 		  
@@ -813,7 +813,7 @@ public function get_by_id($id)
               }    
               $rs->free_result();          
           }
-          $this->db->trans_commit();///new
+          
 		  
           unset($s_qry,$rs,$row,$i_cnt,$s_where,$i_start,$i_limit);
           return $ret_;
@@ -847,7 +847,7 @@ public function get_by_id($id)
               }    
               $rs->free_result();          
           }
-          $this->db->trans_commit();///new
+          
           unset($s_qry,$rs,$row,$i_cnt,$s_where);
           return $ret_;
         }
@@ -871,7 +871,7 @@ public function get_by_id($id)
 						
 		  $s_qry= $s_qry.(trim($s_order_by)!=""?" ORDER BY ".$s_order_by."":" ORDER BY r.i_ring_id DESC")." ".(is_numeric($i_start) && is_numeric($i_limit)?" LIMIT ".intval($i_start).",".intval($i_limit):"");
           #echo $s_qry;exit;
-		  $this->db->trans_begin();///new                
+		           
           $rs=$this->db->query($s_qry); 
 		  $i_cnt=0;
 		  
@@ -892,7 +892,7 @@ public function get_by_id($id)
               }    
               $rs->free_result();          
           }
-          $this->db->trans_commit();///new
+          
 		  
           unset($s_qry,$rs,$row,$i_cnt,$s_where,$i_start,$i_limit);
           return $ret_;
@@ -926,7 +926,7 @@ public function get_by_id($id)
               }    
               $rs->free_result();          
           }
-          $this->db->trans_commit();///new
+          
           unset($s_qry,$rs,$row,$i_cnt,$s_where);
           return $ret_;
         }
@@ -1237,7 +1237,7 @@ public function get_by_id($id)
               }    
               $rs->free_result();          
           }
-          $this->db->trans_commit();///new
+          
           unset($s_qry,$rs,$row,$i_cnt,$s_where);
           return $ret_;
         }
@@ -1292,7 +1292,7 @@ public function get_by_id($id)
 						
 		  $s_qry= $s_qry.(trim($s_order_by)!=""?" ORDER BY ".$s_order_by."":" ORDER BY r.i_ring_id DESC")." ".(is_numeric($i_start) && is_numeric($i_limit)?" LIMIT ".intval($i_start).",".intval($i_limit):"");
         //echo $s_qry;exit;
-		  $this->db->trans_begin();///new                
+		      
           $rs=$this->db->query($s_qry); 
 		  $i_cnt=0;
 		  
@@ -1315,7 +1315,7 @@ public function get_by_id($id)
               }    
               $rs->free_result();          
           }
-          $this->db->trans_commit();///new
+          
 		  
           unset($s_qry,$rs,$row,$i_cnt,$s_where,$i_start,$i_limit);
           return $ret_;
@@ -1350,7 +1350,7 @@ public function get_by_id($id)
               }    
               $rs->free_result();          
           }
-          $this->db->trans_commit();///new
+          
           unset($s_qry,$rs,$row,$i_cnt,$s_where);
           return $ret_;
         }
@@ -1382,7 +1382,7 @@ public function get_by_id($id)
 						
 		  $s_qry= $s_qry.(trim($s_order_by)!=""?" ORDER BY ".$s_order_by."":" ORDER BY r.i_ring_id DESC")." ".(is_numeric($i_start) && is_numeric($i_limit)?" LIMIT ".intval($i_start).",".intval($i_limit):"");
          // echo $s_qry;exit;
-		  $this->db->trans_begin();///new                
+		   
           $rs=$this->db->query($s_qry); 
 		  $i_cnt=0;
 		  
@@ -1406,7 +1406,7 @@ public function get_by_id($id)
               }    
               $rs->free_result();          
           }
-          $this->db->trans_commit();///new
+          
 		  
           unset($s_qry,$rs,$row,$i_cnt,$s_where,$i_start,$i_limit);
           return $ret_;
@@ -1443,7 +1443,7 @@ public function get_by_id($id)
               }    
               $rs->free_result();          
           }
-          $this->db->trans_commit();///new
+          
           unset($s_qry,$rs,$row,$i_cnt,$s_where);
           return $ret_;
         }
@@ -1525,7 +1525,7 @@ public function get_by_id($id)
 		$arr	= array();
 		$uid	= intval(decrypt($this->session->userdata('user_id')));
 		$s_qry = "SELECT * FROM cg_church_ring_invited_user AS inv WHERE i_invited_id='{$uid}' {$where}";
-		$this->db->trans_begin();///new                
+		
         $rs=$this->db->query($s_qry); 
 		$i_cnt=0;
 		  
@@ -1655,7 +1655,7 @@ public function get_by_id($id)
 		 // echo ($s_qry);exit;
           //////////end For Pagination//////////                
                 
-          $this->db->trans_begin();///new                
+             
           $rs=$this->db->query($s_qry); 
          // ;
           $i_cnt=0;
@@ -1692,7 +1692,7 @@ public function get_by_id($id)
               }    
               $rs->free_result();          
           }
-          $this->db->trans_commit();///new
+          
 		  
 		  					
 		  
@@ -1739,7 +1739,7 @@ public function get_by_id($id)
               }    
               $rs->free_result();          
           }
-          $this->db->trans_commit();///new
+          
           unset($s_qry,$rs,$row,$i_cnt,$s_where);
           return $ret_;
         }
