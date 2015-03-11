@@ -220,7 +220,7 @@ class Admins_user_model extends Base_model implements InfModel {
                 $stmt_val["s_password"] = get_salted_password($login_data["s_password"]);
           /*  }*/
 
-            $this->db->trans_begin(); ///new
+            
             $rs = $this->db->query($s_qry, $stmt_val);
             //echo $this->db->last_query();    
 
@@ -249,7 +249,7 @@ class Admins_user_model extends Base_model implements InfModel {
                 }
                 $rs->free_result();
             }
-            $this->db->trans_commit(); ///new
+            
             unset($s_qry, $rs, $row, $login_data, $stmt_val);
 
             return $ret_;
@@ -307,23 +307,23 @@ class Admins_user_model extends Base_model implements InfModel {
                 $s_qry.=" binary s_email=? ";
 
 
-                $this->db->trans_begin(); ///new   
+               
                 $rs = $this->db->query($s_qry, array(
                     get_formatted_string($email)
                 ));
-                $this->db->trans_commit(); ///new   
+                
             } else {
 
                 $s_qry = "SELECT COUNT(*) i_count FROM " . $this->db->ADMIN_USER . " WHERE ";
                 $s_qry.=" binary s_email=? ";
                 $s_qry.=" AND id!=? ";
 
-                $this->db->trans_begin(); ///new   
+                
                 $rs = $this->db->query($s_qry, array(
                     get_formatted_string($email),
                     intval($i_user_id)
                 ));
-                $this->db->trans_commit(); ///new   
+                
             }
 
 
@@ -360,24 +360,22 @@ class Admins_user_model extends Base_model implements InfModel {
                 $s_qry = "SELECT COUNT(*) i_count FROM " . $this->db->ADMIN_USER . " WHERE ";
                 $s_qry.=" binary s_username=? ";
 
-
-                $this->db->trans_begin(); ///new   
                 $rs = $this->db->query($s_qry, array(
                     get_formatted_string($username)
                 ));
-                $this->db->trans_commit(); ///new   
+                 
             } else {
 
                 $s_qry = "SELECT COUNT(*) i_count FROM " . $this->db->ADMIN_USER . " WHERE ";
                 $s_qry.=" binary s_username=? ";
                 $s_qry.=" AND id!=? ";
 
-                $this->db->trans_begin(); ///new   
+                
                 $rs = $this->db->query($s_qry, array(
                     get_formatted_string($username),
                     intval($i_user_id)
                 ));
-                $this->db->trans_commit(); ///new   
+                
             }
 
 

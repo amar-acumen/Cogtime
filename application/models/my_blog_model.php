@@ -83,7 +83,7 @@ class My_blog_model extends Base_model
 			#echo ($s_qry); exit;
           //////////end For Pagination//////////                
                 
-          $this->db->trans_begin();///new                
+             
           $rs=$this->db->query($s_qry); 
           $i_cnt=0;
           if(is_array($rs->result()))
@@ -121,7 +121,7 @@ class My_blog_model extends Base_model
               }    
               $rs->free_result();          
           }
-          $this->db->trans_commit();///new
+          
 		  
 		  					
 		  
@@ -163,7 +163,7 @@ class My_blog_model extends Base_model
               }    
               $rs->free_result();          
           }
-          $this->db->trans_commit();///new
+          
           unset($s_qry,$rs,$row,$i_cnt,$s_where);
           return $ret_;
         }

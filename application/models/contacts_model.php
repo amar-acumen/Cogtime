@@ -89,7 +89,7 @@ class Contacts_model extends Base_model implements InfModel
 	#echo ($s_qry);
           //////////end For Pagination//////////                
                 
-          $this->db->trans_begin();///new                
+                       
           $rs=$this->db->query($s_qry); 
           $i_cnt=0;
           if(is_array($rs->result()))
@@ -137,7 +137,7 @@ class Contacts_model extends Base_model implements InfModel
               }    
               $rs->free_result();          
           }
-          $this->db->trans_commit();///new
+          
 		  
 		  					
 		  
@@ -179,7 +179,7 @@ class Contacts_model extends Base_model implements InfModel
               }    
               $rs->free_result();          
           }
-          $this->db->trans_commit();///new
+          
           unset($s_qry,$rs,$row,$i_cnt,$s_where);
           return $ret_;
         }
@@ -407,7 +407,7 @@ class Contacts_model extends Base_model implements InfModel
 		  
 		   	 $s_qry .=" limit {$i_start}, {$i_limit}"; 
 		        # echo nl2br($s_qry);		
-          $this->db->trans_begin();///new                
+               
           $rs=$this->db->query($s_qry);
           $i_cnt=0;
           if(is_array($rs->result()))
@@ -441,7 +441,7 @@ class Contacts_model extends Base_model implements InfModel
               }    
               $rs->free_result();          
           }
-          $this->db->trans_commit();///new
+          
 		  
 		  					
 		  
@@ -625,7 +625,7 @@ class Contacts_model extends Base_model implements InfModel
         
 		  #echo nl2br($s_qry);
                 
-          $this->db->trans_begin();///new                
+          
           $rs=$this->db->query($s_qry); 
           $i_cnt=0;
           if(is_array($rs->result()))
@@ -642,7 +642,7 @@ class Contacts_model extends Base_model implements InfModel
               }    
               $rs->free_result();          
           }
-          $this->db->trans_commit();///new
+          
 		  
 		  #pr(array_unique($ret_));				
 		  
@@ -699,7 +699,7 @@ class Contacts_model extends Base_model implements InfModel
 	
           //////////end For Pagination//////////                
                 
-          $this->db->trans_begin();///new                
+                
           $rs=$this->db->query($s_qry); 
           $i_cnt=0;
 		  $this->load->model('users_model');
@@ -746,7 +746,7 @@ class Contacts_model extends Base_model implements InfModel
               }    
               $rs->free_result();          
           }
-          $this->db->trans_commit();///new
+          
 		  
 		  					
 		  #pr($ret_);
@@ -790,7 +790,7 @@ class Contacts_model extends Base_model implements InfModel
               }    
               $rs->free_result();          
           }
-          $this->db->trans_commit();///new
+          
           unset($s_qry,$rs,$row,$i_cnt,$s_where);
           return $ret_;
         }
@@ -888,7 +888,7 @@ class Contacts_model extends Base_model implements InfModel
 	#echo nl2br($s_qry);
           //////////end For Pagination//////////                
                 
-          $this->db->trans_begin();///new                
+              
           $rs=$this->db->query($s_qry); 
           $i_cnt=0;
           if(is_array($rs->result()))
@@ -907,10 +907,6 @@ class Contacts_model extends Base_model implements InfModel
               }    
               $rs->free_result();          
           }
-          $this->db->trans_commit();///new
-		
-		
-		  
 	     unset($s_qry,$rs,$row,$i_cnt,$s_where,$i_start,$i_limit);
 
 	     return $ret_;
