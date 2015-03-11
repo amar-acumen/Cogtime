@@ -190,7 +190,7 @@ if (($this->session->userdata('loggedin') != '' || $this->session->userdata('log
                         </div>
 
 
-                        <form action="" method="post" enctype="multipart/form-data" class="comment-form">
+                        <form method="post" enctype="multipart/form-data" class="comment-form">
                             <div class="textarea-div">
                                 <textarea id="feed_comment_box_<?= $id ?>" class="pre-time-textarea" onFocus="if(this.value=='Max 500 Char allowed') this.value='';" onBlur="if(this.value=='')this.value='Max 500 Char allowed'; " onkeypress="return restrict_carrige(event);" >Max 500 Char allowed</textarea>
                                 <span class="error-message"></span>

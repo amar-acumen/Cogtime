@@ -299,7 +299,7 @@ class Photo_albums_model extends Base_model
 		$profile_id = $user_id;
 		
 		#### adding for public:::: 
-		 $mp_sql = "  SELECT  if ((mp.i_friend_privacy = '0' &&  mp.i_netpal_privacy = '0' &&  mp.i_prayer_partner_privacy = '0' 
+		$mp_sql = "  SELECT  if ((mp.i_friend_privacy = '0' &&  mp.i_netpal_privacy = '0' &&  mp.i_prayer_partner_privacy = '0' 
 		 					&& mp.i_ring_privacy = '0' &&  mp.i_prayer_group_privacy = '0'
 						    ) , '' ,
 						       (concat(IF(mp.i_friend_privacy = '1', '\"Friend\", ', ''),''
