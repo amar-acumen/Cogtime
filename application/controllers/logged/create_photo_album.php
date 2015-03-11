@@ -74,7 +74,7 @@ class Create_photo_album extends Base_controller
 				$this->form_validation->set_message('required', '* Required Field.');
 				$this->form_validation->set_rules('txt_name', 'txt_name', 'required');
 				$this->form_validation->set_rules('txt_add_desc', 'txt_add_desc', 'required');
-				$this->form_validation->set_rules('s_photo', 's_photo', 'file_required|file_min_size[10KB]|file_max_size[2000KB]|file_allowed_type[image]);
+				$this->form_validation->set_rules('s_photo', 's_photo', 'file_required|file_min_size[10KB]|file_max_size[2000KB]|file_allowed_type[image]');
 				
 
 				
