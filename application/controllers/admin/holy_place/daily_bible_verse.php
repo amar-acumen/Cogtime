@@ -416,7 +416,7 @@ class Daily_bible_verse extends Admin_base_Controller
 	//echo $this->db->last_query();
 	$res=$query->result_array();
 	//pr($res,1);
-	$html=" <p class='green-title'>Bible Verse : [ <a  href='read-bible-chapter-view.php'>".$res['0']['s_book_name']." ".$res['0']['s_chapter'].":".$res['0']['i_verses']."-".$res[$limit]['i_verses']."</a> ]</p>";
+	$html=" <p class='green-title'>Bible Verse : [ <a  href='javascript:void(0)'>".$res['0']['s_book_name']." ".$res['0']['s_chapter'].":".$res['0']['i_verses']."-".$res[$limit]['i_verses']."</a> ]</p>";
 	foreach($res as $val)
 	{
 		$html.="<p>".$val['s_text']."</p>";
