@@ -299,7 +299,7 @@ class Photo_albums_model extends Base_model
 		$profile_id = $user_id;
 		
 		#### adding for public:::: 
-		 echo $mp_sql = "  SELECT  if ((mp.i_friend_privacy = '0' &&  mp.i_netpal_privacy = '0' &&  mp.i_prayer_partner_privacy = '0' 
+		$mp_sql = "  SELECT  if ((mp.i_friend_privacy = '0' &&  mp.i_netpal_privacy = '0' &&  mp.i_prayer_partner_privacy = '0' 
 		 					&& mp.i_ring_privacy = '0' &&  mp.i_prayer_group_privacy = '0'
 						    ) , '' ,
 						       (concat(IF(mp.i_friend_privacy = '1', '\"Friend\", ', ''),''
@@ -309,7 +309,7 @@ class Photo_albums_model extends Base_model
 									,IF(mp.i_prayer_group_privacy = '1', '\"Prayer Group\", ', '')))) as str
 						FROM cg_privacy_settings mp 
 						WHERE
-						mp.i_user_id = '".$profile_id."' and mp.s_section_name = 'photo'" ;exit;
+						mp.i_user_id = '".$profile_id."' and mp.s_section_name = 'photo'" ;
 		 
 		 $res_data = $this->db->query($mp_sql); 
 		 $res_data_arr = $res_data->result_array();
