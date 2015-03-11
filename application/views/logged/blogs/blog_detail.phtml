@@ -112,7 +112,18 @@
                                         <label class="white-text">Description:</label>
                                         <div class="wall-comment-blog-box">
                                           <textarea name="blogpost_desc" id="blogpost_desc" onfocus="if(this.value=='Max 500 Characters')this.value='';" onblur="if(this.value=='')this.value='Max 500 Characters';" >Max 500 Characters</textarea>
-                                          
+                                          <p style=" clear:both; float:left"> <span id="text_count">500</span> Characters</p>
+                                          <script type="text/javascript">
+                                  $(document).ready(function(){
+                                     // $("#text_countt").html('500')
+                                  $("#blogpost_desc").keyup(function(){
+                                      
+                               $("#text_count").text("Characters left: " + (500 - $(this).val().length));
+                                   });    
+                                  });
+                               
+                               
+                               </script>
                                         </div>
                                         <span class="error-message" id="err_add_blogpostdesc"></span>
                                         <div class="clr"></div>
