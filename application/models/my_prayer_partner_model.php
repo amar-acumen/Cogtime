@@ -190,7 +190,7 @@ class My_prayer_partner_model extends Base_model implements InfModel {
                 }
                 $rs->free_result();
             }
-            $this->db->trans_commit(); ///new
+            
             unset($s_qry, $rs, $row, $i_cnt, $s_where);
             return $ret_;
         } catch (Exception $err_obj) {
@@ -393,7 +393,7 @@ class My_prayer_partner_model extends Base_model implements InfModel {
                     }
                     $rs->free_result();
                 }
-                $this->db->trans_commit(); ///new
+                
                 unset($s_qry, $rs, $row, $i_me, $i_him);
             }
             return $ret_;
@@ -913,7 +913,7 @@ class My_prayer_partner_model extends Base_model implements InfModel {
                 }
                 $rs->free_result();
             }
-            $this->db->trans_commit(); ///new
+            
             unset($s_qry, $rs, $row, $i_cnt, $s_where);
             return $ret_;
         } catch (Exception $err_obj) {
