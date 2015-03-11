@@ -181,7 +181,7 @@ $(this).attr('style','display:none');
 
 $(document).ready(function(arg) {
  $('#frm_search').submit(function(){ 
-			  var datatosend=$("#frm_search").serialize(); alert(datatosend);
+			  var datatosend=$("#frm_search").serialize(); //alert(datatosend);
 				  showBusyScreen();
 				  $.ajax({
 					 type: "POST",
