@@ -11,7 +11,7 @@
 					  <!--text div start -->
                                 <div class="write-text nw-write-text" style="display: block;">
                                 <textarea onblur="if(this.value=='')this.value='Max 500 Characters';" onfocus="if(this.value=='Max 500 Characters')this.value='';" onKeyDown="limitTextarea(this.form.wall_msg,this.form.countdown,500);" 
-onKeyUp="limitTextarea(this.form.wall_msg,this.form.countdown,500);"  rows="" cols="" name="wall_msg" id="wall_msg">Max 500 Characters</textarea>
+onKeyUp="limitTextarea(this.form.wall_msg,this.form.countdown,500);"  name="wall_msg" id="wall_msg">Max 500 Characters</textarea>
                                 </div>
 								</div>
                                 <!--text div end -->
@@ -40,10 +40,10 @@ onKeyUp="limitTextarea(this.form.wall_msg,this.form.countdown,500);"  rows="" co
                                     <label class="upload-img">Video Url :</label>
                                     <div class="video-url"><input type="text" name="txt_video_url" id="txt_video_url" /></div>
 									<ul class="video-logo" >
-					<li><img src="<?=base_url()?>images/YouTube.png" title="YouTube" height="18px" width="44px" alt="YouTube"></li>
-					<li><img src="<?=base_url()?>images/Vimeo.png" title="Vimeo" height="17px" width="19px" alt="Vimeo"></li>
-					<li><img src="<?=base_url()?>images/DailyMotion.png" height="18px" width="18px" title="DailyMotion" alt="DailyMotion"></li>
-					<li><img src="<?=base_url()?>images/Viadeo.png" height="17px" width="74px" title="Viadeo" alt="Viadeo"></li>
+					<li><img src="<?=base_url()?>images/YouTube.png" title="YouTube" height="18" width="44" alt="YouTube"></li>
+					<li><img src="<?=base_url()?>images/Vimeo.png" title="Vimeo" height="17" width="19" alt="Vimeo"></li>
+					<li><img src="<?=base_url()?>images/DailyMotion.png" height="18" width="18" title="DailyMotion" alt="DailyMotion"></li>
+					<li><img src="<?=base_url()?>images/Viadeo.png" height="17" width="74" title="Viadeo" alt="Viadeo"></li>
 					</ul>
                                      <div id="all_videos"></div>
                                      <div id="hdnvideoflds" ></div>
