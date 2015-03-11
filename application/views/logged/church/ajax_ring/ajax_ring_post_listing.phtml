@@ -112,7 +112,7 @@ $logged_id=intval(decrypt($_SESSION['user_id']));
                   Do you want to delete ring post ?
                </p>
                </div>
-               <form id="delfrm" method="post" action=""></form>
+               <form id="delfrm" method="post"></form>
                   <input type="hidden" value="" id="i_del_id" name="i_del_id">
                  <input type="button" onclick="delete_ring_post(<?=$val['id'] ?>)"  class="post-btn pull-left" value="Yes" name="">
                  <input type="button" onclick="hide_dialog()" class="cancel-btn" value="No" name="">

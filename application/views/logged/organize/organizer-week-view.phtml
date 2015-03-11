@@ -242,9 +242,9 @@
                                     <input type="hidden" id="hd_tododate" name="hd_tododate" value="<?= getShortDate($selected_date, '8') ?>"/>
                                     <input type="hidden" id="hd_list_ajax_method" name="hd_list_ajax_method" value="week_slider_ajax_list" />
                                     <br class="clear"/>
-                                    <!---------time slot error------------------------>
+                                    <!--time slot error-->
                  <span id="err_time_stamp" class="error-message" style="margin-left: 374px;margin-top: -19px;"></span>
-                <!------------------------------------>
+                
                                     <div class="lable-txt-nw"></div>
                                     <div class="calader-lable-txt">
                                         <input type="submit" class="yellow-btn calader-float-left" value="Add" name="Add" />
@@ -424,7 +424,7 @@
             <div style="padding-bottom:10px;">
                 <p class="center-text" style="line-height:23px; color:#494949;">Do you really want to delete this Note?</p>
             </div>
-            <form action="" method="post" enctype="multipart/form-data">
+            <form method="post" enctype="multipart/form-data">
                 <input type="hidden" name="note_del_id" id="note_del_id" value="" />
                 <input name="" type="button" value="Yes" class="popup-yes"  onClick="remove_note()"/>
                 <input name="" type="button" value="No" class="popup-no " onclick="hide_dialog()"/>
@@ -450,7 +450,7 @@
             <div style="padding-bottom:10px;">
                 <p class="center-text" style="line-height:23px; color:#494949;">Do you really want to delete this list?</p>
             </div>
-            <form action="" method="post" enctype="multipart/form-data">
+            <form method="post" enctype="multipart/form-data">
                 <input type="hidden" name="list_del_id" id="list_del_id" value="" />
                 <input name="" type="button" value="Yes" class="popup-yes"  onClick="remove_list()"/>
                 <input name="" type="button" value="No" class="popup-no " onclick="hide_dialog()"/>

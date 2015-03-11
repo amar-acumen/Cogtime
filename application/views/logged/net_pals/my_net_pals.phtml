@@ -78,7 +78,7 @@
                                             <div class="clr"></div>
                                             
                                             
-                                       <form id="netpal_form" action="" method="post" onsubmit="return false;">     
+                                       <form id="netpal_form" method="post" onsubmit="return false;">     
                                           <input name="txt_name" type="text"  value="" style="width:223px; height:16px; margin-right:5px;" class="left"/>
                                            <select name="show" id="show" style="width:160px;">
                                               <option value="-1">Show All</option>   
@@ -138,7 +138,7 @@
             </div>
            <p class="bold-text">Are you sure you want to opt out yourself from NetPal Zone?</p>
            
-           <form enctype="multipart/form-data" method="post" action="" style="height:28px;">
+           <form enctype="multipart/form-data" method="post" style="height:28px;">
             <input class="popup-yes" type="button"  value="Yes" name="" onclick="opt_out_net_pal()" />
             <input class="popup-no" type="button" onclick="hide_dialog()" value="No" name="" />
            </form>
@@ -162,7 +162,7 @@
                <div style="padding-bottom:10px;">
                <p class="center-text" style="line-height:23px; color:#494949;">Do you really want to delete NetPal?</p>
                </div>
-               <form action="" method="post" enctype="multipart/form-data" >
+               <form method="post" enctype="multipart/form-data" >
                   <input type="hidden" name="i_del_id" id="i_del_id" value="" />
                  <input name="" type="button" value="Yes" class="popup-yes" onClick="remove_netpal_()"/>
                     <input name="" type="button" value="No" class="popup-no" onclick="hide_dialog()"/>

@@ -65,7 +65,7 @@
                             <!--commit form start -->
                             <div class="commit-form" id="commit_form<?=$prayer_info['id']?>">
                                 <h2>Add Commitment</h2>
-                                <form  id="add_commit<?=$prayer_info['id']?>" action="" method="post" enctype="multipart/form-data">
+                                <form  id="add_commit<?=$prayer_info['id']?>" method="post" enctype="multipart/form-data">
                                     <!--left side start  -->
                                     <div class="left-side" style="width:410px;">
                                     <label>Word of Encouragement:</label>
@@ -319,7 +319,7 @@ function show_more_records(page) {
       <div class="title">Tweet Prayer Request</div>
                
                 <div class="write-tweet" style="padding: 9px 17px; background:#CFCFCF;">
-                                	<form id="prayer_tweet_frm" method="post" action="">
+                                	<form id="prayer_tweet_frm" method="post">
                                     	<span class="tweet-top-curve"></span>
                                         <div class="tweet-mid-curve"><textarea onblur="if(this.value=='')this.value='Max 140 Characters';" onfocus="if(this.value=='Max 140 Characters')this.value='';" name="ta_post_tweet" id="ta_post_tweet" class="tweet-comment-box" autocomplete="off" role="textbox" style="display: inline-block; height: 40px;">Max 140 Characters</textarea></div>
                                             
