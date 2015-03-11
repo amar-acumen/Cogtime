@@ -83,7 +83,6 @@ function windowLike(window_id,like_val)
 	 
 function delete_(id)
 {
-  alert('delete');
   $('#i_del_post_id').val(id);
   show_dialog('delete-post');
 }
@@ -91,7 +90,6 @@ function delete_(id)
 var ajax_delete_post = null;	
 function delete_post() 
 {
-	alert('delete_post');
 		var id = $('#i_del_post_id').val();
 		showUILoader_nodialog('<img src="'+base_url+'images/loading_big.gif" width="50"/> ');
 		if(ajax_delete_post!=null) {
