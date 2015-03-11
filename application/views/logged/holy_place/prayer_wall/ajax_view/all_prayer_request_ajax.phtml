@@ -55,7 +55,7 @@ if(count($arr_prayer_request)){
 							<label class="normal">Comment:</label>
 							<textarea onblur="if (this.value == '')
 										this.value = 'Max 500 Characters';" onfocus="if (this.value == 'Max 500 Characters')
-													this.value = '';" rows="" cols="" name="ta_comment" class="full-textarea" id="ta_comment<?= $val['id'] ?>" onKeyDown="limitText(this.form.ta_comment, this.form.countdown, 500);" 
+													this.value = '';" name="ta_comment" class="full-textarea" id="ta_comment<?= $val['id'] ?>" onKeyDown="limitText(this.form.ta_comment, this.form.countdown, 500);" 
 									  onKeyUp="limitText(this.form.ta_comment, this.form.countdown, 500);">Max 500 Characters</textarea>
 							<div class="clr"></div>
 							<input name="post" type="button" value="Post" class="post-btn post-btn2" onclick="add_comment(<?= $val['id'] ?>)" />

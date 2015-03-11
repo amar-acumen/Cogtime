@@ -10,7 +10,7 @@
 	   <!--  text div start -->
 			   <div class=" comment-content nw-comment-content">
                 <div class="write-text">
-                <textarea name="wall_msg" id="wall_msg" cols="" rows="" onfocus="if(this.value=='Max 500 Characters')this.value='';" onblur="if(this.value=='')this.value='Max 500 Characters';" maxlength ="500" 
+                <textarea name="wall_msg" id="wall_msg" onfocus="if(this.value=='Max 500 Characters')this.value='';" onblur="if(this.value=='')this.value='Max 500 Characters';" maxlength ="500" 
                 onKeyDown="limitTextarea(this.form.wall_msg,this.form.countdown,500);" 
 onKeyUp="limitTextarea(this.form.wall_msg,this.form.countdown,500);" onkeypress="return restrict_carrige(event);"  >Max 500 Characters</textarea>
  <p style=" clear:both; float:left"> <span id="text_count">500</span> Characters</p>
@@ -51,10 +51,10 @@ onKeyUp="limitTextarea(this.form.wall_msg,this.form.countdown,500);" onkeypress=
 				<a href="javascript:void(0);" onclick="$(this).parent('div').hide();" style="float:right;color:#013d62">Hide[-]</a>
                     <label  class="upload-img">Video Url :</label><div class="video-url"><input name="txt_video_url" id="txt_video_url" type="text" /></div>
 					<ul class="video-logo" >
-					<li><img src="<?=base_url()?>images/YouTube.png" title="YouTube" height="18px" width="44px" alt="YouTube"></li>
-					<li><img src="<?=base_url()?>images/Vimeo.png" title="Vimeo" height="17px" width="19px" alt="Vimeo"></li>
-					<li><img src="<?=base_url()?>images/DailyMotion.png" height="18px" width="18px" title="DailyMotion" alt="DailyMotion"></li>
-					<li><img src="<?=base_url()?>images/Viadeo.png" height="17px" width="74px" title="Viadeo" alt="Viadeo"></li>
+					<li><img src="<?=base_url()?>images/YouTube.png" title="YouTube" height="18" width="44" alt="YouTube"></li>
+					<li><img src="<?=base_url()?>images/Vimeo.png" title="Vimeo" height="17" width="19" alt="Vimeo"></li>
+					<li><img src="<?=base_url()?>images/DailyMotion.png" height="18" width="18" title="DailyMotion" alt="DailyMotion"></li>
+					<li><img src="<?=base_url()?>images/Viadeo.png" height="17" width="74" title="Viadeo" alt="Viadeo"></li>
 					</ul>
                     <br class="clr"/>
                     <div id="all_videos">
