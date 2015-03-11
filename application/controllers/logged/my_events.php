@@ -75,6 +75,7 @@ class My_events extends Base_controller {
             $content = ob_get_contents();
             $content_obj = json_decode($content);
             $data['events_ajax_content'] = $content_obj->html;
+			
             $data['no_of_result'] = $content_obj->no_of_result;
             ob_end_clean();
 
