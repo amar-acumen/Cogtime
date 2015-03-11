@@ -62,11 +62,11 @@ class My_blog_post_model extends Base_model {
             //echo '***********************'.$s_qry;
             //////////end For Pagination//////////                
 
-            $this->db->trans_begin(); ///new                
+                
             $rs = $this->db->query($s_qry);
             $rst_data = $rs->result();
             //print_r($rst_data);
-            $this->db->trans_commit(); ///new
+            
             unset($s_qry, $rs, $row, $i_cnt, $s_where, $i_start, $i_limit);
             return $rst_data;
         } catch (Exception $err_obj) {
@@ -93,7 +93,7 @@ class My_blog_post_model extends Base_model {
                 }
                 $rs->free_result();
             }
-            $this->db->trans_commit(); ///new
+            
             unset($s_qry, $rs, $row, $i_cnt, $s_where);
             return $ret_;
         } catch (Exception $err_obj) {
@@ -124,7 +124,7 @@ class My_blog_post_model extends Base_model {
                 }
                 $rs->free_result();
             }
-            $this->db->trans_commit(); ///new
+            
             unset($s_qry, $rs, $row, $i_cnt, $s_where);
             return $ret_;
         } catch (Exception $err_obj) {
@@ -245,11 +245,11 @@ class My_blog_post_model extends Base_model {
             #echo '***********************'.$s_qry;
             //////////end For Pagination//////////                
 
-            $this->db->trans_begin(); ///new                
+                 
             $rs = $this->db->query($s_qry);
             $rst_data = $rs->result();
             //print_r($rst_data);
-            $this->db->trans_commit(); ///new
+            
             return $rst_data;
         } catch (Exception $err_obj) {
             show_error($err_obj->getMessage());
@@ -273,7 +273,7 @@ class My_blog_post_model extends Base_model {
                 }
                 $rs->free_result();
             }
-            $this->db->trans_commit(); ///new
+            
             unset($s_qry, $rs, $row, $i_cnt, $s_where);
             return $ret_;
         } catch (Exception $err_obj) {

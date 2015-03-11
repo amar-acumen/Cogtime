@@ -195,8 +195,7 @@ class My_ring_model extends Base_model
 		 
 		   #echo ($s_qry);exit;
           //////////end For Pagination//////////                
-                
-          $this->db->trans_begin();///new                
+           
           $rs=$this->db->query($s_qry); 
           $i_cnt=0;
           if(is_array($rs->result()))
@@ -229,9 +228,7 @@ class My_ring_model extends Base_model
               }    
               $rs->free_result();          
           }
-          $this->db->trans_commit();///new
-		  
-		  					
+          					
 		  
           unset($s_qry,$rs,$row,$i_cnt,$s_where,$i_start,$i_limit);
           return $ret_;
@@ -271,7 +268,7 @@ class My_ring_model extends Base_model
               }    
               $rs->free_result();          
           }
-          $this->db->trans_commit();///new
+         
           unset($s_qry,$rs,$row,$i_cnt,$s_where);
           return $ret_;
         }
@@ -524,7 +521,7 @@ class My_ring_model extends Base_model
 						
 		  $s_qry= $s_qry.(trim($s_order_by)!=""?" ORDER BY ".$s_order_by."":"ORDER BY ringid DESC")." ".(is_numeric($i_start) && is_numeric($i_limit)?" LIMIT ".intval($i_start).",".intval($i_limit):"");
          // echo $s_qry;exit;
-		  $this->db->trans_begin();///new                
+		  
           $rs=$this->db->query($s_qry); 
 		  $i_cnt=0;
 		  
@@ -559,8 +556,7 @@ class My_ring_model extends Base_model
               }    
               $rs->free_result();          
           }
-          $this->db->trans_commit();///new
-		  //pr($ret_);
+         
 		  //exit;
           unset($s_qry,$rs,$row,$i_cnt,$s_where,$i_start,$i_limit);
           return $ret_;
@@ -593,7 +589,7 @@ class My_ring_model extends Base_model
               }    
               $rs->free_result();          
           }
-          $this->db->trans_commit();///new
+          
           unset($s_qry,$rs,$row,$i_cnt,$s_where);
           return $ret_;
         }
@@ -609,7 +605,7 @@ class My_ring_model extends Base_model
 		$arr	= array();
 		$uid	= intval(decrypt($this->session->userdata('user_id')));
 		$s_qry = "SELECT * FROM {$this->db->RING_INV_USER} AS inv WHERE i_invited_id='{$uid}' {$where}";
-		$this->db->trans_begin();///new                
+		  
         $rs=$this->db->query($s_qry); 
 		$i_cnt=0;
 		  
@@ -648,7 +644,7 @@ class My_ring_model extends Base_model
 						
 		  $s_qry= $s_qry.(trim($s_order_by)!=""?" ORDER BY ".$s_order_by."":" ORDER BY r.i_ring_id DESC")." ".(is_numeric($i_start) && is_numeric($i_limit)?" LIMIT ".intval($i_start).",".intval($i_limit):"");
           //echo $s_qry;exit;
-		  $this->db->trans_begin();///new                
+		  
           $rs=$this->db->query($s_qry); 
 		  $i_cnt=0;
 		  
@@ -669,8 +665,7 @@ class My_ring_model extends Base_model
               }    
               $rs->free_result();          
           }
-          $this->db->trans_commit();///new
-		  
+          
           unset($s_qry,$rs,$row,$i_cnt,$s_where,$i_start,$i_limit);
           return $ret_;
         }
@@ -703,7 +698,7 @@ class My_ring_model extends Base_model
               }    
               $rs->free_result();          
           }
-          $this->db->trans_commit();///new
+          
           unset($s_qry,$rs,$row,$i_cnt,$s_where);
           return $ret_;
         }
@@ -726,8 +721,7 @@ class My_ring_model extends Base_model
 						.$s_where."";  #AND i_privacy=2
 						
 		  $s_qry= $s_qry.(trim($s_order_by)!=""?" ORDER BY ".$s_order_by."":" ORDER BY r.i_ring_id DESC")." ".(is_numeric($i_start) && is_numeric($i_limit)?" LIMIT ".intval($i_start).",".intval($i_limit):"");
-          #echo $s_qry;exit;
-		  $this->db->trans_begin();///new                
+            
           $rs=$this->db->query($s_qry); 
 		  $i_cnt=0;
 		  
@@ -748,8 +742,7 @@ class My_ring_model extends Base_model
               }    
               $rs->free_result();          
           }
-          $this->db->trans_commit();///new
-		  
+          
           unset($s_qry,$rs,$row,$i_cnt,$s_where,$i_start,$i_limit);
           return $ret_;
         }
@@ -782,7 +775,7 @@ class My_ring_model extends Base_model
               }    
               $rs->free_result();          
           }
-          $this->db->trans_commit();///new
+          
           unset($s_qry,$rs,$row,$i_cnt,$s_where);
           return $ret_;
         }
@@ -1084,7 +1077,7 @@ class My_ring_model extends Base_model
               }    
               $rs->free_result();          
           }
-          $this->db->trans_commit();///new
+          
           unset($s_qry,$rs,$row,$i_cnt,$s_where);
           return $ret_;
         }
@@ -1138,8 +1131,7 @@ class My_ring_model extends Base_model
 						.$s_where."";  #AND i_privacy=2
 						
 		  $s_qry= $s_qry.(trim($s_order_by)!=""?" ORDER BY ".$s_order_by."":" ORDER BY r.i_ring_id DESC")." ".(is_numeric($i_start) && is_numeric($i_limit)?" LIMIT ".intval($i_start).",".intval($i_limit):"");
-         #echo $s_qry;exit;
-		  $this->db->trans_begin();///new                
+               
           $rs=$this->db->query($s_qry); 
 		  $i_cnt=0;
 		  
@@ -1161,7 +1153,7 @@ class My_ring_model extends Base_model
               }    
               $rs->free_result();          
           }
-          $this->db->trans_commit();///new
+          
 		  
           unset($s_qry,$rs,$row,$i_cnt,$s_where,$i_start,$i_limit);
           return $ret_;
@@ -1196,7 +1188,7 @@ class My_ring_model extends Base_model
               }    
               $rs->free_result();          
           }
-          $this->db->trans_commit();///new
+          
           unset($s_qry,$rs,$row,$i_cnt,$s_where);
           return $ret_;
         }
@@ -1227,8 +1219,7 @@ class My_ring_model extends Base_model
 						.$s_where."";  #AND i_privacy=2
 						
 		  $s_qry= $s_qry.(trim($s_order_by)!=""?" ORDER BY ".$s_order_by."":" ORDER BY r.i_ring_id DESC")." ".(is_numeric($i_start) && is_numeric($i_limit)?" LIMIT ".intval($i_start).",".intval($i_limit):"");
-         // echo $s_qry;exit;
-		  $this->db->trans_begin();///new                
+                  
           $rs=$this->db->query($s_qry); 
 		  $i_cnt=0;
 		  
@@ -1252,8 +1243,7 @@ class My_ring_model extends Base_model
               }    
               $rs->free_result();          
           }
-          $this->db->trans_commit();///new
-		  
+          
           unset($s_qry,$rs,$row,$i_cnt,$s_where,$i_start,$i_limit);
           return $ret_;
         }
@@ -1288,7 +1278,7 @@ class My_ring_model extends Base_model
               }    
               $rs->free_result();          
           }
-          $this->db->trans_commit();///new
+          
           unset($s_qry,$rs,$row,$i_cnt,$s_where);
           return $ret_;
         }
@@ -1350,7 +1340,7 @@ class My_ring_model extends Base_model
 		$arr	= array();
 		$uid	= intval(decrypt($this->session->userdata('user_id')));
 		$s_qry = "SELECT * FROM {$this->db->RING_INV_USER} AS inv WHERE i_invited_id='{$uid}' {$where}";
-		$this->db->trans_begin();///new                
+		 
         $rs=$this->db->query($s_qry); 
 		$i_cnt=0;
 		  
