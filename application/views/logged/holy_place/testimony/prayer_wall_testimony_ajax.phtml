@@ -52,7 +52,7 @@ if(count($arr_testimony))
 <!--edit testimony start -->
 <div class="commit-form add-testimony edit_<?=$testimony['testimony_id']?>" style=" width: 923px;">
     <h2>Edit Testimony</h2>
-    <form id="edit_frm_<?=$testimony['testimony_id']?>" action="" method="post" enctype="multipart/form-data" onsubmit="return post_edit_testimony(<?=$testimony['testimony_id']?>)">
+    <form id="edit_frm_<?=$testimony['testimony_id']?>" method="post" enctype="multipart/form-data" onsubmit="return post_edit_testimony(<?=$testimony['testimony_id']?>)">
         <label class="normal">Message:</label>
         <input type="hidden" id="h_testimony_id" name="h_testimony_id" value="<?=$testimony['testimony_id']?>" />
         <textarea name="txt_area_msg" rows="" cols="" class="full-textarea" style="height: 70px;" onKeyDown="limitText(this.form.txt_area_msg,this.form.countdown,500);" 

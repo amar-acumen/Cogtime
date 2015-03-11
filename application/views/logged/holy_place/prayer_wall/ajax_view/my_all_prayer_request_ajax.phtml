@@ -258,7 +258,7 @@ if (count($arr_prayer_request)) {
 	<div class="commit-form add-testimony" id="comment_form<?= $val['id'] ?>">
 					<div class="minimize" title="Minimize" onclick="show_comment(<?= $val['id'] ?>)">&nbsp;</div>
 					<h2>Add Comment</h2>
-					<form id="add_comment_frm<?=$val['id'] ?>" action="" method="post" enctype="multipart/form-data">
+					<form id="add_comment_frm<?=$val['id'] ?>" method="post" enctype="multipart/form-data">
 						<label class="normal">Comment:</label>
 						<textarea onblur="if (this.value == '')
 									this.value = 'Max 500 Characters';" onfocus="if (this.value == 'Max 500 Characters')
@@ -274,7 +274,7 @@ if (count($arr_prayer_request)) {
             <div class="commit-form add-testimony" id="add-testimony<?= $val['id'] ?>">
                 <div class="minimize" title="Minimize" onclick="show_testimony(<?= $val['id'] ?>)">&nbsp;</div>
                 <h2>Add Testimony</h2>
-                <form id="add_testimony_frm<?= $val['id'] ?>" action="" method="post" enctype="multipart/form-data">
+                <form id="add_testimony_frm<?= $val['id'] ?>" method="post" enctype="multipart/form-data">
                     <label class="normal">Comment:</label>
                     <textarea onblur="if (this.value == '')
                                 this.value = 'Max 500 Characters';" onfocus="if (this.value == 'Max 500 Characters')

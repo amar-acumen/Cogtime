@@ -107,9 +107,9 @@ function goBack() {
                 <div class="post-box-panel">
                         <div class="postpic"><img src="images/no-profile-pic.jpg" alt="Profile" width="74" height="74"></div>
                         <div class="posttxt">
-							<form action="" id="comment_frm" onsubmit="return false;">
+							<form id="comment_frm" onsubmit="return false;">
 							 
-									<textarea id="txtarea_comment<?=$news_id?>" name="" cols="" rows="" class="txtarea01" placeholder="Add a Comment..."></textarea>
+									<textarea id="txtarea_comment<?=$news_id?>" name="" class="txtarea01" placeholder="Add a Comment..."></textarea>
 							  
 									<input class="postbtn" type="submit" value="Post" name="" onclick="return comment_(<?=$news_id?>,'logged/christian_news/comment_news')">
 							  
@@ -173,7 +173,7 @@ function goBack() {
 				  ?>
                   
               </div>
-                 <!------------------------------------>
+                 
                  <?php
                       if(count($advertisementmedia_detail)){ 
                           //echo 'll';
@@ -191,7 +191,7 @@ function goBack() {
                           }
                       
                           } ?>
-                 <!---------------->
+                 
 <!--                <div class="right-ad"><img src="images/left-ad1.png" alt="Advertisment" width="250" height="250"></div>
               <div class="right-ad"><img src="images/left-ad2.png" alt="Advertisment" width="250" height="250"></div>
               

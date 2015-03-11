@@ -74,8 +74,8 @@ class Create_photo_album extends Base_controller
 				$this->form_validation->set_message('required', '* Required Field.');
 				$this->form_validation->set_rules('txt_name', 'txt_name', 'required');
 				$this->form_validation->set_rules('txt_add_desc', 'txt_add_desc', 'required');
-				$this->form_validation->set_rules('s_photo', 's_photo', 'file_required|file_min_size[10KB]|file_max_size[2000KB]|file_allowed_type[image]');
-				
+				$this->form_validation->set_rules('s_photo', 's_photo', 'callback_fileupload');
+				$this->form_validation->set_rules('privacy', 'privacy', 'callback_check_privacy');
 
 				
 				if ($this->form_validation->run() == TRUE)
@@ -117,7 +117,47 @@ class Create_photo_album extends Base_controller
         } 
 
     } 
-	
+    public function check_privacy()
+    {
+    	if($_POST['privacy']=='-1')
+    	{
+    		$this->form_validation->set_message('check_privacy', "* Required Field.");
+			return false;
+    	}
+    	else 
+    		return true;
+    }
+	public function fileupload()
+	{
+		if( isset($_FILES['s_photo']['name']) && $_FILES['s_photo']['name']!='') {
+			preg_match('/(^.*)\.([^\.]*)$/', $_FILES['s_photo']['name'], $matches);
+			$ext = "";
+			if(count($matches)>0) {
+				$ext = $matches[2];
+				$original_name = $matches[1];
+			}
+			else
+				$original_name = 'photo';
+
+		
+			if ( !in_array($ext , $this->config->item('VALID_IMAGE_EXT'))) 
+			{
+				$this->form_validation->set_message('fileupload', "supported extensions are ".implode(' , ',$this->config->item('VALID_IMAGE_EXT')));
+    			return false;
+			}
+			else if($_FILES['s_photo']['size'] > $this->config->item('MAX_UP_FILE_SIZE')*1024*1024)
+			{
+				$this->form_validation->set_message('fileupload', "Maximum file upload size is ".$this->config->item('MAX_UP_FILE_SIZE')." MB.");
+				return false;
+			}	
+			else 
+				return true;	
+		}else
+		{
+			$this->form_validation->set_message('fileupload', "* Required Field.");
+			return false;
+		}
+	}
 	public function add_photo_album()
 	{
 		try

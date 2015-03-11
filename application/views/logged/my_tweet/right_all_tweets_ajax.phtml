@@ -132,7 +132,7 @@
         <!--reply block start -->
         <div class="insideTweeterBlock" id="tweet_reply_block<?=$val['id']?>">
          <div id="tweet_reply<?=$val['id']?>"></div>
-          <form action="" method="post">
+          <form method="post">
               <textarea name="ta_tweet_reply<?=$val['id']?>" id="ta_tweet_reply<?=$val['id']?>" onfocus="if(this.value=='Max 140 Characters')this.value='';" onblur="if(this.value=='')this.value='Max 140 Characters';" >Max 140 Characters</textarea>
               <input name="post" type="button" value="Post" class="small-blue-btn left" onclick="post_reply(<?=$val['id']?>)"/>
               <div class="clr"></div>

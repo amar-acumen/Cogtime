@@ -329,7 +329,7 @@ $(function(){
                                     <div class="lable01" style="width:95px;">	Description: </div>  
                                     <div class="field03">
                                    <!-- <textarea name="txt_event_desc"  id="txt_event_desc" cols="" rows="" style="width:335px; height:190px;"><?//=get_unformatted_string_edit(br2nl($event_info['s_desc']))?></textarea>-->
-                                    <textarea name="txt_event_desc"  id="txt_event_desc" cols="" rows="" style="width:335px; height:190px" onFocus="if(this.value=='Max 500 Char allowed') this.value='';" onBlur="if(this.value=='')this.value='Max 500 Char allowed'; " onkeypress="return restrict_carrige(event);"  ><?php 
+                                    <textarea name="txt_event_desc"  id="txt_event_desc" style="width:335px; height:190px" onFocus="if(this.value=='Max 500 Char allowed') this.value='';" onBlur="if(this.value=='')this.value='Max 500 Char allowed'; " onkeypress="return restrict_carrige(event);"  ><?php 
 									if($event_info['s_desc'] == '')
 									{echo "Max 500 Char allowed";}
 									else

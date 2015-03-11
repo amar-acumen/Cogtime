@@ -75,7 +75,7 @@ if(count($my_album_videos_content))
                   <div class="comments-number-mid">
                       <div class="heading">
                             <div class="left">
-                                  <h4><img alt="" src="images/heart2.png" height="19px" width="20px" class="cmnt" /> <span class="liked_by_<?=$v['id']?>">Liked by (<?=count_photo_like_link($v['id'],'video')?>)</span> </h4>
+                                  <h4><img alt="heart2" src="images/heart2.png" height="19" width="20" class="cmnt" /> <span class="liked_by_<?=$v['id']?>">Liked by (<?=count_photo_like_link($v['id'],'video')?>)</span> </h4>
                                    <img class="wal-minus" alt="" src="images/minus-white.png" width="13" height="10"/>
                             </div>
                       </div>
@@ -99,7 +99,7 @@ if(count($my_album_videos_content))
                       </div>
                       
                       <div class="txt_content01 comments-number-content"> 
-                      <textarea class="wal-comment-textarea" id="feed_comment_box_<?=$v['id']?>"  cols="" rows=""></textarea>
+                      <textarea class="wal-comment-textarea" id="feed_comment_box_<?=$v['id']?>"></textarea>
                       <input type="button" value="Post" class="yellow-btn" id="post_comment_button" onclick="post_comment(<?=$v['id']?>)" />
                       <br class="clr" />
                       </div>

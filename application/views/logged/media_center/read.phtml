@@ -155,15 +155,15 @@ echo $img[1];
 								<h4><a href="<?= base_url().$val['id']."/".my_url($val['cat_name'])."/christian-news-details/".my_url($val['s_title']).".html"?>" title="<?=$val['s_title']?>"><?=my_substr($val['s_title'],40)?></a></h4>
 								<div class="story-thumb">
                                                                     
-                                                                      <!-------------------new add 8-1-2015------------------------------>
+                                                                      <!--new add 8-1-2015-->
                                                         <?php
                                                           if(is_file(BASEPATH.'../uploads/media_center_article/' . getThumbName($val['s_image'], 'thumb')))
                                                                              {
                                                           ?>
-                                                                  <!-------------------------------------------------->
+                                                                  
 								<div class="pic div_back_pic" style=" background:url('<?=$IMG?>') no-repeat center; width:98px, height:75px;  "></div>
                                                                 
-									<!--------new add 8-1-2015---------------->
+									<!--new add 8-1-2015-->
                                                                              <?php } 
                                                                              
                                                                               else if($val['s_feed_url'] != ''  ) {
@@ -200,7 +200,7 @@ echo $img[1];
                                                                              
                                                                              
                                                                              ?>
-                                                                        <!------------------------->
+                                                                       
 									<p><?=my_substr(strip_tags(get_unformatted_string_edit($val['s_desc'])),120)?></p>
 									<div class="clr"></div>
 								</div>                           
@@ -299,14 +299,14 @@ echo $img[1];
                         <div class="story-panel">
                             <h4><a href="<?= base_url().$val['id']."/".my_url($val['cat_name'])."/christian-news-details/".my_url($val['s_title']).".html"?>" title="<?=$val['s_title']?>"><?=$val['s_title']?></a></h4>
                             <div class="story-thumb">
-                                                   <!-------------------add on 8-1-2015---------------------->
+                                                   <!--add on 8-1-2015-->
                                                       <?php
                                                           if(is_file(BASEPATH.'../uploads/media_center_article/' . getThumbName($val['s_image'], 'thumb')))
                                                                              {
                                                           ?>
-                                                <!-------------------------------------------->
+                                               
 							<div style=" background:url('<?=$IMG?>') no-repeat center;width:98px, height:75px;  " class="div_back_pic"></div>
-                                                        <!---------------------------------------->
+                                                        
                                                             <?php
                                                                              } else if($val['s_feed_url'] != ''  ) {
                                                                                  ?>
@@ -338,7 +338,7 @@ echo $img[1];
                                       }else {
                                           
                                       } ?>
-                                                        <!------------------------------------------>
+                                                        
                                 <div class="blog-date"><?=getShortDate($val['dt_posted_on'],4)?> <?php //$val['admin_name']?></div>
                        
                         <div class="blog-quick-list">
@@ -437,7 +437,7 @@ echo $img[1];
                                          
                                          }?>
                                          
-                               <!-----------------cat3 end---------------------------------------->          
+                               <!--cat3 end-->          
                                          
                       
                     <?
@@ -462,16 +462,16 @@ echo $img[1];
                              <h3 class="faithbook-icon"><a class="article_category" href="<?php echo base_url().'christian_news/category/4' ?>"><?php echo my_substr($cat_name['4'],15)?></a></h3>
                              <div class="part-pic">
                                  
-                                                        <!-------------------new add 8-1-2015------------------------------>
+                                                        <!--new add 8-1-2015-->
                                                         <?php
                                                           if(is_file(BASEPATH.'../uploads/media_center_article/' . getThumbName($cat4_article[0]['s_image'], 'smallthumb')))
                                                                              {
                                                           ?>
-                                                                  <!-------------------------------------------------->
+                                                                  
                                  
 								<div style=" background:url('<?=$IMG?>') no-repeat center;width:75px, height:53px; " class="div_back_pic_new"></div>
                                                                 
-                                                                <!------------------------->
+                                                               
                                                              <?php   } 
                                                              else if($cat4_article[0][s_feed_url] != ''  ) {
                                                                                  ?>
@@ -550,14 +550,14 @@ echo $img[1];
                          <div class="faith-left">
                              <h3 class="society-icon-bottom"><a  class="article_category" href="<?php echo base_url().'christian_news/category/5' ?>"><?php echo my_substr($cat_name['5'],15)?></a></h3>
                              <div class="part-pic">
-                                         <!-------------------new add 8-1-2015------------------------------>
+                                         <!--new add 8-1-2015-->
                                                         <?php
                                                           if(is_file(BASEPATH.'../uploads/media_center_article/' . getThumbName($cat5_article[0]['s_image'], 'smallthumb')))
                                                                              {
                                                           ?>
-                                                                  <!-------------------------------------------------->
+                                                                 
                                  <div style=" background:url('<?=$IMG?>') no-repeat center;width:75px, height:53px; " class="div_back_pic_new"></div>
-                                                                <!-------------------------------->
+                                                                
                                                                              <?php } 
                                                                              else if($cat5_article[0][s_feed_url] != ''  ) {
                                                                                  ?>
@@ -634,14 +634,14 @@ echo $img[1];
                          <div class="faith-right">
                               <h3 class="grow-icon"><a class="article_category" href="<?php echo base_url().'christian_news/category/6' ?>" ><?php echo my_substr($cat_name['6'],15)?></a></h3>
                              <div class="part-pic">
-                                         <!-------------------new add 8-1-2015------------------------------>
+                                         <!--new add 8-1-2015-->
                                                         <?php
                                                           if(is_file(BASEPATH.'../uploads/media_center_article/' . getThumbName($cat6_article[0]['s_image'], 'smallthumb')))
                                                                              {
                                                           ?>
-                                                                  <!-------------------------------------------------->
+                                                                  
                                  <div style=" background:url('<?=$IMG?>') no-repeat center;width:75px, height:53px; " class="div_back_pic_new"></div>
-                                                                  <!-------------------------->
+                                                                  
                                                                              <?php 
                                                                              }
                                                                              else if($cat6_article[0]['s_feed_url'] != ''  ) {
@@ -753,7 +753,7 @@ echo $img[1];
                                                           if(is_file(BASEPATH.'../uploads/media_center_article/' . getThumbName($val['s_image'], 'thumb')))
                                                                              {
                                                           ?>
-                                                                  <!-------------------------------------------------->
+                                                                  
 							  <div class="div_back_pic_104" style=" background:url('<?=$IMG?>') no-repeat center;width:104px, height:104px; "></div>
                                                                              <?php }
                                                                              else if($val[s_feed_url] != ''  ) {
@@ -828,7 +828,7 @@ echo $img[1];
 					$IMG = base_url() . 'uploads/media_center_article/' . getThumbName($val['s_image'], 'thumb');
 					?>   
                <div class="dev-main">
-			           <!-------------------new add 8-1-2015------------------------------>
+			           <!--new add 8-1-2015-->
                                                         <?php
                                                           if(is_file(BASEPATH.'../uploads/media_center_article/' . getThumbName($val['s_image'], 'thumb')))
                                                                              {

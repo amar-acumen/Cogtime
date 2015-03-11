@@ -39,7 +39,7 @@
                                                                         <a title="Back" class="back" href="javascript:void(0);">&nbsp;</a>Add Highlight
                                                                         <a href="javascript:void(0);" class="close" title="Close"></a>
                                                                     </div>
-                                                                    <form action="" id="frm_hilits<?php echo $bibleval['id']?>" method="post" enctype="multipart/form-data" class="quick-edit-form">
+                                                                    <form id="frm_hilits<?php echo $bibleval['id']?>" method="post" enctype="multipart/form-data" class="quick-edit-form">
                                                                         <span class="verse-name"><?php echo $bibleval['s_book_name'].' '.$bibleval['s_chapter'].':'.$bibleval['i_verses']?></span>
                                                                         <label>Select Category:</label>
                                                                         <select name="bk_mark_category">
@@ -68,7 +68,7 @@
                                                                         <a title="Back" class="back" href="javascript:void(0);">&nbsp;</a>Add Note
                                                                         <a href="javascript:void(0);" class="close" title="Close"></a>
                                                                     </div>
-                                                                    <form action="" id="frmNote_<?php echo $bibleval['id']?>" method="post" enctype="multipart/form-data" class="quick-edit-form">
+                                                                    <form id="frmNote_<?php echo $bibleval['id']?>" method="post" enctype="multipart/form-data" class="quick-edit-form">
                                                                         <span class="verse-name"><?php echo $bibleval['s_book_name'].' '.$bibleval['s_chapter'].':'.$bibleval['i_verses']?></span>
                                                                         <label>Select Category:</label>
                                                                         <select name="category">
@@ -83,7 +83,7 @@
                                                                         <input name="add_cat_n" type="text">
                                                                         <br class="clr">
                                                                         <label>Note:</label>
-                                                                        <textarea name="note" cols="" rows=""></textarea>
+                                                                        <textarea name="note"></textarea>
                                                                         <span id="err_note_<?php echo $bibleval['id']?>" class="error-message" style="margin-left:119px;"></span>
                                                                         <br class="clr">
                                                                         <input type="button" name="" value="Add" class="blue-small-button" onclick="addNoteFromVerseNo('<?php echo $bibleval['id']?>');">
@@ -97,7 +97,7 @@
                                                                         <a title="Back" class="back" href="javascript:void(0);">&nbsp;</a>Add Bookmark
                                                                         <a href="javascript:void(0);" class="close" title="Close"></a>
                                                                     </div>
-                                                                    <form action="" id="frmBkmark_<?php echo $bibleval['id']?>" method="post" enctype="multipart/form-data" class="quick-edit-form">
+                                                                    <form id="frmBkmark_<?php echo $bibleval['id']?>" method="post" enctype="multipart/form-data" class="quick-edit-form">
                                                                         <span class="verse-name"><?php echo $bibleval['s_book_name'].' '.$bibleval['s_chapter'].':'.$bibleval['i_verses']?> </span>
                                                                         <label>Select Category:</label>
                                                                         <select name="bk_mark_category">

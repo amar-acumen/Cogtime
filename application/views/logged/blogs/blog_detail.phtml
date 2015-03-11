@@ -100,7 +100,7 @@
   									<input type="hidden" name="blog_id" id="blog_id" value="<?=$blog_id?>" />                               
                                   
                                      
-                                    <form action="" method="post" class="wall-comment-form">
+                                    <form method="post" class="wall-comment-form">
                                     	<label class="white-text">Article Title:</label>
                                         <div class="text-field-bg">
                                         <input name="blogpost_title" id="blogpost_title" type="text"  onfocus="if(this.value=='Type title here')this.value='';" onblur="if(this.value=='')this.value='Type title here';" value="Type title here" style="width: 460px;"/>
@@ -269,7 +269,7 @@
              <div class="clr"></div>
              
              <div class="lable01">Description:</div> 
-             <div class="field01"><textarea name="blog_desc" id="blog_desc" style="height: 80px" cols="" rows="" onfocus="if(this.value=='Max 500 Characters')this.value='';" onblur="if(this.value=='')this.value='Max 500 Characters';" ><?php echo $blogdata[0]['s_description']?></textarea> </div>
+             <div class="field01"><textarea name="blog_desc" id="blog_desc" style="height: 80px" onfocus="if(this.value=='Max 500 Characters')this.value='';" onblur="if(this.value=='')this.value='Max 500 Characters';" ><?php echo $blogdata[0]['s_description']?></textarea> </div>
              
              <div class="clr"></div>
       
@@ -299,7 +299,7 @@
                  <div class="clr"></div>
                    <div class="lable01" style="width:110px;">Description:</div> 
                  <div class="field01">
-                 <textarea name="edit_blogpost_desc" id="edit_blogpost_desc" cols="" rows="" style=" height:200px; width:330px;"></textarea>
+                 <textarea name="edit_blogpost_desc" id="edit_blogpost_desc" style=" height:200px; width:330px;"></textarea>
                  <span class="error-message" id="err_blogpostdesc"></span>
                  </div>
                  
@@ -330,7 +330,8 @@
                <div style="padding-bottom:10px;">
                <p class="center-text" style="line-height:23px; color:#494949;">Do you really want to delete the article?</p>
                </div>
-               <form action="" method="post" enctype="multipart/form-data">
+               <form method="post" enctype="multipart/form-data">
+               <form method="post" enctype="multipart/form-data">
                   <input type="hidden" name="i_del_id" id="i_del_id" value="" />
                  <input name="" type="button" value="Yes" class="popup-yes" style="margin-left:105px;" onClick="delete_article_()"/>
                     <input name="" type="button" value="No" class="popup-no" onclick="hide_dialog()"/>

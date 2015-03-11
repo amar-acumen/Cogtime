@@ -41,7 +41,7 @@
                                   <div class="comments-number-mid">
                                       <div class="heading">
                                             <div class="left">
-                                                  <h4><img alt="" src="images/heart2.png" height="19px" width="20px" class="cmnt" /> <span class="liked_by_<?=$v['id']?>">Liked by (<?=count_photo_like_link($v['id'],'video')?>)</span> </h4>
+                                                  <h4><img alt="heart2" src="images/heart2.png" height="19" width="20" class="cmnt" /> <span class="liked_by_<?=$v['id']?>">Liked by (<?=count_photo_like_link($v['id'],'video')?>)</span> </h4>
                                                    <img class="wal-minus" alt="" src="images/minus-white.png" width="13" height="10"/>
                                             </div>
                                        </div>
@@ -108,11 +108,11 @@
                                           </div>
                                     </div>
                                     <input type="hidden" name="i_photo_id" id="i_photo_id" value="<?=$video_info[0]['id']?>" />
-                                    <form action="" method="post" class="wall-comment-form" onsubmit="return post_comment_detail();">
+                                    <form method="post" class="wall-comment-form" onsubmit="return post_comment_detail();">
                                         
                                             <!--text div start -->
                                             <div class="write-text write-text2">
-                                            <textarea name="txt_message" id="txt_message" cols="" rows=""  ></textarea>
+                                            <textarea name="txt_message" id="txt_message"></textarea>
                                             </div>
                                             <!--text div end -->
                                         
@@ -209,7 +209,7 @@
                   
                   <div class="lable01">Description:</div>
                   <div class="field01">
-                        <textarea name="txtarea_desc_video" id="txtarea_desc_video" cols="" rows="" style="height:80px;" maxlength="500"></textarea>
+                        <textarea name="txtarea_desc_video" id="txtarea_desc_video" style="height:80px;" maxlength="500"></textarea>
                         <span id="err_txtarea_desc_video" class="error-message"></span>
                          <span style="font-size:11px; font-style:italic; line-height:13px;" >
                                       (Max 500 characters.)

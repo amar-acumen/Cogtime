@@ -64,7 +64,7 @@
                         <p><?=$desc?></p>
                     </div>
                 </li>
-                <!---------------------------------event pop up----------------------------------->
+                <!--event pop up-->
                  <div class="lightbox event-news-pop event<?= $val['id']?>" style="width: 500px; left: 100px;">
       <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="<?=base_url()?>images/close.png" alt="" width="24" height="24" /></a></div>
       <div class="top"><div>&nbsp;</div></div>
@@ -136,7 +136,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
                         <!--/right part -->
                </p>
                </div>
-               <form action="" method="post" id="delfrm">
+               <form method="post" id="delfrm">
                   <input type="hidden" name="i_del_id" id="i_del_id" value="" />
 <!--                 <input name="" type="button" value="Yes" class="post-btn" style="margin-left:105px;" onClick="delete_service(<?= $val->id ?>)"/>
                  <input name="" type="button" value="No" class="cancel-btn" onclick="hide_dialog()"/>-->
@@ -147,7 +147,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
       </div>
       <div class="bot"><div>&nbsp;</div></div>
 
-                <!-------------------------------------------------------------------------------------->
+                
                 <?php 
 						 }
 					  }

@@ -555,6 +555,8 @@ class Users_model extends Base_model implements InfModel {
 
             if (!empty($info)) {
                 $this->db->update($this->db->USERS, $info, array('id' => $i_id));
+                //echo 'go';
+              //  echo $this->db->last_query();                exit();
                 $i_ret_ = $this->db->affected_rows();
 
                 if ($i_ret_) {

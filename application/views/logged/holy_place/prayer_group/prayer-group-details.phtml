@@ -107,7 +107,7 @@
                                 <input type="button" class="yellow-btn" value="Post" name="" onclick="post_prayer_grp_post(<?= $prayer_detail_arr['id'] ?>)" />
                             </div>
                             <div class="Create-list-box">
-                                <form id="add_prayer_grp"  action="" method="post" >
+                                <form id="add_prayer_grp" method="post" >
                                     <div class="prayer-group-name"> Prayer Group Name:</div>
                                     <input type="text" class="amount-input prayer-No-input" name="txt_group_name" id="txt_group_name" />
                                     <div class="clr"></div>
@@ -208,7 +208,7 @@
             <div style="padding-bottom:10px;">
                 <p class="center-text" style="line-height:23px; color:#494949;">Do you really want to delete these group?</p>
             </div>
-            <form action="" method="post" enctype="multipart/form-data">
+            <form method="post" enctype="multipart/form-data">
                 <input type="hidden" name="i_del_id" id="i_del_id" value="" />
                 <input name="" type="button" value="Yes" class="popup-yes"  onClick="deleteGroup()"/>
                 <input name="" type="button" value="No" class="popup-no" onclick="hide_dialog();
@@ -234,7 +234,7 @@
             <div style="padding-bottom:10px;">
                 <p class="center-text" style="line-height:23px; color:#494949;">There are active members in this group and if you delete  active members under this group will be deleted. Are you sure you want to delete this group anyway? </p>
             </div>
-            <form action="" method="post" enctype="multipart/form-data">
+            <form method="post" enctype="multipart/form-data">
                 <input type="hidden" name="i_del_id" id="i_del_id" value="" />
                 <input name="" type="button" value="Yes" class="popup-yes"  onClick="deleteGroup()"/>
                 <input name="" type="button" value="No" class="popup-no" onclick="hide_dialog();
@@ -260,7 +260,7 @@
             <div style="padding-bottom:10px;">
                 <p class="center-text" style="line-height:23px; color:#494949;">Do you really want to leave this group?</p>
             </div>
-            <form action="" method="post" enctype="multipart/form-data">
+            <form method="post" enctype="multipart/form-data">
                 <input type="hidden" name="i_lev_id" id="i_lev_id" value="" />
                 <input name="" type="button" value="Yes" class="popup-yes"  onClick="leaveGroup()"/>
                 <input name="" type="button" value="No" class="popup-no" onclick="hide_dialog();

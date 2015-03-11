@@ -113,7 +113,7 @@ echo '<object width="' . $width . '" height="' . $height . '"><param name="movie
 		</td>
         <td align="center" valign="middle" class="last">
        <input name="" title="Delete" type="button" style="" class="delete-button"  value="" onclick="return del_com(<?php echo $info['id'];?>,'wall');"/>
-       <!----------------------------ip status checking & put ip-block or ip-unblock button added on 18-12-2014----------------------------------------->
+       <!--ip status checking & put ip-block or ip-unblock button added on 18-12-2014-->
                <?php 
              $query = $this->db->get_where('cg_user_ip', array('u_id' => $info['i_user_id'],'u_ip'=>$info['u_ip']));
              foreach ($query->result() as $row)
@@ -128,7 +128,7 @@ echo '<object width="' . $width . '" height="' . $height . '"><param name="movie
                       <?php } elseif($status == 1){ ?>
        <input name="" title="Ip Unblock" type="button" style="" class="unbip-button"  value="IP Unblock" onclick="return unblock_ip(<?php echo $info['i_user_id'];?>,'<?=$info['u_ip'] ?>');"/>
                       <?php } ?>
-       <!----------------------------------------->
+      
         </td>
       </tr>
       <?php

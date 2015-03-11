@@ -96,7 +96,7 @@ $logged_id=intval(decrypt($_SESSION['user_id']));
 				 
 
               </ul>
-               <!-----------------------delete popup----------------------------------------->
+               <!--delete popup-->
                  <div  class="lightbox ring-post-delete<?=$val['id'] ?>">
       <div class="close"><a onclick="hide_dialog()" href="javascript:void(0)"><img alt="" src="<?= base_url() ?>images/close.png" width="24" height="24"></a></div>
       <div class="top"><div>&nbsp;</div></div>
@@ -112,7 +112,7 @@ $logged_id=intval(decrypt($_SESSION['user_id']));
                   Do you want to delete ring post ?
                </p>
                </div>
-               <form id="delfrm" method="post" action=""></form>
+               <form id="delfrm" method="post"></form>
                   <input type="hidden" value="" id="i_del_id" name="i_del_id">
                  <input type="button" onclick="delete_ring_post(<?=$val['id'] ?>)"  class="post-btn pull-left" value="Yes" name="">
                  <input type="button" onclick="hide_dialog()" class="cancel-btn" value="No" name="">
@@ -123,9 +123,9 @@ $logged_id=intval(decrypt($_SESSION['user_id']));
       </div>
       <div class="bot"><div>&nbsp;</div></div>
 </div>
-               <!---------------------------------------------------------------------->
+              
 
-               <!----------------------Edit popup---------------------------------------->
+               <!--Edit popup-->
                  <div  class="lightbox ring-post-edit<?=$val['id'] ?>" style="width:450px">
       <div class="close"><a onclick="hide_dialog()" href="javascript:void(0)"><img alt="" src="<?= base_url() ?>images/close.png" width="24" height="24"></a></div>
       <div class="close"><a onclick="hide_dialog()" href="javascript:void(0)"><img alt="" src="<?= base_url() ?>images/close.png" ></a></div>
@@ -155,7 +155,7 @@ $logged_id=intval(decrypt($_SESSION['user_id']));
       </div>
       <div class="bot"><div>&nbsp;</div></div>
 </div>
-               <!------------------------------------------------------>
+               
           </li>
 
                                

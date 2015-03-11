@@ -179,7 +179,7 @@ $("#text_count").text("Characters left: " + (500 - $(this).val().length));
             <div class="frm_box">
                     <form action="<?php echo base_url()?>logged/my_blog/add_blog_post_cmnts" method="post" id="postcmnts_frm">
                         <input type="hidden" name="postcmnts_postid" id="postcmnts_postid" value="" />
-                      <p>  <textarea name="postcmnts_txt" id="postcmnts_txt" cols="" rows="" style="width:486px; height:100px; margin-bottom:10px;"></textarea>
+                      <p>  <textarea name="postcmnts_txt" id="postcmnts_txt" style="width:486px; height:100px; margin-bottom:10px;"></textarea>
                               <span id="err_postcmnts_txt"></span>
                       </p>
                        <p> <input name="postcmnts_btn" id="postcmnts_btn" type="button" value="Post"  class="btn"/></p>
@@ -210,7 +210,7 @@ $("#text_count").text("Characters left: " + (500 - $(this).val().length));
                <div style="padding-bottom:10px;">
                <p class="center-text" style="line-height:23px; color:#494949;">Do you really want to delete the article?</p>
                </div>
-               <form action="" method="post" enctype="multipart/form-data">
+               <form method="post" enctype="multipart/form-data">
                   <input type="hidden" name="i_del_id" id="i_del_id" value="" />
                  <input name="" type="button" value="Yes" class="btn" style="margin-left:105px;" onClick="delete_article_()"/>
                     <input name="" type="button" value="No" class="btn" onclick="hide_dialog()"/>

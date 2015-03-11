@@ -16,7 +16,7 @@
 	 <div class="activity-comment-box">
        <div class="prayer-find">
     <div class="prayer-search-main">
-	  <form id="search_prayer_grp"  action="" method="post">
+	  <form id="search_prayer_grp" method="post">
     <input type="text" placeholder="Prayer Group Name" name="txt_name" id="txt_name" value="">
        <input type="button" value="" id="create_bt" onclick="searchPrayerGrp()" />
 	</form>
@@ -26,7 +26,7 @@
 	<div class="clear"></div>
     </div>                         
                                 
-                                <form id="search_prayer_grp"  action="" method="post" class="create-ring" style="display:none;">
+                                <form id="search_prayer_grp" method="post" class="create-ring" style="display:none;">
 								<div class="lable01"> Prayer Group Name:</div>
                                 <div class="field03">
                                     <input type="text" class="amount-input prayer-No-input" name="txt_name" id="txt_name" />
@@ -53,7 +53,7 @@
      </ul></div>                 
                             </div>
                             
-                                <!-----------------all payer grp---------------------------------->
+                                <!--all payer grp-->
     <div id="pry-all">
     <div class="prayer-sub-heading">Prayer Groups</div>
     <div class="all_prayer_grp grp-table" id="listingContent">
@@ -72,7 +72,7 @@
                     <div class="view_more" id="show_more_feeds_div"><a href="javascript:void(0);" id="show_more_feeds_link" page_value="<?= $current_page_1 ?>" onclick="show_more_feeds($(this).attr('page_value'))">[view more] </a> </div>
 
                 <?php endif; ?></div>
-    <!------------------------------------------------------->
+    
 	</div>
     <div class="clear"></div>
 

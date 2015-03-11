@@ -198,7 +198,7 @@ if ($years > 0) {
                             <div class="txt_content" >
                                 <p class="bold-text">Are you sure you want to enlist yourself as Prayer Partner?</p>
 
-                                <form enctype="multipart/form-data" method="post" action="" >
+                                <form enctype="multipart/form-data" method="post" >
                                     <input class="btn" type="button" style="" value="Yes" name="" onclick="enlist_()" />
                                     <input class="btn" type="button" onclick="hide_msg('#confirm')" value="No" name="" />
                                 </form>
@@ -244,7 +244,7 @@ if ($years > 0) {
         </div>
         <p class="bold-text">Are you sure you want to enlist yourself as Prayer Partner?</p>
 
-        <form enctype="multipart/form-data" method="post" action="" >
+        <form enctype="multipart/form-data" method="post" >
             <input class="btn" type="button" style="" value="Yes" name="" onclick="enlist_()" />
             <input class="btn" type="button" onclick="hide_dialog()" value="No" name="" />
         </form>
@@ -268,7 +268,7 @@ if ($years > 0) {
         </div>
         <p class="bold-text">Are you sure you want to quit yourself from Prayer Partner Zone?</p>
 
-        <form enctype="multipart/form-data" method="post" action="" >
+        <form enctype="multipart/form-data" method="post">
             <input class="btn" type="button" style="margin-left:146px;" value="Yes" name="" onclick="optout_()" />
             <input class="btn" type="button" onclick="hide_dialog()" value="No" name="" />
         </form>
@@ -383,7 +383,7 @@ if ($years > 0) {
         <div class="frm_box">
 
             <div class="lable01" style="width:100px;">Reason :</div> 
-            <div class="field01"> <textarea name="" cols="" rows="" style="width:320px; height:100px;"></textarea></div>
+            <div class="field01"> <textarea name="" style="width:320px; height:100px;"></textarea></div>
             <div class="clr"></div>
 
             <div class="lable01" style="width:100px;">&nbsp;</div> 
@@ -420,7 +420,7 @@ if ($years > 0) {
             <div style="padding-bottom:10px;">
                 <p class="center-text" style="line-height:23px; color:#494949;">Do you really want to delete prayer points?</p>
             </div>
-            <form action="" method="post" enctype="multipart/form-data">
+            <form method="post" enctype="multipart/form-data">
                 <input type="hidden" name="i_del_id" id="i_del_id" value="" />
                 <input name="" type="button" value="Yes" class="popup-yes" onClick="delete_prayer_points()"/>
                 <input name="" type="button" value="No" class="popup-no" onclick="hide_dialog()"/>
@@ -447,7 +447,7 @@ if ($years > 0) {
             <div style="padding-bottom:10px;">
                 <p class="center-text" style="line-height:23px; color:#494949;">Do you really want to delete this prayer partner?</p>
             </div>
-            <form action="" method="post" enctype="multipart/form-data">
+            <form method="post" enctype="multipart/form-data">
                 <input type="hidden" name="i_del_partner_id" id="i_del_partner_id" value="" />
                 <input name="" type="button" value="Yes" class="popup-yes" onClick="delete_prayer_partners_()"/>
                 <input name="" type="button" value="No" class="popup-no" onclick="hide_dialog()"/>
