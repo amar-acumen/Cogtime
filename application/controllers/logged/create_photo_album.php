@@ -74,7 +74,7 @@ class Create_photo_album extends Base_controller
 				$this->form_validation->set_message('required', '* Required Field.');
 				$this->form_validation->set_rules('txt_name', 'txt_name', 'required');
 				$this->form_validation->set_rules('txt_add_desc', 'txt_add_desc', 'required');
-				$this->form_validation->set_rules('s_photo', 's_photo', 'required');//'callback_fileupload'
+				$this->form_validation->set_rules('s_photo', 's_photo', 'callback_fileupload');
 				
 
 				
@@ -132,19 +132,19 @@ class Create_photo_album extends Base_controller
 		
 			if ( !in_array($ext , $this->config->item('VALID_IMAGE_EXT'))) 
 			{
-				$this->form_validation->set_message('handle_upload', "supported extensions are ".implode(' , ',$this->config->item('VALID_IMAGE_EXT')));
+				$this->form_validation->set_message('fileupload', "supported extensions are ".implode(' , ',$this->config->item('VALID_IMAGE_EXT')));
     			return false;
 			}
 			else if($_FILES['s_photo']['size'] > $this->config->item('MAX_UP_FILE_SIZE')*1024*1024)
 			{
-				$this->form_validation->set_message('handle_upload', "Maximum file upload size is ".$this->config->item('MAX_UP_FILE_SIZE')." MB.");
+				$this->form_validation->set_message('fileupload', "Maximum file upload size is ".$this->config->item('MAX_UP_FILE_SIZE')." MB.");
 				return false;
 			}	
 			else 
 				return true;	
 		}else
 		{
-			$this->form_validation->set_message('handle_upload', "* Required Field.");
+			$this->form_validation->set_message('fileupload', "* Required Field.");
 			return false;
 		}
 	}
