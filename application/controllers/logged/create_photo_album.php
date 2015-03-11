@@ -93,6 +93,13 @@ class Create_photo_album extends Base_controller
 					###########################Privacy settings###################################
 					insert_privacy($_ret,$_POST,$this->db->photoalbum_privacy,'i_photo_album_id');
 					###########################Privacy settings###################################
+					header('location:manage-my-photo.html');
+					exit;
+				}
+				else
+				{
+					$VIEW = "logged/photos/create_photo_album.phtml"; 
+	            	parent::_render($data, $VIEW);
 				}
             }
             else
