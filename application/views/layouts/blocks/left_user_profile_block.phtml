@@ -15,9 +15,9 @@
 	   
 	  <?php if($arr_profile_info['s_bio'] !='')
 	  {?>
-        <a href="javascript:void(0);" onclick="open_bio_popup()" id="moods"><img src="images/grey-edit.png" height="12" width="12" title="Update Mood"></a>
+        <a href="javascript:void(0);" onclick="open_bio_popup()" id="moods"><img src="images/grey-edit.png" height="12" width="12" title="Update Mood" alt="Update Mood"></a>
     <?php }else{?>
-	<a href="javascript:void(0);" onclick="open_bio_popup()" id="moods">Set Your Mood [ <img src="images/grey-edit.png" height="12" width="12" title="Add Mood"> ]</a>
+	<a href="javascript:void(0);" onclick="open_bio_popup()" id="moods">Set Your Mood [ <img src="images/grey-edit.png" height="12" width="12" title="Add Mood" alt="Add Mood"> ]</a>
 	<?php }?>
     </div>
     
@@ -104,7 +104,7 @@
         <ul class="online-status-txt" id="online_user_types" >
             <?= ($list_types) ?>
         </ul>
-		 <a  href="javascript:void(0);" id="change-online-slide"  style="float:right;margin-top:-1px;font-weight:normal;color:#000000;padding-right: 34px;" > <img src="images/grey-edit.png" height="12" width="12"> </a>
+		 <a  href="javascript:void(0);" id="change-online-slide"  style="float:right;margin-top:-1px;font-weight:normal;color:#000000;padding-right: 34px;" > <img src="images/grey-edit.png" height="12" width="12" alt=""> </a>
         <span class="nw-change-online">
           <!--  <a  href="javascript:void(0);"    class="on-line" ></a>-->
             <!--<a  href="javascript:void(0);"   class="on-line" onclick="updateOnlineStatus()">[update]</a>-->
@@ -368,7 +368,7 @@ alert(response.success);	//update backbone model
 					var bios=data.s_bio.substr(0,24);
 					 $('#show_save_bio').attr('bio',''+data.s_bio+'');
                     $('#show_save_bio').html('&ldquo;'+bios+'...&rdquo;');
-					$('#moods').html('<img src="images/grey-edit.png" height="12" width="12" title="Update Mood">');
+					$('#moods').html('<img src="images/grey-edit.png" height="12" width="12" title="Update Mood" alt="Update Mood">');
                     $('#s_bio').val('');
                     hideBusyScreen();
                 }
