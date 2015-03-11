@@ -1093,7 +1093,7 @@ class My_profile extends Base_controller {
         $this->users_model->edit_info($info, $i_profile_id);
 
         if (($status == '1')) {
-            $s_status = '<img src="' . base_url() . 'images/icons/online.png" width="12px" height="12px" alt="" /> Online';
+            $s_status = '<img src="' . base_url() . 'images/icons/online.png" width="12" height="12" alt="" /> Online';
         } else if ($status == '2') {
             $s_status = '<img src="' . base_url() . 'images/icons/invisible.png" alt="" /> Invisible';
         } else if ($status == '3') {
@@ -1272,40 +1272,40 @@ $chat_name=get_chat_name_by_id($i_profile_id);
 
         if (($status == '1')) {
 
-            $s_status = '('.$chat_name.') <img src="' . base_url() . 'images/icons/online.png" width="12px" height="12px" alt="" /> ';
+            $s_status = '('.$chat_name.') <img src="' . base_url() . 'images/icons/online.png" width="12" height="12" alt="" /> ';
 
             ### html online user types
             $user_status_arr = $this->users_model->getUserOnlineStatus($i_profile_id);
             if ($user_status_arr['i_isfriend'] == 1)
-                array_push($listarr, '<li><img src="'.base_url().'/images/frnd-small-green.png" style="   float: left;margin-right: 7px;" title="Friends"></li>');
+                array_push($listarr, '<li><img src="'.base_url().'/images/frnd-small-green.png" style="   float: left;margin-right: 7px;" title="Friends" alt="Friends"></li>');
 			else
-			 array_push($listarr, '<li><img src="'.base_url().'/images/frnd-small.png" style="   float: left;margin-right: 7px;" title="Friends"></li>');
+			 array_push($listarr, '<li><img src="'.base_url().'/images/frnd-small.png" style="   float: left;margin-right: 7px;" title="Friends" alt="Friends"></li>');
             if ($user_status_arr['i_isnetpal'] == 1)
-                array_push($listarr, '<li><img src="'.base_url().'/images/netpal-small-green.png" style="   float: left;margin-right: 7px;" title="Netpals"></li>');
+                array_push($listarr, '<li><img src="'.base_url().'/images/netpal-small-green.png" style="   float: left;margin-right: 7px;" title="Netpals" alt="Netpals"></li>');
 				else
-				array_push($listarr, '<li><img src="'.base_url().'/images/netpal-small.png" style="   float: left;margin-right: 7px;" title="Netpals"></li>');
+				array_push($listarr, '<li><img src="'.base_url().'/images/netpal-small.png" style="   float: left;margin-right: 7px;" title="Netpals" alt="Netpals"></li>');
 
             if ($user_status_arr['i_isprayerpartner'] == 1)
-                array_push($listarr, '<li id="prayer_partner_li" style=""><img src="'.base_url().'/images/flower-small-green.png" style="   float: left;margin-right: 7px;" title="Prayer Partner"></li>');
+                array_push($listarr, '<li id="prayer_partner_li" style=""><img src="'.base_url().'/images/flower-small-green.png" style="   float: left;margin-right: 7px;" title="Prayer Partner" alt="Prayer Partner"></li>');
 				else
-				 array_push($listarr, '<li id="prayer_partner_li" style=""><img src="'.base_url().'/images/flower-small.png" style="   float: left;margin-right: 7px;" title="Prayer Partner"></li>');
+				 array_push($listarr, '<li id="prayer_partner_li" style=""><img src="'.base_url().'/images/flower-small.png" style="   float: left;margin-right: 7px;" title="Prayer Partner" alt="Prayer Partner"></li>');
 				 
             $list_types = implode('<li></li>', $listarr);
 			
-            $inst_html = '<a id="instantmsg" href="javascript:void(0);" onclick= "showOnlineUser(\'show\')" ><img src="images/Chat.png" alt=""/>Instant Message</a>';
+            $inst_html = '<a id="instantmsg" href="javascript:void(0);" onclick= "showOnlineUser(\'show\')" ><img src="images/Chat.png" height="20" width="20" alt="Chat"/>Instant Message</a>';
         }
         else {
-            $s_status = '('.$chat_name.') <img src="' . base_url() . 'images/icons/offline.png" alt="" />';
+            $s_status = '('.$chat_name.') <img src="' . base_url() . 'images/icons/offline.png" alt="Offline" />';
 			
-			 array_push($listarr, '<li><img src="'.base_url().'/images/frnd-small.png" style="   float: left;margin-right: 7px;" title="Friends"></li>');
+			 array_push($listarr, '<li><img src="'.base_url().'/images/frnd-small.png" style="   float: left;margin-right: 7px;" title="Friends" alt="Friends"></li>');
             
-				array_push($listarr, '<li><img src="'.base_url().'/images/netpal-small.png" style="   float: left;margin-right: 7px;" title="Netpals"></li>');
+				array_push($listarr, '<li><img src="'.base_url().'/images/netpal-small.png" style="   float: left;margin-right: 7px;" title="Netpals" alt="Netpals"></li>');
 
            
-				 array_push($listarr, '<li id="prayer_partner_li" style=""><img src="'.base_url().'/images/flower-small.png" style="   float: left;margin-right: 7px;" title="Prayer Partner"></li>');
+				 array_push($listarr, '<li id="prayer_partner_li" style=""><img src="'.base_url().'/images/flower-small.png" style="   float: left;margin-right: 7px;" title="Prayer Partner" alt="Prayer Partner"></li>');
 				 
             $list_types = implode('<li></li>', $listarr);
-            $inst_html = '<a id="instantmsg" href="javascript:void(0);" onclick="showUIMsg(\'You are offline to network!\');" ><img src="images/Chat.png" alt=""/>Instant Message</a>';
+            $inst_html = '<a id="instantmsg" href="javascript:void(0);" onclick="showUIMsg(\'You are offline to network!\');" ><img src="images/Chat.png" height="20" width="20" alt="Chat"/>Instant Message</a>';
         }
         #$s_status =($status == 1 )?'Online':($status == 2)?'Invisible':($status == 3)?'Away':'Offline';
         echo json_encode(array('success' => true, 'msg' => 'your status updated successfully', 'status' => $s_status, 'list_types' => $list_types, 'inst_html' => $inst_html));
