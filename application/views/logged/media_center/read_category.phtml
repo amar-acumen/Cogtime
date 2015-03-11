@@ -66,12 +66,12 @@ function goBack() {
 						<?php if($IMG != ''):?>
                         <a href="<?=$detail_url?>"><img src="<?php echo $IMG?>" alt="Image" width="222" height="157"></a>
 						<?php endif;?>
-                                                <!---------------------------->
+                                               
                                                 <?php 
                                                 $this->load->helper('text');
                                                $string = word_limiter(get_unformatted_string_edit($val['s_desc']), 65);
                                                 ?>
-                                                <!-------------------------------->
+                                               
                         <p style="line-height:19px;"><?=strip_tags($string,"<img><p></p>")?></p>
                         <div class="blog-links">
                         	<div class="blog-date"><?=getShortDate($val['dt_posted_on'],4)?> by <?=$val['admin_name']?></div>
@@ -147,7 +147,7 @@ function goBack() {
                   
               </div>
                 
-                <!------------------------------>
+                
                 <?php
                       if(count($advertisementmedia_detail)){
                           
@@ -164,7 +164,7 @@ function goBack() {
                       
                           } ?>
                 
-                <!---------------------------->
+                
 <!--              <div class="advertisment"><img src="images/ad5.png" alt="Advertisment" width="250" height="250"></div>
               <div class="advertisment"><img src="images/ad6.png" alt="Advertisment" width="250" height="250"></div>
               <div class="advertisment"><img src="images/ad7.png" alt="Advertisment" width="250" height="250"></div>-->

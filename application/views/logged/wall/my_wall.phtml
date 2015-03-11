@@ -150,7 +150,7 @@
 <?php 
 }
 ?>
-<!--------------------------------------------------------------------------->
+
 				<?php $event=get_events_by_user(intval(decrypt($_SESSION['user_id'])),'my_wall');
 				if($event != null){
 				
@@ -280,7 +280,7 @@ if ($if_temp_pwd == 1) {
     change_temp_pwd_fld($user_id);
 }
 ?>
-<!-- ------------------------------------------------- -->
+
 <script type="text/javascript">
     $(document).ready(function() {
         var check_first_login = $('#is_first_login').val();
