@@ -251,7 +251,7 @@ $feed->comments=get_feed_comments($feed->id,'cg_church_newsfeed_comments','i_fee
 
 
 
-            <textarea name="wall_msg" id="wall_msg" cols="" rows="" onfocus="if(this.value=='Max 500 Characters')this.value='';" onblur="if(this.value=='')this.value='Max 500 Characters';" maxlength ="500" onKeyDown="limitTextarea(this.form.wall_msg,this.form.countdown,500);" onKeyUp="limitTextarea(this.form.wall_msg,this.form.countdown,500);" onkeypress="return restrict_carrige(event);"  ><?php if($data_arr->message != ''){ echo $data_arr->message;} else echo"Max 500 Characters";?></textarea>
+            <textarea name="wall_msg" id="wall_msg" onfocus="if(this.value=='Max 500 Characters')this.value='';" onblur="if(this.value=='')this.value='Max 500 Characters';" maxlength ="500" onKeyDown="limitTextarea(this.form.wall_msg,this.form.countdown,500);" onKeyUp="limitTextarea(this.form.wall_msg,this.form.countdown,500);" onkeypress="return restrict_carrige(event);"  ><?php if($data_arr->message != ''){ echo $data_arr->message;} else echo"Max 500 Characters";?></textarea>
 
  					  <p class="count"> <span id="text_count"><?=strlen($data_arr->message)?></span> Characters</p>
 
