@@ -86,7 +86,7 @@ class Skill_model extends Base_model implements InfModel
           $s_qry= $s_qry.(trim($s_order_by)!=""?" ORDER BY ".$s_order_by."":"ORDER BY id asc")." ".(is_numeric($i_start) && is_numeric($i_limit)?" LIMIT ".intval($i_start).",".intval($i_limit):"");
           //////////end For Pagination//////////                
                 
-          $this->db->trans_begin();///new                
+                 
           $rs=$this->db->query($s_qry); 
       // echo $this->db->last_query() ."<br /><br />"; 
           $i_cnt=0;
@@ -147,7 +147,7 @@ class Skill_model extends Base_model implements InfModel
               }    
               $rs->free_result();          
           }
-          $this->db->trans_commit();///new
+          
           
            //pr($ret_);                   
           
@@ -188,7 +188,7 @@ class Skill_model extends Base_model implements InfModel
               }    
               $rs->free_result();          
           }
-          $this->db->trans_commit();///new
+          
           unset($s_qry,$rs,$row,$i_cnt,$s_where);
           return $ret_;
         }
@@ -225,7 +225,7 @@ class Skill_model extends Base_model implements InfModel
               }    
               $rs->free_result();          
           }
-          $this->db->trans_commit();///new
+          
           unset($s_qry,$rs,$row,$i_cnt,$s_where);
           return $ret_;
         }
@@ -274,7 +274,7 @@ class Skill_model extends Base_model implements InfModel
               
                   
                     
-              $this->db->trans_begin();///new                       
+                                
               $rs=$this->db->query($s_qry,array(intval($i_id)));
               # echo $this->db->last_query() ."<br />";
               
@@ -371,7 +371,7 @@ class Skill_model extends Base_model implements InfModel
                   }    
                   $rs->free_result();          
               }
-              $this->db->trans_commit();///new
+              
               unset($s_qry,$rs,$row,$i_id);
               
                 
@@ -404,7 +404,7 @@ class Skill_model extends Base_model implements InfModel
               }    
               $rs->free_result();          
           }
-          $this->db->trans_commit();///new
+         
           unset($s_qry,$rs,$row,$i_cnt,$s_where);
           return $ret_;
         }
@@ -431,7 +431,7 @@ class Skill_model extends Base_model implements InfModel
               }    
               $rs->free_result();          
           }
-          $this->db->trans_commit();///new
+          
           unset($s_qry,$rs,$row,$i_cnt,$s_where);
           return $ret_;
         }
@@ -604,10 +604,7 @@ class Skill_model extends Base_model implements InfModel
                 $i_ret_=$this->db->affected_rows();        
                 if($i_ret_)
                 {
-                   /* $logi["msg"]="Deleting ".$this->db->USERS." ";
-                    $logi["sql"]= serialize(array($s_qry, array(intval($i_id))) ) ;
-                    $this->log_info($logi); 
-                    unset($logi);*/
+                   
                     $this->db->trans_commit();///new   
                 }
                 else
@@ -623,10 +620,7 @@ class Skill_model extends Base_model implements InfModel
                 $i_ret_=$this->db->affected_rows();        
                 if($i_ret_)
                 {
-                    /* $logi["msg"]="Deleting all information from ".$this->db->USERS." ";
-                    $logi["sql"]= serialize(array($s_qry) ) ;
-                    $this->log_info($logi); 
-                    unset($logi);*/
+                   
                     $this->db->trans_commit();///new   
                 }
                 else
@@ -667,25 +661,7 @@ class Skill_model extends Base_model implements InfModel
                     $this->db->trans_rollback();///new
                 }                                      
             }
-            /*elseif(intval($db_id)==-1)////Deleting All
-            {
-                $s_qry="DELETE FROM ".$this->db->USERS." ";
-                $this->db->trans_begin();///new
-                $this->db->query($s_qry);
-                $i_ret_=$this->db->affected_rows();        
-                if($i_ret_)
-                {
-                    /* $logi["msg"]="Deleting all information from ".$this->db->USERS." ";
-                    $logi["sql"]= serialize(array($s_qry) ) ;
-                    $this->log_info($logi); 
-                    unset($logi);*/
-            /*        $this->db->trans_commit();///new   
-                }
-                else
-                {
-                    $this->db->trans_rollback();///new
-                }            
-            }*/
+            
             
             unset($s_qry, $i_id);
             return $i_ret_;

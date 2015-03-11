@@ -129,7 +129,7 @@
                                 <div class="clr"></div>
                                 <label class="white-text">Description:</label>
                                 <div class="wall-comment-blog-box">
-                                    <textarea name="blogpost_desc" id="blogpost_desc" cols="" rows="" onfocus="if (this.value == 'Max 500 Characters')
+                                    <textarea name="blogpost_desc" id="blogpost_desc" onfocus="if (this.value == 'Max 500 Characters')
                                                 this.value = '';" onblur="if (this.value == '')
                                                             this.value = 'Max 500 Characters';"  onkeypress="return restrict_carrige(event);" >Max 500 Characters</textarea>
                                     <p style=" clear:both; float:left"> <span id="text_count">0</span> Characters</p>
@@ -549,6 +549,7 @@
                     $('#comments').html(data.comm);
                     reset_('postcmnts_frm' + i_blog_postid);
                     $('.wal-minus').trigger('click');
+                    location.reload();
                 }
             }
 

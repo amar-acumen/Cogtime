@@ -15,9 +15,9 @@
 	   
 	  <?php if($arr_profile_info['s_bio'] !='')
 	  {?>
-        <a href="javascript:void(0);" onclick="open_bio_popup()" id="moods"><img src="images/grey-edit.png" height="12px" width="12px" title="Update Mood"></a>
+        <a href="javascript:void(0);" onclick="open_bio_popup()" id="moods"><img src="images/grey-edit.png" height="12" width="12" title="Update Mood" alt="Update Mood"></a>
     <?php }else{?>
-	<a href="javascript:void(0);" onclick="open_bio_popup()" id="moods">Set Your Mood [ <img src="images/grey-edit.png" height="12px" width="12px" title="Add Mood"> ]</a>
+	<a href="javascript:void(0);" onclick="open_bio_popup()" id="moods">Set Your Mood [ <img src="images/grey-edit.png" height="12" width="12" title="Add Mood" alt="Add Mood"> ]</a>
 	<?php }?>
     </div>
     
@@ -27,20 +27,20 @@
     $listarr = array();
 	//pr($arr_profile_info);
     if ($arr_profile_info['user_status']['i_isfriend'] == 1)
-        array_push($listarr, '<li><img src="'.base_url().'/images/frnd-small-green.png" height="15px" width="19px" style="   float: left;margin-right: 7px;" title="Friends"></li>');
+        array_push($listarr, '<li><img src="'.base_url().'/images/frnd-small-green.png" height="15" width="19" style="   float: left;margin-right: 7px;" title="Friends" alt="Friends"></li>');
 		
 		else
-		array_push($listarr, '<li><img src="'.base_url().'/images/frnd-small.png" style="   float: left;margin-right: 7px;" title="Friends"></li>');
+		array_push($listarr, '<li><img src="'.base_url().'/images/frnd-small.png" style="   float: left;margin-right: 7px;" title="Friends" alt="Friends"></li>');
 
     if ($arr_profile_info['user_status']['i_isnetpal'] == 1 && $arr_profile_info['e_want_net_pal'] == 'Y')
-        array_push($listarr, '<li><img src="'.base_url().'/images/netpal-small-green.png" style="   float: left;margin-right: 7px;" title="Netpals"></li>');
+        array_push($listarr, '<li><img src="'.base_url().'/images/netpal-small-green.png" style="   float: left;margin-right: 7px;" title="Netpals" alt="Netpals"></li>');
 		else
-		 array_push($listarr, '<li><img src="'.base_url().'/images/netpal-small.png" height="17px" width="18px" style="   float: left;margin-right: 7px;" title="Netpals"></li>');
+		 array_push($listarr, '<li><img src="'.base_url().'/images/netpal-small.png" height="17" width="18" style="   float: left;margin-right: 7px;" title="Netpals" alt="Netpals"></li>');
 
     if ($arr_profile_info['user_status']['i_isprayerpartner'] == 1 && $arr_profile_info['e_want_prayer_partner'] == 'Y')
-        array_push($listarr, '<li id="prayer_partner_li" style=""><img src="'.base_url().'/images/flower-small-green.png" style="   float: left;margin-right: 7px;" height="15px" width="19px" title="Prayer Partner"></li>');
+        array_push($listarr, '<li id="prayer_partner_li" style=""><img src="'.base_url().'/images/flower-small-green.png" style="   float: left;margin-right: 7px;" height="15" width="19" title="Prayer Partner" alt="Prayer Partner"></li>');
 		else
-		array_push($listarr, '<li id="prayer_partner_li" style=";"><img src="'.base_url().'/images/flower-small.png" style="   float: left;margin-right: 7px;" height="15px" width="15px" title="Prayer Partner"></li>');
+		array_push($listarr, '<li id="prayer_partner_li" style=";"><img src="'.base_url().'/images/flower-small.png" style="   float: left;margin-right: 7px;" height="15" width="15" title="Prayer Partner" alt="Prayer Partner"></li>');
 
     $list_types = implode('<li></li>', $listarr);
 	//$list_types = $listarr;
@@ -104,7 +104,7 @@
         <ul class="online-status-txt" id="online_user_types" >
             <?= ($list_types) ?>
         </ul>
-		 <a  href="javascript:void(0);" id="change-online-slide"  style="float:right;margin-top:-1px;font-weight:normal;color:#000000;padding-right: 34px;" > <img src="images/grey-edit.png" height="12px" width="12px"> </a>
+		 <a  href="javascript:void(0);" id="change-online-slide"  style="float:right;margin-top:-1px;font-weight:normal;color:#000000;padding-right: 34px;" > <img src="images/grey-edit.png" height="12" width="12" alt=""> </a>
         <span class="nw-change-online">
           <!--  <a  href="javascript:void(0);"    class="on-line" ></a>-->
             <!--<a  href="javascript:void(0);"   class="on-line" onclick="updateOnlineStatus()">[update]</a>-->
@@ -146,7 +146,7 @@
             <?php
         } else if ($arr_profile_info['e_want_prayer_partner'] == 'Y') {
             ?>
-            <li id="seeking"><a  href="javascript:void(0);"  onclick="show_dialog('optout-as-prayer-partner2');"  title="Enable Prayer Partner"><img src="images/icons/icon-17.png" width="20px" height="20px" alt=""/>Prayer Partner</a></li>
+            <li id="seeking"><a  href="javascript:void(0);"  onclick="show_dialog('optout-as-prayer-partner2');"  title="Enable Prayer Partner"><img src="images/icons/icon-17.png" width="20" height="20" alt=""/>Prayer Partner</a></li>
         <?php } else if($arr_profile_info['is_pr_partner_q_mail_sent']==Null && $arr_profile_info['e_want_prayer_partner'] == 'N'){
             ?>
             <li id="seeking"><a  href="javascript:void(0);" onclick="" title="Disable Prayer Partner"><img src="images/icon-17-red.png" alt=""/>Prayer Partner</a></li>
@@ -162,12 +162,12 @@
 			if ($arr_profile_info['user_status']['i_isfriend'] == 0 && $arr_profile_info['user_status']['i_isnetpal'] == 0 
 					&& $arr_profile_info['user_status']['i_isprayerpartner'] == 0){ 
         ?>
-            <a id="instantmsg" href="javascript:void(0);" onclick="showUIMsg('You are offline to network!');" ><img src="images/Chat.png" height="20px" width="20px" alt=""/>Instant Message</a>
+            <a id="instantmsg" href="javascript:void(0);" onclick="showUIMsg('You are offline to network!');" ><img src="images/Chat.png" height="20" width="20" alt="Chat"/>Instant Message</a>
         <?php 
 					}
 			else {
 		?>
-         <a id="instantmsg" href="javascript:void(0);" onclick= "showOnlineUser('show')" ><img src="images/Chat.png" alt="" height="20px" width="20px" />Instant Message</a>
+         <a id="instantmsg" href="javascript:void(0);" onclick= "showOnlineUser('show')" ><img src="images/Chat.png" alt="Chat" height="20" width="20" />Instant Message</a>
          <?php } ?>
          </span>
         
@@ -239,10 +239,10 @@ alert(response.success);	//update backbone model
                     if (json_response.success == true)
                     {
                         showUIMsg(json_response.msg);
-                        $('#seeking').html('<a  href="javascript:void(0);" onclick="chnge_pp_status(\'Y\')"><img src="images/icons/icon-17.png" alt="" title="Enable Prayer Partner"/>Prayer Partner</a>');
+                        $('#seeking').html('<a  href="javascript:void(0);" onclick="chnge_pp_status(\'Y\')"><img src="images/icons/icon-17.png" width="20" height="20" alt="" title="Enable Prayer Partner"/>Prayer Partner</a>');
                         $('#prayer_partner_span').html('<input type="checkbox" name="chk_pp" id="chk_pp" <?= ( $arr_profile_info['user_status']['i_isprayerpartner'] == 1) ? 'checked="checked"' : '' ?> value="1" onclick="updateOnlineStatus()"/>My Prayer Partners');
 						 $('#prayer_partner_span').show();
-						  $('#prayer_partner_li').html('<img src="images/flower-small-green.png" height="15px" width="19px" style="   float: left;margin-right: 7px;" title="Prayer Partner">');
+						  $('#prayer_partner_li').html('<img src="images/flower-small-green.png" height="15" width="19" style="   float: left;margin-right: 7px;" title="Prayer Partner">');
                         /*$('#online_user_types').append('<li>I</li><li id="prayer_partner_li">Prayer Partners</li>')*/
                     }
                     else
@@ -304,7 +304,7 @@ alert(response.success);	//update backbone model
 
 </script>
 
-<script language="javascript">
+<script type="text/javascript">
 <!--
     function updateOnlineStatus() {
 
@@ -368,7 +368,7 @@ alert(response.success);	//update backbone model
 					var bios=data.s_bio.substr(0,24);
 					 $('#show_save_bio').attr('bio',''+data.s_bio+'');
                     $('#show_save_bio').html('&ldquo;'+bios+'...&rdquo;');
-					$('#moods').html('<img src="images/grey-edit.png" height="12px" width="12px" title="Update Mood">');
+					$('#moods').html('<img src="images/grey-edit.png" height="12" width="12" title="Update Mood" alt="Update Mood">');
                     $('#s_bio').val('');
                     hideBusyScreen();
                 }
@@ -391,7 +391,7 @@ alert(response.success);	//update backbone model
 
 </script>
 <div class="lightbox edit-mood">
-      <div class="close"><a href="javascript:void(o)" onclick="hide_dialog(); $('#s_bio').val('');"><img src="<?=base_url()?>images/close.png" height="24px" width="24px" alt="" /></a></div>
+      <div class="close"><a href="javascript:void(o)" onclick="hide_dialog(); $('#s_bio').val('');"><img src="<?=base_url()?>images/close.png" height="24" width="24" alt="close" /></a></div>
       <div class="top"><div>&nbsp;</div></div>
       <div class="mid">
           <div class="mood-message-haeding">
@@ -405,9 +405,9 @@ alert(response.success);	//update backbone model
       <div class="bot"><div>&nbsp;</div></div>
 </div>
 
-<!----------------------------------------display large profile image----------------->
+
  <div class="lightbox large-img" >
-      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="<?=base_url()?>images/close.png" height="24px" width="24px" alt="" /></a></div>
+      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="<?=base_url()?>images/close.png" height="24" width="24" alt="close" /></a></div>
       <div class="top"><div>&nbsp;</div></div>
       <div class="mid">
             <div class="heading-new" style="margin-bottom:0px;">

@@ -5,7 +5,7 @@
 <script type="text/javascript" src="<?php echo  base_url()?>js/jquery.multiselect.js"></script>
 <script type="text/javascript" src="<?php echo  base_url()?>js/jquery.multiselect.filter.js"></script>
 <script type="text/javascript" src="<?php echo  base_url()?>js/prettify.js"></script>
-<script language="javascript">
+<script type="text/javascript">
 <!--
 var g_controller_url = base_url+"my-photos.html";
 
@@ -166,26 +166,34 @@ $(function(){
                         	<!--<div class="page_heading">
                             	<div class="left"><img src="images/icons/photo.png" alt="" /> Create Photo Album</div>
                              </div>-->
-                            <form id="frmPhotoAlbum"  method="post" action="<?=base_url().'logged/create_photo_album/add_photo_album'?>" onsubmit="return false;" enctype="multipart/form-data" class="form-manage">
+                             <!--id="frmPhotoAlbum" onsubmit="return false;" -->
+                            <form method="post" action="<?=base_url().'logged/create_photo_album'?>" enctype="multipart/form-data" class="form-manage">
                              <div class="frm_box blue_box" style="background:url(images/photo.png) no-repeat 20px 90% #f0f7fa; width:452px;">
                                     <div class="lable01">Name:</div>  
                                     <div class="field01">
                                     <input name="txt_name" id="txt_name" type="text" />
-                                    <span id="err_name" class="error-message"></span>  
+                                    <span id="err_name" class="error-message" style="display:block;">
+                                      <?php echo form_error('txt_name'); ?>
+                                    </span>  
                                     </div> 
                                     <div class="clr"></div>
                                     
                                      <div class="lable01">Browse Photo:</div> 
                                      <div class="field01">
                                      <input name="s_photo" id="s_photo" type="file" />
-                                     <span id="err_album_photo" class="error-message"></span>  
+                                     <span id="err_album_photo" class="error-message" style="display:block;">
+                                      <?php echo form_error('s_photo'); ?>
+                                     </span>  
                                      </div>
                                     <div class="clr"></div>
                                     
                                     <div class="lable01">Description:</div>  
                                     <div class="field01">
                                     <textarea name="txt_add_desc"  id="txt_add_desc" cols="" rows="" style="height:125px;" maxlength="250"></textarea>
-                                    <span id="err_desc" class="error-message"></span> 
+                                    <span id="err_desc" class="error-message" style="display:block;">
+                                      <?php echo form_error('txt_add_desc'); ?>
+                                    </span> 
+
                                     <span style="font-size: 11px;font-style: italic;line-height: 13px;">(Max 250 characters.)</span> 
                                     </div> 
                                     <div class="clr"></div>
@@ -209,7 +217,8 @@ $(function(){
                                      
                                     <div class="lable01">&nbsp;</div>  
                                     <div class="field01"> 
-                                    <input name="photo_album_btn"  id="photo_album_btn" type="submit" value="Create"  class="btn"/></div> 
+                                    <input name="photo_album_btn" type="submit" value="Create"  class="btn"/></div> 
+                                    <!--id="photo_album_btn"-->
                                     <div class="clr"></div>
                           	</div>
                             </form>

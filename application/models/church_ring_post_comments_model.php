@@ -75,7 +75,7 @@ class Church_ring_post_comments_model extends CI_Model {
               }    
               $rs->free_result();          
           }
-          $this->db->trans_commit();///new
+          
           unset($s_qry,$rs,$row,$i_cnt,$s_where);
           return $ret_;
         }

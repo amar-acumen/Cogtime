@@ -530,7 +530,7 @@ class Base_controller extends CI_Controller {
             $data['header']['header_html'] .= '<title>' . $this->title . '</title>' . "\n";
 
             // NEW CODE [ meta content-type and base href] - START
-            $data['header']['header_html'] .= '<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />' . "\n";
+           // $data['header']['header_html'] .= '<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />' . "\n";
             $data['header']['header_html'] .= "<base href=\"" . base_url() . "\" />\n";
             // NEW CODE [ meta content-type and base href] - END
 
@@ -2439,7 +2439,7 @@ class Base_controller extends CI_Controller {
 
         $event_arr = $this->events_model->get_by_user_id($i_profile_id, $where);
 
-        //pr($event_arr);
+        //pr($event_arr,1);
 
         $s_where_today_after2days = 'AND i_active = 1  
 									 AND i_reminder_status = 1 

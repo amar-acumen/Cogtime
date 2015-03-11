@@ -69,7 +69,7 @@ class Data_messages_model extends Base_model implements InfModel
               }    
               $rs->free_result();          
           }
-          $this->db->trans_commit();///new
+         
           unset($s_qry,$rs,$row,$i_cnt,$s_where);
           return $ret_;
         }
@@ -267,7 +267,7 @@ class Data_messages_model extends Base_model implements InfModel
 		//return $result_arr;
 		
 		
-		  $this->db->trans_begin();///new                
+		          
           $rs=$this->db->query($s_qry);
           $i_cnt=0;
           if(is_array($rs->result()))
@@ -296,9 +296,7 @@ class Data_messages_model extends Base_model implements InfModel
               }    
               $rs->free_result();          
           }
-          $this->db->trans_commit();///new
-		  
-		  					
+          				
 		  
           unset($s_qry,$rs,$row,$i_cnt,$s_where,$i_start_limit,$i_no_of_page);
           return $ret_;
@@ -373,7 +371,7 @@ class Data_messages_model extends Base_model implements InfModel
 		//return $result_arr;
 		//echo nl2br($s_qry);
 		
-		  $this->db->trans_begin();///new                
+		       
           $rs=$this->db->query($s_qry);
           $i_cnt=0;
           if(is_array($rs->result()))
@@ -401,9 +399,7 @@ class Data_messages_model extends Base_model implements InfModel
               }    
               $rs->free_result();          
           }
-          $this->db->trans_commit();///new
-		  
-		  					
+          					
 		  
           unset($s_qry,$rs,$row,$i_cnt,$s_where,$i_start_limit,$i_no_of_page);
           return $ret_;
@@ -602,7 +598,7 @@ class Data_messages_model extends Base_model implements InfModel
 								  ORDER BY msg_dt DESC limit %3\$s, %4\$s",  $i_user_id, $s_where, $i_start_limit, $i_no_of_page);
 
 	//	echo nl2br($s_qry); 
-		  $this->db->trans_begin();///new                
+		      
           $rs=$this->db->query($s_qry);
           $i_cnt=0;
           if(is_array($rs->result()))
@@ -631,7 +627,7 @@ class Data_messages_model extends Base_model implements InfModel
               }    
               $rs->free_result();          
           }
-          $this->db->trans_commit();///new
+          
 		  
 		  					
 		  

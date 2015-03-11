@@ -2,10 +2,10 @@
 <div class="menu-box">
       <div class="nw-heading">
              <div class="left">
-                    <h4><img src="images/icons/social-activity.png" width="20px" height="20px" alt="Social Activity"/>Social Activity</h4>
+                    <h4><img src="images/icons/social-activity.png" width="20" height="20" alt="Social Activity"/>Social Activity</h4>
               </div>
-              <div class="minus right exp-col020" style="display:none;"><img src="images/icons/nw-minus.png" alt="" class="plus-minus2" width="13px" height="10px"/></div>
-              <div class="plus right exp-col020"><img src="images/icons/nw-plus.png" width="13px" height="10px" alt="" class="plus-minus2"/></div>
+              <div class="minus right exp-col020" style="display:none;"><img src="images/icons/nw-minus.png" alt="nw-minus" class="plus-minus2" width="13" height="10"/></div>
+              <div class="plus right exp-col020"><img src="images/icons/nw-plus.png" width="13" height="10" alt="nw-plus" class="plus-minus2"/></div>
       </div>
       <div class="nw-content" id="switchdiv020" style="display:none;">
           <ul>
@@ -22,10 +22,10 @@
 <div class="menu-box">
       <div class="nw-heading">
              <div class="left">
-                    <h4><img src="images/icons/icon24.png" width="20px" height="22px" alt="Social Activity"/>Holy Zone</h4>
+                    <h4><img src="images/icons/icon24.png" width="20" height="22" alt="Social Activity"/>Holy Zone</h4>
               </div>
-              <div class="minus right exp-col024" style="display:none;"><img src="images/icons/nw-minus.png" alt="" class="plus-minus2" width="13px" height="10px" /></div>
-              <div class="plus right exp-col024"><img src="images/icons/nw-plus.png" alt="" width="13px" height="10px" class="plus-minus2"/></div>
+              <div class="minus right exp-col024" style="display:none;"><img src="images/icons/nw-minus.png" alt="nw-minus" class="plus-minus2" width="13" height="10" /></div>
+              <div class="plus right exp-col024"><img src="images/icons/nw-plus.png" alt="nw-plus" width="13" height="10" class="plus-minus2"/></div>
       </div>
       <div class="nw-content" id="switchdiv024" style="display:none;">
           <ul>
@@ -42,10 +42,10 @@
 <div class="menu-box">
       <div class="nw-heading">
              <div class="left">
-                    <h4><img src="images/icons/coment.png" height="20px" width="20px" alt="Social Activity"/>Chat Rooms</h4>
+                    <h4><img src="images/icons/coment.png" height="20" width="20" alt="Social Activity"/>Chat Rooms</h4>
               </div>
-              <div class="minus right exp-col025" style="display:none;"><img src="images/icons/nw-minus.png" alt="" class="plus-minus2" width="13px" height="10px"/></div>
-              <div class="plus right exp-col025"><img src="images/icons/nw-plus.png" alt="" width="13px" height="10px" class="plus-minus2"/></div>
+              <div class="minus right exp-col025" style="display:none;"><img src="images/icons/nw-minus.png" alt="nw-minus" class="plus-minus2" width="13" height="10"/></div>
+              <div class="plus right exp-col025"><img src="images/icons/nw-plus.png" alt="nw-plus" width="13" height="10" class="plus-minus2"/></div>
       </div>
       <div class="nw-content" id="switchdiv025" style="display:none;">
           <ul>
@@ -59,14 +59,14 @@
       <br class="clr" />
 </div>
  <!--chat rooms end -->
- <!------Church section-------->
+ 
  <div class="menu-box">
       <div class="nw-heading">
              <div class="left">
-                    <h4><img src="images/icons/church-icon.png" height="20px" width="20px" alt="Your Church"/>Your Church</h4>
+                    <h4><img src="images/icons/church-icon.png" height="20" width="20" alt="Your Church"/>Your Church</h4>
               </div>
-              <div class="minus right exp-col030" style="display:none;"><img src="images/icons/nw-minus.png" alt="" class="plus-minus2" width="13px" height="10px" /></div>
-              <div class="plus right exp-col030"><img src="images/icons/nw-plus.png" width="13px" height="10px" alt="" class="plus-minus2"/></div>
+              <div class="minus right exp-col030" style="display:none;"><img src="images/icons/nw-minus.png" alt="nw-minus" class="plus-minus2" width="13" height="10" /></div>
+              <div class="plus right exp-col030"><img src="images/icons/nw-plus.png" width="13" height="10" alt="nw-plus" class="plus-minus2"/></div>
       </div>   
       <div class="nw-content" id="switchdiv030" style="display:none;">
           <ul>
@@ -85,7 +85,7 @@
               if($numrow_superadmin>0)
               {
                   ?>
-                    <li><a href="<?= $result[0]->ch_page_url; ?>" class="" id="" ><?= $result[0]->s_name; ?><img src="<?= base_url() ?>images/icons/crown.png" width="25px" height="14px" alt="" class="add-new-church"/> </a></li>
+                    <li><a href="<?= $result[0]->ch_page_url; ?>" class="" id="" ><?= $result[0]->s_name; ?><img src="<?= base_url() ?>images/icons/crown.png" width="25" height="14" alt="crown" class="add-new-church"/> </a></li>
                   <?php
               }
               if(count($result_churchmember)>0 )
@@ -93,7 +93,7 @@
                 foreach ($result_churchmember as $row){
                   $church_wall_url = base_url().$result_churchmember[0]->chid.'/church-wall';
                 ?>
-                    <li><a href="<?= $church_wall_url; ?>" class="" id="" ><?= $row->s_name; ?><img src="<?= base_url() ?>images/man-24-16.png" width="15" height="15" alt="" class="add-new-church"/> </a></li>
+                    <li><a href="<?= $church_wall_url; ?>" class="" id="" ><?= $row->s_name; ?><img src="<?= base_url() ?>images/man-24-16.png" width="15" height="15" alt="man" class="add-new-church"/> </a></li>
                 <?php 
                 }
                 ?>    
@@ -169,7 +169,7 @@ if($numrow_superadmin == 0){
       <br class="clr" />
 </div>
  <div id="table_contents"></div>
- <!---------end church section------------>
+ 
 
  <script type="text/javascript">
  
@@ -207,7 +207,7 @@ if($numrow_superadmin == 0){
  }
  </script>
 
- <!----------verification pop up ------------------------>
+
 
  <script type='text/javascript'>
 

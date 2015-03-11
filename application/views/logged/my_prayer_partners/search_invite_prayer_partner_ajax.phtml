@@ -59,15 +59,15 @@
                     <p class="add-remove-friend">
                     
                     <?php  if($val['display_becomeprayer_partner'] == 'false'): ?>
-                    <img src="images/icons/icon24.png" alt="" /> <a  href="javascript:void(0);" id="invite_prayer_partner_<?=($val['user_id'])?>" onclick="invite_prayer_partner_('<?=encrypt($val['user_id'])?>','<?=$val['display_becomeprayer_partner']?>')">Re-send Partner Request</a>
+                    <img src="images/icons/icon24.png" width="20" height="22" alt="icon24" /> <a  href="javascript:void(0);" id="invite_prayer_partner_<?=($val['user_id'])?>" onclick="invite_prayer_partner_('<?=encrypt($val['user_id'])?>','<?=$val['display_becomeprayer_partner']?>')">Re-send Partner Request</a>
                     <?php elseif($val['display_alreadyprayer_partner'] == 'true'):?>
-                     <img src="images/icons/icon24.png" alt="" /> Already Your Partner
+                     <img src="images/icons/icon24.png" width="20" height="22" alt="icon24" /> Already Your Partner
                     
                     
                      <?php elseif($val['is_available']=='false') : ?>
-                    <img src="images/icons/icon24.png" alt="" /> Not Available
+                    <img src="images/icons/icon24.png" width="20" height="22" alt="icon24" /> Not Available
                      <?php else: ?>
-                    <img src="images/icons/icon24.png" alt="" /> <a  href="javascript:void(0);" id="invite_prayer_partner_<?=($val['user_id'])?>" onclick="invite_prayer_partner_('<?=encrypt($val['user_id'])?>','<?=$val['display_becomeprayer_partner']?>')">Invite As Partner</a>
+                    <img src="images/icons/icon24.png" width="20" height="22" alt="icon24" /> <a  href="javascript:void(0);" id="invite_prayer_partner_<?=($val['user_id'])?>" onclick="invite_prayer_partner_('<?=encrypt($val['user_id'])?>','<?=$val['display_becomeprayer_partner']?>')">Invite As Partner</a>
                     
                     <?php endif; ?>
                     

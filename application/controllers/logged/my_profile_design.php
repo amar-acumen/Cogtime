@@ -1214,11 +1214,11 @@ class My_profile extends Base_controller {
 
             $list_types = implode('<li>I</li>', $listarr);
 
-            $inst_html = '<a id="instantmsg" href="javascript:void(0);" onclick= "showOnlineUser(\'show\')" ><img src="images/Chat.png" alt=""/>Instant Message</a>';
+            $inst_html = '<a id="instantmsg" href="javascript:void(0);" onclick= "showOnlineUser(\'show\')" ><img src="images/Chat.png" height="20" width="20" alt="Chat"/>Instant Message</a>';
         }
         else {
             $s_status = '<img src="' . base_url() . 'images/icons/offline.png" alt="" /> Offline';
-            $inst_html = '<a id="instantmsg" href="javascript:void(0);" onclick="showUIMsg(\'You are offline to network!\');" ><img src="images/Chat.png" alt=""/>Instant Message</a>';
+            $inst_html = '<a id="instantmsg" href="javascript:void(0);" onclick="showUIMsg(\'You are offline to network!\');" ><img src="images/Chat.png" height="20" width="20" alt="Chat"/>Instant Message</a>';
         }
         #$s_status =($status == 1 )?'Online':($status == 2)?'Invisible':($status == 3)?'Away':'Offline';
         echo json_encode(array('success' => true, 'msg' => 'your status updated successfully', 'status' => $s_status, 'list_types' => $list_types, 'inst_html' => $inst_html));

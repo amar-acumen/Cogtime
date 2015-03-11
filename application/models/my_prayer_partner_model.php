@@ -84,7 +84,7 @@ class My_prayer_partner_model extends Base_model implements InfModel {
             #echo ($s_qry);
             //////////end For Pagination//////////                
 
-            $this->db->trans_begin(); ///new                
+            
             $rs = $this->db->query($s_qry);
             $i_cnt = 0;
             if (is_array($rs->result())) {
@@ -156,7 +156,7 @@ class My_prayer_partner_model extends Base_model implements InfModel {
                 }
                 $rs->free_result();
             }
-            $this->db->trans_commit(); ///new
+           
 
 
 
@@ -190,7 +190,7 @@ class My_prayer_partner_model extends Base_model implements InfModel {
                 }
                 $rs->free_result();
             }
-            $this->db->trans_commit(); ///new
+            
             unset($s_qry, $rs, $row, $i_cnt, $s_where);
             return $ret_;
         } catch (Exception $err_obj) {
@@ -369,7 +369,7 @@ class My_prayer_partner_model extends Base_model implements InfModel {
 
 
 
-                $this->db->trans_begin(); ///new                       
+                           
                 $rs = $this->db->query($s_qry);
                 if (is_array($rs->result())) {
                     foreach ($rs->result() as $row) {
@@ -393,7 +393,7 @@ class My_prayer_partner_model extends Base_model implements InfModel {
                     }
                     $rs->free_result();
                 }
-                $this->db->trans_commit(); ///new
+                
                 unset($s_qry, $rs, $row, $i_me, $i_him);
             }
             return $ret_;
@@ -524,7 +524,7 @@ class My_prayer_partner_model extends Base_model implements InfModel {
 
             #echo nl2br($s_qry);
 
-            $this->db->trans_begin(); ///new                
+              
             $rs = $this->db->query($s_qry);
             $i_cnt = 0;
             if (is_array($rs->result())) {
@@ -538,7 +538,7 @@ class My_prayer_partner_model extends Base_model implements InfModel {
                 }
                 $rs->free_result();
             }
-            $this->db->trans_commit(); ///new
+            
             // pr($ret_);
             //pr(array_unique($ret_));				
 
@@ -765,7 +765,7 @@ class My_prayer_partner_model extends Base_model implements InfModel {
 
                 #cn.s_country_name  , {$this->db->MST_COUNTRY} cn 
 
-                $this->db->trans_begin(); ///new                       
+                           
                 $rs = $this->db->query($s_qry); #echo $this->db->last_query(); exit;
                 if (is_array($rs->result())) {
                     foreach ($rs->result() as $row) {
@@ -781,7 +781,7 @@ class My_prayer_partner_model extends Base_model implements InfModel {
                     }
                     $rs->free_result();
                 }
-                $this->db->trans_commit(); ///new
+                
                 unset($s_qry, $rs, $row, $i_me, $i_him);
             }
             #pr($ret_);
@@ -835,7 +835,7 @@ class My_prayer_partner_model extends Base_model implements InfModel {
             #echo nl2br($s_qry);
             //////////end For Pagination//////////                
 
-            $this->db->trans_begin(); ///new                
+                 
             $rs = $this->db->query($s_qry);
             $i_cnt = 0;
             if (is_array($rs->result())) {
@@ -880,9 +880,7 @@ class My_prayer_partner_model extends Base_model implements InfModel {
                 }
                 $rs->free_result();
             }
-            $this->db->trans_commit(); ///new
-
-
+            
 
             unset($s_qry, $rs, $row, $i_cnt, $s_where, $i_start, $i_limit);
             return $ret_;
@@ -915,7 +913,7 @@ class My_prayer_partner_model extends Base_model implements InfModel {
                 }
                 $rs->free_result();
             }
-            $this->db->trans_commit(); ///new
+            
             unset($s_qry, $rs, $row, $i_cnt, $s_where);
             return $ret_;
         } catch (Exception $err_obj) {
@@ -990,7 +988,7 @@ class My_prayer_partner_model extends Base_model implements InfModel {
 
                 #cn.s_country_name  , {$this->db->MST_COUNTRY} cn 
 
-                $this->db->trans_begin(); ///new                       
+                            
                 $rs = $this->db->query($s_qry); //echo $this->db->last_query(); //exit;
                 if (is_array($rs->result())) {
                     foreach ($rs->result() as $row) {
@@ -1006,7 +1004,7 @@ class My_prayer_partner_model extends Base_model implements InfModel {
                     }
                     $rs->free_result();
                 }
-                $this->db->trans_commit(); ///new
+                
                 unset($s_qry, $rs, $row, $i_me, $i_him);
             }
             #pr($ret_);
@@ -1334,7 +1332,7 @@ class My_prayer_partner_model extends Base_model implements InfModel {
             #echo nl2br($s_qry);
             //////////end For Pagination//////////                
 
-            $this->db->trans_begin(); ///new                
+                   
             $rs = $this->db->query($s_qry);
             $i_cnt = 0;
             if (is_array($rs->result())) {
@@ -1351,10 +1349,7 @@ class My_prayer_partner_model extends Base_model implements InfModel {
                 }
                 $rs->free_result();
             }
-            $this->db->trans_commit(); ///new
-
-
-
+            
             unset($s_qry, $rs, $row, $i_cnt, $s_where, $i_start, $i_limit);
             return $ret_;
         } catch (Exception $err_obj) {

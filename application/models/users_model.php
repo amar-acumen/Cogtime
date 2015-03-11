@@ -312,7 +312,7 @@ class Users_model extends Base_model implements InfModel {
                 }
                 $rs->free_result();
             }
-            $this->db->trans_commit(); ///new
+            
             unset($s_qry, $rs, $row, $i_cnt, $s_where);
             return $ret_;
         } catch (Exception $err_obj) {
@@ -342,7 +342,7 @@ class Users_model extends Base_model implements InfModel {
                 }
                 $rs->free_result();
             }
-            $this->db->trans_commit(); ///new
+            
             unset($s_qry, $rs, $row, $i_cnt, $s_where);
             return $ret_;
         } catch (Exception $err_obj) {
@@ -589,16 +589,7 @@ class Users_model extends Base_model implements InfModel {
                 $i_ret_ = $this->db->affected_rows();
 
                 if ($i_ret_) {
-                    /* $logi["msg"]="Updating ".$this->db->USERS." ";
-                      $logi["sql"]= serialize(array($s_qry,array(
-                      get_formatted_string($info["s_firstname"]),
-                      intval($info["i_entity_id"]),
-                      intval($info["i_updated_by"]),
-                      get_db_datetime(),
-                      intval($i_id)
-                      )) ) ;
-                      $this->log_info($logi);
-                      unset($logi); */
+                    
                     $this->db->trans_commit(); ///new   
                 } else {
                     $this->db->trans_rollback(); ///new
