@@ -203,7 +203,7 @@ class Organizer_events_model extends Base_model
               }
               $rs->free_result();          
           }
-          $this->db->trans_commit();///new
+          
           unset($s_qry,$rs,$row,$i_cnt,$s_where);
           return $ret_;
 			

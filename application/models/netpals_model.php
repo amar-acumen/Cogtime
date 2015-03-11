@@ -95,7 +95,7 @@ class Netpals_model extends Base_model implements InfModel
     //echo nl2br($s_qry);
           //////////end For Pagination//////////                
                 
-          $this->db->trans_begin();///new                
+                        
           $rs=$this->db->query($s_qry); 
           $i_cnt=0;
 		  $this->load->model('users_model');
@@ -145,7 +145,7 @@ class Netpals_model extends Base_model implements InfModel
               }    
               $rs->free_result();          
           }
-          $this->db->trans_commit();///new
+          
           
                               
           
@@ -183,7 +183,7 @@ class Netpals_model extends Base_model implements InfModel
               }    
               $rs->free_result();          
           }
-          $this->db->trans_commit();///new
+          
           unset($s_qry,$rs,$row,$i_cnt,$s_where);
           return $ret_;
         }
@@ -243,7 +243,7 @@ class Netpals_model extends Base_model implements InfModel
 	//echo nl2br($s_qry);
           //////////end For Pagination//////////                
                 
-          $this->db->trans_begin();///new                
+              
           $rs=$this->db->query($s_qry); 
     //echo nl2br($this->db->last_query());
           $i_cnt=0;
@@ -300,7 +300,7 @@ class Netpals_model extends Base_model implements InfModel
               }    
               $rs->free_result();          
           }
-          $this->db->trans_commit();///new
+          
 		  
 		  					
 		  
@@ -365,7 +365,7 @@ class Netpals_model extends Base_model implements InfModel
     //echo nl2br($s_qry); 
           //////////end For Pagination//////////                
                 
-          $this->db->trans_begin();///new                
+                   
           $rs=$this->db->query($s_qry); 
     //pr($rs->result(),1);
           $i_cnt=0;
@@ -425,7 +425,7 @@ class Netpals_model extends Base_model implements InfModel
               }    
               $rs->free_result();          
           }
-          $this->db->trans_commit();///new
+         
           
                               
           
@@ -465,7 +465,7 @@ class Netpals_model extends Base_model implements InfModel
               }    
               $rs->free_result();          
           }
-          $this->db->trans_commit();///new
+          
           unset($s_qry,$rs,$row,$i_cnt,$s_where);
           return $ret_;
         }
@@ -502,7 +502,7 @@ class Netpals_model extends Base_model implements InfModel
               }    
               $rs->free_result();          
           }
-          $this->db->trans_commit();///new
+          
           unset($s_qry,$rs,$row,$i_cnt,$s_where);
           return $ret_;
         }
@@ -711,7 +711,7 @@ class Netpals_model extends Base_model implements InfModel
 						
           $s_qry= $s_qry.(trim($s_order_by)!=""?" ORDER BY ".$s_order_by."":"ORDER BY id asc")." ".(is_numeric($i_start) && is_numeric($i_limit)?" LIMIT ".intval($i_start).",".intval($i_limit):"");
 						
-		  $this->db->trans_begin();///new                
+		    
           $rs=$this->db->query($s_qry); 
           $i_cnt=0;
           if(is_array($rs->result()))
@@ -739,7 +739,7 @@ class Netpals_model extends Base_model implements InfModel
               }    
               $rs->free_result();          
           }
-          $this->db->trans_commit();///new
+          
 		  
           unset($s_qry,$rs,$row,$i_cnt,$s_where,$i_start,$i_limit);
           return $ret_;
@@ -764,7 +764,7 @@ class Netpals_model extends Base_model implements InfModel
               }    
               $rs->free_result();          
           }
-          $this->db->trans_commit();///new
+          
           unset($s_qry,$rs,$row,$i_cnt,$s_where);
           return $ret_;
 	}
@@ -781,12 +781,7 @@ class Netpals_model extends Base_model implements InfModel
 		  $language = get_current_language();
 		  $ret_=array();
 		  
-		  /*$sql    =   "SELECT * FROM(
-                        (SELECT a.frnd_id f_id FROM {$this->db->dbprefix}frnd a WHERE a.user_id ='{$userid}')
-                        UNION
-                        (SELECT b.user_id f_id FROM {$this->db->dbprefix}frnd b WHERE b.frnd_id ='{$userid}')
-                    ) tab INNER JOIN {$this->db->dbprefix}users ms ON ms.user_id=tab.f_id WHERE ms.status=1
-                        AND f_id<>{$userid}  ";*/
+		 
 		 	$s_qry = sprintf("( SELECT 1, 
 						  c.id, 
 						c.i_requester_id, 
@@ -825,7 +820,7 @@ class Netpals_model extends Base_model implements InfModel
 		  
 		   	 $s_qry .=" limit {$i_start}, {$i_limit}"; 
 		         
-          $this->db->trans_begin();///new                
+                   
           $rs=$this->db->query($s_qry);
           $i_cnt=0;
           if(is_array($rs->result()))
@@ -853,7 +848,7 @@ class Netpals_model extends Base_model implements InfModel
               }    
               $rs->free_result();          
           }
-          $this->db->trans_commit();///new
+         
 		  
 		  					
 		  
@@ -931,7 +926,7 @@ class Netpals_model extends Base_model implements InfModel
 	
 			
 			
-			  $this->db->trans_begin();///new                       
+			                 
 			  $rs=$this->db->query($s_qry);
             
                  
@@ -961,7 +956,7 @@ class Netpals_model extends Base_model implements InfModel
                 
 				  $rs->free_result();          
 			  }
-			  $this->db->trans_commit();///new
+			 
 			  unset($s_qry,$rs,$row,$i_me,$i_him);
 			  #pr($ret_);
 				
@@ -1016,7 +1011,7 @@ class Netpals_model extends Base_model implements InfModel
     
             
             
-              $this->db->trans_begin();///new                       
+                               
               $rs=$this->db->query($s_qry);
             
                  
@@ -1046,7 +1041,7 @@ class Netpals_model extends Base_model implements InfModel
                 
                   $rs->free_result();          
               }
-              $this->db->trans_commit();///new
+              
               unset($s_qry,$rs,$row,$i_me,$i_him);
               #pr($ret_);
                 
@@ -1258,7 +1253,7 @@ class Netpals_model extends Base_model implements InfModel
         
 	//echo nl2br($s_qry);
                 
-          $this->db->trans_begin();///new                
+            
           $rs=$this->db->query($s_qry); 
           $i_cnt=0;
           if(is_array($rs->result()))
@@ -1275,7 +1270,7 @@ class Netpals_model extends Base_model implements InfModel
               }    
               $rs->free_result();          
           }
-          $this->db->trans_commit();///new
+         
 		  
 		  #pr(array_unique($ret_));				
 		  
@@ -1377,7 +1372,7 @@ class Netpals_model extends Base_model implements InfModel
 	#echo nl2br($s_qry);
           //////////end For Pagination//////////                
                 
-          $this->db->trans_begin();///new                
+             
           $rs=$this->db->query($s_qry); 
           $i_cnt=0;
           if(is_array($rs->result()))
@@ -1396,7 +1391,7 @@ class Netpals_model extends Base_model implements InfModel
               }    
               $rs->free_result();          
           }
-          $this->db->trans_commit();///new
+          
 		
 		
 		  
