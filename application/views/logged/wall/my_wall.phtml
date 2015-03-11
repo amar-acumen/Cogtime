@@ -240,6 +240,7 @@
                 <p class="center-text" style="line-height:23px; color:#494949;">Do you really want to delete this post?</p>
             </div>
             <form method="post" enctype="multipart/form-data">
+			<input type="hidden" name="i_del_post_id" id="i_del_post_id" value="" />
                 <input type="hidden" name="i_del_partner_id" id="i_del_partner_id" value="" />
                 <input name="" type="button" value="Yes" class="popup-yes"  onClick="delete_post()"/>
                 <input name="" type="button" value="No" class="popup-no " onclick="hide_dialog()"/>
