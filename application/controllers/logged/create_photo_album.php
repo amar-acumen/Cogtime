@@ -127,27 +127,6 @@ class Create_photo_album extends Base_controller
 			}
 			$flag	= 0;
 			
-			/* new change to allow group level privacy when changed from general settings
-			
-			if(trim($this->input->post('privacy'))=='private')
-			{
-				foreach($_POST['ringid'] as $val)
-				{
-					if(count($_POST['ringuser_'.$val])==0)
-						$flag++;
-				}
-				foreach($_POST['pgid'] as $val)
-				{
-					if(count($_POST['pguser_'.$val])==0)
-						$flag++;
-				}
-				if(count($_POST['frnds'])==0 && count($_POST['netpal'])==0 && count($_POST['pp'])==0 )
-					$flag++;
-					
-				if($flag==0)
-					$arr_messages['privacy'] = "* Required Field.";
-			}*/
-			
 		   //pr($arr_messages);
 			if( count($arr_messages)==0 ) {
 					

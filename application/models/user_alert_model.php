@@ -162,10 +162,13 @@ class User_alert_model extends Base_model
 						where i_user_id = '".$id."'"  ;
 			$query2	= $this->db->query($sql2);
 			$result_arr = $query2->result_array();
-						
-			$sql3 = "DELETE FROM ".$this->db->photoalbum_privacy."  
+			if($result_arr[0]['albums'])
+			{
+				$sql3 = "DELETE FROM ".$this->db->photoalbum_privacy."  
 						where i_photo_album_id IN(".$result_arr[0]['albums'].")"  ;
-			$this->db->query($sql3);
+				$this->db->query($sql3);
+			}			
+			
 		}
 		if($section=='audio')
 		{
@@ -173,10 +176,14 @@ class User_alert_model extends Base_model
 						where i_user_id = '".$id."'"  ;
 			$query2	= $this->db->query($sql2);
 			$result_arr = $query2->result_array();
-						
-			$sql3 = "DELETE FROM ".$this->db->audioalbum_privacy."  
+
+			if($result_arr[0]['albums'])
+			{
+				$sql3 = "DELETE FROM ".$this->db->audioalbum_privacy."  
 						where i_audio_album_id IN(".$result_arr[0]['albums'].")"  ;
-			$this->db->query($sql3);
+				$this->db->query($sql3);
+			}			
+			
 		}
 		if($section=='video')
 		{
@@ -184,35 +191,32 @@ class User_alert_model extends Base_model
 						where i_user_id = '".$id."'"  ;
 			$query2	= $this->db->query($sql2);
 			$result_arr = $query2->result_array();
-						
-			$sql3 = "DELETE FROM ".$this->db->videolbum_privacy."  
+
+			if($result_arr[0]['albums'])
+			{
+				$sql3 = "DELETE FROM ".$this->db->videolbum_privacy."  
 						where i_video_album_id IN(".$result_arr[0]['albums'].")"  ;
-			$this->db->query($sql3);
+				$this->db->query($sql3);
+			}			
+			
 		}
 		
 		if($section=='event')
 		{
-			 $sql2 = "SELECT GROUP_CONCAT(id) AS albums  FROM ".$this->db->EVENTS."  
+			$sql2 = "SELECT GROUP_CONCAT(id) AS albums  FROM ".$this->db->EVENTS."  
 						where i_host_id = '".$id."'"  ;
 			$query2	= $this->db->query($sql2);
 			$result_arr = $query2->result_array();
-						
-			$sql3 = "DELETE FROM ".$this->db->event_privacy."  
+			
+			if($result_arr[0]['albums'])
+			{
+				$sql3 = "DELETE FROM ".$this->db->event_privacy."  
 						where i_event_id IN(".$result_arr[0]['albums'].")"  ;
-			$this->db->query($sql3);
+				$this->db->query($sql3);
+			}			
+			
 		}
-		
-		/*if($section=='wallCommentLike')
-		{
-			 $sql2 = "SELECT GROUP_CONCAT(id) AS posts  FROM ".$this->db->USER_NEWSFEEDS."  
-						where i_owner_id = '".$id."'"  ;
-			$query2	= $this->db->query($sql2);
-			$result_arr = $query2->result_array();
-						
-			$sql3 = "DELETE FROM ".$this->db->wallpost_privacy."  
-						where i_event_id IN(".$result_arr[0]['albums'].")"  ;
-			$this->db->query($sql3);
-		}*/
+
 		
 	}
 	
