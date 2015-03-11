@@ -201,7 +201,13 @@ class Members extends Admin_base_Controller {
 // ================================= change status ======================================
     public function change_status($status, $id) {
 
-        $info['i_status'] = $status;
+       
+              if($status == 1){
+                   $info['i_status'] = 2;
+              }else{
+                  $info['i_status'] = 1; 
+              }
+                   
 
         $_ret = $this->users_model->edit_info($info, $id);
 
