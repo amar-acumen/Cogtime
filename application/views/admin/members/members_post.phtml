@@ -536,6 +536,7 @@ showUILoader_nodialog('<img src="'+base_url+'images/loading_big.gif" width="50"/
                           data : ({'id':id}),
 			  success: function (data, status) {
 					   if(data.res == 'ok'){
+                                               alert('#photo_'+id);
 					 $('#photo_'+id).css('display','none');
                                            }
 					  hideUILoader_nodialog();
