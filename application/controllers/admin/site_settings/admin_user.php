@@ -413,7 +413,7 @@ class Admin_user extends Admin_base_Controller
 			
 			## fetchin users detail for mail
 			$user_info = $this->admins_user_model->get_admin_by_id($ID);
-			pr($user_info);
+			//pr($user_info);
 			 
 			$USERNAME = $user_info['s_name'];
 			 $EMAIL = $user_info['s_email'];
@@ -435,8 +435,8 @@ class Admin_user extends Admin_base_Controller
 			'name' => $admin_name,
 			'password' => $NEW_PASSWD);
                         
-			//echo $NEW_PASSWD.'/';
-                       echo $MAIL_ID =  $user_info[0]['s_email'];
+			
+                   $MAIL_ID =  $user_info[0]['s_email'];
                         
                         /********************GET ADMIN EMAIL***************************************************/
 			$query = $this->db->get_where('cg_admin_user', array('id' => 1));
@@ -485,7 +485,7 @@ $this->email->initialize($email_setting);
     </table></td>
   </tr>
 </table>'; 
-$this->email->from($admin_mail, 'From Cogtime ');
+$this->email->from('no-reply@cogtime.com', 'From Cogtime ');
 $this->email->to($MAIL_ID);
 //->email->bcc("$mailids");
 //$this->email->cc('arif.zisu@gmail.com');
@@ -513,56 +513,56 @@ $this->email->message("$body");
 				## sending mail to the user and super-admin .. key individual_password_reset_user
 				
 				 ##user ##
-					$this->load->helper('html');
-					$this->load->library('email');
-					 $email_setting  = array('mailtype'=>'html','charset'  => 'utf-8',
-                  'priority' => '1');
-				$this->email->initialize($email_setting);				 
-				  $this->load->model('mail_contents_model');
-				  $mail_info = $this->mail_contents_model->get_by_name("individual_password_reset_user");
-				  $body = htmlspecialchars_decode($mail_info['body'], ENT_QUOTES);
-  
-				  $body = sprintf3( $body, $replaceArr);
-  
-				  $arr['subject'] = htmlspecialchars_decode($mail_info['subject'], ENT_QUOTES);
-				  $arr['to'] = $MAIL_ID;
-				  $arr['from_email'] = 'no-reply@cogtime.com';
-				  $arr['from_name'] = 'Team Cogtime';
-				  $arr['message'] = $body;
-				 //dump($arr);
-				$this->email->from( $arr['from_email'], $arr['from_name']);
-                #dump($arr);
-				$this->email->subject($arr['subject']);
-						
-				$this->email->to($arr['to']);
-				$this->email->bcc($arr['bcc']);
-				$this->email->message("$body");
-                        //send_mail($arr);
-				$this->email->send();
-				  //send_mail($arr);
-				
-				 ## admin mail ##
-				 
-				  $mail_info = $this->mail_contents_model->get_by_name("individual_password_reset_admin");
-				  $body = htmlspecialchars_decode($mail_info['body'], ENT_QUOTES);
-  
-				  $body = sprintf3( $body, $replaceArr_admin);
-  
-				  $arr_admin['subject'] = htmlspecialchars_decode($mail_info['subject'], ENT_QUOTES);
-				  $arr_admin['to'] = $MAIL_ID;
-				  $arr_admin['from_email'] = 'no-reply@cogtime.com';
-				  $arr_admin['from_name'] = 'Team Cogtime';
-				  $arr_admin['message'] = $body;
-				 //dump($arr_admin); exit;
-				 $this->email->from( $arr_admin['from_email'], $arr_admin['from_name']);
-                #dump($arr);
-				$this->email->subject($arr_admin['subject']);
-						
-				$this->email->to($arr_admin['to']);
-				$this->email->bcc($arr_admin['bcc']);
-				$this->email->message("$body");
-                       
-				$this->email->send();
+//					$this->load->helper('html');
+//					$this->load->library('email');
+//					 $email_setting  = array('mailtype'=>'html','charset'  => 'utf-8',
+//                  'priority' => '1');
+//				$this->email->initialize($email_setting);				 
+//				  $this->load->model('mail_contents_model');
+//				  $mail_info = $this->mail_contents_model->get_by_name("individual_password_reset_user");
+//				  $body = htmlspecialchars_decode($mail_info['body'], ENT_QUOTES);
+//  
+//				  $body = sprintf3( $body, $replaceArr);
+//  
+//				  $arr['subject'] = htmlspecialchars_decode($mail_info['subject'], ENT_QUOTES);
+//				  $arr['to'] = $MAIL_ID;
+//				  $arr['from_email'] = 'no-reply@cogtime.com';
+//				  $arr['from_name'] = 'Team Cogtime';
+//				  $arr['message'] = $body;
+//				 //dump($arr);
+//				$this->email->from( $arr['from_email'], $arr['from_name']);
+//                #dump($arr);
+//				$this->email->subject($arr['subject']);
+//						
+//				$this->email->to($arr['to']);
+//				$this->email->bcc($arr['bcc']);
+//				$this->email->message("$body");
+//                        //send_mail($arr);
+//				$this->email->send();
+//				  //send_mail($arr);
+//				
+//				 ## admin mail ##
+//				 
+//				  $mail_info = $this->mail_contents_model->get_by_name("individual_password_reset_admin");
+//				  $body = htmlspecialchars_decode($mail_info['body'], ENT_QUOTES);
+//  
+//				  $body = sprintf3( $body, $replaceArr_admin);
+//  
+//				  $arr_admin['subject'] = htmlspecialchars_decode($mail_info['subject'], ENT_QUOTES);
+//				  $arr_admin['to'] = $MAIL_ID;
+//				  $arr_admin['from_email'] = 'no-reply@cogtime.com';
+//				  $arr_admin['from_name'] = 'Team Cogtime';
+//				  $arr_admin['message'] = $body;
+//				 //dump($arr_admin); exit;
+//				 $this->email->from( $arr_admin['from_email'], $arr_admin['from_name']);
+//                #dump($arr);
+//				$this->email->subject($arr_admin['subject']);
+//						
+//				$this->email->to($arr_admin['to']);
+//				$this->email->bcc($arr_admin['bcc']);
+//				$this->email->message("$body");
+//                       
+//				$this->email->send();
 				  //send_mail($arr_admin);
 				
 			}
