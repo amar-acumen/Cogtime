@@ -575,7 +575,7 @@ echo '<object width="' . $width . '" height="' . $height . '"><param name="movie
            $now_page = round(($current_page/$pagination_per_page)+1); 
            // echo "in admin_members_ajax.phtml : now_page = ".$now_page;
           //pr($info_arr);
-            if(count($info_arr)){
+           
                 
             ?>
      <tr>
@@ -592,7 +592,7 @@ echo '<object width="' . $width . '" height="' . $height . '"><param name="movie
       </tr>
                 
                 <?php
-                
+                 if(count($info_arr)){
                 foreach($info_arr as $info) {
                     $img = base_url().'uploads/user_photos/'.getThumbName($info['s_photo'],'thumb');
                     ?>
