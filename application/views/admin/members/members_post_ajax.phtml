@@ -595,7 +595,7 @@ echo '<object width="' . $width . '" height="' . $height . '"><param name="movie
                  if(count($info_arr)){
                 foreach($info_arr as $info) {
                     $img = base_url().'uploads/user_photos/'.getThumbName($info['s_photo'],'thumb');
-                    ?><tr>
+                    ?><tr id="photo_<?= $info['id'] ?>">
       <td align="center" valign="middle"><img src="<?= $img; ?>"></td>
       <td align="center" valign="middle"><?=$info['s_title'] ?></td>
       <td align="center" valign="middle"><?= $info['s_description'] ?></td>
@@ -635,7 +635,7 @@ echo '<object width="' . $width . '" height="' . $height . '"><param name="movie
                     // pr($info_arr);
                 foreach($info_arr as $info) {
                    // $img = base_url().'uploads/user_photos/'.getThumbName($info['s_photo'],'thumb');
-                    ?><tr>
+                    ?><tr id="video_<?= $info['id'] ?>">
                         <td align="center" valign="middle">
                             <?php
                             $this->load->library('embed_video');
@@ -720,7 +720,7 @@ $(function(){
 });
 //-->
 </script>
-      <tr>
+<tr id="audio_<?= $info['audioid'] ?>">
       <td align="center" valign="middle"><div id="myElement_<?=$info['audioid']?>" >Loading the player... </div></td>
       <td align="center" valign="middle"><?=$info['s_title'] ?></td>
       <td align="center" valign="middle"><?= $info['s_artist'] ?></td>

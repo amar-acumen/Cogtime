@@ -859,5 +859,20 @@ class Members_post extends Admin_base_Controller
          $id = $this->input->post('id');
        $query = $this->db->delete('cg_bible_prayer_commitments', array('id' => $id));
     }
+    function del_photo(){
+        $id = $this->input->post('id');
+        $this->db->delete('cg_user_photos', array('id' => $id)); 
+          echo json_encode(array('res'=>'ok'));
+    }
+    function del_vid(){
+        $id = $this->input->post('id');
+        $this->db->delete('cg_user_videos', array('id' => $id)); 
+          echo json_encode(array('res'=>'ok'));
+    }
+    function del_audio(){
+        $id = $this->input->post('id');
+        $this->db->delete('cg_user_audio', array('id' => $id)); 
+          echo json_encode(array('res'=>'ok'));
+    }
 
 }// end of controller
