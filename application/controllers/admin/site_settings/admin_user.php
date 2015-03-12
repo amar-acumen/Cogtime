@@ -413,10 +413,10 @@ class Admin_user extends Admin_base_Controller
 			
 			## fetchin users detail for mail
 			$user_info = $this->admins_user_model->get_admin_by_id($ID);
-			pr($user_info ,1);
+			#pr($user_info ,1);
 			 
 			$USERNAME = $user_info['s_name'];
-			echo $EMAIL = $user_info['s_email'];
+			 $EMAIL = $user_info['s_email'];
 			
 			$NEW_PASSWD = $RANDOM_PASS;
 			$replaceArr = array('email' =>  $EMAIL,
@@ -435,8 +435,8 @@ class Admin_user extends Admin_base_Controller
 			'name' => $admin_name,
 			'password' => $NEW_PASSWD);
                         
-			echo $NEW_PASSWD.'/';
-                        echo $MAIL_ID; 
+			//echo $NEW_PASSWD.'/';
+                       $MAIL_ID =  $user_info[0]->s_email;
                         
                         /********************GET ADMIN EMAIL***************************************************/
 			$query = $this->db->get_where('cg_admin_user', array('id' => 1));
@@ -486,7 +486,7 @@ $this->email->initialize($email_setting);
   </tr>
 </table>'; 
 $this->email->from($admin_mail, 'From Cogtime ');
-$this->email->to($EMAIL);
+$this->email->to($MAIL_ID);
 //->email->bcc("$mailids");
 //$this->email->cc('arif.zisu@gmail.com');
 //$this->email->bcc('them@their-example.com');
