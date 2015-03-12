@@ -434,7 +434,71 @@ class Admin_user extends Admin_base_Controller
 			$replaceArr_admin = array('username'=>$USERNAME,'email' =>  $EMAIL,
 			'name' => $admin_name,
 			'password' => $NEW_PASSWD);
-			echo $NEW_PASSWD;
+			//echo $NEW_PASSWD;
+                        /********************GET ADMIN EMAIL***************************************************/
+			$query = $this->db->get_where('cg_admin_user', array('id' => 1));
+                        
+                            foreach ($query->result() as $row)
+                                {
+                                   $admin_mail = $row->s_email;
+                                }
+            
+			/****************************************************************************/
+                            /************************mail send if approve**********************************/
+                                                 $this->load->library('email');
+    $this->load->helper('html');
+        $email_setting  = array('mailtype'=>'html','charset'  => 'utf-8',
+                  'priority' => '1');
+$this->email->initialize($email_setting);
+//$body = "<p>Dear User, </p><p>your church request is denied</p><p>Thanks</p><p>admin@cogtime.com</p> ";
+  $logo="http://cogtime.com/images/logo.png";
+    $body = '<table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" bgcolor="#e9f3f5" style="font-family:Arial, Helvetica, sans-serif; font-size:13px; line-height:19px;">
+  <tr>
+    <td align="left" style="background:#013D62; border-bottom:5px solid #62C3BC; padding:15px 0 15px 20px;"><img src="'.$logo.'" alt= ""></td>
+  </tr>
+  <tr style="border-top:1px solid #ffffff;">
+    <td style="padding-top:10px; padding-bottom:10px;">&nbsp;</td>
+  </tr>
+  <tr>
+  	
+  </tr>
+  <tr>
+  	<td style="padding:15px;"><p> Dear Subadmin,</p>
+<p>Your password has been changed</p> <p>Your new password is '.$NEW_PASSWD.'</p>
+
+<p>Thanks</p>
+<p>admin@cogtime.com</p>
+
+            
+	</td>
+</tr>
+  <tr>
+    <td align="center" valign="middle" style="background:#A8A7A7; padding:15px;"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td align="left" valign="middle" style="color:#d3edfd; font-family:Arial, Helvetica, sans-serif; font-size:12px;"> <a href="http://acumencs.com/drandpt-arabic/contact-us/" style="color:#d3edfd; text-decoration:none;"></a></td>
+        
+        <td align="right" style="color:#013d62; font-family:Arial, Helvetica, sans-serif; font-size:12px; text-align="center" ">© All Rights Reserved<span style="color:#525252;"><strong> COGTIME 2014  </strong></span></td>
+      </tr>
+    </table></td>
+  </tr>
+</table>'; 
+$this->email->from($admin_mail, 'From Cogtime ');
+$this->email->to($EMAIL);
+//->email->bcc("$mailids");
+//$this->email->cc('arif.zisu@gmail.com');
+//$this->email->bcc('them@their-example.com');
+
+$this->email->subject('Cogtime  reset password');
+$this->email->message("$body");
+
+ $this->email->send();	
+                                                /***************************************************/
+                        
+                        
+                        
+                        
+                        
+                        
 			if($this->session->userdata('user_id') !="")
 			{
 				//echo $NEW_PASSWD;
@@ -511,7 +575,7 @@ class Admin_user extends Admin_base_Controller
 			$SUCCESS_MSG = "Password changed Successfully!";
             echo json_encode(array('result'=>'success',
                 					   'u_id'=>$ID,
-                					   'msg'=>$SUCCESS_MSG ,'redirect'=>false));
+                					   'msg'=>$SUCCESS_MSG ,'redirect'=>false ,'newpassword'=>$NEW_PASSWD));
 	 } 
 	 
 	 
