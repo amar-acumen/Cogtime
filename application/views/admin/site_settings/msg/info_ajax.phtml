@@ -33,7 +33,7 @@
                                 $id=$info_arr[$i]['id'];
                                     ?>
                                             <input type="hidden"  value="<?= $id; ?>" class="accept_ch">
-                                            <td align="left" valign="top" id="sta<?= $id ?>">Accept &nbsp;<img src="<?= base_url() ?>images/icons/accept.png" class="accpt_img">&nbsp;&nbsp; Deny&nbsp;<img src="<?= base_url() ?>images/fe/cross-icon.gif" width="10" height="11" class="deny_img"><!--<input type="button" name="accept" value="deny">--></td>
+                                            <td align="left" valign="top" id="sta<?= $id ?>">Accept &nbsp;<img src="<?= base_url() ?>images/icons/accept.png" class="accpt_img">&nbsp;&nbsp; Deny&nbsp;<img src="<?= base_url() ?>images/fe/cross-icon.gif" width="10" height="11" alt="cross-icon" class="deny_img"><!--<input type="button" name="accept" value="deny">--></td>
                                 <?php
                                 }
                                 else if(array_key_exists("request_type",$info_arr[$i]) && $info_arr[$i]['request_type'] == 'church' && $info_arr[$i]['s_status'] == 1   ){

@@ -9,7 +9,7 @@ if(count($info_arr)!=0)
         $counter++;
 
 ?>             
-                <div class="pop-content <?php echo ($counter==1)?'first':''?>" id="del_commitmen<?= $info['id'] ?>"> <div class="ring_del"> <a href="javascript:void(0)" onclick="return del_commitment('<?= $info['id'] ?>','<?=$info['i_id_intercession_wall_post']?>')"><img src="<?=base_url() ?>images/fe/cross-icon.gif" width="10" height="11" ></a></div>       
+                <div class="pop-content <?php echo ($counter==1)?'first':''?>" id="del_commitmen<?= $info['id'] ?>"> <div class="ring_del"> <a href="javascript:void(0)" onclick="return del_commitment('<?= $info['id'] ?>','<?=$info['i_id_intercession_wall_post']?>')"><img src="<?=base_url() ?>images/fe/cross-icon.gif" alt="cross-icon" width="10" height="11" ></a></div>       
                        <img src="<?php echo get_profile_image_of_user('thumb',$info['s_profile_photo'],$info['e_gender'])?>" alt="posteb by" width="73" height="73" class="posted-by" />
                        <div class="right-panel">
                             <h5><?php echo $info['s_profile_name']?></h5>
