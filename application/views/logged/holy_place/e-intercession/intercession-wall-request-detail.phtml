@@ -74,7 +74,7 @@
                                 <label>Word of Encouragement:</label>
                                 <textarea onblur="if (this.value == '')
                                             this.value = 'Max 140 Characters';" onfocus="if (this.value == 'Max 140 Characters')
-                                                        this.value = '';" name="ta_commit_text" id="ta_commit_text_<?= $prayer_info['id'] ?>" class="big-textarea" onKeyDown="limitText(this.form.ta_commit_text, this.form.countdown, 140);" 
+                                                        this.value = '';" rows="" cols="" name="ta_commit_text" id="ta_commit_text_<?= $prayer_info['id'] ?>" class="big-textarea" onKeyDown="limitText(this.form.ta_commit_text, this.form.countdown, 140);" 
                                           onKeyUp="limitText(this.form.ta_commit_text, this.form.countdown, 140);" style="height: 36px;width:370px;" >Max 140 Characters</textarea>
                                 <span id="err_message<?= $prayer_info['id'] ?>" class="error-message"></span> 
                             </div>

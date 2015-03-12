@@ -310,8 +310,8 @@ onKeyUp="limitTextarea(this.form.wall_msg,this.form.countdown,500);" onkeypress=
                             </div>
                               <div class="txt_content01 comments-number-content content-width"> 
                               <textarea  id="feed_comment_box_<?=$feed['id']?>" cols="" rows="" style="width:461px; height:100px; margin-bottom:10px;"></textarea>
-                              <input type="hidden" name="i_newsfeed_id" value=""/><!-- id="i_newsfeed_id"!-->
-                              <input class="yellow-btn" type="button"  value="Post" name="" onclick="post_comment(<?=$feed['id']?>);" /><!--id="post_comment_button"-->
+                              <input type="hidden" name="i_newsfeed_id" value=""/><!-- id="i_newsfeed_id"
+                              <input class="yellow-btn" id="post_comment_button" type="button"  value="Post" name="" onclick="post_comment(<?=$feed['id']?>);" />
                               
                               <br class="clr" />
                               </div>
