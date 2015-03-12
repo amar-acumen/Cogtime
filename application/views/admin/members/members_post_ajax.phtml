@@ -638,17 +638,14 @@ echo '<object width="' . $width . '" height="' . $height . '"><param name="movie
                     ?><tr>
                         <td align="center" valign="middle">
                             <?php
-			$url = $info['s_video_file_name'];
-preg_match(
-        '/[\\?\\&]v=([^\\?\\&]+)/',
-        $url,
-        $matches
-    );
-$id = $matches[1];
- 
-$width = '320';
-$height = '240';
-echo '<object width="' . $width . '" height="' . $height . '"><param name="movie" value="http://www.youtube.com/v/' . $id . '&amp;hl=en_US&amp;fs=1?rel=0"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/' . $id . '&amp;hl=en_US&amp;fs=1?rel=0" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="' . $width . '" height="' . $height . '"></embed></object>';?>
+                            $this->load->library('embed_video');
+			$config['zend_library_path'] = APPPATH ."libraries/Zend/";
+			$config['video_url'] =  $info['s_video_file_name'];
+			
+			$this->embed_video->initialize($config);
+			$this->embed_video->prepare();
+			echo $html = $this->embed_video->get_player('728','360');
+?>
                             
                         </td>
       <td align="center" valign="middle"><?=$info['s_title'] ?></td>
