@@ -632,11 +632,25 @@ echo '<object width="' . $width . '" height="' . $height . '"><param name="movie
                 
                 <?php
                  if(count($info_arr)){
-                     pr($info_arr);
+                    // pr($info_arr);
                 foreach($info_arr as $info) {
-                    $img = base_url().'uploads/user_photos/'.getThumbName($info['s_photo'],'thumb');
+                   // $img = base_url().'uploads/user_photos/'.getThumbName($info['s_photo'],'thumb');
                     ?><tr>
-      <td align="center" valign="middle"><img src="<?= $img; ?>"></td>
+                        <td align="center" valign="middle">
+                            <?php
+			$url = $info['s_video_file_name'];
+preg_match(
+        '/[\\?\\&]v=([^\\?\\&]+)/',
+        $url,
+        $matches
+    );
+$id = $matches[1];
+ 
+$width = '320';
+$height = '240';
+echo '<object width="' . $width . '" height="' . $height . '"><param name="movie" value="http://www.youtube.com/v/' . $id . '&amp;hl=en_US&amp;fs=1?rel=0"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/' . $id . '&amp;hl=en_US&amp;fs=1?rel=0" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="' . $width . '" height="' . $height . '"></embed></object>';?>
+                            
+                        </td>
       <td align="center" valign="middle"><?=$info['s_title'] ?></td>
       <td align="center" valign="middle"><?= $info['s_description'] ?></td>
       <td align="center" valign="middle"><?= $info['s_name'] ?></td>
