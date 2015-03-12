@@ -317,7 +317,7 @@
 				  $IMG = base_url() . 'uploads/media_center_videos/' . getThumbName($val['s_video_thumb'], 'thumb');
 				  ?>
                   <div class="dev-main">
-                      <div class="pic-left"><img src="<?php echo $IMG?>" alt="Library" height="104px" width="104px"></div>
+                      <div class="pic-left"><img src="<?php echo $IMG?>" alt="Library" height="104" width="104"></div>
                       <div class="pic-right">
                           <h4><a href="<?= base_url().$val['id']."/".my_url($val['cat_name'])."/watch-detail/".my_url($val['s_title']).".html"?>" title="<?=$val['s_title']?>"><?php echo my_substr($val['s_title'],30);?></a></h4>
                           <p><?php echo my_substr(strip_tags(get_unformatted_string_edit($val['s_desc'])),80)?></p>
