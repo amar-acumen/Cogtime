@@ -21,7 +21,7 @@
 
 include_once(APPPATH . 'models/base_model.php');
 
-class Admins_user_model extends Base_model implements InfModel {
+class Admins_user_model extends Base_model  {
 
     private $tbl_name;
     private $user_status;
