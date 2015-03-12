@@ -20,7 +20,7 @@
 
 include_once(APPPATH.'models/base_model.php');
 
-class Education_model extends Base_model implements InfModel
+class Education_model extends Base_model
 {
 
     private $tbl_name;
