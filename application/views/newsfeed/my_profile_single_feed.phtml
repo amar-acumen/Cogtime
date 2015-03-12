@@ -123,7 +123,7 @@ if( $feed['s_type'] == 'wall_post' ){
                     <div class="comments-number-mid content-width">
                         <div class="heading">
                               <div class="left">
-                                    <h4><img class="cmnt" src="images/icons/cmnt2.png"  height="20px" width="20px" alt="" /> <span class="comments_div<?=$feed['id']?>">Comments (<?=$feed['total_comments']?>)</span> </h4>
+                                    <h4><img class="cmnt" src="images/icons/cmnt2.png"  height="20" width="20" alt="cmnt2" /> <span class="comments_div<?=$feed['id']?>">Comments (<?=$feed['total_comments']?>)</span> </h4>
                                     <img class="wal-minus" alt="" src="images/minus-white.png" width="13" height="10" />
                               </div>
                             </div>
@@ -136,7 +136,7 @@ if( $feed['s_type'] == 'wall_post' ){
                     <div class="comments-number-mid">
                         <div class="heading">
                               <div class="left">
-                                    <h4><img alt="" src="images/heart2.png" height="19px" width="20px" class="cmnt" /> <span class="liked_by_<?=$feed['id']?>">Liked by (<?=count_like_link($feed['id'])?>) </span></h4>
+                                    <h4><img alt="" src="images/heart2.png" height="19" width="20" class="cmnt" alt="heart2" /> <span class="liked_by_<?=$feed['id']?>">Liked by (<?=count_like_link($feed['id'])?>) </span></h4>
                                      <img class="wal-minus" alt="" src="images/minus-white.png" width="13" height="10"/>
                               </div>
                         </div>
@@ -257,10 +257,10 @@ onKeyUp="limitTextarea(this.form.wall_msg,this.form.countdown,500);" onkeypress=
 				<a href="javascript:void(0);" onclick="$(this).parent('div').hide();" style="float:right;padding-right:22px;color:#013d62">Hide[-]</a>
                     <label  class="upload-img">Video Url :</label><div class="video-url"><input name="txt_video_url" id="txt_video_url" type="text" value="<?=$data_arr->video->url?>"/></div>
 					<ul class="video-logo" >
-					<li><img src="<?=base_url()?>images/YouTube.png" title="YouTube" height="18px" width="44px" alt="YouTube"></li>
-					<li><img src="<?=base_url()?>images/Vimeo.png" title="Vimeo" height="17px" width="19px" alt="Vimeo"></li>
-					<li><img src="<?=base_url()?>images/DailyMotion.png"title="DailyMotion" height="18px" width="18px" alt="DailyMotion"></li>
-					<li><img src="<?=base_url()?>images/Viadeo.png" height="17px" width="74px" title="Viadeo" alt="Viadeo"></li>
+					<li><img src="<?=base_url()?>images/YouTube.png" title="YouTube" height="18" width="44" alt="YouTube"></li>
+					<li><img src="<?=base_url()?>images/Vimeo.png" title="Vimeo" height="17" width="19" alt="Vimeo"></li>
+					<li><img src="<?=base_url()?>images/DailyMotion.png"title="DailyMotion" height="18" width="18" alt="DailyMotion"></li>
+					<li><img src="<?=base_url()?>images/Viadeo.png" height="17" width="74" title="Viadeo" alt="Viadeo"></li>
 					</ul>
                     <br class="clr"/>
                     <div id="all_videos">
@@ -310,7 +310,7 @@ onKeyUp="limitTextarea(this.form.wall_msg,this.form.countdown,500);" onkeypress=
                                   </div>
                             </div>
                               <div class="txt_content01 comments-number-content content-width"> 
-                              <textarea  id="feed_comment_box_<?=$feed['id']?>" cols="" rows="" style="width:461px; height:100px; margin-bottom:10px;"></textarea>
+                              <textarea  id="feed_comment_box_<?=$feed['id']?>" style="width:461px; height:100px; margin-bottom:10px;"></textarea>
                               <input type="hidden" name="i_newsfeed_id" value=""/><!-- id="i_newsfeed_id"-->
                               <input class="yellow-btn" id="post_comment_button" type="button"  value="Post" name="" onclick="post_comment(<?=$feed['id']?>);" />
                               <br class="clr" />
@@ -685,7 +685,7 @@ function validateFrmedit(jsondata)
                <div style="padding-bottom:10px;">
                <p class="center-text" style="line-height:23px; color:#494949;">Do you really want to delete NetPal?</p>
                </div>
-               <form action="" method="post" enctype="multipart/form-data" >
+               <form method="post" enctype="multipart/form-data" >
 				  <input type="hidden" name="i_image_name" id="i_image_name_<?=$feed['id']?>" value="" />
                  <input name="" type="button" value="Yes" class="popup-yes" onClick="delete_post_pic()"/>
                     <input name="" type="button" value="No" class="popup-no" onclick="hide_dialog()"/>

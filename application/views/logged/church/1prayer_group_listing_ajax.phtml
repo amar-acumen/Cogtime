@@ -15,7 +15,7 @@
 
       <tr>
 
-      <td><?php if($church_admin){?><img alt="" src="images/crown.png" style="margin-right:5px;"><?php }else {?><img alt="" src="images/man-24-16.png"><?}?><a href="<?=base_url()?>church-prayer-group/<?=$church->id?>"><?=$church->s_group_name?></a><span class="count-02"><?=$church->members?></span><?php if($church_admin){ ?><a onclick="show_dialog('delete-group'); $('#i_del_id').val('<?=$church->id?>');" title="Delete Group" href="javascript:void(0)"><img alt="" src="images/fe/cross-icon.gif" width="10" height="11"></a><?php }else { ?><a onclick="show_dialog('Leave-group'); $('#i_lev_id').val('<?=$church->i_prayer_group_id?>');" style="float:right" title="Leave Group" href="javascript:void(0)">Leave group</a><?php } ?>
+      <td><?php if($church_admin){?><img alt="" src="images/crown.png" style="margin-right:5px;"><?php }else {?><img alt="" src="images/man-24-16.png"><?}?><a href="<?=base_url()?>church-prayer-group/<?=$church->id?>"><?=$church->s_group_name?></a><span class="count-02"><?=$church->members?></span><?php if($church_admin){ ?><a onclick="show_dialog('delete-group'); $('#i_del_id').val('<?=$church->id?>');" title="Delete Group" href="javascript:void(0)"><img alt="" src="images/fe/cross-icon.gif" width="10" height="11" alt="cross-icon" alt="cross-icon"></a><?php }else { ?><a onclick="show_dialog('Leave-group'); $('#i_lev_id').val('<?=$church->i_prayer_group_id?>');" style="float:right" title="Leave Group" href="javascript:void(0)">Leave group</a><?php } ?>
 
 	  <p>Denomination- <?= getDenominationNameById($church->i_denomination_id) ?> | <?php if($church_admin){?>Created on- <?php echo getShortDate($church->dt_created_on,5);}else {?>Joined on- <?php echo getShortDate($church->dt_joined_on,5);}?>   </p>
 
