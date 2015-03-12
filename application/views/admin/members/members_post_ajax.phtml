@@ -572,9 +572,43 @@ echo '<object width="' . $width . '" height="' . $height . '"><param name="movie
 	
 	<?php
         }}else if($type == 'photo'){
-            pr($info_arr);
+           $now_page = round(($current_page/$pagination_per_page)+1); 
+           // echo "in admin_members_ajax.phtml : now_page = ".$now_page;
+          //pr($info_arr);
+            if(count($info_arr)){
+                
+            ?>
+     <tr>
+          <th align="left" valign="middle" height="30" width="600">Post</th>
+          <th align="left" valign="middle" height="30" width="600">Title</th>
+          <th align="left" valign="middle" height="30" width="600">Description</th>
+        <th align="left" valign="middle" height="30" width="600">Album Name</th>
+       
+        
+      
+        <th align="left" valign="middle" height="30" width="150">Date posted on</th>
+        
+        <th align="center" valign="middle" height="30" width="80" class="last">Actions</th>
+      </tr>
+                
+                <?php
+                
+                foreach($info_arr as $info) {
+                    $img = base_url().'uploads/user_photos/'.getThumbName($info['s_photo'],'thumb');
+                    ?>
+      <td align="center" valign="middle"><img src="<?= $img; ?>"></td>
+      <td align="center" valign="middle"><?=$info['s_title'] ?></td>
+      <td align="center" valign="middle"><?= $info['s_description'] ?></td>
+      <td align="center" valign="middle"><?= $info['s_name'] ?></td>
+      <td align="center" valign="middle"><?= $info['dt_created_on'] ?></td>
+      <td align="center" valign="middle">
+          <input name="" title="Delete" type="button" style="" class="delete-button"  value="" onclick="return del_photo('<?= $info['albumid'] ?>');"/>
+      </td>
+                    <?php
+                }
+            }
         }
-        echo $type;
+        //echo $type;
         ?>
     </table>
 
