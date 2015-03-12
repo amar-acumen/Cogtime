@@ -27,7 +27,6 @@ class Advertisement_request extends Base_controller {
             parent::check_login(TRUE, '', array('1')); // put this code on those pages which are not accessable by guest user
             # loading reqired model & helpers...
 
-            $this->load->model('users_model');
             $this->load->model('help_center_model');
             // $this->load->model('landing_page_cms_model');
             $this->upload_path = BASEPATH.'../uploads/advertisements/';
