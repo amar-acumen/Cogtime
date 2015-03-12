@@ -71,10 +71,13 @@
 												$wrd = 'Goodness';
 												$CSS = 'slider-section-box6';
 											}
+											
+											$altname = explode('.',$bg_img);
+											//pr($altname,1);
 							?>
                             
                             	<li>
-								<img src="images/<?=$bg_img?>" alt="" />
+								<img src="images/<?=$bg_img?>" alt="<?php echo $altname[0]; ?>" />
 								<div class="<?=$CSS?>">
 									<span class="five-item"><?=$wrd?></span>
 									<div class="clr"></div>
