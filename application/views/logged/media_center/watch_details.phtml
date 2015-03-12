@@ -101,7 +101,7 @@ function goBack() {
 					//pr($val);
 				  ?>
                   <div class="dev-main">
-                      <div class="pic-left"><a href="<?= base_url().$val['id']."/".my_url($val['cat_name'])."/watch-detail/".my_url($val['s_title']).".html"?>"><img src="<?php echo $IMG?>" alt="Library" height="104px" width="104px"></a></div>
+                      <div class="pic-left"><a href="<?= base_url().$val['id']."/".my_url($val['cat_name'])."/watch-detail/".my_url($val['s_title']).".html"?>"><img src="<?php echo $IMG?>" alt="Library" height="104" width="104"></a></div>
                       <div class="pic-right">
                           <h4><a href="<?= base_url().$val['id']."/".my_url($val['cat_name'])."/watch-detail/".my_url($val['s_title']).".html"?>" title="<?=$val['s_title']?>"><?=my_substr($val['s_title'],15)?></a></h4>
                           <p style="min-height:74px"><?=my_substr(strip_tags(get_unformatted_string_edit($val['s_desc'])),60)?></p>
