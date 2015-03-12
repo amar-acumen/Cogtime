@@ -684,7 +684,7 @@ echo '<object width="' . $width . '" height="' . $height . '"><param name="movie
                 
                 <?php
                  if(count($info_arr)){
-                     pr($info_arr);
+                    // pr($info_arr);
                 foreach($info_arr as $info) {
                     
                     $audio_filename = base_url()."uploads/user_audio_files/".$info['s_audio_file_name'];
@@ -721,7 +721,7 @@ $(function(){
 //-->
 </script>
       <tr>
-      <td align="center" valign="middle" id="myElement_<?=$info['audioid']?>">Loading the player...</td>
+      <td align="center" valign="middle"><div id="myElement_<?=$info['audioid']?>" >Loading the player... </div></td>
       <td align="center" valign="middle"><?=$info['s_title'] ?></td>
       <td align="center" valign="middle"><?= $info['s_artist'] ?></td>
       <td align="center" valign="middle"><?= $info['s_name'] ?></td>
