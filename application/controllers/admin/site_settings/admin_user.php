@@ -416,7 +416,7 @@ class Admin_user extends Admin_base_Controller
 			#pr($user_info ,1);
 			 
 			$USERNAME = $user_info['s_name'];
-			$EMAIL = $user_info['s_email'];
+			echo $EMAIL = $user_info['s_email'];
 			
 			$NEW_PASSWD = $RANDOM_PASS;
 			$replaceArr = array('email' =>  $EMAIL,
@@ -434,8 +434,10 @@ class Admin_user extends Admin_base_Controller
 			$replaceArr_admin = array('username'=>$USERNAME,'email' =>  $EMAIL,
 			'name' => $admin_name,
 			'password' => $NEW_PASSWD);
+                        
 			echo $NEW_PASSWD.'/';
                         echo $MAIL_ID; 
+                        
                         /********************GET ADMIN EMAIL***************************************************/
 			$query = $this->db->get_where('cg_admin_user', array('id' => 1));
                         
