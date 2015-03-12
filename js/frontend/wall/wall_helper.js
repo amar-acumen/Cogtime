@@ -83,7 +83,6 @@ function windowLike(window_id,like_val)
 	 
 function delete_(id)
 {
-  
   $('#i_del_post_id').val(id);
   show_dialog('delete-post');
 }

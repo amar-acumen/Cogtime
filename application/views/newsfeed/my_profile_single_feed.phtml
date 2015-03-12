@@ -98,7 +98,7 @@ if( $feed['s_type'] == 'wall_post' ){
                 <?php } ?>
                 
           </div>
-          <input type="hidden" name="i_del_post_id" id="i_del_post_id" value="" />
+			<!--<input type="hidden" name="i_del_post_id" id="i_del_post_id" value="" />-->
           <div class="clr"></div>
           <div class="light_heading">
                 <div class="left"><a href="javascript:void(0);" class="comments_div<?=$feed['id']?>"  onclick="return show_comments(<?=$feed['id']?>)<?php /*?>show_dialog('view_comments_div')<?php */?>">Comments (<?php if($feed['total_comments']!=""){echo $feed['total_comments'];}else{ echo '0';}?>)</a> &nbsp; |   &nbsp; <a href="javascript:void(0);"   onclick="return show_people_liked(<?=$feed['id']?>); " class="liked_by_<?=$feed['id']?>">Liked by (<?=count_like_link($feed['id'])?>)</a></div>
