@@ -413,7 +413,7 @@ class Admin_user extends Admin_base_Controller
 			
 			## fetchin users detail for mail
 			$user_info = $this->admins_user_model->get_admin_by_id($ID);
-			#pr($user_info ,1);
+			pr($user_info ,1);
 			 
 			$USERNAME = $user_info['s_name'];
 			echo $EMAIL = $user_info['s_email'];
