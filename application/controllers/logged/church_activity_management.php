@@ -33,12 +33,8 @@ class Church_activity_management extends Base_controller
 		  ));
             parent::check_login(TRUE, '', array('1')); // put this code on those pages which are not accessable by guest user
             # loading reqired model & helpers... 
-//			$user_id = intval(decrypt($this->session->userdata('user_id')));
-//                        parent::check_is_church_admin($user_id);
-            $this->load->model('users_model');
-			$this->load->model('user_notifications_model');
-            $this->load->model('user_alert_model');
-			$this->load->model('landing_page_cms_model');
+
+
             $this->load->model('church_new_model');
 			$this->load->helper('my_utility_helper');
 			$this->i_profile_id = intval(decrypt($this->session->userdata('user_id')));
