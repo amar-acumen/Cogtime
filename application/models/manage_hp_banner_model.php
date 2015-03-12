@@ -13,7 +13,7 @@
 * @link views/admin/site_settings/manage_hp_banner.phtm
 */
 require_once(APPPATH.'models/base_model.php');
-class Manage_hp_banner_model extends Base_model implements InfModel
+class Manage_hp_banner_model extends Base_model
 {
 	private $tbl;///used for this class
 
