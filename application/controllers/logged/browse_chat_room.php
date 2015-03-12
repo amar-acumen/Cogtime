@@ -23,11 +23,9 @@ class Browse_chat_room extends Base_controller
             parent::__construct();
             parent::check_login(TRUE, '', array('1'));
             # loading reqired model & helpers...
-            $this->load->model('users_model');
+           
 			$this->load->model('chat_rooms_model');
-			$this->load->model('netpals_model');
 			$this->load->model('contacts_model');
-			$this->load->model('netpals_model');
 			$this->load->helper('my_utility_helper');
 
 			
