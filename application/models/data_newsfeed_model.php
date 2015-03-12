@@ -464,7 +464,7 @@ return $result_arr;
 
 }
 function get_photo_post_by_id($i_user_id,$s_where,$i_start_limit='', $i_no_of_page=''){
-    $i_start_limit = ($i_start_limit != 0 || $i_start_limit < 0 ) ? $i_start_limit : 0;
+   echo $i_start_limit = ($i_start_limit != 0 || $i_start_limit < 0 ) ? $i_start_limit : 0;
     
     
     
