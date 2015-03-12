@@ -17,7 +17,7 @@
 * @link views/
 */
 require_once(APPPATH.'models/base_model.php');
-class Netpals_model extends Base_model implements InfModel
+class Netpals_model extends Base_model 
 {
 
         # constructor definition...
