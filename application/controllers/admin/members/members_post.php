@@ -441,9 +441,7 @@ class Members_post extends Admin_base_Controller
                         
                         if($type == 'photo')
 			{
-			//$s_where ='';
-			//$s_where ='where 1 ';
-			//echo $WHERE_COND;
+			
 			$this->session->set_userdata('search_condition',$WHERE_COND);
 			$s_where = $this->session->userdata('search_condition');
             $result = $this->data_newsfeed_model->get_photo_post_by_id($i_user_id,$s_where,$page,$this->pagination_per_page);
@@ -454,7 +452,7 @@ class Members_post extends Admin_base_Controller
 			$data['type']='photo';
             //echo $total_rows;
            if( ( !is_array($result) || !count($result) ) && $total_rows ) {
-                $page = $page - $this->pagination_per_page;
+                $page = ($page - $this->pagination_per_page);
                 
                 $result = $this->data_newsfeed_model->get_photo_post_by_id($i_user_id,$s_where,$page, $this->pagination_per_page);
             }
