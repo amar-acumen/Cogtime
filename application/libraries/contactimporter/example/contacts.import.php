@@ -1,4 +1,4 @@
-	<form id="import_form" action="" class="center" method="post">
+	<form id="import_form" class="center" method="post">
 	<?php if (!$this->current_class->ExternalAuth) {?>
             
             <div class="lable02">Email:</div>

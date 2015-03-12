@@ -1,4 +1,4 @@
-	<form action="" id="invite_form" class="center" method="post">
+	<form id="invite_form" class="center" method="post">
     <div class="email-list-heading">
     <ul >
     	<li>
