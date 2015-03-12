@@ -451,7 +451,7 @@ class Members_post extends Admin_base_Controller
            $resultCount = count($result);
 			//echo $resultCount;
             $total_rows = $this->data_newsfeed_model->get_total_photo_post_by_id($i_user_id,$s_where);
-			$data['type']='wall';
+			$data['type']='photo';
             //echo $total_rows;
            if( ( !is_array($result) || !count($result) ) && $total_rows ) {
                 $page = $page - $this->pagination_per_page;
