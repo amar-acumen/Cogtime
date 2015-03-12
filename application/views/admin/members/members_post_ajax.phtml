@@ -595,7 +595,7 @@ echo '<object width="' . $width . '" height="' . $height . '"><param name="movie
                  if(count($info_arr)){
                 foreach($info_arr as $info) {
                     $img = base_url().'uploads/user_photos/'.getThumbName($info['s_photo'],'thumb');
-                    ?>
+                    ?><tr>
       <td align="center" valign="middle"><img src="<?= $img; ?>"></td>
       <td align="center" valign="middle"><?=$info['s_title'] ?></td>
       <td align="center" valign="middle"><?= $info['s_description'] ?></td>
@@ -604,7 +604,7 @@ echo '<object width="' . $width . '" height="' . $height . '"><param name="movie
       <td align="center" valign="middle">
           <input name="" title="Delete" type="button" style="" class="delete-button"  value="" onclick="return del_photo('<?= $info['albumid'] ?>');"/>
       </td>
-                    <?php
+                    </tr> <?php
                 }
             }
         }
