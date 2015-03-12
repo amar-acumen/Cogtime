@@ -62,7 +62,7 @@ class Members_post extends Admin_base_Controller
             parent::_add_js_arr( array( 'js/lightbox.js',
                                         'js/ModalDialog.js',
                                          'js/jquery.dd.js',
-					'js/frontend/logged/my_audio/my_audio.js','js/frontend/logged/my_audio/audio_helper.js'					// ,'js/backend/members/delete_user.js'
+					'js/frontend/logged/my_audio/my_audio.js','js/frontend/logged/my_audio/audio_helper.js','js/jwplayer/jwplayer.js'					// ,'js/backend/members/delete_user.js'
                                          ) );
                                         
             parent::_add_css_arr( array() );
