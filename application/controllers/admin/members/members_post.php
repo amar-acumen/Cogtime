@@ -295,18 +295,35 @@ class Members_post extends Admin_base_Controller
                                 if($type == 'photo'){
 				if($this->input->post('date_to1') != ''){
 					 $dt_start_date = get_db_dateformat($this->input->post('date_to1'));
-					 $WHERE_COND .= ($dt_start_date=='')?'':" AND (DATE(dt_created_on) >='".$dt_start_date."' )";
+					 $WHERE_COND .= ($dt_start_date=='')?'':" AND (DATE(p.dt_created_on) >='".$dt_start_date."' )";
 				}
 				
 				if($this->input->post('date_end1') != ''){
 					 $dt_end_date = get_db_dateformat($this->input->post('date_end1'));
-					$WHERE_COND .= ($dt_end_date=='')?'':" AND (DATE(dt_created_on) <='".$dt_end_date."' )";
+					$WHERE_COND .= ($dt_end_date=='')?'':" AND (DATE(p.dt_created_on) <='".$dt_end_date."' )";
 				}
                                  if($this->input->post('title') != '' ){ 
                                    // die('dd');
                                     $s_title  = trim($this->input->post('title'));
                                      $s_title = htmlspecialchars($s_contents);
-                                    $WHERE_COND .= ($s_title=='')?'':" AND  (s_title LIKE '%$s_title%' OR s_description '%$s_title%')";
+                                    $WHERE_COND .= ($s_title=='')?'':" AND  (p.s_title LIKE '%$s_title%' OR p.s_description '%$s_title%')";
+                                }
+				}
+                                if($type == 'videos'){
+				if($this->input->post('date_to1') != ''){
+					 $dt_start_date = get_db_dateformat($this->input->post('date_to1'));
+					 $WHERE_COND .= ($dt_start_date=='')?'':" AND (DATE(v.dt_created_on) >='".$dt_start_date."' )";
+				}
+				
+				if($this->input->post('date_end1') != ''){
+					 $dt_end_date = get_db_dateformat($this->input->post('date_end1'));
+					$WHERE_COND .= ($dt_end_date=='')?'':" AND (DATE(v.dt_created_on) <='".$dt_end_date."' )";
+				}
+                                 if($this->input->post('title') != '' ){ 
+                                   // die('dd');
+                                    $s_title  = trim($this->input->post('title'));
+                                     $s_title = htmlspecialchars($s_contents);
+                                    $WHERE_COND .= ($s_title=='')?'':" AND  (v.s_title LIKE '%$s_title%' OR v.s_description '%$s_title%')";
                                 }
 				}
 			
@@ -450,6 +467,24 @@ class Members_post extends Admin_base_Controller
 			//echo $resultCount;
             $total_rows = $this->data_newsfeed_model->get_total_photo_post_by_id($i_user_id,$s_where);
 			$data['type']='photo';
+            //echo $total_rows;
+//           if( ( !is_array($result) || !count($result) ) && $total_rows ) {
+//                $page = ($page - $this->pagination_per_page);
+//                
+//                $result = $this->data_newsfeed_model->get_photo_post_by_id($i_user_id,$s_where,$page, $this->pagination_per_page);
+//            }
+			}
+                        if($type == 'videos')
+			{
+			
+			$this->session->set_userdata('search_condition',$WHERE_COND);
+			$s_where = $this->session->userdata('search_condition');
+            $result = $this->data_newsfeed_model->get_video_post_by_id($i_user_id,$s_where,$page,$this->pagination_per_page);
+			
+           $resultCount = count($result);
+			//echo $resultCount;
+            $total_rows = $this->data_newsfeed_model->get_total_video_post_by_id($i_user_id,$s_where);
+			$data['type']='videos';
             //echo $total_rows;
 //           if( ( !is_array($result) || !count($result) ) && $total_rows ) {
 //                $page = ($page - $this->pagination_per_page);
