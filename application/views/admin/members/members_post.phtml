@@ -523,4 +523,55 @@ showUILoader_nodialog('<img src="'+base_url+'images/loading_big.gif" width="50"/
 				  }	// end of success function...
 		  });
 }
+
+
+
+
+function del_photo(id)
+{
+showUILoader_nodialog('<img src="'+base_url+'images/loading_big.gif" width="50"/> ');
+	  $.ajax({
+			  type: 'post',
+			  url: admin_base_url+'members/members_post/del_photo',
+                          data : ({'id':id}),
+			  success: function (data, status) {
+					   
+					 $('#photo_'+id).css('display','none');
+                                          
+					  hideUILoader_nodialog();
+						  
+				  }	// end of success function...
+		  });
+}
+function del_vid(id){
+    showUILoader_nodialog('<img src="'+base_url+'images/loading_big.gif" width="50"/> ');
+	  $.ajax({
+			  type: 'post',
+			  url: admin_base_url+'members/members_post/del_vid',
+                          data : ({'id':id}),
+			  success: function (data, status) {
+					 
+					 $('#video_'+id).css('display','none');
+                                           
+					  hideUILoader_nodialog();
+						  
+				  }	// end of success function...
+		  });
+}
+function del_audio(id){
+     showUILoader_nodialog('<img src="'+base_url+'images/loading_big.gif" width="50"/> ');
+	  $.ajax({
+			  type: 'post',
+			  url: admin_base_url+'members/members_post/del_audio',
+                          data : ({'id':id}),
+			  success: function (data, status) {
+					  
+					 $('#audio_'+id).css('display','none');
+                                          
+					  hideUILoader_nodialog();
+						  
+				  }	// end of success function...
+		  });
+}
+
 </script>

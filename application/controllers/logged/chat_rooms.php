@@ -23,7 +23,7 @@ class Chat_rooms extends Base_controller
             parent::__construct();
                parent::check_login(TRUE, '', array('1')); // put this code on those pages which are not accessable by guest user
             # loading reqired model & helpers...
-            $this->load->model('users_model');
+           
         }
         catch(Exception $err_obj)
         {

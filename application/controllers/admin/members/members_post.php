@@ -61,8 +61,8 @@ class Members_post extends Admin_base_Controller
             parent::_set_meta_keywords("::: COGTIME Xtian network :::");
             parent::_add_js_arr( array( 'js/lightbox.js',
                                         'js/ModalDialog.js',
-                                         'js/jquery.dd.js'
-										// ,'js/backend/members/delete_user.js'
+                                         'js/jquery.dd.js',
+					'js/frontend/logged/my_audio/my_audio.js','js/frontend/logged/my_audio/audio_helper.js','js/jwplayer/jwplayer.js'					// ,'js/backend/members/delete_user.js'
                                          ) );
                                         
             parent::_add_css_arr( array() );
@@ -858,6 +858,21 @@ class Members_post extends Admin_base_Controller
      function del_commitment(){
          $id = $this->input->post('id');
        $query = $this->db->delete('cg_bible_prayer_commitments', array('id' => $id));
+    }
+    function del_photo(){
+        $id = $this->input->post('id');
+        $this->db->delete('cg_user_photos', array('id' => $id)); 
+          echo json_encode(array('res'=>'ok'));
+    }
+    function del_vid(){
+        $id = $this->input->post('id');
+        $this->db->delete('cg_user_videos', array('id' => $id)); 
+          echo json_encode(array('res'=>'ok'));
+    }
+    function del_audio(){
+        $id = $this->input->post('id');
+        $this->db->delete('cg_user_audio', array('id' => $id)); 
+          echo json_encode(array('res'=>'ok'));
     }
 
 }// end of controller

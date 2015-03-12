@@ -595,14 +595,14 @@ echo '<object width="' . $width . '" height="' . $height . '"><param name="movie
                  if(count($info_arr)){
                 foreach($info_arr as $info) {
                     $img = base_url().'uploads/user_photos/'.getThumbName($info['s_photo'],'thumb');
-                    ?><tr>
+                    ?><tr id="photo_<?= $info['id'] ?>">
       <td align="center" valign="middle"><img src="<?= $img; ?>"></td>
       <td align="center" valign="middle"><?=$info['s_title'] ?></td>
       <td align="center" valign="middle"><?= $info['s_description'] ?></td>
       <td align="center" valign="middle"><?= $info['s_name'] ?></td>
       <td align="center" valign="middle"><?= $info['dt_created_on'] ?></td>
       <td align="center" valign="middle">
-          <input name="" title="Delete" type="button" style="" class="delete-button"  value="" onclick="return del_photo('<?= $info['albumid'] ?>');"/>
+          <input name="" title="Delete" type="button" style="" class="delete-button"  value="" onclick="return del_photo('<?= $info['id'] ?>');"/>
       </td>
                     </tr> <?php
                 }
@@ -635,7 +635,7 @@ echo '<object width="' . $width . '" height="' . $height . '"><param name="movie
                     // pr($info_arr);
                 foreach($info_arr as $info) {
                    // $img = base_url().'uploads/user_photos/'.getThumbName($info['s_photo'],'thumb');
-                    ?><tr>
+                    ?><tr id="video_<?= $info['id'] ?>">
                         <td align="center" valign="middle">
                             <?php
                             $this->load->library('embed_video');
@@ -654,7 +654,7 @@ echo '<object width="' . $width . '" height="' . $height . '"><param name="movie
       <td align="center" valign="middle"><?= $info['s_name'] ?></td>
       <td align="center" valign="middle"><?= $info['dt_created_on'] ?></td>
       <td align="center" valign="middle">
-          <input name="" title="Delete" type="button" style="" class="delete-button"  value="" onclick="return del_photo('<?= $info['albumid'] ?>');"/>
+          <input name="" title="Delete" type="button" style="" class="delete-button"  value="" onclick="return del_vid('<?= $info['id'] ?>');"/>
       </td>
                     </tr> <?php
                 }
@@ -684,17 +684,50 @@ echo '<object width="' . $width . '" height="' . $height . '"><param name="movie
                 
                 <?php
                  if(count($info_arr)){
-                     pr($info_arr);
+                    // pr($info_arr);
                 foreach($info_arr as $info) {
+                    
+                    $audio_filename = base_url()."uploads/user_audio_files/".$info['s_audio_file_name'];
                    // $img = base_url().'uploads/user_photos/'.getThumbName($info['s_photo'],'thumb');
-                    ?><tr>
-      <td align="center" valign="middle"><img src="<?= $img; ?>"></td>
+                    ?>
+      <script type="text/javascript">
+
+function pausePlayers(playing_id) { 
+  
+   
+		
+		   if(<?=$info['audioid']?> != playing_id) { jwplayer("myElement_"+<?=$info['audioid']?>).pause(true); }
+	
+};
+
+$(function(){
+
+	
+	 jwplayer("myElement_<?=$info['audioid']?>").setup({
+        file: "<?=$audio_filename?>",
+        image: "<?=$audio_filename?>",
+		height: 30,
+
+        events:{
+		  onPlay: function() {
+		    	pausePlayers(<?=$info['audioid']?>);
+			 //jwplayer('container3').stop();
+		  }
+		}
+
+     });
+
+});
+//-->
+</script>
+<tr id="audio_<?= $info['audioid'] ?>">
+      <td align="center" valign="middle"><div id="myElement_<?=$info['audioid']?>" >Loading the player... </div></td>
       <td align="center" valign="middle"><?=$info['s_title'] ?></td>
-      <td align="center" valign="middle"><?= $info['s_description'] ?></td>
+      <td align="center" valign="middle"><?= $info['s_artist'] ?></td>
       <td align="center" valign="middle"><?= $info['s_name'] ?></td>
       <td align="center" valign="middle"><?= $info['dt_created_on'] ?></td>
       <td align="center" valign="middle">
-          <input name="" title="Delete" type="button" style="" class="delete-button"  value="" onclick="return del_photo('<?= $info['albumid'] ?>');"/>
+          <input name="" title="Delete" type="button" style="" class="delete-button"  value="" onclick="return del_audio('<?= $info['audioid'] ?>');"/>
       </td>
                     </tr> <?php
                 }
