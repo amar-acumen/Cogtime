@@ -424,7 +424,7 @@ class Admin_user extends Admin_base_Controller
 			'password' => $NEW_PASSWD);
 			
 			## end
-			
+			echo $NEW_PASSWD;
 			## fetch admin details for mail
 			$super_admin_details = $this->admins_user_model->get_admin_by_id(1);
 			
