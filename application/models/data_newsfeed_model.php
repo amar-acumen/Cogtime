@@ -464,11 +464,17 @@ return $result_arr;
 
 }
 function get_photo_post_by_id($i_user_id,$s_where,$i_start_limit='', $i_no_of_page=''){
-    echo $start_limit = $i_start_limit;
-    echo $no_of_page = $i_no_of_page; 
-{$sql="select p.s_photo , p.s_title , p.s_description , p.dt_created_on , a.s_name , a.id as albumid from cg_user_photos p ,cg_photo_album a ".$s_where." and p.i_user_id='".$i_user_id."'and p.i_status='1' and p.i_photo_album_id = a.id ORDER BY p.id DESC  limit ".$start_limit.",".$no_of_page."";}
-echo $sql;
-$query=$this->db->query($sql);
+   echo $i_start_limit = ($i_start_limit != 0 || $i_start_limit < 0 ) ? $i_start_limit : 0;
+    
+    
+    
+{$sql1="select p.s_photo , p.s_title , p.s_description , p.dt_created_on , a.s_name , a.id as albumid from cg_user_photos p ,cg_photo_album a ".$s_where." and p.i_user_id='".$i_user_id."'and p.i_status='1' and p.i_photo_album_id = a.id ORDER BY p.id DESC  limit ".$i_start_limit.",".$i_no_of_page."";}
+echo $sql1;
+echo "=============";
+echo $s_where;
+echo "==============";
+echo "query end";
+$query=$this->db->query($sql1);
 $result_arr=$query->result_array();  
     
 }
