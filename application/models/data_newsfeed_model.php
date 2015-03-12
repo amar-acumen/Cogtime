@@ -501,7 +501,7 @@ $result_arr=$query->result_array();
 return $result_arr;  
 }
 function get_total_audio_post_by_id($i_user_id,$s_where){
-  $sql = "select count(a.id) as count from cg_user_audio as a , cg_audio_album as aab ".$s_where." and a.i_user_id ='".$i_user_id."' and a.i_id_audio_album = aab.id and a.i_status = 1 ORDER BY a.id DESC limit ".$i_start_limit.",".$i_no_of_page." ";   
+  $sql = "select count(a.id) as count from cg_user_audio as a , cg_audio_album as aab ".$s_where." and a.i_user_id ='".$i_user_id."' and a.i_id_audio_album = aab.id and a.i_status = 1 ORDER BY a.id DESC ";   
    $query=$this->db->query($sql);
 $result_arr=$query->result_array();  
      return $result_arr['0']['count'];
