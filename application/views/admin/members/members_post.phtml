@@ -101,6 +101,18 @@ $(document).ready(function(){
         {$('#postT').html('Post description');
          $('#postT').show();
         $('#postText').show();}
+    }else if(act == 'photo'){
+        $('#postT').html('photo post');
+            $('#postT').show();
+        $('#postText').show();
+    }else if(act == 'videos'){
+        $('#postT').html('videos post');
+            $('#postT').show();
+        $('#postText').show();
+    }else if(act == 'audio'){
+        $('#postT').html('audio post');
+            $('#postT').show();
+        $('#postText').show();
     }
     });
 });
@@ -205,7 +217,11 @@ $(document).ready(function(arg) {
                                         <li id="fund" class="type"><a href="javascript:void(0);" onClick="show_posts('blog')" id="Blog">Blog</a></li>
                                         <li id="fund" class="type"><a href="javascript:void(0);" onClick="show_posts('prayer_group')" id="Prayer Group">Prayer Group</a></li>
                                         <li id="fund" class="type"><a href="javascript:void(0);" onClick="show_posts('prayer_wall')" id="Prayer wall">prayer wall</a></li>
-                                        <li id="fund" class="noBg type"><a href="javascript:void(0);" onClick="show_posts('tweet')" id="Chitter">Chitter</a></li>
+                                        <li id="fund" class="type"><a href="javascript:void(0);" onClick="show_posts('tweet')" id="Chitter">Chitter</a></li>
+                                        
+                                        <li id="fund" class="type"><a href="javascript:void(0);" onClick="show_posts('photo')" id="photo">photo</a></li>
+                                        <li id="fund" class="type"><a href="javascript:void(0);" onClick="show_posts('videos')" id="videos">videos</a></li>
+                                        <li id="fund" class="noBg type"><a href="javascript:void(0);" onClick="show_posts('audio')" id="audio">audio</a></li>
                                     </ul>
                                 </div>
 								<div class="clr"></div>
@@ -233,6 +249,15 @@ $(document).ready(function(arg) {
                                     </div>
                                     <div class="lavel-01" id="prayer_wall_content">
                                         <?=$result_content6?>       
+                                    </div>
+                                     <div class="lavel-01" id="photo_content">
+                                        <?=$result_content7?>       
+                                    </div>
+                                     <div class="lavel-01" id="videos_content">
+                                        <?=$result_content8?>       
+                                    </div>
+                                     <div class="lavel-01" id="audio_content">
+                                        <?=$result_content9?>       
                                     </div>
                                    
                                 </div>

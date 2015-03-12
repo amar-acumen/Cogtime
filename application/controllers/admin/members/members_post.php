@@ -133,6 +133,30 @@ class Members_post extends Admin_base_Controller
 			//$data['type']='blog';
             ob_end_clean();
 			}
+                        else if($type == 'photo')
+			{
+			ob_start();
+            $this->ajax_pagination($user_id,$type,$page);
+            $data['result_content7'] = ob_get_contents(); #pr($data['result_content'],1);
+			//$data['type']='blog';
+            ob_end_clean();
+			}
+                        else if($type == 'videos')
+			{
+			ob_start();
+            $this->ajax_pagination($user_id,$type,$page);
+            $data['result_content8'] = ob_get_contents(); #pr($data['result_content'],1);
+			//$data['type']='blog';
+            ob_end_clean();
+			}
+                        else if($type == 'audio')
+			{
+			ob_start();
+            $this->ajax_pagination($user_id,$type,$page);
+            $data['result_content9'] = ob_get_contents(); #pr($data['result_content'],1);
+			//$data['type']='blog';
+            ob_end_clean();
+			}
              #pr($data,1);
             # rendering the view file...
 			$data['i_id']=$user_id;
@@ -267,6 +291,24 @@ class Members_post extends Admin_base_Controller
                                     $WHERE_COND .= ($s_contents=='')?'':" AND  s_contents LIKE '%$s_contents%'";
                                 }
 				}
+                                
+                                if($type == 'photo'){
+				if($this->input->post('date_to1') != ''){
+					 $dt_start_date = get_db_dateformat($this->input->post('date_to1'));
+					 $WHERE_COND .= ($dt_start_date=='')?'':" AND (DATE(dt_created_on) >='".$dt_start_date."' )";
+				}
+				
+				if($this->input->post('date_end1') != ''){
+					 $dt_end_date = get_db_dateformat($this->input->post('date_end1'));
+					$WHERE_COND .= ($dt_end_date=='')?'':" AND (DATE(dt_created_on) <='".$dt_end_date."' )";
+				}
+                                 if($this->input->post('title') != '' ){ 
+                                   // die('dd');
+                                    $s_title  = trim($this->input->post('title'));
+                                     $s_title = htmlspecialchars($s_contents);
+                                    $WHERE_COND .= ($s_title=='')?'':" AND  (s_title LIKE '%$s_title%' OR s_description '%$s_title%')";
+                                }
+				}
 			
 				//$this->session->set_userdata('search_condition',$WHERE_COND);
 			//echo $WHERE_COND;exit;
@@ -395,6 +437,25 @@ class Members_post extends Admin_base_Controller
                 
                 $result = $this->prayer_wall_model->get_owner_prayer_wall_by_id($i_user_id,$s_where,$page,$this->pagination_per_page);
             }
+			}
+                        
+                        if($type == 'photo')
+			{
+			
+			$this->session->set_userdata('search_condition',$WHERE_COND);
+			$s_where = $this->session->userdata('search_condition');
+            $result = $this->data_newsfeed_model->get_photo_post_by_id($i_user_id,$s_where,$page,$this->pagination_per_page);
+			
+           $resultCount = count($result);
+			//echo $resultCount;
+            $total_rows = $this->data_newsfeed_model->get_total_photo_post_by_id($i_user_id,$s_where);
+			$data['type']='photo';
+            //echo $total_rows;
+//           if( ( !is_array($result) || !count($result) ) && $total_rows ) {
+//                $page = ($page - $this->pagination_per_page);
+//                
+//                $result = $this->data_newsfeed_model->get_photo_post_by_id($i_user_id,$s_where,$page, $this->pagination_per_page);
+//            }
 			}
             #Jquery Pagination Starts
             $this->load->library('jquery_pagination');

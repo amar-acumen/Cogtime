@@ -74,7 +74,7 @@
                         <a href="<?=$profile_link?>"><div class="pro_photo3" style="background:url(<?php echo $profile_image_filename;?>) no-repeat center;width:60px; height:60px;" ></div></a>                
                         <div class="right_div01">
                               <p  style="font-size:12px; line-height:15px;"><a  href="<?=$profile_link?>" class="light_blue_link"><?=$val['s_profile_name']?> <?=$val['s_tweet_id']?> :</a> </p>
-                              <p id="tweet_ryt_date" class="nw-date-time" style="font-size:12px; line-height:15px;"><?=get_time_elapsed($val['dt_created_on'])?>
+                              <p class="nw-date-time" style="font-size:12px; line-height:15px;"><?=get_time_elapsed($val['dt_created_on'])?><!--id="tweet_ryt_date"-->
                                <span id="fav_img<?=$val['id']?>">
                                 <?php if($val['fav_tweet'] > 0){?>
                                  
@@ -103,7 +103,7 @@
                         <a href="<?=$profile_link?>"><div class="pro_photo3" style="background:url(<?php echo $profile_image_filename;?>) no-repeat center;width:60px; height:60px;" ></div></a>               
                         <div class="right_div01">
                              <p  style="font-size:12px; line-height:15px;"><a  href="<?=$profile_link?>" class="light_blue_link"><?=$val['s_profile_name']?> <?=$val['s_tweet_id']?> :</a> </p>
-                              <p id="tweet_ryt_date" class="nw-date-time"><?=get_time_elapsed($val['dt_created_on'])?>
+                              <p class="nw-date-time"><?=get_time_elapsed($val['dt_created_on'])?><!--id="tweet_ryt_date"-->
                                <span id="fav_img<?=$val['id']?>">
                                 <?php if($val['fav_tweet'] > 0){?>
                                  
