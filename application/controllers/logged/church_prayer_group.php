@@ -36,8 +36,7 @@ class Church_prayer_group extends Base_controller
             $this->load->model('prayer_group_model');
 			$this->load->model('contacts_model');
 			$this->load->model('my_prayer_partner_model');
-			$this->load->model('user_alert_model');
-			//$this->load->model('chat_rooms_model');
+
 			$this->load->model('organizer_todo_model');
 			$this->load->model('church_new_model');
 			$this->max_prayer_group = $this->config->item('max_prayer_group');
