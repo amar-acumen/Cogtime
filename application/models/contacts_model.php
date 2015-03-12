@@ -17,7 +17,7 @@
 * @link views/
 */
 require_once(APPPATH.'models/base_model.php');
-class Contacts_model extends Base_model implements InfModel
+class Contacts_model extends Base_model 
 {
 
         # constructor definition...
