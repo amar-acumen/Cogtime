@@ -55,7 +55,7 @@ if(count($arr_testimony))
     <form id="edit_frm_<?=$testimony['testimony_id']?>" method="post" enctype="multipart/form-data" onsubmit="return post_edit_testimony(<?=$testimony['testimony_id']?>)">
         <label class="normal">Message:</label>
         <input type="hidden" id="h_testimony_id" name="h_testimony_id" value="<?=$testimony['testimony_id']?>" />
-        <textarea name="txt_area_msg" rows="" cols="" class="full-textarea" style="height: 70px;" onKeyDown="limitText(this.form.txt_area_msg,this.form.countdown,500);" 
+        <textarea name="txt_area_msg" class="full-textarea" style="height: 70px;" onKeyDown="limitText(this.form.txt_area_msg,this.form.countdown,500);" 
 onKeyUp="limitText(this.form.txt_area_msg,this.form.countdown,500);" ><?=$testimony['testimony_desc']?></textarea>
         <span id="err_message_msg_<?=$testimony['testimony_id']?>" class="error-message" style="display: none; margin-left: 70px;">* Required Field.</span>
         <div class="clr"></div>
