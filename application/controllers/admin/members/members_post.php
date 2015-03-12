@@ -137,7 +137,7 @@ class Members_post extends Admin_base_Controller
 			{
 			ob_start();
             $this->ajax_pagination($user_id,$type,$page);
-            $data['result_content5'] = ob_get_contents(); #pr($data['result_content'],1);
+            $data['result_content7'] = ob_get_contents(); #pr($data['result_content'],1);
 			//$data['type']='blog';
             ob_end_clean();
 			}
@@ -145,7 +145,7 @@ class Members_post extends Admin_base_Controller
 			{
 			ob_start();
             $this->ajax_pagination($user_id,$type,$page);
-            $data['result_content5'] = ob_get_contents(); #pr($data['result_content'],1);
+            $data['result_content8'] = ob_get_contents(); #pr($data['result_content'],1);
 			//$data['type']='blog';
             ob_end_clean();
 			}
@@ -153,7 +153,7 @@ class Members_post extends Admin_base_Controller
 			{
 			ob_start();
             $this->ajax_pagination($user_id,$type,$page);
-            $data['result_content5'] = ob_get_contents(); #pr($data['result_content'],1);
+            $data['result_content9'] = ob_get_contents(); #pr($data['result_content'],1);
 			//$data['type']='blog';
             ob_end_clean();
 			}
