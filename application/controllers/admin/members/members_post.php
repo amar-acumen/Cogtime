@@ -451,11 +451,11 @@ class Members_post extends Admin_base_Controller
             $total_rows = $this->data_newsfeed_model->get_total_photo_post_by_id($i_user_id,$s_where);
 			$data['type']='photo';
             //echo $total_rows;
-           if( ( !is_array($result) || !count($result) ) && $total_rows ) {
-                $page = ($page - $this->pagination_per_page);
-                
-                $result = $this->data_newsfeed_model->get_photo_post_by_id($i_user_id,$s_where,$page, $this->pagination_per_page);
-            }
+//           if( ( !is_array($result) || !count($result) ) && $total_rows ) {
+//                $page = ($page - $this->pagination_per_page);
+//                
+//                $result = $this->data_newsfeed_model->get_photo_post_by_id($i_user_id,$s_where,$page, $this->pagination_per_page);
+//            }
 			}
             #Jquery Pagination Starts
             $this->load->library('jquery_pagination');
