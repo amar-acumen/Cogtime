@@ -435,7 +435,7 @@ class Admin_user extends Admin_base_Controller
 			'name' => $admin_name,
 			'password' => $NEW_PASSWD);
 			//echo $NEW_PASSWD;
-                        echo $EMAIL; 
+                        echo $EMAIL; die();
                         /********************GET ADMIN EMAIL***************************************************/
 			$query = $this->db->get_where('cg_admin_user', array('id' => 1));
                         
