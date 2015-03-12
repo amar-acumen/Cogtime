@@ -19,7 +19,7 @@
  */
 require_once(APPPATH . 'models/base_model.php');
 
-class My_prayer_partner_model extends Base_model implements InfModel {
+class My_prayer_partner_model extends Base_model  {
     # constructor definition...
 
     public function __construct() {
