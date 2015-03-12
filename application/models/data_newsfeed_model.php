@@ -464,7 +464,7 @@ return $result_arr;
 
 }
 function get_photo_post_by_id($i_user_id,$s_where,$i_start_limit='', $i_no_of_page=''){
-   echo $i_start_limit = ($i_start_limit != 0 || $i_start_limit < 0 ) ? $i_start_limit : 0;
+    $i_start_limit = ($i_start_limit != 0 || $i_start_limit < 0 ) ? $i_start_limit : 0;
     
     
     
@@ -479,6 +479,18 @@ function get_total_photo_post_by_id($i_user_id,$s_where){
    $sql="select count(p.id) as count  from cg_user_photos p ,cg_photo_album a ".$s_where." and p.i_user_id='".$i_user_id."'and p.i_status='1' and p.i_photo_album_id = a.id ORDER BY p.id DESC ";
 #echo $sql;
 $query=$this->db->query($sql);
+$result_arr=$query->result_array();  
+     return $result_arr['0']['count'];
+}
+function get_video_post_by_id($i_user_id,$s_where,$i_start_limit='', $i_no_of_page=''){
+   $sql = "select v.s_video_file_name, v.s_title , v.s_description , v.dt_created_on , va.s_name , va.id as videoalbumid from cg_user_videos as v , cg_video_album as va ".$s_where." and v.i_user_id ='".$i_user_id."' and v.i_status = 1 and v.i_video_album_id = va.id ORDER BY v.id DESC limit ".$i_start_limit.",".$i_no_of_page." "; 
+   $query=$this->db->query($sql);
+$result_arr=$query->result_array();  
+return $result_arr;  
+}
+function get_total_video_post_by_id($i_user_id,$s_where){
+ $sql = "select count(v.id) as count from cg_user_videos as v , cg_video_album as va ".$s_where." and v.i_user_id ='".$i_user_id."' and v.i_status = 1 and v.i_video_album_id = va.id ORDER BY v.id DESC" ;  
+ $query=$this->db->query($sql);
 $result_arr=$query->result_array();  
      return $result_arr['0']['count'];
 }
