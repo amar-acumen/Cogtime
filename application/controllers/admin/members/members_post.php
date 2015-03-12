@@ -39,7 +39,7 @@ class Members_post extends Admin_base_Controller
                         
            $this->load->helper('common_option_helper.php');
 		   $this->load->model('my_tweet_model');
-           
+            $this->load->library('embed_video');
         }
         catch(Exception $err_obj)
         {
