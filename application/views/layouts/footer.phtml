@@ -713,7 +713,8 @@ function get_user_clock() {//return false;
             </div>
             <div class="">
                        <?php 
-                       echo $salvation_prayer['result']['s_what_next'];
+                       
+                      echo str_replace("<p>"," ",$salvation_prayer['result']['s_what_next']);
                     //echo $about = preg_replace('#<p>(.*?)</p>#', ' ', nl2br($salvation_prayer['result']['s_what_next']));
                        ?>
                 <h5> Here provide counselling information.</h5> 
