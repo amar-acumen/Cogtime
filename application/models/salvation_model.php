@@ -26,7 +26,7 @@ class Salvation_model extends Base_model
 			$sql = sprintf('SELECT * FROM '.$this->db->SALVATION_PRAYER.'  where id = %s limit %s, %s',  $id, $start_limit, $no_of_page);
 		}
 
-		$query = $this->db->query($sql); #echo $this->db->last_query(); exit;
+		$query = $this->db->query($sql); echo $this->db->last_query(); exit;
 		$result_arr = $query->result_array();
 
 		return $result_arr[0];
