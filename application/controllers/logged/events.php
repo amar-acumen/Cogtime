@@ -36,7 +36,7 @@ class Events extends Base_controller {
             $this->load->model('user_notifications_model');
 
 
-            //$this->load->helper('wall_helper');
+            $this->load->helper('wall_helper');
         } catch (Exception $err_obj) {
             show_error($err_obj->getMessage());
         }
