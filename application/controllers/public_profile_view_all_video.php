@@ -26,7 +26,7 @@ class Public_profile_view_all_video extends Base_controller
         {
             parent::__construct();
             # loading reqired model & helpers...
-            //$this->load->helper('wall_helper');
+            $this->load->helper('wall_helper');
             $this->load->model('users_model');
             //$this->load->model('netpals_model');
             //$this->load->model('my_prayer_partner_model');

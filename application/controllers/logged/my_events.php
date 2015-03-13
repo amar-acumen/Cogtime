@@ -35,7 +35,7 @@ class My_events extends Base_controller {
             $this->load->model('events_feedback_model');
             $this->load->model("user_notifications_model");
             $this->load->model("user_alert_model");
-            //$this->load->helper('wall_helper');
+            $this->load->helper('wall_helper');
         } catch (Exception $err_obj) {
             show_error($err_obj->getMessage());
         }

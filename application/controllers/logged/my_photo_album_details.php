@@ -31,7 +31,7 @@ class My_photo_album_details extends Base_controller
 		    $this->upload_path = BASEPATH.'../uploads/user_photos/';
 			$this->upload_tmp_path = BASEPATH.'../uploads/_tmp/';
 			
-			//$this->load->helper('wall_helper');
+			$this->load->helper('wall_helper');
 			$this->load->model('user_photos_model');
 			$this->load->model('photo_albums_model');
 			$this->load->model('media_comments_model');

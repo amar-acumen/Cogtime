@@ -29,7 +29,7 @@ class Public_profile_view_all_photo extends Base_controller
             $this->upload_path  = BASEPATH.'../uploads/wall_photos/';
                $this->upload_photo_path    = BASEPATH.'../uploads/wall_photos/';
             # loading reqired model & helpers...
-            //$this->load->helper('wall_helper');
+            $this->load->helper('wall_helper');
             $this->load->model('users_model');
             //$this->load->model('netpals_model');
             //$this->load->model('my_prayer_partner_model');
