@@ -306,7 +306,7 @@ class Members_post extends Admin_base_Controller
                                    // die('dd');
                                     $s_title  = trim($this->input->post('title'));
                                      $s_title = htmlspecialchars($s_title);
-                                    $WHERE_COND .= ($s_title=='')?'':" AND  (p.s_title LIKE '%$s_title%' OR p.s_description LIKE '%$s_title%')";
+                                    $WHERE_COND .= ($s_title=='')?'':' AND  (p.s_title LIKE "%'.$s_title.'%" OR p.s_description LIKE "%'.$s_title.'%")';
                                 }
 				}
                                 if($type == 'videos'){
@@ -323,7 +323,7 @@ class Members_post extends Admin_base_Controller
                                    // die('dd');
                                     $s_title  = trim($this->input->post('title'));
                                      $s_title = htmlspecialchars($s_title);
-                                    $WHERE_COND .= ($s_title=='')?'':" AND  (v.s_title LIKE '%$s_title%' OR v.s_description LIKE '%$s_title%')";
+                                    $WHERE_COND .= ($s_title=='')?'':' AND  (v.s_title LIKE "%'.$s_title.'%" OR v.s_description LIKE "%'.$s_title.'%")';
                                 }
 				}
                                  if($type == 'audio'){
@@ -340,7 +340,7 @@ class Members_post extends Admin_base_Controller
                                    // die('dd');
                                     $s_title  = trim($this->input->post('title'));
                                      $s_title = htmlspecialchars($s_title);
-                                    $WHERE_COND .= ($s_title=='')?'':" AND  (a.s_title LIKE '%$s_title%' OR  a.s_description LIKE '%$s_title%')";
+                                    $WHERE_COND .= ($s_title=='')?'':' AND  (a.s_title LIKE "%'.$s_title.'%" OR  a.s_description LIKE "%'.$s_title.'%")';
                                 }
 				}
 			
