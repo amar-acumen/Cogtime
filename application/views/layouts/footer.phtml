@@ -718,7 +718,7 @@ function get_user_clock() {//return false;
                    
                        ?>
                 <h5> Here provide counselling information.</h5> 
-                <p id="whatnext"><?= nl2br($salvation_prayer['result']['s_what_next']) ?></p>
+                <p id="whatnext"><?= htmlspecialchars_decode($salvation_prayer['result']['s_what_next']) ?></p>
 
 
                 <br />
