@@ -117,7 +117,7 @@ class My_events extends Base_controller {
 
         if (is_array($result) && count($result)) {
             $content = $this->load->view($VIEW_FILE, $data, true);
-             parent::_render($data, $VIEW);
+             parent::_render($data, $VIEW_FILE);
         } else {
             $content = '';
         }
