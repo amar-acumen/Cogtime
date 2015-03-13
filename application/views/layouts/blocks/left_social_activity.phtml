@@ -85,7 +85,7 @@
               if($numrow_superadmin>0)
               {
                   ?>
-                    <li><a href="<?= $result[0]->ch_page_url; ?>" class="" id="" ><?= $result[0]->s_name; ?><img src="<?= base_url() ?>images/icons/crown.png" width="25" height="14" alt="crown" class="add-new-church"/> </a></li>
+                    <li><a href="<?= $result[0]->ch_page_url; ?>" class=""><?= $result[0]->s_name; ?><img src="<?= base_url() ?>images/icons/crown.png" width="25" height="14" alt="crown" class="add-new-church"/> </a></li>
                   <?php
               }
               if(count($result_churchmember)>0 )
@@ -93,7 +93,7 @@
                 foreach ($result_churchmember as $row){
                   $church_wall_url = base_url().$result_churchmember[0]->chid.'/church-wall';
                 ?>
-                    <li><a href="<?= $church_wall_url; ?>" class="" id="" ><?= $row->s_name; ?><img src="<?= base_url() ?>images/man-24-16.png" width="15" height="15" alt="man" class="add-new-church"/> </a></li>
+                    <li><a href="<?= $church_wall_url; ?>" class="" ><?= $row->s_name; ?><img src="<?= base_url() ?>images/man-24-16.png" width="15" height="15" alt="man" class="add-new-church"/> </a></li>
                 <?php 
                 }
                 ?>    
