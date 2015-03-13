@@ -32,7 +32,7 @@ class My_audio_album_details extends Base_controller
 			$this->upload_path_music_full = BASEPATH.'../uploads/user_audio_files/';
 			
 			
-			//$this->load->helper('wall_helper');
+			$this->load->helper('wall_helper');
 			//$this->load->model('user_audios_model');
 			$this->load->model('audio_albums_model');
 			$this->load->model('media_comments_model');

@@ -34,7 +34,7 @@ class Newsfeed extends Base_controller {
             $this->upload_video_path = BASEPATH . '../uploads/wall_videos/';
             $this->load->model('data_newsfeed_model');
             $this->load->model('newsfeed_comments_model');
-            //$this->load->helper('wall_helper');
+            $this->load->helper('wall_helper');
         } catch (Exception $err_obj) {
             
         }

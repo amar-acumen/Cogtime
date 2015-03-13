@@ -29,7 +29,7 @@ class My_videos extends Base_controller {
             parent::check_login(TRUE, '', array('1', '2', '3')); // put this code on those pages which are not accessable by guest user
             # loading reqired model & helpers...
             $this->load->model('media_comments_model');
-            //$this->load->helper('wall_helper');
+            $this->load->helper('wall_helper');
             $this->load->model('users_model');
             $this->load->model('my_videos_model');
 

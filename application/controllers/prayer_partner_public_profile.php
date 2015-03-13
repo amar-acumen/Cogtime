@@ -26,7 +26,7 @@ class prayer_partner_public_profile extends Base_controller
             parent::__construct();
 			parent::check_login(TRUE, '', array('1'));//put this code on those pages which are not accessable by guest user
             # loading reqired model & helpers...
-            //$this->load->helper('wall_helper');
+            $this->load->helper('wall_helper');
             $this->load->model('users_model');
 			$this->load->model('netpals_model');
 			$this->load->model('my_prayer_partner_model');
