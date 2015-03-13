@@ -28,12 +28,12 @@ class Prayer_wall_testimony extends Base_controller
                parent::check_login(TRUE, '', array('1')); // put this code on those pages which are not accessable by guest user
             # loading reqired model & helpers...
 
-            $this->load->model('users_model');
-            $this->load->model('holy_place_model');
-            $this->load->model('bible_fruits_model');
-            $this->load->model('prayer_wall_photos_model');
+            //$this->load->model('users_model');
+            //$this->load->model('holy_place_model');
+            //$this->load->model('bible_fruits_model');
+            //$this->load->model('prayer_wall_photos_model');
             $this->load->model('prayer_wall_model');
-            $this->load->model('prayer_commit_model');
+            //$this->load->model('prayer_commit_model');
             
             $this->i_profile_id = intval(decrypt($this->session->userdata('user_id')));
         }

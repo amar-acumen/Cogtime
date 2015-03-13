@@ -24,9 +24,9 @@ class Privacy_settings extends Base_controller
             parent::check_login(TRUE, '', array('1')); // put this code on those pages which are not accessable by guest user
             # loading reqired model & helpers...
             $this->load->model('user_alert_model');
-			$this->load->model('contacts_model');
-			$this->load->model('netpals_model');
-			$this->load->model('my_prayer_partner_model');
+			//$this->load->model('contacts_model');
+			//$this->load->model('netpals_model');
+			//$this->load->model('my_prayer_partner_model');
 			$this->load->model('my_ring_model');
         }
         catch(Exception $err_obj)

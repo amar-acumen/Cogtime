@@ -22,7 +22,7 @@ class Organizer_day_view extends Base_controller
             parent::__construct();
                parent::check_login(TRUE, '', array('1')); // put this code on those pages which are not accessable by guest user
             # loading reqired model & helpers...
-            $this->load->model('users_model');
+            //$this->load->model('users_model');
 			$this->load->model('organizer_note_model');
 			$this->load->model('organizer_todo_model');
 			$this->load->model('system_reminder_model');

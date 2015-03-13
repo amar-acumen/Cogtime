@@ -25,11 +25,11 @@ class Ring_members extends Base_controller
             # loading reqired model & helpers...
             $this->load->helper('wall_helper');
             
-            $this->load->model('users_model');
-            $this->load->model('contacts_model');
-            $this->load->model('ring_post_model');
+            //$this->load->model('users_model');
+            //$this->load->model('contacts_model');
+            //$this->load->model('ring_post_model');
             $this->load->model('my_ring_model');
-            $this->load->model('netpals_model');
+            //$this->load->model('netpals_model');
 
         }
         catch(Exception $err_obj)

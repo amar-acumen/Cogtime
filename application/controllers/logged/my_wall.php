@@ -33,11 +33,11 @@ class My_wall extends Base_controller {
             $this->load->model('users_model');
             $this->load->model('data_newsfeed_model');
             $this->load->model('newsfeed_comments_model');
-            $this->load->model('bible_fruits_model');
+            //$this->load->model('bible_fruits_model');
             $this->load->model('holy_place_model');
             $this->load->model('intercession_model');
             $this->load->model('prayer_wall_model');
-            $this->load->model('projects_model');
+            //$this->load->model('projects_model');
             $this->load->model('prayer_commit_model');
             $this->load->model('prayer_group_model');
         } catch (Exception $err_obj) {

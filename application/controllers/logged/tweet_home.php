@@ -31,11 +31,10 @@ class Tweet_home extends Base_controller {
 
             # loading reqired model & helpers...
             $this->load->model('users_model');
-            $this->load->model('contacts_model');
+            //$this->load->model('contacts_model');
             $this->load->model('my_tweet_model');
-            $this->load->model('netpals_model');
+            //$this->load->model('netpals_model');
             $this->load->model('user_notifications_model');
-            $this->load->model('my_tweet_model');
             $this->load->model('tweet_reply_model');
             $this->load->model('user_alert_model');
         } catch (Exception $err_obj) {
