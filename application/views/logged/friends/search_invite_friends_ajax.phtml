@@ -76,7 +76,7 @@
                         <p class="add-remove-friend">
                         
                        <?php  if($val['display_becomefriend'] == 'false'){ ?>
-                        <img src="images/icons/icon11.png" alt="" /> <a  href="javascript:void(0);" id="invite_friend_<?=($val['id'])?>" onclick="invite_friend_('<?=encrypt($val['id'])?>')" >Re-send Friend Request</a>
+                        <img src="images/icons/icon11.png" alt="" /> <a  href="javascript:void(0);" id="invite_friend_<?=($val['id'])?>" onclick="invite_friend_('<?=encrypt($val['id'])?>')" >Respond to firend request</a>
                        <?php
                        }
                        elseif($val['if_already_friend'] == 'true')
