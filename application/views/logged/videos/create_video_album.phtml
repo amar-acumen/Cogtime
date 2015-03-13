@@ -60,7 +60,7 @@ $(function(){
                             	<div class="left"><img src="images/icons/video.png" alt="" /> Create Video Album</div>
                              </div>-->
                              <div class="frm_box blue_box" style="width:452px;">
-                             	 <form name="" id="createVideoAlbumFrm" method="post" action="<?= base_url().'logged/my_videos/create_video_album_ajax_submit'?>" enctype="multipart/data" onsubmit="return create_video_album_();">               
+                             	 <form name="" id="createVideoAlbumFrm" method="post" action="<?= base_url().'logged/my_videos/create_video_album_ajax_submit'?>" enctype="multipart/form-data" onsubmit="return create_video_album_();">               
                                     <div class="lable01" style="width:80px;">Name:</div>  
                                     <div class="field01"><input name="txt_video_album_name" type="text" /> 
                                         <span id="err_txt_video_album_name" class="error-message"></span>
