@@ -2,7 +2,7 @@
  if($is_post_ == '1' ) {?>
 <div class="arrow_btm"></div>
 <div style=" margin-top:0px;" class="div_content" > 
-   <?php //pr($search_result_friends);
+   <?php pr($search_result_friends);
    		  if(count($search_result_friends) >0) {
             foreach($search_result_friends as $key =>$val):   
             
@@ -76,7 +76,7 @@
                         <p class="add-remove-friend">
                         
                        <?php  if($val['display_becomefriend'] == 'false'){ ?>
-                        <img src="images/icons/icon11.png" alt="" /> <a  href="javascript:void(0);" id="invite_friend_<?=($val['id'])?>" onclick="invite_friend_('<?=encrypt($val['id'])?>')" >Re-send Friend Request</a>
+                        <img src="images/icons/icon11.png" alt="" /> <a  href="javascript:void(0);" id="invite_friend_<?=($val['id'])?>" onclick="invite_friend_('<?=encrypt($val['id'])?>')" >Respond to firend request</a>
                        <?php
                        }
                        elseif($val['if_already_friend'] == 'true')
