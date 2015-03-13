@@ -65,7 +65,7 @@ class Base_controller extends CI_Controller {
                 //$this->_get_total_unread_msgs($logged_user_id);
                 $this->_set_left_panel_data($logged_user_id);
                 $this->get_user_all_tweets($logged_user_id);
-                //$this->salavtion_popup_content();
+                $this->salavtion_popup_content();
 
 
                 /* get advertisement */
@@ -3607,7 +3607,7 @@ else if ($s_type == 'event_rsvp_received') {
         $this->load->model('salvation_model');
         $this->data['salvation_prayer']['result'] = $this->salvation_model->get_by_id(1);
         $this->data['salvation_prayer']['photo_arr'] = $this->salvation_model->get_photo_by_salvation_id(1);
-        //pr($data['salvation_prayer']);
+        //pr($data['salvation_prayer'],1);
     }
 
     public function getImList_Ajax($page = 0, $type = 'all', $s_name = '') {
