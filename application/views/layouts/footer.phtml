@@ -562,6 +562,7 @@ function get_user_clock() {//return false;
         <div class="mid">
             <div class="heading-cap">
                     <h4>Being a Christian </h4>
+                    <?=  pr($salvation_prayer); ?>
             </div>
             <script type="text/javascript">
                 stepcarousel.setup({
@@ -579,7 +580,7 @@ function get_user_clock() {//return false;
             <div id="bandContainer1" class="bandContainer_slideshow">
                 <div class="belt">
     <?php
-    pr($salvation_prayer);
+   
     if (count($salvation_prayer['photo_arr'])) {
         foreach ($salvation_prayer['photo_arr'] as $sal_key => $val) {
 
