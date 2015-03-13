@@ -19,9 +19,9 @@ class Get_server_time extends Base_controller {
 		{
 			parent::__construct();
 			$this->load->model('users_model');
-			$this->load->model('organizer_note_model');
-			$this->load->model('organizer_todo_model');
-			$this->load->model('system_reminder_model');
+			//$this->load->model('organizer_note_model');
+			//$this->load->model('organizer_todo_model');
+			//$this->load->model('system_reminder_model');
 		}
 		catch(Exception $err_obj)
 		{

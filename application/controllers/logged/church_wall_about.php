@@ -29,10 +29,10 @@ class Church_wall_about extends Base_controller
             parent::__construct();
             parent::check_login(TRUE, '', array('1')); // put this code on those pages which are not accessable by guest user
             parent::_add_church_css_arr (array('css/church.css'));
-            $this->load->model('cms_model');
-			$this->load->model('landing_page_cms_model');
+            //$this->load->model('cms_model');
+			//$this->load->model('landing_page_cms_model');
             $this->load->model('church_new_model');
-			$this->load->model('users_model');
+			//$this->load->model('users_model');
 			////////////Managing Validators/////////
 			$this->load->library('form_validation');
 			$this->form_validation->set_error_delimiters('<div id="err_msg" class="error_massage">', '</div>');

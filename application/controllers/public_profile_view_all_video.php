@@ -26,12 +26,12 @@ class Public_profile_view_all_video extends Base_controller
         {
             parent::__construct();
             # loading reqired model & helpers...
-            $this->load->helper('wall_helper');
+            //$this->load->helper('wall_helper');
             $this->load->model('users_model');
-            $this->load->model('netpals_model');
-            $this->load->model('my_prayer_partner_model');
+            //$this->load->model('netpals_model');
+            //$this->load->model('my_prayer_partner_model');
             $this->load->model('data_newsfeed_model');
-            $this->load->model('newsfeed_comments_model');
+            //$this->load->model('newsfeed_comments_model');
             $this->load->model('my_videos_model');
         }
         catch(Exception $err_obj)

@@ -30,12 +30,12 @@ class Church_prayer_group extends Base_controller
             parent::check_church_id_empty(TRUE, $_SESSION['logged_church_id'], array('1'));
             # loading reqired model & helpers...
 			
-            $this->load->model('users_model');
+            //$this->load->model('users_model');
 			$this->load->model('user_alert_model');
 			$this->load->model('user_notifications_model');
             $this->load->model('prayer_group_model');
-			$this->load->model('contacts_model');
-			$this->load->model('my_prayer_partner_model');
+			//$this->load->model('contacts_model');
+			//$this->load->model('my_prayer_partner_model');
 
 			$this->load->model('organizer_todo_model');
 			$this->load->model('church_new_model');
