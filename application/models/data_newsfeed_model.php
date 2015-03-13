@@ -165,7 +165,7 @@ class Data_newsfeed_model extends CI_Model
 					) )
 
 				ORDER BY dt_created_on DESC
-					limit { intval($i_start_limit)}, {intval($i_no_of_page)}
+					limit {$i_start_limit}, {$i_no_of_page}
 					";
 		}
 
