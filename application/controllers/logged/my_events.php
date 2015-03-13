@@ -691,7 +691,7 @@ class My_events extends Base_controller {
 function deny_event(){
     $event_id = $this->input->post('event_id');
     $i_user_id = intval(decrypt($this->session->userdata('user_id')));
-    $this->db->delete('cg_event_user_invited', array('i_event_id' => $id , 'i_user_id' => $i_user_id)); 
+    $this->db->delete('cg_event_user_invited', array('i_event_id' => $event_id , 'i_user_id' => $i_user_id)); 
 echo json_encode(array('msg' => 'ok'));
 }
 }
