@@ -35,6 +35,7 @@ class Register extends Base_controller
     }
 
     
+	
     public function index($s_member_type = '') 
     {
         try
