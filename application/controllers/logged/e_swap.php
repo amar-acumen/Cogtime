@@ -34,8 +34,8 @@ class E_swap extends Base_controller
             # loading reqired model & helpers...
 			$this->upload_path = BASEPATH.'../uploads/e_trade_product/';
             $this->load->model('users_model');
-			$this->load->model('contacts_model');
-			$this->load->model('netpals_model');
+			//$this->load->model('contacts_model');
+			//$this->load->model('netpals_model');
 			$this->load->model('e_swap_model');
 			$this->load->model('e_trade_model');
 			$this->load->model('user_notifications_model');

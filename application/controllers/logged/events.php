@@ -30,13 +30,13 @@ class Events extends Base_controller {
             $this->load->model('events_model');
 
             $this->load->model('events_user_invited_model');
-            $this->load->model('events_email_invited_model');
+            //$this->load->model('events_email_invited_model');
             $this->load->model('events_comments_model');
             $this->load->model('events_feedback_model');
             $this->load->model('user_notifications_model');
 
 
-            $this->load->helper('wall_helper');
+            //$this->load->helper('wall_helper');
         } catch (Exception $err_obj) {
             show_error($err_obj->getMessage());
         }

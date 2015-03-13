@@ -31,9 +31,8 @@ class My_audios extends Base_controller {
             # configuring required paths & folders...
             $this->upload_path_music_full = BASEPATH . '../uploads/user_audio_files/';
 
-            $this->load->helper('wall_helper');
-            $this->load->helper('common_option_helper');
-            $this->load->model('users_model');
+            //$this->load->helper('wall_helper');
+            //$this->load->helper('common_option_helper');
             $this->load->model('user_audios_model');
             $this->load->model('audio_albums_model');
             $this->load->model('media_comments_model');

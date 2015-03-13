@@ -30,10 +30,10 @@ class Listen extends Base_controller
                parent::check_login(TRUE, '', array('1')); // put this code on those pages which are not accessable by guest user
             # loading reqired model & helpers...
 			
-            $this->load->model('users_model');
+            /*$this->load->model('users_model');
 			
 			$this->load->model('user_notifications_model');
-            $this->load->model('user_alert_model');
+            $this->load->model('user_alert_model');*/
 			$this->load->model('landing_page_cms_model');
 			$this->i_profile_id = intval(decrypt($this->session->userdata('user_id')));
         }

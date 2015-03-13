@@ -25,8 +25,7 @@ class Manage_my_audio extends Base_controller
             parent::check_login(TRUE, '', array('1')); // put this code on those pages which are not accessable by guest user
            
 		    $this->upload_path_music_full = BASEPATH.'../uploads/user_audio_files/';
-            $this->load->model('users_model');
-			$this->load->model('user_audios_model');
+			//$this->load->model('user_audios_model');
 			$this->load->model('audio_albums_model');
 		    # loading reqired model & helpers...
             $this->load->model('users_model');
