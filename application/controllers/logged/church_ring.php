@@ -36,11 +36,11 @@ class Church_ring extends Base_controller
                          parent::check_church_id_empty(TRUE, $_SESSION['logged_church_id'], array('1'));
 			//			$user_id = intval(decrypt($this->session->userdata('user_id')));
 			//                        parent::check_is_church_admin($user_id);
-			$this->load->model('users_model');
+			//$this->load->model('users_model');
 
-			$this->load->model('user_notifications_model');
-			$this->load->model('user_alert_model');
-			$this->load->model('landing_page_cms_model');
+			//$this->load->model('user_notifications_model');
+			//$this->load->model('user_alert_model');
+			//$this->load->model('landing_page_cms_model');
 			$this->load->model('church_new_model');
 			$this->load->model('church_ring_model');
 			$this->i_profile_id = intval(decrypt($this->session->userdata('user_id')));

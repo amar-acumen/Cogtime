@@ -28,10 +28,10 @@ class Events extends Base_controller
 			# loading reqired model & helpers...
             $this->load->model('events_model');
 			
-			$this->load->model('events_user_invited_model');
-			$this->load->model('events_email_invited_model');
+			//$this->load->model('events_user_invited_model');
+			//$this->load->model('events_email_invited_model');
 			$this->load->model('events_comments_model');
-			$this->load->model('events_feedback_model');
+			//$this->load->model('events_feedback_model');
 			
 			$this->load->helper('wall_helper');
 		

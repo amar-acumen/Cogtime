@@ -29,14 +29,14 @@ class Create_event extends Base_controller {
             parent::check_login(TRUE, '', array('1')); // put this code on those pages which are not accessable by guest user
             $this->upload_path = BASEPATH . '../uploads/events_photo/';
             # loading reqired model & helpers...
-            $this->load->model('users_model');
+            //$this->load->model('users_model');
             $this->load->model('contacts_model');
             $this->load->model('netpals_model');
             $this->load->model("events_model");
             $this->load->model("events_email_invited_model");
             $this->load->model("events_user_invited_model");
             $this->load->model("user_notifications_model");
-            $this->load->helper("my_utility_helper");
+            //$this->load->helper("my_utility_helper");
         } catch (Exception $err_obj) {
             show_error($err_obj->getMessage());
         }

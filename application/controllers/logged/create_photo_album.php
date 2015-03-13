@@ -25,7 +25,7 @@ class Create_photo_album extends Base_controller
             parent::check_login(TRUE, '', array('1')); // put this code on those pages which are not accessable by guest user
            
 		    $this->upload_path = BASEPATH.'../uploads/user_album_photos/';
-            $this->load->model('users_model');
+			
 			$this->load->model('photo_albums_model');
 		    # loading reqired model & helpers...
             $this->load->model('users_model');
