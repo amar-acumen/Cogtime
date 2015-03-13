@@ -247,7 +247,7 @@ class Data_newsfeed_model extends CI_Model
 
 	public function delete_by_id($id) {
 		$id = intval($id);
-		$sql =  "DELETE FROM cg_user_newsfeeds WHERE id='".$id."'", , );
+		$sql =  "DELETE FROM cg_user_newsfeeds WHERE id='".$id."'";
 
 		$this->db->query($sql);
 		
