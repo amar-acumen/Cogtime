@@ -151,7 +151,7 @@ include(APPPATH . "views/layouts/nav.phtml");
                         <form id="frmManageProfile" method="post" action="modify-my-profile-personal-info-ajax" onsubmit="return modify_my_profile_ajax()" enctype="multipart/form-data">
                             <div class="shade_box_01 frm_box shade_box_blue" style="padding-bottom:17px;">
 
-                                <div class="lable01">Title:</div>  
+                                <div class="lable01">Title<span style="color: red; margin:0 0 0 4px; ">*</span>:</div>  
                                 <div class="field01">
                                     <select name="txt_title" id="txt_title" style="width:60px;">
                                         <option value="-1" >---</option>
@@ -171,7 +171,7 @@ include(APPPATH . "views/layouts/nav.phtml");
                                 </div> 
                                 <div class="clr"></div>
 
-                                <div class="lable01">First Name:</div>  
+                                <div class="lable01">First Name<span style="color: red; margin:0 0 0 4px; ">*</span>:</div>  
                                 <div class="field01">
                                     <input name="txt_fname" id="txt_fname" type="text" value="<?= isset($arr_profile_info_for_my_profile["s_first_name"]) ? $arr_profile_info_for_my_profile["s_first_name"] : '' ?>" />
                                     <?php /* ?><?php echo form_error('txt_fname'); ?><?php */ ?>
@@ -179,14 +179,14 @@ include(APPPATH . "views/layouts/nav.phtml");
                                 </div> 
                                 <div class="clr"></div>
 
-                                <div class="lable01">Last Name:</div>  
+                                <div class="lable01">Last Name<span style="color: red; margin:0 0 0 4px; ">*</span>:</div>   
                                 <div class="field01">
                                     <input name="txt_lname" id="txt_lname" type="text" value="<?= isset($arr_profile_info_for_my_profile["s_last_name"]) ? $arr_profile_info_for_my_profile["s_last_name"] : '' ?>" />
                                     <?php echo form_error('txt_lname'); ?>
                                     <div class="error-message" id="err_lname"></div>
                                 </div> 
                                 <div class="clr"></div>
-                                <div class="lable01">Country:</div>  
+                                <div class="lable01">Country<span style="color: red; margin:0 0 0 4px; ">*</span>:</div>  
                                 <div class="field01">
 
                                     <select name="txt_country" id="txt_country" style="width:150px; margin-bottom:6px;" onchange="showState(this.value);">
@@ -197,7 +197,7 @@ include(APPPATH . "views/layouts/nav.phtml");
                                     <div class="error-message" id="err_country"></div>
                                 </div> 
                                 <div class="clr"></div>
-                                <div class="lable01">State:</div>  
+                                <div class="lable01">State<span style="color: red; margin:0 0 0 4px; ">*</span>:</div>  
                                 <div class="field01">
                                     <select name="txt_state" id="txt_state" onchange="showCity(this.value)">
                                         <option value="-1">---</option>
@@ -208,7 +208,7 @@ include(APPPATH . "views/layouts/nav.phtml");
                                     <div class="error-message" id="err_state"></div>
                                 </div> 
                                 <div class="clr"></div>
-                                <div class="lable01">City:</div>  
+                                <div class="lable01">City<span style="color: red; margin:0 0 0 4px; ">*</span>:</div>  
                                 <div class="field01">
                                     <select name="txt_city" id="txt_city">
                                         <option value="-1">---</option>
@@ -221,7 +221,7 @@ include(APPPATH . "views/layouts/nav.phtml");
                                 <div class="clr"></div>
 
 
-                                <div class="lable01">Gender:</div>  
+                                <div class="lable01">Gender<span style="color: red; margin:0 0 0 4px; ">*</span>:</div>  
                                 <div class="field01">
 
                                     <select name="txt_gender" id="txt_gender" style="width: 70px;">
@@ -234,7 +234,7 @@ include(APPPATH . "views/layouts/nav.phtml");
                                 </div> 
                                 <div class="clr"></div>
 
-                                <div class="lable01">Date of Birth:</div>  
+                                <div class="lable01">Date of Birth<span style="color: red; margin:0 0 0 4px; ">*</span>:</div>  
                                 <div class="field01">
 
                                     <?php
