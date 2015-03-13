@@ -389,9 +389,14 @@ function()
       var datatosend=$("#frm_Search_friends").serialize();
       var fname=$("#txt_fname").val();
 	  var lname=$("#txt_lname").val();
+          var txt_chat = $('#txt_chat').val();
 	  //var location=$("#txt_location").val();
 	 var radio=$('input[name=select_search]:checked').val();
-	  if( (fname == "" || lname == "") && (radio == '2'))
+         if(txt_chat == '' && (radio == '1')){
+              showUIMsgFriend("Please enter Chat Name");  
+         }
+         
+	else if( (fname == "" || lname == "") && (radio == '2'))
 	  {
 		 	
          showUIMsgFriend("Please enter first name and last name for search");  
