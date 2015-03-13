@@ -718,12 +718,8 @@ function get_user_clock() {//return false;
                    
                        ?>
                 <h5> Here provide counselling information.</h5> 
-                <p id="whatnext"><?= strip_tags(nl2br($salvation_prayer['result']['s_what_next'])) ?></p>
-<!--                <script type="text/javascript">
-                    jQuery(document).ready(function(){
-                       jQuery('#whatnext > p > *').unwrap();
-                    });
-                </script>-->
+                <p id="whatnext"><?= nl2br($salvation_prayer['result']['s_what_next']) ?></p>
+
 
                 <br />
                 <input name="" type="button" value="Close" class="popup-yes"   onclick="hide_dialog()"   /> 
