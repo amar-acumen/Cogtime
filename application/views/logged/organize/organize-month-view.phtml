@@ -169,7 +169,7 @@
 
                                 <form id="frmAddTodolist"  method="post" action="<?= base_url() . 'logged/organizer_day_view/add_todo_ajax' ?>" onsubmit="return false;" enctype="multipart/form-data" class="note-todo-form">
                                     <div class="lable-txt-nw">Add Todo List : </div>
-                                    <textarea rows="" cols=""  name="ta_todo_desc" id="ta_todo_desc" onKeyDown="limitText(this.form.ta_todo_desc, this.form.countdown, 250);" 
+                                    <textarea name="ta_todo_desc" id="ta_todo_desc" onKeyDown="limitText(this.form.ta_todo_desc, this.form.countdown, 250);" 
                           onKeyUp="limitText(this.form.ta_todo_desc, this.form.countdown, 250);"></textarea>	
                                     <span id="err_todo_desc" class="error-message" style="margin-left: 130px;
                                           margin-top: -9px;"></span>
