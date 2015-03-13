@@ -3,7 +3,7 @@
    $page_location = $this->uri->segment(1);
  $page_location1 = $this->uri->segment(2);
 ?>
-<li><a <?php if($page_location1 == 'church-wall'){  ?> class="community-ico active" <?php } ?> href="<?= base_url().''.$_SESSION['logged_church_id'].'/church-wall' ?>" class="community-ico">Community</a></li>
+<li><a <?php if($page_location1 == 'church-wall'){  ?> class="community-ico active" <?php } else { ?> class="community-ico" <?php } ?> href="<?= base_url().''.$_SESSION['logged_church_id'].'/church-wall' ?>" >Community</a></li>
 <li><a <?php if($page_location1 == 'church_wall_about'){  ?> class="about-ico active" <?php } ?> href="<?php echo base_url().$_SESSION['logged_church_id'];?>/church_wall_about/" class="about-ico">About</a></li>
 <li><a  <?php if($page_location1 == 'church_members'){  ?> class="member-ico active" <?php } ?> href="<?php echo base_url().$_SESSION['logged_church_id'];?>/church_members/" class="member-ico">Members</a></li>
 <li><a <?php if($page_location1 == 'church-prayer-group' || $page_location1 == 'create-prayer-group' || $page_location == 'church-prayer-group' || $page_location == 'church-prayer-group-member' || $page_location == 'church-prayer-group-invite' ){  ?> class="prayer-ico active" <?php } ?> href="<?php echo base_url().$_SESSION['logged_church_id'];?>/church-prayer-group" class="prayer-ico">Prayer Groups</a></li>

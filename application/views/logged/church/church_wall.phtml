@@ -84,7 +84,7 @@
 		<?php $members=get_member_by_id($_SESSION['logged_church_id']);
 		//pr($members);?>
 		<div class="privacy-drop" > <select id="meminv" multiple="multiple" name="meminv[]"><?php foreach($members as $k=>$v){ ?>
-									 <?=$v->member_name?>
+									 <?//=$v->member_name?>
 										<option value="<?=$v->member_id?>" ><?=$v->member_name?></option> 
 									 <?php }?></select></div>
         </div>
