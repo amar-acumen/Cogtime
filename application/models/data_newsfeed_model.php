@@ -495,7 +495,7 @@ $result_arr=$query->result_array();
      return $result_arr['0']['count'];
 }
 function get_audio_post_by_id($i_user_id,$s_where,$i_start_limit='', $i_no_of_page=''){
-   $sql = "select a.id as audioid , a.i_id_audio_album as audioalbumid ,a.s_title,a.s_artist,a.s_audio_file_name,aab.s_name from cg_user_audio as a , cg_audio_album as aab ".$s_where." and a.i_user_id ='".$i_user_id."' and a.i_id_audio_album = aab.id and a.i_status = 1 ORDER BY a.id DESC limit ".$i_start_limit.",".$i_no_of_page." "; 
+   $sql = "select a.id as audioid , a.i_id_audio_album as audioalbumid ,a.s_title,a.s_artist,a.s_audio_file_name,a.dt_created_on ,aab.s_name from cg_user_audio as a , cg_audio_album as aab ".$s_where." and a.i_user_id ='".$i_user_id."' and a.i_id_audio_album = aab.id and a.i_status = 1 ORDER BY a.id DESC limit ".$i_start_limit.",".$i_no_of_page." "; 
     $query=$this->db->query($sql);
 $result_arr=$query->result_array();  
 return $result_arr;  
