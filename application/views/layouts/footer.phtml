@@ -542,7 +542,9 @@ function get_user_clock() {//return false;
             <div >
                 <h5> Welcome to CoGTime where everybody is somebody.</h5> 
                 <p class="blue_bold12"><?= $this->session->userdata('username') ?> <span>YOU'VE MADE IT!!</span></p>
-                <p class="light_blue_bold12"> <?= $salvation_prayer['result']['s_welcome_msg'] ?></p>
+                <p class="light_blue_bold12"> <?= $salvation_prayer['result']['s_welcome_msg'] ?>
+                <?= pr($salvation_prayer['result']); ?>
+                </p>
                 <br />
                 <input name="" type="button" value="About This Site" class="popup-yes"  onclick="hide_dialog();window.location.href='<?=base_url()?>cms/2/about-us.html'"   />
                 &nbsp;
@@ -561,7 +563,7 @@ function get_user_clock() {//return false;
         </div>
         <div class="mid">
             <div class="heading-cap">
-                    <h4>Being a Christian <?php echo 'test'. pr($latest_emergency_intercession); ?> </h4>
+                    <h4>Being a Christian <?php echo 'test'; ?> </h4>
                     
             </div>
             <script type="text/javascript">
