@@ -10,7 +10,7 @@ class My_tweet_model extends Base_model
 
 	
 	public function get() {
-		$sql = sprintf('SELECT * FROM '.$this->db->TWEETS.' order by id desc');
+		$sql = 'SELECT * FROM '.$this->db->TWEETS.' order by id desc';
 		$query = $this->db->query($sql);
 		$result_arr = $query->result_array();
 
