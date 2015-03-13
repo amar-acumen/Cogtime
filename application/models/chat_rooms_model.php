@@ -11,7 +11,7 @@ class Chat_rooms_model extends Base_model
 
 	
 	public function get() {
-		$sql = sprintf('SELECT * FROM '.$this->chat_db->CHAT_ROOM.' order by id desc');
+		$sql = 'SELECT * FROM '.$this->chat_db->CHAT_ROOM.' order by id desc';
 		$query = $this->chat_db->query($sql);
 		$result_arr = $query->result_array();
 
