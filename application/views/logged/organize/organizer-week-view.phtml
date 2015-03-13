@@ -106,7 +106,7 @@
                                 <form id="frmAddNote"  method="post" action="<?= base_url() . 'logged/organizer_day_view/add_note_ajax' ?>" onsubmit="return false;"  enctype="multipart/form-data" class="note-todo-form">
 
                                     <div class="lable-txt-nw">Add Note : </div>
-                                    <textarea rows="" cols="" name="txt_desc" id="txt_desc" onKeyDown="limitText(this.form.txt_desc, this.form.countdown, 250);" onKeyUp="limitText(this.form.txt_desc, this.form.countdown, 250);"></textarea>
+                                    <textarea name="txt_desc" id="txt_desc" onKeyDown="limitText(this.form.txt_desc, this.form.countdown, 250);" onKeyUp="limitText(this.form.txt_desc, this.form.countdown, 250);"></textarea>
                                     <span id="err_desc" class="error-message" style="margin-left: 130px;margin-top: -8px;"></span> 
                                     <br class="clear"/>
                                     
