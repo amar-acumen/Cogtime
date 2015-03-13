@@ -52,7 +52,7 @@ function validateAddEventFrm(data)
         $('#frmCreateEvent')[0].reset();
         showUIMsg(data.msg);
         if (data.abusive != 1) {
-            //window.location.href = base_url + 'my-events.html';
+            window.location.href = base_url + 'my-events.html';
         }
     }
 
