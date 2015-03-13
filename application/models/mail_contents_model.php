@@ -7,7 +7,7 @@ class Mail_contents_model extends CI_Model {
 	}
 
 	function get() {
-            $sql = "SELECT * FROM %smail_contents ORDER BY name", $this->db->dbprefix;
+            $sql = "SELECT * FROM cg_mail_contents ORDER BY name" ;
             $query = $this->db->query($sql);
             $result_arr = $query->result_array();
 

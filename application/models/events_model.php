@@ -481,7 +481,7 @@ class Events_model extends Base_model {
             );
         } else {
 
-			echo 'ELSLESLELS';
+			//echo 'ELSLESLELS';
 
             $sql = sprintf("
 					(SELECT 
