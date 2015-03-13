@@ -184,21 +184,5 @@
             }	// end of success function...
         });
     }
-    function deny_event(id){
-      showUILoader_nodialog();
-    $.ajax({
-        type: 'POST',
-        url:base_url+'logged/my_events/deny_event',
-    
-        dataType: 'json',
-        data: ({'event_id': id,}),
-        success: function (data)  
-        {
-            location.reload();
-          
-        }
-    
-    });
-    
-    }
+   
 </script>
