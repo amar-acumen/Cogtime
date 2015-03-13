@@ -99,6 +99,7 @@ class My_events extends Base_controller {
         $result = $this->events_model->get_my_events($i_user_id, $s_where, intval($page), $this->pagination_per_page);
         //echo $this->db->last_query();
       echo   $total_rows = $this->events_model->get_total_my_events($i_user_id, $s_where);
+      die('ok');
         //pr($result,1);
         $data['arr_events'] = $result;
         $data['no_of_result'] = $total_rows;
