@@ -218,7 +218,7 @@ class Data_newsfeed_model extends CI_Model
 				UNION ALL
 
 				(SELECT u.id
-					FROM cg_susers u, cg_user_newsfeeds n 
+					FROM cg_users u, cg_user_newsfeeds n 
 					WHERE u.i_status='1' AND u.i_isdeleted ='1' AND n.i_owner_id = u.id 
 					AND n.s_type != 'friend_with' AND
 					(
