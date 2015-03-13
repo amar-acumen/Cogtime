@@ -475,13 +475,13 @@ class Events_model extends Base_model {
 					   e.i_host_id = u.id AND e.i_host_id = %2\$s
 					   %3\$s  )
 
-				ORDER BY `dt_start_time` ASC
+				ORDER BY `dt_created_on` DESC
 					"
                     , $this->db->dbprefix, intval($i_user_id), $s_where
             );
         } else {
 
-			echo 'ELSLESLELS';
+			//echo 'ELSLESLELS';
 
             $sql = sprintf("
 					(SELECT 
@@ -569,7 +569,7 @@ class Events_model extends Base_model {
 					  AND e.i_status = 1 AND e.i_host_id = %2\$s AND e.i_host_id = u.id
 					   %5\$s  )
 
-				    ORDER BY `dt_start_time` ASC
+				    ORDER BY `dt_created_on` DESC
 					limit %3\$s, %4\$s
 					"
                     , $this->db->dbprefix, intval($i_user_id), intval($i_start_limit), intval($i_no_of_page), $s_where

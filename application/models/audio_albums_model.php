@@ -20,11 +20,11 @@ class Audio_albums_model extends Base_model
 	
 	public function get_by_id($id, $start_limit="", $no_of_page="") {
 		if("$start_limit" == "") {
-			$sql = sprintf('SELECT * FROM '.$this->db->AUDIO_ALBUM.'  where id = %s',  $id);
+			$sql = 'SELECT * FROM '.$this->db->AUDIO_ALBUM.'  where id = "'.$id.'"';
 		}
 		else {
-			$sql = sprintf('SELECT * FROM '.$this->db->AUDIO_ALBUM.'  where id = %s limit %s, %s',  $id, $start_limit, $no_of_page);
-		}
+			$sql = 'SELECT * FROM '.$this->db->AUDIO_ALBUM.'  where id = "'.$id.'" limit {$start_limit}, {$no_of_page}';
+		}$start_limit
 		
 
 		$query = $this->db->query($sql);
@@ -42,7 +42,7 @@ class Audio_albums_model extends Base_model
  ### new created
 
 	public function get_total_by_album_id($album_id) {
-		$sql = sprintf("SELECT count(*) count FROM ".$this->db->USER_AUDIO."  where  i_id_audio_album = '%s'", $album_id);
+		$sql = "SELECT count(*) count FROM ".$this->db->USER_AUDIO."  where  i_id_audio_album = '".$album_id."'";
 		$query = $this->db->query($sql);
 		$result_arr = $query->result_array();
 
@@ -53,10 +53,10 @@ class Audio_albums_model extends Base_model
 	
 	public function get_by_user_id($user_id, $start_limit="", $no_of_page="") {
 		if("$start_limit" == "") {
-			$sql = sprintf('SELECT * FROM '.$this->db->AUDIO_ALBUM.'  WHERE i_user_id = %s ORDER BY id DESC ',$user_id);
+			$sql = 'SELECT * FROM '.$this->db->AUDIO_ALBUM.'  WHERE i_user_id = "'.$user_id.'" ORDER BY id DESC ';
 		}
 		else {
-			$sql = sprintf('SELECT * FROM '.$this->db->AUDIO_ALBUM.'  WHERE i_user_id = %s ORDER BY id DESC LIMIT %s, %s', $user_id, $start_limit, $no_of_page);
+			$sql = 'SELECT * FROM '.$this->db->AUDIO_ALBUM.'  WHERE i_user_id = "'.$user_id.'" ORDER BY id DESC LIMIT '.$start_limit.', '.$no_of_page.'';
 		}
 
 		$query = $this->db->query($sql);
