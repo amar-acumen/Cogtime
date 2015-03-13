@@ -78,7 +78,7 @@ class Audio_albums_model extends Base_model
 	
 
 	public function get_total_by_user_id($user_id) {
-		$sql = sprintf("SELECT count(*) count FROM ".$this->db->AUDIO_ALBUM."  where i_user_id = '%s'", $user_id);
+		$sql = "SELECT count(*) count FROM ".$this->db->AUDIO_ALBUM."  where i_user_id = '".$user_id."'", ;
 		$query = $this->db->query($sql); 
 		$result_arr = $query->result_array();
 
@@ -160,33 +160,30 @@ class Audio_albums_model extends Base_model
             $logged_user_id = intval(decrypt($this->session->userdata('user_id')));
             //echo $logged_user_id; 
             // die('ok');
-	     $sql = sprintf( 'DELETE FROM '.$this->db->AUDIO_ALBUM.' WHERE id=%s', $id );
+	     $sql = 'DELETE FROM '.$this->db->AUDIO_ALBUM.' WHERE id="'.$id.'"';
 			 $this->db->query($sql);
 		 
 		 ## delete associated photos
-		 $audio_sql = sprintf( 'SELECT id, s_audio_file_name FROM '.$this->db->USER_AUDIO.' WHERE  i_id_audio_album =%s ', $id );
+		 $audio_sql = 'SELECT id, s_audio_file_name FROM '.$this->db->USER_AUDIO.' WHERE  i_id_audio_album ="'.$id.'" ';
 		 $audio_arr = $this->db->query($audio_sql)->result_array();
 		 
-		   $albums_comments_sql = sprintf( 'DELETE FROM %sUSER_MEDIA_COMMENTS WHERE i_media_id=%s AND s_media_type = "audio_album" ',
-								 $this->db->dbprefix, $id);
+		   $albums_comments_sql = 'DELETE FROM cg_user_media_comments WHERE i_media_id="'.$id.'" AND s_media_type = "audio_album" ';
 		 $this->db->query($albums_comments_sql);
 		
-		  $like_album_sql = sprintf( "DELETE FROM %suser_media_like WHERE i_media_id=%s AND s_media_type = 'audio_album'" , $this->db->dbprefix, $id);
+		  $like_album_sql = "DELETE FROM cg_user_media_like WHERE i_media_id='".$id."' AND s_media_type = 'audio_album'" ;
 		  		 $this->db->query($like_album_sql); 
 		 
 		 ## delete associated comments
 		 if(count($audio_arr) && is_array($audio_arr)){
 			 foreach($audio_arr as $key=>$val){
-				  $comments_sql = sprintf( 'DELETE FROM %sUSER_MEDIA_COMMENTS WHERE i_media_id=%s AND s_media_type = "audio" ',
-								 $this->db->dbprefix, $val['id']);
+				  $comments_sql = 'DELETE FROM cg_user_media_comments WHERE i_media_id="'.$val['id'].'" AND s_media_type = "audio" ';
 				 $this->db->query($comments_sql);
 				 
 				# delete from like table #
-				  $like_sql = sprintf( "DELETE FROM %suser_media_like WHERE i_media_id=%s AND s_media_type = 'audio'" , $this->db->dbprefix, $val['id']);
+				  $like_sql = "DELETE FROM cg_user_media_like WHERE i_media_id='".$val['id']."' AND s_media_type = 'audio'";
 		  		 $this->db->query($like_sql); 
 				 
-				  $audio_sql = sprintf( 'DELETE FROM %sUSER_AUDIO WHERE  	i_id_audio_album=%s  ',
-								 $this->db->dbprefix, $id);				 
+				  $audio_sql = 'DELETE FROM cg_user_audio WHERE i_id_audio_album="'.$id.'"';				 
 				 $this->db->query($audio_sql);
 				 
 				
@@ -217,13 +214,12 @@ class Audio_albums_model extends Base_model
 		global $CI;
 				
 		if("$start_limit" == "") {
-			$sql = 		sprintf("SELECT * FROM ".$this->db->USER_AUDIO
-						."  where  i_id_audio_album = '%s' AND i_user_id = '%s' ORDER BY i_order DESC ", $album_id ,$user_id);
+			$sql = 		"SELECT * FROM ".$this->db->USER_AUDIO
+						."  where  i_id_audio_album = '".$album_id."' AND i_user_id = '".$user_id."' ORDER BY i_order DESC ";
 		}
 		else {
-			$sql = 		sprintf("SELECT * FROM ".$this->db->USER_AUDIO
-				  		."  where  i_id_audio_album = '%s' AND i_user_id = '%s' ORDER BY i_order DESC LIMIT %s, %s"
-				  		, $album_id, $user_id, $start_limit, $no_of_page);
+			$sql = 		"SELECT * FROM ".$this->db->USER_AUDIO
+				  		."  where  i_id_audio_album = '".$album_id."' AND i_user_id = '".$user_id."' ORDER BY i_order DESC LIMIT {$start_limit}, {$no_of_page}";
 		} 
 				
 		$query = $this->db->query($sql); 
@@ -232,7 +228,7 @@ class Audio_albums_model extends Base_model
 		
 		if(count($result_arr) > 0 ){
 			
-			$user_sql = sprintf("SELECT s_profile_photo FROM ".$this->db->USERS."  where  id = '%s'", $user_id);
+			$user_sql = "SELECT s_profile_photo FROM ".$this->db->USERS."  where  id = '".$user_id."'";
 			$query = $this->db->query($user_sql); 
 			
 			  foreach ($query->result() as $row)
@@ -298,10 +294,10 @@ class Audio_albums_model extends Base_model
 	
 	public function get_by_album_details_id($id, $s_where,  $start_limit="", $no_of_page="") {
 		if("$start_limit" == "") {
-			$sql = sprintf('SELECT * FROM '.$this->db->AUDIO_ALBUM.'  where id = %s %s ' ,  $id , $s_where);
+			$sql = 'SELECT * FROM '.$this->db->AUDIO_ALBUM.'  where id = "'.$id.'" {$s_where} ';
 		}
 		else {
-			$sql = sprintf('SELECT * FROM '.$this->db->AUDIO_ALBUM.'  where id = %s  %s limit %s, %s',  $id, $s_where, $start_limit, $no_of_page);
+			$sql = 'SELECT * FROM '.$this->db->AUDIO_ALBUM.'  where id = "'.$id.'"  {$s_where} limit {$start_limit}, {$no_of_page}';
 		}
 
 		$query = $this->db->query($sql);
@@ -319,7 +315,7 @@ class Audio_albums_model extends Base_model
 	
 	
 	public function get_total_audios_by_album_id($album_id, $s_where) {
-		$sql = sprintf("SELECT count(*) count FROM ".$this->db->USER_AUDIO."  where  i_id_audio_album = '%s' %s ", $album_id, $s_where);
+		$sql = "SELECT count(*) count FROM ".$this->db->USER_AUDIO."  where  i_id_audio_album = '".$album_id."' {$s_where} ";
 		$query = $this->db->query($sql);
 		$result_arr = $query->result_array(); //echo $this->db->last_query(); exit;
 
@@ -330,7 +326,7 @@ class Audio_albums_model extends Base_model
 	######## new for organize audio page ################3
 	
 	public function get_total_audios_albm_id_($album_id, $user_id) {
-		$sql = sprintf("SELECT count(*) count FROM ".$this->db->USER_AUDIO."  where  i_id_audio_album = '%s' AND `i_user_id` = %s ", $album_id, $user_id);
+		$sql = "SELECT count(*) count FROM ".$this->db->USER_AUDIO."  where  i_id_audio_album = '".$album_id."' AND `i_user_id` = '".$user_id."' ";
 		$query = $this->db->query($sql);
 		$result_arr = $query->result_array(); //echo $this->db->last_query(); 
 

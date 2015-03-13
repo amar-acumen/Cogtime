@@ -21,10 +21,10 @@ class Chat_rooms_model extends Base_model
 	
 	public function get_by_id($id, $start_limit="", $no_of_page="") {
 		if("$start_limit" == "") {
-			$sql = sprintf('SELECT * FROM '.$this->chat_db->CHAT_ROOM.'  where room_id = %s',  $id);
+			$sql = 'SELECT * FROM '.$this->chat_db->CHAT_ROOM.'  where room_id = "'.$id.'"';
 		}
 		else {
-			$sql = sprintf('SELECT * FROM '.$this->chat_db->CHAT_ROOM.'  where room_id = %s limit %s, %s',  $id, $start_limit, $no_of_page);
+			$sql = 'SELECT * FROM '.$this->chat_db->CHAT_ROOM.'  where room_id = "'.$id.'" limit {$start_limit}, {$no_of_page}';
 		}
 		$query = $this->chat_db->query($sql);
 		$result_arr = $query->result_array();
@@ -58,7 +58,7 @@ class Chat_rooms_model extends Base_model
 	public function delete_by_id($id) {
 	
 		## deleting ring cateory 
-	     $sql = sprintf( 'DELETE FROM '.$this->chat_db->CHAT_ROOM.' WHERE room_id=%s', $id );
+	     $sql = 'DELETE FROM '.$this->chat_db->CHAT_ROOM.' WHERE room_id="'.$id.'"';
 		 $this->chat_db->query($sql);
 		#echo $this->db->last_query(); exit;
 	}
@@ -176,8 +176,7 @@ class Chat_rooms_model extends Base_model
 	  {
 		  $tbl = 'room';
 		  
-		  $SQL = sprintf("SELECT IFNULL(MAX(`sequence`)+1,1) AS `max_sequence` FROM %s %s",
-									   $tbl, $where);
+		  $SQL = "SELECT IFNULL(MAX(`sequence`)+1,1) AS `max_sequence` FROM ".$tbl." {$where}";
 		  $query = $this->chat_db->query($SQL);
 		  $rows = $query->row();
 
@@ -196,8 +195,7 @@ class Chat_rooms_model extends Base_model
 	  
 	  public function get_grpid_by_Chatroom_id($room_id){
 		
-		  $SQL = sprintf("SELECT i_group_id FROM %s WHERE i_chat_room_id = %s",
-									    $this->db->CHAT_ROOM_INVITATION, $room_id);
+		  $SQL = "SELECT i_group_id FROM ".$this->db->CHAT_ROOM_INVITATION." WHERE i_chat_room_id = '".$room_id."'";
 									   
 		  $query     = $this->db->query($SQL); //echo $this->db->last_query();
           $result_arr = $query->result_array(); //pr($result_arr);
@@ -216,8 +214,7 @@ class Chat_rooms_model extends Base_model
 	   ## fetch Chat room details by group_id
 	    public function get_Chatroom_grpid_by($grp_id){
 		
-		 $SQL = sprintf("SELECT i_chat_room_id FROM %s WHERE i_group_id = %s  ",
-									   $this->db->CHAT_ROOM_INVITATION, $grp_id);
+		 $SQL = "SELECT i_chat_room_id FROM ".$this->db->CHAT_ROOM_INVITATION." WHERE i_group_id = '".$grp_id."'  ";
 									   
 		  $query     = $this->db->query($SQL); //echo $this->db->last_query(); 
           $result_arr = $query->result_array(); //pr($result_arr);
@@ -293,7 +290,7 @@ class Chat_rooms_model extends Base_model
 	 public function delete_chat_invitation($id) {
 	
 		## deleting ring cateory 
-	     $sql = sprintf( 'DELETE FROM '.$this->db->CHAT_ROOM_INVITATION.' WHERE i_chat_room_id=%s', $id );
+	     $sql = 'DELETE FROM '.$this->db->CHAT_ROOM_INVITATION.' WHERE i_chat_room_id="'.$id.'"';
 		 $this->db->query($sql);
 		#echo $this->db->last_query(); exit;
 	}

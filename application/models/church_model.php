@@ -11,7 +11,7 @@ class Church_model extends Base_model
 	
 	public function get_by_id($id, $start_limit="", $no_of_page="") {
 		
-		$sql = sprintf('SELECT * FROM '.$this->db->CHURCH.'  where id = %s',  $id);
+		$sql = 'SELECT * FROM '.$this->db->CHURCH.'  where id = "'.$id.'"';
 		
 		$query = $this->db->query($sql); #echo $this->db->last_query(); exit;
 		$result_arr = $query->result_array();
@@ -55,7 +55,7 @@ class Church_model extends Base_model
 	
 
 	public function delete_by_id($id) {
-	    $sql = sprintf( 'DELETE FROM '.$this->db->CHURCH.' WHERE id=%s', $id );
+	    $sql = 'DELETE FROM '.$this->db->CHURCH.' WHERE id="'.$id.'"';
 		$this->db->query($sql);
 		
 	}

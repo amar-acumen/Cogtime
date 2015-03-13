@@ -60,7 +60,7 @@ class Church_newsfeed_model extends Base_model
 	    $_ret = array();
 		if(intval($i_newsfeed_id)>0)
 		{
-			$sql = sprintf("SELECT * FROM %schurch_newsfeed WHERE id = '%s'", $this->db->dbprefix, intval($i_newsfeed_id));
+			$sql = "SELECT * FROM cg_church_newsfeed WHERE id = '".intval($i_newsfeed_id)."'";
 			$query = $this->db->query($sql);
 			$result_arr = $query->result_array();
 			 $_ret = $result_arr[0];
