@@ -726,7 +726,7 @@ class Events_model extends Base_model {
 					  WHERE u.i_status='1' AND u.i_isdeleted ='1' AND e.i_status = 1 AND e.i_host_id = u.id AND e.dt_end_time >  NOW() AND e.i_user_type = 1
 					   %2\$s )
 
-				ORDER BY  dt_end_time ASC
+				ORDER BY  dt_created_on ASC
 					"
                     , $this->db->dbprefix, $s_where
             );
@@ -804,7 +804,7 @@ class Events_model extends Base_model {
 					  WHERE u.i_status='1' AND u.i_isdeleted ='1' AND e.i_status = 1 AND e.i_host_id = u.id AND e.dt_end_time >  NOW() AND  e.i_user_type = 1
 					   %4\$s )
 
-				    ORDER BY  dt_end_time ASC 
+				    ORDER BY  dt_created_on ASC 
 					limit %2\$s, %3\$s
 					"
                     , $this->db->dbprefix, intval($i_start_limit), intval($i_no_of_page), $s_where
