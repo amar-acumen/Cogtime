@@ -37,7 +37,7 @@ class My_wall extends Base_controller {
             $this->load->model('holy_place_model');
             $this->load->model('intercession_model');
             $this->load->model('prayer_wall_model');
-            $this->load->model('projects_model');
+            //$this->load->model('projects_model');
             $this->load->model('prayer_commit_model');
             $this->load->model('prayer_group_model');
         } catch (Exception $err_obj) {

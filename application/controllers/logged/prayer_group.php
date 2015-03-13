@@ -30,12 +30,12 @@ class Prayer_group extends Base_controller
 			   // put this code on those pages which are not accessable by guest user
             # loading reqired model & helpers...
 
-            $this->load->model('users_model');
+            //$this->load->model('users_model');
 			$this->load->model('user_alert_model');
 			$this->load->model('user_notifications_model');
             $this->load->model('prayer_group_model');
-			$this->load->model('contacts_model');
-			$this->load->model('my_prayer_partner_model');
+			//$this->load->model('contacts_model');
+			//$this->load->model('my_prayer_partner_model');
 			$this->load->model('user_alert_model');
 			//$this->load->model('chat_rooms_model');
 			$this->load->model('organizer_todo_model');
@@ -1321,7 +1321,7 @@ class Prayer_group extends Base_controller
 					if( count($arr_messages)==0 ) 
 						{
 		 					
-								$this->load->model('users_model');
+								//$this->load->model('users_model');
 								
 								//$end_time = trim($this->input->post('date_end1'));
 								#$end_time_arr = explode(' ',$end_time);
