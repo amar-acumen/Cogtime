@@ -10,7 +10,7 @@ class Ring_post_model extends Base_model
 
 	
 	public function get() {
-		$sql = sprintf('SELECT * FROM '.$this->db->USER_RING_POST.' order by id desc');
+		$sql = 'SELECT * FROM '.$this->db->USER_RING_POST.' order by id desc';
 		$query = $this->db->query($sql);
 		$result_arr = $query->result_array();
 

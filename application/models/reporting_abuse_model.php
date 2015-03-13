@@ -9,7 +9,7 @@ class Reporting_abuse_model extends Base_model
 	}
 
 	public function get() {
-		$sql = sprintf('SELECT * FROM '.$this->db->ABUSE_DICTIONARY.' order by id desc');
+		$sql = 'SELECT * FROM '.$this->db->ABUSE_DICTIONARY.' order by id desc';
 		$query = $this->db->query($sql);
 		$result_arr = $query->result_array();
 //pr($result_arr,1);
