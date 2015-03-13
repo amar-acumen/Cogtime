@@ -713,15 +713,16 @@ function get_user_clock() {//return false;
             </div>
             <div class="">
                        <?php 
+                       echo $salvation_prayer['result']['s_what_next'];
                     //echo $about = preg_replace('#<p>(.*?)</p>#', ' ', nl2br($salvation_prayer['result']['s_what_next']));
                        ?>
                 <h5> Here provide counselling information.</h5> 
                 <p id="whatnext"><?= nl2br($salvation_prayer['result']['s_what_next']) ?></p>
-                <script type="text/javascript">
+<!--                <script type="text/javascript">
                     jQuery(document).ready(function(){
                        jQuery('#whatnext > p > *').unwrap();
                     });
-                </script>
+                </script>-->
 
                 <br />
                 <input name="" type="button" value="Close" class="popup-yes"   onclick="hide_dialog()"   /> 
