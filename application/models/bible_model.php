@@ -11,6 +11,7 @@ class Bible_model extends Base_model
 	
 	public function get_by_id($id, $start_limit="", $no_of_page="") {
 		
+
 		$sql = 'SELECT * FROM '.$this->db->BIBLE_QUIZ.'  where id = "'.$id.'"';
 		
 		$query = $this->db->query($sql); #echo $this->db->last_query(); exit;
