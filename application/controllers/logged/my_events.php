@@ -688,7 +688,12 @@ class My_events extends Base_controller {
         //echo json_encode( array('html'=>$content, 'current_page'=>$page) );
         echo json_encode(array('html' => $content, 'current_page' => $cur_page, 'no_of_result' => $data['no_of_result'], 'total' => $total_rows, 'view_more' => $view_more, 'cur_page' => $data['current_page_1']));
     }
-
+function deny_event(){
+    $event_id = $this->input->post('event_id');
+    $i_user_id = intval(decrypt($this->session->userdata('user_id')));
+    $this->db->delete('cg_event_user_invited', array('i_event_id' => $id , 'i_user_id' => $i_user_id)); 
+echo json_encode(array('msg' => 'ok'));
+}
 }
 
 // end of controller...
