@@ -10,7 +10,7 @@ class Organizer_todo_model extends Base_model
 
 	
 	public function get() {
-		$sql = sprintf('SELECT * FROM '.$this->db->ORGANIZER_TO_DO_LIST.' order by id desc');
+		$sql = 'SELECT * FROM '.$this->db->ORGANIZER_TO_DO_LIST.' order by id desc';
 		$query = $this->db->query($sql);
 		$result_arr = $query->result_array();
 

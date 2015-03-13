@@ -20,7 +20,7 @@ class Data_newsfeed_model extends CI_Model
 	}
 
 	public function get() {
-		$sql = sprintf("SELECT * FROM %s ORDER BY dt_created_on DESC", $this->db->user_newsfeeds);
+		$sql = "SELECT * FROM %s ORDER BY dt_created_on DESC", $this->db->user_newsfeeds;
 		$query = $this->db->query($sql);
 		$result_arr = $query->result_array();
 
