@@ -120,7 +120,7 @@
                   </div>
             </div>
             <div class="frm_box">
-            <form id="uploadVideoFrm" class="abcd" action="<?php echo base_url()?>logged/organize_my_videos/upload_individual_video" method="post" enctype="multipart/data" onsubmit="return upload_video_organize_()">
+            <form id="uploadVideoFrm" class="abcd" action="<?php echo base_url()?>logged/organize_my_videos/upload_individual_video" method="post" enctype="multipart/form-data" onsubmit="return upload_video_organize_()">
                   <div class="lable01">Title:</div>
                   <div class="field01">
                         <input name="txt_title" type="text" />
@@ -229,7 +229,7 @@
                   </div>
             </div>
             <div class="frm_box">
-            <form id="uploadVideoFrmEdit" action="<?php echo base_url()?>logged/organize_my_videos/edit_individual_video" method="post" enctype="multipart/data" onsubmit="return upload_video_organize_edit_()">
+            <form id="uploadVideoFrmEdit" action="<?php echo base_url()?>logged/organize_my_videos/edit_individual_video" method="post" enctype="multipart/form-data" onsubmit="return upload_video_organize_edit_()">
             <input type="hidden" name="id" id="id" value="" />
             <input type="hidden" name="s_video_image" id="s_video_image" value="" />
             
