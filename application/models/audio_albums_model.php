@@ -24,7 +24,7 @@ class Audio_albums_model extends Base_model
 		}
 		else {
 			$sql = 'SELECT * FROM '.$this->db->AUDIO_ALBUM.'  where id = "'.$id.'" limit {$start_limit}, {$no_of_page}';
-		}$start_limit
+		}
 		
 
 		$query = $this->db->query($sql);
