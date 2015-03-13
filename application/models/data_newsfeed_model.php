@@ -196,21 +196,20 @@ class Data_newsfeed_model extends CI_Model
 
 	 /*get total of my($user_id) newsfeeds */
 	public function get_total_newsfeeds_by_user_id($i_user_id) {
-
-		$sql = sprintf("
-				SELECT COUNT(*) count FROM (
+		$i_user_id = intval($i_user_id);
+		$sql = "SELECT COUNT(*) count FROM (
 				(SELECT u.id
 						
-					FROM %1\$susers u, %1\$suser_newsfeeds n 
+					FROM cg_users u, cg_user_newsfeeds n 
 					WHERE u.i_status='1' AND u.i_isdeleted ='1'  AND n.i_owner_id = u.id AND
 					n.s_type = 'friend_with' AND
 					(
-						n.i_owner_id in (SELECT u.id from %1\$suser_contacts c, %1\$susers u where c.s_status = 'accepted'
-						and ((c.i_requester_id = %2\$s and u.id=c.i_accepter_id) 
-						or (c.i_accepter_id = %2\$s and u.id=c.i_requester_id)) 
-							and n.data not regexp '\"user_id1\"[[.:.]]\"%2\$s\"'  
-							and n.data not regexp '\"user_id2\"[[.:.]]\"%2\$s\"' 
-						) and i_owner_id != '%2\$s' and n.s_ownership = 'ownerpost'
+						n.i_owner_id in (SELECT u.id from cg_user_contacts c,cg_users u where c.s_status = 'accepted'
+						and ((c.i_requester_id = '".$i_user_id."' and u.id=c.i_accepter_id) 
+						or (c.i_accepter_id = '".$i_user_id."' and u.id=c.i_requester_id)) 
+							and n.data not regexp '\"user_id1\"[[.:.]]\"$i_user_id\"'  
+							and n.data not regexp '\"user_id2\"[[.:.]]\"$i_user_id\"' 
+						) and i_owner_id != '".$i_user_id."' and n.s_ownership = 'ownerpost'
 					
 					
 					
@@ -219,22 +218,19 @@ class Data_newsfeed_model extends CI_Model
 				UNION ALL
 
 				(SELECT u.id
-					FROM %1\$susers u, %1\$suser_newsfeeds n 
+					FROM cg_susers u, cg_user_newsfeeds n 
 					WHERE u.i_status='1' AND u.i_isdeleted ='1' AND n.i_owner_id = u.id 
 					AND n.s_type != 'friend_with' AND
 					(
-						n.i_owner_id in (SELECT u.id from %1\$suser_contacts c, %1\$susers u where c.s_status = 'accepted'
-						AND ((c.i_requester_id = %2\$s AND u.id=c.i_accepter_id) 
-						OR (c.i_accepter_id = %2\$s AND u.id=c.i_requester_id))) AND n.s_ownership = 'ownerpost'
+						n.i_owner_id in (SELECT u.id from cg_user_contacts c, cg_users u where c.s_status = 'accepted'
+						AND ((c.i_requester_id = '".$i_user_id."' AND u.id=c.i_accepter_id) 
+						OR (c.i_accepter_id = '".$i_user_id."' AND u.id=c.i_requester_id))) AND n.s_ownership = 'ownerpost'
 						OR
-						n.i_owner_id = '%2\$s'
+						n.i_owner_id = '".$i_user_id."'
 					) )
 
 				
-				) t
-					"
-				, $this->db->dbprefix, intval($i_user_id)
-			);
+				) t";
 		
 
 		$query = $this->db->query($sql);
