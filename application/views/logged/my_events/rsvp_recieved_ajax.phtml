@@ -46,7 +46,9 @@
                                       
                                       <div class="clr"></div>
                                       <ul class="article-comment-block article-comment-block2">
+                                          <li id="deny_rsvp_<?=$val['id']?>"> <img src="images/icons/send.png" alt=""  width="16" height="13" class="icon-img" height="16" width="16"/><a href="javascript:void(0)" onclick="deny_event('<?=$val['id']?>')">Deny event</a>  </li>
                                       <li  class="first" id="send_rsvp_<?=$val['id']?>"><img src="images/icons/send.png" alt=""  width="16" height="13" class="icon-img" height="16" width="16"/> <a href="javascript:void(0);" class="blue_link" >RSVP Recieved (<?=$val['total_rsvp']?>) </a></li>
+                                      
                                       </ul>
 									  
 									  
@@ -84,6 +86,7 @@
 													else{
 														echo '<div style="margin-top:5px;">No RSVPs received yet!</div>';
 												   } ?>
+                                                  
                                             </div>
                                          
                                         </div>
