@@ -112,11 +112,12 @@ class My_events extends Base_controller {
             $view_more = false;
         //--------- end check
 
-		pr($data,1);
+		//pr($data,1);
         $VIEW_FILE = "logged/my_events/my_events_ajax_new.phtml";
 
         if (is_array($result) && count($result)) {
             $content = $this->load->view($VIEW_FILE, $data, true);
+             parent::_render($data, $VIEW);
         } else {
             $content = '';
         }
