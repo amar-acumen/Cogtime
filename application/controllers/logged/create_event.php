@@ -889,6 +889,9 @@ class Create_event extends Base_controller {
                    
                 } else {
                     $i_ret_id = $this->events_model->update($info, $id);
+                    /******************************resend friend ******************************/
+                    pr($arr_frnd);
+                    /*************************************************************/
 //                echo $i_ret_id;
 
                     insert_invitation($id, $_POST, $this->db->event_invitation, 'i_event_id');
