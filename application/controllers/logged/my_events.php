@@ -74,7 +74,7 @@ class My_events extends Base_controller {
             $this->all_events_ajax_pagination($i_user_id);
             $content = ob_get_contents();
             $content_obj = json_decode($content);
-            $data['events_ajax_content'] = $content_obj->html;
+            $data['events_ajax_content_new'] = $content_obj->html;
 			
             $data['no_of_result'] = $content_obj->no_of_result;
             ob_end_clean();
@@ -90,16 +90,17 @@ class My_events extends Base_controller {
 
     public function all_events_ajax_pagination($i_user_id, $page = 0) {
 
-        //echo $page;
+        
         $s_where = '';
         $cur_page = $page + $this->pagination_per_page;
         $data = $this->data;
         $cur_time = date('Y-m-d');
         $s_where = " AND e.dt_end_time >= '" . $cur_time . "'";
         $result = $this->events_model->get_my_events($i_user_id, $s_where, intval($page), $this->pagination_per_page);
-        //echo $this->db->last_query();
-        $total_rows = $this->events_model->get_total_my_events($i_user_id, $s_where);
-        //pr($result,1);
+        
+      $total_rows = $this->events_model->get_total_my_events($i_user_id, $s_where);
+     
+        
         $data['arr_events'] = $result;
         $data['no_of_result'] = $total_rows;
         $data['current_page_1'] = $cur_page;
@@ -110,18 +111,18 @@ class My_events extends Base_controller {
         $rest_counter = $total_rows - $page;
         if ($rest_counter <= $this->pagination_per_page)
             $view_more = false;
-        //--------- end check
-
-		//pr($data,1);
-        $VIEW_FILE = "logged/my_events/my_events_ajax.phtml";
+       
+        $VIEW_FILE = "logged/my_events/my_events_ajax_new.phtml";
 
         if (is_array($result) && count($result)) {
+            
             $content = $this->load->view($VIEW_FILE, $data, true);
+            
         } else {
             $content = '';
         }
 
-        //echo json_encode( array('html'=>$content, 'current_page'=>$page) );
+        
         echo json_encode(array('html' => $content, 'current_page' => $cur_page, 'no_of_result' => $data['no_of_result'], 'total' => $total_rows, 'view_more' => $view_more, 'cur_page' => $data['current_page_1']));
     }
 
@@ -688,7 +689,12 @@ class My_events extends Base_controller {
         //echo json_encode( array('html'=>$content, 'current_page'=>$page) );
         echo json_encode(array('html' => $content, 'current_page' => $cur_page, 'no_of_result' => $data['no_of_result'], 'total' => $total_rows, 'view_more' => $view_more, 'cur_page' => $data['current_page_1']));
     }
-
+function deny_event(){
+    $event_id = $this->input->post('event_id');
+    $i_user_id = intval(decrypt($this->session->userdata('user_id')));
+    $this->db->delete('cg_event_user_invited', array('i_event_id' => $event_id , 'i_user_id' => $i_user_id)); 
+echo json_encode(array('msg' => 'ok'));
+}
 }
 
 // end of controller...

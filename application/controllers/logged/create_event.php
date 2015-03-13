@@ -889,6 +889,19 @@ class Create_event extends Base_controller {
                    
                 } else {
                     $i_ret_id = $this->events_model->update($info, $id);
+                    /******************************resend friend ******************************/
+                    //pr($arr_frnd);
+                   $count_frnd = count($arr_frnd);
+                   for($i=0;$i<$count_frnd;$i++){
+                                        $data = array(
+                    'i_event_id' => $id ,
+                    'i_user_id' => $arr_frnd[$i] ,
+                    'dt_created_on' => get_db_datetime()
+                 );
+
+                   $this->db->insert('cg_event_user_invited', $data); 
+                   }
+                    /*************************************************************/
 //                echo $i_ret_id;
 
                     insert_invitation($id, $_POST, $this->db->event_invitation, 'i_event_id');

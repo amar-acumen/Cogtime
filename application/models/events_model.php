@@ -11,7 +11,7 @@ class Events_model extends Base_model {
     }
 
     public function get() {
-        $sql = sprintf('SELECT * FROM ' . $this->db->EVENTS . ' order by id desc');
+        $sql = 'SELECT * FROM ' . $this->db->EVENTS . ' order by id desc';
         $query = $this->db->query($sql);
         $result_arr = $query->result_array();
 //pr($result_arr,1);
@@ -726,7 +726,7 @@ class Events_model extends Base_model {
 					  WHERE u.i_status='1' AND u.i_isdeleted ='1' AND e.i_status = 1 AND e.i_host_id = u.id AND e.dt_end_time >  NOW() AND e.i_user_type = 1
 					   %2\$s )
 
-				ORDER BY  dt_end_time ASC
+				ORDER BY  dt_created_on DESC
 					"
                     , $this->db->dbprefix, $s_where
             );
@@ -804,7 +804,7 @@ class Events_model extends Base_model {
 					  WHERE u.i_status='1' AND u.i_isdeleted ='1' AND e.i_status = 1 AND e.i_host_id = u.id AND e.dt_end_time >  NOW() AND  e.i_user_type = 1
 					   %4\$s )
 
-				    ORDER BY  dt_end_time ASC 
+				    ORDER BY  dt_created_on DESC 
 					limit %2\$s, %3\$s
 					"
                     , $this->db->dbprefix, intval($i_start_limit), intval($i_no_of_page), $s_where
@@ -1552,7 +1552,7 @@ class Events_model extends Base_model {
     }
 
     public function get_latest_admin_events() {
-        $sql = $this->db->query('select s_title,s_desc,s_city,s_state,i_country_id,dt_start_time,dt_end_time from cg_events where i_user_type = "2" and i_status="1" order by dt_start_time desc limit 0,2 ');
+        $sql = $this->db->query('select s_title,s_desc,s_city,s_state,i_country_id,dt_start_time,dt_end_time from cg_events where i_user_type = "2" and i_status="1" order by dt_created_on DESC limit 0,2 ');
         $res = $sql->result_array();
         return $res;
     }

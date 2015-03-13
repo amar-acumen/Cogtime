@@ -20,7 +20,7 @@ class Data_newsfeed_model extends CI_Model
 	}
 
 	public function get() {
-		$sql = sprintf("SELECT * FROM %s ORDER BY dt_created_on DESC", $this->db->user_newsfeeds);
+		$sql = "SELECT * FROM $this->db->user_newsfeeds ORDER BY dt_created_on DESC";
 		$query = $this->db->query($sql);
 		$result_arr = $query->result_array();
 
@@ -33,7 +33,7 @@ class Data_newsfeed_model extends CI_Model
 	    $_ret = array();
 		if(intval($i_newsfeed_id)>0)
 		{
-			$sql = sprintf("SELECT * FROM %suser_newsfeeds WHERE id = '%s'", $this->db->dbprefix, intval($i_newsfeed_id));
+			$sql = "SELECT * FROM cg_user_newsfeeds WHERE id = '".intval($i_newsfeed_id)."'";
 			$query = $this->db->query($sql);
 			$result_arr = $query->result_array();
 			 $_ret = $result_arr[0];
@@ -44,7 +44,7 @@ class Data_newsfeed_model extends CI_Model
 
 	/* get users wall posts */
 	public function get_by_owner($i_owner_id) {
-		$sql = sprintf("SELECT * FROM %suser_newsfeeds where i_owner_id = '%s' order by dt_created_on desc", $this->db->dbprefix, intval($i_owner_id));
+		$sql = "SELECT * FROM cg_user_newsfeeds where i_owner_id = '".intval($i_owner_id)."' order by dt_created_on desc";
 		$query = $this->db->query($sql);
 		$result_arr = $query->result_array();
 
@@ -53,8 +53,9 @@ class Data_newsfeed_model extends CI_Model
 
 	/* get all my($user_id) newsfeeds */
 	public function get_newsfeeds_by_user_id($i_user_id, $i_start_limit='', $i_no_of_page='') {
+		$i_user_id = intval($i_user_id);
 		if("$i_start_limit" == "") {
-			$sql = sprintf("
+			$sql = "
 				(SELECT  u.id i_user_id, 
 						 u.s_email, 
 						
@@ -69,16 +70,16 @@ class Data_newsfeed_model extends CI_Model
 						n.data,
 						n.dt_created_on,
 						n.i_referrence_id
-					FROM %1\$susers u, %1\$suser_newsfeeds n 
+					FROM cg_users u,cg_user_newsfeeds n 
 					WHERE u.i_status='1' AND u.i_isdeleted ='1' AND n.i_owner_id = u.id AND
 					n.s_type = 'friend_with' AND n.i_status='1' AND
 					(
-						n.i_owner_id in (SELECT u.id from %1\$suser_contacts c, %1\$susers u where c.s_status = 'accepted'
-						and ((c.i_requester_id = %2\$s and u.id=c.i_accepter_id) 
-						or (c.i_accepter_id = %2\$s and u.id=c.i_requester_id)) 
-							and n.data not regexp '\"user_id1\"[[.:.]]\"%2\$s\"'  
-							and n.data not regexp '\"user_id2\"[[.:.]]\"%2\$s\"' 
-						) and i_owner_id != '%2\$s' and n.s_ownership = 'ownerpost'
+						n.i_owner_id in (SELECT u.id from cg_user_contacts c, cg_users u where c.s_status = 'accepted'
+						and ((c.i_requester_id ='".$i_user_id."' and u.id=c.i_accepter_id) 
+						or (c.i_accepter_id = '".$i_user_id."' and u.id=c.i_requester_id)) 
+							and n.data not regexp '\"user_id1\"[[.:.]]\"$i_user_id\"'  
+							and n.data not regexp '\"user_id2\"[[.:.]]\"$i_user_id\"' 
+						) and i_owner_id != '".$i_user_id."' and n.s_ownership = 'ownerpost'
 					
 					
 					
@@ -100,30 +101,26 @@ class Data_newsfeed_model extends CI_Model
 						n.data,
 						n.dt_created_on,
 						n.i_referrence_id
-					FROM %1\$susers u, %1\$suser_newsfeeds n 
+					FROM cg_users u, cg_user_newsfeeds n 
 					WHERE u.i_status='1' AND u.i_isdeleted ='1'  AND n.i_owner_id = u.id 
 					AND n.s_type != 'friend_with' AND n.i_status='1' AND
 					(
-						n.i_owner_id in (SELECT u.id from %1\$suser_contacts c, %1\$susers u where c.s_status = 'accepted'
-						AND ((c.i_requester_id = %2\$s AND u.id=c.i_accepter_id) 
-						OR (c.i_accepter_id = %2\$s AND u.id=c.i_requester_id))) AND n.s_ownership = 'ownerpost'
+						n.i_owner_id in (SELECT u.id from cg_user_contacts c, cg_users u where c.s_status = 'accepted'
+						AND ((c.i_requester_id ='".$i_user_id."' AND u.id=c.i_accepter_id) 
+						OR (c.i_accepter_id = '".$i_user_id."' AND u.id=c.i_requester_id))) AND n.s_ownership = 'ownerpost'
 						
 						
 						OR 
-						n.i_owner_id = '%2\$s'
+						n.i_owner_id = '".$i_user_id."'
 					) )
 
-				ORDER BY dt_created_on DESC
-					"
-				, $this->db->dbprefix, intval($i_user_id)
-			);
+				ORDER BY dt_created_on DESC";
 		}
 		else {
 		
 		
-		
-			 $sql = sprintf("
-				(SELECT  u.id i_user_id, 
+			
+			 $sql = "(SELECT  u.id i_user_id, 
 						u.s_email, 
 						
 						u.e_gender, 
@@ -131,16 +128,16 @@ class Data_newsfeed_model extends CI_Model
 						u.s_profile_photo, 
 						u.i_user_type,
 						n.*
-					FROM %1\$susers u, %1\$suser_newsfeeds n 
+					FROM cg_users u, cg_user_newsfeeds n 
 					WHERE u.i_status='1' AND u.i_isdeleted ='1' AND  n.i_owner_id = u.id AND
 					n.s_type = 'friend_with' AND n.i_status='1' AND
 					(
-						n.i_owner_id in (SELECT u.id from %1\$suser_contacts c, %1\$susers u where c.s_status = 'accepted'
-						and ((c.i_requester_id = %2\$s and u.id=c.i_accepter_id) 
-						or (c.i_accepter_id = %2\$s and u.id=c.i_requester_id)) 
-							and n.data not regexp '\"user_id1\"[[.:.]]\"%2\$s\"'  
-							and n.data not regexp '\"user_id2\"[[.:.]]\"%2\$s\"' 
-						) and i_owner_id != '%2\$s' and n.s_ownership = 'ownerpost'
+						n.i_owner_id in (SELECT u.id from cg_user_contacts c,cg_users u where c.s_status = 'accepted'
+						and ((c.i_requester_id = '".$i_user_id."' and u.id=c.i_accepter_id) 
+						or (c.i_accepter_id = '".$i_user_id."' and u.id=c.i_requester_id)) 
+							and n.data not regexp '\"user_id1\"[[.:.]]\"$i_user_id\"'  
+							and n.data not regexp '\"user_id2\"[[.:.]]\"$i_user_id\"' 
+						) and i_owner_id != '".$i_user_id."' and n.s_ownership = 'ownerpost'
 					
 					
 					
@@ -156,22 +153,20 @@ class Data_newsfeed_model extends CI_Model
 						u.s_profile_photo, 
 						u.i_user_type,
 						n.*
-					FROM %1\$susers u, %1\$suser_newsfeeds n 
+					FROM cg_users u, cg_user_newsfeeds n 
 					WHERE u.i_status='1' AND u.i_isdeleted ='1'  AND n.i_owner_id = u.id 
 					AND n.s_type != 'friend_with' AND n.i_status='1' AND
 					(
-						n.i_owner_id in (SELECT u.id from %1\$suser_contacts c, %1\$susers u where c.s_status = 'accepted'
-						AND ((c.i_requester_id = %2\$s AND u.id=c.i_accepter_id) 
-						OR (c.i_accepter_id = %2\$s AND u.id=c.i_requester_id))) AND n.s_ownership = 'ownerpost'
+						n.i_owner_id in (SELECT u.id from cg_user_contacts c, cg_users u where c.s_status = 'accepted'
+						AND ((c.i_requester_id = '".$i_user_id."' AND u.id=c.i_accepter_id) 
+						OR (c.i_accepter_id = '".$i_user_id."' AND u.id=c.i_requester_id))) AND n.s_ownership = 'ownerpost'
 						OR
-						n.i_owner_id = '%2\$s'
+						n.i_owner_id = '".$i_user_id."'
 					) )
 
 				ORDER BY dt_created_on DESC
-					limit %3\$s, %4\$s
-					"
-				, $this->db->dbprefix, intval($i_user_id), intval($i_start_limit), intval($i_no_of_page)
-			);
+					limit {$i_start_limit}, {$i_no_of_page}
+					";
 		}
 
 		$query = $this->db->query($sql);//echo "sql ==>". nl2br($sql) ."<br />"; 
@@ -196,21 +191,20 @@ class Data_newsfeed_model extends CI_Model
 
 	 /*get total of my($user_id) newsfeeds */
 	public function get_total_newsfeeds_by_user_id($i_user_id) {
-
-		$sql = sprintf("
-				SELECT COUNT(*) count FROM (
+		$i_user_id = intval($i_user_id);
+		$sql = "SELECT COUNT(*) count FROM (
 				(SELECT u.id
 						
-					FROM %1\$susers u, %1\$suser_newsfeeds n 
+					FROM cg_users u, cg_user_newsfeeds n 
 					WHERE u.i_status='1' AND u.i_isdeleted ='1'  AND n.i_owner_id = u.id AND
 					n.s_type = 'friend_with' AND
 					(
-						n.i_owner_id in (SELECT u.id from %1\$suser_contacts c, %1\$susers u where c.s_status = 'accepted'
-						and ((c.i_requester_id = %2\$s and u.id=c.i_accepter_id) 
-						or (c.i_accepter_id = %2\$s and u.id=c.i_requester_id)) 
-							and n.data not regexp '\"user_id1\"[[.:.]]\"%2\$s\"'  
-							and n.data not regexp '\"user_id2\"[[.:.]]\"%2\$s\"' 
-						) and i_owner_id != '%2\$s' and n.s_ownership = 'ownerpost'
+						n.i_owner_id in (SELECT u.id from cg_user_contacts c,cg_users u where c.s_status = 'accepted'
+						and ((c.i_requester_id = '".$i_user_id."' and u.id=c.i_accepter_id) 
+						or (c.i_accepter_id = '".$i_user_id."' and u.id=c.i_requester_id)) 
+							and n.data not regexp '\"user_id1\"[[.:.]]\"$i_user_id\"'  
+							and n.data not regexp '\"user_id2\"[[.:.]]\"$i_user_id\"' 
+						) and i_owner_id != '".$i_user_id."' and n.s_ownership = 'ownerpost'
 					
 					
 					
@@ -219,22 +213,19 @@ class Data_newsfeed_model extends CI_Model
 				UNION ALL
 
 				(SELECT u.id
-					FROM %1\$susers u, %1\$suser_newsfeeds n 
+					FROM cg_users u, cg_user_newsfeeds n 
 					WHERE u.i_status='1' AND u.i_isdeleted ='1' AND n.i_owner_id = u.id 
 					AND n.s_type != 'friend_with' AND
 					(
-						n.i_owner_id in (SELECT u.id from %1\$suser_contacts c, %1\$susers u where c.s_status = 'accepted'
-						AND ((c.i_requester_id = %2\$s AND u.id=c.i_accepter_id) 
-						OR (c.i_accepter_id = %2\$s AND u.id=c.i_requester_id))) AND n.s_ownership = 'ownerpost'
+						n.i_owner_id in (SELECT u.id from cg_user_contacts c, cg_users u where c.s_status = 'accepted'
+						AND ((c.i_requester_id = '".$i_user_id."' AND u.id=c.i_accepter_id) 
+						OR (c.i_accepter_id = '".$i_user_id."' AND u.id=c.i_requester_id))) AND n.s_ownership = 'ownerpost'
 						OR
-						n.i_owner_id = '%2\$s'
+						n.i_owner_id = '".$i_user_id."'
 					) )
 
 				
-				) t
-					"
-				, $this->db->dbprefix, intval($i_user_id)
-			);
+				) t";
 		
 
 		$query = $this->db->query($sql);
@@ -255,16 +246,17 @@ class Data_newsfeed_model extends CI_Model
 
 
 	public function delete_by_id($id) {
-		$sql = sprintf( "DELETE FROM %suser_newsfeeds WHERE id=%s", $this->db->dbprefix, $id );
+		$id = intval($id);
+		$sql =  "DELETE FROM cg_user_newsfeeds WHERE id='".$id."'";
 
 		$this->db->query($sql);
 		
-		$sql = sprintf( "DELETE FROM %suser_newsfeed_comments WHERE i_newsfeed_id=%s", $this->db->dbprefix, $id );
+		$sql = "DELETE FROM cg_user_newsfeed_comments WHERE i_newsfeed_id='".$id."'";
 
 		$this->db->query($sql);
 		
 		# delete from like table #
-		$sql = sprintf( "DELETE FROM %suser_newsfeed_like WHERE i_newsfeed_id=%s", $this->db->dbprefix, $id );
+		$sql = "DELETE FROM cg_user_newsfeed_like WHERE i_newsfeed_id='".$id."'";
 
 		$this->db->query($sql);
 	}
