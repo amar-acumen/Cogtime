@@ -12,7 +12,7 @@ class Denomination_model extends Base_model
    //----------------------- get all denomination ----------------------
     public function get_all_denomination_list()
     {
-        $sql = sprintf('SELECT * FROM '.$this->db->DENOMINATION.' order by s_name asc');
+        $sql = 'SELECT * FROM '.$this->db->DENOMINATION.' order by s_name asc';
         $query = $this->db->query($sql);
         $result_arr = $query->result_array();
 //pr($result_arr,1);
