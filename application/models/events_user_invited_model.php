@@ -82,7 +82,7 @@ class Events_user_invited_model extends Base_model
 					
 					) %3\$s )
 
-				ORDER BY `dt_created_on` ASC
+				ORDER BY `dt_created_on` DESC
 					"
 				, $this->db->dbprefix, intval($i_user_id), $s_where
 			);
@@ -133,7 +133,7 @@ class Events_user_invited_model extends Base_model
 					  
 					  ) %5\$s )
 
-				    ORDER BY `dt_created_on` ASC
+				    ORDER BY `dt_created_on` DESC
 					limit %3\$s, %4\$s
 					"
 				, $this->db->dbprefix, intval($i_user_id), intval($i_start_limit), intval($i_no_of_page),  $s_where
