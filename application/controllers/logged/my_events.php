@@ -24,18 +24,18 @@ class My_events extends Base_controller {
             parent::check_login(TRUE, '', array('1')); // put this code on those pages which are not accessable by guest user
             # loading reqired model & helpers...
             $this->load->model('users_model');
-            $this->load->model('contacts_model');
-            $this->load->model('tweet_model');
-            $this->load->model('netpals_model');
+            //$this->load->model('contacts_model');
+            //$this->load->model('tweet_model');
+            //$this->load->model('netpals_model');
 
             $this->load->model('events_model');
             $this->load->model('events_user_invited_model');
-            $this->load->model('events_email_invited_model');
+            //$this->load->model('events_email_invited_model');
             $this->load->model('events_comments_model');
             $this->load->model('events_feedback_model');
             $this->load->model("user_notifications_model");
             $this->load->model("user_alert_model");
-            $this->load->helper('wall_helper');
+            //$this->load->helper('wall_helper');
         } catch (Exception $err_obj) {
             show_error($err_obj->getMessage());
         }
@@ -210,7 +210,7 @@ class My_events extends Base_controller {
     public function post_comment($feed_id) {
 
 
-        $this->load->model('users_model');
+        //$this->load->model('users_model');
         $user_id = intval(decrypt($this->session->userdata('user_id')));
         $user_details = $this->users_model->fetch_this($user_id);
 

@@ -27,7 +27,7 @@ class My_blog extends Base_controller {
             parent::check_login(TRUE, '', array('1')); // put this code on those pages which are not accessable by guest user
             # loading reqired model & helpers...
 
-            $this->load->model('users_model');
+            //$this->load->model('users_model');
             $this->load->model('my_blog_model');
             $this->load->model('my_blog_post_model');
             $this->load->model('user_notifications_model');

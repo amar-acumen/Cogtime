@@ -28,10 +28,9 @@ class E_intercession extends Base_controller {
             # loading reqired model & helpers...
 
             $this->load->model('users_model');
-            $this->load->model('holy_place_model');
-            $this->load->model('bible_fruits_model');
-            $this->load->model('prayer_wall_photos_model');
-            $this->load->model('intercession_model');
+            //$this->load->model('holy_place_model');
+            //$this->load->model('bible_fruits_model');
+            //$this->load->model('prayer_wall_photos_model');
             $this->load->model('intercession_model');
 
             $this->i_profile_id = intval(decrypt($this->session->userdata('user_id')));

@@ -22,10 +22,10 @@ class Mutual_friends extends Base_controller
             parent::__construct();
            	parent::check_login(TRUE, '', array('1')); // put this code on those pages which are not accessable by guest user
 			# loading reqired model & helpers...
-            $this->load->model('users_model');
+            //$this->load->model('users_model');
 			$this->load->model('contacts_model');
-			$this->load->model('user_notifications_model');
-			$this->load->model('user_alert_model');
+			//$this->load->model('user_notifications_model');
+			//$this->load->model('user_alert_model');
         }
         catch(Exception $err_obj)
         {
@@ -65,8 +65,8 @@ class Mutual_friends extends Base_controller
            // $data['mutual']=$this->contacts_model->get_mutual_friends_by_user(intval(decrypt($this->session->userdata('user_id'))));
 			$i_profile_id = intval(decrypt($this->session->userdata('user_id')));
 			$data['page_view_type'] = 'myaccount';
-			$this->load->model('users_model');
-			$this->load->model('contacts_model');
+			//$this->load->model('users_model');
+			//$this->load->model('contacts_model');
 			//$arr_profile_info = $this->users_model->fetch_this($i_profile_id);
 			//$data['arr_profile_info'] = $arr_profile_info;
 			

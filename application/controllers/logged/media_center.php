@@ -33,9 +33,9 @@ class Media_center extends Base_controller
             parent::__construct();
             parent::check_login(TRUE, '', array('1')); // put this code on those pages which are not accessable by guest user
             # loading reqired model & helpers...
-            $this->load->model('users_model');
-			$this->load->model("gospel_magazine_model");
-			$this->load->model("my_blog_post_model");
+            //$this->load->model('users_model');
+			//$this->load->model("gospel_magazine_model");
+			//$this->load->model("my_blog_post_model");
 			$this->load->model("landing_page_cms_model");
 			
 			$this->i_profile_id = intval(decrypt($this->session->userdata('user_id')));
