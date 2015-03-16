@@ -2613,7 +2613,35 @@ class Base_controller extends CI_Controller {
                 $this->load->model('mail_contents_model');
 
                 $mail_info = $this->mail_contents_model->get_by_name("ring_join_request");
-                $body = htmlspecialchars_decode($mail_info['body'], ENT_QUOTES);
+               // $body = htmlspecialchars_decode($mail_info['body'], ENT_QUOTES);
+               
+  $logo="http://cogtime.com/images/logo.png";
+    $body = '<table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" bgcolor="#e9f3f5" style="font-family:Arial, Helvetica, sans-serif; font-size:13px; line-height:19px;">
+  <tr>
+    <td align="left" style="background:#013D62; border-bottom:5px solid #62C3BC; padding:15px 0 15px 20px;"><img src="'.$logo.'" alt= ""></td>
+  </tr>
+  <tr style="border-top:1px solid #ffffff;">
+    <td style="padding-top:10px; padding-bottom:10px;">&nbsp;</td>
+  </tr>
+  <tr>
+  	
+  </tr>
+  <tr>
+  	<td style="padding:15px;"><p>Dear '.$user_receiver['s_profile_name'].', </p><p>You have received ring request from '.$user_sender['s_profile_name'].' in COGTIME.</p><p>Best Regards,</p><p>COGTIME Team</p> 
+
+            
+	</td>
+</tr>
+  <tr>
+    <td align="center" valign="middle" style="background:#A8A7A7; padding:15px;"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td align="left" valign="middle" style="color:#d3edfd; font-family:Arial, Helvetica, sans-serif; font-size:12px;"> <a href="http://acumencs.com/drandpt-arabic/contact-us/" style="color:#d3edfd; text-decoration:none;"></a></td>
+        
+        <td align="right" style="color:#013d62; font-family:Arial, Helvetica, sans-serif; font-size:12px; text-align="center" ">© All Rights Reserved<span style="color:#525252;"><strong> COGTIME 2014  </strong></span></td>
+      </tr>
+    </table></td>
+  </tr>
+</table>';
                 $subject = htmlspecialchars_decode($mail_info['subject'], ENT_QUOTES);
                 $info = $this->my_ring_model->get_by_id($media_id);
                 $ring_name = $info['s_ring_name'];
