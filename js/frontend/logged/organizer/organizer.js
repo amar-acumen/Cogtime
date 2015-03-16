@@ -706,7 +706,7 @@ function gotoDay(year,day,month){
 	//$('#gotoFrm').submit();
 	/*page refresh*/
 alert(month);alert(day);
-	showUILoader_nodialog();
+	showUILoader();
 	getdata = '00:00/60/'+day+'/'+month+'/'+year;
 	$.ajax({
 			 type: "get",
@@ -714,7 +714,7 @@ alert(month);alert(day);
 			 dataType:"json",
 			 success: function(json_response){
 				$('#content_div').html(json_response.html);
-				hideUILoader_nodialog();
+				hideUILoader();
 			  },
 			  error: function(){
 				hideUILoader();
