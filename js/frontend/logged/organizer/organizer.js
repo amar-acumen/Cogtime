@@ -706,7 +706,7 @@ function gotoDay(year,day,month){
 	//$('#gotoFrm').submit();
 	/*page refresh*/
 
-	showUILoader('<img src="'+base_url+'images/loading_big.gif" width="50"/> ');
+	showUILoader_nodialog('<img src="'+base_url+'images/loading_big.gif" width="50"/> ');
 	getdata = '0/60/'+day+'/'+month+'/'+year;
 	$.ajax({
 			 type: "get",
@@ -714,10 +714,10 @@ function gotoDay(year,day,month){
 			 dataType:"json",
 			 success: function(json_response){
 				$('#content_div').html(json_response.html);
-				hideUILoader();
+				hideUILoader_nodialog();
 			  },
 			  error: function(){
-				hideUILoader();
+				hideUILoader_nodialog();
 				//hide_dialog('edit_list');
 				showUIMsg('Some error occurred. Please try again.');
 			  }
