@@ -471,7 +471,7 @@ class Rings extends Admin_base_Controller {
             $where = "WHERE A.i_ring_post_id=" . $article_id;
             //$result = $this->my_blog_post_model->show_all_comments($where,$page,$this->comments_pagination_per_page);
             $result = $this->ring_post_comments_model->get_by_ring_post_id($article_id);
-            pr($res,1);
+            //pr($res,1);
             // $total_rows=$this->ring_post_comments_model->get_by_ring_post_id($article_id);
             #Jquery Pagination Starts
             $this->load->library('jquery_pagination');

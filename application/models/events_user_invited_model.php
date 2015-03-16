@@ -23,7 +23,7 @@ class Events_user_invited_model extends Base_model
 	
 
 	public function delete_by_id($id) {
-	     $sql = sprintf( 'DELETE FROM '.$this->db->EVENTS_USER_INVITED.' WHERE id=%s', $id );
+	     $sql = 'DELETE FROM '.$this->db->EVENTS_USER_INVITED.' WHERE id="'.$id.'"';
 		 $this->db->query($sql);
 				
 	}
@@ -182,7 +182,7 @@ class Events_user_invited_model extends Base_model
 	public function get_total_events_invitation_recived($i_user_id,  $s_where) {
 		
 
-		 $sql = sprintf("
+		 $sql = "
 				SELECT COUNT(*) count FROM (
 				(SELECT 
 					  e.id
@@ -192,15 +192,13 @@ class Events_user_invited_model extends Base_model
 					  (
 					  e.id in
 					  (SELECT ui.i_event_id from cg_event_user_invited ui, cg_users u where
-					  ui.i_user_id = %2\$s 
+					  ui.i_user_id = '".intval($i_user_id)."' 
 					  )
 					  
-					  )%3\$s )
+					  ){$s_where} )
 
 				) derived_tbl
-					"
-				, $this->db->dbprefix, intval($i_user_id),$s_where
-			);
+					";
 		
 #and t.i_user_id != '%2\$s'
 		$query = $this->db->query($sql); 
@@ -226,7 +224,7 @@ class Events_user_invited_model extends Base_model
    
    public function get_events_rsvps_recived($i_user_id, $s_where, $i_start_limit='', $i_no_of_page='') {
 		
-			 $sql = sprintf("
+			 $sql = "
 			 		(SELECT 
 
 					  u.id i_user_id,
@@ -261,17 +259,15 @@ class Events_user_invited_model extends Base_model
 					  
 					  WHERE u.i_status='1' AND u.i_isdeleted ='1' 
 					 
-					  AND e.i_status = 1 AND e.i_host_id = %2\$s AND e.i_host_id = u.id
+					  AND e.i_status = 1 AND e.i_host_id = '".intval($i_user_id)."' AND e.i_host_id = u.id
 					 
 					  
 					  
-					   %5\$s )
+					   {$s_where} )
 
 				    ORDER BY `dt_start_time` ASC
-					limit %3\$s, %4\$s
-					"
-				, $this->db->dbprefix, intval($i_user_id), intval($i_start_limit), intval($i_no_of_page),  $s_where
-			);
+					limit {$i_start_limit}, {$i_no_of_page}
+					";
 		
 		$query = $this->db->query($sql); //echo "sql ==>". nl2br($sql) ."<br />"; 
 		# AND e.id in (SELECT r.i_event_id from cg_event_rsvp r)
@@ -291,21 +287,19 @@ class Events_user_invited_model extends Base_model
 	
 	public function get_total_events_rsvps_recived($i_user_id,  $s_where) {
 		
-		 $sql = sprintf("
+		 $sql = "
 				SELECT COUNT(*) count FROM (
 				 (SELECT 
 					  e.id
 					  FROM cg_users u, cg_events e
 					  WHERE u.i_status='1' AND u.i_isdeleted ='1' AND e.i_status = 1
 					   AND e.i_host_id = u.id 
-					  AND e.i_host_id = %2\$s
+					  AND e.i_host_id = '".intval($i_user_id)."'
 					  
-					  %3\$s
+					  {$s_where}
 				   )
 				) derived_tbl
-					"
-				, $this->db->dbprefix, intval($i_user_id),$s_where
-			);
+					";
 		#AND e.id in (SELECT r.i_event_id from cg_event_rsvp r)
 		$query = $this->db->query($sql); 
 		$result_arr = $query->result_array();

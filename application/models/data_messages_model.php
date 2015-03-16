@@ -217,7 +217,7 @@ class Data_messages_model extends Base_model
 		  	$ret_=array();
 			if("$i_start_limit" == "") 
 			  {
-				 $s_qry = sprintf('SELECT 
+				 $s_qry = 'SELECT 
 										m.id, 
 										m.i_sender_id, 
 										m.i_receiver_id, 
@@ -232,14 +232,13 @@ class Data_messages_model extends Base_model
 										u.s_last_name,
 										u.s_profile_photo,
 										u.e_gender
-								FROM %smessages m, %susers u 
-								WHERE u.id = m.i_sender_id AND m.i_receiver_id = %s AND m.i_is_deleted_by_receiver = 0 
-								%s ORDER BY m.dt_created_on DESC', 
-								$this->db->dbprefix, $this->db->dbprefix, $i_user_id, $s_where);
+								FROM cg_messages m, cg_users u 
+								WHERE u.id = m.i_sender_id AND m.i_receiver_id = "'.$i_user_id.'" AND m.i_is_deleted_by_receiver = 0 
+								{$s_where} ORDER BY m.dt_created_on DESC';
 			}
 			else 
 			{
-				  $s_qry = sprintf('SELECT m.id, 
+				  $s_qry = 'SELECT m.id, 
 										m.i_sender_id, 
 										m.i_receiver_id, 
 										m.s_message, 
@@ -253,9 +252,9 @@ class Data_messages_model extends Base_model
 										u.s_last_name,
 										u.s_profile_photo,
 										u.e_gender
-								 FROM %smessages m, %susers u 
-								 WHERE u.id = m.i_sender_id AND m.i_receiver_id = %s AND m.i_is_deleted_by_receiver = 0 %s
-								 ORDER BY m.dt_created_on DESC limit %s, %s', $this->db->dbprefix, $this->db->dbprefix, $i_user_id,$s_where, $i_start_limit, $i_no_of_page); 
+								 FROM cg_messages m, cg_users u 
+								 WHERE u.id = m.i_sender_id AND m.i_receiver_id = "'.$i_user_id.'" AND m.i_is_deleted_by_receiver = 0 {$s_where}
+								 ORDER BY m.dt_created_on DESC limit {$i_start_limit}, {$i_no_of_page}'; 
 								 
 								
 			}
@@ -312,7 +311,7 @@ class Data_messages_model extends Base_model
 
 	public function get_total_by_receiver($i_user_id , $s_where) 
 	{
-		$sql = sprintf("SELECT count(*) count FROM %smessages m, %susers u WHERE u.id = m.i_sender_id AND m.i_receiver_id = %s AND m.i_is_deleted_by_receiver = 0  %s ", $this->db->dbprefix, $this->db->dbprefix, $i_user_id,$s_where);		
+		$sql = "SELECT count(*) count FROM cg_messages m, cg_users u WHERE u.id = m.i_sender_id AND m.i_receiver_id = '".$i_user_id."' AND m.i_is_deleted_by_receiver = 0  {$s_where} ";		
 
 		$query = $this->db->query($sql);
 		$result_arr = $query->result_array();
@@ -330,7 +329,7 @@ class Data_messages_model extends Base_model
 		  	$ret_=array();
 			if("$i_start_limit" == "") 
 			  {
-				$s_qry = sprintf('SELECT 
+				$s_qry = 'SELECT 
 										m.id, 
 										m.i_sender_id, 
 										m.i_receiver_id, 
@@ -343,13 +342,12 @@ class Data_messages_model extends Base_model
 										m.i_ended, 
 										u.s_first_name, 
 										u.s_last_name 
-								FROM %smessages m, %susers u 
-								WHERE u.id = m.i_receiver_id AND m.i_sender_id = %s  AND m.s_type=\'normal\' AND m.i_is_deleted_by_sender = 0 %s ORDER BY m.dt_created_on DESC', 
-								$this->db->dbprefix, $this->db->dbprefix, $i_user_id , $s_where);
+								FROM cg_messages m, cg_users u 
+								WHERE u.id = m.i_receiver_id AND m.i_sender_id = "'.$i_user_id.'"  AND m.s_type=\'normal\' AND m.i_is_deleted_by_sender = 0 {$s_where} ORDER BY m.dt_created_on DESC';
 			}
 			else 
 			{
-				 $s_qry = sprintf('SELECT m.id, 
+				 $s_qry = 'SELECT m.id, 
 										m.i_sender_id, 
 										m.i_receiver_id, 
 										m.i_referred_media_id,
@@ -361,8 +359,8 @@ class Data_messages_model extends Base_model
 										m.i_ended, 
 										u.s_first_name, 
 										u.s_last_name 
-								 FROM %smessages m, %susers u 
-								 WHERE u.id = m.i_receiver_id AND m.i_sender_id = %s AND m.s_type=\'normal\'  AND m.i_is_deleted_by_sender = 0 %s ORDER BY m.dt_created_on DESC limit %s, %s', $this->db->dbprefix, $this->db->dbprefix, $i_user_id, $s_where, $i_start_limit, $i_no_of_page);
+								 FROM cg_messages m, cg_users u 
+								 WHERE u.id = m.i_receiver_id AND m.i_sender_id = %s AND m.s_type=\'normal\'  AND m.i_is_deleted_by_sender = 0 %s ORDER BY m.dt_created_on DESC limit {$i_start_limit}, {$i_no_of_page}';
 			}
 	
 		//query = $this->db->query($sql); AND m.s_type=\'normal\'
@@ -415,7 +413,7 @@ class Data_messages_model extends Base_model
 
 	public function get_total_by_sender($i_user_id , $s_where ='') 
 	{
-		 $sql = sprintf("SELECT count(*) count FROM %smessages m, %susers u WHERE u.id = m.i_receiver_id AND m.i_sender_id = %s AND m.i_is_deleted_by_sender = 0  AND m.s_type= 'normal'  %s ", $this->db->dbprefix, $this->db->dbprefix, $i_user_id , $s_where );		
+		 $sql = "SELECT count(*) count FROM %smessages m, %susers u WHERE u.id = m.i_receiver_id AND m.i_sender_id = '".$i_user_id."' AND m.i_is_deleted_by_sender = 0  AND m.s_type= 'normal'  {$s_where} ";		
 
 		$query = $this->db->query($sql);
 		$result_arr = $query->result_array();
@@ -426,7 +424,7 @@ class Data_messages_model extends Base_model
 
 	public function get_total_unread_by_user_id($i_user_id) 
 	{
-		$sql = sprintf("SELECT count(distinct id) count FROM %smessages AS m WHERE m.i_receiver_id = %s AND m.i_is_unread = 1 AND m.i_is_deleted_by_receiver = 0 ", $this->db->dbprefix, $i_user_id);
+		$sql = "SELECT count(distinct id) count FROM cg_messages AS m WHERE m.i_receiver_id = '".$i_user_id."'AND m.i_is_unread = 1 AND m.i_is_deleted_by_receiver = 0 ";
 	
 		$query = $this->db->query($sql);
 		$result_arr = $query->result_array();
@@ -456,7 +454,7 @@ class Data_messages_model extends Base_model
 	public function get_by_id_receiver($id, $i_user_id) 
 	{
 		
-		$sql = sprintf('SELECT m.id, 
+		$sql = 'SELECT m.id, 
 								m.i_sender_id, 
 								m.i_receiver_id, 
 								m.i_referred_media_id,
@@ -470,8 +468,8 @@ class Data_messages_model extends Base_model
 								u.s_last_name,
 								u.s_profile_photo,
 								u.i_user_type 
-		 			FROM %smessages m, %susers u 
-					WHERE u.id = m.i_sender_id and m.id = %s and m.i_receiver_id = %s order by m.dt_created_on DESC', $this->db->dbprefix, $this->db->dbprefix, $id, $i_user_id);
+		 			FROM cg_messages m, cg_users u 
+					WHERE u.id = m.i_sender_id and m.id = "'.$id.'" and m.i_receiver_id = "'.$i_user_id.'" order by m.dt_created_on DESC';
 		
 
 		$query = $this->db->query($sql);
@@ -488,7 +486,7 @@ class Data_messages_model extends Base_model
 	public function get_by_id_sender($id, $i_user_id) 
 	{
 		
-		$sql = sprintf('SELECT m.id, 
+		$sql = 'SELECT m.id, 
 								m.i_sender_id, 
 								m.i_receiver_id, 
 								m.i_referred_media_id,
@@ -502,8 +500,8 @@ class Data_messages_model extends Base_model
 								u.s_last_name,
 								u.s_profile_photo,
 								u.i_user_type 
-		 			FROM %smessages m, %susers u 
-					WHERE u.id = m.i_receiver_id and m.id = %s and m.i_sender_id = %s order by m.dt_created_on DESC', $this->db->dbprefix, $this->db->dbprefix, $id, $i_user_id);
+		 			FROM cg_messages m, cg_users u 
+					WHERE u.id = m.i_receiver_id and m.id = "'.$id.'" and m.i_sender_id = "'.$i_user_id.'" order by m.dt_created_on DESC';
 		
 
 		$query = $this->db->query($sql);
@@ -552,7 +550,7 @@ class Data_messages_model extends Base_model
         {
 		  	$ret_=array();
 			
-			$s_qry = sprintf("(SELECT  m.id, 
+			$s_qry = "(SELECT  m.id, 
 										m.i_sender_id, 
 										m.i_receiver_id, 
 										m.s_message, 
@@ -569,8 +567,8 @@ class Data_messages_model extends Base_model
 										u.e_gender,
 										m.dt_created_on as  msg_dt
 								 FROM cg_messages m, cg_users u 
-								 WHERE u.id = m.i_receiver_id AND m.i_sender_id = %1\$s  AND m.i_is_deleted_by_sender = 1
-								  %2\$s
+								 WHERE u.id = m.i_receiver_id AND m.i_sender_id = '".$i_user_id."'  AND m.i_is_deleted_by_sender = 1
+								  {$s_where}
 								 GROUP BY m.id
 								 )
 								 
@@ -592,10 +590,10 @@ class Data_messages_model extends Base_model
 										u.e_gender,
 										m.dt_created_on as  msg_dt
 								 FROM cg_messages m, cg_users u 
-								 WHERE u.id = m.i_sender_id AND m.i_receiver_id = %1\$s AND m.i_is_deleted_by_receiver = 1 %2\$s
+								 WHERE u.id = m.i_sender_id AND m.i_receiver_id = '".$i_user_id."' AND m.i_is_deleted_by_receiver = 1 {$s_where}
 								 GROUP BY m.id
 								 )
-								  ORDER BY msg_dt DESC limit %3\$s, %4\$s",  $i_user_id, $s_where, $i_start_limit, $i_no_of_page);
+								  ORDER BY msg_dt DESC limit {$i_start_limit}, {$i_no_of_page}";
 
 	//	echo nl2br($s_qry); 
 		      
@@ -645,18 +643,18 @@ class Data_messages_model extends Base_model
 
 	public function get_trash_msg_list_count($i_user_id , $s_where ='') 
 	{
-		 $sql = sprintf("SELECT count(*) count FROM ((SELECT m.id
+		 $sql = "SELECT count(*) count FROM ((SELECT m.id
 								 FROM cg_messages m, cg_users u 
-								 WHERE u.id = m.i_receiver_id AND m.i_sender_id = %1\$s  AND m.i_is_deleted_by_sender = 1 %2\$s
+								 WHERE u.id = m.i_receiver_id AND m.i_sender_id = '".$i_user_id."'  AND m.i_is_deleted_by_sender = 1 {$s_where}
 								 GROUP BY m.id
 								 )
 								 
 						     UNION 
 							 (SELECT m.id
 								 FROM cg_messages m, cg_users u 
-								 WHERE u.id = m.i_sender_id AND m.i_receiver_id = %1\$s AND m.i_is_deleted_by_receiver = 1 %2\$s
+								 WHERE u.id = m.i_sender_id AND m.i_receiver_id = '".$i_user_id."' AND m.i_is_deleted_by_receiver = 1 {$s_where}
 								 GROUP BY m.id
-								 )) as drvd_tbl",  $i_user_id , $s_where );		
+								 )) as drvd_tbl";		
 
 		$query = $this->db->query($sql);
 		$result_arr = $query->result_array();

@@ -18,7 +18,7 @@ class Events_feedback_model extends Base_model
 	
 
 	public function delete_by_id($id) {
-	     $sql = sprintf( 'DELETE FROM '.$this->db->EVENTS_FEEDBACK.' WHERE id=%s', $id );
+	     $sql = 'DELETE FROM '.$this->db->EVENTS_FEEDBACK.' WHERE id="'.$id.'"';
 		 $this->db->query($sql);
 				
 	}
