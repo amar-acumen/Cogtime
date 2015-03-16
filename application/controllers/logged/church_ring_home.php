@@ -518,6 +518,7 @@ class Church_ring_home extends Base_controller
 		    $data = $this->data;  
 			$result = $this->church_ring_post_comments_model->get_by_ring_post_id($i_media_id ,$page,
 																$this->comments_pagination_per_page);
+																pr($result,1);
 		    $resultCount = count($result);
 			 $total_rows = $this->church_ring_post_comments_model->get_total_by_ring_post_id($i_media_id);
 
