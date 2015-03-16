@@ -363,7 +363,7 @@ class Contacts_model extends Base_model
                         (SELECT b.user_id f_id FROM {$this->db->dbprefix}frnd b WHERE b.frnd_id ='{$userid}')
                     ) tab INNER JOIN {$this->db->dbprefix}users ms ON ms.user_id=tab.f_id WHERE ms.status=1
                         AND f_id<>{$userid}  ";*/
-		 	$s_qry = sprintf("( SELECT 1, 
+		 	$s_qry = " SELECT 1, 
 						 	c.id, 
 						   c.i_requester_id, 
 						   c.i_accepter_id,
@@ -391,14 +391,10 @@ class Contacts_model extends Base_model
 						AND c.s_status = 'accepted' 
 						AND u.i_status=1 
 						AND
-						((c.i_requester_id = %s AND u.id=c.i_accepter_id ) 
-						OR (c.i_accepter_id = %s AND u.id=c.i_requester_id )) )
+						((c.i_requester_id = '".intval($i_user_id)."' AND u.id=c.i_accepter_id ) 
+						OR (c.i_accepter_id = '".intval($i_user_id)."' AND u.id=c.i_requester_id )) 
 				
-				ORDER BY 1, dt_accepted_on DESC", 
-						/*intval($i_user_id), 
-						intval($i_user_id), , dt_created_on DESC*/
-						intval($i_user_id), 
-						intval($i_user_id));
+				ORDER BY 1, dt_accepted_on DESC";
 						
 				
 						
@@ -459,7 +455,7 @@ class Contacts_model extends Base_model
 	
 	  $ret_=array();
 	  
-		$s_qry = sprintf("SELECT count(*) count
+		$s_qry = "SELECT count(*) count
 					
 						  FROM 
 						  {$this->db->USER_CONTACTS} c, {$this->db->USERS} u
@@ -468,13 +464,9 @@ class Contacts_model extends Base_model
 						  AND c.s_status = 'accepted' 
 						  AND u.i_status=1 
 						  AND
-						  ((c.i_requester_id = %s AND u.id=c.i_accepter_id ) 
-						  OR (c.i_accepter_id = %s AND u.id=c.i_requester_id ))
-						  ", 
-						  /*intval($i_user_id), 
-						  intval($i_user_id), */
-						  intval($i_user_id), 
-						  intval($i_user_id));
+						  ((c.i_requester_id = '".intval($i_user_id)."' AND u.id=c.i_accepter_id ) 
+						  OR (c.i_accepter_id = '".intval($i_user_id)."' AND u.id=c.i_requester_id ))
+						  ";
 					
 	  
 	  $rs=$this->db->query($s_qry)->result_array();
@@ -804,8 +796,7 @@ class Contacts_model extends Base_model
 	# function to check if friend_request_already_sent
     function friend_request_already_sent($i_requester_id='', $i_accepter_id = '')
     {
-      	$SQL = sprintf("SELECT COUNT(*) AS `check_count` FROM %s WHERE `i_requester_id`='%s'  AND `i_accepter_id` = '%s' AND `s_status` = 'pending' ",
-                        $this->db->USER_CONTACTS, $i_requester_id, $i_accepter_id);
+      	$SQL = "SELECT COUNT(*) AS `check_count` FROM cg_user_contacts WHERE `i_requester_id`='".$i_requester_id."'  AND `i_accepter_id` = '".$i_accepter_id."' AND `s_status` = 'pending' ";
         $ROW = $this->db->query($SQL)->row_array(); #echo $this->db->last_query(); exit;
         
         if( $ROW['check_count'] )
@@ -821,9 +812,8 @@ class Contacts_model extends Base_model
 			return null;
 		}
 		#$arr['dt_accepted_on'] = get_db_datetime();
-		$SQL = sprintf("DELETE FROM %s WHERE (`i_requester_id`='{$arr['i_requester_id']}'  AND `i_accepter_id` = '{$arr['i_accepter_id']}' ) 
-						OR (`i_requester_id`='{$arr['i_accepter_id']}'  AND `i_accepter_id` = '{$arr['i_requester_id']}' AND `s_status`='{$arr['s_status']}' ) ",
-                        $this->db->USER_CONTACTS);
+		$SQL = "DELETE FROM cg_user_contacts WHERE (`i_requester_id`='{$arr['i_requester_id']}'  AND `i_accepter_id` = '{$arr['i_accepter_id']}' ) 
+						OR (`i_requester_id`='{$arr['i_accepter_id']}'  AND `i_accepter_id` = '{$arr['i_requester_id']}' AND `s_status`='{$arr['s_status']}' ) ";
 		
 		$this->db->query($SQL);
 		$ret_ =  $this->db->affected_rows(); 
@@ -834,8 +824,7 @@ class Contacts_model extends Base_model
 	# function to check total pending prayer_partner sent
     function total_pending_friend_sent($i_requester_id='')
     {
-      	$SQL = sprintf("SELECT COUNT(*) AS `check_count` FROM %s WHERE (`i_requester_id`='%s' ) AND `s_status` = 'pending' ",
-                        $this->db->USER_CONTACTS, $i_requester_id);
+      	$SQL = "SELECT COUNT(*) AS `check_count` FROM cg_user_contacts WHERE (`i_requester_id`='".$i_requester_id."' ) AND `s_status` = 'pending' ";
         $ROW = $this->db->query($SQL)->row_array(); #echo $this->db->last_query(); exit;
         
         if( $ROW['check_count'] )
@@ -847,8 +836,7 @@ class Contacts_model extends Base_model
 	# function to check total pending prayer_partner recieved
     function total_pending_friend_recieved($i_requester_id='')
     {
-      	$SQL = sprintf("SELECT COUNT(*) AS `check_count` FROM %s WHERE (`i_accepter_id`='%s' ) AND `s_status` = 'pending' ",
-                        $this->db->USER_CONTACTS, $i_requester_id);
+      	$SQL = "SELECT COUNT(*) AS `check_count` FROM cg_user_contacts WHERE (`i_accepter_id`='".$i_requester_id."' ) AND `s_status` = 'pending' ";
         $ROW = $this->db->query($SQL)->row_array(); //echo $this->db->last_query(); 
         //echo  $ROW['check_count'];
         if( $ROW['check_count'] )
