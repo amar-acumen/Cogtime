@@ -653,8 +653,7 @@ class Events_model extends Base_model {
     public function get_all_events($s_where, $i_start_limit = '', $i_no_of_page = '') {
 
         if ("$i_start_limit" == "") {
-            $sql = sprintf("
-				  (SELECT 
+            $sql = "SELECT 
 					a.id i_user_id,
 					a.s_email,
 					
@@ -725,14 +724,12 @@ class Events_model extends Base_model {
 					   {$s_where} )
 
 				ORDER BY  dt_created_on DESC
-					"
-                    , $this->db->dbprefix, $s_where
-            );
+					";
         } else {
 
 
 
-            $sql = sprintf("
+            $sql = "
 					(SELECT 
 					a.id i_user_id,
 					a.s_email,
@@ -764,7 +761,7 @@ class Events_model extends Base_model {
 					FROM cg_admin_user a, cg_events e
 					
 					WHERE a.i_status='1' AND a.e_disabled ='no' AND e.i_status = 1 AND e.i_host_id = a.id  AND e.dt_end_time >  NOW() AND e.i_user_type = 2
-					 %4\$s )
+					 {$s_where} )
 					  
 					 UNION
 					 
@@ -800,13 +797,11 @@ class Events_model extends Base_model {
 					  FROM cg_users u, cg_events e
 					  
 					  WHERE u.i_status='1' AND u.i_isdeleted ='1' AND e.i_status = 1 AND e.i_host_id = u.id AND e.dt_end_time >  NOW() AND  e.i_user_type = 1
-					   %4\$s )
+					   {$s_where} )
 
 				    ORDER BY  dt_created_on DESC 
-					limit %2\$s, %3\$s
-					"
-                    , $this->db->dbprefix, intval($i_start_limit), intval($i_no_of_page), $s_where
-            );
+					limit {$i_start_limit}, {$i_no_of_pag}
+					";
         }
 
         $query = $this->db->query($sql); //echo "sql ==>". nl2br($sql) ."<br />";  exit;
