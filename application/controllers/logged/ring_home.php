@@ -1127,7 +1127,7 @@ $this->email->initialize($email_setting);
                 #pr($user_sender);pr($user_receiver);
                 $body = ' ';
                 $subject = ' ';
-
+$url = '<a href="' . base_url() . 'accept_invitation/' . encrypt($invite_id) . '" target="_blank" style=" width:108px; height:28px; background-color:#62C3BC; color:#fff; display:block; text-align:center; text-decoration:none; padding-top:8px;">Join</a>';
                $logo="http://cogtime.com/images/logo.png";
     $body = '<table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" bgcolor="#e9f3f5" style="font-family:Arial, Helvetica, sans-serif; font-size:13px; line-height:19px;">
   <tr>
@@ -1142,7 +1142,9 @@ $this->email->initialize($email_setting);
   <tr>
   	<td style="padding:15px;"><p> Dear '.$user_receiver['s_profile_name'].',</p>
 <p>You have received ring request from '.$user_sender['s_profile_name'].' in COGTIME.</p>
-
+<p>
+    To view the message, please log in to '.base_url().'
+    </p>
 <p>Best Regards,</p>
 <p>COGTIME Team</p>
 
