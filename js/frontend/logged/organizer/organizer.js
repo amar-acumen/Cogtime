@@ -705,7 +705,7 @@ function gotoDay(year,month,day){
 	//$('#goto_date').val(val_date);
 	//$('#gotoFrm').submit();
 	/*page refresh*/
-
+alert(month);alert(day);
 	getdata = '00:00/60/'+day+'/'+month+'/'+year;
 	$.ajax({
 			 type: "get",
