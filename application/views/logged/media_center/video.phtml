@@ -130,12 +130,12 @@
 								$class='last';
 								$i=0;
 							}
-                                                        if(file_exists(APPPATH.'uploads/media_center_videos/'.getThumbName($val['s_video_thumb'], 'bigthumb'))){
+                                                        //if(file_exists(APPPATH.'uploads/media_center_videos/'.getThumbName($val['s_video_thumb'], 'bigthumb'))){
                                                         $IMG = base_url() . 'uploads/media_center_videos/' . getThumbName($val['s_video_thumb'], 'bigthumb');
                                                         
-                                                        }else if(!file_exists(APPPATH.'uploads/media_center_videos/'.getThumbName($val['s_video_thumb'], 'bigthumb'))){
-                                                        $IMG = base_url() . 'images/private_vedio.png';    
-                                                        }
+                                                       // }else if(!file_exists(APPPATH.'uploads/media_center_videos/'.getThumbName($val['s_video_thumb'], 'bigthumb'))){
+                                                        //$IMG = base_url() . 'images/private_vedio.png';    
+                                                      //  }
 							
 						?>
                         	<li class="<?php echo $class?>"><a href="<?= base_url().$val['id']."/".my_url($val['cat_name'])."/watch-detail/".my_url($val['s_title']).".html"?>"><img src="<?php echo $IMG?>" alt="Minister4 Shout" width="222" height="157"><span title="<?=$val['s_title']?>">
