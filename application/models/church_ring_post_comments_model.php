@@ -129,7 +129,7 @@ class Church_ring_post_comments_model extends CI_Model {
 
         
 		$query = $this->db->query($sql); 
-    echo $this->db->last_query();
+    //echo $this->db->last_query();
 		$result_arr = $query->result_array();
 
 		return $result_arr;
