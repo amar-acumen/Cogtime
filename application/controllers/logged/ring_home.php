@@ -1109,7 +1109,7 @@ class Ring_home extends Base_controller
                 #echo $i_sender_id.'####'.$i_receiver_id;
                 $user_sender = $this->users_model->get_user_email_by_id($i_user_id);
                 $user_receiver = $this->users_model->get_user_email_by_id($invite_id);
-                pr($user_receiver,1);
+               // pr($user_receiver,1);
                 /********************GET ADMIN EMAIL***************************************************/
 			$query = $this->db->get_where('cg_admin_user', array('id' => 1));
                         
@@ -1160,7 +1160,7 @@ $this->email->initialize($email_setting);
   </tr>
 </table>'; 
     $this->email->from($admin_mail, 'From Cogtime ');
-$this->email->to($MAIL_ID);
+$this->email->to($user_receiver['s_email']);
 //->email->bcc("$mailids");
 //$this->email->cc('arif.zisu@gmail.com');
 //$this->email->bcc('them@their-example.com');
