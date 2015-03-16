@@ -145,7 +145,7 @@ class My_blog_post_model extends Base_model {
 
     public function get_by_id($id) {
 
-        $sql = sprintf('SELECT * FROM ' . $this->db->USER_BLOG_POST . '  where id = %s', $id);
+        $sql = 'SELECT * FROM ' . $this->db->USER_BLOG_POST . '  where id = "'.$id.'"';
         $query = $this->db->query($sql); #echo $this->db->last_query(); exit;
         $result_arr = $query->result_array();
         //pr($result_arr[0]);
@@ -154,7 +154,7 @@ class My_blog_post_model extends Base_model {
 
     public function get_detail_by_id($id) {
 
-        $sql = sprintf("SELECT p.*, CONCAT(u.s_first_name,' ',u.s_last_name) as user_name, u.s_profile_photo,u.e_gender FROM " . $this->db->USER_BLOG_POST . " as p LEFT JOIN " . $this->db->USERS . " as u on p.i_user_id=u.id  where p.id = %s", $id);
+        $sql = "SELECT p.*, CONCAT(u.s_first_name,' ',u.s_last_name) as user_name, u.s_profile_photo,u.e_gender FROM " . $this->db->USER_BLOG_POST . " as p LEFT JOIN " . $this->db->USERS . " as u on p.i_user_id=u.id  where p.id = '".$id."'";
         $query = $this->db->query($sql); #echo $this->db->last_query(); exit;
 
         $result_arr = $query->result_array();
@@ -293,10 +293,10 @@ class My_blog_post_model extends Base_model {
 
     public function delete_by_id($id) {
 
-        $sql = sprintf('DELETE FROM ' . $this->db->USER_BLOG_POST_COMMENTS . ' WHERE i_blog_post_id=%s', $id);
+        $sql = 'DELETE FROM ' . $this->db->USER_BLOG_POST_COMMENTS . ' WHERE i_blog_post_id="'.$id.'"';
         $this->db->query($sql);
 
-        $sql = sprintf('DELETE FROM ' . $this->db->USER_BLOG_POST . ' WHERE id=%s', $id);
+        $sql = 'DELETE FROM ' . $this->db->USER_BLOG_POST . ' WHERE id="'.$id.'"';
         $this->db->query($sql);
 
 
@@ -304,13 +304,13 @@ class My_blog_post_model extends Base_model {
     }
 
     public function delete_blog_data_by_id($blog_id) {
-        $sql = sprintf('DELETE FROM ' . $this->db->USER_BLOG_POST_COMMENTS . ' WHERE i_blog_id=%s', $blog_id);
+        $sql = 'DELETE FROM ' . $this->db->USER_BLOG_POST_COMMENTS . ' WHERE i_blog_id="'.$blog_id.'"';
         $this->db->query($sql);
 
-        $sql = sprintf('DELETE FROM ' . $this->db->USER_BLOG_POST . ' WHERE i_blog_id=%s', $blog_id);
+        $sql = 'DELETE FROM ' . $this->db->USER_BLOG_POST . ' WHERE i_blog_id="'.$blog_id.'"';
         $this->db->query($sql);
 
-        $sql = sprintf('DELETE FROM ' . $this->db->USER_BLOGS . ' WHERE id=%s', $blog_id);
+        $sql = 'DELETE FROM ' . $this->db->USER_BLOGS . ' WHERE id="'.$blog_id.'"';
         $this->db->query($sql);
     }
 
