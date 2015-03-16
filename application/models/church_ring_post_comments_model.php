@@ -144,7 +144,8 @@ class Church_ring_post_comments_model extends CI_Model {
 	
 
 	public function get_total_by_ring_post_id($i_media_id) {
-		$sql = sprintf("SELECT count(*) count FROM %1\$schurch_ring_post_comments c, %1\$susers u WHERE c.i_user_id=u.id AND c.i_ring_post_id = %2\$s  order by c.dt_created_on", $this->db->dbprefix, intval($i_media_id) );
+		//$sql = sprintf("SELECT count(*) count FROM %1\$schurch_ring_post_comments c, %1\$susers u WHERE c.i_user_id=u.id AND c.i_ring_post_id = %2\$s  order by c.dt_created_on", $this->db->dbprefix, intval($i_media_id) );
+		$sql = "SELECT count(*) count FROM cg_church_ring_post_comments c, cg_users u WHERE c.i_user_id=u.id AND c.i_ring_post_id = '".intval($i_media_id)."'  order by c.dt_created_on";
 
 		$query = $this->db->query($sql); //echo nl2br($sql);
 		$result_arr = $query->result_array();
@@ -189,12 +190,12 @@ class Church_ring_post_comments_model extends CI_Model {
 
 	public function delete_by_id($id, $s_media_type) {
 		
-		$sql = sprintf( 'DELETE FROM %suser_ring_post_comments WHERE i_ring_post_id =%s AND s_media_type = "%s" ', $this->db->dbprefix, $id, $s_media_type );
+		$sql = 'DELETE FROM cg_user_ring_post_comments WHERE i_ring_post_id ="'.$id.'" AND s_media_type = "'.$s_media_type.'" ';
 
 		$this->db->query($sql);
 		
 		# delete from like table #
-		$sql = sprintf( "DELETE FROM %suser_ring_post_like WHERE i_ring_post_id =%s AND s_media_type = '%s'" , $this->db->dbprefix, $id , $s_media_type);
+		$sql = "DELETE FROM cg_suser_ring_post_like WHERE i_ring_post_id ='".$id."' AND s_media_type = '".$s_media_type."'";
 
 		$this->db->query($sql); 
 	}

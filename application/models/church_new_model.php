@@ -230,12 +230,12 @@ class Church_new_model extends Base_model
 	}
 	
 	public function delete_prayer_group($id) {
-        $sql = sprintf('DELETE FROM  cg_church_prayer_group WHERE id=%s', $id);
+        $sql = 'DELETE FROM  cg_church_prayer_group WHERE id="'.$id.'"';
         $this->db->query($sql);
 
-        $sql1 = sprintf('DELETE FROM  cg_church_prayer_group_members WHERE i_prayer_group_id=%s', $id);
+        $sql1 = 'DELETE FROM  cg_church_prayer_group_members WHERE i_prayer_group_id="'.$id.'"';
         $this->db->query($sql1);
-        $sql2 = sprintf('DELETE FROM  cg_church_prayer_group_notifications WHERE i_prayer_group_id=%s', $id);
+        $sql2 = 'DELETE FROM  cg_church_prayer_group_notifications WHERE i_prayer_group_id="'.$id.'"';
         $this->db->query($sql2);
 
         /*$sql2 = sprintf('DELETE FROM  cg_church_prayer_group_post WHERE i_prayer_group_id=%s', $id);
@@ -352,8 +352,7 @@ class Church_new_model extends Base_model
 		public function get_pending_groups_requests_sent_for_church($i_user_id, $s_where) {
 
 
-        $sql = sprintf(" 
-		  				  SELECT 
+						$sql = "SELECT 
 						  pg_mem.id as rec_id,
 						  pg_mem.i_user_id ,
 						  pg_mem.s_status,
@@ -370,13 +369,10 @@ class Church_new_model extends Base_model
 						  LEFT JOIN cg_users u ON pg_mem.i_user_id = u.id
 						  
 						  WHERE u.i_status='1' AND u.i_isdeleted ='1' AND pg.i_isenabled = 1 
-						  AND pg.i_owner_id = %2\$s AND pg_mem.i_request = '0' 
+						  AND pg.i_owner_id = '".intval($i_user_id)."' AND pg_mem.i_request = '0' 
 						  AND pg_mem.s_status = 'pending' 
-						   %3\$s
-						   group by pg_mem.id 
-					"
-                , $this->db->dbprefix, intval($i_user_id), $s_where
-        );
+						   {$s_where}
+						   group by pg_mem.id";
         //echo nl2br($sql); exit;
         $query = $this->db->query($sql);
         $result_arr = $query->result_array(); //pr($result_arr,1);
@@ -401,15 +397,11 @@ class Church_new_model extends Base_model
 						  LEFT JOIN cg_users u ON pg_mem.i_user_id = u.id
 						  
 						  WHERE u.i_status='1' AND u.i_isdeleted ='1' AND pg.i_isenabled = 1 
-						  AND pg.i_owner_id = %2\$s AND pg_mem.i_request = '1' 
+						  AND pg.i_owner_id = '".intval($i_user_id)."' AND pg_mem.i_request = '1' 
 						  AND pg_mem.s_status = 'pending' 
-						   %3\$s
-						   group by pg_mem.id 
-					  
-					"
-                , $this->db->dbprefix, intval($i_user_id), $s_where
-        );
-       // echo nl2br($sql); exit;
+						   {$s_where}
+						   group by pg_mem.id ";
+       echo nl2br($sql); exit;
         $query = $this->db->query($sql);
         $result_arr = $query->result_array(); //echo '1';pr($result_arr,1);
         return $result_arr;
@@ -427,9 +419,9 @@ class Church_new_model extends Base_model
 	# function to check if request_already_sent
 
     function request_already_sent($i_user_id = '', $i_group_id = '') {
-        $SQL = sprintf("SELECT COUNT(*) AS `check_count` FROM %s 
-						WHERE `i_user_id`='%s'  AND `i_prayer_group_id` = '%s' 
-						AND `s_status` = 'pending' ", $this->db->CHURCH_PRAYER_GROUP_MEMBERS, $i_user_id, $i_group_id);
+        $SQL = sprintf("SELECT COUNT(*) AS `check_count` FROM ".$this->db->CHURCH_PRAYER_GROUP_MEMBERS." 
+						WHERE `i_user_id`='".$i_user_id."'  AND `i_prayer_group_id` = '".$i_group_id."' 
+						AND `s_status` = 'pending' ";
         $ROW = $this->db->query($SQL)->row_array(); //echo $this->db->last_query(); exit;
 
         if ($ROW['check_count'])
