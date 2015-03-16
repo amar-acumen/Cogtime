@@ -455,7 +455,7 @@ class Contacts_model extends Base_model
 	
 	  $ret_=array();
 	  
-		$s_qry = sprintf("SELECT count(*) count
+		$s_qry = "SELECT count(*) count
 					
 						  FROM 
 						  {$this->db->USER_CONTACTS} c, {$this->db->USERS} u
@@ -464,13 +464,9 @@ class Contacts_model extends Base_model
 						  AND c.s_status = 'accepted' 
 						  AND u.i_status=1 
 						  AND
-						  ((c.i_requester_id = %s AND u.id=c.i_accepter_id ) 
-						  OR (c.i_accepter_id = %s AND u.id=c.i_requester_id ))
-						  ", 
-						  /*intval($i_user_id), 
-						  intval($i_user_id), */
-						  intval($i_user_id), 
-						  intval($i_user_id));
+						  ((c.i_requester_id = '".intval($i_user_id)."' AND u.id=c.i_accepter_id ) 
+						  OR (c.i_accepter_id = '".intval($i_user_id)."' AND u.id=c.i_requester_id ))
+						  ";
 					
 	  
 	  $rs=$this->db->query($s_qry)->result_array();
