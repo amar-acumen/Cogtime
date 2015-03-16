@@ -307,7 +307,7 @@ class My_blog_model extends Base_model
     
 	public function get_total_articles_by_blog_id($blog_id) {
 	
-		$sql = sprintf("SELECT count(*) count FROM ".$this->db->USER_BLOG_POST."  where i_blog_id = '%s'", $blog_id);
+		$sql = "SELECT count(*) count FROM ".$this->db->USER_BLOG_POST."  where i_blog_id = '".$blog_id."'", ;
 		$query = $this->db->query($sql);
 		$result_arr = $query->result_array();
 
@@ -316,8 +316,8 @@ class My_blog_model extends Base_model
 	
 	public function get_total_comments_by_blog_id($blog_id) {
 		
-		$sql = sprintf("SELECT count(*) count FROM ".$this->db->USER_BLOG_POST_COMMENTS.
-					  " where i_blog_id = '%s'", $blog_id);
+		$sql = "SELECT count(*) count FROM ".$this->db->USER_BLOG_POST_COMMENTS.
+					  " where i_blog_id = '".$blog_id."'";
 							
 		$query = $this->db->query($sql);
  		//echo $this->db->last_query();
@@ -341,13 +341,13 @@ class My_blog_model extends Base_model
     //--------- for admin use ---------------------
 	public function delete_by_id($id) {
 	
-	     $sql = sprintf( 'DELETE FROM '.$this->db->USER_BLOG_POST_COMMENTS.' WHERE i_blog_post_id=%s', $id );
+	     $sql = 'DELETE FROM '.$this->db->USER_BLOG_POST_COMMENTS.' WHERE i_blog_post_id="'.$id.'"';
 		 $this->db->query($sql);
 		 
-		 $sql = sprintf( 'DELETE FROM '.$this->db->USER_BLOG_POST.' WHERE i_blog_id=%s', $id );
+		 $sql = 'DELETE FROM '.$this->db->USER_BLOG_POST.' WHERE i_blog_id="'.$id.'"';
 		 $this->db->query($sql);
 		 
-		 $sql = sprintf( 'DELETE FROM '.$this->db->USER_BLOGS.' WHERE id=%s', $id );
+		 $sql = 'DELETE FROM '.$this->db->USER_BLOGS.' WHERE id="'.$id.'"';
 		 $this->db->query($sql);
 		#echo $this->db->last_query(); exit;
 	}
@@ -355,7 +355,7 @@ class My_blog_model extends Base_model
 	
 	public function get_by_id($id) {
 
-		$sql = sprintf('SELECT * FROM '.$this->db->USER_BLOGS.'  where id = %s',  $id);
+		$sql = 'SELECT * FROM '.$this->db->USER_BLOGS.'  where id = "'.$id.'"';
 		$query = $this->db->query($sql); #echo $this->db->last_query(); exit;
 		$result_arr = $query->result_array();
 		#pr($result_arr[0]);
@@ -438,22 +438,21 @@ class My_blog_model extends Base_model
 			$limit = ' limit '.$i_start.', '.$i_limit;
 		}
 		$user_id = decrypt($this->session->userdata('user_id'));
-		$sql = sprintf(" SELECT derived_tbl.* FROM (
+		$sql = " SELECT derived_tbl.* FROM (
 							(SELECT B.*, CONCAT(U.s_first_name,' ',U.s_last_name) AS user_name,
 							
-							(SELECT count(*) FROM %1\$suser_blog_post 
+							(SELECT count(*) FROM cg_user_blog_post 
 										 WHERE i_blog_id = B.id ) total_articles,
 										 
-							(SELECT count(*) FROM %1\$suser_blog_post_comments 
+							(SELECT count(*) FROM cg_user_blog_post_comments 
 										 WHERE i_blog_id = B.id ) total_comments
 							
-							FROM %1\$suser_blogs B
+							FROM cg_user_blogs B
 							LEFT JOIN  {$this->db->USERS} U  ON U.id = B.i_user_id 
-							WHERE  	i_isenabled = 1 %3\$s GROUP BY B.id ORDER BY `i_view_count` DESC, B.`dt_created_on` DESC, 
+							WHERE  	i_isenabled = 1 {$where} GROUP BY B.id ORDER BY `i_view_count` DESC, B.`dt_created_on` DESC, 
 							`total_articles` DESC, `total_comments`  DESC )
 							
-  						) as  derived_tbl %2\$s  "
-						, $this->db->dbprefix, $limit,$where);
+  						) as  derived_tbl {$limit}  ";
 		//echo $sql;exit;
 
 		$query = $this->db->query($sql);
@@ -504,21 +503,20 @@ class My_blog_model extends Base_model
             $limit = ' limit '.$i_start.', '.$i_limit;
         }
         $user_id = decrypt($this->session->userdata('user_id'));
-        $sql = sprintf(" SELECT derived_tbl.* FROM (
+        $sql = " SELECT derived_tbl.* FROM (
                             (SELECT B.*, CONCAT(U.s_first_name,' ',U.s_last_name) AS user_name,
                             
-                            (SELECT count(*) FROM %1\$suser_blog_post 
+                            (SELECT count(*) FROM cg_user_blog_post 
                                          WHERE i_blog_id = B.id ) total_articles,
                                          
-                            (SELECT count(*) FROM %1\$suser_blog_post_comments 
+                            (SELECT count(*) FROM cg_user_blog_post_comments 
                                          WHERE i_blog_id = B.id ) total_comments
                             
-                            FROM %1\$suser_blogs B
+                            FROM cg_user_blogs B
                             LEFT JOIN  {$this->db->USERS} U  ON U.id = B.i_user_id 
-                            WHERE      i_isenabled = 1 %3\$s GROUP BY B.id ORDER BY  B.`dt_created_on` DESC)
+                            WHERE      i_isenabled = 1 {$where} GROUP BY B.id ORDER BY  B.`dt_created_on` DESC)
                             
-                          ) as  derived_tbl %2\$s  "
-                        , $this->db->dbprefix, $limit,$where);
+                          ) as  derived_tbl {$limit}  ";
         //echo $sql;exit;
 
         $query = $this->db->query($sql);
