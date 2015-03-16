@@ -382,8 +382,7 @@ class Church_new_model extends Base_model
 	public function get_pending_groups_requests_recieved_for_church($i_user_id, $s_where) {
 
 
-        $sql = sprintf(" 
-		  				  SELECT 
+        $sql = " SELECT 
 						  pg_mem.id as rec_id,
 						  pg_mem.i_user_id ,
 						  pg_mem.s_status,
@@ -398,8 +397,8 @@ class Church_new_model extends Base_model
 						  
 						  WHERE u.i_status='1' AND u.i_isdeleted ='1' AND pg.i_isenabled = 1 
 						  AND pg.i_owner_id = '".intval($i_user_id)."' AND pg_mem.i_request = '1' 
-						  AND pg_mem.s_status = 'pending' '".$s_where."' group by pg_mem.id ";
-       echo nl2br($sql); exit;
+						  AND pg_mem.s_status = 'pending' {$s_where} group by pg_mem.id ";
+       //echo nl2br($sql); exit;
         $query = $this->db->query($sql);
         $result_arr = $query->result_array(); //echo '1';pr($result_arr,1);
         return $result_arr;
@@ -417,7 +416,7 @@ class Church_new_model extends Base_model
 	# function to check if request_already_sent
 
     function request_already_sent($i_user_id = '', $i_group_id = '') {
-        $SQL = sprintf("SELECT COUNT(*) AS `check_count` FROM ".$this->db->CHURCH_PRAYER_GROUP_MEMBERS." 
+        $SQL = "SELECT COUNT(*) AS `check_count` FROM ".$this->db->CHURCH_PRAYER_GROUP_MEMBERS." 
 						WHERE `i_user_id`='".$i_user_id."'  AND `i_prayer_group_id` = '".$i_group_id."' 
 						AND `s_status` = 'pending' ";
         $ROW = $this->db->query($SQL)->row_array(); //echo $this->db->last_query(); exit;
