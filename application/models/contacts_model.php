@@ -397,7 +397,7 @@ class Contacts_model extends Base_model
 				ORDER BY 1, dt_accepted_on DESC", 
 						/*intval($i_user_id), 
 						intval($i_user_id), , dt_created_on DESC*/
-						, 
+						intval($i_user_id), 
 						intval($i_user_id));
 						
 				
