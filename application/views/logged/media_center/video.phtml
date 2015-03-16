@@ -131,6 +131,7 @@
 								$i=0;
 							}
                                                       //  echo $_SERVER['DOCUMENT_ROOT'];
+                                                        var_damp(base_url() . 'uploads/media_center_videos/' . getThumbName($val['s_video_thumb'], 'bigthumb'));
                                                         if(file_exists(base_url() . 'uploads/media_center_videos/' . getThumbName($val['s_video_thumb'], 'bigthumb'))){
                                                         $IMG = base_url() . 'uploads/media_center_videos/' . getThumbName($val['s_video_thumb'], 'bigthumb');
                                                         
