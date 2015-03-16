@@ -93,7 +93,7 @@ class Church_ring_post_comments_model extends CI_Model {
 	public function get_by_ring_post_id($i_media_id,$i_start_limit="", $i_no_of_page="") { 
         
 		if("$i_start_limit" == "") {
-			$sql = sprintf("SELECT c.id, 
+			$sql = "SELECT c.id, 
 								  
 								   c.i_ring_post_id,
 								   c.i_user_id, 
@@ -104,16 +104,14 @@ class Church_ring_post_comments_model extends CI_Model {
 								   u.s_first_name as pseudo, 
 								   u.e_gender
 								   
-						FROM %1\$schurch_ring_post_comments  c, %1\$susers u 
+						FROM cg_church_ring_post_comments  c, cg_users u 
 						WHERE c.i_user_id=u.id 
-						    AND c.i_ring_post_id = %2\$s 
+						    AND c.i_ring_post_id = '".intval($i_media_id))."' 
 							
-						   ORDER BY c.dt_created_on DESC", 
-						   $this->db->dbprefix, 
-						   intval($i_media_id));
+						   ORDER BY c.dt_created_on DESC";
 		}
 		else {
-			$sql = sprintf("SELECT c.id, 
+			$sql = "SELECT c.id, 
 								   c.i_ring_post_id,
 								   c.i_user_id, 
 								   c.s_contents, 
@@ -124,13 +122,9 @@ class Church_ring_post_comments_model extends CI_Model {
 								   u.s_first_name as pseudo 
 					    FROM %1\$schurch_ring_post_comments c, %1\$susers u 
 						WHERE c.i_user_id=u.id
-						 AND c.i_ring_post_id = %2\$s 
+						 AND c.i_ring_post_id = '".intval($i_media_id)."' 
 						 
-						 ORDER BY dt_created_on DESC LIMIT %3\$s, %4\$s", 
-						 $this->db->dbprefix,
-						 intval($i_media_id), 
-						 intval($i_start_limit), 
-						 intval($i_no_of_page));
+						 ORDER BY dt_created_on DESC LIMIT {intval($i_start_limit)}, {intval($i_no_of_page)}";
 		}
 
         
