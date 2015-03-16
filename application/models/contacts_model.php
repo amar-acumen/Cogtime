@@ -836,8 +836,7 @@ class Contacts_model extends Base_model
 	# function to check total pending prayer_partner recieved
     function total_pending_friend_recieved($i_requester_id='')
     {
-      	$SQL = sprintf("SELECT COUNT(*) AS `check_count` FROM %s WHERE (`i_accepter_id`='%s' ) AND `s_status` = 'pending' ",
-                        $this->db->USER_CONTACTS, $i_requester_id);
+      	$SQL = "SELECT COUNT(*) AS `check_count` FROM cg_user_contacts WHERE (`i_accepter_id`='".$i_requester_id."' ) AND `s_status` = 'pending' ";
         $ROW = $this->db->query($SQL)->row_array(); //echo $this->db->last_query(); 
         //echo  $ROW['check_count'];
         if( $ROW['check_count'] )
