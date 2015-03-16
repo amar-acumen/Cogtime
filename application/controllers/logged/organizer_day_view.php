@@ -103,7 +103,7 @@ class Organizer_day_view extends Base_controller
 			$this->timeListingData('00:00' ,60,$day, $month, $year);
 			$content = ob_get_contents();
 			$content_obj = json_decode($content);
-			$data['result_content'] = $content_obj->html; 
+			$data['result_content'] = '';//$content_obj->html; 
 			ob_end_clean();
 			
             # view file...
