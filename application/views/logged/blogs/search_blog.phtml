@@ -174,10 +174,12 @@ function search_blogs()
 							  $('#show_more_feeds_div').remove();
 							  hideUILoader_nodialog();
 							  
-							  if(data.html=='')
+							  if(data.html=='' && data.type != 2)
 							  {
 								  $('#search_result').html('<div class="page_heading_full">Search Results</div>'+'<div class="section01" style="padding-top:5px;"><div class="shade_norecords" style="width:260px;"><p class="blue_bold12">No Blog.</p></div></div></div>');
-							  }
+							  }else if(data.html=='' && data.type == 2){
+                                                              $('#search_result').html('<div class="page_heading_full">Search Results</div>'+'<div class="section01" style="padding-top:5px;"><div class="shade_norecords" style="width:260px;"><p class="blue_bold12">No Article.</p></div></div></div>');
+                                                          }
 							  else
 							  {
 								  $('#search_result').html('<div class="page_heading_full">Search Results</div>'+data.html);
