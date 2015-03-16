@@ -809,7 +809,7 @@ class Events_model extends Base_model {
             );
         }
 
-        $query = $this->db->query($sql); echo "sql ==>". nl2br($sql) ."<br />";  exit;
+        $query = $this->db->query($sql); //echo "sql ==>". nl2br($sql) ."<br />";  exit;
         $result_arr = $query->result_array();
 
         # pr($result_arr);
