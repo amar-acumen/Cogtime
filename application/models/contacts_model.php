@@ -391,14 +391,10 @@ class Contacts_model extends Base_model
 						AND c.s_status = 'accepted' 
 						AND u.i_status=1 
 						AND
-						((c.i_requester_id = %s AND u.id=c.i_accepter_id ) 
-						OR (c.i_accepter_id = %s AND u.id=c.i_requester_id )) )
+						((c.i_requester_id = '".intval($i_user_id)."' AND u.id=c.i_accepter_id ) 
+						OR (c.i_accepter_id = '".intval($i_user_id)."' AND u.id=c.i_requester_id )) )
 				
-				ORDER BY 1, dt_accepted_on DESC", 
-						/*intval($i_user_id), 
-						intval($i_user_id), , dt_created_on DESC*/
-						intval($i_user_id), 
-						intval($i_user_id));
+				ORDER BY 1, dt_accepted_on DESC";
 						
 				
 						
