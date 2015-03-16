@@ -16,7 +16,7 @@ class Mail_contents_model extends CI_Model {
 
 	
 	function get_by_id($id) {
-            $sql = sprintf("SELECT * FROM %smail_contents WHERE id = %s ORDER BY name", $this->db->dbprefix, $id);
+            $sql = "SELECT * FROM cg_mail_contents WHERE id = '".$id."' ORDER BY name";
             $query = $this->db->query($sql);
             $result_arr = $query->result_array();
 
@@ -24,8 +24,8 @@ class Mail_contents_model extends CI_Model {
 	}
 
 	function get_by_name($name) {
-            $sql = sprintf("SELECT * FROM %smail_contents
-                            WHERE `name` = '%s' ORDER BY name", $this->db->dbprefix, $name);
+            $sql = "SELECT * FROM cg_mail_contents
+                            WHERE `name` = '".$name."' ORDER BY name";
             $query = $this->db->query($sql);
             $result_arr = $query->result_array();
            // echo $sql; die();
@@ -41,10 +41,10 @@ class Mail_contents_model extends CI_Model {
 
 	function name_exists($name, $current = '') {
             if($current=='') {
-                $sql = sprintf("SELECT count(*) count FROM %smail_contents WHERE name = '%s'", $this->db->dbprefix, $name);
+                $sql = "SELECT count(*) count FROM cg_mail_contents WHERE name = '".$name."'";
             }
             else {
-                $sql = sprintf("SELECT count(*) count FROM %smail_contents WHERE name = '%s' and name != '%s'", $this->db->dbprefix, $name, $current);
+                $sql = "SELECT count(*) count FROM cg_mail_contents WHERE name = '".$name."' and name != '".$current."'";
             }
 
             $query = $this->db->query($sql);
@@ -70,7 +70,7 @@ class Mail_contents_model extends CI_Model {
 
 
 	function delete_by_id($id) {
-            $sql = sprintf( "DELETE FROM %smail_contents WHERE id=%s", $this->db->dbprefix, $id );
+            $sql = "DELETE FROM cg_mail_contents WHERE id='".$id."'";
 
             $this->db->query($sql);
 	}
