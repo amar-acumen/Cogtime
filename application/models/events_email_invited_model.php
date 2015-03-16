@@ -22,17 +22,17 @@ class Events_email_invited_model extends Base_model
 		
 		$where_cond = ($where !='')?" AND {$where} ":" ";
 		if("$start_limit" == "") {
-			$sql = sprintf("SELECT E.*, C.s_country_name , U.s_name, U.s_last_name 
+			$sql = "SELECT E.*, C.s_country_name , U.s_name, U.s_last_name 
 							FROM {$this->db->EVENTS_EMAIL_INVITED} E LEFT JOIN  {$this->db->ADMIN_USER} U 
 							ON U.id = E.i_host_id 
 							LEFT JOIN  {$this->db->MST_COUNTRY} C ON E.i_country_id = C.id 
-							where E.id = %s  {$where_cond} ",  $id);
+							where E.id = '".$id."'  {$where_cond}";
 		}
 		else {
-			$sql = sprintf("SELECT E.*, C.s_country_name, U.s_name, U.s_last_name FROM {$this->db->EVENTS_EMAIL_INVITED}
+			$sql = "SELECT E.*, C.s_country_name, U.s_name, U.s_last_name FROM {$this->db->EVENTS_EMAIL_INVITED}
 							 E LEFT JOIN  {$this->db->ADMIN_USER} U ON U.id = E.i_host_id 
 							 LEFT JOIN  {$this->db->MST_COUNTRY} C ON E.i_country_id = C.id 
-							  where E.id = %s   {$where_cond}   limit %s, %s",  $id, $start_limit, $no_of_page);
+							  where E.id = '".$id."'   {$where_cond}   limit {$start_limit}, {$no_of_page}";
 		}
 
 		$query = $this->db->query($sql); //echo $this->db->last_query(); //exit;
@@ -62,7 +62,7 @@ class Events_email_invited_model extends Base_model
 	
 
 	public function delete_by_id($id) {
-	     $sql = sprintf( 'DELETE FROM '.$this->db->EVENTS_EMAIL_INVITED.' WHERE id=%s', $id );
+	     $sql = 'DELETE FROM '.$this->db->EVENTS_EMAIL_INVITED.' WHERE id="'.$id.'"', ;
 
 		$this->db->query($sql);
 				

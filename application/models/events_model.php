@@ -613,7 +613,7 @@ class Events_model extends Base_model {
     public function get_total_my_events($i_user_id, $s_where) {
 
 
-        $sql = sprintf("
+        $sql = "
 				SELECT COUNT(*) count FROM (
 				(SELECT 
 					  e.id
@@ -623,10 +623,10 @@ class Events_model extends Base_model {
 					  (
 					  e.id in
 					  (SELECT r.i_event_id from cg_event_rsvp r, cg_users u where
-					  r.i_user_id = %2\$s 
+					  r.i_user_id = '".intval($i_user_id)."' 
 					  )
 					  
-					  ) %3\$s)
+					  ) {$s_where})
 			     UNION
 				 
 				 (SELECT 
@@ -634,14 +634,12 @@ class Events_model extends Base_model {
 					  FROM cg_users u, cg_events e
 					  WHERE u.i_status='1' AND u.i_isdeleted ='1' AND e.i_status = 1
 					   AND e.i_host_id = u.id 
-					  AND e.i_host_id = %2\$s %3\$s
+					  AND e.i_host_id = '".intval($i_user_id)."' {$s_where}
 				   )
 				 
 
 				) derived_tbl
-					"
-                , $this->db->dbprefix, intval($i_user_id), $s_where
-        );
+					";
 
 #and t.i_user_id != '%2\$s'
         $query = $this->db->query($sql);
@@ -655,7 +653,7 @@ class Events_model extends Base_model {
     public function get_all_events($s_where, $i_start_limit = '', $i_no_of_page = '') {
 
         if ("$i_start_limit" == "") {
-            $sql = sprintf("
+            $sql = "
 				  (SELECT 
 					a.id i_user_id,
 					a.s_email,
@@ -688,7 +686,7 @@ class Events_model extends Base_model {
 					
 					WHERE a.i_status='1' AND a.e_disabled ='no' AND e.i_status = 1 AND e.i_host_id = a.id AND e.dt_end_time >  NOW()
 					AND e.i_user_type = 2
-					 %2\$s )
+					 {$s_where} )
 					
 					 UNION
 					 
@@ -724,7 +722,7 @@ class Events_model extends Base_model {
 					  FROM cg_users u, cg_events e
 					  
 					  WHERE u.i_status='1' AND u.i_isdeleted ='1' AND e.i_status = 1 AND e.i_host_id = u.id AND e.dt_end_time >  NOW() AND e.i_user_type = 1
-					   %2\$s )
+					   {$s_where} )
 
 				ORDER BY  dt_created_on DESC
 					"
@@ -1255,7 +1253,7 @@ class Events_model extends Base_model {
     public function get_admin_events($s_where, $i_start_limit = '', $i_no_of_page = '') {
 
 
-        $sql = sprintf("
+        $sql = "
 						(SELECT 
 						a.id i_user_id,
 						a.s_email,
@@ -1286,12 +1284,10 @@ class Events_model extends Base_model {
 						FROM cg_admin_user a, cg_events e
 						
 						WHERE a.i_status='1' AND a.e_disabled ='no' AND e.i_status = 1 AND e.i_host_id = a.id AND e.i_user_type = 2
-						 %4\$s )
+						 {$s_where} )
 						ORDER BY `dt_start_time` ASC
-						limit %2\$s, %3\$s
-						"
-                , $this->db->dbprefix, intval($i_start_limit), intval($i_no_of_page), $s_where
-        );
+						limit {$i_start_limit}, {$i_no_of_page}
+						";
 
         $query = $this->db->query($sql); //echo "sql ==>". nl2br($sql) ."<br />";  exit;
         $result_arr = $query->result_array();
@@ -1303,18 +1299,15 @@ class Events_model extends Base_model {
     public function get_total_admin_events($s_where) {
 
 
-        $sql = sprintf("
-					SELECT COUNT(*) count FROM (
+        $sql = "SELECT COUNT(*) count FROM (
 					(SELECT 
 						a.id
 						FROM cg_admin_user a, cg_events e
 						
 						WHERE a.i_status='1' AND a.e_disabled ='no' AND e.i_status = 1 AND e.i_host_id = a.id AND e.i_user_type = 2
-						 %2\$s )
+						 {$s_where} )
 					) derived_tbl
-						"
-                , $this->db->dbprefix, $s_where
-        );
+						";
 
         #and t.i_user_id != '%2\$s'
         $query = $this->db->query($sql); //echo $result_arr[0]['count']." === sql ==>". nl2br($sql) ."<br />";   exit;
@@ -1514,7 +1507,7 @@ class Events_model extends Base_model {
     public function get_total_my_events_new($i_user_id, $s_where) {
 
 
-        $sql = sprintf("
+        $sql = "
 				SELECT COUNT(*) count FROM (
 				(SELECT 
 					  e.id
@@ -1524,10 +1517,10 @@ class Events_model extends Base_model {
 					  (
 					  e.id in
 					  (SELECT r.i_event_id from cg_event_rsvp r, cg_users u where
-					  r.i_user_id = %2\$s 
+					  r.i_user_id = '".intval($i_user_id)."' 
 					  )
 					  
-					  ) %3\$s)
+					  ) {$s_where})
 			     UNION
 				 
 				 (SELECT 
@@ -1535,14 +1528,12 @@ class Events_model extends Base_model {
 					  FROM cg_users u, cg_events e
 					  WHERE u.i_status='1' AND u.i_isdeleted ='1' AND e.i_status = 1
 					   AND e.i_host_id = u.id 
-					  AND e.i_host_id = %2\$s %3\$s
+					  AND e.i_host_id = '".intval($i_user_id)."' {$s_where}
 				   )
 				 
 
 				) derived_tbl
-					"
-                , $this->db->dbprefix, intval($i_user_id), $s_where
-        );
+					";
 
 #and t.i_user_id != '%2\$s'
         $query = $this->db->query($sql);

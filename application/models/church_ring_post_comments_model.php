@@ -124,12 +124,12 @@ class Church_ring_post_comments_model extends CI_Model {
 						WHERE c.i_user_id=u.id
 						 AND c.i_ring_post_id = '".intval($i_media_id)."' 
 						 
-						 ORDER BY dt_created_on DESC LIMIT {intval($i_start_limit)}, {intval($i_no_of_page)}";
+						 ORDER BY dt_created_on DESC LIMIT {$i_start_limit}, {$i_no_of_page}";
 		}
 
         
 		$query = $this->db->query($sql); 
-   echo $this->db->last_query();exit;
+   //echo $this->db->last_query();exit;
 		$result_arr = $query->result_array();
 
 		return $result_arr;
