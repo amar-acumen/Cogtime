@@ -47,11 +47,11 @@ function showUIMsgFriend(msg)
 				border: 'none',
 				padding: '15px',
 				fontSize: '12px',
-				backgroundColor: '#FFFF00',
+				backgroundColor: '#000000',
 				'-webkit-border-radius': '10px',
 				'-moz-border-radius': '10px',
 				opacity: '1',
-				color: '#000000'
+				color: '#ffffff'
 		},
 		overlayCSS: { backgroundColor: '#000000' }
 	});
