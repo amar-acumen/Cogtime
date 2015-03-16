@@ -416,7 +416,7 @@ class Church_new_model extends Base_model
 	# function to check if request_already_sent
 
     function request_already_sent($i_user_id = '', $i_group_id = '') {
-        $SQL = sprintf("SELECT COUNT(*) AS `check_count` FROM ".$this->db->CHURCH_PRAYER_GROUP_MEMBERS." 
+        $SQL = "SELECT COUNT(*) AS `check_count` FROM ".$this->db->CHURCH_PRAYER_GROUP_MEMBERS." 
 						WHERE `i_user_id`='".$i_user_id."'  AND `i_prayer_group_id` = '".$i_group_id."' 
 						AND `s_status` = 'pending' ";
         $ROW = $this->db->query($SQL)->row_array(); //echo $this->db->last_query(); exit;
