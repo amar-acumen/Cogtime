@@ -14,9 +14,9 @@ include(APPPATH.'controllers/base_controller.php');
 
 class Ring_home extends Base_controller
 {
-    private $pagination_per_page= 3;
-    private $comments_pagination_per_page = 10;
-	private $people_liked_pagination_per_page = 10;
+    private $pagination_per_page= 1;
+    private $comments_pagination_per_page = 1;
+	private $people_liked_pagination_per_page = 1;
     public function __construct()
      {
         try
