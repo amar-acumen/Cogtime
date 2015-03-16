@@ -50,8 +50,8 @@ class Admin_utility_model extends Base_model
                 $where = ( empty($where) )? "": $where;
                 
                 // get selected table's max-rank...
-                $maxSQL = "SELECT IFNULL(MAX(i_order),1) AS `max_displayorder`
-                          FROM ".$tbl." {$where}";
+                $maxSQL = sprintf("SELECT IFNULL(MAX(i_order),1) AS `max_displayorder`
+                          FROM %s %s", $tbl, $where);
                 $query = $this->db->query($maxSQL);
                 $row = $query->row();
          		$MAX_DISPLAYORDER = $row->max_displayorder;
@@ -59,7 +59,7 @@ class Admin_utility_model extends Base_model
 				
 				  // get selected table's min-rank...
                 $minSQL = sprintf("SELECT IFNULL(MIN(i_order),1) AS `min_displayorder`
-                          FROM ".$tbl." {$where}";
+                          FROM %s %s", $tbl, $where);
                 $query_min = $this->db->query($minSQL);
                 $row_min = $query_min->row();
          		$MIN_DISPLAYORDER = $row_min->min_displayorder;
@@ -104,12 +104,14 @@ class Admin_utility_model extends Base_model
                 /* Ranking Up Starts */
                 if($to=='dn')
                 {
-                    $query_pageorder = "SELECT `i_order` FROM ".$tbl." WHERE `id` = '".$id."' ";
+                    $query_pageorder = sprintf("SELECT `i_order` FROM %s WHERE `id` = %s ",
+                                                $tbl, $id);
                     $query1 = $this->db->query($query_pageorder);
                     $row1 = $query1->row();
                     $pageOrder=$row1->i_order;
 
-                    $query_pageid="SELECT `id` FROM  ".$tbl." WHERE `i_order`=('".$pageOrder."'-1) ";
+                    $query_pageid=sprintf("SELECT `id` FROM  %s WHERE `i_order`=(%s-1) ",
+                                                                 $tbl, $pageOrder);
                     $query2 = $this->db->query($query_pageid);
                     $row2 = $query2->row();
                     $pageid=$row2->id;
@@ -128,13 +130,14 @@ class Admin_utility_model extends Base_model
                 /* Ranking Down Starts */
                 if($to == 'up')
                 {
-                    $query_pageorder = "SELECT `i_order` FROM ".$tbl." WHERE `id` = '".$id."' ",
-                                                                          , ;
+                    $query_pageorder = sprintf("SELECT `i_order` FROM %s WHERE `id` = %s ",
+                                                                          $tbl, $id);
                     $query1 = $this->db->query($query_pageorder);
                     $row1 = $query1->row();
                     $pageOrder=$row1->i_order;
 
-                    $query_pageid=sprintf("SELECT `id` FROM  ".$tbl." WHERE `i_order`=('".$pageOrder."'+1) ";
+                    $query_pageid=sprintf("SELECT `id` FROM  %s WHERE `i_order`=(%s+1) ",
+                                                                  $tbl, $pageOrder);
                     $query2 = $this->db->query($query_pageid);
                     $row2 = $query2->row();
                     $pageid=$row2->id;
@@ -160,7 +163,8 @@ class Admin_utility_model extends Base_model
                 
                 $where = ( empty($where) )? " WHERE `i_is_active` = 1 ": $where;
                 
-                $SQL = "SELECT IFNULL(MAX(`i_displayorder`)+1,1) AS `max_displayorder` FROM ".$tbl." {$where}";
+                $SQL = sprintf("SELECT IFNULL(MAX(`i_displayorder`)+1,1) AS `max_displayorder` FROM %s %s",
+                                             $tbl, $where);
                 $query = $this->db->query($SQL);
                 $rows = $query->row();
 
@@ -177,16 +181,17 @@ class Admin_utility_model extends Base_model
                 
 				$WHERE_COND = ( empty($where) )? " `i_is_active` = 1 ": $where;
 				
-                $SQL1 = "SELECT `i_displayorder` FROM ".$tbl." WHERE `id` = '".$pID."' AND {$WHERE_COND} ";
+                $SQL1 = sprintf("SELECT `i_displayorder` FROM %s WHERE `id` = %s AND %s ",
+                                                $tbl, $pID, $WHERE_COND);
                 $query1 = $this->db->query($SQL1);
 
                 $row1 = $query1->row();
                 $DisplayOrder = $row1->i_displayorder;
 
-                $SQL2 = "SELECT `id`, `i_displayorder`
-								 FROM ".$tbl."
-								 WHERE `i_displayorder` > '".$DisplayOrder."' AND {$WHERE_COND}
-								 ORDER BY `i_displayorder` ASC ";
+                $SQL2 = sprintf("SELECT `id`, `i_displayorder`
+								 FROM %s
+								 WHERE `i_displayorder` > %s AND %s
+								 ORDER BY `i_displayorder` ASC ", $tbl, $DisplayOrder, $WHERE_COND);
                 $query2 = $this->db->query($SQL2);
                 $rows = $query2->result_array();
 
