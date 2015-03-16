@@ -569,7 +569,7 @@ class My_blog extends Base_controller {
                     echo json_encode(array('result' => 'success', 'msg' => $SUCCESS_MSG, 'html' => $no_of_cmnts, 'blog' => $postcmnts_postid, 'comm' => $total_rows));
                     exit;
                 } else {
-                    $return_arr = array('result' => 'error', "msg" => "Some Error Occured");
+                    $return_arr = array('result' => 'error', "msg" => "Some Error Occurred");
                 }
                 echo json_encode($return_arr);
                 exit;
