@@ -705,9 +705,9 @@ function gotoDay(year,day,month){
 	//$('#goto_date').val(val_date);
 	//$('#gotoFrm').submit();
 	/*page refresh*/
-alert(month);alert(day);
+
 	showUILoader();
-	getdata = '00:00/60/'+day+'/'+month+'/'+year;
+	getdata = '0/60/'+day+'/'+month+'/'+year;
 	$.ajax({
 			 type: "get",
 			 url: base_url+'logged/organizer_day_view/timeListingData/'+getdata,
