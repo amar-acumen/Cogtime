@@ -706,7 +706,7 @@ function gotoDay(year,day,month){
 	//$('#gotoFrm').submit();
 	/*page refresh*/
 
-	showUILoader();
+	showUILoader('<img src="'+base_url+'images/loading_big.gif" width="50"/> ');
 	getdata = '0/60/'+day+'/'+month+'/'+year;
 	$.ajax({
 			 type: "get",
