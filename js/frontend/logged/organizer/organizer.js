@@ -707,7 +707,7 @@ function gotoDay(year,day,month){
 	/*page refresh*/
 
 	showUILoader();
-	getdata = '/60/'+day+'/'+month+'/'+year;
+	getdata = '0/60/'+day+'/'+month+'/'+year;
 	$.ajax({
 			 type: "get",
 			 url: base_url+'logged/organizer_day_view/timeListingData/'+getdata,
