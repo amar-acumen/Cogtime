@@ -363,7 +363,7 @@ class Contacts_model extends Base_model
                         (SELECT b.user_id f_id FROM {$this->db->dbprefix}frnd b WHERE b.frnd_id ='{$userid}')
                     ) tab INNER JOIN {$this->db->dbprefix}users ms ON ms.user_id=tab.f_id WHERE ms.status=1
                         AND f_id<>{$userid}  ";*/
-		 	$s_qry = sprintf("( SELECT 1, 
+		 	$s_qry = "( SELECT 1, 
 						 	c.id, 
 						   c.i_requester_id, 
 						   c.i_accepter_id,
