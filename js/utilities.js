@@ -36,7 +36,7 @@ function showUIMsg(msg)
 		overlayCSS: { backgroundColor: '#000000' }
 	});
 
-	setTimeout($.unblockUI, 2000);
+	setTimeout($.unblockUI, 10000);
 }
 
 function showUIMsgFriend(msg)

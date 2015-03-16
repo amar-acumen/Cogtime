@@ -118,7 +118,7 @@ function showUIMsg(msg)
 		overlayCSS: { backgroundColor: '#000000' }
 	});
 
-	setTimeout($.unblockUI, 2000);
+	setTimeout($.unblockUI, 10000);
 }
 var redirect_url ='';
 function showUIMsgRedirect(msg,pageurl)
