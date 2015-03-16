@@ -904,7 +904,7 @@ class Organizer_day_view extends Base_controller
 					  
 					  $s_option .= "<li class='ul-color'>
 					  				 <div class='day-time-zone'>
-									 ".$c_day.'-'.$month.'-'.$year.getShortDateWithTime($time_val,8)."</div>
+									 ".getShortDateWithTime($time_val,8)."</div>
 									 <div class='day-data-list'>";
 									 
 										if(count($note_list)){
