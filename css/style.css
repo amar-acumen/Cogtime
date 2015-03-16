@@ -309,6 +309,9 @@ input[type="checkbox"] {
 	color:#004084;
 	background-color:inherit;
 }
+.light_blue_bold12 > p {
+  padding: 0 10px;
+}
 .light_blue12 {
 	font-weight:normal;
 	font-size:12px;
