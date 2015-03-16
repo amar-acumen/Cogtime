@@ -559,8 +559,7 @@ class Education_model extends Base_model
     // check education data exists or not
     public function check_edu_info($record_id)
     {
-		$sql = sprintf("SELECT count(*) as total_count from cg_user_education where id  = '%s'"
-							, $record_id);
+		$sql = "SELECT count(*) as total_count from cg_user_education where id  = '". $record_id."'";
         $query=$this->db->query($sql);
 	    $result_arr = $query->result_array();
 		//pr($result_arr[0]['total_count'] ,1);
@@ -645,7 +644,7 @@ class Education_model extends Base_model
             if(intval($db_id)>0)
             {
                 
-                $q=sprintf("DELETE FROM %s WHERE id=%s",$this->db->USER_EDUCATION,$db_id);
+                $q="DELETE FROM cg_user_education WHERE id='".$db_id."'";
                 
                 $this->db->trans_begin();///new  
                 $this->db->query($q);

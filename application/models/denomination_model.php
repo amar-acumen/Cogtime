@@ -65,7 +65,7 @@ class Denomination_model extends Base_model
     //------------------------- get particular denoination ----------------------
     function fetch_this($id)
     {
-        $query = sprintf("SELECT * FROM %s WHERE `id`=%s",$this->db->DENOMINATION,$id);
+        $query = "SELECT * FROM cg_denomination WHERE `id`='".$id."'";
         $res = $this->db->query($query)->result_array();
         //pr($res);
         return $res;

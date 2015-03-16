@@ -20,10 +20,10 @@ class Church_ring_post_model extends Base_model
 	
 	public function get_by_id($id, $start_limit="", $no_of_page="") {
 		if("$start_limit" == "") {
-			$sql = sprintf('SELECT * FROM '.$this->db->USER_RING_POST.'  where id = %s',  $id);
+			$sql = 'SELECT * FROM '.$this->db->USER_RING_POST.'  where id = "'.$id.'"';
 		}
 		else {
-			$sql = sprintf('SELECT * FROM '.$this->db->USER_RING_POST.'  where id = %s limit %s, %s',  $id, $start_limit, $no_of_page);
+			$sql = 'SELECT * FROM '.$this->db->USER_RING_POST.'  where id = "'.$id.'" limit {$start_limit}, {$no_of_page}';
 		}
 
 		$query = $this->db->query($sql);
@@ -41,7 +41,7 @@ class Church_ring_post_model extends Base_model
 public function get_all_ring_post_by_ring_id($i_ring_id, $s_where, $i_start_limit='', $i_no_of_page='') {
 		
 		if("$i_start_limit" == "") {
-			$sql = sprintf("
+			$sql = "
 				(SELECT u.id post_owner_user_id,
 							  u.s_email,
 							  u.e_gender,
@@ -51,19 +51,16 @@ public function get_all_ring_post_by_ring_id($i_ring_id, $s_where, $i_start_limi
 							  
 							  t.*
 							  FROM cg_users u, cg_church_ring_post t
-							  WHERE u.i_status='1' AND u.i_isdeleted ='1' AND t.i_user_id = u.id and t.i_ring_id = %1\$s and t.i_disable='1'
-							  %2\$s)
+							  WHERE u.i_status='1' AND u.i_isdeleted ='1' AND t.i_user_id = u.id and t.i_ring_id = '".intval($i_ring_id)."' and t.i_disable='1'
+							  {$s_where})
 
-				ORDER BY t.id DESC
-					"
-				,  intval($i_ring_id), $s_where
-			);
+				ORDER BY t.id DESC";
 		}
 		else {
 		
 		
 		
-			 $sql = sprintf("
+			 $sql = "
 						(SELECT u.id post_owner_user_id,
 									  u.s_email,
 									  u.e_gender,
@@ -74,13 +71,11 @@ public function get_all_ring_post_by_ring_id($i_ring_id, $s_where, $i_start_limi
 									  
 									  FROM cg_users u, cg_church_ring_post t
 									  WHERE u.i_status='1' AND u.i_isdeleted ='1' AND t.i_user_id = u.id and t.i_ring_id = %1\$s and t.i_disable='1'
-									  %4\$s)
+									  {$s_where})
 	
 						ORDER BY dt_created_on DESC
-						limit %2\$s, %3\$s
-					"
-				,  intval($i_ring_id), intval($i_start_limit), intval($i_no_of_page),  $s_where
-			);
+						limit {$i_start_limit}, {$i_no_of_page}
+					";
 		}
 
 #AND t.i_user_id != '%2\$s'
@@ -98,18 +93,16 @@ public function get_all_ring_post_by_ring_id($i_ring_id, $s_where, $i_start_limi
 	public function get_total_all_ring_post_by_ring_id($i_ring_id,  $s_where) {
 		
 
-		 $sql = sprintf("
+		 $sql = "
 				SELECT COUNT(*) count FROM (
 							(SELECT    t.id
 									 
 									  FROM cg_users u, cg_church_ring_post t
-									  WHERE u.i_status='1' AND u.i_isdeleted ='1' AND t.i_user_id = u.id and t.i_ring_id = %1\$s
-									  %2\$s)
+									  WHERE u.i_status='1' AND u.i_isdeleted ='1' AND t.i_user_id = u.id and t.i_ring_id = '".intval($i_ring_id)."'
+									  {$s_where})
 
  				) derived_tbl
-					"
-				, intval($i_ring_id),$s_where
-			);
+					";
 		
 #and t.i_user_id != '%2\$s'
 		$query = $this->db->query($sql); //echo "sql ==>". ($sql) ."<br />";  
@@ -148,13 +141,13 @@ public function get_all_ring_post_by_ring_id($i_ring_id, $s_where, $i_start_limi
 
 	public function delete_by_id($id) {
 		
-		 $sql = sprintf( 'DELETE FROM '.$this->db->USER_RING_POST_LIKE.' WHERE i_ring_post_id=%s', $id );
+		 $sql = 'DELETE FROM '.$this->db->USER_RING_POST_LIKE.' WHERE i_ring_post_id="'.$id.'"';
 		 $this->db->query($sql);
 		 
-		 $sql = sprintf( 'DELETE FROM '.$this->db->USER_RING_POST_COMMENTS.' WHERE i_ring_post_id=%s', $id );
+		 $sql = 'DELETE FROM '.$this->db->USER_RING_POST_COMMENTS.' WHERE i_ring_post_id="'.$id.'"';
 		 $this->db->query($sql);
 		 
-	     $sql = sprintf( 'DELETE FROM '.$this->db->USER_RING_POST.' WHERE id=%s', $id );
+	     $sql = 'DELETE FROM '.$this->db->USER_RING_POST.' WHERE id="'.$id.'"';
 		 $this->db->query($sql);
 		#echo $this->db->last_query(); exit;
 	}

@@ -551,38 +551,6 @@ class My_profile extends Base_controller {
             $total_divs = count($arr_institute_name);
             $info = array();
 
-//            for ($i = 0; $i < $total_divs; $i++) {
-//
-//                ## CHECKING BLANK ARRAY
-//                if ($arr_institute_name[$i] != '' || $arr_institute_city[$i] != '-1' || $arr_institute_state[$i] != '-1' || $arr_institute_country[$i] != '-1' || $arr_institute_year[$i] != '' || $arr_institute_degree[$i] != '') {
-//
-//                    if (!empty($DELETED_IDS_ARR) && in_array($arr_db_id[$i], $DELETED_IDS_ARR)) {
-//                        //echo "Delete : ". $arr_db_id[$i] ."\r\n";
-//
-//                        $this->education_model->delete_info_db($arr_db_id[$i]);
-//                        #echo $this->db->last_query();
-//                    } else {
-//                        //echo "update..".$arr_db_id[$i];
-//                        $info['s_school_name'] = get_formatted_string($arr_institute_name[$i]);
-//                        $info['s_school_city'] = intval(decrypt(trim($arr_institute_city[$i])));
-//                        $info['s_school_state'] = intval(decrypt(trim($arr_institute_state[$i])));
-//                        $info['s_school_country'] = intval(decrypt(trim($arr_institute_country[$i])));
-//                        $info['i_class_year'] = get_formatted_string($arr_institute_year[$i]);
-//                        $info['s_degree'] = get_formatted_string($arr_institute_degree[$i]);
-//                        $info['i_user_id'] = $logged_user_id;
-//
-//                        #pr($info);
-//                        #echo "db id : ".$arr_db_id[$i];
-//                        # modify user-profile info...                    
-//                        $result = $this->education_model->edit_edu_info($info, $logged_user_id, $arr_db_id[$i]);
-//                        #echo $this->db->last_query().' ==  ';
-//                        //pr($result);
-//                    }
-//                }   // end of 'if any field in a div exists
-//                else {
-//                    $this->education_model->delete_info_db($arr_db_id[$i]);
-//                }
-//            }
 
             $REDIRECT = "my-profile.html";
             $SUCCESS_MSG = "Account updated successfully";
