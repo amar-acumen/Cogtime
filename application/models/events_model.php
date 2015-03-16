@@ -800,8 +800,7 @@ class Events_model extends Base_model {
 					   {$s_where} )
 
 				    ORDER BY  dt_created_on DESC 
-					limit {$i_start_limit}, {$i_no_of_pag}
-					";
+					limit {$i_start_limit}, {$i_no_of_page}";
         }
 
         $query = $this->db->query($sql); //echo "sql ==>". nl2br($sql) ."<br />";  exit;
