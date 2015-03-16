@@ -699,8 +699,43 @@ function showAddList(adddate,caldate){
 }
 
 
-function gotoDay(val_date){
-	
-	$('#goto_date').val(val_date);
-	$('#gotoFrm').submit();
+//function gotoDay(val_date){
+function gotoDay(day,month,year){
+	/*page refresh*/
+	//$('#goto_date').val(val_date);
+	//$('#gotoFrm').submit();
+	/*page refresh*/
+
+	getdata = '00:00/60/'+day+'/'+month+'/'+year;
+	$.ajax({
+			 type: "get",
+			 url: base_url+'logged/organizer_day_view/timeListingData/',
+			 data: getdata,
+			 dataType:"json",
+			 success: function(json_response){
+				 
+				 
+				  if(json_response.success == true) {
+					   showUIMsg(json_response.msg);
+						//alert(json_response.success+ 1);
+						//hide_dialog('edit_list');
+						
+						$('#edit_todo_end_frm_'+id).html('');
+						$('#edit_todo_end_frm_'+id).html(json_response.sel_html);
+						$('#edit_end_time_div_'+id).attr('style','display:block;');
+						hideUILoader_nodialog();
+				  }
+				  else if(json_response.success == false) {
+					   //alert(json_response.success +' al '+ 2+ ' id: '+ id);
+					   $('#edit_end_time_div_'+id).attr('style','display:none;');
+					   hideUILoader_nodialog();
+					   // showUIMsg('Some error occurred. Please try again.');
+				  }
+			  },
+			  error: function(){
+				 hideUILoader();
+				 //hide_dialog('edit_list');
+				  showUIMsg('Some error occurred. Please try again.');
+			  }
+		  });
 }
