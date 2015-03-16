@@ -653,7 +653,7 @@ class Events_model extends Base_model {
     public function get_all_events($s_where, $i_start_limit = '', $i_no_of_page = '') {
 
         if ("$i_start_limit" == "") {
-            $sql = "
+            $sql = sprintf("
 				  (SELECT 
 					a.id i_user_id,
 					a.s_email,
