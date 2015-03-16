@@ -1102,7 +1102,76 @@ class Ring_home extends Base_controller
 				{
 					
 					$invite_id = $i;
-					$message_id=$this->social_notifications_message($i_user_id, $invite_id, 'ring_join_request', $ring_id) ;
+					//$message_id=$this->social_notifications_message($i_user_id, $invite_id, 'ring_join_request', $ring_id) ;
+                                        /*******send mail*********/
+                                         $this->load->model('users_model');
+                $this->load->model('my_ring_model');
+                #echo $i_sender_id.'####'.$i_receiver_id;
+                $user_sender = $this->users_model->get_user_email_by_id($i_user_id);
+                $user_receiver = $this->users_model->get_user_email_by_id($invite_id);
+               // pr($user_receiver,1);
+                /********************GET ADMIN EMAIL***************************************************/
+			$query = $this->db->get_where('cg_admin_user', array('id' => 1));
+                        
+                            foreach ($query->result() as $row)
+                                {
+                                   $admin_mail = $row->s_email;
+                                }
+            
+			/****************************************************************************/
+                   $this->load->library('email');
+    $this->load->helper('html');
+        $email_setting  = array('mailtype'=>'html','charset'  => 'utf-8',
+                  'priority' => '1');
+$this->email->initialize($email_setting);
+                #pr($user_sender);pr($user_receiver);
+                $body = ' ';
+                $subject = ' ';
+$url = '<a href="' . base_url() . 'accept_invitation/' . encrypt($invite_id) . '" target="_blank" style=" width:108px; height:28px; background-color:#62C3BC; color:#fff; display:block; text-align:center; text-decoration:none; padding-top:8px;">Join</a>';
+               $logo="http://cogtime.com/images/logo.png";
+    $body = '<table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" bgcolor="#e9f3f5" style="font-family:Arial, Helvetica, sans-serif; font-size:13px; line-height:19px;">
+  <tr>
+    <td align="left" style="background:#013D62; border-bottom:5px solid #62C3BC; padding:15px 0 15px 20px;"><img src="'.$logo.'" alt= ""></td>
+  </tr>
+  <tr style="border-top:1px solid #ffffff;">
+    <td style="padding-top:10px; padding-bottom:10px;">&nbsp;</td>
+  </tr>
+  <tr>
+  	
+  </tr>
+  <tr>
+  	<td style="padding:15px;"><p> Dear '.$user_receiver['s_profile_name'].',</p>
+<p>You have received ring request from '.$user_sender['s_profile_name'].' in COGTIME.</p>
+<p>
+    To view the message, please log in to '.base_url().'
+    </p>
+<p>Best Regards,</p>
+<p>COGTIME Team</p>
+
+            
+	</td>
+</tr>
+  <tr>
+    <td align="center" valign="middle" style="background:#A8A7A7; padding:15px;"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td align="left" valign="middle" style="color:#d3edfd; font-family:Arial, Helvetica, sans-serif; font-size:12px;"> <a href="http://acumencs.com/drandpt-arabic/contact-us/" style="color:#d3edfd; text-decoration:none;"></a></td>
+        
+        <td align="right" style="color:#013d62; font-family:Arial, Helvetica, sans-serif; font-size:12px; text-align="center" ">© All Rights Reserved<span style="color:#525252;"><strong> COGTIME 2014  </strong></span></td>
+      </tr>
+    </table></td>
+  </tr>
+</table>'; 
+    $this->email->from($admin_mail, 'From Cogtime ');
+$this->email->to($user_receiver['s_email']);
+//->email->bcc("$mailids");
+//$this->email->cc('arif.zisu@gmail.com');
+//$this->email->bcc('them@their-example.com');
+
+$this->email->subject('You have received a new message!');
+$this->email->message("$body");
+
+ $this->email->send();	
+                                        /**********************/
 					
 					$info_arr['i_ring_id'] = $ring_id;
 					$info_arr['i_invited_id'] = $invite_id;
