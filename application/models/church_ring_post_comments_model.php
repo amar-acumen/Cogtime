@@ -106,7 +106,7 @@ class Church_ring_post_comments_model extends CI_Model {
 								   
 						FROM cg_church_ring_post_comments  c, cg_users u 
 						WHERE c.i_user_id=u.id 
-						    AND c.i_ring_post_id = '".intval($i_media_id))."' 
+						    AND c.i_ring_post_id = '".intval($i_media_id)."' 
 							
 						   ORDER BY c.dt_created_on DESC";
 		}
@@ -129,7 +129,7 @@ class Church_ring_post_comments_model extends CI_Model {
 
         
 		$query = $this->db->query($sql); 
-    //echo $this->db->last_query();
+    echo $this->db->last_query();
 		$result_arr = $query->result_array();
 
 		return $result_arr;
