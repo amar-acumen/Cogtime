@@ -396,7 +396,7 @@ class Church_prayer_group extends Base_controller
 	{
 		
 		$user_id = intval(decrypt($this->session->userdata('user_id')));
-		$s_where = 'pg.s_group_name ="sdsdsd"';
+		$s_where = '';
 		$whr_cond = "";
 		
 		if($notif_grp_by != '-1'){
