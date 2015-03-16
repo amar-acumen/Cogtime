@@ -130,12 +130,12 @@
 								$class='last';
 								$i=0;
 							}
-                                                       echo APPPATH.'uploads/media_center_videos/' . getThumbName($val['s_video_thumb'], 'bigthumb').'/';
+                                                       echo dirname(__FILE__).'uploads/media_center_videos/' . getThumbName($val['s_video_thumb'], 'bigthumb').'/';
                                                        
-                                                        if(file_exists(base_url() . 'uploads/media_center_videos/' . getThumbName($val['s_video_thumb'], 'bigthumb'))){
+                                                        if(file_exists(dirname(__FILE__) . 'uploads/media_center_videos/' . getThumbName($val['s_video_thumb'], 'bigthumb'))){
                                                         $IMG = base_url() . 'uploads/media_center_videos/' . getThumbName($val['s_video_thumb'], 'bigthumb');
                                                         
-                                                        }else if(!file_exists(base_url() . 'uploads/media_center_videos/' . getThumbName($val['s_video_thumb'], 'bigthumb'))){
+                                                        }else if(!file_exists(dirname(__FILE__). 'uploads/media_center_videos/' . getThumbName($val['s_video_thumb'], 'bigthumb'))){
                                                         $IMG = base_url() . 'images/private_vedio.png';    
                                                         }
 							
