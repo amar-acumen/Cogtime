@@ -41,7 +41,7 @@ class Events_user_invited_model extends Base_model
 	public function get_events_invitation_recived($i_user_id, $s_where, $i_start_limit='', $i_no_of_page='') {
 		
 		if("$i_start_limit" == "") {
-			$sql = sprintf("
+			$sql = "
 				  (SELECT 
 					u.id i_user_id,
 					u.s_email,
@@ -77,21 +77,19 @@ class Events_user_invited_model extends Base_model
 					(
 					e.id in
 					(SELECT ui.i_event_id from cg_event_user_invited ui, cg_users u where
-					ui.i_user_id = %2\$s
+					ui.i_user_id = '".intval($i_user_id)."'
 					)
 					
-					) %3\$s )
+					) {$s_where} )
 
 				ORDER BY `dt_created_on` DESC
-					"
-				, $this->db->dbprefix, intval($i_user_id), $s_where
-			);
+					";
 		}
 		else {
 		
 		
 		
-			 $sql = sprintf("
+			 $sql = "
 					(SELECT 
 
 					  u.id i_user_id,
@@ -128,16 +126,14 @@ class Events_user_invited_model extends Base_model
 					  (
 					  e.id in
 					  (SELECT ui.i_event_id from cg_event_user_invited ui, cg_users u where
-					  ui.i_user_id = %2\$s
+					  ui.i_user_id = '".intval($i_user_id)."'
 					  )
 					  
-					  ) %5\$s )
+					  ) {$s_where} )
 
 				    ORDER BY `dt_created_on` DESC
-					limit %3\$s, %4\$s
-					"
-				, $this->db->dbprefix, intval($i_user_id), intval($i_start_limit), intval($i_no_of_page),  $s_where
-			);
+					limit {$i_start_limit}, {$i_no_of_page}
+					";
 		}
 
 #AND t.i_user_id != '%2\$s'
