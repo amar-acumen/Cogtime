@@ -20,10 +20,10 @@ class HP_cms_model extends Base_model
 	
 	public function get_by_id($id, $start_limit="", $no_of_page="") {
 		if("$start_limit" == "") {
-			$sql = sprintf('SELECT * FROM '.$this->db->HP_CMS.'  where id = %s',  $id);
+			$sql = 'SELECT * FROM '.$this->db->HP_CMS.'  where id = "'.$id.'"';
 		}
 		else {
-			$sql = sprintf('SELECT * FROM '.$this->db->HP_CMS.'  where id = %s limit %s, %s',  $id, $start_limit, $no_of_page);
+			$sql = 'SELECT * FROM '.$this->db->HP_CMS.'  where id = "'.$id.'" limit {$start_limit}, {$no_of_page}';
 		}
 
 		$query = $this->db->query($sql);
@@ -58,7 +58,7 @@ class HP_cms_model extends Base_model
 
 	public function delete_by_id($id) {
 	
-	     $sql = sprintf( 'DELETE FROM '.$this->db->HP_CMS.' WHERE id=%s', $id );
+	     $sql = 'DELETE FROM '.$this->db->HP_CMS.' WHERE id="'.$id.'"';
 
 		$this->db->query($sql);
 		

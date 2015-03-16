@@ -179,7 +179,7 @@ class Intercession_model extends Base_model
 	public function get_by_request_id($i_prayer_req_id,  $i_start_limit="", $i_no_of_page="") { 
         
 		if("$i_start_limit" == "") {
-			$sql = sprintf("SELECT c.id, 
+			$sql = "SELECT c.id, 
 								   c.i_id_intercession_wall_post,
 								   c.i_user_id, 
 								   c.s_contents, 
@@ -190,17 +190,15 @@ class Intercession_model extends Base_model
 								   CONCAT(u.s_first_name,' ', u.s_last_name) s_profile_name,
 								   u.s_profile_photo
 								   
-						FROM %1\$sbible_intercession_commitments c, %1\$susers u 
+						FROM cg_bible_intercession_commitments c, cg_users u 
 						LEFT JOIN {$this->db->COUNTRY} mst_c on mst_c.id=u.i_country_id
 						
 						WHERE c.i_user_id=u.id 
-						    AND c.i_id_intercession_wall_post = %2\$s 
-						   ORDER BY c.dt_created_on DESC", 
-						   $this->db->dbprefix, 
-						   intval($i_prayer_req_id));
+						    AND c.i_id_intercession_wall_post = '".intval($i_prayer_req_id)."' 
+						   ORDER BY c.dt_created_on DESC";
 		}
 		else {
-			$sql = sprintf("SELECT c.id, 
+			$sql = "SELECT c.id, 
 								   c.i_id_intercession_wall_post,
 								   c.i_user_id, 
 								   c.s_contents, 
@@ -212,16 +210,12 @@ class Intercession_model extends Base_model
 								   u.s_profile_photo
 								   
 								   
-					    FROM %1\$sbible_intercession_commitments c, %1\$susers u 
+					    FROM cg_bible_intercession_commitments c, cg_users u 
 						LEFT JOIN {$this->db->COUNTRY} mst_c on mst_c.id=u.i_country_id
 						
 						WHERE c.i_user_id=u.id
-						 AND c.i_id_intercession_wall_post = %2\$s 
-						 ORDER BY dt_created_on DESC LIMIT %3\$s, %4\$s", 
-						 $this->db->dbprefix,
-						 intval($i_prayer_req_id), 
-						 intval($i_start_limit), 
-						 intval($i_no_of_page));
+						 AND c.i_id_intercession_wall_post = '".intval($i_prayer_req_id)."' 
+						 ORDER BY dt_created_on DESC LIMIT {$i_start_limit}, {$i_no_of_page}";
 		}
 
         //echo $sql; exit;
@@ -237,12 +231,12 @@ class Intercession_model extends Base_model
 	
 
 	public function get_total_by_request_id($i_prayer_req_id) {
-		$sql = sprintf("SELECT count(*) count 
+		$sql = "SELECT count(*) count 
 						 
-						 FROM %1\$sbible_intercession_commitments c, %1\$susers u
+						 FROM cg_bible_intercession_commitments c, cg_users u
 						 LEFT JOIN {$this->db->COUNTRY} mst_c on mst_c.id=u.i_country_id
-						 WHERE c.i_user_id=u.id AND c.i_id_intercession_wall_post = %2\$s 
-						 order by c.dt_created_on", $this->db->dbprefix, intval($i_prayer_req_id));
+						 WHERE c.i_user_id=u.id AND c.i_id_intercession_wall_post = '".intval($i_prayer_req_id)."' 
+						 order by c.dt_created_on";
 
 		$query = $this->db->query($sql); //echo nl2br($sql);
 		$result_arr = $query->result_array();
@@ -271,7 +265,7 @@ class Intercession_model extends Base_model
 	
 	public function delete_commitments_by_id($id) {
 		
-		$sql = sprintf( 'DELETE FROM %sbible_intercession_commitments WHERE id =%s  ', $this->db->dbprefix, $id);
+		$sql = 'DELETE FROM cg_bible_intercession_commitments WHERE id ="'.$id.'"  ';
 
 		$this->db->query($sql);
 		
