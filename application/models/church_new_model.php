@@ -398,9 +398,7 @@ class Church_new_model extends Base_model
 						  
 						  WHERE u.i_status='1' AND u.i_isdeleted ='1' AND pg.i_isenabled = 1 
 						  AND pg.i_owner_id = '".intval($i_user_id)."' AND pg_mem.i_request = '1' 
-						  AND pg_mem.s_status = 'pending' 
-						   {$s_where}
-						   group by pg_mem.id ";
+						  AND pg_mem.s_status = 'pending' {'".$s_where."'} group by pg_mem.id ";
        echo nl2br($sql); exit;
         $query = $this->db->query($sql);
         $result_arr = $query->result_array(); //echo '1';pr($result_arr,1);
