@@ -811,7 +811,7 @@ class My_blog extends Base_controller {
         else
             $Content = "";
 
-        echo json_encode(array('status' => 'success', 'html' => $Content, 'current_page' => $cur_page, 'view_more' => $view_more));
+        echo json_encode(array('status' => 'success', 'html' => $Content, 'current_page' => $cur_page, 'view_more' => $view_more , 'type'=>$rd_type));
     }
 
     /*     * **************************End Search blogs*********************** */

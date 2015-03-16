@@ -145,7 +145,7 @@ class Church_ring_model extends Base_model
 	
 public function get_by_id($id) 
     {
-		$sql = sprintf('SELECT * FROM cg_church_ring  where id = %s',  $id);
+		$sql = 'SELECT * FROM cg_church_ring  where id = "'.$id.'"';
 		$query = $this->db->query($sql); //echo $this->db->last_query(); exit;
 		$result_arr = $query->result_array();
 		#pr($result_arr[0]);
@@ -492,9 +492,9 @@ public function get_by_id($id)
         
         public function delete_by_id($id) {
 	
-	     $sql = sprintf( 'DELETE FROM cg_church_ring WHERE id=%s', $id );
+	     $sql = 'DELETE FROM cg_church_ring WHERE id="'.$id.'"';
 		 $this->db->query($sql);
-		 $sql = sprintf( 'DELETE FROM cg_church_ring_invited_user WHERE i_ring_id=%s', $id );
+		 $sql = 'DELETE FROM cg_church_ring_invited_user WHERE i_ring_id="'.$id.'"';
 		 $this->db->query($sql);
 //		 $sql = sprintf( 'DELETE FROM '.$this->db->USER_RING_POST.' WHERE i_ring_id=%s', $id );
 //		 $this->db->query($sql);
@@ -508,7 +508,7 @@ public function get_by_id($id)
 	public function leave_ring($id) {
 	
 	     $inv_id	 = intval(decrypt($this->session->userdata('user_id')));
-		 $sql = sprintf( 'DELETE FROM cg_church_ring_invited_user WHERE i_ring_id=%s AND i_invited_id=%s', $id,$inv_id );
+		 $sql = 'DELETE FROM cg_church_ring_invited_user WHERE i_ring_id="'.$id.'" AND i_invited_id="'.$inv_id.'"';
 		 $this->db->query($sql);
 		 
 		#echo $this->db->last_query(); exit;
