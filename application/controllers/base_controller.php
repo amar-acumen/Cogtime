@@ -2650,9 +2650,9 @@ class Base_controller extends CI_Controller {
 
 
                 $subject = sprintf3($subject, array('sender_name' => $user_sender['s_profile_name']));
-                $body = nl2br(sprintf3($body, array('receiver_name' => $user_receiver['s_profile_name'],
-                    'sender_name' => $user_sender['s_profile_name'],
-                    'ring_name' => $ring_name)));
+//                $body = nl2br(sprintf3($body, array('receiver_name' => $user_receiver['s_profile_name'],
+//                    'sender_name' => $user_sender['s_profile_name'],
+//                    'ring_name' => $ring_name)));
 
 
 
