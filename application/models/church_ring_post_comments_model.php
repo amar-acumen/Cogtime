@@ -120,7 +120,7 @@ class Church_ring_post_comments_model extends CI_Model {
 								   u.s_profile_photo, 
 								  
 								   u.s_first_name as pseudo 
-					    FROM %1\$schurch_ring_post_comments c, %1\$susers u 
+					    FROM cg_church_ring_post_comments c, cg_users u 
 						WHERE c.i_user_id=u.id
 						 AND c.i_ring_post_id = '".intval($i_media_id)."' 
 						 
@@ -129,7 +129,7 @@ class Church_ring_post_comments_model extends CI_Model {
 
         
 		$query = $this->db->query($sql); 
-    //echo $this->db->last_query();
+   echo $this->db->last_query();exit;
 		$result_arr = $query->result_array();
 
 		return $result_arr;
