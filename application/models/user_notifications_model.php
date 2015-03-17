@@ -20,11 +20,11 @@ class User_notifications_model extends Base_model
 	
 	public function get_by_id($id, $start_limit="", $no_of_page="") {
 		if("$start_limit" == "") {
-			$sql = sprintf('SELECT * FROM '.$this->db->NOTIFICATIONS.'  where id = %s',  $id);
+			$sql = 'SELECT * FROM '.$this->db->NOTIFICATIONS.'  where id = "'.$id.'"';
 		}
 		else {
 			
-			 $sql = sprintf('SELECT * FROM '.$this->db->NOTIFICATIONS.'  where id = %s limit %s, %s',  $id, $start_limit, $no_of_page);
+			 $sql = 'SELECT * FROM '.$this->db->NOTIFICATIONS.'  where id = "'.$id.'" limit {$start_limit}, {$no_of_page}';
 		}
 
 		$query = $this->db->query($sql); #echo $this->db->last_query(); exit;
@@ -38,11 +38,11 @@ class User_notifications_model extends Base_model
 
 	public function get_by_user_id($user_id, $s_where="", $start_limit="", $no_of_page="") {
 		if("$start_limit" == "") {
-			$sql = sprintf('SELECT n.*,CONCAT(u.s_first_name," ", u.s_last_name) s_profile_name, u.s_profile_photo, u.e_gender FROM '.$this->db->NOTIFICATIONS.' n,cg_users u  WHERE n.i_requester_id=u.id AND n.i_accepter_id = %s %s ORDER BY n.id DESC ',$user_id,  $s_where);
+			$sql = 'SELECT n.*,CONCAT(u.s_first_name," ", u.s_last_name) s_profile_name, u.s_profile_photo, u.e_gender FROM '.$this->db->NOTIFICATIONS.' n,cg_users u  WHERE n.i_requester_id=u.id AND n.i_accepter_id = "'.$user_id.'" {$s_where} ORDER BY n.id DESC ';
 		}
 		else {
-			 $sql = sprintf('SELECT n.*,CONCAT(u.s_first_name," ", u.s_last_name) s_profile_name, u.s_profile_photo, u.e_gender FROM '.$this->db->NOTIFICATIONS
-								.' n,cg_users u  WHERE n.i_requester_id=u.id AND n.i_accepter_id = %s %s ORDER BY n.id DESC LIMIT %s, %s ', $user_id, $s_where, $start_limit, $no_of_page);
+			 $sql = 'SELECT n.*,CONCAT(u.s_first_name," ", u.s_last_name) s_profile_name, u.s_profile_photo, u.e_gender FROM '.$this->db->NOTIFICATIONS
+								.' n,cg_users u  WHERE n.i_requester_id=u.id AND n.i_accepter_id = "'.$user_id.'" {$s_where} ORDER BY n.id DESC LIMIT {$start_limit}, {$no_of_page} ';
 		}
 
 		$query = $this->db->query($sql);
