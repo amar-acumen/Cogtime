@@ -20,10 +20,10 @@ class My_tweet_model extends Base_model
 	
 	public function get_by_id($id, $start_limit="", $no_of_page="") {
 		if("$start_limit" == "") {
-			$sql = sprintf('SELECT * FROM '.$this->db->TWEETS.'  where id = %s',  $id);
+			$sql = 'SELECT * FROM '.$this->db->TWEETS.'  where id = "'.$id.'"';
 		}
 		else {
-			$sql = sprintf('SELECT * FROM '.$this->db->TWEETS.'  where id = %s limit %s, %s',  $id, $start_limit, $no_of_page);
+			$sql = 'SELECT * FROM '.$this->db->TWEETS.'  where id = "'.$id.'" limit {$start_limit}, {$no_of_page}';
 		}
 
 		$query = $this->db->query($sql);
@@ -212,15 +212,15 @@ public function get_total_all_tweets_by_user_id($i_user_id,  $s_where) {
 public function get_my_tweets($i_user_id, $s_where, $i_start_limit='', $i_no_of_page='') {
 		
 		if("$i_start_limit" == "") {
-			$sql = sprintf("
+			$sql = "
 				  (SELECT  u.id i_user_id, 
 						 u.s_email, 
 						 u.e_gender, 
 						 CONCAT(u.s_first_name,' ', u.s_last_name) s_profile_name,
 						 u.s_profile_photo,
-						(SELECT COUNT(*) as count FROM %1\$stweets_fav ft WHERE ft.i_tweet_id = t.id AND ft.i_user_id = %2\$s)
+						(SELECT COUNT(*) as count FROM cg_tweets_fav ft WHERE ft.i_tweet_id = t.id AND ft.i_user_id = '".intval($i_user_id)."')
 						 as fav_tweet, 
-						(SELECT COUNT(*) as count FROM %1\$stweets_replys tr WHERE tr.i_tweet_id = t.id )
+						(SELECT COUNT(*) as count FROM cg_tweets_replys tr WHERE tr.i_tweet_id = t.id )
 						 as total_reply,
 						 u.s_tweet_id,
 						 t.id,
@@ -229,20 +229,18 @@ public function get_my_tweets($i_user_id, $s_where, $i_start_limit='', $i_no_of_
 						 t.s_type,
 						 t.dt_created_on
 						
-					FROM %1\$susers u, %1\$stweets t
+					FROM cg_users u, cg_tweets t
 					
 					WHERE u.i_status='1' AND u.i_isdeleted ='1' AND t.i_isenabled =1 
-					 AND t.i_owner_id = u.id AND t.i_owner_id = %2\$s %3\$s
+					 AND t.i_owner_id = u.id AND t.i_owner_id = '".intval($i_user_id)."' {$s_where}
 					ORDER BY dt_created_on DESC
-					"
-				, $this->db->dbprefix, intval($i_user_id), $s_where
-			);
+					";
 		}
 		else {
 		
 		
 		
-			 $sql = sprintf("
+			 $sql = "
 				(SELECT  u.id i_user_id, 
 						 u.s_email, 
 						 u.e_gender, 
@@ -259,17 +257,15 @@ public function get_my_tweets($i_user_id, $s_where, $i_start_limit='', $i_no_of_
 						 t.s_type,
 						 t.dt_created_on
 						
-					FROM %1\$susers u, %1\$stweets t
+					FROM cg_users u, cg_tweets t
 					
 					WHERE u.i_status='1' AND u.i_isdeleted ='1' AND t.i_isenabled =1 
-					AND t.i_owner_id = u.id AND t.i_owner_id = %2\$s %5\$s
+					AND t.i_owner_id = u.id AND t.i_owner_id = '".intval($i_user_id)."' {$s_where}
 				)
 
 				    ORDER BY dt_created_on DESC
-					limit %3\$s, %4\$s
-					"
-				, $this->db->dbprefix, intval($i_user_id), intval($i_start_limit), intval($i_no_of_page),  $s_where
-			);
+					limit {$i_start_limit}, {$i_no_of_page}
+					";
 		}
 
 #AND t.i_user_id != '%2\$s'
