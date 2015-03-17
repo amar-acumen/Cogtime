@@ -781,7 +781,7 @@ class Netpals_model extends Base_model
 		  $ret_=array();
 		  
 		 
-		 	$s_qry = sprintf("( SELECT 1, 
+		 	$s_qry = "( SELECT 1, 
 						  c.id, 
 						c.i_requester_id, 
 						c.i_accepter_id,
@@ -803,14 +803,10 @@ class Netpals_model extends Base_model
 						AND c.s_status = 'accepted' 
 						AND u.i_status=1 
 						AND
-						((c.i_requester_id = %s AND u.id=c.i_accepter_id AND u.i_country_id=cn.id) 
-						OR (c.i_accepter_id = %s AND u.id=c.i_requester_id AND u.i_country_id=cn.id)) )
+						((c.i_requester_id = '".intval($i_user_id)."' AND u.id=c.i_accepter_id AND u.i_country_id=cn.id) 
+						OR (c.i_accepter_id = '".intval($i_user_id)."' AND u.id=c.i_requester_id AND u.i_country_id=cn.id)) )
 				
-				ORDER BY 1, dt_accepted_on DESC, dt_created_on DESC", 
-						/*intval($i_user_id), 
-						intval($i_user_id), */
-						intval($i_user_id), 
-						intval($i_user_id));
+				ORDER BY 1, dt_accepted_on DESC, dt_created_on DESC";
 						
 						
 						#u.s_first_name,

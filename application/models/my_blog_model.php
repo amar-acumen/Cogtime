@@ -307,7 +307,7 @@ class My_blog_model extends Base_model
     
 	public function get_total_articles_by_blog_id($blog_id) {
 	
-		$sql = "SELECT count(*) count FROM ".$this->db->USER_BLOG_POST."  where i_blog_id = '".$blog_id."'", ;
+		$sql = "SELECT count(*) count FROM ".$this->db->USER_BLOG_POST."  where i_blog_id = '".$blog_id."'";
 		$query = $this->db->query($sql);
 		$result_arr = $query->result_array();
 
