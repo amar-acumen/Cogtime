@@ -86,7 +86,7 @@ class User_notifications_model extends Base_model
 	
 
 	public function delete_by_id($id) {
-	     $sql = sprintf( 'DELETE FROM '.$this->db->NOTIFICATIONS.' WHERE id=%s', $id );
+	     $sql = 'DELETE FROM '.$this->db->NOTIFICATIONS.' WHERE id="'.$id.'"';
 
 		$this->db->query($sql);
 		

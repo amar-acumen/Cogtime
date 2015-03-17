@@ -20,10 +20,10 @@ class Tweet_model extends Base_model
 	
 	public function get_by_id($id, $start_limit="", $no_of_page="") {
 		if("$start_limit" == "") {
-			$sql = sprintf('SELECT * FROM '.$this->db->USER_TWEETS.'  where id = %s',  $id);
+			$sql = 'SELECT * FROM '.$this->db->USER_TWEETS.'  where id = "'.$id.'"';
 		}
 		else {
-			$sql = sprintf('SELECT * FROM '.$this->db->USER_TWEETS.'  where id = %s limit %s, %s',  $id, $start_limit, $no_of_page);
+			$sql = 'SELECT * FROM '.$this->db->USER_TWEETS.'  where id = "'.$id.'" limit {$start_limit}, {$no_of_page}';
 		}
 
 		$query = $this->db->query($sql);
@@ -39,7 +39,7 @@ class Tweet_model extends Base_model
 	public function get_friends_netpals_tweets_by_user_id($i_user_id, $s_where, $i_start_limit='', $i_no_of_page='') {
 		
 		if("$i_start_limit" == "") {
-			$sql = sprintf("
+			$sql = "
 				  (SELECT  u.id i_user_id, 
 						 u.s_email, 
 						 u.e_gender, 
@@ -51,17 +51,17 @@ class Tweet_model extends Base_model
 						 t.s_tweet_text,
 						 t.dt_created_on
 						
-					FROM %1\$susers u, %1\$suser_tweets t
+					FROM cg_users u, cg_user_tweets t
 					
 					WHERE u.i_status='1' AND u.i_isdeleted ='1' AND t.i_isenabled =1  AND t.i_user_id = u.id 
 					
 					AND
 					(
 						t.i_user_id in 
-						(SELECT u.id from %1\$suser_contacts c, %1\$susers u where c.s_status = 'accepted'
-							and ((c.i_requester_id = %2\$s and u.id=c.i_accepter_id) 
-							or (c.i_accepter_id = %2\$s and u.id=c.i_requester_id)) 
-						)  %5\$s
+						(SELECT u.id from cg_user_contacts c, cg_users u where c.s_status = 'accepted'
+							and ((c.i_requester_id = '".intval($i_user_id)."' and u.id=c.i_accepter_id) 
+							or (c.i_accepter_id = '".intval($i_user_id)."' and u.id=c.i_requester_id)) 
+						)  {$s_where}
 					
 					
 					
@@ -80,25 +80,23 @@ class Tweet_model extends Base_model
 						 t.s_tweet_text,
 						 t.dt_created_on
 						 
-					FROM %1\$susers u, %1\$suser_tweets t
+					FROM cg_users u, cg_user_tweets t
 					WHERE u.i_status='1' AND u.i_isdeleted ='1' AND t.i_isenabled =1  AND t.i_user_id = u.id AND
 					
 					(
-						t.i_user_id in  (SELECT u.id from %1\$susers_net_pal_contacts n, %1\$susers u where n.s_status = 'accepted'
-						AND ((n.i_requester_id = %2\$s AND u.id=n.i_accepter_id) 
-						OR (n.i_accepter_id = %2\$s AND u.id= n.i_requester_id))) %5\$s
+						t.i_user_id in  (SELECT u.id from cg_users_net_pal_contacts n, cg_users u where n.s_status = 'accepted'
+						AND ((n.i_requester_id = '".intval($i_user_id)."' AND u.id=n.i_accepter_id) 
+						OR (n.i_accepter_id = '".intval($i_user_id)."' AND u.id= n.i_requester_id))) {$s_where}
 					) )
 
 				ORDER BY dt_created_on DESC
 					"
-				, $this->db->dbprefix, intval($i_user_id), $s_where
-			);
 		}
 		else {
 		
 		
 		
-			 $sql = sprintf("
+			 $sql = "
 				(SELECT  u.id i_user_id, 
 						 u.s_email, 
 						 u.e_gender, 
@@ -110,17 +108,17 @@ class Tweet_model extends Base_model
 						 t.s_tweet_text,
 						 t.dt_created_on
 						
-					FROM %1\$susers u, %1\$suser_tweets t
+					FROM cg_users u, cg_user_tweets t
 					
 					WHERE u.i_status='1' AND u.i_isdeleted ='1' AND t.i_isenabled =1  AND t.i_user_id = u.id 
 					
 					AND
 					(
 						t.i_user_id in 
-						(SELECT u.id from %1\$suser_contacts c, %1\$susers u where c.s_status = 'accepted'
-							and ((c.i_requester_id = %2\$s and u.id=c.i_accepter_id) 
-							or (c.i_accepter_id = %2\$s and u.id=c.i_requester_id)) 
-						)  %5\$s
+						(SELECT u.id from cg_user_contacts c, cg_users u where c.s_status = 'accepted'
+							and ((c.i_requester_id = '".intval($i_user_id)."' and u.id=c.i_accepter_id) 
+							or (c.i_accepter_id = '".intval($i_user_id)."' and u.id=c.i_requester_id)) 
+						)  {$s_where}
 					
 					
 					
@@ -139,20 +137,18 @@ class Tweet_model extends Base_model
 						 t.s_tweet_text,
 						 t.dt_created_on
 						 
-					FROM %1\$susers u, %1\$suser_tweets t
+					FROM cg_users u, cg_user_tweets t
 					WHERE u.i_status='1' AND u.i_isdeleted ='1' AND t.i_isenabled =1  AND t.i_user_id = u.id AND
 					
 					(
-						t.i_user_id in  (SELECT u.id from %1\$susers_net_pal_contacts n, %1\$susers u where n.s_status = 'accepted'
-						AND ((n.i_requester_id = %2\$s AND u.id=n.i_accepter_id) 
-						OR (n.i_accepter_id = %2\$s AND u.id= n.i_requester_id)))  %5\$s
+						t.i_user_id in  (SELECT u.id from cg_users_net_pal_contacts n, cg_users u where n.s_status = 'accepted'
+						AND ((n.i_requester_id = '".intval($i_user_id)."' AND u.id=n.i_accepter_id) 
+						OR (n.i_accepter_id = '".intval($i_user_id)."' AND u.id= n.i_requester_id)))  {$s_where}
 					) )
 					
 				    ORDER BY dt_created_on DESC
-					limit %3\$s, %4\$s
-					"
-				, $this->db->dbprefix, intval($i_user_id), intval($i_start_limit), intval($i_no_of_page),  $s_where
-			);
+					limit {$i_start_limit}, {$i_no_of_page}
+					";
 		}
 
 #AND t.i_user_id != '%2\$s'
@@ -172,17 +168,17 @@ class Tweet_model extends Base_model
 	public function get_total_friends_netpals_tweets_by_user_id($i_user_id,  $s_where) {
 		
 
-		 $sql = sprintf("
+		 $sql = "
 				SELECT COUNT(*) count FROM (
 				(SELECT t.id
 						
-					FROM %1\$susers u, %1\$suser_tweets t
+					FROM cg_users u, cg_user_tweets t
 					WHERE u.i_status='1' AND u.i_isdeleted ='1' AND t.i_isenabled =1  AND t.i_user_id = u.id AND
 					(
-						t.i_user_id in (SELECT u.id from %1\$suser_contacts c, %1\$susers u where c.s_status = 'accepted'
-						and ((c.i_requester_id = %2\$s and u.id=c.i_accepter_id) 
-						or (c.i_accepter_id = %2\$s and u.id=c.i_requester_id)) 
-						)  %3\$s
+						t.i_user_id in (SELECT u.id from cg_user_contacts c,cg_users u where c.s_status = 'accepted'
+						and ((c.i_requester_id = '".intval($i_user_id)."' and u.id=c.i_accepter_id) 
+						or (c.i_accepter_id = '".intval($i_user_id)."' and u.id=c.i_requester_id)) 
+						)  {$s_where}
 					
 					
 					
@@ -191,20 +187,18 @@ class Tweet_model extends Base_model
 				UNION 
 				
 				(SELECT t.id
-					FROM %1\$susers u, %1\$suser_tweets t
+					FROM cg_users u, cg_user_tweets t
 					WHERE u.i_status='1' AND u.i_isdeleted ='1' AND t.i_isenabled =1  AND t.i_user_id = u.id 
 					AND
 					(
-						t.i_user_id in  (SELECT u.id from %1\$susers_net_pal_contacts n, %1\$susers u where n.s_status = 'accepted'
-						AND ((n.i_requester_id = %2\$s AND u.id=n.i_accepter_id) 
-						OR (n.i_accepter_id = %2\$s AND u.id= n.i_requester_id)))  %3\$s
+						t.i_user_id in  (SELECT u.id from cg_users_net_pal_contacts n, cg_users u where n.s_status = 'accepted'
+						AND ((n.i_requester_id = '".intval($i_user_id)."' AND u.id=n.i_accepter_id) 
+						OR (n.i_accepter_id = '".intval($i_user_id)."' AND u.id= n.i_requester_id)))  {$s_where}
 					) )
 
 				
 				) derived_tbl
-					"
-				, $this->db->dbprefix, intval($i_user_id),$s_where
-			);
+					";
 		
 #and t.i_user_id != '%2\$s'
 		$query = $this->db->query($sql); //echo "sql ==>". nl2br($sql) ."<br />";  
