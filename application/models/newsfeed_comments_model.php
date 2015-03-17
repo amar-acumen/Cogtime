@@ -158,7 +158,7 @@ class Newsfeed_comments_model extends CI_Model {
 	}
 
 	public function delete_by_id($id) {
-		$sql = sprintf( 'DELETE FROM %suser_newsfeed_comments WHERE id=%s', $this->db->dbprefix, $id );
+		$sql = 'DELETE FROM cg_user_newsfeed_comments WHERE id="'.$id.'"';
 
 		$this->db->query($sql);
 	}

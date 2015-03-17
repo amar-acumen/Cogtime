@@ -582,8 +582,7 @@ class Netpals_model extends Base_model
     
     function netpal_request_already_sent($i_requester_id='', $i_accepter_id = '')
     {
-          $SQL = sprintf("SELECT COUNT(*) AS `check_count` FROM %s WHERE `i_requester_id`='%s'  AND `i_accepter_id` = '%s' AND `s_status` = 'pending'  ",
-                        $this->db->NETPAL, $i_requester_id, $i_accepter_id);
+          $SQL = "SELECT COUNT(*) AS `check_count` FROM ".$this->db->NETPAL." WHERE `i_requester_id`='".$i_requester_id."'  AND `i_accepter_id` = '".$i_accepter_id."' AND `s_status` = 'pending'  ";
         $ROW = $this->db->query($SQL)->row_array(); #echo $this->db->last_query(); exit;
         
         if( $ROW['check_count'] )
@@ -1157,9 +1156,8 @@ class Netpals_model extends Base_model
         if(count($arr)==0)
             return null;
        
-       $SQL = sprintf("DELETE FROM %s WHERE (`i_requester_id`='{$arr['i_requester_id']}'  AND `i_accepter_id` = '{$arr['i_accepter_id']}' ) 
-                        OR (`i_requester_id`='{$arr['i_accepter_id']}'  AND `i_accepter_id` = '{$arr['i_requester_id']}' AND `s_status`='{$arr['s_status']}' ) ",
-                        $this->db->NETPAL);
+       $SQL = "DELETE FROM ". $this->db->NETPAL." WHERE (`i_requester_id`='{$arr['i_requester_id']}'  AND `i_accepter_id` = '{$arr['i_accepter_id']}' ) 
+                        OR (`i_requester_id`='{$arr['i_accepter_id']}'  AND `i_accepter_id` = '{$arr['i_requester_id']}' AND `s_status`='{$arr['s_status']}' ) ";
        
         
         $this->db->query($SQL);
@@ -1317,9 +1315,8 @@ class Netpals_model extends Base_model
 			return null;
 		}
 		#$arr['dt_accepted_on'] = get_db_datetime();
-		$SQL = sprintf("DELETE FROM %s WHERE (`i_requester_id`='{$arr['i_requester_id']}'  AND `i_accepter_id` = '{$arr['i_accepter_id']}' ) 
-						OR (`i_requester_id`='{$arr['i_accepter_id']}'  AND `i_accepter_id` = '{$arr['i_requester_id']}' AND `s_status`='{$arr['s_status']}' ) ",
-                        $this->db->USER_CONTACTS);
+		$SQL = "DELETE FROM ".$this->db->USER_CONTACTS." WHERE (`i_requester_id`='{$arr['i_requester_id']}'  AND `i_accepter_id` = '{$arr['i_accepter_id']}' ) 
+						OR (`i_requester_id`='{$arr['i_accepter_id']}'  AND `i_accepter_id` = '{$arr['i_requester_id']}' AND `s_status`='{$arr['s_status']}' ) ";
 		
 		$this->db->query($SQL);
 		$ret_ =  $this->db->affected_rows(); 
@@ -1330,8 +1327,7 @@ class Netpals_model extends Base_model
 	# function to check total pending prayer_partner recieved
     function total_pending_netpal_recieved($i_requester_id='')
     {
-      	$SQL = sprintf("SELECT COUNT(*) AS `check_count` FROM %s WHERE (`i_accepter_id`='%s' ) AND `s_status` = 'pending' ",
-                        $this->db->NETPAL, $i_requester_id);
+      	$SQL = "SELECT COUNT(*) AS `check_count` FROM ".$this->db->NETPAL." WHERE (`i_accepter_id`='".$i_requester_id."' ) AND `s_status` = 'pending' ";
         $ROW = $this->db->query($SQL)->row_array(); #echo $this->db->last_query(); exit;
         
         if( $ROW['check_count'] )
