@@ -210,7 +210,7 @@ class Session extends Base_controller {
                 $err_msg = '* E-mail incorrecte id';
             } else {
                 # check for email-id existence...
-                $Query = sprintf("SELECT * FROM %susers WHERE binary `s_email` = '%s' ", $this->db->dbprefix, $MAIL_ID);
+                $Query = "SELECT * FROM cg_users WHERE binary `s_email` = '".$MAIL_ID."' ";
                 $query = $this->db->query($Query);
 
                 if ($query->num_rows()) {

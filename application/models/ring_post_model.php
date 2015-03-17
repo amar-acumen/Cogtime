@@ -43,7 +43,7 @@ class Ring_post_model extends Base_model
 public function get_all_ring_post_by_ring_id($i_ring_id, $s_where, $i_start_limit='', $i_no_of_page='') {
 		
 		if("$i_start_limit" == "") {
-			$sql = sprintf("
+			$sql = "
 				(SELECT u.id post_owner_user_id,
 							  u.s_email,
 							  u.e_gender,
@@ -53,19 +53,17 @@ public function get_all_ring_post_by_ring_id($i_ring_id, $s_where, $i_start_limi
 							  
 							  t.*
 							  FROM cg_users u, cg_user_ring_post t
-							  WHERE u.i_status='1' AND u.i_isdeleted ='1' AND t.i_user_id = u.id and t.i_ring_id = %1\$s and t.i_disable='1'
-							  %2\$s)
+							  WHERE u.i_status='1' AND u.i_isdeleted ='1' AND t.i_user_id = u.id and t.i_ring_id = '".intval($i_ring_id)."' and t.i_disable='1'
+							  {$s_where})
 
 				ORDER BY t.id DESC
-					"
-				,  intval($i_ring_id), $s_where
-			);
+					";
 		}
 		else {
 		
 		
 		
-			 $sql = sprintf("
+			 $sql = "
 						(SELECT u.id post_owner_user_id,
 									  u.s_email,
 									  u.e_gender,
@@ -75,14 +73,12 @@ public function get_all_ring_post_by_ring_id($i_ring_id, $s_where, $i_start_limi
 									  t.*
 									  
 									  FROM cg_users u, cg_user_ring_post t
-									  WHERE u.i_status='1' AND u.i_isdeleted ='1' AND t.i_user_id = u.id and t.i_ring_id = %1\$s and t.i_disable='1'
-									  %4\$s)
+									  WHERE u.i_status='1' AND u.i_isdeleted ='1' AND t.i_user_id = u.id and t.i_ring_id = '".intval($i_ring_id)."' and t.i_disable='1'
+									  {$s_where})
 	
 						ORDER BY dt_created_on DESC
-						limit %2\$s, %3\$s
-					"
-				,  intval($i_ring_id), intval($i_start_limit), intval($i_no_of_page),  $s_where
-			);
+						limit {$i_start_limit}, {$i_no_of_page}
+					";
 		}
 
 #AND t.i_user_id != '%2\$s'
@@ -105,13 +101,11 @@ public function get_all_ring_post_by_ring_id($i_ring_id, $s_where, $i_start_limi
 							(SELECT    t.id
 									 
 									  FROM cg_users u, cg_user_ring_post t
-									  WHERE u.i_status='1' AND u.i_isdeleted ='1' AND t.i_user_id = u.id and t.i_ring_id = %1\$s
-									  %2\$s)
+									  WHERE u.i_status='1' AND u.i_isdeleted ='1' AND t.i_user_id = u.id and t.i_ring_id = '".intval($i_ring_id)."'
+									  {$s_where})
 
  				) derived_tbl
-					"
-				, intval($i_ring_id),$s_where
-			);
+					";
 		
 #and t.i_user_id != '%2\$s'
 		$query = $this->db->query($sql); //echo "sql ==>". ($sql) ."<br />";  
