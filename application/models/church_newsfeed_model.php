@@ -41,7 +41,7 @@ class Church_newsfeed_model extends Base_model
 			$sql='select cn.*,cp.privacy from cg_church_newsfeed cn left join cg_church_post_privacy_settings cp on cn.id=cp.feed_id where cn.i_owner_id = "'.$_SESSION['logged_church_id'].'" AND (privacy =1 and posted_by="'.$user_id.'") OR ( privacy=2) OR (privacy=3 and (viewed_by="'.$user_id.'" or posted_by="'.$user_id.'")) group by id order by id desc  limit '.$page.','.$offset.'';
 			$query=$this->db->query($sql);
 			$result = $query->result();
-			echo $this->db->last_query();exit;
+			//echo $this->db->last_query();exit;
 			return $result;
 			
 		}
