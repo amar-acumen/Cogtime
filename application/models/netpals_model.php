@@ -862,7 +862,7 @@ class Netpals_model extends Base_model
 	  $language = get_current_language();
 	  $ret_=array();
 	  
-		$s_qry = sprintf("SELECT count(*) count
+		$s_qry = "SELECT count(*) count
 				FROM 
 					{$this->db->USER_CONTACTS} c, {$this->db->USERS} u, {$this->db->MST_COUNTRY} cn 
 				WHERE 
@@ -870,13 +870,9 @@ class Netpals_model extends Base_model
 					AND c.s_status = 'accepted' 
 					AND u.i_status=1 
 					AND
-					((c.i_requester_id = %s AND u.id=c.i_accepter_id AND u.i_country_id=cn.id) 
-					OR (c.i_accepter_id = %s AND u.id=c.i_requester_id AND u.i_country_id=cn.id))
-					", 
-					/*intval($i_user_id), 
-					intval($i_user_id), */
-					intval($i_user_id), 
-					intval($i_user_id));
+					((c.i_requester_id = '".intval($i_user_id)."' AND u.id=c.i_accepter_id AND u.i_country_id=cn.id) 
+					OR (c.i_accepter_id = '".intval($i_user_id)."' AND u.id=c.i_requester_id AND u.i_country_id=cn.id))
+					";
 					
 	  
 	  $rs=$this->db->query($s_qry)->result_array();
@@ -894,7 +890,7 @@ class Netpals_model extends Base_model
 				$language = get_current_language();
 				if(intval($i_me) > 0 && intval($i_him) > 0 &&  intval($i_me)!=intval($i_him))
 				{
-					$s_qry = sprintf("SELECT 
+					$s_qry = "SELECT 
 									c.id, 
 									c.i_requester_id, 
 									c.i_accepter_id,
@@ -912,12 +908,12 @@ class Netpals_model extends Base_model
 					FROM 
 							{$this->db->NETPAL} c, {$this->db->USERS} u 
 				   WHERE 
-					( (c.i_requester_id = %s and c.i_accepter_id = %s)  OR (c.i_accepter_id = %s and c.i_requester_id = %s) )
+					( (c.i_requester_id = '".$i_me."' and c.i_accepter_id = '".$i_him."')  OR (c.i_accepter_id = '".$i_me."' and c.i_requester_id = '".$i_him."') )
 					AND u.id=c.i_requester_id
                     AND c.s_status='pending'
                      
 					
-			",  $i_me, $i_him, $i_me, $i_him);
+			";
 	
 			
 			
@@ -979,7 +975,7 @@ class Netpals_model extends Base_model
                 $language = get_current_language();
                 if(intval($i_me) > 0 && intval($i_him) > 0 &&  intval($i_me)!=intval($i_him))
                 {
-                    $s_qry = sprintf("SELECT 
+                    $s_qry = "SELECT 
                                     c.id, 
                                     c.i_requester_id, 
                                     c.i_accepter_id,
@@ -997,12 +993,12 @@ class Netpals_model extends Base_model
                     FROM 
                             {$this->db->NETPAL} c, {$this->db->USERS} u 
                    WHERE 
-                    ( (c.i_requester_id = %s and c.i_accepter_id = %s)  OR (c.i_accepter_id = %s and c.i_requester_id = %s) )
+                    ( (c.i_requester_id = '".$i_me."' and c.i_accepter_id = '".$i_him."')  OR (c.i_accepter_id = '".$i_me."' and c.i_requester_id = '".$i_him."') )
                     AND u.id=c.i_requester_id
                     AND c.s_status='accepted'
                      
                     
-            ",  $i_me, $i_him, $i_me, $i_him);
+            ";
     
             
             
@@ -1181,8 +1177,7 @@ class Netpals_model extends Base_model
     
     function total_pending_netpal_sent($i_requester_id='')
     {
-          $SQL = sprintf("SELECT COUNT(*) AS `check_count` FROM %s WHERE (`i_requester_id`='%s' ) AND `s_status` = 'pending' ",
-                        $this->db->NETPAL, $i_requester_id);
+          $SQL = "SELECT COUNT(*) AS `check_count` FROM ".$this->db->NETPAL." WHERE (`i_requester_id`='".$i_requester_id."' ) AND `s_status` = 'pending' ";
         $ROW = $this->db->query($SQL)->row_array(); 
     //echo $this->db->last_query(); exit;
         
