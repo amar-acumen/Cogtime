@@ -282,18 +282,16 @@ public function get_my_tweets($i_user_id, $s_where, $i_start_limit='', $i_no_of_
 	public function get_total_my_tweets($i_user_id,  $s_where) {
 		
 
-		 $sql = sprintf("
+		 $sql = "
 				SELECT COUNT(*) count FROM (
 					(SELECT t.id 
 					  FROM cg_users u, cg_tweets t
 					  WHERE u.i_status='1' AND u.i_isdeleted ='1' AND t.i_isenabled =1 
-					  AND t.i_owner_id = u.id AND t.i_owner_id = %2\$s %3\$s)
+					  AND t.i_owner_id = u.id AND t.i_owner_id = '".intval($i_user_id)."' {$s_where})
 
 				
 				) derived_tbl
-					"
-				, $this->db->dbprefix, intval($i_user_id),$s_where
-			);
+					";
 		
 #and t.i_user_id != '%2\$s'
 		$query = $this->db->query($sql); //echo "sql ==>". nl2br($sql) ."<br />";  
