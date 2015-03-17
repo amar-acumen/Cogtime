@@ -344,7 +344,7 @@ class My_prayer_partner_model extends Base_model  {
             $ret_ = array();
             $language = get_current_language();
             if (intval($i_me) > 0 && intval($i_him) > 0 && intval($i_me) != intval($i_him)) {
-                $s_qry = sprintf("SELECT 
+                $s_qry = "SELECT 
 									c.id, 
 									c.i_requester_id, 
 									c.i_accepter_id,
@@ -362,10 +362,10 @@ class My_prayer_partner_model extends Base_model  {
 					FROM 
 							{$this->db->USER_PRAYER_PARTNER} c, {$this->db->USERS} u, {$this->db->MST_COUNTRY} cn 
 				   WHERE 
-					( (c.i_requester_id = %s and c.i_accepter_id = %s)  OR (c.i_accepter_id = %s and c.i_requester_id = %s) )
+					( (c.i_requester_id = '".$i_me."' and c.i_accepter_id = '".$i_him."')  OR (c.i_accepter_id = '".$i_me."' and c.i_requester_id = '".$i_him."') )
 					AND u.id=c.i_requester_id 
 					
-			", $i_me, $i_him, $i_me, $i_him);
+			";
 
 
 
@@ -552,7 +552,7 @@ class My_prayer_partner_model extends Base_model  {
     # function to check if friend_request_already_sent
 
     function friend_request_already_sent($i_requester_id = '', $i_accepter_id = '') {
-        $SQL = sprintf("SELECT COUNT(*) AS `check_count` FROM %s WHERE `i_requester_id`='%s'  AND `i_accepter_id` = '%s' AND `s_status` = 'pending'  ", $this->db->USER_PRAYER_PARTNER, $i_requester_id, $i_accepter_id);
+        $SQL = "SELECT COUNT(*) AS `check_count` FROM ".$this->db->USER_PRAYER_PARTNER." WHERE `i_requester_id`='".$i_requester_id."'  AND `i_accepter_id` = '".$i_accepter_id."' AND `s_status` = 'pending'  ";
         $ROW = $this->db->query($SQL)->row_array(); #echo $this->db->last_query(); exit;
 
         if ($ROW['check_count'])
@@ -568,8 +568,8 @@ class My_prayer_partner_model extends Base_model  {
             return null;
         }
         #$arr['dt_accepted_on'] = get_db_datetime();
-        $SQL = sprintf("DELETE FROM %s WHERE (`i_requester_id`='{$arr['i_requester_id']}'  AND `i_accepter_id` = '{$arr['i_accepter_id']}' ) 
-						OR (`i_requester_id`='{$arr['i_accepter_id']}'  AND `i_accepter_id` = '{$arr['i_requester_id']}' AND `s_status`='{$arr['s_status']}' ) ", $this->db->USER_PRAYER_PARTNER);
+        $SQL = "DELETE FROM ".$this->db->USER_PRAYER_PARTNER." WHERE (`i_requester_id`='{$arr['i_requester_id']}'  AND `i_accepter_id` = '{$arr['i_accepter_id']}' ) 
+						OR (`i_requester_id`='{$arr['i_accepter_id']}'  AND `i_accepter_id` = '{$arr['i_requester_id']}' AND `s_status`='{$arr['s_status']}' ) ";
 
         $this->db->query($SQL);
         $ret_ = $this->db->affected_rows();
@@ -739,7 +739,7 @@ class My_prayer_partner_model extends Base_model  {
         try {
             $ret_ = array();
             if (intval($i_me) > 0 && intval($i_him) > 0 && intval($i_me) != intval($i_him)) {
-                $s_qry = sprintf("SELECT 
+                $s_qry = "SELECT 
 								c.id, 
 								c.i_requester_id, 
 								c.i_accepter_id,
@@ -757,11 +757,11 @@ class My_prayer_partner_model extends Base_model  {
 				FROM 
 						{$this->db->USER_PRAYER_PARTNER} c, {$this->db->USERS} u
 			   WHERE 
-				( (c.i_requester_id = %s and c.i_accepter_id = %s)  OR (c.i_accepter_id = %s and c.i_requester_id = %s) )
+				( (c.i_requester_id = '".$i_me."' and c.i_accepter_id =  '".$i_him."')  OR (c.i_accepter_id =  '".$i_me."' and c.i_requester_id = '".$i_him."') )
 				AND c.s_status = 'pending' 
 				AND u.id=c.i_requester_id 
 				
-		", $i_me, $i_him, $i_me, $i_him);
+		";
 
                 #cn.s_country_name  , {$this->db->MST_COUNTRY} cn 
 
@@ -924,7 +924,7 @@ class My_prayer_partner_model extends Base_model  {
     # function to check total total_pending_prayer partner_request
 
     function total_pending_prayer_partner_request($i_requester_id = '', $i_accepter_id = '') {
-        $SQL = sprintf("SELECT COUNT(*) AS `check_count` FROM %s WHERE  (`i_requester_id`='%s'  OR `i_accepter_id` = '%s')  AND `s_status` = 'pending'", $this->db->USER_PRAYER_PARTNER, $i_requester_id, $i_requester_id);
+        $SQL = "SELECT COUNT(*) AS `check_count` FROM ".$this->db->USER_PRAYER_PARTNER." WHERE  (`i_requester_id`='".$i_requester_id."'  OR `i_accepter_id` = '".$i_requester_id."')  AND `s_status` = 'pending'";
         $ROW = $this->db->query($SQL)->row_array(); #echo $this->db->last_query(); exit;
 
         if ($ROW['check_count'])
@@ -936,7 +936,7 @@ class My_prayer_partner_model extends Base_model  {
     # function to check total pending prayer_partner sent
 
     function total_pending_prayer_partner_sent($i_requester_id = '') {
-        $SQL = sprintf("SELECT COUNT(*) AS `check_count` FROM %s WHERE (`i_requester_id`='%s' ) AND `s_status` = 'pending' ", $this->db->USER_PRAYER_PARTNER, $i_requester_id);
+        $SQL = "SELECT COUNT(*) AS `check_count` FROM ".$this->db->USER_PRAYER_PARTNER." WHERE (`i_requester_id`='".$i_requester_id."' ) AND `s_status` = 'pending' ";
         $ROW = $this->db->query($SQL)->row_array(); #echo $this->db->last_query(); exit;
 
         if ($ROW['check_count'])
@@ -948,7 +948,7 @@ class My_prayer_partner_model extends Base_model  {
     # function to check total pending prayer_partner recieved
 
     function total_pending_prayer_partner_recieved($i_requester_id = '') {
-        $SQL = sprintf("SELECT COUNT(*) AS `check_count` FROM %s WHERE (`i_accepter_id`='%s' ) AND `s_status` = 'pending' ", $this->db->USER_PRAYER_PARTNER, $i_requester_id);
+        $SQL = "SELECT COUNT(*) AS `check_count` FROM ".$this->db->USER_PRAYER_PARTNER." WHERE (`i_accepter_id`='".$i_requester_id."' ) AND `s_status` = 'pending' ";
         $ROW = $this->db->query($SQL)->row_array(); //echo $this->db->last_query(); //exit;
         //echo  $ROW['check_count'];
 
@@ -962,7 +962,7 @@ class My_prayer_partner_model extends Base_model  {
         try {
             $ret_ = array();
             if (intval($i_me) > 0 && intval($i_him) > 0 && intval($i_me) != intval($i_him)) {
-                $s_qry = sprintf("SELECT 
+                $s_qry = "SELECT 
 								c.id, 
 								c.i_requester_id, 
 								c.i_accepter_id,
@@ -980,11 +980,11 @@ class My_prayer_partner_model extends Base_model  {
 				FROM 
 						{$this->db->USER_PRAYER_PARTNER} c, {$this->db->USERS} u
 			   WHERE 
-				( (c.i_requester_id = %s and c.i_accepter_id = %s)  OR (c.i_accepter_id = %s and c.i_requester_id = %s) )
+				( (c.i_requester_id = '".$i_me."' and c.i_accepter_id = '".$i_him."')  OR (c.i_accepter_id = '".$i_me."' and c.i_requester_id = '".$i_him."') )
 				AND c.s_status = 'accepted' 
 				AND u.id=c.i_requester_id 
 				
-		", $i_me, $i_him, $i_me, $i_him);
+		";
 
                 #cn.s_country_name  , {$this->db->MST_COUNTRY} cn 
 
@@ -1018,15 +1018,15 @@ class My_prayer_partner_model extends Base_model  {
 
     public function fetch_prayer_partner_points($arr = array()) {
         //pr($arr);
-        $qty = sprintf("SELECT 
+        $qty = "SELECT 
 						p.*,
 						u.s_first_name 
-						FROM %s AS p 
+						FROM ".$this->db->PRAYER_PARTNER_POINTS." AS p 
 						LEFT JOIN {$this->db->USERS} AS u ON u.id = p.i_giving_user_id 
-						WHERE (`i_rec_user_id` = %s AND `i_giving_user_id` = %s )
-						OR (`i_rec_user_id` = %s AND `i_giving_user_id` = %s)
+						WHERE (`i_rec_user_id` = '".$arr['i_rec_user_id']."' AND `i_giving_user_id` = '".$arr['i_giving_user_id']."' )
+						OR (`i_rec_user_id` = '".$arr['i_giving_user_id']."' AND `i_giving_user_id` = '".$arr['i_rec_user_id']."')
 						
-						ORDER BY p.id DESC", $this->db->PRAYER_PARTNER_POINTS, $arr['i_rec_user_id'], $arr['i_giving_user_id'], $arr['i_giving_user_id'], $arr['i_rec_user_id']);
+						ORDER BY p.id DESC";
         $res = $this->db->query($qty)->result_array();
 
         return $res;
@@ -1076,7 +1076,7 @@ class My_prayer_partner_model extends Base_model  {
 
         $ORDERBY = trim($s_order_by) != "" ? " ORDER BY " . $s_order_by . "" : "ORDER BY id asc";
         $user_id = decrypt($this->session->userdata('user_id'));
-        $sql = sprintf(" SELECT derived_tbl.* FROM (
+        $sql = " SELECT derived_tbl.* FROM (
 							(SELECT 
 								  
 								  u.id as user_id,
@@ -1105,7 +1105,7 @@ class My_prayer_partner_model extends Base_model  {
 								 LEFT JOIN cg_city c ON u.i_city_id = c.id
 								 LEFT JOIN {$this->db->DENOMINATION} AS d ON u.i_id_denomination = d.id 
 								 WHERE 1  
-								 %1\$s   
+								 {$s_where}   
 							     ORDER BY u.`dt_created_on` DESC )
                             
                             UNION
@@ -1137,9 +1137,10 @@ class My_prayer_partner_model extends Base_model  {
 							LEFT JOIN cg_state s ON s.id = u.i_state_id
 							LEFT JOIN cg_city c ON u.i_city_id = c.id
 							LEFT JOIN {$this->db->DENOMINATION} AS d ON u.i_id_denomination = d.id  WHERE 1  
-							 %2\$s                                      
-                            ORDER BY u.`dt_created_on` DESC )) as  derived_tbl %4\$s  "
-                , $s_where, $s_like_where, $timestamp, $limit);
+							 {$s_like_where}                                      
+                            ORDER BY u.`dt_created_on` DESC )) as  derived_tbl {$limit}  ";
+							
+                /*$s_where, $s_like_where, $timestamp, $limit*/
 //echo $sql;
         $query = $this->db->query($sql);
         $result_arr = $query->result_array();
@@ -1151,7 +1152,7 @@ class My_prayer_partner_model extends Base_model  {
             foreach ($result_arr as $key => $item) {
 
                 ## CHECKING 100% MATCH OR LIKELY MATCH  ##
-                $SQL_EXACT_COUNT = sprintf(" SELECT derived_tbl.* FROM (
+                $SQL_EXACT_COUNT = " SELECT derived_tbl.* FROM (
 							(SELECT 
 								  'Y' as flag_fld
 								 
@@ -1160,8 +1161,8 @@ class My_prayer_partner_model extends Base_model  {
 								 LEFT JOIN cg_state s ON s.id = u.i_state_id
 								 LEFT JOIN cg_city c ON u.i_city_id = c.id
 								 LEFT JOIN {$this->db->DENOMINATION} AS d ON u.i_id_denomination = d.id 
-								 WHERE 1  AND u.id = '%3\$s'
-								 %1\$s    
+								 WHERE 1  AND u.id = '".$item['user_id']."'
+								 {$s_where}    
 							     ORDER BY u.`dt_created_on` DESC )
                             
                              UNION
@@ -1174,10 +1175,11 @@ class My_prayer_partner_model extends Base_model  {
 								 LEFT JOIN cg_state s ON s.id = u.i_state_id
 								 LEFT JOIN cg_city c ON u.i_city_id = c.id
 								LEFT JOIN {$this->db->DENOMINATION} AS d ON u.i_id_denomination = d.id 
-								WHERE 1  AND u.id = '%3\$s'
-								 %2\$s                                      
-                            	ORDER BY u.`dt_created_on` DESC )) as  derived_tbl %5\$s  "
-                        , $s_where, $s_like_where, $item['user_id'], $timestamp, $limit);
+								WHERE 1  AND u.id = '".$item['user_id']."'
+								 {$s_like_where}                                      
+                            	ORDER BY u.`dt_created_on` DESC )) as  derived_tbl {$limit}  ";
+								
+                        /*$s_where, $s_like_where, $item['user_id'], $timestamp,$limit*/ 
                 //echo $SQL_EXACT_COUNT; exit;
                 ## CHECKING 100% MATCH OR LIKELY MATCH  ##
 
@@ -1235,7 +1237,7 @@ class My_prayer_partner_model extends Base_model  {
     function get_prayer_partner_sug_total($s_where = null, $s_like_where = null) {
 
 
-        $sql = sprintf(" SELECT count(*) as count FROM (
+        $sql = " SELECT count(*) as count FROM (
 							(SELECT 
 								  
 								 u.id as user_id
@@ -1246,7 +1248,7 @@ class My_prayer_partner_model extends Base_model  {
 								 LEFT JOIN cg_city c ON u.i_city_id = c.id
 								 LEFT JOIN {$this->db->DENOMINATION} AS d ON u.i_id_denomination = d.id 
 								 WHERE 1  
-								 %1\$s   
+								 {$s_where}   
 							     ORDER BY u.`dt_created_on` DESC )
                             
                             UNION
@@ -1260,9 +1262,10 @@ class My_prayer_partner_model extends Base_model  {
 							LEFT JOIN cg_state s ON s.id = u.i_state_id
 							LEFT JOIN cg_city c ON u.i_city_id = c.id
 							LEFT JOIN {$this->db->DENOMINATION} AS d ON u.i_id_denomination = d.id  WHERE 1  
-							 %2\$s                                      
-                            ORDER BY u.`dt_created_on` DESC )) as  derived_tbl  "
-                , $s_where, $s_like_where, $timestamp);
+							 {$s_like_where}                                      
+                            ORDER BY u.`dt_created_on` DESC )) as  derived_tbl  ";
+							
+                /*$s_where, $s_like_where, $timestamp*/
 
         $query = $this->db->query($sql);
         $result_arr = $query->result_array();
@@ -1274,7 +1277,7 @@ class My_prayer_partner_model extends Base_model  {
 
     public function delete_prayer_points($id) {
 
-        $SQL = sprintf("DELETE FROM %s WHERE id = {$id}  ", $this->db->PRAYER_PARTNER_POINTS);
+        $SQL = "DELETE FROM ".$this->db->PRAYER_PARTNER_POINTS." WHERE id = {$id}  ", ;
 
         $this->db->query($SQL);
         $ret_ = $this->db->affected_rows();
@@ -1287,13 +1290,13 @@ class My_prayer_partner_model extends Base_model  {
     function total_prayer_partner($i_requester_id = '') {
 
 
-        $SQL = sprintf("SELECT COUNT(*) AS `check_count` FROM {$this->db->USER_PRAYER_PARTNER} c ,{$this->db->USERS} u  WHERE 
+        $SQL = "SELECT COUNT(*) AS `check_count` FROM {$this->db->USER_PRAYER_PARTNER} c ,{$this->db->USERS} u  WHERE 
 									 
 									 c.s_status = 'accepted' 
 									 AND u.i_status = 1
 									AND
 									((c.i_requester_id = '" . $i_requester_id . "' AND u.id=c.i_accepter_id  ) 
-									OR (c.i_accepter_id = '" . $i_requester_id . "' AND u.id=c.i_requester_id ))");
+									OR (c.i_accepter_id = '" . $i_requester_id . "' AND u.id=c.i_requester_id ))";
 
         $ROW = $this->db->query($SQL)->row_array(); //echo $this->db->last_query(); 
 
