@@ -143,13 +143,13 @@ public function get_all_ring_post_by_ring_id($i_ring_id, $s_where, $i_start_limi
 
 	public function delete_by_id($id) {
 		
-		 $sql = sprintf( 'DELETE FROM '.$this->db->USER_RING_POST_LIKE.' WHERE i_ring_post_id=%s', $id );
+		 $sql = 'DELETE FROM '.$this->db->USER_RING_POST_LIKE.' WHERE i_ring_post_id="'.$id.'"';
 		 $this->db->query($sql);
 		 
-		 $sql = sprintf( 'DELETE FROM '.$this->db->USER_RING_POST_COMMENTS.' WHERE i_ring_post_id=%s', $id );
+		 $sql = 'DELETE FROM '.$this->db->USER_RING_POST_COMMENTS.' WHERE i_ring_post_id="'.$id.'"';
 		 $this->db->query($sql);
 		 
-	     $sql = sprintf( 'DELETE FROM '.$this->db->USER_RING_POST.' WHERE id=%s', $id );
+	     $sql = 'DELETE FROM '.$this->db->USER_RING_POST.' WHERE id="'.$id.'"';
 		 $this->db->query($sql);
 		#echo $this->db->last_query(); exit;
 	}

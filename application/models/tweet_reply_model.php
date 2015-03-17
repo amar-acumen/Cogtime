@@ -142,9 +142,9 @@ class Tweet_reply_model extends CI_Model {
 	
 
 	public function get_total_by_tweet_id($i_tweet_id) {
-		$sql = sprintf("SELECT count(*) count FROM %1\$stweets_replys c, %1\$susers u
-						 WHERE c.i_user_id=u.id AND c.i_tweet_id = %2\$s 
-						 order by c.dt_created_on", $this->db->dbprefix, intval($i_tweet_id));
+		$sql = "SELECT count(*) count FROM cg_tweets_replys c, %1\$susers u
+						 WHERE c.i_user_id=u.id AND c.i_tweet_id = '".intval($i_tweet_id)."' 
+						 order by c.dt_created_on";
 
 		$query = $this->db->query($sql); //echo nl2br($sql);
 		$result_arr = $query->result_array();
