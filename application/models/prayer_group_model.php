@@ -12,7 +12,7 @@ class Prayer_group_model extends Base_model {
 
     public function get_group_detail_by_id($id) {
 
-        $sql = sprintf('SELECT * FROM ' . $this->db->PRAYER_GROUP . '  where id = %s  ', $id);
+        $sql = 'SELECT * FROM ' . $this->db->PRAYER_GROUP . '  where id = "'.$id.'"  ';
 
         $query = $this->db->query($sql);
         $result_arr = $query->result_array();
@@ -26,7 +26,7 @@ class Prayer_group_model extends Base_model {
     }
 
     public function get_group_name_by_id($id) {
-        $sql = sprintf('SELECT s_group_name FROM ' . $this->db->PRAYER_GROUP . '  where id = %s  ', $id);
+        $sql = 'SELECT s_group_name FROM ' . $this->db->PRAYER_GROUP . '  where id = "'.$id.'"  ';
         $query = $this->db->query($sql);
         $result_arr = $query->result_array();
         return $result_arr[0]['s_group_name'];
@@ -44,7 +44,7 @@ class Prayer_group_model extends Base_model {
         }
 
         if ($querytype == 'all') {
-            $sql = sprintf("
+            $sql = "
 					  (SELECT
 						u.id i_user_id,
 						CONCAT(u.s_first_name,' ', u.s_last_name) s_profile_name,
@@ -64,10 +64,10 @@ class Prayer_group_model extends Base_model {
 						(
 						pg.id in
 							(SELECT pg_mem.i_prayer_group_id from cg_prayer_group_members pg_mem, cg_users u where
-								pg_mem.i_user_id = %2\$s AND pg_mem.s_status = 'accepted'
+								pg_mem.i_user_id = '".intval($i_user_id)."' AND pg_mem.s_status = 'accepted'
 							)
 						
-						) %4\$s  GROUP BY pg.id ORDER BY s_group_name ASC)
+						) {$s_where} GROUP BY pg.id ORDER BY s_group_name ASC)
 					 UNION
 					 
 					 (SELECT 
@@ -83,16 +83,14 @@ class Prayer_group_model extends Base_model {
 					  FROM  cg_prayer_group pg , cg_users u
 					  
 					  WHERE u.i_status='1' AND u.i_isdeleted ='1' AND pg.i_isenabled = 1 
-					  AND pg.i_owner_id = %2\$s AND pg.i_owner_id = u.id
-					   %4\$s ORDER BY s_group_name ASC)
+					  AND pg.i_owner_id = '".intval($i_user_id)."' AND pg.i_owner_id = u.id
+					   {$s_where} ORDER BY s_group_name ASC)
 
 				    ORDER BY {$orderby} 
-					%3\$s
-					"
-                    , $this->db->dbprefix, intval($i_user_id), $limit, $s_where
-            );
+					{$limit}
+					";
         } else if ($querytype == 'ownership') {
-            $sql = sprintf("
+            $sql = "
 								 
 					 (SELECT 
 
@@ -107,16 +105,14 @@ class Prayer_group_model extends Base_model {
 					  FROM  cg_prayer_group pg , cg_users u
 					  
 					  WHERE u.i_status='1' AND u.i_isdeleted ='1' AND pg.i_isenabled = 1 
-					  AND pg.i_owner_id = %2\$s AND pg.i_owner_id = u.id
-					   %4\$s ORDER BY s_group_name ASC)
+					  AND pg.i_owner_id = '".intval($i_user_id)."' AND pg.i_owner_id = u.id
+					   {$s_where} ORDER BY s_group_name ASC)
 
 				    ORDER BY {$orderby} 
-					%3\$s
-					"
-                    , $this->db->dbprefix, intval($i_user_id), $limit, $s_where
-            );
+					{$limit}
+					";
         } else if ($querytype == 'members') {
-            $sql = sprintf("
+            $sql = "
 								 
 					 (SELECT
 						u.id i_user_id,
@@ -137,16 +133,14 @@ class Prayer_group_model extends Base_model {
 						(
 						pg.id in
 							(SELECT pg_mem.i_prayer_group_id from cg_prayer_group_members pg_mem, cg_users u where
-							pg_mem.i_user_id = %2\$s AND pg_mem.s_status = 'accepted'
+							pg_mem.i_user_id = '".intval($i_user_id)."' AND pg_mem.s_status = 'accepted'
 							)
 						
-						) %4\$s  GROUP BY pg.id ORDER BY s_group_name ASC)
+						) {$s_where}  GROUP BY pg.id ORDER BY s_group_name ASC)
 
 				    ORDER BY {$orderby} 
-					%3\$s
-					"
-                    , $this->db->dbprefix, intval($i_user_id), $limit, $s_where
-            );
+					{$limit} 
+					";
         }
 
 
@@ -235,10 +229,10 @@ class Prayer_group_model extends Base_model {
 								(
 								pg.id in
 									(SELECT pg_mem.i_prayer_group_id from cg_prayer_group_members pg_mem, cg_users u where
-									pg_mem.i_user_id = %2\$s AND pg_mem.s_status = 'accepted'
+									pg_mem.i_user_id = '".intval($i_user_id)."' AND pg_mem.s_status = 'accepted'
 									)
 								
-								) %3\$s GROUP BY pg.id 
+								) {$s_where} GROUP BY pg.id 
 						
 						)
 						) derived_tbl
@@ -324,7 +318,7 @@ class Prayer_group_model extends Base_model {
 
     public function getAllPosts_grpID($group_id, $s_where, $i_start_limit = '', $i_no_of_page = '') {
 
-        $sql = sprintf(" SELECT  u.id i_user_id, 
+        $sql = " SELECT  u.id i_user_id, 
 								CONCAT(u.s_first_name,' ', u.s_last_name) s_profile_name,
 								p_post.*,
 								pg.i_owner_id
@@ -333,14 +327,12 @@ class Prayer_group_model extends Base_model {
 								LEFT JOIN cg_users u ON p_post.i_user_id = u.id
 								WHERE u.i_status='1' AND u.i_isdeleted ='1' 
 								AND pg.i_isenabled = 1
-								AND p_post.i_prayer_group_id = %1\$s 
+								AND p_post.i_prayer_group_id = '".intval($group_id)."' 
 								
-								%4\$s
+								{$s_where}
 								ORDER BY p_post.dt_created_on DESC 
-							    limit %2\$s, %3\$s
-				  "
-                , intval($group_id), intval($i_start_limit), intval($i_no_of_page), $s_where
-        );
+							    limit ".intval($i_start_limit).",".intval($i_no_of_page)
+				  ;
 
         $query = $this->db->query($sql); #echo "sql ==>". ($sql) ."<br />"; 
         $result_arr = $query->result_array();
@@ -351,7 +343,7 @@ class Prayer_group_model extends Base_model {
     public function getTotalPosts_grpID($group_id, $s_where) {
 
 
-        $sql = sprintf("
+        $sql = "
 				SELECT COUNT(*) count FROM (
 						 SELECT p_post.*
 								FROM  cg_prayer_group pg 
@@ -359,13 +351,11 @@ class Prayer_group_model extends Base_model {
 								LEFT JOIN cg_users u ON p_post.i_user_id = u.id
 								WHERE u.i_status='1' AND u.i_isdeleted ='1' 
 								AND pg.i_isenabled = 1
-								AND p_post.i_prayer_group_id = %1\$s 
-								%2\$s
+								AND p_post.i_prayer_group_id = '".intval($group_id)."' 
+								{$s_where}
 								
 				) derived_tbl
-					"
-                , intval($group_id), $s_where
-        );
+					";
 
         $query = $this->db->query($sql); #echo "sql ==>". nl2br($sql) ."<br />";  
         $result_arr = $query->result_array();
