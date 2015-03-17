@@ -1060,6 +1060,7 @@ class My_prayer_partner_model extends Base_model  {
     ##--------------- end of read-write prayer partner -------------------------
 
     function get_prayer_partner_sugg($s_where = null, $s_like_where, $s_order_by = null, $start_limit = null, $no_of_page = null, $timeout = '') {
+
         if ($timeout == '') {
             $timeout = $this->timeout;
         }
@@ -1141,7 +1142,7 @@ class My_prayer_partner_model extends Base_model  {
                             ORDER BY u.`dt_created_on` DESC )) as  derived_tbl {$limit}  ";
 							
                 /*$s_where, $s_like_where, $timestamp, $limit*/
-//echo $sql;
+echo $sql;
         $query = $this->db->query($sql);
         $result_arr = $query->result_array();
 		//pr($result_arr,1);

@@ -503,8 +503,8 @@ class My_prayer_partners extends Base_controller {
 
     public function ajax_pagination($page = 0) {
         try {
-
-            //pr($_POST,1);
+            
+            pr($_POST,1);
             ## seting session to detect the source of hit of public profile (if already netpals/ friends)##
             ## seacrh conditions : filter ############
             $i_profile_id = intval(decrypt($this->session->userdata('user_id')));
@@ -608,50 +608,6 @@ class My_prayer_partners extends Base_controller {
                     $WHERE_COND_NOTEXACT .= ($s_email == '') ? '' : " OR (binary u.s_email = '" . $s_email . "' )";
                 else
                     $WHERE_COND_NOTEXACT .= ($s_email == '') ? '' : " (binary u.s_email = '" . $s_email . "' )";
-
-
-
-                /* $s_country = intval(decrypt($this->input->post('txt_country')));
-
-                  if($WHERE_COND != '')
-                  $WHERE_COND .= ($s_country=='')?'':" AND ( u.i_country_id= '".$s_country."' )";
-                  else
-                  $WHERE_COND .= ($s_country=='')?'':" ( u.i_country_id = '".$s_country."' )";
-
-                  if($WHERE_COND_NOTEXACT != '')
-                  $WHERE_COND_NOTEXACT .= ($s_country=='')?'':" OR ( u.i_country_id= '".$s_country."' )";
-                  else
-                  $WHERE_COND_NOTEXACT .= ($s_country=='')?'':" ( u.i_country_id = '".$s_country."' )";
-
-
-                  $s_state = get_formatted_string(trim($this->input->post('txt_state')));
-
-                  if($WHERE_COND != '')
-                  $WHERE_COND .= ($s_state=='')?'':" AND ( u.`s_state`= '".$s_state."' )";
-                  else
-                  $WHERE_COND .= ($s_state=='')?'':"  ( u.`s_state`= '".$s_state."' )";
-
-                  if($WHERE_COND_NOTEXACT != '')
-                  $WHERE_COND_NOTEXACT .= ($s_state=='')?'':" OR ( u.`s_state`= '".$s_state."' )";
-                  else
-                  $WHERE_COND_NOTEXACT .= ($s_state=='')?'':"  ( u.`s_state`= '".$s_state."' )";
-
-
-                  $s_city = get_formatted_string(trim($this->input->post('txt_city')));
-
-                  if($WHERE_COND != '')
-                  $WHERE_COND .= ($s_city=='')?'':" AND ( u.`s_city`= '".$s_city."' )";
-                  else
-                  $WHERE_COND .= ($s_city=='')?'':" ( u.`s_city`= '".$s_city."' )";
-
-                  if($WHERE_COND_NOTEXACT != '')
-                  $WHERE_COND_NOTEXACT .= ($s_city=='')?'':" OR ( u.`s_city`= '".$s_city."' )";
-                  else
-                  $WHERE_COND_NOTEXACT .= ($s_city=='')?'':" ( u.`s_city`= '".$s_city."' )";
-                 */
-
-
-
 
 
                 $s_church_name = get_formatted_string(trim($this->input->post('txt_church_name')));
