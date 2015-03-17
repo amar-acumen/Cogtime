@@ -254,7 +254,7 @@ class Data_messages_model extends Base_model
 										u.e_gender
 								 FROM cg_messages m, cg_users u 
 								 WHERE u.id = m.i_sender_id AND m.i_receiver_id = "'.$i_user_id.'" AND m.i_is_deleted_by_receiver = 0 "'.$s_where.'"
-								 ORDER BY m.dt_created_on DESC limit "'.intval($i_start_limit.'", "'.intval($i_no_of_page).'"'; 
+								 ORDER BY m.dt_created_on DESC limit "'.intval($i_start_limit).'", "'.intval($i_no_of_page).'"'; 
 								 
 								
 			}
