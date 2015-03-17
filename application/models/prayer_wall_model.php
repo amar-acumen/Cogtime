@@ -183,7 +183,7 @@ class Prayer_wall_model extends Base_model
                 FROM 
                 {$this->db->BIBLE_PRAYER_REQUEST} p 
 				LEFT JOIN {$this->db->USERS} u on u.id=p.i_user_id 
-                LEFT JOIN {$this->db->COUNTRY} cnt on cnt.id=u.i_country_id
+                LEFT JOIN {$this->db->COUNTRY} mst_c on mst_c.id=u.i_country_id
                 WHERE p.i_isenabled = 1  AND p.id  = {$id} "; //exit;
         $result_arr = $this->db->query($sql)->result_array(); //
 		
