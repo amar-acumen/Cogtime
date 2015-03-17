@@ -611,7 +611,77 @@ $("#text_count").text("Characters left: " + (500 - $(this).val().length));
      
 
     </div>
+      <!---image management image---->
+    <div class="church-setting-main">
+    <h3>Picture Managment</h3>
+    <form method="POST"  action="<?= base_url().'logged/church/add_landing_page_img' ?>" id="lang_ch_img" enctype="multipart/form-data">
+    <div class="form-main">
+        	<label> Picture: </label>
+                <input type="file" name="ch_img1" id="ch_img1">
+                 <span>(prefered image size 350 * 250)</span>
+                  <?php
+                 $img1 = get_church_land_image1($church_arr[0]->id, 'thumb', $church_arr[0]->img1)
+                 ?>
+                 <span class="show-upload"><img src="<?= $img1 ?>"></span>
+                 <label>&nbsp;</label>
+                 <input type="text" name="ch_img1_txt" value="<?=  $church_arr[0]->img1_des; ?>"> 
+               
+                <span id="error30" class="error-msg">Required</span>
+        </div>
+        
+        <div class="form-main">
+        	<label> Picture: </label>
+                <input type="file" name="ch_img2" id="ch_img2">
+                 <span>(prefered image size 350 * 250)</span>
+                <?php
+                 $img2 = get_church_land_image2($church_arr[0]->id, 'thumb', $church_arr[0]->img2)
+                 ?>
+                 <span class="show-upload"><img src="<?= $img2 ?>"></span>
+                   <label>&nbsp;</label>
+                   <input type="text" name="ch_img2_txt" value="<?=  $church_arr[0]->img2_des; ?>"> 
+               
+                <span id="error31" class="error-msg">Required</span>
+        </div>
+      <div class="form-main">
+        	<label> Picture: </label>
+                <input type="file" name="ch_img3" id="ch_img3">
+                 <span>(prefered image size 350 * 250)</span>
+                 <?php
+                 $img3 = get_church_land_image3($church_arr[0]->id, 'thumb', $church_arr[0]->img3)
+                 ?>
+                 <span class="show-upload"><img src="<?= $img3 ?>"></span>
+                   <label>&nbsp;</label>
+                   <input type="text" name="ch_img3_txt" value="<?=  $church_arr[0]->img3_des; ?>"> 
+               
+                <span id="error32" class="error-msg">Required</span>
+        </div>
+      <div class="form-main">
+        	<label>Picture: </label>
+                <input type="file" name="ch_img4" id="ch_img4">
+                 <span>(prefered image size 350 * 250)</span>
+                 <?php
+                 $img4 = get_church_land_image4($church_arr[0]->id, 'thumb', $church_arr[0]->img4)
+                 ?>
+                 <span class="show-upload"><img src="<?= $img4 ?>"></span>
+                   <label>&nbsp;</label>
+                   <input type="text" name="ch_img4_txt" value="<?=  $church_arr[0]->img4_des; ?>"> 
+               
+                <span id="error33" class="error-msg">Required</span>
+        </div>
+          <input type="hidden" value="<?=  $church_arr[0]->id; ?>" name="ch_id">
+    </form>
+    <div class="post-update"><input type="button" value="Update" class="post-btn" id="img_setting_bnt" onclick="image_setting();"> <input type="button" value="Cancel" class="cancel-btn"></div>
+     <?php 
+        if($_GET['img'] && $_GET['img'] == 1 ){
+        ?>
+        <div class="sucess-msg">
+            Data update successfully....
+        </div>
+        <?php } ?>
+    </div>
     
+     
+    <!------>
      
     
     </div>
@@ -963,6 +1033,70 @@ function edit_service(id){
    });
 
 
+}
+
+
+
+function  image_setting(){
+    //alert('d');
+    var ch_img1 = $('#ch_img1').val();
+     var ch_img1_format =  ch_img1.substring(ch_img1.lastIndexOf('.') + 1).toLowerCase();
+      var ch_img2 = $('#ch_img2').val();
+     var ch_img2_format =  ch_img2.substring(ch_img2.lastIndexOf('.') + 1).toLowerCase();
+      var ch_img3 = $('#ch_img3').val();
+     var ch_img3_format =  ch_img3.substring(ch_img3.lastIndexOf('.') + 1).toLowerCase();
+      var ch_img4 = $('#ch_img4').val();
+     var ch_img4_format =  ch_img4.substring(ch_img4.lastIndexOf('.') + 1).toLowerCase();
+     
+   if(ch_img1 == '' && ch_img1_format != 'jpg' && ch_img1_format != 'png' && ch_img1_format != 'gif' && ch_img1_format != 'bmp' && ch_img1_format != '' ){
+                //alert('j');
+              $('#error30').css('display','block').html('Please select a valid image file');
+                var flag30 = 0;  
+            }else{
+               $('#error30').css('display','none');
+               var flag30 = 1;
+            }
+            
+            
+            
+           
+ if( ch_img2 == '' && ch_img2_format != 'jpg' && ch_img2_format != 'png' && ch_img2_format != 'gif' && ch_img2_format != 'bmp' && ch_img2_format != '' ){
+                //alert('j');
+              $('#error31').css('display','block').html('Please select a valid image file');
+                var flag31 = 0;  
+            }else{
+               $('#error31').css('display','none');
+               var flag31 = 1;
+            }
+            
+            
+            
+            
+      if( ch_img3 == '' && ch_img3_format != 'jpg' && ch_img3_format != 'png' && ch_img3_format != 'gif' && ch_img3_format != 'bmp' && ch_img3_format != '' ){
+                //alert('j');
+              $('#error32').css('display','block').html('Please select a valid image file');
+                var flag32 = 0;  
+            }else{
+               $('#error32').css('display','none');
+               var flag32 = 1;
+            }
+            
+            
+            
+               if( ch_img4 == '' && ch_img4_format != 'jpg' && ch_img4_format != 'png' && ch_img4_format != 'gif' && ch_img4_format != 'bmp' && ch_img4_format != '' ){
+                //alert('j');
+              $('#error33').css('display','block').html('Please select a valid image file');
+                var flag33 = 0;  
+            }else{
+               $('#error33').css('display','none');
+               var flag33 = 1;
+            }
+            
+            
+            if(flag30 == 1 && flag31 == 1 && flag32 == 1 && flag33 == 1){
+                
+               $('#lang_ch_img').submit();
+            }
 }
 </script>
 <script type="text/javascript" src="<?= base_url() ?>js/lightbox.js"></script>
