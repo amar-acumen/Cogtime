@@ -503,8 +503,7 @@ class My_prayer_partners extends Base_controller {
 
     public function ajax_pagination($page = 0) {
         try {
-            
-            pr($_POST,1);
+
             ## seting session to detect the source of hit of public profile (if already netpals/ friends)##
             ## seacrh conditions : filter ############
             $i_profile_id = intval(decrypt($this->session->userdata('user_id')));
