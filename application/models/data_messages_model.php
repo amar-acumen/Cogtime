@@ -343,7 +343,7 @@ class Data_messages_model extends Base_model
 										u.s_first_name, 
 										u.s_last_name 
 								FROM cg_messages m, cg_users u 
-								WHERE u.id = m.i_receiver_id AND m.i_sender_id = "'.$i_user_id.'"  AND m.s_type=\'normal\' AND m.i_is_deleted_by_sender = 0 {$s_where} ORDER BY m.dt_created_on DESC';
+								WHERE u.id = m.i_receiver_id AND m.i_sender_id = "'.$i_user_id.'"  AND m.s_type=\'normal\' AND m.i_is_deleted_by_sender = 0 '.$s_where.' ORDER BY m.dt_created_on DESC';
 			}
 			else 
 			{
@@ -360,7 +360,7 @@ class Data_messages_model extends Base_model
 										u.s_first_name, 
 										u.s_last_name 
 								 FROM cg_messages m, cg_users u 
-								 WHERE u.id = m.i_receiver_id AND m.i_sender_id = %s AND m.s_type=\'normal\'  AND m.i_is_deleted_by_sender = 0 %s ORDER BY m.dt_created_on DESC limit {$i_start_limit}, {$i_no_of_page}';
+								 WHERE u.id = m.i_receiver_id AND m.i_sender_id = "'.$i_user_id.'" AND m.s_type=\'normal\'  AND m.i_is_deleted_by_sender = 0 '.$s_where.' ORDER BY m.dt_created_on DESC limit '.intval($i_start_limit).', '.intval($i_no_of_page);
 			}
 	
 		//query = $this->db->query($sql); AND m.s_type=\'normal\'
@@ -413,7 +413,7 @@ class Data_messages_model extends Base_model
 
 	public function get_total_by_sender($i_user_id , $s_where ='') 
 	{
-		 $sql = "SELECT count(*) count FROM %smessages m, %susers u WHERE u.id = m.i_receiver_id AND m.i_sender_id = '".$i_user_id."' AND m.i_is_deleted_by_sender = 0  AND m.s_type= 'normal'  {$s_where} ";		
+		 $sql = "SELECT count(*) count FROM cg_messages m, cg_users u WHERE u.id = m.i_receiver_id AND m.i_sender_id = '".$i_user_id."' AND m.i_is_deleted_by_sender = 0  AND m.s_type= 'normal'  ".$s_where;		
 
 		$query = $this->db->query($sql);
 		$result_arr = $query->result_array();
@@ -534,8 +534,7 @@ class Data_messages_model extends Base_model
 	
 	public function get_message_by_id($id) 
 	{
-		$sql = sprintf("SELECT * FROM %smessages m WHERE m.id = %s  "
-						, $this->db->dbprefix, $id);		
+		$sql = "SELECT * FROM cg_messages m WHERE m.id = '".$id."'  ";		
 
 		$query = $this->db->query($sql);
 		$result_arr = $query->result_array();
