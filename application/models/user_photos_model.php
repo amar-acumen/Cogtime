@@ -93,7 +93,7 @@ class User_photos_model extends Base_model
 	
 
 	public function delete_by_id($id) {
-	     $sql = sprintf( 'DELETE FROM '.$this->db->USER_PHOTOS.' WHERE id=%s', $id );
+	     $sql = 'DELETE FROM '.$this->db->USER_PHOTOS.' WHERE id="'.$id.'"';
 
 		$this->db->query($sql);
 		
@@ -106,11 +106,11 @@ class User_photos_model extends Base_model
 	
 	public function get_by_media_id($id, $s_where="", $start_limit="", $no_of_page="") {
 		if("$start_limit" == "") {
-			$sql = sprintf('SELECT * FROM '.$this->db->USER_PHOTOS.'  WHERE i_status =1 AND  id = %s %s ORDER BY id DESC ',$id,$s_where);
+			$sql = 'SELECT * FROM '.$this->db->USER_PHOTOS.'  WHERE i_status =1 AND  id = "'.$id.'" {$s_where} ORDER BY id DESC ';
 		}
 		else {
-			 $sql = sprintf('SELECT * FROM '.$this->db->USER_PHOTOS
-								.'  WHERE i_status =1 AND id = %s %s ORDER BY id DESC LIMIT %s, %s ', $id, $s_where, $start_limit, $no_of_page);
+			 $sql = 'SELECT * FROM '.$this->db->USER_PHOTOS
+								.'  WHERE i_status =1 AND id = "'.$id.'" {$s_where} ORDER BY id DESC LIMIT {$start_limit}, {$no_of_page} ';
 		}
 
 		$query = $this->db->query($sql);
@@ -130,7 +130,7 @@ class User_photos_model extends Base_model
 	
 
 	public function get_total_by_media_id($id, $s_where) {
-		$sql = sprintf("SELECT count(*) count FROM ".$this->db->USER_PHOTOS."  where i_status =1 AND id = '%s' %s ", $id, $s_where);
+		$sql = "SELECT count(*) count FROM ".$this->db->USER_PHOTOS."  where i_status =1 AND id = '".$id."' ".$s_where;
 		$query = $this->db->query($sql);
 		$result_arr = $query->result_array();
 
