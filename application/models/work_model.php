@@ -647,7 +647,7 @@ class Work_model extends Base_model
             if(intval($db_id)>0)
             {
                 
-                $q=sprintf("DELETE FROM %s WHERE id=%s",$this->db->USER_WORKS,$db_id);
+                $q="DELETE FROM ".$this->db->USER_WORKS." WHERE id='".$db_id."'";
                 
                 $this->db->trans_begin();///new  
                 $this->db->query($q);
