@@ -24,7 +24,7 @@ class User_notifications_model extends Base_model
 		}
 		else {
 			
-			 $sql = 'SELECT * FROM '.$this->db->NOTIFICATIONS.'  where id = "'.$id.'" limit {$start_limit}, {$no_of_page}';
+			 $sql = 'SELECT * FROM '.$this->db->NOTIFICATIONS.'  where id = "'.$id.'" limit '.$start_limit.', '.$no_of_page;
 		}
 
 		$query = $this->db->query($sql); #echo $this->db->last_query(); exit;
@@ -55,7 +55,7 @@ class User_notifications_model extends Base_model
 	
 
 	public function get_total_by_user_id($user_id, $s_where) {
-		$sql = sprintf("SELECT count(*) count FROM ".$this->db->NOTIFICATIONS."  where i_accepter_id = '%s' %s ", $user_id, $s_where);
+		$sql = "SELECT count(*) count FROM ".$this->db->NOTIFICATIONS."  where i_accepter_id = '".$user_id."' ".$s_where;
 		$query = $this->db->query($sql);
 		$result_arr = $query->result_array();
 
