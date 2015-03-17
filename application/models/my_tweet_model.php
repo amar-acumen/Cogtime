@@ -290,8 +290,7 @@ public function get_my_tweets($i_user_id, $s_where, $i_start_limit='', $i_no_of_
 					  AND t.i_owner_id = u.id AND t.i_owner_id = '".intval($i_user_id)."' {$s_where})
 
 				
-				) derived_tbl
-					";
+				) derived_tbl";
 		
 #and t.i_user_id != '%2\$s'
 		$query = $this->db->query($sql); //echo "sql ==>". nl2br($sql) ."<br />";  
