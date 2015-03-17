@@ -93,7 +93,7 @@ class Tweet_reply_model extends CI_Model {
 	public function get_by_tweet_id($i_tweet_id,  $i_start_limit="", $i_no_of_page="") { 
         
 		if("$i_start_limit" == "") {
-			$sql = sprintf("SELECT c.id, 
+			$sql = "SELECT c.id, 
 								   c.i_tweet_id,
 								   c.i_user_id, 
 								   c.s_contents, 
@@ -103,15 +103,13 @@ class Tweet_reply_model extends CI_Model {
 								   u.s_tweet_id,
 								  
 								   u.s_first_name as pseudo 
-						FROM %1\$stweets_replys c, %1\$susers u 
+						FROM cg_tweets_replys c, cg_users u 
 						WHERE c.i_user_id=u.id 
-						    AND c.i_tweet_id = %2\$s 
-						   ORDER BY c.dt_created_on DESC", 
-						   $this->db->dbprefix, 
-						   intval($i_tweet_id));
+						    AND c.i_tweet_id = '".intval($i_tweet_id)."' 
+						   ORDER BY c.dt_created_on DESC";
 		}
 		else {
-			$sql = sprintf("SELECT c.id, 
+			$sql = "SELECT c.id, 
 								   c.i_tweet_id,
 								   c.i_user_id, 
 								   c.s_contents, 
@@ -121,14 +119,10 @@ class Tweet_reply_model extends CI_Model {
 								   u.s_tweet_id, 
 								  
 								   u.s_first_name as pseudo 
-					    FROM %1\$stweets_replys c, %1\$susers u 
+					    FROM cg_tweets_replys c, cg_users u 
 						WHERE c.i_user_id=u.id
-						 AND c.i_tweet_id = %2\$s 
-						 ORDER BY dt_created_on DESC LIMIT %3\$s, %4\$s", 
-						 $this->db->dbprefix,
-						 intval($i_tweet_id), 
-						 intval($i_start_limit), 
-						 intval($i_no_of_page));
+						 AND c.i_tweet_id = '".intval($i_tweet_id)."' 
+						 ORDER BY dt_created_on DESC LIMIT {$i_start_limit}, {$i_no_of_page}";
 		}
 
         
