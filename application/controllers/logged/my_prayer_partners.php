@@ -611,7 +611,7 @@ class My_prayer_partners extends Base_controller {
 
                 $s_church_name = get_formatted_string(trim($this->input->post('txt_church_name')));
 
-                if ($WHERE_COND != '')
+                /*if ($WHERE_COND != '')
                     $WHERE_COND .= ($s_church_name == '') ? '' : " AND ( u.`s_church_name` LIKE '" . $s_church_name . "%' )";
                 else
                     $WHERE_COND .= ($s_church_name == '') ? '' : "  ( u.`s_church_name` LIKE '" . $s_church_name . "%' )";
@@ -619,8 +619,10 @@ class My_prayer_partners extends Base_controller {
                 if ($WHERE_COND_NOTEXACT != '')
                     $WHERE_COND_NOTEXACT .= ($s_church_name == '') ? '' : " OR ( u.`s_church_name` LIKE '" . $s_church_name . "%' )";
                 else
-                    $WHERE_COND_NOTEXACT .= ($s_church_name == '') ? '' : "  ( u.`s_church_name` LIKE '" . $s_church_name . "%' )";
+                    $WHERE_COND_NOTEXACT .= ($s_church_name == '') ? '' : "  ( u.`s_church_name` LIKE '" . $s_church_name . "%' )";*/
 
+                    
+                    
 
 
 
