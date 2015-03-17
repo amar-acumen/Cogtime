@@ -70,7 +70,7 @@ public function get_all_ring_post_by_ring_id($i_ring_id, $s_where, $i_start_limi
 									  t.*
 									  
 									  FROM cg_users u, cg_church_ring_post t
-									  WHERE u.i_status='1' AND u.i_isdeleted ='1' AND t.i_user_id = u.id and t.i_ring_id = %1\$s and t.i_disable='1'
+									  WHERE u.i_status='1' AND u.i_isdeleted ='1' AND t.i_user_id = u.id and t.i_ring_id = '".intval($i_ring_id)."' and t.i_disable='1'
 									  {$s_where})
 	
 						ORDER BY dt_created_on DESC
@@ -79,7 +79,7 @@ public function get_all_ring_post_by_ring_id($i_ring_id, $s_where, $i_start_limi
 		}
 
 #AND t.i_user_id != '%2\$s'
-		$query = $this->db->query($sql); #echo "sql ==>". ($sql);exit; 
+		$query = $this->db->query($sql);echo "sql ==>". ($sql);exit; 
 		$result_arr = $query->result_array();
         
      //pr($result_arr);
