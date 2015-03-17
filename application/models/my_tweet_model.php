@@ -705,7 +705,7 @@ public function get_total_fav_tweets_by_user_id($i_user_id,  $s_where) {
 
 	public function get_trend_name_by_id($id){
 		
-		$sql = 'SELECT * FROM '.$this->db->TWEETS_TRENDINGS.'  where id = "'.$id.'"',  ;
+		$sql = 'SELECT * FROM '.$this->db->TWEETS_TRENDINGS.'  where id = "'.$id.'"';
 		$query     = $this->db->query($sql); //echo $this->db->last_query();
         $result_arr = $query->result_array(); //pr($result_arr);
         return $result_arr[0];
