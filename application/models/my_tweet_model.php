@@ -551,7 +551,7 @@ public function get_total_fav_tweets_by_user_id($i_user_id,  $s_where) {
 
 	public function delete_by_id($id) {
 	
-	     $sql = sprintf( 'DELETE FROM '.$this->db->TWEETS.' WHERE id=%s', $id );
+	     $sql = 'DELETE FROM '.$this->db->TWEETS.' WHERE id="'.$id.'"';
 		 $this->db->query($sql);
 		#echo $this->db->last_query(); exit;
 	}
@@ -602,7 +602,7 @@ public function get_total_fav_tweets_by_user_id($i_user_id,  $s_where) {
 	
 	public function get_owner_by_tweet_id($id) {
 		
-		$sql = sprintf('SELECT i_owner_id  FROM '.$this->db->TWEETS.'  WHERE id = %s ',$id);
+		$sql = 'SELECT i_owner_id  FROM '.$this->db->TWEETS.'  WHERE id = "'.$id.'" ';
 		$query = $this->db->query($sql);
 		$result_arr = $query->result_array();
 		return $result_arr[0];
@@ -705,7 +705,7 @@ public function get_total_fav_tweets_by_user_id($i_user_id,  $s_where) {
 
 	public function get_trend_name_by_id($id){
 		
-		$sql = sprintf('SELECT * FROM '.$this->db->TWEETS_TRENDINGS.'  where id = %s',  $id);
+		$sql = 'SELECT * FROM '.$this->db->TWEETS_TRENDINGS.'  where id = "'.$id.'"',  ;
 		$query     = $this->db->query($sql); //echo $this->db->last_query();
         $result_arr = $query->result_array(); //pr($result_arr);
         return $result_arr[0];
@@ -714,7 +714,7 @@ public function get_total_fav_tweets_by_user_id($i_user_id,  $s_where) {
 	
 	public function get_trend_id_by_name($name){
 		
-		$sql = sprintf('SELECT *  FROM '.$this->db->TWEETS_TRENDINGS.'  where s_tags = "%s"',  $name);
+		$sql = 'SELECT *  FROM '.$this->db->TWEETS_TRENDINGS.'  where s_tags = "'.$name.'"',  ;
 		$query     = $this->db->query($sql); #echo $this->db->last_query();
         $result_arr = $query->result_array(); //pr($result_arr);
         return $result_arr[0];
@@ -755,7 +755,7 @@ public function get_total_fav_tweets_by_user_id($i_user_id,  $s_where) {
 	### REMOVING follow TWEET IN TWEETS_FOLLOWERS
 	public function remove_follow($i_requester_id, $i_accepter_id) {
 	
-	     $sql = sprintf( 'DELETE FROM '.$this->db->TWEETS_FOLLOWERS.' WHERE i_accepter_id=%s AND i_requester_id = %s ', $i_accepter_id, $i_requester_id);
+	     $sql = 'DELETE FROM '.$this->db->TWEETS_FOLLOWERS.' WHERE i_accepter_id="'.$i_accepter_id.'" AND i_requester_id = "'.$i_requester_id.'" ';
 		 $this->db->query($sql);
 		#echo $this->db->last_query(); exit;
 	}
@@ -929,7 +929,7 @@ public function get_total_fav_tweets_by_user_id($i_user_id,  $s_where) {
 	public function search_tweets_by_trend($i_user_id, $s_where, $i_start_limit='', $i_no_of_page='') {
 		
 		if("$i_start_limit" == "") {
-			$sql = sprintf("
+			$sql = "
 				  SELECT  u.id i_user_id, 
 						 u.s_email, 
 						 u.e_gender, 
@@ -942,28 +942,26 @@ public function get_total_fav_tweets_by_user_id($i_user_id,  $s_where) {
 						 t.data,
 						 t.s_type,
 						 t.dt_created_on,
-						 (SELECT COUNT(*) as count FROM %1\$stweets_fav ft WHERE ft.i_tweet_id = t.id AND ft.i_user_id = %2\$s)
+						 (SELECT COUNT(*) as count FROM cg_tweets_fav ft WHERE ft.i_tweet_id = t.id AND ft.i_user_id = '".intval($i_user_id)."')
 						 as fav_tweet,
 						 
-						 (SELECT COUNT(*) as count FROM %1\$stweets_replys tr WHERE tr.i_tweet_id = t.id )
+						 (SELECT COUNT(*) as count FROM cg_tweets_replys tr WHERE tr.i_tweet_id = t.id )
 						 as total_reply
 						 
 						 
 						
-					FROM %1\$susers u, %1\$stweets t
+					FROM cg_users u, cg_tweets t
 					
 					WHERE u.i_status='1' AND u.i_isdeleted ='1' AND t.i_isenabled =1  AND t.i_owner_id = u.id  
-					%3\$s
+					{$s_where}
 				    ORDER BY t.id DESC
-					"
-				, $this->db->dbprefix, intval($i_user_id), $s_where
-			);
+					";
 		}
 		else {
 		
 		
 		
-			 $sql = sprintf("
+			 $sql = "
 				SELECT  u.id i_user_id, 
 						 u.s_email, 
 						 u.e_gender, 
@@ -976,23 +974,21 @@ public function get_total_fav_tweets_by_user_id($i_user_id,  $s_where) {
 						 t.data,
 						 t.s_type,
 						 t.dt_created_on,
-						 (SELECT COUNT(*) as count FROM %1\$stweets_fav ft WHERE ft.i_tweet_id = t.id AND ft.i_user_id = %2\$s)
+						 (SELECT COUNT(*) as count FROM cg_tweets_fav ft WHERE ft.i_tweet_id = t.id AND ft.i_user_id = '".intval($i_user_id)."')
 						 as fav_tweet,
 						 
-						  (SELECT COUNT(*) as count FROM %1\$stweets_replys tr WHERE tr.i_tweet_id = t.id )
+						  (SELECT COUNT(*) as count FROM cg_tweets_replys tr WHERE tr.i_tweet_id = t.id )
 						 as total_reply
 						
-					FROM %1\$susers u, %1\$stweets t
+					FROM cg_users u, cg_tweets t
 					
 					WHERE u.i_status='1' AND u.i_isdeleted ='1' AND t.i_isenabled =1  AND t.i_owner_id = u.id 
-					%5\$s
+					{$s_where}
 					
 					
 					ORDER BY t.id DESC
-					limit %3\$s, %4\$s
-					"
-				, $this->db->dbprefix, intval($i_user_id), intval($i_start_limit), intval($i_no_of_page),  $s_where
-			);
+					limit {$i_start_limit}, {$i_no_of_page}
+					";
 		}
 
 #AND t.i_user_id != '%2\$s' or (c.i_accepter_id = %2\$s and u.id=c.i_requester_id)
@@ -1009,18 +1005,16 @@ public function get_total_fav_tweets_by_user_id($i_user_id,  $s_where) {
 	public function get_total_search_tweets_by_trend($i_user_id, $s_where) {
 		
 
-		 $sql = sprintf("
+		 $sql = "
 				SELECT COUNT(*) count FROM (
 				(SELECT t.id
 						
-					FROM %1\$susers u, %1\$stweets t
-					WHERE u.i_status='1' AND u.i_isdeleted ='1' AND t.i_isenabled =1  AND t.i_owner_id = u.id  %2\$s  
+					FROM cg_users u, cg_tweets t
+					WHERE u.i_status='1' AND u.i_isdeleted ='1' AND t.i_isenabled =1  AND t.i_owner_id = u.id  {$s_where}  
 				 )
 
 				) derived_tbl
-					"
-				, $this->db->dbprefix, $s_where
-			);
+					";
 		
 #and t.i_user_id != '%2\$s' or (c.i_accepter_id = %2\$s and u.id=c.i_requester_id)
 		$query = $this->db->query($sql); #echo "sql ==>". ($sql) ."<br />";  exit;
@@ -1076,7 +1070,7 @@ public function get_total_fav_tweets_by_user_id($i_user_id,  $s_where) {
 	    $_ret = array();
 		if(intval($i_newsfeed_id)>0)
 		{
-			$sql = sprintf("SELECT * FROM %stweets WHERE id = '%s'", $this->db->dbprefix, intval($i_newsfeed_id));
+			$sql = "SELECT * FROM cg_tweets WHERE id = '".intval($i_newsfeed_id)."'";
 			
 			$query = $this->db->query($sql);
 			$result_arr = $query->result_array();
