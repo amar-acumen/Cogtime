@@ -1189,8 +1189,7 @@ class Netpals_model extends Base_model
     
     function total_pending_netpal_received($i_accepter_id='')
     {
-          $SQL = sprintf("SELECT COUNT(*) AS `check_count` FROM %s WHERE (`i_accepter_id`='%s' ) AND `s_status` = 'pending' ",
-                        $this->db->NETPAL, $i_accepter_id);
+          $SQL = "SELECT COUNT(*) AS `check_count` FROM ".$this->db->NETPAL." WHERE (`i_accepter_id`='".$i_accepter_id."' ) AND `s_status` = 'pending' ";
         $ROW = $this->db->query($SQL)->row_array(); 
     //echo $this->db->last_query(); 
 	//echo $ROW['check_count'];
@@ -1289,8 +1288,7 @@ class Netpals_model extends Base_model
     function netpals_request_already_sent($i_requester_id='', $i_accepter_id = '')
     {
         
-      	$SQL = sprintf("SELECT COUNT(*) AS `check_count` FROM %s WHERE `i_requester_id`='%s'  AND `i_accepter_id` = '%s' ",
-                        $this->db->NETPAL, $i_requester_id, $i_accepter_id);
+      	$SQL = "SELECT COUNT(*) AS `check_count` FROM ".$this->db->NETPAL." WHERE `i_requester_id`='".$i_requester_id."'  AND `i_accepter_id` = '".$i_accepter_id."' ";
         $ROW = $this->db->query($SQL)->row_array(); #echo $this->db->last_query(); exit;
         
         if( $ROW['check_count'] )
