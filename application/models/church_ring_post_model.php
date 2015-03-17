@@ -79,7 +79,7 @@ public function get_all_ring_post_by_ring_id($i_ring_id, $s_where, $i_start_limi
 		}
 
 #AND t.i_user_id != '%2\$s'
-		$query = $this->db->query($sql);echo "sql ==>". ($sql);exit; 
+		$query = $this->db->query($sql);//echo "sql ==>". ($sql);exit; 
 		$result_arr = $query->result_array();
         
      //pr($result_arr);
