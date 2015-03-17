@@ -49,23 +49,23 @@ class Utility_model extends Base_model
                 $where = ( empty($where) )? "": $where;
                 
                 // get selected table's max-rank...
-                $maxSQL = sprintf("SELECT IFNULL(MAX(i_order),1) AS `max_displayorder`
-                          FROM %s %s", $tbl, $where);
+                $maxSQL = "SELECT IFNULL(MAX(i_order),1) AS `max_displayorder`
+                          FROM ".$tbl." {$where}";
                 $query = $this->db->query($maxSQL); //echo $this->db->last_query();
                 $row = $query->row(); 
          	    $MAX_DISPLAYORDER = $row->max_displayorder;
 				
 				
 				  // get selected table's min-rank...
-                $minSQL = sprintf("SELECT IFNULL(MIN(i_order),1) AS `min_displayorder`
-                          FROM %s %s", $tbl, $where);
+                $minSQL = "SELECT IFNULL(MIN(i_order),1) AS `min_displayorder`
+                          FROM ".$tbl." {$where}";
                 $query_min = $this->db->query($minSQL);
                 $row_min = $query_min->row(); 
          		$MIN_DISPLAYORDER = $row_min->min_displayorder;
 
                 $ImgRank="";
 				
-                $if_one_record_query = sprintf("SELECT count(*) as total_row FROM %s %s",$tbl,$where);
+                $if_one_record_query = "SELECT count(*) as total_row FROM ".$tbl." {$where}";
                 $if_one_record = $this->db->query($if_one_record_query)->row();
                 //pr($if_one_record);
                 $only_one_record = $if_one_record->total_row;
@@ -102,14 +102,12 @@ class Utility_model extends Base_model
                 /* Ranking Up Starts */
                 if($to=='dn')
                 {
-                    $query_pageorder = sprintf("SELECT `i_order` FROM %s WHERE `id` = %s ",
-                                                $tbl, $id);
+                    $query_pageorder = "SELECT `i_order` FROM ".$tbl." WHERE `id` = {$id} ";
                     $query1 = $this->db->query($query_pageorder); 
                     $row1 = $query1->row();
                     $pageOrder=$row1->i_order;
 
-                    $query_pageid=sprintf("SELECT `id` FROM  %s WHERE `i_order`=(%s-1) %s",
-                                                                 $tbl, $pageOrder , $where);
+                    $query_pageid="SELECT `id` FROM  ". $tbl." WHERE `i_order`=({$pageOrder}-1) {$where}";
                     $query2 = $this->db->query($query_pageid); 
                     $row2 = $query2->row();
              	    $pageid=$row2->id;
