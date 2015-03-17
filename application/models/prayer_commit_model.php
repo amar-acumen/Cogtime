@@ -121,7 +121,7 @@ class Prayer_commit_model extends CI_Model {
 
 	public function delete_by_id($id) {
 		
-		$sql = sprintf( 'DELETE FROM %sbible_prayer_commitments WHERE id =%s  ', $this->db->dbprefix, $id);
+		$sql = 'DELETE FROM cg_bible_prayer_commitments WHERE id ="'.$id.'"  ';
 
 		$this->db->query($sql);
 		
@@ -134,7 +134,7 @@ class Prayer_commit_model extends CI_Model {
 	public function get_all_commitments_by_user_id($i_user_id,  $i_start_limit="", $i_no_of_page="") { 
         
 	
-		 	$sql = sprintf(" (SELECT c.id commits_id, 
+		 	$sql = " (SELECT c.id commits_id, 
 								   c.i_prayer_req_id as prayer_id,
 								   c.i_user_id, 
 								   c.s_contents, 
@@ -161,12 +161,12 @@ class Prayer_commit_model extends CI_Model {
 								 							
 								   
 								   
-					    FROM   %1\$sbible_prayer_request p
-						LEFT JOIN  %1\$sbible_prayer_commitments c on p.id = c.i_prayer_req_id
-						LEFT JOIN  %1\$susers u on u.id = c.i_user_id 
+					    FROM   cg_bible_prayer_request p
+						LEFT JOIN  cg_bible_prayer_commitments c on p.id = c.i_prayer_req_id
+						LEFT JOIN  cg_users u on u.id = c.i_user_id 
 						LEFT JOIN {$this->db->COUNTRY} mst_c on mst_c.id=u.i_country_id
 						
-						WHERE  c.i_user_id = %2\$s )
+						WHERE  c.i_user_id = '".intval($i_user_id)."' )
 						 
 						 UNION 
 						 
@@ -198,20 +198,16 @@ class Prayer_commit_model extends CI_Model {
 								 							
 								  
 								   
-					    FROM   %1\$sbible_intercession e
-						LEFT JOIN  %1\$sbible_intercession_commitments et on e.id= et.i_id_intercession_wall_post
+					    FROM   cg_bible_intercession e
+						LEFT JOIN  cg_bible_intercession_commitments et on e.id= et.i_id_intercession_wall_post
 						
-						LEFT JOIN  %1\$susers u on u.id = et.i_user_id
+						LEFT JOIN  cg_users u on u.id = et.i_user_id
 						LEFT JOIN {$this->db->COUNTRY} mst_c on mst_c.id=u.i_country_id
 						
-						WHERE et.i_user_id = %2\$s )
+						WHERE et.i_user_id = '".intval($i_user_id)."' )
 						 
 						 
-						 ORDER BY dt_created_on DESC LIMIT %3\$s, %4\$s", 
-						 $this->db->dbprefix,
-						 intval($i_user_id), 
-						 intval($i_start_limit), 
-						 intval($i_no_of_page));
+						 ORDER BY dt_created_on DESC LIMIT ".intval($i_start_limit).", ".intval($i_no_of_page);
 		
        // echo nl2br($sql); exit;
 		$query = $this->db->query($sql); 
@@ -227,32 +223,32 @@ class Prayer_commit_model extends CI_Model {
 	
 
 	public function get_all_commitments_total_by_request_id($i_user_id) {
-		$sql = sprintf("SELECT count(*) count FROM (
+		$sql = "SELECT count(*) count FROM (
 								(SELECT c.id 
 								   
 												   
-										FROM   %1\$sbible_prayer_request p
-										LEFT JOIN  %1\$sbible_prayer_commitments c on p.id = c.i_prayer_req_id
-										LEFT JOIN  %1\$susers u on u.id = c.i_user_id 
+										FROM   cg_bible_prayer_request p
+										LEFT JOIN  cg_bible_prayer_commitments c on p.id = c.i_prayer_req_id
+										LEFT JOIN  cg_users u on u.id = c.i_user_id 
 										LEFT JOIN {$this->db->COUNTRY} mst_c on mst_c.id=u.i_country_id
 										
-										WHERE  c.i_user_id = %2\$s )
+										WHERE  c.i_user_id = '".intval($i_user_id)."' )
 						 
 						 UNION
 						 
 						 (SELECT et.id 
 								   
-								  FROM   %1\$sbible_intercession e
-								  LEFT JOIN  %1\$sbible_intercession_commitments et on e.id= et.i_id_intercession_wall_post
+								  FROM   cg_bible_intercession e
+								  LEFT JOIN  cg_bible_intercession_commitments et on e.id= et.i_id_intercession_wall_post
 								  
-								  LEFT JOIN  %1\$susers u on u.id = et.i_user_id
+								  LEFT JOIN  cg_users u on u.id = et.i_user_id
 								  LEFT JOIN {$this->db->COUNTRY} mst_c on mst_c.id=u.i_country_id
 								  
-								  WHERE et.i_user_id = %2\$s )
+								  WHERE et.i_user_id = '".intval($i_user_id)."' )
 		
 						) derived_tbl
 						 
-						 ", $this->db->dbprefix, intval($i_user_id));
+						 ";
 
 		$query = $this->db->query($sql); //echo nl2br($sql);
 		$result_arr = $query->result_array();
