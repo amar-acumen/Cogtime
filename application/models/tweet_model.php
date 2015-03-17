@@ -430,7 +430,7 @@ public function get_all_tweets_by_user_id($i_user_id, $s_where, $i_start_limit='
 public function get_my_tweets($i_user_id, $s_where, $i_start_limit='', $i_no_of_page='') {
 		
 		if("$i_start_limit" == "") {
-			$sql = sprintf("
+			$sql = "
 				  (SELECT  u.id i_user_id, 
 						 u.s_email, 
 						 u.e_gender, 
@@ -442,10 +442,10 @@ public function get_my_tweets($i_user_id, $s_where, $i_start_limit='', $i_no_of_
 						 t.s_tweet_text,
 						 t.dt_created_on
 						
-					FROM %1\$susers u, %1\$suser_tweets t
+					FROM cg_users u, cg_user_tweets t
 					
 					WHERE u.i_status='1' AND u.i_isdeleted ='1' AND t.i_isenabled =1 
-					 AND t.i_user_id = u.id AND t.i_user_id = %2\$s %3\$s
+					 AND t.i_user_id = u.id AND t.i_user_id = '".intval($i_user_id)."' {$s_where}
 					ORDER BY dt_created_on DESC
 					"
 				, $this->db->dbprefix, intval($i_user_id), $s_where
@@ -455,7 +455,7 @@ public function get_my_tweets($i_user_id, $s_where, $i_start_limit='', $i_no_of_
 		
 		
 		
-			 $sql = sprintf("
+			 $sql = "
 				(SELECT  u.id i_user_id, 
 						 u.s_email, 
 						 u.e_gender, 
@@ -467,17 +467,15 @@ public function get_my_tweets($i_user_id, $s_where, $i_start_limit='', $i_no_of_
 						 t.s_tweet_text,
 						 t.dt_created_on
 						
-					FROM %1\$susers u, %1\$suser_tweets t
+					FROM cg_users u, cg_user_tweets t
 					
 					WHERE u.i_status='1' AND u.i_isdeleted ='1' AND t.i_isenabled =1 
-					AND t.i_user_id = u.id AND t.i_user_id = %2\$s %5\$s
+					AND t.i_user_id = u.id AND t.i_user_id = '".intval($i_user_id)."' {$s_where}
 				)
 
 				    ORDER BY dt_created_on DESC
-					limit %3\$s, %4\$s
-					"
-				, $this->db->dbprefix, intval($i_user_id), intval($i_start_limit), intval($i_no_of_page),  $s_where
-			);
+					limit {$i_start_limit}, {$i_no_of_page}
+					";
 		}
 
 #AND t.i_user_id != '%2\$s'
