@@ -96,7 +96,7 @@ public function get_all_ring_post_by_ring_id($i_ring_id, $s_where, $i_start_limi
 	public function get_total_all_ring_post_by_ring_id($i_ring_id,  $s_where) {
 		
 
-		 $sql = sprintf("
+		 $sql = "
 				SELECT COUNT(*) count FROM (
 							(SELECT    t.id
 									 
@@ -104,8 +104,7 @@ public function get_all_ring_post_by_ring_id($i_ring_id, $s_where, $i_start_limi
 									  WHERE u.i_status='1' AND u.i_isdeleted ='1' AND t.i_user_id = u.id and t.i_ring_id = '".intval($i_ring_id)."'
 									  {$s_where})
 
- 				) derived_tbl
-					";
+ 				) derived_tbl";
 		
 #and t.i_user_id != '%2\$s'
 		$query = $this->db->query($sql); //echo "sql ==>". ($sql) ."<br />";  
