@@ -417,12 +417,12 @@ class Prayer_group_model extends Base_model {
 
         try {
             $result_arr = array();
-            $s_qry = sprintf("SELECT 
+            $s_qry = "SELECT 
 									pg.s_status as 's_status'
 								FROM {$this->db->PRAYER_GROUP_MEMBERS} pg, {$this->db->USERS} u
 								WHERE 
-									pg.i_user_id = %s and pg.i_prayer_group_id = %s 
-									AND u.id= pg.i_user_id ", $i_user_id, $i_group_id);
+									pg.i_user_id = '".$i_user_id."' and pg.i_prayer_group_id = '".$i_group_id."' 
+									AND u.id= pg.i_user_id ";
 
             $query = $this->db->query($s_qry);
             $result_arr = $query->result_array();
@@ -466,9 +466,9 @@ class Prayer_group_model extends Base_model {
     # function to check if request_already_sent
 
     function request_already_sent($i_user_id = '', $i_group_id = '') {
-        $SQL = sprintf("SELECT COUNT(*) AS `check_count` FROM %s 
-						WHERE `i_user_id`='%s'  AND `i_prayer_group_id` = '%s' 
-						AND `s_status` = 'pending' ", $this->db->PRAYER_GROUP_MEMBERS, $i_user_id, $i_group_id);
+        $SQL = "SELECT COUNT(*) AS `check_count` FROM ".$this->db->PRAYER_GROUP_MEMBERS." 
+						WHERE `i_user_id`='".$i_user_id."'  AND `i_prayer_group_id` = '".$i_group_id."' 
+						AND `s_status` = 'pending' ";
         $ROW = $this->db->query($SQL)->row_array(); //echo $this->db->last_query(); exit;
 
         if ($ROW['check_count'])
@@ -633,7 +633,7 @@ class Prayer_group_model extends Base_model {
     }
 
     public function delete_post_by_id($id) {
-        $sql = sprintf('DELETE FROM  cg_prayer_group_post WHERE id=%s', $id);
+        $sql = 'DELETE FROM  cg_prayer_group_post WHERE id="'.$id.'"';
         $this->db->query($sql);
     }
 
@@ -804,26 +804,26 @@ class Prayer_group_model extends Base_model {
     }
 
     public function delete_prayer_group($id) {
-        $sql = sprintf('DELETE FROM  cg_prayer_group WHERE id=%s', $id);
+        $sql = 'DELETE FROM  cg_prayer_group WHERE id="'.$id.'"';
         $this->db->query($sql);
 
-        $sql1 = sprintf('DELETE FROM  cg_prayer_group_members WHERE i_prayer_group_id=%s', $id);
+        $sql1 = 'DELETE FROM  cg_prayer_group_members WHERE i_prayer_group_id="'.$id.'"';
         $this->db->query($sql1);
 
-        $sql2 = sprintf('DELETE FROM  cg_prayer_group_notifications WHERE i_prayer_group_id=%s', $id);
+        $sql2 = 'DELETE FROM  cg_prayer_group_notifications WHERE i_prayer_group_id="'.$id.'"';
         $this->db->query($sql2);
 
-        $sql3 = sprintf('DELETE FROM  cg_prayer_group_post WHERE i_prayer_group_id=%s', $id);
+        $sql3 = 'DELETE FROM  cg_prayer_group_post WHERE i_prayer_group_id="'.$id.'"';
         $this->db->query($sql3);
 
-        $sql4 = sprintf('DELETE FROM  cg_prayer_grp_chat_room_invitation WHERE i_group_id=%s', $id);
+        $sql4 = 'DELETE FROM  cg_prayer_grp_chat_room_invitation WHERE i_group_id="'.$id.'"';
         $this->db->query($sql4);
     }
 
     public function getTotalPrayerRoom($i_user_id) {
 
-        $SQL = sprintf("SELECT count(*) as count FROM %s WHERE i_user_id = %s  
-		  								AND dt_end_time  <= '%s' ", $this->db->CHAT_ROOM_INVITATION, $i_user_id, get_db_datetime());
+        $SQL = "SELECT count(*) as count FROM ".$this->db->CHAT_ROOM_INVITATION." WHERE i_user_id = '".$i_user_id."'  
+		  								AND dt_end_time  <= '".get_db_datetime()."' ";
 
         $query = $this->db->query($SQL); //echo $this->db->last_query();
         $result_arr = $query->result_array(); //pr($result_arr);
