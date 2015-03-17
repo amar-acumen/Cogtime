@@ -381,9 +381,7 @@ public function get_fav_tweets_by_user_id($i_user_id, $s_where, $i_start_limit='
 					))
 
 				ORDER BY t.id DESC
-					"
-				, $this->db->dbprefix, intval($i_user_id), $s_where
-			);
+					";
 		}
 		else {
 		
