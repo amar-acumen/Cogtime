@@ -1277,7 +1277,7 @@ class My_prayer_partner_model extends Base_model  {
 
     public function delete_prayer_points($id) {
 
-        $SQL = "DELETE FROM ".$this->db->PRAYER_PARTNER_POINTS." WHERE id = {$id}  ", ;
+        $SQL = "DELETE FROM ".$this->db->PRAYER_PARTNER_POINTS." WHERE id = {$id}  ";
 
         $this->db->query($SQL);
         $ret_ = $this->db->affected_rows();
