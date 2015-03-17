@@ -38,7 +38,7 @@ class Church_newsfeed_model extends Base_model
 		public function get_newsfeeds_by_church_id($c_id,$user_id,$page,$offset)
 		{
 			//$query = $this->db->order_by('id', 'DESC')->get_where('cg_church_newsfeed',array('i_owner_id'=>$c_id),$offset,$page);
-			$sql='select cn.*,cp.privacy from cg_church_newsfeed cn left join cg_church_post_privacy_settings cp on cn.id=cp.feed_id where cn.i_owner_id = "'.$_SESSION['logged_church_id'].'" AND (privacy =1 and posted_by="'.$user_id.'") OR ( privacy=2) OR (privacy=3 and (viewed_by="'.$user_id.'" or posted_by="'.$user_id.'")) group by id order by id desc  limit '.$page.','.$offset.'';
+			$sql='select cn.*,cp.privacy from cg_church_newsfeed cn left join cg_church_post_privacy_settings cp on cn.id=cp.feed_id and cn.i_owner_id = "'.$_SESSION['logged_church_id'].'"  where  (privacy =1 and posted_by="'.$user_id.'") OR ( privacy=2) OR (privacy=3 and (viewed_by="'.$user_id.'" or posted_by="'.$user_id.'")) group by id order by id desc  limit '.$page.','.$offset.'';
 			$query=$this->db->query($sql);
 			$result = $query->result();
 			//echo $this->db->last_query();exit;
@@ -47,7 +47,7 @@ class Church_newsfeed_model extends Base_model
 		}
 		public function get_total_newsfeeds_by_church_id($i_church_id,$user_id)
 		{
-			$sql='select cn.* from cg_church_newsfeed cn left join cg_church_post_privacy_settings cp on cn.id=cp.feed_id where cn.i_owner_id = "'.$_SESSION['logged_church_id'].'" AND (privacy =1 and posted_by="'.$user_id.'") OR ( privacy=2) OR (privacy=3 and (viewed_by="'.$user_id.'" or posted_by="'.$user_id.'")) group by id ';
+			$sql='select cn.* from cg_church_newsfeed cn left join cg_church_post_privacy_settings cp on cn.id=cp.feed_id and cn.i_owner_id = "'.$_SESSION['logged_church_id'].'" where  (privacy =1 and posted_by="'.$user_id.'") OR ( privacy=2) OR (privacy=3 and (viewed_by="'.$user_id.'" or posted_by="'.$user_id.'")) group by id ';
 			$query=$this->db->query($sql);
 			//$query = $this->db->get_where('cg_church_newsfeed',array('i_owner_id'=>$i_church_id));
 			$result = $query->result();

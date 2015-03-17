@@ -192,7 +192,7 @@ class Church_wall extends Base_controller
                     $json_data['message'] = $message;
                     //pr($json_data);exit;
 					$church=get_church_by_admin($i_session_user_id);
-                    $arr['i_owner_id'] =$church->ch_id ;
+                    $arr['i_owner_id'] =$_SESSION['logged_church_id'];
                     $arr['s_type'] = 'wall_post';
                     $wall_type = trim($this->input->post('wall_type'));
                     if ($wall_type == 'public_wall') {
