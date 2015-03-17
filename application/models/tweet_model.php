@@ -376,17 +376,17 @@ public function get_all_tweets_by_user_id($i_user_id, $s_where, $i_start_limit='
 	public function get_total_all_tweets_by_user_id($i_user_id,  $s_where) {
 		
 
-		 $sql = sprintf("
+		 $sql = "
 				SELECT COUNT(*) count FROM (
 				(SELECT t.id
 						
-					FROM %1\$susers u, %1\$suser_tweets t
+					FROM cg_users u, cg_user_tweets t
 					WHERE u.i_status='1' AND u.i_isdeleted ='1' AND t.i_isenabled =1  AND t.i_user_id = u.id AND
 					(
-						t.i_user_id in (SELECT u.id from %1\$suser_contacts c, %1\$susers u where c.s_status = 'accepted'
-						and ((c.i_requester_id = %2\$s and u.id=c.i_accepter_id) 
-						or (c.i_accepter_id = %2\$s and u.id=c.i_requester_id)) 
-						)  %3\$s
+						t.i_user_id in (SELECT u.id from cg_user_contacts c, cg_users u where c.s_status = 'accepted'
+						and ((c.i_requester_id = '".intval($i_user_id)."' and u.id=c.i_accepter_id) 
+						or (c.i_accepter_id = '".intval($i_user_id)."' and u.id=c.i_requester_id)) 
+						)  {$s_where}
 					
 					
 					
@@ -395,25 +395,23 @@ public function get_all_tweets_by_user_id($i_user_id, $s_where, $i_start_limit='
 				UNION 
 				
 				(SELECT t.id
-					FROM %1\$susers u, %1\$suser_tweets t
+					FROM cg_users u, cg_user_tweets t
 					WHERE u.i_status='1' AND u.i_isdeleted ='1' AND t.i_isenabled =1  AND t.i_user_id = u.id 
 					AND
 					(
-						t.i_user_id in  (SELECT u.id from %1\$susers_net_pal_contacts n, %1\$susers u where n.s_status = 'accepted'
-						AND ((n.i_requester_id = %2\$s AND u.id=n.i_accepter_id) 
-						OR (n.i_accepter_id = %2\$s AND u.id= n.i_requester_id)))  %3\$s
+						t.i_user_id in  (SELECT u.id from cg_users_net_pal_contacts n, cg_users u where n.s_status = 'accepted'
+						AND ((n.i_requester_id = '".intval($i_user_id)."' AND u.id=n.i_accepter_id) 
+						OR (n.i_accepter_id = '".intval($i_user_id)."' AND u.id= n.i_requester_id)))  {$s_where}
 					) )
 				UNION
 				(SELECT t.id 
 					FROM cg_users u, cg_user_tweets t
 					WHERE u.i_status='1' AND u.i_isdeleted ='1' AND t.i_isenabled =1 
-					 AND t.i_user_id = u.id AND t.i_user_id = %2\$s  %3\$s)
+					 AND t.i_user_id = u.id AND t.i_user_id = '".intval($i_user_id)."'  {$s_where})
 
 				
 				) derived_tbl
-					"
-				, $this->db->dbprefix, intval($i_user_id),$s_where
-			);
+					";
 		
 #and t.i_user_id != '%2\$s'
 		$query = $this->db->query($sql); //echo "sql ==>". ($sql) ."<br />";  
