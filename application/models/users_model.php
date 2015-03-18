@@ -1135,10 +1135,8 @@ class Users_model extends Base_model  {
 
     function chng_user_online_status($user_id, $s_status = '1') {
 
-        $sql_check_user = sprintf("select count(*) count from %susers_online 
-						where i_user_id = '%s'"
-                , $this->db->dbprefix, $user_id
-        );
+        $sql_check_user = "select count(*) count from cg_users_online 
+						where i_user_id = '".$user_id."'";
 
         $result_arr = $this->db->query($sql_check_user)->result_array();
         $current_time = get_db_datetime();
@@ -1158,10 +1156,8 @@ class Users_model extends Base_model  {
         }
 
         $timestamp = time() - $timeout;
-        $sql_check_user = sprintf("select count(*) count from %susers_online 
-						where i_user_id = '%s' and unix_timestamp(ts_last_active) > '%s'"
-                , $this->db->dbprefix, $user_id, $timestamp
-        );
+        $sql_check_user = "select count(*) count from cg_users_online 
+						where i_user_id = '".$user_id."' and unix_timestamp(ts_last_active) > '".$timestamp."'";
 
         $result_arr = $this->db->query($sql_check_user)->result_array();
 
@@ -1174,17 +1170,15 @@ class Users_model extends Base_model  {
         }
 
         $timestamp = time() - $timeout;
-        $delete_user = sprintf("delete from %susers_online 
-						where unix_timestamp(ts_last_active) < '%s'"
-                , $this->db->dbprefix, $timestamp
-        );
+        $delete_user = "delete from cg_users_online 
+						where unix_timestamp(ts_last_active) < '".$timestamp."'";
 
         $this->db->query($delete_user);
     }
 
     function offline_this_user($user_id, $ip = '') {
         //if( $ip == '' ) {
-        $delete_user = "delete from %susers_online 
+        $delete_user = "delete from cg_users_online 
 							where i_user_id  = '".$user_id."'";
         $this->db->query($delete_user);
     }
@@ -1368,7 +1362,7 @@ class Users_model extends Base_model  {
     # function to check if username already exists or not... for unique profile url suffix
 
     function username_already_exists($username = '') {
-        $SQL = sprintf("SELECT COUNT(*) AS `check_count` FROM %s WHERE `s_first_name`='%s' ", $this->db->USERS, $username);
+        $SQL = "SELECT COUNT(*) AS `check_count` FROM ".$this->db->USERS." WHERE `s_first_name`='".$username."' ";
         $ROW = $this->db->query($SQL)->row_array(); #echo $this->db->last_query(); exit;
 
         if ($ROW['check_count'])
@@ -1642,7 +1636,7 @@ class Users_model extends Base_model  {
         try {
             $ret_ = array();
             if (intval($i_me) > 0 && intval($i_him) > 0 && intval($i_me) != intval($i_him)) {
-                $s_qry = sprintf("SELECT 
+                $s_qry = "SELECT 
                                 c.id, 
                                 c.i_requester_id, 
                                 c.i_accepter_id,
@@ -1660,11 +1654,11 @@ class Users_model extends Base_model  {
                 FROM 
                         {$this->db->USER_CONTACTS} c, {$this->db->USERS} u
                WHERE 
-                ( (c.i_requester_id = %s and c.i_accepter_id = %s)  OR (c.i_accepter_id = %s and c.i_requester_id = %s) )
+                ( (c.i_requester_id = '".$i_me."' and c.i_accepter_id = '".$i_him."')  OR (c.i_accepter_id = '".$i_me."' and c.i_requester_id = '".$i_him."') )
                 AND c.s_status = 'accepted' 
                 AND u.id=c.i_requester_id 
                 
-        ", $i_me, $i_him, $i_me, $i_him);
+        ";
 
                 #cn.s_country_name  , {$this->db->MST_COUNTRY} cn 
 
