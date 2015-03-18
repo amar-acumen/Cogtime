@@ -519,7 +519,7 @@ class Data_messages_model extends Base_model
 	
 		/* for extra validation that user is the owner */
 	function delete_by_id_receiver($id, $user_id) {
-		$sql = 'UPDATE  cg_messages SET i_is_deleted_by_receiver = 1 WHERE id="'.$id.'" and i_receiver_id = "'.$user_id.'"', $this->db->dbprefix, $id, ;
+		$sql = 'UPDATE  cg_messages SET i_is_deleted_by_receiver = 1 WHERE id="'.$id.'" and i_receiver_id = "'.$user_id.'"' ;
 
 		$this->db->query($sql);
 	}
