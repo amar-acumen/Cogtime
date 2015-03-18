@@ -510,14 +510,18 @@ class My_prayer_partners extends Base_controller {
 
             if (isset($_POST['search_basic']) && $_POST['search_basic'] == 'Y') {
 
-                echo '========='.$sql_churchmember = "SELECT member_id AS chid FROM cg_church_member WHERE is_approved=1 AND member_id='".$i_profile_id."'";
-                exit;
+                $sql_churchmember = "SELECT GROUP_CONCAT(member_id) AS members FROM cg_church_member WHERE church_id IN
+                        (SELECT church_id AS chid FROM cg_church_member WHERE is_approved=1 AND member_id='".$i_profile_id."') AND member_id!='".$i_profile_id."'";
+               
+                
                 $query_churchmember = $this->db->query($sql_churchmember);
-                $numrowmember = $query_churchmember->num_rows();
                 $result_churchmember = $query_churchmember->result();
-                $query = $this->db->get_where('cg_church', array('ch_admin_id' => $i_profile_id));
-                $result = $query->result();
-
+                pr($result_churchmember);
+                $query = "SELECT GROUP_CONCAT(member_id) AS members FROM cg_church_member WHERE church_id IN
+                        (SELECT church_id AS chid FROM cg_church_admin WHERE is_approved=1 AND ch_admin_id='".$i_profile_id."') AND member_id!='".$i_profile_id."'";
+                $query_churchadmin = $this->db->query($query);
+                $result_churchadmin = $query_churchadmin->result();
+                pr($result_churchadmin);
                 $WHERE_COND = "";
                 $WHERE_COND_NOTEXACT = "";
 
