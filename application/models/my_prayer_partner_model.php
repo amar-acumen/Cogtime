@@ -1077,6 +1077,42 @@ class My_prayer_partner_model extends Base_model  {
 
         $ORDERBY = trim($s_order_by) != "" ? " ORDER BY " . $s_order_by . "" : "ORDER BY id asc";
         $user_id = decrypt($this->session->userdata('user_id'));
+
+        $churchmember_query = '';
+        if($members!='')
+        {
+            $churchmember_query = " UNION (  SELECT
+                            
+                            u.id as user_id,
+                            u.s_email,
+                            
+                            u.s_last_name,
+                            u.s_first_name ,
+                            CONCAT(u.s_first_name,' ',u.s_last_name) as s_displayname,
+                            u.s_profile_photo,
+                            u.e_gender,
+                            u.i_country_id,
+                            u.i_user_type,
+                            
+                            u.i_status,
+                            u.dt_created_on,
+                            
+                            u.e_want_prayer_partner,
+                            d.s_name ,
+                            con.s_country,
+                            s.s_state,
+                            c.s_city
+                            
+                            FROM  {$this->db->USERS} u  
+                            LEFT JOIN cg_country con ON con.id = u.i_country_id
+                            LEFT JOIN cg_state s ON s.id = u.i_state_id
+                            LEFT JOIN cg_city c ON u.i_city_id = c.id
+                            LEFT JOIN {$this->db->DENOMINATION} AS d ON u.i_id_denomination = d.id  WHERE 1  
+                             AND u.id IN(".$members.") {$s_like_where_for_church}                                         
+                            ORDER BY u.`dt_created_on` DESC )";
+        }
+        
+
         $sql = " SELECT derived_tbl.* FROM (
 							(SELECT 
 								  
@@ -1140,37 +1176,9 @@ class My_prayer_partner_model extends Base_model  {
 							LEFT JOIN {$this->db->DENOMINATION} AS d ON u.i_id_denomination = d.id  WHERE 1  
 							 {$s_like_where}                                      
                             ORDER BY u.`dt_created_on` DESC )
-                        UNION
+                            ".$churchmember_query ."
                             
-                         (  SELECT
-                            
-                            u.id as user_id,
-                            u.s_email,
-                            
-                            u.s_last_name,
-                            u.s_first_name ,
-                            CONCAT(u.s_first_name,' ',u.s_last_name) as s_displayname,
-                            u.s_profile_photo,
-                            u.e_gender,
-                            u.i_country_id,
-                            u.i_user_type,
-                            
-                            u.i_status,
-                            u.dt_created_on,
-                            
-                            u.e_want_prayer_partner,
-                            d.s_name ,
-                            con.s_country,
-                            s.s_state,
-                            c.s_city
-                            
-                            FROM  {$this->db->USERS} u  
-                            LEFT JOIN cg_country con ON con.id = u.i_country_id
-                            LEFT JOIN cg_state s ON s.id = u.i_state_id
-                            LEFT JOIN cg_city c ON u.i_city_id = c.id
-                            LEFT JOIN {$this->db->DENOMINATION} AS d ON u.i_id_denomination = d.id  WHERE 1  
-                             AND u.id IN(".$members.") {$s_like_where_for_church}                                         
-                            ORDER BY u.`dt_created_on` DESC )
+                         
                         ) as  derived_tbl {$limit}  ";
 							
                 /*$s_where, $s_like_where, $timestamp, $limit*/
