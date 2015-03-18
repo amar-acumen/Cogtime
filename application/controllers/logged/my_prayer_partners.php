@@ -524,7 +524,9 @@ class My_prayer_partners extends Base_controller {
                 $result_churchadmin = $query_churchadmin->result_array();
                 pr($result_churchadmin);
                 $arr_churchadmin = explode(',', $result_churchadmin[0]['member']);
-                $arrmember = array_diff($arr_churchmember, $arr_churchadmin);
+                $arrmember1 = array_diff($arr_churchmember, $arr_churchadmin);
+                $arrmember2 = array_diff($arr_churchadmin, $arr_churchmember);
+                $arrmember = array_merge($arrmember1,$arrmember2);
                 pr($arrmember);
 
                 $WHERE_COND = "";
