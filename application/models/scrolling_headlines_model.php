@@ -20,10 +20,10 @@ class Scrolling_headlines_model extends Base_model
 	
 	public function get_by_id($id, $start_limit="", $no_of_page="") {
 		if("$start_limit" == "") {
-			$sql = sprintf('SELECT * FROM '.$this->db->CHRISTIAN_HEADLINE.'  where id = %s',  $id);
+			$sql = 'SELECT * FROM '.$this->db->CHRISTIAN_HEADLINE.'  where id = "'.$id.'"';
 		}
 		else {
-			$sql = sprintf('SELECT * FROM '.$this->db->CHRISTIAN_HEADLINE.'  where id = %s limit %s, %s',  $id, $start_limit, $no_of_page);
+			$sql = 'SELECT * FROM '.$this->db->CHRISTIAN_HEADLINE.'  where id = "'.$id.'" limit '.$start_limit.', '.$no_of_page;
 		}
 
 		$query = $this->db->query($sql); #echo $this->db->last_query(); exit;
@@ -53,7 +53,7 @@ class Scrolling_headlines_model extends Base_model
 	
 
 	public function delete_by_id($id) {
-	    $sql = sprintf( 'DELETE FROM '.$this->db->CHRISTIAN_HEADLINE.' WHERE id=%s', $id );
+	    $sql = 'DELETE FROM '.$this->db->CHRISTIAN_HEADLINE.' WHERE id="'.$id.'"';
 		$this->db->query($sql);
 	}
 	
@@ -106,9 +106,8 @@ class Scrolling_headlines_model extends Base_model
 	public function change_status($status ,$id) {
 		
 	  if($status !='' && $id !=''){	
-		  $sql = sprintf( "UPDATE {$this->db->CHRISTIAN_HEADLINE}  SET `i_status` = '%s'
-						   WHERE `id` ='%s'"
-					  ,  $status, $id );
+		  $sql = "UPDATE {$this->db->CHRISTIAN_HEADLINE}  SET `i_status` = '".$status."'
+						   WHERE `id` ='".$id."'";
 		  $this->db->query($sql);// echo $this->db->last_query();exit;
 		  return true;
 	  }
