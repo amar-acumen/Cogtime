@@ -197,24 +197,23 @@ class Prayer_group_model extends Base_model {
             );
         } else if ($querytype == 'ownership') {
 
-            $sql = sprintf("
+            $sql = "
 						SELECT COUNT(*) count FROM (
 						 (SELECT 
 							  pg.id
 							  FROM cg_users u, cg_prayer_group pg
 							  WHERE u.i_status='1' AND u.i_isdeleted ='1' AND pg.i_isenabled = 1 
-							  AND pg.i_owner_id = %2\$s AND pg.i_owner_id = u.id  %3\$s
+							  AND pg.i_owner_id = '".intval($i_user_id)."' AND pg.i_owner_id = u.id  {$s_where}
+							  
 						   )
 						 
 		
 						) derived_tbl
-							"
-                    , $this->db->dbprefix, intval($i_user_id), $s_where
-            );
+							";
         } else if ($querytype == 'members') {
 
 
-            $sql = sprintf("
+            $sql = "
 						SELECT COUNT(*) count FROM (
 						( SELECT
 								pg.id
@@ -236,9 +235,7 @@ class Prayer_group_model extends Base_model {
 						
 						)
 						) derived_tbl
-							"
-                    , $this->db->dbprefix, intval($i_user_id), $s_where
-            );
+							";
         }
 
         $query = $this->db->query($sql);

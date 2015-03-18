@@ -20,10 +20,10 @@ class Organizer_note_model extends Base_model
 	
 	public function get_by_id($id, $start_limit="", $no_of_page="") {
 		if("$start_limit" == "") {
-			$sql = sprintf('SELECT * FROM '.$this->db->ORGANIZER_NOTE.'  where id = %s',  $id);
+			$sql = 'SELECT * FROM '.$this->db->ORGANIZER_NOTE.'  where id = "'.$id.'"',  ;
 		}
 		else {
-			$sql = sprintf('SELECT * FROM '.$this->db->ORGANIZER_NOTE.'  where id = %s limit %s, %s',  $id, $start_limit, $no_of_page);
+			$sql = 'SELECT * FROM '.$this->db->ORGANIZER_NOTE.'  where id = "'.$id.'" limit '.$start_limit.', '.$no_of_page;
 		}
 
 		$query = $this->db->query($sql);
@@ -41,10 +41,10 @@ class Organizer_note_model extends Base_model
 	
 	public function get_by_user_id($user_id, $s_where, $start_limit="", $no_of_page="") {
 		if("$start_limit" == "") {
-			  $sql = sprintf('SELECT * FROM '.$this->db->ORGANIZER_NOTE.'  WHERE i_user_id = %s  %s ORDER BY id DESC ',$user_id, $s_where);
+			  $sql = 'SELECT * FROM '.$this->db->ORGANIZER_NOTE.'  WHERE i_user_id = "'.$user_id.'"  {$s_where} ORDER BY id DESC ';
 		}
 		else {
-			  $sql = sprintf('SELECT * FROM '.$this->db->ORGANIZER_NOTE.'  WHERE i_user_id = %s %s ORDER BY id DESC LIMIT %s, %s', $user_id, $s_where,  $start_limit, $no_of_page);
+			  $sql = 'SELECT * FROM '.$this->db->ORGANIZER_NOTE.'  WHERE i_user_id = "'.$user_id.'" '.$s_where.' ORDER BY id DESC LIMIT '.$start_limit.', '.$no_of_page;
 		}
 		//echo $sql;exit;
 
@@ -66,7 +66,7 @@ class Organizer_note_model extends Base_model
 	
 
 	public function get_total_by_user_id($user_id) {
-		$sql = sprintf("SELECT count(*) count FROM ".$this->db->ORGANIZER_NOTE."  where i_user_id = '%s'", $user_id);
+		$sql = "SELECT count(*) count FROM ".$this->db->ORGANIZER_NOTE."  where i_user_id = '".$user_id."'";
 		$query = $this->db->query($sql); 
 		$result_arr = $query->result_array();
 
@@ -97,7 +97,7 @@ class Organizer_note_model extends Base_model
 
 	public function delete_by_id($id) {
 	
-	     $sql = sprintf( 'DELETE FROM '.$this->db->ORGANIZER_NOTE.' WHERE id=%s', $id );
+	     $sql = 'DELETE FROM '.$this->db->ORGANIZER_NOTE.' WHERE id="'.$id.'"';
 		 $this->db->query($sql);
 		 
 	}
