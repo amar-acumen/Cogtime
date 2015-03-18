@@ -206,9 +206,9 @@ class My_videos_model extends Base_model
     public function get_count_allvideos_with_comments_by_user_id_($user_id, $s_where="", $start_limit="", $no_of_page="") {
 		$logged_user_id = intval(decrypt($this->session->userdata('user_id')));
 		
-		$sql = sprintf("SELECT count(*) AS count FROM {$this->db->videolbum_privacy}  AS vp, {$this->db->USER_VIDEOS} AS v
+		$sql = "SELECT count(*) AS count FROM {$this->db->videolbum_privacy}  AS vp, {$this->db->USER_VIDEOS} AS v
 		WHERE  vp.i_video_album_id=v.i_video_album_id AND vp.i_user_id='".$logged_user_id."' 
-		AND v.i_status =1 AND  v.i_user_id = %s ", $user_id);
+		AND v.i_status =1 AND  v.i_user_id = '".$user_id."' ";
 		
 		
 		$res = $this->db->query($sql)->result_array();
@@ -218,7 +218,7 @@ class My_videos_model extends Base_model
     
     function get_video_by_id($db_id)
     {
-        $sql = sprintf("SELECT * FROM %s WHERE id= %s",$this->db->USER_VIDEOS, $db_id);
+        $sql = "SELECT * FROM ".$this->db->USER_VIDEOS." WHERE id= '".$db_id."'";
         $res = $this->db->query($sql)->result_array();
 
         return $res[0]['s_video_file_name'];
@@ -226,7 +226,7 @@ class My_videos_model extends Base_model
     
     function get_video_title_by_id($db_id)
     {
-        $sql = sprintf("SELECT * FROM %s WHERE id= %s",$this->db->USER_VIDEOS, $db_id);
+        $sql = "SELECT * FROM ".$this->db->USER_VIDEOS." WHERE id= '".$db_id."'";
         $res = $this->db->query($sql)->result_array();
         
         return $res[0]['s_title'];
@@ -237,7 +237,7 @@ class My_videos_model extends Base_model
     //---------------------------- search video ------------------------------
     function search_get_all_videos($id, $where, $start_limit, $end_limit)
     {
-        $query = sprintf("SELECT * FROM %s WHERE  i_status =1 AND i_user_id= %s %s ORDER BY id DESC LIMIT %s , %s",$this->db->USER_VIDEOS, $id,$where,$start_limit,$end_limit);
+        $query = "SELECT * FROM ".$this->db->USER_VIDEOS." WHERE  i_status =1 AND i_user_id= '".$id."' {$where} ORDER BY id DESC LIMIT ".$start_limit." , ".$end_limit;
         $res = $this->db->query($query)->result_array();
         $this->load->model('media_comments_model');
         if(is_array($res)){
@@ -251,7 +251,7 @@ class My_videos_model extends Base_model
     
     function search_get_total_no_of_videos($id,$where)
     {
-        $sql = sprintf("SELECT count(*) as count FROM %s WHERE  i_status =1 AND  `i_user_id`=%s %s",$this->db->USER_VIDEOS,$id,$where);
+        $sql = "SELECT count(*) as count FROM ".$this->db->USER_VIDEOS." WHERE  i_status =1 AND  `i_user_id`='".$id,."' ".$where;
         $res = $this->db->query($sql)->result_array();
         return $res[0]['count'];
         
@@ -260,7 +260,7 @@ class My_videos_model extends Base_model
    // *** unused
     function rest_total_videos($id, $start_limit, $end_limit)
     {
-        $sql = sprintf("SELECT count(*) as count FROM %s WHERE  i_status =1 AND `i_user_id`=%s LIMIT %s,%s",$this->db->USER_VIDEOS,$id,$start_limit, $end_limit);
+        $sql = "SELECT count(*) as count FROM ".$this->db->USER_VIDEOS." WHERE  i_status =1 AND `i_user_id`='".$id."' LIMIT ".$start_limit.",".$end_limit;
         $res = $this->db->query($sql)->result_array();
         echo "q :".$this->db->last_query();
         return $res[0]['count'];
@@ -269,14 +269,14 @@ class My_videos_model extends Base_model
     //------------------------ delete video(s)----------------------------
     function delete_video($video_id)
     {
-        $sql = sprintf("DELETE FROM %s WHERE id=%s",$this->db->USER_VIDEOS,$video_id);
+        $sql = "DELETE FROM ".$this->db->USER_VIDEOS." WHERE id='".$video_id."'";
         $res = $this->db->query($sql);
         return $res;
     }
     
     function get_video_img_by_id($video_id)
     {
-        $sql = sprintf("SELECT `s_video_image` FROM %s WHERE id=%s", $this->db->USER_VIDEOS,$video_id);
+        $sql = "SELECT `s_video_image` FROM ".$this->db->USER_VIDEOS." WHERE id='".$video_id."'";
         $res = $this->db->query($sql)->row_array();
         return $res;
     }
@@ -287,11 +287,11 @@ class My_videos_model extends Base_model
     function delete_video_album_by_id($album_id)
     {
         
-        $aql1 = sprintf("DELETE FROM %s WHERE id=%s",$this->db->VIDEO_ALBUM,$album_id);
+        $aql1 = "DELETE FROM ".$this->db->VIDEO_ALBUM." WHERE id='".$album_id."'";
         $res1 = $this->db->query($aql1);
         
         
-        $sql2 = sprintf("DELETE FROM %s WHERE i_video_album_id=%s",$this->db->USER_VIDEOS,$album_id);
+        $sql2 = "DELETE FROM ".$this->db->VIDEO_ALBUM." WHERE i_video_album_id='".$album_id."'";
         $res2 = $this->db->query($sql2);
 		
 		$this->db->query("DELETE FROM {$this->db->videolbum_privacy} WHERE i_video_album_id='".$album_id."'");
@@ -300,7 +300,7 @@ class My_videos_model extends Base_model
     
     function get_album_img_by_album_id($video_id)
     {
-        $sql = sprintf("SELECT `s_video_album_image` FROM %s WHERE `id`=%s",$this->db->VIDEO_ALBUM,$video_id);
+        $sql = "SELECT `s_video_album_image` FROM ".$this->db->VIDEO_ALBUM." WHERE `id`='".$video_id."'";
         $res = $this->db->query($sql)->row_array();
         return $res;
     }
