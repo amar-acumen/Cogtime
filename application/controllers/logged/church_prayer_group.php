@@ -2283,7 +2283,7 @@ class Church_prayer_group extends Base_controller
 	function delete_invitation_sent()
 	{
 		$groupid	= $this->input->post('gr_id');
-		$sql = 'DELETE FROM  cg_prayer_group_members WHERE id="'.$groupid.'"';
+		$sql = sprintf( 'DELETE FROM  cg_prayer_group_members WHERE id=%s', $groupid );
 		$this->db->query($sql);
 		
 		ob_start();

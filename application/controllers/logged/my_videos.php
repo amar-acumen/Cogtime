@@ -387,7 +387,7 @@ class My_videos extends Base_controller {
 
         @unlink($album_img);
 
-        $sql = "SELECT id FROM ".$this->db->USER_VIDEOS." WHERE `i_video_album_id`='".$album_id."'";
+        $sql = sprintf("SELECT id FROM %s WHERE `i_video_album_id`=%s", $this->db->USER_VIDEOS, $album_id);
         $res = $this->db->query($sql)->result_array();
         foreach ($res as $r) {
 
