@@ -20,10 +20,10 @@ class Ring_categories_model extends Base_model
 	
 	public function get_by_id($id, $start_limit="", $no_of_page="") {
 		if("$start_limit" == "") {
-			$sql = sprintf('SELECT * FROM '.$this->db->RING_CAT.'  where id = %s',  $id);
+			$sql = 'SELECT * FROM '.$this->db->RING_CAT.'  where id = "'.$id.'"';
 		}
 		else {
-			$sql = sprintf('SELECT * FROM '.$this->db->RING_CAT.'  where id = %s limit %s, %s',  $id, $start_limit, $no_of_page);
+			$sql = 'SELECT * FROM '.$this->db->RING_CAT.'  where id = "'.$id.'" limit '.$start_limit.', '.$no_of_page;
 		}
 
 		$query = $this->db->query($sql);
@@ -55,11 +55,11 @@ class Ring_categories_model extends Base_model
 	
 	
 		## deleting rings 
-		 $sql = sprintf( 'DELETE FROM '.$this->db->RING.' WHERE i_category_id=%s', $id );
+		 $sql = 'DELETE FROM '.$this->db->RING.' WHERE i_category_id="'.$id.'"';
 		 $this->db->query($sql);
 		 
 		## deleting ring cateory 
-	     $sql = sprintf( 'DELETE FROM '.$this->db->RING_CAT.' WHERE id=%s', $id );
+	     $sql = 'DELETE FROM '.$this->db->RING_CAT.' WHERE id="'.$id.'"';
 		 $this->db->query($sql);
 		#echo $this->db->last_query(); exit;
 	}
