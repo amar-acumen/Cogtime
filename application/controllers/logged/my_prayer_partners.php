@@ -526,7 +526,7 @@ class My_prayer_partners extends Base_controller {
                 $arr_churchadmin = explode(',', $result_churchadmin[0]['member']);
                 $arrmember1 = array_diff($arr_churchmember, $arr_churchadmin);
                 $arrmember2 = array_diff($arr_churchadmin, $arr_churchmember);
-                $member = implode(array_merge($arrmember1,$arrmember2));
+                $member = implode(",",array_merge($arrmember1,$arrmember2));
                 
                 $WHERE_COND = "";
                 $WHERE_COND_NOTEXACT = "";
