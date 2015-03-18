@@ -20,10 +20,10 @@ class Projects_model extends Base_model
 	
 	public function get_by_id($id, $start_limit="", $no_of_page="") {
 		if("$start_limit" == "") {
-			$sql = sprintf('SELECT * FROM '.$this->db->PROJECT.'  where id = %s',  $id);
+			$sql = 'SELECT * FROM '.$this->db->PROJECT.'  where id = "'.$id.'"';
 		}
 		else {
-			$sql = sprintf('SELECT * FROM '.$this->db->PROJECT.'  where id = %s limit %s, %s',  $id, $start_limit, $no_of_page);
+			$sql = 'SELECT * FROM '.$this->db->PROJECT.'  where id = "'.$id.'" limit '.$start_limit.', '.$no_of_page;
 		}
 
 		$query = $this->db->query($sql); #echo $this->db->last_query(); exit;
@@ -55,10 +55,10 @@ class Projects_model extends Base_model
 	
 
 	public function delete_by_id($id) {
-	    $sql = sprintf( 'DELETE FROM '.$this->db->PROJECT.' WHERE id=%s', $id );
+	    $sql = 'DELETE FROM '.$this->db->PROJECT.' WHERE id="'.$id.'"', ;
 		$this->db->query($sql);
 		
-		$sql = sprintf( 'DELETE FROM '.$this->db->PROJECT_SKILL_REQUIRED.' WHERE i_project_id = %s', $id );
+		$sql = 'DELETE FROM '.$this->db->PROJECT_SKILL_REQUIRED.' WHERE i_project_id = "'.$id.'"';
 		$this->db->query($sql);
 	}
 	
@@ -123,7 +123,7 @@ class Projects_model extends Base_model
 	
 	public function get_all_skill_by_project_id($i_project_id) {
 		
-		$sql = sprintf('SELECT * FROM '.$this->db->PROJECT_SKILL_REQUIRED.' WHERE i_project_id = %s order by id asc', $i_project_id);
+		$sql = 'SELECT * FROM '.$this->db->PROJECT_SKILL_REQUIRED.' WHERE i_project_id = "'.$i_project_id.'" order by id asc';
 		$query = $this->db->query($sql);
 		$result_arr = $query->result_array();
 //pr($result_arr,1);
@@ -131,14 +131,14 @@ class Projects_model extends Base_model
 	}
 	
 	public function delete_skill_by_id($id) {
-	    $sql = sprintf( 'DELETE FROM '.$this->db->PROJECT_SKILL_REQUIRED.' WHERE id=%s', $id );
+	    $sql = 'DELETE FROM '.$this->db->PROJECT_SKILL_REQUIRED.' WHERE id="'.$id.'"';
 		$this->db->query($sql);
 	}
 	
 	
 	public function get_all_skill_id_by_project_id($i_project_id) {
 		
-		$sql = sprintf('SELECT id FROM '.$this->db->PROJECT_SKILL_REQUIRED.' WHERE i_project_id = %s order by id asc', $i_project_id);
+		$sql = 'SELECT id FROM '.$this->db->PROJECT_SKILL_REQUIRED.' WHERE i_project_id = "'.$i_project_id.'" order by id asc';
 		$query = $this->db->query($sql);
 		$result_arr = $query->result_array();
 //pr($result_arr,1);
@@ -414,7 +414,7 @@ class Projects_model extends Base_model
 	
 	public function deleteDonationRequest($id) {
 	    
-		$sql = sprintf( 'DELETE FROM cg_project_skill_request WHERE id=%s', $id );
+		$sql = 'DELETE FROM cg_project_skill_request WHERE id="'.$id.'"';
 		$this->db->query($sql);
 	}
 	
@@ -752,7 +752,7 @@ class Projects_model extends Base_model
 	
 	public function get_skill_request_detail_by_id($id) {
 			
-		$sql = sprintf('SELECT * FROM cg_project_skill_request where id = %s',  $id);
+		$sql = 'SELECT * FROM cg_project_skill_request where id = "'.$id.'"';
 
 		$query = $this->db->query($sql); #echo $this->db->last_query(); exit;
 		$result_arr = $query->result_array();
