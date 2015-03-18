@@ -1169,7 +1169,7 @@ class My_prayer_partner_model extends Base_model  {
                             LEFT JOIN cg_state s ON s.id = u.i_state_id
                             LEFT JOIN cg_city c ON u.i_city_id = c.id
                             LEFT JOIN {$this->db->DENOMINATION} AS d ON u.i_id_denomination = d.id  WHERE 1  
-                             AND u.id IN(".$members.")                                      
+                             AND u.id IN(".$members.") {$s_like_where}                                         
                             ORDER BY u.`dt_created_on` DESC )
                         ) as  derived_tbl {$limit}  ";
 							
