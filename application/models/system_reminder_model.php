@@ -14,15 +14,14 @@ class System_reminder_model extends Base_model
 	
 	public function get_by_type_id($reminder_id,  $s_where, $start_limit="", $no_of_page="") {
 		if("$start_limit" == "") {
-			  $sql = sprintf('SELECT * FROM '.$this->db->SYSTEM_REMINDER.'  WHERE i_reminder_id = %s 
+			  $sql = 'SELECT * FROM '.$this->db->SYSTEM_REMINDER.'  WHERE i_reminder_id = "'.$reminder_id.'" 
 			  				 
-							 %s ORDER BY id DESC ',$reminder_id, $s_where);
+							 {$s_where} ORDER BY id DESC ';
 		}
 		else {
-			 $sql = sprintf('SELECT * FROM '.$this->db->SYSTEM_REMINDER.'  WHERE i_reminder_id = %s 
+			 $sql = 'SELECT * FROM '.$this->db->SYSTEM_REMINDER.'  WHERE i_reminder_id = "'.$reminder_id.'" 
 			 				
-							%s ORDER BY id DESC LIMIT %s, %s', $reminder_id, 
-							$s_where,  $start_limit, $no_of_page);
+							{$s_where} ORDER BY id DESC LIMIT '.$start_limit.', '.$no_of_page;
 		}
 
 		$query = $this->db->query($sql); //echo $this->db->last_query(); exit;
@@ -36,15 +35,14 @@ class System_reminder_model extends Base_model
 
 	public function get_by_user_id($user_id,  $s_where, $start_limit="", $no_of_page="") {
 		if("$start_limit" == "") {
-			  $sql = sprintf('SELECT * FROM '.$this->db->SYSTEM_REMINDER.'  WHERE i_user_id = %s 
+			  $sql = 'SELECT * FROM '.$this->db->SYSTEM_REMINDER.'  WHERE i_user_id = "'.$user_id.'" 
 			  				 
-							 %s ORDER BY id DESC ',$user_id, $s_where);
+							 {$s_where} ORDER BY id DESC ',, ;
 		}
 		else {
-			 $sql = sprintf('SELECT * FROM '.$this->db->SYSTEM_REMINDER.'  WHERE i_user_id = %s 
+			 $sql = 'SELECT * FROM '.$this->db->SYSTEM_REMINDER.'  WHERE i_user_id = "'.$user_id.'" 
 			 				
-							%s ORDER BY id DESC LIMIT %s, %s', $user_id, 
-							$s_where,  $start_limit, $no_of_page);
+							{$s_where} ORDER BY id DESC LIMIT '.$start_limit.', '.$no_of_page;
 		}
 
 		$query = $this->db->query($sql); #echo $this->db->last_query(); exit;
@@ -79,14 +77,14 @@ class System_reminder_model extends Base_model
 	}
 	
     public function get_last_count($id) {
-		$sql = sprintf('SELECT i_sent_mail_count FROM '.$this->db->SYSTEM_REMINDER.' WHERE id = %s',$id);
+		$sql = 'SELECT i_sent_mail_count FROM '.$this->db->SYSTEM_REMINDER.' WHERE id = "'.$id.'"';
 		$query = $this->db->query($sql);
 		$result_arr = $query->result_array();
 		return $result_arr[0]['i_sent_mail_count'];
 	}
 	
 	  public function get_last_mail_sent_time($id) {
-		$sql = sprintf('SELECT t_time_last_mail_sent FROM '.$this->db->SYSTEM_REMINDER.' WHERE id = %s',$id);
+		$sql = 'SELECT t_time_last_mail_sent FROM '.$this->db->SYSTEM_REMINDER.' WHERE id = "'.$id.'"';
 		$query = $this->db->query($sql);
 		$result_arr = $query->result_array();
 		return $result_arr[0]['t_time_last_mail_sent'];
