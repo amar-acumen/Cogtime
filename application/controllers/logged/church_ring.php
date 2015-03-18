@@ -1917,7 +1917,7 @@ $this->email->message("$body");
 		$ringid	= decrypt($ringid);
 		
         #$res = $this->my_ring_model->leave_ring($ringid);
-		$sql = sprintf( 'DELETE FROM cg_church_ring_invited_user WHERE i_ring_id=%s AND i_invited_id=%s', $ringid,$uid );
+		$sql = 'DELETE FROM cg_church_ring_invited_user WHERE i_ring_id="'.$ringid.'" AND i_invited_id="'.$uid.'"';
 		$this->db->query($sql);
 		
 		$msgarr	= array('s_type'=>'ring_join_request', 'i_referred_media_id'=>$ringid,'i_receiver_id'=>$uid);
