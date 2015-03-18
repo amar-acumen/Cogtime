@@ -526,9 +526,8 @@ class My_prayer_partners extends Base_controller {
                 $arr_churchadmin = explode(',', $result_churchadmin[0]['member']);
                 $arrmember1 = array_diff($arr_churchmember, $arr_churchadmin);
                 $arrmember2 = array_diff($arr_churchadmin, $arr_churchmember);
-                $arrmember = array_merge($arrmember1,$arrmember2);
-                pr($arrmember);
-
+                $member = implode(",",array_merge($arrmember1,$arrmember2));
+                
                 $WHERE_COND = "";
                 $WHERE_COND_NOTEXACT = "";
 
@@ -831,7 +830,7 @@ class My_prayer_partners extends Base_controller {
                 //echo 'EXACT_WHERE::: '.$EXACT_WHERE;
                 //echo 'LIKE_WHERE::: '.$LIKE_WHERE; exit;
 
-                $result = $this->my_prayer_partner_model->get_prayer_partner_sugg($EXACT_WHERE, $LIKE_WHERE, $s_order_by, $page, $this->pagination_per_page);
+                $result = $this->my_prayer_partner_model->get_prayer_partner_sugg($EXACT_WHERE, $LIKE_WHERE, $s_order_by, $page, $this->pagination_per_page,$member);
                 $resultCount = count($result);
                 #echo $this->db->last_query(); 
                 //pr($result);
