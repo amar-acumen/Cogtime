@@ -228,7 +228,9 @@ class Module_generate extends CI_Controller {
                     'js/frontend/logged/message_box/my_trash_message.js',
                     'js/frontend/logged/delete_friend.js',
                     'js/frontend/logged/my_photo/manage_photo_album.js',
-                    'js/frontend/logged/my_audio/manage_audio_album.js'
+                    'js/frontend/logged/my_audio/manage_audio_album.js',
+                    'js/frontend/logged/build_kingdom/church.js'
+
                   //  'js/jquery.hoverIntent.js',
                   //  'js/frontend/utils.js'
                 );
