@@ -20,7 +20,7 @@ class Salvation_model extends Base_model
 	
 	public function get_by_id($id, $start_limit="", $no_of_page="") {
 		if("$start_limit" == "") {
-			$sql = 'SELECT * FROM '.$this->db->SALVATION_PRAYER.'  where id = "'.$id.'"',  );
+			$sql = 'SELECT * FROM '.$this->db->SALVATION_PRAYER.'  where id = "'.$id.'"';
 		}
 		else {
 			$sql = 'SELECT * FROM '.$this->db->SALVATION_PRAYER.'  where id = "'.$id.'" limit '.$start_limit.', '.$no_of_page;
