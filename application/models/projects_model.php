@@ -55,7 +55,7 @@ class Projects_model extends Base_model
 	
 
 	public function delete_by_id($id) {
-	    $sql = 'DELETE FROM '.$this->db->PROJECT.' WHERE id="'.$id.'"', ;
+	    $sql = 'DELETE FROM '.$this->db->PROJECT.' WHERE id="'.$id.'"';
 		$this->db->query($sql);
 		
 		$sql = 'DELETE FROM '.$this->db->PROJECT_SKILL_REQUIRED.' WHERE i_project_id = "'.$id.'"';
