@@ -375,14 +375,14 @@ class My_videos_model extends Base_model
     
     function get_total_no_of_videos_of_album($id)
     {
-        $sql = sprintf("SELECT count(*) as count FROM %s WHERE  i_status =1 AND  `i_video_album_id`=%s",$this->db->USER_VIDEOS,$id);
+        $sql = "SELECT count(*) as count FROM ".$this->db->USER_VIDEOS." WHERE  i_status =1 AND  `i_video_album_id`='".$id."'";
         $res = $this->db->query($sql)->result_array();
         return $res[0]['count'];
     }
     
     function get_album_info($album_id)
     {
-        $sql = sprintf("SELECT * FROM %s WHERE `id`=%s",$this->db->VIDEO_ALBUM,$album_id);
+        $sql = "SELECT * FROM ".$this->db->VIDEO_ALBUM." WHERE `id`='".$album_id."'";
         $res = $this->db->query($sql)->result_array();
 		
 		 $res[0]['total_videos'] = $this->get_total_no_of_album_videos($album_id);
