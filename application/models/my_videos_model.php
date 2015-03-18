@@ -44,7 +44,7 @@ class My_videos_model extends Base_model
     
     function get_all_video_album_name($id)
     {
-        $query = sprintf("SELECT * FROM %s WHERE i_user_id = %s",$this->db->VIDEO_ALBUM,$id);
+        $query = "SELECT * FROM ".$this->db->VIDEO_ALBUM." WHERE i_user_id = '".$id."'";
         $res = $this->db->query($query)->result_array();
         return $res;
     }
@@ -83,10 +83,10 @@ class My_videos_model extends Base_model
     {
         
 	   if("$start_limit" == ''){
-		    $query = sprintf("SELECT * FROM cg_video_album WHERE i_user_id = %s ORDER BY dt_created_on  ",$id);
+		    $query = "SELECT * FROM cg_video_album WHERE i_user_id = '".$id."' ORDER BY dt_created_on  ";
 	   }
 	   else{
-           $query = sprintf("SELECT * FROM cg_video_album WHERE i_user_id = %s ORDER BY dt_created_on DESC LIMIT %s , %s ",$id,$start_limit,$end_limit);
+           $query = "SELECT * FROM cg_video_album WHERE i_user_id = '".$id."' ORDER BY dt_created_on DESC LIMIT ".$start_limit." ,  ".$end_limit;
 	   }
 
         $res = $this->db->query($query)->result_array();		//echo $this->db->last_query(); 
@@ -104,14 +104,14 @@ class My_videos_model extends Base_model
     }
     function count_per_album($album_id)
     {
-        $sql = sprintf("SELECT count(*) as count FROM %s WHERE  i_status =1 AND  i_video_album_id=%s",$this->db->USER_VIDEOS, 		$album_id);
+        $sql = "SELECT count(*) as count FROM ".$this->db->USER_VIDEOS." WHERE  i_status =1 AND  i_video_album_id='".$album_id."'";
         $res = $this->db->query($sql)->row_array();
         return $res['count'];
     }
     
     function get_total_no_of_albums($id)    // also called from manage video albums
     {
-        $sql = sprintf("SELECT count(*) as total FROM %s WHERE `i_user_id` = %s",$this->db->VIDEO_ALBUM,$id);
+        $sql = "SELECT count(*) as total FROM ".$this->db->VIDEO_ALBUM." WHERE `i_user_id` = '".$id."'";
         $res =$this->db->query($sql)->result_array();
         return $res[0]['total'];
     }
@@ -119,14 +119,14 @@ class My_videos_model extends Base_model
     
     function get_all_videos($id, $start_limit, $end_limit)
     {
-        $query = sprintf("SELECT * FROM %s WHERE  i_status =1 AND  i_user_id= %s ORDER BY id DESC LIMIT %s , %s",$this->db->USER_VIDEOS, $id,$start_limit,$end_limit);
+        $query = "SELECT * FROM ".$this->db->USER_VIDEOS." WHERE  i_status =1 AND  i_user_id= '".$id."' ORDER BY id DESC LIMIT ".$start_limit." , ".$end_limit;
         $res = $this->db->query($query)->result_array();
         return $res;
     }
     
     function get_total_no_of_videos($id)
     {
-        $sql = sprintf("SELECT count(*) as count FROM %s WHERE i_status =1 AND `i_user_id`=%s",$this->db->USER_VIDEOS,$id);
+        $sql = "SELECT count(*) as count FROM ".$this->db->USER_VIDEOS." WHERE i_status =1 AND `i_user_id`='".$id."'";
         $res = $this->db->query($sql)->result_array();
         return $res[0]['count'];
         
@@ -135,7 +135,7 @@ class My_videos_model extends Base_model
     
     function get_total_no_of_videos_of_album_by_album_id($id,$where)
     {
-        $sql = sprintf("SELECT count(*) as count FROM %s WHERE  i_status =1 AND  `i_user_id`=%s %s",$this->db->USER_VIDEOS,$id,$where);
+        $sql = "SELECT count(*) as count FROM ".$this->db->USER_VIDEOS." WHERE  i_status =1 AND  `i_user_id`='".$id."' ".$where;
         $res = $this->db->query($sql)->result_array();
         return $res[0]['count'];
         
