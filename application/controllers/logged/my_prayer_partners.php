@@ -113,7 +113,7 @@ class My_prayer_partners extends Base_controller {
             ### search condition ###
             if (isset($_POST['search_basic']) && $_POST['search_basic'] == 'Y') {
                
-                echo $sql_churchmember = "SELECT member_id AS chid FROM cg_church_member WHERE is_approved=1 AND member_id='".$i_profile_id."'";
+                echo '========='.$sql_churchmember = "SELECT member_id AS chid FROM cg_church_member WHERE is_approved=1 AND member_id='".$i_profile_id."'";
                 exit;
                 $query_churchmember = $this->db->query($sql_churchmember);
                 $numrowmember = $query_churchmember->num_rows();
