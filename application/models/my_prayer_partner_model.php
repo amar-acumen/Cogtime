@@ -1182,7 +1182,7 @@ class My_prayer_partner_model extends Base_model  {
                         ) as  derived_tbl {$limit}  ";
 							
                 /*$s_where, $s_like_where, $timestamp, $limit*/
-                //echo $sql;
+                echo $sql;
         $query = $this->db->query($sql);
         $result_arr = $query->result_array();
 		//pr($result_arr,1);
