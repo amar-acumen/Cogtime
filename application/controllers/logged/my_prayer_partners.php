@@ -829,7 +829,6 @@ class My_prayer_partners extends Base_controller {
                 $LIKE_WHERE_FOR_CHURCH = " 
                                   AND u.i_isdeleted = 1  
                                   AND u.i_status=1  
-                                  AND u.e_want_prayer_partner = 'Y'
                                   AND u.id NOT IN (" . $exclude_id_csv . ")
                                   " . $s_like_where ."";
 
