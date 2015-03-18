@@ -37,10 +37,10 @@ class Site_settings_model extends CI_Model{
 	
 	public function get_by_id($id, $start_limit="", $no_of_page="") {
 		if("$start_limit" == "") {
-			$sql = sprintf('SELECT * FROM '.$this->db->site_settings.'  where id = %s',  $id);
+			$sql = 'SELECT * FROM '.$this->db->site_settings.'  where id = "'.$id.'"';
 		}
 		else {
-			$sql = sprintf('SELECT * FROM '.$this->db->site_settings.'  where id = %s limit %s, %s',  $id, $start_limit, $no_of_page);
+			$sql = 'SELECT * FROM '.$this->db->site_settings.'  where id = "'.$id.'" limit '.$start_limit.', '.$no_of_page;
 		}
 		$query = $this->db->query($sql);
 		$result_arr = $query->result_array();

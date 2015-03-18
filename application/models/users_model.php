@@ -1084,7 +1084,7 @@ class Users_model extends Base_model  {
 
     function set_user_online($user_id, $ip, $s_status = '1') {
 
-        $sql_check_user = sprintf("select count(*) count from %susers_online 
+        $sql_check_user = "select count(*) count from %susers_online 
 						where i_user_id = '%s'"
                 , $this->db->dbprefix, $user_id
         );

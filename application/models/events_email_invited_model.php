@@ -62,7 +62,7 @@ class Events_email_invited_model extends Base_model
 	
 
 	public function delete_by_id($id) {
-	     $sql = 'DELETE FROM '.$this->db->EVENTS_EMAIL_INVITED.' WHERE id="'.$id.'"', ;
+	     $sql = 'DELETE FROM '.$this->db->EVENTS_EMAIL_INVITED.' WHERE id="'.$id.'"' ;
 
 		$this->db->query($sql);
 				

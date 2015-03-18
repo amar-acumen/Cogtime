@@ -166,7 +166,7 @@ class Tweet_reply_model extends CI_Model {
 
 	public function delete_by_id($id) {
 		
-		$sql = sprintf( 'DELETE FROM %stweets_replys WHERE i_tweet_id=%s AND s_media_type = "%s" ', $this->db->dbprefix, $id);
+		$sql = 'DELETE FROM %stweets_replys WHERE i_tweet_id=%s AND s_media_type = "'.$id.'" ';
 
 		$this->db->query($sql);
 		
