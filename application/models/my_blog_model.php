@@ -329,9 +329,8 @@ class My_blog_model extends Base_model
 	public function change_status($status ,$id) {
 		
 	  if($status !='' && $id !=''){	
-		  $sql = sprintf( "UPDATE {$this->db->USER_BLOGS} SET `i_isenabled` = '%s'
-						   WHERE `id` ='%s'"
-					  , $status, $id );
+		  $sql = "UPDATE {$this->db->USER_BLOGS} SET `i_isenabled` = '".$status."'
+						   WHERE `id` ='".$id."'";
 		  $this->db->query($sql);// echo $this->db->last_query();exit;
 		  return true;
 	  }
@@ -482,7 +481,7 @@ class My_blog_model extends Base_model
         $view_count = $res['i_view_count'];
         $view_count++;
         
-        $query = sprintf("UPDATE {$this->db->USER_BLOGS} SET `i_view_count`=%s WHERE id=%s",$view_count,$blog_id);
+        $query = "UPDATE {$this->db->USER_BLOGS} SET `i_view_count`='".$view_count."' WHERE id='".$blog_id."'";
         $this->db->query($query);
     }
     

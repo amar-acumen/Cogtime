@@ -518,9 +518,8 @@ public function get_by_id($id)
 	public function change_status($status ,$id) {
 		
 	  if($status !='' && $id !=''){	
-		  $sql = sprintf( "UPDATE {$this->db->RING} SET `i_isenabled` = '%s'
-						   WHERE `id` ='%s'"
-					  , $status, $id );
+		  $sql = "UPDATE {$this->db->RING} SET `i_isenabled` = '".$id."'
+						   WHERE `id` ='".$status."'";
 		  $this->db->query($sql);// echo $this->db->last_query();exit;
 		  return true;
 	  }

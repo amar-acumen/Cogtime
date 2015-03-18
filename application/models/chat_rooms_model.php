@@ -147,9 +147,8 @@ class Chat_rooms_model extends Base_model
 	
 	public function change_status($status ,$id) {
 		
-		  $sql = sprintf( "UPDATE {$this->chat_db->CHAT_ROOM} SET `enable` = '%s'
-						   WHERE `room_id` ='%s'"
-					  , $status, $id );
+		  $sql = "UPDATE {$this->chat_db->CHAT_ROOM} SET `enable` = '".$status."'
+						   WHERE `room_id` ='".$id."'";
 		  $this->chat_db->query($sql); //echo $this->db->last_query();exit;
 		  return true;
 	}
