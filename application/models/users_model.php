@@ -1092,10 +1092,8 @@ class Users_model extends Base_model  {
         $current_time = get_db_datetime();
 
         if ($result_arr[0]['count']) {
-            $sql = sprintf("UPDATE %susers_online set ts_last_active = '%s'
-						 WHERE i_user_id='%s'"
-                    , $this->db->dbprefix, $current_time, $user_id
-            );
+            $sql = "UPDATE cg_users_online set ts_last_active = '".$current_time."'
+						 WHERE i_user_id='".$user_id."'";
 
             $this->db->query($sql);
         } else {
@@ -1110,14 +1108,12 @@ class Users_model extends Base_model  {
 		
 		## if status is maintained then do nothing keep the same
 		## else insert a record with all users status true by default
-		$check_user = sprintf("select count(*) count from %susers_status where i_user_id = '%s'" , $this->db->dbprefix, $user_id);
+		$check_user = "select count(*) count from cg_users_status where i_user_id = '".$user_id."'" ;
         $s_arr = $this->db->query($check_user)->result_array();
 		
 		if ($s_arr[0]['count']) {
-            $sql = sprintf("UPDATE %susers_status set last_seen_date = '%s'
-						 WHERE i_user_id='%s' "
-                    , $this->db->dbprefix, $current_time, $user_id
-            );
+            $sql = "UPDATE cg_users_status set last_seen_date = '".$current_time."'
+						 WHERE i_user_id='".$user_id."' ";
 
             $this->db->query($sql);
         }
@@ -1148,10 +1144,8 @@ class Users_model extends Base_model  {
         $current_time = get_db_datetime();
 
         if ($result_arr[0]['count']) {
-            $sql = sprintf("UPDATE %susers_online set ts_last_active = '%s' , s_status = '%s'
-						 WHERE i_user_id='%s'"
-                    , $this->db->dbprefix, $current_time, $s_status, $user_id
-            );
+            $sql = "UPDATE cg_users_online set ts_last_active = '".$current_time."' , s_status = '".$s_status."'
+						 WHERE i_user_id='".$user_id."'";
 
             $this->db->query($sql);
             #echo $this->db->last_query(); exit;
@@ -1190,10 +1184,8 @@ class Users_model extends Base_model  {
 
     function offline_this_user($user_id, $ip = '') {
         //if( $ip == '' ) {
-        $delete_user = sprintf("delete from %susers_online 
-							where i_user_id  = '%s'"
-                , $this->db->dbprefix, $user_id
-        );
+        $delete_user = "delete from %susers_online 
+							where i_user_id  = '".$user_id."'";
         $this->db->query($delete_user);
     }
 
@@ -1202,7 +1194,7 @@ class Users_model extends Base_model  {
             return;
         }
 
-        $sql = sprintf("SELECT * FROM {$this->db->USERS} u WHERE u.id = '%s'", $user_id);
+        $sql = "SELECT * FROM {$this->db->USERS} u WHERE u.id = '".$user_id."'";
 
         $query = $this->db->query($sql);
         $result_arr = $query->result_array();
@@ -1266,7 +1258,7 @@ class Users_model extends Base_model  {
     # function to check if email already exists or not...
 
     function email_already_exists($email_id = '') {
-        $SQL = sprintf("SELECT COUNT(*) AS `check_count` FROM %s WHERE `s_email`='%s' ", $this->db->USERS, $email_id);
+        $SQL = "SELECT COUNT(*) AS `check_count` FROM ".$this->db->USERS." WHERE `s_email`='".$email_id."' ";
         $ROW = $this->db->query($SQL)->row_array();
 
         if ($ROW['check_count'])
@@ -1388,7 +1380,7 @@ class Users_model extends Base_model  {
     # function to check if username already exists or not... for unique profile url suffix
 
     function profile_url_suffix_exists($profile_url = '', $user_id) {
-        $SQL = sprintf("SELECT id FROM %s WHERE `s_profile_url_suffix`='%s' ", $this->db->USERS, $profile_url);
+        $SQL = "SELECT id FROM ".$this->db->USERS." WHERE `s_profile_url_suffix`='".$profile_url."' ";
         $ROW = $this->db->query($SQL)->row_array(); #echo $this->db->last_query(); exit;
 
         if ($ROW['id'] > 0) {
@@ -1456,7 +1448,7 @@ class Users_model extends Base_model  {
           %6\$s GROUP BY u.id ORDER BY u.`dt_created_on` DESC )
 
           ) as  derived_tbl %5\$s  " */
-        $sql = sprintf(" SELECT derived_tbl.* FROM (
+        $sql = " SELECT derived_tbl.* FROM (
 							(SELECT u.*, CONCAT(u.s_first_name,' ' , u.s_last_name)  AS user_profile_name
 									, c.s_country 
 									, church.s_country AS church_country
@@ -1470,7 +1462,7 @@ class Users_model extends Base_model  {
 									,u.s_chat_display_name AS chat_user_name
 																  
 									  										
-							FROM %2\$s u
+							FROM cg_".$this->tbl_name." u
 							    LEFT JOIN {$this->db->COUNTRY} AS c ON u.i_country_id = c.id 
 								LEFT JOIN {$this->db->STATE} AS S ON u.i_state_id = S.id
 								LEFT JOIN {$this->db->CITY} AS city ON u.i_city_id = city.id
@@ -1483,10 +1475,10 @@ class Users_model extends Base_model  {
 								LEFT JOIN {$this->db->USER_WORKS} AS w ON w.i_user_id = u.id 
 								
 								
-							  %6\$s GROUP BY u.id ORDER BY u.`dt_created_on` DESC )
+							  ".$where_cond." GROUP BY u.id ORDER BY u.`dt_created_on` DESC )
                             
-                          ) as  derived_tbl %5\$s  "
-                , $this->db->dbprefix, $this->tbl_name, $user_type, $timestamp, $limit, $where_cond);
+                          ) as  derived_tbl  ".$limit;
+						  /*$this->db->dbprefix, $this->tbl_name, $user_type, $timestamp, $limit,$where_cond*/
 #echo nl2br($sql); #exit;
         #echo $sql;
         $query = $this->db->query($sql);
