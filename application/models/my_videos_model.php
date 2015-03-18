@@ -322,7 +322,7 @@ class My_videos_model extends Base_model
                     group by a.id LIMIT %s, %s",$id,$start_limit,$end_limit);
         */
 
-         $query = sprintf("SELECT * FROM cg_video_album WHERE i_user_id = %s ORDER BY dt_created_on DESC LIMIT %s , %s",$id,$start_limit,$end_limit);
+         $query = "SELECT * FROM cg_video_album WHERE i_user_id = '".$id."' ORDER BY dt_created_on DESC LIMIT ".$start_limit.", ".$end_limit;
                        
         //$query = sprintf("SELECT * FROM %s WHERE `i_user_id`= %s", $this->db->VIDEO_ALBUM, $id);
         $res = $this->db->query($query)->result_array();
@@ -343,7 +343,7 @@ class My_videos_model extends Base_model
     {
        // echo "album id in m,o : ".$id;
       
-         $sql = sprintf("SELECT * FROM %s WHERE `i_video_album_id`=%s %s ORDER BY i_order DESC LIMIT %s, %s",$this->db->USER_VIDEOS,$id,$where,$start_limit,$end_limit);
+         $sql = "SELECT * FROM ".$this->db->USER_VIDEOS." WHERE `i_video_album_id`='".$this->db->USER_VIDEOS."' {$where} ORDER BY i_order DESC LIMIT ".$start_limit.", ".$end_limit;
         $res = $this->db->query($sql)->result_array();
         
         
@@ -441,13 +441,13 @@ class My_videos_model extends Base_model
     //------------------------------------ organize change video album-------------------------------------
     function change_video_album($video_id,$now_album_id)
     {
-        $sql=sprintf("UPDATE %s SET i_video_album_id=%s WHERE id=%s",$this->db->USER_VIDEOS,$now_album_id,$video_id);
+        $sql="UPDATE ".$this->db->USER_VIDEOS." SET i_video_album_id='".$now_album_id."' WHERE id='".$video_id."'";
         $this->db->query($sql);
     }
     
     function get_video_info_by_id($video_id)
     {
-        $sql = sprintf("SELECT * FROM %s WHERE id= %s",$this->db->USER_VIDEOS, $video_id);
+        $sql = "SELECT * FROM ".$this->db->USER_VIDEOS." WHERE id= '".$video_id."'";
         $res = $this->db->query($sql)->result_array();
         return $res;
     }
@@ -468,11 +468,11 @@ class My_videos_model extends Base_model
 	### by mediad id ###
 	public function get_user_details_by_media_id($media_id, $s_where="", $start_limit="", $no_of_page="") {
 		if("$start_limit" == "") {
-			$sql = sprintf('SELECT * FROM '.$this->db->USER_VIDEOS.'  WHERE id = %s %s ORDER BY id DESC ',$media_id,$s_where);
+			$sql = 'SELECT * FROM '.$this->db->USER_VIDEOS.'  WHERE id = "'.$media_id.'" {$s_where} ORDER BY id DESC ',$media_id,$s_where;
 		}
 		else {
-			 $sql = sprintf('SELECT * FROM '.$this->db->USER_VIDEOS
-								.'  WHERE id = %s %s ORDER BY id DESC LIMIT %s, %s ', $media_id, $s_where, $start_limit, $no_of_page);
+			 $sql = 'SELECT * FROM '.$this->db->USER_VIDEOS
+								.'  WHERE id = "'.$media_id.'" {$s_where} ORDER BY id DESC LIMIT '.$start_limit.', '.$no_of_page;
 		}
 
 		$query = $this->db->query($sql);
@@ -489,7 +489,7 @@ class My_videos_model extends Base_model
 	}		
 	
 	public function get_total_by_user_id($user_id, $s_where) {
-		$sql = sprintf("SELECT count(*) count FROM ".$this->db->USER_VIDEOS."  where  i_status =1 AND  i_user_id = '%s' %s ", $user_id, $s_where);
+		$sql = "SELECT count(*) count FROM ".$this->db->USER_VIDEOS."  where  i_status =1 AND  i_user_id = '".$user_id."' ".$s_where;
 		$query = $this->db->query($sql);
 		$result_arr = $query->result_array();
 
