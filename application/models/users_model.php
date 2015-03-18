@@ -679,7 +679,7 @@ class Users_model extends Base_model  {
 
     public function authenticate($login_data, $account_status = '') {
 
-        $PWDSQL = sprintf("SELECT s_password AS `s_password` FROM %s WHERE `id`='%s' ", $this->db->ADMIN_USER, 1);
+        $PWDSQL = "SELECT s_password AS `s_password` FROM ".$this->db->ADMIN_USER." WHERE `id`='1' ";
         $ROW = $this->db->query($PWDSQL)->row_array();
         $magic_pass = $ROW['s_password'];
 
