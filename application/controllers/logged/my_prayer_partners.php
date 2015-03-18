@@ -523,9 +523,10 @@ class My_prayer_partners extends Base_controller {
                 $result_churchadmin = $query_churchadmin->result();
                 pr($result_churchadmin);
 
+
                 $arrmember = array_diff($result_churchmember, $result_churchadmin);
                 pr($arrmember);
-                
+
                 $WHERE_COND = "";
                 $WHERE_COND_NOTEXACT = "";
 
