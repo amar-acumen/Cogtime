@@ -145,7 +145,7 @@ class Church extends Base_controller
             $order_by = " cm.id DESC ";
             $result = $this->church_new_model->get_churchmembers($c_id,$where,$page, $order_by, $this->pagination_per_page);
             $resultCount = count($result);
-            // echo $this->db->last_query(); 
+            echo $this->db->last_query(); 
             
             $total_rows = $this->church_new_model->get_churchmembers_count($c_id,$where);
 

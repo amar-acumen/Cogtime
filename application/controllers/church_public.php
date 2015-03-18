@@ -327,7 +327,15 @@ class Church_public extends Base_controller
                             );
                         }
                          $this->db->insert('cg_church_member', $data); 
-
+						if (isset($_SESSION['invited_member_id']) && $_SESSION['invited_member_id'] != '')
+	                      {
+                                $invited_member = array(
+                            'status' => '1',
+                            'joined_on_date' => get_db_datetime()
+                            );
+	                   $this->db->update('cg_church_member_invitation', $invited_member, array('id' => $_SESSION['invited_member_id']));
+	
+	                           }
                         ## end ##
                         //EMAIL SENDING CODE.[start]
 						 $this->load->helper('html');
