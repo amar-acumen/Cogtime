@@ -20,7 +20,7 @@ class User_alert_model extends Base_model
 	
 	public function get_by_user_id($id, $start_limit="", $no_of_page="") {
 		if("$start_limit" == "") {
-			$sql = sprintf('SELECT * FROM '.$this->db->USER_ALERTS.'  where i_user_id = %s',  $id);
+			$sql = 'SELECT * FROM '.$this->db->USER_ALERTS.'  where i_user_id = "'.$id.'"';
 		}
 		else {
 			$sql = sprintf('SELECT * FROM '.$this->db->USER_ALERTS.'  where i_user_id = %s limit %s, %s',  $id, $start_limit, $no_of_page);

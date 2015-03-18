@@ -1241,8 +1241,7 @@ class Users_model extends Base_model  {
     }
 
     function increase_profile_visit($user_id) {
-        $sql = sprintf("UPDATE %1\$s SET i_profile_visits = i_profile_visits + 1 WHERE id = '%2\$s'"
-                , $this->tbl_name, $user_id);
+        $sql = "UPDATE ".$this->tbl_name." SET i_profile_visits = i_profile_visits + 1 WHERE id = '".$user_id."'";
 
         $this->db->query($sql);
 
@@ -1534,7 +1533,7 @@ class Users_model extends Base_model  {
         }
 
 
-        $sql = sprintf("SELECT count(*) as count FROM(
+        $sql = "SELECT count(*) as count FROM(
 		
 							(SELECT u.*, CONCAT(u.s_first_name,' ' , u.s_last_name)  AS user_profile_name
 									, c.s_country 
@@ -1549,7 +1548,7 @@ class Users_model extends Base_model  {
 									,u.s_chat_display_name AS chat_user_name
 																  
 									  										
-							FROM %2\$s u
+							FROM cg_".$this->tbl_name." u
 							    LEFT JOIN {$this->db->COUNTRY} AS c ON u.i_country_id = c.id 
 								LEFT JOIN {$this->db->STATE} AS S ON u.i_state_id = S.id
 								LEFT JOIN {$this->db->CITY} AS city ON u.i_city_id = city.id
@@ -1563,9 +1562,9 @@ class Users_model extends Base_model  {
 
 								
 								
-							 %6\$s GROUP BY u.id ORDER BY u.`dt_created_on` DESC )
-							) as  derived_tbl "
-                , $this->db->dbprefix, $this->tbl_name, $user_type, $timestamp, $limit, $where_cond);
+							 {$where_cond} GROUP BY u.id ORDER BY u.`dt_created_on` DESC )
+							) as  derived_tbl ";
+							/*$this->db->dbprefix, $this->tbl_name, $user_type, $timestamp, $limit,$where_cond*/
         $query = $this->db->query($sql);
         $result_arr = $query->result_array();
 
@@ -1579,7 +1578,7 @@ class Users_model extends Base_model  {
         try {
             $ret_ = array();
             if (intval($i_me) > 0 && intval($i_him) > 0 && intval($i_me) != intval($i_him)) {
-                $s_qry = sprintf("SELECT 
+                $s_qry = "SELECT 
 								c.id, 
 								c.i_requester_id, 
 								c.i_accepter_id,
@@ -1597,11 +1596,11 @@ class Users_model extends Base_model  {
 				FROM 
 						{$this->db->USER_CONTACTS} c, {$this->db->USERS} u
 			   WHERE 
-				( (c.i_requester_id = %s and c.i_accepter_id = %s)  OR (c.i_accepter_id = %s and c.i_requester_id = %s) )
+				( (c.i_requester_id = '".$i_me."' and c.i_accepter_id = '".$i_him."')  OR (c.i_accepter_id = '".$i_me."' and c.i_requester_id = '".$i_him."') )
 				AND c.s_status = 'pending' 
 				AND u.id=c.i_requester_id 
 				
-		", $i_me, $i_him, $i_me, $i_him);
+		";
 
                 #cn.s_country_name  , {$this->db->MST_COUNTRY} cn 
 
@@ -1702,7 +1701,7 @@ class Users_model extends Base_model  {
     ## ADDED TO MATCH PASSWORD
 
     function match_password($id = '', $pwd = '') {
-        $SQL = sprintf("SELECT COUNT(*) AS `check_count` FROM %s WHERE `id`='%s' AND `s_password` = '%s' ", $this->db->USERS, $id, get_salted_password($pwd));
+        $SQL = "SELECT COUNT(*) AS `check_count` FROM ".$this->db->USERS." WHERE `id`='".$id."' AND `s_password` = '".get_salted_password($pwd)."' ";
         $ROW = $this->db->query($SQL)->row_array();
         //echo $ROW['check_count']; exit;
         if ($ROW['check_count'])
@@ -1840,23 +1839,19 @@ class Users_model extends Base_model  {
 
     public function updateUserOnlineStatus($user_id, $status, $chk_frnd, $chk_netpal, $chk_pp) {
 
-        $sql_check_user = sprintf("select count(*) count from %susers_online 
-						where i_user_id = '%s'"
-                , $this->db->dbprefix, $user_id
-        );
+        $sql_check_user = "select count(*) count from cg_users_online 
+						where i_user_id = '".$user_id."'";
 
         $result_arr = $this->db->query($sql_check_user)->result_array();
         $current_time = get_db_datetime();
 
         if ($result_arr[0]['count']) {
-            $sql = sprintf("UPDATE %susers_online set ts_last_active = '%s' ,
-									 s_status = '%s',
-									 i_isfriend =  %s,
-									 i_isnetpal = %s,
-									 i_isprayerpartner = %s
-									 WHERE i_user_id='%s'"
-                    , $this->db->dbprefix, $current_time, $status, $chk_frnd, $chk_netpal, $chk_pp, $user_id
-            );
+            $sql = "UPDATE cg_users_online set ts_last_active = '".$current_time."' ,
+									 s_status = '".$status."',
+									 i_isfriend =  '".$chk_frnd."',
+									 i_isnetpal = '".$chk_netpal."',
+									 i_isprayerpartner = '".$chk_pp."'
+									 WHERE i_user_id='".$user_id."'";
 
             $this->db->query($sql);
             //echo $this->db->last_query(); exit;
@@ -1864,18 +1859,16 @@ class Users_model extends Base_model  {
 		
         ## if status is maintained then do nothing keep the same
         ## else insert a record with all users status true by default
-        $check_user = sprintf("select count(*) count from %susers_status where i_user_id = '%s'" , $this->db->dbprefix, $user_id);
+        $check_user = "select count(*) count from cg_users_status where i_user_id = '".$user_id."'";
         $s_arr = $this->db->query($check_user)->result_array();
         
         if ($s_arr[0]['count']) {
-            $sql = sprintf("UPDATE %susers_status 
-                                set  last_seen_date = '%s',
-                                     i_isfriend =  %s,
-                                     i_isnetpal = %s,
-                                     i_isprayerpartner = %s
-                                WHERE i_user_id='%s' "
-                    , $this->db->dbprefix, $current_time,  $chk_frnd, $chk_netpal, $chk_pp, $user_id
-            );
+            $sql = "UPDATE cg_users_status 
+                                set  last_seen_date = '".$current_time."',
+                                     i_isfriend =  '".$chk_frnd."',
+                                     i_isnetpal = '".$chk_netpal."',
+                                     i_isprayerpartner = '".$chk_pp."'
+                                WHERE i_user_id='".$user_id."' ";
 
             $this->db->query($sql);
         }
