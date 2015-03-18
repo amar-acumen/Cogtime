@@ -1059,7 +1059,7 @@ class My_prayer_partner_model extends Base_model  {
 
     ##--------------- end of read-write prayer partner -------------------------
 
-    function get_prayer_partner_sugg($s_where = null, $s_like_where, $s_order_by = null, $start_limit = null, $no_of_page = null, $members, $timeout = '') {
+    function get_prayer_partner_sugg($s_where = null, $s_like_where, $s_like_where_for_church, $s_order_by = null, $start_limit = null, $no_of_page = null, $members, $timeout = '') {
 
         if ($timeout == '') {
             $timeout = $this->timeout;
@@ -1169,7 +1169,7 @@ class My_prayer_partner_model extends Base_model  {
                             LEFT JOIN cg_state s ON s.id = u.i_state_id
                             LEFT JOIN cg_city c ON u.i_city_id = c.id
                             LEFT JOIN {$this->db->DENOMINATION} AS d ON u.i_id_denomination = d.id  WHERE 1  
-                             AND u.id IN(".$members.") {$s_like_where}                                         
+                             AND u.id IN(".$members.") {$s_like_where_for_church}                                         
                             ORDER BY u.`dt_created_on` DESC )
                         ) as  derived_tbl {$limit}  ";
 							

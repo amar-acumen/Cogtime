@@ -826,11 +826,18 @@ class My_prayer_partners extends Base_controller {
 								  AND u.id NOT IN (" . $exclude_id_csv . ")
 								  " . $s_like_where . "". $is_councillor ."  GROUP BY u.id";
 
+                $LIKE_WHERE_FOR_CHURCH = " 
+                                  AND u.i_isdeleted = 1  
+                                  AND u.i_status=1  
+                                  AND u.e_want_prayer_partner = 'Y'
+                                  AND u.id NOT IN (" . $exclude_id_csv . ")
+                                  " . $s_like_where ."";
+
                 //$result = $this->my_prayer_partner_model->get_prayer_partner_suggestion($WHERE,$page,$this->pagination_per_page,$s_order_by);
                 //echo 'EXACT_WHERE::: '.$EXACT_WHERE;
                 //echo 'LIKE_WHERE::: '.$LIKE_WHERE; exit;
 
-                $result = $this->my_prayer_partner_model->get_prayer_partner_sugg($EXACT_WHERE, $LIKE_WHERE, $s_order_by, $page, $this->pagination_per_page,$member);
+                $result = $this->my_prayer_partner_model->get_prayer_partner_sugg($EXACT_WHERE, $LIKE_WHERE,$LIKE_WHERE_FOR_CHURCH, $s_order_by, $page, $this->pagination_per_page,$member);
                 $resultCount = count($result);
                 #echo $this->db->last_query(); 
                 //pr($result);
