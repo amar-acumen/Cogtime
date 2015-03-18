@@ -510,21 +510,19 @@ class My_prayer_partners extends Base_controller {
 
             if (isset($_POST['search_basic']) && $_POST['search_basic'] == 'Y') {
 
-                $sql_churchmember = "SELECT member_id  FROM cg_church_member WHERE church_id IN
+                $sql_churchmember = "SELECT GROUP_CONCAT(member_id) AS member  FROM cg_church_member WHERE church_id IN
                         (SELECT church_id AS chid FROM cg_church_member WHERE is_approved=1 AND member_id='".$i_profile_id."') AND member_id!='".$i_profile_id."'";
                
                 
                 $query_churchmember = $this->db->query($sql_churchmember);
                 $result_churchmember = $query_churchmember->result_array();
-                pr(array_values($result_churchmember));
-                $query = "SELECT member_id FROM cg_church_member WHERE church_id IN
+                $arr_churchmember = explode(',', $result_churchmember[0]);
+                $query = "SELECT GROUP_CONCAT(member_id) AS member FROM cg_church_member WHERE church_id IN
                         (SELECT church_id AS chid FROM cg_church_admin WHERE is_approved=1 AND ch_admin_id='".$i_profile_id."') AND member_id!='".$i_profile_id."'";
                 $query_churchadmin = $this->db->query($query);
                 $result_churchadmin = $query_churchadmin->result_array();
-                pr(array_values($result_churchadmin));
-
-
-                $arrmember = array_diff($result_churchmember, $result_churchadmin);
+                $arr_churchadmin = explode(',', $result_churchadmin[0]);
+                $arrmember = array_diff($arr_churchmember, $arr_churchadmin);
                 pr($arrmember);
 
                 $WHERE_COND = "";
