@@ -113,15 +113,6 @@ class My_prayer_partners extends Base_controller {
             ### search condition ###
             if (isset($_POST['search_basic']) && $_POST['search_basic'] == 'Y') {
                
-                echo '========='.$sql_churchmember = "SELECT member_id AS chid FROM cg_church_member WHERE is_approved=1 AND member_id='".$i_profile_id."'";
-                exit;
-                $query_churchmember = $this->db->query($sql_churchmember);
-                $numrowmember = $query_churchmember->num_rows();
-                $result_churchmember = $query_churchmember->result();
-                $query = $this->db->get_where('cg_church', array('ch_admin_id' => $i_profile_id));
-                $result = $query->result();
-
-
                 $s_name = get_formatted_string(trim($this->input->post('txt_name')));
                 if ($WHERE_COND != '')
                     $WHERE_COND .= ($s_name == '') ? '' : " OR (u.s_first_name LIKE '" . $s_name . "%'  OR u.s_last_name LIKE '" . $s_name . "%'  )";
@@ -518,6 +509,14 @@ class My_prayer_partners extends Base_controller {
             $i_profile_id = intval(decrypt($this->session->userdata('user_id')));
 
             if (isset($_POST['search_basic']) && $_POST['search_basic'] == 'Y') {
+
+                echo '========='.$sql_churchmember = "SELECT member_id AS chid FROM cg_church_member WHERE is_approved=1 AND member_id='".$i_profile_id."'";
+                exit;
+                $query_churchmember = $this->db->query($sql_churchmember);
+                $numrowmember = $query_churchmember->num_rows();
+                $result_churchmember = $query_churchmember->result();
+                $query = $this->db->get_where('cg_church', array('ch_admin_id' => $i_profile_id));
+                $result = $query->result();
 
                 $WHERE_COND = "";
                 $WHERE_COND_NOTEXACT = "";
