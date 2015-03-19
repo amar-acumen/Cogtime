@@ -637,6 +637,8 @@ function general_setting(){
             if (($handle = fopen($destfile, "r")) !== FALSE) {
                
                 if(($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
+                    $data = fgetcsv($handle, 1000, ",");
+                    pr($data,1);
                      $num = count($data);
                    for($k = 0 ; $k<=$num ; $k++){
                    
@@ -651,7 +653,7 @@ function general_setting(){
 							'church_id' => $_SESSION['logged_church_id'],
 							'invitation_sent_date' => get_db_datetime()
 							);
-						//$this->db->insert('cg_church_member_invitation', $invite_mem_info);
+						$this->db->insert('cg_church_member_invitation', $invite_mem_info);
                                                 
 						
 						$add_mem_id = $this->db->insert_id();
