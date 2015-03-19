@@ -1045,6 +1045,7 @@ class Contacts_model extends Base_model
       $result=$this->db->query($s_qry)->result_array();
       $frnds = explode(',', $result[0]['frnd_id']); 
       $frndcount = count($frnds);
+      pr($result[0]['frnd_id']);
       $ret = array();
       if($result[0]['frnd_id']!='')
       {   $j = 0;
