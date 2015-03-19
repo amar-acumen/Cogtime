@@ -1028,7 +1028,7 @@ class Contacts_model extends Base_model
 
 
   public function get_mutual_friends_by_user_for_wall($i_user_id) {
-      $s_qry = "select group_concat( tab1.user_id separator ',') as frnd_id from 
+      echo '========='.$s_qry = "select group_concat( tab1.user_id separator ',') as frnd_id from 
                   (
                       (select DISTINCT i_accepter_id as user_id
                                              from cg_user_contacts where (i_requester_id ='" . $i_user_id . "') 
