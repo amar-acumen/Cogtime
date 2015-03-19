@@ -160,7 +160,7 @@ class Prayer_group_model extends Base_model {
     public function get_total_my_groups($i_user_id, $s_where, $querytype = 'all') {
 
         if ($querytype == 'all') {
-            $sql = sprintf("
+            $sql = "
 						SELECT COUNT(*) count FROM (
 						( SELECT
 								pg.id
@@ -175,10 +175,10 @@ class Prayer_group_model extends Base_model {
 								(
 								pg.id in
 									(SELECT pg_mem.i_prayer_group_id from cg_prayer_group_members pg_mem, cg_users u where
-									pg_mem.i_user_id = %2\$s AND pg_mem.s_status = 'accepted'
+									pg_mem.i_user_id = '".intval($i_user_id)."' AND pg_mem.s_status = 'accepted'
 									)
 								
-								) %3\$s GROUP BY pg.id 
+								) {$s_where} GROUP BY pg.id 
 						
 						)
 						 UNION
@@ -187,14 +187,12 @@ class Prayer_group_model extends Base_model {
 							  pg.id
 							  FROM cg_users u, cg_prayer_group pg
 							  WHERE u.i_status='1' AND u.i_isdeleted ='1' AND pg.i_isenabled = 1 
-							  AND pg.i_owner_id = %2\$s AND pg.i_owner_id = u.id  %3\$s
+							  AND pg.i_owner_id = '".intval($i_user_id)."' AND pg.i_owner_id = u.id  {$s_where}
 						   )
 						 
 		
 						) derived_tbl
-							"
-                    , $this->db->dbprefix, intval($i_user_id), $s_where
-            );
+							";
         } else if ($querytype == 'ownership') {
 
             $sql = "
@@ -492,7 +490,7 @@ class Prayer_group_model extends Base_model {
             $limit = 'LIMIT ' . $i_start_limit . ' , ' . $i_no_of_page;
         }
 
-        $sql = sprintf("
+        $sql = "
 					(SELECT 
 					  pg.s_group_name,
 					  n.* 
@@ -509,12 +507,12 @@ class Prayer_group_model extends Base_model {
 					  (
 						   pg.id in
 						  (SELECT pg_mem.i_prayer_group_id from cg_prayer_group_members pg_mem, cg_users u where
-							pg_mem.i_user_id = %2\$s AND  pg_mem.s_status = 'accepted'
+							pg_mem.i_user_id = '".intval($i_user_id)."' AND  pg_mem.s_status = 'accepted'
 						  )
 						  
 					  )  AND n.s_type != 'joining_req' 
 					  	 AND n.s_type != 'invited' 
-					  %4\$s )
+					  {$s_where} )
 					  
 					 UNION
 					 
@@ -528,10 +526,10 @@ class Prayer_group_model extends Base_model {
 					  LEFT JOIN cg_users u ON pg.i_owner_id = u.id
 					  
 					  WHERE u.i_status='1' AND u.i_isdeleted ='1' AND pg.i_isenabled = 1 
-					  AND pg.i_owner_id = %2\$s AND pg.i_owner_id = u.id AND n.s_type != 'invited'
+					  AND pg.i_owner_id = '".intval($i_user_id)."' AND pg.i_owner_id = u.id AND n.s_type != 'invited'
 					  
 					  
-					   %4\$s )
+					   {$s_where} )
 					   
 					  UNION
 					  
@@ -545,15 +543,12 @@ class Prayer_group_model extends Base_model {
 					  LEFT JOIN cg_users u ON n.i_user_id = u.id
 					  
 					  WHERE u.i_status='1' AND u.i_isdeleted ='1' AND pg.i_isenabled = 1 
-					  AND n.i_user_id = %2\$s AND n.s_type = 'invited'
+					  AND n.i_user_id = '".intval($i_user_id)."' AND n.s_type = 'invited'
 					  AND n.s_type != 'joining_req' 
-					   %4\$s )
+					   {$s_where} )
 
 				    ORDER BY `dt_created_on` DESC
-					%3\$s
-					"
-                , $this->db->dbprefix, intval($i_user_id), $limit, $s_where
-        );
+					".$limit;
 
         $query = $this->db->query($sql); //echo "sql ==>". nl2br($sql) ."<br />"; 
         $result_arr = $query->result_array();
