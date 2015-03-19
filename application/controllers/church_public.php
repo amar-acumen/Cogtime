@@ -590,7 +590,7 @@ class Church_public extends Base_controller
         }
     }
 
- public function already_user($churchid,$byrequest)
+ public function already_user($churchid,$byrequest,$user_id)
   {
      die('ok');
     $_SESSION['current_church_id'] = $churchid;
