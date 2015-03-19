@@ -649,12 +649,14 @@ function general_setting(){
 							);
 						$this->db->insert('cg_church_member_invitation', $invite_mem_info);
                                                 /*************check already cogtime user*******************/
+                                                echo $data[1];
                                                 $query = $this->db->get_where('cg_users', array('s_email' => $data[1]));
                                                 $result = $query->result();
                                                  foreach ($query->result() as $row)
                                                         {
                                                            $user_id =  $row->id;
                                                         }
+                                                        echo count($result);
                                                   if(count($result) > 0){
                                                     $location =  base_url().'church_registration_by_email/'.$_SESSION['logged_church_id'].'/1/'.$add_mem_id;
                                                 }else {
