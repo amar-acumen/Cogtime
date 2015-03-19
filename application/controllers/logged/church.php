@@ -667,9 +667,9 @@ function general_setting(){
                                                         }
                                                         
                                                   if(count($result) == 1){
-                                                      echo 'alm';
+                                                      
                                                    $location =  base_url().'already_user/'.$_SESSION['logged_church_id'].'/1/'.$user_id;
-                                                    $body[$c] = sprintf3( $body, array('churchurl'=> $location) );
+                                                  echo  $body[$c] = sprintf3( $body, array('churchurl'=> $location) );
                                                     
                                                 }else if(count($result) == 0) {
                                                     //echo 'new';
