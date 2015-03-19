@@ -658,7 +658,7 @@ function general_setting(){
                      $to      = $data[$c];
                         /*************check already cogtime user*******************/
                                                
-                                                $query = $this->db->get_where('cg_users', array('s_email' => $data[$c]));
+                                                $query = $this->db->get_where('cg_users', array('s_email' => $data[$c] ,'i_status' => 1));
                                                 $result = $query->result();
                                             
                                                  //echo count($result);
@@ -669,7 +669,7 @@ function general_setting(){
                                                         {
                                                           $user_id =  $row->id;
                                                         }
-                                                   $location =  base_url().'already_user/'.$_SESSION['logged_church_id'].'/1/'.$user_id;
+                                                   $location =  base_url().'already_user/'.$_SESSION['logged_church_id'].'/1/'.$user_id.$add_mem_id;
                                                   $body = sprintf3( $body, array('churchurl'=> $location) );
                                                     
                                                 }else if(count($result) == 0) {
