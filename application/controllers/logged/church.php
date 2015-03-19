@@ -1693,11 +1693,12 @@ echo json_encode( array('success'=>'true'));
 					'invitation_sent_date' => get_db_datetime()
 				);
 				//$this->db->insert('cg_church_member_invitation', $invited_member);
-				$//invte_id = $this->db->insert_id(); 
+				//invte_id = $this->db->insert_id(); 
+                                        echo $invite_val[$i][0].'======';
 				/********************************************************************/
                                 $query = $this->db->get_where('cg_users', array('s_email' => $invite_val[$i][1] ,'i_status' => 1));
                                                 $result = $query->result();
-                                pr($result,1);
+                              //  pr($result,1);
                                 
 				$this->load->model('mail_contents_model');
 				$mail_info = $this->mail_contents_model->get_by_name("church_community_invitation_mail");
