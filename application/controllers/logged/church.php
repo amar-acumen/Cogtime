@@ -643,6 +643,7 @@ function general_setting(){
                  
 					if($row>2)
 					{
+                                            echo $row;
 						$invite_mem_info = array(
 							'name' => $data[0],
 							'email' => $data[1],
@@ -650,7 +651,7 @@ function general_setting(){
 							'invitation_sent_date' => get_db_datetime()
 							);
                                                 pr($invite_mem_info);
-						//$this->db->insert('cg_church_member_invitation', $invite_mem_info);
+						$this->db->insert('cg_church_member_invitation', $invite_mem_info);
                                                 
 						
 						//$add_mem_id = $this->db->insert_id();
