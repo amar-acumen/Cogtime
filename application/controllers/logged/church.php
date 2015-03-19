@@ -668,12 +668,12 @@ function general_setting(){
                                                         
                                                   if(count($result) == 1){
                                                      // echo 'alm';
-                                                    echo   $location =  base_url().'already_user/'.$_SESSION['logged_church_id'].'/1/'.$user_id;
+                                                   $location =  base_url().'already_user/'.$_SESSION['logged_church_id'].'/1/'.$user_id;
                                                     $body = sprintf3( $body, array('churchurl'=> $location) );
                                                     
                                                 }else if(count($result) == 0) {
                                                     //echo 'new';
-                                                   echo  $location =  base_url().'church_registration_by_email/'.$_SESSION['logged_church_id'].'/1/'.$add_mem_id;
+                                                   $location =  base_url().'church_registration_by_email/'.$_SESSION['logged_church_id'].'/1/'.$add_mem_id;
                                                    $body = sprintf3( $body, array('churchurl'=> $location) );
                                                 }
                                                 /***************************************************/
