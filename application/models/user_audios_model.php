@@ -20,11 +20,11 @@ class User_audios_model extends Base_model
 	
 	public function get_by_id($id, $start_limit="", $no_of_page="") {
 		if("$start_limit" == "") {
-			$sql = sprintf('SELECT * FROM '.$this->db->USER_AUDIO.'  where   id = %s',  $id);
+			$sql = 'SELECT * FROM '.$this->db->USER_AUDIO.'  where   id = "'.$id.'"';
 		}
 		else {
 			
-			 $sql = sprintf('SELECT * FROM '.$this->db->USER_AUDIO.'  where    id = %s limit %s, %s',  $id, $start_limit, $no_of_page);
+			 $sql = 'SELECT * FROM '.$this->db->USER_AUDIO.'  where    id = "'.$id.'" limit '.$start_limit.', '.$no_of_page;
 		}
 
 		$query = $this->db->query($sql); #echo $this->db->last_query(); exit;
@@ -36,7 +36,7 @@ class User_audios_model extends Base_model
 	
 	function get_audio_title_by_id($db_id)
     {
-        $sql = sprintf("SELECT * FROM %s WHERE id= %s",$this->db->USER_AUDIO, $db_id);
+        $sql = "SELECT * FROM ".$this->db->USER_AUDIO." WHERE id= '".$db_id."'";
         $res = $this->db->query($sql)->result_array();
 
         return $res[0]['s_title'];
@@ -47,17 +47,17 @@ class User_audios_model extends Base_model
 
 	public function get_by_user_id($user_id, $s_where="", $start_limit="", $no_of_page="") {
 		if("$start_limit" == "") {
-			$sql = sprintf('SELECT audio.*,gen.genre_name as genre  FROM '.$this->db->USER_AUDIO.' audio
+			$sql = 'SELECT audio.*,gen.genre_name as genre  FROM '.$this->db->USER_AUDIO.' audio
 									LEFT JOIN '.$this->db->genre.' gen on gen.id=audio.s_genre_id
 								
-								 WHERE  audio.i_status =1 AND  audio.i_user_id = %s %s ORDER BY audio.id DESC ',$user_id, $s_where);
+								 WHERE  audio.i_status =1 AND  audio.i_user_id = "'.$user_id.'" {$s_where} ORDER BY audio.id DESC ';
 		}
 	
 		else {
-			$sql = sprintf('SELECT audio.*,gen.genre_name as genre FROM '.$this->db->USER_AUDIO
+			$sql = 'SELECT audio.*,gen.genre_name as genre FROM '.$this->db->USER_AUDIO
 								.' audio LEFT JOIN '.$this->db->genre.' gen on gen.id=audio.s_genre_id WHERE 
 								audio.i_status =1 AND 
-								audio.i_user_id = %s %s ORDER BY audio.id DESC LIMIT %s, %s ', $user_id, $s_where, $start_limit, $no_of_page);
+								audio.i_user_id = "'.$user_id.'" {$s_where} ORDER BY audio.id DESC LIMIT '.$start_limit.', '.$no_of_page;
 		}
 
 
@@ -109,9 +109,9 @@ class User_audios_model extends Base_model
 	
 
 	public function get_total_by_user_id($user_id, $s_where) {
-		$sql = sprintf("SELECT count(*) count FROM {$this->db->USER_AUDIO}  AS a 
+		$sql = "SELECT count(*) count FROM {$this->db->USER_AUDIO}  AS a 
 							WHERE 
-								a.i_status =1 AND a.i_user_id = '%s' %s ", $user_id, $s_where);
+								a.i_status =1 AND a.i_user_id = '".$user_id."' ".$s_where;
 		$query = $this->db->query($sql);
 		$result_arr = $query->result_array();
 
@@ -144,15 +144,15 @@ class User_audios_model extends Base_model
 	
 
 	public function delete_by_id($id) {
-	    $sql = sprintf( 'DELETE FROM '.$this->db->USER_AUDIO.' WHERE id=%s', $id );
+	    $sql = 'DELETE FROM '.$this->db->USER_AUDIO.' WHERE id="'.$id.'"';
 
 		$this->db->query($sql);
 		
-		$comments_sql = sprintf( 'DELETE FROM '.$this->db->USER_MEDIA_COMMENTS.' WHERE i_media_id=%s AND s_media_type = "audio" ', $id );
+		$comments_sql = 'DELETE FROM '.$this->db->USER_MEDIA_COMMENTS.' WHERE i_media_id="'.$id.'" AND s_media_type = "audio" ';
 
 		$this->db->query($comments_sql);
 		
-		$like_sql = sprintf( "DELETE FROM ".$this->db->USER_MEDIA_LIKE." WHERE i_media_id=%s AND s_media_type = 'audio'" , $id);
+		$like_sql = "DELETE FROM ".$this->db->USER_MEDIA_LIKE." WHERE i_media_id='".$id."' AND s_media_type = 'audio'";
 		$this->db->query($like_sql); 
 		
 	}
@@ -161,11 +161,11 @@ class User_audios_model extends Base_model
 	## by mediad id ###
 	public function get_user_details_by_media_id($media_id, $s_where="", $start_limit="", $no_of_page="") {
 		if("$start_limit" == "") {
-			$sql = sprintf('SELECT * FROM '.$this->db->USER_AUDIO.'  WHERE id = %s %s ORDER BY id DESC ',$media_id,$s_where);
+			$sql = 'SELECT * FROM '.$this->db->USER_AUDIO.'  WHERE id = "'.$media_id.'" {$s_where} ORDER BY id DESC ';
 		}
 		else {
-			 $sql = sprintf('SELECT * FROM '.$this->db->USER_AUDIO
-								.'  WHERE id = %s %s ORDER BY id DESC LIMIT %s, %s ', $media_id, $s_where, $start_limit, $no_of_page);
+			 $sql = 'SELECT * FROM '.$this->db->USER_AUDIO
+								.'  WHERE id = "'.$media_id.'" {$s_where} ORDER BY id DESC LIMIT '.$start_limit.', '.$no_of_page;
 		}
 
 		$query = $this->db->query($sql);

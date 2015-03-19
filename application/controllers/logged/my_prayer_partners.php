@@ -112,7 +112,7 @@ class My_prayer_partners extends Base_controller {
 
             ### search condition ###
             if (isset($_POST['search_basic']) && $_POST['search_basic'] == 'Y') {
-
+               
                 $s_name = get_formatted_string(trim($this->input->post('txt_name')));
                 if ($WHERE_COND != '')
                     $WHERE_COND .= ($s_name == '') ? '' : " OR (u.s_first_name LIKE '" . $s_name . "%'  OR u.s_last_name LIKE '" . $s_name . "%'  )";
@@ -510,6 +510,26 @@ class My_prayer_partners extends Base_controller {
 
             if (isset($_POST['search_basic']) && $_POST['search_basic'] == 'Y') {
 
+                $sql_churchmember = "SELECT GROUP_CONCAT(member_id) AS member  FROM cg_church_member WHERE church_id IN
+                        (SELECT church_id AS chid FROM cg_church_member WHERE is_approved=1 AND member_id='".$i_profile_id."') AND member_id!='".$i_profile_id."'";
+               
+                
+                $query_churchmember = $this->db->query($sql_churchmember);
+                $result_churchmember = $query_churchmember->result_array();
+                
+                $arr_churchmember = explode(',', $result_churchmember[0]['member']);
+                $query = "SELECT GROUP_CONCAT(member_id) AS member FROM cg_church_member WHERE church_id IN
+                        (SELECT church_id AS chid FROM cg_church_admin WHERE is_approved=1 AND ch_admin_id='".$i_profile_id."') AND member_id!='".$i_profile_id."'";
+                $query_churchadmin = $this->db->query($query);
+                $result_churchadmin = $query_churchadmin->result_array();
+                
+                $arr_churchadmin = explode(',', $result_churchadmin[0]['member']);
+                $arrmember1 = array_diff($arr_churchmember, $arr_churchadmin);
+                $arrmember2 = array_diff($arr_churchadmin, $arr_churchmember);
+                $member = implode(",",array_merge($arrmember1,$arrmember2));
+                $member = substr($member,0,-1);
+
+
                 $WHERE_COND = "";
                 $WHERE_COND_NOTEXACT = "";
 
@@ -797,22 +817,26 @@ class My_prayer_partners extends Base_controller {
                 $EXACT_WHERE = " 
 								  AND u.i_isdeleted = 1  
 								  AND u.i_status=1  
-								  AND u.e_want_prayer_partner = 'Y'
 								  AND u.id NOT IN (" . $exclude_id_csv . ")
 								  " . $s_where . "". $is_councillor ."  GROUP BY u.id";
 
                 $LIKE_WHERE = " 
 								  AND u.i_isdeleted = 1  
 								  AND u.i_status=1  
-								  AND u.e_want_prayer_partner = 'Y'
 								  AND u.id NOT IN (" . $exclude_id_csv . ")
 								  " . $s_like_where . "". $is_councillor ."  GROUP BY u.id";
+
+                $LIKE_WHERE_FOR_CHURCH = " 
+                                  AND u.i_isdeleted = 1  
+                                  AND u.i_status=1  
+                                  AND u.id NOT IN (" . $exclude_id_csv . ")
+                                  " . $s_like_where ."";
 
                 //$result = $this->my_prayer_partner_model->get_prayer_partner_suggestion($WHERE,$page,$this->pagination_per_page,$s_order_by);
                 //echo 'EXACT_WHERE::: '.$EXACT_WHERE;
                 //echo 'LIKE_WHERE::: '.$LIKE_WHERE; exit;
 
-                $result = $this->my_prayer_partner_model->get_prayer_partner_sugg($EXACT_WHERE, $LIKE_WHERE, $s_order_by, $page, $this->pagination_per_page);
+                $result = $this->my_prayer_partner_model->get_prayer_partner_sugg($EXACT_WHERE, $LIKE_WHERE,$LIKE_WHERE_FOR_CHURCH, $s_order_by, $page, $this->pagination_per_page,$member);
                 $resultCount = count($result);
                 #echo $this->db->last_query(); 
                 //pr($result);

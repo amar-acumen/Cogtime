@@ -2154,7 +2154,7 @@ color: #096aa7;
 
 .admin-menu ul li{ list-style-type:none; color:#48535a; font-size:14px; margin:0; padding:0; float:left;}
 
-.admin-menu ul li a{ margin:0 0 0 30px; padding:12px 0px 11px 0px; color:#fff; text-decoration:none; text-transform:uppercase; display:block; border-bottom:3px solid #3b3b3b;}
+.admin-menu ul li a{ margin:0 0 0 15px; padding:12px 0px 11px 0px; color:#fff; text-decoration:none; text-transform:uppercase; display:block; border-bottom:3px solid #3b3b3b;}
 
 .admin-menu ul li a:hover, .admin-menu ul li a.active{ color:#face01; border-bottom:3px solid #face01;}
 

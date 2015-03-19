@@ -28,7 +28,7 @@ class Church_public extends Base_controller
         try
         {
             parent::__construct();
-           // parent::_non_accessible_by_logged(); // put this code on those pages which are not accessable by logged in user
+            // put this code on those pages which are not accessable by logged in user
             # loading reqired model & helpers...
             $this->load->model('users_model');
             
@@ -58,13 +58,13 @@ class Church_public extends Base_controller
             parent::_set_meta_desc('');
             parent::_set_meta_keywords('');
         
-//
-            parent::_add_js_arr( array( //'js/ddsmoothmenu.js',
+            
+            parent::_add_js_arr( array( 'js/ddsmoothmenu.js',
 //                                        'js/switch.js','js/animate-collapse.js',
 //                                        'js/lightbox.js','js/jquery.dd.js','js/jquery-ui-1.8.2.custom.min.js',
 //                                        'js/stepcarousel.js',
 										'js/production/tweet_utilities.js',
-                                        'js/production/christian_news_js.js',
+                                        'js/production/christian_news_js.js'
 //										'js/tab.js',
 //										'js/jquery.flexslider.js'
 //										,'js/jquery.eislideshow.js',
@@ -72,13 +72,9 @@ class Church_public extends Base_controller
 //										'js/jquery.naviDropDown.1.0.js','js/church_login.js'
                                         ));
 //
-//            parent::_add_css_arr( array(
-//                                        /*'css/jquery-ui-1.8.2.custom.css',
+            parent::_add_css_arr( array(//'css/jquery-ui-1.8.2.custom.css',
 //                                          'css/dd.css',
-//										  'css/church.css'*/
-//
-//            ) );
-
+										  'css/church.css') );
             
                //$this->session->set_userdata('current_church_id', $c_id);
             $_SESSION['current_church_id'] = $c_id;
@@ -101,17 +97,19 @@ class Church_public extends Base_controller
 
     } // end of index   
     
-  public function church_registration_by_email($churchid,$byrequest,$invited_member_id)
+  public function church_registration_by_email($churchid,$byrequest)
   {
     $_SESSION['current_church_id'] = $churchid;
     $_SESSION['byrequest'] = $byrequest;
-	$_SESSION['invited_member_id'] = $invited_member_id;
-    header('location:'.base_url().'church_registration/');
+    $location = base_url()."church_registration/";
+    
+    header('location:'.$location.'');
     exit;
   }
     
    public function church_registration($churchid = '') {
         try {
+             parent::_non_accessible_by_logged();
             
             $data['church_arr'] =     $this->church_new_model->get_church_info($churchid);
 
@@ -132,19 +130,13 @@ class Church_public extends Base_controller
             parent::_set_meta_keywords('');
 
 
-            parent::_add_js_arr(array(
-                //'js/jquery.autofill.js',
-               // 'js/lightbox.js',
+            parent::_add_js_arr(array('js/jquery.autofill.js',
+                'js/lightbox.js',
                 //'js/jquery-1.5.2.js',
                 //'js/no-conflict.js',
-               // 'js/jquery.dd.js',
-               // 'js/church_login.js'
+                'js/jquery.dd.js','js/church_login.js'
             ));
-            parent::_add_css_arr(array(
-                //'css/recaptcha.css'
-                //'css/dd.css',
-                //'css/church.css'
-            ));
+            parent::_add_css_arr(array('css/recaptcha.css', 'css/dd.css','css/church.css'));
 
 
             if ($this->input->post('is_submitted') == 'Y') {
@@ -166,13 +158,13 @@ class Church_public extends Base_controller
 
                 $posted["txt_chat_display_name"] = trim($this->input->post("txt_chat_display_name"));
                 
-               
+                 /**********Arif***************/
                 $posted["day"]=trim($this->input->post("day"));
 			$posted["month"]=trim($this->input->post("month"));
 			$posted["year"]=trim($this->input->post("year"));
-             
+                /***************************/
        
-               
+                /**************new chat name validation 10-12-2014*****************************/
                 if($posted["txt_chat_display_name"] != '')
 				{
 				
@@ -181,10 +173,17 @@ class Church_public extends Base_controller
 				{
 				$containsLetter  = preg_match('/[a-zA-Z]/',    $posted["txt_chat_display_name"]);
 				$containsDigit   = preg_match('/\d/',          $posted["txt_chat_display_name"]);
-
+//				if($containsLetter == 1)
+//				{
+//				$data['error_chatname']="*your chat name must contain atleast 1 digit.";
+//				}
+				if($containsDigit == 1)
+				{
+				$data['error_chatname']="*your chat name must contain atleast 1 letter.";
 				}
 				}
-                       
+				}
+                        /******************************************************/
                 $this->form_validation->set_message('required', "Please provide" . " %s");
                 $this->form_validation->set_message('valid_email', "must contain a valid email address.");
                 //$this->form_validation->set_message('matches', "* Password verification failed.");
@@ -203,11 +202,11 @@ class Church_public extends Base_controller
 
                 $this->form_validation->set_rules('txt_chat_display_name', 'txt_chat_display_name', 'trim|required|callback_check_availability|callback_check_void_space_chat_name');
                    
-               
-            $this->form_validation->set_rules('day', 'Birth date', 'trim|required'); 
+                 /************************Arif***************************/
+                        $this->form_validation->set_rules('day', 'Birth date', 'trim|required'); 
 			$this->form_validation->set_rules('month','Birth date', 'trim|required'); 
 			$this->form_validation->set_rules('year', 'Birth date', 'trim|required'); 
-                       
+                        /***************************************************/
                 if ($posted["txt_password"] == '') {
                     $data['error_password'] = "* Required Field.";
                 }
@@ -238,14 +237,14 @@ class Church_public extends Base_controller
                 if ($posted["title"] == '-1') {
                     $data['error_title'] = '* Required Field.';
                 }
-                  
+                  /**************Arif**************/
                  if($posted["day"] == '-1' || $posted["month"] == '-1' || $posted["year"] == '-1'){
                 $data['dob'] = "* Required Field.";
             }
            if((date("Y")-$posted["year"]) < 18){
                 $data['dob'] = "your age should be 18+ ";
             }
-               
+                /******************************/
                 if ($posted["s_language"] == '-1') {
                     $data['txt_lang'] = '* Required Field.';
                 }
@@ -290,7 +289,7 @@ class Church_public extends Base_controller
                     $info['s_chat_display_name'] = get_formatted_string($posted['txt_chat_display_name']);
                     $info['s_tweet_id'] = '@' . $info['s_chat_display_name'];
                     $info['dt_dob'] = date('Y-m-d',mktime(0,0,0,$posted["month"],$posted["day"],$posted["year"]));
-                      //pr($info,1);
+                     // pr($info,1);
                     $USER_ID = $this->users_model->sign_up($info);
 
 
@@ -299,7 +298,8 @@ class Church_public extends Base_controller
                     // echo $USER_ID; exit;
 
                     if ($USER_ID > 0) {
-					
+
+
                         ## inserting into user alert table
                         $this->load->model('user_alert_model');
                         $user_alert['i_user_id'] = $USER_ID;
@@ -326,18 +326,16 @@ class Church_public extends Base_controller
                                'is_deleted' => 0
                             );
                         }
-                         $this->db->insert('cg_church_member', $data);
-
+                         $this->db->insert('cg_church_member', $data); 
 						if (isset($_SESSION['invited_member_id']) && $_SESSION['invited_member_id'] != '')
-						{
-							$invited_member = array(
-								'status' => '1',
-								'joined_on_date' => get_db_datetime()
-							);
-							$this->db->update('cg_church_member_invitation', $invited_member, array('id' => $_SESSION['invited_member_id']));
-							//echo $this->db->last_query();
-						}
-						
+	                      {
+                                $invited_member = array(
+                            'status' => '1',
+                            'joined_on_date' => get_db_datetime()
+                            );
+	                   $this->db->update('cg_church_member_invitation', $invited_member, array('id' => $_SESSION['invited_member_id']));
+	
+	                           }
                         ## end ##
                         //EMAIL SENDING CODE.[start]
 						 $this->load->helper('html');
@@ -440,9 +438,9 @@ class Church_public extends Base_controller
             //pr($data["captcha"]);
 
 
-          
+            /*             * ******************* Generating recaptcha html ********************* */
             $data['recaptcha_html'] = recaptcha_get_html($this->config->item('recaptcha_public_key'));
-         
+            /*             * ******************************************************************** */
             $c_id =  $_SESSION['current_church_id'];
             $data['church_arr'] =     $this->church_new_model->get_church_info($c_id);
             ### fetch private policy and terms and conditions
@@ -487,6 +485,7 @@ class Church_public extends Base_controller
     }
 
     public function registration_success() {
+         parent::_non_accessible_by_logged();
         $posted = array();
         $this->data["posted"] = $posted; /* don't change */
         $data = $this->data;
@@ -501,18 +500,13 @@ class Church_public extends Base_controller
         parent::_set_meta_keywords('');
 
 
-        parent::_add_js_arr(array(
-            //'js/jquery.autofill.js',
-            //'js/lightbox.js',
+        parent::_add_js_arr(array('js/jquery.autofill.js',
+            'js/lightbox.js',
             //'js/jquery-1.5.2.js',
             //'js/no-conflict.js',
-            //'js/jquery.dd.js',
-            //'js/church_login.js'
+            'js/jquery.dd.js','js/church_login.js'
         ));
-        parent::_add_css_arr(array(
-            //'css/recaptcha.css',
-            //'css/dd.css','css/church.css'
-        ));
+        parent::_add_css_arr(array('css/recaptcha.css', 'css/dd.css','css/church.css'));
         $c_id =  $_SESSION['current_church_id'];
          $data['church_arr'] =     $this->church_new_model->get_church_info($c_id);
         $VIEW = "church_registration_success.phtml";
@@ -525,6 +519,7 @@ class Church_public extends Base_controller
         $info = $this->users_model->fetch_this($id);
         $USER_ID = $id;
         if ($info['i_status'] == 1) {
+
             ## AUTO LOGIN for user ##
             //pr($info,1);;
             $this->session->set_userdata('login_referrer', '');
@@ -547,7 +542,6 @@ class Church_public extends Base_controller
             $this->session->set_userdata('display_username', $info["s_chat_display_name"]);
 
             //$_SESSION['username'] = 'jhon';
-			//echo '========'.$_SESSION['first_login'];exit;
             ### generating five fruits
             $this->load->model('bible_fruits_model');
             $this->bible_fruits_model->generate_fruit_list_per_user_id_date();
@@ -591,13 +585,93 @@ class Church_public extends Base_controller
             $SUCCESS_PG = base_url() . 'my-wall.html'; #."inscription-success.html";
 
             header("location:" . $SUCCESS_PG);
-			
         } else {
             header("location:" . base_url());
         }
     }
 
- 
+ public function already_user($churchid,$byrequest,$user_id,$member_id)
+  {
+    // echo $churchid.'/'.$user_id.'/'.$member_id;
+     
+    // die('ok');
+    $_SESSION['current_church_id'] = $churchid;
+    $_SESSION['byrequest'] = $byrequest;
+    
+    /*****************update invite table*****************************************/
+   
+    /*****************insert in member table*****************************/
+    
+    
+    
+    $data = array(
+   'church_id' => $churchid ,
+   'member_id' => $user_id ,
+   'is_approved' => 1,
+    'created_date' => get_db_datetime(),
+      'is_deleted'=> 0  
+);
+
+$this->db->insert('cg_church_member', $data); 
+    /**************************************************/
+$info = $this->users_model->fetch_this($user_id);
+        $USER_ID = $user_id;
+         if ($info['i_status'] == 1) {
+             
+             
+             get_all_church_session($churchid);
+             $data = array(
+               'status' => 1,
+               
+               'joined_on_date' => get_db_datetime
+            );
+
+$this->db->where('id', $member_id);
+$this->db->update('cg_church_member_invitation', $data);  
+
+
+
+             $this->session->set_userdata('login_referrer', '');
+                    $this->session->set_userdata('loggedin', true);
+                    $this->session->set_userdata('user_id', encrypt($info["id"]));
+                    $this->session->set_userdata('username', $info["s_first_name"]);
+                    $this->session->set_userdata('user_type', $info["i_user_type"]);
+                    $this->session->set_userdata('email', $info["s_email"]);
+                    $this->session->set_userdata('user_lastname', $info["s_last_name"]);
+                    $this->session->set_userdata('is_admin', $info["i_is_admin"]);
+                    $this->session->set_userdata('upassword', $info["s_password"]);
+                    $this->session->set_userdata('IMuserid', ($ret_["id"]));
+                    $this->session->set_userdata('s_profile_photo', ($info['s_profile_photo']));
+                    $this->session->set_userdata('e_gender', ($info['e_gender']));
+					$this->session->set_userdata('s_time', ($info['s_time']));
+					$this->session->set_userdata('s_bio', ($info['s_bio']));
+                    $this->session->set_userdata('unique_username', $info["s_profile_url_suffix"]);
+                    $this->session->set_userdata('display_username', $info["s_chat_display_name"]);
+                    $this->session->set_userdata('s_tweet_bg_img', $info["s_tweet_bg_img"]);
+                     $this->session->set_userdata('s_tweet_id', ($info['s_tweet_id']));
+                      $this->session->set_userdata('s_profile_name', ($info['s_profile_name']));
+					$this->session->set_userdata('s_chat_display_name', $info["s_chat_display_name"]);
+					$this->session->set_userdata('e_want_net_pal', $info["e_want_net_pal"]);
+					$this->session->set_userdata('e_want_prayer_partner', $info["e_want_prayer_partner"]);
+					$this->session->set_userdata('is_pr_partner_q_mail_sent', $info["is_pr_partner_q_mail_sent"]);
+					$this->session->set_userdata('is_netpal_q_mail_sent', $info["is_netpal_q_mail_sent"]);
+					$this->session->set_userdata('s_timezone_text', $info["s_timezone_text"]);
+                    //$_SESSION['username'] = 'jhon';
+                    $this->session->set_userdata('is_first_login_checked', 'false');
+                        //$this->mail_contents_model->get_by_name("acknowledgement");
+
+                    //$this->set_user_online($info["id"], $_SERVER['REMOTE_ADDR']);
+                    $loc = base_url().$churchid.'/church-wall';
+            header("location:" . $loc);
+         }
+        
+        //get_all_church_session($churchid);
+     
+    
+    
+    
+    exit;
+  }
     
 }   // end of controller...
 

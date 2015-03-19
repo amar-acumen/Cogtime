@@ -20,10 +20,10 @@ class User_alert_model extends Base_model
 	
 	public function get_by_user_id($id, $start_limit="", $no_of_page="") {
 		if("$start_limit" == "") {
-			$sql = sprintf('SELECT * FROM '.$this->db->USER_ALERTS.'  where i_user_id = %s',  $id);
+			$sql = 'SELECT * FROM '.$this->db->USER_ALERTS.'  where i_user_id = "'.$id.'"';
 		}
 		else {
-			$sql = sprintf('SELECT * FROM '.$this->db->USER_ALERTS.'  where i_user_id = %s limit %s, %s',  $id, $start_limit, $no_of_page);
+			$sql = 'SELECT * FROM '.$this->db->USER_ALERTS.'  where i_user_id = "'.$id.'" limit '.$start_limit.', '.$no_of_page;
 		}
 
 		$query = $this->db->query($sql); #echo $this->db->last_query(); exit;
@@ -56,9 +56,8 @@ class User_alert_model extends Base_model
 	public function change_status($status ,$id) {
 		
 	  if($status !='' && $id !=''){	
-		  $sql = sprintf( "UPDATE {$this->db->USER_ALERTS}  SET `i_status` = '%s'
-						   WHERE `id` ='%s'"
-					  ,  $status, $id );
+		  $sql = "UPDATE {$this->db->USER_ALERTS}  SET `i_status` = '".$status."'
+						   WHERE `id` ='".$id."'";
 		  $this->db->query($sql);// echo $this->db->last_query();exit;
 		  return true;
 	  }
@@ -67,7 +66,7 @@ class User_alert_model extends Base_model
 	
 	public function check_option_user_id($id) {
 		
-		$sql = sprintf('SELECT * FROM '.$this->db->USER_ALERTS.'  where i_user_id = %s ',  $id);
+		$sql = 'SELECT * FROM '.$this->db->USER_ALERTS.'  where i_user_id = "'.$id.'" ';
 
 		$query = $this->db->query($sql); //echo $this->db->last_query(); 
 		$result_arr = $query->result_array();
@@ -222,7 +221,7 @@ class User_alert_model extends Base_model
 	
 	public function get_email_by_user_id($id) {
 	
-			$sql = sprintf('SELECT count(*) as count FROM '.$this->db->USER_EMAIL_ALERTS.'  where i_user_id = %s',  $id);
+			$sql = 'SELECT count(*) as count FROM '.$this->db->USER_EMAIL_ALERTS.'  where i_user_id = "'.$id.'"';
 		
 
 		$query = $this->db->query($sql); #echo $this->db->last_query(); exit;
@@ -233,7 +232,7 @@ class User_alert_model extends Base_model
 			$this->db->insert($this->db->USER_EMAIL_ALERTS,$arr);
 		}
 		
-		$sql1 = sprintf('SELECT * FROM '.$this->db->USER_EMAIL_ALERTS.'  where i_user_id = %s',  $id);
+		$sql1 = 'SELECT * FROM '.$this->db->USER_EMAIL_ALERTS.'  where i_user_id = "'.$id.'"';
 
 		
 		$query1 = $this->db->query($sql1); #echo $this->db->last_query(); exit;
@@ -258,7 +257,7 @@ class User_alert_model extends Base_model
 		$this->db->update($this->db->USER_EMAIL_ALERTS, $arr, array('i_user_id'=>$id)); //echo $this->db->last_query();
 	}
 	public function check_option_email_user_id($id) {
-		$sql = sprintf('SELECT count(*) as count FROM '.$this->db->USER_EMAIL_ALERTS.'  where i_user_id = %s',  $id);
+		$sql = 'SELECT count(*) as count FROM '.$this->db->USER_EMAIL_ALERTS.'  where i_user_id = "'.$id.'"';
 		
 
 		$query = $this->db->query($sql); #echo $this->db->last_query(); exit;
@@ -268,7 +267,7 @@ class User_alert_model extends Base_model
 			$arr['i_user_id']=$id;
 			$this->db->insert($this->db->USER_EMAIL_ALERTS,$arr);
 		}
-		$sql1 = sprintf('SELECT * FROM '.$this->db->USER_EMAIL_ALERTS.'  where i_user_id = %s ',  $id);
+		$sql1 = 'SELECT * FROM '.$this->db->USER_EMAIL_ALERTS.'  where i_user_id = "'.$id.'" ';
 
 		$query1 = $this->db->query($sql1); //echo $this->db->last_query(); 
 		$result_arr1 = $query1->result_array();

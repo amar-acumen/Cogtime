@@ -519,7 +519,7 @@ class Data_messages_model extends Base_model
 	
 		/* for extra validation that user is the owner */
 	function delete_by_id_receiver($id, $user_id) {
-		$sql = sprintf( 'UPDATE  %smessages SET i_is_deleted_by_receiver = 1 WHERE id=%s and i_receiver_id = %s', $this->db->dbprefix, $id, $user_id );
+		$sql = 'UPDATE  cg_messages SET i_is_deleted_by_receiver = 1 WHERE id="'.$id.'" and i_receiver_id = "'.$user_id.'"' ;
 
 		$this->db->query($sql);
 	}
@@ -527,7 +527,7 @@ class Data_messages_model extends Base_model
 	
 		/* for extra validation that user is the owner */
 	function delete_by_id_sender($id, $user_id) {
-		$sql = sprintf( 'UPDATE  %smessages SET i_is_deleted_by_sender = 1 WHERE id=%s and i_sender_id = %s', $this->db->dbprefix, $id, $user_id );
+		$sql = 'UPDATE  cg_messages SET i_is_deleted_by_sender = 1 WHERE id="'.$id.'" and i_sender_id = "'.$user_id.'"';
 
 		$this->db->query($sql);
 	}
@@ -662,13 +662,13 @@ class Data_messages_model extends Base_model
 	}
 	
 	function delete_from_trash($id, $fld_type ) {
-		$sql = sprintf( 'UPDATE  %smessages SET %s = 2 WHERE id=%s ', $this->db->dbprefix, $fld_type, $id );
+		$sql = 'UPDATE  cg_messages SET '.$fld_type.' = 2 WHERE id="'.$id.'" ';
 		$this->db->query($sql);
 	}
 	
 	
 	function moved_from_trash($id, $fld_type ) {
-		$sql = sprintf( 'UPDATE  %smessages SET %s = 0 WHERE id=%s ', $this->db->dbprefix, $fld_type, $id );
+		$sql = 'UPDATE  cg_messages SET '.$fld_type.' = 0 WHERE id="'.$id.'" ';
 		$this->db->query($sql);
 	}
         

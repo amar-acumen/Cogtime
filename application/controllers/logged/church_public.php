@@ -570,7 +570,7 @@ class Church_public extends Base_controller
                         //send_mail($arr);
 						$this->email->send();
            // send_mail($arr);
-            // $this->set_user_online($USER_ID, $_SERVER['REMOTE_ADDR']);
+             $this->set_user_online($USER_ID, $_SERVER['REMOTE_ADDR']);
             $SUCCESS_PG = base_url() . 'my-wall.html'; #."inscription-success.html";
 
             header("location:" . $SUCCESS_PG);

@@ -123,9 +123,8 @@ class Cms_model extends Base_model
 	public function change_status($status ,$id) {
 		
 	  if($status !='' && $id !=''){	
-		  $sql = sprintf( "UPDATE {$this->db->CMS_PAGE}  SET `i_status` = '%s'
-						   WHERE `id` ='%s'"
-					  ,  $status, $id );
+		  $sql = "UPDATE {$this->db->CMS_PAGE}  SET `i_status` = '".$status."'
+						   WHERE `id` ='".$id."'";
 		  $this->db->query($sql);// echo $this->db->last_query();exit;
 		  return true;
 	  }

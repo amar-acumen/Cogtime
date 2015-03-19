@@ -160,12 +160,12 @@ class Prayer_wall_model extends Base_model
 	
 	
 	public function get_total_commitments_prayer_wall($i_prayer_req_id) {
-		$sql = sprintf("SELECT count(*) count 
+		$sql = "SELECT count(*) count 
 						 
-						 FROM %1\$sbible_prayer_commitments c, %1\$susers u
+						 FROM cg_bible_prayer_commitments c, cg_users u
 						 LEFT JOIN {$this->db->COUNTRY} mst_c on mst_c.id=u.i_country_id
-						 WHERE c.i_user_id=u.id AND c.i_prayer_req_id = %2\$s 
-						 order by c.dt_created_on", $this->db->dbprefix, intval($i_prayer_req_id));
+						 WHERE c.i_user_id=u.id AND c.i_prayer_req_id = '".intval($i_prayer_req_id)."' 
+						 order by c.dt_created_on";
 
 		$query = $this->db->query($sql); //echo nl2br($sql);
 		$result_arr = $query->result_array();
@@ -208,7 +208,7 @@ class Prayer_wall_model extends Base_model
 	public function get_testimony_by_prayer_id($i_prayer_req_id) { 
         
 		
-			$sql = sprintf("SELECT p.*,
+			$sql = "SELECT p.*,
 								   mst_c.s_country,
 								   CONCAT(u.s_first_name,' ', u.s_last_name) s_profile_name,
 								   u.s_profile_photo,
@@ -220,10 +220,8 @@ class Prayer_wall_model extends Base_model
 						LEFT JOIN cg_users u  ON p.i_user_id=u.id
 						LEFT JOIN {$this->db->COUNTRY} mst_c on mst_c.id=u.i_country_id
 						WHERE p.id = pt.i_prayer_req_id
-						    AND pt.i_prayer_req_id = %2\$s 
-						 ", 
-						 $this->db->dbprefix,
-						 intval($i_prayer_req_id));
+						    AND pt.i_prayer_req_id = '".intval($i_prayer_req_id)."' 
+						 ";
 	
 		$query = $this->db->query($sql); 
     //echo $this->db->last_query();
@@ -236,18 +234,18 @@ class Prayer_wall_model extends Base_model
 	public function delete_by_id($id) {
 		
 		## deleting commitments 
-		 $sql = sprintf( 'DELETE FROM %sbible_prayer_commitments WHERE i_prayer_req_id=%s  ', $this->db->dbprefix, $id);
+		 $sql = 'DELETE FROM cg_bible_prayer_commitments WHERE i_prayer_req_id="'.$id.'"  ';
 
 		$this->db->query($sql);
 		
 		#### deleting testimony
-		 $sql = sprintf( 'DELETE FROM %sbible_prayer_request_testimonies WHERE i_prayer_req_id=%s  ', $this->db->dbprefix, $id);
+		 $sql = 'DELETE FROM cg_bible_prayer_request_testimonies WHERE i_prayer_req_id="'.$id.'"  ';
 
 		$this->db->query($sql);
 		
 		## deleting prayer request
 		
-		 $sql = sprintf( 'DELETE FROM %sbible_prayer_request WHERE id=%s  ', $this->db->dbprefix, $id);
+		 $sql = 'DELETE FROM cg_bible_prayer_request WHERE id="'.$id.'"  ';
 
 		$this->db->query($sql);
 		
@@ -330,7 +328,7 @@ class Prayer_wall_model extends Base_model
 		//echo "where/ ".$s_where."---------------";
 		//$ORDERBY = trim($s_order_by)!=""?" ORDER BY ".$s_order_by."":"ORDER BY id asc";
 		$user_id = decrypt($this->session->userdata('user_id'));
-		$sql = sprintf(" SELECT derived_tbl.* FROM (
+		$sql = " SELECT derived_tbl.* FROM (
 							(SELECT 
 
 								  t.id testimony_id,
@@ -355,7 +353,7 @@ class Prayer_wall_model extends Base_model
 								LEFT JOIN {$this->db->COUNTRY} mst_c on mst_c.id=u.i_country_id
 								WHERE   p.i_isenabled=1  
 								 
-								 %1\$s   
+								 ".$s_where."   
 							     )
                             
                             UNION
@@ -373,7 +371,7 @@ class Prayer_wall_model extends Base_model
 								  p.dt_end_date prayer_req_end_date,
 								  p.dt_insert_date prayer_req_insert_date,
 								  CONCAT(u.s_first_name,' ',u.s_last_name) posted_by,u.s_profile_photo,u.e_gender,
-								  (SELECT 'Y' FROM {$this->db->BIBLE_PRAYER_REQUEST} p1 WHERE p1.i_user_id = '%5\$s' AND p1.id=p.id
+								  (SELECT 'Y' FROM {$this->db->BIBLE_PRAYER_REQUEST} p1 WHERE p1.i_user_id = '".$user_id."' AND p1.id=p.id
 								  ) as owner_post
 								  
 								FROM {$this->db->BIBLE_PRAYER_REQUEST_TESTIMONIES} t
@@ -382,9 +380,9 @@ class Prayer_wall_model extends Base_model
 								LEFT JOIN {$this->db->USERS} u ON u.id = p.i_user_id
 								LEFT JOIN {$this->db->COUNTRY} mst_c on mst_c.id=u.i_country_id
 								WHERE  p.i_isenabled=1   
-							 %2\$s                                      
-                             )) as  derived_tbl ORDER BY testimony_id DESC  %4\$s  "
-						, $s_where,$s_like_where, $timestamp, $limit , $user_id);
+							 ".$s_like_where."                                      
+                             )) as  derived_tbl ORDER BY testimony_id DESC  ".$limit;
+							 /*$s_where,$s_like_where, $timestamp, $s_where, $user_id*/
                         
 		//echo nl2br($sql); exit;
 
@@ -398,7 +396,7 @@ class Prayer_wall_model extends Base_model
 	public function gettotal_my_testimony_list($s_where=null,$s_like_where =null) {
 		
 		$user_id = decrypt($this->session->userdata('user_id'));
-		$sql = sprintf(" SELECT count(*) as count FROM (
+		$sql = " SELECT count(*) as count FROM (
 							(SELECT 
 								  
 								  t.id testimony_id
@@ -410,7 +408,7 @@ class Prayer_wall_model extends Base_model
 								LEFT JOIN {$this->db->COUNTRY} mst_c on mst_c.id=u.i_country_id
 								WHERE  p.i_isenabled=1  
 								 
-								 %1\$s   
+								 ".$s_where."   
 							     ORDER BY testimony_id DESC )
                             
                             UNION
@@ -425,10 +423,9 @@ class Prayer_wall_model extends Base_model
 								LEFT JOIN {$this->db->USERS} u ON u.id = p.i_user_id
 								LEFT JOIN {$this->db->COUNTRY} mst_c on mst_c.id=u.i_country_id
 								WHERE  p.i_isenabled=1    
-							 %2\$s                                      
-                            ORDER BY testimony_id DESC )) as  derived_tbl  "
-						, $s_where,$s_like_where, $timestamp, $user_id);
-
+							 ".$s_like_where."                                      
+                            ORDER BY testimony_id DESC )) as  derived_tbl  ";
+							/*$s_where,$s_like_where, $timestamp, $user_id*/
 		$query = $this->db->query($sql);
 		$result_arr = $query->result_array();
 

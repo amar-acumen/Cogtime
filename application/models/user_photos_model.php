@@ -202,10 +202,10 @@ class User_photos_model extends Base_model
 	}*/
 		
 	public function get_total_allphotos_with_comments_by_user_id_($user_id, $s_where) {
-		$sql = sprintf("SELECT count(*) count FROM ".$this->db->USER_PHOTOS." AS up, {$this->db->photoalbum_privacy} AS pr  
+		$sql = "SELECT count(*) count FROM ".$this->db->USER_PHOTOS." AS up, {$this->db->photoalbum_privacy} AS pr  
 						where pr.i_photo_album_id=up.i_photo_album_id 
 									AND pr.i_user_id='".$logged_user_id."' AND 
-									up.i_status =1 AND  up.i_user_id = '%s' %s ", $user_id, $s_where);
+									up.i_status =1 AND  up.i_user_id = '".$user_id."' ".$s_where;
 		$query = $this->db->query($sql);
 		$result_arr = $query->result_array();
 
@@ -219,11 +219,11 @@ class User_photos_model extends Base_model
 	### by mediad id ###
 	public function get_user_details_by_media_id($media_id, $s_where="", $start_limit="", $no_of_page="") {
 		if("$start_limit" == "") {
-			$sql = sprintf('SELECT * FROM '.$this->db->USER_PHOTOS.'  WHERE id = %s %s ORDER BY id DESC ',$media_id,$s_where);
+			$sql = 'SELECT * FROM '.$this->db->USER_PHOTOS.'  WHERE id = "'.$media_id.'" {$s_where} ORDER BY id DESC ';
 		}
 		else {
-			 $sql = sprintf('SELECT * FROM '.$this->db->USER_PHOTOS
-								.'  WHERE id = %s %s ORDER BY id DESC LIMIT %s, %s ', $media_id, $s_where, $start_limit, $no_of_page);
+			 $sql = 'SELECT * FROM '.$this->db->USER_PHOTOS
+								.'  WHERE id = "'.$media_id.'" {$s_where} ORDER BY id DESC LIMIT '.$start_limit.', '.$no_of_page, $media_id, $s_where, , ;
 		}
 
 		$query = $this->db->query($sql);

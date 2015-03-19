@@ -93,7 +93,7 @@ class Ring_post_comments_model extends CI_Model {
 	public function get_by_ring_post_id($i_media_id,$i_start_limit="", $i_no_of_page="") { 
         
 		if("$i_start_limit" == "") {
-			$sql = sprintf("SELECT c.id, 
+			$sql = "SELECT c.id, 
 								  
 								   c.i_ring_post_id,
 								   c.i_user_id, 
@@ -103,16 +103,14 @@ class Ring_post_comments_model extends CI_Model {
 								   u.s_profile_photo, 
 								   u.s_first_name as pseudo ,
 								   u.e_gender
-						FROM %1\$suser_ring_post_comments  c, %1\$susers u 
+						FROM cg_user_ring_post_comments  c, cg_users u 
 						WHERE c.i_user_id=u.id 
-						    AND c.i_ring_post_id = %2\$s 
+						    AND c.i_ring_post_id = '".intval($i_media_id)."' 
 							
-						   ORDER BY c.dt_created_on DESC", 
-						   $this->db->dbprefix, 
-						   intval($i_media_id));
+						   ORDER BY c.dt_created_on DESC";
 		}
 		else {
-			$sql = sprintf("SELECT c.id, 
+			$sql = "SELECT c.id, 
 								   c.i_ring_post_id,
 								   c.i_user_id, 
 								   c.s_contents, 
@@ -121,15 +119,11 @@ class Ring_post_comments_model extends CI_Model {
 								   u.s_profile_photo, 
 								  
 								   u.s_first_name as pseudo 
-					    FROM %1\$suser_ring_post_comments c, %1\$susers u 
+					    FROM cg_user_ring_post_comments c, cg_users u 
 						WHERE c.i_user_id=u.id
-						 AND c.i_ring_post_id = %2\$s 
+						 AND c.i_ring_post_id = '".intval($i_media_id)."' 
 						 
-						 ORDER BY dt_created_on DESC LIMIT %3\$s, %4\$s", 
-						 $this->db->dbprefix,
-						 intval($i_media_id), 
-						 intval($i_start_limit), 
-						 intval($i_no_of_page));
+						 ORDER BY dt_created_on DESC LIMIT ".intval($i_start_limit).", ".intval($i_no_of_page);
 		}
 
         
@@ -143,7 +137,7 @@ class Ring_post_comments_model extends CI_Model {
 	
 
 	public function get_total_by_ring_post_id($i_media_id) {
-		$sql = sprintf("SELECT count(*) count FROM %1\$suser_ring_post_comments c, %1\$susers u WHERE c.i_user_id=u.id AND c.i_ring_post_id = %2\$s  order by c.dt_created_on", $this->db->dbprefix, intval($i_media_id) );
+		$sql = "SELECT count(*) count FROM cg_user_ring_post_comments c, cg_users u WHERE c.i_user_id=u.id AND c.i_ring_post_id = '".intval($i_media_id)."'  order by c.dt_created_on";
 
 		$query = $this->db->query($sql); //echo nl2br($sql);
 		$result_arr = $query->result_array();
@@ -187,12 +181,12 @@ class Ring_post_comments_model extends CI_Model {
 
 	public function delete_by_id($id, $s_media_type) {
 		
-		$sql = sprintf( 'DELETE FROM %suser_ring_post_comments WHERE i_ring_post_id =%s AND s_media_type = "%s" ', $this->db->dbprefix, $id, $s_media_type );
+		$sql = 'DELETE FROM cg_user_ring_post_comments WHERE i_ring_post_id ="'.$id.'" AND s_media_type = "'.$s_media_type.'" ';
 
 		$this->db->query($sql);
 		
 		# delete from like table #
-		$sql = sprintf( "DELETE FROM %suser_ring_post_like WHERE i_ring_post_id =%s AND s_media_type = '%s'" , $this->db->dbprefix, $id , $s_media_type);
+		$sql = "DELETE FROM cg_user_ring_post_like WHERE i_ring_post_id ='".$id."' AND s_media_type = '".$s_media_type."'";
 
 		$this->db->query($sql); 
 	}

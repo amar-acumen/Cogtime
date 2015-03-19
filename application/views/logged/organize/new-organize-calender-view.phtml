@@ -68,6 +68,10 @@
 					
 								 $( "#current-month" ).datepicker( "setDate", selected_date );
                                 });
+                            
+                                $(function(){
+                                	$( "#current-month" ).datepicker( "setDate", '<?php echo date('m'); ?>/<?php echo date('d'); ?>/<?php echo date('Y'); ?>' );
+                                });
                             </script>
 
                             <div class="current-month" id="current-month"></div>

@@ -591,9 +591,8 @@ public function get_total_fav_tweets_by_user_id($i_user_id,  $s_where) {
 	public function change_status($status ,$id) {
 		
 	  if($status !='' && $id !=''){	
-		  $sql = sprintf( "UPDATE {$this->db->TWEETS} SET `i_isenabled` = '%s'
-						   WHERE `id` ='%s'"
-					  , $status, $id );
+		  $sql = "UPDATE {$this->db->TWEETS} SET `i_isenabled` = '".$status."'
+						   WHERE `id` ='".$id."'";
 		  $this->db->query($sql);// echo $this->db->last_query();exit;
 		  return true;
 	  }
@@ -633,9 +632,8 @@ public function get_total_fav_tweets_by_user_id($i_user_id,  $s_where) {
 	## updating tags score
 	
 	public function update_tags_score($i_score , $tag) {
-		$sql = sprintf( "UPDATE {$this->db->TWEETS_TRENDINGS} SET `i_score` = '%s'
-						   WHERE BINARY `s_tags` ='%s'"
-					  ,$i_score, $tag);
+		$sql = "UPDATE {$this->db->TWEETS_TRENDINGS} SET `i_score` = '".$i_score."'
+						   WHERE BINARY `s_tags` ='".$tag."'";
 	    $this->db->query($sql);// echo $this->db->last_query();exit;
 		return true;
 	}
@@ -643,7 +641,7 @@ public function get_total_fav_tweets_by_user_id($i_user_id,  $s_where) {
 	## getting total score by stags in trending
 	
 	public function getScore($tag) {
-		$sql = sprintf( "SELECT i_score FROM {$this->db->TWEETS_TRENDINGS} WHERE BINARY `s_tags` ='%s'", $tag);
+		$sql = "SELECT i_score FROM {$this->db->TWEETS_TRENDINGS} WHERE BINARY `s_tags` ='".$tag."'";
 	    $query = $this->db->query($sql);
 		$result_arr = $query->result_array();
 		return $result_arr[0]['i_score'];
@@ -663,7 +661,7 @@ public function get_total_fav_tweets_by_user_id($i_user_id,  $s_where) {
 	### REMOVING FAVOURITE TWEET IN TWEETS_FAV
 	public function remove_from_fav_tweet($id, $user_id) {
 	
-	     $sql = sprintf( 'DELETE FROM '.$this->db->TWEETS_FAV.' WHERE i_tweet_id=%s AND i_user_id = %s ', $id, $user_id);
+	     $sql = 'DELETE FROM '.$this->db->TWEETS_FAV.' WHERE i_tweet_id="'.$id.'" AND i_user_id = "'.$user_id.'" ';
 		 $this->db->query($sql);
 		#echo $this->db->last_query(); exit;
 	}

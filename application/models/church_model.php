@@ -102,9 +102,8 @@ class Church_model extends Base_model
 	
 	public function change_status($status ,$id) {
 		
-		  $sql = sprintf( "UPDATE {$this->db->CHURCH} SET `i_disabled` = '%s'
-						   WHERE `id` ='%s'"
-					  , $status, $id );
+		  $sql = "UPDATE {$this->db->CHURCH} SET `i_disabled` = '".$status."'
+						   WHERE `id` ='".$id."'";
 		  $this->db->query($sql); //echo $this->db->last_query();exit;
                   //
                    if($status == 2)

@@ -289,9 +289,8 @@ class Manage_advertisement_model extends Base_model
 	public function change_adv_status($status ,$id) {
 		
 	  if($status !='' && $id !=''){	
-		  $sql = sprintf( "UPDATE cg_advertisement SET `i_status` = '%s'
-						   WHERE `id` ='%s'"
-					  , $status, $id );
+		  $sql = "UPDATE cg_advertisement SET `i_status` = '".$status."'
+						   WHERE `id` ='".$id."'";
 		  $this->db->query($sql); //echo $this->db->last_query();exit;
 		  return true;
 	  }
@@ -446,9 +445,8 @@ class Manage_advertisement_model extends Base_model
     public function change_adv_status_media($status ,$id) {
 		
 	  if($status !='' && $id !=''){	
-		  $sql = sprintf( "UPDATE cg_media_center_advertisement SET `i_status` = '%s'
-						   WHERE `id` ='%s'"
-					  , $status, $id );
+		  $sql = "UPDATE cg_media_center_advertisement SET `i_status` = '".$status."'
+						   WHERE `id` ='".$id."'";
 		  $this->db->query($sql); //echo $this->db->last_query();exit;
 		  return true;
 	  }
