@@ -1692,15 +1692,15 @@ echo json_encode( array('success'=>'true'));
 					'church_id' => $_SESSION['logged_church_id'],
 					'invitation_sent_date' => get_db_datetime()
 				);
-				//$this->db->insert('cg_church_member_invitation', $invited_member);
-				//invte_id = $this->db->insert_id(); 
-                                        echo $invite_val[$i][1].'======';
+				$this->db->insert('cg_church_member_invitation', $invited_member);
+				$invte_id = $this->db->insert_id(); 
+                                       // echo $invite_val[$i][1].'======';
 				/********************************************************************/
                                 $query = $this->db->get_where('cg_users', array('s_email' => $invite_val[$i][1] ,'i_status' => 1));
                                                 $result = $query->result();
-                               pr($result);
-                                
-				$this->load->model('mail_contents_model');
+                             //  pr($result);
+                                if($result[0]->id == null){
+                                    $this->load->model('mail_contents_model');
 				$mail_info = $this->mail_contents_model->get_by_name("church_community_invitation_mail");
 
 				$subject = htmlspecialchars_decode($mail_info['subject'], ENT_QUOTES);
@@ -1717,6 +1717,30 @@ echo json_encode( array('success'=>'true'));
 				$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
 				//echo $body;exit;
 				mail($to, $subject, $message, $headers);
+                                    
+                                    
+                                    
+                                }else{
+                                    $this->load->model('mail_contents_model');
+				$mail_info = $this->mail_contents_model->get_by_name("church_community_invitation_mail");
+
+				$subject = htmlspecialchars_decode($mail_info['subject'], ENT_QUOTES);
+				$body = htmlspecialchars_decode($mail_info['body'], ENT_QUOTES);
+				$body = sprintf3( $body, array('churchurl'=> base_url().'already_user/'.$_SESSION['logged_church_id'].'/1/'.$result[0]->id.'/'.$add_mem_id) );
+						   
+				$to      = $invite_val[$i][1];
+				$subject = $subject;
+				$message = $body;
+				$headers = 'From: admin@cogtime.com' . "\r\n" .
+					'Reply-To: admin@cogtime.com' . "\r\n" .
+					'X-Mailer: PHP/' . phpversion() . "\r\n";
+				$headers  .= 'MIME-Version: 1.0' . "\r\n";
+				$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+				//echo $body;exit;
+				mail($to, $subject, $message, $headers);
+                                    
+                                }
+				
                                 /*********************************************************/
 				//echo json_encode(array('success'=>true,'arr_messages'=>$arr_messages,'msg'=>'Mail sent successfully'));
 				}
