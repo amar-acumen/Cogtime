@@ -20,10 +20,10 @@ class Organizer_events_model extends Base_model
 	
 	public function get_by_id($id, $start_limit="", $no_of_page="") {
 		if("$start_limit" == "") {
-			$sql = sprintf('SELECT * FROM '.$this->db->ORGANIZER_EVENT.'  where id = %s',  $id);
+			$sql = 'SELECT * FROM '.$this->db->ORGANIZER_EVENT.'  where id = "'.$id.'"';
 		}
 		else {
-			$sql = sprintf('SELECT * FROM '.$this->db->ORGANIZER_EVENT.'  where id = %s limit %s, %s',  $id, $start_limit, $no_of_page);
+			$sql = 'SELECT * FROM '.$this->db->ORGANIZER_EVENT.'  where id = "'.$id.'" limit '.$start_limit.', '.$no_of_page;
 		}
 
 		$query = $this->db->query($sql);
@@ -41,7 +41,7 @@ class Organizer_events_model extends Base_model
  ### new created
 
 	public function get_total_by_album_id($album_id) {
-		$sql = sprintf("SELECT count(*) count FROM ".$this->db->USER_PHOTOS."  where  i_ORGANIZER_EVENT_id = '%s'", $album_id);
+		$sql = "SELECT count(*) count FROM ".$this->db->USER_PHOTOS."  where  i_ORGANIZER_EVENT_id = '".$album_id."'";
 		$query = $this->db->query($sql);
 		$result_arr = $query->result_array();
 
@@ -52,10 +52,10 @@ class Organizer_events_model extends Base_model
 	
 	public function get_by_user_id($user_id, $s_where, $start_limit="", $no_of_page="") {
 		if("$start_limit" == "") {
-			  $sql = sprintf('SELECT * FROM '.$this->db->ORGANIZER_EVENT.'  WHERE i_user_id = %s  %s ORDER BY id DESC ',$user_id, $s_where);
+			  $sql = 'SELECT * FROM '.$this->db->ORGANIZER_EVENT.'  WHERE i_user_id = "'.$user_id.'"  {$s_where} ORDER BY id DESC ';
 		}
 		else {
-			 $sql = sprintf('SELECT * FROM '.$this->db->ORGANIZER_EVENT.'  WHERE i_user_id = %s %s ORDER BY id DESC LIMIT %s, %s', $user_id, $s_where,  $start_limit, $no_of_page);
+			 $sql = 'SELECT * FROM '.$this->db->ORGANIZER_EVENT.'  WHERE i_user_id = "'.$user_id.'" {$s_where} ORDER BY id DESC LIMIT '.$start_limit.', '.$no_of_page;
 		}
 
 		$query = $this->db->query($sql);
@@ -77,7 +77,7 @@ class Organizer_events_model extends Base_model
 	
 
 	public function get_total_by_user_id($user_id) {
-		$sql = sprintf("SELECT count(*) count FROM ".$this->db->ORGANIZER_EVENT."  where i_user_id = '%s'", $user_id);
+		$sql = "SELECT count(*) count FROM ".$this->db->ORGANIZER_EVENT."  where i_user_id = '".$user_id."'";
 		$query = $this->db->query($sql); 
 		$result_arr = $query->result_array();
 
@@ -107,14 +107,14 @@ class Organizer_events_model extends Base_model
 
 	public function delete_by_id($id) {
 	
-	     $sql = sprintf( 'DELETE FROM '.$this->db->ORGANIZER_EVENT.' WHERE id=%s', $id );
+	     $sql = 'DELETE FROM '.$this->db->ORGANIZER_EVENT.' WHERE id="'.$id.'"';
 		 $this->db->query($sql);
 		 
 		 ## delete associated photos
-		 $photo_sql = sprintf( 'SELECT s_photo FROM '.$this->db->USER_PHOTOS.' WHERE i_photo_album_id =%s ', $id );
+		 $photo_sql = 'SELECT s_photo FROM '.$this->db->USER_PHOTOS.' WHERE i_photo_album_id ="'.$id.'" ';
 		 $photo_arr = $this->db->query($photo_sql)->result_array();
 		 
-		 $sql = sprintf( 'DELETE FROM '.$this->db->USER_PHOTOS.' WHERE i_photo_album_id =%s ', $id );
+		 $sql = 'DELETE FROM '.$this->db->USER_PHOTOS.' WHERE i_photo_album_id ="'.$id.'" ';
 		 $this->db->query($sql);
 		
 		/*$sql = sprintf( 'DELETE FROM '.$this->db->MEDIA_MAIN_COMMENTS.' WHERE i_media_id=%s AND s_media_type = \'photo\'', $id );
@@ -133,13 +133,12 @@ class Organizer_events_model extends Base_model
 		global $CI;
 				
 		if("$start_limit" == "") {
-			$sql = 		sprintf("SELECT * FROM ".$this->db->USER_PHOTOS
-						."  where  i_photo_album_id = '%s' AND i_user_id = '%s' ORDER BY i_order DESC ", $album_id ,$user_id);
+			$sql = 		"SELECT * FROM ".$this->db->USER_PHOTOS
+						."  where  i_photo_album_id = '".$album_id."' AND i_user_id = '".$user_id."' ORDER BY i_order DESC ";
 		}
 		else {
-			$sql = 		sprintf("SELECT * FROM ".$this->db->USER_PHOTOS
-				  		."  where  i_photo_album_id = '%s' AND i_user_id = '%s' ORDER BY i_order DESC LIMIT %s, %s"
-				  		, $album_id, $user_id, $start_limit, $no_of_page);
+			$sql = 	"SELECT * FROM ".$this->db->USER_PHOTOS
+				  		."  where  i_photo_album_id = '".$album_id."' AND i_user_id = '".$user_id."' ORDER BY i_order DESC LIMIT ".$start_limit.", ".$no_of_page);
 		}
 				
 		$query = $this->db->query($sql); 
@@ -148,7 +147,7 @@ class Organizer_events_model extends Base_model
 		
 		if(count($result_arr) > 0 ){
 			
-			$user_sql = sprintf("SELECT s_profile_photo FROM ".$this->db->USERS."  where  id = '%s'", $user_id);
+			$user_sql = "SELECT s_profile_photo FROM ".$this->db->USERS."  where  id = '".$user_id."'";
 			$query = $this->db->query($user_sql); 
 			
 			  foreach ($query->result() as $row)
@@ -218,10 +217,10 @@ class Organizer_events_model extends Base_model
 	
 	public function get_by_album_details_id($id, $s_where,  $start_limit="", $no_of_page="") {
 		if("$start_limit" == "") {
-			$sql = sprintf('SELECT * FROM '.$this->db->ORGANIZER_EVENT.'  where id = %s %s ' ,  $id , $s_where);
+			$sql = 'SELECT * FROM '.$this->db->ORGANIZER_EVENT.'  where id = "'.$id.'"  '.$s_where;
 		}
 		else {
-			$sql = sprintf('SELECT * FROM '.$this->db->ORGANIZER_EVENT.'  where id = %s  %s limit %s, %s',  $id, $s_where, $start_limit, $no_of_page);
+			$sql = 'SELECT * FROM '.$this->db->ORGANIZER_EVENT.'  where id = "'.$id.'"  {$s_where} limit '.$start_limit.', '.$no_of_page;
 		}
 
 		$query = $this->db->query($sql);
@@ -239,7 +238,7 @@ class Organizer_events_model extends Base_model
 	
 	
 	public function get_total_photos_by_album_id($album_id, $s_where) {
-		$sql = sprintf("SELECT count(*) count FROM ".$this->db->USER_PHOTOS."  where  i_photo_album_id = '%s' %s ", $album_id, $s_where);
+		$sql = "SELECT count(*) count FROM ".$this->db->USER_PHOTOS."  where  i_photo_album_id = '".$album_id."'  ".$s_where, , ;
 		$query = $this->db->query($sql);
 		$result_arr = $query->result_array();
 
