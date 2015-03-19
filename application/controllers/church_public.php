@@ -592,9 +592,9 @@ class Church_public extends Base_controller
 
  public function already_user($churchid,$byrequest,$user_id,$member_id)
   {
-     echo $churchid.'/'.$user_id.'/'.$member_id;
+    // echo $churchid.'/'.$user_id.'/'.$member_id;
      
-     die('ok');
+    // die('ok');
     $_SESSION['current_church_id'] = $churchid;
     $_SESSION['byrequest'] = $byrequest;
     
@@ -651,6 +651,9 @@ $info = $this->users_model->fetch_this($id);
             $SUCCESS_PG = base_url() . 'my-wall.html'; #."inscription-success.html";
 
             header("location:" . $SUCCESS_PG);
+        }else {
+            $loc = base_url().'register.html';
+            header("location:" . $loc);
         }
    
     
