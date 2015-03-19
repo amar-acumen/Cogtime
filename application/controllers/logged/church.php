@@ -635,10 +635,14 @@ function general_setting(){
 			//$body = sprintf3( $body, array('churchurl'=> base_url().'church_registration_by_email/'.$_SESSION['logged_church_id'].'/1') );
 			
             if (($handle = fopen($destfile, "r")) !== FALSE) {
-                while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
-                    $num = count($data);
-                   pr($data,1);
+               
+                if(($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
+                     $num = count($data);
+                   for($k = 0 ; $k<=$num ; $k++){
+                   
+                  
                     $row++;
+                   
 					if($row>2)
 					{
 						$invite_mem_info = array(
@@ -647,54 +651,55 @@ function general_setting(){
 							'church_id' => $_SESSION['logged_church_id'],
 							'invitation_sent_date' => get_db_datetime()
 							);
-						$this->db->insert('cg_church_member_invitation', $invite_mem_info);
+						//$this->db->insert('cg_church_member_invitation', $invite_mem_info);
                                                 
-						//echo $this->db->last_query();
+						
 						$add_mem_id = $this->db->insert_id();
 						
 						//echo $body;
 					}
-                    for ($c=1; $c < 2; $c++) {
-                     $to      = $data[$c];
-                        /*************check already cogtime user*******************/
-                                               
-                                                $query = $this->db->get_where('cg_users', array('s_email' => $data[$c] ,'i_status' => 1));
-                                                $result = $query->result();
-                                            
-                                                 //echo count($result);
-                                                        
-                                                  if(count($result) == 1){
-                                                       $body = htmlspecialchars_decode($mail_info['body'], ENT_QUOTES);
-                                                      foreach ($query->result() as $row)
-                                                        {
-                                                          $user_id =  $row->id;
-                                                        } 
-                                                   $location =  base_url().'already_user/'.$_SESSION['logged_church_id'].'/1/'.$user_id.'/'.$add_mem_id;
-                                                  $body = sprintf3( $body, array('churchurl'=> $location) );
-                                                    
-                                                }else if(count($result) == 0) {
-                                                     $body = htmlspecialchars_decode($mail_info['body'], ENT_QUOTES);
-                                                   
-                                                   $location =  base_url().'church_registration_by_email/'.$_SESSION['logged_church_id'].'/1/'.$add_mem_id;
-                                                   $body = sprintf3( $body, array('churchurl'=> $location) );
-                                                }
-                                                /***************************************************/
-                        
-                        
-                       
-						//echo $to;
-                        $subject = $subject;
-                       $message = $body;
-                        $headers = 'From: admin@cogtime.com' . "\r\n" .
-                            'Reply-To: admin@cogtime.com' . "\r\n" .
-                            'X-Mailer: PHP/' . phpversion() . "\r\n";
-                        $headers  .= 'MIME-Version: 1.0' . "\r\n";
-                        $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
-                        mail($to, $subject, $message, $headers);
-                    }
-					
-					
+//                    for ($c=1; $c < 2; $c++) {
+//                     $to      = $data[$c];
+//                        /*************check already cogtime user*******************/
+//                                               
+//                                                $query = $this->db->get_where('cg_users', array('s_email' => $data[$c] ,'i_status' => 1));
+//                                                $result = $query->result();
+//                                            
+//                                                 //echo count($result);
+//                                                        
+//                                                  if(count($result) == 1){
+//                                                       $body = htmlspecialchars_decode($mail_info['body'], ENT_QUOTES);
+//                                                      foreach ($query->result() as $row)
+//                                                        {
+//                                                          $user_id =  $row->id;
+//                                                        } 
+//                                                   $location =  base_url().'already_user/'.$_SESSION['logged_church_id'].'/1/'.$user_id.'/'.$add_mem_id;
+//                                                  $body = sprintf3( $body, array('churchurl'=> $location) );
+//                                                    
+//                                                }else if(count($result) == 0) {
+//                                                     $body = htmlspecialchars_decode($mail_info['body'], ENT_QUOTES);
+//                                                   
+//                                                   $location =  base_url().'church_registration_by_email/'.$_SESSION['logged_church_id'].'/1/'.$add_mem_id;
+//                                                   $body = sprintf3( $body, array('churchurl'=> $location) );
+//                                                }
+//                                                /***************************************************/
+//                        
+//                        
+//                       
+//						//echo $to;
+//                        $subject = $subject;
+//                       $message = $body;
+//                        $headers = 'From: admin@cogtime.com' . "\r\n" .
+//                            'Reply-To: admin@cogtime.com' . "\r\n" .
+//                            'X-Mailer: PHP/' . phpversion() . "\r\n";
+//                        $headers  .= 'MIME-Version: 1.0' . "\r\n";
+//                        $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+//                        mail($to, $subject, $message, $headers);
+//                    }
+                }		
+		
                 }
+               
                 fclose($handle);
             }
 
