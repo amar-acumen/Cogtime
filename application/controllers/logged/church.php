@@ -643,26 +643,22 @@ function general_setting(){
                  
 					if($row>2)
 					{
-                                            echo $row;
+                                            
 						$invite_mem_info = array(
 							'name' => $data[0],
 							'email' => $data[1],
 							'church_id' => $_SESSION['logged_church_id'],
 							'invitation_sent_date' => get_db_datetime()
 							);
-                                                pr($invite_mem_info);
+                                               // pr($invite_mem_info);
 						$this->db->insert('cg_church_member_invitation', $invite_mem_info);
-                                                
+                                                $add_mem_id = $this->db->insert_id();
 						
-						//$add_mem_id = $this->db->insert_id();
-						
-						//echo $body;
-					}
-//                    for ($c=1; $c < 2; $c++) {
-//                     $to      = $data[$c];
+                                                echo $data[0].'===';
+//                                                $to      = $data[0];
 //                        /*************check already cogtime user*******************/
 //                                               
-//                                                $query = $this->db->get_where('cg_users', array('s_email' => $data[$c] ,'i_status' => 1));
+//                                                $query = $this->db->get_where('cg_users', array('s_email' => $data[0] ,'i_status' => 1));
 //                                                $result = $query->result();
 //                                            
 //                                                 //echo count($result);
@@ -695,6 +691,18 @@ function general_setting(){
 //                        $headers  .= 'MIME-Version: 1.0' . "\r\n";
 //                        $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
 //                        mail($to, $subject, $message, $headers);
+//                                                
+                                                
+                                                
+                                                
+                                                
+                                                
+					
+						
+						//echo $body;
+					}
+//                    for ($c=1; $c < 2; $c++) {
+                     
 //                    }
 					
 		
