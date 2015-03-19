@@ -679,10 +679,10 @@ function general_setting(){
                                                 /***************************************************/
                         
                         
-                        
+                        echo $body.'_'.$c;
 						//echo $to;
                         $subject = $subject;
-                      echo   $message = $body.'_'.$c;
+                       $message = $body.'_'.$c;
                         $headers = 'From: admin@cogtime.com' . "\r\n" .
                             'Reply-To: admin@cogtime.com' . "\r\n" .
                             'X-Mailer: PHP/' . phpversion() . "\r\n";
