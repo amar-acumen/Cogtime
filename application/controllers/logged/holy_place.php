@@ -390,9 +390,10 @@ class Holy_place extends Base_controller
 										'js/jquery.nicescroll.min.js',*/
 										'js/production/search.js'
                                         ));
+
                                         
-            parent::_add_css_arr( array('css/jquery-ui-1.8.2.custom.css',
-                                          'css/dd.css') );
+//            parent::_add_css_arr( array('css/jquery-ui-1.8.2.custom.css',
+//                                          'css/dd.css') );
 		   
 		   ### check if reading plan exists or not
 			$data	= $this->utility();
