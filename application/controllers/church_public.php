@@ -617,14 +617,19 @@ $this->db->insert('cg_church_member', $data);
 $info = $this->users_model->fetch_this($user_id);
         $USER_ID = $user_id;
          if ($info['i_status'] == 1) {
+             
+             
              get_all_church_session($churchid);
-              $data1 = array(
+             $data = array(
                'status' => 1,
-               'joined_on_date' =>get_db_datetime()
+               
+               'joined_on_date' => get_db_datetime
             );
 
 $this->db->where('id', $member_id);
-$this->db->update('cg_church_member_invitation', $data1); 
+$this->db->update('cg_church_member_invitation', $data);  
+
+
 
              $this->session->set_userdata('login_referrer', '');
                     $this->session->set_userdata('loggedin', true);
