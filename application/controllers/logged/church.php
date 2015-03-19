@@ -659,8 +659,8 @@ function general_setting(){
                                                                      /*************check already cogtime user*******************/
                                                 $query = $this->db->get_where('cg_users', array('s_email' => $invite_mem_info['email'] ,'i_status' => 1));
                                                 $result = $query->result();
-                                                 
-                                            pr($result);
+                                                     echo $result[0]->id;   
+                                            //pr($result);
                                                  //echo count($result);
                                                         
 //                                                  if(!empty($result) && count($result) == 1){
