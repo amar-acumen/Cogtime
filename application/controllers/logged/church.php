@@ -655,7 +655,7 @@ function general_setting(){
 						//echo $body;
 					}
                     for ($c=1; $c < 2; $c++) {
-                    echo     $to      = $data[$c].'/';
+                     $to      = $data[$c];
                         /*************check already cogtime user*******************/
                                                
                                                 $query = $this->db->get_where('cg_users', array('s_email' => $data[$c]));
