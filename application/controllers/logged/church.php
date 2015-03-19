@@ -637,8 +637,8 @@ function general_setting(){
             if (($handle = fopen($destfile, "r")) !== FALSE) {
                 while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
                     $num = count($data);
-                    $row++;
-					
+                   
+				echo $row++;	
 					if($row>2)
 					{
 						$invite_mem_info = array(
