@@ -695,9 +695,10 @@ function general_setting(){
                         mail($to, $subject, $message, $headers);
                     }
 					
-		$cn++;			
+		$cn++;	
+                echo $cn.'==';
                 }
-                echo $cn;
+               
                 fclose($handle);
             }
 
