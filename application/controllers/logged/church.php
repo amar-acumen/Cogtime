@@ -640,7 +640,7 @@ function general_setting(){
                     $num = count($data);
                   
                     $row++;
-                    echo $data[0];
+                   pr($data);
 					if($row>2)
 					{
 						$invite_mem_info = array(
