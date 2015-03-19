@@ -28,7 +28,7 @@ class Church_public extends Base_controller
         try
         {
             parent::__construct();
-            parent::_non_accessible_by_logged(); // put this code on those pages which are not accessable by logged in user
+            // put this code on those pages which are not accessable by logged in user
             # loading reqired model & helpers...
             $this->load->model('users_model');
             
@@ -109,7 +109,7 @@ class Church_public extends Base_controller
     
    public function church_registration($churchid = '') {
         try {
-            
+             parent::_non_accessible_by_logged();
             
             $data['church_arr'] =     $this->church_new_model->get_church_info($churchid);
 
@@ -485,6 +485,7 @@ class Church_public extends Base_controller
     }
 
     public function registration_success() {
+         parent::_non_accessible_by_logged();
         $posted = array();
         $this->data["posted"] = $posted; /* don't change */
         $data = $this->data;
