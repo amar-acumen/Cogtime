@@ -631,7 +631,7 @@ function general_setting(){
             /*$subject = sprintf3( $subject, array('sender_name'=> $profile_info["s_first_name"],
                               'project_name'=> $project_name
                            ));*/
-            $body = htmlspecialchars_decode($mail_info['body'], ENT_QUOTES);
+            //$body = htmlspecialchars_decode($mail_info['body'], ENT_QUOTES);
 			//$body = sprintf3( $body, array('churchurl'=> base_url().'church_registration_by_email/'.$_SESSION['logged_church_id'].'/1') );
 			
             if (($handle = fopen($destfile, "r")) !== FALSE) {
@@ -647,7 +647,7 @@ function general_setting(){
 							'church_id' => $_SESSION['logged_church_id'],
 							'invitation_sent_date' => get_db_datetime()
 							);
-						//$this->db->insert('cg_church_member_invitation', $invite_mem_info);
+						$this->db->insert('cg_church_member_invitation', $invite_mem_info);
                                                 
 						//echo $this->db->last_query();
 						$add_mem_id = $this->db->insert_id();
@@ -655,34 +655,36 @@ function general_setting(){
 						//echo $body;
 					}
                     for ($c=1; $c < 2; $c++) {
-                    echo     $to      = $data[$c].'/';
+                     $to      = $data[$c];
                         /*************check already cogtime user*******************/
                                                
                                                 $query = $this->db->get_where('cg_users', array('s_email' => $data[$c]));
                                                 $result = $query->result();
-                                            //   pr($result);
-                                                 foreach ($query->result() as $row)
+                                            
+                                                 //echo count($result);
+                                                        
+                                                  if(count($result) == 1){
+                                                       $body = htmlspecialchars_decode($mail_info['body'], ENT_QUOTES);
+                                                      foreach ($query->result() as $row)
                                                         {
                                                           $user_id =  $row->id;
                                                         }
-                                                        
-                                                  if(count($result) == 1){
-                                                      echo 'alm';
                                                    $location =  base_url().'already_user/'.$_SESSION['logged_church_id'].'/1/'.$user_id;
-                                                    $body[$c] = sprintf3( $body, array('churchurl'=> $location) );
+                                                  $body = sprintf3( $body, array('churchurl'=> $location) );
                                                     
                                                 }else if(count($result) == 0) {
-                                                    //echo 'new';
+                                                     $body = htmlspecialchars_decode($mail_info['body'], ENT_QUOTES);
+                                                   
                                                    $location =  base_url().'church_registration_by_email/'.$_SESSION['logged_church_id'].'/1/'.$add_mem_id;
-                                                   $body[$c] = sprintf3( $body, array('churchurl'=> $location) );
+                                                   $body = sprintf3( $body, array('churchurl'=> $location) );
                                                 }
                                                 /***************************************************/
                         
                         
-                        
+                       
 						//echo $to;
                         $subject = $subject;
-                      echo   $message = $body[$c];
+                       $message = $body;
                         $headers = 'From: admin@cogtime.com' . "\r\n" .
                             'Reply-To: admin@cogtime.com' . "\r\n" .
                             'X-Mailer: PHP/' . phpversion() . "\r\n";

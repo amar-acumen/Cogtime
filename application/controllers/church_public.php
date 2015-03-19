@@ -590,7 +590,16 @@ class Church_public extends Base_controller
         }
     }
 
- 
+ public function already_user($churchid,$byrequest,$user_id)
+  {
+     die('ok');
+    $_SESSION['current_church_id'] = $churchid;
+    $_SESSION['byrequest'] = $byrequest;
+    $location = base_url()."church_registration/";
+    
+    header('location:'.$location.'');
+    exit;
+  }
     
 }   // end of controller...
 
