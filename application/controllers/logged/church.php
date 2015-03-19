@@ -669,12 +669,12 @@ function general_setting(){
                                                   if(count($result) == 1){
                                                       
                                                    $location =  base_url().'already_user/'.$_SESSION['logged_church_id'].'/1/'.$user_id;
-                                                  echo  $body[$c] = sprintf3( $body, array('churchurl'=> $location) );
+                                                  $body.'_'.$c = sprintf3( $body, array('churchurl'=> $location) );
                                                     
                                                 }else if(count($result) == 0) {
                                                     //echo 'new';
                                                    $location =  base_url().'church_registration_by_email/'.$_SESSION['logged_church_id'].'/1/'.$add_mem_id;
-                                                   $body[$c] = sprintf3( $body, array('churchurl'=> $location) );
+                                                   $body.'_'.$c = sprintf3( $body, array('churchurl'=> $location) );
                                                 }
                                                 /***************************************************/
                         
@@ -682,7 +682,7 @@ function general_setting(){
                         
 						//echo $to;
                         $subject = $subject;
-                      echo   $message = $body[$c];
+                      echo   $message = $body.'_'.$c;
                         $headers = 'From: admin@cogtime.com' . "\r\n" .
                             'Reply-To: admin@cogtime.com' . "\r\n" .
                             'X-Mailer: PHP/' . phpversion() . "\r\n";
