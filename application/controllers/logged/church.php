@@ -637,6 +637,8 @@ function general_setting(){
             if (($handle = fopen($destfile, "r")) !== FALSE) {
                
                 if(($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
+                    $data = fgetcsv($handle, 1000, ",");
+                    pr($data,1);
                      $num = count($data);
                    for($k = 0 ; $k<=$num ; $k++){
                    
