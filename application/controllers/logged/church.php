@@ -651,7 +651,7 @@ function general_setting(){
 							'church_id' => $_SESSION['logged_church_id'],
 							'invitation_sent_date' => get_db_datetime()
 							);
-                                                pr($invite_mem_info);
+                                               // pr($invite_mem_info);
 						$this->db->insert('cg_church_member_invitation', $invite_mem_info);
                                                 $add_mem_id = $this->db->insert_id();
 						
@@ -667,7 +667,7 @@ function general_setting(){
                                                       $this->email->initialize($email_setting);
                                                 if($result[0]->id == null){
                                                     $location =  base_url().'church_registration_by_email/'.$_SESSION['logged_church_id'].'/1/'.$add_mem_id;
-                                                    echo 'new';
+                                                   // echo 'new';
                                                     $logo="http://cogtime.com/images/logo.png";
     $body = '<table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" bgcolor="#e9f3f5" style="font-family:Arial, Helvetica, sans-serif; font-size:13px; line-height:19px;">
   <tr>
@@ -684,7 +684,7 @@ function general_setting(){
 <p>You are invited to join church community. Please click on link and register to join the church community. </p>
 
 <p><a href='.$location.'>Click</a></p>
-            
+            <p>Team Cogtime</p>
 	</td>
 </tr>
   <tr>
@@ -714,7 +714,7 @@ $this->email->message("$body");
                                                     
                                                     
                                                 }else{
-                                                    echo 'old';
+                                                    //echo 'old';
                                                    $location =  base_url().'already_user/'.$_SESSION['logged_church_id'].'/1/'.$user_id.'/'.$add_mem_id;
                                                     $logo="http://cogtime.com/images/logo.png";
     $body = '<table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" bgcolor="#e9f3f5" style="font-family:Arial, Helvetica, sans-serif; font-size:13px; line-height:19px;">
@@ -732,7 +732,7 @@ $this->email->message("$body");
 <p>You are invited to join church community. Please click on link and register to join the church community. </p>
 
 <p><a href='.$location.'>Click</a></p>
-            
+      <p>Team Cogtime</p>      
 	</td>
 </tr>
   <tr>
