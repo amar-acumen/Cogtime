@@ -650,7 +650,7 @@ $info = $this->users_model->fetch_this($user_id);
 					$this->session->set_userdata('s_timezone_text', $info["s_timezone_text"]);
                     //$_SESSION['username'] = 'jhon';
                     $this->session->set_userdata('is_first_login_checked', 'false');
-                        $this->mail_contents_model->get_by_name("acknowledgement");
+                        //$this->mail_contents_model->get_by_name("acknowledgement");
 
                     //$this->set_user_online($info["id"], $_SERVER['REMOTE_ADDR']);
                     $loc = base_url().'my-wall.html';
