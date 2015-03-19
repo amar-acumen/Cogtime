@@ -1050,8 +1050,9 @@ class Contacts_model extends Base_model
       {   $j = 0;
           for($i=0;$i<3;$i++)
           {
-              if(count($ret)>0)
-                $friend_already_shown = ','.implode(',', $ret);
+           
+              if(count($already_added)>0)
+                $friend_already_shown = ','.implode(',', $already_added);
               else
                 $friend_already_shown = '';
 
@@ -1079,19 +1080,22 @@ class Contacts_model extends Base_model
               {
                 $result1[0]['mutualfrnd'] = $this->get_number_of_mutual_friends($i_user_id,$result1[0]['user_id']);
                 $ret[$j]      = $result1[0];
+                $already_added[$j]      = $result1[0]['user_id'];
                 $j++;
               }
               if(count($result1[1])>0)
               {
                 $result1[1]['mutualfrnd'] = $this->get_number_of_mutual_friends($i_user_id,$result1[1]['user_id']);
-                $ret[$j]      = $result1[1]; 
+                $ret[$j]      = $result1[1];
+                $already_added[$j]      = $result1[1]['user_id']; 
                 $j++;
               }
               
               
           }  
       }
-            
+      
+      
       return $ret;
   }
 
