@@ -1028,7 +1028,7 @@ class Contacts_model extends Base_model
 
 
   public function get_mutual_friends_by_user_for_wall($i_user_id) {
-      echo '========='.$s_qry = "select group_concat( tab1.user_id separator ',') as frnd_id from 
+      $s_qry = "select group_concat( tab1.user_id separator ',') as frnd_id from 
                   (
                       (select DISTINCT i_accepter_id as user_id
                                              from cg_user_contacts where (i_requester_id ='" . $i_user_id . "') 
@@ -1045,12 +1045,16 @@ class Contacts_model extends Base_model
       $result=$this->db->query($s_qry)->result_array();
       $frnds = explode(',', $result[0]['frnd_id']); 
       $frndcount = count($frnds);
-      pr($result[0]['frnd_id']);
       $ret = array();
       if($result[0]['frnd_id']!='')
       {   $j = 0;
           for($i=0;$i<3;$i++)
           {
+              if(count($ret)>0)
+                $friend_already_shown = ','.implode(',', $ret);
+              else
+                $friend_already_shown = '';
+              
               $s_qry1 = "select u.id user_id, 
                              u.s_email,
                              CONCAT(u.s_first_name ,' ', u.s_last_name) AS name,
@@ -1062,11 +1066,11 @@ class Contacts_model extends Base_model
                               (
                                   (select DISTINCT i_accepter_id as user_id
                                                          from cg_user_contacts AS c  where (c.i_requester_id ='" . $frnds[$i] . "') 
-                                                         AND s_status='accepted' AND i_accepter_id NOT IN(".$result[0]['frnd_id'].",".$i_user_id.")  ORDER BY RAND() LIMIT 0,1)
+                                                         AND s_status='accepted' AND i_accepter_id NOT IN(".$result[0]['frnd_id'].",".$i_user_id.$friend_already_shown")  ORDER BY RAND() LIMIT 0,1)
                                   UNION
                                   (select DISTINCT i_requester_id as user_id
                                                          from cg_user_contacts AS c where (c.i_accepter_id='" . $frnds[$i] . "') 
-                                                         AND s_status='accepted' AND i_requester_id NOT IN(".$result[0]['frnd_id'].",".$i_user_id.") ORDER BY RAND() LIMIT 0,1)
+                                                         AND s_status='accepted' AND i_requester_id NOT IN(".$result[0]['frnd_id'].",".$i_user_id.$friend_already_shown") ORDER BY RAND() LIMIT 0,1)
                               ) as tab1, cg_users AS u WHERE u.id=tab1.user_id"; 
 
               $result1  = $this->db->query($s_qry1)->result_array();
