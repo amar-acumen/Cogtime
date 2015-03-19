@@ -653,9 +653,9 @@ function general_setting(){
 							);
                                                 pr($invite_mem_info);
 						$this->db->insert('cg_church_member_invitation', $invite_mem_info);
-                                               echo  $add_mem_id = $this->db->insert_id().'=======';
+                                                $add_mem_id = $this->db->insert_id();
 						
-                                               $invite_mem_info['email'].'===';
+                                              // $invite_mem_info['email'].'===';
                                                                      /*************check already cogtime user*******************/
                                                 $query = $this->db->get_where('cg_users', array('s_email' => $invite_mem_info['email'] ,'i_status' => 1));
                                                 $result = $query->result();
@@ -666,9 +666,96 @@ function general_setting(){
                                                                     'priority' => '1');
                                                       $this->email->initialize($email_setting);
                                                 if($result[0]->id == null){
+                                                    $location =  base_url().'church_registration_by_email/'.$_SESSION['logged_church_id'].'/1/'.$add_mem_id;
                                                     echo 'new';
+                                                    $logo="http://cogtime.com/images/logo.png";
+    $body = '<table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" bgcolor="#e9f3f5" style="font-family:Arial, Helvetica, sans-serif; font-size:13px; line-height:19px;">
+  <tr>
+    <td align="left" style="background:#013D62; border-bottom:5px solid #62C3BC; padding:15px 0 15px 20px;"><img src="'.$logo.'" alt= ""></td>
+  </tr>
+  <tr style="border-top:1px solid #ffffff;">
+    <td style="padding-top:10px; padding-bottom:10px;">&nbsp;</td>
+  </tr>
+  <tr>
+  	
+  </tr>
+  <tr>
+  	<td style="padding:15px;"><p>Hello,</p>
+<p>You are invited to join church community. Please click on link and register to join the church community. </p>
+
+<p><a href='.$location.'>Click</a></p>
+            
+	</td>
+</tr>
+  <tr>
+    <td align="center" valign="middle" style="background:#A8A7A7; padding:15px;"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td align="left" valign="middle" style="color:#d3edfd; font-family:Arial, Helvetica, sans-serif; font-size:12px;"> <a href="http://acumencs.com/drandpt-arabic/contact-us/" style="color:#d3edfd; text-decoration:none;"></a></td>
+        
+        <td align="right" style="color:#013d62; font-family:Arial, Helvetica, sans-serif; font-size:12px; text-align="center" ">© All Rights Reserved<span style="color:#525252;"><strong> COGTIME 2014  </strong></span></td>
+      </tr>
+    </table></td>
+  </tr>
+</table>'; 
+$this->email->from('admin@cogtime.com', 'From Cogtime');
+$this->email->to($invite_mem_info['email']);
+//->email->bcc("$mailids");
+//$this->email->cc('arif.zisu@gmail.com');
+//$this->email->bcc('them@their-example.com');
+
+$this->email->subject('Churh Member Request');
+$this->email->message("$body");
+
+ $this->email->send();	
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
                                                 }else{
                                                     echo 'old';
+                                                   $location =  base_url().'already_user/'.$_SESSION['logged_church_id'].'/1/'.$user_id.'/'.$add_mem_id;
+                                                    $logo="http://cogtime.com/images/logo.png";
+    $body = '<table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" bgcolor="#e9f3f5" style="font-family:Arial, Helvetica, sans-serif; font-size:13px; line-height:19px;">
+  <tr>
+    <td align="left" style="background:#013D62; border-bottom:5px solid #62C3BC; padding:15px 0 15px 20px;"><img src="'.$logo.'" alt= ""></td>
+  </tr>
+  <tr style="border-top:1px solid #ffffff;">
+    <td style="padding-top:10px; padding-bottom:10px;">&nbsp;</td>
+  </tr>
+  <tr>
+  	
+  </tr>
+  <tr>
+  	<td style="padding:15px;"><p>Hello,</p>
+<p>You are invited to join church community. Please click on link and register to join the church community. </p>
+
+<p><a href='.$location.'>Click</a></p>
+            
+	</td>
+</tr>
+  <tr>
+    <td align="center" valign="middle" style="background:#A8A7A7; padding:15px;"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td align="left" valign="middle" style="color:#d3edfd; font-family:Arial, Helvetica, sans-serif; font-size:12px;"> <a href="http://acumencs.com/drandpt-arabic/contact-us/" style="color:#d3edfd; text-decoration:none;"></a></td>
+        
+        <td align="right" style="color:#013d62; font-family:Arial, Helvetica, sans-serif; font-size:12px; text-align="center" ">© All Rights Reserved<span style="color:#525252;"><strong> COGTIME 2014  </strong></span></td>
+      </tr>
+    </table></td>
+  </tr>
+</table>'; 
+$this->email->from('admin@cogtime.com', 'From Cogtime');
+$this->email->to($invite_mem_info['email']);
+//->email->bcc("$mailids");
+//$this->email->cc('arif.zisu@gmail.com');
+//$this->email->bcc('them@their-example.com');
+
+$this->email->subject('Churh Member Request');
+$this->email->message("$body");
+
+ $this->email->send();	
+                                                  
                                                 }   
                                             //pr($result);
                                                  //echo count($result);
