@@ -715,7 +715,7 @@ $this->email->message("$body");
                                                     
                                                 }else{
                                                     //echo 'old';
-                                                   $location =  base_url().'already_user/'.$_SESSION['logged_church_id'].'/1/'.$user_id.'/'.$add_mem_id;
+                                                   $location =  base_url().'already_user/'.$_SESSION['logged_church_id'].'/1/'.$result[0]->id.'/'.$add_mem_id;
                                                     $logo="http://cogtime.com/images/logo.png";
     $body = '<table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" bgcolor="#e9f3f5" style="font-family:Arial, Helvetica, sans-serif; font-size:13px; line-height:19px;">
   <tr>
