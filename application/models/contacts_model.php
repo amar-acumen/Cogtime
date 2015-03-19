@@ -1091,8 +1091,7 @@ class Contacts_model extends Base_model
               
           }  
       }
-      
-      
+            
       return $ret;
   }
 
