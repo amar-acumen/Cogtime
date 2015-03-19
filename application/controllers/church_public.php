@@ -599,13 +599,7 @@ class Church_public extends Base_controller
     $_SESSION['byrequest'] = $byrequest;
     
     /*****************update invite table*****************************************/
-    $data = array(
-               'status' => 1,
-               
-            );
-
-$this->db->where('id', $member_id);
-$this->db->update('cg_church_member_invitation', $data); 
+   
     /*****************insert in member table*****************************/
     
     
@@ -620,42 +614,54 @@ $this->db->update('cg_church_member_invitation', $data);
 
 $this->db->insert('cg_church_member', $data); 
     /**************************************************/
-$info = $this->users_model->fetch_this($id);
-        $USER_ID = $id;
-    if ($info['i_status'] == 1) {
- get_all_church_session($churchid);
-            ## AUTO LOGIN for user ##
-            //pr($info,1);;
-            $this->session->set_userdata('login_referrer', '');
-            $this->session->set_userdata('loggedin', true);
-            $this->session->set_userdata('user_id', encrypt($USER_ID));
-            $this->session->set_userdata('username', $info["s_first_name"]);
-            $this->session->set_userdata('user_type', $info["i_user_type"]);
-            $this->session->set_userdata('email', $info["s_email"]);
-            $this->session->set_userdata('user_lastname', $info["s_last_name"]);
-            $this->session->set_userdata('is_admin', $info["i_is_admin"]);
+$info = $this->users_model->fetch_this($user_id);
+        $USER_ID = $user_id;
+         if ($info['i_status'] == 1) {
+             get_all_church_session($churchid);
+              $data1 = array(
+               'status' => 1,
+               'joined_on_date' =>get_db_datetime()
+            );
 
-            #### first login show salavation message ###
-            
-            $this->users_model->set_user_online($USER_ID, $_SERVER['REMOTE_ADDR']);
+$this->db->where('id', $member_id);
+$this->db->update('cg_church_member_invitation', $data1); 
 
-            $this->session->set_userdata('upassword', $info["s_password"]);
-            $this->session->set_userdata('IMuserid', ($info["id"]));
+             $this->session->set_userdata('login_referrer', '');
+                    $this->session->set_userdata('loggedin', true);
+                    $this->session->set_userdata('user_id', encrypt($info["id"]));
+                    $this->session->set_userdata('username', $info["s_first_name"]);
+                    $this->session->set_userdata('user_type', $info["i_user_type"]);
+                    $this->session->set_userdata('email', $info["s_email"]);
+                    $this->session->set_userdata('user_lastname', $info["s_last_name"]);
+                    $this->session->set_userdata('is_admin', $info["i_is_admin"]);
+                    $this->session->set_userdata('upassword', $info["s_password"]);
+                    $this->session->set_userdata('IMuserid', ($ret_["id"]));
+                    $this->session->set_userdata('s_profile_photo', ($info['s_profile_photo']));
+                    $this->session->set_userdata('e_gender', ($info['e_gender']));
+					$this->session->set_userdata('s_time', ($info['s_time']));
+					$this->session->set_userdata('s_bio', ($info['s_bio']));
+                    $this->session->set_userdata('unique_username', $info["s_profile_url_suffix"]);
+                    $this->session->set_userdata('display_username', $info["s_chat_display_name"]);
+                    $this->session->set_userdata('s_tweet_bg_img', $info["s_tweet_bg_img"]);
+                     $this->session->set_userdata('s_tweet_id', ($info['s_tweet_id']));
+                      $this->session->set_userdata('s_profile_name', ($info['s_profile_name']));
+					$this->session->set_userdata('s_chat_display_name', $info["s_chat_display_name"]);
+					$this->session->set_userdata('e_want_net_pal', $info["e_want_net_pal"]);
+					$this->session->set_userdata('e_want_prayer_partner', $info["e_want_prayer_partner"]);
+					$this->session->set_userdata('is_pr_partner_q_mail_sent', $info["is_pr_partner_q_mail_sent"]);
+					$this->session->set_userdata('is_netpal_q_mail_sent', $info["is_netpal_q_mail_sent"]);
+					$this->session->set_userdata('s_timezone_text', $info["s_timezone_text"]);
+                    //$_SESSION['username'] = 'jhon';
+                    $this->session->set_userdata('is_first_login_checked', 'false');
+                        //$this->mail_contents_model->get_by_name("acknowledgement");
 
-            $this->session->set_userdata('unique_username', $info["s_profile_url_suffix"]);
-            $this->session->set_userdata('display_username', $info["s_chat_display_name"]);
-
-            //$_SESSION['username'] = 'jhon';
-            ### generating five fruits
-          
-            $SUCCESS_PG = base_url() . 'my-wall.html'; #."inscription-success.html";
-
-            header("location:" . $SUCCESS_PG);
-        }else {
-            $loc = base_url().'register.html';
+                    //$this->set_user_online($info["id"], $_SERVER['REMOTE_ADDR']);
+                    $loc = base_url().$churchid.'/church-wall';
             header("location:" . $loc);
-        }
-   
+         }
+        
+        //get_all_church_session($churchid);
+     
     
     
     
