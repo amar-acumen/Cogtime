@@ -37,7 +37,7 @@ class System_reminder_model extends Base_model
 		if("$start_limit" == "") {
 			  $sql = 'SELECT * FROM '.$this->db->SYSTEM_REMINDER.'  WHERE i_user_id = "'.$user_id.'" 
 			  				 
-							 {$s_where} ORDER BY id DESC ',, ;
+							 {$s_where} ORDER BY id DESC ';
 		}
 		else {
 			 $sql = 'SELECT * FROM '.$this->db->SYSTEM_REMINDER.'  WHERE i_user_id = "'.$user_id.'" 
