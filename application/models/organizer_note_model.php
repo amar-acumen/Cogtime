@@ -20,7 +20,7 @@ class Organizer_note_model extends Base_model
 	
 	public function get_by_id($id, $start_limit="", $no_of_page="") {
 		if("$start_limit" == "") {
-			$sql = 'SELECT * FROM '.$this->db->ORGANIZER_NOTE.'  where id = "'.$id.'"',  ;
+			$sql = 'SELECT * FROM '.$this->db->ORGANIZER_NOTE.'  where id = "'.$id.'"';
 		}
 		else {
 			$sql = 'SELECT * FROM '.$this->db->ORGANIZER_NOTE.'  where id = "'.$id.'" limit '.$start_limit.', '.$no_of_page;
