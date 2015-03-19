@@ -621,7 +621,7 @@ $this->db->update('cg_church_member_invitation', $data1);
 $this->db->insert('cg_church_member', $data); 
     /**************************************************/
 $info = $this->users_model->fetch_this($user_id);
-        $USER_ID = $id;
+        $USER_ID = $user_id;
     if ($info['i_status'] == 1) {
  get_all_church_session($churchid);
             ## AUTO LOGIN for user ##
