@@ -588,7 +588,7 @@ class Prayer_group_model extends Base_model {
 					  	pg_mem.i_user_id = '".intval($i_user_id)."' AND  pg_mem.s_status = 'accepted'
 					  )
 					  
-					  ) AND n.s_type != 'joining_req'  {$s_where})
+					  ) AND n.s_type != 'joining_req'  ".$s_where.")
 			     UNION
 				 
 				 (SELECT 
@@ -610,13 +610,11 @@ class Prayer_group_model extends Base_model {
 					  
 					  WHERE u.i_status='1' AND u.i_isdeleted ='1' AND pg.i_isenabled = 1 
 					  AND n.i_user_id = '".intval($i_user_id)."' AND n.s_type = 'invited'  AND n.s_type != 'joining_req' 
-					   {$s_where} )
+					   ".$s_where." )
 				 
 
 				) derived_tbl
-					"
-                , $this->db->dbprefix, intval($i_user_id), $s_where
-        );
+					";
 
 
         $query = $this->db->query($sql);
@@ -976,12 +974,10 @@ class Prayer_group_model extends Base_model {
 						  WHERE u.i_status='1' AND u.i_isdeleted ='1' AND pg.i_isenabled = 1 
 						  AND pg_mem.i_user_id = '".intval($i_user_id)."' AND pg_mem.i_request = '0' 
 						  AND pg_mem.s_status = 'pending' 
-						   {$s_where}
+						   ".$s_where."
 						   group by pg_mem.id 
 					  
-					"
-                , $this->db->dbprefix, intval($i_user_id), $s_where
-        );
+					";
         //echo nl2br($sql); exit;
         $query = $this->db->query($sql);
         $result_arr = $query->result_array(); //pr($result_arr,1);
