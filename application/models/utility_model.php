@@ -156,8 +156,7 @@ class Utility_model extends Base_model
                 
                 $where = ( empty($where) )? " WHERE `i_is_active` = 1 ": $where;
                 
-                $SQL = sprintf("SELECT IFNULL(MAX(`i_displayorder`)+1,1) AS `max_displayorder` FROM %s %s",
-                                             $tbl, $where);
+                $SQL = "SELECT IFNULL(MAX(`i_displayorder`)+1,1) AS `max_displayorder` FROM ".$tbl." ".$where;
                 $query = $this->db->query($SQL);
                 $rows = $query->row();
 
@@ -174,17 +173,16 @@ class Utility_model extends Base_model
                 
 				$WHERE_COND = ( empty($where) )? " `i_is_active` = 1 ": $where;
 				
-                $SQL1 = sprintf("SELECT `i_displayorder` FROM %s WHERE `id` = %s AND %s ",
-                                                $tbl, $pID, $WHERE_COND);
+                $SQL1 = "SELECT `i_displayorder` FROM ".$tbl." WHERE `id` = '".$pID."' AND ".$WHERE_COND;
                 $query1 = $this->db->query($SQL1);
 
                 $row1 = $query1->row();
                 $DisplayOrder = $row1->i_displayorder;
 
-                $SQL2 = sprintf("SELECT `id`, `i_displayorder`
-								 FROM %s
-								 WHERE `i_displayorder` > %s AND %s
-								 ORDER BY `i_displayorder` ASC ", $tbl, $DisplayOrder, $WHERE_COND);
+                $SQL2 = "SELECT `id`, `i_displayorder`
+								 FROM ".$tbl."
+								 WHERE `i_displayorder` > ".$DisplayOrder." AND ".$WHERE_COND."
+								 ORDER BY `i_displayorder` ASC ";
                 $query2 = $this->db->query($SQL2);
                 $rows = $query2->result_array();
 
@@ -197,9 +195,9 @@ class Utility_model extends Base_model
 
                       $newDisplayOrder = $prevDisplayOrder - 1;
 
-                      $updtSQL = sprintf("UPDATE %s
-										  SET `i_displayorder` = %s
-										  WHERE `id` = %s AND %s ", $tbl, $newDisplayOrder, $prevContentId, $WHERE_COND);
+                      $updtSQL = "UPDATE ".$tbl."
+										  SET `i_displayorder` = '".$newDisplayOrder."'
+										  WHERE `id` = '".$prevContentId."' AND ".$WHERE_COND;
                       $this->db->query($updtSQL);
                 }
 
