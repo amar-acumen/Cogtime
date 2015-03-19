@@ -601,7 +601,7 @@ class Church_public extends Base_controller
     /*****************update invite table*****************************************/
     $data = array(
                'status' => 1,
-               
+               'joined_on_date' =>get_db_datetime()
             );
 
 $this->db->where('id', $member_id);
@@ -620,7 +620,7 @@ $this->db->update('cg_church_member_invitation', $data);
 
 $this->db->insert('cg_church_member', $data); 
     /**************************************************/
-$info = $this->users_model->fetch_this($id);
+$info = $this->users_model->fetch_this($user_id);
         $USER_ID = $id;
     if ($info['i_status'] == 1) {
  get_all_church_session($churchid);
