@@ -599,13 +599,7 @@ class Church_public extends Base_controller
     $_SESSION['byrequest'] = $byrequest;
     
     /*****************update invite table*****************************************/
-    $data1 = array(
-               'status' => 1,
-               'joined_on_date' =>get_db_datetime()
-            );
-
-$this->db->where('id', $member_id);
-$this->db->update('cg_church_member_invitation', $data1); 
+   
     /*****************insert in member table*****************************/
     
     
@@ -623,6 +617,15 @@ $this->db->insert('cg_church_member', $data);
 $info = $this->users_model->fetch_this($user_id);
         $USER_ID = $user_id;
          if ($info['i_status'] == 1) {
+             get_all_church_session($churchid);
+              $data1 = array(
+               'status' => 1,
+               'joined_on_date' =>get_db_datetime()
+            );
+
+$this->db->where('id', $member_id);
+$this->db->update('cg_church_member_invitation', $data1); 
+
              $this->session->set_userdata('login_referrer', '');
                     $this->session->set_userdata('loggedin', true);
                     $this->session->set_userdata('user_id', encrypt($info["id"]));
@@ -653,7 +656,7 @@ $info = $this->users_model->fetch_this($user_id);
                         //$this->mail_contents_model->get_by_name("acknowledgement");
 
                     //$this->set_user_online($info["id"], $_SERVER['REMOTE_ADDR']);
-                    $loc = base_url().'my-wall.html';
+                    $loc = base_url().$churchid.'/church-wall';
             header("location:" . $loc);
          }
         
