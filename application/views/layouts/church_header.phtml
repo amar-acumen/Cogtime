@@ -32,8 +32,8 @@
     <div class="banner-bg" style="background-image: url(<?= $large_cover_img ?>);">
   <div class="container">
     <div class="main-caption">
-      <h2><?= $church_arr[0]->ch_banner_heading; ?></h2>
-      <p><?= $church_arr[0]->ch_details; ?></p>
+      <h2><?= substr($church_arr[0]->ch_banner_heading,30); ?></h2>
+      <p><?= substr($church_arr[0]->ch_details,150); ?></p>
        <?php
           
         if($this->session->userdata('loggedin')!= '1'){ 
