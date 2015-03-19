@@ -651,7 +651,7 @@ function general_setting(){
 							'church_id' => $_SESSION['logged_church_id'],
 							'invitation_sent_date' => get_db_datetime()
 							);
-						//$this->db->insert('cg_church_member_invitation', $invite_mem_info);
+						$this->db->insert('cg_church_member_invitation', $invite_mem_info);
                                                 
 						
 						$add_mem_id = $this->db->insert_id();
