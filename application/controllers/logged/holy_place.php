@@ -66,9 +66,10 @@ class Holy_place extends Base_controller
 										'js/jquery.autofill.js',
 										'js/jquery/ui/jquery.ui.core.js',
 										'js/jquery.ui.datepicker.js',
-										'js/search.js',
+
 										'js/tab.js',
 										'js/jquery.nicescroll.min.js'*/
+                                        'js/production/search.js',
 										//'js/jquery.mCustomScrollbar.min.js'
 										));
 										
@@ -226,10 +227,10 @@ class Holy_place extends Base_controller
                                         'js/switch.js','js/animate-collapse.js',
                                         'js/lightbox.js','js/jquery.dd.js','js/jquery-ui-1.8.2.custom.min.js',
                                         'js/stepcarousel.js',
-										'js/jquery.autofill.js',
-										'js/search.js',
+										'js/jquery.autofill.js',										'
 										'js/tab.js',
 										'js/jquery.nicescroll.min.js'*/
+                                        'js/production/search.js'
                                         ));
                                         
 //            parent::_add_css_arr( array('css/jquery-ui-1.8.2.custom.css',
@@ -330,7 +331,7 @@ class Holy_place extends Base_controller
                                         'js/stepcarousel.js',
 										'js/jquery.autofill.js',
 										'js/jquery.nicescroll.min.js',*/
-										'js/search.js'
+										'js/production/search.js'
                                         ));
                                         
 //            parent::_add_css_arr( array('css/jquery-ui-1.8.2.custom.css',
@@ -387,7 +388,7 @@ class Holy_place extends Base_controller
                                         'js/stepcarousel.js',
 										'js/jquery.autofill.js',
 										'js/jquery.nicescroll.min.js',*/
-										'js/search.js'
+										'js/production/search.js'
                                         ));
                                         
             parent::_add_css_arr( array('css/jquery-ui-1.8.2.custom.css',
