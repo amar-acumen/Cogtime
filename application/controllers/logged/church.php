@@ -647,7 +647,7 @@ function general_setting(){
 							'church_id' => $_SESSION['logged_church_id'],
 							'invitation_sent_date' => get_db_datetime()
 							);
-						$this->db->insert('cg_church_member_invitation', $invite_mem_info);
+						//$this->db->insert('cg_church_member_invitation', $invite_mem_info);
                                                 /*************check already cogtime user*******************/
                                                
                                                 $query = $this->db->get_where('cg_users', array('s_email' => $data[1]));
@@ -660,11 +660,11 @@ function general_setting(){
                                                         
                                                   if(count($result) == 1){
                                                      // echo 'alm';
-                                                      $location =  base_url().'already_user/'.$_SESSION['logged_church_id'].'/1/'.$user_id;
+                                                    echo   $location =  base_url().'already_user/'.$_SESSION['logged_church_id'].'/1/'.$user_id;
                                                     
                                                 }else if(count($result) == 0) {
                                                     //echo 'new';
-                                                    $location =  base_url().'church_registration_by_email/'.$_SESSION['logged_church_id'].'/1/'.$add_mem_id;
+                                                   echo  $location =  base_url().'church_registration_by_email/'.$_SESSION['logged_church_id'].'/1/'.$add_mem_id;
                                                 }
                                                 /***************************************************/
 						//echo $this->db->last_query();
