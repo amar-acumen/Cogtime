@@ -1692,9 +1692,13 @@ echo json_encode( array('success'=>'true'));
 					'church_id' => $_SESSION['logged_church_id'],
 					'invitation_sent_date' => get_db_datetime()
 				);
-				$this->db->insert('cg_church_member_invitation', $invited_member);
-				$invte_id = $this->db->insert_id(); 
-				
+				//$this->db->insert('cg_church_member_invitation', $invited_member);
+				$//invte_id = $this->db->insert_id(); 
+				/********************************************************************/
+                                $query = $this->db->get_where('cg_users', array('s_email' => $invite_val[$i][1] ,'i_status' => 1));
+                                                $result = $query->result();
+                                pr($result,1);
+                                
 				$this->load->model('mail_contents_model');
 				$mail_info = $this->mail_contents_model->get_by_name("church_community_invitation_mail");
 
@@ -1712,6 +1716,7 @@ echo json_encode( array('success'=>'true'));
 				$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
 				//echo $body;exit;
 				mail($to, $subject, $message, $headers);
+                                /*********************************************************/
 				//echo json_encode(array('success'=>true,'arr_messages'=>$arr_messages,'msg'=>'Mail sent successfully'));
 				}
 			  }
