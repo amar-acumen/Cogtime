@@ -136,8 +136,7 @@ class Utility_model extends Base_model
                     $row2 = $query2->row();
                     $pageid=$row2->id;
 
-                    $upt_pageorder = "UPDATE ". $tbl." SET `i_order`=({$pageOrder}+1) WHERE `id` = '".$id."' ",
-                                                                      $tbl, $pageOrder, $id);
+                    $upt_pageorder = "UPDATE ". $tbl." SET `i_order`=({$pageOrder}+1) WHERE `id` = '".$id."' ";
                     $this->db->query($upt_pageorder);
 
                     $upt_pageorder1 = "UPDATE ". $tbl." SET `i_order`='".$pageOrder."' WHERE `id` = '".$pageid."' ";
