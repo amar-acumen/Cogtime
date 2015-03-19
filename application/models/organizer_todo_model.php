@@ -20,10 +20,10 @@ class Organizer_todo_model extends Base_model
 	
 	public function get_by_id($id, $start_limit="", $no_of_page="") {
 		if("$start_limit" == "") {
-			$sql = 'SELECT * FROM '.$this->db->ORGANIZER_TO_DO_LIST.'  where id = "'.$id.'"',  ;
+			$sql = 'SELECT * FROM '.$this->db->ORGANIZER_TO_DO_LIST.'  where id = "'.$id.'"';
 		}
 		else {
-			$sql = 'SELECT * FROM '.$this->db->ORGANIZER_TO_DO_LIST.'  where id = "'.$id.'" limit '.$start_limit.', '.$no_of_page);
+			$sql = 'SELECT * FROM '.$this->db->ORGANIZER_TO_DO_LIST.'  where id = "'.$id.'" limit '.$start_limit.', '.$no_of_page;
 		}
 
 		$query = $this->db->query($sql);
@@ -40,7 +40,7 @@ class Organizer_todo_model extends Base_model
 	
 	public function get_by_user_id($user_id, $s_where, $start_limit="", $no_of_page="") {
 		if("$start_limit" == "") {
-			  $sql = 'SELECT * FROM '.$this->db->ORGANIZER_TO_DO_LIST.'  WHERE i_user_id = "'.$user_id.'"  {$s_where} ORDER BY id DESC ',, $s_where;
+			  $sql = 'SELECT * FROM '.$this->db->ORGANIZER_TO_DO_LIST.'  WHERE i_user_id = "'.$user_id.'"  {$s_where} ORDER BY id DESC ';
 		}
 		else {
 			  $sql = 'SELECT * FROM '.$this->db->ORGANIZER_TO_DO_LIST.'  WHERE i_user_id = "'.$user_id.'" {$s_where} ORDER BY id DESC LIMIT '.$start_limit.', '.$no_of_page;
