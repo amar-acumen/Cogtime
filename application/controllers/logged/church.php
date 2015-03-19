@@ -661,7 +661,7 @@ function general_setting(){
                                                 $query = $this->db->get_where('cg_users', array('s_email' => $data[$c]));
                                                 $result = $query->result();
                                             
-                                                 echo count($result);
+                                                 //echo count($result);
                                                         
                                                   if(count($result) == 1){
                                                        $body = htmlspecialchars_decode($mail_info['body'], ENT_QUOTES);
