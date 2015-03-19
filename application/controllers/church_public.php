@@ -599,13 +599,13 @@ class Church_public extends Base_controller
     $_SESSION['byrequest'] = $byrequest;
     
     /*****************update invite table*****************************************/
-    $data = array(
+    $data1 = array(
                'status' => 1,
                'joined_on_date' =>get_db_datetime()
             );
 
 $this->db->where('id', $member_id);
-$this->db->update('cg_church_member_invitation', $data); 
+$this->db->update('cg_church_member_invitation', $data1); 
     /*****************insert in member table*****************************/
     
     
