@@ -138,9 +138,9 @@ class Organizer_events_model extends Base_model
 		}
 		else {
 			$sql = 	"SELECT * FROM ".$this->db->USER_PHOTOS
-				  		."  where  i_photo_album_id = '".$album_id."' AND i_user_id = '".$user_id."' ORDER BY i_order DESC LIMIT ".$start_limit.", ".$no_of_page);
+				  		."  where  i_photo_album_id = '".$album_id."' AND i_user_id = '".$user_id."' ORDER BY i_order DESC LIMIT (".$start_limit.", ".$no_of_page.")";
 		}
-				
+		
 		$query = $this->db->query($sql); 
 			#echo $this->db->last_query(); 
 		$result_arr = $query->result_array();
