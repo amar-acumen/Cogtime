@@ -107,17 +107,17 @@ class Utility_model extends Base_model
                     $row1 = $query1->row();
                     $pageOrder=$row1->i_order;
 
-                    $query_pageid="SELECT `id` FROM  ". $tbl." WHERE `i_order`=({$pageOrder}-1) {$where}";
+                    $query_pageid="SELECT `id` FROM  ". $tbl." WHERE `i_order`=({$pageOrder}-1) ".$where;
                     $query2 = $this->db->query($query_pageid); 
                     $row2 = $query2->row();
              	    $pageid=$row2->id;
 
-                    $upt_pageorder = sprintf("UPDATE %s SET `i_order`=(%s-1)
-                                   WHERE `id` = %s ", $tbl, $pageOrder, $id);
+                    $upt_pageorder = "UPDATE ".$tbl." SET `i_order`=({$pageOrder}-1)
+                                   WHERE `id` = '".$id."' ";
                     $this->db->query($upt_pageorder); 
 
-                    $upt_pageorder1 = sprintf("UPDATE %s SET `i_order`=%s
-                                    WHERE `id` = %s ", $tbl, $pageOrder, $pageid);
+                    $upt_pageorder1 = "UPDATE ".$tbl." SET `i_order`='".$pageOrder."'
+                                    WHERE `id` = '".$pageid."' ";
                     $this->db->query($upt_pageorder1); 
 
                 }
@@ -126,24 +126,21 @@ class Utility_model extends Base_model
                 /* Ranking Down Starts */
                 if($to == 'up')
                 {
-                    $query_pageorder = sprintf("SELECT `i_order` FROM %s WHERE `id` = %s ",
-                                                                          $tbl, $id);
+                    $query_pageorder = "SELECT `i_order` FROM ". $tbl." WHERE `id` = '".$id."' ";
                     $query1 = $this->db->query($query_pageorder);
                     $row1 = $query1->row();
                     $pageOrder=$row1->i_order;
 
-                    $query_pageid=sprintf("SELECT `id` FROM  %s WHERE `i_order`=(%s+1)  %s ",
-                                                                  $tbl, $pageOrder, $where);
+                    $query_pageid="SELECT `id` FROM  ". $tbl." WHERE `i_order`=({$pageOrder}+1)  ".$where;
                     $query2 = $this->db->query($query_pageid);
                     $row2 = $query2->row();
                     $pageid=$row2->id;
 
-                    $upt_pageorder = sprintf("UPDATE %s SET `i_order`=(%s+1) WHERE `id` = %s ",
+                    $upt_pageorder = "UPDATE ". $tbl." SET `i_order`=({$pageOrder}+1) WHERE `id` = '".$id."' ",
                                                                       $tbl, $pageOrder, $id);
                     $this->db->query($upt_pageorder);
 
-                    $upt_pageorder1 = sprintf("UPDATE %s SET `i_order`=%s WHERE `id` = %s ",
-                                                                        $tbl, $pageOrder, $pageid);
+                    $upt_pageorder1 = "UPDATE ". $tbl." SET `i_order`='".$pageOrder."' WHERE `id` = '".$pageid."' ";
                     $this->db->query($upt_pageorder1);
                 }
                 /* Ranking Down Ends */
