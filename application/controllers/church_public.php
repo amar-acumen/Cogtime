@@ -592,10 +592,22 @@ class Church_public extends Base_controller
 
  public function already_user($churchid,$byrequest,$user_id,$member_id)
   {
-     die('ok');
+     //die('ok');
     $_SESSION['current_church_id'] = $churchid;
     $_SESSION['byrequest'] = $byrequest;
+    
+    /*****************update invite table*****************************************/
+    $data = array(
+               'status' => 1,
+               
+            );
+
+$this->db->where('id', $member_id);
+$this->db->update('cg_church_member_invitation', $data); 
     /*****************insert in member table*****************************/
+    
+    
+    
     $data = array(
    'church_id' => $churchid ,
    'member_id' => $user_id ,
@@ -604,13 +616,44 @@ class Church_public extends Base_controller
       'is_deleted'=> 0  
 );
 
-$this->db->insert('mytable', $data); 
+$this->db->insert('cg_church_member', $data); 
     /**************************************************/
+$info = $this->users_model->fetch_this($id);
+        $USER_ID = $id;
+    if ($info['i_status'] == 1) {
+ get_all_church_session($churchid);
+            ## AUTO LOGIN for user ##
+            //pr($info,1);;
+            $this->session->set_userdata('login_referrer', '');
+            $this->session->set_userdata('loggedin', true);
+            $this->session->set_userdata('user_id', encrypt($USER_ID));
+            $this->session->set_userdata('username', $info["s_first_name"]);
+            $this->session->set_userdata('user_type', $info["i_user_type"]);
+            $this->session->set_userdata('email', $info["s_email"]);
+            $this->session->set_userdata('user_lastname', $info["s_last_name"]);
+            $this->session->set_userdata('is_admin', $info["i_is_admin"]);
+
+            #### first login show salavation message ###
+            
+            $this->users_model->set_user_online($USER_ID, $_SERVER['REMOTE_ADDR']);
+
+            $this->session->set_userdata('upassword', $info["s_password"]);
+            $this->session->set_userdata('IMuserid', ($info["id"]));
+
+            $this->session->set_userdata('unique_username', $info["s_profile_url_suffix"]);
+            $this->session->set_userdata('display_username', $info["s_chat_display_name"]);
+
+            //$_SESSION['username'] = 'jhon';
+            ### generating five fruits
+          
+            $SUCCESS_PG = base_url() . 'my-wall.html'; #."inscription-success.html";
+
+            header("location:" . $SUCCESS_PG);
+        }
+   
     
-    get_all_church_session($churchid);
-    $location = base_url()."church_registration/";
     
-    header('location:'.$location.'');
+    
     exit;
   }
     
