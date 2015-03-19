@@ -622,28 +622,35 @@ $this->db->insert('cg_church_member', $data);
     /**************************************************/
 $info = $this->users_model->fetch_this($user_id);
         $USER_ID = $user_id;
-    if ($info['i_status'] == 1) {
- get_all_church_session($churchid);
+        get_all_church_session($churchid);
+     if ($info['i_status'] == 1) {
+
             ## AUTO LOGIN for user ##
             //pr($info,1);;
             $this->session->set_userdata('login_referrer', '');
             $this->session->set_userdata('loggedin', true);
-            $this->session->set_userdata('user_id', encrypt($USER_ID));
+            $this->session->set_userdata('user_id', encrypt($user_id));
             $this->session->set_userdata('username', $info["s_first_name"]);
             $this->session->set_userdata('user_type', $info["i_user_type"]);
             $this->session->set_userdata('email', $info["s_email"]);
             $this->session->set_userdata('user_lastname', $info["s_last_name"]);
-            $this->session->set_userdata('is_admin', $info["i_is_admin"]);
+            //$this->session->set_userdata('is_admin', $info["i_is_admin"]);
 
             #### first login show salavation message ###
+            //$this->session->set_userdata('first_login', 'yes');
+            $this->users_model->set_user_online($user_id, $_SERVER['REMOTE_ADDR']);
+
+            $this->session->set_userdata('upassword', $info["s_password"]);
+            $this->session->set_userdata('IMuserid', ($info["id"]));
+
+            $this->session->set_userdata('unique_username', $info["s_profile_url_suffix"]);
+            $this->session->set_userdata('display_username', $info["s_chat_display_name"]);
+
             
-            //$_SESSION['username'] = 'jhon';
-            ### generating five fruits
-          
             $SUCCESS_PG = base_url() . 'my-wall.html'; #."inscription-success.html";
 
             header("location:" . $SUCCESS_PG);
-        }else {
+        } else {
             $loc = base_url().'register.html';
             header("location:" . $loc);
         }
