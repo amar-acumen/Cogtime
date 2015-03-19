@@ -47,10 +47,6 @@
                         <div class="organize-calender-section">
                           
                             <script type="text/javascript">
-                            
-                                $(function(){
-                                	$( "#current-month" ).datepicker( "setDate", '<?php echo date('m'); ?>/<?php echo date('d'); ?>/<?php echo date('Y'); ?>' );
-                                });
                                 $(function() {
                                     $('#current-month').datepicker({
 										numberOfMonths: 2,
@@ -71,6 +67,10 @@
 							 	var selected_date =  '<?=date('d/m/Y',mktime(0, 0, 0, $selected_month ,$selected_day, $selected_year))?>';
 					
 								 $( "#current-month" ).datepicker( "setDate", selected_date );
+                                });
+                            
+                                $(function(){
+                                	$( "#current-month" ).datepicker( "setDate", '<?php echo date('m'); ?>/<?php echo date('d'); ?>/<?php echo date('Y'); ?>' );
                                 });
                             </script>
 
