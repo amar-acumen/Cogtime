@@ -659,17 +659,17 @@ function general_setting(){
                                                         }
                                                         
                                                   if(count($result) == 1){
-                                                      echo 'alm';
+                                                     // echo 'alm';
                                                       $location =  base_url().'already_user/'.$_SESSION['logged_church_id'].'/1/'.$user_id;
                                                     
                                                 }else if(count($result) == 0) {
-                                                    echo 'new';
+                                                    //echo 'new';
                                                     $location =  base_url().'church_registration_by_email/'.$_SESSION['logged_church_id'].'/1/'.$add_mem_id;
                                                 }
                                                 /***************************************************/
 						//echo $this->db->last_query();
 						$add_mem_id = $this->db->insert_id();
-						$body = sprintf3( $body, array('churchurl'=> base_url().'church_registration_by_email/'.$_SESSION['logged_church_id'].'/1/'.$add_mem_id) );
+						$body = sprintf3( $body, array('churchurl'=> $location) );
 						//echo $body;
 					}
                     for ($c=1; $c < 2; $c++) {
