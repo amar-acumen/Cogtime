@@ -1694,11 +1694,11 @@ echo json_encode( array('success'=>'true'));
 				);
 				//$this->db->insert('cg_church_member_invitation', $invited_member);
 				//invte_id = $this->db->insert_id(); 
-                                        echo $invite_val[$i][0].'======';
+                                        echo $invite_val[$i][1].'======';
 				/********************************************************************/
                                 $query = $this->db->get_where('cg_users', array('s_email' => $invite_val[$i][1] ,'i_status' => 1));
                                                 $result = $query->result();
-                              //  pr($result,1);
+                               pr($result);
                                 
 				$this->load->model('mail_contents_model');
 				$mail_info = $this->mail_contents_model->get_by_name("church_community_invitation_mail");
