@@ -1689,7 +1689,7 @@ class Users_model extends Base_model  {
     # function to check if friend_request_already_sent
 
     function friend_request_already_sent($i_requester_id = '', $i_accepter_id = '') {
-        $SQL = sprintf("SELECT COUNT(*) AS `check_count` FROM %s WHERE `i_requester_id`='%s'  AND `i_accepter_id` = '%s' AND `s_status` = 'pending'  ", $this->db->USER_CONTACTS, $i_requester_id, $i_accepter_id);
+        $SQL = "SELECT COUNT(*) AS `check_count` FROM ".$this->db->USER_CONTACTS." WHERE `i_requester_id`='".$i_requester_id."'  AND `i_accepter_id` = '".$i_accepter_id."' AND `s_status` = 'pending'  ";
         $ROW = $this->db->query($SQL)->row_array(); #echo $this->db->last_query(); exit;
 
         if ($ROW['check_count'])
@@ -1755,7 +1755,7 @@ class Users_model extends Base_model  {
     # function to check if username already exists or not... for unique profile url suffix
 
     function twitter_username_already_exists($user_first_name = '', $user_last_name = '') {
-        $SQL = sprintf("SELECT COUNT(*) AS `check_count` FROM %s WHERE `s_first_name`='%s'  AND `s_last_name`='%s'", $this->db->USERS, $user_first_name, $user_last_name);
+        $SQL = "SELECT COUNT(*) AS `check_count` FROM ".$this->db->USERS." WHERE `s_first_name`='".$user_first_name."'  AND `s_last_name`='".$user_last_name."'";
         $ROW = $this->db->query($SQL)->row_array(); //echo $this->db->last_query(); exit;
 
         if ($ROW['check_count'])
@@ -1791,10 +1791,8 @@ class Users_model extends Base_model  {
     public function check_user_first_login_in_a_day($user_id) {
 
         $current_day = date('Y-m-d');
-        $sql_check_user = sprintf("select count(*) as count from %slogin_logs
-						              where i_user_id = '%s' AND DATE(dt_login_on) = '{$current_day}'  "
-                , $this->db->dbprefix, $user_id
-        );
+        $sql_check_user = "select count(*) as count from cg_login_logs
+						              where i_user_id = '".$user_id."' AND DATE(dt_login_on) = '{$current_day}'  ";
 
         $result_arr = $this->db->query($sql_check_user)->result_array();
 
