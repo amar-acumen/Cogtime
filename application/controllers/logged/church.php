@@ -652,7 +652,8 @@ function general_setting(){
                                                 echo $data[1].'/';
                                                 $query = $this->db->get_where('cg_users', array('s_email' => $data[1]));
                                                 $result = $query->result();
-                                                pr( $result,1);
+                                                pr( $result);
+                                                echo count($result).'/'; 
                                                  foreach ($query->result() as $row)
                                                         {
                                                            $user_id =  $row->id;
