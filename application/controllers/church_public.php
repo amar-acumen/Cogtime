@@ -637,14 +637,6 @@ $info = $this->users_model->fetch_this($user_id);
 
             #### first login show salavation message ###
             
-            //$this->users_model->set_user_online($USER_ID, $_SERVER['REMOTE_ADDR']);
-
-            $this->session->set_userdata('upassword', $info["s_password"]);
-            $this->session->set_userdata('IMuserid', ($info["id"]));
-
-            $this->session->set_userdata('unique_username', $info["s_profile_url_suffix"]);
-            $this->session->set_userdata('display_username', $info["s_chat_display_name"]);
-
             //$_SESSION['username'] = 'jhon';
             ### generating five fruits
           
