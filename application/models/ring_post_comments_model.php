@@ -186,7 +186,7 @@ class Ring_post_comments_model extends CI_Model {
 		$this->db->query($sql);
 		
 		# delete from like table #
-		$sql = "DELETE FROM %suser_ring_post_like WHERE i_ring_post_id ='".$id."' AND s_media_type = '".$s_media_type."'";
+		$sql = "DELETE FROM cg_user_ring_post_like WHERE i_ring_post_id ='".$id."' AND s_media_type = '".$s_media_type."'";
 
 		$this->db->query($sql); 
 	}

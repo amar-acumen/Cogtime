@@ -238,7 +238,7 @@ class Organizer_events_model extends Base_model
 	
 	
 	public function get_total_photos_by_album_id($album_id, $s_where) {
-		$sql = "SELECT count(*) count FROM ".$this->db->USER_PHOTOS."  where  i_photo_album_id = '".$album_id."'  ".$s_where, , ;
+		$sql = "SELECT count(*) count FROM ".$this->db->USER_PHOTOS."  where  i_photo_album_id = '".$album_id."'  ".$s_where;
 		$query = $this->db->query($sql);
 		$result_arr = $query->result_array();
 

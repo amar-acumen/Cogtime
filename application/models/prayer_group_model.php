@@ -1007,7 +1007,7 @@ class Prayer_group_model extends Base_model {
 						  WHERE u.i_status='1' AND u.i_isdeleted ='1' AND pg.i_isenabled = 1 
 						  AND pg.i_owner_id = '".intval($i_user_id)."' AND pg_mem.i_request = '0' 
 						  AND pg_mem.s_status = 'pending' 
-						   {$s_where}
+						   ".$s_where."
 						   group by pg_mem.id 
 					  
 					";
