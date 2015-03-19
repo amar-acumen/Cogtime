@@ -637,6 +637,7 @@ function general_setting(){
             if (($handle = fopen($destfile, "r")) !== FALSE) {
                
                 while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
+                    
                     $num = count($data);
                   
                     $row++;
@@ -652,9 +653,9 @@ function general_setting(){
 							);
                                                 pr($invite_mem_info);
 						$this->db->insert('cg_church_member_invitation', $invite_mem_info);
-                                                $add_mem_id = $this->db->insert_id();
+                                               echo  $add_mem_id = $this->db->insert_id().'=======';
 						
-                                                echo $data[1].'===';
+                                                echo $invite_mem_info['email'].'===';
                                                 
 //                        /*************check already cogtime user*******************/
 //                                               $to      = $data[1];
