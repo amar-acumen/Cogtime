@@ -650,15 +650,15 @@ function general_setting(){
 							'church_id' => $_SESSION['logged_church_id'],
 							'invitation_sent_date' => get_db_datetime()
 							);
-                                               // pr($invite_mem_info);
+                                                pr($invite_mem_info);
 						$this->db->insert('cg_church_member_invitation', $invite_mem_info);
                                                 $add_mem_id = $this->db->insert_id();
 						
-                                                echo $data[0].'===';
-//                                                $to      = $data[0];
+                                                echo $data[1].'===';
+                                                
 //                        /*************check already cogtime user*******************/
-//                                               
-//                                                $query = $this->db->get_where('cg_users', array('s_email' => $data[0] ,'i_status' => 1));
+//                                               $to      = $data[1];
+//                                                $query = $this->db->get_where('cg_users', array('s_email' => $data[1] ,'i_status' => 1));
 //                                                $result = $query->result();
 //                                            
 //                                                 //echo count($result);
@@ -678,12 +678,7 @@ function general_setting(){
 //                                                   $location =  base_url().'church_registration_by_email/'.$_SESSION['logged_church_id'].'/1/'.$add_mem_id;
 //                                                   $body = sprintf3( $body, array('churchurl'=> $location) );
 //                                                }
-//                                                /***************************************************/
-//                        
-//                        
-//                       
-//						//echo $to;
-//                        $subject = $subject;
+//                                                  $subject = $subject;
 //                       $message = $body;
 //                        $headers = 'From: admin@cogtime.com' . "\r\n" .
 //                            'Reply-To: admin@cogtime.com' . "\r\n" .
@@ -691,7 +686,13 @@ function general_setting(){
 //                        $headers  .= 'MIME-Version: 1.0' . "\r\n";
 //                        $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
 //                        mail($to, $subject, $message, $headers);
-//                                                
+//                                                /***************************************************/
+                        
+                        
+                       
+						//echo $to;
+                      
+                                                
                                                 
                                                 
                                                 
