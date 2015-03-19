@@ -68,10 +68,9 @@
 					
 								 $( "#current-month" ).datepicker( "setDate", selected_date );
                                 });
+                            
                                 $(function(){
-                                	//alert('sss');
-                                	$( "#current-month" ).datepicker( "setDate", '11/05/2015' );
-                                	//alert('sss');
+                                	$( "#current-month" ).datepicker( "setDate", '<?php echo date('m'); ?>/<?php echo date('d'); ?>/<?php echo date('Y'); ?>' );
                                 });
                             </script>
 
