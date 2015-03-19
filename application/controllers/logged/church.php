@@ -659,7 +659,17 @@ function general_setting(){
                                                                      /*************check already cogtime user*******************/
                                                 $query = $this->db->get_where('cg_users', array('s_email' => $invite_mem_info['email'] ,'i_status' => 1));
                                                 $result = $query->result();
-                                                     echo $result[0]->id.'==';   
+                                                
+                                                 $this->load->library('email');
+                                                $this->load->helper('html');
+                                              $email_setting  = array('mailtype'=>'html','charset'  => 'utf-8',
+                                                                    'priority' => '1');
+                                                      $this->email->initialize($email_setting);
+                                                if($result[0]->id == null){
+                                                    echo 'new';
+                                                }else{
+                                                    echo 'old';
+                                                }   
                                             //pr($result);
                                                  //echo count($result);
                                                         
