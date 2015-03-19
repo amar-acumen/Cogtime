@@ -1726,7 +1726,7 @@ echo json_encode( array('success'=>'true'));
 
 				$subject = htmlspecialchars_decode($mail_info['subject'], ENT_QUOTES);
 				$body = htmlspecialchars_decode($mail_info['body'], ENT_QUOTES);
-				$body = sprintf3( $body, array('churchurl'=> base_url().'already_user/'.$_SESSION['logged_church_id'].'/1/'.$result[0]->id.'/'.$add_mem_id) );
+				$body = sprintf3( $body, array('churchurl'=> base_url().'already_user/'.$_SESSION['logged_church_id'].'/1/'.$result[0]->id.'/'.$invte_id) );
 						   
 				$to      = $invite_val[$i][1];
 				$subject = $subject;
