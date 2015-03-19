@@ -663,7 +663,7 @@ function general_setting(){
                                             
                                                  //echo count($result);
                                                         
-                                                  if(count($result) == 1){
+                                                  if(!empty($result) && count($result) == 1){
                                                        $body = htmlspecialchars_decode($mail_info['body'], ENT_QUOTES);
                                                       foreach ($query->result() as $row)
                                                         {
@@ -672,7 +672,7 @@ function general_setting(){
                                                    $location =  base_url().'already_user/'.$_SESSION['logged_church_id'].'/1/'.$user_id.'/'.$add_mem_id;
                                                   $body = sprintf3( $body, array('churchurl'=> $location) );
                                                     
-                                                }else if(count($result) == 0) {
+                                                }else if(empty($result) && count($result) == 0) {
                                                      $body = htmlspecialchars_decode($mail_info['body'], ENT_QUOTES);
                                                    
                                                    $location =  base_url().'church_registration_by_email/'.$_SESSION['logged_church_id'].'/1/'.$add_mem_id;
