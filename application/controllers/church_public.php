@@ -590,11 +590,24 @@ class Church_public extends Base_controller
         }
     }
 
- public function already_user($churchid,$byrequest,$user_id)
+ public function already_user($churchid,$byrequest,$user_id,$member_id)
   {
      die('ok');
     $_SESSION['current_church_id'] = $churchid;
     $_SESSION['byrequest'] = $byrequest;
+    /*****************insert in member table*****************************/
+    $data = array(
+   'church_id' => $churchid ,
+   'member_id' => $user_id ,
+   'is_approved' => 1,
+    'created_date' => get_db_datetime(),
+      'is_deleted'=> 0  
+);
+
+$this->db->insert('mytable', $data); 
+    /**************************************************/
+    
+    get_all_church_session($churchid);
     $location = base_url()."church_registration/";
     
     header('location:'.$location.'');
