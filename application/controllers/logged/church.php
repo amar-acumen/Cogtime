@@ -660,7 +660,7 @@ function general_setting(){
                                                
                                                 $query = $this->db->get_where('cg_users', array('s_email' => $data[$c]));
                                                 $result = $query->result();
-                                               
+                                               pr($result);
                                                  foreach ($query->result() as $row)
                                                         {
                                                           $user_id =  $row->id;
