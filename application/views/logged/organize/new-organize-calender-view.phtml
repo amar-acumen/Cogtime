@@ -45,30 +45,6 @@
 
 
                         <div class="organize-calender-section">
-                          
-                            <script type="text/javascript">
-                                $(function() {
-                                    $('#current-month').datepicker({
-										numberOfMonths: 2,
-										minDate: new Date(<?=(date('Y'))?>, <?=(date('m')-1)?>, <?=(date('d'))?> ,  0, 00),
-										onSelect: function(selectedDate) { alert(selectedDate);
-											var day_arr = selectedDate.split('/');
-											var WeekNumber = $.datepicker.iso8601Week(new Date(day_arr[2], day_arr[0] , day_arr[1]));											
-											var val_date = day_arr[2]+'-'+day_arr[1]+'-'+day_arr[0];
-											//alert(WeekNumber);
-											//show_cal_contents_by_week(day_arr[2], day_arr[0], day_arr[1], 'null', WeekNumber)
-											//alert($.datepicker.iso8601Week(new Date(day_arr[2], day_arr[0] , day_arr[1])))
-											//gotoDay(val_date);
-                      gotoDay(day_arr[2],day_arr[1],day_arr[0]);
-										}
-									});
-						 			
-							     
-							 	var selected_date =  '<?=date('d/m/Y',mktime(0, 0, 0, $selected_month ,$selected_day, $selected_year))?>';
-					
-								 $( "#current-month" ).datepicker( "setDate", selected_date );
-                                });
-                            </script>
 
                             <div class="current-month" id="current-month"></div>
 
