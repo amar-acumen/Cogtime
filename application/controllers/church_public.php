@@ -637,7 +637,7 @@ $info = $this->users_model->fetch_this($user_id);
 
             #### first login show salavation message ###
             
-            $this->users_model->set_user_online($USER_ID, $_SERVER['REMOTE_ADDR']);
+            //$this->users_model->set_user_online($USER_ID, $_SERVER['REMOTE_ADDR']);
 
             $this->session->set_userdata('upassword', $info["s_password"]);
             $this->session->set_userdata('IMuserid', ($info["id"]));
