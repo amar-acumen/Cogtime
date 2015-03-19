@@ -643,6 +643,7 @@ function general_setting(){
                  
 					if($row>2)
 					{
+                                            echo $row;
 						$invite_mem_info = array(
 							'name' => $data[0],
 							'email' => $data[1],
