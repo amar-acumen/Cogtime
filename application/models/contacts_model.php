@@ -1054,7 +1054,7 @@ class Contacts_model extends Base_model
                 $friend_already_shown = ','.implode(',', $ret);
               else
                 $friend_already_shown = '';
-              
+
               $s_qry1 = "select u.id user_id, 
                              u.s_email,
                              CONCAT(u.s_first_name ,' ', u.s_last_name) AS name,
@@ -1066,11 +1066,11 @@ class Contacts_model extends Base_model
                               (
                                   (select DISTINCT i_accepter_id as user_id
                                                          from cg_user_contacts AS c  where (c.i_requester_id ='" . $frnds[$i] . "') 
-                                                         AND s_status='accepted' AND i_accepter_id NOT IN(".$result[0]['frnd_id'].",".$i_user_id.$friend_already_shown")  ORDER BY RAND() LIMIT 0,1)
+                                                         AND s_status='accepted' AND i_accepter_id NOT IN(".$result[0]['frnd_id'].",".$i_user_id.$friend_already_shown.")  ORDER BY RAND() LIMIT 0,1)
                                   UNION
                                   (select DISTINCT i_requester_id as user_id
                                                          from cg_user_contacts AS c where (c.i_accepter_id='" . $frnds[$i] . "') 
-                                                         AND s_status='accepted' AND i_requester_id NOT IN(".$result[0]['frnd_id'].",".$i_user_id.$friend_already_shown") ORDER BY RAND() LIMIT 0,1)
+                                                         AND s_status='accepted' AND i_requester_id NOT IN(".$result[0]['frnd_id'].",".$i_user_id.$friend_already_shown.") ORDER BY RAND() LIMIT 0,1)
                               ) as tab1, cg_users AS u WHERE u.id=tab1.user_id"; 
 
               $result1  = $this->db->query($s_qry1)->result_array();
