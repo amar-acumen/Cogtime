@@ -631,7 +631,7 @@ function general_setting(){
             /*$subject = sprintf3( $subject, array('sender_name'=> $profile_info["s_first_name"],
                               'project_name'=> $project_name
                            ));*/
-            $body = htmlspecialchars_decode($mail_info['body'], ENT_QUOTES);
+            //$body = htmlspecialchars_decode($mail_info['body'], ENT_QUOTES);
 			//$body = sprintf3( $body, array('churchurl'=> base_url().'church_registration_by_email/'.$_SESSION['logged_church_id'].'/1') );
 			
             if (($handle = fopen($destfile, "r")) !== FALSE) {
@@ -661,17 +661,19 @@ function general_setting(){
                                                 $query = $this->db->get_where('cg_users', array('s_email' => $data[$c]));
                                                 $result = $query->result();
                                             
-                                                 foreach ($query->result() as $row)
+                                                 echo count($result);
+                                                        
+                                                  if(count($result) == 1){
+                                                       $body = htmlspecialchars_decode($mail_info['body'], ENT_QUOTES);
+                                                      foreach ($query->result() as $row)
                                                         {
                                                           $user_id =  $row->id;
                                                         }
-                                                        
-                                                  if(count($result) == 1){
-                                                      
                                                    $location =  base_url().'already_user/'.$_SESSION['logged_church_id'].'/1/'.$user_id;
                                                   $body = sprintf3( $body, array('churchurl'=> $location) );
                                                     
                                                 }else if(count($result) == 0) {
+                                                     $body = htmlspecialchars_decode($mail_info['body'], ENT_QUOTES);
                                                    
                                                    $location =  base_url().'church_registration_by_email/'.$_SESSION['logged_church_id'].'/1/'.$add_mem_id;
                                                    $body = sprintf3( $body, array('churchurl'=> $location) );
