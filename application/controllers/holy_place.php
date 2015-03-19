@@ -547,8 +547,8 @@ class Holy_place extends Base_controller
 										'js/production/search.js'
                                         ));
                                         
-            parent::_add_css_arr( array('css/jquery-ui-1.8.2.custom.css',
-                                          'css/dd.css') );
+            parent::_add_css_arr( array('css/jquery-ui-1.8.2.custom.css'/*,
+                                          'css/dd.css'*/) );
 										  
            $bookname			= get_original_text($bookname);
            $data['bookname']	= $bookname;
