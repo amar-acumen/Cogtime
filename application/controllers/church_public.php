@@ -622,39 +622,43 @@ $this->db->insert('cg_church_member', $data);
     /**************************************************/
 $info = $this->users_model->fetch_this($user_id);
         $USER_ID = $user_id;
-        get_all_church_session($churchid);
-     if ($info['i_status'] == 1) {
+         if ($info['i_status'] == 1) {
+             $this->session->set_userdata('login_referrer', '');
+                    $this->session->set_userdata('loggedin', true);
+                    $this->session->set_userdata('user_id', encrypt($info["id"]));
+                    $this->session->set_userdata('username', $info["s_first_name"]);
+                    $this->session->set_userdata('user_type', $info["i_user_type"]);
+                    $this->session->set_userdata('email', $info["s_email"]);
+                    $this->session->set_userdata('user_lastname', $info["s_last_name"]);
+                    $this->session->set_userdata('is_admin', $info["i_is_admin"]);
+                    $this->session->set_userdata('upassword', $info["s_password"]);
+                    $this->session->set_userdata('IMuserid', ($ret_["id"]));
+                    $this->session->set_userdata('s_profile_photo', ($info['s_profile_photo']));
+                    $this->session->set_userdata('e_gender', ($info['e_gender']));
+					$this->session->set_userdata('s_time', ($info['s_time']));
+					$this->session->set_userdata('s_bio', ($info['s_bio']));
+                    $this->session->set_userdata('unique_username', $info["s_profile_url_suffix"]);
+                    $this->session->set_userdata('display_username', $info["s_chat_display_name"]);
+                    $this->session->set_userdata('s_tweet_bg_img', $info["s_tweet_bg_img"]);
+                     $this->session->set_userdata('s_tweet_id', ($info['s_tweet_id']));
+                      $this->session->set_userdata('s_profile_name', ($info['s_profile_name']));
+					$this->session->set_userdata('s_chat_display_name', $info["s_chat_display_name"]);
+					$this->session->set_userdata('e_want_net_pal', $info["e_want_net_pal"]);
+					$this->session->set_userdata('e_want_prayer_partner', $info["e_want_prayer_partner"]);
+					$this->session->set_userdata('is_pr_partner_q_mail_sent', $info["is_pr_partner_q_mail_sent"]);
+					$this->session->set_userdata('is_netpal_q_mail_sent', $info["is_netpal_q_mail_sent"]);
+					$this->session->set_userdata('s_timezone_text', $info["s_timezone_text"]);
+                    //$_SESSION['username'] = 'jhon';
+                    $this->session->set_userdata('is_first_login_checked', 'false');
 
-            ## AUTO LOGIN for user ##
-            //pr($info,1);;
-            $this->session->set_userdata('login_referrer', '');
-            $this->session->set_userdata('loggedin', true);
-            $this->session->set_userdata('user_id', encrypt($user_id));
-            $this->session->set_userdata('username', $info["s_first_name"]);
-            $this->session->set_userdata('user_type', $info["i_user_type"]);
-            $this->session->set_userdata('email', $info["s_email"]);
-            $this->session->set_userdata('user_lastname', $info["s_last_name"]);
-            //$this->session->set_userdata('is_admin', $info["i_is_admin"]);
 
-            #### first login show salavation message ###
-            //$this->session->set_userdata('first_login', 'yes');
-            $this->users_model->set_user_online($user_id, $_SERVER['REMOTE_ADDR']);
-
-            $this->session->set_userdata('upassword', $info["s_password"]);
-            $this->session->set_userdata('IMuserid', ($info["id"]));
-
-            $this->session->set_userdata('unique_username', $info["s_profile_url_suffix"]);
-            $this->session->set_userdata('display_username', $info["s_chat_display_name"]);
-
-            
-            $SUCCESS_PG = base_url() . 'my-wall.html'; #."inscription-success.html";
-
-            header("location:" . $SUCCESS_PG);
-        } else {
-            $loc = base_url().'register.html';
+                    $this->set_user_online($info["id"], $_SERVER['REMOTE_ADDR']);
+                    $loc = base_url().'my-wall.html';
             header("location:" . $loc);
-        }
-   
+         }
+        
+        //get_all_church_session($churchid);
+     
     
     
     
