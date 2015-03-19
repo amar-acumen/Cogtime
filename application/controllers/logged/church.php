@@ -635,7 +635,7 @@ function general_setting(){
 			//$body = sprintf3( $body, array('churchurl'=> base_url().'church_registration_by_email/'.$_SESSION['logged_church_id'].'/1') );
 			
             if (($handle = fopen($destfile, "r")) !== FALSE) {
-                
+                $cn = 0;
                 while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
                     $num = count($data);
                   
@@ -695,8 +695,9 @@ function general_setting(){
                         mail($to, $subject, $message, $headers);
                     }
 					
-					
+		$cn++;			
                 }
+                echo $cn;
                 fclose($handle);
             }
 
