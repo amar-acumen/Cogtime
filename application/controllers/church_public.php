@@ -99,6 +99,9 @@ class Church_public extends Base_controller
     
   public function church_registration_by_email($churchid,$byrequest,$member_id)
   {
+      $_SESSION['invited_member_id'] = $member_id;
+       $_SESSION['current_church_id'] = $churchid;
+    $_SESSION['byrequest'] = $byrequest;
       $query = $this->db->get_where('cg_church_member_invitation', array('id' => $member_id , 'status'=> 1));
     $result = $query->result();
      if(count($result) > 0){
@@ -112,8 +115,7 @@ class Church_public extends Base_controller
          
      }else{
    // pr($member_id,1);
-    $_SESSION['current_church_id'] = $churchid;
-    $_SESSION['byrequest'] = $byrequest;
+   
     $location = base_url()."church_registration/";
     
     header('location:'.$location.'');
@@ -123,6 +125,7 @@ class Church_public extends Base_controller
     
    public function church_registration($churchid = '') {
         try {
+             echo $_SESSION['invited_member_id']; die();
              parent::_non_accessible_by_logged();
             
             $data['church_arr'] =     $this->church_new_model->get_church_info($churchid);
