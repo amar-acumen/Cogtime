@@ -2649,7 +2649,7 @@ function get_photoid_with_privacy($uid, $profile_id = '') {
 
         $res_data = $CI->db->query($mp_sql);
         $res_data_arr = $res_data->result_array();
-        //pr($res_data_arr);
+        pr($res_data_arr);
         //echo $res_data_arr[0]['str'].' #$#$'; 
         if ($res_data_arr[0]['str'] != '')
             $PRIVACY_STR = " AND pp.s_section IN  (" . substr($res_data_arr[0]['str'], 0, -2) . ")";
