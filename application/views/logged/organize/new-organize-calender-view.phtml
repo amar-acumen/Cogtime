@@ -62,12 +62,6 @@
                       						gotoDay(day_arr[2],day_arr[1],day_arr[0]);
                       						
                       						var select_date=day_arr[2]+'-'+day_arr[0]+'-'+day_arr[1];
-                      						
-                      						//alert(select_date);
-                      						// var current_date_formate = new Date(select_date);
-											// var new_date_formate = current_date_formate.toString('F d,Y');
-                      						alert(day_arr[0]);
-                      						
                       						var month = new Array();
 											month[01] = "January";
 											month[02] = "February";
@@ -82,9 +76,7 @@
 											month[11] = "November";
 											month[12] = "December";
 											var new_date_formate= month[parseInt(day_arr[0])];
-                      						
-											//var new_date_formate = date.toString('F d,Y');
-                      						$('#displayDateDIV').html(new_date_formate+' '+day_arr[1]+','+day_arr[2]);    //hd_date
+                      						$('#displayDateDIV').html(new_date_formate+' '+day_arr[1]+','+day_arr[2]);
                       						$('#hd_tododate').val(select_date);
                       						$('#hd_date').val(select_date);
 										}
@@ -145,7 +137,7 @@
                                        <?=makeOption_time()?>
                             </select>
                             <span id="err_time" class="error-message" style="margin-left: 130px;margin-top: -8px;"></span> 									
-                            <input type="" id="hd_date" name="hd_date" value="<?=getShortDate($selected_date,'8')?>"/>					
+                            <input type="hidden" id="hd_date" name="hd_date" value="<?=getShortDate($selected_date,'8')?>"/>					
                                  <br class="clear"/>
                                  <div class="lable-txt-nw"></div>
                                  <div class="calader-lable-txt">
@@ -199,7 +191,7 @@ margin-top: -9px;"></span>
                                    <span class="blue12"><strong>Back</strong></span>
                                     
                                     <span id="err_todo_rem_time" class="error-message" style="margin-left: 130px;margin-top: -8px;"></span>
-                                     <input type="" id="hd_tododate" name="hd_tododate" value="<?=getShortDate($selected_date,'8')?>"/>
+                                     <input type="hidden" id="hd_tododate" name="hd_tododate" value="<?=getShortDate($selected_date,'8')?>"/>
                                   <br class="clear"/>
                                  <div class="lable-txt-nw"></div>
                                  <span id="err_time_stamp" class="error-message" style="margin-left:0 !important;"></span>
