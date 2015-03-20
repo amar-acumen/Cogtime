@@ -60,8 +60,12 @@
 											//alert($.datepicker.iso8601Week(new Date(day_arr[2], day_arr[0] , day_arr[1])))
 											//gotoDay(val_date);
                       						gotoDay(day_arr[2],day_arr[1],day_arr[0]);
-                      						$('#displayDateDIV').html(selectedDate);    //hd_date
-                      						$('#hd_tododate').val(selectedDate);
+                      						var current_date_formate = new Date(val_date);
+											var new_date_formate = current_date_formate.toString('dd-MM-yy');
+                      						alert(new_date_formate);
+											//var new_date_formate = date.toString('F d,Y');
+                      						$('#displayDateDIV').html(new_date_formate);    //hd_date
+                      						$('#hd_tododate').val(val_date);
 										}
 									});
 						 			
