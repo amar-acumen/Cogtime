@@ -101,13 +101,24 @@ class Church_public extends Base_controller
   {
       $query = $this->db->get_where('cg_church_member_invitation', array('id' => $member_id , 'status'=> 1));
     $result = $query->result();
-    pr($member_id,1);
+     if(count($result) > 0){
+          $loc = base_url().'?mSt=1';
+        if($_SESSION['user_id'] != null){
+            $this->users_model->logout();
+             header("location:" . $loc);
+        }else{
+             header("location:" . $loc);
+        }
+         
+     }else{
+   // pr($member_id,1);
     $_SESSION['current_church_id'] = $churchid;
     $_SESSION['byrequest'] = $byrequest;
     $location = base_url()."church_registration/";
     
     header('location:'.$location.'');
     exit;
+     }
   }
     
    public function church_registration($churchid = '') {
