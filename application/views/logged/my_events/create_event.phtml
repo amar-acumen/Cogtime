@@ -187,7 +187,7 @@
 
                                 <div class="lable01" style="width:146px;">End Date : </div>  
                                 <div class="field03">
-                                    <input style="width:131px;" type="text"  value="" name="date_end" id="date_end"  readonly="readonly" onchange="return check_lim()"/>
+                                    <input style="width:131px;" type="text"  value="" name="date_end" id="date_end"  readonly="readonly" onchange="check_lim();"/>
                                     <img src="images/icons/cal.png" alt="" width="15" height="16" onclick="$(this).prev().focus()" style="cursor:pointer; " />
                                     <script type="text/javascript">
                                         /*$(document).ready(function(arg) {
@@ -242,6 +242,7 @@
                                         {
                                             var start_date = $('#date_to').val();
                                             var end_date = $('#date_end').val();
+                                            alert(end_date);
                                             if (start_date > end_date && end_date.trim()!='')
                                             {
                                                 alert('Please enter a valid end date');
