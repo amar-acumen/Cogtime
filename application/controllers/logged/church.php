@@ -1702,8 +1702,9 @@ echo json_encode( array('success'=>'true'));
                                     $query1 = $this->db->get_where('cg_church_member_invitation', array('email' => $invite_val[$i][1]));
                                     $result = $query1->result();
                                     if(count($result) > 0){
-                                         continue;
                                          echo json_encode(array('success'=>false,'arr_messages'=>$arr_messages,'msg'=>''.$invite_val[$i][1].' already exist'));
+                                         continue;
+                                        
                                     }
                                     /********************************************/
 					$invited_member = array(
