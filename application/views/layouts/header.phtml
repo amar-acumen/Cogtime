@@ -117,13 +117,13 @@ $(document).ready(function(){
 
  <?php } 
  
- echo $member_status = $_REQUEST['mSt'];
+ $member_status = $_REQUEST['mSt'];
  if($member_status == 1){
  ?>
 <script type="text/javascript">
 
 $(document).ready(function(){
-    ShowUIMSg('You are already used this link');
+    showUIMsg('You are already used this link');
 });
 
 </script>
