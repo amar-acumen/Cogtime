@@ -1686,6 +1686,15 @@ echo json_encode( array('success'=>'true'));
 				
 				$invite_val_count = count($invite_val);
 				for($i=0; $i<$invite_val_count; $i++){
+                                    
+                                    
+                                    /**********if already invited member**********************************/
+                                    $query1 = $this->db->get_where('cg_church_member_invitation', array('email' => $invite_val[$i][1]));
+                                    $result = $query1->result();
+                                    if(count($result) > 0){
+                                         continue;
+                                    }
+                                    /********************************************/
 					$invited_member = array(
 					'name' => $invite_val[$i][0],
 					'email' => $invite_val[$i][1],
