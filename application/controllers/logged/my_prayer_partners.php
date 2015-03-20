@@ -529,7 +529,7 @@ class My_prayer_partners extends Base_controller {
                 $arrmember2 = array_diff($arr_churchadmin, $arr_churchmember);
                 $member = implode(",",array_merge($arrmember1,$arrmember2));
                 $member = substr($member,0,-1);
-
+                $member = ltrim ($member, ',');
 
                 $WHERE_COND = "";
                 $WHERE_COND_NOTEXACT = "";
@@ -839,6 +839,7 @@ class My_prayer_partners extends Base_controller {
 
                 $result = $this->my_prayer_partner_model->get_prayer_partner_sugg($EXACT_WHERE, $LIKE_WHERE,$LIKE_WHERE_FOR_CHURCH, $s_order_by, $page, $this->pagination_per_page,$member);
                 $resultCount = count($result);
+                //echo $resultCount;
                // echo $this->db->last_query(); 
                 //pr($result);
                 $total_rows = $this->my_prayer_partner_model->get_prayer_partner_sug_total($EXACT_WHERE, $LIKE_WHERE);
@@ -880,7 +881,7 @@ class My_prayer_partners extends Base_controller {
             $data['no_of_result'] = $total_rows;
             $data['current_page'] = $page;
             $data['total_pages'] = ceil($total_rows / $this->pagination_per_page);
-
+             $data['resultCount'] = $resultCount;
             //echo $data['total_pages'].' ==total_pages==== '.$page;
             //echo $data['current_page'].' ==  ';
             $data['post_val'] = ($total_rows > 0 ) ? 'true' : 'false';
