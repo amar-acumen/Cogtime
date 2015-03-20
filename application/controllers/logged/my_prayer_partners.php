@@ -513,13 +513,14 @@ class My_prayer_partners extends Base_controller {
                 $sql_churchmember = "SELECT GROUP_CONCAT(member_id) AS member  FROM cg_church_member WHERE church_id IN
                         (SELECT church_id AS chid FROM cg_church_member WHERE is_approved=1 AND member_id='".$i_profile_id."') AND member_id!='".$i_profile_id."'";
                
-                
+                //echo $sql_churchmember;                exit();
                 $query_churchmember = $this->db->query($sql_churchmember);
                 $result_churchmember = $query_churchmember->result_array();
                 
                 $arr_churchmember = explode(',', $result_churchmember[0]['member']);
                 $query = "SELECT GROUP_CONCAT(member_id) AS member FROM cg_church_member WHERE church_id IN
-                        (SELECT church_id AS chid FROM cg_church_admin WHERE is_approved=1 AND ch_admin_id='".$i_profile_id."') AND member_id!='".$i_profile_id."'";
+                        (SELECT id AS chid FROM cg_church WHERE ch_public_url!='' AND ch_page_url!='' AND ch_admin_id='".$i_profile_id."') AND member_id!='".$i_profile_id."'";
+                //echo $query;                exit();
                 $query_churchadmin = $this->db->query($query);
                 $result_churchadmin = $query_churchadmin->result_array();
                 
@@ -528,7 +529,7 @@ class My_prayer_partners extends Base_controller {
                 $arrmember2 = array_diff($arr_churchadmin, $arr_churchmember);
                 $member = implode(",",array_merge($arrmember1,$arrmember2));
                 $member = substr($member,0,-1);
-
+                $member = ltrim ($member, ',');
 
                 $WHERE_COND = "";
                 $WHERE_COND_NOTEXACT = "";
@@ -838,7 +839,8 @@ class My_prayer_partners extends Base_controller {
 
                 $result = $this->my_prayer_partner_model->get_prayer_partner_sugg($EXACT_WHERE, $LIKE_WHERE,$LIKE_WHERE_FOR_CHURCH, $s_order_by, $page, $this->pagination_per_page,$member);
                 $resultCount = count($result);
-                #echo $this->db->last_query(); 
+                //echo $resultCount;
+               // echo $this->db->last_query(); 
                 //pr($result);
                 $total_rows = $this->my_prayer_partner_model->get_prayer_partner_sug_total($EXACT_WHERE, $LIKE_WHERE);
             }
@@ -879,7 +881,7 @@ class My_prayer_partners extends Base_controller {
             $data['no_of_result'] = $total_rows;
             $data['current_page'] = $page;
             $data['total_pages'] = ceil($total_rows / $this->pagination_per_page);
-
+             $data['resultCount'] = $resultCount;
             //echo $data['total_pages'].' ==total_pages==== '.$page;
             //echo $data['current_page'].' ==  ';
             $data['post_val'] = ($total_rows > 0 ) ? 'true' : 'false';

@@ -59,7 +59,26 @@
 											//show_cal_contents_by_week(day_arr[2], day_arr[0], day_arr[1], 'null', WeekNumber)
 											//alert($.datepicker.iso8601Week(new Date(day_arr[2], day_arr[0] , day_arr[1])))
 											//gotoDay(val_date);
-                      gotoDay(day_arr[2],day_arr[1],day_arr[0]);
+                      						gotoDay(day_arr[2],day_arr[1],day_arr[0]);
+                      						
+                      						var select_date=day_arr[2]+'-'+day_arr[0]+'-'+day_arr[1];
+                      						var month = new Array();
+											month[01] = "January";
+											month[02] = "February";
+											month[03] = "March";
+											month[04] = "April";
+											month[05] = "May";
+											month[06] = "June";
+											month[07] = "July";
+											month[08] = "August";
+											month[09] = "September";
+											month[10] = "October";
+											month[11] = "November";
+											month[12] = "December";
+											var new_date_formate= month[parseInt(day_arr[0])];
+                      						$('#displayDateDIV').html(new_date_formate+' '+day_arr[1]+','+day_arr[2]);
+                      						$('#hd_tododate').val(select_date);
+                      						$('#hd_date').val(select_date);
 										}
 									});
 						 			
@@ -79,7 +98,7 @@
                         </div>
 
                         <div class="page_heading">
-                        <?php  //echo $selected_date;
+                        <?php  //echo $selected_date.' .....';
 								$d_year = date('Y',mktime(0, 0, 0, $selected_month ,$selected_day, $selected_year));
 								$d_month = date('m',mktime(0, 0, 0, $selected_month ,$selected_day, $selected_year));
 								$d_day = date('d',mktime(0, 0, 0, $selected_month ,$selected_day, $selected_year));
