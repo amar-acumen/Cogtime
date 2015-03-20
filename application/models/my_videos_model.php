@@ -251,7 +251,7 @@ class My_videos_model extends Base_model
     
     function search_get_total_no_of_videos($id,$where)
     {
-        $sql = "SELECT count(*) as count FROM ".$this->db->USER_VIDEOS." WHERE  i_status =1 AND  `i_user_id`='".$id,."' ".$where;
+        $sql = "SELECT count(*) as count FROM ".$this->db->USER_VIDEOS." WHERE  i_status =1 AND `i_user_id`='".$id."' ".$where;
         $res = $this->db->query($sql)->result_array();
         return $res[0]['count'];
         
