@@ -59,7 +59,9 @@
 											//show_cal_contents_by_week(day_arr[2], day_arr[0], day_arr[1], 'null', WeekNumber)
 											//alert($.datepicker.iso8601Week(new Date(day_arr[2], day_arr[0] , day_arr[1])))
 											//gotoDay(val_date);
-                      gotoDay(day_arr[2],day_arr[1],day_arr[0]);
+                      						gotoDay(day_arr[2],day_arr[1],day_arr[0]);
+                      						$('#displayDateDIV').html(selectedDate);    //hd_date
+                      						$('#hd_tododate').val(selectedDate);
 										}
 									});
 						 			
@@ -172,7 +174,7 @@ margin-top: -9px;"></span>
                                    <span class="blue12"><strong>Back</strong></span>
                                     
                                     <span id="err_todo_rem_time" class="error-message" style="margin-left: 130px;margin-top: -8px;"></span>
-                                     <input type="hidden" id="hd_tododate" name="hd_tododate" value="<?=getShortDate($selected_date,'8')?>"/>
+                                     <input type="" id="hd_tododate" name="hd_tododate" value="<?=getShortDate($selected_date,'8')?>"/>
                                   <br class="clear"/>
                                  <div class="lable-txt-nw"></div>
                                  <span id="err_time_stamp" class="error-message" style="margin-left:0 !important;"></span>
