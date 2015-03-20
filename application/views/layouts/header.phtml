@@ -115,4 +115,16 @@ $(document).ready(function(){
 
 </script>
 
+ <?php } 
+ 
+ $member_status = $_GET['mSt'];
+ if($member_status == 1){
+ ?>
+<script type="text/javascript">
+
+$(document).ready(function(){
+    ShowUIMSg('You are already used this link');
+});
+
+</script>
  <?php } ?>
