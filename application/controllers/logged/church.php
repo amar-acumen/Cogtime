@@ -652,6 +652,16 @@ function general_setting(){
 							'invitation_sent_date' => get_db_datetime()
 							);
                                                // pr($invite_mem_info);
+                                                /****************already member***********************/
+                                                /**********if already invited member**********************************/
+                                    $query1 = $this->db->get_where('cg_church_member_invitation', array('email' => $invite_mem_info['email']));
+                                    $result = $query1->result();
+                                    if(count($result) > 0){
+                                         continue;
+                                    }
+                                                /*******************************************/
+                                                
+                                                
 						$this->db->insert('cg_church_member_invitation', $invite_mem_info);
                                                 $add_mem_id = $this->db->insert_id();
 						
@@ -1693,6 +1703,7 @@ echo json_encode( array('success'=>'true'));
                                     $result = $query1->result();
                                     if(count($result) > 0){
                                          continue;
+                                         echo json_encode(array('success'=>false,'arr_messages'=>$arr_messages,'msg'=>''.$invite_val[$i][1].' already exist'));
                                     }
                                     /********************************************/
 					$invited_member = array(
