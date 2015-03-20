@@ -227,13 +227,23 @@
 
                                                 }, 0);
                                             };
+
+                                            $("#date_end").datetimepicker({
+                                                beforeShow: changeYearButtons,
+                                                onChangeMonthYear: changeYearButtons,
+                                                dateFormat: 'yy-mm-dd',
+                                                minDate: new Date(<?= (date('Y')) ?>, <?= (date('m') - 1) ?>, <?= (date('d')) ?>, 0, 00),
+                                                controlType: 'select',
+                                                stepMinute: 15
+                                            });
+
+											alert('ssss');
                                         });
                                         function check_lim()
                                         {
                                             var start_date = $('#date_to').val();
                                             var end_date = $('#date_end').val();
                                             //alert(end_date);
-                                            
                                             if (start_date > end_date && end_date.trim()!='')
                                             {
                                                 //alert('Please enter a valid end date');
