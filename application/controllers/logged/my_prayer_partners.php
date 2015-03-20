@@ -838,7 +838,7 @@ class My_prayer_partners extends Base_controller {
 
                 $result = $this->my_prayer_partner_model->get_prayer_partner_sugg($EXACT_WHERE, $LIKE_WHERE,$LIKE_WHERE_FOR_CHURCH, $s_order_by, $page, $this->pagination_per_page,$member);
                 $resultCount = count($result);
-                #echo $this->db->last_query(); 
+                echo $this->db->last_query(); 
                 //pr($result);
                 $total_rows = $this->my_prayer_partner_model->get_prayer_partner_sug_total($EXACT_WHERE, $LIKE_WHERE);
             }
