@@ -61,12 +61,15 @@
 											//gotoDay(val_date);
                       						gotoDay(day_arr[2],day_arr[1],day_arr[0]);
                       						
-                      						//var current_date_formate = new Date(val_date);
-											//var new_date_formate = current_date_formate.toString('dd-MM-yy');
-                      						//alert(new_date_formate);
+                      						var select_date=day_arr[2]+'-'+day_arr[0]+'-'+day_arr[1];
+                      						
+                      						alert(select_date);
+                      						var current_date_formate = new Date(select_date);
+											var new_date_formate = current_date_formate.toString('dd-MM-yy');
+                      						alert(new_date_formate);
 											//var new_date_formate = date.toString('F d,Y');
-                      						$('#displayDateDIV').html("<?php echo getShortDate( '?>val_date<?php ','9')?>");    //hd_date
-                      						$('#hd_tododate').val(val_date);
+                      						$('#displayDateDIV').html(new_date_formate);    //hd_date
+                      						$('#hd_tododate').val(select_date);
 										}
 									});
 						 			
@@ -86,7 +89,7 @@
                         </div>
 
                         <div class="page_heading">
-                        <?php  echo $selected_date.' .....';
+                        <?php  //echo $selected_date.' .....';
 								$d_year = date('Y',mktime(0, 0, 0, $selected_month ,$selected_day, $selected_year));
 								$d_month = date('m',mktime(0, 0, 0, $selected_month ,$selected_day, $selected_year));
 								$d_day = date('d',mktime(0, 0, 0, $selected_month ,$selected_day, $selected_year));
