@@ -133,14 +133,6 @@ else if(jQuery('#name').val() != '' && jQuery('#email').val() != '')
      if( check_mail == null ){
          e_flag=1;
          $('#email_err').css("display","block").html('Invalid email id ');
-     }else if(check_mail == null && jQuery('#name').val() == '' ){
-         e_flag=1;
-	$('#email_err').css("display","block").html('Invalid email id ');
-	$('#name_err').css("display","block");
-     }else if(email.match(/^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/) == null && jQuery('#name').val() != '' ){
-         e_flag=1;
-	$('#email_err').css("display","block").html('Invalid email id '); 
-        $('#name_err').css("display","none");
      }
      else{
     
@@ -156,8 +148,17 @@ if((jQuery('#name1').val() != '' && jQuery('#email1').val() == '') || (jQuery('#
 }
 else if (jQuery('#name1').val() != '' && jQuery('#email1').val() != '')
 {
-
+ var email = jQuery('#email1').val();
+    var check_mail = email.match(/^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/);
+    
+    //alert(email);
+     if( check_mail == null ){
+         e_flag=1;
+         $('#email_err_1').css("display","block").html('Invalid email id ');
+     }
+     else{
 	val_arr.push(jQuery('#name1').val()+'_'+jQuery('#email1').val());
+    }
 	//console.log(val_arr);
 }
 if((jQuery('#name2').val() != '' && jQuery('#email2').val() == '') || (jQuery('#name2').val() == '' && jQuery('#email2').val() != '')) {
@@ -167,7 +168,17 @@ if((jQuery('#name2').val() != '' && jQuery('#email2').val() == '') || (jQuery('#
 }
 else if (jQuery('#name2').val() != '' && jQuery('#email2').val() != '')
 {
+     var email = jQuery('#email2').val();
+    var check_mail = email.match(/^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/);
+    
+    //alert(email);
+     if( check_mail == null ){
+         e_flag=1;
+         $('#email_err_2').css("display","block").html('Invalid email id ');
+     }
+     else{
 	val_arr.push(jQuery('#name2').val()+'_'+jQuery('#email2').val());
+    }
 }
 if((jQuery('#name3').val() != '' && jQuery('#email3').val() == '') || (jQuery('#name3').val() == '' && jQuery('#email3').val() != '')) {
 	e_flag=1;
@@ -176,7 +187,16 @@ if((jQuery('#name3').val() != '' && jQuery('#email3').val() == '') || (jQuery('#
 }
 else if(jQuery('#name3').val() != '' && jQuery('#email3').val() != '')
 {
+      var email = jQuery('#email3').val();
+    var check_mail = email.match(/^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/);
+    
+    //alert(email);
+     if( check_mail == null ){
+         e_flag=1;
+         $('#email_err_3').css("display","block").html('Invalid email id ');
+     }else{
 	val_arr.push(jQuery('#name3').val()+'_'+jQuery('#email3').val());
+    }
 }
 if((jQuery('#name4').val() != '' && jQuery('#email4').val() == '') || (jQuery('#name4').val() == '' && jQuery('#email4').val() != '')) {
 	e_flag=1;
@@ -185,7 +205,16 @@ if((jQuery('#name4').val() != '' && jQuery('#email4').val() == '') || (jQuery('#
 }
 else if(jQuery('#name4').val() != '' && jQuery('#email4').val() != '')
 {
+      var email = jQuery('#email4').val();
+    var check_mail = email.match(/^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/);
+    
+    //alert(email);
+     if( check_mail == null ){
+         e_flag=1;
+         $('#email_err_4').css("display","block").html('Invalid email id ');
+     }else{
 	val_arr.push(jQuery('#name4').val()+'_'+jQuery('#email4').val());
+    }
 }
 if(e_flag == 1)
 {
