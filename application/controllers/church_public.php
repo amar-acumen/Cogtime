@@ -97,18 +97,35 @@ class Church_public extends Base_controller
 
     } // end of index   
     
-  public function church_registration_by_email($churchid,$byrequest)
+  public function church_registration_by_email($churchid,$byrequest,$member_id)
   {
-    $_SESSION['current_church_id'] = $churchid;
+      $_SESSION['invited_member_id'] = $member_id;
+       $_SESSION['current_church_id'] = $churchid;
     $_SESSION['byrequest'] = $byrequest;
+      $query = $this->db->get_where('cg_church_member_invitation', array('id' => $member_id , 'status'=> 1));
+    $result = $query->result();
+     if(count($result) > 0){
+          $loc = base_url().'?mSt=1';
+        if($_SESSION['user_id'] != null){
+            $this->users_model->logout();
+             header("location:" . $loc);
+        }else{
+             header("location:" . $loc);
+        }
+         
+     }else{
+   // pr($member_id,1);
+   
     $location = base_url()."church_registration/";
     
     header('location:'.$location.'');
     exit;
+     }
   }
     
    public function church_registration($churchid = '') {
         try {
+             //echo $_SESSION['invited_member_id']; die();
              parent::_non_accessible_by_logged();
             
             $data['church_arr'] =     $this->church_new_model->get_church_info($churchid);
@@ -327,15 +344,16 @@ class Church_public extends Base_controller
                             );
                         }
                          $this->db->insert('cg_church_member', $data); 
-						if (isset($_SESSION['invited_member_id']) && $_SESSION['invited_member_id'] != '')
-	                      {
-                                $invited_member = array(
-                            'status' => '1',
-                            'joined_on_date' => get_db_datetime()
-                            );
-	                   $this->db->update('cg_church_member_invitation', $invited_member, array('id' => $_SESSION['invited_member_id']));
-	
-	                           }
+						if ($_SESSION['invited_member_id'] != null)
+                                                     {
+                                                    $data = array(
+                                                    'status' => 1
+                                                    
+                                                 );
+
+                                                $this->db->where('id', $_SESSION['invited_member_id']);
+                                                $this->db->update('cg_church_member_invitation', $data); 
+                                                                  }
                         ## end ##
                         //EMAIL SENDING CODE.[start]
 						 $this->load->helper('html');
@@ -601,8 +619,17 @@ class Church_public extends Base_controller
     /*****************update invite table*****************************************/
    
     /*****************insert in member table*****************************/
-    
-    
+    $query = $this->db->get_where('cg_church_member_invitation', array('id' => $member_id , 'status'=> 1));
+    $result = $query->result();
+    if(count($result) > 0){
+        $loc = base_url().'?mSt=1';
+        if($_SESSION['user_id'] != null){
+            $this->users_model->logout();
+             header("location:" . $loc);
+        }else{
+             header("location:" . $loc);
+        }
+    }else{
     
     $data = array(
    'church_id' => $churchid ,
@@ -617,14 +644,19 @@ $this->db->insert('cg_church_member', $data);
 $info = $this->users_model->fetch_this($user_id);
         $USER_ID = $user_id;
          if ($info['i_status'] == 1) {
+             
+             
              get_all_church_session($churchid);
-              $data1 = array(
+             $data = array(
                'status' => 1,
-               'joined_on_date' =>get_db_datetime()
+               
+               'joined_on_date' => get_db_datetime
             );
 
 $this->db->where('id', $member_id);
-$this->db->update('cg_church_member_invitation', $data1); 
+$this->db->update('cg_church_member_invitation', $data);  
+
+
 
              $this->session->set_userdata('login_referrer', '');
                     $this->session->set_userdata('loggedin', true);
@@ -655,7 +687,7 @@ $this->db->update('cg_church_member_invitation', $data1);
                     $this->session->set_userdata('is_first_login_checked', 'false');
                         //$this->mail_contents_model->get_by_name("acknowledgement");
 
-                    //$this->set_user_online($info["id"], $_SERVER['REMOTE_ADDR']);
+                    $this->users_model->set_user_online($info["id"], $_SERVER['REMOTE_ADDR']);
                     $loc = base_url().$churchid.'/church-wall';
             header("location:" . $loc);
          }
@@ -666,6 +698,7 @@ $this->db->update('cg_church_member_invitation', $data1);
     
     
     exit;
+  }
   }
     
 }   // end of controller...
