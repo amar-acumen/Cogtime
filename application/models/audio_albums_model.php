@@ -78,11 +78,8 @@ class Audio_albums_model extends Base_model
 	
 
 	public function get_total_by_user_id($user_id) {
-<<<<<<< HEAD
-		$sql = "SELECT count(*) count FROM ".$this->db->AUDIO_ALBUM."  where i_user_id = '".$user_id."'", ;
-=======
 		$sql = "SELECT count(*) count FROM ".$this->db->AUDIO_ALBUM."  where i_user_id = '".$user_id."'";
->>>>>>> 919edf40b7b491c6b74f33e8bdbf9bb4db6fa402
+
 		$query = $this->db->query($sql); 
 		$result_arr = $query->result_array();
 
@@ -117,29 +114,17 @@ class Audio_albums_model extends Base_model
             $logged_user_id = intval(decrypt($this->session->userdata('user_id')));
             //echo $logged_user_id; 
             // die('ok');
-<<<<<<< HEAD
 	     $sql = 'DELETE FROM '.$this->db->AUDIO_ALBUM.' WHERE id="'.$id.'"';
 			 $this->db->query($sql);
 		 
 		 ## delete associated photos
 		 $audio_sql = 'SELECT id, s_audio_file_name FROM '.$this->db->USER_AUDIO.' WHERE  i_id_audio_album ="'.$id.'" ';
-=======
-	     	$sql =  'DELETE FROM '.$this->db->AUDIO_ALBUM.' WHERE id="'.$id.'"';
-			$this->db->query($sql);
-		 
-		 ## delete associated photos
-		 $audio_sql = 'SELECT id, s_audio_file_name FROM '.$this->db->USER_AUDIO.' WHERE  i_id_audio_album = "'.$id.'"';
->>>>>>> 919edf40b7b491c6b74f33e8bdbf9bb4db6fa402
 		 $audio_arr = $this->db->query($audio_sql)->result_array();
 		 
 		   $albums_comments_sql = 'DELETE FROM cg_user_media_comments WHERE i_media_id="'.$id.'" AND s_media_type = "audio_album" ';
 		 $this->db->query($albums_comments_sql);
-		
-<<<<<<< HEAD
+		 
 		  $like_album_sql = "DELETE FROM cg_user_media_like WHERE i_media_id='".$id."' AND s_media_type = 'audio_album'" ;
-=======
-		  $like_album_sql = "DELETE FROM cg_user_media_like WHERE i_media_id='".$id."' AND s_media_type = 'audio_album'";
->>>>>>> 919edf40b7b491c6b74f33e8bdbf9bb4db6fa402
 		  		 $this->db->query($like_album_sql); 
 		 
 		 ## delete associated comments
@@ -259,17 +244,10 @@ class Audio_albums_model extends Base_model
 	
 	public function get_by_album_details_id($id, $s_where,  $start_limit="", $no_of_page="") {
 		if("$start_limit" == "") {
-<<<<<<< HEAD
 			$sql = 'SELECT * FROM '.$this->db->AUDIO_ALBUM.'  where id = "'.$id.'" {$s_where} ';
 		}
 		else {
 			$sql = 'SELECT * FROM '.$this->db->AUDIO_ALBUM.'  where id = "'.$id.'"  {$s_where} limit {$start_limit}, {$no_of_page}';
-=======
-			$sql = 'SELECT * FROM '.$this->db->AUDIO_ALBUM.'  where id =  %s '.$s_where.'';
-		}
-		else {
-			$sql = 'SELECT * FROM '.$this->db->AUDIO_ALBUM.'  where id ="'.$id.'" '.$s_where.' limit {$start_limit}, {$no_of_page}';
->>>>>>> 919edf40b7b491c6b74f33e8bdbf9bb4db6fa402
 		}
 
 		$query = $this->db->query($sql);
