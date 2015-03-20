@@ -243,11 +243,18 @@
                                             var end_date = $('#date_end').val();
                                             var change_date = $('#change_date').val();
                                             //alert(end_date);
-                                            if (start_date > end_date && end_date.trim()!='' && change_date.trim()!=end_date.trim())
+                                            if (start_date > end_date && end_date.trim()!='')
                                             {
-                                                alert('Please enter a valid end date');
-                                                $("#change_date").val(end_date);
+                                            	if(start_date > end_date && end_date.trim()!='' && change_date.trim()!=end_date.trim())
+                                            	{
+                                                	alert('Please enter a valid end date');
+                                                	$("#change_date").val(end_date);
+                                            	}
                                                 $("#date_end").val('');
+                                            }
+                                            if (start_date <= end_date && end_date.trim()!='')
+                                            {
+                                            	$("#change_date").val('');
                                             }
                                         }
                                     </script>
