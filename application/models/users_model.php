@@ -1548,7 +1548,7 @@ class Users_model extends Base_model  {
 									,u.s_chat_display_name AS chat_user_name
 																  
 									  										
-							FROM cg_".$this->tbl_name." u
+							FROM cg_users u
 							    LEFT JOIN {$this->db->COUNTRY} AS c ON u.i_country_id = c.id 
 								LEFT JOIN {$this->db->STATE} AS S ON u.i_state_id = S.id
 								LEFT JOIN {$this->db->CITY} AS city ON u.i_city_id = city.id
