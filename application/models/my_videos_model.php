@@ -251,7 +251,7 @@ class My_videos_model extends Base_model
     
     function search_get_total_no_of_videos($id,$where)
     {
-        $sql = "SELECT count(*) as count FROM ".$this->db->USER_VIDEOS." WHERE  i_status =1 AND  `i_user_id`='".$id,."' ".$where;
+        $sql = "SELECT count(*) as count FROM ".$this->db->USER_VIDEOS." WHERE  i_status =1 AND `i_user_id`='".$id."' ".$where;
         $res = $this->db->query($sql)->result_array();
         return $res[0]['count'];
         
@@ -468,7 +468,7 @@ class My_videos_model extends Base_model
 	### by mediad id ###
 	public function get_user_details_by_media_id($media_id, $s_where="", $start_limit="", $no_of_page="") {
 		if("$start_limit" == "") {
-			$sql = 'SELECT * FROM '.$this->db->USER_VIDEOS.'  WHERE id = "'.$media_id.'" {$s_where} ORDER BY id DESC ',$media_id,$s_where;
+			$sql = 'SELECT * FROM '.$this->db->USER_VIDEOS.'  WHERE id = "'.$media_id.'" '.$s_where.' ORDER BY id DESC ';
 		}
 		else {
 			 $sql = 'SELECT * FROM '.$this->db->USER_VIDEOS

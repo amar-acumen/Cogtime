@@ -224,7 +224,7 @@ class User_photos_model extends Base_model
 		}
 		else {
 			 $sql = 'SELECT * FROM '.$this->db->USER_PHOTOS
-								.'  WHERE id = "'.$media_id.'" {$s_where} ORDER BY id DESC LIMIT '.$start_limit.', '.$no_of_page, $media_id, $s_where, , ;
+								.'  WHERE id = "'.$media_id.'" {$s_where} ORDER BY id DESC LIMIT '.$start_limit.', '.$no_of_page;
 		}
 
 		$query = $this->db->query($sql);

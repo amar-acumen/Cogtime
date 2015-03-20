@@ -225,7 +225,7 @@ class Photo_albums_model extends Base_model
 			$sql = 'SELECT * FROM '.$this->db->PHOTO_ALBUM.'  where id = "'.$id.'" '.$s_where;
 		}
 		else {
-			$sql = 'SELECT * FROM '.$this->db->PHOTO_ALBUM.'  where id = "'.$id.'"  {$s_where} limit '.$start_limit.', '.$no_of_page;
+			$sql = 'SELECT * FROM '.$this->db->PHOTO_ALBUM.'  where id = "'.$id.'"  '.$s_where.' limit '.$start_limit.', '.$no_of_page;
 		}
 
 		$query = $this->db->query($sql);
