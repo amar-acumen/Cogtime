@@ -125,7 +125,7 @@ class Church_public extends Base_controller
     
    public function church_registration($churchid = '') {
         try {
-             echo $_SESSION['invited_member_id']; die();
+             //echo $_SESSION['invited_member_id']; die();
              parent::_non_accessible_by_logged();
             
             $data['church_arr'] =     $this->church_new_model->get_church_info($churchid);
@@ -344,15 +344,16 @@ class Church_public extends Base_controller
                             );
                         }
                          $this->db->insert('cg_church_member', $data); 
-						if (isset($_SESSION['invited_member_id']) && $_SESSION['invited_member_id'] != '')
-	                      {
-                                $invited_member = array(
-                            'status' => '1',
-                            'joined_on_date' => get_db_datetime()
-                            );
-	                   $this->db->update('cg_church_member_invitation', $invited_member, array('id' => $_SESSION['invited_member_id']));
-	
-	                           }
+						if ($_SESSION['invited_member_id'] != null)
+                                                     {
+                                                    $data = array(
+                                                    'status' => 1
+                                                    
+                                                 );
+
+                                                $this->db->where('id', $_SESSION['invited_member_id']);
+                                                $this->db->update('cg_church_member_invitation', $data); 
+                                                                  }
                         ## end ##
                         //EMAIL SENDING CODE.[start]
 						 $this->load->helper('html');
