@@ -519,8 +519,8 @@ class My_prayer_partners extends Base_controller {
                 
                 $arr_churchmember = explode(',', $result_churchmember[0]['member']);
                 $query = "SELECT GROUP_CONCAT(member_id) AS member FROM cg_church_member WHERE church_id IN
-                        (SELECT church_id AS chid FROM cg_church_admin WHERE is_approved=1 AND ch_admin_id='".$i_profile_id."') AND member_id!='".$i_profile_id."'";
-                echo $query;                exit();
+                        (SELECT id AS chid FROM cg_church WHERE ch_public_url!='' AND ch_page_url!='' AND ch_admin_id='".$i_profile_id."') AND member_id!='".$i_profile_id."'";
+                //echo $query;                exit();
                 $query_churchadmin = $this->db->query($query);
                 $result_churchadmin = $query_churchadmin->result_array();
                 
