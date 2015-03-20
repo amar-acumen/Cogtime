@@ -50,14 +50,14 @@ class User_audios_model extends Base_model
 			$sql = 'SELECT audio.*,gen.genre_name as genre  FROM '.$this->db->USER_AUDIO.' audio
 									LEFT JOIN '.$this->db->genre.' gen on gen.id=audio.s_genre_id
 								
-								 WHERE  audio.i_status =1 AND  audio.i_user_id = "'.$user_id.'" {$s_where} ORDER BY audio.id DESC ';
+								 WHERE  audio.i_status =1 AND  audio.i_user_id = "'.$user_id.'" '.$s_where.' ORDER BY audio.id DESC ';
 		}
 	
 		else {
 			$sql = 'SELECT audio.*,gen.genre_name as genre FROM '.$this->db->USER_AUDIO
 								.' audio LEFT JOIN '.$this->db->genre.' gen on gen.id=audio.s_genre_id WHERE 
 								audio.i_status =1 AND 
-								audio.i_user_id = "'.$user_id.'" {$s_where} ORDER BY audio.id DESC LIMIT '.$start_limit.', '.$no_of_page;
+								audio.i_user_id = "'.$user_id.'" '.$s_where.' ORDER BY audio.id DESC LIMIT '.$start_limit.', '.$no_of_page;
 		}
 
 
