@@ -39,6 +39,7 @@ class User_photos_model extends Base_model
 	public function get_by_user_id($user_id, $s_where="", $start_limit="", $no_of_page="") {
 		if("$start_limit" == "") {
 			$sql = 'SELECT * FROM '.$this->db->USER_PHOTOS.'  WHERE i_status =1 AND i_user_id = "'.$user_id.'" '.$s_where.' ORDER BY id DESC ';
+			
 		}
 		else {
 			 $sql = 'SELECT * FROM '.$this->db->USER_PHOTOS
