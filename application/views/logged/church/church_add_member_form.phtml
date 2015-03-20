@@ -139,7 +139,8 @@ else if(jQuery('#name').val() != '' && jQuery('#email').val() != '')
 	$('#name_err').css("display","block");
      }else if(email.match(/^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/) == null && jQuery('#name').val() != '' ){
          e_flag=1;
-	$('#email_err').css("display","block").html('Invalid email id ');  
+	$('#email_err').css("display","block").html('Invalid email id '); 
+        $('#name_err').css("display","none");
      }
      else{
     
