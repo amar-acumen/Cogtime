@@ -236,17 +236,17 @@
                                                 controlType: 'select',
                                                 stepMinute: 15
                                             });
-
-											alert('ssss');
                                         });
                                         function check_lim()
                                         {
                                             var start_date = $('#date_to').val();
                                             var end_date = $('#date_end').val();
+                                            var change_date = $('#change_date').val();
                                             //alert(end_date);
-                                            if (start_date > end_date && end_date.trim()!='')
+                                            if (start_date > end_date && end_date.trim()!='' && change_date.trim()!=end_date.trim())
                                             {
-                                                //alert('Please enter a valid end date');
+                                                alert('Please enter a valid end date');
+                                                $("#change_date").val(end_date);
                                                 $("#date_end").val('');
                                             }
                                         }
@@ -254,7 +254,7 @@
                                     <span id="err_date_end" class="error-message"></span> 
                                 </div> 
                                 <div class="clr"></div>
-
+								<input id="change_date" value="">
 
                                 <?php /*  <div class="lable01" style="width:146px;">End Time :</div>
                                   <div class="field03">
