@@ -54,6 +54,7 @@
 
 
                     <form id="frmCreateEvent"  method="post" action="<?= base_url() . 'logged/create_event/add_event_ajax' ?>" onsubmit="return false;" enctype="multipart/form-data"> 
+                        <input id="change_date" type="hidden" value="">
                         <div class="frm_box blue_box" >
                             <div class="lable01" style="width:60px;">Title : </div>  
                             <div class="field03">
@@ -245,12 +246,12 @@
                                             //alert(end_date);
                                             if (start_date > end_date && end_date.trim()!='')
                                             {
+                                                $("#date_end").val('');
                                             	if(start_date > end_date && end_date.trim()!='' && change_date.trim()!=end_date.trim())
                                             	{
                                                 	alert('Please enter a valid end date');
                                                 	$("#change_date").val(end_date);
                                             	}
-                                                $("#date_end").val('');
                                             }
                                             if (start_date <= end_date && end_date.trim()!='')
                                             {
@@ -261,7 +262,6 @@
                                     <span id="err_date_end" class="error-message"></span> 
                                 </div> 
                                 <div class="clr"></div>
-								<input id="change_date" value="">
 
                                 <?php /*  <div class="lable01" style="width:146px;">End Time :</div>
                                   <div class="field03">
