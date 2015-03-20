@@ -2146,11 +2146,11 @@ color: #096aa7;
 
 
 
-.admin-menu{  background:#3b3b3b; margin-bottom:21px; border-top:0; font-family: 'GibsonRegular'; border:1px solid #d6d6d6; border-top:0;}
+.admin-menu{  background:#3b3b3b; margin-bottom:21px; border-top:0; font-family: 'GibsonRegular'; border:1px solid #d6d6d6; border-top:0; height:40px;}
 
 
 
-.admin-menu ul{ margin:0; padding:0; overflow:hidden; width:100%;}
+.admin-menu ul{ margin:0; padding:0; width:100%;}
 
 .admin-menu ul li{ list-style-type:none; color:#48535a; font-size:14px; margin:0; padding:0; float:left;}
 
