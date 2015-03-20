@@ -880,7 +880,7 @@ class My_prayer_partners extends Base_controller {
             $data['no_of_result'] = $total_rows;
             $data['current_page'] = $page;
             $data['total_pages'] = ceil($total_rows / $this->pagination_per_page);
-
+             $dat['resultCount'] = $resultCount;
             //echo $data['total_pages'].' ==total_pages==== '.$page;
             //echo $data['current_page'].' ==  ';
             $data['post_val'] = ($total_rows > 0 ) ? 'true' : 'false';
