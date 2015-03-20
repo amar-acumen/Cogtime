@@ -654,7 +654,7 @@ function general_setting(){
                                                // pr($invite_mem_info);
                                                 /****************already member***********************/
                                                 /**********if already invited member**********************************/
-                                    $query1 = $this->db->get_where('cg_church_member_invitation', array('email' => $invite_mem_info['email']));
+                                    $query1 = $this->db->get_where('cg_church_member_invitation', array('email' => $invite_mem_info['email'] , 'church_id'=>$_SESSION['logged_church_id'] ));
                                     $result = $query1->result();
                                     if(count($result) > 0){
                                          continue;
@@ -1699,7 +1699,7 @@ echo json_encode( array('success'=>'true'));
                                     
                                     
                                     /**********if already invited member**********************************/
-                                    $query1 = $this->db->get_where('cg_church_member_invitation', array('email' => $invite_val[$i][1]));
+                                    $query1 = $this->db->get_where('cg_church_member_invitation', array('email' => $invite_val[$i][1] ,'church_id'=>$_SESSION['logged_church_id'] ));
                                     $result = $query1->result();
                                     if(count($result) > 0){
                                          echo json_encode(array('success'=>false,'arr_messages'=>$arr_messages,'msg'=>''.$invite_val[$i][1].' already exist'));
