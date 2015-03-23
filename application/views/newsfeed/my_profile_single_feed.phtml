@@ -169,7 +169,7 @@ if( $feed['s_type'] == 'wall_post' ){
               <!--  text div start -->
 			   <div class=" comment-content nw-comment-content">
                 <div class="write-text">
-                <textarea name="wall_msg" id="wall_msg" onfocus="if(this.value=='Max 500 Characters')this.value='';" onblur="if(this.value=='')this.value='Max 500 Characters';" maxlength ="500"  onKeyDown="limitTextarea(this.form.wall_msg,this.form.countdown,500);" onKeyUp="limitTextarea(this.form.wall_msg,this.form.countdown,500);" onkeypress="return restrict_carrige(event);"  ><?php if($data_arr->message != ''){ echo html_entity_decode($data_arr->message);} else echo"Max 500 Characters";?></textarea>
+                <textarea name="wall_msg" id="wall_msg" onfocus="if(this.value=='Max 500 Characters')this.value='';" onblur="if(this.value=='')this.value='Max 500 Characters';" maxlength ="500"  onKeyDown="limitTextarea(this.form.wall_msg,this.form.countdown,500);" onKeyUp="limitTextarea(this.form.wall_msg,this.form.countdown,500);" onkeypress="return restrict_carrige(event);"  ><?php if($data_arr->message != ''){ echo strip_tags($data_arr->message);} else echo"Max 500 Characters";?></textarea>
  <p style=" clear:both; float:left"> <span id="text_count"><?=strlen($data_arr->message)?></span> Characters</p>
                 </div>
                <!-- text div end  -->
