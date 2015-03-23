@@ -375,9 +375,9 @@ class My_ring extends Base_controller
 				insert_invitation($_ret,$_POST,$this->db->ring_invitation,'i_ring_id');
 				### add ring chat room
 
-				$host = "127.0.0.1";
-				$port = 51127;
-				$apiCommand = '<?xml version="1.0" encoding="UTF-8"?><Command group="default" api_pwd="3874-3459-9293-2194" type="add_room" name="'.$info['s_ring_name'].'" passallmessage="false" member = "true" ></Command>';
+//				$host = "127.0.0.1";
+//				$port = 51127;
+				/*$apiCommand = '<?xml version="1.0" encoding="UTF-8"?><Command group="default" api_pwd="3874-3459-9293-2194" type="add_room" name="'.$info['s_ring_name'].'" passallmessage="false" member = "true" ></Command>';/*
 				
 				$result = "";
 				$resultDoc = "";
@@ -1219,9 +1219,9 @@ $this->email->message("$body");
 				insert_invitation($id,$_POST,$this->db->ring_invitation,'i_ring_id');
 				
 				### updating room information
-				$host = "127.0.0.1";
-				$port = 51127;
-				$apiCommand = '<?xml version="1.0" encoding="UTF-8"?><Command group="default" api_pwd="3874-3459-9293-2194" type="edit_room" name="'.$info['s_ring_name'].'" roomid="'.$id.'"  passallmessage="false" member = "true" ></Command>';
+//				$host = "127.0.0.1";
+//				$port = 51127;
+				/*$apiCommand = '<?xml version="1.0" encoding="UTF-8"?><Command group="default" api_pwd="3874-3459-9293-2194" type="edit_room" name="'.$info['s_ring_name'].'" roomid="'.$id.'"  passallmessage="false" member = "true" ></Command>';
 				
 				
 				$result = "";
