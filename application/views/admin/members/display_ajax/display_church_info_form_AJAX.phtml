@@ -80,7 +80,7 @@ function autologin(user_id , church_id , type){
           success : function(data)
           {
              var url = data.url;
-             alert(url);
+             window.location.href=url;
           }
       }); 
     }
@@ -94,7 +94,8 @@ function autologin(user_id , church_id , type){
            dataType: 'json',
           success : function(data)
           {
-              
+             var url = data.url;
+             window.location.href=url;  
           }
       }); 
     }
