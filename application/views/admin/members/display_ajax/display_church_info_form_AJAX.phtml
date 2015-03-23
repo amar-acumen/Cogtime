@@ -43,7 +43,7 @@
                                        <tr>
                                             <td align="left" valign="top" ><?=$church_admin['admin_church_name'];  ?></td>
                                             <td align="left" valign="top"><?=$church_admin['admin_join_date'];  ?></td>
-                                            <td align="left" valign="top">Admin</td>
+                                            <td align="left" valign="top">Admin &nbsp; <input id="autologin_admin" class="btn-04" type="button" onclick="autologin()" value="Auto login as this user" title="Auto login as this user" name=""></td>
                                             
                                           </tr>
                                           <?php
@@ -54,7 +54,7 @@
                                           <tr>
                                             <td align="left" valign="top" ><?= $member->member_church_name ?></td>
                                             <td align="left" valign="top"><?=$member->member_join_date  ?></td>
-                                            <td align="left" valign="top"><?= 'Member' ?></td>
+                                            <td align="left" valign="top"><?= 'Member'  ?> &nbsp; <input id="autologin_member" class="btn-04" type="button" onclick="autologin()" value="Auto login as this user" title="Auto login as this user" name=""> </td>
                                             
                                           </tr>
                                            <?php 
