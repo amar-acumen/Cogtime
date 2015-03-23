@@ -2,19 +2,20 @@
     <?php 
     pr($church_admin); echo '============';
     pr($church_member); echo '======================';
-    
+    $new_arr = array_merge($church_admin,$church_member);
+    pr($new_arr);
     ?>
                                 	<!--title section -->
                                 	<div class="sec-title">
                                     	<span class="title-left"></span>
-                                        <div class="title-body"><h2>Subscriptions</h2></div>
+                                        <div class="title-body"><h2>Church</h2></div>
                                         <span class="title-right"></span>
                                     </div>
                                     <!--/title section -->
                                     <div class="show-by">
                                     <label>Show :</label>
                                         <select name="type" id="type" style="width:120px; float:right;">
-                                              <option>All</option> <option>SMS Credit</option> <option>Trade Credit</option>
+                                              <option>All</option> <option>Admin</option> <option>Member</option>
                                         </select>
                                         <script type="text/javascript">
                                             $(document).ready(function(arg) {
