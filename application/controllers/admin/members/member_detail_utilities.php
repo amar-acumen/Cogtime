@@ -52,7 +52,8 @@ class Member_detail_utilities extends Admin_base_Controller
             
             // fetching data
             $ajax_data['result'] = $this->users_model->fetch_this($user_id);
-           
+            $ajax_data['church_admin'] = $this->users_model->fetch_church_admin($user_id);   
+            $ajax_data['church_member'] = $this->users_model->fetch_church_member($user_id); 
             // get concerned view file...
             $VIEW_FILE = $this->get_display_file($tab);
             
@@ -151,6 +152,8 @@ class Member_detail_utilities extends Admin_base_Controller
                                  break;
                 case 'subscription'  : $view_filename = 'admin/members/display_ajax/display_subscription_info_form_AJAX.phtml';
                                  break;
+               case 'church'  : $view_filename = 'admin/members/display_ajax/display_church_info_form_AJAX.phtml';
+               break;
                 default        : $view_filename = 'admin/members/display_ajax/display_personal_info_form_AJAX.phtml';
                                  break;
             }

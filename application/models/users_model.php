@@ -1965,5 +1965,15 @@ class Users_model extends Base_model  {
         $result_arr = $this->db->query($SQL)->result_array();
         return $result_arr[0]['count'];
     }
+    function fetch_church_admin($user_id){
+       $SQL = "SELECT id,s_name,dt_join_on FROM cg_church WHERE ch_admin_id='" . $user_id . "' AND i_disabled=1";  
+          $result_arr = $this->db->query($SQL)->result_array();
+            return $result_arr[0];
+    }
+    function fetch_church_member($user_id){
+        $SQL = "SELECT c.s_name , cm.church_id,cm.created_date FROM cg_church_member  cm, cg_church c  WHERE cm.member_id='" . $user_id . "' AND c.id = cm.church_id "; 
+   $result_arr = $this->db->query($SQL)->result_array();
+            return $result_arr[0];
+        }
 
 }
