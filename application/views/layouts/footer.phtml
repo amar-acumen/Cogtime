@@ -479,7 +479,10 @@ window.onload=function(){
 	get_new_request_notification();
 
     if(globaVariableForGetunreadmsg)
+    {
         setInterval(function(){get_unread_msg()},59000);
+    }
+        
     
     <?php
     if($latest_emergency_intercession)
