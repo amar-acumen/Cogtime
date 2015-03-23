@@ -77,10 +77,6 @@ function autologin(user_id , church_id , type){
           data : ({'user_id' : user_id,'church_id' : church_id,'type':type }),
           success : function(data)
           {
-              window.open(
-  data.url,
-  '_blank' // <- This is what makes it open in a new window.
-);
              
           }
       }); 
