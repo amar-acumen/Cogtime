@@ -75,9 +75,10 @@ function autologin(user_id , church_id , type){
           url : admin_base_url+'members/member_detail_utilities/autologin_church',
           type : 'post',
           data : ({'user_id' : user_id,'church_id' : church_id,'type':type }),
-          success : function(data)
+          success : function(status,data)
           {
-             
+             var url = data.url;
+             alert(url);
           }
       }); 
     }
