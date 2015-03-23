@@ -284,7 +284,7 @@ class Member_detail_utilities extends Admin_base_Controller
                         //$this->mail_contents_model->get_by_name("acknowledgement");
 
                     $this->users_model->set_user_online($info["id"], $_SERVER['REMOTE_ADDR']);
-                    $loc = get_church_dashboard_url_by_church_id($church_id);
+                    $loc = base_url().get_church_dashboard_url_by_church_id($church_id);
             //header("location:" . $loc);
             echo json_encode(array('url' => $loc , 'result' => true));
              
