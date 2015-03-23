@@ -54,6 +54,7 @@ class Member_detail_utilities extends Admin_base_Controller
             $ajax_data['result'] = $this->users_model->fetch_this($user_id);
             $ajax_data['church_admin'] = $this->users_model->fetch_church_admin($user_id);   
             $ajax_data['church_member'] = $this->users_model->fetch_church_member($user_id); 
+            $ajax_data['user_id'] = $user_id;
             // get concerned view file...
             $VIEW_FILE = $this->get_display_file($tab);
             
