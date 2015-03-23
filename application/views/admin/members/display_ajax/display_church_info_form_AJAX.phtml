@@ -93,13 +93,13 @@ function autologin(user_id , church_id , type){
           data : ({'user_id' : user_id,'church_id' : church_id,'type':type }),
           success : function(data)
           {
+              alert(data.result);
+              var loc = <?= base_url() ?>+data.url;
             if(data.result == true){  
-             window.open(
-  data.url,
-  '_blank' // <- This is what makes it open in a new window.
-);
+            <?php  $this->users_model->logout(); ?>
+              window.location.href = loc;          
             } else {
-                
+                location.reload();
             }
           }
       }); 
