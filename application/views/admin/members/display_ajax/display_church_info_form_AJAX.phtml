@@ -74,9 +74,10 @@ function autologin(user_id , church_id , type){
    $.ajax({
           url : admin_base_url+'members/member_detail_utilities/autologin_church',
           type : 'post',
-          dataType: 'json',
+         
           data : ({'user_id' : user_id,'church_id' : church_id,'type':type }),
-          success : function(status,data)
+           dataType: 'json',
+          success : function(data)
           {
              var url = data.url;
              alert(url);
@@ -88,8 +89,9 @@ function autologin(user_id , church_id , type){
    $.ajax({
           url : admin_base_url+'members/member_detail_utilities/autologin_church',
           type : 'post',
-          dataType: 'json',
+         
           data : ({'user_id' : user_id,'church_id' : church_id,'type':type }),
+           dataType: 'json',
           success : function(data)
           {
               
