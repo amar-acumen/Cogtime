@@ -96,7 +96,7 @@ function autologin(user_id , church_id , type){
               alert(data.result);
               var loc = <?= base_url() ?>data.url;
             if(data.result == true){  
-            <?php  $this->users_model->logout(); ?>
+            
               window.location.href = loc;          
             } else {
                 location.reload();
