@@ -16,9 +16,9 @@ include(APPPATH.'controllers/base_controller.php');
 class My_ring extends Base_controller
 {
     
-    private $pagination_per_page =  1;//6 ;
-    private $search_pagination_per_page =  1;//20 ;
-    private $popular_pagination_per_page =  1;//10 ;
+    private $pagination_per_page =  6 ;
+    private $search_pagination_per_page =  20 ;
+    private $popular_pagination_per_page =  10 ;
     
     
     
