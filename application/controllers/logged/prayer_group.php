@@ -345,9 +345,9 @@ class Prayer_group extends Base_controller
 			
 			$data['prayer_detail_arr'] = $this->prayer_group_model->get_group_detail_by_id($prayer_group_id);
 			$data['prayer_member_arr'] = $this->prayer_group_model->get_members_by_grpid($prayer_group_id);
-			
-			$data['chat_room_id'] = $this->chat_rooms_model->get_Chatroom_grpid_by($prayer_group_id);
-			
+			/****************************comment for devserver************************************************************/
+			//$data['chat_room_id'] = $this->chat_rooms_model->get_Chatroom_grpid_by($prayer_group_id);
+                        /***************************************************************************************/
 			
 			if($data['chat_room_id'] != ''){
 				$data['is_exists'] = $this->chat_rooms_model->checkExistenceChatRoom($data['chat_room_id']);
