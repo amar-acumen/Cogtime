@@ -1,0 +1,80 @@
+<div class="lavel-01">
+    <?php 
+//    pr($church_admin); echo '============';
+//    pr($church_member); echo '======================';
+//    $new_arr = array_merge($church_admin,$church_member);
+//    pr($new_arr);
+    ?>
+                                	<!--title section -->
+                                	<div class="sec-title">
+                                    	<span class="title-left"></span>
+                                        <div class="title-body"><h2>Church</h2></div>
+                                        <span class="title-right"></span>
+                                    </div>
+                                    <!--/title section -->
+<!--                                    <div class="show-by">
+                                    <label>Show :</label>
+                                        <select name="type" id="type" style="width:120px; float:right;">
+                                              <option>All</option> <option>Admin</option> <option>Member</option>
+                                        </select>
+                                        <script type="text/javascript">
+                                            $(document).ready(function(arg) {
+                                                $("#type").msDropDown();
+                                                $("#type").hide();
+                                            })
+                                        </script>
+                                    </div>-->
+                                    <div class="clr"></div>
+                                    <!--detail section -->
+                                    <div class="sec-detail">
+                                        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="admin-table">
+                                          <tr>
+                                            <th align="left" valign="middle" height="30" width="100">church Name</th>
+                                            <th align="left" valign="middle" height="30" width="160" >Join on</th>
+                                            <th align="left" valign="middle" height="30" width="80" >User Status</th>
+                                           
+                                          </tr>
+                                           <tr>
+<!--                                              <td style="text-align:center;" height="80" colspan="20">No data available!!!</td>-->
+                                          </tr>
+                                          <?php
+                                           if(count($church_admin) > 0 ){
+                                          ?>
+                                       <tr>
+                                            <td align="left" valign="top" ><?=$church_admin['admin_church_name'];  ?></td>
+                                            <td align="left" valign="top"><?=$church_admin['admin_join_date'];  ?></td>
+                                            <td align="left" valign="top">Admin &nbsp; <input id="autologin_admin" class="btn-04" type="button" onclick="autologin('<?= $user_id ?>','<?= $church_admin['admin_church_id'] ?>','admin')" value="Auto login as this user" title="Auto login as this user" name="" style="float: right;"></td>
+                                            
+                                          </tr>
+                                          <?php
+                                           }
+                                           if(count($church_member) > 0){
+                                               foreach ($church_member as $member){
+                                          ?>
+                                          <tr>
+                                            <td align="left" valign="top" ><?= $member->member_church_name ?></td>
+                                            <td align="left" valign="top"><?=$member->member_join_date  ?></td>
+                                            <td align="left" valign="top"><?= 'Member'  ?> &nbsp; <input id="autologin_member" class="btn-04" type="button" onclick="autologin('<?= $user_id ?>','<?= $member->member_church_id ?>','member')" value="Auto login as this user" title="Auto login as this user" name="" style="float:  right;"> </td>
+                                            
+                                          </tr>
+                                           <?php 
+                                           
+                                           
+                                               }
+                                               } ?>
+                                        </table>
+
+                                    </div>
+                                    <!--/detail section -->
+                                </div>
+<script type="text/javascript">
+function autologin(user_id , church_id , type){
+    if(type == 'admin'){
+        alert('admin');
+    }
+    if(type == 'member'){
+        alert('member');
+    }
+}
+
+</script>
