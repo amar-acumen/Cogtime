@@ -70,10 +70,39 @@
 <script type="text/javascript">
 function autologin(user_id , church_id , type){
     if(type == 'admin'){
-        alert('admin');
+         showBusyScreen()
+   $.ajax({
+          url : admin_base_url+'members/member_detail_utilities/autologin_church',
+          type : 'post',
+          data : ({'user_id' : user_id,'church_id' : church_id,'type':type }),
+          success : function(data)
+          {
+              window.open(
+  data.url,
+  '_blank' // <- This is what makes it open in a new window.
+);
+             
+          }
+      }); 
     }
     if(type == 'member'){
-        alert('member');
+       showBusyScreen()
+   $.ajax({
+          url : admin_base_url+'members/member_detail_utilities/autologin_church',
+          type : 'post',
+          data : ({'user_id' : user_id,'church_id' : church_id,'type':type }),
+          success : function(data)
+          {
+            if(data.result == true){  
+             window.open(
+  data.url,
+  '_blank' // <- This is what makes it open in a new window.
+);
+            } else {
+                
+            }
+          }
+      }); 
     }
 }
 

@@ -242,5 +242,109 @@ class Member_detail_utilities extends Admin_base_Controller
         }
     }
     
+    function autologin_church(){
+        $user_id = $this->input->post('user_id');
+        $church_id = $this->input->post('church_id');
+        $type = $this->input->post('type');
+        if($type == 'admin'){
+            
+            $info = $this->users_model->fetch_this($user_id);
+        $USER_ID = $user_id;
+         if ($info['i_status'] == 1) {
+             
+             
+             get_all_church_session($churchid);
+               $this->session->set_userdata('login_referrer', '');
+                    $this->session->set_userdata('loggedin', true);
+                    $this->session->set_userdata('user_id', encrypt($info["id"]));
+                    $this->session->set_userdata('username', $info["s_first_name"]);
+                    $this->session->set_userdata('user_type', $info["i_user_type"]);
+                    $this->session->set_userdata('email', $info["s_email"]);
+                    $this->session->set_userdata('user_lastname', $info["s_last_name"]);
+                    $this->session->set_userdata('is_admin', $info["i_is_admin"]);
+                    $this->session->set_userdata('upassword', $info["s_password"]);
+                    $this->session->set_userdata('IMuserid', ($ret_["id"]));
+                    $this->session->set_userdata('s_profile_photo', ($info['s_profile_photo']));
+                    $this->session->set_userdata('e_gender', ($info['e_gender']));
+					$this->session->set_userdata('s_time', ($info['s_time']));
+					$this->session->set_userdata('s_bio', ($info['s_bio']));
+                    $this->session->set_userdata('unique_username', $info["s_profile_url_suffix"]);
+                    $this->session->set_userdata('display_username', $info["s_chat_display_name"]);
+                    $this->session->set_userdata('s_tweet_bg_img', $info["s_tweet_bg_img"]);
+                     $this->session->set_userdata('s_tweet_id', ($info['s_tweet_id']));
+                      $this->session->set_userdata('s_profile_name', ($info['s_profile_name']));
+					$this->session->set_userdata('s_chat_display_name', $info["s_chat_display_name"]);
+					$this->session->set_userdata('e_want_net_pal', $info["e_want_net_pal"]);
+					$this->session->set_userdata('e_want_prayer_partner', $info["e_want_prayer_partner"]);
+					$this->session->set_userdata('is_pr_partner_q_mail_sent', $info["is_pr_partner_q_mail_sent"]);
+					$this->session->set_userdata('is_netpal_q_mail_sent', $info["is_netpal_q_mail_sent"]);
+					$this->session->set_userdata('s_timezone_text', $info["s_timezone_text"]);
+                    //$_SESSION['username'] = 'jhon';
+                    $this->session->set_userdata('is_first_login_checked', 'false');
+                        //$this->mail_contents_model->get_by_name("acknowledgement");
+
+                    $this->users_model->set_user_online($info["id"], $_SERVER['REMOTE_ADDR']);
+                    $loc = get_church_dashboard_url_by_church_id($church_id);
+            //header("location:" . $loc);
+            echo json_encode(array('url' => $loc , 'result' => true));
+             
+         }else {
+            echo json_encode(array('url' => '' , 'result' => false));  
+         }
     
+        
+            
+            
+        }
+        if($type == 'member'){
+             $info = $this->users_model->fetch_this($user_id);
+        $USER_ID = $user_id;
+         if ($info['i_status'] == 1) {
+             
+             
+             get_all_church_session($churchid);
+               $this->session->set_userdata('login_referrer', '');
+                    $this->session->set_userdata('loggedin', true);
+                    $this->session->set_userdata('user_id', encrypt($info["id"]));
+                    $this->session->set_userdata('username', $info["s_first_name"]);
+                    $this->session->set_userdata('user_type', $info["i_user_type"]);
+                    $this->session->set_userdata('email', $info["s_email"]);
+                    $this->session->set_userdata('user_lastname', $info["s_last_name"]);
+                    $this->session->set_userdata('is_admin', $info["i_is_admin"]);
+                    $this->session->set_userdata('upassword', $info["s_password"]);
+                    $this->session->set_userdata('IMuserid', ($ret_["id"]));
+                    $this->session->set_userdata('s_profile_photo', ($info['s_profile_photo']));
+                    $this->session->set_userdata('e_gender', ($info['e_gender']));
+					$this->session->set_userdata('s_time', ($info['s_time']));
+					$this->session->set_userdata('s_bio', ($info['s_bio']));
+                    $this->session->set_userdata('unique_username', $info["s_profile_url_suffix"]);
+                    $this->session->set_userdata('display_username', $info["s_chat_display_name"]);
+                    $this->session->set_userdata('s_tweet_bg_img', $info["s_tweet_bg_img"]);
+                     $this->session->set_userdata('s_tweet_id', ($info['s_tweet_id']));
+                      $this->session->set_userdata('s_profile_name', ($info['s_profile_name']));
+					$this->session->set_userdata('s_chat_display_name', $info["s_chat_display_name"]);
+					$this->session->set_userdata('e_want_net_pal', $info["e_want_net_pal"]);
+					$this->session->set_userdata('e_want_prayer_partner', $info["e_want_prayer_partner"]);
+					$this->session->set_userdata('is_pr_partner_q_mail_sent', $info["is_pr_partner_q_mail_sent"]);
+					$this->session->set_userdata('is_netpal_q_mail_sent', $info["is_netpal_q_mail_sent"]);
+					$this->session->set_userdata('s_timezone_text', $info["s_timezone_text"]);
+                    //$_SESSION['username'] = 'jhon';
+                    $this->session->set_userdata('is_first_login_checked', 'false');
+                        //$this->mail_contents_model->get_by_name("acknowledgement");
+
+                    $this->users_model->set_user_online($info["id"], $_SERVER['REMOTE_ADDR']);
+                    $loc = base_url().$church_id.'/church-wall';
+            //header("location:" . $loc);
+            echo json_encode(array('url' => $loc , 'result' => true));
+             
+         }else {
+            echo json_encode(array('url' => '' , 'result' => false));  
+         }
+     
+        }
+        
+        
+        
+        
+    }
 }   // end of controller
