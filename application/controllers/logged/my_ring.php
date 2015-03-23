@@ -587,8 +587,8 @@ $this->email->message("$body");
 		//pr($res,1);
 		
 		###On -fly delete from room table.
-					  
-		$host = "127.0.0.1";
+			/********for client server********/		  
+		/*$host = "127.0.0.1";
 		$port = 51127;
 		$apiCommand = '<?xml version="1.0" encoding="UTF-8"?><Command group="default" api_pwd="3874-3459-9293-2194" type="del_room" room_id="'.$res['i_room_id'].'" />';
 		$result = "";
@@ -622,7 +622,7 @@ $this->email->message("$body");
 				fclose($fp);
 			   
 			}
-		}
+		}*/
 		
 		
 		@unlink($this->upload_path.getThumbName($res['s_logo'],'thumb'));
