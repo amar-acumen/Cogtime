@@ -315,7 +315,7 @@ class Admin_base_controller extends Base_Controller
 		 
         try{
            
-            if($this->session->userdata('loggedin')=='' || $this->session->userdata('loggedin')==false || $this->session->userdata('is_admin') == '' || $this->session->userdata('is_admin') == 0 )
+            if($this->session->userdata('loggedin')=='' || $this->session->userdata('loggedin')==false || $this->session->userdata('is_admin') == ''  )
             {
                 
                 $url = my_current_url();
