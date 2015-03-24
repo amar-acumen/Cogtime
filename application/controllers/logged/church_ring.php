@@ -802,7 +802,8 @@ class Church_ring extends Base_controller
         $AJAX_VIEW_FILE = 'logged/church/ajax_ring/ajax_listing_search_ring1.phtml';
         
         
-   //pr($result);
+   pr($result);
+   echo '======='.$total_rows;
 		
 		if( $total_rows>0 ) {
         	$listingContent = $this->load->view($AJAX_VIEW_FILE, $data, true); 
