@@ -12,10 +12,12 @@
 <!-- ############ Loading Section [End] ########### -->
 <?php 
 if($_SESSION['is_admin'] == 0){
+    $loc = admin_base_url() . 'index.html';
   ?>
 <script type="text/javascript">
 $(document).ready(function(){
-    alert('ok');
+    alert('<?= $loc ?>');
+   window.location.href = '<?= $loc ?>'; 
 })
 
 </script>
