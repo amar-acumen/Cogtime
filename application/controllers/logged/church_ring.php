@@ -805,7 +805,7 @@ class Church_ring extends Base_controller
    
 		
 		if( $total_rows > 0 ) {
-                    pr($data);
+                  //  pr($data);
         	$listingContent = $this->load->view($AJAX_VIEW_FILE, $data, true); 
 		}
 		else {
