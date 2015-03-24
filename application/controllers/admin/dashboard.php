@@ -68,8 +68,8 @@ class Dashboard extends Admin_base_Controller
 			# adjusting header & footer sections [End]...
 			/*******************************************/
            if($_SESSION['is_admin'] == 0){
-               $loc = admin_base_url() . 'index.html';
-               die();
+               //$loc = admin_base_url() . 'index.html';
+               redirect(admin_base_url() . 'index.html');
                // header('Location: ' . $loc);
            }
            /****************************************************************/
