@@ -93,7 +93,7 @@
                 foreach ($result_churchmember as $row){
                   $church_wall_url = base_url().$result_churchmember[0]->chid.'/church-wall';
                 ?>
-                    <li><a href="<?= $church_wall_url; ?>" class="" ><?= $row->s_name; ?><img src="<?= base_url() ?>images/man-24-16.png" width="15" height="15" alt="man" class="add-new-church"/><img class="icon-img" alt="" src="images/icons/leave-2.png" title="Leave this Church" onclick=""> </a></li>
+                    <li><a href="<?= $church_wall_url; ?>" class="" ><?= $row->s_name; ?><img src="<?= base_url() ?>images/man-24-16.png" width="15" height="15" alt="man" class="add-new-church"/><img class="icon-img" alt="" src="images/icons/leave-2.png" title="Leave this Church" width="15" height="15" onclick=""> </a></li>
                 <?php 
                 }
                 ?>    
