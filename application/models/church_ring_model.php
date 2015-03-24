@@ -1013,7 +1013,7 @@ public function get_by_id($id)
 								 rp.s_post_description as s_desc,
 								 rp.dt_created_on,
 								 r.i_sub_category_id, 
-								
+								r.ch_admin_id as church_admin_id,
 								 'post' as s_type,
 								 c.s_category_name AS s_category_name , 
 								 rp.i_user_id as post_owner_user_id, 
