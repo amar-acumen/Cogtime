@@ -73,7 +73,7 @@
              <?php
               $user_id = intval(decrypt($this->session->userdata('user_id')));
               $sql_churchmember = "SELECT *,ch.id AS chid FROM cg_church AS ch,cg_church_member AS chm WHERE ch.id=chm.church_id 
-              AND chm.is_approved=1 AND chm.member_id='".$user_id."'";
+              AND chm.is_approved=1 AND chm.member_id='".$user_id."' AND chm.is_leave = 0";
 
               $query_churchmember = $this->db->query($sql_churchmember);
               $numrowmember = $query_churchmember->num_rows();
@@ -93,7 +93,7 @@
                 foreach ($result_churchmember as $row){
                   $church_wall_url = base_url().$result_churchmember[0]->chid.'/church-wall';
                 ?>
-                    <li><a href="<?= $church_wall_url; ?>" class="" ><?= $row->s_name; ?><img src="<?= base_url() ?>images/man-24-16.png" width="15" height="15" alt="man" class="add-new-church"/></a><a href="javascript:void(0)" onclick=""><img class="icon-img" alt="" src="images/icons/leave-2.png" title="Leave this Church" width="15" height="15"></a> </li>
+                    <li><a href="<?= $church_wall_url; ?>" class="" ><?= $row->s_name; ?><img src="<?= base_url() ?>images/man-24-16.png" width="15" height="15" alt="man" class="add-new-church"/></a><a href="javascript:void(0)" onclick="leave_church_member('<?= $result_churchmember[0]->chid ?>','<?= $user_id ?>')"><img class="icon-img" alt="" src="images/icons/leave-2.png" title="Leave this Church" width="15" height="15"></a> </li>
                 <?php 
                 }
                 ?>    
