@@ -713,7 +713,7 @@ class Church_ring extends Base_controller
 			}
 			
 			else if($rd_type == 3){
-				//
+				
 				  $s_query_type = 'ring';
 				  if($ring_name!='')
 				  {
@@ -735,7 +735,7 @@ class Church_ring extends Base_controller
 				  $this->session->set_userdata('where',$wh);
 				  $this->session->set_userdata('WHERE_POST_COND',$wh_ring_post);
 				  $this->session->set_userdata('s_query_type',$s_query_type);
-				  //$is_post = 1;
+				 
 				  $this->session->set_userdata('is_post',$is_post);
 			
 		}
@@ -790,7 +790,7 @@ class Church_ring extends Base_controller
 		if( $total_rows > 0 ) {
                   
         	$listingContent = $this->load->view($AJAX_VIEW_FILE, $data, true); 
-               // var_dump($listingContent);
+               
 		}
 		else {
 			$listingContent = '';
