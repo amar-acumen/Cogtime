@@ -253,9 +253,9 @@ class Member_detail_utilities extends Admin_base_Controller
         $USER_ID = $user_id;
          if ($info['i_status'] == 1) {
              
-              /************admin logout*******************/
-         $this->admins_user_model->logout();
-        /********************************/
+//              /************admin logout*******************/
+//         $this->admins_user_model->logout();
+//        /********************************/
              get_all_church_session($churchid);
                $this->session->set_userdata('login_referrer', '');
                     $this->session->set_userdata('loggedin', true);
