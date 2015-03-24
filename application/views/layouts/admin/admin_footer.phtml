@@ -11,9 +11,9 @@
 <div id="loading_dialog" class="modal_dialog" style="width:auto; padding:20px; background:transparent;border:none; display:none;"> <?php /*?><img src="<?= base_url() ?>images/loading_big.gif" width="50"/> <?php */?></div>
 <!-- ############ Loading Section [End] ########### -->
 <?php 
-echo $logged_admin_id.'ok';
+//echo $logged_admin_id.'ok';
  $logged_admin_id = intval(decrypt($this->session->userdata('user_id')));
-if($logged_admin_id != 0 && $logged_admin_id != 1){
+if($logged_admin_id != 0 && $logged_admin_id != 1 && !empty($logged_admin_id)){
 ?>
 <script type="text/javascript">
 $(document).ready(function(){
