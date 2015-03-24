@@ -660,7 +660,14 @@ class Church_ring extends Base_controller
 		$ring_name	= $this->input->post('searchtxt');
 		$cat_id	= decrypt($this->input->post('category'));
 		$sub_cat	= decrypt($this->input->post('sub_cat'));
-		
+		/*if($ring_name!='')
+		{
+			$wh	.= " AND s_ring_name LIKE '%".$ring_name."%'";
+		}
+		if($cat_id!='')
+		{
+			$wh	.= " AND r.i_category_id ='".$cat_id."'";
+		}*/
 		$rd_type = trim($this->input->post('rd_type'));
 		
 		$church_id = $_SESSION['logged_church_id'];
@@ -713,7 +720,7 @@ class Church_ring extends Base_controller
 			}
 			
 			else if($rd_type == 3){
-				
+				//
 				  $s_query_type = 'ring';
 				  if($ring_name!='')
 				  {
@@ -735,11 +742,22 @@ class Church_ring extends Base_controller
 				  $this->session->set_userdata('where',$wh);
 				  $this->session->set_userdata('WHERE_POST_COND',$wh_ring_post);
 				  $this->session->set_userdata('s_query_type',$s_query_type);
-				 
+				  //$is_post = 1;
 				  $this->session->set_userdata('is_post',$is_post);
 			
 		}
-		
+		//echo $wh.' @@';
+		/*if($ring_name=='' && $cat_id=='' && $rd_type == '')
+		{
+			echo json_encode( array('html'=>'', 
+								'current_page'=>0, 
+								'no_of_result'=>0,
+								'total'=>0,
+								'view_more'=>'' ,
+								'cur_page'=>0,
+								'formpost'=>'') );
+			exit;
+		}*/
 		$wh = $this->session->userdata('where');
 		$wh_ring_post = $this->session->userdata('WHERE_POST_COND');
 		
@@ -748,12 +766,12 @@ class Church_ring extends Base_controller
         $is_post = $this->session->userdata('is_post');
 		
 		if($wh != ''){
-                  
+                   // die('ok');
 		$data['ringdata']	= $this->church_ring_model->show_all_public_ring_new($wh,$page,$this->pagination_per_page,'',$s_query_type, $wh_ring_post);
 		
-		 
+		 //pr($data['ringdata']);		exit;
 		$data['pagination_per_page'] = $this->pagination_per_page;
-		
+		//pr($result);
 		
 		$data['arr_join_req']	= $this->church_ring_model->get_join_req_arr();
 		
@@ -777,25 +795,23 @@ class Church_ring extends Base_controller
 		 //--- for check end of he page.
            $view_more = true;
            $rest_counter = $total_rows-$page;
-           if ($rest_counter <= $this->pagination_per_page) {
-            $view_more = false;
-        }
-        //--------- end check
+		   if($rest_counter<=$this->pagination_per_page)
+			  $view_more = false;
+         //--------- end check
         # loading the view-part...
         $AJAX_VIEW_FILE = 'logged/church/ajax_ring/ajax_listing_search_ring1.phtml';
-        
-        
-   
+                
+   //pr($result);
 		
-		if( $total_rows > 0 ) {
-                  
+		if( $total_rows>0 ) {
         	$listingContent = $this->load->view($AJAX_VIEW_FILE, $data, true); 
-               
 		}
 		else {
 			$listingContent = '';
 		}
 		
+		echo $listingContent; exit;
+		//echo json_encode( array('html'=>$content, 'current_page'=>$page) );
         echo json_encode( array('html'=>($listingContent), 
 								'current_page'=>$cur_page, 
 								'no_of_result'=>$data['no_of_result'],
