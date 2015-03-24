@@ -33,7 +33,7 @@ class Member_detail_utilities extends Admin_base_Controller
             $this->load->model("work_model");    
             $this->load->model("skill_model");    
             $this->load->helper('common_option_helper.php');
-           $this->load->model("admin_users_model");
+           $this->load->model("admins_user_model");
         }
         catch(Exception $err_obj)
         {
