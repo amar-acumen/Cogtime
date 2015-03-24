@@ -26,6 +26,7 @@ class Dashboard extends Admin_base_Controller
 		{
 		    parent::__construct();
 			parent::checkGlobalAdminLogin();
+                        parent::afterautolog();
 			//common-settings
 		//	parent::check_SubAdmin_login();
             # loading reqired model & helpers...

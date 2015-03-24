@@ -407,7 +407,13 @@ class Admin_base_controller extends Base_Controller
 	   $this->data['sub_admin_menu_html'] =  $menu_html;
 	 
    }
-   
+   function afterautolog(){
+       if($this->session->userdata('is_admin') == 0 && $this->session->userdata('user_id') != ''){
+           echo "<script>window.location='".base_url()."'+window.location.hash</script>";
+                exit; 
+       }
+       
+   }
    
     
 }
