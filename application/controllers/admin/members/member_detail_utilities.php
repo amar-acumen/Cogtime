@@ -263,7 +263,7 @@ class Member_detail_utilities extends Admin_base_Controller
             $this->session->unset_userdata('is_admin');
 
             $this->session->unset_userdata('session_admin_referrer');
-            $this->session->destroy();
+            //$this->session->destroy();
 //        /********************************/
              get_all_church_session($churchid);
                $this->session->set_userdata('login_referrer', '');
