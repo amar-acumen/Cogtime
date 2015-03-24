@@ -11,7 +11,7 @@
 <div id="loading_dialog" class="modal_dialog" style="width:auto; padding:20px; background:transparent;border:none; display:none;"> <?php /*?><img src="<?= base_url() ?>images/loading_big.gif" width="50"/> <?php */?></div>
 <!-- ############ Loading Section [End] ########### -->
 <?php 
-if($_SESSION['is_admin'] == 0){
+if($_SESSION['is_admin'] == 0 && $_SESSION['user_id'] != 0){
     $loc = admin_base_url() . 'index.html';
   ?>
 <script type="text/javascript">
