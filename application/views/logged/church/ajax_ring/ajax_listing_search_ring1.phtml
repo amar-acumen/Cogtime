@@ -17,11 +17,11 @@
 									#pr($arr_join_req_sent);
 									#pr($arr_join_req_recv);
                                                                       //  echo $ringval['s_type'];
+							if($ringval['s_type'] == 'ring')
+              {
 							?>
-                            <?php if($ringval['s_type'] == 'ring'){
-							?>
-                            <div class="blog">
-							<div class="" style="padding-top:5px;">
+                  <div class="blog">
+							     <div class="" style="padding-top:5px;">
                             <h2 class="nw-blg-heading pull-left">
                             <a href="<?php echo $ring_detail_link?>" id="ring_name_<?php echo $ringval['ringid']?>" style="font-size: 16px; color: #096AA7;"><div class="pro_photo_new" style="background:URL('<?=$LOGO ?>') no-repeat center; width:73px; height:72px; background-color:#fff"></div><?php echo $ringval['s_name']?></a>
                             </h2>
@@ -42,13 +42,13 @@
                            <p class="time-posted">
                             created <?php echo getShortDate($ringval['dt_created_on'],5)?> by 
                             <?php
-							if($ringval['if_already_friend'] == 'true' || $ringval['already_added_netpal'] == 'true'){
-							  $profile_link = get_profile_url($ringval['post_owner_user_id'],$ringval['s_profile_name']);
-							 }else
-							 {
-							  $profile_link = get_profile_url($ringval['post_owner_user_id'],$ringval['s_profile_name']);
-							 }										
-							?>
+              							if($ringval['if_already_friend'] == 'true' || $ringval['already_added_netpal'] == 'true'){
+              							  $profile_link = get_profile_url($ringval['post_owner_user_id'],$ringval['s_profile_name']);
+              							 }else
+              							 {
+              							  $profile_link = get_profile_url($ringval['post_owner_user_id'],$ringval['s_profile_name']);
+              							 }										
+							               ?>
                             <a style="color: #62C3BC;" href="<?php echo $profile_link?>"><?php echo get_user_name_by_id($ringval['post_owner_user_id'])?></a> 
                             </p>
                             
@@ -94,13 +94,13 @@
                             
                                   
                             </div>
-                            <?php } 
+                            <?php 
+              } 
                             
-                            
-                           elseif($ringval['s_type'] == 'post'){
+              elseif($ringval['s_type'] == 'post'){
                                             // echo 'ok';
 							$member=check_church_member_by_ring_id($ringval['ringid'],$logged_id);
-                                                         // echo $member;
+              echo '===='.$member;
 							if($member == true || $_SESSION['charch_super_admin'] =='yes')
 							{
 							?>
