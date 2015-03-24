@@ -113,7 +113,7 @@
                </div>
                <form method="post" id="delfrm">
                   <input type="hidden" name="i_del_id" id="i_del_id" value="" />
-                 <input name="" type="button" value="Yes" class="btn" style="margin-left:105px;" onClick="delete_profile_image()"/>
+                 <input name="" type="button" value="Yes" class="btn" style="margin-left:105px;" onClick="leave_church_member('<?= $row->chid ?>','<?= $user_id ?>')"/>
                  <input name="" type="button" value="No" class="btn" onclick="hide_dialog()"/>
                </form>   
                <div class="clr"></div>
