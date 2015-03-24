@@ -2,8 +2,7 @@
 
 							<?php
 							$logged_id=intval(decrypt($_SESSION['user_id']));
- pr($ringdata);
-							
+ 					
 							if(count($ringdata)>0)
 							{
                                                           //  pr($ringdata);
@@ -98,11 +97,7 @@
               } 
                             
               elseif($ringval['s_type'] == 'post'){
-                                            // echo 'ok';
-							$member=check_church_member_by_ring_id($ringval['ringid'],$logged_id);
-              echo '===='.$member;
-							if($member == true || $_SESSION['charch_super_admin'] =='yes')
-							{
+             
 							?>
                             
                             <div class="blog" style="padding-top:5px;">
@@ -151,7 +146,7 @@
                                   
                             </div>
                             
-                            <?php }
+                            <?php 
 							         }
 								    }
 							}
