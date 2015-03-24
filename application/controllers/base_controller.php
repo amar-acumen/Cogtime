@@ -5065,6 +5065,17 @@ if($res){
         }
         
         }
+        function leave_church_member(){
+            $church_id = $this->input->post('church_id');
+            $user_id = $this->input->post('user_id');
+            $data = array(
+               'is_leave' => 1,
+               
+            );
+
+$this->db->update('cg_church_member', $data, array('church_id' => $church_id ,'member_id'=>$user_id ));
+ echo json_encode( array('success'=>true,'msg'=>'ok')); 
+        }
 
 }
 
