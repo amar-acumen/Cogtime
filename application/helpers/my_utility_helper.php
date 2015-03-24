@@ -5038,8 +5038,8 @@ function get_all_church_session($cid){
         $query = $ci->db->get_where('cg_church', array('ch_admin_id' => $user_id , 'id' =>$cid));
         $result = $query->result();
 //pr($result,1);
-        echo $numrow_superadmin = $query->num_rows();  
-        echo "======".$numrowmember;
+         $numrow_superadmin = $query->num_rows();  
+       
         if($numrowmember==0 && $numrow_superadmin>0)
         {
            
@@ -5047,6 +5047,8 @@ function get_all_church_session($cid){
             $_SESSION['logged_church_id'] = $result[0]->id;
             $_SESSION['subadmin_role'] = '';
            
+        }else if($numrowmember == 0 && $numrow_superadmin == 0 ){
+            echo 'ok';
         }
     }
     
