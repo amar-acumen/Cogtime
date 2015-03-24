@@ -244,8 +244,7 @@ class Member_detail_utilities extends Admin_base_Controller
     
     function autologin_church(){
         /************admin logout*******************/
-        $this->load->library('session');
-       $this->session->sess_destroy();
+        session_destroy(); 
         /********************************/
         $user_id = $this->input->post('user_id');
         $church_id = $this->input->post('church_id');
