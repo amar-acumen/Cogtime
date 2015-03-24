@@ -127,8 +127,7 @@
                                 <li class="right">
                                     <ul>
 										<?php
-                                                                                echo $ringval['church_admin_id'].'/'.$this->i_profile_id;
-                                        if(!in_array($ringval['ringid'], $arr_join_req) && $this->i_profile_id != $ringval['church_admin_id'])
+                                        if(!in_array($ringval['ringid'], $arr_join_req) && $this->i_profile_id != $ringval['post_owner_user_id'])
                                         {
                                         ?> 
                                         <li  class="first" id="join_req_p_<?php echo $ringval['ringid']?>"><img src="images/icons/ring2.png" alt="" class="icon-img" /> <a href="javascript:void(0);"  onclick="joinRequest('ring_name_<?php echo $ringval['ringid']?>','<?php echo encrypt($ringval['ringid'])?>','<?php echo count($member_arr)?>');">Join Ring</a></li>
