@@ -250,7 +250,7 @@ if (is_array($result_arr) && $no_of_result > 0) {
     <?php } ?>
     <script type="text/javascript">
         $('.my-sub').click(function() {
-            $(this).parent().next().next().slideToggle();
+           // $(this).parent().next().next().slideToggle();
             if ($(this).parent().parent().parent().parent().hasClass("unread")) {
                 $(this).parent().parent().parent().parent().removeClass('unread');
                 $(this).parent().parent().parent().parent().addClass('read');
