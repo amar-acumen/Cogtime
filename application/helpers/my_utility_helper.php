@@ -5019,7 +5019,7 @@ function get_all_church_session($cid){
     $ci = get_instance();
     $user_id = intval(decrypt($ci->session->userdata('user_id')));
     $sql_churchmember = "SELECT *,ch.id AS chid FROM cg_church AS ch,cg_church_member AS chm 
-    WHERE ch.id=chm.church_id AND chm.member_id='".$user_id."' AND ch.id='".$cid."'";
+    WHERE ch.id=chm.church_id AND chm.member_id='".$user_id."' AND ch.id='".$cid."'  AND chm.is_leave = 0";
 
     $query_churchmember = $ci->db->query($sql_churchmember);
     $numrowmember = $query_churchmember->num_rows();
