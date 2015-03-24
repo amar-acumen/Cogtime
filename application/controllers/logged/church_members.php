@@ -123,7 +123,7 @@ class Church_members extends Base_controller
 	public function generate_member_listing_AJAX($page=0)
     {
 		$c_id = $_SESSION['logged_church_id'];
-		$s_where = " AND cm.is_approved=1 AND is_blocked = 1";
+		$s_where = " AND cm.is_approved=1 AND is_blocked = 1 AND cm.is_leave = 0";
 		 if (isset($_SESSION['search_data']) && $_SESSION['search_data'] != '') {
 			$s_where .= ' AND (u.s_first_name LIKE "%'.$_SESSION['search_data'].'%" OR u.s_last_name LIKE "%'.$_SESSION['search_data'].'%" OR CONCAT(u.s_first_name, " ", u.s_last_name) LIKE "%'.$_SESSION['search_data'].'%")';
 		//$data['ringdata']	= $this->church_new_model->get_churchmembers($c_id,$s_where, '', $order_by, '');
