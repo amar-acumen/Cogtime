@@ -94,32 +94,9 @@
                   $church_wall_url = base_url().$row->chid.'/church-wall';
                 ?>
                     <li><a href="<?= $church_wall_url; ?>" class="" ><?= $row->s_name; ?><img src="<?= base_url() ?>images/man-24-16.png" width="15" height="15" alt="man" class="add-new-church"/></a>
-                    <a href="javascript:void(0)" onclick="show_dialog('leave_grp<?= $result_churchmember[0]->chid ?>')"><img class="icon-img" alt="" src="images/icons/leave-2.png" title="Leave this Church" width="15" height="15"></a>
+                    
                     </li>
-                   <div class="lightbox leave_grp<?= $result_churchmember[0]->chid ?>'">
-    <div class="close"><a onclick="hide_dialog()" href="javascript:void(0)"><img width="24" height="24" alt="" src="images/close.png"></a></div>
-    <div class="top"><div>&nbsp;</div></div>
-    <div class="mid">
-        <div style="margin-bottom:0px;" class="heading">
-            <div class="left">
-                <h4>Leave Church</h4>
-            </div>
-        </div>
-        <div style="padding:8px 0px;" class="shade_box_white">
-            <div style="padding-bottom:10px;">
-                <p style="line-height:23px; color:#494949;" class="center-text">
-                    Are you sure you want to leave "<?= $row->s_name; ?>" church ?
-                </p>
-            </div>
-            <form id="delfrm" method="post">
-                <input type="hidden" value="" id="i_del_id" name="i_del_id">
-                <input type="button" onclick="leave_church_member('<?= $result_churchmember[0]->chid ?>','<?= $user_id ?>')" style="margin-left:105px;" class="btn" value="Yes" name="">
-                <input type="button" onclick="hide_dialog()" class="btn" value="No" name="">
-            </form>   
-            <div class="clr"></div>
-        </div>
-
-    </div>
+                   
                 <?php 
                 }
                 ?>    
