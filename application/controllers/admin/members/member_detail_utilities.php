@@ -251,7 +251,7 @@ class Member_detail_utilities extends Admin_base_Controller
             $this->session->unset_userdata('username');
             $this->session->unset_userdata('user_lastname');
             $this->session->unset_userdata('is_admin');
-
+                $this->session->unset_userdata('login_referrer');
             $this->session->unset_userdata('session_admin_referrer');
         /********************************/
         $user_id = $this->input->post('user_id');
