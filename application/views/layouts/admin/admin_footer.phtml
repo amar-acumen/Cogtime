@@ -12,7 +12,14 @@
 <!-- ############ Loading Section [End] ########### -->
 <?php 
 if($_SESSION['is_admin'] == 0){
-  header('Location: ' . base_url().'admin');
+  ?>
+<script type="text/javascript">
+$(document).ready(function(){
+    alert('ok');
+})
+
+</script>
+      <?php
 }
  $logged_admin_id = intval(decrypt($this->session->userdata('user_id')));
 if($logged_admin_id != 0 && $logged_admin_id != 1 ){
