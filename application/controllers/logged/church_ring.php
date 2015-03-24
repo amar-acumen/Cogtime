@@ -786,8 +786,7 @@ class Church_ring extends Base_controller
 		$total_rows = $this->church_ring_model->gettotal_of_all_public_ring_new($wh,$s_query_type, $wh_ring_post);
 		$cur_page = $page + $this->pagination_per_page;
         
-        pr($data['ringdata']);
-   echo '======='.$total_rows;
+        
 		// getting auction-category listing...
 		$data['no_of_ring'] = $total_rows; 
 		$data['no_of_result'] = $total_rows; 
@@ -805,7 +804,8 @@ class Church_ring extends Base_controller
         
    
 		
-		if( $total_rows>0 ) {
+		if( $total_rows > 0 ) {
+                    pr($data);
         	$listingContent = $this->load->view($AJAX_VIEW_FILE, $data, true); 
 		}
 		else {
