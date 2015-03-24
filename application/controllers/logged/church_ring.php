@@ -660,14 +660,7 @@ class Church_ring extends Base_controller
 		$ring_name	= $this->input->post('searchtxt');
 		$cat_id	= decrypt($this->input->post('category'));
 		$sub_cat	= decrypt($this->input->post('sub_cat'));
-		/*if($ring_name!='')
-		{
-			$wh	.= " AND s_ring_name LIKE '%".$ring_name."%'";
-		}
-		if($cat_id!='')
-		{
-			$wh	.= " AND r.i_category_id ='".$cat_id."'";
-		}*/
+		
 		$rd_type = trim($this->input->post('rd_type'));
 		
 		$church_id = $_SESSION['logged_church_id'];
@@ -746,18 +739,7 @@ class Church_ring extends Base_controller
 				  $this->session->set_userdata('is_post',$is_post);
 			
 		}
-		//echo $wh.' @@';
-		/*if($ring_name=='' && $cat_id=='' && $rd_type == '')
-		{
-			echo json_encode( array('html'=>'', 
-								'current_page'=>0, 
-								'no_of_result'=>0,
-								'total'=>0,
-								'view_more'=>'' ,
-								'cur_page'=>0,
-								'formpost'=>'') );
-			exit;
-		}*/
+		
 		$wh = $this->session->userdata('where');
 		$wh_ring_post = $this->session->userdata('WHERE_POST_COND');
 		
@@ -766,12 +748,12 @@ class Church_ring extends Base_controller
         $is_post = $this->session->userdata('is_post');
 		
 		if($wh != ''){
-                   // die('ok');
+                  
 		$data['ringdata']	= $this->church_ring_model->show_all_public_ring_new($wh,$page,$this->pagination_per_page,'',$s_query_type, $wh_ring_post);
 		
-		 //pr($data['ringdata']);		exit;
+		 
 		$data['pagination_per_page'] = $this->pagination_per_page;
-		//pr($result);
+		
 		
 		$data['arr_join_req']	= $this->church_ring_model->get_join_req_arr();
 		
@@ -805,14 +787,13 @@ class Church_ring extends Base_controller
    
 		
 		if( $total_rows > 0 ) {
-                  //  pr($data);
+                  
         	$listingContent = $this->load->view($AJAX_VIEW_FILE, $data, true); 
 		}
 		else {
 			$listingContent = '';
 		}
-		//echo $listingContent; exit;
-		//echo json_encode( array('html'=>$content, 'current_page'=>$page) );
+		
         echo json_encode( array('html'=>($listingContent), 
 								'current_page'=>$cur_page, 
 								'no_of_result'=>$data['no_of_result'],
