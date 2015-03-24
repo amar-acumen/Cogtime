@@ -777,9 +777,10 @@ class Church_ring extends Base_controller
 		 //--- for check end of he page.
            $view_more = true;
            $rest_counter = $total_rows-$page;
-		   if($rest_counter<=$this->pagination_per_page)
-			  $view_more = false;
-         //--------- end check
+           if ($rest_counter <= $this->pagination_per_page) {
+            $view_more = false;
+        }
+        //--------- end check
         # loading the view-part...
         $AJAX_VIEW_FILE = 'logged/church/ajax_ring/ajax_listing_search_ring1.phtml';
         
