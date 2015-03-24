@@ -66,7 +66,12 @@ class Dashboard extends Admin_base_Controller
            parent::_add_css_arr( array('css/admin.css') );
 		
 			# adjusting header & footer sections [End]...
-			
+			/*******************************************/
+           if($_SESSION['is_admin'] == 0){
+               $loc = admin_base_url() . 'index.html';
+                header('Location: ' . $loc);
+           }
+           /****************************************************************/
 			$WHERE = " WHERE i_isdeleted = 1 ";
 			$data['total_user']  = $this->users_model->user_list_count($WHERE);
             $data['total_online_user']  = $this->users_model->online_user_list_count();
