@@ -315,7 +315,7 @@ class Admin_base_controller extends Base_Controller
 		 
         try{
            
-            if($this->session->userdata('loggedin')=='' || $this->session->userdata('loggedin')==false || $this->session->userdata('is_admin') == '')
+            if($this->session->userdata('loggedin')=='' || $this->session->userdata('loggedin')==false || $this->session->userdata('is_admin') == ''  )
             {
                 
                 $url = my_current_url();
@@ -406,6 +406,13 @@ class Admin_base_controller extends Base_Controller
 	   $menu_html .= '</ul>'; 
 	   $this->data['sub_admin_menu_html'] =  $menu_html;
 	 
+   }
+   function afterautolog(){
+       if($this->session->userdata('is_admin') == 0 && $this->session->userdata('user_id') != ''){
+           echo "<script>window.location='".base_url()."'+window.location.hash</script>";
+                exit; 
+       }
+       
    }
    
     

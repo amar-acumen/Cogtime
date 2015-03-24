@@ -39,7 +39,7 @@
 </div>
  <!--Holy place end -->
 <!--chat rooms start -->
-<div class="menu-box">
+<div class="menu-box" style="display: none">
       <div class="nw-heading">
              <div class="left">
                     <h4><img src="images/icons/coment.png" height="20" width="20" alt="Social Activity"/>Chat Rooms</h4>
@@ -73,7 +73,7 @@
              <?php
               $user_id = intval(decrypt($this->session->userdata('user_id')));
               $sql_churchmember = "SELECT *,ch.id AS chid FROM cg_church AS ch,cg_church_member AS chm WHERE ch.id=chm.church_id 
-              AND chm.is_approved=1 AND chm.member_id='".$user_id."'";
+              AND chm.is_approved=1 AND chm.member_id='".$user_id."' AND chm.is_leave = 0";
 
               $query_churchmember = $this->db->query($sql_churchmember);
               $numrowmember = $query_churchmember->num_rows();
@@ -91,9 +91,37 @@
               if(count($result_churchmember)>0 )
               {
                 foreach ($result_churchmember as $row){
-                  $church_wall_url = base_url().$result_churchmember[0]->chid.'/church-wall';
+                  $church_wall_url = base_url().$row->chid.'/church-wall';
                 ?>
-                    <li><a href="<?= $church_wall_url; ?>" class="" ><?= $row->s_name; ?><img src="<?= base_url() ?>images/man-24-16.png" width="15" height="15" alt="man" class="add-new-church"/> </a></li>
+                    <li><a href="<?= $church_wall_url; ?>" class="" ><?= $row->s_name; ?><img src="<?= base_url() ?>images/man-24-16.png" width="15" height="15" alt="man" class="add-new-church"/></a>
+                    <a href="javascript:void(0)" onclick="show_dialog('lavegrp<?= $row->chid ?>')"><img class="icon-img" alt="" src="images/icons/leave-2.png" title="Leave this Church" width="15" height="15"></a>
+                    </li>
+                      <div class="lightbox lavegrp<?= $row->chid ?>" style="width: 400px; left: 100px;">
+      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="<?=base_url()?>images/close.png" alt="" width="24" height="24"/></a></div>
+      <div class="top"><div>&nbsp;</div></div>
+      <div class="mid">
+            <div class="heading" style="margin-bottom:0px;">
+                  <div class="left">
+                        <h4>Leave Church</h4>
+                  </div>
+            </div>
+               <div class="shade_box_white" style="padding:8px 0px;">
+               <div style="padding-bottom:10px;">
+               <p class="center-text" style="line-height:23px; color:#494949;">
+                  Do you want to Leave "<?= $row->s_name; ?>" church ?
+               </p>
+               </div>
+               <form method="post" id="delfrm">
+                  <input type="hidden" name="i_del_id" id="i_del_id" value="" />
+                 <input name="" type="button" value="Yes" class="btn" style="margin-left:105px;" onClick="leave_church_member('<?= $row->chid ?>','<?= $user_id ?>')"/>
+                 <input name="" type="button" value="No" class="btn" onclick="hide_dialog()"/>
+               </form>   
+               <div class="clr"></div>
+            </div>
+            
+      </div>
+      <div class="bot"><div>&nbsp;</div></div>
+</div>
                 <?php 
                 }
                 ?>    
@@ -220,6 +248,7 @@ if($numrow_superadmin == 0){
          })
 
          
+
 
      });
 
@@ -349,6 +378,32 @@ $(function() {
 
 });
 
- 
+ function leave_church_member(church_id , user_id){
+     $.ajax({
+
+                    type: "POST",
+
+                    url: base_url + "base_controller/leave_church_member/",
+
+                    data: ({'church_id':church_id ,'user_id':user_id }),
+
+                    dataType: 'json',
+
+                    success: function(data) {
+
+                        
+                         if(data.msg == 'ok'){
+                             location.reload();
+                         }
+                        
+
+                       // hideBusyScreen();
+
+                        
+
+                    }
+
+                });
+ }
 
  </script>

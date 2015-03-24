@@ -806,9 +806,16 @@ $.noConflict();
 
 
 
+<?php 
+echo $_GET['autologin'];
+if($_REQUEST['autologin'] == 1) {
+?>
 
+<script type="text/javascript">
+    alert('ok');
+</script>
 
-
-
-
+<?php
+}
+?>
 

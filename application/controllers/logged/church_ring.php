@@ -769,7 +769,7 @@ class Church_ring extends Base_controller
                    // die('ok');
 		$data['ringdata']	= $this->church_ring_model->show_all_public_ring_new($wh,$page,$this->pagination_per_page,'',$s_query_type, $wh_ring_post);
 		
-		 //pr($data['ringdata']);		exit;
+		
 		$data['pagination_per_page'] = $this->pagination_per_page;
 		//pr($result);
 		
@@ -800,8 +800,7 @@ class Church_ring extends Base_controller
          //--------- end check
         # loading the view-part...
         $AJAX_VIEW_FILE = 'logged/church/ajax_ring/ajax_listing_search_ring1.phtml';
-        
-        
+                
    //pr($result);
 		
 		if( $total_rows>0 ) {
@@ -810,7 +809,8 @@ class Church_ring extends Base_controller
 		else {
 			$listingContent = '';
 		}
-		//echo $listingContent; exit;
+		
+		
 		//echo json_encode( array('html'=>$content, 'current_page'=>$page) );
         echo json_encode( array('html'=>($listingContent), 
 								'current_page'=>$cur_page, 

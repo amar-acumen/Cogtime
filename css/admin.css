@@ -745,3 +745,13 @@ div.modal_dialog  div.content {
 .add-member-main{margin: 0 auto 0 390px;}
 .add-member-main .btn{}
 .banner-img .close a img{ border:none;}
+
+.btn-auto {
+  background: none repeat scroll 0 0 #014882;
+  border: medium none;
+  color: #fff;
+  font-size: 12px;
+  padding: 3px 5px;
+  cursor:pointer;
+}
+.btn-auto:hover { background:#065697;}

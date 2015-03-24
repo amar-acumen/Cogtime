@@ -5019,10 +5019,10 @@ function get_all_church_session($cid){
     $ci = get_instance();
     $user_id = intval(decrypt($ci->session->userdata('user_id')));
     $sql_churchmember = "SELECT *,ch.id AS chid FROM cg_church AS ch,cg_church_member AS chm 
-    WHERE ch.id=chm.church_id AND chm.member_id='".$user_id."' AND ch.id='".$cid."'";
+    WHERE ch.id=chm.church_id AND chm.member_id='".$user_id."' AND ch.id='".$cid."'  AND chm.is_leave = 0";
 
     $query_churchmember = $ci->db->query($sql_churchmember);
-    $numrowmember = $query_churchmember->num_rows();
+    $numrowmember = $query_churchmember->num_rows();   
     $result_churchmember = $query_churchmember->result();
     if($numrowmember>0)
     {
@@ -5038,7 +5038,7 @@ function get_all_church_session($cid){
         $query = $ci->db->get_where('cg_church', array('ch_admin_id' => $user_id));
         $result = $query->result();
 //pr($result,1);
-        $numrow_superadmin = $query->num_rows();
+         $numrow_superadmin = $query->num_rows();       
         if($numrowmember==0 && $numrow_superadmin>0)
         {
            

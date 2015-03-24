@@ -62,7 +62,7 @@ class Base_controller extends CI_Controller {
 
                 # get total unread messages #
                 $logged_user_id = intval(decrypt($this->session->userdata('user_id')));
-                //$this->_get_total_unread_msgs($logged_user_id);
+                $this->_get_total_unread_msgs($logged_user_id);
                 $this->_set_left_panel_data($logged_user_id);
                 $this->get_user_all_tweets($logged_user_id);
                 $this->salavtion_popup_content();
@@ -5064,6 +5064,17 @@ if($res){
             
         }
         
+        }
+        function leave_church_member(){
+            $church_id = $this->input->post('church_id');
+            $user_id = $this->input->post('user_id');
+            $data = array(
+               'is_leave' => 1,
+               
+            );
+
+$this->db->update('cg_church_member', $data, array('church_id' => $church_id ,'member_id'=>$user_id ));
+ echo json_encode( array('success'=>true,'msg'=>'ok')); 
         }
 
 }
