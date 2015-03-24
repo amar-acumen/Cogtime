@@ -69,7 +69,8 @@ class Dashboard extends Admin_base_Controller
 			/*******************************************/
            if($_SESSION['is_admin'] == 0){
                $loc = admin_base_url() . 'index.html';
-                header('Location: ' . $loc);
+               die();
+               // header('Location: ' . $loc);
            }
            /****************************************************************/
 			$WHERE = " WHERE i_isdeleted = 1 ";
