@@ -5022,7 +5022,7 @@ function get_all_church_session($cid){
     WHERE ch.id=chm.church_id AND chm.member_id='".$user_id."' AND ch.id='".$cid."'  AND chm.is_leave = 0";
 
     $query_churchmember = $ci->db->query($sql_churchmember);
-    $numrowmember = $query_churchmember->num_rows();
+   echo  $numrowmember = $query_churchmember->num_rows();   exit();
     $result_churchmember = $query_churchmember->result();
     if($numrowmember>0)
     {
