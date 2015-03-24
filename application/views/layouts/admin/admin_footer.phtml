@@ -12,7 +12,7 @@
 <!-- ############ Loading Section [End] ########### -->
 <?php 
 //echo $logged_admin_id.'ok';
-if(isset($this->session->userdata('user_id')) && empty($this->session->userdata('user_id')) ){
+if(isset($_SESSION['user_id']) && empty($_SESSION['user_id']) ){
     header("location:".base_url()."");
 }
  $logged_admin_id = intval(decrypt($this->session->userdata('user_id')));
