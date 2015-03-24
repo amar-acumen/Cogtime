@@ -2,7 +2,7 @@
 
 							<?php
 							$logged_id=intval(decrypt($_SESSION['user_id']));
- //pr($ringdata);
+ pr($ringdata);
 							
 							if($ringdata)
 							{
@@ -114,13 +114,13 @@
                            <p class="time-posted">
                             posted <?php echo get_time_elapsed_blog($ringval['dt_created_on'])?> by 
                             <?php
-							if($ringval['if_already_friend'] == 'true' || $ringval['already_added_netpal'] == 'true'){
-							  $profile_link = get_profile_url($ringval['post_owner_user_id'],$ringval['s_profile_name']);
-							 }else
-							 {
-							  $profile_link = get_profile_url_prayer_partner($ringval['post_owner_user_id'],$ringval['s_profile_name']);
-							 }										
-							?>
+              							if($ringval['if_already_friend'] == 'true' || $ringval['already_added_netpal'] == 'true'){
+              							  $profile_link = get_profile_url($ringval['post_owner_user_id'],$ringval['s_profile_name']);
+              							 }else
+              							 {
+              							  $profile_link = get_profile_url_prayer_partner($ringval['post_owner_user_id'],$ringval['s_profile_name']);
+              							 }										
+              							?>
                             <a style="color: #62C3BC;" href="<?php echo $profile_link?>"><?php echo $ringval['owner_name']?></a> 
                             </p>
                             
@@ -133,7 +133,7 @@
                                 <li> <span>Likes : <?php echo $ringval['post_lik']?></span></li>
                                 <li class="right">
                                     <ul>
-										<?php
+										                    <?php
                                         if(!in_array($ringval['ringid'], $arr_join_req) && $this->i_profile_id != $ringval['church_admin_id'])
                                         {
                                         ?> 
@@ -146,30 +146,14 @@
                              </ul>
                             
                             <p>Posted on ring <a href="<?php echo $ring_detail_link?>" style="font-size: 15px; color: #096AA7;" ><?=get_ring_name_by_id($ringval['ringid'])?></a></p>
-                            <?php /*?><ul class="article-comment-block article-comment-block2">
-                            	<li class="first">Total Posts : <?php echo $ringval['post']?> </li> 
-                                <li> <span>Total Comments : <?php echo $ringval['cmt']?></span></li>
-                                <li> <span>Total Likes : <?php echo $ringval['lik']?></span></li>
-                                <li class="right">
-                                    <ul>
-										<?php
-                                        if(!in_array($ringval['ringid'], $arr_join_req) && $this->i_profile_id != $ringval['i_user_id'])
-                                        {
-                                        ?> 
-                                        <li  class="first" id="join_req_p_<?php echo $ringval['ringid']?>"><img src="images/icons/ring2.png" alt="" class="icon-img" /> <a href="javascript:void(0);"  onclick="joinRequest('ring_name_<?php echo $ringval['ringid']?>','<?php echo encrypt($ringval['ringid'])?>');">Join Ring</a></li>
-                                        <?php 
-                                        }
-                                        ?>
-                                    </ul>
-                                </li>
-                             </ul><?php */?>
+                            
                             
                                   
                             </div>
                             
                             <?php }
-							}
-								}
+							         }
+								    }
 							}
 
 							?>
