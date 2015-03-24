@@ -94,9 +94,34 @@
                   $church_wall_url = base_url().$row->chid.'/church-wall';
                 ?>
                     <li><a href="<?= $church_wall_url; ?>" class="" ><?= $row->s_name; ?><img src="<?= base_url() ?>images/man-24-16.png" width="15" height="15" alt="man" class="add-new-church"/></a>
-                    
+                    <a href="javascript:void(0)" onclick="show_dialog('lavegrp<?= $row->chid ?>')"><img class="icon-img" alt="" src="images/icons/leave-2.png" title="Leave this Church" width="15" height="15"></a>
                     </li>
-                   
+                      <div class="lightbox lavegrp<?= $row->chid ?>" style="width: 400px; left: 100px;">
+      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="<?=base_url()?>images/close.png" alt="" width="24" height="24"/></a></div>
+      <div class="top"><div>&nbsp;</div></div>
+      <div class="mid">
+            <div class="heading" style="margin-bottom:0px;">
+                  <div class="left">
+                        <h4>Delete Profile Image</h4>
+                  </div>
+            </div>
+               <div class="shade_box_white" style="padding:8px 0px;">
+               <div style="padding-bottom:10px;">
+               <p class="center-text" style="line-height:23px; color:#494949;">
+                  Do you want to delete profile image ?
+               </p>
+               </div>
+               <form method="post" id="delfrm">
+                  <input type="hidden" name="i_del_id" id="i_del_id" value="" />
+                 <input name="" type="button" value="Yes" class="btn" style="margin-left:105px;" onClick="delete_profile_image()"/>
+                 <input name="" type="button" value="No" class="btn" onclick="hide_dialog()"/>
+               </form>   
+               <div class="clr"></div>
+            </div>
+            
+      </div>
+      <div class="bot"><div>&nbsp;</div></div>
+</div>
                 <?php 
                 }
                 ?>    
