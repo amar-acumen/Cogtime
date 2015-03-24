@@ -11,7 +11,7 @@
 <div id="loading_dialog" class="modal_dialog" style="width:auto; padding:20px; background:transparent;border:none; display:none;"> <?php /*?><img src="<?= base_url() ?>images/loading_big.gif" width="50"/> <?php */?></div>
 <!-- ############ Loading Section [End] ########### -->
 <?php 
-//echo $logged_admin_id.'ok';
+echo $_SESSION['user_id'].'ok';
 if(isset($_SESSION['user_id']) && empty($_SESSION['user_id']) ){
     header("location:".base_url()."");
 }
