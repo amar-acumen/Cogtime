@@ -16,6 +16,7 @@ if($_SESSION['is_admin'] == 0){
   ?>
 <script type="text/javascript">
 $(document).ready(function(){
+    alert('<?= $loc ?>');
    window.location.href = '<?= $loc ?>'; 
 })
 
