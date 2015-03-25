@@ -918,7 +918,7 @@ $this->load->model('user_alert_model');
 					 			<a href="' . $profile_link . '"><div style="background:url(' . $profile_image_filename . ') no-repeat center;width:60px; height:60px;" class="pro_photo" ></div></a>
 									<div class="left-nw-wal">
 										  <p class="blue_bold12"><a href="javascript:void(0);">' . $val['s_profile_name'] . '</a></p>
-										  <p>' . nl2br($DESC) . '</p>
+										  <p>' . nl2br(strip_tags($DESC)) . '</p>
 											 <p class="read-more">Updated on: ' . get_time_elapsed($val['dt_created_on']) . '</p>
 									</div>
 									<div class="clr"></div>
