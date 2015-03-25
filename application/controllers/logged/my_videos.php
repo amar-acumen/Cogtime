@@ -1735,13 +1735,13 @@ class My_videos extends Base_controller {
             $html = '';
             $result = $this->media_comments_model->get_people_liked_by_newsfeed_id($i_media_id, 'video');
 
-           // pr($result);
+            //pr($result);
 
             if (count($result)) {
                 foreach ($result as $key => $val) {
 
                     $name = $val['s_profile_name'];
-                    $profile_image = get_profile_image_of_user('thumb',$val['s_profile_photo'],$val['e_gender']);
+                    $profile_image = get_profile_image_of_user('thumb',$info['s_profile_photo'],$info['e_gender']);
 
                     $profile_link = get_profile_url($val['i_user_id'], $val['s_profile_name']);
 
@@ -1780,7 +1780,7 @@ class My_videos extends Base_controller {
 
                 foreach ($result as $key => $val) {
 
-                    $profile_image_filename = get_profile_image_of_user('thumb',$val['s_profile_photo'],$val['e_gender']);
+                    $profile_image_filename = get_profile_image_of_user('thumb',$info['s_profile_photo'],$info['e_gender']);
                     $DESC = html_entity_decode(htmlspecialchars_decode($val['s_contents']), ENT_QUOTES, 'utf-8');
                     $profile_link = get_profile_url($val['i_user_id'], $val['s_profile_name']);
 
@@ -1788,7 +1788,8 @@ class My_videos extends Base_controller {
 					 			<a href="' . $profile_link . '"><div style="background:url(' . $profile_image_filename . ') no-repeat center;width:60px; height:60px;" class="pro_photo" ></div></a>
 									<div class="left-nw-wal">
 										  <p class="blue_bold12"><a href="javascript:void(0);">' . $val['s_profile_name'] . '</a></p>
-										  <p>' . strip_tags($DESC) . '</p>
+										  <p>' . strip_tags(nl2br($DESC)) . '</p>
+                                          <p>' . nl2br(strip_tags($DESC)) . '</p>
 											 <p class="read-more">Updated on: ' . get_time_elapsed($val['dt_created_on']) . '</p>
 									</div>
 									<div class="clr"></div>
