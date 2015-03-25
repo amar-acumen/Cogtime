@@ -1142,7 +1142,7 @@ class My_videos extends Base_controller {
             ob_end_clean();
             ### end all albums  ###
             # view file...
-           pr($data['album_videos']);
+          
             $VIEW = "logged/videos/my_individual_video_album.phtml";
             parent::_render($data, $VIEW);
         } catch (Exception $err_obj) {
@@ -1152,6 +1152,7 @@ class My_videos extends Base_controller {
 
     public function my_album_videos_ajax_pagination($album_id = '', $page = 0) {
         try {
+            die('ok');
             $current_page = $page + $this->pagination_per_page_album_videos;
             //$this->session->set_userdata('search_condition','');
             $WHERE = '';
