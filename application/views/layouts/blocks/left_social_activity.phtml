@@ -93,7 +93,7 @@
                 foreach ($result_churchmember as $row){
                   $church_wall_url = base_url().$row->chid.'/church-wall';
                 ?>
-                    <li><a href="<?= $church_wall_url; ?>" class="" ><?= $row->s_name; ?><img src="<?= base_url() ?>images/man-24-16.png" width="15" height="15" alt="man" class="add-new-church"/></a>
+                    <li><a href="<?= $church_wall_url; ?>" class="" style="width:84%;"><?= $row->s_name; ?><img src="<?= base_url() ?>images/man-24-16.png" width="15" height="15" alt="man" class="add-new-church"/></a>
                         <span onclick="show_dialog('lavegrp<?= $row->chid ?>')" class="memberlv"><img class="icon-img" alt="" src="images/icons/leave-2.png" title="Leave this Church" width="15" height="15"></span>
                     </li>
                       <div class="lightbox lavegrp<?= $row->chid ?>" style="width: 400px; left: 100px;">
