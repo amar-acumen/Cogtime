@@ -390,6 +390,9 @@ class Data_messages_model extends Base_model
 					$ret_[$i_cnt]["s_type"]				=	$row->s_type;
 					$ret_[$i_cnt]["ended"]				=	$row->i_ended;
 					
+                                        $ret_[$i_cnt]["s_profile_photo"]				=	$row->s_profile_photo;
+					$ret_[$i_cnt]["e_gender"]				=	$row->e_gender;
+                                        
 					$ret_[$i_cnt]["dt_created_on"]		=   $row->dt_created_on;
 					$ret_[$i_cnt]["i_is_unread"]		=	intval($row->i_is_unread);  
 				
