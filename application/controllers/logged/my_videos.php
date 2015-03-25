@@ -1142,7 +1142,7 @@ class My_videos extends Base_controller {
             ob_end_clean();
             ### end all albums  ###
             # view file...
-            pr($data);
+           pr($data['album_videos']);
             $VIEW = "logged/videos/my_individual_video_album.phtml";
             parent::_render($data, $VIEW);
         } catch (Exception $err_obj) {
