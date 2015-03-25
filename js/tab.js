@@ -420,7 +420,7 @@ $(document).ready(function() {
 	$("#date-inbox").datepicker();
     //17-oct-2013
 	//18-oct-2013
-		$('.my-sub').click(function(){
+		$(document).delegate('.my-sub' , 'click', function(){
 			$(this).parent().next().next().slideToggle();
 			//$(this).parent().next().next('my-msg-body').toggle()'slow');
 			})
