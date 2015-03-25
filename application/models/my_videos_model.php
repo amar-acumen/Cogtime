@@ -346,7 +346,7 @@ class My_videos_model extends Base_model
          $sql = "SELECT * FROM ".$this->db->USER_VIDEOS." WHERE `i_video_album_id`= '".$id."''".$this->db->USER_VIDEOS."' {$where} ORDER BY i_order DESC LIMIT ".$start_limit.", ".$end_limit;
         $res = $this->db->query($sql)->result_array();
         
-        echo $sql;        exit();
+      //  echo $sql;        exit();
         $this->load->model("utility_model");
         $s_where =  " WHERE i_video_album_id = {$id}";
         foreach($res as $key=>$val){
