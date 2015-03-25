@@ -1660,7 +1660,7 @@ $this->email->send();
 		include_once(APPPATH.'libraries/contactimporter/example/updatecontacts.main.php');
 		$data['handler'] = new ContactsHandler();
 		# view file...
-                  pr($data['result'],1);
+                //  pr($data['result'],1);
 		$VIEW = "logged/friends/my_contacts.phtml"; 
 		parent::_render($data, $VIEW);
 	}
