@@ -1615,7 +1615,7 @@ $this->email->send();
 	
 	public function my_contacts($contactimporter)
 	{
-            die();
+            //die();
 		$posted=array();
 		$this->data["posted"]=$posted;/*don't change*/    
 		$data = $this->data;      
@@ -1651,6 +1651,7 @@ $this->email->send();
 		$_REQUEST['contacts_option']	= $contactimporter;
 		$_GET['contacts_option']		= $contactimporter;
 		$data['result'] = $this->contacts_model->fetch_contacts($i_profile_id);
+                pr($data['result'],1);
 		foreach($data['result'] as $emailval)
 		{
 			$_REQUEST['result'][]	= $emailval['s_contact_email'];
