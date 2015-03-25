@@ -1174,7 +1174,7 @@ class My_videos extends Base_controller {
 
             $result = $this->my_videos_model->get_all_videos_of_album($album_id, $where_cond, $page, $this->pagination_per_page_album_videos);
 
-            pr($result,1);
+            //pr($result,1);
             $total_rows = $this->my_videos_model->get_total_no_of_album_videos($album_id);
 
             //pr($result);
