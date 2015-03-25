@@ -1083,6 +1083,7 @@ class My_videos extends Base_controller {
     //=============================================== end play media file ===========================================
 //------------------------------------------- individual album detail --------------------------------------
     function my_video_album_details($album_id) {
+       // die();
         try {
 
             $i_profile_id = intval(decrypt($this->session->userdata('user_id')));
@@ -1141,6 +1142,7 @@ class My_videos extends Base_controller {
             ob_end_clean();
             ### end all albums  ###
             # view file...
+          
             $VIEW = "logged/videos/my_individual_video_album.phtml";
             parent::_render($data, $VIEW);
         } catch (Exception $err_obj) {
@@ -1150,8 +1152,9 @@ class My_videos extends Base_controller {
 
     public function my_album_videos_ajax_pagination($album_id = '', $page = 0) {
         try {
+           
             $current_page = $page + $this->pagination_per_page_album_videos;
-            //$this->session->set_userdata('search_condition','');
+            
             $WHERE = '';
             $where_cond = '';
             if (isset($_POST['if_search_indv']) && $_POST['if_search_indv'] == 'y') {
@@ -1171,10 +1174,10 @@ class My_videos extends Base_controller {
 
             $result = $this->my_videos_model->get_all_videos_of_album($album_id, $where_cond, $page, $this->pagination_per_page_album_videos);
 
-            //$total_rows = $this->my_videos_model->get_total_no_of_album_videos($i_profile_id);
+            //pr($result,1);
             $total_rows = $this->my_videos_model->get_total_no_of_album_videos($album_id);
 
-            // pr($result);
+            //pr($result);
             #Jquery Pagination Starts
             /*          $this->load->library('jquery_pagination');
               $config['base_url'] = base_url()."logged/my_videos/my_album_videos_ajax_pagination";

@@ -244,10 +244,10 @@ class Audio_albums_model extends Base_model
 	
 	public function get_by_album_details_id($id, $s_where,  $start_limit="", $no_of_page="") {
 		if("$start_limit" == "") {
-			$sql = 'SELECT * FROM '.$this->db->AUDIO_ALBUM.'  where id = "'.$id.'" {$s_where} ';
+			$sql = 'SELECT * FROM '.$this->db->AUDIO_ALBUM.'  where id = "'.$id.'" '.$s_where.' ';
 		}
 		else {
-			$sql = 'SELECT * FROM '.$this->db->AUDIO_ALBUM.'  where id = "'.$id.'"  {$s_where} limit {$start_limit}, {$no_of_page}';
+			$sql = 'SELECT * FROM '.$this->db->AUDIO_ALBUM.'  where id = "'.$id.'"  '.$s_where.' limit '.$start_limit.', '.$no_of_page.'';
 		}
 
 		$query = $this->db->query($sql);
