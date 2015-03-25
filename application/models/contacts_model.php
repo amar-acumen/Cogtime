@@ -932,7 +932,7 @@ class Contacts_model extends Base_model
 	}
    public function fetch_contacts($uid)
    {
-	   $s_qry = "SELECT * FROM {$this->db->contacts} 
+	 echo  $s_qry = "SELECT * FROM {$this->db->contacts} 
 						WHERE i_user_id='".$uid."'"; 
 	   $rs=$this->db->query($s_qry)->result_array();
 	   return $rs;
