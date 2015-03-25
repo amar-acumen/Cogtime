@@ -1615,6 +1615,7 @@ $this->email->send();
 	
 	public function my_contacts($contactimporter)
 	{
+            die();
 		$posted=array();
 		$this->data["posted"]=$posted;/*don't change*/    
 		$data = $this->data;      
