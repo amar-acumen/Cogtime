@@ -1174,7 +1174,7 @@ class My_videos extends Base_controller {
             //$total_rows = $this->my_videos_model->get_total_no_of_album_videos($i_profile_id);
             $total_rows = $this->my_videos_model->get_total_no_of_album_videos($album_id);
 
-            // pr($result);
+            pr($result);
             #Jquery Pagination Starts
             /*          $this->load->library('jquery_pagination');
               $config['base_url'] = base_url()."logged/my_videos/my_album_videos_ajax_pagination";
