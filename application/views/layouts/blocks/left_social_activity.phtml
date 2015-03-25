@@ -93,17 +93,15 @@
                 foreach ($result_churchmember as $row){
                   $church_wall_url = base_url().$row->chid.'/church-wall';
                 ?>
-                    <li><a href="<?= $church_wall_url; ?>" class="" ><?= $row->s_name; ?><img src="<?= base_url() ?>images/man-24-16.png" width="15" height="15" alt="man" class="add-new-church"/></a>
-                    <a href="javascript:void(0)" onclick="show_dialog('lavegrp<?= $row->chid ?>')"><img class="icon-img" alt="" src="images/icons/leave-2.png" title="Leave this Church" width="15" height="15"></a>
+                    <li><a href="<?= $church_wall_url; ?>" class="" style="width:84%;"><?= $row->s_name; ?><img src="<?= base_url() ?>images/man-24-16.png" width="15" height="15" alt="man" class="add-new-church"/></a>
+                        <span onclick="show_dialog('lavegrp<?= $row->chid ?>')" class="memberlv"><img class="icon-img" alt="" src="images/icons/leave-2.png" title="Leave this Church" width="15" height="15"></span>
                     </li>
                       <div class="lightbox lavegrp<?= $row->chid ?>" style="width: 400px; left: 100px;">
       <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="<?=base_url()?>images/close.png" alt="" width="24" height="24"/></a></div>
       <div class="top"><div>&nbsp;</div></div>
       <div class="mid">
-            <div class="heading" style="margin-bottom:0px;">
-                  <div class="left">
+            <div class="mood-message-haeding" style="margin-bottom:0px;">                  
                         <h4>Leave Church</h4>
-                  </div>
             </div>
                <div class="shade_box_white" style="padding:8px 0px;">
                <div style="padding-bottom:10px;">

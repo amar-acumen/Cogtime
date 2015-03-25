@@ -5048,7 +5048,7 @@ function get_all_church_session($cid){
             $_SESSION['subadmin_role'] = '';
            
         }else if($numrowmember == 0 && $numrow_superadmin == 0 ){
-            echo 'ok';
+            header('Location: ' . base_url());
         }
     }
     
