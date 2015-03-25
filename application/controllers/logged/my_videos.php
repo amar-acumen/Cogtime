@@ -1780,7 +1780,7 @@ class My_videos extends Base_controller {
 
                 foreach ($result as $key => $val) {
 
-                    $profile_image_filename = get_profile_image_of_user('thumb',$info['s_profile_photo'],$info['e_gender']);
+                    $profile_image_filename = get_profile_image_of_user('thumb',$val['s_profile_photo'],$val['e_gender']);
                     $DESC = html_entity_decode(htmlspecialchars_decode($val['s_contents']), ENT_QUOTES, 'utf-8');
                     $profile_link = get_profile_url($val['i_user_id'], $val['s_profile_name']);
 
