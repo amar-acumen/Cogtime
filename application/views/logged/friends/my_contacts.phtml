@@ -56,7 +56,7 @@
 								{ //pr($result);
 								foreach($result as $contact) {?>
                                 <li>
-                                    <input type="checkbox" name="contact_<?=$contact['id']?>" id="contact_<?=$contact['id']?>" value="<?=$contact['id']?>" /><?php if(isset($contact['s_contact_email'])){ echo $contact['s_contact_email']; }else{}?>
+                                    <input type="checkbox" name="contact_<?=$contact['id']?>" id="contact_<?=$contact['id']?>" value="<?=$contact['id']?>" /><?php if(array_key_exists($contact['s_contact_email'])){ echo $contact['s_contact_email']; }else{}?>
                                 </li>
                                 <?php } 
 								}
