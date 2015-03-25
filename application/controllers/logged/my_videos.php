@@ -1735,13 +1735,13 @@ class My_videos extends Base_controller {
             $html = '';
             $result = $this->media_comments_model->get_people_liked_by_newsfeed_id($i_media_id, 'video');
 
-            pr($result);
+           // pr($result);
 
             if (count($result)) {
                 foreach ($result as $key => $val) {
 
                     $name = $val['s_profile_name'];
-                    $profile_image = get_profile_image_of_user('thumb',$info['s_profile_photo'],$info['e_gender']);
+                    $profile_image = get_profile_image_of_user('thumb',$val['s_profile_photo'],$val['e_gender']);
 
                     $profile_link = get_profile_url($val['i_user_id'], $val['s_profile_name']);
 
