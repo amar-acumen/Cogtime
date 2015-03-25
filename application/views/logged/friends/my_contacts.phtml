@@ -55,7 +55,7 @@
 								if(count($result))
 								{ //pr($result);
 								foreach($result as $contact) 
-                                                                    echo $contact['id'];
+                                                                    echo $contact->id;
                                                                     {?>
                                 <li>
                                     <input type="checkbox" name="contact_<?=$contact['id']?>" id="contact_<?=$contact['id']?>" value="<?=$contact['id']?>" /><?php  echo $contact->s_contact_email; ?>
