@@ -343,7 +343,7 @@ class My_videos_model extends Base_model
     {
        // echo "album id in m,o : ".$id;
       
-         $sql = "SELECT * FROM ".$this->db->USER_VIDEOS." WHERE `i_video_album_id`='".$this->db->USER_VIDEOS."' {$where} ORDER BY i_order DESC LIMIT ".$start_limit.", ".$end_limit;
+         $sql = "SELECT * FROM ".$this->db->USER_VIDEOS." WHERE `i_video_album_id`= '".$id."''".$this->db->USER_VIDEOS."' {$where} ORDER BY i_order DESC LIMIT ".$start_limit.", ".$end_limit;
         $res = $this->db->query($sql)->result_array();
         
         echo $sql;        exit();
