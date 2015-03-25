@@ -1651,7 +1651,7 @@ $this->email->send();
 		$_REQUEST['contacts_option']	= $contactimporter;
 		$_GET['contacts_option']		= $contactimporter;
 		$data['result'] = $this->contacts_model->fetch_contacts($i_profile_id);
-                pr($data['result'],1);
+               // pr($data['result'],1);
 		foreach($data['result'] as $emailval)
 		{
 			$_REQUEST['result'][]	= $emailval['s_contact_email'];
@@ -1660,6 +1660,7 @@ $this->email->send();
 		include_once(APPPATH.'libraries/contactimporter/example/updatecontacts.main.php');
 		$data['handler'] = new ContactsHandler();
 		# view file...
+                pr($data,1);
 		$VIEW = "logged/friends/my_contacts.phtml"; 
 		parent::_render($data, $VIEW);
 	}
