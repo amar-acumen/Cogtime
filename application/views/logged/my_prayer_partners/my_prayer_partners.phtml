@@ -118,8 +118,8 @@ if ($years > 0) {
 
  <?php 
                      $user_id = intval(decrypt($this->session->userdata('user_id')));
-                     $member = check_prayer_partner_quality($user_id);
-                     if($member > 0){
+                     $quality = check_prayer_partner_quality($user_id);
+                     if($quality > 0){
                     ?>
 <!---if any church member---->
                     
@@ -157,8 +157,12 @@ if ($years > 0) {
 
 
 <!------>
-                     <?php } ?>
+                     <?php } else{ ?>
+  <DIV id="my_friends">
+                        <?= 'You must belong to a Church Community to use this facility.' ?>
+                    </DIV>
                 <?php 
+                     }
                // } 
                 /*else {
                     ?>  
