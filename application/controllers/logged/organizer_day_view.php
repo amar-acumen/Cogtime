@@ -978,6 +978,7 @@ class Organizer_day_view extends Base_controller
                                         'js/stepcarousel.js',
 										'js/frontend/logged/organizer/organizer.js',*/
 										'js/production/tweet_utilities.js',
+										'js/frontend/logged/organizer/organizer.js',
 //										'js/tab.js',
 										'js/jquery.jcarousel.min.js',
 										'js/jquery-ui-1.8.2.custom.min.js',
