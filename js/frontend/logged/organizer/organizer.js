@@ -711,7 +711,7 @@ function gotoDay(year,day,month){
 	$.ajax({
 			 type: "get",
 			 url: base_url+'logged/organizer_day_view/timeListingData/'+getdata,
-			 dataType:"json",
+			 dataType:"post",
 			 success: function(json_response){
 			 	alert(json_response);
 				$('#content_div').html(json_response.html);
@@ -720,7 +720,8 @@ function gotoDay(year,day,month){
 			  error: function(){
 				hideUILoader_nodialog();
 				//hide_dialog('edit_list');
-				showUIMsg('Some error occurred. Please try again.');
+				//showUIMsg('Some error occurred. Please try again.');
+				alert('Some error occurred. Please try again....');
 			  }
 		  });
 }
