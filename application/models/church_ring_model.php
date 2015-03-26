@@ -1089,7 +1089,7 @@ public function get_by_id($id)
 								 '0' as s_logo,
 								 '0' AS i_member,
 								 'post' as s_type,
-								   r.i_sub_category_id, r.i_user_id as church_admin_id,
+								   r.i_sub_category_id, 
 								 rp.i_user_id as post_owner_user_id,
 								 c.s_category_name AS s_category_name , 
 								 CONCAT(u.s_first_name,' ',u.s_last_name) AS owner_name,
