@@ -699,8 +699,8 @@ function showAddList(adddate,caldate){
 }
 
 
-//function gotoDay(val_date){
-function gotoDay(year,day,month){
+function gotoDay(val_date){
+//function gotoDay(year,day,month){
 	/*page refresh*/
 	$('#goto_date').val(val_date);
 	$('#gotoFrm').submit();
