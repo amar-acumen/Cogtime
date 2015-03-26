@@ -984,7 +984,6 @@ class Organizer_day_view extends Base_controller
 										'js/jquery-ui-1.8.2.custom.min.js',
 										'js/jquery.mCustomScrollbar.min.js',
 //										'js/jquery.ui.datepicker.js',
-										'js/production/organizer.js'
 										
                                         ));
                                         
