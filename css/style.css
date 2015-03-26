@@ -8882,7 +8882,7 @@ a.on-line{color: #000;font-size: 12px;text-decoration: none; font-weight:normal;
 	width:94%;
  	padding:1%;
 }
-#left_container .nw-content ul li a:hover, #left_container .nw-content ul li a.select{  color:#118ad5 !important; background:#ddd;} 
+#left_container .nw-content ul li:hover, #left_container .nw-content ul li a.select{  color:#118ad5 !important; background:#ddd;} 
 
 .secttion-padding{padding:6px 0 0 0;}
 /*-----------------------------17jun-------------------------------*/
