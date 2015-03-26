@@ -705,7 +705,35 @@ function gotoDay(year,day,month){
 	//$('#goto_date').val(val_date);
 	//$('#gotoFrm').submit();
 	/*page refresh*/
-alert('ok');
+//alert('ok');
+	showUILoader_nodialog('<img src="'+base_url+'images/loading_big.gif" width="50"/> ');
+	var getdata = '0/60/'+day+'/'+month+'/'+year;
+	$.ajax({
+			 type: "get",
+			 url: base_url+'logged/organizer_day_view/timeListingData/'+getdata,
+			 dataType:"json",
+			 success: function(json_response){
+				$('#content_div').html(json_response.html);
+				hideUILoader_nodialog();
+			  },
+			  error: function(){
+				hideUILoader_nodialog();
+				//hide_dialog('edit_list');
+				showUIMsg('Some error occurred. Please try again.');
+			  }
+		  });
+}
+function gotoDay1(val_date){
+    var result = val_date.split('-')
+    var year = result[2];
+    var month = result[1];
+    var day = result[0];
+    alert(day);
+	/*page refresh*/
+	//$('#goto_date').val(val_date);
+	//$('#gotoFrm').submit();
+	/*page refresh*/
+//alert('ok');
 	showUILoader_nodialog('<img src="'+base_url+'images/loading_big.gif" width="50"/> ');
 	var getdata = '0/60/'+day+'/'+month+'/'+year;
 	$.ajax({
