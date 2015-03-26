@@ -36,6 +36,7 @@
                      $user_id = intval(decrypt($this->session->userdata('user_id')));
                      $quality = check_prayer_partner_quality($user_id);
                      if($quality > 0){
+                         
                     ?>
                         
                               <!--/sub page links -->
@@ -304,7 +305,7 @@
                               <DIV id="srch_prayer_partner" >
                                   <?=$result_content?>
                               </DIV>
-                                    <?php} else{ ?>
+                                    <?php } else { ?>
   <DIV class="prayer_partnr_fail">
                         <?= 'You must belong to a Church Community to use this facility' ?>
                     </DIV>
