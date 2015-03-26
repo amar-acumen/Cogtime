@@ -728,7 +728,7 @@ function gotoDay1(val_date){
     var year = result[2];
     var month = result[1];
     var day = result[0];
-    alert(day);
+   // alert(day);
 	/*page refresh*/
 	//$('#goto_date').val(val_date);
 	//$('#gotoFrm').submit();
