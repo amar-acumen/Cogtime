@@ -32,7 +32,11 @@
                               <div class="clr"></div>
                             </div>
                             
-                            
+                            <?php 
+                     $user_id = intval(decrypt($this->session->userdata('user_id')));
+                     $quality = check_prayer_partner_quality($user_id);
+                     if($quality > 0){
+                    ?>
                             <!--/sub page links -->
                             <div>
                             <div class="page_heading">
@@ -46,6 +50,12 @@
                                  </div>
                                   <DIV id="request_recieved_content"><?=$content2?></DIV>
                             </div>
+                            <?php} else{ ?>
+  <DIV class="prayer_partnr_fail">
+                        <?= 'You must belong to a Church Community to use this facility' ?>
+                    </DIV>
+                <?php 
+                     } ?>
                          </div>
                         <!-- /left container -->
                         <!-- right container -->

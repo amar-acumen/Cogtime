@@ -12574,3 +12574,14 @@ text-align: center;}
 .info_pp{ vertical-align:sub;}
 
 /********** Tooltip*******/
+.prayer_partnr_fail{
+   
+  background: none repeat scroll 0 0 #f4f4f4;
+  border: 1px solid #ccc;
+  color: red;
+  display: block;
+  font-size: 16px;
+  padding: 50px 10px 52px;
+  text-align: center;
+
+}
