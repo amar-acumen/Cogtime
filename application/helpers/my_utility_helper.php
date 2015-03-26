@@ -5217,7 +5217,7 @@ function check_prayer_partner_quality($user_id){
 
               $query_churchmember = $ci->db->query($sql_churchmember);
               $numrowmember = $query_churchmember->num_rows();
-              if($numrow_superadmin > 0 && $numrowmember > 0 ){
+              if($numrow_superadmin > 0 || $numrowmember > 0 ){
                   $res = 1;
               }
         
