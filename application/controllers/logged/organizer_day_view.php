@@ -978,17 +978,18 @@ class Organizer_day_view extends Base_controller
                                         'js/stepcarousel.js',
 										'js/frontend/logged/organizer/organizer.js',*/
 										'js/production/tweet_utilities.js',
-										'js/frontend/logged/organizer/organizer.js',
 //										'js/tab.js',
 										'js/jquery.jcarousel.min.js',
 										'js/jquery-ui-1.8.2.custom.min.js',
 										'js/jquery.mCustomScrollbar.min.js',
 //										'js/jquery.ui.datepicker.js',
+										'js/production/organizer.js'
 										
                                         ));
                                         
             parent::_add_css_arr( array('css/date/jquery-ui-1.8.2.custom.css',
-                                          'css/dd.css') );										  
+                                          'css/dd.css') );
+										  
             $i_profile_id = intval(decrypt($this->session->userdata('user_id')));
          //	$data['right_panel']['calendar_data'] = parent::show_event_calendar($i_profile_id, date('Y'), date('m'), '', true);
 			$data['right_panel']['uid'] = $i_profile_id; 
