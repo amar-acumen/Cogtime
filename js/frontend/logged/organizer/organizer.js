@@ -713,6 +713,7 @@ function gotoDay(year,day,month){
 			 url: base_url+'logged/organizer_day_view/timeListingData/'+getdata,
 			 dataType:"json",
 			 success: function(json_response){
+			 	alert(json_response);
 				$('#content_div').html(json_response.html);
 				hideUILoader_nodialog();
 			  },
