@@ -34,8 +34,8 @@ class Church_new_model extends Base_model
     		$limit = (is_numeric($i_start) && is_numeric($i_limit)) ? " Limit " . intval($i_start) . "," . intval($i_limit) : '';
         	$order_by =  " ORDER BY {$order_by}" ;
             $sql = 'select *,u.id AS mid, CONCAT(u.s_first_name, " ", u.s_last_name) AS member_name,cm.id AS cmid from cg_church_member AS cm 
-            LEFT JOIN cg_users AS u ON cm.member_id=u.id WHERE cm.church_id = "'.$c_id.'" AND cm.is_deleted=0   AND cm.is_leave = 0 '.$where.' '.$order_by.' '.$limit.'';
-				//echo $sql;
+            LEFT JOIN cg_users AS u ON cm.member_id=u.id WHERE cm.church_id = "'.$c_id.'" AND cm.is_deleted=0 AND cm.is_blocked=1  AND cm.is_leave = 0 '.$where.' '.$order_by.' '.$limit.'';
+				echo $sql;
             $query = $this->db->query($sql);
             $result = $query->result();
             return $result;
