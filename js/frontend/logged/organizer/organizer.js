@@ -699,14 +699,16 @@ function showAddList(adddate,caldate){
 }
 
 
-//function gotoDay(val_date){
-function gotoDay(year,day,month){
+function gotoDay(val_date){
+//function gotoDay(year,day,month){
 	/*page refresh*/
-	//$('#goto_date').val(val_date);
-	//$('#gotoFrm').submit();
+	$('#goto_date').val(val_date);
+	$('#gotoFrm').submit();
 	/*page refresh*/
 //alert('ok');
-	showUILoader_nodialog('<img src="'+base_url+'images/loading_big.gif" width="50"/> ');
+
+
+/*	showUILoader_nodialog('<img src="'+base_url+'images/loading_big.gif" width="50"/> ');
 	var getdata = '0/60/'+day+'/'+month+'/'+year;
 	$.ajax({
 			 type: "get",
@@ -721,7 +723,7 @@ function gotoDay(year,day,month){
 				//hide_dialog('edit_list');
 				showUIMsg('Some error occurred. Please try again.');
 			  }
-		  });
+		  });*/
 }
 function gotoDay1(val_date){
     var result = val_date.split('-')
