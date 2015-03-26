@@ -73,7 +73,7 @@
              <?php
               $user_id = intval(decrypt($this->session->userdata('user_id')));
               $sql_churchmember = "SELECT *,ch.id AS chid FROM cg_church AS ch,cg_church_member AS chm WHERE ch.id=chm.church_id 
-              AND chm.is_approved=1 AND chm.member_id='".$user_id."' AND chm.is_leave = 0";
+              AND chm.is_approved=1 AND chm.member_id='".$user_id."' AND chm.is_leave = 0 AND chm.is_blocked = 1";
 
               $query_churchmember = $this->db->query($sql_churchmember);
               $numrowmember = $query_churchmember->num_rows();
