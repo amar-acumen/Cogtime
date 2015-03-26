@@ -1151,7 +1151,7 @@ class Organizer_day_view extends Base_controller
 													</span>
 													</span>
 													
-													<span class='date' onclick='gotoDay(".$val_date.")'>
+													<span class='date' onclick='gotoDay1(".$val_date.")'>
 													
 													".$note_img.$list_img.$event_img."
 							 						</span>
