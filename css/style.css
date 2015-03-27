@@ -12533,7 +12533,9 @@ line-height: 22px;
 padding-right: 8px;
 text-align: right;
 vertical-align: middle;
-width: 14px;}
+width: 14px;
+padding :2px 0 0 0;
+}
 
 #vcode{ width: 227px; margin-bottom: 10px;}
 .req-reg{
@@ -12571,3 +12573,17 @@ text-align: center;}
 .new-blogcomment .comments-number-content{margin-bottom:0px;}
 .field01 > input[type="text"]:focus, .field01 > textarea:focus, .field01 > select:focus{border: 1px solid #013d62;} 
 .memberlv {cursor: pointer;}
+.info_pp{ vertical-align:sub;}
+
+/********** Tooltip*******/
+.prayer_partnr_fail{
+   
+  background: none repeat scroll 0 0 #f4f4f4;
+  border: 1px solid #ccc;
+  color: red;
+  display: block;
+  font-size: 16px;
+  padding: 50px 10px 52px;
+  text-align: center;
+
+}

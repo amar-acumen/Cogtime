@@ -32,6 +32,13 @@
                                 </ul>
                                 <div class="clr"></div>
                               </div>
+                                       <?php 
+                     $user_id = intval(decrypt($this->session->userdata('user_id')));
+                     $quality = check_prayer_partner_quality($user_id);
+                     if($quality > 0){
+                         
+                    ?>
+                        
                               <!--/sub page links -->
                               <div class="page_heading">
                                     <div class="left"><img src="images/icons/icon25.png" alt="" width="41" height="35" /> Search & Invite Prayer Partner </div>
@@ -298,7 +305,12 @@
                               <DIV id="srch_prayer_partner" >
                                   <?=$result_content?>
                               </DIV>
-                                    
+                                    <?php } else { ?>
+  <DIV class="prayer_partnr_fail">
+                        <?= 'You must belong to a Church Community to use this facility' ?>
+                    </DIV>
+                <?php 
+                     } ?>   
                              
                               
                         </div>

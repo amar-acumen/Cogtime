@@ -5019,7 +5019,7 @@ function get_all_church_session($cid){
     $ci = get_instance();
     $user_id = intval(decrypt($ci->session->userdata('user_id')));
     $sql_churchmember = "SELECT *,ch.id AS chid FROM cg_church AS ch,cg_church_member AS chm 
-    WHERE ch.id=chm.church_id AND chm.member_id='".$user_id."' AND ch.id='".$cid."'  AND chm.is_leave = 0 AND chm.is_blocked = 1";
+    WHERE ch.id=chm.church_id AND chm.member_id='".$user_id."' AND ch.id='".$cid."'  AND chm.is_leave = 0 AND chm.is_blocked = 1 AND chm.is_approved = 1";
 
     $query_churchmember = $ci->db->query($sql_churchmember);
     $numrowmember = $query_churchmember->num_rows();   
@@ -5203,4 +5203,28 @@ function get_userinfo_for_newsfeed($i_user_id = NULL) {
         show_error($err_obj->getMessage());
     }
 }
+function check_prayer_partner_quality($user_id){
+    try{
+        $ci = & get_instance();
+        
+         $query = $ci->db->get_where('cg_church', array('ch_admin_id' => $user_id ));
+        $result = $query->result();
+//pr($result,1);
+         $numrow_superadmin = $query->num_rows();  
+         
+         $sql_churchmember = "SELECT *,ch.id AS chid FROM cg_church AS ch,cg_church_member AS chm WHERE ch.id=chm.church_id 
+              AND chm.is_approved=1 AND chm.member_id='".$user_id."' AND chm.is_leave = 0 AND chm.is_blocked = 1";
 
+              $query_churchmember = $ci->db->query($sql_churchmember);
+              $numrowmember = $query_churchmember->num_rows();
+              if($numrow_superadmin > 0 || $numrowmember > 0 ){
+                  $res = 1;
+              }
+        
+   
+        
+              return $res;
+    } catch (Exception $err_obj){
+         show_error($err_obj->getMessage());
+    }
+}
