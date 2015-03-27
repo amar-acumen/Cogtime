@@ -5040,7 +5040,7 @@ function get_all_church_session($cid){
 //pr($result,1);
          $numrow_superadmin = $query->num_rows();  
        
-        if($numrowmember==0 && $numrow_superadmin>0)
+        if($numrowmember==0 && $numrow_superadmin > 0)
         {
            
             $_SESSION['charch_super_admin'] = 'yes';
