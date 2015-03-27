@@ -132,7 +132,7 @@
 
                                                     <img src="images/icons/close.png" alt=""  /> 
 
-                                                 <a  href="javascript:void(0);" class="blue_link" onclick="DeclineInvitation('<?=$this->session->userdata('user_id')?>', '<?php echo encrypt($ring_inv_val['ringid'])?>', <?=($ring_inv_val['ringid'])?> , '<?=$type?>')">Delete</a>
+                                                 <a  href="javascript:void(0);" class="blue_link" onclick="DeclineInvitation('<?=$this->session->userdata('user_id')?>', '<?php echo encrypt($ring_inv_val['ringid'])?>', <?=($ring_inv_val['ringid'])?> , '<?=$type?>')">Decline</a>
 
                                                   <?php }
 
@@ -142,7 +142,7 @@
 
                                                    <img src="images/icons/close.png" alt=""  /> 
 
-                                                 <a  href="javascript:void(0);" class="blue_link" onclick="DeclineInvitation('<?=encrypt($ring_inv_val['invitedid'])?>', '<?php echo encrypt($ring_inv_val['ringid'])?>', <?=($ring_inv_val['ringid'])?> , 'recv')">Delete</a>
+                                                 <a  href="javascript:void(0);" class="blue_link" onclick="DeclineInvitation('<?=encrypt($ring_inv_val['invitedid'])?>', '<?php echo encrypt($ring_inv_val['ringid'])?>', <?=($ring_inv_val['ringid'])?> , 'recv')">Decline</a>
 
                                                   <?php
 
