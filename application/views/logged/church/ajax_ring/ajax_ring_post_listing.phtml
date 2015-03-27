@@ -143,11 +143,7 @@ $logged_id=intval(decrypt($_SESSION['user_id']));
                </p>
                </div>
                   <div class="edit-ringpost"> <input type="text" style="width:98%;" name="txt_title" id="txt_title<?=$val['id'] ?>" value="<?=$val['s_post_title']?>">
-               <textarea id="edit_des<?=$val['id'] ?>"><?=nl2br(strip_tags(stripcslashes($val['s_post_description'])))?></textarea>
-
-               <textarea id="edit_des<?=$val['id'] ?>"><?=nl2br(htmlentities(stripcslashes($val['s_post_description'])))?></textarea>
-               <textarea id="edit_des<?=$val['id'] ?>"><?=nl2br(htmlspecialchars(stripcslashes($val['s_post_description'])))?></textarea>
-               <textarea id="edit_des<?=$val['id'] ?>"><?=nl2br(strip_tags(stripcslashes($val['s_post_description'])))?></textarea>
+               <textarea id="edit_des<?=$val['id'] ?>"><?=strip_tags($val['s_post_description'])?></textarea>
 
 
 
