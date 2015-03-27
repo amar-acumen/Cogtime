@@ -1701,8 +1701,8 @@ echo json_encode( array('success'=>'true'));
                                     /**********if already invited member**********************************/
                                     $query1 = $this->db->get_where('cg_church_member_invitation', array('email' => $invite_val[$i][1] ,'church_id'=>$_SESSION['logged_church_id'] ));
                                     $result = $query1->result();
-                                     $query = $ci->db->get_where('cg_church', array('ch_admin_id' => get_user_id_byemail($invite_val[$i][1]) , 'id' =>$_SESSION['logged_church_id']));
-                                      $result1 = $query->result();
+                                     $query2 = $this->db->get_where('cg_church', array('ch_admin_id' => get_user_id_byemail($invite_val[$i][1]) , 'id' =>$_SESSION['logged_church_id']));
+                                      $result1 = $query2->result();
 //pr($result,1);
                                      
                                     if(count($result) > 0 || count($result1)){
