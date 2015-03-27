@@ -5228,3 +5228,10 @@ function check_prayer_partner_quality($user_id){
          show_error($err_obj->getMessage());
     }
 }
+function get_user_id_byemail($email){
+          $ci = & get_instance();
+        
+         $query = $ci->db->get_where('cg_users', array('s_email' => $email ));
+        $info = $query->result_array();
+        return $info[0]['id'];
+}
