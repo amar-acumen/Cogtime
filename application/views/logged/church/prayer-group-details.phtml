@@ -146,7 +146,7 @@
                                        
                                         
                              
-                                  <textarea  id="wall_msg<?=$v->id ?>"  maxlength="500"><?=$v->s_post_desc?></textarea>
+                                  <textarea  id="wall_msg<?=$v->id ?>"  maxlength="500"><?=strip_tags($v->s_post_desc)?></textarea>
                                   
                                   <input type="button" onclick="edit_prayer_post(<?=$v->i_user_id ?>,<?=$v->id ?>,<?= $prayer_group_id ?>)"  class="post-btn" value="Update" name="" style="font-size:12px; height:24px; line-height:24px;">
                  
