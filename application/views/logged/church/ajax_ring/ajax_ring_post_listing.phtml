@@ -139,11 +139,11 @@ $logged_id=intval(decrypt($_SESSION['user_id']));
                <div style="padding:8px 0px;" class="shade_box_white">
                <div style="padding-bottom:10px;">
                <p style="line-height:23px; color:#494949; font-size:16px; text-align:center;" class="center-text">
-                  Do you want to Edit Ring Post ?
+                  Do you want to Edit Ring Post ?..
                </p>
                </div>
                   <div class="edit-ringpost"> <input type="text" style="width:98%;" name="txt_title" id="txt_title<?=$val['id'] ?>" value="<?=$val['s_post_title']?>">
-               <textarea id="edit_des<?=$val['id'] ?>"><?=$val['s_post_description']?></textarea>
+               <textarea id="edit_des<?=$val['id'] ?>"><?=nl2br(strip_tags(stripcslashes($val['s_post_description'])))?></textarea>
                   <input type="hidden" value="" id="i_del_id" name="i_del_id">
                   <div class="clr"></div>
                  <input type="button" onclick="edit_ring_post(<?=$val['id'] ?>)"  class="post-btn pull-left" value="Update" name="">
