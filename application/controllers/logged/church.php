@@ -1770,7 +1770,7 @@ echo json_encode( array('success'=>'true'));
 			else
 			{
 				$user_id = intval(decrypt($this->session->userdata('user_id')));
-				get_all_church_session($c_id);
+				get_all_church_session($_SESSION['logged_church_id']);
 				//parent::check_is_church_admin($user_id,$c_id);
 				$posted=array();
 				$this->data["posted"]=$posted;/*don't change*/    
