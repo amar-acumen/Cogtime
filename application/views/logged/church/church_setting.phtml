@@ -17,10 +17,7 @@
     <div class="church-setting-main">
 		<h3>General Site Setting</h3>
         <?php
-       //pr($church_arr);
-	 $open_time = json_decode($church_arr[0]->ch_open_time);
-	 //pr($open_time);
-	 $close_time = json_decode($church_arr[0]->ch_close_time);
+      pr($church_arr);
      $thumb_logo_img = get_church_logo_image($church_arr[0]->id, 'thumb', $church_arr[0]->ch_logo);
      $thumb_cover_img = get_church_cover_image($church_arr[0]->id, 'thumb', $church_arr[0]->ch_cover);
      $thumb_profile_img = get_church_profile_image($church_arr[0]->id, 'profile', $church_arr[0]->ch_profile_img)
@@ -108,13 +105,13 @@
 				<table width="80%" border="0" cellspacing="0" cellpadding="0" class="church-close-time">
     <tbody>
 	 <tr>
-	 <td><input type="checkbox" name="church_week_day" value="Sun"> Sun</td>
-	 <td><input type="checkbox" name="church_week_day" value="Mon"> Mon</td>
-	 <td><input type="checkbox" name="church_week_day" value="Tue"> Tue</td>
-	 <td><input type="checkbox" name="church_week_day" value="Wed"> Wed</td>
-	 <td><input type="checkbox" name="church_week_day" value="Thrus"> Thrus</td>
-	 <td><input type="checkbox" name="church_week_day" value="Fri"> Fri</td>
-	  <td><input type="checkbox" name="church_week_day" value="Sat"> Sat</td>
+	 <td><input type="checkbox" name="church_week_day" value="Sun" <?php $church_arr[0]->ch_week_day=='Sun'?'checked':''?> />Sun</td>
+	 <td><input type="checkbox" name="church_week_day" value="Mon" <?php $church_arr[0]->ch_week_day=='Mon'?'checked':''?>/> Mon</td>
+	 <td><input type="checkbox" name="church_week_day" value="Tue" <?php $church_arr[0]->ch_week_day=='Tue'?'checked':''?>/> Tue</td>
+	 <td><input type="checkbox" name="church_week_day" value="Wed" <?php $church_arr[0]->ch_week_day=='Wed'?'checked':''?>/> Wed</td>
+	 <td><input type="checkbox" name="church_week_day" value="Thrus" <?php $church_arr[0]->ch_week_day=='Thrus'?'checked':''?>/> Thrus</td>
+	 <td><input type="checkbox" name="church_week_day" value="Fri" <?php $church_arr[0]->ch_week_day=='Fri'?'checked':''?>/> Fri</td>
+	  <td><input type="checkbox" name="church_week_day" value="Sat" <?php $church_arr[0]->ch_week_day=='Sat'?'checked':''?>/> Sat</td>
 	 </tr>
 	</tbody>
 	</table>
@@ -133,7 +130,7 @@
       <td><select class="time-selectbox" id="ch_open_time" name="ch_open_time" >
                               <option value="-1">Select</option>
                               <?php  
-                              $s_time = $open_time->sunday;
+                              $s_time = $church_arr[0]->ch_open_time;
                               if(!empty($s_time)){
                                 $s_time_new = $s_time; 
                               }else{
@@ -147,7 +144,7 @@
                <option value="-1">Select</option>
                                <?php /*?><option value="-1">Select</option><?php */?>
                                     <?php  
-                              $s_time = $close_time->sunday;
+                              $s_time = $church_arr[0]->ch_close_time;
                               if(!empty($s_time)){
                                 $s_time_new = $s_time; 
                               }else{
