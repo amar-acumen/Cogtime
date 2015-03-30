@@ -17,10 +17,7 @@
     <div class="church-setting-main">
 		<h3>General Site Setting</h3>
         <?php
-       //pr($church_arr);
-	 $open_time = json_decode($church_arr[0]->ch_open_time);
-	 //pr($open_time);
-	 $close_time = json_decode($church_arr[0]->ch_close_time);
+      //pr($church_arr);
      $thumb_logo_img = get_church_logo_image($church_arr[0]->id, 'thumb', $church_arr[0]->ch_logo);
      $thumb_cover_img = get_church_cover_image($church_arr[0]->id, 'thumb', $church_arr[0]->ch_cover);
      $thumb_profile_img = get_church_profile_image($church_arr[0]->id, 'profile', $church_arr[0]->ch_profile_img)
@@ -104,23 +101,36 @@
         </div>-->
         <div class="form-main">
         	<label>Church Open / Close Time: </label>
-			
+				<div>
+				<table width="80%" border="0" cellspacing="0" cellpadding="0" class="church-close-time">
+    <tbody>
+	 <tr>
+	 <td><input type="checkbox" name="church_week_day[]" value="Sun" <?php echo ($church_arr[0]->ch_week_day=='Sun'?'checked':''); ?> />Sun</td>
+	 <td><input type="checkbox" name="church_week_day[]" value="Mon" <?php echo ($church_arr[0]->ch_week_day=='Mon'?'checked':''); ?>/> Mon</td>
+	 <td><input type="checkbox" name="church_week_day[]" value="Tue" <?php echo ($church_arr[0]->ch_week_day=='Tue'?'checked':''); ?>/> Tue</td>
+	 <td><input type="checkbox" name="church_week_day[]" value="Wed" <?php echo ($church_arr[0]->ch_week_day=='Wed'?'checked':''); ?>/> Wed</td>
+	 <td><input type="checkbox" name="church_week_day[]" value="Thrus" <?php echo ($church_arr[0]->ch_week_day=='Thrus'?'checked':''); ?>/> Thrus</td>
+	 <td><input type="checkbox" name="church_week_day[]" value="Fri" <?php echo ($church_arr[0]->ch_week_day=='Fri'?'checked':''); ?>/> Fri</td>
+	  <td><input type="checkbox" name="church_week_day[]" value="Sat" <?php echo ($church_arr[0]->ch_week_day=='Sat'?'checked':''); ?>/> Sat</td>
+	 </tr>
+	</tbody>
+	</table>
+	<div class="clear"></div>
+				</div>
             
                 <div> <table width="80%" border="0" cellspacing="0" cellpadding="0" class="church-close-time">
   <thead>
     <tr>
-      <th class="day-colum">Days</th>
-      <th>Open Time</th>
-      <th>Close Time</th>
+      <th>Start Time</th>
+      <th>End Time</th>
     </tr>
     </thead>
     <tbody>
     <tr>
-      <td class="day-colum">Sunday</td>
-      <td><select class="time-selectbox" id="sun_ch_open" name="sun_ch_open" >
+      <td><select class="time-selectbox" id="ch_open_time" name="ch_open_time" >
                               <option value="-1">Select</option>
                               <?php  
-                              $s_time = $open_time->sunday;
+                              $s_time = $church_arr[0]->ch_open_time;
                               if(!empty($s_time)){
                                 $s_time_new = $s_time; 
                               }else{
@@ -128,13 +138,13 @@
                               } ?>
                               <?=makeOption_time($start_time = '00:00', $i_gap = 15, $s_time_new)?>
                        </select>
-					   <span class="error-msg" id="sun_ch_open_error">Required</span>
+					   <span class="error-msg" id="ch_open_timeerror">Required</span>
 					   </td>
-      <td> <select  id="sun_ch_close" name="sun_ch_close">
+      <td> <select  id="ch_close_time" name="ch_close_time">
                <option value="-1">Select</option>
                                <?php /*?><option value="-1">Select</option><?php */?>
                                     <?php  
-                              $s_time = $close_time->sunday;
+                              $s_time = $church_arr[0]->ch_close_time;
                               if(!empty($s_time)){
                                 $s_time_new = $s_time; 
                               }else{
@@ -142,188 +152,8 @@
                               } ?>
                                  <?=makeOption_time($start_time = '00:00', $i_gap = 15, $s_time_new)?>
                         </select>
-                <span class="error-msg" id="sun_ch_close_error">Required</span></td>
+                <span class="error-msg" id="ch_close_time_error">Required</span></td>
     </tr>
-	<tr>
-      <td class="day-colum">Monday</td>
-      <td><select class="time-selectbox" id="mon_ch_open" name="mon_ch_open" >
-                              <option value="-1">Select</option>
-                              <?php  
-                              $s_time = $open_time->monday;
-                              if(!empty($s_time)){
-                                $s_time_new = $s_time; 
-                              }else{
-                                 $s_time_new = '';  
-                              } ?>
-                              <?=makeOption_time($start_time = '00:00', $i_gap = 15, $s_time_new)?>
-                       </select>
-					   <span class="error-msg" id="mon_ch_open_error">Required</span>
-					   </td>
-      <td> <select  id="mon_ch_close" name="mon_ch_close">
-               <option value="-1">Select</option>
-                               <?php /*?><option value="-1">Select</option><?php */?>
-                                    <?php  
-                              $s_time = $close_time->monday;
-                              if(!empty($s_time)){
-                                $s_time_new = $s_time; 
-                              }else{
-                                 $s_time_new = '';  
-                              } ?>
-                                 <?=makeOption_time($start_time = '00:00', $i_gap = 15, $s_time_new)?>
-                        </select>
-                <span class="error-msg" id="mon_ch_close_error">Required</span></td>
-    </tr>
-	
-	<tr>
-      <td class="day-colum">Tuesday</td>
-      <td><select class="time-selectbox" id="tues_ch_open" name="tues_ch_open" >
-                              <option value="-1">Select</option>
-                              <?php  
-                              $s_time = $open_time->tuesday;
-                              if(!empty($s_time)){
-                                $s_time_new = $s_time; 
-                              }else{
-                                 $s_time_new = '';  
-                              } ?>
-                              <?=makeOption_time($start_time = '00:00', $i_gap = 15, $s_time_new)?>
-                       </select>
-					   <span class="error-msg" id="tues_ch_open_error">Required</span>
-					   </td>
-      <td> <select  id="tues_ch_close" name="tues_ch_close">
-               <option value="-1">Select</option>
-                               <?php /*?><option value="-1">Select</option><?php */?>
-                                    <?php  
-                              $s_time = $close_time->tuesday;
-                              if(!empty($s_time)){
-                                $s_time_new = $s_time; 
-                              }else{
-                                 $s_time_new = '';  
-                              } ?>
-                                 <?=makeOption_time($start_time = '00:00', $i_gap = 15, $s_time_new)?>
-                        </select>
-                <span class="error-msg" id="tues_ch_close_error">Required</span></td>
-    </tr>
-	
-	<tr>
-      <td class="day-colum">Wednesday</td>
-      <td><select class="time-selectbox" id="wed_ch_open" name="wed_ch_open" >
-                              <option value="-1">Select</option>
-                              <?php  
-                              $s_time = $open_time->wednesday;
-                              if(!empty($s_time)){
-                                $s_time_new = $s_time; 
-                              }else{
-                                 $s_time_new = '';  
-                              } ?>
-                              <?=makeOption_time($start_time = '00:00', $i_gap = 15, $s_time_new)?>
-                       </select>
-					   <span class="error-msg" id="wed_ch_open_error">Required</span>
-					   </td>
-      <td> <select  id="wed_ch_close" name="wed_ch_close">
-               <option value="-1">Select</option>
-                               <?php /*?><option value="-1">Select</option><?php */?>
-                                    <?php  
-                              $s_time = $close_time->wednesday;
-                              if(!empty($s_time)){
-                                $s_time_new = $s_time; 
-                              }else{
-                                 $s_time_new = '';  
-                              } ?>
-                                 <?=makeOption_time($start_time = '00:00', $i_gap = 15, $s_time_new)?>
-                        </select>
-                <span class="error-msg" id="wed_ch_close_error">Required</span></td>
-    </tr>
-	
-	<tr>
-      <td class="day-colum">Thursday</td>
-      <td><select class="time-selectbox" id="thurs_ch_open" name="thurs_ch_open" >
-                              <option value="-1">Select</option>
-                              <?php  
-                              $s_time = $open_time->thursday;
-                              if(!empty($s_time)){
-                                $s_time_new = $s_time; 
-                              }else{
-                                 $s_time_new = '';  
-                              } ?>
-                              <?=makeOption_time($start_time = '00:00', $i_gap = 15, $s_time_new)?>
-                       </select>
-					   <span class="error-msg" id="thurs_ch_open_error">Required</span>
-					   </td>
-      <td> <select  id="thurs_ch_close" name="thurs_ch_close">
-               <option value="-1">Select</option>
-                               <?php /*?><option value="-1">Select</option><?php */?>
-                                    <?php  
-                              $s_time = $close_time->thursday;
-                              if(!empty($s_time)){
-                                $s_time_new = $s_time; 
-                              }else{
-                                 $s_time_new = '';  
-                              } ?>
-                                 <?=makeOption_time($start_time = '00:00', $i_gap = 15, $s_time_new)?>
-                        </select>
-                <span class="error-msg" id="thurs_ch_close_error">Required</span></td>
-    </tr>
-	
-	<tr>
-      <td class="day-colum">Friday</td>
-      <td><select class="time-selectbox" id="fri_ch_open" name="fri_ch_open" >
-                              <option value="-1">Select</option>
-                              <?php  
-                              $s_time = $open_time->friday;
-                              if(!empty($s_time)){
-                                $s_time_new = $s_time; 
-                              }else{
-                                 $s_time_new = '';  
-                              } ?>
-                              <?=makeOption_time($start_time = '00:00', $i_gap = 15, $s_time_new)?>
-                       </select>
-					   <span class="error-msg" id="fri_ch_open_error">Required</span>
-					   </td>
-      <td> <select  id="fri_ch_close" name="fri_ch_close">
-               <option value="-1">Select</option>
-                               <?php /*?><option value="-1">Select</option><?php */?>
-                                    <?php  
-                              $s_time = $close_time->friday;
-                              if(!empty($s_time)){
-                                $s_time_new = $s_time; 
-                              }else{
-                                 $s_time_new = '';  
-                              } ?>
-                                 <?=makeOption_time($start_time = '00:00', $i_gap = 15, $s_time_new)?>
-                        </select>
-                <span class="error-msg" id="fri_ch_close_error">Required</span></td>
-    </tr>
-	
-	<tr>
-      <td class="day-colum">Saturday</td>
-      <td><select class="time-selectbox" id="sat_ch_open" name="sat_ch_open" >
-                              <option value="-1">Select</option>
-                              <?php  
-                              $s_time = $open_time->saturday;
-                              if(!empty($s_time)){
-                                $s_time_new = $s_time; 
-                              }else{
-                                 $s_time_new = '';  
-                              } ?>
-                              <?=makeOption_time($start_time = '00:00', $i_gap = 15, $s_time_new)?>
-                       </select>
-					   <span class="error-msg" id="sat_ch_open_error">Required</span>
-					   </td>
-      <td> <select  id="sat_ch_close" name="sat_ch_close">
-               <option value="-1">Select</option>
-                               <?php /*?><option value="-1">Select</option><?php */?>
-                                    <?php  
-                              $s_time = $close_time->saturday;
-                              if(!empty($s_time)){
-                                $s_time_new = $s_time; 
-                              }else{
-                                 $s_time_new = '';  
-                              } ?>
-                                 <?=makeOption_time($start_time = '00:00', $i_gap = 15, $s_time_new)?>
-                        </select>
-                <span class="error-msg" id="sat_ch_close_error">Required</span></td>
-    </tr>
-    
   </tbody>
 </table>
 <div class="clear"></div>
