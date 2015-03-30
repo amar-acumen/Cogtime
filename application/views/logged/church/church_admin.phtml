@@ -26,19 +26,19 @@
       </ul>
     </div>
        <div class="group-block">
-      <h3 class="ring-heading">Ring</h3>
+      <h3 class="ring-heading">Rings</h3>
       <ul>
-        <li><a href="<?= base_url() ?>church-ring-list">Total Ring</a> <span>(<?= get_church_ring_total_by_church_ID($_SESSION['logged_church_id']) ?>)</span></li>
-        <li><a href="javascript:void(0);">Total Member</a> <span>(<?= get_church_ring_member_total_by_church_ID($_SESSION['logged_church_id']) ?>)</span></li>
-        <li><a href="javascript:void(0);">Total Post</a> <span>(<?= get_church_ring_post_total_by_church_ID($_SESSION['logged_church_id']) ?>)</span></li>
+        <li><a href="<?= base_url() ?>church-ring-list">Total Rings </a> <span>(<?= get_church_ring_total_by_church_ID($_SESSION['logged_church_id']) ?>)</span></li>
+        <li><a href="javascript:void(0);">Total Members</a> <span>(<?= get_church_ring_member_total_by_church_ID($_SESSION['logged_church_id']) ?>)</span></li>
+        <li><a href="javascript:void(0);">Total Posts </a> <span>(<?= get_church_ring_post_total_by_church_ID($_SESSION['logged_church_id']) ?>)</span></li>
       </ul>
     </div>
        <div class="group-block">
       <h3 class="groups-heading">Prayer Groups</h3>
       <ul>
         <li><a href="<?= base_url().$church_arr[0]->id ?>/church-prayer-group.html">Total Prayer Groups</a> <span>(<?=get_prayer_group_count_by_church($church_arr[0]->id)?>)</span></li>
-        <li><a href="javascript:void(0);">Total Member</a> <span>(<?= get_prayer_group_member_count_by_church($_SESSION['logged_church_id']) ?>)</span></li>
-        <li><a href="javascript:void(0);">Total Post</a> <span>(<?=get_prayer_group_post_count_by_church($_SESSION['logged_church_id']) ?>)</span></li>
+        <li><a href="javascript:void(0);">Total Members</a>  <span>(<?= get_prayer_group_member_count_by_church($_SESSION['logged_church_id']) ?>)</span></li>
+        <li><a href="javascript:void(0);">Total Posts</a>  <span>(<?=get_prayer_group_post_count_by_church($_SESSION['logged_church_id']) ?>)</span></li>
       </ul>
     </div>
   </div>
