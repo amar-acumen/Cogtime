@@ -5079,7 +5079,7 @@ $this->db->update('cg_church_member', $data, array('church_id' => $church_id ,'m
 
         
          function church_advace_search(){  
-             
+            pr($_POST,1);
             $txt_name_church = $this->input->post('txt_name_church');
             $txt_address_church = $this->input->post('txt_address_church');
             $txt_postcode_church = $this->input->post('txt_postcode_church');
