@@ -33,7 +33,7 @@
 			</ul>
 			<?php }?>
 			<div class="comment-text">
-            	<textarea style="font-family: 'GibsonRegular'; color:#878d91; font-size:13px; height:30px;" name="wall_comment_txt" id="wall_comment_txt_<?php echo $church_activity_feed_comment->id; ?>" class="comment_message" height="20" width="40"><?php echo $church_activity_feed_comment->s_contents; ?></textarea> 
+            	<textarea style="font-family: 'GibsonRegular'; color:#878d91; font-size:13px; height:30px;" name="wall_comment_txt" id="wall_comment_txt_<?php echo $church_activity_feed_comment->id; ?>" class="comment_message" height="20" width="40"><?php echo htmlspecialchars_decode($church_activity_feed_comment->s_contents); ?></textarea> 
 				<input type="button" name="save_comment" id="save_comment_<?php echo $church_activity_feed_comment->id; ?>" value="SAVE" onclick="javascript:save_comments('<?php echo $church_activity_feed_comment->id; ?>','<?php echo $church_activity_feed_comment->post_type; ?>');" style="display:none;"/>
            
 			</div>
