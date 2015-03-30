@@ -457,13 +457,15 @@ function unblock_member () {
  }
  function add_church_data(){
      // pr($_POST,1);
-	$info['ch_week_day'] =  $this->input->post('church_week_day');
+	$open_close_day = implode(',',$this->input->post('church_week_day'));
+	 echo $open_close_day;
+	$info['ch_week_day'] =  ;
     $info['ch_open_time'] = $this->input->post('ch_open_time');
     $info['ch_close_time'] = $this->input->post('ch_close_time');
     $info['ch_banner_heading'] = $this->input->post('banner_heading');
     $info['ch_details'] = $this->input->post('church_des');
 	
-	//pr($info);
+	pr($info);
 
     list($width_ch_logo, $height_ch_logo, $type, $attr) =  getimagesize($_FILES['ch_logo']['tmp_name']);
     list($width_ch_cover, $height_ch_cover, $type, $attr) =  getimagesize($_FILES['ch_cover']['tmp_name']);
