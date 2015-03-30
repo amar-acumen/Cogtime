@@ -5084,12 +5084,12 @@ $this->db->update('cg_church_member', $data, array('church_id' => $church_id ,'m
             $txt_address_church = $this->input->post('txt_address_church');
             $txt_postcode_church = $this->input->post('txt_postcode_church');
           //  $query = $this->db->query('Select * from cg_church where s_name like "%'.$txt_name_church.'%" AND s_address like "%'.$txt_address_church.'%" AND s_postcode like "%'.$txt_postcode_church.'%" ' );
-            $query =  $this->db->query('Select * from cg_church where  s_name LIKE "'.$txt_name_church.'" AND i_disabled = 1  ');
-            echo $query;           exit();
+            $q =  $this->db->query('Select * from cg_church ');
+            echo $q;           exit();
            // $result = $query->result();
             //$data['result_arr'] = $result;
-            $VIEW_FILE = 'church_ajax.phtml';
-            echo $this->load->view($VIEW_FILE, $data,true);
+           // $VIEW_FILE = 'church_ajax.phtml';
+            //echo $this->load->view($VIEW_FILE, $data,true);
             //pr($result);
             //die($ch_email);
         }
