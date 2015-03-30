@@ -5044,10 +5044,8 @@ $this->db->update('cg_church', $data);
             $txt_address_church = $this->input->post('txt_address_church');
             $txt_postcode_church = $this->input->post('txt_postcode_church');
             
-            $sql = "Select * from cg_church";
-          //  $query = $this->db->query('Select * from cg_church where s_name like "%'.$txt_name_church.'%" AND s_address like "%'.$txt_address_church.'%" AND s_postcode like "%'.$txt_postcode_church.'%" ' );
-          $query =  $this->db->query($sql);
-           echo $query;           exit();
+            $query =  $this->db->query('Select * from cg_church where  ch_email LIKE "'.$txt_name_church.'" AND i_disabled = 1 AND ch_public_url IS NOT NULL ');
+            $result = $query->result();
            
         }
         
