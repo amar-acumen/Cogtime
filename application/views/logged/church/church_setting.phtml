@@ -17,7 +17,6 @@
     <div class="church-setting-main">
 		<h3>General Site Setting</h3>
         <?php
-      pr($church_arr);
 	 $open_close_day_arr = explode(',',$church_arr[0]->ch_week_day);
      $thumb_logo_img = get_church_logo_image($church_arr[0]->id, 'thumb', $church_arr[0]->ch_logo);
      $thumb_cover_img = get_church_cover_image($church_arr[0]->id, 'thumb', $church_arr[0]->ch_cover);
@@ -107,8 +106,11 @@
     <tbody>
 	 <tr>
 	
-	 <?php for($i=0; $i<count($open_close_day_arr); $i++) { ?>
-	 
+	 <?php
+	 pr(open_close_day_arr);
+	 for($i=0; $i<count($open_close_day_arr); $i++) { ?>
+	 	  <?php } ?>
+
 	  <td><input type="checkbox" name="church_week_day[]" value="Sun" <?php echo ($open_close_day_arr[$i]=='Sun'?'checked':''); ?> />Sun</td>
 	 <td><input type="checkbox" name="church_week_day[]" value="Mon" <?php echo ($open_close_day_arr[$i]=='Mon'?'checked':''); ?>/> Mon</td>
 	 <td><input type="checkbox" name="church_week_day[]" value="Tue" <?php echo ($open_close_day_arr[$i]=='Tue'?'checked':''); ?>/> Tue</td>
@@ -117,7 +119,6 @@
 	 <td><input type="checkbox" name="church_week_day[]" value="Fri" <?php echo ($open_close_day_arr[$i]=='Fri'?'checked':''); ?>/> Fri</td>
 	  <td><input type="checkbox" name="church_week_day[]" value="Sat" <?php echo ($open_close_day_arr[$i]=='Sat'?'checked':''); ?>/> Sat</td>
 	  
-	  <?php } ?>
 	 </tr>
 	</tbody>
 	</table>
