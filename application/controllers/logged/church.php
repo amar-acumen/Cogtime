@@ -457,13 +457,29 @@ function unblock_member () {
  }
  function add_church_data(){
      // pr($_POST,1);
-	$info['ch_week_day'] =  $this->input->post('church_week_day');
-    $info['ch_open_time'] = $this->input->post('ch_open_time');
-    $info['ch_close_time'] = $this->input->post('ch_close_time');
+	 $church_open_arr = array();
+	 $church_open_arr['sunday']=$this->input->post('sun_ch_open');
+	 $church_open_arr['monday']=$this->input->post('mon_ch_open');
+	 $church_open_arr['tuesday']=$this->input->post('tues_ch_open');
+	 $church_open_arr['wednesday']=$this->input->post('wed_ch_open');
+	 $church_open_arr['thursday']=$this->input->post('thurs_ch_open');
+	 $church_open_arr['friday']=$this->input->post('fri_ch_open');
+	 $church_open_arr['saturday']=$this->input->post('sat_ch_open');
+	 
+	 $church_close_arr = array();
+	 $church_close_arr['sunday']=$this->input->post('sun_ch_close');
+	 $church_close_arr['monday']=$this->input->post('mon_ch_close');
+	 $church_close_arr['tuesday']=$this->input->post('tues_ch_close');
+	 $church_close_arr['wednesday']=$this->input->post('wed_ch_close');
+	 $church_close_arr['thursday']=$this->input->post('thurs_ch_close');
+	 $church_close_arr['friday']=$this->input->post('fri_ch_close');
+	 $church_close_arr['saturday']=$this->input->post('sat_ch_close');
+	 
+	 
+    $info['ch_open_time'] = json_encode($church_open_arr);
+    $info['ch_close_time'] = json_encode($church_close_arr);
     $info['ch_banner_heading'] = $this->input->post('banner_heading');
     $info['ch_details'] = $this->input->post('church_des');
-	
-	//pr($info);
 
     list($width_ch_logo, $height_ch_logo, $type, $attr) =  getimagesize($_FILES['ch_logo']['tmp_name']);
     list($width_ch_cover, $height_ch_cover, $type, $attr) =  getimagesize($_FILES['ch_cover']['tmp_name']);
