@@ -20,7 +20,7 @@
 		pr($church_arr);
 		
 	 $open_close_day_arr = explode(',',$church_arr[0]->ch_week_day);
-	 pr($open_close_day_arr);
+	 
      $thumb_logo_img = get_church_logo_image($church_arr[0]->id, 'thumb', $church_arr[0]->ch_logo);
      $thumb_cover_img = get_church_cover_image($church_arr[0]->id, 'thumb', $church_arr[0]->ch_cover);
      $thumb_profile_img = get_church_profile_image($church_arr[0]->id, 'profile', $church_arr[0]->ch_profile_img)
@@ -110,7 +110,7 @@
 	 <tr>
 	
 	 <?php
-	 
+	 pr($open_close_day_arr);
 	 for($i=0; $i<count($open_close_day_arr); $i++) { ?>
 	 	  <?php } ?>
 
