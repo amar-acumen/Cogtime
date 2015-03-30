@@ -17,7 +17,10 @@
     <div class="church-setting-main">
 		<h3>General Site Setting</h3>
         <?php
-      //pr($church_arr);
+		//pr($church_arr);
+		
+	 $open_close_day_arr = explode(',',$church_arr[0]->ch_week_day);
+	 
      $thumb_logo_img = get_church_logo_image($church_arr[0]->id, 'thumb', $church_arr[0]->ch_logo);
      $thumb_cover_img = get_church_cover_image($church_arr[0]->id, 'thumb', $church_arr[0]->ch_cover);
      $thumb_profile_img = get_church_profile_image($church_arr[0]->id, 'profile', $church_arr[0]->ch_profile_img)
@@ -105,13 +108,51 @@
 				<table width="80%" border="0" cellspacing="0" cellpadding="0" class="church-close-time">
     <tbody>
 	 <tr>
-	 <td><input type="checkbox" name="church_week_day[]" value="Sun" <?php echo ($church_arr[0]->ch_week_day=='Sun'?'checked':''); ?> />Sun</td>
-	 <td><input type="checkbox" name="church_week_day[]" value="Mon" <?php echo ($church_arr[0]->ch_week_day=='Mon'?'checked':''); ?>/> Mon</td>
-	 <td><input type="checkbox" name="church_week_day[]" value="Tue" <?php echo ($church_arr[0]->ch_week_day=='Tue'?'checked':''); ?>/> Tue</td>
-	 <td><input type="checkbox" name="church_week_day[]" value="Wed" <?php echo ($church_arr[0]->ch_week_day=='Wed'?'checked':''); ?>/> Wed</td>
-	 <td><input type="checkbox" name="church_week_day[]" value="Thrus" <?php echo ($church_arr[0]->ch_week_day=='Thrus'?'checked':''); ?>/> Thrus</td>
-	 <td><input type="checkbox" name="church_week_day[]" value="Fri" <?php echo ($church_arr[0]->ch_week_day=='Fri'?'checked':''); ?>/> Fri</td>
-	  <td><input type="checkbox" name="church_week_day[]" value="Sat" <?php echo ($church_arr[0]->ch_week_day=='Sat'?'checked':''); ?>/> Sat</td>
+	
+	 <?php
+	//pr($open_close_day_arr);
+	 for($i=0; $i<count($open_close_day_arr); $i++) { 
+		if($open_close_day_arr[$i] == 'Mon') {
+			$checked['Mon'] = 'checked';
+		}
+		
+		if($open_close_day_arr[$i] == 'Tue') {
+			$checked['Tue'] = 'checked="checked"';
+		}
+		
+		if($open_close_day_arr[$i] == 'Wed') {
+			$checked['Wed'] = 'checked="checked"';
+		}
+		
+		if($open_close_day_arr[$i] == 'Thurs') {
+			$checked['Thurs'] = 'checked="checked"';
+		}
+		
+		
+		if($open_close_day_arr[$i] == 'Fri') {
+			$checked['Fri'] = 'checked="checked"';
+		}
+		
+		if($open_close_day_arr[$i] == 'Sun') {
+			$checked['Sun'] = 'checked="checked"';
+		}
+		
+		
+		if($open_close_day_arr[$i] == 'Sat') {
+			$checked['Sat'] = 'checked="checked"';
+		}
+		
+	 
+	 	  } ?>
+
+	  <td><input type="checkbox" name="church_week_day[]" value="Sun" <?=$checked['Sun']?> />Sun</td>
+	 <td><input type="checkbox" name="church_week_day[]" value="Mon" <?=$checked['Mon']?>/> Mon</td>
+	 <td><input type="checkbox" name="church_week_day[]" value="Tue" <?=$checked['Tue']?>/> Tue</td>
+	 <td><input type="checkbox" name="church_week_day[]" value="Wed" <?=$checked['Wed']?>/> Wed</td>
+	 <td><input type="checkbox" name="church_week_day[]" value="Thurs" <?=$checked['Thurs']?>/> Thurs</td>
+	 <td><input type="checkbox" name="church_week_day[]" value="Fri" <?=$checked['Fri']?>/> Fri</td>
+	  <td><input type="checkbox" name="church_week_day[]" value="Sat" <?=$checked['Sat']?>/> Sat</td>
+	  
 	 </tr>
 	</tbody>
 	</table>
