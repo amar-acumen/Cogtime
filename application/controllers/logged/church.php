@@ -457,7 +457,8 @@ function unblock_member () {
  }
  function add_church_data(){
      // pr($_POST,1);
-	$info['ch_week_day'] =  $this->input->post('church_week_day');
+	$open_close_day = implode(',',$this->input->post('church_week_day'));
+	$info['ch_week_day'] = $open_close_day;
     $info['ch_open_time'] = $this->input->post('ch_open_time');
     $info['ch_close_time'] = $this->input->post('ch_close_time');
     $info['ch_banner_heading'] = $this->input->post('banner_heading');
