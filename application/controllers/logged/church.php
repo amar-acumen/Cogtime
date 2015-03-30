@@ -463,7 +463,7 @@ function unblock_member () {
     $info['ch_banner_heading'] = $this->input->post('banner_heading');
     $info['ch_details'] = $this->input->post('church_des');
 	
-	pr($info);
+	//pr($info);
 
     list($width_ch_logo, $height_ch_logo, $type, $attr) =  getimagesize($_FILES['ch_logo']['tmp_name']);
     list($width_ch_cover, $height_ch_cover, $type, $attr) =  getimagesize($_FILES['ch_cover']['tmp_name']);
