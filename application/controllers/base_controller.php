@@ -4986,10 +4986,13 @@ $this->db->update('cg_church', $data);
     $query_churchmember = $this->db->query($sql_churchmember);
      $numrowmember_subadmin = $query_churchmember->num_rows();   
             
-            echo $numrowmember_subadmin;
-            if(empty($result) || empty($numrowmember_subadmin)){
-                 header("location:" . base_url());
-                 exit;
+           // echo $numrowmember_subadmin;
+            if(empty($result)){
+                if(empty($numrowmember_subadmin)){
+                    header("location:" . base_url());
+                 exit; 
+                }
+                
             }
         }
         /** church_css**/
