@@ -17,7 +17,7 @@
     <div class="church-setting-main">
 		<h3>General Site Setting</h3>
         <?php
-       //pr($church_arr);
+       pr($church_arr);
 	 $open_time = json_decode($church_arr[0]->ch_open_time);
 	 //pr($open_time);
 	 $close_time = json_decode($church_arr[0]->ch_close_time);
@@ -153,6 +153,7 @@
       <td class="day-colum">Monday</td>
       <td><select class="time-selectbox" id="mon_ch_open" name="mon_ch_open" >
                               <option value="-1">Select</option>
+							  <option value="Closed">Closed</option>
                               <?php  
                               $s_time = $open_time->monday;
                               if(!empty($s_time)){
@@ -184,6 +185,7 @@
       <td class="day-colum">Tuesday</td>
       <td><select class="time-selectbox" id="tues_ch_open" name="tues_ch_open" >
                               <option value="-1">Select</option>
+							  <option value="Closed">Closed</option>
                               <?php  
                               $s_time = $open_time->tuesday;
                               if(!empty($s_time)){
@@ -215,6 +217,7 @@
       <td class="day-colum">Wednesday</td>
       <td><select class="time-selectbox" id="wed_ch_open" name="wed_ch_open" >
                               <option value="-1">Select</option>
+							  <option value="Closed">Closed</option>
                               <?php  
                               $s_time = $open_time->wednesday;
                               if(!empty($s_time)){
@@ -246,6 +249,7 @@
       <td class="day-colum">Thursday</td>
       <td><select class="time-selectbox" id="thurs_ch_open" name="thurs_ch_open" >
                               <option value="-1">Select</option>
+							  <option value="Closed">Closed</option>
                               <?php  
                               $s_time = $open_time->thursday;
                               if(!empty($s_time)){
@@ -277,6 +281,7 @@
       <td class="day-colum">Friday</td>
       <td><select class="time-selectbox" id="fri_ch_open" name="fri_ch_open" >
                               <option value="-1">Select</option>
+							  <option value="Closed">Closed</option>
                               <?php  
                               $s_time = $open_time->friday;
                               if(!empty($s_time)){
@@ -308,6 +313,7 @@
       <td class="day-colum">Saturday</td>
       <td><select class="time-selectbox" id="sat_ch_open" name="sat_ch_open" >
                               <option value="-1">Select</option>
+							  <option value="Closed">Closed</option>
                               <?php  
                               $s_time = $open_time->saturday;
                               if(!empty($s_time)){
@@ -710,7 +716,7 @@ $(function() {
     });
 	
 	$("#mon_ch_open").change(function() {
-        alert( $('option:selected', this).text() );
+        //alert( $('option:selected', this).text() );
 		if($('option:selected', this).text() == 'Closed')
 		{
 			$("#mon_ch_close").attr('disabled', 'disabled');
@@ -719,7 +725,7 @@ $(function() {
     });
 	
 	$("#tues_ch_open").change(function() {
-        alert( $('option:selected', this).text() );
+        //alert( $('option:selected', this).text() );
 		if($('option:selected', this).text() == 'Closed')
 		{
 			$("#tues_ch_close").attr('disabled', 'disabled');
@@ -728,7 +734,7 @@ $(function() {
     });
 	
 	$("#wed_ch_open").change(function() {
-        alert( $('option:selected', this).text() );
+        //alert( $('option:selected', this).text() );
 		if($('option:selected', this).text() == 'Closed')
 		{
 			$("#wed_ch_close").attr('disabled', 'disabled');
@@ -737,7 +743,7 @@ $(function() {
     });
 	
 	$("#thurs_ch_open").change(function() {
-        alert( $('option:selected', this).text() );
+        //alert( $('option:selected', this).text() );
 		if($('option:selected', this).text() == 'Closed')
 		{
 			$("#thurs_ch_close").attr('disabled', 'disabled');
@@ -746,7 +752,7 @@ $(function() {
     });
 	
 	$("#fri_ch_open").change(function() {
-        alert( $('option:selected', this).text() );
+        //alert( $('option:selected', this).text() );
 		if($('option:selected', this).text() == 'Closed')
 		{
 			$("#fri_ch_close").attr('disabled', 'disabled');
@@ -755,7 +761,7 @@ $(function() {
     });
 	
 	$("#sat_ch_open").change(function() {
-        alert( $('option:selected', this).text() );
+        //alert( $('option:selected', this).text() );
 		if($('option:selected', this).text() == 'Closed')
 		{
 			$("#sat_ch_close").attr('disabled', 'disabled');
