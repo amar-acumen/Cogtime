@@ -4979,8 +4979,15 @@ $this->db->update('cg_church', $data);
          public function check_is_church_admin($id='',$c_id){
             $query = $this->db->get_where('cg_church', array('ch_admin_id' => $id,'id'=>$c_id));
             $result = $query->result();
+             
+              $sql_churchmember = "SELECT *,ch.id AS chid FROM cg_church AS ch,cg_church_member AS chm 
+    WHERE ch.id=chm.church_id AND chm.member_id='".$id."' AND ch.id='".$c_id."'  AND chm.is_leave = 0 AND chm.is_blocked = 1 AND chm.is_approved = 1 AND chm.role = 2";
 
-            if(empty($result)){
+    $query_churchmember = $ci->db->query($sql_churchmember);
+     $numrowmember_subadmin = $query_churchmember->num_rows();   
+            
+            
+            if(empty($result) || empty($numrowmember_subadmin)){
                  header("location:" . base_url());
                  exit;
             }
