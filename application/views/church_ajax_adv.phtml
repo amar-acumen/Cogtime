@@ -1,29 +1,29 @@
 <?php
-pr($result_arr);
+//pr($result_arr);
 if($result_arr){
-    
+    foreach ($result_arr as $val){
     
 ?>
 <div class="search-div">
     <h6>Search Result:</h6>
     <div class="result-div">
         <ul>
-            <li><span>Name :</span> <?php  echo $result_arr[0] -> s_name ?></li>
+            <li><span>Name :</span> <?php  echo $val -> s_name ?></li>
     
-            <li><span>Address : </span> <?= $result_arr[0] ->s_address ?></li>
+            <li><span>Address : </span> <?= $val ->s_address ?></li>
     
-            <li><span>Country : </span><?= get_country_name_by_id($result_arr[0]->i_country_id) ?></li>
+            <li><span>Country : </span><?= get_country_name_by_id($val->i_country_id) ?></li>
     
-            <li><span>Created On :</span> <?= $result_arr[0] ->dt_created_on ?></li>
+            <li><span>Created On :</span> <?= $val ->dt_created_on ?></li>
     
-            <li><span>Email : </span><?= $result_arr[0]->ch_email ?></li>
+            <li><span>Email : </span><?= $val->ch_email ?></li>
     
-            <li><span>Contact no. : </span><?= $result_arr[0]->s_phone ?></li>
+            <li><span>Contact no. : </span><?= $val->s_phone ?></li>
     
         </ul>
-    <?php if($result_arr[0]->i_disabled == 1 && $result_arr[0]->ch_verification_code == '' && $result_arr[0]->ch_page_url == ''){ ?>
+    <?php if($val->i_disabled == 1 && $val->ch_verification_code == '' && $val->ch_page_url == ''){ ?>
                           
-        <input type="button" name="" value="Create Church Space" id="crt-churchsp" class="chresend_btn" onclick="send_church_code('<?= $result_arr[0]->id ?>','<?= $result_arr[0]->ch_email ?>')">
+        <input type="button" name="" value="Create Church Space" id="crt-churchsp" class="chresend_btn" onclick="send_church_code('<?= $val->id ?>','<?= $val->ch_email ?>')">
     <span style="display: none" class="send_success">
         Varification code for church space has been sent to church email id.
     </span>
@@ -53,10 +53,10 @@ if($result_arr){
     
     </script>
     <?php }
-    else if($result_arr[0]->i_disabled == 1 && $result_arr[0]->ch_verification_code != '' && $result_arr[0]->ch_page_url == ''){
+    else if($val->i_disabled == 1 && $val->ch_verification_code != '' && $val->ch_page_url == ''){
         
         ?>
-    <input type="button" name="" value="Resend Code" class="chresend_btn" onclick="send_church_code1('<?= $result_arr[0]->id ?>','<?= $result_arr[0]->ch_email ?>')">
+    <input type="button" name="" value="Resend Code" class="chresend_btn" onclick="send_church_code1('<?= $val->id ?>','<?= $val->ch_email ?>')">
      <span style="display: none" class="send_success1">
         Varification code resend successfully..
     </span>
@@ -87,9 +87,9 @@ if($result_arr){
     <?php
     }
     
-    else if($result_arr[0]->i_disabled == 1  && $result_arr[0]->ch_verification_code != '' && $result_arr[0]->ch_page_url != '' ) {
+    else if($val->i_disabled == 1  && $val->ch_verification_code != '' && $val->ch_page_url != '' ) {
         ?>
-    <h1 align="center"><a href="<?= $result_arr[0]->ch_public_url ?>" class="church-register"> View church Space</a> </h1>
+    <h1 align="center"><a href="<?= $val->ch_public_url ?>" class="church-register"> View church Space</a> </h1>
             <?php
         
     }?>
@@ -97,7 +97,7 @@ if($result_arr){
     </div>
 </div>
 <?php
-    
+}  
 }else{
     ?>
 
@@ -106,7 +106,7 @@ if($result_arr){
 
 
 
-<div id="church_reg_new" style="display: none;">
+<!--<div id="church_reg_new" style="display: none;">
     <div class="register-your-church-form">
 								<form id="register_church" method="post" >
                                                                     
@@ -176,7 +176,7 @@ if($result_arr){
                                                                         
 									</form>
 								  </div>
-</div>
+</div>-->
 <div id="success_ch_req" style="display: none;" class="send_success">
    Church added Successfully , Waiting for  admin  approval. 
 </div>
