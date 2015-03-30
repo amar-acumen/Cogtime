@@ -17,18 +17,18 @@
 		if(subadmin_access('ring'))
 		{
 			?>
-			<li><a <?php if($page_location == 'create-church-ring'){  ?> class="active" <?php } ?> href="<?= base_url().'create-church-ring' ?>">Create ring</a></li>  
+			<li><a <?php if($page_location == 'create-church-ring'){  ?> class="active" <?php } ?> href="<?= base_url().'create-church-ring' ?>">Create</a></li>  
 			<?php
 		}
         ?>
            
-        <li><a <?php if($page_location == 'search_ring'){  ?> class="active" <?php } ?> href="<?= base_url().'search_ring' ?>">Search ring</a></li>
+        <li><a <?php if($page_location == 'search_ring'){  ?> class="active" <?php } ?> href="<?= base_url().'search_ring' ?>">Search</a></li>
         <li><a <?php if($page_location == 'ring_request'){  ?> class="active" <?php } ?> href="<?= base_url().'ring_request' ?>">Requests</a></li>
         <?php
         if($_SESSION['charch_super_admin'] =='yes'){
         ?>
         <!--create ring category-->
-        <li><a <?php if($page_location == 'create_ring_category'){  ?> class="active" <?php } ?> href="<?= base_url().'create_ring_category' ?>">Create Ring Category</a></li>
+        <li><a <?php if($page_location == 'create_ring_category'){  ?> class="active" <?php } ?> href="<?= base_url().'create_ring_category' ?>">Create Category</a></li>
         <?php
         }
         if($this->router->fetch_class() == 'church_ring_home')
