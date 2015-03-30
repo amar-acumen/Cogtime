@@ -5046,11 +5046,11 @@ $this->db->update('cg_church', $data);
             
            
           //  $query = $this->db->query('Select * from cg_church where s_name like "%'.$txt_name_church.'%" AND s_address like "%'.$txt_address_church.'%" AND s_postcode like "%'.$txt_postcode_church.'%" ' );
-        $query =  $this->db->query('Select * from cg_church where s_name like "%'.$txt_name_church.'%" AND s_address like "%'.$txt_address_church.'%" AND s_postcode like "%'.$txt_postcode_church.'%" ');
-              echo $this->db->last_query();
+        $query =  $this->db->query('Select * from cg_church where s_name like "%'.$txt_name_church.'%" or s_address like "%'.$txt_address_church.'%" or s_postcode like "%'.$txt_postcode_church.'%" ');
+              //echo $this->db->last_query();
             $result = $query->result();
              $data['result_arr'] = $result;
-            $VIEW_FILE = 'church_list_ajax.phtml';
+            $VIEW_FILE = 'church_ajax.phtml';
             echo $this->load->view($VIEW_FILE, $data,true);
            
         }
