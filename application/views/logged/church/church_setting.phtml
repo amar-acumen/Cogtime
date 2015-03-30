@@ -130,7 +130,7 @@
     </thead>
     <tbody>
     <tr>
-      <td><select class="time-selectbox" id="sun_ch_open" name="sun_ch_open" >
+      <td><select class="time-selectbox" id="ch_open_time" name="ch_open_time" >
                               <option value="-1">Select</option>
                               <?php  
                               $s_time = $open_time->sunday;
@@ -141,9 +141,9 @@
                               } ?>
                               <?=makeOption_time($start_time = '00:00', $i_gap = 15, $s_time_new)?>
                        </select>
-					   <span class="error-msg" id="sun_ch_open_error">Required</span>
+					   <span class="error-msg" id="ch_open_timeerror">Required</span>
 					   </td>
-      <td> <select  id="sun_ch_close" name="sun_ch_close">
+      <td> <select  id="ch_close_time" name="ch_close_time">
                <option value="-1">Select</option>
                                <?php /*?><option value="-1">Select</option><?php */?>
                                     <?php  
@@ -155,7 +155,7 @@
                               } ?>
                                  <?=makeOption_time($start_time = '00:00', $i_gap = 15, $s_time_new)?>
                         </select>
-                <span class="error-msg" id="sun_ch_close_error">Required</span></td>
+                <span class="error-msg" id="ch_close_time_error">Required</span></td>
     </tr>
   </tbody>
 </table>
