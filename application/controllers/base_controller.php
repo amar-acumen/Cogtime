@@ -5078,6 +5078,18 @@ $this->db->update('cg_church_member', $data, array('church_id' => $church_id ,'m
         }
 
 }
+ function church_advace_search(){
+            $txt_name_church = $this->input->post('txt_name_church');
+            $txt_address_church = $this->input->post('txt_address_church');
+            $txt_postcode_church = $this->input->post('txt_postcode_church');
+            $query = $this->db->get_where('cg_church', array('s_name' => $txt_name_church ,'i_disabled'=>1 , 's_address'=>$txt_address_church,'s_postcode'=>$txt_postcode_church ));
+            $result = $query->result();
+            $data['result_arr'] = $result;
+            $VIEW_FILE = 'church_ajax.phtml';
+            echo $this->load->view($VIEW_FILE, $data,true);
+            //pr($result);
+            //die($ch_email);
+        }
 
 /*function getLatestProject(){
 	 
