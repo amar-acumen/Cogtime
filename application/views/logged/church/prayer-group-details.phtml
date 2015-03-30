@@ -86,6 +86,11 @@
                         
                         
                         <div>
+                            <!---is member-->
+                            <?php 
+                             echo $res = is_prayer_grp_member(intval(decrypt($this->session->userdata('user_id'))),$prayer_group_id);
+                             
+                            ?>
                             <ul class="notification-ul" id="grp_post_list">
                                 <?= $postlists ?>
                                 <?php if (count($group_posts) == 0) { ?>
@@ -157,6 +162,7 @@
 endforeach;								}?>
 
                             </ul>
+                            <!-->
                         </div>
 
                     </div>

@@ -5235,3 +5235,13 @@ function get_user_id_byemail($email){
         $info = $query->result_array();
         return $info[0]['id'];
 }
+function is_prayer_grp_member($uid,$gid){
+   $ci = & get_instance();
+    $query = $ci->db->get_where('cg_church_prayer_group_members', array('i_user_id' => $uid,'s_status'=>'accepted','i_request'=>1,'i_prayer_group_id'=>$gid ));
+      $info = $query->result();
+      if(count($info) > 0){
+          return 1;
+      }else{
+          return 0;
+      }
+}
