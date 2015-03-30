@@ -258,7 +258,7 @@
                                     Find Your church
                                 </h1>
                                 <input type="text" name="ch_email" id="ch_email" placeholder="Enter church email id" >
-                                <input type="button" name="find" value="Find church" onclick="church_find();"   class="sml_btn" style="line-height: 23px; height: 23px;">
+                                <input type="button" name="find" value="Find church" onclick="church_find();"   class="sml_btn" style="line-height: 23px; height: 23px;"><input type="button" class="advc-search" value="Advance" onclick="advance_search()">
                                 <div class="error_txt" id="mail_error">
                                     
                                 </div>
@@ -292,10 +292,50 @@
       }); 
                                 }
                                 }
+                                function advance_search(){
+                                $('#church_reg').slideUp();
+                                $('.advance-search-panel').slideDown();
+                                }
                             </script>
                             <div id="table_contents"></div>
                         </div>
-                        
+                         <div class="advance-search-panel" style="display: none">
+                             <h1>Find a church</h1><span><a href="javascript:void(0)" onclick="normal_search()">Normal Search</a></span>
+                             <div class="register-your-church-form">
+                            <form id="frm_srch" method="post" onsubmit=" return false;">
+                                <div class="lable-form-nw"> Church Name:</div>
+                                <input type="text"  name="txt_name" id="txt_name" />
+                                <div class="clr"></div>
+                                <!--new added-->
+                                
+
+                                <div class="lable-form-nw">Address:</div>
+                                <input type="text"  name="txt_address" />
+                                <div class="clr"></div>
+
+                                <div class="lable-form-nw"> Postcode:</div>
+                                <input type="text" name="txt_postcode" />
+                                <div class="clr"></div>
+
+                              
+                               
+
+                                <div class="lable-form-nw"> 
+                                    <input type="submit" class="yellow-btn register-your-float-right click-church" value="Search" name="" />
+                                </div>
+                                <input type="hidden" value="Y" name="search_basic" id="search_basic"  />
+                                <div class="clr"></div>
+                            </form>
+                        </div>
+                         </div>
+                         <script type="text/javascript">
+                         function normal_search(){
+                               $('#church_reg').slideDown();
+                                $('.advance-search-panel').slideUp();
+                         }
+                         
+                         
+                         </script>
                   </div>
                   <!-- /left container -->
                   <!-- right container -->

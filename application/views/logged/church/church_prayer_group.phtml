@@ -8,7 +8,7 @@
 <div class="container">
   
   <div class="main-page">
-  	<h3 class="page-heading">Prayer Group<span class="prayer-tab"><a href="<?=base_url().''.$_SESSION['logged_church_id']?>/request.html">Prayer Group Request</a>
+  	<h3 class="page-heading">Prayer Groups<span class="prayer-tab"><a href="<?=base_url().''.$_SESSION['logged_church_id']?>/request.html">Prayer Group Requests</a>
                 <?php                          
                 if(subadmin_access('prayer_group'))
         {
@@ -38,7 +38,7 @@
         <div class="payer-notification">
                           
 						<div class="notification-list-box">
-                        	<h4 class="page-heading">Notification</h4>
+                        	<h4 class="page-heading">Notifications</h4>
                             <span style="float:right;">
                             <label style="width:115px;" class="short-by-prayer-selt">Filter by Group Name: </label>
                             <select style="width:200px;" class="prayer-selt " id="notif_grp_by" onchange="get_Grouped_notificationlist()">
