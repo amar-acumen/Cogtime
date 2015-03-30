@@ -457,17 +457,9 @@ function unblock_member () {
  }
  function add_church_data(){
      // pr($_POST,1);
-	 $church_open_close_day = $this->input->post('church_week_day');
-	 
-	 $church_open_arr = array();
-	 $church_open_arr[$church_open_close_day]=$this->input->post('ch_open_time');
-	 
-	 $church_close_arr = array();
-	 $church_close_arr[$church_open_close_day]=$this->input->post('ch_close_time');
-	 
-	 
-    $info['ch_open_time'] = json_encode($church_open_arr);
-    $info['ch_close_time'] = json_encode($church_close_arr);
+	$info['ch_week_day'] =  $this->input->post('church_week_day');
+    $info['ch_open_time'] = $this->input->post('ch_open_time');
+    $info['ch_close_time'] = $this->input->post('ch_close_time');
     $info['ch_banner_heading'] = $this->input->post('banner_heading');
     $info['ch_details'] = $this->input->post('church_des');
 	
