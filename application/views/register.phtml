@@ -302,30 +302,33 @@
                          <div class="advance-search-panel" style="display: none">
                              <h1>Find a church</h1><span><a href="javascript:void(0)" onclick="normal_search()">Normal Search</a></span>
                              <div class="register-your-church-form">
-                            <form id="frm_srch" method="post" onsubmit=" return false;">
+                           
                                 <div class="lable-form-nw"> Church Name:</div>
-                                <input type="text"  name="txt_name" id="txt_name" />
+                                <input type="text"  name="txt_name_church" id="txt_name_church" />
+                                <span class="error_massage" id="churherror1"></span>
                                 <div class="clr"></div>
                                 <!--new added-->
                                 
 
                                 <div class="lable-form-nw">Address:</div>
-                                <input type="text"  name="txt_address" />
+                                <input type="text"  name="txt_address_church" id="txt_address_church" />
+                                <span class="error_massage" id="churherror2"></span>
                                 <div class="clr"></div>
 
                                 <div class="lable-form-nw"> Postcode:</div>
-                                <input type="text" name="txt_postcode" />
+                                <input type="text" name="txt_postcode_church" id="txt_postcode_church" />
+                                <span class="error_massage" id="churherror3"></span>
                                 <div class="clr"></div>
 
                               
                                
 
                                 <div class="lable-form-nw"> 
-                                    <input type="submit" class="yellow-btn register-your-float-right click-church" value="Search" name="" />
+                                    <input type="button" class="yellow-btn register-your-float-right click-church" value="Search"  onclick="search_advance_church()" />
                                 </div>
-                                <input type="hidden" value="Y" name="search_basic" id="search_basic"  />
+                               
                                 <div class="clr"></div>
-                            </form>
+                           
                         </div>
                          </div>
                          <script type="text/javascript">
@@ -333,7 +336,37 @@
                                $('#church_reg').slideDown();
                                 $('.advance-search-panel').slideUp();
                          }
-                         
+                         function search_advance_church(){
+                             var txt_name_church = $('#txt_name_church').val();
+                             var txt_address_church = $('#txt_address_church').val();
+                             var txt_postcode_church = $('#txt_postcode_church').val();
+                             if(txt_name_church.trim() == ''){
+                                 $('#churherror1').css('display','block').html('Enter church name');
+                                 var flag1 = 1;
+                             }else{
+                                 $('#churherror1').css('display','none');
+                                 var flag1 = 0;
+                             }
+                             if(txt_address_church.trim() == ''){
+                                  $('#churherror2').css('display','block').html('Enter church address');
+                                 var flag2 = 1; 
+                             }
+                             else{
+                                  $('#churherror2').css('display','none');
+                                 var flag2 = 0; 
+                             }
+                             if(txt_postcode_church.trim() == ''){
+                               $('#churherror3').css('display','block').html('Enter church postal code');
+                                 var flag3 = 1;    
+                             }
+                             else{
+                                 $('#churherror3').css('display','none');
+                                 var flag3 = 0;   
+                             }
+                             if(flag1 == 0 && flag2 == 0 && flag3 == 0){
+                                 alert('ok');
+                             }
+                         }
                          
                          </script>
                   </div>
