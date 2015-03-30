@@ -475,9 +475,19 @@ function unblock_member () {
 	 $church_close_arr['friday']=$this->input->post('fri_ch_close');
 	 $church_close_arr['saturday']=$this->input->post('sat_ch_close');
 	 
+	 $church_special_note_arr = array();
+	 $church_special_note_arr['sunday']=$this->input->post('sun_special_note');
+	 $church_special_note_arr['monday']=$this->input->post('mon_special_note');
+	 $church_special_note_arr['tuesday']=$this->input->post('tues_special_note');
+	 $church_special_note_arr['wednesday']=$this->input->post('wed_special_note');
+	 $church_special_note_arr['thursday']=$this->input->post('thurs_special_note');
+	 $church_special_note_arr['friday']=$this->input->post('fri_special_note');
+	 $church_special_note_arr['saturday']=$this->input->post('sat_special_note');
+	 
 	 
     $info['ch_open_time'] = json_encode($church_open_arr);
     $info['ch_close_time'] = json_encode($church_close_arr);
+	$info['ch_special_note'] = json_encode($church_special_note_arr);
     $info['ch_banner_heading'] = $this->input->post('banner_heading');
     $info['ch_details'] = $this->input->post('church_des');
 
