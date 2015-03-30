@@ -5050,7 +5050,7 @@ $this->db->update('cg_church', $data);
               //echo $this->db->last_query();
             $result = $query->result();
              $data['result_arr'] = $result;
-            $VIEW_FILE = 'church_ajax.phtml';
+            $VIEW_FILE = 'church_ajax_adv.phtml';
             echo $this->load->view($VIEW_FILE, $data,true);
            
         }
