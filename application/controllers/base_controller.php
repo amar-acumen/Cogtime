@@ -5085,8 +5085,8 @@ $this->db->update('cg_church_member', $data, array('church_id' => $church_id ,'m
             $txt_postcode_church = $this->input->post('txt_postcode_church');
             $sql = "select * from cg_church";
           //  $query = $this->db->query('Select * from cg_church where s_name like "%'.$txt_name_church.'%" AND s_address like "%'.$txt_address_church.'%" AND s_postcode like "%'.$txt_postcode_church.'%" ' );
-           $this->db->query($sql);
-          //  echo $q;           exit();
+          $q =  $this->db->query($sql);
+           echo $q;           exit();
            
         }
         
