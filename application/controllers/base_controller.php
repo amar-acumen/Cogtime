@@ -5083,15 +5083,11 @@ $this->db->update('cg_church_member', $data, array('church_id' => $church_id ,'m
             $txt_name_church = $this->input->post('txt_name_church');
             $txt_address_church = $this->input->post('txt_address_church');
             $txt_postcode_church = $this->input->post('txt_postcode_church');
+            $sql = "select * from cg_church";
           //  $query = $this->db->query('Select * from cg_church where s_name like "%'.$txt_name_church.'%" AND s_address like "%'.$txt_address_church.'%" AND s_postcode like "%'.$txt_postcode_church.'%" ' );
-            $q =  $this->db->query('Select * from cg_church ');
-            echo $q;           exit();
-           // $result = $query->result();
-            //$data['result_arr'] = $result;
-           // $VIEW_FILE = 'church_ajax.phtml';
-            //echo $this->load->view($VIEW_FILE, $data,true);
-            //pr($result);
-            //die($ch_email);
+           $this->db->query($sql);
+          //  echo $q;           exit();
+           
         }
         
         
