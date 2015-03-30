@@ -258,7 +258,7 @@
                                     Find Your church
                                 </h1>
                                 <input type="text" name="ch_email" id="ch_email" placeholder="Enter church email id" >
-                                <input type="button" name="find" value="Find church" onclick="church_find();"   class="sml_btn" style="line-height: 23px; height: 23px;">
+                                <input type="button" name="find" value="Find church" onclick="church_find();"   class="sml_btn" style="line-height: 23px; height: 23px;"><input type="button" class="advc-search" onclick="advance_search()">
                                 <div class="error_txt" id="mail_error">
                                     
                                 </div>
@@ -292,10 +292,16 @@
       }); 
                                 }
                                 }
+                                function advance_search(){
+                                $('#church_reg').slideUp();
+                                $('.advance-search-panel').slideDown();
+                                }
                             </script>
                             <div id="table_contents"></div>
                         </div>
-                        
+                         <div class="advance-search-panel" style="display: none">
+                             <h1>Find a church.</h1>
+                         </div>
                   </div>
                   <!-- /left container -->
                   <!-- right container -->
