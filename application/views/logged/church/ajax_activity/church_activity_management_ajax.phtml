@@ -33,7 +33,7 @@
 			</ul>
 			<?php }?>
 			<div class="comment-text">
-            	<textarea style="font-family: 'GibsonRegular'; color:#878d91; font-size:13px; height:30px;" name="wall_comment_txt" id="wall_comment_txt_<?php echo $church_activity_feed_comment->id; ?>" class="comment_message" height="20" width="40"><?php echo $church_activity_feed_comment->s_contents; ?></textarea> 
+            	<textarea style="font-family: 'GibsonRegular'; color:#878d91; font-size:13px; height:30px;" name="wall_comment_txt" id="wall_comment_txt_<?php echo $church_activity_feed_comment->id; ?>" class="comment_message" height="20" width="40"><?php echo strip_tags(htmlspecialchars_decode($church_activity_feed_comment->s_contents)); ?></textarea> 
 				<input type="button" name="save_comment" id="save_comment_<?php echo $church_activity_feed_comment->id; ?>" value="SAVE" onclick="javascript:save_comments('<?php echo $church_activity_feed_comment->id; ?>','<?php echo $church_activity_feed_comment->post_type; ?>');" style="display:none;"/>
            
 			</div>
@@ -46,7 +46,7 @@
         	<h4 style="font-size:14px;"><a href="javascript:void(0);"><?php echo $church_activity_feed_comment->member_name; ?></a> Posted a Comment on a Ring.</h4>
             <h5 style="font-size:13px;">Ring Name: <span><?php echo $church_activity_feed_comment->feedtitle; ?></span></h5>
              <div class="comment-text">
-            	<textarea style="font-family: 'GibsonRegular'; font-size:12px;" name="ring_comment_txt" id="ring_comment_txt<?php echo $church_activity_feed_comment->id; ?>" class="comment_message" height="20" width="40"><?php echo $church_activity_feed_comment->s_contents; ?></textarea> 
+            	<textarea style="font-family: 'GibsonRegular'; font-size:12px;" name="ring_comment_txt" id="ring_comment_txt<?php echo $church_activity_feed_comment->id; ?>" class="comment_message" height="20" width="40"><?php echo strip_tags(htmlspecialchars_decode($church_activity_feed_comment->s_contents)); ?></textarea> 
 				<input type="button" name="ring_save_comment" id="ring_save_comment_<?php echo $church_activity_feed_comment->id; ?>" value="SAVE" onclick="javascript:save_comments('<?php echo $church_activity_feed_comment->id; ?>','<?php echo $church_activity_feed_comment->post_type; ?>');" style="display:none;"/> 
             </div>
             
