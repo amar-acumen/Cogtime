@@ -347,7 +347,7 @@
                                  $('#churherror1').css('display','none');
                                  var flag1 = 0;
                              }
-                             if(txt_address_church.trim()){
+                             if(txt_address_church.trim() == ''){
                                   $('#churherror2').css('display','block').html('Enter church address');
                                  var flag2 = 1; 
                              }
@@ -355,7 +355,7 @@
                                   $('#churherror2').css('display','none');
                                  var flag2 = 0; 
                              }
-                             if(txt_postcode_church.trim()){
+                             if(txt_postcode_church.trim() == ''){
                                $('#churherror3').css('display','block').html('Enter church postal code');
                                  var flag3 = 1;    
                              }
