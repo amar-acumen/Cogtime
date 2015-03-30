@@ -50,7 +50,7 @@
                               
                               
                               <div class="content-section">
-                                  <h2><?=$profile_info['s_profile_name']?> <?=(strtolower($this->session->userdata('s_lname')) == strtolower($profile_info['s_last_name']) && strtolower($this->session->userdata('s_fname')) == strtolower($profile_info['s_first_name']))?'<span class="match_fld"><img src="images/tick.png"></span>':''?> </h2>
+                                  <h2><?=$profile_info['s_profile_name']?>  <?=(strtolower($this->session->userdata('s_lname')) == strtolower($profile_info['s_last_name']) && strtolower($this->session->userdata('s_fname')) == strtolower($profile_info['s_first_name']))?'<span class="match_fld"><img src="images/tick.png"></span>':''?> </h2>
 <!--                                   <DIV id="rate_div"><?=show_profile_rating($profile_info['id'])?></DIV>-->
                                     <?php if(!isRated($profile_info['id'])){
 									  ?>
