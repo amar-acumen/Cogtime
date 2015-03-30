@@ -258,7 +258,7 @@
                                     Find Your church
                                 </h1>
                                 <input type="text" name="ch_email" id="ch_email" placeholder="Enter church email id" >
-                                <input type="button" name="find" value="Find church" onclick="church_find();"   class="sml_btn" style="line-height: 23px; height: 23px;">
+                                <input type="button" name="find" value="Find church" onclick="church_find();"   class="sml_btn" style="line-height: 23px; height: 23px;"><input type="button" class="advc-search" value="Advance" onclick="advance_search()">
                                 <div class="error_txt" id="mail_error">
                                     
                                 </div>
@@ -292,10 +292,96 @@
       }); 
                                 }
                                 }
+                                function advance_search(){
+                                $('#church_reg').slideUp();
+                                $('.advance-search-panel').slideDown();
+                                }
                             </script>
                             <div id="table_contents"></div>
                         </div>
-                        
+                         <div class="advance-search-panel" style="display: none">
+                             <h1>Find a church</h1><span><a href="javascript:void(0)" onclick="normal_search()">Normal Search</a></span>
+                             <div class="register-your-church-form">
+                           
+                                <div class="lable-form-nw"> Church Name:</div>
+                                <input type="text"  name="txt_name_church" id="txt_name_church" />
+                                <span class="error_massage" id="churherror1"></span>
+                                <div class="clr"></div>
+                                <!--new added-->
+                                
+
+                                <div class="lable-form-nw">Address:</div>
+                                <input type="text"  name="txt_address_church" id="txt_address_church" />
+                                <span class="error_massage" id="churherror2"></span>
+                                <div class="clr"></div>
+
+                                <div class="lable-form-nw"> Postcode:</div>
+                                <input type="text" name="txt_postcode_church" id="txt_postcode_church" />
+                                <span class="error_massage" id="churherror3"></span>
+                                <div class="clr"></div>
+
+                              
+                               
+
+                                <div class="lable-form-nw"> 
+                                    <input type="button" class="yellow-btn register-your-float-right click-church" value="Search"  onclick="search_advance_church()" />
+                                </div>
+                               
+                                <div class="clr"></div>
+                           
+                        </div>
+                         </div>
+                         <script type="text/javascript">
+                         function normal_search(){
+                               $('#church_reg').slideDown();
+                                $('.advance-search-panel').slideUp();
+                         }
+                         function search_advance_church(){
+                             var txt_name_church = $('#txt_name_church').val();
+                             var txt_address_church = $('#txt_address_church').val();
+                             var txt_postcode_church = $('#txt_postcode_church').val();
+                             if(txt_name_church.trim() == ''){
+                                 $('#churherror1').css('display','block').html('Enter church name');
+                                 var flag1 = 1;
+                             }else{
+                                 $('#churherror1').css('display','none');
+                                 var flag1 = 0;
+                             }
+                             if(txt_address_church.trim() == ''){
+                                  $('#churherror2').css('display','block').html('Enter church address');
+                                 var flag2 = 1; 
+                             }
+                             else{
+                                  $('#churherror2').css('display','none');
+                                 var flag2 = 0; 
+                             }
+                             if(txt_postcode_church.trim() == ''){
+                               $('#churherror3').css('display','block').html('Enter church postal code');
+                                 var flag3 = 1;    
+                             }
+                             else{
+                                 $('#churherror3').css('display','none');
+                                 var flag3 = 0;   
+                             }
+                             if(flag1 == 0 && flag2 == 0 && flag3 == 0){
+                                 showBusyScreen(); 
+                                 $.ajax({
+          url : base_url+'base_controller/church_advace_search',
+          type : 'post',
+          data : ({'txt_name_church' : txt_name_church, 'txt_address_church': txt_address_church ,'txt_postcode_church':txt_postcode_church }),
+          success : function(data)
+          {
+              hideBusyScreen();
+              //alert(data)
+              $('#table_contents_adv').html(data);
+          //window.location.href="<?= admin_base_url() ?>help_center/help_center";
+          }
+      }); 
+                             }
+                         }
+                         
+                         </script>
+                          <div id="table_contents_adv"></div>
                   </div>
                   <!-- /left container -->
                   <!-- right container -->

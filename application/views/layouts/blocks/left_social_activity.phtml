@@ -29,7 +29,7 @@
       </div>
       <div class="nw-content" id="switchdiv024" style="display:none;">
           <ul>
-                <li><a href="my-prayer-partners.html" class="<?php echo ($page_name=='my-prayer-partners')?'select':'';?>">My Prayer Partners</a></li>
+              <li><a href="my-prayer-partners.html" class="<?php echo ($page_name=='my-prayer-partners')?'select':'';?>">My Prayer Partners <img src="images/icons/info_pp.png" class="add-new-church" title="You must belong to a Church Community to use this facility." width="15" height="15"></a></li>
                 <li><a href="<?php echo base_url()?>prayer-group.html" class="<?php echo ($page_name=='prayer-group')?'select':'';?>">My Prayer Groups <?php if($arr_profile_info['prayergrp_notification_count'] != 0) { ?><span class="notification" id="pryergrp_not"><?=$arr_profile_info['prayergrp_notification_count']?></span><?php } ?></a></li>
                 <li><a href="manage-my-commitments.html" class="<?php echo ($page_name=='manage-my-commitments')?'select':'';?>">My Prayer Commitments</a></li>
                 <li><a href="manage-my-prayer-request.html" class="<?php echo ($page_name=='manage-my-prayer-request')?'select':'';?>">My Prayer Requests </a></li>
@@ -73,7 +73,7 @@
              <?php
               $user_id = intval(decrypt($this->session->userdata('user_id')));
               $sql_churchmember = "SELECT *,ch.id AS chid FROM cg_church AS ch,cg_church_member AS chm WHERE ch.id=chm.church_id 
-              AND chm.is_approved=1 AND chm.member_id='".$user_id."' AND chm.is_leave = 0";
+              AND chm.is_approved=1 AND chm.member_id='".$user_id."' AND chm.is_leave = 0 AND chm.is_blocked = 1";
 
               $query_churchmember = $this->db->query($sql_churchmember);
               $numrowmember = $query_churchmember->num_rows();

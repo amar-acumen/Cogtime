@@ -341,7 +341,7 @@ class Data_messages_model extends Base_model
 										m.dt_created_on, 
 										m.i_ended, 
 										u.s_first_name, 
-										u.s_last_name 
+										u.s_last_name ,u.s_profile_photo , u.e_gender
 								FROM cg_messages m, cg_users u 
 								WHERE u.id = m.i_receiver_id AND m.i_sender_id = "'.$i_user_id.'"  AND m.s_type=\'normal\' AND m.i_is_deleted_by_sender = 0 '.$s_where.' ORDER BY m.dt_created_on DESC';
 			}
@@ -358,7 +358,7 @@ class Data_messages_model extends Base_model
 										m.dt_created_on, 
 										m.i_ended, 
 										u.s_first_name, 
-										u.s_last_name 
+										u.s_last_name ,u.s_profile_photo , u.e_gender
 								 FROM cg_messages m, cg_users u 
 								 WHERE u.id = m.i_receiver_id AND m.i_sender_id = "'.$i_user_id.'" AND m.s_type=\'normal\'  AND m.i_is_deleted_by_sender = 0 '.$s_where.' ORDER BY m.dt_created_on DESC limit '.intval($i_start_limit).', '.intval($i_no_of_page);
 			}
@@ -390,6 +390,9 @@ class Data_messages_model extends Base_model
 					$ret_[$i_cnt]["s_type"]				=	$row->s_type;
 					$ret_[$i_cnt]["ended"]				=	$row->i_ended;
 					
+                                        $ret_[$i_cnt]["s_profile_photo"]				=	$row->s_profile_photo;
+					$ret_[$i_cnt]["e_gender"]				=	$row->e_gender;
+                                        
 					$ret_[$i_cnt]["dt_created_on"]		=   $row->dt_created_on;
 					$ret_[$i_cnt]["i_is_unread"]		=	intval($row->i_is_unread);  
 				
@@ -616,7 +619,8 @@ class Data_messages_model extends Base_model
 					$ret_[$i_cnt]["s_type"]				=	$row->s_type;
 					$ret_[$i_cnt]["type"]				=	$row->type;
 					$ret_[$i_cnt]["ended"]				=	$row->i_ended;
-					
+					 $ret_[$i_cnt]["s_profile_photo"]		=	$row->s_profile_photo;
+					$ret_[$i_cnt]["e_gender"]			=	$row->e_gender;
 					$ret_[$i_cnt]["dt_created_on"]		=   $row->dt_created_on;
 					$ret_[$i_cnt]["i_is_unread"]		=	intval($row->i_is_unread);  
 				

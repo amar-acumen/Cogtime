@@ -457,29 +457,13 @@ function unblock_member () {
  }
  function add_church_data(){
      // pr($_POST,1);
-	 $church_open_arr = array();
-	 $church_open_arr['sunday']=$this->input->post('sun_ch_open');
-	 $church_open_arr['monday']=$this->input->post('mon_ch_open');
-	 $church_open_arr['tuesday']=$this->input->post('tues_ch_open');
-	 $church_open_arr['wednesday']=$this->input->post('wed_ch_open');
-	 $church_open_arr['thursday']=$this->input->post('thurs_ch_open');
-	 $church_open_arr['friday']=$this->input->post('fri_ch_open');
-	 $church_open_arr['saturday']=$this->input->post('sat_ch_open');
-	 
-	 $church_close_arr = array();
-	 $church_close_arr['sunday']=$this->input->post('sun_ch_close');
-	 $church_close_arr['monday']=$this->input->post('mon_ch_close');
-	 $church_close_arr['tuesday']=$this->input->post('tues_ch_close');
-	 $church_close_arr['wednesday']=$this->input->post('wed_ch_close');
-	 $church_close_arr['thursday']=$this->input->post('thurs_ch_close');
-	 $church_close_arr['friday']=$this->input->post('fri_ch_close');
-	 $church_close_arr['saturday']=$this->input->post('sat_ch_close');
-	 
-	 
-    $info['ch_open_time'] = json_encode($church_open_arr);
-    $info['ch_close_time'] = json_encode($church_close_arr);
+	$info['ch_week_day'] =  $this->input->post('church_week_day');
+    $info['ch_open_time'] = $this->input->post('ch_open_time');
+    $info['ch_close_time'] = $this->input->post('ch_close_time');
     $info['ch_banner_heading'] = $this->input->post('banner_heading');
     $info['ch_details'] = $this->input->post('church_des');
+	
+	//pr($info);
 
     list($width_ch_logo, $height_ch_logo, $type, $attr) =  getimagesize($_FILES['ch_logo']['tmp_name']);
     list($width_ch_cover, $height_ch_cover, $type, $attr) =  getimagesize($_FILES['ch_cover']['tmp_name']);
@@ -656,7 +640,11 @@ function general_setting(){
                                                 /**********if already invited member**********************************/
                                     $query1 = $this->db->get_where('cg_church_member_invitation', array('email' => $invite_mem_info['email'] , 'church_id'=>$_SESSION['logged_church_id'] ));
                                     $result = $query1->result();
-                                    if(count($result) > 0){
+                                    
+                                     $query2 = $this->db->get_where('cg_church', array('ch_admin_id' => get_user_id_byemail($invite_mem_info['email']) , 'id' =>$_SESSION['logged_church_id']));
+                                      $result1 = $query2->result();
+                                    
+                                    if(count($result) > 0 || count($result1) > 0){
                                          continue;
                                     }
                                                 /*******************************************/
@@ -1701,7 +1689,11 @@ echo json_encode( array('success'=>'true'));
                                     /**********if already invited member**********************************/
                                     $query1 = $this->db->get_where('cg_church_member_invitation', array('email' => $invite_val[$i][1] ,'church_id'=>$_SESSION['logged_church_id'] ));
                                     $result = $query1->result();
-                                    if(count($result) > 0){
+                                     $query2 = $this->db->get_where('cg_church', array('ch_admin_id' => get_user_id_byemail($invite_val[$i][1]) , 'id' =>$_SESSION['logged_church_id']));
+                                      $result1 = $query2->result();
+//pr($result,1);
+                                     
+                                    if(count($result) > 0 || count($result1) > 0){
                                          echo json_encode(array('success'=>false,'arr_messages'=>$arr_messages,'msg'=>''.$invite_val[$i][1].' already exist'));
                                          continue;
                                         
@@ -1770,7 +1762,7 @@ echo json_encode( array('success'=>'true'));
 			else
 			{
 				$user_id = intval(decrypt($this->session->userdata('user_id')));
-				get_all_church_session($c_id);
+				get_all_church_session($_SESSION['logged_church_id']);
 				//parent::check_is_church_admin($user_id,$c_id);
 				$posted=array();
 				$this->data["posted"]=$posted;/*don't change*/    

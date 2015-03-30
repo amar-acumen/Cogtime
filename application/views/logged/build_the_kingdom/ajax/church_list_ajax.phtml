@@ -102,7 +102,7 @@
             //pr($result);
            // echo count($result);
             if(!count($result)){
-               $query1 = $this->db->get_where('cg_church_member', array('member_id' => $user_id,'church_id'=>$val['id']));  
+               $query1 = $this->db->get_where('cg_church_member', array('member_id' => $user_id,'church_id'=>$val['id'] ,'is_approved' => 1 ,'is_deleted'=> 0 , 'is_blocked'=>1 ,'is_leave'=> 0 ));  
                $result1 = $query1->result();
                //pr($result1);
                if(!count($result1)){
