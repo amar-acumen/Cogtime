@@ -121,7 +121,7 @@
       <td class="day-colum">Sunday</td>
       <td><select class="time-selectbox" id="sun_ch_open" name="sun_ch_open" >
                               <option value="-1">Select</option>
-							  <option value="Closed">Closed</option>
+							  <option value="Closed" <?php echo ($open_time->sunday == 'Closed'?'selected':''); ?>>Closed</option>
                               <?php  
                               $s_time = $open_time->sunday;
                               if(!empty($s_time)){
@@ -133,7 +133,7 @@
                        </select>
 					   <span class="error-msg" id="sun_ch_open_error">Required</span>
 					   </td>
-      <td> <select  id="sun_ch_close" name="sun_ch_close">
+      <td> <select  id="sun_ch_close" name="sun_ch_close" disabled="<?php if(open_time->sunday == 'Closed') { echo 'disabled'; } else { echo ''; } ?>">
                <option value="-1">Select</option>
                                <?php /*?><option value="-1">Select</option><?php */?>
                                     <?php  
@@ -146,7 +146,7 @@
                                  <?=makeOption_time($start_time = '00:00', $i_gap = 15, $s_time_new)?>
                         </select>
                 <!--<span class="error-msg" id="sun_ch_close_error">Required</span>--></td>
-		<td><input type="text" name="sun_special_note" id="sun_special_note" value="<?php echo $special_note->sunday; ?>" /></td>		
+		<td><input type="text" name="sun_special_note" id="sun_special_note" disabled="<?php if(open_time->sunday == 'Closed') { echo 'disabled'; } else { echo ''; } ?>" value="<?php echo $special_note->sunday; ?>" /></td>		
 				
     </tr>
 	<tr>
@@ -217,7 +217,7 @@
       <td class="day-colum">Wednesday</td>
       <td><select class="time-selectbox" id="wed_ch_open" name="wed_ch_open" >
                               <option value="-1">Select</option>
-							  <option value="Closed">Closed</option>
+							  <option value="Closed" >Closed</option>
                               <?php  
                               $s_time = $open_time->wednesday;
                               if(!empty($s_time)){

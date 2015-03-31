@@ -5031,6 +5031,13 @@ function get_all_church_session($cid){
             $_SESSION['subadmin_role'] = $result_churchmember[0]->role;
         $_SESSION['charch_super_admin'] = 'no';
         $_SESSION['logged_church_id'] = $result_churchmember[0]->chid;
+        $access = $result_churchmember[0]->access;
+        $access_arr = explode(",",$access);
+        //pr($access_arr);
+        for($i=0;$i<count($access_arr);$i++){
+            $_SESSION[$access_arr[$i]] = 'yes';
+           // echo $access_arr[$i];
+        }
         
     }
     else
