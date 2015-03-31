@@ -573,18 +573,19 @@ function add_service(){
 	$week_day = $this->input->post('ch_service_week_day');
     $des = $this->input->post('des');
     $ch_id = $this->input->post('ch_id');
-    
+    for($j = 0 ; $j < count($week_day) ; $j++){
     for($i = 0; $i < count($open_time); $i++){
         $data = array(
    'c_id' => $ch_id ,
    'c_start_time' => $open_time[$i] ,
    'c_end_time' => $close_time[$i],
    'c_des' => $des[$i], 
-   'ch_service_week_day' => $week_day[$i],	 
+   'ch_service_week_day' => $week_day[$j],	 
    'c_update' => get_db_datetime()         
 );
 
 $rs = $this->db->insert('cg_church_schedul', $data); 
+    }
     }
     if($rs){
     $url = base_url().'church_setting?ser=1';
