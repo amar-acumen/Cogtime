@@ -1204,7 +1204,7 @@ $this->email->message("$body");
                            );
               // pr($_POST,1);
                $this->db->update('cg_church_member', $data, array('member_id' => $_POST['memberid'] , 'church_id'=>$c_id ));
-                echo $this->db->last_query();  die('ok');            
+              //  echo $this->db->last_query();  die('ok');            
                 header('location:'.base_url().'church-subadmin'); 
             }
             else
