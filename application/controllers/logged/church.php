@@ -1175,7 +1175,7 @@ $this->email->message("$body");
     }
 
     function church_addsubadmin(){
-
+//pr($_POST,1);
         $c_id = $_SESSION['logged_church_id'];
         $user_id = intval(decrypt($this->session->userdata('user_id')));
                         parent::check_is_church_admin($user_id,$c_id);
@@ -1202,9 +1202,10 @@ $this->email->message("$body");
                            'role' => 2,
                            'access' => $accessstring
                            );
-               
+              // pr($data,1);
                 $this->db->where('id', $_POST['memberid']);
                 $res = $this->db->update('cg_church_member', $data);
+                $this->db->last_query();                exit(1);
                 header('location:'.base_url().'church-subadmin'); 
             }
             else
@@ -1268,7 +1269,7 @@ $this->email->message("$body");
         if($_POST['subadminaccess']==1)
         {
             $accessstring = '';
-            pr($_POST['assign'],1);
+            //pr($_POST['assign'],1);
             foreach ($_POST['assign'] as $value) {
                 $accessstring .= $value.',';
             }
