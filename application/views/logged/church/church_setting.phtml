@@ -400,11 +400,12 @@ $("#text_count").text("Characters left: " + (500 - $(this).val().length));
     
     <div class="church-setting-main">
 		<h3>Please Add Daily Church Service</h3>
-        
+			
+
+               
                
                <form action="<?= base_url().'logged/church/add_service' ?>" method="POST" name="Service[]" class="church_serv_main">
-                 <div class="church_serv" id="first_elem">
-               <div class="form-main-service">
+			   <div class="form-main-service">
 				<input type="checkbox" name="ch_service_week_day[]" id="ch_service_week_day" value="Mon"> Mon
 				<input type="checkbox" name="ch_service_week_day[]" id="ch_service_week_day" value="Tue"> Tue
 				<input type="checkbox" name="ch_service_week_day[]" id="ch_service_week_day" value="Wed"> Wed
@@ -413,7 +414,8 @@ $("#text_count").text("Characters left: " + (500 - $(this).val().length));
 				<input type="checkbox" name="ch_service_week_day[]" id="ch_service_week_day" value="Sat"> Sat
 				<input type="checkbox" name="ch_service_week_day[]" id="ch_service_week_day" value="Sun"> Sun
 				</div>
-                     
+				
+			   <div class="church_serv" id="first_elem">
         <div class="form-main-service">
         	<label> Start Time: </label>
             <select  class="time-selectbox ch_open" name="ch_open[]">
