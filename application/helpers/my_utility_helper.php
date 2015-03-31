@@ -5248,6 +5248,7 @@ function is_prayer_grp_member($uid,$gid){
 }
 
 function get_subadmin_access($user_id , $cid){
+     $ci = & get_instance();
      $sql_churchmember = "SELECT *,ch.id AS chid FROM cg_church AS ch,cg_church_member AS chm 
     WHERE ch.id=chm.church_id AND chm.member_id='".$user_id."' AND ch.id='".$cid."'  AND chm.is_leave = 0 AND chm.is_blocked = 1 AND chm.is_approved = 1";
       $query_churchmember = $ci->db->query($sql_churchmember);
