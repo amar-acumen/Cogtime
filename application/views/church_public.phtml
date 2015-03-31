@@ -21,7 +21,7 @@ pr($ser_arr);
           if(!empty($ser_arr)){
               foreach ($ser_arr as $val){
           ?>
-        <li><?= if(count($val->ch_service_week_day) > 1) { ?> <span><?= $val->ch_service_week_day; ?> <?= $val->c_start_time; ?> - <?= $val->c_end_time; ?>,</span><?= $val->c_des; ?>, <?php } else { ?> <?= $val->ch_service_week_day; ?> <?= $val->c_start_time; ?> - <?= $val->c_end_time; ?> </span><?= $val->c_des; ?> </<?php } ?></li>
+        <li><?php if(count($val->ch_service_week_day) > 1) { ?> <span><?= $val->ch_service_week_day; ?> <?= $val->c_start_time; ?> - <?= $val->c_end_time; ?>,</span><?= $val->c_des; ?>, <?php } else { ?> <?= $val->ch_service_week_day; ?> <?= $val->c_start_time; ?> - <?= $val->c_end_time; ?> </span><?= $val->c_des; ?> </<?php } ?></li>
           <?php 
               }
               } else{?> 
