@@ -1268,7 +1268,7 @@ $this->email->message("$body");
         if($_POST['subadminaccess']==1)
         {
             $accessstring = '';
-            pr($_POST['assign']);
+            pr($_POST['assign'],1);
             foreach ($_POST['assign'] as $value) {
                 $accessstring .= $value.',';
             }
