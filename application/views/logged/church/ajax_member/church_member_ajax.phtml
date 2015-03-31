@@ -33,7 +33,7 @@
     <?php
 
                 $i = 1;
-pr($info_arr);
+//pr($info_arr);
                 foreach ($info_arr as $member) {
 
                     ?>
@@ -67,7 +67,9 @@ pr($info_arr);
             }
 
             ?>
-
+<?php
+if(!($_SESSION['subadmin_role'] == 2 && $member->id == intval(decrypt($this->session->userdata('user_id'))))){
+?>
       <td class="<?php echo $class?>" width="15%" id="approve_<?php echo $member->cmid?>">
 
          <?php
@@ -113,7 +115,9 @@ pr($info_arr);
 			<?php } ?>
 
       </td>
-
+<?php } else{ ?>
+      <td>you can't take action against yourself</td>
+ <?php } ?>
     </tr>
 	
 	
