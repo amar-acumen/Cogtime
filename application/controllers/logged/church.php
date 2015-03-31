@@ -1202,10 +1202,10 @@ $this->email->message("$body");
                            'role' => 2,
                            'access' => $accessstring
                            );
-              // pr($data,1);
+               pr($_POST,1);
                 $this->db->where('id', $_POST['memberid']);
                 $res = $this->db->update('cg_church_member', $data);
-                $this->db->last_query();                exit(1);
+                $this->db->last_query();              
                 header('location:'.base_url().'church-subadmin'); 
             }
             else
