@@ -1202,10 +1202,9 @@ $this->email->message("$body");
                            'role' => 2,
                            'access' => $accessstring
                            );
-               pr($_POST,1);
-                $this->db->where('id', $_POST['memberid']);
-                $res = $this->db->update('cg_church_member', $data);
-                $this->db->last_query();              
+              // pr($_POST,1);
+               $this->db->update('cg_church_member', $data, array('member_id' => $_POST['memberid'] , 'church_id'=>$c_id ));
+                $this->db->last_query();  die('ok');            
                 header('location:'.base_url().'church-subadmin'); 
             }
             else
