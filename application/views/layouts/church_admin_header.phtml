@@ -68,8 +68,9 @@
   $page_location = $this->uri->segment(1);
 
   $page_location1 = $this->uri->segment(2);
-
- //echo $_SESSION['wall'].'/'.$_SESSION['prayergroup'].'/'.$_SESSION['ring'];
+         $sudadmin_access = get_subadmin_access(intval(decrypt($this->session->userdata('user_id'))),$_SESSION['logged_church_id'] );
+        
+// pr($sudadmin_access);
 
     //echo 'ok';
 
@@ -83,9 +84,25 @@
 
              
              <?php
-             if(($_SESSION['subadmin_role']==2 && $_SESSION['wall'] == 'yes') ||  $_SESSION['charch_super_admin'] == 'yes' ){
+             if(count($sudadmin_access)){
+                 for($i=0;$i<count($sudadmin_access);$i++){
+                     if($sudadmin_access[$i] == 'wall' ){
+                         $con_wall = 1;
+                     }
+                     if($sudadmin_access[$i] == 'ring' ){
+                         $con_ring = 1;
+                     }
+                      if($sudadmin_access[$i] == 'prayergroup' ){
+                          $con_prayergroup = 1;
+                     }
+                 }
+             }
+              ?>
+                        <li><a <?php if($page_location == 'church'){  ?> class="active" <?php } ?> href="<?= get_church_dashboard_url_by_church_id($_SESSION['logged_church_id']) ?>">Dashboard</a></li>
+                  <?php 
+             if(($_SESSION['subadmin_role']==2 && $con_wall == 1 ) ||  $_SESSION['charch_super_admin'] == 'yes'  ){
              ?>
-                <li><a <?php if($page_location == 'church'){  ?> class="active" <?php } ?> href="<?= get_church_dashboard_url_by_church_id($_SESSION['logged_church_id']) ?>">Dashboard</a></li>
+     
 
           <li><a <?php if($page_location == 'church_setting'){  ?> class="active" <?php } ?> href="<?= base_url().'church_setting' ?>">Manage site</a></li>
 
@@ -104,7 +121,7 @@
                   <?php } ?>
           
 
-                  <?php  if(($_SESSION['subadmin_role']==2 && $_SESSION['ring'] == 'yes') ||  $_SESSION['charch_super_admin'] == 'yes' ){ 
+                  <?php  if(($_SESSION['subadmin_role']==2 && $con_ring == 1 ) ||  $_SESSION['charch_super_admin'] == 'yes' ){ 
 
             if(!($_SESSION['subadmin_role']==2 || $_SESSION['charch_super_admin'] =='yes')){
 
@@ -119,7 +136,7 @@
             <?php } ?>
            <?php } 
            
-               if(($_SESSION['subadmin_role']==2 && $_SESSION['prayergroup'] == 'yes') ||  $_SESSION['charch_super_admin'] == 'yes' ){ 
+               if(($_SESSION['subadmin_role']==2 && $con_prayergroup == 1 ) ||  $_SESSION['charch_super_admin'] == 'yes' ){ 
            ?>
                
             <li><a href="<?= base_url().$_SESSION['logged_church_id'].'/church-prayer-group.html' ?>" <?php if($page_location1 == 'church-prayer-group.html'){?> class="active" { ?> <?php } ?>>Prayer Groups</a></li>

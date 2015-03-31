@@ -5031,13 +5031,7 @@ function get_all_church_session($cid){
             $_SESSION['subadmin_role'] = $result_churchmember[0]->role;
         $_SESSION['charch_super_admin'] = 'no';
         $_SESSION['logged_church_id'] = $result_churchmember[0]->chid;
-        $access = $result_churchmember[0]->access;
-        $access_arr = explode(",",$access);
-        //pr($access_arr);
-        for($i=0;$i<count($access_arr);$i++){
-            $_SESSION[$access_arr[$i]] = 'yes';
-           // echo $access_arr[$i];
-        }
+       
         
     }
     else
@@ -5251,4 +5245,24 @@ function is_prayer_grp_member($uid,$gid){
       }else{
           return 0;
       }
+}
+
+function get_subadmin_access($user_id , $cid){
+     $ci = & get_instance();
+     $sql_churchmember = "SELECT *,ch.id AS chid FROM cg_church AS ch,cg_church_member AS chm 
+    WHERE ch.id=chm.church_id AND chm.member_id='".$user_id."' AND ch.id='".$cid."'  AND chm.is_leave = 0 AND chm.is_blocked = 1 AND chm.is_approved = 1";
+      $query_churchmember = $ci->db->query($sql_churchmember);
+    $numrowmember = $query_churchmember->num_rows();   
+    $result_churchmember = $query_churchmember->result();
+    if($numrowmember>0)
+    {
+        
+        if($result_churchmember[0]->role == 2){
+    $access = $result_churchmember[0]->access;
+        $access_arr = explode(",",$access);
+        return $access_arr;
+        //pr($access_arr);
+        
+        }
+     }
 }

@@ -12,6 +12,24 @@
          $church_number =  get_church_ring_number_by_id($_SESSION['logged_church_id']);
         // echo $_SESSION['logged_church_id'];
         ?>
+         <?php 
+      $sudadmin_access = get_subadmin_access(intval(decrypt($this->session->userdata('user_id'))),$_SESSION['logged_church_id'] );
+      if(count($sudadmin_access)){
+                 for($i=0;$i<count($sudadmin_access);$i++){
+                     if($sudadmin_access[$i] == 'wall' ){
+                         $con_wall = 1;
+                     }
+                     if($sudadmin_access[$i] == 'ring' ){
+                         $con_ring = 1;
+                     }
+                      if($sudadmin_access[$i] == 'prayergroup' ){
+                          $con_prayergroup = 1;
+                     }
+                 }
+             }
+               
+    
+    ?>
 <!--        <div class="right-round right-gray"><p><a href="<?= base_url() ?>church_member" style="text-decoration: none; color: #ffffff;">Community members</a> <br /><span><?=get_member_count_by_church_id($church_arr[0]->id)?></span></p></div>
         <div class="right-round right-gray"><p><a href="<?= base_url() ?>church-ring-list" style="text-decoration: none; color: #ffffff;">Rings </a><br /><span><?= $church_number ?></span></p></div>
         <div class="right-round right-gray"><p><a href="<?= base_url()."".$church_arr[0]->id ?>/church-prayer-group.html" style="text-decoration: none; color: #ffffff;">Prayer Groups</a>  <br /><span><?=get_prayer_group_count_by_church($church_arr[0]->id)?></span></p></div>-->
@@ -21,14 +39,26 @@
     <div class="group-block">
       <h3 class="member-heading">Community</h3>
       <ul>
-        <li><a href="<?= base_url() ?>church_member">Members</a> <span>(<?=get_member_count_by_church_id($church_arr[0]->id)?>)</span></li>
+        <li><a href="<?php 
+        if($_SESSION['charch_super_admin']=='yes' || ($_SESSION['subadmin_role']==2 && $con_wall == 1)){
+            echo base_url().'church_member';
+        }else{
+            echo 'javascript:void(0)';
+        }
+        ?>">Members</a> <span>(<?=get_member_count_by_church_id($church_arr[0]->id)?>)</span></li>
 <!--        <li><a href="javascript:void(0);">Online Users</a> <span>(11)</span></li>-->
       </ul>
     </div>
        <div class="group-block">
       <h3 class="ring-heading">Rings</h3>
       <ul>
-        <li><a href="<?= base_url() ?>church-ring-list">Total Rings </a> <span>(<?= get_church_ring_total_by_church_ID($_SESSION['logged_church_id']) ?>)</span></li>
+        <li><a href="<?php 
+        if($_SESSION['charch_super_admin']=='yes' || ($_SESSION['subadmin_role']==2 && $con_ring == 1)){
+            echo base_url().'church-ring-list';
+        }else{
+            echo 'javascript:void(0)';
+        }
+        ?>">Total Rings </a> <span>(<?= get_church_ring_total_by_church_ID($_SESSION['logged_church_id']) ?>)</span></li>
         <li><a href="javascript:void(0);">Total Members</a> <span>(<?= get_church_ring_member_total_by_church_ID($_SESSION['logged_church_id']) ?>)</span></li>
         <li><a href="javascript:void(0);">Total Posts </a> <span>(<?= get_church_ring_post_total_by_church_ID($_SESSION['logged_church_id']) ?>)</span></li>
       </ul>
@@ -36,7 +66,13 @@
        <div class="group-block">
       <h3 class="groups-heading">Prayer Groups</h3>
       <ul>
-        <li><a href="<?= base_url().$church_arr[0]->id ?>/church-prayer-group.html">Total Prayer Groups</a> <span>(<?=get_prayer_group_count_by_church($church_arr[0]->id)?>)</span></li>
+        <li><a href="<?php 
+        if($_SESSION['charch_super_admin']=='yes' || ($_SESSION['subadmin_role']==2 && $con_prayergroup == 1)){
+            echo base_url().$_SESSION['logged_church_id'].'/church-prayer-group.html';
+        }else{
+            echo 'javascript:void(0)';
+        }
+        ?>">Total Prayer Groups</a> <span>(<?=get_prayer_group_count_by_church($_SESSION['logged_church_id'])?>)</span></li>
         <li><a href="javascript:void(0);">Total Members</a>  <span>(<?= get_prayer_group_member_count_by_church($_SESSION['logged_church_id']) ?>)</span></li>
         <li><a href="javascript:void(0);">Total Posts</a>  <span>(<?=get_prayer_group_post_count_by_church($_SESSION['logged_church_id']) ?>)</span></li>
       </ul>
@@ -46,11 +82,22 @@
     <div class="quick-link-panels">
       <h3>Quick Links</h3>
       <ul>
+           <?php 
+          if($_SESSION['charch_super_admin']=='yes' || ($_SESSION['subadmin_role']==2 && $con_wall == 1)){
+        ?>
         <li><a href="<?= base_url().$_SESSION['logged_church_id'].'/church-wall' ?>">Church wall</a></li>
         <li><a href="<?= base_url().'church_setting' ?>">Manage site</a></li>
         <li><a href="<?= base_url().'church_member' ?>">Members</a></li>
+          <?php 
+          }
+          if($_SESSION['charch_super_admin']=='yes' || ($_SESSION['subadmin_role']==2 && $con_ring == 1)){
+        ?>
         <li><a href="<?= base_url().'church-ring-list' ?>">Rings</a></li>
-        <li><a href="<?= base_url().$_SESSION['logged_church_id'].'/church-prayer-group' ?>">Prayer Groups</a></li>
+        <?php 
+          }
+          if($_SESSION['charch_super_admin']=='yes' || ($_SESSION['subadmin_role']==2 && $con_prayergroup == 1)){
+        ?>
+          <li><a href="<?= base_url().$_SESSION['logged_church_id'].'/church-prayer-group' ?>">Prayer Groups</a></li> <?php } ?>
 <!--        <li><a href="javascript:void(0);">Chat rooms</a></li>-->
       </ul>
     </div>

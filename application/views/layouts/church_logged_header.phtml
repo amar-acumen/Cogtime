@@ -28,15 +28,36 @@
 </div>
 <!-- banner and menu section start -->
 <div class="container">
+    <?php 
+      $sudadmin_access = get_subadmin_access(intval(decrypt($this->session->userdata('user_id'))),$_SESSION['logged_church_id'] );
+      if(count($sudadmin_access)){
+                 for($i=0;$i<count($sudadmin_access);$i++){
+                     if($sudadmin_access[$i] == 'wall' ){
+                         $con_wall = 1;
+                     }
+                     if($sudadmin_access[$i] == 'ring' ){
+                         $con_ring = 1;
+                     }
+                      if($sudadmin_access[$i] == 'prayergroup' ){
+                          $con_prayergroup = 1;
+                     }
+                 }
+             }
+               
+    
+    ?>
 <?php if($_SESSION['charch_super_admin']=='yes' || $_SESSION['subadmin_role']==2) {
     $page_location = $this->uri->segment(1);
  $page_location1 = $this->uri->segment(2);
     ?>
 	<div class="admin-menu">
-    	<ul>
-        	<li><a  <?php if($page_location1 == 'church-wall'){  ?> class="active" <?php } ?> href="<?= base_url().''.$_SESSION['logged_church_id'].'/church-wall' ?>">Church wall</a></li>
+    	<ul><li><a  <?php if($page_location1 == 'church-wall'){  ?> class="active" <?php } ?> href="<?= base_url().''.$_SESSION['logged_church_id'].'/church-wall' ?>">Church wall</a></li>
             
             <li><a <?php if($page_location == 'church'){  ?> class="active" <?php } ?> href="<?= get_church_dashboard_url_by_church_id($_SESSION['logged_church_id']) ?>">Dashboard</a></li>
+            <?php
+            if($_SESSION['charch_super_admin']=='yes' || ($_SESSION['subadmin_role']==2 && $con_wall == 1)){
+            ?>
+        	
             
              <li><a <?php if($page_location == 'church_setting.html'){  ?> class="active" <?php } ?> href="<?=base_url()?>church_setting.html">Manage site</a></li>
              
@@ -44,26 +65,33 @@
            
             <li><a <?php if($page_location == 'church_member'){  ?> class="active" <?php } ?> href="<?php echo base_url().'church_member'?>">Members</a></li>
             
+            <?php 
+            }
+            ?>
             
+            <?php if(!$_SESSION['subadmin_role']==2){ ?>
         <li><a <?php if($page_location == 'church-subadmin'){  ?> class="active" <?php } ?> href="<?= base_url().'church-subadmin' ?>">Sub Admin</a></li>
         
-            
+            <?php } ?>
             
             
               <?php
+              if(($_SESSION['subadmin_role']==2 && $con_ring == 1 ) ||  $_SESSION['charch_super_admin'] == 'yes' ){
             if(!($_SESSION['subadmin_role']==2 || $_SESSION['charch_super_admin'] =='yes') || $_SESSION['subadmin_role']==2){
             ?>
         <li><a <?php if($page_location == 'member_ring' || $page_location == 'member_ring' || $page_location == 'church-ring-list' || $page_location == 'create-church-ring' || $page_location == 'search_ring' || $page_location == 'ring_request' || $page_location == 'church_rings' || $page_location == 'create_ring_category'){  ?> class="active" <?php } ?> href="<?php echo base_url().'member_ring/'.$_SESSION['logged_church_id'];?>">Rings</a></li>  
             <?php } else {?>
           <li><a  <?php if($page_location == 'church-ring-list' || $page_location == 'member_ring' || $page_location == 'church-ring-list' || $page_location == 'create-church-ring' || $page_location == 'search_ring' || $page_location == 'ring_request' || $page_location == 'church_rings' || $page_location == 'create_ring_category'){  ?> class="active" <?php } ?> href="<?php echo base_url().'church-ring-list';?>">Rings</a></li>  
-            <?php } ?>
+              <?php } } ?>
             
             
             
-            
+            <?php 
+               if(($_SESSION['subadmin_role']==2 && $con_prayergroup == 1 ) ||  $_SESSION['charch_super_admin'] == 'yes' ){ 
+            ?>
                      
        <li><a href="<?= base_url().$_SESSION['logged_church_id'].'/church-prayer-group' ?>" <?php if($page_location1 == 'church-prayer-group' || $page_location1 == 'create-prayer-group' || $page_location == 'church-prayer-group' || $page_location == 'church-prayer-group-member' || $page_location == 'church-prayer-group-invite' ) { ?> class="active" <?php } ?>>Prayer Groups</a></li>
-       
+               <?php } ?>
        
        
        

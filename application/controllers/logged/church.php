@@ -569,6 +569,7 @@ function unblock_member () {
 function add_service(){
     $open_time = $this->input->post('ch_open');
     $close_time = $this->input->post('ch_close');
+	$week_day = $this->input->post('ch_service_week_day');
     $des = $this->input->post('des');
     $ch_id = $this->input->post('ch_id');
     
@@ -577,7 +578,8 @@ function add_service(){
    'c_id' => $ch_id ,
    'c_start_time' => $open_time[$i] ,
    'c_end_time' => $close_time[$i],
-     'c_des' => $des[$i],       
+   'c_des' => $des[$i], 
+   'ch_service_week_day' => $week_day[$i],	 
    'c_update' => get_db_datetime()         
 );
 
@@ -1175,7 +1177,7 @@ $this->email->message("$body");
     }
 
     function church_addsubadmin(){
-
+//pr($_POST,1);
         $c_id = $_SESSION['logged_church_id'];
         $user_id = intval(decrypt($this->session->userdata('user_id')));
                         parent::check_is_church_admin($user_id,$c_id);
@@ -1202,9 +1204,9 @@ $this->email->message("$body");
                            'role' => 2,
                            'access' => $accessstring
                            );
-               
-                $this->db->where('id', $_POST['memberid']);
-                $res = $this->db->update('cg_church_member', $data);
+              // pr($_POST,1);
+               $this->db->update('cg_church_member', $data, array('member_id' => $_POST['memberid'] , 'church_id'=>$c_id ));
+              //  echo $this->db->last_query();  die('ok');            
                 header('location:'.base_url().'church-subadmin'); 
             }
             else
@@ -1249,7 +1251,7 @@ $this->email->message("$body");
 
 
     function church_editsubadmin($id){
-          pr($_POST);
+         
         $c_id = $_SESSION['logged_church_id'];
         $user_id = intval(decrypt($this->session->userdata('user_id')));
         parent::check_is_church_admin($user_id,$c_id);
@@ -1268,6 +1270,7 @@ $this->email->message("$body");
         if($_POST['subadminaccess']==1)
         {
             $accessstring = '';
+            //pr($_POST['assign'],1);
             foreach ($_POST['assign'] as $value) {
                 $accessstring .= $value.',';
             }
