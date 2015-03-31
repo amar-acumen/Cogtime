@@ -1249,7 +1249,7 @@ $this->email->message("$body");
 
 
     function church_editsubadmin($id){
-
+         // pr($_POST,1);
         $c_id = $_SESSION['logged_church_id'];
         $user_id = intval(decrypt($this->session->userdata('user_id')));
         parent::check_is_church_admin($user_id,$c_id);
