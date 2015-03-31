@@ -6,6 +6,7 @@
 <?php //pr($church_arr); 
 $open_time = json_decode($church_arr[0]->ch_open_time);
 $close_time = json_decode($church_arr[0]->ch_close_time);
+$special_note = json_decode($church_arr[0]->ch_special_note);
 //pr($open_time);
 //pr($close_time);exit;
 //pr($ser_arr);
@@ -32,7 +33,7 @@ $close_time = json_decode($church_arr[0]->ch_close_time);
     <div class="church-time">The Church is open 
 <ul class="ch-notification">
 	<?php foreach ($open_time As $openkey => $openval) { ?>
-	<li><?= $openkey; ?> from <?= $openval; ?> - <?= $close_time->$openkey; ?></li>
+	<li><?= $openkey; ?> from <?= $openval; ?> - <?= $close_time->$openkey; ?>  (lunch <?=$special_note->$openkey;?> )</li>
 	<?php } ?>
     </ul>
 	</div>
