@@ -1249,7 +1249,7 @@ $this->email->message("$body");
 
 
     function church_editsubadmin($id){
-          pr($_POST);
+         
         $c_id = $_SESSION['logged_church_id'];
         $user_id = intval(decrypt($this->session->userdata('user_id')));
         parent::check_is_church_admin($user_id,$c_id);
@@ -1268,6 +1268,7 @@ $this->email->message("$body");
         if($_POST['subadminaccess']==1)
         {
             $accessstring = '';
+            pr($_POST['assign']);
             foreach ($_POST['assign'] as $value) {
                 $accessstring .= $value.',';
             }
