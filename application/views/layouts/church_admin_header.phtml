@@ -98,7 +98,7 @@
                   <?php } ?>
           
 
-                  <?php
+                  <?php  if(!$_SESSION['subadmin_role']==2){ 
 
             if(!($_SESSION['subadmin_role']==2 || $_SESSION['charch_super_admin'] =='yes')){
 
@@ -113,10 +113,12 @@
             <?php } ?>
                
             <li><a href="<?= base_url().$_SESSION['logged_church_id'].'/church-prayer-group.html' ?>" <?php if($page_location1 == 'church-prayer-group.html'){?> class="active" { ?> <?php } ?>>Prayer Groups</a></li>
+            
+                  <?php } ?>
             <li><a href="<?= base_url().$_SESSION['logged_church_id'].'/church_activity_management' ?>" <?php if($page_location1 == 'church_activity_management'){?> class="active" { ?> <?php } ?>>Activity</a></li>
-
+                 <?php if(!$_SESSION['subadmin_role']==2){  ?>
             <li><a href="<?= base_url().'church_plugin' ?>" <?php if($page_location == 'church_plugin'){?> class="active" <?php } ?> >Church Plugin</a></li>
-             <li><a href="<?= base_url().'my-prayer-partners.html' ?>">Prayer Partners</a></li>
+                 <li><a href="<?= base_url().'my-prayer-partners.html' ?>">Prayer Partners</a></li> <?php } ?>
         </ul>
 <div class="clear"></div>
         
