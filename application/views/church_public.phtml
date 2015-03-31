@@ -21,7 +21,7 @@ pr($ser_arr);
           if(!empty($ser_arr)){
               foreach ($ser_arr as $val){
           ?>
-        <li><span><?= $val->c_start_time; ?></span><?= $val->c_des; ?></li>
+        <li><?= $val->ch_service_week_day; ?> <span><?= $val->c_start_time; ?></span><?= $val->c_des; ?></li>
           <?php 
               }
               } else{?> 
