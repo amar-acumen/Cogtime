@@ -69,7 +69,7 @@
 
   $page_location1 = $this->uri->segment(2);
 
- 
+ //echo $_SESSION['wall'].'/'.$_SESSION['prayergroup'].'/'.$_SESSION['ring'];
 
     //echo 'ok';
 
@@ -81,6 +81,10 @@
 
              <li><a  <?php if($page_location1 == 'church-wall'){  ?> class="active" <?php } ?> href="<?= base_url().''.$_SESSION['logged_church_id'].'/church-wall' ?>">Church wall</a></li>
 
+             
+             <?php
+             if(($_SESSION['subadmin_role']==2 && $_SESSION['wall'] == 'yes') ||  $_SESSION['charch_super_admin'] == 'yes' ){
+             ?>
                 <li><a <?php if($page_location == 'church'){  ?> class="active" <?php } ?> href="<?= get_church_dashboard_url_by_church_id($_SESSION['logged_church_id']) ?>">Dashboard</a></li>
 
           <li><a <?php if($page_location == 'church_setting'){  ?> class="active" <?php } ?> href="<?= base_url().'church_setting' ?>">Manage site</a></li>
@@ -91,6 +95,8 @@
 			</ul>
 		  </li>
 
+                  
+             <?php } ?>
                   <?php if(!$_SESSION['subadmin_role']==2){ ?>
                   
           <li><a <?php if($page_location == 'church-subadmin'){  ?> class="active" <?php } ?> href="<?= base_url().'church-subadmin' ?>">Sub Admin</a></li>
@@ -98,7 +104,7 @@
                   <?php } ?>
           
 
-                  <?php
+                  <?php  if(($_SESSION['subadmin_role']==2 && $_SESSION['ring'] == 'yes') ||  $_SESSION['charch_super_admin'] == 'yes' ){ 
 
             if(!($_SESSION['subadmin_role']==2 || $_SESSION['charch_super_admin'] =='yes')){
 
@@ -111,12 +117,21 @@
           <li><a  <?php if($page_location == 'church-ring-list' || $page_location == 'church_rings'){  ?> class="active" <?php } ?> href="<?php echo base_url().'church-ring-list';?>">Rings</a></li>  
 
             <?php } ?>
+           <?php } 
+           
+               if(($_SESSION['subadmin_role']==2 && $_SESSION['prayergroup'] == 'yes') ||  $_SESSION['charch_super_admin'] == 'yes' ){ 
+           ?>
                
             <li><a href="<?= base_url().$_SESSION['logged_church_id'].'/church-prayer-group.html' ?>" <?php if($page_location1 == 'church-prayer-group.html'){?> class="active" { ?> <?php } ?>>Prayer Groups</a></li>
+            
+               <?php } ?>
+            
             <li><a href="<?= base_url().$_SESSION['logged_church_id'].'/church_activity_management' ?>" <?php if($page_location1 == 'church_activity_management'){?> class="active" { ?> <?php } ?>>Activity</a></li>
-
+            
+            
+                 <?php if(!$_SESSION['subadmin_role']==2){  ?>
             <li><a href="<?= base_url().'church_plugin' ?>" <?php if($page_location == 'church_plugin'){?> class="active" <?php } ?> >Church Plugin</a></li>
-             <li><a href="<?= base_url().'my-prayer-partners.html' ?>">Prayer Partners</a></li>
+                 <li><a href="<?= base_url().'my-prayer-partners.html' ?>">Prayer Partners</a></li> <?php } ?>
         </ul>
 <div class="clear"></div>
         
