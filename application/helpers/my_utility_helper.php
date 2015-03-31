@@ -5043,7 +5043,7 @@ function get_all_church_session($cid){
                 $_SESSION['ring'] = 'yes';
             }
            
-           // echo $access_arr[$i];
+            echo $access_arr[$i].'/';
         }
         
     }
