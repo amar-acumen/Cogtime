@@ -36,7 +36,7 @@ $(function()
        
         <div class="spacer"></div>
         <?php
-        pr($member_arr);
+      //  pr($member_arr);
         if($member_arr[0] && $member_arr[0]->role != 2)
         {
             ?>
@@ -51,7 +51,7 @@ $(function()
                 <div class="assign-main">
                     <form action="<?php echo base_url().'logged/church/church_addsubadmin'?>" method="post">
                         <input type="hidden" name="subadminaccess" value="1">
-                        <input type="hidden" name="memberid" value="<?php echo $member_arr[0]->cmid?>">
+                        <input type="hidden" name="memberid" value="<?php echo $member_arr[0]->id?>">
                        <label><input type="checkbox" name="assign[]" value="wall"> Community</label>
                        <label><input type="checkbox" name="assign[]" value="prayergroup"> Prayer Group</label>
                        <label><input type="checkbox" name="assign[]" value="ring"> Rings</label>
