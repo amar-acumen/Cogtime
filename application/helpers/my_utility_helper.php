@@ -5034,7 +5034,7 @@ function get_all_church_session($cid){
         $access = $result_churchmember[0]->access;
         $access_arr = explode(",",$access);
         pr($access_arr);
-        for($i=0;$i>count($access_arr);$i++){
+        for($i=0;$i<count($access_arr);$i++){
             $_SESSION[$access_arr[$i]] = 'yes';
             echo $access_arr[$i];
         }
