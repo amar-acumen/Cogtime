@@ -33,7 +33,7 @@ $special_note = json_decode($church_arr[0]->ch_special_note);
     <div class="church-time">The Church is open 
 <ul class="ch-notification">
 	<?php foreach ($open_time As $openkey => $openval) { ?>
-	<li><?= $openkey; ?> : <?= $openval; ?> - <?= $close_time->$openkey; ?> <?php if($special_note->$openkey !='') { ?> (lunch <?=$special_note->$openkey;?> ) <?php } ?></li>
+	<li><?= $openkey; ?> : <?= $openval; ?> - <?= $close_time->$openkey; ?> <?php if(!empty($special_note->$openkey)) { ?> (lunch <?=$special_note->$openkey;?> ) <?php } ?></li>
 	<?php } ?>
     </ul>
 	</div>
