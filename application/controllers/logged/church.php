@@ -569,6 +569,7 @@ function unblock_member () {
 function add_service(){
     $open_time = $this->input->post('ch_open');
     $close_time = $this->input->post('ch_close');
+	$week_day = $this->input->post('ch_service_week_day');
     $des = $this->input->post('des');
     $ch_id = $this->input->post('ch_id');
     
@@ -577,7 +578,8 @@ function add_service(){
    'c_id' => $ch_id ,
    'c_start_time' => $open_time[$i] ,
    'c_end_time' => $close_time[$i],
-     'c_des' => $des[$i],       
+   'c_des' => $des[$i], 
+   'ch_service_week_day' => $week_day[$i],	 
    'c_update' => get_db_datetime()         
 );
 
