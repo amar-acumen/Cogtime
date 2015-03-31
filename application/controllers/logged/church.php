@@ -1205,6 +1205,7 @@ $this->email->message("$body");
               // pr($data,1);
                 $this->db->where('id', $_POST['memberid']);
                 $res = $this->db->update('cg_church_member', $data);
+                $this->db->last_query();                exit();
                 header('location:'.base_url().'church-subadmin'); 
             }
             else
