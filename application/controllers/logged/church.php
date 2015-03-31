@@ -567,7 +567,7 @@ function unblock_member () {
  
 
 function add_service(){
-    pr($_POST,1);
+    //pr($_POST,1);
     $open_time = $this->input->post('ch_open');
     $close_time = $this->input->post('ch_close');
 	$week_day = $this->input->post('ch_service_week_day');
