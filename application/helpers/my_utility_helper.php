@@ -5037,16 +5037,13 @@ function get_all_church_session($cid){
         for($i=0;$i<count($access_arr);$i++){
             if($access_arr[$i] == 'wall'){
                  $_SESSION['wall'] = 'yes';
-                   $_SESSION['prayergroup'] = 'no';
-                    $_SESSION['ring'] = 'no';
+                   
             }else if($access_arr[$i] == 'prayergroup'){
                  $_SESSION['prayergroup'] = 'yes';
-                    $_SESSION['ring'] = 'no';
-                     $_SESSION['wall'] = 'no';
+                   
             }else if($access_arr[$i] == 'ring'){
                 $_SESSION['ring'] = 'yes';
-                  $_SESSION['wall'] = 'no';
-                  $_SESSION['prayergroup'] = 'no';
+                 
             }
            
             echo $access_arr[$i].'/';
