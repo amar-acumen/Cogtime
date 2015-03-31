@@ -51,13 +51,13 @@
  $page_location1 = $this->uri->segment(2);
     ?>
 	<div class="admin-menu">
-    	<ul>
+    	<ul><li><a  <?php if($page_location1 == 'church-wall'){  ?> class="active" <?php } ?> href="<?= base_url().''.$_SESSION['logged_church_id'].'/church-wall' ?>">Church wall</a></li>
+            
+            <li><a <?php if($page_location == 'church'){  ?> class="active" <?php } ?> href="<?= get_church_dashboard_url_by_church_id($_SESSION['logged_church_id']) ?>">Dashboard</a></li>
             <?php
             if($_SESSION['charch_super_admin']=='yes' || ($_SESSION['subadmin_role']==2 && $con_wall == 1)){
             ?>
-        	<li><a  <?php if($page_location1 == 'church-wall'){  ?> class="active" <?php } ?> href="<?= base_url().''.$_SESSION['logged_church_id'].'/church-wall' ?>">Church wall</a></li>
-            
-            <li><a <?php if($page_location == 'church'){  ?> class="active" <?php } ?> href="<?= get_church_dashboard_url_by_church_id($_SESSION['logged_church_id']) ?>">Dashboard</a></li>
+        	
             
              <li><a <?php if($page_location == 'church_setting.html'){  ?> class="active" <?php } ?> href="<?=base_url()?>church_setting.html">Manage site</a></li>
              

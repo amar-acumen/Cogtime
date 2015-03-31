@@ -97,10 +97,12 @@
                      }
                  }
              }
-               
+              ?>
+                        <li><a <?php if($page_location == 'church'){  ?> class="active" <?php } ?> href="<?= get_church_dashboard_url_by_church_id($_SESSION['logged_church_id']) ?>">Dashboard</a></li>
+                  <?php 
              if(($_SESSION['subadmin_role']==2 && $con_wall == 1 ) ||  $_SESSION['charch_super_admin'] == 'yes'  ){
              ?>
-                <li><a <?php if($page_location == 'church'){  ?> class="active" <?php } ?> href="<?= get_church_dashboard_url_by_church_id($_SESSION['logged_church_id']) ?>">Dashboard</a></li>
+     
 
           <li><a <?php if($page_location == 'church_setting'){  ?> class="active" <?php } ?> href="<?= base_url().'church_setting' ?>">Manage site</a></li>
 
