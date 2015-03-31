@@ -91,9 +91,12 @@
 			</ul>
 		  </li>
 
+                  <?php if(!$_SESSION['subadmin_role']==2){ ?>
+                  
           <li><a <?php if($page_location == 'church-subadmin'){  ?> class="active" <?php } ?> href="<?= base_url().'church-subadmin' ?>">Sub Admin</a></li>
 
-		 
+                  <?php } ?>
+          
 
                   <?php
 

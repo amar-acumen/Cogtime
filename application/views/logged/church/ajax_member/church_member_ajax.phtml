@@ -67,7 +67,9 @@
             }
 
             ?>
-
+<?php
+if(!($_SESSION['subadmin_role'] == 2 && $member->id == intval(decrypt($this->session->userdata('user_id'))))){
+?>
       <td class="<?php echo $class?>" width="15%" id="approve_<?php echo $member->cmid?>">
 
          <?php
@@ -113,7 +115,9 @@
 			<?php } ?>
 
       </td>
-
+<?php } else{ ?>
+      <td>you can't take action against yourself</td>
+ <?php } ?>
     </tr>
 	
 	
