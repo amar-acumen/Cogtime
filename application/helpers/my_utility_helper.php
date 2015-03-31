@@ -5035,16 +5035,22 @@ function get_all_church_session($cid){
         $access_arr = explode(",",$access);
         //pr($access_arr);
         for($i=0;$i<count($access_arr);$i++){
-            if($access_arr[$i] == 'wall'){
+            if($access_arr[$i] == 'wall' && $access_arr[$i] == 'prayergroup'){
                  $_SESSION['wall'] = 'yes';
-                   
-            }else if($access_arr[$i] == 'prayergroup'){
-                 $_SESSION['prayergroup'] = 'yes';
-                   
-            }else if($access_arr[$i] == 'ring'){
-                $_SESSION['ring'] = 'yes';
-                 
+                    $_SESSION['prayergroup'] = 'yes';
+            }else if($access_arr[$i] == 'ring' && $access_arr[$i] == 'prayergroup'){
+                
+                     $_SESSION['ring'] = 'yes';
+                    $_SESSION['prayergroup'] = 'yes';
+            }else if($access_arr[$i] == 'wall' && $access_arr[$i] == 'ring' ){
+                  $_SESSION['wall'] = 'yes';
+                    $_SESSION['ring'] = 'yes';
             }
+                else if($access_arr[$i] == 'wall' && $access_arr[$i] == 'prayergroup' && $access_arr[$i] == 'ring' ) {
+                     $_SESSION['wall'] = 'yes';
+                    $_SESSION['ring'] = 'yes';
+                      $_SESSION['prayergroup'] = 'yes';
+                }
            
             echo $access_arr[$i].'/';
         }
