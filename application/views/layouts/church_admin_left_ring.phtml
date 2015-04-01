@@ -22,7 +22,7 @@
 		}
         ?>
            
-        <li><a <?php if($page_location == 'search_ring'){  ?> class="active" <?php } ?> href="<?= base_url().'search_ring' ?>">Search </a></li>
+        <li><a <?php if($page_location == 'search_ring'){  ?> class="active" <?php } ?> href="<?= base_url().'search_ring' ?>">Search <img src="images/search-grey.png" alt="Magnifying"></a></li>
         <li><a <?php if($page_location == 'ring_request'){  ?> class="active" <?php } ?> href="<?= base_url().'ring_request' ?>">Requests </a></li>
         <?php
         if($_SESSION['charch_super_admin'] =='yes'){
