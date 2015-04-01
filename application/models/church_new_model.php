@@ -17,7 +17,7 @@ class Church_new_model extends Base_model
         }
         function get_service_info($c_id){
            
-              $query = $this->db->query('select * from cg_church_schedul where c_id = '.$c_id.' ORDER BY c_update ASC LIMIT 0, 5');
+              $query = $this->db->query('select * from cg_church_schedul where c_id = '.$c_id.' ORDER BY c_update ASC');
              $result = $query->result();
              return $result;
             
