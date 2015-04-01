@@ -44,7 +44,10 @@ pr($ser_arr);
 			  }
 		}
           ?>
-        <li> <span> <?php if($time_interval_mon) { echo 'Mon : '.rtrim($time_interval_mon ,','); } elseif($time_interval_tue) { echo 'Tue : '.rtrim($time_interval_tue ,','); } elseif ($time_interval_wed) { echo 'Wed : '.rtrim($time_interval_wed ,','); } else ($time_interval_sun) { echo 'Sun : '.rtrim($time_interval_sun ,','); } ?></span> </li>
+        <li> <span> <?php if($time_interval_mon) { echo 'Mon : '.rtrim($time_interval_mon ,','); } 
+		if($time_interval_tue) { echo 'Tue : '.rtrim($time_interval_tue ,','); } 
+		if ($time_interval_wed) { echo 'Wed : '.rtrim($time_interval_wed ,','); } 
+		if ($time_interval_sun) { echo 'Sun : '.rtrim($time_interval_sun ,','); } ?></span> </li>
           <?php 
               }
                else{?> 
