@@ -44,10 +44,13 @@ pr($ser_arr);
 			  }
 		}
           ?>
-        <li> <span> <?php if($time_interval_mon) { echo 'Mon : '.rtrim($time_interval_mon ,','); } 
-		if($time_interval_tue) { echo 'Tue : '.rtrim($time_interval_tue ,','); } 
-		if ($time_interval_wed) { echo 'Wed : '.rtrim($time_interval_wed ,','); } 
-		if ($time_interval_sun) { echo 'Sun : '.rtrim($time_interval_sun ,','); } ?></span> </li>
+        <li> <span> <?php if($time_interval_mon) { echo 'Mon : '.rtrim($time_interval_mon ,','); } ?></span> </li>
+		<li> <span> <?php if($time_interval_tue) { echo 'Tue : '.rtrim($time_interval_tue ,','); } ?></span> </li>
+		<li> <span> <?php if ($time_interval_wed) { echo 'Wed : '.rtrim($time_interval_wed ,','); } ?></span> </li>
+		<li> <span> <?php if ($time_interval_thurs) { echo 'Thurs : '.rtrim($time_interval_thurs ,','); } ?></span> </li>
+		<li> <span> <?php if ($time_interval_fri) { echo 'Fri : '.rtrim($time_interval_fri ,','); } ?></span> </li>
+		<li> <span> <?php if ($time_interval_sat) { echo 'Sat : '.rtrim($time_interval_sat ,','); } ?></span> </li>
+		<li> <span> <?php if ($time_interval_sun) { echo 'Sun : '.rtrim($time_interval_sun ,','); } ?></span> </li>
           <?php 
               }
                else{?> 
