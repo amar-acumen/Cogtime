@@ -31,7 +31,7 @@ pr($ser_arr);
 				$time_interval .= $val->c_start_time .'-'.$val->c_end_time .',';
 			  }
           ?>
-        <li> <?= $val->ch_service_week_day; ?> <span> <?= $time_interval; ?></span></li>
+        <li><?= $val->ch_service_week_day .': '; ?> <span> <?= $time_interval; ?></span> </li>
           <?php 
               }
               } else{?> 
