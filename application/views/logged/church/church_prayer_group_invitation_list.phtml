@@ -6,7 +6,10 @@
   <div class="main-page">
     <h3 class="page-heading">Prayer Group</h3>
     <?php// include(APPPATH ."views/logged/church/church_prayer_group_left_panel.phtml");?>
-    
+     <div class="activity-left">
+         <ul class="left-list">
+             <li><a href="<?=base_url().''.$_SESSION['logged_church_id']?>/search-and-join-church-prayer-group" class="<?php echo ($active_menu == 'search_join')?'active':'';?>">Search and Join Prayer Group</a></li>
+         </ul></div>
     <?php
     
    /* if(subadmin_access('prayer_group'))
