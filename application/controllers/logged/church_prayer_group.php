@@ -221,7 +221,7 @@ class Church_prayer_group extends Base_controller
                                 /************************notification*******************************/
                           $grp_info  = $this->church_new_model->get_prayer_group_details($grp_id);
                          // pr($grp_info,1);
-                          $message=get_username_by_id($val).' has invited  to join at '.$grp_info[0]->s_group_name." on ".getShortDateWithTime(get_db_datetime(),2);
+                          $message=get_username_by_id($val).' was invited  to join  '.$grp_info[0]->s_group_name." on ".getShortDateWithTime(get_db_datetime(),2);
                           $grp_notification_arr = array();
    
                             $grp_notification_arr['i_requester_user_id'] = $val;
@@ -2210,7 +2210,7 @@ class Church_prayer_group extends Base_controller
                                 /************************notification*******************************/
                           $grp_info  = $this->church_new_model->get_prayer_group_details($group_id);
                          // pr($grp_info,1);
-                          $message=get_username_by_id($val).' has invited  to join at '.$grp_info[0]->s_group_name." on ".getShortDateWithTime(get_db_datetime(),2);
+                          $message=get_username_by_id($val).' was invited  to join  '.$grp_info[0]->s_group_name." on ".getShortDateWithTime(get_db_datetime(),2);
                           $grp_notification_arr = array();
    
                             $grp_notification_arr['i_requester_user_id'] = $val;
