@@ -4846,7 +4846,7 @@ function subadmin_access($access_type)
 function get_feed_comments($window_id,$table,$column)
 {
 	$ci=& get_instance();
-	echo $sql="select * from ".$table." where ".$column."='".$window_id."' order by id ASC";
+	echo $sql="select * from ".$table." where ".$column."='".$window_id."' order by id ASC";        exit();
 	$res=$ci->db->query($sql);
 	$s=$res->result_array();
 	
