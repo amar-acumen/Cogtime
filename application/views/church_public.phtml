@@ -22,13 +22,13 @@ pr($ser_arr);
               foreach ($ser_arr as $val){
 			  $time_interval = ''
 			  if($val->ch_service_week_day == 'Monday') { 
-				$time_interval .= $val->c_start_time.'-'.$val->c_end_time,;
+				$time_interval .= $val->c_start_time .'-'.$val->c_end_time,;
 			  }
 			  if($val->ch_service_week_day == 'Tuesday') { 
-				$time_interval .= $val->c_start_time.'-'.$val->c_end_time,;
+				$time_interval .= $val->c_start_time .'-'.$val->c_end_time,;
 			  }
 			  if($val->ch_service_week_day == 'Wednesday') { 
-				$time_interval .= $val->c_start_time.'-'.$val->c_end_time,;
+				$time_interval .= $val->c_start_time .'-'.$val->c_end_time,;
 			  }
           ?>
         <li> <?= $val->ch_service_week_day; ?> <span> <?= $time_interval; ?></span></li>
