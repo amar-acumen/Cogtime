@@ -9,7 +9,7 @@ $close_time = json_decode($church_arr[0]->ch_close_time);
 $special_note = json_decode($church_arr[0]->ch_special_note);
 //pr($open_time);
 //pr($close_time);exit;
-pr($ser_arr);
+//pr($ser_arr);
 ?>
 </div>
 <div class="container">
@@ -22,19 +22,38 @@ pr($ser_arr);
               foreach ($ser_arr as $val){
 			  $time_interval = '';
 			  if($val->ch_service_week_day == 'Mon') { 
-				$time_interval .= $val->c_start_time .'-'.$val->c_end_time .',';
+				$time_interval_mon .=$val->c_start_time .'-'.$val->c_end_time .',';
 			  }
 			  if($val->ch_service_week_day == 'Tue') { 
-				$time_interval .= $val->c_start_time .'-'.$val->c_end_time .',';
+				$time_interval_tue .= $val->c_start_time .'-'.$val->c_end_time .',';
 			  }
 			  if($val->ch_service_week_day == 'Wed') { 
-				$time_interval .= $val->c_start_time .'-'.$val->c_end_time .',';
+				$time_interval_wed .= $val->c_start_time .'-'.$val->c_end_time .',';
 			  }
+			  if($val->ch_service_week_day == 'Thurs') { 
+				$time_interval_thurs .= $val->c_start_time .'-'.$val->c_end_time .',';
+			  }
+			  if($val->ch_service_week_day == 'Fri') { 
+				$time_interval_fri .= $val->c_start_time .'-'.$val->c_end_time .',';
+			  }
+			  if($val->ch_service_week_day == 'Sat') { 
+				$time_interval_sat .= $val->c_start_time .'-'.$val->c_end_time .',';
+			  }
+			  if($val->ch_service_week_day == 'Sun') { 
+				$time_interval_sun .= $val->c_start_time .'-'.$val->c_end_time .',';
+			  }
+		}
           ?>
-        <li> <span> <?= $time_interval; ?></span> </li>
+        <li> <span> <?php if($time_interval_mon) { echo 'Mon : '.rtrim($time_interval_mon ,','); } ?></span> </li>
+		<li> <span> <?php if($time_interval_tue) { echo 'Tue : '.rtrim($time_interval_tue ,','); } ?></span> </li>
+		<li> <span> <?php if ($time_interval_wed) { echo 'Wed : '.rtrim($time_interval_wed ,','); } ?></span> </li>
+		<li> <span> <?php if ($time_interval_thurs) { echo 'Thurs : '.rtrim($time_interval_thurs ,','); } ?></span> </li>
+		<li> <span> <?php if ($time_interval_fri) { echo 'Fri : '.rtrim($time_interval_fri ,','); } ?></span> </li>
+		<li> <span> <?php if ($time_interval_sat) { echo 'Sat : '.rtrim($time_interval_sat ,','); } ?></span> </li>
+		<li> <span> <?php if ($time_interval_sun) { echo 'Sun : '.rtrim($time_interval_sun ,','); } ?></span> </li>
           <?php 
               }
-              } else{?> 
+               else{?> 
                <li>no service found</li>             
               <?php } ?>
        
