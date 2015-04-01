@@ -194,7 +194,7 @@ function post_comment(id)
 
 				  $('#comment_'+id).html(data.html);
 
-				  $('.comments-number-mid').append(data.com);
+				  $('.comments-number-mid').insertAfter(data.com);
 
 				}
 
