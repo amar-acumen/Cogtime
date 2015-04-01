@@ -20,8 +20,18 @@ pr($ser_arr);
           <?php 
           if(!empty($ser_arr)){
               foreach ($ser_arr as $val){
+			  $time_interval = ''
+			  if($val->ch_service_week_day == 'Monday') { 
+				$time_interval .= $val->c_start_time.'-'.$val->c_end_time,;
+			  }
+			  if($val->ch_service_week_day == 'Tuesday') { 
+				$time_interval .= $val->c_start_time.'-'.$val->c_end_time,;
+			  }
+			  if($val->ch_service_week_day == 'Wednesday') { 
+				$time_interval .= $val->c_start_time.'-'.$val->c_end_time,;
+			  }
           ?>
-        <li><?php if(count($val->ch_service_week_day) > 1) { ?> <span><?= $val->ch_service_week_day; ?> <?= $val->c_start_time; ?> - <?= $val->c_end_time; ?>,</span><?= $val->c_des; ?>, <?php } else { ?> <?= $val->ch_service_week_day; ?> <?= $val->c_start_time; ?> - <?= $val->c_end_time; ?> </span><?= $val->c_des; ?> </<?php } ?></li>
+        <li> <?= $val->ch_service_week_day; ?> <span> <?= $time_interval; ?></span></li>
           <?php 
               }
               } else{?> 
