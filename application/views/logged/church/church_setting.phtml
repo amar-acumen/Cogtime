@@ -405,14 +405,14 @@ $("#text_count").text("Characters left: " + (500 - $(this).val().length));
                
                
                <form action="<?= base_url().'logged/church/add_service' ?>" method="POST" name="Service[]" class="church_serv_main">
-			   <div class="form-main-service">
-				<input type="checkbox" name="ch_service_week_day[]" id="ch_service_week_day" value="Monday"> Mon
-				<input type="checkbox" name="ch_service_week_day[]" id="ch_service_week_day" value="Tuesday"> Tue
-				<input type="checkbox" name="ch_service_week_day[]" id="ch_service_week_day" value="Wednesday"> Wed
-				<input type="checkbox" name="ch_service_week_day[]" id="ch_service_week_day" value="Thursday"> Thurs
-				<input type="checkbox" name="ch_service_week_day[]" id="ch_service_week_day" value="Friday"> Fri
-				<input type="checkbox" name="ch_service_week_day[]" id="ch_service_week_day" value="Saturday"> Sat
-				<input type="checkbox" name="ch_service_week_day[]" id="ch_service_week_day" value="Sunday"> Sun
+			   <div class="ch-time">
+				<label><input type="checkbox" name="ch_service_week_day[]" id="ch_service_week_day" value="Monday"> Mon</label>
+				<label><input type="checkbox" name="ch_service_week_day[]" id="ch_service_week_day" value="Tuesday"> Tue</label>
+				<label><input type="checkbox" name="ch_service_week_day[]" id="ch_service_week_day" value="Wednesday"> Wed</label>
+				<label><input type="checkbox" name="ch_service_week_day[]" id="ch_service_week_day" value="Thursday"> Thurs</label>
+				<label><input type="checkbox" name="ch_service_week_day[]" id="ch_service_week_day" value="Friday"> Fri</label>
+				<label><input type="checkbox" name="ch_service_week_day[]" id="ch_service_week_day" value="Saturday"> Sat</label>
+				<label><input type="checkbox" name="ch_service_week_day[]" id="ch_service_week_day" value="Sunday"> Sun</label>
 				</div>
 				
 			   <div class="church_serv" id="first_elem">
