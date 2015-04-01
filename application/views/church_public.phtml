@@ -20,7 +20,7 @@ pr($ser_arr);
           <?php 
           if(!empty($ser_arr)){
               foreach ($ser_arr as $val){
-			  $time_interval = ''
+			  $time_interval = '';
 			  if($val->ch_service_week_day == 'Monday') { 
 				$time_interval .= $val->c_start_time .'-'.$val->c_end_time,;
 			  }
