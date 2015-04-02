@@ -243,3 +243,39 @@ function validatephotoFrm(data)
       <div class="bot"><div>&nbsp;</div></div>
 </div>
 <!--profile image popup end-->
+<script type="text/javascript">
+function autologin(user_id , church_id , type){
+    if(type == 'admin'){
+         showBusyScreen()
+   $.ajax({
+          url : base_url+'admin/members/member_detail_utilities/autologin_church',
+          type : 'post',
+         
+          data : ({'user_id' : user_id,'church_id' : church_id,'type':type }),
+           dataType: 'json',
+          success : function(data)
+          {
+             var url = data.url;
+             window.location.href=url;
+          }
+      }); 
+    }
+    if(type == 'member'){
+       showBusyScreen()
+   $.ajax({
+          url : admin_base_url+'members/member_detail_utilities/autologin_church',
+          type : 'post',
+         
+          data : ({'user_id' : user_id,'church_id' : church_id,'type':type }),
+           dataType: 'json',
+          success : function(data)
+          {
+              alert('ok');
+             //var url = data.url;
+            // window.location.protocol=url;  
+          }
+      }); 
+    }
+}
+
+</script>
