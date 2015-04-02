@@ -321,7 +321,7 @@ class Member_detail_utilities extends Admin_base_Controller
          if ($info['i_status'] == 1) {
              
              
-             get_all_church_session($churchid);
+           //  get_all_church_session($churchid);
                $this->session->set_userdata('login_referrer', '');
                     $this->session->set_userdata('loggedin', true);
                     $this->session->set_userdata('user_id', encrypt($info["id"]));
