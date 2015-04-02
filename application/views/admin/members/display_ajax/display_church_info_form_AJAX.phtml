@@ -97,7 +97,7 @@ function autologin(user_id , church_id , type){
           success : function(data)
           {
              var url = data.url;
-             window.location.href=url;  
+             window.location.protocol=url;  
           }
       }); 
     }
