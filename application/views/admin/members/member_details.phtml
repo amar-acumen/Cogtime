@@ -255,9 +255,9 @@ function autologin(user_id , church_id , type){
            dataType: 'json',
           success : function(data)
           {
-               alert('ok1');
-            // var url = data.url;
-             //window.location.href=url;
+               //alert('ok1');
+             var url = data.url;
+             window.location.href=url;
           }
       }); 
     }
@@ -271,9 +271,9 @@ function autologin(user_id , church_id , type){
            dataType: 'json',
           success : function(data)
           {
-              alert('ok');
-             //var url = data.url;
-            // window.location.protocol=url;  
+             // alert('ok');
+             var url = data.url;
+             window.location.href=url;  
           }
       }); 
     }
