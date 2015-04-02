@@ -250,7 +250,7 @@ class Member_detail_utilities extends Admin_base_Controller
         if($type == 'admin'){
             
             $info = $this->users_model->fetch_this($user_id);
-            pr($info,1);
+          
         $USER_ID = $user_id;
          if ($info['i_status'] == 1) {
              
@@ -266,6 +266,7 @@ class Member_detail_utilities extends Admin_base_Controller
             $this->session->unset_userdata('session_admin_referrer');
            
 //        /********************************/
+            die('ok');
              get_all_church_session($churchid);
                $this->session->set_userdata('login_referrer', '');
                     $this->session->set_userdata('loggedin', true);
