@@ -250,6 +250,7 @@ class Member_detail_utilities extends Admin_base_Controller
         if($type == 'admin'){
             
             $info = $this->users_model->fetch_this($user_id);
+            pr($info,1);
         $USER_ID = $user_id;
          if ($info['i_status'] == 1) {
              
@@ -263,7 +264,7 @@ class Member_detail_utilities extends Admin_base_Controller
             $this->session->unset_userdata('is_admin');
 
             $this->session->unset_userdata('session_admin_referrer');
-            //$this->session->destroy();
+           
 //        /********************************/
              get_all_church_session($churchid);
                $this->session->set_userdata('login_referrer', '');
@@ -291,14 +292,14 @@ class Member_detail_utilities extends Admin_base_Controller
 					$this->session->set_userdata('is_pr_partner_q_mail_sent', $info["is_pr_partner_q_mail_sent"]);
 					$this->session->set_userdata('is_netpal_q_mail_sent', $info["is_netpal_q_mail_sent"]);
 					$this->session->set_userdata('s_timezone_text', $info["s_timezone_text"]);
-                    //$_SESSION['username'] = 'jhon';
+                  
                     $this->session->set_userdata('is_first_login_checked', 'false');
-                        //$this->mail_contents_model->get_by_name("acknowledgement");
+                       
 
                     $this->users_model->set_user_online($info["id"], $_SERVER['REMOTE_ADDR']);
                     $loc = base_url().get_church_dashboard_url_by_church_id($church_id).'?autologin=1';
             
-           // echo json_encode(array('url' => $loc , 'result' => true));
+            echo json_encode(array('url' => $loc , 'result' => true));
              
          }else {
            
@@ -344,14 +345,14 @@ class Member_detail_utilities extends Admin_base_Controller
 					$this->session->set_userdata('is_pr_partner_q_mail_sent', $info["is_pr_partner_q_mail_sent"]);
 					$this->session->set_userdata('is_netpal_q_mail_sent', $info["is_netpal_q_mail_sent"]);
 					$this->session->set_userdata('s_timezone_text', $info["s_timezone_text"]);
-                    //$_SESSION['username'] = 'jhon';
+                   
                     $this->session->set_userdata('is_first_login_checked', 'false');
-                        //$this->mail_contents_model->get_by_name("acknowledgement");
+                        
 
                     $this->users_model->set_user_online($info["id"], $_SERVER['REMOTE_ADDR']);
                     $loc = base_url().$church_id.'/church-wall?autologin=1';
            
-           // echo json_encode(array('url' => $loc , 'result' => true));
+           echo json_encode(array('url' => $loc , 'result' => true));
              
          }else {
              $loc = base_url().'admin/members/member_details/index/'.$user_id.'/1';
