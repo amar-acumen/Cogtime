@@ -243,7 +243,7 @@ class Member_detail_utilities extends Admin_base_Controller
     }
     
     function autologin_church(){
-       
+       die('ok');
         $user_id = $this->input->post('user_id');
         $church_id = $this->input->post('church_id');
         $type = $this->input->post('type');
