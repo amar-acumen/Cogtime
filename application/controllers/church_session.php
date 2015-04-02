@@ -30,7 +30,7 @@ class Church_session extends Base_controller {
     public function authenticate($email, $pwd) {
 
         try {
-get_all_church_session();
+//get_all_church_session();
             $arr_messages = array();
 
 
