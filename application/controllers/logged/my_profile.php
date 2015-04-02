@@ -283,7 +283,10 @@ class My_profile extends Base_controller {
                 $info['s_time'] = get_formatted_string($posted["s_time"]);
                 $info['e_title'] = get_formatted_string($posted['txt_title']);
                 $info['s_first_name'] = get_formatted_string($posted['txt_fname']);
+                  $this->session->set_userdata('username', $info["s_first_name"]);
+                
                 $info['s_last_name'] = get_formatted_string($posted['txt_lname']);
+                 $this->session->set_userdata('user_lastname', $info["s_last_name"]);
                 $info['e_gender'] = $posted["txt_gender"];
 
                 $info['dt_dob'] = date('Y-m-d', mktime(0, 0, 0, $posted["month"], $posted["day"], $posted["year"]));
