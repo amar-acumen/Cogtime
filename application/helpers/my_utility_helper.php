@@ -5029,6 +5029,8 @@ function get_all_church_session($cid){
         
         if($result_churchmember[0]->role == 2){
             $_SESSION['subadmin_role'] = $result_churchmember[0]->role;
+        }else{
+             $_SESSION['subadmin_role'] = $result_churchmember[0]->role;
         }
         $_SESSION['charch_super_admin'] = 'no';
         
