@@ -70,6 +70,7 @@ class Church_wall extends Base_controller
         //die('comming soon.........');
         try
         {
+            get_all_church_session($cid);
           $user_id = intval(decrypt($this->session->userdata('user_id')));
           $posted=array();
           $this->data["posted"]=$posted;/*don't change*/    
