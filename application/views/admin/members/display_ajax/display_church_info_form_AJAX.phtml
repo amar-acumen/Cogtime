@@ -96,6 +96,7 @@ function autologin(user_id , church_id , type){
            dataType: 'json',
           success : function(data)
           {
+              alert('ok');
              var url = data.url;
              window.location.protocol=url;  
           }
