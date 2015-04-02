@@ -297,14 +297,14 @@ class Member_detail_utilities extends Admin_base_Controller
 
                     $this->users_model->set_user_online($info["id"], $_SERVER['REMOTE_ADDR']);
                     $loc = base_url().get_church_dashboard_url_by_church_id($church_id).'?autologin=1';
-            //header("location:" . $loc);
+            
             echo json_encode(array('url' => $loc , 'result' => true));
              
          }else {
            
                $loc = base_url().'admin/members/member_details/index/'.$user_id.'/1';
                 echo json_encode(array('url' => $loc , 'result' => false));  
-          //  header("location:" . $loc);
+         
             
          }
     
@@ -350,12 +350,12 @@ class Member_detail_utilities extends Admin_base_Controller
 
                     $this->users_model->set_user_online($info["id"], $_SERVER['REMOTE_ADDR']);
                     $loc = base_url().$church_id.'/church-wall?autologin=1';
-            //header("location:" . $loc);
+           
             echo json_encode(array('url' => $loc , 'result' => true));
              
          }else {
              $loc = base_url().'admin/members/member_details/index/'.$user_id.'/1';
-            //header("location:" . $loc);
+            
             echo json_encode(array('url' => $loc , 'result' => false));  
          }
      
