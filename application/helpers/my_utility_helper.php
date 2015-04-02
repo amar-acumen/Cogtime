@@ -5027,9 +5027,11 @@ function get_all_church_session($cid){
     if($numrowmember>0)
     {
         
-        if($result_churchmember[0]->role == 2)
+        if($result_churchmember[0]->role == 2){
             $_SESSION['subadmin_role'] = $result_churchmember[0]->role;
+        }
         $_SESSION['charch_super_admin'] = 'no';
+        
         $_SESSION['logged_church_id'] = $result_churchmember[0]->chid;
        
         
