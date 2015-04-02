@@ -44,7 +44,7 @@
                  }
              }
                
-    
+    echo $_SESSION['subadmin_role'];
     ?>
 <?php if($_SESSION['charch_super_admin']=='yes' || $_SESSION['subadmin_role']==2) {
     $page_location = $this->uri->segment(1);
