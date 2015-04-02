@@ -74,7 +74,7 @@ function autologin(user_id , church_id , type){
     if(type == 'admin'){
          showBusyScreen()
    $.ajax({
-          url : admin_base_url+'members/member_detail_utilities/autologin_church',
+          url : base_url+'admin/members/member_detail_utilities/autologin_church',
           type : 'post',
          
           data : ({'user_id' : user_id,'church_id' : church_id,'type':type }),
