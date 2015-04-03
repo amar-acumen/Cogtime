@@ -864,126 +864,127 @@ $(document).ready(function(){
 //               var flag2 = 1;
 //            }
             
-            var flagopen = 0;
+            var flagopen;
 			
             if(sun_ch_open == '-1'){
                 $('#sun_ch_open_error').css('display','block').html('Please select sunday church open time');
-                flagopen++;
+                flagopen = 1;
             }else{
               $('#sun_ch_open_error').css('display','none');
             }
             
 			if(sun_ch_close  == '-1' || sun_ch_close  != 'Closed'){
                  $('#sun_ch_close_error').css('display','block').html('Please select sunday church close time');
-                flagopen++;
+                flagopen = 1;
                 
             }else if(sun_ch_open >= sun_ch_close  ){
                  $('#sun_ch_close_error').css('display','block').html('Please enter valid end time');
-                flagopen++;
+                flagopen = 1;
             }else{
                  $('#sun_ch_close_error').css('display','none');
             }
 			
 			if(mon_ch_open == '-1'){
                 $('#mon_ch_open_error').css('display','block').html('Please select monday church open time');
-                flagopen++;
+                flagopen = 1;
             }else{
               $('#mon_ch_open_error').css('display','none');
             }
             if(mon_ch_close == '-1' || mon_ch_close  != 'Closed'){
                  $('#mon_ch_close_error').css('display','block').html('Please select monday church close time');
-                flagopen++;
+                flagopen = 1;
                 
             }else if(mon_ch_open >= mon_ch_close ){
                  $('#mon_ch_close_error').css('display','block').html('Please enter valid end time');
-                flagopen++;
+                flagopen = 1;
             }else{
                  $('#mon_ch_close_error').css('display','none');
             }
 			
 			if(tues_ch_open == '-1' ){
                 $('#tues_ch_open_error').css('display','block').html('Please select tuesday church open time');
-                flagopen++;
+                flagopen = 1;
             }else{
               $('#tues_ch_open_error').css('display','none');
             }
             if(tues_ch_close == '-1' || tues_ch_open  != 'Closed'){
                  $('#tues_ch_close_error').css('display','block').html('Please select tuesday church close time');
-                flagopen++;
+                flagopen = 1;
                 
             }else if(tues_ch_open >= tues_ch_close){
                  $('#tues_ch_close_error').css('display','block').html('Please enter valid end time');
-                flagopen++;
+                flagopen = 1;
             }else{
                  $('#tues_ch_close_error').css('display','none');
             }
 			
 			if(wed_ch_open == '-1'){
                 $('#wed_ch_open_error').css('display','block').html('Please select wednesday church open time');
-                flagopen++;
+                flagopen = 1;
             }else{
               $('#wed_ch_open_error').css('display','none');
             }
             if(wed_ch_close == '-1' || wed_ch_close  != 'Closed'){
                  $('#wed_ch_close_error').css('display','block').html('Please select wednesday church close time');
-                flagopen++;
+                flagopen = 1;
                 
             }else if(wed_ch_open >= wed_ch_close ){
                  $('#wed_ch_close_error').css('display','block').html('Please enter valid end time');
-                flagopen++;
+                flagopen = 1;
             }else{
                  $('#wed_ch_close_error').css('display','none');
             }
 			
 			if(thurs_ch_open == '-1'){
                 $('#thurs_ch_open_error').css('display','block').html('Please select thursday church open time');
-                flagopen++;
+                flagopen = 1;
             }else{
               $('#thurs_ch_open_error').css('display','none');
             }
             if(thurs_ch_close   == '-1' || thurs_ch_close  != 'Closed'){
                  $('#thurs_ch_close_error').css('display','block').html('Please select thursday church close time');
-                flagopen++;
+                flagopen = 1;
                 
             }else if(thurs_ch_open >= thurs_ch_close ){
                  $('#thurs_ch_close_error').css('display','block').html('Please enter valid end time');
-                flagopen++;
+                flagopen = 1;
             }else{
                  $('#thurs_ch_close_error').css('display','none');
             }
 			
 			if(fri_ch_open == '-1'){
                 $('#fri_ch_open_error').css('display','block').html('Please select friday church open time');
-                flagopen++;
+                flagopen = 1;
             }else{
               $('#fri_ch_open_error').css('display','none');
             }
             if(fri_ch_close   == '-1' || fri_ch_close  != 'Closed'){
                  $('#fri_ch_close_error').css('display','block').html('Please select friday church close time');
-                flagopen++;
+                flagopen = 1;
                 
             }else if(fri_ch_open >= fri_ch_close ){
                  $('#fri_ch_close_error').css('display','block').html('Please enter valid end time');
-                flagopen++;
+                flagopen = 1;
             }else{
                  $('#fri_ch_close_error').css('display','none');
             }
 			
 			if(sat_ch_open == '-1'){
                 $('#sat_ch_open_error').css('display','block').html('Please select saturday church open time');
-                flagopen++;
+                flagopen = 1;
             }else{
               $('#sat_ch_open_error').css('display','none');
             }
             if(sat_ch_close   == '-1' || sat_ch_close  != 'Closed'){
                  $('#sat_ch_close_error').css('display','block').html('Please select saturday church close time');
-                flagopen++;
+                flagopen = 1;
                 
             }else if(sat_ch_open >= sat_ch_close ){
                  $('#sat_ch_close_error').css('display','block').html('Please enter valid end time');
-                flagopen++;
+                flagopen = 1;
             }else{
                  $('#sat_ch_close_error').css('display','none');
+                 flagopen = 0;
             }
 			
             //else if()
