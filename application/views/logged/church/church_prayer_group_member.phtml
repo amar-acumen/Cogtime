@@ -31,7 +31,28 @@
                                       
                                       <div style="background:url(<?=get_profile_image_of_user('thumb',$val->s_profile_photo,$val->e_gender)?>) no-repeat center;width:30px; height:30px;" class="pro_photo3"></div>
                                           <div class="pra-member-content">
-                                              <a href="<?=base_url() . "profile/" . $val->i_user_id . "/" . my_url($val->member_name) . ".html"?>"><?=$val->member_name?></a>&nbsp;&nbsp; <a href="javascript:void(0);" onclick="delete_member(<?=$val->i_user_id?>,<?=$val->i_prayer_group_id?>)">Remove</a>
+                                              <a href="<?=base_url() . "profile/" . $val->i_user_id . "/" . my_url($val->member_name) . ".html"?>"><?=$val->member_name?></a>&nbsp;&nbsp; 
+                                              <?php 
+                                               $sudadmin_access = get_subadmin_access(intval(decrypt($this->session->userdata('user_id'))),$_SESSION['logged_church_id'] );
+                                                if(count($sudadmin_access)){
+                                                    for($i=0;$i<count($sudadmin_access);$i++){
+                                                        if($sudadmin_access[$i] == 'wall' ){
+                                                            $con_wall = 1;
+                                                        }
+                                                        if($sudadmin_access[$i] == 'ring' ){
+                                                            $con_ring = 1;
+                                                        }
+                                                         if($sudadmin_access[$i] == 'prayergroup' ){
+                                                             $con_prayergroup = 1;
+                                                        }
+                                                    }
+                                                }
+                                              if($_SESSION['charch_super_admin'] == 'yes' || ($_SESSION['subadmin_role'] == 2 && $con_prayergroup == 1) ){
+                                              ?>
+                                              <a href="javascript:void(0);" onclick="delete_member(<?=$val->i_user_id?>,<?=$val->i_prayer_group_id?>)">Remove</a>
+                                              <?php
+                                              }
+                                              ?>
                                           <ul class="prayer-option">
                                          
                                           <li>Member Since- <?=getShortDateWithTime($val->dt_joined_on,6)?> </li>
