@@ -484,7 +484,8 @@ function unblock_member () {
 	 $church_special_note_arr['friday']=$this->input->post('fri_special_note');
 	 $church_special_note_arr['saturday']=$this->input->post('sat_special_note');
 	 
-	 
+	 pr($church_open_arr);
+         pr($church_close_arr);
     $info['ch_open_time'] = json_encode($church_open_arr);
     $info['ch_close_time'] = json_encode($church_close_arr);
 	$info['ch_special_note'] = json_encode($church_special_note_arr);
