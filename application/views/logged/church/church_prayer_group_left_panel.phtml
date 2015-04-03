@@ -8,7 +8,9 @@
             ?>
             <li><a href="<?=base_url().''.$_SESSION['logged_church_id']?>/create-prayer-group" class="<?php echo ($active_menu == 'create_group')?'active':'';?>">Create Prayer Group</a></li>
 			<?php if($prayer_group_id != null) { ?>
-<!--			<li><a href="<?=base_url()?>church-prayer-group-invite/<?=$prayer_group_id?>" class="<?php echo ($active_menu == 'search_invite')?'active':'';?>">Search and Invite</a></li>-->
+              <?php if($_SESSION['charch_super_admin'] == 'yes' || $_SESSION['subadmin_role']  == 2){ ?>
+		<li><a href="<?=base_url()?>church-prayer-group-invite/<?=$prayer_group_id?>" class="<?php echo ($active_menu == 'search_invite')?'active':'';?>">Search and Invite</a></li>
+              <?php } ?>
 			<? } ?>
 		<? 
         } 
