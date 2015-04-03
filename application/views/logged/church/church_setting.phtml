@@ -895,10 +895,8 @@ $(document).ready(function(){
             }
             else{
               $('#mon_ch_open_error').css('display','none');
-               flagopen = 0;
-            }
-            if(mon_ch_close == '-1' && mon_ch_open  != 'Closed'){
-                alert('d');
+              if(mon_ch_close == '-1' && mon_ch_open  != 'Closed'){
+               // alert('d');
                  $('#mon_ch_close_error').css('display','block').html('Please select monday church close time');
                 flagopen = 1;
                 
@@ -910,6 +908,8 @@ $(document).ready(function(){
             else{
                  $('#mon_ch_close_error').css('display','none');
                   flagopen = 0;
+            }
+            
             }
             
 			
