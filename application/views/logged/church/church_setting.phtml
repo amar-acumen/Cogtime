@@ -414,13 +414,13 @@ $("#text_count").text("Characters left: " + (500 - $(this).val().length));
                
                <form action="<?= base_url().'logged/church/add_service' ?>" method="POST" name="Service[]" class="church_serv_main">
 			   <div class="ch-time">
-				<label><input type="checkbox" name="ch_service_week_day[]" id="ch_service_week_day" value="Mon"> Mon</label>
-				<label><input type="checkbox" name="ch_service_week_day[]" id="ch_service_week_day" value="Tues"> Tue</label>
-				<label><input type="checkbox" name="ch_service_week_day[]" id="ch_service_week_day" value="Wed"> Wed</label>
-				<label><input type="checkbox" name="ch_service_week_day[]" id="ch_service_week_day" value="Thurs"> Thurs</label>
-				<label><input type="checkbox" name="ch_service_week_day[]" id="ch_service_week_day" value="Fri"> Fri</label>
-				<label><input type="checkbox" name="ch_service_week_day[]" id="ch_service_week_day" value="Sat"> Sat</label>
-				<label><input type="checkbox" name="ch_service_week_day[]" id="ch_service_week_day" value="Sun"> Sun</label>
+                               <label><input type="checkbox" name="ch_service_week_day[]" class="ch_service_week_day" value="Mon" > Mon</label>
+				<label><input type="checkbox" name="ch_service_week_day[]" class="ch_service_week_day" value="Tues"> Tue</label>
+				<label><input type="checkbox" name="ch_service_week_day[]" class="ch_service_week_day" value="Wed"> Wed</label>
+				<label><input type="checkbox" name="ch_service_week_day[]" class="ch_service_week_day" value="Thurs"> Thurs</label>
+				<label><input type="checkbox" name="ch_service_week_day[]" class="ch_service_week_day" value="Fri"> Fri</label>
+				<label><input type="checkbox" name="ch_service_week_day[]" class="ch_service_week_day" value="Sat"> Sat</label>
+				<label><input type="checkbox" name="ch_service_week_day[]" class="ch_service_week_day" value="Sun"> Sun</label>
 				</div>
 				
 			   <div class="church_serv" id="first_elem">
@@ -1119,6 +1119,7 @@ $(document).ready(function(){
 })
 
 $('#ch_service').live('click',function(){
+
 var ch_open = $('.ch_open').val();
 var ch_close = $('.ch_close').val();
 var des = $('.des').val();
@@ -1144,7 +1145,15 @@ else{
     $('#error12').css('display','none');
     var flag12 = 1;
 }
-if(flag10 == 1 && flag11 == 1 && flag12 == 1){
+
+
+if (!$('.ch_service_week_day').is(':checked')) {
+alert('Please check any day..');
+var weekflag = 0;
+}else{
+  var weekflag = 1;  
+}
+if(flag10 == 1 && flag11 == 1 && flag12 == 1 && weekflag == 1){
     $('.church_serv_main').submit();
 }
 
