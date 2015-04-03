@@ -417,8 +417,9 @@ function unblockGroup()
     }	
 $(document).ready(function(){
     $('.approve').children('a').mouseover(function(){
+        var id = $(this).attr('id');
         var check = $('.approve').children('a').text();
-        alert(check);
+        alert(id);
     });
     
 });
