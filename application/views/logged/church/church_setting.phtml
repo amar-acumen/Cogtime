@@ -874,14 +874,15 @@ $(document).ready(function(){
                flagopen = 0;
             }
             
-			if(sun_ch_close  == '-1'  || sun_ch_open  != 'Closed'){
+			if(sun_ch_close  == '-1'  && sun_ch_open  != 'Closed'){
                  $('#sun_ch_close_error').css('display','block').html('Please select sunday church close time');
                 flagopen = 1;
                 
-            }else if(sun_ch_open >= sun_ch_close  ){
+            }     else if(sun_ch_open >= sun_ch_close  ){ 
                  $('#sun_ch_close_error').css('display','block').html('Please enter valid end time');
                 flagopen = 1;
-            }else{
+            }
+            else{
                  $('#sun_ch_close_error').css('display','none');
                   flagopen = 0;
             }
@@ -889,18 +890,21 @@ $(document).ready(function(){
 			if(mon_ch_open == '-1'){
                 $('#mon_ch_open_error').css('display','block').html('Please select monday church open time');
                 flagopen = 1;
-            }else{
+            }
+            else{
               $('#mon_ch_open_error').css('display','none');
                flagopen = 0;
             }
-            if(mon_ch_close == '-1' || mon_ch_open  != 'Closed'){
+            if(mon_ch_close == '-1' && mon_ch_open  != 'Closed'){
                  $('#mon_ch_close_error').css('display','block').html('Please select monday church close time');
                 flagopen = 1;
                 
-            }else if(mon_ch_open >= mon_ch_close ){
+            }
+            else if(mon_ch_open >= mon_ch_close ){
                  $('#mon_ch_close_error').css('display','block').html('Please enter valid end time');
                 flagopen = 1;
-            }else{
+            }
+            else{
                  $('#mon_ch_close_error').css('display','none');
                   flagopen = 0;
             }
@@ -913,11 +917,12 @@ $(document).ready(function(){
               $('#tues_ch_open_error').css('display','none');
                flagopen = 0;
             }
-            if(tues_ch_close == '-1' || tues_ch_open  != 'Closed'){
+            if(tues_ch_close == '-1' && tues_ch_open  != 'Closed'){
                  $('#tues_ch_close_error').css('display','block').html('Please select tuesday church close time');
                 flagopen = 1;
                 
-            }else if(tues_ch_open >= tues_ch_close){
+            }
+            else if(tues_ch_open >= tues_ch_close){
                  $('#tues_ch_close_error').css('display','block').html('Please enter valid end time');
                 flagopen = 1;
             }else{
@@ -932,7 +937,7 @@ $(document).ready(function(){
               $('#wed_ch_open_error').css('display','none');
                flagopen = 0;
             }
-            if(wed_ch_close == '-1' || wed_ch_open  != 'Closed'){
+            if(wed_ch_close == '-1' && wed_ch_open  != 'Closed'){
                  $('#wed_ch_close_error').css('display','block').html('Please select wednesday church close time');
                 flagopen = 1;
                 
@@ -951,11 +956,12 @@ $(document).ready(function(){
               $('#thurs_ch_open_error').css('display','none');
                flagopen = 0;
             }
-            if(thurs_ch_close   == '-1' || thurs_ch_open  != 'Closed'){
+            if(thurs_ch_close   == '-1' && thurs_ch_open  != 'Closed'){
                  $('#thurs_ch_close_error').css('display','block').html('Please select thursday church close time');
                 flagopen = 1;
                 
-            }else if(thurs_ch_open >= thurs_ch_close ){
+            }
+            else if(thurs_ch_open >= thurs_ch_close ){
                  $('#thurs_ch_close_error').css('display','block').html('Please enter valid end time');
                 flagopen = 1;
             }else{
@@ -970,14 +976,16 @@ $(document).ready(function(){
               $('#fri_ch_open_error').css('display','none');
                flagopen = 0;
             }
-            if(fri_ch_close   == '-1' || fri_ch_open  != 'Closed'){
+            if(fri_ch_close   == '-1' && fri_ch_open  != 'Closed'){
                  $('#fri_ch_close_error').css('display','block').html('Please select friday church close time');
                 flagopen = 1;
                 
-            }else if(fri_ch_open >= fri_ch_close ){
+            }
+            else if(fri_ch_open >= fri_ch_close ){
                  $('#fri_ch_close_error').css('display','block').html('Please enter valid end time');
                 flagopen = 1;
-            }else{
+            }
+            else{
                  $('#fri_ch_close_error').css('display','none');
                   flagopen = 0;
             }
@@ -985,11 +993,12 @@ $(document).ready(function(){
 			if(sat_ch_open == '-1'){
                 $('#sat_ch_open_error').css('display','block').html('Please select saturday church open time');
                 flagopen = 1;
-            }else{
+            }else
+            {
               $('#sat_ch_open_error').css('display','none');
                flagopen = 0;
             }
-            if(sat_ch_close   == '-1' || sat_ch_open  != 'Closed'){
+            if(sat_ch_close   == '-1' && sat_ch_open  != 'Closed'){
                  $('#sat_ch_close_error').css('display','block').html('Please select saturday church close time');
                 flagopen = 1;
                 
@@ -1026,7 +1035,8 @@ $(document).ready(function(){
                 $('#error7').css('display','none');
                 var flag7 = 1;
             }
-        if(flag1 == 1  && flag5 == 1 && flag6 == 1 && flag7 == 1 ){
+            alert(flagopen);
+        if(flag1 == 1  && flag5 == 1 && flag6 == 1 && flag7 == 1 && flagopen == 0){
             $('#gen_setting_form').submit();
         }
         
