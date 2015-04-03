@@ -419,7 +419,10 @@ $(document).ready(function(){
     $('.approve').children('a').mouseover(function(){
        
         var check = $(this).text();
-        alert(check);
+        if(check == 'blocked'){
+        $(this).css('color','#096aa7').html('Unblock');            
+        }
+        //alert(check);
     });
     
 });
