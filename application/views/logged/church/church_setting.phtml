@@ -116,7 +116,7 @@
 	  <th>Special Notes</th>
     </tr>
     </thead>
-    <tbody>
+     <tbody>
     <tr>
       <td class="day-colum">Sunday</td>
       <td><select class="time-selectbox" id="sun_ch_open" name="sun_ch_open" >
@@ -145,7 +145,7 @@
                               } ?>
                                  <?=makeOption_time($start_time = '00:00', $i_gap = 15, $s_time_new)?>
                         </select>
-                <!--<span class="error-msg" id="sun_ch_close_error">Required</span>--></td>
+                <span class="error-msg" id="sun_ch_close_error">Required</span></td>
 		<td><input type="text" name="sun_special_note" id="sun_special_note" <?php if($open_time->sunday == 'Closed') { echo 'disabled'; } else { echo ''; } ?> value="<?php echo $special_note->sunday; ?>" /></td>		
 				
     </tr>
@@ -165,7 +165,7 @@
                        </select>
 					   <span class="error-msg" id="mon_ch_open_error">Required</span>
 					   </td>
-      <td> <select  id="mon_ch_close" name="mon_ch_close">
+      <td> <select  id="mon_ch_close" name="mon_ch_close" <?php if($open_time->monday == 'Closed') { echo 'disabled'; } else { echo ''; } ?>>
                <option value="-1">Select</option>
                                <?php /*?><option value="-1">Select</option><?php */?>
                                     <?php  
@@ -177,16 +177,17 @@
                               } ?>
                                  <?=makeOption_time($start_time = '00:00', $i_gap = 15, $s_time_new)?>
                         </select>
-                <span class="error-msg" id="mon_ch_close_error">Required</span>
-      </td>
-				<td><input type="text" name="mon_special_note" id="mon_special_note" value="<?php echo $special_note->monday; ?>" /></td>
+
+                <span class="error-msg" id="mon_ch_close_error">Required</span></td>
+				<td><input type="text" name="mon_special_note" id="mon_special_note" <?php if($open_time->monday == 'Closed') { echo 'disabled'; } else { echo ''; } ?> value="<?php echo $special_note->monday; ?>" /></td>
+
     </tr>
 	
 	<tr>
       <td class="day-colum">Tuesday</td>
       <td><select class="time-selectbox" id="tues_ch_open" name="tues_ch_open" >
                               <option value="-1">Select</option>
-							  <option value="Closed">Closed</option>
+							  <option value="Closed" <?php echo ($open_time->tuesday == 'Closed'?'selected':''); ?>>Closed</option>
                               <?php  
                               $s_time = $open_time->tuesday;
                               if(!empty($s_time)){
@@ -198,7 +199,7 @@
                        </select>
 					   <span class="error-msg" id="tues_ch_open_error">Required</span>
 					   </td>
-      <td> <select  id="tues_ch_close" name="tues_ch_close">
+      <td> <select  id="tues_ch_close" name="tues_ch_close" <?php if($open_time->tuesday == 'Closed') { echo 'disabled'; } else { echo ''; } ?>>
                <option value="-1">Select</option>
                                <?php /*?><option value="-1">Select</option><?php */?>
                                     <?php  
@@ -211,14 +212,15 @@
                                  <?=makeOption_time($start_time = '00:00', $i_gap = 15, $s_time_new)?>
                         </select>
                 <span class="error-msg" id="tues_ch_close_error">Required</span></td>
-				<td><input type="text" name="tues_special_note" id="tues_special_note" value="<?php echo $special_note->tuesday; ?>" /></td>
+				<td><input type="text" name="tues_special_note" id="tues_special_note" <?php if($open_time->tuesday == 'Closed') { echo 'disabled'; } else { echo ''; } ?> value="<?php echo $special_note->tuesday; ?>" /></td>
+
     </tr>
 	
 	<tr>
       <td class="day-colum">Wednesday</td>
       <td><select class="time-selectbox" id="wed_ch_open" name="wed_ch_open" >
                               <option value="-1">Select</option>
-							  <option value="Closed" >Closed</option>
+							  <option value="Closed" <?php echo ($open_time->wednesday == 'Closed'?'selected':''); ?>>Closed</option>
                               <?php  
                               $s_time = $open_time->wednesday;
                               if(!empty($s_time)){
@@ -230,7 +232,7 @@
                        </select>
 					   <span class="error-msg" id="wed_ch_open_error">Required</span>
 					   </td>
-      <td> <select  id="wed_ch_close" name="wed_ch_close">
+      <td> <select  id="wed_ch_close" name="wed_ch_close" <?php if($open_time->wednesday == 'Closed') { echo 'disabled'; } else { echo ''; } ?>>
                <option value="-1">Select</option>
                                <?php /*?><option value="-1">Select</option><?php */?>
                                     <?php  
@@ -242,15 +244,17 @@
                               } ?>
                                  <?=makeOption_time($start_time = '00:00', $i_gap = 15, $s_time_new)?>
                         </select>
+
                 <span class="error-msg" id="wed_ch_close_error">Required</span></td>
-				<td><input type="text" name="wed_special_note" id="wed_special_note" value="<?php echo $special_note->wednesday; ?>" /></td>
+				<td><input type="text" name="wed_special_note" id="wed_special_note" <?php if($open_time->wednesday == 'Closed') { echo 'disabled'; } else { echo ''; } ?> value="<?php echo $special_note->wednesday; ?>" /></td>
+
     </tr>
 	
 	<tr>
       <td class="day-colum">Thursday</td>
       <td><select class="time-selectbox" id="thurs_ch_open" name="thurs_ch_open" >
                               <option value="-1">Select</option>
-							  <option value="Closed">Closed</option>
+							  <option value="Closed" <?php echo ($open_time->thursday == 'Closed'?'selected':''); ?>>Closed</option>
                               <?php  
                               $s_time = $open_time->thursday;
                               if(!empty($s_time)){
@@ -262,7 +266,7 @@
                        </select>
 					   <span class="error-msg" id="thurs_ch_open_error">Required</span>
 					   </td>
-      <td> <select  id="thurs_ch_close" name="thurs_ch_close">
+      <td> <select  id="thurs_ch_close" name="thurs_ch_close" <?php if($open_time->thursday == 'Closed') { echo 'disabled'; } else { echo ''; } ?>>
                <option value="-1">Select</option>
                                <?php /*?><option value="-1">Select</option><?php */?>
                                     <?php  
@@ -274,15 +278,16 @@
                               } ?>
                                  <?=makeOption_time($start_time = '00:00', $i_gap = 15, $s_time_new)?>
                         </select>
-               <span class="error-msg" id="thurs_ch_close_error">Required</span></td>
-				<td><input type="text" name="thurs_special_note" id="thurs_special_note" value="<?php echo $special_note->thursday; ?>" /></td>
+<span class="error-msg" id="thurs_ch_close_error">Required</span></td>
+				<td><input type="text" name="thurs_special_note" id="thurs_special_note" <?php if($open_time->thursday == 'Closed') { echo 'disabled'; } else { echo ''; } ?> value="<?php echo $special_note->thursday; ?>" /></td>
+
     </tr>
 	
 	<tr>
       <td class="day-colum">Friday</td>
       <td><select class="time-selectbox" id="fri_ch_open" name="fri_ch_open" >
                               <option value="-1">Select</option>
-							  <option value="Closed">Closed</option>
+							  <option value="Closed" <?php echo ($open_time->friday == 'Closed'?'selected':''); ?>>Closed</option>
                               <?php  
                               $s_time = $open_time->friday;
                               if(!empty($s_time)){
@@ -294,7 +299,7 @@
                        </select>
 					   <span class="error-msg" id="fri_ch_open_error">Required</span>
 					   </td>
-      <td> <select  id="fri_ch_close" name="fri_ch_close">
+      <td> <select  id="fri_ch_close" name="fri_ch_close" <?php if($open_time->friday == 'Closed') { echo 'disabled'; } else { echo ''; } ?>>
                <option value="-1">Select</option>
                                <?php /*?><option value="-1">Select</option><?php */?>
                                     <?php  
@@ -306,15 +311,16 @@
                               } ?>
                                  <?=makeOption_time($start_time = '00:00', $i_gap = 15, $s_time_new)?>
                         </select>
-              <span class="error-msg" id="fri_ch_close_error">Required</span></td>
-				<td><input type="text" name="fri_special_note" id="fri_special_note" value="<?php echo $special_note->friday; ?>" /></td>
+<span class="error-msg" id="fri_ch_close_error">Required</span></td>
+				<td><input type="text" name="fri_special_note" id="fri_special_note" <?php if($open_time->friday == 'Closed') { echo 'disabled'; } else { echo ''; } ?> value="<?php echo $special_note->friday; ?>" /></td>
+
     </tr>
 	
 	<tr>
       <td class="day-colum">Saturday</td>
       <td><select class="time-selectbox" id="sat_ch_open" name="sat_ch_open" >
                               <option value="-1">Select</option>
-							  <option value="Closed">Closed</option>
+							  <option value="Closed"  <?php echo ($open_time->saturday == 'Closed'?'selected':''); ?>>Closed</option>
                               <?php  
                               $s_time = $open_time->saturday;
                               if(!empty($s_time)){
@@ -326,7 +332,7 @@
                        </select>
 					   <span class="error-msg" id="sat_ch_open_error">Required</span>
 					   </td>
-      <td> <select  id="sat_ch_close" name="sat_ch_close">
+      <td> <select  id="sat_ch_close" name="sat_ch_close" <?php if($open_time->saturday == 'Closed') { echo 'disabled'; } else { echo ''; } ?>>
                <option value="-1">Select</option>
                                <?php /*?><option value="-1">Select</option><?php */?>
                                     <?php  
@@ -338,8 +344,9 @@
                               } ?>
                                  <?=makeOption_time($start_time = '00:00', $i_gap = 15, $s_time_new)?>
                         </select>
-              <span class="error-msg" id="sat_ch_close_error">Required</span></td>
-				<td><input type="text" name="sat_special_note" id="sat_special_note" value="<?php echo $special_note->saturday; ?>" /></td>
+<span class="error-msg" id="sat_ch_close_error">Required</span></td>
+				<td><input type="text" name="sat_special_note" id="sat_special_note"  <?php if($open_time->saturday == 'Closed') { echo 'disabled'; } else { echo ''; } ?> value="<?php echo $special_note->saturday; ?>" /></td>
+
     </tr>
     
   </tbody>
