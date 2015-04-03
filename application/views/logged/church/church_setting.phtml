@@ -153,7 +153,7 @@
       <td class="day-colum">Monday</td>
       <td><select class="time-selectbox" id="mon_ch_open" name="mon_ch_open" >
                               <option value="-1">Select</option>
-							  <option value="Closed">Closed</option>
+							  <option value="Closed" <?php echo ($open_time->monday == 'Closed'?'selected':''); ?>>Closed</option>
                               <?php  
                               $s_time = $open_time->monday;
                               if(!empty($s_time)){
