@@ -20,7 +20,9 @@
         ?>
 <!--		<li><a href="<?=base_url().''.$_SESSION['logged_church_id']?>/church-prayer-group" class="<?php echo ($active_menu == 'prayer-groups')?'active':'';?>" >Prayer Groups</a></li>-->
 		<?php if($prayer_group_id != null) { ?>
-<!--		<li><a href="<?=base_url()?>church-prayer-group-member/<?=$prayer_group_id?>" class="<?php echo ($active_menu == 'member')?'active':'';?>">Members</a></li>-->
+                  <?php if($_SESSION['charch_super_admin'] == 'yes' || $_SESSION['subadmin_role']  == 2){ ?>
+		<li><a href="<?=base_url()?>church-prayer-group-member/<?=$prayer_group_id?>" class="<?php echo ($active_menu == 'member')?'active':'';?>">Members</a></li>
+                  <?php } ?>
 		<?}?>
 		<?php if(!subadmin_access('prayer_group')) {?>
 		<li><a href="<?=base_url().''.$_SESSION['logged_church_id']?>/search-and-join-church-prayer-group" class="<?php echo ($active_menu == 'search_join')?'active':'';?>">Search and Join Prayer Group</a></li>	
