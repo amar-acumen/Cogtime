@@ -105,13 +105,15 @@ if(!($_SESSION['subadmin_role'] == 2 && $member->id == intval(decrypt($this->ses
 			$mem_approved_status = 0;
 			$mem_approved_status_label = 'Block';
 			$dialog_box_class = 'block-group';
+                         $color = '#096aa7';
 			if ($member->is_blocked == 0) { 
 				$mem_approved_status = 1;
-				$mem_approved_status_label = 'Unblock';
+				$mem_approved_status_label = 'blocked';
 				$dialog_box_class = 'unblock-group';
+                                $color = 'red';
 			}
 			?>
-			<a href="javascript:void(0);" onclick="show_dialog('<?=$dialog_box_class?>'); $('#i_del_id').val('<?=$member->cmid?>'); $('#i_mem_unblock').val('<?=$mem_approved_status?>');"><?php echo $mem_approved_status_label; ?></a>
+                                <a href="javascript:void(0);" style="color:<?= $color; ?>" onclick="show_dialog('<?=$dialog_box_class?>'); $('#i_del_id').val('<?=$member->cmid?>'); $('#i_mem_unblock').val('<?=$mem_approved_status?>');"><?php echo $mem_approved_status_label; ?></a>
 			<?php } ?>
 
       </td>
