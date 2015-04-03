@@ -390,6 +390,7 @@ function blockGroup()
 				$('#approved_status_label_'+id).html('Block');
 				$('#approved_status_label_'+id).attr('class','approve');
                 $('#table_content').html(data.html);
+                location.reload();
 				//window.location.reload();
             }
         });
@@ -411,6 +412,7 @@ function unblockGroup()
 				$('#approved_status_label_'+id).html('Unblock');
 				$('#approved_status_label_'+id).attr('class','decline');
                 $('#table_content').html(data.html);
+                 location.reload();
 				//window.location.reload();
             }
         });
