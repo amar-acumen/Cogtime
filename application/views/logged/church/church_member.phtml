@@ -424,6 +424,14 @@ $(document).ready(function(){
         }
         //alert(check);
     });
+    $('.approve').children('a').mouseleave(function(){
+       
+        var check = $(this).text();
+        if(check == 'Unblock'){
+        $(this).css('color','red').html('blocked');            
+        }
+        //alert(check);
+    });
     
 });
 </script>
