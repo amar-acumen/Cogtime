@@ -47,7 +47,7 @@
 	<h4>Search By:</h4>
     <div class="user-part">
         <div class="ui-widget">
-                <input type="text" class="inp-form" id="keyword"  name="keyword" value="<?php echo $_REQUEST['keyword'];?>" placeholder="User Name" />
+                <input type="text" class="inp-form" id="keyword"  name="keyword"  placeholder="User Name" />
                  </div>
     <label>User:</label> <select id="members" name="members">
 	<option value='-1'>--select---</option>
@@ -399,11 +399,12 @@ var ajax_req_feeds = null;
 	
 function search_result() {
 	var base_url = '<?php echo base_url(); ?>';
-	
+	var keyword = $('#keyword').val();
+      alert(keyword);
 	var member=$('#members').val();
 	var date=$('#date_to').val();
 	var content=$('#content').val();
-	if(member == '-1' && date == '' && content == '')
+	if((member == '-1' && keyword == '') && date == '' && content == '')
 	{
 		showUIMsg('Please enter some criteria.');
 	}
@@ -414,7 +415,7 @@ function search_result() {
 	  url: base_url+'logged/church_activity_management/comment_search_result/',
 	  type: 'POST',
 	  dataType: 'json',
-	  data: {'member':member,'date':date,'content':content},
+	  data: {'member':member,'date':date,'content':content , 'keyword':keyword},
 	  success: function(data) {
 	  
 		//called when successful
@@ -438,19 +439,59 @@ function search_result() {
 	});
 	}
 }
+// $(function() {
+//var availableTags = [
+//"ActionScript",
+//"AppleScript",
+//"Asp",
+//"BASIC",
+//"C",
+//"C++",
+//"Clojure",
+//"COBOL",
+//"ColdFusion",
+//"Erlang",
+//"Fortran",
+//"Groovy",
+//"Haskell",
+//"Java",
+//"JavaScript",
+//"Lisp",
+//"Perl",
+//"PHP",
+//"Python",
+//"Ruby",
+//"Scala",
+//"Scheme"
+//];
+//$( "#keyword" ).autocomplete({
+//source: availableTags
+//});
+//});
 $(function() { 
                 $( "#keyword" ).autocomplete({
                 source: "<?php echo base_url().'logged/church_activity_management/auto_complete' ?>",
                 minLength: 2,
                 select: function( event, ui ) {
-                  //  alert(ui.item.value);
-                    $('#keyword').val(ui.item.value)
+//                    alert('ok');
+                  
+                    $('#keyword').val(ui.item.value);
+                   $('#members').attr('disabled', 'disabled');
+                   $('#members').val('-1');
                     // = 'abc';
                    // alert();
                 
                 }
             });
             });
+            
+            $(document).ready(function(){
+            $('#keyword').keydown(function(){
+                if($('#keyword').val() == ''){
+                    $('#members').removeAttr("disabled");  
+                }
+            });
+            })
 </script>
 
 <script type="text/javascript" src="<?= base_url().'js/jquery-ui.js' ?>">

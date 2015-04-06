@@ -241,18 +241,21 @@ class Church_activity_management extends Base_controller
     function auto_complete(){
         $term = $_GET['term'];
        
-        $sql = "SELECT u.id,u.s_first_name,u.s_last_name FROM cg_church_member chm , cg_users u  WHERE u.s_first_name LIKE '%$term%'ORDER BY u.s_first_name AND u.id = chm.member_id AND chm.church_id ='".$_SESSION['logged_church_id']."' AND chm.is_blocked = 1 AND chm.is_leave = 0  ASC" ;
+        $sql = "SELECT u.id,u.s_first_name,u.s_last_name FROM cg_church_member chm , cg_users u  WHERE  u.id = chm.member_id AND chm.church_id ='".$_SESSION['logged_church_id']."' AND chm.is_blocked = 1 AND chm.is_leave = 0 AND  u.s_first_name LIKE '%$term%'ORDER BY u.s_first_name " ;
         $query = $this->db->query($sql);
         $res = $query->result();
        // pr($res);
-        foreach ($res as $row){
+        $row = array();
+       foreach ($res as $row_user){
+    
+   //$row_user->s_first_name = trim($row_user['s_first_name']);
+   // $row['id'] = $row_user->id;       
+    $row_set[] = $row_user->s_first_name.' '.$row_user->s_last_name;
+    // $row_set[] = $row[];
+    
+}
            
-            $arr = array();
-            $arr['name'] = $row->s_first_name.''.$row->s_first_name;
-            $arr['id'] = $row->id;
-            $row_set[] = $arr;
-        }
-        echo json_encode($row_set);
+     echo json_encode($row_set);    
     }
 }   // end of controller...
 
