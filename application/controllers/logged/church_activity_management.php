@@ -245,7 +245,7 @@ class Church_activity_management extends Base_controller
         $query = $this->db->query($sql);
         $res = $query->result();
        // pr($res);
-       foreach ($row_user as $query->result()){
+       foreach ($res as $row_user){
     
    $row_user['s_first_name'] = trim($row_user['s_first_name']);
     $row_set[] = $row_user['s_first_name'].' '.$row_user['s_last_name'];
