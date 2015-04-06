@@ -1,0 +1,63 @@
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+
+         <?php
+
+            if($info_arr)
+
+            {
+
+             ?>
+
+  <thead>
+
+    <tr>
+
+      <th>S no.</th>
+
+      <th align="left">Name</th>
+      <th align="left">Email</th>
+
+    </tr>
+
+   </thead>
+
+    <tbody>
+
+    <?php
+
+                $i = 1;
+//pr($info_arr);
+                foreach ($info_arr as $member) {
+
+                    ?>
+
+    <tr>
+
+    
+
+      <td width="6%"><?php echo $i++; ?></td>
+
+      <td width="27%" class="textleft"><?php echo $member->user_name; ?></td>
+
+      <td width="25%" class="textleft"><?php echo $member->s_email?></td>
+
+    </tr>
+	
+	
+
+    <?php } ?>
+
+  </tbody>
+
+  <?php }
+
+else
+
+{
+
+  echo '<tr><td colspan="5">No Records</td></tr>';
+
+}  ?>
+
+</table>
+<div class="paging"><ul><?= $page_links ?></ul></div>
