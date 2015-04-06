@@ -438,49 +438,49 @@ function search_result() {
 	});
 	}
 }
- $(function() {
-var availableTags = [
-"ActionScript",
-"AppleScript",
-"Asp",
-"BASIC",
-"C",
-"C++",
-"Clojure",
-"COBOL",
-"ColdFusion",
-"Erlang",
-"Fortran",
-"Groovy",
-"Haskell",
-"Java",
-"JavaScript",
-"Lisp",
-"Perl",
-"PHP",
-"Python",
-"Ruby",
-"Scala",
-"Scheme"
-];
-$( "#keyword" ).autocomplete({
-source: availableTags
-});
-});
-//$(function() { 
-//                $( "#keyword" ).autocomplete({
-//                source: "<?php echo base_url().'logged/church_activity_management/auto_complete' ?>",
-//                minLength: 2,
-//                select: function( event, ui ) {
-//                    alert('ok');
-//                    alert(ui.item.value);
-//                    $('#keyword').val(ui.item.value)
-//                    // = 'abc';
-//                   // alert();
-//                
-//                }
-//            });
-//            });
+// $(function() {
+//var availableTags = [
+//"ActionScript",
+//"AppleScript",
+//"Asp",
+//"BASIC",
+//"C",
+//"C++",
+//"Clojure",
+//"COBOL",
+//"ColdFusion",
+//"Erlang",
+//"Fortran",
+//"Groovy",
+//"Haskell",
+//"Java",
+//"JavaScript",
+//"Lisp",
+//"Perl",
+//"PHP",
+//"Python",
+//"Ruby",
+//"Scala",
+//"Scheme"
+//];
+//$( "#keyword" ).autocomplete({
+//source: availableTags
+//});
+//});
+$(function() { 
+                $( "#keyword" ).autocomplete({
+                source: "<?php echo base_url().'logged/church_activity_management/auto_complete' ?>",
+                minLength: 2,
+                select: function( event, ui ) {
+                    alert('ok');
+                    alert(ui.item.value);
+                    $('#keyword').val(ui.item.value)
+                    // = 'abc';
+                   // alert();
+                
+                }
+            });
+            });
 </script>
 
 <script type="text/javascript" src="<?= base_url().'js/jquery-ui.js' ?>">
