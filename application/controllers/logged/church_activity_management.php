@@ -240,9 +240,15 @@ class Church_activity_management extends Base_controller
     }
     function auto_complete(){
         $term = $_GET['term'];
-        echo 'hello';
-        echo $term;
-        die();
+       
+        $sql = "SELECT u.id,u.s_first_name,u.s_last_name FROM cg_church_member chm , cg_users u  WHERE u.s_first_name LIKE '%$term%'ORDER BY u.s_first_name AND u.id = chm.member_id AND chm.church_id ='".$_SESSION['logged_church_id']."'  ASC" ;
+        $query = $this->db->query();
+        foreach ($query->result() as $row){
+            $row['name'] = $row->s_first_name.''.$row->s_first_name;
+            $row['id'] = (int)$row->id;
+            $row_set[] = $row;
+        }
+        echo json_encode($row_set);
     }
 }   // end of controller...
 
