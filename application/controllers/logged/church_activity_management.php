@@ -243,7 +243,9 @@ class Church_activity_management extends Base_controller
        
         $sql = "SELECT u.id,u.s_first_name,u.s_last_name FROM cg_church_member chm , cg_users u  WHERE u.s_first_name LIKE '%$term%'ORDER BY u.s_first_name AND u.id = chm.member_id AND chm.church_id ='".$_SESSION['logged_church_id']."'  ASC" ;
         $query = $this->db->query($sql);
+        
         foreach ($query->result() as $row){
+            echo $row['id'];
             $arr['name'] = $row->s_first_name.''.$row->s_first_name;
             $arr['id'] = (int)$row->id;
             $row_set[] = $arr;
