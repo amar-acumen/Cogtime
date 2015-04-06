@@ -79,11 +79,11 @@
 												<?php if($label == 'Ring Name: ') :?>
 												 
 												<?php endif;?>
-												<?=$label?><a href="<?php echo $profile_link?>"><?php echo $profile_name?></a></p>
+												<a href="<?php echo $profile_link?>"><?php echo $profile_name?></a></p>
 
                                                 <p class="blue_bold12">
 												
-                                                <strong><?=$ring_inv_val['s_ring_name']?></strong></p>
+                                                <strong><?=$label?><?=$ring_inv_val['s_ring_name']?></strong></p>
 
                                                 <p style="">Requested On: <?php echo getShortDate($ring_inv_val['dt_request_date'],5)?> </p>       
 
