@@ -199,7 +199,112 @@ class Church extends Base_controller
             show_error($err_obj->getMessage());
         }
     }
+	
+	function church_user($page_no = 0){
+        $c_id = $_SESSION['logged_church_id'];
+       //die();
+        $user_id = intval(decrypt($this->session->userdata('user_id')));
+                        //parent::check_is_church_admin($user_id,$c_id);
+        $posted=array();
+        $this->data["posted"]=$posted;/*don't change*/    
+        $data = $this->data;      
+//               $this->data["MAIN_MENU_SELECTED"] = 1;
+        parent::_set_title('::: COGTIME Xtian network :::');
+        parent::_set_meta_desc('');
+        parent::_set_meta_keywords('');
+		parent::_add_js_arr( array( 
+                                        'js/lightbox.js'
+										                                    ));
+                                        
+        parent::_add_church_css_arr( array('css/church.css','css/church_admin.css') );
+		
+        parent::check_church_id_empty(TRUE, $_SESSION['logged_church_id'], array('1'));
+        
+       
+        $where = '';
+        $page = 0;
+        //---------------------- for pagination back ---------------------
+        if ($page_no != 0)
+            $page = ($page_no - 1) * 2;
+        //---------------------- end pagination back ---------------------
 
+        ob_start();
+        $this->ajax_church_user_pagination($page);
+        $data['result_content'] = ob_get_contents(); //pr($data['result_content'],1);
+        ob_end_clean();
+
+        $VIEW = "logged/church/church_user.phtml";
+        
+
+        parent::_render($data, $VIEW);
+              
+	}
+	
+	public function ajax_church_user_pagination($page = 0) {
+        try {
+            ## seacrh conditions : filter ############
+
+            $c_id = $_SESSION['logged_church_id'];
+            $order_by = " u.id DESC ";
+            $result = $this->church_new_model->get_churchusers($c_id,$page, $order_by, $this->pagination_per_page);
+			exit;
+            $resultCount = count($result);
+            // echo $this->db->last_query(); 
+            
+            $total_rows = $this->church_new_model->get_churchusers_count($c_id);
+
+            if ((!is_array($result) || !count($result) ) && $total_rows) {
+                $page = $page - $this->pagination_per_page;
+                $result = $this->church_new_model->get_churchusers($c_id,$page, $this->pagination_per_page, $order_by);
+            }
+            ## end seacrh conditions : filter ############
+            //pr($result,1);
+            #Jquery Pagination Starts
+            $this->load->library('jquery_pagination');
+            $config['base_url'] = base_url() . "logged/church/ajax_church_user_pagination";
+            $config['total_rows'] = $total_rows;
+            $config['per_page'] = $this->pagination_per_page;
+            $config['uri_segment'] = 4;
+            $config['num_links'] = 9;
+            $config['page_query_string'] = false;
+            $config['prev_link'] = 'PREV';
+            $config['next_link'] = 'NEXT';
+
+            $config['cur_tag_open'] = '<li>';
+            $config['cur_tag_close'] = '</li>';
+
+            $config['next_tag_open'] = '<li>';
+            $config['next_tag_close'] = '</li>';
+
+            $config['prev_tag_open'] = '<li>';
+            $config['prev_tag_close'] = '</li>';
+
+            $config['num_tag_open'] = '<li>';
+            $config['num_tag_close'] = '</li>';
+
+            $config['div'] = '#table_content'; /* Here #content is the CSS selector for target DIV */
+            $config['js_bind'] = "showBusyScreen(); "; /* if you want to bind extra js code */
+            $config['js_rebind'] = "hideBusyScreen(); "; /* if you want to rebind extra js code */
+
+            $this->jquery_pagination->initialize($config);
+            $data['page_links'] = $this->jquery_pagination->create_links();
+
+            // getting   listing...
+            $data['info_arr'] = $result;
+            $data['no_of_result'] = $total_rows;
+            $data['current_page'] = $page;
+
+            $data['pagination_per_page'] = $this->pagination_per_page;
+
+            # loading the view-part...
+            echo $this->load->view('logged/church/ajax_member/church_user_ajax.phtml', $data, TRUE);
+            
+        } catch (Exception $err_obj) {
+            show_error($err_obj->getMessage());
+        }
+    }
+	
+	
     function search_church_member_pagination()
     {
         if(count($_POST)>0)
