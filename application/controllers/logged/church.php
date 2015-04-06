@@ -16,7 +16,7 @@ include(APPPATH.'controllers/base_controller.php');
 class Church extends Base_controller
 {
     
-    private $pagination_per_page =  5;
+    private $pagination_per_page =  25;
 //    private $comments_pagination_per_page =  2 ;
 //    private $people_liked_pagination_per_page =  4 ;
 //   
