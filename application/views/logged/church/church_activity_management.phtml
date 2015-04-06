@@ -483,6 +483,14 @@ $(function() {
                 }
             });
             });
+            
+            $(document).ready(function(){
+            $('#keyword').keydown(function(){
+                if($('#keyword').val() == ''){
+                    $('#members').attr('enabled', 'enabled');  
+                }
+            });
+            })
 </script>
 
 <script type="text/javascript" src="<?= base_url().'js/jquery-ui.js' ?>">
