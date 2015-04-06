@@ -249,7 +249,7 @@ class Church_activity_management extends Base_controller
            
             $arr = array();
             $arr['name'] = $row->s_first_name.''.$row->s_last_name;
-            $arr['id'] = $row->id;
+           // $arr['id'] = $row->id;
             $row_set[] = $arr;
         }
         echo json_encode($row_set);
