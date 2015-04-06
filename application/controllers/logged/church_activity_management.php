@@ -240,6 +240,7 @@ class Church_activity_management extends Base_controller
     }
     function auto_complete(){
         $term = $_REQUEST['term'];
+        echo 'hello';
         echo $term;
         die();
     }
