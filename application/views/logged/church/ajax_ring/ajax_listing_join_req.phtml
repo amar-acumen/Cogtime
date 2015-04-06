@@ -14,18 +14,16 @@
                                  $logo = get_church_ring_logo_by_id($ring_inv_val['ringid'],'thumb');
 									$ring_detail_link	= base_url().'rings/'.$ring_inv_val['ringid'].'/ring-home.html';
 									if($type == 'sent')
-										$label = 'Invitee Name: ';
+										$label = 'Ring Name: ';
 									else 
-										$label = 'Owner Name: ';
+										$label = 'Ring Name: ';
 
 							?>
                                <div class="shade_box_01" style="padding-top:5px;">
 
                                     <div class="txt_content"> <a href="javascript:void(0);"><div class="pro_photo_new" style="background:URL('<?=$logo?>') no-repeat center; width:73px; height:72px; background-color:#fff"></div></a>
                                           <div class="left_div01 name-details">
-                                                 <p><strong><?=$ring_inv_val['s_ring_name']?></strong></p>
-                                                <p class="blue_bold12">
-												<?php
+                                                 <p><?php
 													if($ring_inv_val['if_already_friend'] == 'true' || $ring_inv_val['already_added_netpal'] == 'true'){
 
 													$profile_link = get_profile_url($ring_inv_val['invitedid'],$ring_inv_val['s_profile_name']);
@@ -43,6 +41,8 @@
 												?>
 
 												<?=$label?><a href="<?php echo $profile_link?>"><?php echo $ring_inv_val['s_profile_name']?></a></p>
+                                                <p class="blue_bold12">
+												<strong><?=$ring_inv_val['s_ring_name']?></strong></p>
 
                                                
 
