@@ -201,7 +201,6 @@ class Church extends Base_controller
     }
 	
 	function church_user($page_no = 0){
-        echo 'church_user';
         $c_id = $_SESSION['logged_church_id'];
        //die();
         $user_id = intval(decrypt($this->session->userdata('user_id')));
@@ -230,7 +229,7 @@ class Church extends Base_controller
         //---------------------- end pagination back ---------------------
 
         ob_start();
-        $this->ajax_church_member_pagination($page);
+        $this->ajax_church_user_pagination($page);
         $data['result_content'] = ob_get_contents(); //pr($data['result_content'],1);
         ob_end_clean();
 
