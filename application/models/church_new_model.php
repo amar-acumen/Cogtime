@@ -64,7 +64,10 @@ class Church_new_model extends Base_model
         }
 		
 		function get_churchusers_count($c_id){
-		
+			$sql = 'select COUNT(*) AS totrow  from cg_users u WHERE u.id NOT IN (select member_id from cg_church_member where is_deleted=0 AND church_id = "'.$c_id.'" AND is_leave = 0 AND is_blocked = 1)';
+            $query = $this->db->query($sql);
+            $result = $query->result();
+            return $result[0]->totrow;
 		}
 		
         function get_churchsubadmin($c_id,$i_start=0,$i_limit=0){
