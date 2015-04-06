@@ -251,7 +251,7 @@ class Church_activity_management extends Base_controller
    //$row_user->s_first_name = trim($row_user['s_first_name']);
     $row['id'] = $row_user->id;       
     $row['name'] = $row_user->s_first_name.' '.$row_user->s_last_name;
-     $row_set[] = $row;
+     $row_set[] = $row[];
     
 }
            
