@@ -491,6 +491,10 @@ $(function() {
                     $('#members').removeAttr("disabled");  
                 }
             });
+            
+            $('#members').change(function(){
+               $('#keyword').val(''); 
+            });
             })
 </script>
 
