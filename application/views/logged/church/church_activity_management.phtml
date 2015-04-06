@@ -46,6 +46,9 @@
 		<form name="" class="search-main-ring">
 	<h4>Search By:</h4>
     <div class="user-part">
+        <div class="ui-widget">
+                <input type="text" class="inp-form" id="keyword"  name="keyword" value="<?php echo $_REQUEST['keyword'];?>" placeholder="User Name" />
+                 </div>
     <label>User:</label> <select id="members" name="members">
 	<option value='-1'>--select---</option>
 	<?php foreach($members as $k=>$v){ ?>
