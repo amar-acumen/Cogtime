@@ -52,7 +52,21 @@ class Church_new_model extends Base_model
             $result = $query->result();
             return $result[0]->totrow;
         }
-
+		
+		function get_churchusers($c_id,$i_start=0,$order_by=' cm.id DESC',$i_limit=0){
+    		$limit = (is_numeric($i_start) && is_numeric($i_limit)) ? " Limit " . intval($i_start) . "," . intval($i_limit) : '';
+        	$order_by =  " ORDER BY {$order_by}" ;
+		$sql ='select u.id, u.s_email, CONCAT(u.s_first_name, " ", u.s_last_name) AS user_name from cg_church_member cm , cg_users u LEFT JOIN cg_church_member cm WHERE u.id NOT IN (select member_id from cg_church_member where is_deleted=0 AND church_id = "'.$c_id.'") AND church_id = "'.$c_id.'" '.$order_by.' '.$limit.' ';		echo $sql;exit;
+            $query = $this->db->query($sql);
+            $result = $query->result();
+            return $result;
+            
+        }
+		
+		function get_churchusers_count($c_id){
+		
+		}
+		
         function get_churchsubadmin($c_id,$i_start=0,$i_limit=0){
 			$limit = (is_numeric($i_start) && is_numeric($i_limit)) ? " Limit " . intval($i_start) . "," . intval($i_limit) : '';
             $sql = 'select *,cm.id AS mid from cg_church_member AS cm,cg_users AS u 

@@ -276,6 +276,7 @@ function approvedMember()
             </select>
         </form></div>
             <div class="clear"></div>
+			<div align="right"><input type="submit" value="Church user" class="btn" onclick="church_user_list();" style="font-weight:normal;"></div>
             <div align="right"><input type="submit" value="Add member" class="btn" onclick="invite_member();" style="font-weight:normal;"></div><br />
 
         <div class="church-time-table" style="margin-right:0;" id="table_content">
@@ -323,6 +324,10 @@ function approvedMember()
 <script type="text/javascript">
 function invite_member() {
 	window.location.href = "<?php echo base_url(); ?>logged/church/church_add_member_form";
+}
+
+function church_user_list() {
+	window.location.href = "<?php echo base_url(); ?>logged/church/church_user";
 }
 
 function sample_csv(){
