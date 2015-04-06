@@ -219,7 +219,7 @@ class Church_activity_management extends Base_controller
 			}
                         if($this->input->post('keyword') && $this->input->post('member') == '-1'){
                             $s_where.='AND CONCAT(user.s_first_name,'.' '.',user.s_last_name) = "'.$this->input->post('keyword').'"';
-                            echo $s_where; die('d');
+                           // echo $s_where; die('d');
                         }
 			
 			$this->session->set_userdata('search_condition', $s_where);
