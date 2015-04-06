@@ -247,7 +247,7 @@ class Church extends Base_controller
             $c_id = $_SESSION['logged_church_id'];
             $order_by = " u.id DESC ";
             $result = $this->church_new_model->get_churchusers($c_id,$page, $order_by, $this->pagination_per_page);
-			exit;
+			
             $resultCount = count($result);
             // echo $this->db->last_query(); 
             
