@@ -45,11 +45,11 @@
 		//pr($members);?>
 		<form name="" class="search-main-ring">
 	<h4>Search By:</h4>
-    <div class="user-part" style="width:352px; float:left;">
+    <div class="user-part">
         <div class="ui-widget">
                 <input type="text" class="inp-form" id="keyword"  name="keyword"  placeholder="User Name" />
                  </div>
-    <label>User:</label> <select id="members" name="members" style="width:138px;">
+    <label>User:</label> <select id="members" name="members">
 	<option value='-1'>--select---</option>
 	<?php foreach($members as $k=>$v){ ?>
 			 <?=$v->member_name?>
@@ -59,9 +59,9 @@
 			</select>
        </div>
        
-       <div class="date-colm"><label>Date:</label><input  type="text"  value="" name="date_to" id="date_to" style="width:69px;"  /></div>
+       <div class="date-colm"><label>Date:</label><input style="" type="text"  value="" name="date_to" id="date_to"  /></div>
         <div class="date-colm"><label>Content:</label><input type="text" name="content" id="content"></div>
-			<input type="button" style="float:right; margin:10px 14px 0 0;" onclick="search_result()" value="Search" class="post-btn"></form>
+			<input type="button" onclick="search_result()" value="Search" class="post-btn"></form>
 	<?php 
 
 	
