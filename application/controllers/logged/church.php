@@ -201,7 +201,7 @@ class Church extends Base_controller
     }
 	
 	function church_user($page_no = 0){
-        
+        echo 'church_user';
         $c_id = $_SESSION['logged_church_id'];
        //die();
         $user_id = intval(decrypt($this->session->userdata('user_id')));
