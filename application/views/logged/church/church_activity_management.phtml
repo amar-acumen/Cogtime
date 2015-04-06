@@ -400,11 +400,11 @@ var ajax_req_feeds = null;
 function search_result() {
 	var base_url = '<?php echo base_url(); ?>';
 	var keyword = $('#keyword').val();
-        alert(keyword);
+       // alert(keyword);
 	var member=$('#members').val();
 	var date=$('#date_to').val();
 	var content=$('#content').val();
-	if(member == '-1' && date == '' && content == '')
+	if((member == '-1' || keyword == '') && date == '' && content == '')
 	{
 		showUIMsg('Please enter some criteria.');
 	}
@@ -415,7 +415,7 @@ function search_result() {
 	  url: base_url+'logged/church_activity_management/comment_search_result/',
 	  type: 'POST',
 	  dataType: 'json',
-	  data: {'member':member,'date':date,'content':content},
+	  data: {'member':member,'date':date,'content':content , 'keyword':keyword},
 	  success: function(data) {
 	  
 		//called when successful
