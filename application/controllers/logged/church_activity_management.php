@@ -27,9 +27,9 @@ class Church_activity_management extends Base_controller
         try
         {
             parent::__construct();
-            parent::_add_church_css_arr (array('css/church.css','css/wall-slider.css','css/jquery-ui-1.8.2.custom.css','css/jquery-ui.css'));
+            parent::_add_church_css_arr (array('css/church.css','css/wall-slider.css','css/jquery-ui-1.8.2.custom.css'));
 			parent::_add_js_arr(array(
-			'js/church-wall-slider.js','js/jquery-ui.js'
+			'js/church-wall-slider.js'
 		  ));
             parent::check_login(TRUE, '', array('1')); // put this code on those pages which are not accessable by guest user
             # loading reqired model & helpers... 
