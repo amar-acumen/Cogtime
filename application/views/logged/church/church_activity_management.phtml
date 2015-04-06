@@ -404,7 +404,7 @@ function search_result() {
 	var member=$('#members').val();
 	var date=$('#date_to').val();
 	var content=$('#content').val();
-	if((member == '-1' || keyword == '') && date == '' && content == '')
+	if((member == '-1' && keyword == '') && date == '' && content == '')
 	{
 		showUIMsg('Please enter some criteria.');
 	}
