@@ -248,7 +248,9 @@ class Church_activity_management extends Base_controller
        foreach ($res as $row_user){
     
    //$row_user->s_first_name = trim($row_user['s_first_name']);
+    $row_set[] = $row_user->id;       
     $row_set[] = $row_user->s_first_name.' '.$row_user->s_last_name;
+    
 }
            
      echo json_encode($row_set);    
