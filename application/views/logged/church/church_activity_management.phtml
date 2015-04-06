@@ -440,7 +440,7 @@ function search_result() {
 }
 $(function() { 
                 $( "#keyword" ).autocomplete({
-                source: "<?php echo base_url().'church_activity_management/auto_complete' ?>",
+                source: "<?php echo base_url().'logged/church_activity_management/auto_complete' ?>",
                 minLength: 2,
                 select: function( event, ui ) {
                   //  alert(ui.item.value);
