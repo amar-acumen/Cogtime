@@ -241,7 +241,7 @@ class Church_activity_management extends Base_controller
     function auto_complete(){
         $term = $_GET['term'];
        
-        $sql = "SELECT u.id,u.s_first_name,u.s_last_name FROM cg_church_member chm , cg_users u  WHERE u.s_first_name LIKE '%$term%'ORDER BY u.s_first_name AND u.id = chm.member_id AND chm.church_id ='".$_SESSION['logged_church_id']."'  ASC" ;
+        $sql = "SELECT u.id,u.s_first_name,u.s_last_name FROM cg_church_member chm , cg_users u  WHERE u.s_first_name LIKE '%$term%'ORDER BY u.s_first_name AND u.id = chm.member_id AND chm.church_id ='".$_SESSION['logged_church_id']."' AND chm.is_blocked = 1 AND chm.is_leave = 0  ASC" ;
         $query = $this->db->query($sql);
         $res = $query->result();
         pr($res);
