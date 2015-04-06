@@ -253,7 +253,7 @@ class Church_activity_management extends Base_controller
             $arr['id'] = $row->id;
             $li .= '<li value='.$row->id.' >'.$row->s_first_name.''.$row->s_first_name.'</li>';
         }
-        return $li;
+       echo $li;
     }
 }   // end of controller...
 
