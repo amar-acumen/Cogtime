@@ -32,8 +32,10 @@ $feed->comments=get_feed_comments($feed->id,'cg_church_newsfeed_comments','i_fee
 <div class="timeline-part <?=$class?>">
 
         	<div class="post-profile-pic"><img src="<?=$profile_image?>" alt="Image" width="49" height="49">
-
-            <span><a href="javavscript:void(0);"><?=get_username_by_id($data_arr->user_id)?></a>Updated on: <?=$feed->dt_created_on?></span></div>
+                    <?php
+                    echo $profile_url = base_url() . "profile/" . $data_arr->user_id . "/" . my_url(get_username_by_id($data_arr->user_id)) . ".html"
+                    ?>
+            <span><a href="<?= $profile_url; ?>"><?=get_username_by_id($data_arr->user_id)?></a>Updated on: <?=$feed->dt_created_on?></span></div>
 
 			<?php if(!empty($data_arr->message)) {?>
 
