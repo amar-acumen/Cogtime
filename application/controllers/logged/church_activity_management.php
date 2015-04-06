@@ -245,14 +245,15 @@ class Church_activity_management extends Base_controller
         $query = $this->db->query($sql);
         $res = $query->result();
        // pr($res);
+          $arr = array();
         foreach ($res as $row){
            
-            $arr = array();
+          
             $arr['name'] = $row->s_first_name.''.$row->s_first_name;
             $arr['id'] = $row->id;
-            $row_set[] = $arr;
+            $li .= '<li value='.$row->id.' >'.$row->s_first_name.''.$row->s_first_name.'</li>';
         }
-        echo json_encode($row_set);
+        return $li;
     }
 }   // end of controller...
 
