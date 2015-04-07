@@ -735,7 +735,7 @@ function general_setting(){
 		
           $query3 = $this->db->get_where('cg_users', 'id' => $user_id );
 		  //echo $this->db->last_query();
-		  $users_data = $query1->result();   
+		  $users_data = $query3->result();   
 			pr($users_data);		  
 					
 						/****************already member***********************/
