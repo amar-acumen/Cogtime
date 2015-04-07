@@ -799,10 +799,10 @@ $this->email->message("$body");
 
  $this->email->send();
  
-		
+		echo json_encode(array('success'=>true,'arr_messages'=>$arr_messages,'msg'=>'Mail sent successfully'));
+        //exit;
 		}
-	echo json_encode(array('success'=>true,'arr_messages'=>$arr_messages,'msg'=>'Mail sent successfully'));
-        exit;
+	
 	}
      
     public function import_member_csv()
