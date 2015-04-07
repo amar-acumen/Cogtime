@@ -122,7 +122,13 @@ $feed->comments=get_feed_comments($feed->id,'cg_church_newsfeed_comments','i_fee
 			   <?php if(!empty($data_arr->audio)){?>
 
 				<figure>
-
+                                       <?php $query = $this->db->get('cg_site_settings');
+                            foreach ($query->result() as $row)
+                                {
+                                    $client_id = $row->client_id;
+                                    $api_user_id = $row->api_user_id;
+                                }
+                            ?>
 					<?=$data_arr->audio?>
 
 				</figure>
