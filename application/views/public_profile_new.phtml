@@ -1,4 +1,5 @@
 <?php
+pr($this->session->userdata);
 if ($this->session->userdata('loggedin') == '' || $this->session->userdata('loggedin') == false) {
     include(APPPATH . "views/layouts/header.phtml");
     include(APPPATH . "views/layouts/slider_nav.phtml");
@@ -40,7 +41,9 @@ if ($this->session->userdata('loggedin') == '' || $this->session->userdata('logg
                             <h1 class="profile-name"><?= $public_arr_profile_info['s_profile_name'] ?>'s Profile  <?php
                         $relation_arr = CheckUserRelation($public_arr_profile_info['id']);
                         //pr($relation_arr);
-                        ?><span class="pro-offline" style="float:none">
+                        ?>
+						<?php $check_frnd = is_friend(,$public_arr_profile_info['id']); ?>
+						<span class="pro-offline" style="float:none">
                             <?php if($public_arr_profile_info['id'] == intval(decrypt($this->session->userdata('user_id'))) ){ echo  check_user_online_hlpr($public_arr_profile_info['id']); } else{ ?>
                             <?= check_user_online_hlpr($public_arr_profile_info['id'], 'public', $relation_arr); ?> <?php } ?>
                         </span> </h1>
