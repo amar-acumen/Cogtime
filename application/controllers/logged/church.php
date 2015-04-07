@@ -243,10 +243,10 @@ class Church extends Base_controller
 	public function ajax_church_user_pagination($page = 0) {
         try {
             ## seacrh conditions : filter ############
-
+            $s_where .= 'AND 1';
             $c_id = $_SESSION['logged_church_id'];
             $order_by = " u.id DESC ";
-            $result = $this->church_new_model->get_churchusers($c_id,$page, $order_by, $this->pagination_per_page);
+            $result = $this->church_new_model->get_churchusers($c_id,$page, $order_by, $this->pagination_per_page,$s_where);
 			
             $resultCount = count($result);
             // echo $this->db->last_query(); 
@@ -255,7 +255,7 @@ class Church extends Base_controller
 
             if ((!is_array($result) || !count($result) ) && $total_rows) {
                 $page = $page - $this->pagination_per_page;
-                $result = $this->church_new_model->get_churchusers($c_id,$page, $this->pagination_per_page, $order_by);
+                $result = $this->church_new_model->get_churchusers($c_id,$page, $this->pagination_per_page, $order_by,$s_where);
             }
             ## end seacrh conditions : filter ############
             //pr($result,1);
