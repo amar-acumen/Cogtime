@@ -56,7 +56,7 @@ class Church_new_model extends Base_model
 		function get_churchusers($c_id,$i_start=0,$order_by='',$i_limit=0,$s_where){
     		$limit = (is_numeric($i_start) && is_numeric($i_limit)) ? " Limit " . intval($i_start) . "," . intval($i_limit) : '';
         	$order_by =  " ORDER BY {$order_by}" ;
-		echo $sql ='select u.id, u.s_email, CONCAT(u.s_first_name, " ", u.s_last_name) AS user_name from cg_users u WHERE u.id NOT IN (select member_id from cg_church_member where is_deleted=0 AND church_id = "'.$c_id.'" AND is_leave = 0 AND is_blocked = 1)'.$s_where.' '.$order_by.' '.$limit.' ';		exit;
+		 $sql ='select u.id, u.s_email, CONCAT(u.s_first_name, " ", u.s_last_name) AS user_name from cg_users u WHERE u.id NOT IN (select member_id from cg_church_member where is_deleted=0 AND church_id = "'.$c_id.'" AND is_leave = 0 AND is_blocked = 1)'.$s_where.' '.$order_by.' '.$limit.' ';		//exit;
             $query = $this->db->query($sql);
             $result = $query->result();
             return $result;
