@@ -732,10 +732,11 @@ function general_setting(){
                 for($i = 0 ; $i < count($member_id_array); $i++){
                     $id = $member_id_array[$i];
                     $user_detail = get_user_details_by_id($id);
-                   echo $email = $user_detail->s_email;
-                   die('ok');
+                    echo $email = $user_detail['s_email'];
+                  
                    // pr($user_detail,1);
                 }
+                 die('ok');
                // pr($member_id_array,1);
 		//pr($this->input->post('cogtime_user_email'));
 //		 if ($this->input->post('cogtime_user_id')) 
