@@ -42,13 +42,15 @@ if ($this->session->userdata('loggedin') == '' || $this->session->userdata('logg
                         //pr($relation_arr);
                         ?>
 						<?php 
-						$user_id = intval(decrypt($this->session->userdata('user_id')));
+						$i_profile_id = intval(decrypt($this->session->userdata('user_id')));
 						
-						$check_frnd = is_friend($user_id, $public_arr_profile_info['id']); ?>
+						$check_frnd = is_friend($i_profile_id); 
+						if ($check_frnd != 'pending') { ?>
+						
 						<span class="pro-offline" style="float:none">
                             <?php if($public_arr_profile_info['id'] == intval(decrypt($this->session->userdata('user_id'))) ){ echo  check_user_online_hlpr($public_arr_profile_info['id']); } else{ ?>
                             <?= check_user_online_hlpr($public_arr_profile_info['id'], 'public', $relation_arr); ?> <?php } ?>
-                        </span> </h1>
+                        </span> <?php } ?></h1>
                             <input type="submit" class="sml_btn" name="reload_search" value="Back"  style=" background:none repeat scroll 0 0 #013D62;margin-left:412px; margin-bottom:5px;"  />
                         </form>
                     </div>
