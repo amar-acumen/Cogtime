@@ -726,16 +726,17 @@ function general_setting(){
 	
 	 public function cogtime_user_sent_invitation()
     {
+	echo 'cogtime_user_sent_invitation';
         parent::check_login(TRUE, '', array('1'));
 		$row = 1;
 		pr($this->input->post('cogtime_user_mail'));
-	    while ($data = $this->input->post('cogtime_user_mail'))  {
+	    while ($data = $this->input->post('cogtime_user_email'))  {
 		$row++;
                  
 					if($row>2)
 					{
 					
-					echo '======'.$data[0];
+					echo '======'.$data[0];exit;
 						/****************already member***********************/
 						/**********if already invited member**********************************/
 						$query1 = $this->db->get_where('cg_church_member_invitation', array('email' => $data[0] , 'church_id'=>$_SESSION['logged_church_id'] ));
