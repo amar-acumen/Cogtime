@@ -182,10 +182,10 @@ function search_member(){
         dataType: 'json',
         data: {'mem_nm' : mem_nm,'membr_eml' : membr_eml},
         success: function (data, status) {
-            alert('sss');
+            //alert('sss');
             //hideUILoader_nodialog();
                   if(1){
-                alert('sss');
+                alert(data.html);
                     $('#table_content').html(data.html);
                
                   }
