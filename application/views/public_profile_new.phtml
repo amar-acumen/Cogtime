@@ -1,5 +1,5 @@
 <?php
-pr($this->session->userdata('loggedin'));exit;
+pr($_SESSION);exit;
 if ($this->session->userdata('loggedin') == '' || $this->session->userdata('loggedin') == false) {
     include(APPPATH . "views/layouts/header.phtml");
     include(APPPATH . "views/layouts/slider_nav.phtml");
