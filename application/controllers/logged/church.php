@@ -243,12 +243,15 @@ class Church extends Base_controller
 	public function ajax_church_user_pagination($page = 0) {
         try {
             ## seacrh conditions : filter ############
-            $s_where .= 'AND 1';
+            
             if($this->input->post('mem_nm')){
                 $s_where .= 'AND CONCAT(u.s_first_name,u.s_last_name) LIKE "%'.$this->input->post('mem_nm').'%"';
             }
             if($this->input->post('membr_eml')){
                $s_where .='AND u.s_email LIKE "%'.$this->input->post('membr_eml').'%"'; 
+            }
+            if(!$this->input->post('mem_nm') && !$this->input->post('membr_eml')){
+                $s_where .= 'AND 1';
             }
             $c_id = $_SESSION['logged_church_id'];
             $order_by = " u.id DESC ";
