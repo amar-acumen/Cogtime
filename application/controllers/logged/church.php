@@ -810,7 +810,7 @@ $this->email->message("$body");
             exit;
         }
         echo json_encode(array('success'=>true,'arr_messages'=>$arr_messages,'msg'=>'Mail sent successfully'));
-        exit;
+        //exit;
 	}
      
     public function import_member_csv()
