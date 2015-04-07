@@ -195,7 +195,7 @@ class Church_wall extends Base_controller
                                          
                                        $kind = 'playlists';  
                                      }
-                                     $res = $tracks_id.'/'.$kind;
+                                     $res = $tracks->id.'/'.$kind;
                             $json_data['audio_details'] = $res;
                             $json_data['audio']= trim($this->input->post('txt_audio_url'));
                         } catch (Exception $e) {

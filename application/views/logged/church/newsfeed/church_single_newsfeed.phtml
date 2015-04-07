@@ -122,11 +122,11 @@ $feed->comments=get_feed_comments($feed->id,'cg_church_newsfeed_comments','i_fee
 			   <?php if(!empty($data_arr->audio)){?>
 
 				<figure>
-                                    <?php 
+                                    
+                                    <?php echo $data_arr->audio.'/n'?>
+<?php 
                                     echo $data_arr->audio_details;
                                      ?>
-                                    <?php echo $data_arr->audio?>
-
 				</figure>
 
 			   <?php } ?>
