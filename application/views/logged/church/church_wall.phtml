@@ -174,6 +174,7 @@ function validateFrm(jsondata)
 	
 		showUIMsg(data.msg);		
 		location.reload();
+                
 		//window.location.href=g_controller_url;
 	}
 }
@@ -219,4 +220,7 @@ function delete_post()
       }
     });
 }
+$(document).load(function(){
+    $('#txt_audio_url').val('');
+});
 </script>
