@@ -79,8 +79,66 @@
 $(document).ready(function() {
 $( "#sent_invitation_user" ).click(function() {
 $( "#sent_invitation_user_btn" ).trigger( "click" );
-alert('Hi......');
+//alert('Hi......');
+var options = { 
+
+        //beforeSubmit:  showLoad,  // pre-submit callback 
+
+        success:       validateFrm // post-submit callback 
+
+    }; 
+
+ 
+
+    // bind to the form's submit event 
+
+    $('#sent_invitation_user_frm').submit(function() {
+
+        $(this).ajaxSubmit(options);
+
+        return false;
+
+        
+
+    });
+
+
 });
 });
+
+
+function validateFrm(data)
+
+{
+
+    //alert( data);
+
+    var data = JSON.parse(data);
+
+
+
+    //id=data.photo_id;
+
+
+
+    if(data.success==false) 
+
+    {
+	
+	showUIMsg(data.msg);
+
+    }
+
+    else {
+
+        
+
+        showUIMsg(data.msg);  
+
+        
+
+    }
+	
+}	
 
 </script>
