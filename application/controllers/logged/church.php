@@ -727,89 +727,91 @@ function general_setting(){
 	 public function cogtime_user_sent_invitation()
     {
         parent::check_login(TRUE, '', array('1'));
-		pr($_POST,1);
+		
+                $member_id_array = $this->input->post('cogtime_user_id');
+                pr($member_id_array,1);
 		//pr($this->input->post('cogtime_user_email'));
-		 if ($this->input->post('cogtime_user_id')) 
-        { 
-		foreach ($this->input->post('cogtime_user_id') as $key => $user_id) {
-          $sql ='select s_email, CONCAT(s_first_name, " ", s_last_name) AS user_name from cg_users where id = "'.$user_id.'"';
-		  $query3 = $this->db->query($sql);
-          $users_data = $query3->result();	
-		
-				//pr($users_data);	exit;
-			/****************already member***********************/
-			/**********if already invited member**********************************/
-			$query1 = $this->db->get_where('cg_church_member_invitation', array('email' => $users_data[0]->s_email , 'church_id'=>$_SESSION['logged_church_id'] ));
-			//echo $this->db->last_query();
-			$result = $query1->result();
-			
-			 $query2 = $this->db->get_where('cg_church', array('ch_admin_id' => $user_id , 'id' =>$_SESSION['logged_church_id']));
-			  $result1 = $query2->result();
-			
-			if(count($result) > 0 || count($result1) > 0){
-				 continue;
-			}
-			/*******************************************/
-		$invite_user_info = array(
-				'name' => $users_data[0]->user_name,
-				'email' => $users_data[0]->s_email,
-				'church_id' => $_SESSION['logged_church_id'],
-				'invitation_sent_date' => get_db_datetime()
-				);
-		$this->db->insert('cg_church_member_invitation', $invite_user_info);
-		$add_mem_id = $this->db->insert_id();
-					
-		$location =  base_url().'already_user/'.$_SESSION['logged_church_id'].'/1/'.$user_id.'/'.$add_mem_id;
-                                                    $logo="http://cogtime.com/images/logo.png";
-    $body = '<table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" bgcolor="#e9f3f5" style="font-family:Arial, Helvetica, sans-serif; font-size:13px; line-height:19px;">
-  <tr>
-    <td align="left" style="background:#013D62; border-bottom:5px solid #62C3BC; padding:15px 0 15px 20px;"><img src="'.$logo.'" alt= ""></td>
-  </tr>
-  <tr style="border-top:1px solid #ffffff;">
-    <td style="padding-top:10px; padding-bottom:10px;">&nbsp;</td>
-  </tr>
-  <tr>
-  	
-  </tr>
-  <tr>
-  	<td style="padding:15px;"><p>Hello,</p>
-<p>You are invited to join church community. Please click on link and register to join the church community. </p>
-
-<p><a href='.$location.'>Click</a></p>
-      <p>Team Cogtime</p>      
-	</td>
-</tr>
-  <tr>
-    <td align="center" valign="middle" style="background:#A8A7A7; padding:15px;"><table width="100%" border="0" cellspacing="0" cellpadding="0">
-      <tr>
-        <td align="left" valign="middle" style="color:#d3edfd; font-family:Arial, Helvetica, sans-serif; font-size:12px;"> <a href="http://acumencs.com/drandpt-arabic/contact-us/" style="color:#d3edfd; text-decoration:none;"></a></td>
-        
-        <td align="right" style="color:#013d62; font-family:Arial, Helvetica, sans-serif; font-size:12px; text-align="center" ">© All Rights Reserved<span style="color:#525252;"><strong> COGTIME 2014  </strong></span></td>
-      </tr>
-    </table></td>
-  </tr>
-</table>'; 
-$this->email->from('admin@cogtime.com', 'From Cogtime');
-$this->email->to($users_data[0]->s_email);
-//->email->bcc("$mailids");
-//$this->email->cc('arif.zisu@gmail.com');
-//$this->email->bcc('them@their-example.com');
-
-$this->email->subject('Churh Member Request');
-$this->email->message("$body");
-
- $this->email->send();
- 
-		
-		}
-		
-		}
-	else {
-            $arr_messages['err_csv'] = "* Required Field.";
-            echo json_encode(array('success'=>false,'arr_messages'=>$arr_messages,'msg'=>'Please check atleast one checkbox!'));
-            exit;
-        }
-        echo json_encode(array('success'=>true,'arr_messages'=>$arr_messages,'msg'=>'Mail sent successfully'));
+//		 if ($this->input->post('cogtime_user_id')) 
+//        { 
+//		foreach ($this->input->post('cogtime_user_id') as $key => $user_id) {
+//          $sql ='select s_email, CONCAT(s_first_name, " ", s_last_name) AS user_name from cg_users where id = "'.$user_id.'"';
+//		  $query3 = $this->db->query($sql);
+//          $users_data = $query3->result();	
+//		
+//				//pr($users_data);	exit;
+//			/****************already member***********************/
+//			/**********if already invited member**********************************/
+//			$query1 = $this->db->get_where('cg_church_member_invitation', array('email' => $users_data[0]->s_email , 'church_id'=>$_SESSION['logged_church_id'] ));
+//			//echo $this->db->last_query();
+//			$result = $query1->result();
+//			
+//			 $query2 = $this->db->get_where('cg_church', array('ch_admin_id' => $user_id , 'id' =>$_SESSION['logged_church_id']));
+//			  $result1 = $query2->result();
+//			
+//			if(count($result) > 0 || count($result1) > 0){
+//				 continue;
+//			}
+//			/*******************************************/
+//		$invite_user_info = array(
+//				'name' => $users_data[0]->user_name,
+//				'email' => $users_data[0]->s_email,
+//				'church_id' => $_SESSION['logged_church_id'],
+//				'invitation_sent_date' => get_db_datetime()
+//				);
+//		$this->db->insert('cg_church_member_invitation', $invite_user_info);
+//		$add_mem_id = $this->db->insert_id();
+//					
+//		$location =  base_url().'already_user/'.$_SESSION['logged_church_id'].'/1/'.$user_id.'/'.$add_mem_id;
+//                                                    $logo="http://cogtime.com/images/logo.png";
+//    $body = '<table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" bgcolor="#e9f3f5" style="font-family:Arial, Helvetica, sans-serif; font-size:13px; line-height:19px;">
+//  <tr>
+//    <td align="left" style="background:#013D62; border-bottom:5px solid #62C3BC; padding:15px 0 15px 20px;"><img src="'.$logo.'" alt= ""></td>
+//  </tr>
+//  <tr style="border-top:1px solid #ffffff;">
+//    <td style="padding-top:10px; padding-bottom:10px;">&nbsp;</td>
+//  </tr>
+//  <tr>
+//  	
+//  </tr>
+//  <tr>
+//  	<td style="padding:15px;"><p>Hello,</p>
+//<p>You are invited to join church community. Please click on link and register to join the church community. </p>
+//
+//<p><a href='.$location.'>Click</a></p>
+//      <p>Team Cogtime</p>      
+//	</td>
+//</tr>
+//  <tr>
+//    <td align="center" valign="middle" style="background:#A8A7A7; padding:15px;"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+//      <tr>
+//        <td align="left" valign="middle" style="color:#d3edfd; font-family:Arial, Helvetica, sans-serif; font-size:12px;"> <a href="http://acumencs.com/drandpt-arabic/contact-us/" style="color:#d3edfd; text-decoration:none;"></a></td>
+//        
+//        <td align="right" style="color:#013d62; font-family:Arial, Helvetica, sans-serif; font-size:12px; text-align="center" ">© All Rights Reserved<span style="color:#525252;"><strong> COGTIME 2014  </strong></span></td>
+//      </tr>
+//    </table></td>
+//  </tr>
+//</table>'; 
+//$this->email->from('admin@cogtime.com', 'From Cogtime');
+//$this->email->to($users_data[0]->s_email);
+////->email->bcc("$mailids");
+////$this->email->cc('arif.zisu@gmail.com');
+////$this->email->bcc('them@their-example.com');
+//
+//$this->email->subject('Churh Member Request');
+//$this->email->message("$body");
+//
+// $this->email->send();
+// 
+//		
+//		}
+//		
+//		}
+//	else {
+//            $arr_messages['err_csv'] = "* Required Field.";
+//            echo json_encode(array('success'=>false,'arr_messages'=>$arr_messages,'msg'=>'Please check atleast one checkbox!'));
+//            exit;
+//        }
+//        echo json_encode(array('success'=>true,'arr_messages'=>$arr_messages,'msg'=>'Mail sent successfully'));
         //exit;
 	}
      
