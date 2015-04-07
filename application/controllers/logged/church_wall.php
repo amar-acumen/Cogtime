@@ -177,7 +177,7 @@ class Church_wall extends Base_controller
 					if ($this->input->post('txt_audio_url') != '') {
 
                         try {
-                            $json_data['audio']= trim($this->input->post('txt_audio_url',FALSE));
+                            $json_data['audio']= trim($this->input->post('txt_audio_url'));
                         } catch (Exception $e) {
                             $audio_url_messages = "* Not valid video URL, Video cannot be uploaded!";
                         }
