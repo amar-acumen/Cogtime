@@ -5304,10 +5304,10 @@ function is_friend($login_id, $profile_id) {
 						AND u.i_status=1 
 						AND
 						((c.i_accepter_id = '".$i_profile_id."' AND u.id=c.i_requester_id ) ) GROUP BY u.id"; */
-	echo $sql_frnd;					
+	//echo $sql_frnd;					
 	$query_check_friend = $ci->db->query($sql_frnd);
 	$result_check_friend = $query_check_friend->result();
-	pr($result_check_friend);
+	//pr($result_check_friend);
 	if (!empty($result_check_friend)) {
 	$status = $result_check_friend[0]->s_status;
 	}
