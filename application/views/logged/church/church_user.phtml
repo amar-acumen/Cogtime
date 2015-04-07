@@ -175,7 +175,25 @@ function search_member(){
         if(membr_eml!= '' && chkeml==null){
              showUIMsg('Please enter valid email id');
         }else{
-            alert('ok');
+            
+            $.ajax({
+        type: 'post',
+        url: base_url+'logged/church/ajax_church_user_pagination',
+        dataType: 'json',
+        data:{'mem_nm' : mem_nm,'membr_eml' : membr_eml}
+        success: function (data, status) {
+            hideUILoader_nodialog();
+            if(data.success) {
+                
+                    $('#table_content').html(data.html);
+                }
+               
+     
+
+            }   // end of success function...
+
+
+    });
         }
         
     }
