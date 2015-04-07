@@ -699,3 +699,14 @@ function validateFrmedit(jsondata)
    
 
    </script>
+   <?php 
+   if($_GET['audio'] == 1 ){
+       ?>
+   <script type="text/javascript">
+   $(document).ready(function(){
+        window.location.href="<?= base_url().$_SESSION['logged_church_id'].'/church-wall'; ?>"  ; 
+   })
+   </script> 
+          <?php
+   }
+   ?>
