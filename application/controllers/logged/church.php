@@ -733,6 +733,7 @@ function general_setting(){
                     $id = $member_id_array[$i];
                     $user_detail = get_user_details_by_id($id);
                    echo $email = $user_detail->s_email;
+                   die('ok');
                    // pr($user_detail,1);
                 }
                // pr($member_id_array,1);
