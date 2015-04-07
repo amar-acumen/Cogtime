@@ -79,10 +79,10 @@
 $(document).ready(function() {
 $( "#sent_invitation_user" ).click(function() {
 $( "#sent_invitation_user_btn" ).trigger( "click" );
-//alert('Hi......');
+alert('Hi......');
 var options = { 
 
-        //beforeSubmit:  showLoad,  // pre-submit callback 
+        beforeSubmit:  showLoad,  // pre-submit callback 
 
         success:       validateFrm // post-submit callback 
 
@@ -106,6 +106,18 @@ var options = {
 });
 });
 
+function showLoad()
+
+{
+
+ // $('#photo_album_btn').attr('disabled','disabled');
+
+    showUIMsg();
+
+	}
+
+
+// validate ajax-submission...
 
 function validateFrm(data)
 
