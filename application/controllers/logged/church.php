@@ -734,8 +734,9 @@ function general_setting(){
 		foreach ($data_id as $key => $user_id) {
           $sql ='select s_email, CONCAT(s_first_name, " ", s_last_name) AS user_name from cg_users where id = "'.$user_id.'"';
 		  $query3 = $this->db->query($sql);
-          $users_data = $query3->result();	  
-					
+          $users_data = $query3->result();	
+		
+				pr($users_data);	exit;
 			/****************already member***********************/
 			/**********if already invited member**********************************/
 			$query1 = $this->db->get_where('cg_church_member_invitation', array('email' => $users_data[0]->s_email , 'church_id'=>$_SESSION['logged_church_id'] ));
