@@ -729,9 +729,9 @@ function general_setting(){
         parent::check_login(TRUE, '', array('1'));
 		
 		//pr($this->input->post('cogtime_user_email'));
-		  
-		$data_id = $this->input->post('cogtime_user_id');
-		foreach ($data_id as $key => $user_id) {
+		 if ( !empty($this->input->post('cogtime_user_id'))) 
+        { 
+		foreach ($this->input->post('cogtime_user_id') as $key => $user_id) {
           $sql ='select s_email, CONCAT(s_first_name, " ", s_last_name) AS user_name from cg_users where id = "'.$user_id.'"';
 		  $query3 = $this->db->query($sql);
           $users_data = $query3->result();	
@@ -802,7 +802,14 @@ $this->email->message("$body");
  
 		
 		}
-	echo json_encode(array('success'=>true,'arr_messages'=>$arr_messages,'msg'=>'Mail sent successfully'));
+		
+		}
+	else {
+            $arr_messages['err_csv'] = "* Required Field.";
+            echo json_encode(array('success'=>false,'arr_messages'=>$arr_messages,'msg'=>'Please check atleast one checkbox!'));
+            exit;
+        }
+        echo json_encode(array('success'=>true,'arr_messages'=>$arr_messages,'msg'=>'Mail sent successfully'));
         exit;
 	}
      
