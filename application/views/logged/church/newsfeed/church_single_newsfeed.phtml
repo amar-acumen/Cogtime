@@ -130,7 +130,7 @@ $feed->comments=get_feed_comments($feed->id,'cg_church_newsfeed_comments','i_fee
                                 }
                                  $tracks_json = file_get_contents('https://api.soundcloud.com/resolve.json?url='.$data_arr->audio.'&client_id='.$client_id.'');
                                  $tracks = json_decode($tracks_json);
-                                 $track_id = $tracks->id;
+                               echo  $track_id = $tracks->id;
                                 // pr($tracks);
                             ?>
                                     <iframe width="100%" height="450" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/<?=$track_id?>&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;visual=true"></iframe><?php //$data_arr->audio?>
