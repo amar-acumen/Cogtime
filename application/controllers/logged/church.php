@@ -736,7 +736,7 @@ function general_setting(){
 		  $query3 = $this->db->query($sql);
           $users_data = $query3->result();	
 		
-				pr($users_data);	exit;
+				//pr($users_data);	exit;
 			/****************already member***********************/
 			/**********if already invited member**********************************/
 			$query1 = $this->db->get_where('cg_church_member_invitation', array('email' => $users_data[0]->s_email , 'church_id'=>$_SESSION['logged_church_id'] ));
@@ -800,10 +800,10 @@ $this->email->message("$body");
 
  $this->email->send();
  
-		echo json_encode(array('success'=>true,'arr_messages'=>$arr_messages,'msg'=>'Mail sent successfully'));
-        //exit;
+		
 		}
-	
+	echo json_encode(array('success'=>true,'arr_messages'=>$arr_messages,'msg'=>'Mail sent successfully'));
+        exit;
 	}
      
     public function import_member_csv()
