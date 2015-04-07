@@ -42,9 +42,9 @@ if ($this->session->userdata('loggedin') == '' || $this->session->userdata('logg
                         //pr($relation_arr);
                         ?>
 						<?php 
-						$i_profile_id = intval(decrypt($this->session->userdata('user_id')));
+						$user_id = intval(decrypt($this->session->userdata('user_id')));
 						
-						$check_frnd = is_friend($i_profile_id); 
+						$check_frnd = is_friend($user_id, $public_arr_profile_info['id']); 
 						if ($check_frnd != 'pending') { ?>
 						
 						<span class="pro-offline" style="float:none">
