@@ -132,7 +132,7 @@ $feed->comments=get_feed_comments($feed->id,'cg_church_newsfeed_comments','i_fee
                                  $tracks = json_decode($tracks_json);
                            $track_id = $tracks->id;
                                  $kind = $tracks->kind;
-                                     if( $kind='track'){
+                                     if(isset($kind) && $kind=='track'){
                                          echo 'ok';
                                        $kind ='tracks';
                                      }else{
