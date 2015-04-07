@@ -177,7 +177,8 @@ class Church_wall extends Base_controller
 					if ($this->input->post('txt_audio_url') != '') {
 
                         try {
-                           $query = $this->db->get('cg_site_settings');
+                           
+                               $query = $this->db->get('cg_site_settings');
                             foreach ($query->result() as $row)
                                 {
                                     $client_id = $row->client_id;
@@ -194,11 +195,9 @@ class Church_wall extends Base_controller
                                          
                                        $kind = 'playlists';  
                                      }
-                                     $res = $track_id.'/'.$kind;
-                                   //  echo $kind;
-                               // pr($tracks);
-                            
-                            $json_data['audio']= trim($res);
+                                     $res = $tracks->id.'/'.$kind;
+                            $json_data['audio_details'] = $res;
+                            $json_data['audio']= trim($this->input->post('txt_audio_url'));
                         } catch (Exception $e) {
                             $audio_url_messages = "* Not valid video URL, Video cannot be uploaded!";
                         }
