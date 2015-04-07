@@ -79,7 +79,7 @@
 $(document).ready(function() {
 $( "#sent_invitation_user" ).click(function() {
 $( "#sent_invitation_user_btn" ).trigger( "click" );
-alert('Hi......');
+
 var options = { 
 
         beforeSubmit:  showLoad,  // pre-submit callback 
@@ -95,7 +95,7 @@ var options = {
     $('#sent_invitation_user_frm').submit(function() {
 
         $(this).ajaxSubmit(options);
-
+		alert('Hi......');
         return false;
 
         
