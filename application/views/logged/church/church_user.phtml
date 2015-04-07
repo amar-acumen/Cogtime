@@ -183,10 +183,10 @@ function search_member(){
         data: {'mem_nm' : mem_nm,'membr_eml' : membr_eml},
         success: function (data, status) {
             hideUILoader_nodialog();
-            if(data.success) {
+          
                 
                     $('#table_content').html(data.html);
-                }
+               
                
      
 
