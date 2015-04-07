@@ -737,7 +737,7 @@ function general_setting(){
 						/****************already member***********************/
 						/**********if already invited member**********************************/
 						$query1 = $this->db->get_where('cg_church_member_invitation', array('email' => $user_val , 'church_id'=>$_SESSION['logged_church_id'] ));
-						echo $this->db->last_query();
+						//echo $this->db->last_query();
 						$result = $query1->result();
 						
 						 $query2 = $this->db->get_where('cg_church', array('ch_admin_id' => get_user_id_byemail($user_val) , 'id' =>$_SESSION['logged_church_id']));
