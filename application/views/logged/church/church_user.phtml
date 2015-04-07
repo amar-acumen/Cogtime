@@ -178,7 +178,7 @@ function search_member(){
               
             $.ajax({
         type: 'post',
-        url: base_url+'logged/church/ajax_church_user_pagination',
+        url: base_url+'logged/church/ajax_church_user_pagination_search',
         dataType: 'json',
         data: {'mem_nm' : mem_nm,'membr_eml' : membr_eml},
         success: function (data, status) {
