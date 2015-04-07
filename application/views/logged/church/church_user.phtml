@@ -172,7 +172,7 @@ function search_member(){
     if(mem_nm == '' && membr_eml == '' ){
         showUIMsg('Please enter name or email id');
     }else{
-        if(chkeml==null){
+        if(membr_eml!= '' && chkeml==null){
              showUIMsg('Please enter valid email id');
         }else{
             alert('ok');
