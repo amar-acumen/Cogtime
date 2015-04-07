@@ -198,6 +198,11 @@ class Church_wall extends Base_controller
                                      $res = $tracks->id.'/'.$kind;
                             $json_data['audio_details'] = $res;
                             $json_data['audio']= trim($this->input->post('txt_audio_url'));
+                            if($this->input->post('txt_audio_url') != ''){
+                                $audio_status = 1;
+                            }else{
+                                $audio_status = 0;
+                            }
                         } catch (Exception $e) {
                             $audio_url_messages = "* Not valid video URL, Video cannot be uploaded!";
                         }
@@ -266,7 +271,7 @@ class Church_wall extends Base_controller
                         if ($is_abusive > 0) {
                             echo json_encode(array('success' => FALSE, 'feed' => $feed, 'msg' => 'Abusive words are not allowed', 'vid_msg' => ''));
                         } else {
-                            echo json_encode(array('success' => TRUE, 'feed' => $feed, 'msg' => 'Post Published!', 'vid_msg' => ''));
+                            echo json_encode(array('success' => TRUE, 'feed' => $feed, 'msg' => 'Post Published!', 'vid_msg' => '', 'audio'=>$audio_status));
                         }
 
                         //echo json_encode( array('success'=>TRUE,'msg'=>'Post Published!' , 'vid_msg'=>''));
