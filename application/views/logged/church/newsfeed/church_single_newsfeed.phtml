@@ -128,6 +128,9 @@ $feed->comments=get_feed_comments($feed->id,'cg_church_newsfeed_comments','i_fee
                                     $client_id = $row->client_id;
                                     $api_user_id = $row->api_user_id;
                                 }
+                                 $tracks_json = file_get_contents('https://api.soundcloud.com/resolve.json?url='.$data_arr->audio.'&client_id='.$client_id.'');
+                                 $tracks = json_decode($tracks_json);
+                                 pr($tracks);
                             ?>
 					<?=$data_arr->audio?>
 
