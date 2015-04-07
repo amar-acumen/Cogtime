@@ -729,7 +729,7 @@ function general_setting(){
 	echo 'cogtime_user_sent_invitation';
         parent::check_login(TRUE, '', array('1'));
 		$row = 1;
-		pr($this->input->post('cogtime_user_mail'));exit;
+		pr($this->input->post('cogtime_user_email'));exit;
 	    while ($data = $this->input->post('cogtime_user_email'))  {
 		$row++;
                  
