@@ -5273,7 +5273,7 @@ function get_subadmin_access($user_id , $cid){
 
 function is_friend($login_id , $profile_id) {
 	$ci = & get_instance();
-	$sql_frnd = "select s_status from cg_user_contacts where i_requester_id = '".$login_id."' AND i_accepter_id = '".$profile_id."'";
+	$sql_frnd = "select s_status from cg_user_contacts where i_requester_id = '".$login_id."' AND i_accepter_id = '151'";
 	echo $sql_frnd;
 	$query_check_friend = $ci->db->query($sql_frnd);
 	$result_check_friend = $query_check_friend->result();
