@@ -133,14 +133,14 @@ $feed->comments=get_feed_comments($feed->id,'cg_church_newsfeed_comments','i_fee
                            $track_id = $tracks->id;
                                  $kind = $tracks->kind;
                                      if(isset($kind) && $kind=='track'){
-                                         echo 'ok';
+                                       
                                        $kind ='tracks';
                                      }else{
-                                         echo 'ok2';
+                                         
                                        $kind = 'playlists';  
                                      }
-                                     echo $kind;
-                                pr($tracks);
+                                   //  echo $kind;
+                               // pr($tracks);
                             ?>
                                     <iframe width="100%" height="450" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/<?= $kind ?>/<?=$track_id?>&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;visual=true"></iframe><?php //$data_arr->audio?>
 
