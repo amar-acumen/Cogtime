@@ -36,7 +36,7 @@
 
     <div class="right-box">
 
-
+		<div align="right"><input type="submit" value="Add member" class="btn" onclick="invite_cogtime_user();" style="font-weight:normal;"></div><br />
         <div class="church-time-table" style="margin-right:0;" id="table_content">
                         <?= $result_content ?>
 
@@ -75,4 +75,9 @@
 <?php include(APPPATH."views/layouts/church_footer.phtml");?>
 
 <!-- /FOOTER SECTION -->
+<script type="text/javascript">
+function invite_cogtime_user() {
+	window.location.href = "<?php echo base_url(); ?>logged/church/cogtime_user_sent_invitation";
+}
 
+</script>
