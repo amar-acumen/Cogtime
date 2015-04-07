@@ -31,7 +31,11 @@
 
     </div>-->
 
-    <h1 style="color: green;">
+    
+
+
+    <div class="right-box">
+<h1 style="color: green;font-size: 16px; font-weight: normal;">
         
         <?php
         if($_GET['mail'] == 1){
@@ -40,10 +44,6 @@
         ?>
         
     </h1>
-
-
-    <div class="right-box">
-
         <div align="right"><input type="button" value="Send Invitation" id="sent_invitation_user" class="btn" style="font-weight:normal;" onclick="send_invition()"></div><br />
         <div class="church-time-table" style="margin-right:0;" id="table_content">
                         <?= $result_content ?>
