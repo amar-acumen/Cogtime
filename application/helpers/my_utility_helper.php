@@ -5271,7 +5271,7 @@ function get_subadmin_access($user_id , $cid){
      }
 }
 
-function is_friend($i_profile_id) {
+function is_friend($login_id, $profile_id) {
 	$ci = & get_instance();
 	$sql_frnd = "select s_status from cg_user_contacts where i_requester_id = '".$login_id."' AND i_accepter_id = '".$profile_id."'";
 	/*$s_qry = "SELECT   c.id, 
