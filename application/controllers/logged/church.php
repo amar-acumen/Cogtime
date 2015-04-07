@@ -723,6 +723,13 @@ function general_setting(){
 }
 
     // pr($_POST,1);
+	
+	 public function cogtime_user_sent_invitation()
+    {
+        parent::check_login(TRUE, '', array('1'));
+	
+	
+	}
      
     public function import_member_csv()
     {
