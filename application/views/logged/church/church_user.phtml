@@ -115,11 +115,14 @@ function validateFrm(data)
 
     var data = JSON.parse(data);
 
-
+	if (!jQuery("#cogtime_user_id").is(":checked")) {
+        alert("Please select atleast one checkbox.");
+        return false;
+    }
 
     //id=data.photo_id;
 
-
+	else {
 
     if(data.success==false) 
 
@@ -135,7 +138,7 @@ function validateFrm(data)
 
         showUIMsg(data.msg);  
 
-        
+        }
 
     }
 	
