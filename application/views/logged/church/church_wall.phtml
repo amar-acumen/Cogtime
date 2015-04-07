@@ -174,7 +174,12 @@ function validateFrm(jsondata)
 	
 		showUIMsg(data.msg);		
 		//location.reload();
-                 alert(data.audio)
+                 //alert()
+                 if(data.audio == 1){
+                      window.location.href="<?= base_url().$_SESSION['logged_church_id'].'/church-wall?audio=1'; ?>"  ; 
+                 }else{
+                 location.reload();
+                 }
 		//window.location.href=g_controller_url;
 	}
 }
