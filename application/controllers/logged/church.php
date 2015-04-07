@@ -729,18 +729,22 @@ function general_setting(){
         parent::check_login(TRUE, '', array('1'));
 		
 		//pr($this->input->post('cogtime_user_email'));
-	  $users_data = $this->input->post('cogtime_user_email');
-		foreach ($users_data as $key => $user_val) {
+		  
+		$data_id = $this->input->post('cogtime_user_id');
+		foreach ($data_id as $key => $user_id) {
 		
-                 
+          $query3 = $this->db->get_where('cg_users', 'id' => $user_id );
+		  //echo $this->db->last_query();
+		  $users_data = $query1->result();   
+			pr($users_data);		  
 					
 						/****************already member***********************/
 						/**********if already invited member**********************************/
-						$query1 = $this->db->get_where('cg_church_member_invitation', array('email' => $user_val , 'church_id'=>$_SESSION['logged_church_id'] ));
-						//echo $this->db->last_query();
+						$query1 = $this->db->get_where('cg_church_member_invitation', array('email' => $users_data['s_email'] , 'church_id'=>$_SESSION['logged_church_id'] ));
+						echo $this->db->last_query();
 						$result = $query1->result();
 						
-						 $query2 = $this->db->get_where('cg_church', array('ch_admin_id' => get_user_id_byemail($user_val) , 'id' =>$_SESSION['logged_church_id']));
+						 $query2 = $this->db->get_where('cg_church', array('ch_admin_id' => $user_id , 'id' =>$_SESSION['logged_church_id']));
 						  $result1 = $query2->result();
 						
 						if(count($result) > 0 || count($result1) > 0){
