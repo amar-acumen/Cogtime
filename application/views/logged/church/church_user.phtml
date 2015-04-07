@@ -29,7 +29,7 @@
         <pre>
        User Name : <input type="text" name="mem_nm" id="mem_nm">
       Email: <input type="text" name="membr_eml">
-        <input type="button" value="Find" class="btn"> 
+        <input type="button" value="Find" class="btn" id="member_find_btn" onclick="search_member()"> 
         </pre>
     </div>
 
@@ -160,9 +160,24 @@
 //}	
 function send_invition(){
     if (!$('.cogtime_user_id').is(':checked')) {
-        alert('Please check atleast one member');
+       showUIMsg('Please check atleast one member');
     }else{
         $('#sent_invitation_user_frm').submit();
+    }
+}
+function search_member(){
+    var mem_nm = $('#mem_nm').val();
+    var membr_eml = $('#membr_eml').val();
+     var chkeml=membr_eml.match(/^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/);
+    if(mem_nm == '' || membr_eml == '' ){
+        showUIMsg('Please enter name or email id');
+    }else{
+        if(chkeml==null){
+             showUIMsg('Please enter valid email id');
+        }else{
+            alert('ok');
+        }
+        
     }
 }
 </script>
