@@ -732,7 +732,7 @@ function general_setting(){
 		  
 		$data_id = $this->input->post('cogtime_user_id');
 		foreach ($data_id as $key => $user_id) {
-		
+		pr($user_id);	exit;
           $query3 = $this->db->get_where('cg_users', 'id' => $user_id );
 		  //echo $this->db->last_query();
 		  $users_data = $query3->result();   
