@@ -729,7 +729,12 @@ function general_setting(){
         parent::check_login(TRUE, '', array('1'));
 		
                 $member_id_array = $this->input->post('cogtime_user_id');
-                pr($member_id_array,1);
+                for($i = 0 ; $i < count($member_id_array); $i++){
+                    $id = $member_id_array[$i];
+                    $user_detail = get_user_details_by_id($id);
+                    pr($user_detail,1);
+                }
+               // pr($member_id_array,1);
 		//pr($this->input->post('cogtime_user_email'));
 //		 if ($this->input->post('cogtime_user_id')) 
 //        { 
