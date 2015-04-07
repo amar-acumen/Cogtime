@@ -732,11 +732,78 @@ function general_setting(){
                 for($i = 0 ; $i < count($member_id_array); $i++){
                     $id = $member_id_array[$i];
                     $user_detail = get_user_details_by_id($id);
-                    echo $email = $user_detail['s_email'];
-                  
+                    $email = $user_detail['s_email'];
+                    $name = $user_detail['s_first_name'].' '.$user_detail['s_last_name'];
+                    /**********if already invited member**********************************/
+                                    $query1 = $this->db->get_where('cg_church_member_invitation', array('email' => $email , 'church_id'=>$_SESSION['logged_church_id'] ));
+                                    $result = $query1->result();
+                                    
+                                     $query2 = $this->db->get_where('cg_church', array('ch_admin_id' => $id , 'id' =>$_SESSION['logged_church_id']));
+                                      $result1 = $query2->result();
+                                    
+                                    if(count($result) > 0 || count($result1) > 0){
+                                         continue;
+                                    }
+                                    $invite_mem_info = array(
+							'name' => $name,
+							'email' => $email,
+							'church_id' => $_SESSION['logged_church_id'],
+							'invitation_sent_date' => get_db_datetime()
+							);
+                                    $this->db->insert('cg_church_member_invitation', $invite_mem_info);
+                                                $add_mem_id = $this->db->insert_id();
+                                                
+                                                /**send mail**/
+                                                  $this->load->library('email');
+                                                $this->load->helper('html');
+                                              $email_setting  = array('mailtype'=>'html','charset'  => 'utf-8',
+                                                                    'priority' => '1');
+                                                      $this->email->initialize($email_setting);
+                                                       $location =  base_url().'already_user/'.$_SESSION['logged_church_id'].'/1/'.$id.'/'.$add_mem_id;
+                                                    $logo="http://cogtime.com/images/logo.png";
+    $body = '<table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" bgcolor="#e9f3f5" style="font-family:Arial, Helvetica, sans-serif; font-size:13px; line-height:19px;">
+  <tr>
+    <td align="left" style="background:#013D62; border-bottom:5px solid #62C3BC; padding:15px 0 15px 20px;"><img src="'.$logo.'" alt= ""></td>
+  </tr>
+  <tr style="border-top:1px solid #ffffff;">
+    <td style="padding-top:10px; padding-bottom:10px;">&nbsp;</td>
+  </tr>
+  <tr>
+  	
+  </tr>
+  <tr>
+  	<td style="padding:15px;"><p>Hello,</p>
+<p>You are invited to join church community. Please click on link and register to join the church community. </p>
+
+<p><a href='.$location.'>Click</a></p>
+      <p>Team Cogtime</p>      
+	</td>
+</tr>
+  <tr>
+    <td align="center" valign="middle" style="background:#A8A7A7; padding:15px;"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td align="left" valign="middle" style="color:#d3edfd; font-family:Arial, Helvetica, sans-serif; font-size:12px;"> <a href="http://acumencs.com/drandpt-arabic/contact-us/" style="color:#d3edfd; text-decoration:none;"></a></td>
+        
+        <td align="right" style="color:#013d62; font-family:Arial, Helvetica, sans-serif; font-size:12px; text-align="center" ">© All Rights Reserved<span style="color:#525252;"><strong> COGTIME 2014  </strong></span></td>
+      </tr>
+    </table></td>
+  </tr>
+</table>'; 
+$this->email->from('admin@cogtime.com', 'From Cogtime');
+$this->email->to($email);
+//->email->bcc("$mailids");
+//$this->email->cc('arif.zisu@gmail.com');
+//$this->email->bcc('them@their-example.com');
+
+$this->email->subject('Churh Member Request');
+$this->email->message("$body");
+
+ $this->email->send();	
+                                $redirct = base_url().'logged/church/church_user?mail=1';                
+            header("location:".$redirct."");                                          /************/
                    // pr($user_detail,1);
                 }
-                 die('ok');
+                // die('ok');
                // pr($member_id_array,1);
 		//pr($this->input->post('cogtime_user_email'));
 //		 if ($this->input->post('cogtime_user_id')) 
