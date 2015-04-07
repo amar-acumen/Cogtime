@@ -729,7 +729,7 @@ function general_setting(){
         parent::check_login(TRUE, '', array('1'));
 		
 		//pr($this->input->post('cogtime_user_email'));
-		 if ( !empty($this->input->post('cogtime_user_id'))) 
+		 if ( isset($this->input->post('cogtime_user_id'))) 
         { 
 		foreach ($this->input->post('cogtime_user_id') as $key => $user_id) {
           $sql ='select s_email, CONCAT(s_first_name, " ", s_last_name) AS user_name from cg_users where id = "'.$user_id.'"';
