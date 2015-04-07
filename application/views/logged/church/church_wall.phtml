@@ -173,8 +173,8 @@ function validateFrm(jsondata)
 		
 	
 		showUIMsg(data.msg);		
-		location.reload();
-                
+		//location.reload();
+                 alert(data.audio)
 		//window.location.href=g_controller_url;
 	}
 }
@@ -208,8 +208,8 @@ function delete_post()
           hide_dialog('delete-post');
           hideUILoader_nodialog();
             showUIMsg(data.msg);
-          alert(data.audio)
-          //window.location.reload();
+         
+          window.location.reload();
         }
         
       },
