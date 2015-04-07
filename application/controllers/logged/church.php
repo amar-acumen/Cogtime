@@ -727,7 +727,7 @@ function general_setting(){
 	 public function cogtime_user_sent_invitation()
     {
         parent::check_login(TRUE, '', array('1'));
-		
+		pr($_POST,1);
 		//pr($this->input->post('cogtime_user_email'));
 		 if ($this->input->post('cogtime_user_id')) 
         { 
