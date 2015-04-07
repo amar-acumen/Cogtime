@@ -125,8 +125,12 @@ $feed->comments=get_feed_comments($feed->id,'cg_church_newsfeed_comments','i_fee
                                     
                                     <?php //echo $data_arr->audio.'/n'?>
 <?php 
-                                   echo  $data_arr->audio_details;
+
+   
+                                   $arr =  explode('/',$data_arr->audio_details);
+                                  // echo $arr[0] .'==='.$arr[1];
                                      ?>
+                                    <iframe width="100%" height="450" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/<?= $arr[1] ?>/<?=$arr[0]?>&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;visual=true"></iframe>
 				</figure>
 
 			   <?php } ?>
