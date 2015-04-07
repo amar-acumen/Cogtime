@@ -36,7 +36,7 @@
 
     <div class="right-box">
 
-		<div align="right"><input type="button" value="Send Invitation" id="sent_invitation_user" class="btn" style="font-weight:normal;"></div><br />
+        <div align="right"><input type="button" value="Send Invitation" id="sent_invitation_user" class="btn" style="font-weight:normal;" onclick="send_invition()"></div><br />
         <div class="church-time-table" style="margin-right:0;" id="table_content">
                         <?= $result_content ?>
 
@@ -76,77 +76,83 @@
 
 <!-- /FOOTER SECTION -->
 <script type="text/javascript">
-$(document).ready(function() {
-$( "#sent_invitation_user" ).click(function() {
-$( "#sent_invitation_user_btn" ).trigger( "click" );
-
-var options = { 
-
-        beforeSubmit:  showLoad,  // pre-submit callback 
-
-        success:       validateFrm // post-submit callback 
-
-    }; 
-
- 
-
-    // bind to the form's submit event 
-
-    $('#sent_invitation_user_frm').submit(function() {
-
-        $(this).ajaxSubmit(options);
-		alert('Hi......');
-        return false;
-
-        
-
-    });
-
-
-});
-});
-
-function showLoad()
-
-{
-
- // $('#photo_album_btn').attr('disabled','disabled');
-
-    showUIMsg();
-
-	}
-
-
-// validate ajax-submission...
-
-function validateFrm(data)
-
-{
-
-   alert( data);
-
-    var data = JSON.parse(data);
-
-
-    if(data.success==false) 
-
-    {
-	
-	showUIMsg(data.msg);
-	location.reload();
-
+//$(document).ready(function() {
+//$( "#sent_invitation_user" ).click(function() {
+//$( "#sent_invitation_user_btn" ).trigger( "click" );
+//
+//var options = { 
+//
+//        beforeSubmit:  showLoad,  // pre-submit callback 
+//
+//        success:       validateFrm // post-submit callback 
+//
+//    }; 
+//
+// 
+//
+//    // bind to the form's submit event 
+//
+//    $('#sent_invitation_user_frm').submit(function() {
+//
+//        $(this).ajaxSubmit(options);
+//		alert('Hi......');
+//        return false;
+//
+//        
+//
+//    });
+//
+//
+//});
+//});
+//
+//function showLoad()
+//
+//{
+//
+// // $('#photo_album_btn').attr('disabled','disabled');
+//
+//    showUIMsg();
+//
+//	}
+//
+//
+//// validate ajax-submission...
+//
+//function validateFrm(data)
+//
+//{
+//
+//   alert( data);
+//
+//    var data = JSON.parse(data);
+//
+//
+//    if(data.success==false) 
+//
+//    {
+//	
+//	showUIMsg(data.msg);
+//	location.reload();
+//
+//    }
+//
+//    else {
+//
+//        
+//
+//        showUIMsg(data.msg);  
+//		location.reload();
+//        }
+//
+//    
+//	
+//}	
+function send_invition(){
+    if (!$('.cogtime_user_id').is(':checked')) {
+        alert('Please check atleast one member');
+    }else{
+        $('#sent_invitation_user_frm').submit();
     }
-
-    else {
-
-        
-
-        showUIMsg(data.msg);  
-		location.reload();
-        }
-
-    
-	
-}	
-
+}
 </script>
