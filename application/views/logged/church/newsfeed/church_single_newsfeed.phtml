@@ -130,7 +130,7 @@ $feed->comments=get_feed_comments($feed->id,'cg_church_newsfeed_comments','i_fee
                                 }
                                  $tracks_json = file_get_contents('https://api.soundcloud.com/resolve.json?url='.$data_arr->audio.'&client_id='.$client_id.'');
                                  $tracks = json_decode($tracks_json);
-                          $track_id = $tracks->id;
+                           $track_id = $tracks->id;
                                      $kind = $tracks->track;
                                      if(isset($kind) && $kind='track'){
                                        $kind =$tracks->track;
