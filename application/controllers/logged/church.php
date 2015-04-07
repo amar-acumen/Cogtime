@@ -304,7 +304,7 @@ class Church extends Base_controller
             $data['current_page'] = $page;
 
             $data['pagination_per_page'] = $this->pagination_per_page;
-
+            echo  json_encode(array('html'=>$result_content,'success' => true));
             # loading the view-part...
             echo $this->load->view('logged/church/ajax_member/church_user_ajax.phtml', $data, TRUE);
             
