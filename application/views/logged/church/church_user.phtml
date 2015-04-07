@@ -111,7 +111,7 @@ function validateFrm(data)
 
 {
 
-    //alert( data);
+   alert( data);
 
     var data = JSON.parse(data);
 
@@ -121,6 +121,7 @@ function validateFrm(data)
     {
 	
 	showUIMsg(data.msg);
+	location.reload();
 
     }
 
@@ -129,7 +130,7 @@ function validateFrm(data)
         
 
         showUIMsg(data.msg);  
-
+		location.reload();
         }
 
     
