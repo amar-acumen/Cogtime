@@ -732,15 +732,14 @@ function general_setting(){
 		  
 		$data_id = $this->input->post('cogtime_user_id');
 		foreach ($data_id as $key => $user_id) {
-		
-          $query3 = $this->db->get_where('cg_users', 'id' => $user_id );
+          $query3 = $this->db->get_where('cg_users', array('id' => $user_id ));
 		  //echo $this->db->last_query();
 		  $users_data = $query3->result();   
 			pr($users_data);		  
 					
 						/****************already member***********************/
 						/**********if already invited member**********************************/
-						$query1 = $this->db->get_where('cg_church_member_invitation', array('email' => $users_data['s_email'] , 'church_id'=>$_SESSION['logged_church_id'] ));
+						$query1 = $this->db->get_where('cg_church_member_invitation', array('email' => $users_data[0]->s_email , 'church_id'=>$_SESSION['logged_church_id'] ));
 						echo $this->db->last_query();
 						$result = $query1->result();
 						
