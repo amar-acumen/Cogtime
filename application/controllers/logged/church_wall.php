@@ -177,28 +177,11 @@ class Church_wall extends Base_controller
 					if ($this->input->post('txt_audio_url') != '') {
 
                         try {
-                           $query = $this->db->get('cg_site_settings');
-                            foreach ($query->result() as $row)
-                                {
-                                    $client_id = $row->client_id;
-                                    $api_user_id = $row->api_user_id;
-                                }
-                                 $tracks_json = file_get_contents('https://api.soundcloud.com/resolve.json?url='.$this->input->post('txt_audio_url').'&client_id='.$client_id.'');
-                                 $tracks = json_decode($tracks_json);
-                           $track_id = $tracks->id;
-                                 $kind = $tracks->kind;
-                                     if(isset($kind) && $kind=='track'){
-                                       
-                                       $kind ='tracks';
-                                     }else{
-                                         
-                                       $kind = 'playlists';  
-                                     }
-                                     $res = $track_id.'/'.$kind;
+                           
                                    //  echo $kind;
                                // pr($tracks);
                             
-                            $json_data['audio']= trim($res);
+                            $json_data['audio']= trim($this->input->post('txt_audio_url'));
                         } catch (Exception $e) {
                             $audio_url_messages = "* Not valid video URL, Video cannot be uploaded!";
                         }
