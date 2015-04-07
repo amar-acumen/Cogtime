@@ -714,7 +714,11 @@ $_html = ''."Liked by "." (".count_word_like_link($window_id).")";
                                      }
                                      $res = $tracks->id.'/'.$kind;
                             $json_data['audio_details'] = $res;
-                            
+                            if($this->input->post('txt_audio_url') != ''){
+                                $audio_status = 1;
+                            }else{
+                                $audio_status = 0;
+                            }
                             $json_data['audio']= trim($this->input->post('txt_audio_url'));
                         } catch (Exception $e) {
                             $audio_url_messages = "* Not valid video URL, Video cannot be uploaded!";
@@ -784,7 +788,7 @@ $_html = ''."Liked by "." (".count_word_like_link($window_id).")";
                                         echo json_encode(array('success' => false, 'feed' => $feed, 'msg' => 'Empty posts are not allowed!', 'vid_msg' => ''));
                                     }                       
                                     else {
-                                        echo json_encode(array('success' => TRUE, 'feed' => $feed, 'msg' => 'Post Edited Successfully!', 'vid_msg' => ''));
+                                        echo json_encode(array('success' => TRUE, 'feed' => $feed, 'msg' => 'Post Edited Successfully!', 'vid_msg' => '' ,'audio'=>$audio_status));
                                     }
 
                                     //echo json_encode( array('success'=>TRUE,'msg'=>'Post Published!' , 'vid_msg'=>''));
