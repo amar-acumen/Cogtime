@@ -180,7 +180,7 @@ function search_member(){
         type: 'post',
         url: base_url+'logged/church/ajax_church_user_pagination',
         dataType: 'json',
-        data:{'mem_nm' : mem_nm,'membr_eml' : membr_eml}
+        data: {'mem_nm' : mem_nm,'membr_eml' : membr_eml},
         success: function (data, status) {
             hideUILoader_nodialog();
             if(data.success) {
