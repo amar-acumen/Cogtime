@@ -202,48 +202,6 @@ function search_member(){
         
     }
 }
-$(document).ready(function(){
-    $('.cogtime_user_id').click(function(){
-         var id = $(this).val();
-         var type = 'docheck';
-         if($('#cogtime_user_id'+id).is(':checked')){
-            var type = 'docheck';
-            $.ajax({
-        type: 'post',
-        url: base_url+'logged/church/store_in_session',
-       // dataType: 'json',
-        data: {'id' : id ,'type': type},
-        success: function (data, status) {
-  
-     
 
-            }   // end of success function...
-
-
-    });
-         }
-          if(!$('#cogtime_user_id'+id).is(':checked')){
-            var type = 'uncheck';
-            $.ajax({
-        type: 'post',
-        url: base_url+'logged/church/store_in_session',
-       // dataType: 'json',
-        data: {'id' : id ,'type': type},
-        success: function (data, status) {
-  
-     
-
-            }   // end of success function...
-
-
-    });
-        }
-            
-//          
-           
-        
-        });
-         
-    });
 
 </script>
