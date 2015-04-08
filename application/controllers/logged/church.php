@@ -2172,6 +2172,12 @@ echo json_encode( array('success'=>'true'));
            
         } 
 	}
+        
+        function store_in_session(){
+            $id = $this->input->post('id');
+            $_SESSION['cm'] = $id;
+            $_SESSION['check_member'] = array($_SESSION['cm'].',');pr( $_SESSION['check_member']);
+        }
     /********************************************************************/
 }   // end of controller...
 
