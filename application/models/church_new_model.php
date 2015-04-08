@@ -64,7 +64,7 @@ class Church_new_model extends Base_model
         }
 		
 		function get_churchusers_count($c_id,$s_where){
-			$sql = 'select DISTINCT COUNT(*) AS totrow  from cg_users u , cg_church r WHERE u.id NOT IN (select member_id from cg_church_member where is_deleted=0 AND church_id = "'.$c_id.'" AND is_leave = 0 AND is_blocked = 1)'.$s_where.' '; 
+			$sql = 'select DISTINCT COUNT(u.id) AS totrow  from cg_users u , cg_church r WHERE u.id NOT IN (select member_id from cg_church_member where is_deleted=0 AND church_id = "'.$c_id.'" AND is_leave = 0 AND is_blocked = 1)'.$s_where.' '; 
             $query = $this->db->query($sql);
             $result = $query->result();
             return $result[0]->totrow;
