@@ -33,13 +33,13 @@
                 //$i = 1;
 //pr($info_arr);
                 foreach ($info_arr as $member) {
-
+                                   
                     ?>
 
     <tr>
 
     
-        <td width="6%"><input type="checkbox" name="cogtime_user_id[]" id="cogtime_user_id<?php echo $member->id?>" class="cogtime_user_id" value="<?php echo $member->id?>"></td>
+        <td width="6%"><input type="checkbox" name="cogtime_user_id[]" id="cogtime_user_id<?php echo $member->id?>" class="cogtime_user_id" value="<?php echo $member->id?>" <?php if (in_array($member->id, $_SESSION['check_member'])){ echo'checked=""'; }  ?> ></td>
 	 
       <td width="6%"><?php echo $i++; ?></td>
 
@@ -51,7 +51,11 @@
 	
 	
 
-    <?php } ?>
+    <?php
+    
+                                     
+    
+                                     } ?>
 	<input type="submit" id="sent_invitation_user_btn" value="submit" class="post-btn" style="display:none;"> 
 </form>
   </tbody>
