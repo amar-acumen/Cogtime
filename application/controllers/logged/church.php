@@ -2175,8 +2175,11 @@ echo json_encode( array('success'=>'true'));
         
         function store_in_session(){
             $id = $this->input->post('id');
-           
+            $type = $this->input->post('type');
+                 if($type == 'docheck'){
             $_SESSION['check_member'][$id] = $id;
+                 }
+                 
           // $_SESSION['check_member'] = $id.',';
           
         }
