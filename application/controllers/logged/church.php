@@ -2180,7 +2180,7 @@ echo json_encode( array('success'=>'true'));
             $_SESSION['check_member'][$id] = $id;
                  }
                  if($type == 'uncheck'){
-                  $_SESSION['check_member'] = array_diff($_SESSION['check_member'],$id);    
+                unset($_SESSION['check_member'][$id]);  
                   
                  }
                  pr( $_SESSION['check_member']);
