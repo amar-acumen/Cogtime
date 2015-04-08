@@ -207,11 +207,11 @@ $(document).ready(function(){
          var id = $(this).val();
          var type = 'docheck';
          if($(this).prop('checked',true)){
-             alert('checked');
+            var type = 'docheck';
          }
           if($(this).prop('checked',false)){
-             alert('unchecked');
-         }
+            var type = 'uncheck';
+        }
             $.ajax({
         type: 'post',
         url: base_url+'logged/church/store_in_session',
