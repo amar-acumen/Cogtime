@@ -2179,7 +2179,9 @@ echo json_encode( array('success'=>'true'));
                  if($type == 'docheck'){
             $_SESSION['check_member'][$id] = $id;
                  }
-                 
+                 if($type == 'uncheck'){
+                  $_SESSION['check_member'] = array_diff($_SESSION['check_member'],$_SESSION['check_member'][$id]);    
+                 }
           // $_SESSION['check_member'] = $id.',';
           
         }
