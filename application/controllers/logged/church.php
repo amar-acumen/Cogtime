@@ -2176,7 +2176,7 @@ echo json_encode( array('success'=>'true'));
         function store_in_session(){
             $id = $this->input->post('id');
            
-            $_SESSION['check_member'] = array($id.',');
+            $_SESSION['check_member'] = array($id);
           // $_SESSION['check_member'] = $id.',';
           
         }
