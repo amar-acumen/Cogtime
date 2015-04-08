@@ -250,9 +250,9 @@ class Church extends Base_controller
             if($this->input->post('membr_eml')){
                $s_where .=' AND u.s_email LIKE "%'.$this->input->post('membr_eml').'%"'; 
             }
-            if(!$this->input->post('mem_nm') && !$this->input->post('membr_eml')){
-                $s_where .= ' AND 1';
-            }
+//            if(!$this->input->post('mem_nm') && !$this->input->post('membr_eml')){
+//                $s_where .= ' AND 1';
+//            }
              $s_where .= ' AND r.ch_admin_id != '.intval(decrypt($this->session->userdata('user_id'))).'';
             $c_id = $_SESSION['logged_church_id'];
             $order_by = " u.id DESC ";
