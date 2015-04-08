@@ -5304,7 +5304,7 @@ function is_friend($login_id, $profile_id) {
 						AND u.i_status=1 
 						AND
 						((c.i_accepter_id = '".$i_profile_id."' AND u.id=c.i_requester_id ) ) GROUP BY u.id"; */
-	//echo $sql_frnd;					
+	echo $sql_frnd;					
 	$query_check_friend = $ci->db->query($sql_frnd);
 	$result_check_friend = $query_check_friend->result();
 	pr($result_check_friend);
@@ -5318,7 +5318,18 @@ function is_friend($login_id, $profile_id) {
 	//pr($result_check_friend);
 }
 
-function is_netpals($church_id, $profile_id) {
-
-
+function is_netpal($church_id, $profile_id) {
+	$ci = & get_instance();
+	$sql_netpal = "select church_id, member_id from cg_church_member where church_id = '".$church_id."' AND member_id = '".$profile_id."' AND is_approved='1' AND is_deleted=0 AND is_blocked='1' AND is_leave=0";
+	echo $sql_netpal;	
+	$query_check_netpal = $ci->db->query($sql_frnd);
+	$result_check_netpal = $query_check_netpal->result();
+	pr($result_check_netpal);
+	if (!empty($result_check_netpal)) {
+	$netpal = 'yes';
+	}
+	else {
+	$netpal = 'no';
+	}
+	return $netpal;
 }
