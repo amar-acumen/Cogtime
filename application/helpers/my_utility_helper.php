@@ -5324,7 +5324,7 @@ function is_netpal($church_id, $profile_id) {
 	//echo $sql_netpal;	
 	$query_check_netpal = $ci->db->query($sql_netpal);
 	$result_check_netpal = $query_check_netpal->result();
-	//pr($result_check_netpal);
+	pr($result_check_netpal);
 	if (!empty($result_check_netpal)) {
 	$netpal = 'yes';
 	}
