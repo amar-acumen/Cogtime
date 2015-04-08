@@ -177,7 +177,7 @@ function search_member(){
         if(membr_eml!= '' && chkeml==null){
              showUIMsg('Please enter valid email id');
         }else{
-              
+              showBusyScreen();
             $.ajax({
         type: 'post',
         url: base_url+'logged/church/ajax_church_user_pagination',
@@ -185,10 +185,11 @@ function search_member(){
         data: {'mem_nm' : mem_nm,'membr_eml' : membr_eml,'is_search':is_search},
         success: function (data, status) {
             //alert('sss');
+              hideBusyScreen(); 
             //hideUILoader_nodialog();
                   if(1){
                 alert(data.html);
-                    $('#table_content').html(data.html);
+                    $('#table_content').html(data);
                
                   }
      
