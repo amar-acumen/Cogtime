@@ -1,10 +1,15 @@
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
-
+<?php 
+ $now_page = round(($current_page/$pagination_per_page)+1);
+  
+?>
          <?php
 
             if($info_arr)
 
             {
+                $j= $now_page - 1;
+                if($now_page > 1){  $i = $now_page+(24*$j); } else {$i=1;}
 
              ?>
 
@@ -25,7 +30,7 @@
 <form style="width:412px;" name="sent_invitation_user_frm" id="sent_invitation_user_frm" method="post" action="<?=base_url().'logged/church/cogtime_user_sent_invitation'?>">
     <?php
 
-                $i = 1;
+                //$i = 1;
 //pr($info_arr);
                 foreach ($info_arr as $member) {
 
@@ -36,7 +41,7 @@
     
         <td width="6%"><input type="checkbox" name="cogtime_user_id[]" id="cogtime_user_id<?php echo $member->id?>" class="cogtime_user_id" value="<?php echo $member->id?>"></td>
 	 
-      <td width="6%"><?php echo $i++; ?></td>
+      <td width="6%"><?php echo $i; ?></td>
 
       <td width="27%" class="textleft"><?php echo $member->user_name; ?></td>
 
