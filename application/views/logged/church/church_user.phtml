@@ -206,10 +206,10 @@ $(document).ready(function(){
     $('.cogtime_user_id').click(function(){
          var id = $(this).val();
          var type = 'docheck';
-         if($(this).prop('checked',true)){
+         if($('#cogtime_user_id'+id).prop('checked',true)){
             var type = 'docheck';
          }
-          if($(this).prop('checked',false)){
+          if($('#cogtime_user_id'+id).prop('checked',false)){
             var type = 'uncheck';
         }
             $.ajax({
