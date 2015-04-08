@@ -227,6 +227,29 @@ $(document).ready(function(){
 
     });
         }
+         if (!$('.cogtime_user_id').is(':checked')) {
+            var id = $(this).val();
+            $.ajax({
+        type: 'post',
+        url: base_url+'logged/church/store_in_session',
+       // dataType: 'json',
+        data: {'id' : id ,'type': 'uncheck'},
+        success: function (data, status) {
+            //alert('sss');
+             // hideBusyScreen(); 
+            //hideUILoader_nodialog();
+//                  if(1){
+//                //alert(data.html);
+//                    $('#table_content').html(data);
+//               
+//                  }
+     
+
+            }   // end of success function...
+
+
+    });
+        }
     });
 })
 </script>
