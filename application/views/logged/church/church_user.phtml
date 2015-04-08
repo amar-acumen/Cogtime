@@ -208,10 +208,6 @@ $(document).ready(function(){
          var type = 'docheck';
          if($('#cogtime_user_id'+id).prop('checked',true)){
             var type = 'docheck';
-         }
-          if($('#cogtime_user_id'+id).prop('checked',false)){
-            var type = 'uncheck';
-        }
             $.ajax({
         type: 'post',
         url: base_url+'logged/church/store_in_session',
@@ -225,6 +221,24 @@ $(document).ready(function(){
 
 
     });
+         }
+          if($('#cogtime_user_id'+id).prop('checked',false)){
+            var type = 'uncheck';
+            $.ajax({
+        type: 'post',
+        url: base_url+'logged/church/store_in_session',
+       // dataType: 'json',
+        data: {'id' : id ,'type': type},
+        success: function (data, status) {
+  
+     
+
+            }   // end of success function...
+
+
+    });
+        }
+            
 //          
            
         
