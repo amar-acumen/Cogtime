@@ -210,7 +210,7 @@ $(document).ready(function(){
         type: 'post',
         url: base_url+'logged/church/store_in_session',
        // dataType: 'json',
-        data: {'id' : id},
+        data: {'id' : id ,'type': 'docheck'},
         success: function (data, status) {
             //alert('sss');
              // hideBusyScreen(); 
