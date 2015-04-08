@@ -5321,6 +5321,7 @@ function is_friend($login_id, $profile_id) {
 function is_netpal($church_id, $profile_id) {
 	$ci = & get_instance();
 	$sql_netpal = "select church_id, member_id from cg_church_member where church_id = '".$church_id."' AND member_id = '".$profile_id."' AND is_approved='1' AND is_deleted=0 AND is_blocked='1' AND is_leave=0";
+	echo $sql_netpal;	
 	$query_check_netpal = $ci->db->query($sql_frnd);
 	$result_check_netpal = $query_check_netpal->result();
 	pr($result_check_netpal);
