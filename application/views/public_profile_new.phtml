@@ -226,13 +226,15 @@ if ($this->session->userdata('loggedin') == '' || $this->session->userdata('logg
                             <?php elseif ($display_becomefriend === false): ?>
                                 <li><a href="javascript:void(0);" id="invite_friend_<?= ($public_arr_profile_info['id']) ?>" onclick="invite_friend_('<?= encrypt($public_arr_profile_info['id']) ?>')"  class="addfriend">Re-send Friend Request</a></li>
                             <?php endif; ?>
-
+							<?php 
+							$check_netpal = is_netpal($_SESSION['logged_church_id'],$public_arr_profile_info['id']);
+							if ($check_netpal == 'yes') : ?>
                             <?php if ($if_already_netpals == 'false') : ?>
                                 <li><a id="invite_netpal_<?= $public_arr_profile_info['id'] ?>"  href="javascript:void(0);" onclick="invite_netpals_(<?php echo $public_arr_profile_info['id']; ?>)" class="netpal">Invite As Netpal</a></li>
                             <?php elseif ($display_becomenetpals == 'false'): ?>
                                 <li><a d="invite_netpal_<?= $public_arr_profile_info['id'] ?>"  href="javascript:void(0);" onclick="invite_netpals_(<?php echo $public_arr_profile_info['id']; ?>)" class="netpal">Reinvite As NetPal</a></li>
                             <?php endif; ?>
-
+							<?php endif; ?>
                             <?php
                             ## prayer partner
                             if ($is_hit_frm_pp) {
