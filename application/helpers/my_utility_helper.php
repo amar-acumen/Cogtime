@@ -5273,7 +5273,7 @@ function get_subadmin_access($user_id , $cid){
 
 function is_friend($login_id, $profile_id) {
 	$ci = & get_instance();
-	$sql_frnd = "select s_status from cg_user_contacts where i_requester_id = '".$login_id."' AND i_accepter_id = '".$profile_id."'";
+	$sql_frnd = "select s_status from cg_user_contacts where i_requester_id = '".$profile_id."' AND i_accepter_id = '".$login_id."'";
 	/*$s_qry = "SELECT   c.id, 
 						   c.i_requester_id, 
 						   c.i_accepter_id,
@@ -5321,10 +5321,10 @@ function is_friend($login_id, $profile_id) {
 function is_netpal($church_id, $profile_id) {
 	$ci = & get_instance();
 	$sql_netpal = "select church_id, member_id from cg_church_member where church_id = '".$church_id."' AND member_id = '".$profile_id."' AND is_approved='1' AND is_deleted=0 AND is_blocked='1' AND is_leave=0";
-	echo $sql_netpal;	
-	$query_check_netpal = $ci->db->query($sql_frnd);
+	//echo $sql_netpal;	
+	$query_check_netpal = $ci->db->query($sql_netpal);
 	$result_check_netpal = $query_check_netpal->result();
-	pr($result_check_netpal);
+	//pr($result_check_netpal);
 	if (!empty($result_check_netpal)) {
 	$netpal = 'yes';
 	}
