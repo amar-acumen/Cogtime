@@ -206,7 +206,7 @@ $(document).ready(function(){
     $('.cogtime_user_id').click(function(){
          var id = $(this).val();
          var type = 'docheck';
-         if($('#cogtime_user_id'+id).prop('checked',true)){
+         if($('#cogtime_user_id'+id).is(':checked')){
             var type = 'docheck';
             $.ajax({
         type: 'post',
@@ -222,7 +222,7 @@ $(document).ready(function(){
 
     });
          }
-          if($('#cogtime_user_id'+id).prop('checked',false)){
+          if(!$('#cogtime_user_id'+id).is(':checked')){
             var type = 'uncheck';
             $.ajax({
         type: 'post',
