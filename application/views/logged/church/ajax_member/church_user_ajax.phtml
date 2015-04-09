@@ -84,6 +84,7 @@ else
 
 $(document).ready(function(){
     $('.cogtime_user_id').click(function(){
+         showBusyScreen();
          var id = $(this).val();
          var type = 'docheck';
          if($('#cogtime_user_id'+id).is(':checked')){
@@ -94,7 +95,7 @@ $(document).ready(function(){
        // dataType: 'json',
         data: {'id' : id ,'type': type},
         success: function (data, status) {
-  
+   hideBusyScreen();
      location.reload();
 
             }   // end of success function...
@@ -104,13 +105,14 @@ $(document).ready(function(){
          }
           if(!$('#cogtime_user_id'+id).is(':checked')){
             var type = 'uncheck';
+             showBusyScreen();
             $.ajax({
         type: 'post',
         url: base_url+'logged/church/store_in_session',
        // dataType: 'json',
         data: {'id' : id ,'type': type},
         success: function (data, status) {
-  
+   hideBusyScreen();
      location.reload();
 
             }   // end of success function...
