@@ -344,7 +344,7 @@ $this->email->send();
 						
 		//$sql       = 		"call sp_find_church('".$where."','".$limit."');";
 
-        $query     = $this->db->query($sql); //echo $this->db->last_query();
+        $query     = $this->db->query($sql); echo $this->db->last_query();
         $result_arr = $query->result_array(); //pr($result_arr,1);
         return $result_arr;
     }
@@ -362,7 +362,7 @@ $this->email->send();
 									) AS TBL ";
 					/* LEFT JOIN cg_city ct ON  ct.i_country_id = mst_c.id
 									LEFT JOIN cg_state s ON  s.id =  ct.i_state_idLEFT JOIN {$this->db->CITY} mst_city on mst_city.id=C.i_city_id*/
-        $query     = $this->db->query($sql);// echo $this->db->last_query();
+        $query     = $this->db->query($sql);//echo $this->db->last_query();
         $result_arr = $query->result_array();
         return $result_arr[0]['i_total'];
     }
