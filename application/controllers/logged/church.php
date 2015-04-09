@@ -817,7 +817,12 @@ function general_setting(){
            $redirct = base_url().'logged/church/church_user?error=1';                
             header("location:".$redirct."");  
         }else{
+            $arr = $_SESSION['check_member'];
+            foreach ($arr as $val){
+                echo $val.'==';
+            }
 pr($_SESSION['check_member'],1);
+
                 $member_id_array = $this->input->post('cogtime_user_id');
                 for($i = 0 ; $i < count($member_id_array); $i++){
                     $id = $member_id_array[$i];
