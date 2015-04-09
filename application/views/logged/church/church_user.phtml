@@ -52,7 +52,14 @@
         }
         ?>
         
-    </h1>
+</h1><h2 style="color: red;font-size: 14px; font-weight: normal; float: left;">
+   <?php
+        if($_GET['error'] == 1){
+            echo "Please check atleast one..";
+        }
+        ?> 
+    
+</h2>
         <div align="right"><input type="button" value="Send Invitation" id="sent_invitation_user" class="btn" style="font-weight:normal;" onclick="send_invition()"></div><br />
         <div class="church-time-table" style="margin-right:0;" id="table_content">
                         <?= $result_content ?>
@@ -166,11 +173,8 @@
 //	
 //}	
 function send_invition(){
-    if (!$('.cogtime_user_id').is(':checked')) {
-       showUIMsg('Please check atleast one member');
-    }else{
-        $('#sent_invitation_user_frm').submit();
-    }
+    
+  $('#sent_invitation_user_frm').submit();
 }
 function search_member(){
     var mem_nm = $('#mem_nm').val();

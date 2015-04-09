@@ -813,6 +813,10 @@ function general_setting(){
 	 public function cogtime_user_sent_invitation()
     {
         parent::check_login(TRUE, '', array('1'));
+        if(empty($_SESSION['check_member'])){
+           $redirct = base_url().'logged/church/church_user?error=1';                
+            header("location:".$redirct."");  
+        }else{
 pr($_POST,1);
                 $member_id_array = $this->input->post('cogtime_user_id');
                 for($i = 0 ; $i < count($member_id_array); $i++){
@@ -889,6 +893,7 @@ $this->email->message("$body");
             header("location:".$redirct."");                                          /************/
                    // pr($user_detail,1);
                 }
+    }
                 // die('ok');
                // pr($member_id_array,1);
 		//pr($this->input->post('cogtime_user_email'));
