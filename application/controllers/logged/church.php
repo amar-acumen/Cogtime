@@ -813,7 +813,7 @@ function general_setting(){
 	 public function cogtime_user_sent_invitation()
     {
         parent::check_login(TRUE, '', array('1'));
-		
+		pr($_POST,1);
                 $member_id_array = $this->input->post('cogtime_user_id');
                 for($i = 0 ; $i < count($member_id_array); $i++){
                     $id = $member_id_array[$i];
