@@ -46,7 +46,7 @@
                                         <?php
                                    if($info['ch_space_enable'] == 1 && $info['ch_page_url'] != '' ){
                                         ?>
-                                <img class="add-new-church" width="25" height="14" alt="crown" src="<?= base_url() ?>images/icons/crown.png" style="cursor: pointer" >
+                                    <img class="add-new-church" width="25" height="14" alt="crown" src="<?= base_url() ?>images/icons/crown.png" style="cursor: pointer" onclick="autologin('<?=get_user_id_byemail($info['s_email']) ?>','<?php echo $info['id'] ?>','admin')" >
                                             <?php
                                     }
                                     ?>
