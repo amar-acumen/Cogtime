@@ -806,8 +806,12 @@ $order_by='`dt_created_on` DESC';
     }
     function show_member(){
         $id = $this->input->post('id');
-        $query = $this->db->query('select u.id,u.s_profile_photo,u.e_gender from cg_users u , cg_church_member cm where cm.church_id='.$id.' AND cm.is_blocked = 1 AND cm.is_leave = 0 AND cm.member_id = u.id AND cm.is_approved = 1');
+        $query = $this->db->query('select u.id,CONCAT(u.s_first_name,u.s_last_name) as user_name , u.s_profile_photo,u.e_gender from cg_users u , cg_church_member cm where cm.church_id='.$id.' AND cm.is_blocked = 1 AND cm.is_leave = 0 AND cm.member_id = u.id AND cm.is_approved = 1');
         $res = $query->result();
-        pr($res);
+        foreach ($res as $val){
+            echo '<ul>';
+            echo '<li> <img src="'.get_profile_image_of_user('thumb',$val['s_profile_photo'],$val['e_gender']).'" title='.$val['user_name'].' width="42" height="42"><li>';
+            echo '</ul>';
+        }
     }
 }   // end of controller...
