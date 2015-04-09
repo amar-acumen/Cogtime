@@ -716,12 +716,12 @@ $this->email->message("$body");
         {
 			//echo $_POST['search_basic']; exit;
 			## seacrh conditions : filter ############
-		 	
+		 	$s_where = "C.ch_space_enable = 1 AND C.ch_page_url != ' '    GROUP BY C.id";
 			 if(isset($_POST['search_basic']) && $_POST['search_basic'] == 'Y' ) :
                          //echo $srch_date =trim($this->input->post('date_filter'));
                             //echo intval(decrypt(trim($this->input->post('date')))); 
                           //die('ok');
-				$WHERE_COND .= " WHERE 1  ";
+				//$WHERE_COND = " WHERE 1  ";
 				
 				$srch_country = intval(decrypt(trim($this->input->post('srch_country')))); 
 				$WHERE_COND .= ($srch_country=='0')?'':" AND ( C.i_country_id  =  '".$srch_country."')";

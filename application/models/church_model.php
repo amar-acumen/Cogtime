@@ -335,7 +335,7 @@ $this->email->send();
          $sql  = " SELECT C.* 
 				  		FROM {$this->db->CHURCH} C
 						
-						{$where} AND C.ch_space_enable = 1 AND C.ch_page_url != ' '    GROUP BY C.id 
+						{$where} 
 						ORDER BY C.id DESC {$limit}"; 
 						/*LEFT JOIN cg_city ct ON  ct.i_country_id = mst_c.id
 						LEFT JOIN cg_state s ON  s.id =  ct.i_state_id*/
@@ -353,7 +353,7 @@ $this->email->send();
 									SELECT C.id
 									FROM {$this->db->CHURCH} C
 									
-									{$where} AND C.ch_space_enable = 1 AND C.ch_page_url != ' '
+									{$where} 
 									GROUP BY C.id 
 									) AS TBL ";
 					/* LEFT JOIN cg_city ct ON  ct.i_country_id = mst_c.id
