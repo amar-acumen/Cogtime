@@ -749,8 +749,8 @@ $this->email->message("$body");
 			
             endif;  
 		   	
-		echo	$s_where = $this->session->userdata('search_condition'); 
-                die('ok');
+			$s_where .= $this->session->userdata('search_condition'); 
+               
 $order_by='`dt_created_on` DESC';
 		   	$result = $this->church_model->get_space_list($s_where,$page,$this->pagination_per_page,$order_by);
             $resultCount = count($result);
