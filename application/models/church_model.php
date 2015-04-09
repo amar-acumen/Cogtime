@@ -332,10 +332,10 @@ $this->email->send();
     {
         
         $limit  = (is_numeric($i_start) && is_numeric($i_limit))?" Limit ".intval($i_start).",".intval($i_limit):'';
-         $sql  = " SELECT C.* 
-				  		FROM {$this->db->CHURCH} C
+         $sql  = " SELECT C.* ,u.id as user_id
+				  		FROM {$this->db->CHURCH} C , cg_users u 
 						
-						{$where} 
+						{$where} AND u.id = C.ch_admin_id
 						ORDER BY C.id DESC {$limit}"; 
 						/*LEFT JOIN cg_city ct ON  ct.i_country_id = mst_c.id
 						LEFT JOIN cg_state s ON  s.id =  ct.i_state_id*/
@@ -349,9 +349,9 @@ $this->email->send();
 	
     public function get_space_list_count($where='')
     {
-        $sql    = "     SELECT count(*) as i_total FROM {$this->db->CHURCH} C
+        $sql    = "     SELECT count(*) as i_total FROM {$this->db->CHURCH} C ,cg_users u 
 						
-						{$where} 
+						{$where} AND u.id = C.ch_admin_id
 						ORDER BY C.id DESC ";
 					/* LEFT JOIN cg_city ct ON  ct.i_country_id = mst_c.id
 									LEFT JOIN cg_state s ON  s.id =  ct.i_state_idLEFT JOIN {$this->db->CITY} mst_city on mst_city.id=C.i_city_id*/
