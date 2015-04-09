@@ -22,8 +22,8 @@
                               <?php }?>
                                 <td align="left" valign="top"><?=getShortDate($info['dt_created_on'],5)?></td>
                                 <td align="left" valign="top"><?=$info['s_name']?></td>
-                                <td align="left" valign="top"><?=get_member_count_by_church_id($info['id'])?></td>
-                                <td align="left" valign="top"><?=get_subadmin_count_by_church_id($info['id'])?></td>
+                                <td align="left" valign="top"><a href="javascript:void(0)" onclick="show_member(<?= $info['id'] ?>)"> <?=get_member_count_by_church_id($info['id'])?></a></td>
+                                <td align="left" valign="top"><a href="javascript:void(0)" onclick="show_subadmin(<?= $info['id'] ?>)"><?=get_subadmin_count_by_church_id($info['id'])?></a></td>
                                
                                 <td align="center" valign="middle" class="last">
 <!--                                <input name="" title="Edit" type="button" class="edit-button"  value="" onclick="show_edit(<?=$info['id']?>)"/>-->
@@ -76,6 +76,25 @@ $(document).ready(function()
 	$(".highlight").children('td').css("background-color","#E5E5E5");
 	
 });
+function show_member(id){
+     $.ajax({
+          url : base_url+'build_kingdom/churches/show_member',
+          type : 'post',
+          data : ({'id' : id}),
+          success : function(data)
+          {
+              hideBusyScreen();
+              //alert(data)
+               //$('#table_contents_adv').slideDown(); 
+               show_dialog('member-pop');
+              $('#table_contents_adv').html(data);
+          //window.location.href="<?= admin_base_url() ?>help_center/help_center";
+          }
+      });
+}
+function show_subadmin(id){
+    
+}
 //function go_details(id){
 //    //alert(id);
 //    window.location.href=admin_base_url+'build_kingdom/churches/space_view/'+id
