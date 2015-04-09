@@ -685,4 +685,8 @@ $this->email->message("$body");
                 					   'id'=>$id,
                 					   'msg'=>$SUCCESS_MSG ));
          }
+         public function space_view($id){
+             echo $id;
+             die();
+         }
 }   // end of controller...
