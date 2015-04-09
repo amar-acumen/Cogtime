@@ -40,7 +40,9 @@
     <tr>
 
     
-        <td width="6%"><input type="checkbox" name="cogtime_user_id[]" id="cogtime_user_id<?php echo $member->id?>" class="cogtime_user_id" value="<?php echo $member->id?>" <?php if (in_array($member->id, $_SESSION['check_member'])){ echo'checked=""'; }  ?> ></td>
+        <td width="6%"><input type="checkbox" name="cogtime_user_id[]" id="cogtime_user_id<?php echo $member->id?>" class="cogtime_user_id" value="<?php echo $member->id?>" <?php if (in_array($member->id, $_SESSION['check_member'])){ echo'checked=""'; }  ?> >
+            <input type="hidden" value="<?= $_SESSION['check_member'] ?>" name="member_id_arr">
+        </td>
 	 
       <td width="6%"><?php echo $i++; ?></td>
 
