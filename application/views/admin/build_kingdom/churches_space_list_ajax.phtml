@@ -93,7 +93,20 @@ function show_member(id){
       });
 }
 function show_subadmin(id){
-    
+     $.ajax({
+          url : admin_base_url+'build_kingdom/churches/show_subadmin',
+          type : 'post',
+          data : ({'id' : id}),
+          success : function(data)
+          {
+              hideBusyScreen();
+              //alert(data)
+               //$('#table_contents_adv').slideDown(); 
+               show_dialog('subadmin-pop');
+              $('#table_contents_adv').html(data);
+          //window.location.href="<?= admin_base_url() ?>help_center/help_center";
+          }
+      });
 }
 //function go_details(id){
 //    //alert(id);
