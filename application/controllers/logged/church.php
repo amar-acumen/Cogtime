@@ -818,14 +818,14 @@ function general_setting(){
             header("location:".$redirct."");  
         }else{
             $arr = $_SESSION['check_member'];
-            foreach ($arr as $val){
-                echo $val.'==';
-            }
-pr($_SESSION['check_member'],1);
+//            foreach ($arr as $val){
+//                echo $val.'==';
+//            }
+//pr($_SESSION['check_member'],1);
 
                 $member_id_array = $this->input->post('cogtime_user_id');
-                for($i = 0 ; $i < count($member_id_array); $i++){
-                    $id = $member_id_array[$i];
+                foreach ($arr as $val){
+                    $id =$val;
                     $user_detail = get_user_details_by_id($id);
                     $email = $user_detail['s_email'];
                     $name = $user_detail['s_first_name'].' '.$user_detail['s_last_name'];
