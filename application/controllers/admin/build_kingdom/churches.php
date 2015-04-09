@@ -806,7 +806,7 @@ $order_by='`dt_created_on` DESC';
     }
     function show_member(){
         $id = $this->input->post('id');
-        $query = $this->db->query('select u.id,u.s_profile_photo,u.e_gender from cg_users u , cg_church_member cm where cm.church_id='.$id.' AND cm.is_blocked = 1 AND cm.is_leave = 0 AND cm.member_id = u.id');
+        $query = $this->db->query('select u.id,u.s_profile_photo,u.e_gender from cg_users u , cg_church_member cm where cm.church_id='.$id.' AND cm.is_blocked = 1 AND cm.is_leave = 0 AND cm.member_id = u.id AND cm.is_approved = 1');
         $res = $query->result();
         pr($res);
     }
