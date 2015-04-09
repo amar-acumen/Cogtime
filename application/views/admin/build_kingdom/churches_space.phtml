@@ -6,7 +6,7 @@
       <div id="container">
             <div id="mid_content">
                   <div class="page_heading left">
-                        <div class="left"><img src="../images/icons/login.png" alt="" /> Churches</div>
+                        <div class="left"><img src="../images/icons/login.png" alt="" /> Churches Space</div>
                   </div>
                   <div class="clr"></div>
                   <div id="right_container">
@@ -16,29 +16,13 @@
                             <div class="filter">
                                 <span class="filter-by">Filter By &raquo;</span>
                                 <form id="frm_search" onsubmit="return false;" method="post" enctype="multipart/form-data" class="filter-search">
-                                    <label>Location :</label><label>Country :</label>
+                                    <label>Church Name :</label>
                                     <div class="field01" style="float:left;">
-                                         <select name="srch_country" id="srch_country" style="width:240px;" onchange="showSrchState(this.value);">
-                                                   <option value="-1">---</option>
-                                                   <?=makeOptionCountryNew('');?>
-                                         </select>
+                                        <input type="text" name="church_name" id="church_name">
                                     </div>
-                                    <label style="margin-left: 5px;">State :</label>
-                                    <div class="field01" style="float:left;">
-                                    <select name="srch_state" id="srch_state" style="width:140px;" onchange="showSrchCity(this.value);">
-                                       <option value="-1">---</option>
-                                       <?=$state;?>
-                                    </select>
-                                    </div>
-                                    <label style="margin-left: 5px;">City :</label>
-                                    <div class="field01" style="float:left;">
-                                    <select name="srch_city" id="srch_city" style="width:140px;">
-                                         <option value="-1">---</option>
-                                         <?=$city;?>
-                                    </select>
-                                    </div>
+                                   
                                     
-                                    <div class="field01" style="float:left;">
+<!--                                    <div class="field01" style="float:left;">
                                      <label style="margin-left: 5px;">Date :</label>
                                      <input type="text"  value="" name="date_filter"  class="date-field" id="date1"/>
                                       <img src="../images/icons/cal.png" width="15" height="16" alt="" onclick="$(this).prev().focus()" class="calender" style="margin-right:35px;" />
@@ -49,7 +33,7 @@
 
                 });
           </script>
-                                    </div>
+                                    </div>-->
                                    
                                     <input type="hidden" value="Y" name="search_basic" id="search_basic"  />
                                     <input name="" type="submit" value="GO" class="go" />
