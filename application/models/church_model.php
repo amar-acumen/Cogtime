@@ -342,7 +342,7 @@ $this->email->send();
 						
 		//$sql       = 		"call sp_find_church('".$where."','".$limit."');";
 
-        $query     = $this->db->query($sql); echo $this->db->last_query();
+        $query     = $this->db->query($sql); //echo $this->db->last_query();
         $result_arr = $query->result_array(); //pr($result_arr,1);
         return $result_arr;
     }

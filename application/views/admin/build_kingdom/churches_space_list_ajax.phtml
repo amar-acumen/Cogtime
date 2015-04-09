@@ -2,9 +2,9 @@
                               <tr>
                                 <th align="left" valign="middle" height="30" width="80">Date Posted</th>
                                 <th align="left" valign="middle" height="30" width="200">Church Name</th>
-                                <th align="left" valign="middle" height="30" width="400">Location</th>
-                                <th align="left" valign="middle" height="30" width="80">Post Code</th>
-                                <th align="left" valign="middle" height="30" width="120">Phone No</th>
+                                <th align="left" valign="middle" height="30" width="400">Member</th>
+                                <th align="left" valign="middle" height="30" width="80">Subadmin</th>
+<!--                                <th align="left" valign="middle" height="30" width="120">Phone No</th>-->
                                 <th align="center" valign="middle" height="30" class="last">Actions</th>
                               </tr>
                               
@@ -12,7 +12,7 @@
 							  //   pr($info_arr);
 							  		if(count($info_arr)){
 										foreach($info_arr as $key=> $info){
-											$s_status = ($info['i_disabled'] == 1)?'Deny':'Approve';	 		
+											$s_status = ($info['ch_space_enable'] == 1)?'Enable':'Disable';	 		
 							  ?>
                               <?php if($info['i_disabled']==1){?>
 							  
@@ -22,21 +22,21 @@
                               <?php }?>
                                 <td align="left" valign="top"><?=getShortDate($info['dt_created_on'],5)?></td>
                                 <td align="left" valign="top"><?=$info['s_name']?></td>
-                                <td align="left" valign="top"><?=get_cityname($info['i_city_id'])?>, <?=get_statename($info['i_state_id'])?>, <?=get_countryname($info['i_country_id'])?></td>
+                                <td align="left" valign="top"><?=get_member_count_by_church_id($info['id'])?>?></td>
                                 <td align="left" valign="top"><?=$info['s_postcode']?></td>
                                 <td align="left" valign="top"><?=$info['s_phone']?></td>
                                 <td align="center" valign="middle" class="last">
-                                <input name="" title="Edit" type="button" class="edit-button"  value="" onclick="show_edit(<?=$info['id']?>)"/>
-                                <input name="" title="Delete" type="button" class="delete-button"  value="" onclick="delete_church(<?=$info['id']?>)"/>
-                                 <?php if($info['i_disabled'] == 1){ ?>
+<!--                                <input name="" title="Edit" type="button" class="edit-button"  value="" onclick="show_edit(<?=$info['id']?>)"/>-->
+<!--                                <input name="" title="Delete" type="button" class="delete-button"  value="" onclick="delete_church(<?=$info['id']?>)"/>-->
+                                 <?php if($info['ch_space_enable'] == 1){ ?>
                             		<span id="<?=$info['id']?>_status">
-                                    <input name="" title="Approve" type="button" class="btn-06"  onclick="javascript:changeStatus(<?php echo $info['id'] ?> , 2 , <?php echo $info['i_disabled'] ?>)"  value="<?=$s_status?>"/>
+                                    <input name="" title="Enable" type="button" class="btn-06"  onclick="javascript:changeStatus(<?php echo $info['id'] ?> , 2 , <?php echo $info['ch_space_enable'] ?>)"  value="<?=$s_status?>"/>
                                     </span>
 									<?php 
                                         } 
                                         else if($info['i_disabled'] == 2){?>
                                             <span id="<?=$info['id']?>_status">
-                                            <input name="" title="Deny" type="button" class="btn-06"  onclick="javascript:changeStatus(<?php echo $info['id'] ?> , 1 , <?php echo $info['i_disabled'] ?>)"  value="<?=$s_status?>"/>
+                                            <input name="" title="Disable" type="button" class="btn-06"  onclick="javascript:changeStatus(<?php echo $info['id'] ?> , 1 , <?php echo $info['ch_space_enable'] ?>)"  value="<?=$s_status?>"/>
                                             </span>
                                     
                                     <?php }
