@@ -721,7 +721,7 @@ $this->email->message("$body");
                          //echo $srch_date =trim($this->input->post('date_filter'));
                             //echo intval(decrypt(trim($this->input->post('date')))); 
                           //die('ok');
-				$WHERE_COND = " WHERE 1  ";
+				$WHERE_COND .= " WHERE 1  ";
 				
 				$srch_country = intval(decrypt(trim($this->input->post('srch_country')))); 
 				$WHERE_COND .= ($srch_country=='0')?'':" AND ( C.i_country_id  =  '".$srch_country."')";
@@ -750,6 +750,7 @@ $this->email->message("$body");
             endif;  
 		   	
 		echo	$s_where = $this->session->userdata('search_condition'); 
+                die('ok');
 $order_by='`dt_created_on` DESC';
 		   	$result = $this->church_model->get_space_list($s_where,$page,$this->pagination_per_page,$order_by);
             $resultCount = count($result);
