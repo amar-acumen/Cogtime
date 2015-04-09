@@ -829,7 +829,7 @@ $order_by='`dt_created_on` DESC';
             echo '</ul>';
         }
         }else{
-            echo '<h1 class="no_mem">No Members</h1>';
+            echo '<h1 class="no_mem">No Subadmin</h1>';
         }
     }
 }   // end of controller...
