@@ -9,7 +9,7 @@
                               </tr>
                               
                               <?php
-							     pr($info_arr);
+							  //   pr($info_arr);
 							  		if(count($info_arr)){
 										foreach($info_arr as $key=> $info){
 											$s_status = ($info['i_disabled'] == 1)?'Deny':'Approve';	 		
@@ -40,7 +40,7 @@
                                             </span>
                                     
                                     <?php }
-                                    if($info_arr['ch_space_enable'] == 1 && !empty($info_arr['ch_page_url'])){
+                                    if($info_arr['ch_space_enable'] == 1 && $info_arr['ch_page_url'] != '' ){
                                         ?>
                                 <img class="add-new-church" width="25" height="14" alt="crown" src="<?= base_url() ?>images/icons/crown.png">
                                             <?php
