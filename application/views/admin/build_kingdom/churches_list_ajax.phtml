@@ -39,7 +39,14 @@
                                             <input name="" title="Deny" type="button" class="btn-06"  onclick="javascript:changeStatus(<?php echo $info['id'] ?> , 1 , <?php echo $info['i_disabled'] ?>)"  value="<?=$s_status?>"/>
                                             </span>
                                     
-                                    <?php }?>
+                                    <?php }
+                                    if($info_arr['ch_space_enable'] == 1 && !empty($info_arr['ch_page_url'])){
+                                        ?>
+                                <img class="add-new-church" width="25" height="14" alt="crown" src="<?= base_url() ?>images/icons/crown.png">
+                                            <?php
+                                    }
+                                    ?>
+                                
                                 </td>
                               </tr>
                               <?php
