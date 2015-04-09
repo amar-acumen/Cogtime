@@ -810,7 +810,7 @@ $order_by='`dt_created_on` DESC';
         $res = $query->result();
         foreach ($res as $val){
             echo '<ul>';
-            echo '<li> <img src="'.get_profile_image_of_user('thumb',$val['s_profile_photo'],$val['e_gender']).'" title='.$val['user_name'].' width="42" height="42"><li>';
+            echo '<li> <img src="'.get_profile_image_of_user('thumb',$val->s_profile_photo,$val->e_gender).'" title='.$val->user_name.' width="42" height="42"><li>';
             echo '</ul>';
         }
     }
