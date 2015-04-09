@@ -685,8 +685,120 @@ $this->email->message("$body");
                 					   'id'=>$id,
                 					   'msg'=>$SUCCESS_MSG ));
          }
-         public function space_view($id){
-             echo $id;
-             die();
+         public function space_view(){
+               $data = $this->data;
+            parent::_set_title("::: COGTIME Xtian network :::");
+            parent::_set_meta_desc("::: COGTIME Xtian network :::");
+            parent::_set_meta_keywords("::: COGTIME Xtian network :::");
+            parent::_add_js_arr( array( 'js/lightbox.js',
+										'js/jquery.form.js',
+									    'js/jquery/JSON/json2.js') );
+                                        
+             parent::_add_css_arr( array('css/dd.css',
+                                        ) );
+            # adjusting header & footer sections [End]...
+			$data['top_menu_selected'] = 6;
+			$data['submenu'] = 7;
+                        $this->session->set_userdata('search_condition','');
+			
+			ob_start();
+            $this->ajax_church_space_pagination();
+            $data['result_content'] = ob_get_contents(); //pr($data['result_content']);
+            ob_end_clean();
+                       // $data['subadmin'] = $this->church_model->get_church_subadmin($id);
+                        
          }
+         public function ajax_church_space_pagination($page=0)
+    {
+        try
+        {
+			//echo $_POST['search_basic']; exit;
+			## seacrh conditions : filter ############
+		 	
+			 if(isset($_POST['search_basic']) && $_POST['search_basic'] == 'Y' ) :
+                         //echo $srch_date =trim($this->input->post('date_filter'));
+                            //echo intval(decrypt(trim($this->input->post('date')))); 
+                          //die('ok');
+				$WHERE_COND = " WHERE c.ch_space_enable = 1 AND c.ch_page_url != ''  ";
+				
+				$srch_country = intval(decrypt(trim($this->input->post('srch_country')))); 
+				$WHERE_COND .= ($srch_country=='0')?'':" AND ( C.i_country_id  =  '".$srch_country."')";
+				
+				$srch_state = intval(decrypt(trim($this->input->post('srch_state'))));
+				$WHERE_COND .= ($srch_state=='0')?'':" AND ( C.i_state_id =  '".$srch_state."')";
+				
+				$srch_city = intval(decrypt(trim($this->input->post('srch_city'))));
+				$WHERE_COND .= ($srch_city=='0')?'':" AND ( C.i_city_id  =  '".$srch_city."')";
+                                 
+                                if(trim($this->input->post('date_filter'))!= '')
+                                {
+                                 $srch_date = get_db_dateformat($this->input->post('date_filter'));
+                                 $WHERE_COND .= ($srch_date=='0')?'':" AND ( DATE(C.dt_created_on)  =  '".$srch_date."')";  
+                                   // die('ok');
+                                } 
+                                  //  $srch_date = get_db_dateformat(trim($this->input->post('date'))); 
+                                  // $WHERE_COND .= ($srch_date=='0')?'':" AND ( C.dt_created_on  =  '".$srch_date."')";  
+                                 //}
+//                                 $srch_date = get_db_dateformat(trim($this->input->post('date')));
+//                                 $WHERE_COND .= ($srch_date=='0')?'':" AND ( C.dt_created_on  =  '".$srch_date."')";
+				//echo $WHERE_COND;
+                                //echo $this->db->last_query();
+				 $this->session->set_userdata('search_condition',$WHERE_COND);
+			
+            endif;  
+		   	
+			$s_where = $this->session->userdata('search_condition'); 
+$order_by='`dt_created_on` DESC';
+		   	$result = $this->church_model->get_space_list($s_where,$page,$this->pagination_per_page,$order_by);
+            $resultCount = count($result);
+			$total_rows = $this->church_model->get_space_list_count($s_where);
+			
+			
+			
+			//pr($result,1);
+			#Jquery Pagination Starts
+           	$this->load->library('jquery_pagination');
+            $config['base_url'] = base_url()."admin/build_kingdom/churches/ajax_pagination";
+            $config['total_rows'] = $total_rows;
+            $config['per_page'] = $this->pagination_per_page;
+            $config['uri_segment'] = 5;
+            $config['num_links'] = 9;
+            $config['page_query_string'] = false;
+            $config['prev_link'] = 'PREV';
+            $config['next_link'] = 'NEXT';
+
+            $config['cur_tag_open'] = '<li> <span><a href="javascript:void(0)" class="select">';
+            $config['cur_tag_close'] = '</a></span></li>';
+
+            $config['next_tag_open'] = '<li><a href="javascript:void(0)">';
+            $config['next_tag_close'] = '</a></li>';
+
+            $config['prev_tag_open'] = '<li><a href="javascript:void(0)">';
+            $config['prev_tag_close'] = '</a></li>';
+
+            $config['num_tag_open'] = '<li>';
+            $config['num_tag_close'] = '</li>';
+
+            $config['div'] = '#table_content'; /* Here #content is the CSS selector for target DIV */
+            $config['js_bind'] = "showBusyScreen(); "; /* if you want to bind extra js code */
+            $config['js_rebind'] = "hideBusyScreen(); "; /* if you want to rebind extra js code */
+
+            $this->jquery_pagination->initialize($config);
+            $data['page_links'] = $this->jquery_pagination->create_links();
+			$this->jquery_pagination->create_links();
+
+            // getting   listing...
+			$data['info_arr'] = $result;
+			$data['no_of_result'] = $total_rows;
+			$data['current_page'] = $page;
+          
+			# loading the view-part...
+          echo  $this->load->view('admin/build_kingdom/churches_space_list_ajax.phtml', $data,TRUE);
+		 }
+        catch(Exception $err_obj)
+        {
+            show_error($err_obj->getMessage());
+        } 
+		
+    }
 }   // end of controller...

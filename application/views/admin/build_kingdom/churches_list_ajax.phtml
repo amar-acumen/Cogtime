@@ -46,7 +46,7 @@
                                         <?php
                                    if($info['ch_space_enable'] == 1 && $info['ch_page_url'] != '' ){
                                         ?>
-                                <img class="add-new-church" width="25" height="14" alt="crown" src="<?= base_url() ?>images/icons/crown.png" style="cursor: pointer" onclick="go_details(<?=$info['id']?>)">
+                                <img class="add-new-church" width="25" height="14" alt="crown" src="<?= base_url() ?>images/icons/crown.png" style="cursor: pointer" >
                                             <?php
                                     }
                                     ?>
@@ -76,8 +76,8 @@ $(document).ready(function()
 	$(".highlight").children('td').css("background-color","#E5E5E5");
 	
 });
-function go_details(id){
-    //alert(id);
-    window.location.href=admin_base_url+'build_kingdom/churches/space_view/'+id
-}
+//function go_details(id){
+//    //alert(id);
+//    window.location.href=admin_base_url+'build_kingdom/churches/space_view/'+id
+//}
 </script>

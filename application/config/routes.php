@@ -717,3 +717,5 @@ $route['admin/holy-place/add-prayercouncillor'] = "admin/holy_place/prayer_counc
 
 /************************pre login event **********************************/
 $route['upcoming-events'] = 'index/event_details';
+/*************for church space in admin panel***********************************************/
+$route['admin/church_spaces'] = "admin/build_kingdom/churches/space_view";
