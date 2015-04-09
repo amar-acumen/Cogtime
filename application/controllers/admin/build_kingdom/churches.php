@@ -716,7 +716,7 @@ $this->email->message("$body");
         {
 			//echo $_POST['search_basic']; exit;
 			## seacrh conditions : filter ############
-		 	$s_where = "C.ch_space_enable = 1 AND C.ch_page_url != ' '    GROUP BY C.id";
+		 	$s_where = "where C.ch_space_enable = 1 AND C.ch_page_url != ' '    GROUP BY C.id";
 			 if(isset($_POST['search_basic']) && $_POST['search_basic'] == 'Y' ) :
                          //echo $srch_date =trim($this->input->post('date_filter'));
                             //echo intval(decrypt(trim($this->input->post('date')))); 
