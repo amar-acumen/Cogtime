@@ -357,7 +357,7 @@ $this->email->send();
 									LEFT JOIN {$this->db->COUNTRY} mst_c on mst_c.id=C.i_country_id
 									LEFT JOIN {$this->db->STATE} mst_s on mst_s.id=C.i_state_id
 									LEFT JOIN {$this->db->CITY} mst_city on mst_city.id=C.i_city_id
-									{$where} AND c.ch_space_enable = 1 AND c.ch_page_url != ''
+									{$where} AND C.ch_space_enable = 1 AND C.ch_page_url != ''
 									GROUP BY C.id 
 									) AS TBL ";
 					/* LEFT JOIN cg_city ct ON  ct.i_country_id = mst_c.id
