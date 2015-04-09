@@ -29,6 +29,13 @@
 
     <tbody>
 <form style="width:412px;" name="sent_invitation_user_frm" id="sent_invitation_user_frm" method="post" action="<?=base_url().'logged/church/cogtime_user_sent_invitation'?>">
+     <input type="hidden" value="<?php $arr = $_SESSION['check_member'];
+ foreach ($arr as $val){
+    echo $id = $val.'/';
+ }
+                
+             ?>" name="member_id_arr">
+    
     <?php
 
                 //$i = 1;
@@ -41,12 +48,7 @@
 
     
         <td width="6%"><input type="checkbox" name="cogtime_user_id[]" id="cogtime_user_id<?php echo $member->id?>" class="cogtime_user_id" value="<?php echo $member->id?>" <?php if (in_array($member->id, $_SESSION['check_member'])){ echo'checked=""'; }  ?> >
-            <input type="hidden" value="<?php $arr = $_SESSION['check_member'];
- foreach ($arr as $val){
-    echo $id = $val.'/';
- }
-                
-             ?>" name="member_id_arr">
+           
         </td>
 	 
       <td width="6%"><?php echo $i++; ?></td>
