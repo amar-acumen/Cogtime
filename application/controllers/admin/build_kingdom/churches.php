@@ -705,6 +705,8 @@ $this->email->message("$body");
             $this->ajax_church_space_pagination();
             $data['result_content'] = ob_get_contents(); //pr($data['result_content']);
             ob_end_clean();
+               $VIEW_FILE = "admin/build_kingdom/churches_space.phtml";
+            parent::_render($data, $VIEW_FILE);
                        // $data['subadmin'] = $this->church_model->get_church_subadmin($id);
                         
          }
