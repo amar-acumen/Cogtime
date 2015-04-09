@@ -12,7 +12,7 @@
 							  //   pr($info_arr);
 							  		if(count($info_arr)){
 										foreach($info_arr as $key=> $info){
-											$s_status = ($info['ch_space_enable'] == 1)?'Enable':'Disable';	 		
+											$s_status = ($info['ch_space_enable'] == 1)?'Disable':'Enable';	 		
 							  ?>
                               <?php if($info['i_disabled']==1){?>
 							  
@@ -22,7 +22,7 @@
                               <?php }?>
                                 <td align="left" valign="top"><?=getShortDate($info['dt_created_on'],5)?></td>
                                 <td align="left" valign="top"><?=$info['s_name']?></td>
-                                <td align="left" valign="top"><?=get_member_count_by_church_id($info['id'])?>?></td>
+                                <td align="left" valign="top"><?=get_member_count_by_church_id($info['id'])?></td>
                                 <td align="left" valign="top"><?=$info['s_postcode']?></td>
                                 <td align="left" valign="top"><?=$info['s_phone']?></td>
                                 <td align="center" valign="middle" class="last">
@@ -30,13 +30,13 @@
 <!--                                <input name="" title="Delete" type="button" class="delete-button"  value="" onclick="delete_church(<?=$info['id']?>)"/>-->
                                  <?php if($info['ch_space_enable'] == 1){ ?>
                             		<span id="<?=$info['id']?>_status">
-                                    <input name="" title="Enable" type="button" class="btn-06"  onclick="javascript:changeStatus(<?php echo $info['id'] ?> , 2 , <?php echo $info['ch_space_enable'] ?>)"  value="<?=$s_status?>"/>
+                                    <input name="" title="Disable" type="button" class="btn-06"  onclick="javascript:changeStatus(<?php echo $info['id'] ?> , 0 , <?php echo $info['ch_space_enable'] ?>)"  value="<?=$s_status?>"/>
                                     </span>
 									<?php 
                                         } 
-                                        else if($info['i_disabled'] == 2){?>
+                                        else if($info['i_disabled'] == 0){?>
                                             <span id="<?=$info['id']?>_status">
-                                            <input name="" title="Disable" type="button" class="btn-06"  onclick="javascript:changeStatus(<?php echo $info['id'] ?> , 1 , <?php echo $info['ch_space_enable'] ?>)"  value="<?=$s_status?>"/>
+                                            <input name="" title="Enable" type="button" class="btn-06"  onclick="javascript:changeStatus(<?php echo $info['id'] ?> , 1 , <?php echo $info['ch_space_enable'] ?>)"  value="<?=$s_status?>"/>
                                             </span>
                                     
                                     <?php }
