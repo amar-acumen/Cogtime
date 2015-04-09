@@ -78,7 +78,7 @@ $(document).ready(function()
 });
 function show_member(id){
      $.ajax({
-          url : base_url+'build_kingdom/churches/show_member',
+          url : admin_base_url+'build_kingdom/churches/show_member',
           type : 'post',
           data : ({'id' : id}),
           success : function(data)
