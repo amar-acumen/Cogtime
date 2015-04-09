@@ -334,9 +334,7 @@ $this->email->send();
         $limit  = (is_numeric($i_start) && is_numeric($i_limit))?" Limit ".intval($i_start).",".intval($i_limit):'';
          $sql  = " SELECT C.* 
 				  		FROM {$this->db->CHURCH} C
-						LEFT JOIN {$this->db->COUNTRY} mst_c on mst_c.id=C.i_country_id
-						LEFT JOIN {$this->db->STATE} mst_s on mst_s.id=C.i_state_id
-						LEFT JOIN {$this->db->CITY} mst_city on mst_city.id=C.i_city_id
+						
 						{$where} AND C.ch_space_enable = 1 AND C.ch_page_url != ' '    GROUP BY C.id 
 						ORDER BY C.id DESC {$limit}"; 
 						/*LEFT JOIN cg_city ct ON  ct.i_country_id = mst_c.id
@@ -354,9 +352,7 @@ $this->email->send();
         $sql    = "     SELECT count(*) as i_total FROM (
 									SELECT C.id
 									FROM {$this->db->CHURCH} C
-									LEFT JOIN {$this->db->COUNTRY} mst_c on mst_c.id=C.i_country_id
-									LEFT JOIN {$this->db->STATE} mst_s on mst_s.id=C.i_state_id
-									LEFT JOIN {$this->db->CITY} mst_city on mst_city.id=C.i_city_id
+									
 									{$where} AND C.ch_space_enable = 1 AND C.ch_page_url != ' '
 									GROUP BY C.id 
 									) AS TBL ";
