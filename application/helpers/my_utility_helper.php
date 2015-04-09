@@ -4934,7 +4934,7 @@ function get_prayer_group_count_by_church($cid)
 function get_member_count_by_church_id($cid)
 {
 	$ci=& get_instance();
-	$query=$ci->db->query("select count(id) as ct from cg_church_member where church_id='".$cid."' and is_approved=1");
+	$query=$ci->db->query("select count(id) as ct from cg_church_member where church_id='".$cid."' and is_approved=1 and is_blocked = 1 and is_leave = 0");
 	$result=$query->result_array();
 	return $result['0']['ct'];
 }
