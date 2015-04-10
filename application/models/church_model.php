@@ -332,7 +332,7 @@ $this->email->send();
     {
         
         $limit  = (is_numeric($i_start) && is_numeric($i_limit))?" Limit ".intval($i_start).",".intval($i_limit):'';
-         $sql  = " SELECT C.* 
+      echo   $sql  = " SELECT C.* 
 				  		FROM {$this->db->CHURCH} C 
 						
 						{$where} 
