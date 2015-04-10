@@ -731,7 +731,10 @@ $this->email->message("$body");
 				
 				$srch_city = intval(decrypt(trim($this->input->post('srch_city'))));
 				$WHERE_COND .= ($srch_city=='0')?'':" AND ( C.i_city_id  =  '".$srch_city."')";
+                                 $srch_city = intval(decrypt(trim($this->input->post('srch_city'))));
                                  
+                                 $srch_name = trim($this->input->post('church_name'));
+				$WHERE_COND .= ($srch_name=='0')?'':" AND ( C.s_name  LIKE '%".$srch_name."%')";
                                 if(trim($this->input->post('date_filter'))!= '')
                                 {
                                  $srch_date = get_db_dateformat($this->input->post('date_filter'));
