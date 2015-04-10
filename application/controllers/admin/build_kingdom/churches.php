@@ -838,11 +838,113 @@ $this->email->message("$body");
       $this->db->where('id', $id);
 $this->db->update('cg_church', $data); 
 if($inset_val == 0){
+    
+     $this->load->library('email');
+    $this->load->helper('html');
+        $email_setting  = array('mailtype'=>'html','charset'  => 'utf-8',
+                  'priority' => '1');
+$this->email->initialize($email_setting);
+//$body = "<p>Dear User, </p><p>your church request is denied</p><p>Thanks</p><p>admin@cogtime.com</p> ";
+  $logo="http://cogtime.com/images/logo.png";
+    $body = '<table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" bgcolor="#e9f3f5" style="font-family:Arial, Helvetica, sans-serif; font-size:13px; line-height:19px;">
+  <tr>
+    <td align="left" style="background:#013D62; border-bottom:5px solid #62C3BC; padding:15px 0 15px 20px;"><img src="'.$logo.'" alt= ""></td>
+  </tr>
+  <tr style="border-top:1px solid #ffffff;">
+    <td style="padding-top:10px; padding-bottom:10px;">&nbsp;</td>
+  </tr>
+  <tr>
+  	
+  </tr>
+  <tr>
+  	<td style="padding:15px;"><p> Dear Church admin,</p>
+<p>Your church space has been disable by cogtime admin</p> <p>Now you cannot access church space </p>
+
+
+<p>Thanks</p>
+<p>admin@cogtime.com</p>
+
+            
+	</td>
+</tr>
+  <tr>
+    <td align="center" valign="middle" style="background:#A8A7A7; padding:15px;"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td align="left" valign="middle" style="color:#d3edfd; font-family:Arial, Helvetica, sans-serif; font-size:12px;"> <a href="http://acumencs.com/drandpt-arabic/contact-us/" style="color:#d3edfd; text-decoration:none;"></a></td>
+        
+        <td align="right" style="color:#013d62; font-family:Arial, Helvetica, sans-serif; font-size:12px; text-align="center" ">© All Rights Reserved<span style="color:#525252;"><strong> COGTIME 2014  </strong></span></td>
+      </tr>
+    </table></td>
+  </tr>
+</table>'; 
+$this->email->from('admin@cogtime.com', 'From Cogtime Church');
+$this->email->to(get_useremail_by_id($admin_id));
+//->email->bcc("$mailids");
+//$this->email->cc('arif.zisu@gmail.com');
+//$this->email->bcc('them@their-example.com');
+
+$this->email->subject('Cogtime church approval');
+$this->email->message("$body");
+
+ $this->email->send();	 
+    
     $btnval = "Enable";
     $action_txt ='<input name="" title="Enable" type="button" class="btn-06" onclick="javascript:changeStatus_space(\''.$id.'\',\'1\')"  value="Enable"/>';
     $inst_after = '';
 }
 if($inset_val == 1){
+    
+    $this->load->library('email');
+    $this->load->helper('html');
+        $email_setting  = array('mailtype'=>'html','charset'  => 'utf-8',
+                  'priority' => '1');
+$this->email->initialize($email_setting);
+//$body = "<p>Dear User, </p><p>your church request is denied</p><p>Thanks</p><p>admin@cogtime.com</p> ";
+  $logo="http://cogtime.com/images/logo.png";
+    $body = '<table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" bgcolor="#e9f3f5" style="font-family:Arial, Helvetica, sans-serif; font-size:13px; line-height:19px;">
+  <tr>
+    <td align="left" style="background:#013D62; border-bottom:5px solid #62C3BC; padding:15px 0 15px 20px;"><img src="'.$logo.'" alt= ""></td>
+  </tr>
+  <tr style="border-top:1px solid #ffffff;">
+    <td style="padding-top:10px; padding-bottom:10px;">&nbsp;</td>
+  </tr>
+  <tr>
+  	
+  </tr>
+  <tr>
+  	<td style="padding:15px;"><p> Dear Church admin,</p>
+<p>Your church space has been Enable by cogtime admin</p> <p>Now you  can access church space </p>
+
+
+<p>Thanks</p>
+<p>admin@cogtime.com</p>
+
+            
+	</td>
+</tr>
+  <tr>
+    <td align="center" valign="middle" style="background:#A8A7A7; padding:15px;"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td align="left" valign="middle" style="color:#d3edfd; font-family:Arial, Helvetica, sans-serif; font-size:12px;"> <a href="http://acumencs.com/drandpt-arabic/contact-us/" style="color:#d3edfd; text-decoration:none;"></a></td>
+        
+        <td align="right" style="color:#013d62; font-family:Arial, Helvetica, sans-serif; font-size:12px; text-align="center" ">© All Rights Reserved<span style="color:#525252;"><strong> COGTIME 2014  </strong></span></td>
+      </tr>
+    </table></td>
+  </tr>
+</table>'; 
+$this->email->from('admin@cogtime.com', 'From Cogtime Church');
+$this->email->to(get_useremail_by_id($admin_id));
+//->email->bcc("$mailids");
+//$this->email->cc('arif.zisu@gmail.com');
+//$this->email->bcc('them@their-example.com');
+
+$this->email->subject('Cogtime church approval');
+$this->email->message("$body");
+
+ $this->email->send();	 
+    
+    
+    
   $btnval = "Disable";
     $action_txt ='<input name="" title="Disable" type="button" class="btn-06" onclick="javascript:changeStatus_space(\''.$id.'\',\'0\')"  value="Disable"/>';  
 $inst_after = '<img width="25" height="14" onclick="autologin(\''.$admin_id.'\',\''.$id.'\',"admin")" style="cursor: pointer" src="'.base_url().'images/icons/crown.png" alt="crown" class="add-new-church">';
