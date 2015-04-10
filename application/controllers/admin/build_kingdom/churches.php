@@ -732,7 +732,7 @@ $this->email->message("$body");
                          $order_by='`dt_created_on` DESC';
 		   	$result = $this->church_model->get_space_list($s_where,$page,$this->pagination_per_page,$order_by);
                          $resultCount = count($result);
-			echo$total_rows = $this->church_model->get_space_list_count($s_where);
+			$total_rows = $this->church_model->get_space_list_count($s_where);
 			
 			
 			
