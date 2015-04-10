@@ -829,12 +829,12 @@ if($inset_val == 0){
 }
 if($inset_val == 1){
   $btnval = "Disable";
-    $action_txt ='<input name="" title="Disable" type="button" class="btn-06" onclick="javascript:changeStatus_space(\''.$id.'\',\'1\')"  value="Disable"/>';  
+    $action_txt ='<input name="" title="Disable" type="button" class="btn-06" onclick="javascript:changeStatus_space(\''.$id.'\',\'0\')"  value="Disable"/>';  
 }
-if($inset_val == 0){
-     $btnval = "Enable";
-    $action_txt ='<input name="" title="Enable" type="button" class="btn-06" onclick="javascript:changeStatus_space(\''.$id.'\',\'0\')"  value="Enable"/>';  
-}
+//if($inset_val == 0){
+//     $btnval = "Enable";
+//    $action_txt ='<input name="" title="Enable" type="button" class="btn-06" onclick="javascript:changeStatus_space(\''.$id.'\',\'0\')"  value="Enable"/>';  
+//}
 
 echo json_encode(array('msg'=>'Status change successfully' , 'action_txt'=>$action_txt , 'btnval'=>$btnval));
     }
