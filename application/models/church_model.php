@@ -349,10 +349,10 @@ $this->email->send();
 	
     public function get_space_list_count($where='')
     {
-      echo  $sql    = "     SELECT count(*) as i_total FROM {$this->db->CHURCH} C
+        $sql    = "     SELECT count(*) as i_total FROM {$this->db->CHURCH} C
 						
-						{$where} 
-						ORDER BY C.id DESC ";
+						where C.ch_space_enable = 1 AND C.ch_page_url != ' '
+						 ";
 					/* LEFT JOIN cg_city ct ON  ct.i_country_id = mst_c.id
 									LEFT JOIN cg_state s ON  s.id =  ct.i_state_idLEFT JOIN {$this->db->CITY} mst_city on mst_city.id=C.i_city_id*/
         $query     = $this->db->query($sql);//echo $this->db->last_query();
