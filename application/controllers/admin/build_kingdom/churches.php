@@ -31,7 +31,7 @@ class Churches extends Admin_base_Controller
             # configuring paths...
            $this->load->model("church_model");
            $this->load->helper('common_option_helper.php');
-		   
+		$this->load->library('email');   
 		   $this->upload_path = BASEPATH.'../uploads/church_csv/';
            
         }
@@ -894,11 +894,11 @@ $this->email->message("$body");
 }
 if($inset_val == 1){
     
-      $this->load->library('email');
-    $this->load->helper('html');
-        $email_setting  = array('mailtype'=>'html','charset'  => 'utf-8',
+       $this->load->library('email');
+       $this->load->helper('html');
+    $email_setting  = array('mailtype'=>'html','charset'  => 'utf-8',
                   'priority' => '1');
-$this->email->initialize($email_setting);
+    $this->email->initialize($email_setting);
 //$body = "<p>Dear User, </p><p>your church request is denied</p><p>Thanks</p><p>admin@cogtime.com</p> ";
   $logo="http://cogtime.com/images/logo.png";
     $body = '<table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" bgcolor="#e9f3f5" style="font-family:Arial, Helvetica, sans-serif; font-size:13px; line-height:19px;">
