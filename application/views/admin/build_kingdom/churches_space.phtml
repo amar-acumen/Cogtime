@@ -547,7 +547,8 @@ function changeStatus_space(id,insert_val,admin_id)
 						hideBusyScreen();
 					$('#'+id+'_status').html('')
                                         $('#'+id+'_status').html(data.action_txt)
-                                        $('#'+id+'_status').insertAfter(data.inst_after);
+                                        $('status_img'+id).html('');
+                                        $('status_img'+id).html(data.$inst_after);
 				},
 		error: function (data, status, e) {
 							hideBusyScreen();
