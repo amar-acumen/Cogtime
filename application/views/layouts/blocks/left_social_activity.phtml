@@ -78,7 +78,7 @@
               $query_churchmember = $this->db->query($sql_churchmember);
               $numrowmember = $query_churchmember->num_rows();
               $result_churchmember = $query_churchmember->result();
-              $query = $this->db->get_where('cg_church', array('ch_admin_id' => $user_id));
+              $query = $this->db->get_where('cg_church', array('ch_admin_id' => $user_id,'ch_space_enable' => 1));
               $result = $query->result();
 
               $numrow_superadmin = $query->num_rows();
