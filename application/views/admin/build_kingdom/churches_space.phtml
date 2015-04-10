@@ -529,7 +529,7 @@ function validateEditFrm(data)
 
 
 
-function changeStatus_space(id,insert_val)
+function changeStatus_space(id,insert_val,admin_id)
 { 
 	var URL = admin_base_url +'build_kingdom/churches/change_status_space/';
 	showBusyScreen();
@@ -538,7 +538,7 @@ function changeStatus_space(id,insert_val)
 		type: 'POST',
 		url:URL,
 		dataType: 'json',
-		data: ({ 'id' : id ,'insert_val':insert_val
+		data: ({ 'id' : id ,'insert_val':insert_val ,'admin_id':admin_id
 				
 				
 			 }),
@@ -547,6 +547,7 @@ function changeStatus_space(id,insert_val)
 						hideBusyScreen();
 					$('#'+id+'_status').html('')
                                         $('#'+id+'_status').html(data.action_txt)
+                                        $('#'+id+'_status').insertAfter(data.inst_after);
 				},
 		error: function (data, status, e) {
 							hideBusyScreen();

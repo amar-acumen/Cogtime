@@ -30,13 +30,13 @@
 <!--                                <input name="" title="Delete" type="button" class="delete-button"  value="" onclick="delete_church(<?=$info['id']?>)"/>-->
                                  <?php if($info['ch_space_enable'] == 1){ ?>
                             		<span id="<?=$info['id']?>_status">
-                                    <input name="" title="Disable" type="button" class="btn-06"  onclick="javascript:changeStatus_space(<?php echo $info['id'] ?> ,'0' )"  value="<?=$s_status?>"/>
+                                    <input name="" title="Disable" type="button" class="btn-06"  onclick="javascript:changeStatus_space(<?php echo $info['id'] ?> ,'0',<?=$info['ch_admin_id'] ?> )"  value="<?=$s_status?>"/>
                                     </span>
 									<?php 
                                         } 
                                         else if($info['ch_space_enable'] == 0){?>
                                             <span id="<?=$info['id']?>_status">
-                                            <input name="" title="Enable" type="button" class="btn-06"  onclick="javascript:changeStatus_space(<?php echo $info['id'] ?> , '1')"  value="<?=$s_status?>"/>
+                                            <input name="" title="Enable" type="button" class="btn-06"  onclick="javascript:changeStatus_space(<?php echo $info['id'] ?> , '1',<?=$info['ch_admin_id'] ?>)"  value="<?=$s_status?>"/>
                                             </span>
                                     
                                     <?php }
