@@ -764,7 +764,7 @@ $order_by='`dt_created_on` DESC';
 			//pr($result,1);
 			#Jquery Pagination Starts
            	$this->load->library('jquery_pagination');
-            $config['base_url'] = base_url()."admin/build_kingdom/churches/ajax_pagination";
+            $config['base_url'] = base_url()."admin/build_kingdom/churches/ajax_church_space_pagination";
             $config['total_rows'] = $total_rows;
             $config['per_page'] = $this->pagination_per_page;
             $config['uri_segment'] = 5;
