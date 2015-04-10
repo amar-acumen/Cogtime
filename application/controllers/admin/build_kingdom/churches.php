@@ -721,7 +721,7 @@ $this->email->message("$body");
                          
                                  
                                  $srch_name =  trim($this->input->post('church_name')); 
-				$WHERE_COND .= ($srch_name=='0')?'':" AND  C.s_name  LIKE '%".$srch_name."'";
+				$WHERE_COND .= ($srch_name=='0')?'':' AND  C.s_name  LIKE "%'.$srch_name.'%"';
 //                               
 				 $this->session->set_userdata('search_condition',$WHERE_COND);
 			
