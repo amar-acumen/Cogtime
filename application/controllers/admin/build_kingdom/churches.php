@@ -720,7 +720,7 @@ $this->email->message("$body");
 			 if(isset($_POST['search_basic']) && $_POST['search_basic'] == 'Y' ) :
                          
                                  
-                                 $srch_name = preg_replace('/[^A-Za-z0-9\-]/', '_', trim($this->input->post('church_name'))); 
+                                 $srch_name =  trim($this->input->post('church_name')); 
 				$WHERE_COND .= ($srch_name=='0')?'':" AND  C.s_name  LIKE '%".$srch_name."'";
 //                               
 				 $this->session->set_userdata('search_condition',$WHERE_COND);
