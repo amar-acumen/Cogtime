@@ -718,36 +718,11 @@ $this->email->message("$body");
 			## seacrh conditions : filter ############
 		 	$s_where = "where C.ch_space_enable = 1 AND C.ch_page_url != ' '    GROUP BY C.id";
 			 if(isset($_POST['search_basic']) && $_POST['search_basic'] == 'Y' ) :
-                         //echo $srch_date =trim($this->input->post('date_filter'));
-                            //echo intval(decrypt(trim($this->input->post('date')))); 
-                          //die('ok');
-				//$WHERE_COND = " WHERE 1  ";
-				
-//				$srch_country = intval(decrypt(trim($this->input->post('srch_country')))); 
-//				$WHERE_COND .= ($srch_country=='0')?'':" AND ( C.i_country_id  =  '".$srch_country."')";
-//				
-//				$srch_state = intval(decrypt(trim($this->input->post('srch_state'))));
-//				$WHERE_COND .= ($srch_state=='0')?'':" AND ( C.i_state_id =  '".$srch_state."')";
-//				
-//				$srch_city = intval(decrypt(trim($this->input->post('srch_city'))));
-//				$WHERE_COND .= ($srch_city=='0')?'':" AND ( C.i_city_id  =  '".$srch_city."')";
-//                                 $srch_city = intval(decrypt(trim($this->input->post('srch_city'))));
+                         
                                  
                                  $srch_name = preg_replace('/[^A-Za-z0-9\-]/', '', trim($this->input->post('church_name'))); 
 				$WHERE_COND .= ($srch_name=='0')?'':" AND ( C.s_name  LIKE '%".$srch_name."%')";
-//                                if(trim($this->input->post('date_filter'))!= '')
-//                                {
-//                                 $srch_date = get_db_dateformat($this->input->post('date_filter'));
-//                                 $WHERE_COND .= ($srch_date=='0')?'':" AND ( DATE(C.dt_created_on)  =  '".$srch_date."')";  
-//                                   // die('ok');
-//                                } 
-                                  //  $srch_date = get_db_dateformat(trim($this->input->post('date'))); 
-                                  // $WHERE_COND .= ($srch_date=='0')?'':" AND ( C.dt_created_on  =  '".$srch_date."')";  
-                                 //}
-//                                 $srch_date = get_db_dateformat(trim($this->input->post('date')));
-//                                 $WHERE_COND .= ($srch_date=='0')?'':" AND ( C.dt_created_on  =  '".$srch_date."')";
-				//echo $WHERE_COND;
-                                //echo $this->db->last_query();
+//                               
 				 $this->session->set_userdata('search_condition',$WHERE_COND);
 			
             endif;  
@@ -791,6 +766,7 @@ $this->email->message("$body");
 
             $this->jquery_pagination->initialize($config);
             $data['page_links'] = $this->jquery_pagination->create_links();
+            pr( $data['page_links']);
 			$this->jquery_pagination->create_links();
 
             // getting   listing...
