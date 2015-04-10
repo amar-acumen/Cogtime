@@ -716,12 +716,12 @@ $this->email->message("$body");
         {
 			//echo $_POST['search_basic']; exit;
 			## seacrh conditions : filter ############
-		 	$s_where = "where  C.ch_page_url != ' ' ";
+		 	$s_where = "where  C.ch_page_url != ' '    ";
 			 if(isset($_POST['search_basic']) && $_POST['search_basic'] == 'Y' ) :
                          
                                  
                                  $srch_name = preg_replace('/[^A-Za-z0-9\-]/', ' ', trim($this->input->post('church_name'))); 
-				$WHERE_COND .= ($srch_name=='0')?'':" AND  C.s_name  LIKE '%".$srch_name."%'";
+				$WHERE_COND .= ($srch_name=='0')?'':" AND  C.s_name  LIKE '".$srch_name."%'";
 //                               
 				 $this->session->set_userdata('search_condition',$WHERE_COND);
 			
