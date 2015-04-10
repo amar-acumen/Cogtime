@@ -723,24 +723,24 @@ $this->email->message("$body");
                           //die('ok');
 				//$WHERE_COND = " WHERE 1  ";
 				
-				$srch_country = intval(decrypt(trim($this->input->post('srch_country')))); 
-				$WHERE_COND .= ($srch_country=='0')?'':" AND ( C.i_country_id  =  '".$srch_country."')";
-				
-				$srch_state = intval(decrypt(trim($this->input->post('srch_state'))));
-				$WHERE_COND .= ($srch_state=='0')?'':" AND ( C.i_state_id =  '".$srch_state."')";
-				
-				$srch_city = intval(decrypt(trim($this->input->post('srch_city'))));
-				$WHERE_COND .= ($srch_city=='0')?'':" AND ( C.i_city_id  =  '".$srch_city."')";
-                                 $srch_city = intval(decrypt(trim($this->input->post('srch_city'))));
+//				$srch_country = intval(decrypt(trim($this->input->post('srch_country')))); 
+//				$WHERE_COND .= ($srch_country=='0')?'':" AND ( C.i_country_id  =  '".$srch_country."')";
+//				
+//				$srch_state = intval(decrypt(trim($this->input->post('srch_state'))));
+//				$WHERE_COND .= ($srch_state=='0')?'':" AND ( C.i_state_id =  '".$srch_state."')";
+//				
+//				$srch_city = intval(decrypt(trim($this->input->post('srch_city'))));
+//				$WHERE_COND .= ($srch_city=='0')?'':" AND ( C.i_city_id  =  '".$srch_city."')";
+//                                 $srch_city = intval(decrypt(trim($this->input->post('srch_city'))));
                                  
                                  $srch_name = preg_replace('/[^A-Za-z0-9\-]/', '', trim($this->input->post('church_name'))); 
 				$WHERE_COND .= ($srch_name=='0')?'':" AND ( C.s_name  LIKE '%".$srch_name."%')";
-                                if(trim($this->input->post('date_filter'))!= '')
-                                {
-                                 $srch_date = get_db_dateformat($this->input->post('date_filter'));
-                                 $WHERE_COND .= ($srch_date=='0')?'':" AND ( DATE(C.dt_created_on)  =  '".$srch_date."')";  
-                                   // die('ok');
-                                } 
+//                                if(trim($this->input->post('date_filter'))!= '')
+//                                {
+//                                 $srch_date = get_db_dateformat($this->input->post('date_filter'));
+//                                 $WHERE_COND .= ($srch_date=='0')?'':" AND ( DATE(C.dt_created_on)  =  '".$srch_date."')";  
+//                                   // die('ok');
+//                                } 
                                   //  $srch_date = get_db_dateformat(trim($this->input->post('date'))); 
                                   // $WHERE_COND .= ($srch_date=='0')?'':" AND ( C.dt_created_on  =  '".$srch_date."')";  
                                  //}
@@ -754,7 +754,7 @@ $this->email->message("$body");
 		   	
 			$s_where .= $this->session->userdata('search_condition'); 
                
-$order_by='`dt_created_on` DESC';
+                         $order_by='`dt_created_on` DESC';
 		   	$result = $this->church_model->get_space_list($s_where,$page,$this->pagination_per_page,$order_by);
             $resultCount = count($result);
 			$total_rows = $this->church_model->get_space_list_count($s_where);
