@@ -12594,12 +12594,11 @@ text-align: center;}
 .pull-right-close{ position:relative;}
 .pull-right-close a{ position: absolute; right: -24px; top: -24px;}
 
-
-a.tooltip {outline:none; }
+a.tooltip {outline:none; position: relative; }
 a.tooltip strong {line-height:30px;}
 a.tooltip:hover {text-decoration:none;} 
 a.tooltip span {
-   display: none;
+    display: none;
     left: -150px;
     line-height: 16px;
     margin-left: 28px;
@@ -12610,6 +12609,15 @@ a.tooltip span {
     width: 300px;
     z-index: 10;
 }
+a.tooltip span:after{
+width: 0;
+height: 0;
+border-style: solid;
+border-width: 15px 10px 0 10px;
+border-color: #999999 transparent transparent transparent;
+content:"";
+position:absolute; left:151px; bottom:100%; margin:0;
+}
 a.tooltip:hover span{
     display:inline; position:absolute; color:#111;
     border:1px solid #DCA; background:#fffAF0;}
@@ -12619,4 +12627,16 @@ a.tooltip:hover span{
 a.tooltip span
 {
     border-radius:4px;
-    box-shadow: 5px 5px 8px #CCC;}
+    box-shadow: 5px 5px 8px #CCC;
+}
+
+
+
+
+
+
+
+
+
+
+
