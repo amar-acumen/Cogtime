@@ -806,11 +806,13 @@ $this->email->message("$body");
         $query = $this->db->query('select u.id,u.s_first_name as first_name ,u.s_last_name as last_name, u.s_profile_photo,u.e_gender from cg_users u , cg_church_member cm where cm.church_id='.$id.' AND cm.is_blocked = 1 AND cm.is_leave = 0 AND cm.member_id = u.id AND cm.is_approved = 1 AND role = 2');
         $res = $query->result();
         if(count($res) > 0){
+             echo '<ul>';
         foreach ($res as $val){
-            echo '<ul>';
+           
             echo "<li style='background:url(".get_profile_image_of_user('thumb',$val->s_profile_photo, $val->e_gender).") no-repeat center;width:60px; height:60px;' title='member' class='pro_photo4 user_pro_image' ><span class='mem_nm'>".$val->first_name." ".$val->last_name. "</span></li>";
-            echo '</ul>';
+           
         }
+         echo '</ul>';
         }else{
             echo '<h1 class="no_mem">No Subadmin</h1>';
         }
