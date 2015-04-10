@@ -12594,10 +12594,10 @@ text-align: center;}
 .pull-right-close{ position:relative;}
 .pull-right-close a{ position: absolute; right: -24px; top: -24px;}
 
-a.tooltip {outline:none; position: relative; }
-a.tooltip strong {line-height:30px;}
-a.tooltip:hover {text-decoration:none;} 
-a.tooltip span {
+a.tooltip2 {outline:none; position: relative; }
+a.tooltip2 strong {line-height:30px;}
+a.tooltip2:hover {text-decoration:none;} 
+a.tooltip2 span {
     display: none;
     left: -150px;
     line-height: 16px;
@@ -12608,23 +12608,24 @@ a.tooltip span {
     top: 60px;
     width: 300px;
     z-index: 10;
+    background: #62c3bc;
 }
-a.tooltip span:after{
+a.tooltip2 span:after{
 width: 0;
 height: 0;
 border-style: solid;
-border-width: 15px 10px 0 10px;
-border-color: #999999 transparent transparent transparent;
+border-width: 0 9px 12px;
+border-color: transparent transparent #62c3bc;
 content:"";
 position:absolute; left:151px; bottom:100%; margin:0;
 }
-a.tooltip:hover span{
+a.tooltip2:hover span{
     display:inline; position:absolute; color:#111;
     border:1px solid #DCA; background:#fffAF0;}
 .callout {z-index:20;position:absolute;top:30px;border:0;left:-12px;}
     
 /*CSS3 extras*/
-a.tooltip span
+a.tooltip2 span
 {
     border-radius:4px;
     box-shadow: 5px 5px 8px #CCC;
