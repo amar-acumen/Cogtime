@@ -825,11 +825,11 @@ $this->email->message("$body");
 $this->db->update('cg_church', $data); 
 if($inset_val == 0){
     $btnval = "Enable";
-    $action_txt ='<input name="" title="Enable" type="button" class="btn-06" onclick="javascript:changeStatus(\''.$ID.'\',\'1\')"  value="Enable"/>';
+    $action_txt ='<input name="" title="Enable" type="button" class="btn-06" onclick="javascript:changeStatus(\''.$id.'\',\'1\')"  value="Enable"/>';
 }
 if($inset_val == 1){
   $btnval = "Disable";
-    $action_txt ='<input name="" title="Disable" type="button" class="btn-06" onclick="javascript:changeStatus(\''.$ID.'\',\'1\')"  value="Disable"/>';  
+    $action_txt ='<input name="" title="Disable" type="button" class="btn-06" onclick="javascript:changeStatus(\''.$id.'\',\'1\')"  value="Disable"/>';  
 }
 
 echo json_encode(array('msg'=>'Status change successfully' , 'action_txt'=>$action_txt , 'btnval'=>$btnval));
