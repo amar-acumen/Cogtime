@@ -12599,9 +12599,16 @@ a.tooltip {outline:none; }
 a.tooltip strong {line-height:30px;}
 a.tooltip:hover {text-decoration:none;} 
 a.tooltip span {
-    z-index:10;display:none; padding:14px 20px;
-    margin-top:-30px; margin-left:28px;
-    width:300px; line-height:16px;
+   display: none;
+    left: -150px;
+    line-height: 16px;
+    margin-left: 28px;
+    margin-top: -30px;
+    padding: 14px 20px;
+    position: absolute;
+    top: 60px;
+    width: 300px;
+    z-index: 10;
 }
 a.tooltip:hover span{
     display:inline; position:absolute; color:#111;
