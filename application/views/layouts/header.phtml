@@ -69,8 +69,8 @@ function after_submit() {
                           <div id="error_msg_email_login" class="error_msg" style="margin-left:20px;"></div> 
                           <div class="clr"></div>
                            <label class="remember-pass"><input name="chkRem" id="chkRem" type="checkbox" value="1" <?=($Rember=='checked'?'checked="checked"':'')?>/>Remember me.</label>  <!--Not a registered user?--> <a href="<?=base_url().'register.html'?>" class="signup">Sign Up </a>
-                          <a href="<?=base_url()?>forgot-password.html">Forgot Password?</a>
-                          <a href="<?=base_url()?>register.html">Find a church<span>
+                           <a href="<?=base_url()?>forgot-password.html">Forgot Password?</a> &nbsp;&nbsp;
+                          <a href="<?=base_url()?>register.html?findch=1">Find a church<span>
                             <img alt="Church" src="images/church-info.png">
                             </span></a>
                           </form>
