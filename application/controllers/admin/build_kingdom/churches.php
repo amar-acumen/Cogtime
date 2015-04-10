@@ -828,12 +828,12 @@ $this->db->update('cg_church', $data);
 if($inset_val == 0){
     $btnval = "Enable";
     $action_txt ='<input name="" title="Enable" type="button" class="btn-06" onclick="javascript:changeStatus_space(\''.$id.'\',\'1\')"  value="Enable"/>';
-    $inst_after = '<img width="25" height="14" onclick="autologin(\''.$admin_id.'\',\''.$id.'\',"admin")" style="cursor: pointer" src="'.base_url().'images/icons/crown.png" alt="crown" class="add-new-church">';
+    $inst_after = '';
 }
 if($inset_val == 1){
   $btnval = "Disable";
     $action_txt ='<input name="" title="Disable" type="button" class="btn-06" onclick="javascript:changeStatus_space(\''.$id.'\',\'0\')"  value="Disable"/>';  
-$inst_after = '';
+$inst_after = '<img width="25" height="14" onclick="autologin(\''.$admin_id.'\',\''.$id.'\',"admin")" style="cursor: pointer" src="'.base_url().'images/icons/crown.png" alt="crown" class="add-new-church">';
     
 }
 //if($inset_val == 0){
