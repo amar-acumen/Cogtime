@@ -16,7 +16,7 @@
                            
                             
                             Cogtime Registration :  <input type="radio" name="reg" value="cogtime" checked="" class="chk">
-                            Church  Registration :   <input type="radio" name="reg" value="church" class="chk" <?php if($_GET['findch'] == 1) { ?> checked="" <?php } ?>>
+                            Church  Registration :   <input type="radio" id="chrch_reg" name="reg" value="church" class="chk" <?php if($_GET['findch'] == 1) { ?> checked="" <?php } ?>>
                                 
                        
                         </span>
@@ -455,3 +455,11 @@
     <div class="bot"><div>&nbsp;</div></div>
 </div>
 
+<script type="text/javascript">
+
+$(document).ready(function(){
+    var checked = $("#chrch_reg:checked").length;
+    alert(checked);
+});
+
+</script>
