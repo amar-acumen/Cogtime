@@ -349,7 +349,7 @@ $this->email->send();
 	
     public function get_space_list_count($where='')
     {
-        $sql    = "     SELECT count(*) as i_total FROM {$this->db->CHURCH} C
+      echo  $sql    = "     SELECT count(*) as i_total FROM {$this->db->CHURCH} C
 						
 						{$where} 
 						ORDER BY C.id DESC ";
