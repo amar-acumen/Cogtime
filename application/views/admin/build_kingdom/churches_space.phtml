@@ -529,31 +529,24 @@ function validateEditFrm(data)
 
 
 
-function changeStatus(id,i_status ,cur_status)
+function changeStatus_space(id,insert_val)
 { 
-	var URL = admin_base_url +'build_kingdom/churches/change_status/';
+	var URL = admin_base_url +'build_kingdom/churches/change_status_space/';
 	showBusyScreen();
-	if(ajax_req!=null) {
-		ajax_req.abort();
-	}
-	ajax_req = $.ajax({
+	
+	 $.ajax({
 		type: 'POST',
 		url:URL,
 		dataType: 'json',
-		data: ({ 'record_id' : id
-				 ,'i_status' : i_status
-				 ,'cur_status' : cur_status
+		data: ({ 'id' : id ,'insert_val':insert_val
+				
+				
 			 }),
 		success: function (data, status) {
-						var result_obj = data;
+						
 						hideBusyScreen();
-						if(result_obj.result=='success' && result_obj.redirect == false ) {
-							showUIMsg(result_obj.msg);
-							$('#'+result_obj.u_id+'_status').html(result_obj.action_txt);
-						}
-						else if(result_obj.result==false && result_obj.redirect == true){
-							showUIMsg(result_obj.msg);
-						}
+					$('#'+id+'_status').html('')
+                                        $('#'+id+'_status').html(data.action_txt)
 				},
 		error: function (data, status, e) {
 							hideBusyScreen();

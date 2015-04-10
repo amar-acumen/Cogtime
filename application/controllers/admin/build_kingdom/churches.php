@@ -811,4 +811,30 @@ $this->email->message("$body");
             echo '<h1 class="no_mem">No Subadmin</h1>';
         }
     }
+    
+    
+    public function change_status_space()
+    {
+       $id = $this->input->post('id');
+       $inset_val = $this->input->post('insert_val');
+      $data = array(
+               'ch_space_enable' => $inset_val
+               
+            );
+      $this->db->where('id', $id);
+$this->db->update('cg_church', $data); 
+if($inset_val == 0){
+    $btnval = "Enable";
+    $action_txt ='<input name="" title="Enable" type="button" class="btn-06" onclick="javascript:changeStatus(\''.$ID.'\',\'1\')"  value="Enable"/>';
+}
+if($inset_val == 1){
+  $btnval = "Disable";
+    $action_txt ='<input name="" title="Disable" type="button" class="btn-06" onclick="javascript:changeStatus(\''.$ID.'\',\'1\')"  value="Disable"/>';  
+}
+
+echo json_encode(array('msg'=>'Status change successfully' , 'action_txt'=>$action_txt , 'btnval'=>$btnval));
+    }
+    
+    
+    
 }   // end of controller...
