@@ -5340,3 +5340,13 @@ function get_subadmin_count_by_church_id($cid)
 	$result=$query->result_array();
 	return $result['0']['ct'];
 }
+function check_church_admin_exist(){
+   $ci=& get_instance();
+    $query = $this->db->get_where('cg_church', array('ch_space_enable' => 1,'id'=>$_SESSION['logged_church_id']));
+              //$result = $query->result();
+
+              $numrow_superadmin = $query->num_rows();
+              if($numrow_superadmin == 0){
+                  header("location:".base_url()."");
+              }
+}
