@@ -766,7 +766,7 @@ $this->email->message("$body");
 
             $this->jquery_pagination->initialize($config);
             $data['page_links'] = $this->jquery_pagination->create_links();
-            pr($config['div'] );
+            pr($config['page_links'] );
 			$this->jquery_pagination->create_links();
 
             // getting   listing...
