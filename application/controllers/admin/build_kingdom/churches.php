@@ -894,7 +894,7 @@ $this->email->message("$body");
 }
 if($inset_val == 1){
     
-    $this->load->library('email');
+      $this->load->library('email');
     $this->load->helper('html');
         $email_setting  = array('mailtype'=>'html','charset'  => 'utf-8',
                   'priority' => '1');
