@@ -16,7 +16,7 @@
 class Churches extends Admin_base_Controller
 {
 	
-	private $pagination_per_page=20;
+	private $pagination_per_page=10;
 
     
 
