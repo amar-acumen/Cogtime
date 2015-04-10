@@ -792,10 +792,13 @@ $this->email->message("$body");
              echo '<ul>';
         foreach ($res as $val){
            
-          echo "<li style='background:url(".get_profile_image_of_user('thumb',$val->s_profile_photo, $val->e_gender).") no-repeat center;width:60px; height:60px;' title='member' class='pro_photo4 user_pro_image' ><span class='mem_nm'>".$val->first_name." ".$val->last_name. "</span></li>";
+          echo "<li>";
             //echo '<li> background:url(http://web.acumensofttech.com/Cogtime/uploads/prayer_wall_photos/prayer-wall-6-0-thumb.jpg) no-repeat center; width:60px; height:60px;border: 1px solid #DCDCDC; float: left; <img src="" title='.$val->user_name.' ><li>';
+           echo "<div style='float:left;background:url(".get_profile_image_of_user('thumb',$val->s_profile_photo, $val->e_gender).") no-repeat center;width:60px; height:60px;' ></div>";
+        echo "<span class='mem_nm' style='float:left;' >".$val->first_name." ".$val->last_name. "</span>";
+           echo "</li>";
            
-        }
+        }  
          echo '</ul>';
         }else{
             echo '<h1 class="no_mem">No Members</h1>';
