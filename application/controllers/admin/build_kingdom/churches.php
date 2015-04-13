@@ -1016,6 +1016,8 @@ $this->db->update('cg_church_member', $data, array('id' => $id , 'member_id' => 
     {
         try
         {
+            echo $id;
+            die();
             
 			//echo $_POST['search_basic']; exit;
 			## seacrh conditions : filter ############
