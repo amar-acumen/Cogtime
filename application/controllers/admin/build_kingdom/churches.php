@@ -873,7 +873,7 @@ echo json_encode(array('msg'=>'Status change successfully' , 'action_txt'=>$acti
                         $this->session->set_userdata('search_condition','');
 			
 			ob_start();
-            $this->ajax_church_space_member_pagination();
+            $this->ajax_church_space_member_pagination($page=0,$id);
             $data['result_content'] = ob_get_contents(); //pr($data['result_content']);
             ob_end_clean();
                $VIEW_FILE = "admin/build_kingdom/churches_space_member.phtml";
@@ -881,11 +881,12 @@ echo json_encode(array('msg'=>'Status change successfully' , 'action_txt'=>$acti
                        // $data['subadmin'] = $this->church_model->get_church_subadmin($id);
                         
          }
-             public function ajax_church_space_member_pagination($page=0)
+             public function ajax_church_space_member_pagination($page=0,$id)
     {
         try
         {
-            die($id);
+            echo $id;
+            die();
 			//echo $_POST['search_basic']; exit;
 			## seacrh conditions : filter ############
 		 	$s_where = "where  C.ch_page_url != ' ' AND u.id = C.ch_admin_id   ";
