@@ -65,6 +65,20 @@
                                     <input name="" title="Unblock" type="button" class="btn-06"  onclick="javascript:member_block_unblock(<?=$info['id']?>,<?php echo  $info['member_id'] ?> ,'1',<?=$info['church_id'] ?> )"  value="Unblock"/>
                                     </span>	
                                           <?php } ?>
+                                    
+                                     <?php if($info['is_role'] == 2){ ?>
+					<span id="<?=$info['id']?>_dlsub">
+                                    <input name="" title="Delete from Subadmin" type="button" class="btn-06"  onclick="javascript:member_subadmin_del(<?=$info['id']?>,<?php echo $info['member_id'] ?> ,'1',<?=$info['church_id'] ?> )"  value="Delete from Subadmin"/>
+                                    </span>
+                                          <?php }if($info['is_role'] != 2 ){ ?>
+                                  <span id="<?=$info['id']?>_undodelsub">
+                                    <input name="" title="Assign to subadmin" type="button" class="btn-06"  onclick="javascript:member_subadmin_del(<?=$info['id']?>,<?php echo  $info['member_id'] ?> ,'2',<?=$info['church_id'] ?> )"  value="Assign to subadmin"/>
+                                    </span>	
+                                          <?php } ?>
+                                    
+                                    
+                                    
+                                    
 			<?php 
                                         } 
                                         else if($info['is_approved'] == 0){?>
@@ -76,15 +90,7 @@
                                     
                                     
                                     ?>
-                                        <?php
-                                   if($info['ch_space_enable'] == 1 && $info['ch_page_url'] != '' ){
-                                        ?>
-                                    <div id="status_img<?=$info['id']?> ">
-                                    <img class="add-new-church" width="25" height="14" alt="crown" src="<?= base_url() ?>images/icons/crown.png" style="cursor: pointer" onclick="autologin('<?=$info['ch_admin_id'] ?>','<?php echo $info['id'] ?>','admin')" >
-                                    </div>
-                                            <?php
-                                    }
-                                    ?>
+                                       
                                 
                                 </td>
                               </tr>
