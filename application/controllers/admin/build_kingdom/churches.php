@@ -893,7 +893,7 @@ echo json_encode(array('msg'=>'Status change successfully' , 'action_txt'=>$acti
                          
                                  
                                  $srch_name = preg_replace('/[^A-Za-z0-9\-]/', '', trim($this->input->post('church_name'))); 
-				$WHERE_COND .= ($srch_name=='0')?'':" AND ( C.s_name  LIKE '%".$srch_name."%')";
+				$WHERE_COND .= ($srch_name=='0')?'':" AND ( cm.s_name  LIKE '%".$srch_name."%')";
 //                               
 				 $this->session->set_userdata('search_condition',$WHERE_COND);
 			

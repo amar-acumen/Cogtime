@@ -365,7 +365,7 @@ $this->email->send();
 				  		FROM  cg_church_member cm ,cg_users u
 						
 						{$where} 
-						ORDER BY C.id DESC {$limit}"; 
+						ORDER BY cm.id DESC {$limit}"; 
                                                    $query     = $this->db->query($sql); //echo $this->db->last_query();
         $result_arr = $query->result_array(); //pr($result_arr,1);
         return $result_arr;
