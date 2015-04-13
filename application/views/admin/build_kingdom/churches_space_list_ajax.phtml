@@ -3,8 +3,10 @@
                                 <th align="left" valign="middle" height="30" width="80">Date Posted</th>
                                 <th align="left" valign="middle" height="30" width="200">Church Name</th>
                                 <th align="left" valign="middle" height="30" width="200">Admin Name</th>
+                               
+                                <th align="left" valign="middle" height="30" width="80">Subadmin</th> 
                                 <th align="left" valign="middle" height="30" width="400">Member</th>
-                                <th align="left" valign="middle" height="30" width="80">Subadmin</th>
+                                
 <!--                                <th align="left" valign="middle" height="30" width="120">Phone No</th>-->
                                 <th align="center" valign="middle" height="30" class="last">Actions</th>
                               </tr>
@@ -24,8 +26,9 @@
                                 <td align="left" valign="top"><?=getShortDate($info['dt_created_on'],5)?></td>
                                 <td align="left" valign="top"><?=$info['s_name']?></td>
                                 <td align="left" valign="top"><?=$info['s_first_name'].' '.$info['s_last_name']?></td>
-                                <td align="left" valign="top"><a href="javascript:void(0)" onclick="show_member(<?= $info['id'] ?>)"> <?=get_member_count_by_church_id($info['id'])?></a></td>
+                                
                                 <td align="left" valign="top"><a href="javascript:void(0)" onclick="show_subadmin(<?= $info['id'] ?>)"><?=get_subadmin_count_by_church_id($info['id'])?></a></td>
+                                <td align="left" valign="top"><a href="javascript:void(0)" onclick="show_member(<?= $info['id'] ?>)"> <?=get_member_count_by_church_id($info['id'])?></a></td>
                                
                                 <td align="center" valign="middle" class="last">
 <!--                                <input name="" title="Edit" type="button" class="edit-button"  value="" onclick="show_edit(<?=$info['id']?>)"/>-->
