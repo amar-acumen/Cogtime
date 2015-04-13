@@ -1004,7 +1004,7 @@ $this->db->update('cg_church_member', $data, array('id' => $id , 'member_id' => 
                         $this->session->set_userdata('search_condition','');
 			$data['church_id'] = $id;
 			ob_start();
-            $this->ajax_church_space_member_pagination($page=0,$id);
+            $this->ajax_church_space_subadmin_pagination($page=0,$id);
             $data['result_content'] = ob_get_contents(); //pr($data['result_content']);
             ob_end_clean();
                $VIEW_FILE = "admin/build_kingdom/churches_space_subadmin.phtml";
@@ -1016,8 +1016,7 @@ $this->db->update('cg_church_member', $data, array('id' => $id , 'member_id' => 
     {
         try
         {
-            echo $id;
-            die();
+           
             
 			//echo $_POST['search_basic']; exit;
 			## seacrh conditions : filter ############
@@ -1044,7 +1043,7 @@ $this->db->update('cg_church_member', $data, array('id' => $id , 'member_id' => 
 			//pr($result,1);
 			#Jquery Pagination Starts
            $this->load->library('jquery_pagination');
-            $config['base_url'] = base_url()."admin/build_kingdom/churches/ajax_church_space_member_pagination";
+            $config['base_url'] = base_url()."admin/build_kingdom/churches/ajax_church_space_subadmin_pagination";
             $config['total_rows'] = $total_rows;
             $config['per_page'] = $this->pagination_per_page;
             $config['uri_segment'] = 5;
