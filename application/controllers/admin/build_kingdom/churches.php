@@ -1087,6 +1087,20 @@ $this->db->update('cg_church_member', $data, array('id' => $id , 'member_id' => 
         } 
 		
     }
+    function member_subadmin_del(){
+         $id = $this->input->post('id');
+        $member_id = $this->input->post('member_id');
+        $status = $this->input->post('status');
+        $church_id = $this->input->post('church_id');
+        
+        $data = array(
+               'role' => $status,
+               
+               
+            );
+
+$this->db->update('cg_church_member', $data, array('id' => $id , 'member_id' => $member_id ,'church_id' => $church_id)); 
+    }
     
    
     
