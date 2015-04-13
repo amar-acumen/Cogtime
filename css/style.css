@@ -12630,7 +12630,12 @@ a.tooltip2:hover span{
 
 
 
-
+.adv-ch-srch{
+    float: right; margin: 7px 140px 0px 0px; font-size: 13px; color:#f7c102 !important ; 
+}
+.adv-ch-srch:hover{
+    text-decoration:underline;
+}
 
 
 
