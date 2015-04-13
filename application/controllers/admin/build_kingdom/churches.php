@@ -985,6 +985,108 @@ $this->db->update('cg_church_member', $data, array('id' => $id , 'member_id' => 
 
 $this->db->update('cg_church_member', $data, array('id' => $id , 'member_id' => $member_id ,'church_id' => $church_id));
     }
+    
+     public function show_subadmin($id){
+           //die($id);
+               $data = $this->data;
+            parent::_set_title("::: COGTIME Xtian network :::");
+            parent::_set_meta_desc("::: COGTIME Xtian network :::");
+            parent::_set_meta_keywords("::: COGTIME Xtian network :::");
+            parent::_add_js_arr( array( 'js/lightbox.js',
+										'js/jquery.form.js',
+									    'js/jquery/JSON/json2.js') );
+                                        
+             parent::_add_css_arr( array('css/dd.css',
+                                        ) );
+            # adjusting header & footer sections [End]...
+			$data['top_menu_selected'] = 6;
+			$data['submenu'] = 7;
+                        $this->session->set_userdata('search_condition','');
+			$data['church_id'] = $id;
+			ob_start();
+            $this->ajax_church_space_member_pagination($page=0,$id);
+            $data['result_content'] = ob_get_contents(); //pr($data['result_content']);
+            ob_end_clean();
+               $VIEW_FILE = "admin/build_kingdom/churches_space_subadmin.phtml";
+            parent::_render($data, $VIEW_FILE);
+                       // $data['subadmin'] = $this->church_model->get_church_subadmin($id);
+                        
+         }
+             public function ajax_church_space_subadmin_pagination($page=0,$id)
+    {
+        try
+        {
+            
+			//echo $_POST['search_basic']; exit;
+			## seacrh conditions : filter ############
+		 	$s_where = "where  cm.church_id = $id AND u.id = cm.member_id  AND cm.role = 2  ";
+			 if(isset($_POST['search_basic']) && $_POST['search_basic'] == 'Y' ) :
+                         
+                                 
+                                 $srch_name = preg_replace('/[^A-Za-z0-9\-]/', '', trim($this->input->post('church_name'))); 
+				$WHERE_COND .= ($srch_name=='0')?'':" AND ( cm.s_name  LIKE '%".$srch_name."%')";
+//                               
+				 $this->session->set_userdata('search_condition',$WHERE_COND);
+			
+            endif;  
+		   	
+			$s_where .= $this->session->userdata('search_condition'); 
+               
+                         $order_by='cm.created_date DESC';
+		   	$result = $this->church_model->get_space_list_member($s_where,$page,$this->pagination_per_page,$order_by);
+                         $resultCount = count($result);
+			$total_rows = $this->church_model->get_space_list_member_count($s_where);
+			
+			
+			
+			//pr($result,1);
+			#Jquery Pagination Starts
+           $this->load->library('jquery_pagination');
+            $config['base_url'] = base_url()."admin/build_kingdom/churches/ajax_church_space_member_pagination";
+            $config['total_rows'] = $total_rows;
+            $config['per_page'] = $this->pagination_per_page;
+            $config['uri_segment'] = 5;
+            $config['num_links'] = 9;
+            $config['page_query_string'] = false;
+            $config['prev_link'] = 'PREV';
+            $config['next_link'] = 'NEXT';
+
+            $config['cur_tag_open'] = '<li> <span><a href="javascript:void(0)" class="select">';
+            $config['cur_tag_close'] = '</a></span></li>';
+
+            $config['next_tag_open'] = '<li><a href="javascript:void(0)">';
+            $config['next_tag_close'] = '</a></li>';
+
+            $config['prev_tag_open'] = '<li><a href="javascript:void(0)">';
+            $config['prev_tag_close'] = '</a></li>';
+
+            $config['num_tag_open'] = '<li>';
+            $config['num_tag_close'] = '</li>';
+
+            $config['div'] = '#table_content'; /* Here #content is the CSS selector for target DIV */
+            $config['js_bind'] = "showBusyScreen(); "; /* if you want to bind extra js code */
+            $config['js_rebind'] = "hideBusyScreen(); "; /* if you want to rebind extra js code */
+
+            $this->jquery_pagination->initialize($config);
+            $data['page_links'] = $this->jquery_pagination->create_links();
+           
+			$this->jquery_pagination->create_links();
+
+            // getting   listing...
+			$data['info_arr'] = $result;
+			$data['no_of_result'] = $total_rows;
+			$data['current_page'] = $page;
+          
+			# loading the view-part...
+          echo  $this->load->view('admin/build_kingdom/churches_space_subadmin_list_ajax.phtml', $data,TRUE);
+		 }
+        catch(Exception $err_obj)
+        {
+            show_error($err_obj->getMessage());
+        } 
+		
+    }
+    
    
     
 }   // end of controller...

@@ -1,12 +1,10 @@
 						<table width="100%" border="0" cellspacing="0" cellpadding="0" class="admin-table">
                               <tr>
-                                <th align="left" valign="middle" height="30" width="80">Date Posted</th>
-                                <th align="left" valign="middle" height="30" width="200">Church Name</th>
-                                <th align="left" valign="middle" height="30" width="200">Admin Name</th>
-                               
-                                <th align="left" valign="middle" height="30" width="80">Subadmin</th> 
-                                <th align="left" valign="middle" height="30" width="80">Member</th>
+                                <th align="left" valign="middle" height="30" width="80">Join date</th>
                                 
+                                <th align="left" valign="middle" height="30" width="200">Member Name</th>
+                               
+                                 <th align="left" valign="middle" height="30" width="200">Member status</th>
 <!--                                <th align="left" valign="middle" height="30" width="120">Phone No</th>-->
                                 <th align="center" valign="middle" height="30" width="100" class="last">Actions</th>
                               </tr>
@@ -23,25 +21,55 @@
                               <?php } else {?>
                               <tr id="req_row_<?=$info['id']?>" class="highlight" >
                               <?php }?>
-                                <td align="left" valign="top"><?=getShortDate($info['dt_created_on'],5)?></td>
-                                <td align="left" valign="top"><?=$info['s_name']?></td>
+                                <td align="left" valign="top"><?=getShortDate($info['created_date'],5)?></td>
+                              
                                 <td align="left" valign="top"><?=$info['s_first_name'].' '.$info['s_last_name']?></td>
                                 
-                                <td align="left" valign="top"><a href="javascript:void(0)" onclick="show_subadmin(<?= $info['id'] ?>)"><?=get_subadmin_count_by_church_id($info['id'])?></a></td>
-                                <td align="left" valign="top"><a href="javascript:void(0)" onclick="show_member(<?= $info['id'] ?>)"> <?=get_member_count_by_church_id($info['id'])?></a></td>
+                                <td align="left" valign="top">
+                                    <?php
+                                    if($info['is_blocked'] == 1){
+                                        $block_status = '<font color=green>Unblock</font>';
+                                    }if($info['is_blocked'] == 0){
+                                        $block_status = '<font color=red>Blocked</font>';
+                                    }
+                                    if($info['is_leave'] == 0){
+                                        $lv_status= '<font color=green>Not leave</font>';
+                                    }if($info['is_leave'] == 1){
+                                        $lv_status= '<font color=red>leaved</font>';
+                                    }
+                                    if($info['is_approved'] == 1){
+                                        $aprv_status = '<font color=green>Approved</font>';
+                                        $status = $block_status.' , '.$lv_status.' , '.$aprv_status;
+                                    } if($info['is_approved'] == 0){
+                                        $aprv_status = '<font color=red>Waiting for Approval</font>';
+                                        $status = $aprv_status;
+                                    }
+                                 echo  $status; 
+                                    ?>
+                                    
+                                </td>
                                
                                 <td align="center" valign="middle" class="last">
 <!--                                <input name="" title="Edit" type="button" class="edit-button"  value="" onclick="show_edit(<?=$info['id']?>)"/>-->
 <!--                                <input name="" title="Delete" type="button" class="delete-button"  value="" onclick="delete_church(<?=$info['id']?>)"/>-->
-                                 <?php if($info['ch_space_enable'] == 1){ ?>
+                                 <?php if($info['is_approved'] == 1){ ?>
                             		<span id="<?=$info['id']?>_status">
-                                    <input name="" title="Disable" type="button" class="btn-06"  onclick="javascript:changeStatus_space(<?php echo $info['id'] ?> ,'0',<?=$info['ch_admin_id'] ?> )"  value="<?=$s_status?>"/>
+                                    <input name="" title="Decline" type="button" class="btn-06"  onclick="javascript:member_accept_deny(<?=$info['id']?>,<?php echo $info['member_id'] ?> ,'0','<?php echo $info['church_id'] ?>')"  value="Decline"/>
                                     </span>
-									<?php 
+                                          <?php if($info['is_blocked'] == 1){ ?>
+					<span id="<?=$info['id']?>_block">
+                                    <input name="" title="Block" type="button" class="btn-06"  onclick="javascript:member_block_unblock(<?=$info['id']?>,<?php echo $info['member_id'] ?> ,'0',<?=$info['church_id'] ?> )"  value="Block"/>
+                                    </span>
+                                          <?php }if($info['is_blocked'] == 0){ ?>
+                                  <span id="<?=$info['id']?>_unblock">
+                                    <input name="" title="Unblock" type="button" class="btn-06"  onclick="javascript:member_block_unblock(<?=$info['id']?>,<?php echo  $info['member_id'] ?> ,'1',<?=$info['church_id'] ?> )"  value="Unblock"/>
+                                    </span>	
+                                          <?php } ?>
+			<?php 
                                         } 
-                                        else if($info['ch_space_enable'] == 0){?>
+                                        else if($info['is_approved'] == 0){?>
                                             <span id="<?=$info['id']?>_status">
-                                            <input name="" title="Enable" type="button" class="btn-06"  onclick="javascript:changeStatus_space(<?php echo $info['id'] ?> , '1',<?=$info['ch_admin_id'] ?>)"  value="<?=$s_status?>"/>
+                                            <input name="" title="Approve" type="button" class="btn-06"  onclick="javascript:member_accept_deny(<?=$info['id']?>,<?php echo $info['member_id'] ?> ,'1','<?php echo $info['church_id'] ?>')"  value="Approve"/>
                                             </span>
                                     
                                     <?php }
@@ -102,7 +130,6 @@ function show_member(id){
 //      });
 }
 function show_subadmin(id){
-     window.location.href="<?= admin_base_url() ?>build_kingdom/churches/show_subadmin/"+id;
 //     $.ajax({
 //          url : admin_base_url+'build_kingdom/churches/show_subadmin',
 //          type : 'post',
@@ -122,4 +149,32 @@ function show_subadmin(id){
 //    //alert(id);
 //    window.location.href=admin_base_url+'build_kingdom/churches/space_view/'+id
 //}
+function member_accept_deny(id,member_id,status,church_id){
+     showBusyScreen();
+    $.ajax({
+          url : admin_base_url+'build_kingdom/churches/member_accept_deny',
+          type : 'post',
+          data : ({'id' : id , 'member_id' : member_id , 'status' : status , 'church_id':church_id }),
+          success : function(data)
+          {
+              hideBusyScreen();
+              location.reload();
+             
+          }
+      });
+}
+function member_block_unblock(id,member_id,status,church_id){
+    showBusyScreen(); 
+    $.ajax({
+          url : admin_base_url+'build_kingdom/churches/member_block_unblock',
+          type : 'post',
+          data : ({'id' : id , 'member_id' : member_id , 'status' : status , 'church_id':church_id }),
+          success : function(data)
+          {
+              hideBusyScreen();
+              location.reload();
+             
+          }
+      });
+}
 </script>
