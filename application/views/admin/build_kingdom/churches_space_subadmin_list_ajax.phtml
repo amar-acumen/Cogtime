@@ -70,11 +70,11 @@
                                     
                                      <?php if($info['role'] == 2){ ?>
 					<span id="<?=$info['id']?>_dlsub">
-                                    <input name="" title="Delete from Subadmin" type="button" class="btn-06"  onclick="javascript:member_subadmin_del(<?=$info['id']?>,<?php echo $info['member_id'] ?> ,'1',<?=$info['church_id'] ?> )"  value="Delete from Subadmin"/>
+                                    <input name="" title="Delete from Subadmin" type="button" class="btn-06"  onclick="javascript:member_subadmin_del(<?=$info['id']?>,<?php echo $info['member_id'] ?> ,'1',<?=$info['church_id'] ?> )"  value="Delete"/>
                                     </span>
                                           <?php }if($info['role'] != 2 ){ ?>
                                   <span id="<?=$info['id']?>_undodelsub">
-                                    <input name="" title="Assign to subadmin" type="button" class="btn-06"  onclick="javascript:member_subadmin_del(<?=$info['id']?>,<?php echo  $info['member_id'] ?> ,'2',<?=$info['church_id'] ?> )"  value="Assign to subadmin"/>
+                                    <input name="" title="Assign to subadmin" type="button" class="btn-06"  onclick="javascript:member_subadmin_del(<?=$info['id']?>,<?php echo  $info['member_id'] ?> ,'2',<?=$info['church_id'] ?> )"  value="Assign"/>
                                     </span>	
                                           <?php } ?>
 			<?php 
