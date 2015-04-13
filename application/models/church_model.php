@@ -361,7 +361,7 @@ $this->email->send();
     }
     function get_space_list_member($where='',$i_start=null,$i_limit=null,$s_order_by='1'){
       $limit  = (is_numeric($i_start) && is_numeric($i_limit))?" Limit ".intval($i_start).",".intval($i_limit):''; 
-      $sql  = " SELECT cm.* ,u.s_first_name,u.s_last_name
+    echo  $sql  = " SELECT cm.* ,u.s_first_name,u.s_last_name
 				  		FROM  cg_church_member cm ,cg_users u
 						
 						{$where} 
