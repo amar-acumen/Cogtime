@@ -15,16 +15,18 @@
                       <?php } ?>
                         <!--14-01-2015 church registration-->
                         <!--today-->
-                       
+                       <?php
+                      if($_GET['findch'] == 1) { 
+                       ?>
                         <span class="church-register-main">
                            
                             
                             <input type="radio" name="reg" value="cogtime" checked="" class="chk"> Register as a member  &nbsp;
-                            <input type="radio" id="chrch_reg" name="reg" value="church" class="chk" <?php if($_GET['findch'] == 1) { ?> checked="" style="display: none" <?php } ?> > Register a Church:   
+                            <input type="radio" id="chrch_reg" name="reg" value="church" class="chk" <?php if($_GET['findch'] == 1) { ?> checked=""  <?php } ?> > Register a Church:   
                                 
                        
                         </span>
-                        
+                       <?php } ?>
                         
                         <script type="text/javascript">
                         $(document).ready(function(){
