@@ -856,7 +856,7 @@ $inst_after = '<img width="25" height="14" onclick="autologin(\''.$admin_id.'\',
 echo json_encode(array('msg'=>'Status change successfully' , 'action_txt'=>$action_txt , 'btnval'=>$btnval ,'inst_after'=>$inst_after));
     }
        public function show_member($id){
-           die($id);
+           //die($id);
                $data = $this->data;
             parent::_set_title("::: COGTIME Xtian network :::");
             parent::_set_meta_desc("::: COGTIME Xtian network :::");
@@ -885,6 +885,7 @@ echo json_encode(array('msg'=>'Status change successfully' , 'action_txt'=>$acti
     {
         try
         {
+            die($id);
 			//echo $_POST['search_basic']; exit;
 			## seacrh conditions : filter ############
 		 	$s_where = "where  C.ch_page_url != ' ' AND u.id = C.ch_admin_id   ";
