@@ -5354,5 +5354,6 @@ function get_church_name_by_id($id){
   $ci=& get_instance();
     $query = $ci->db->get_where('cg_church', array('id' => $id));
     $res = $query->result();
+    pr($res);
     return $res->s_name;
 }
