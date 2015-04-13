@@ -956,6 +956,35 @@ echo json_encode(array('msg'=>'Status change successfully' , 'action_txt'=>$acti
 		
     }
     
+    function member_accept_deny(){
+        $id = $this->input->post('id');
+        $member_id = $this->input->post('member_id');
+        $status = $this->input->post('status');
+        $church_id = $this->input->post('church_id');
+        
+        $data = array(
+               'is_approved' => $status,
+               
+               
+            );
+
+$this->db->update('cg_church_member', $data, array('id' => $id , 'member_id' => $member_id ,'church_id' => $church_id));
+
+    }
+    function member_block_unblock(){
+         $id = $this->input->post('id');
+        $member_id = $this->input->post('member_id');
+        $status = $this->input->post('status');
+        $church_id = $this->input->post('church_id');
+        
+        $data = array(
+               'is_blocked' => $status,
+               
+               
+            );
+
+$this->db->update('cg_church_member', $data, array('id' => $id , 'member_id' => $member_id ,'church_id' => $church_id));
+    }
    
     
 }   // end of controller...
