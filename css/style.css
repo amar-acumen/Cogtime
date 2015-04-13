@@ -12594,7 +12594,8 @@ text-align: center;}
 .pull-right-close{ position:relative;}
 .pull-right-close a{ position: absolute; right: -24px; top: -24px;}
 
-a.tooltip2 {outline:none; position: relative; }
+a.tooltip2 {outline:none; position: relative; color:#F7C102;
+    margin: 0 0 0 87px;}
 a.tooltip2 strong {line-height:30px;}
 a.tooltip2:hover {text-decoration:none;} 
 a.tooltip2 span {
@@ -12610,8 +12611,7 @@ a.tooltip2 span {
     z-index: 10;
     background: #62c3bc;
     border-radius:4px;
-    color:#F7C102;
-    margin: 0 0 0 87px;
+    
 }
 a.tooltip2 span:after{
 width: 0;
