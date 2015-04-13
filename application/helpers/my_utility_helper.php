@@ -5352,7 +5352,7 @@ function check_church_admin_exist(){
 }
 function get_church_name_by_id($id){
   $ci=& get_instance();
-    $query = $this->db->get_where('cg_church', array('id' => $id));
+    $query = $ci->db->get_where('cg_church', array('id' => $id));
     $res = $query->result();
     return $res->s_name;
 }
