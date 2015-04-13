@@ -351,7 +351,7 @@ $this->email->send();
     {
         $sql    = "     SELECT count(*) as i_total FROM {$this->db->CHURCH} C ,cg_users u
 						
-						where  C.ch_page_url != ' '
+						{$where} 
 						 ";
 					/* LEFT JOIN cg_city ct ON  ct.i_country_id = mst_c.id
 									LEFT JOIN cg_state s ON  s.id =  ct.i_state_idLEFT JOIN {$this->db->CITY} mst_city on mst_city.id=C.i_city_id*/
