@@ -15,10 +15,10 @@
                       <?php } ?>
                         <!--14-01-2015 church registration-->
                         <!--today-->
-                       <?php
+                      
+                        <span class="church-register-main"  <?php
                       if($_GET['findch'] == 1) { 
-                       ?>
-                        <span class="church-register-main">
+                          ?> style="display: none" <?php } ?>>
                            
                             
                             <input type="radio" name="reg" value="cogtime" checked="" class="chk"> Register as a member  &nbsp;
@@ -26,7 +26,7 @@
                                 
                        
                         </span>
-                       <?php } ?>
+                       
                         
                         <script type="text/javascript">
                         $(document).ready(function(){
