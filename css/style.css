@@ -12611,7 +12611,7 @@ a.tooltip2 span {
     z-index: 10;
     background: #62c3bc;
     border-radius:4px;
-    
+    color:#fff !important;
 }
 a.tooltip2 span:after{
 width: 0;
