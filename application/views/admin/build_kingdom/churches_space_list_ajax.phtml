@@ -52,7 +52,7 @@
                                    if($info['ch_space_enable'] == 1 && $info['ch_page_url'] != '' ){
                                         ?>
                                     <div id="status_img<?=$info['id']?> ">
-                                    <img class="add-new-church" width="25" height="14" alt="crown" src="<?= base_url() ?>images/icons/crown.png" style="cursor: pointer" onclick="autologin('<?=$info['ch_admin_id'] ?>','<?php echo $info['id'] ?>','admin')" >
+                                    <input type="button" style="float:  right;" name="" title="Auto login as this user" value="Auto login as this user" onclick="autologin('<?=$info['ch_admin_id'] ?>','<?php echo $info['id'] ?>','admin')" class="btn-auto" id="autologin_member" >
                                     </div>
                                             <?php
                                     }
