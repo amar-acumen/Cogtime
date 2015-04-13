@@ -871,7 +871,7 @@ echo json_encode(array('msg'=>'Status change successfully' , 'action_txt'=>$acti
 			$data['top_menu_selected'] = 6;
 			$data['submenu'] = 7;
                         $this->session->set_userdata('search_condition','');
-			
+			$data['church_id'] = $id;
 			ob_start();
             $this->ajax_church_space_member_pagination($page=0,$id);
             $data['result_content'] = ob_get_contents(); //pr($data['result_content']);
