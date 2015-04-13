@@ -10,7 +10,7 @@
                               </tr>
                               
                               <?php
-							  //   pr($info_arr);
+							  //  pr($info_arr);
 							  		if(count($info_arr)){
 										foreach($info_arr as $key=> $info){
 											$s_status = ($info['ch_space_enable'] == 1)?'Disable':'Enable';	 		
@@ -66,15 +66,7 @@
                                     </span>	
                                           <?php } ?>
                                     
-                                     <?php if($info['role'] == 2){ ?>
-					<span id="<?=$info['id']?>_dlsub">
-                                    <input name="" title="Delete from Subadmin" type="button" class="btn-06"  onclick="javascript:member_subadmin_del(<?=$info['id']?>,<?php echo $info['member_id'] ?> ,'1',<?=$info['church_id'] ?> )"  value="Delete from Subadmin"/>
-                                    </span>
-                                          <?php }if($info['role'] != 2 ){ ?>
-                                  <span id="<?=$info['id']?>_undodelsub">
-                                    <input name="" title="Assign to subadmin" type="button" class="btn-06"  onclick="javascript:member_subadmin_del(<?=$info['id']?>,<?php echo  $info['member_id'] ?> ,'2',<?=$info['church_id'] ?> )"  value="Assign to subadmin"/>
-                                    </span>	
-                                          <?php } ?>
+                                    
                                     
                                     
                                     
