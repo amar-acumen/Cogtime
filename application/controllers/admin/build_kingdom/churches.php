@@ -716,7 +716,7 @@ $this->email->message("$body");
         {
 			//echo $_POST['search_basic']; exit;
 			## seacrh conditions : filter ############
-		 	$s_where = "where  C.ch_page_url != ' '    GROUP BY C.id";
+		 	$s_where = "where  C.ch_page_url != ' ' AND u.id = C.ch_admin_id   ";
 			 if(isset($_POST['search_basic']) && $_POST['search_basic'] == 'Y' ) :
                          
                                  

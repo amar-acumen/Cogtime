@@ -335,7 +335,7 @@ $this->email->send();
          $sql  = " SELECT C.* ,u.s_first_name,u.s_last_name
 				  		FROM {$this->db->CHURCH} C ,cg_users u
 						
-						{$where} AND u.id = C.ch_admin_id
+						{$where} 
 						ORDER BY C.id DESC {$limit}"; 
 						/*LEFT JOIN cg_city ct ON  ct.i_country_id = mst_c.id
 						LEFT JOIN cg_state s ON  s.id =  ct.i_state_id*/
