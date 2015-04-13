@@ -12610,7 +12610,8 @@ a.tooltip2 span {
     z-index: 10;
     background: #62c3bc;
     border-radius:4px;
-    color:#fff;
+    color:#F7C102;
+    margin: 0 0 0 87px;
 }
 a.tooltip2 span:after{
 width: 0;
