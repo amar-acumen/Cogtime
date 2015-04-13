@@ -39,10 +39,12 @@
                                     }
                                     if($info['is_approved'] == 1){
                                         $aprv_status = '<font color=green>Approved</font>';
+                                        $status = $block_status.' , '.$lv_status.' , '.$aprv_status;
                                     } if($info['is_approved'] == 0){
                                         $aprv_status = '<font color=red>Waiting for Approval</font>';
+                                        $status = $aprv_status;
                                     }
-                                 echo   $status = $block_status.','.$lv_status.','.$aprv_status;
+                                 echo  $status; 
                                     ?>
                                     
                                 </td>
