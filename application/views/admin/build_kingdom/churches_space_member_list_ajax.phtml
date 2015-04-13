@@ -54,7 +54,7 @@
 <!--                                <input name="" title="Delete" type="button" class="delete-button"  value="" onclick="delete_church(<?=$info['id']?>)"/>-->
                                  <?php if($info['is_approved'] == 1){ ?>
                             		<span id="<?=$info['id']?>_status">
-                                    <input name="" title="Deny" type="button" class="btn-06"  onclick="javascript:member_accept_deny(<?=$info['id']?>,<?php echo $info['member_id'] ?> ,'0','<?php echo $info['church_id'] ?>')"  value="Deny"/>
+                                    <input name="" title="Decline" type="button" class="btn-06"  onclick="javascript:member_accept_deny(<?=$info['id']?>,<?php echo $info['member_id'] ?> ,'0','<?php echo $info['church_id'] ?>')"  value="Decline"/>
                                     </span>
                                           <?php if($info['is_blocked'] == 1){ ?>
 					<span id="<?=$info['id']?>_block">
@@ -69,7 +69,7 @@
                                         } 
                                         else if($info['is_approved'] == 0){?>
                                             <span id="<?=$info['id']?>_status">
-                                            <input name="" title="Accept" type="button" class="btn-06"  onclick="javascript:member_accept_deny(<?=$info['id']?>,<?php echo $info['member_id'] ?> ,'1','<?php echo $info['church_id'] ?>')"  value="Accept"/>
+                                            <input name="" title="Approve" type="button" class="btn-06"  onclick="javascript:member_accept_deny(<?=$info['id']?>,<?php echo $info['member_id'] ?> ,'1','<?php echo $info['church_id'] ?>')"  value="Approve"/>
                                             </span>
                                     
                                     <?php }
