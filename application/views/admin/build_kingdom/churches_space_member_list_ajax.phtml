@@ -1,12 +1,10 @@
 						<table width="100%" border="0" cellspacing="0" cellpadding="0" class="admin-table">
                               <tr>
-                                <th align="left" valign="middle" height="30" width="80">Date Posted</th>
-                                <th align="left" valign="middle" height="30" width="200">Church Name</th>
-                                <th align="left" valign="middle" height="30" width="200">Admin Name</th>
-                               
-                                <th align="left" valign="middle" height="30" width="80">Subadmin</th> 
-                                <th align="left" valign="middle" height="30" width="80">Member</th>
+                                <th align="left" valign="middle" height="30" width="80">Join date</th>
                                 
+                                <th align="left" valign="middle" height="30" width="200">Member Name</th>
+                               
+                                 <th align="left" valign="middle" height="30" width="200">Member status</th>
 <!--                                <th align="left" valign="middle" height="30" width="120">Phone No</th>-->
                                 <th align="center" valign="middle" height="30" width="100" class="last">Actions</th>
                               </tr>
@@ -23,12 +21,31 @@
                               <?php } else {?>
                               <tr id="req_row_<?=$info['id']?>" class="highlight" >
                               <?php }?>
-                                <td align="left" valign="top"><?=getShortDate($info['dt_created_on'],5)?></td>
-                                <td align="left" valign="top"><?=$info['s_name']?></td>
+                                <td align="left" valign="top"><?=getShortDate($info['created_date'],5)?></td>
+                              
                                 <td align="left" valign="top"><?=$info['s_first_name'].' '.$info['s_last_name']?></td>
                                 
-                                <td align="left" valign="top"><a href="javascript:void(0)" onclick="show_subadmin(<?= $info['id'] ?>)"><?=get_subadmin_count_by_church_id($info['id'])?></a></td>
-                                <td align="left" valign="top"><a href="javascript:void(0)" onclick="show_member(<?= $info['id'] ?>)"> <?=get_member_count_by_church_id($info['id'])?></a></td>
+                                <td align="left" valign="top">
+                                    <?php
+                                    if($info['is_blocked'] == 1){
+                                        $block_status = '<font color=green>Unblock</font>';
+                                    }if($info['is_blocked'] == 0){
+                                        $block_status = '<font color=red>Blocked</font>';
+                                    }
+                                    if($info['is_leave'] == 0){
+                                        $lv_status= '<font color=green>Not leave</font>';
+                                    }if($info['is_leave'] == 1){
+                                        $lv_status= '<font color=red>leaved</font>';
+                                    }
+                                    if($info['is_approved'] == 1){
+                                        $aprv_status = '<font color=green>Approved</font>';
+                                    } if($info['is_approved'] == 0){
+                                        $aprv_status = '<font color=red>Waiting for Approval</font>';
+                                    }
+                                 echo   $status = $block_status.','.$lv_status.','.$aprv_status;
+                                    ?>
+                                    
+                                </td>
                                
                                 <td align="center" valign="middle" class="last">
 <!--                                <input name="" title="Edit" type="button" class="edit-button"  value="" onclick="show_edit(<?=$info['id']?>)"/>-->
