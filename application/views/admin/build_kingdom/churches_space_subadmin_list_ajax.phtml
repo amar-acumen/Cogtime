@@ -181,4 +181,18 @@ function member_block_unblock(id,member_id,status,church_id){
           }
       });
 }
+function member_subadmin_del(id,member_id,status,church_id){
+    showBusyScreen();
+       $.ajax({
+          url : admin_base_url+'build_kingdom/churches/member_subadmin_del',
+          type : 'post',
+          data : ({'id' : id , 'member_id' : member_id , 'status' : status , 'church_id':church_id }),
+          success : function(data)
+          {
+              hideBusyScreen();
+              location.reload();
+             
+          }
+      })
+}
 </script>
