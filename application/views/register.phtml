@@ -8,15 +8,19 @@
             <div id="mid_content">
                   <!-- left container -->
                   <div id="register_l">
+                      <?php if($_GET['findch'] != 1) { ?>
                         <h1> Register Now - It’s  FREE </h1>
+                      <?php } if($_GET['findch'] == 1) { ?>
+                        <h1> Register your Church </h1>
+                      <?php } ?>
                         <!--14-01-2015 church registration-->
                         <!--today-->
                        
                         <span class="church-register-main">
                            
                             
-                            Cogtime Registration :  <input type="radio" name="reg" value="cogtime" checked="" class="chk">
-                            Church  Registration :   <input type="radio" id="chrch_reg" name="reg" value="church" class="chk" <?php if($_GET['findch'] == 1) { ?> checked="" <?php } ?>>
+                            <input type="radio" name="reg" value="cogtime" checked="" class="chk"> Register as a member  &nbsp;
+                            <input type="radio" id="chrch_reg" name="reg" value="church" class="chk" <?php if($_GET['findch'] == 1) { ?> checked="" <?php } ?>> Register a Church:   
                                 
                        
                         </span>
