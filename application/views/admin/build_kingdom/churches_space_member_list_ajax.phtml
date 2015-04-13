@@ -1,0 +1,124 @@
+						<table width="100%" border="0" cellspacing="0" cellpadding="0" class="admin-table">
+                              <tr>
+                                <th align="left" valign="middle" height="30" width="80">Date Posted</th>
+                                <th align="left" valign="middle" height="30" width="200">Church Name</th>
+                                <th align="left" valign="middle" height="30" width="200">Admin Name</th>
+                               
+                                <th align="left" valign="middle" height="30" width="80">Subadmin</th> 
+                                <th align="left" valign="middle" height="30" width="80">Member</th>
+                                
+<!--                                <th align="left" valign="middle" height="30" width="120">Phone No</th>-->
+                                <th align="center" valign="middle" height="30" width="100" class="last">Actions</th>
+                              </tr>
+                              
+                              <?php
+							  //   pr($info_arr);
+							  		if(count($info_arr)){
+										foreach($info_arr as $key=> $info){
+											$s_status = ($info['ch_space_enable'] == 1)?'Disable':'Enable';	 		
+							  ?>
+                              <?php if($info['i_disabled']==1){?>
+							  
+                              <tr id="req_row_<?=$info['id']?>">
+                              <?php } else {?>
+                              <tr id="req_row_<?=$info['id']?>" class="highlight" >
+                              <?php }?>
+                                <td align="left" valign="top"><?=getShortDate($info['dt_created_on'],5)?></td>
+                                <td align="left" valign="top"><?=$info['s_name']?></td>
+                                <td align="left" valign="top"><?=$info['s_first_name'].' '.$info['s_last_name']?></td>
+                                
+                                <td align="left" valign="top"><a href="javascript:void(0)" onclick="show_subadmin(<?= $info['id'] ?>)"><?=get_subadmin_count_by_church_id($info['id'])?></a></td>
+                                <td align="left" valign="top"><a href="javascript:void(0)" onclick="show_member(<?= $info['id'] ?>)"> <?=get_member_count_by_church_id($info['id'])?></a></td>
+                               
+                                <td align="center" valign="middle" class="last">
+<!--                                <input name="" title="Edit" type="button" class="edit-button"  value="" onclick="show_edit(<?=$info['id']?>)"/>-->
+<!--                                <input name="" title="Delete" type="button" class="delete-button"  value="" onclick="delete_church(<?=$info['id']?>)"/>-->
+                                 <?php if($info['ch_space_enable'] == 1){ ?>
+                            		<span id="<?=$info['id']?>_status">
+                                    <input name="" title="Disable" type="button" class="btn-06"  onclick="javascript:changeStatus_space(<?php echo $info['id'] ?> ,'0',<?=$info['ch_admin_id'] ?> )"  value="<?=$s_status?>"/>
+                                    </span>
+									<?php 
+                                        } 
+                                        else if($info['ch_space_enable'] == 0){?>
+                                            <span id="<?=$info['id']?>_status">
+                                            <input name="" title="Enable" type="button" class="btn-06"  onclick="javascript:changeStatus_space(<?php echo $info['id'] ?> , '1',<?=$info['ch_admin_id'] ?>)"  value="<?=$s_status?>"/>
+                                            </span>
+                                    
+                                    <?php }
+                                    
+                                    
+                                    ?>
+                                        <?php
+                                   if($info['ch_space_enable'] == 1 && $info['ch_page_url'] != '' ){
+                                        ?>
+                                    <div id="status_img<?=$info['id']?> ">
+                                    <img class="add-new-church" width="25" height="14" alt="crown" src="<?= base_url() ?>images/icons/crown.png" style="cursor: pointer" onclick="autologin('<?=$info['ch_admin_id'] ?>','<?php echo $info['id'] ?>','admin')" >
+                                    </div>
+                                            <?php
+                                    }
+                                    ?>
+                                
+                                </td>
+                              </tr>
+                              <?php
+										}
+									}
+										else{
+							?>
+								<tr>
+									<td style="text-align:center;" height="80" colspan="20">No data available!!!</td>
+								</tr>
+							<?php
+									}
+							?>
+ </table>
+
+
+<div class="paging" >
+            <ul><?= $page_links ?></ul>
+</div>	
+<script type="text/javascript">
+$(document).ready(function()
+{
+	$(".highlight").children('td').css("background-color","#E5E5E5");
+	
+});
+function show_member(id){
+    window.location.href="<?= admin_base_url() ?>build_kingdom/churches/show_member/"+id;
+    
+//     $.ajax({
+//          url : admin_base_url+'build_kingdom/churches/show_member',
+//          type : 'post',
+//          data : ({'id' : id}),
+//          success : function(data)
+//          {
+//              hideBusyScreen();
+//              //alert(data)
+//               //$('#table_contents_adv').slideDown(); 
+//               show_dialog('member-pop');
+//              $('#table_contents_adv').html(data);
+//          //window.location.href="<?= admin_base_url() ?>help_center/help_center";
+//          }
+//      });
+}
+function show_subadmin(id){
+//     $.ajax({
+//          url : admin_base_url+'build_kingdom/churches/show_subadmin',
+//          type : 'post',
+//          data : ({'id' : id}),
+//          success : function(data)
+//          {
+//              hideBusyScreen();
+//              //alert(data)
+//               //$('#table_contents_adv').slideDown(); 
+//               show_dialog('subadmin-pop');
+//              $('#table_contents_adv_Sub').html(data);
+//          //window.location.href="<?= admin_base_url() ?>help_center/help_center";
+//          }
+//      });
+}
+//function go_details(id){
+//    //alert(id);
+//    window.location.href=admin_base_url+'build_kingdom/churches/space_view/'+id
+//}
+</script>

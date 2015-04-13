@@ -885,11 +885,10 @@ echo json_encode(array('msg'=>'Status change successfully' , 'action_txt'=>$acti
     {
         try
         {
-            echo $id;
-            die();
+            
 			//echo $_POST['search_basic']; exit;
 			## seacrh conditions : filter ############
-		 	$s_where = "where  C.ch_page_url != ' ' AND u.id = C.ch_admin_id   ";
+		 	$s_where = "where  cm.church_id = $id AND  AND u.id = cm.member_id   ";
 			 if(isset($_POST['search_basic']) && $_POST['search_basic'] == 'Y' ) :
                          
                                  
@@ -902,17 +901,17 @@ echo json_encode(array('msg'=>'Status change successfully' , 'action_txt'=>$acti
 		   	
 			$s_where .= $this->session->userdata('search_condition'); 
                
-                         $order_by='`dt_created_on` DESC';
-		   	$result = $this->church_model->get_space_list($s_where,$page,$this->pagination_per_page,$order_by);
+                         $order_by='cm.created_date DESC';
+		   	$result = $this->church_model->get_space_list_member($s_where,$page,$this->pagination_per_page,$order_by);
                          $resultCount = count($result);
-			$total_rows = $this->church_model->get_space_list_count($s_where);
+			$total_rows = $this->church_model->get_space_list_member_count($s_where);
 			
 			
 			
 			//pr($result,1);
 			#Jquery Pagination Starts
            $this->load->library('jquery_pagination');
-            $config['base_url'] = base_url()."admin/build_kingdom/churches/ajax_church_space_pagination";
+            $config['base_url'] = base_url()."admin/build_kingdom/churches/ajax_church_space_member_pagination";
             $config['total_rows'] = $total_rows;
             $config['per_page'] = $this->pagination_per_page;
             $config['uri_segment'] = 5;
@@ -948,7 +947,7 @@ echo json_encode(array('msg'=>'Status change successfully' , 'action_txt'=>$acti
 			$data['current_page'] = $page;
           
 			# loading the view-part...
-          echo  $this->load->view('admin/build_kingdom/churches_space_list_ajax.phtml', $data,TRUE);
+          echo  $this->load->view('admin/build_kingdom/churches_space_member_list_ajax.phtml', $data,TRUE);
 		 }
         catch(Exception $err_obj)
         {

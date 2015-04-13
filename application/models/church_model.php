@@ -359,5 +359,28 @@ $this->email->send();
         $result_arr = $query->result_array();
         return $result_arr[0]['i_total'];
     }
+    function get_space_list_member($where='',$i_start=null,$i_limit=null,$s_order_by='1'){
+      $limit  = (is_numeric($i_start) && is_numeric($i_limit))?" Limit ".intval($i_start).",".intval($i_limit):''; 
+      $sql  = " SELECT cm.* ,u.s_first_name,u.s_last_name
+				  		FROM  cg_church_member cm ,cg_users u
+						
+						{$where} 
+						ORDER BY C.id DESC {$limit}"; 
+                                                   $query     = $this->db->query($sql); //echo $this->db->last_query();
+        $result_arr = $query->result_array(); //pr($result_arr,1);
+        return $result_arr;
+    }
+     public function get_space_list_member_count($where='')
+    {
+        $sql    = "     SELECT count(*) as i_total FROM cg_church_member cm ,cg_users u
+						
+						{$where} 
+						 ";
+					/* LEFT JOIN cg_city ct ON  ct.i_country_id = mst_c.id
+									LEFT JOIN cg_state s ON  s.id =  ct.i_state_idLEFT JOIN {$this->db->CITY} mst_city on mst_city.id=C.i_city_id*/
+        $query     = $this->db->query($sql);//echo $this->db->last_query();
+        $result_arr = $query->result_array();
+        return $result_arr[0]['i_total'];
+    }
     
 }
