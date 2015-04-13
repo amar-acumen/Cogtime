@@ -84,36 +84,38 @@ $(document).ready(function()
 	
 });
 function show_member(id){
-     $.ajax({
-          url : admin_base_url+'build_kingdom/churches/show_member',
-          type : 'post',
-          data : ({'id' : id}),
-          success : function(data)
-          {
-              hideBusyScreen();
-              //alert(data)
-               //$('#table_contents_adv').slideDown(); 
-               show_dialog('member-pop');
-              $('#table_contents_adv').html(data);
-          //window.location.href="<?= admin_base_url() ?>help_center/help_center";
-          }
-      });
+    window.location.href="<?= admin_base_url() ?>build_kingdom/show_member/"+id;
+    
+//     $.ajax({
+//          url : admin_base_url+'build_kingdom/churches/show_member',
+//          type : 'post',
+//          data : ({'id' : id}),
+//          success : function(data)
+//          {
+//              hideBusyScreen();
+//              //alert(data)
+//               //$('#table_contents_adv').slideDown(); 
+//               show_dialog('member-pop');
+//              $('#table_contents_adv').html(data);
+//          //window.location.href="<?= admin_base_url() ?>help_center/help_center";
+//          }
+//      });
 }
 function show_subadmin(id){
-     $.ajax({
-          url : admin_base_url+'build_kingdom/churches/show_subadmin',
-          type : 'post',
-          data : ({'id' : id}),
-          success : function(data)
-          {
-              hideBusyScreen();
-              //alert(data)
-               //$('#table_contents_adv').slideDown(); 
-               show_dialog('subadmin-pop');
-              $('#table_contents_adv_Sub').html(data);
-          //window.location.href="<?= admin_base_url() ?>help_center/help_center";
-          }
-      });
+//     $.ajax({
+//          url : admin_base_url+'build_kingdom/churches/show_subadmin',
+//          type : 'post',
+//          data : ({'id' : id}),
+//          success : function(data)
+//          {
+//              hideBusyScreen();
+//              //alert(data)
+//               //$('#table_contents_adv').slideDown(); 
+//               show_dialog('subadmin-pop');
+//              $('#table_contents_adv_Sub').html(data);
+//          //window.location.href="<?= admin_base_url() ?>help_center/help_center";
+//          }
+//      });
 }
 //function go_details(id){
 //    //alert(id);

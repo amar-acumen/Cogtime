@@ -1,0 +1,629 @@
+<div class="clr"></div>
+<!--navigation section start -->
+<?php include(APPPATH."views/layouts/admin/admin_nav.phtml");?>
+<!--navigation section end -->
+<div id="content_section">
+      <div id="container">
+            <div id="mid_content">
+                  <div class="page_heading left">
+                        <div class="left"><img src="../images/icons/login.png" alt="" /> Churches Space</div>
+                  </div>
+                  <div class="clr"></div>
+                  <div id="right_container">
+                        <div class="arrow_btm"></div>
+                        <div class="content_area">
+                            <!--filter section start -->
+                            <div class="filter"> 
+<!--                                <span class="filter-by">Filter By &raquo;</span>
+                                <form id="frm_search" onsubmit="return false;" method="post" enctype="multipart/form-data" class="filter-search">
+                                    <label>Church Name :</label>
+                                    <div class="field01" style="float:left;">
+                                        <input type="text" name="church_name" id="church_name">
+                                    </div>-->
+                                   
+                                    
+<!--                                    <div class="field01" style="float:left;">
+                                     <label style="margin-left: 5px;">Date :</label>
+                                     <input type="text"  value="" name="date_filter"  class="date-field" id="date1"/>
+                                      <img src="../images/icons/cal.png" width="15" height="16" alt="" onclick="$(this).prev().focus()" class="calender" style="margin-right:35px;" />
+                                    <script type="text/javascript">
+                $(document).ready(function() {
+                    $.datepicker.setDefaults($.datepicker.regional['']);
+                    $("#date1").datepicker($.datepicker.regional['en']);
+
+                });
+          </script>
+                                    </div>-->
+                                   
+<!--                                    <input type="hidden" value="Y" name="search_basic" id="search_basic"  />
+                                    <input name="" type="submit" value="GO" class="go" />-->
+<!--                                </form>  -->
+                                <div class="clr"></div>
+                            
+                            </div>
+                            <!--filter section end -->
+                            <h4>Churches</h4>
+                            <div class="right" style="margin-bottom:14px;">
+                            
+<!--                            <input name="" type="button" value="Back to church list"  class="evnt_btn1" 
+onclick="back_church_list()"/> -->
+							
+<!--                            <input type="button" value="Import Church List"  class="evnt_btn1" onclick="$('#import_blck').slideToggle('slow');"  />-->
+                            
+                            </div>
+                            <div class="clr"></div>
+                            <div id="import_blck" style="float:right; display:none; color:#014882; width:325px;">    
+                                 <form id="frm_list" action="<?=admin_base_url().'build_kingdom/churches/import_list.html'?>" onsubmit="return false;" method="post" >
+                                  <div class="imprt-lbl">CSV File :</div>
+                                  <div class="imprt-fld">
+                                    <input type="file" name="list_file" id="list_file" />
+                                    <div class="clr"></div>
+                                  </div>
+                            	 
+                                  <div class="error-message" id="err_list_file"></div>
+                                  <div class="clr"></div>
+                                  <input name="" class="btn-03 import_blue_btn" type="submit" value="Import Church List"  />
+                            	</form>
+                            </div>
+                            <div class="clr"></div>
+                             <DIV id="table_content" style="margin-top:5px;">
+							  <?=$result_content?>
+                             </DIV>
+                        	<div class="clr"></div>
+                        </div>
+                  </div>
+                  <div class="clr"></div>
+            </div>
+      </div>
+      <div class="clr"></div>
+</div>
+<!-- /CONTENT SECTION -->
+
+<!--popup one start-->
+<div class="lightbox member-pop" style="width:500px;">
+      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="../images/close.png" alt="close" width="24" height="24"  /></a></div>
+      <div class="top"><div>&nbsp;</div></div>
+      <div class="mid">
+            <div class="heading" style="margin-bottom:0px;">
+                  <div class="left">
+                        <h4>Church Member</h4>
+                  </div>
+            </div>
+               <div class="shade_box_white">
+                   <div id="table_contents_adv">
+                       
+                   </div>
+                 
+               <div class="clr"></div>
+            </div>
+            
+      </div>
+      <div class="bot"><div>&nbsp;</div></div>
+</div>
+
+
+<div class="lightbox subadmin-pop" style="width:500px;">
+      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog()"><img src="../images/close.png" alt="close" width="24" height="24"  /></a></div>
+      <div class="top"><div>&nbsp;</div></div>
+      <div class="mid">
+            <div class="heading" style="margin-bottom:0px;">
+                  <div class="left">
+                        <h4>Church Subadmin</h4>
+                  </div>
+            </div>
+               <div class="shade_box_white">
+                   <div id="table_contents_adv_Sub">
+                       
+                   </div>
+                 
+               <div class="clr"></div>
+            </div>
+            
+      </div>
+      <div class="bot"><div>&nbsp;</div></div>
+</div>
+<!--popup one end-->
+
+<!--popup add church -->
+<div class="lightbox add-new-church" style="width:500px;">
+      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog();$('#register_church')[0].reset();$('.error-message').each(function(i){
+			$(this).attr('style','display:none');
+	});"><img src="../images/close.png" alt="close" width="24" height="24" /></a></div>
+      <div class="top"><div>&nbsp;</div></div>
+      <div class="mid">
+            <div class="heading" style="margin-bottom:0px;">
+                  <div class="left">
+                        <h4>Add New Church</h4>
+                  </div>
+            </div>
+               <div class="shade_box_white" style="padding:8px 0px;">
+               <div class="content_area frm_box2">
+                        	  <form id="register_church" action="<?=admin_base_url()?>build_kingdom/churches/add_church" method="post"  onsubmit="return false;">
+                              	  <div class="lable01">Church Name  :</div>
+                                  <div class="field01">
+                                        <input type="text" id="txt_name" name="txt_name" />
+                                  </div>
+                                  <div class="error-message" id="err_name"></div>
+                                  <div class="clr"></div>
+                                  
+                                  <div class="lable01">Location :</div>
+                                  		<div class="lightbox-second-lavel">
+                                          <div class="lable01">Street Address :</div>
+                                          <div class="field03"><input type="text" name="txt_address" id="txt_address"/></div>
+                                          <div class="error-message" id="err_address"></div>
+                                          <div class="clr"></div>
+                                          
+                                          <div class="lable01">Country :</div>
+                                          <div class="field03">
+                                               <select name="sel_country" id="sel_country" style="width:240px;" onchange="showStatePopup(this.value);">
+                                                   <option value="-1">---</option>
+                                                   <?=makeOptionCountryNew('',encrypt($posted['i_country_id']));?>
+                                               </select>
+                                          </div>
+                                          <div class="error-message" id="err_country"></div>
+                                          <div class="clr"></div>
+                                          
+                                           <div class="lable01">State :</div>
+                                          <div class="field03">
+                                          	<select name="txt_state" id="txt_state" style="width:240px;" onchange="showCityPopup(this.value); ">
+                                               <option value="-1">---</option>
+                                               <?=$state;?>
+                                            </select>
+                                          </div>
+                                          <div class="error-message" id="err_state"></div>
+                                          <div class="clr"></div>
+                                          
+                                          <div class="lable01">City :</div>
+                                          <div class="field03">
+                                           <select name="txt_city" id="txt_city" style="width:240px;">
+                                             <option value="-1">---</option>
+                                             <?=$city;?>
+                                            </select>
+                                          </div>
+                                          <div class="error-message" id="err_city"></div>
+                                          <div class="clr"></div>
+                                          
+                                          <div class="lable01">Post Code :</div>
+                                          <div class="field03"><input type="text" name="txt_postcode" id="txt_postcode" /></div>
+                                          <div class="error-message" id="err_postcode"></div>
+                                          <div class="clr"></div>
+                                  </div>
+                                  
+                                  <div class="lable01">Phone No :</div>
+                                  <div class="field01">
+                                        <input type="text" name="txt_phone" />
+                                  </div>
+                                  <div class="error-message" id="err_phone"></div>
+                                  <div class="clr"></div>
+                                  
+                                  <div class="lable01">&nbsp;</div>
+                                  <div class="field01">
+                                        <input name="" type="submit" class="btn"  value="Add"/>
+                                        <input name="" type="reset" class="btn"  value="Cancel" onclick="hide_dialog();$('#register_church')[0].reset();$('.error-message').each(function(i){
+$(this).attr('style','display:none');
+	});"/>
+                                  </div>
+                              </form>
+                              <div class="clr"></div>
+                        </div>
+               <div class="clr"></div>
+            </div>
+            
+      </div>
+      <div class="bot"><div>&nbsp;</div></div>
+</div>
+<!--/popup add church -->
+
+
+<!--popup edit church -->
+<div class="lightbox edit-church" style="width:500px;">
+      <div class="close"><a href="javascript:void(0)" onclick="hide_dialog();$('.error-message').each(function(i){
+			$(this).attr('style','display:none');
+	});"><img src="../images/close.png" alt="close" width="24" height="24" /></a></div>
+      <div class="top"><div>&nbsp;</div></div>
+      <div class="mid">
+            <div class="heading" style="margin-bottom:0px;">
+                  <div class="left">
+                        <h4>Edit Church</h4>
+                  </div>
+            </div>
+               <div class="shade_box_white" style="padding:8px 0px;">
+               <div class="content_area frm_box2">
+                        	  <form id="register_edit_church" action="<?=admin_base_url()?>build_kingdom/churches/edit_church" method="post" onsubmit=" return false;" >
+                              	  <div class="lable01">Church Name  :</div>
+                                  <div class="field01">
+                                        <input type="text" name="txt_edit_name" id="txt_edit_name" />
+                                  </div>
+                                  <div class="error-message" id="err_edit_name"></div>
+                                  <div class="clr"></div>
+                                  
+                                  <div class="lable01">Location :</div>
+                                  		<div class="lightbox-second-lavel">
+                                          <div class="lable01">Street Address :</div>
+                                          <div class="field03">
+                                          <input type="text" name="txt_edit_address" id="txt_edit_address"/></div>
+                                          <div class="error-message" id="err_edit_address"></div>
+                                          <div class="clr"></div>
+                                          
+                                          <div class="lable01">Country :</div>
+                                          <div class="field03">
+                                               <select name="sel_edit_country" id="sel_edit_country" style="width:240px;" onchange="showSrchState(this.value);">
+                                                   <option value="-1">---</option>
+                                                   <?=makeOptionCountryNew('',encrypt($posted['i_country_id']));?>
+                                               </select>
+                                          </div>
+                                          <div class="error-message"></div>
+                                          <div class="clr"></div>
+                                          
+                                           <div class="lable01">State :</div>
+                                          <div class="field03">
+                                          	<select name="txt_edit_state" id="txt_edit_state" style="width:240px;" onchange="showSrchCity(this.value);">
+                                               <option value="-1">---</option>
+                                               <?=$state;?>
+                                            </select>
+                                          </div>
+                                          <div class="error-message" id="err_edit_state"></div>
+                                          <div class="clr"></div>
+                                          
+                                          <div class="lable01">City :</div>
+                                          <div class="field03">
+                                           <select name="txt_edit_city" id="txt_edit_city" style="width:240px;">
+                                             <option value="-1">---</option>
+                                             <?=$city;?>
+                                            </select>
+                                          </div>
+                                          <div class="error-message" id="err_edit_city"></div>
+                                          <div class="clr"></div>
+                                          
+                                          <div class="lable01">Post Code :</div>
+                                          <div class="field03"><input type="text" name="txt_edit_postcode" id="txt_edit_postcode" /></div>
+                                          <div class="error-message" id="err_edit_postcode"></div>
+                                          <div class="clr"></div>
+                                  </div>
+                                  
+                                  <div class="lable01">Phone No :</div>
+                                  <div class="field01">
+                                        <input type="text" name="txt_edit_phone" id="txt_edit_phone" />
+                                  </div>
+                                  <div class="error-message" id="err_edit_phone"></div>
+                                  <div class="clr"></div>
+                                  <input type="hidden" id="hd_edit_id" name="hd_edit_id"  />
+                                  
+                                  <div class="lable01">&nbsp;</div>
+                                  <div class="field01">
+                                        <input name="" type="submit" class="btn"  value="Update"/>
+                                        <input name="" type="reset" class="btn"  value="Cancel" onclick="hide_dialog();$('.error-message').each(function(i){
+			$(this).attr('style','display:none');
+	});"/>
+                                  </div>
+                              </form>
+                              <div class="clr"></div>
+                        </div>
+               <div class="clr"></div>
+            </div>
+            
+      </div>
+      <div class="bot"><div>&nbsp;</div></div>
+</div>
+<!--/popup edit church -->
+
+<script type="text/javascript">
+function showSrchState(country)
+{ 
+	showUILoader_nodialog('<img src="'+base_url+'images/loading_big.gif" width="50"/> ');
+	$.ajax({
+			"type" : "post",
+			"url"  : base_url+'logged/country_state_city/getstate/'+country,
+			"success" : function(response)
+			{
+				var optiontxt	= '<option value="-1">---</option>'+response;
+				$('#srch_state').html(optiontxt);
+				hideUILoader_nodialog();
+			}
+		});
+	
+}
+function showSrchCity(state)
+{
+	showUILoader_nodialog('<img src="'+base_url+'images/loading_big.gif" width="50"/> ');
+	$.ajax({
+			"type" : "post",
+			"url"  : base_url+'logged/country_state_city/getcity/'+state,
+			"success" : function(response)
+			{
+				var optiontxt	= '<option value="-1">---</option>'+response;
+				$('#srch_city').html(optiontxt);
+				hideUILoader_nodialog();
+			}
+		});
+	
+}
+
+$(document).ready(function(arg) {
+ $('#frm_search').submit(function(){ 
+			  var datatosend=$("#frm_search").serialize(); //alert(datatosend);//(Arif)
+				  showBusyScreen();
+				  $.ajax({
+					 type: "POST",
+					 url: admin_base_url+"build_kingdom/churches/ajax_church_space_pagination/",
+					 data: datatosend,
+					 success: function(data){
+						hideBusyScreen(); 
+						 $('#table_content').html(data);
+					 }
+				   });	 
+	  });
+});
+
+
+
+function delete_church(file_id)
+{
+	//alert(file_id);
+	$('#i_del_id').val( file_id );
+	show_dialog('delete-page-popup');
+	//return false;
+}
+
+
+function delete_()
+{
+	  var selected_id = parseInt( $('#i_del_id').val() );
+		  //alert(selected_id);
+	  if( selected_id!=0 )
+	  {
+	  
+		  $.ajax({
+			type: 'get',
+			url: admin_base_url+'build_kingdom/churches/delete_church/'+ selected_id,
+			dataType: 'json',
+	
+			success: function (data, status) {
+				
+					hide_dialog();
+					if(data.success == true){
+						$('#req_row_'+selected_id).hide();
+						showUIMsg('Church deleted successfully.');
+					}
+				}	// end of success function...
+		});
+	  } else {
+	  
+		  var msg = "Sorry an error has occured, Please try again";
+		  showUIMsg(msg);
+		  hide_dialog();
+		  
+	  }
+}
+
+// adding / edit church
+function show_edit(id){
+	showUILoader_nodialog('<img src="'+base_url+'images/loading_big.gif" width="50"/> ');
+	$.ajax({
+			type: 'get',
+			url: admin_base_url+'build_kingdom/churches/edit_church/'+ id,
+			dataType: 'json',
+	
+			success: function (data, status) {
+				
+					
+					if(data.success == true){
+						$('#txt_edit_name').val(data.church_info.s_name);
+						$('#txt_edit_address').val(data.church_info.s_address);
+						$('#txt_edit_city').html(data.church_info.city);
+						$('#txt_edit_state').html(data.church_info.state);
+						$('#sel_edit_country').val(data.church_info.country);
+						$('#txt_edit_postcode').val(data.church_info.s_postcode);
+						$('#txt_edit_phone').val(data.church_info.s_phone);
+						$('#hd_edit_id').val(data.church_info.id)
+						hideUILoader_nodialog();
+						show_dialog('edit-church');
+					}
+				}	// end of success function...
+		});
+}
+
+
+$(document).ready(function() {
+
+	// for AJAX page-submission...
+    var options = { 
+        beforeSubmit:  show_loader_screen,  // pre-submit callback 
+        success:       validateAddFrm // post-submit callback 
+    }; 
+	
+	var options_edit = { 
+        beforeSubmit:  show_loader_screen,  // pre-submit callback 
+        success:       validateEditFrm // post-submit callback 
+    }; 
+	
+	
+	var options_add_list = { 
+       // beforeSubmit:  show_loader_screen,  // pre-submit callback 
+        success:       validateListFrm // post-submit callback 
+    }; 
+	
+    // bind to the form's submit event 
+    $('#register_church').submit(function() { 
+        $(this).ajaxSubmit(options);
+        return false;
+    });
+	
+	$('#register_edit_church').submit(function() { 
+        $(this).ajaxSubmit(options_edit);
+        return false;
+    });
+	
+	
+	$('#frm_list').submit(function() { 
+        $(this).ajaxSubmit(options_add_list);
+        return false;
+    });
+
+});
+
+function show_loader_screen(){
+	showUILoader_nodialog('<img src="'+base_url+'images/loading_big.gif" width="50"/> ');
+}
+
+// validate ajax-submission...
+function validateAddFrm(data)
+{
+	
+   var data = JSON.parse(data);//alert(data.html);
+   $('.error-message').each(function(i){
+			$(this).attr('style','display:none');
+	});
+	
+	if(data.success==false) 
+	{
+		for ( var id in data.arr_messages ){
+			//alert(data.arr_messages[id]);
+			if( $('#err_'+id) != null ) {
+				$('#err_'+id).html(data.arr_messages[id]);
+				$('#err_'+id).css('display', 'block');
+			}
+		}
+	}
+	else {
+		  // clearing form
+		  $('#register_church')[0].reset();	
+		  hide_dialog();
+		  $('#table_content').html(data.html);
+		  showUIMsg(data.msg);
+	}
+	 
+	hideUILoader_nodialog();
+}
+
+
+// validate ajax-submission...
+function validateEditFrm(data)
+{
+	
+   var data = JSON.parse(data);//alert(data.html);
+   $('.error-message').each(function(i){
+			$(this).attr('style','display:none');
+	});
+	
+	if(data.success==false) 
+	{
+		for ( var id in data.arr_messages ){
+			//alert(data.arr_messages[id]);
+			if( $('#err_'+id) != null ) {
+				$('#err_'+id).html(data.arr_messages[id]);
+				$('#err_'+id).css('display', 'block');
+			}
+		}
+	}
+	else {
+		  // clearing form
+		  $('#register_edit_church')[0].reset();	
+		  hide_dialog();
+		  $('#table_content').html(data.html);
+		  showUIMsg(data.msg);
+	}
+	 
+	hideUILoader_nodialog();
+}
+
+
+
+function changeStatus_space(id,insert_val,admin_id)
+{ 
+	var URL = admin_base_url +'build_kingdom/churches/change_status_space/';
+	showBusyScreen();
+	
+	 $.ajax({
+		type: 'POST',
+		url:URL,
+		dataType: 'json',
+		data: ({ 'id' : id ,'insert_val':insert_val ,'admin_id':admin_id
+				
+				
+			 }),
+		success: function (data, status) {
+						
+						hideBusyScreen();
+					$('#'+id+'_status').html('')
+                                        $('#'+id+'_status').html(data.action_txt)
+                                        $('#status_img'+id).html('');
+                                        $('#status_img'+id).html(data.inst_after);
+				},
+		error: function (data, status, e) {
+							hideBusyScreen();
+							showUIMsg(data.msg);
+		}
+	});
+}
+
+
+
+// validate ajax-submission...
+function validateListFrm(data)
+{ 
+   var data = JSON.parse(data);//alert(data.html);
+   $('.error-message').each(function(i){
+			$(this).attr('style','display:none');
+	});
+	
+	if(data.success==false) 
+	{
+		for ( var id in data.msg ){
+			
+			if( $('#err_'+id) != null ) {
+				$('#err_'+id).html(data.msg[id]);
+				$('#err_'+id).css('display', 'block');
+			}
+		}
+	}
+	else {
+		  // clearing form
+		  $('#frm_list')[0].reset();
+		  $('#import_blck').slideToggle('slow');	
+		  $('#table_content').html(data.result_content);
+		  showUIMsg('Church list imported successfully.');
+	}
+	 
+	//hideUILoader_nodialog();
+}
+
+function back_church_list(){
+    window.location.href=admin_base_url+'church-spaces';
+}
+function autologin(user_id , church_id , type){
+    if(type == 'admin'){
+         showBusyScreen()
+   $.ajax({
+          url : base_url+'admin/members/member_detail_utilities/autologin_church',
+          type : 'post',
+         
+          data : ({'user_id' : user_id,'church_id' : church_id,'type':type }),
+           dataType: 'json',
+          success : function(data)
+          {
+               //alert('ok1');
+             var url = data.url;
+             window.location.href=url;
+          }
+      }); 
+    }
+    if(type == 'member'){
+       showBusyScreen()
+   $.ajax({
+          url : admin_base_url+'members/member_detail_utilities/autologin_church',
+          type : 'post',
+         
+          data : ({'user_id' : user_id,'church_id' : church_id,'type':type }),
+           dataType: 'json',
+          success : function(data)
+          {
+             // alert('ok');
+             var url = data.url;
+             window.location.href=url;  
+          }
+      }); 
+    }
+}
+</script>
+

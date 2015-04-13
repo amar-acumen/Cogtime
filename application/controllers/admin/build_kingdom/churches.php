@@ -783,46 +783,46 @@ $this->email->message("$body");
         } 
 		
     }
-    function show_member(){
-        $id = $this->input->post('id');
-        $query = $this->db->query('select u.id, u.s_first_name as first_name   , u.s_last_name as last_name , u.s_profile_photo,u.e_gender from cg_users u , cg_church_member cm where cm.church_id='.$id.' AND cm.is_blocked = 1 AND cm.is_leave = 0 AND cm.member_id = u.id AND cm.is_approved = 1');
-        $res = $query->result();
-        
-        if(count($res) > 0){
-             echo '<ul style="margin:2px 6px 5px 16px">';
-        foreach ($res as $val){
-           
-          echo "<li style='clear:both;'>";
-            //echo '<li> background:url(http://web.acumensofttech.com/Cogtime/uploads/prayer_wall_photos/prayer-wall-6-0-thumb.jpg) no-repeat center; width:60px; height:60px;border: 1px solid #DCDCDC; float: left; <img src="" title='.$val->user_name.' ><li>';
-           echo "<div style='float:left;background:url(".get_profile_image_of_user('thumb',$val->s_profile_photo, $val->e_gender).") no-repeat center;width:60px; height:60px;' ></div>";
-        echo "<span class='mem_nm' style='float:left;margin:10px 0 0 10px; color:#014882;font-weight:bold' >".$val->first_name." ".$val->last_name. "</span>";
-           echo "</li>";
-           
-        }  
-         echo '</ul>';
-        }else{
-            echo '<h1 class="no_mem">No Members</h1>';
-        }
-    }
-    function show_subadmin(){
-         $id = $this->input->post('id');
-        $query = $this->db->query('select u.id,u.s_first_name as first_name ,u.s_last_name as last_name, u.s_profile_photo,u.e_gender from cg_users u , cg_church_member cm where cm.church_id='.$id.' AND cm.is_blocked = 1 AND cm.is_leave = 0 AND cm.member_id = u.id AND cm.is_approved = 1 AND role = 2');
-        $res = $query->result();
-        if(count($res) > 0){
-            echo '<ul style="margin:2px 6px 5px 16px">';
-        foreach ($res as $val){
-           
-           echo "<li style='clear:both;'>";
-            //echo '<li> background:url(http://web.acumensofttech.com/Cogtime/uploads/prayer_wall_photos/prayer-wall-6-0-thumb.jpg) no-repeat center; width:60px; height:60px;border: 1px solid #DCDCDC; float: left; <img src="" title='.$val->user_name.' ><li>';
-           echo "<div style='float:left;background:url(".get_profile_image_of_user('thumb',$val->s_profile_photo, $val->e_gender).") no-repeat center;width:60px; height:60px;' ></div>";
-        echo "<span class='mem_nm' style='float:left;margin:10px 0 0 10px;font-weight:bold' >".$val->first_name." ".$val->last_name. "</span>";
-           echo "</li>";
-        }
-         echo '</ul>';
-        }else{
-            echo '<h1 class="no_mem">No Subadmin</h1>';
-        }
-    }
+//    function show_member(){
+//        $id = $this->input->post('id');
+//        $query = $this->db->query('select u.id, u.s_first_name as first_name   , u.s_last_name as last_name , u.s_profile_photo,u.e_gender from cg_users u , cg_church_member cm where cm.church_id='.$id.' AND cm.is_blocked = 1 AND cm.is_leave = 0 AND cm.member_id = u.id AND cm.is_approved = 1');
+//        $res = $query->result();
+//        
+//        if(count($res) > 0){
+//             echo '<ul style="margin:2px 6px 5px 16px">';
+//        foreach ($res as $val){
+//           
+//          echo "<li style='clear:both;'>";
+//            //echo '<li> background:url(http://web.acumensofttech.com/Cogtime/uploads/prayer_wall_photos/prayer-wall-6-0-thumb.jpg) no-repeat center; width:60px; height:60px;border: 1px solid #DCDCDC; float: left; <img src="" title='.$val->user_name.' ><li>';
+//           echo "<div style='float:left;background:url(".get_profile_image_of_user('thumb',$val->s_profile_photo, $val->e_gender).") no-repeat center;width:60px; height:60px;' ></div>";
+//        echo "<span class='mem_nm' style='float:left;margin:10px 0 0 10px; color:#014882;font-weight:bold' >".$val->first_name." ".$val->last_name. "</span>";
+//           echo "</li>";
+//           
+//        }  
+//         echo '</ul>';
+//        }else{
+//            echo '<h1 class="no_mem">No Members</h1>';
+//        }
+//    }
+//    function show_subadmin(){
+//         $id = $this->input->post('id');
+//        $query = $this->db->query('select u.id,u.s_first_name as first_name ,u.s_last_name as last_name, u.s_profile_photo,u.e_gender from cg_users u , cg_church_member cm where cm.church_id='.$id.' AND cm.is_blocked = 1 AND cm.is_leave = 0 AND cm.member_id = u.id AND cm.is_approved = 1 AND role = 2');
+//        $res = $query->result();
+//        if(count($res) > 0){
+//            echo '<ul style="margin:2px 6px 5px 16px">';
+//        foreach ($res as $val){
+//           
+//           echo "<li style='clear:both;'>";
+//            //echo '<li> background:url(http://web.acumensofttech.com/Cogtime/uploads/prayer_wall_photos/prayer-wall-6-0-thumb.jpg) no-repeat center; width:60px; height:60px;border: 1px solid #DCDCDC; float: left; <img src="" title='.$val->user_name.' ><li>';
+//           echo "<div style='float:left;background:url(".get_profile_image_of_user('thumb',$val->s_profile_photo, $val->e_gender).") no-repeat center;width:60px; height:60px;' ></div>";
+//        echo "<span class='mem_nm' style='float:left;margin:10px 0 0 10px;font-weight:bold' >".$val->first_name." ".$val->last_name. "</span>";
+//           echo "</li>";
+//        }
+//         echo '</ul>';
+//        }else{
+//            echo '<h1 class="no_mem">No Subadmin</h1>';
+//        }
+//    }
     
     
     public function change_status_space()
@@ -855,7 +855,106 @@ $inst_after = '<img width="25" height="14" onclick="autologin(\''.$admin_id.'\',
 
 echo json_encode(array('msg'=>'Status change successfully' , 'action_txt'=>$action_txt , 'btnval'=>$btnval ,'inst_after'=>$inst_after));
     }
+       public function show_member($id){
+           die($id);
+               $data = $this->data;
+            parent::_set_title("::: COGTIME Xtian network :::");
+            parent::_set_meta_desc("::: COGTIME Xtian network :::");
+            parent::_set_meta_keywords("::: COGTIME Xtian network :::");
+            parent::_add_js_arr( array( 'js/lightbox.js',
+										'js/jquery.form.js',
+									    'js/jquery/JSON/json2.js') );
+                                        
+             parent::_add_css_arr( array('css/dd.css',
+                                        ) );
+            # adjusting header & footer sections [End]...
+			$data['top_menu_selected'] = 6;
+			$data['submenu'] = 7;
+                        $this->session->set_userdata('search_condition','');
+			
+			ob_start();
+            $this->ajax_church_space_member_pagination();
+            $data['result_content'] = ob_get_contents(); //pr($data['result_content']);
+            ob_end_clean();
+               $VIEW_FILE = "admin/build_kingdom/churches_space_member.phtml";
+            parent::_render($data, $VIEW_FILE);
+                       // $data['subadmin'] = $this->church_model->get_church_subadmin($id);
+                        
+         }
+             public function ajax_church_space_member_pagination($page=0)
+    {
+        try
+        {
+			//echo $_POST['search_basic']; exit;
+			## seacrh conditions : filter ############
+		 	$s_where = "where  C.ch_page_url != ' ' AND u.id = C.ch_admin_id   ";
+			 if(isset($_POST['search_basic']) && $_POST['search_basic'] == 'Y' ) :
+                         
+                                 
+                                 $srch_name = preg_replace('/[^A-Za-z0-9\-]/', '', trim($this->input->post('church_name'))); 
+				$WHERE_COND .= ($srch_name=='0')?'':" AND ( C.s_name  LIKE '%".$srch_name."%')";
+//                               
+				 $this->session->set_userdata('search_condition',$WHERE_COND);
+			
+            endif;  
+		   	
+			$s_where .= $this->session->userdata('search_condition'); 
+               
+                         $order_by='`dt_created_on` DESC';
+		   	$result = $this->church_model->get_space_list($s_where,$page,$this->pagination_per_page,$order_by);
+                         $resultCount = count($result);
+			$total_rows = $this->church_model->get_space_list_count($s_where);
+			
+			
+			
+			//pr($result,1);
+			#Jquery Pagination Starts
+           $this->load->library('jquery_pagination');
+            $config['base_url'] = base_url()."admin/build_kingdom/churches/ajax_church_space_pagination";
+            $config['total_rows'] = $total_rows;
+            $config['per_page'] = $this->pagination_per_page;
+            $config['uri_segment'] = 5;
+            $config['num_links'] = 9;
+            $config['page_query_string'] = false;
+            $config['prev_link'] = 'PREV';
+            $config['next_link'] = 'NEXT';
+
+            $config['cur_tag_open'] = '<li> <span><a href="javascript:void(0)" class="select">';
+            $config['cur_tag_close'] = '</a></span></li>';
+
+            $config['next_tag_open'] = '<li><a href="javascript:void(0)">';
+            $config['next_tag_close'] = '</a></li>';
+
+            $config['prev_tag_open'] = '<li><a href="javascript:void(0)">';
+            $config['prev_tag_close'] = '</a></li>';
+
+            $config['num_tag_open'] = '<li>';
+            $config['num_tag_close'] = '</li>';
+
+            $config['div'] = '#table_content'; /* Here #content is the CSS selector for target DIV */
+            $config['js_bind'] = "showBusyScreen(); "; /* if you want to bind extra js code */
+            $config['js_rebind'] = "hideBusyScreen(); "; /* if you want to rebind extra js code */
+
+            $this->jquery_pagination->initialize($config);
+            $data['page_links'] = $this->jquery_pagination->create_links();
+           
+			$this->jquery_pagination->create_links();
+
+            // getting   listing...
+			$data['info_arr'] = $result;
+			$data['no_of_result'] = $total_rows;
+			$data['current_page'] = $page;
+          
+			# loading the view-part...
+          echo  $this->load->view('admin/build_kingdom/churches_space_list_ajax.phtml', $data,TRUE);
+		 }
+        catch(Exception $err_obj)
+        {
+            show_error($err_obj->getMessage());
+        } 
+		
+    }
     
-    
+   
     
 }   // end of controller...
