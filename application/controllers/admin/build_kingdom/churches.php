@@ -888,7 +888,7 @@ echo json_encode(array('msg'=>'Status change successfully' , 'action_txt'=>$acti
             
 			//echo $_POST['search_basic']; exit;
 			## seacrh conditions : filter ############
-		 	$s_where = "where  cm.church_id = $id AND  AND u.id = cm.member_id   ";
+		 	$s_where = "where  cm.church_id = $id AND u.id = cm.member_id   ";
 			 if(isset($_POST['search_basic']) && $_POST['search_basic'] == 'Y' ) :
                          
                                  
