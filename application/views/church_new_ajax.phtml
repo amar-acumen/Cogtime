@@ -20,6 +20,7 @@ if($result_arr){
             </span></li>
     
             <li><span class="left-prt">Contact no. : </span> <span class="right-prt"><?= $result_arr[0]->s_phone ?></span></li>
+              <li><span>Postcode : </span><?= $result_arr[0]->s_postcode ?></li>
     
         </ul>
     <?php if($result_arr[0]->i_disabled == 1 && $result_arr[0]->ch_verification_code == '' && $result_arr[0]->ch_page_url == ''){ ?>
