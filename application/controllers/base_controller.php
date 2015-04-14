@@ -5071,7 +5071,7 @@ $this->db->update('cg_church', $data);
             $member_id = $this->input->post('member_id');
             
             $query = $this->db->get_where('cg_church_member', array('church_id' => $church_id , 'member_id' => $member_id ));
-           $result =  $query->result(); 
+           $result =  $query->result(); pr($result,1);
             
             if(!empty($result)){
                   echo json_encode( array('success'=>true,'msg'=>'error')); 
