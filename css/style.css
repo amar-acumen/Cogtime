@@ -12670,7 +12670,11 @@ a.tooltip3:hover span{
     display:inline;}
 .callout {z-index:20;position:absolute;top:30px;border:0;left:-12px;}
 
-
+.adv-new span{
+    width:97px;
+    display:inline-block;
+    
+}
 
 
 
