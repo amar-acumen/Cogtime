@@ -92,7 +92,7 @@ select{ font-size:13px !important;}
 
 .top-right img{ float:left; margin-right:10px;}
 
-.main-caption{ background:#090909; width:415px; padding:13px 0 0 23px; font-family: 'GibsonRegular'; margin:0px 0 0 0; height:177px; }
+.main-caption{ background:#090909; width:415px; padding:13px 0 0 23px; font-family: 'GibsonRegular'; margin:0px 0 0 0; height:200px; }
 
 .main-caption h2{ color:#fff; font-size:27px; text-transform:uppercase; font-weight:normal; padding-bottom:16px;  }
 
@@ -2686,3 +2686,11 @@ padding: 3px 5px;
 	font-family:'GibsonRegular';
 	}
 	.maginfying{ float:right;}
+        .main-caption a.visit_url {
+    background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
+    display: inline;
+    font-size: 12px;
+    height: auto;
+    line-height: normal;
+    margin: 0 0 0 5px;
+}
