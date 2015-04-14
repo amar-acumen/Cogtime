@@ -12681,8 +12681,9 @@ a.tooltip3:hover span{
     display:block;
 }
 .find-img{
-  margin:3px 0 0 10px;
+  margin:0 0 0 10px;
    display:block !important;
+   float:left;
 }
 
 
