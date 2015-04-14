@@ -34,6 +34,13 @@
     <div class="main-caption">
       <h2><?= substr($church_arr[0]->ch_banner_heading, 0 , 30); ?></h2>
       <p><?= substr($church_arr[0]->ch_details, 0 , 150); ?></p>
+      <?php
+      if($church_arr[0]->ch_url != ''){
+      ?>
+      <p>visit us : <a href="<?= $church_arr[0]->ch_url  ?>" target="_blank"><?= $church_arr[0]->ch_url  ?></a></p>
+      <?php
+      }
+      ?>
        <?php
           
         if($this->session->userdata('loggedin')!= '1'){ 
