@@ -12680,6 +12680,7 @@ a.tooltip3:hover span{
     float:left;
     display:block;
     width:auto !important;
+    line-height:20px;
 }
 .find-img{
   margin:0 0 0 5px;
