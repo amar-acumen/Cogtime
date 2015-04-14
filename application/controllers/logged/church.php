@@ -793,9 +793,11 @@ function general_setting(){
     $wel_hed = trim($this->input->post('wel_hed'));
     $wel_des = trim($this->input->post('wel_des'));
     $ch_id = $this->input->post('ch_id');
+    $web_url = $this->input->post('web_url');
     $data = array(
                'w_heading' => $wel_hed,
-               'w_des' => $wel_des
+               'w_des' => $wel_des,
+               'ch_url'=>$web_url
                );
     //pr($data,1);
      $this->db->where('id', $ch_id);
