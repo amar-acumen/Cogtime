@@ -5071,11 +5071,19 @@ $this->db->update('cg_church', $data);
             $member_id = $this->input->post('member_id');
             
             $query = $this->db->get_where('cg_church_member', array('church_id' => $church_id , 'member_id' => $member_id ));
-           $result =  $query->result(); pr($result,1);
+           $result =  $query->result(); //pr($result,1);
             
-            if(!empty($result)){
+            if(!empty($result) && $result[0]->is_leave == 0){
                   echo json_encode( array('success'=>true,'msg'=>'error')); 
-            }else if(empty ($result)){
+            }
+            else if(!empty($result) && $result[0]->is_leave == 1){
+                $data = array(
+                    'is_leave' => 0
+                );
+                $this->db->update('cg_church_member', $data, array('church_id' => $church_id , 'member_id' => $member_id));
+                 echo json_encode( array('success'=>true,'msg'=>'ok')); 
+            }
+            else if(empty ($result)){
             
             $data = array(
    'church_id' => $church_id ,
