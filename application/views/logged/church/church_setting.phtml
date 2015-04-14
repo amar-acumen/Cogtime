@@ -627,6 +627,11 @@ $("#text_count").text("Characters left: " + (500 - $(this).val().length));
                 <textarea maxlength="300" id="wel_des" name="wel_des"> <?= $church_arr[0]->w_des; ?></textarea>
            <span class="error-msg" id="error21">Required</span>
         </div>
+                    <div class="form-main3">
+        	<label>Church Website url </label>
+               <input type="text" maxlength="50" id="web_url" name="web_url" value="<?= $church_arr[0]->ch_url; ?>">
+           <span class="error-msg" id="error29">Required</span>
+        </div>
                     <input type="hidden" value="<?=  $church_arr[0]->id; ?>" name="ch_id">
                 </form>
         
@@ -1098,6 +1103,7 @@ $(document).ready(function(){
     $('#g_setting_bnt').click(function(){
     var wel_hed = $('#wel_hed').val();
     var wel_des = $('#wel_des').val();
+    var web_url = $('#web_url').val();
     if(wel_hed.trim() == ''){
         $('#error20').css('display','block').html('Please enter heading');
         var flag20 = 0;
@@ -1112,7 +1118,20 @@ $(document).ready(function(){
         $('#error21').css('display','none');
         var flag21 = 1;
     }
-    if(flag20 == 1 && flag21 == 1 ){
+    if(web_url != ''){
+        if(/^([a-z]([a-z]|\d|\+|-|\.)*):(\/\/(((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:)*@)?((\[(|(v[\da-f]{1,}\.(([a-z]|\d|-|\.|_|~)|[!\$&'\(\)\*\+,;=]|:)+))\])|((\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5]))|(([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=])*)(:\d*)?)(\/(([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)*)*|(\/((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)+(\/(([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)*)*)?)|((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)+(\/(([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)*)*)|((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)){0})(\?((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|[\uE000-\uF8FF]|\/|\?)*)?(\#((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|\/|\?)*)?$/i.test(web_url)) {
+  var flag29 = 1;
+  }else{
+       $('#error29').css('display','block').html('Please enter valid web address');
+        var flag29 = 0;
+  }
+    }else{
+        $('#error29').css('display','none');
+        var flag29 = 1;
+    }
+        
+    
+    if(flag20 == 1 && flag21 == 1 && flag29 ==1 ){
         $('#g_setting').submit();
     }
 })
