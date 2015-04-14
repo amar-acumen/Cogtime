@@ -5078,7 +5078,8 @@ $this->db->update('cg_church', $data);
             }
             else if(!empty($result) && $result[0]->is_leave == 1){
                 $data = array(
-                    'is_leave' => 0
+                    'is_leave' => 0,
+                    'is_approved' => 0
                 );
                 $this->db->update('cg_church_member', $data, array('church_id' => $church_id , 'member_id' => $member_id));
                  echo json_encode( array('success'=>true,'msg'=>'ok')); 
