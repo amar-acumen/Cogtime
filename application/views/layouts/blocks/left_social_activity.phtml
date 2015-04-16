@@ -90,9 +90,13 @@
               }
               if(count($result_churchmember)>0 )
               {
+                   $cnt = 0;
                 foreach ($result_churchmember as $row){
                   $church_wall_url = base_url().$row->chid.'/church-wall';
                    $role = $row->role;
+                   if($role == 2){
+                       $cnt++;
+                   }
                 ?>
                     <li><a href="<?= $church_wall_url; ?>" class="" style="width:84%;"><?= $row->s_name; ?>
                             <?php if($role == 2){ 
@@ -133,6 +137,7 @@
 </div>
                 <?php 
                 }
+                echo $cnt;
                 ?>    
 
 <?php
