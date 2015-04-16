@@ -92,7 +92,7 @@ select{ font-size:13px !important;}
 
 .top-right img{ float:left; margin-right:10px;}
 
-.main-caption{ background:#090909; width:415px; padding:13px 0 0 23px; font-family: 'GibsonRegular'; margin:0px 0 0 0; height:200px; }
+.main-caption{ background:#090909; width:415px; padding:13px 0 0 23px; font-family: 'GibsonRegular'; margin:0px 0 0 0; height:auto; }
 
 .main-caption h2{ color:#fff; font-size:27px; text-transform:uppercase; font-weight:normal; padding-bottom:16px;  }
 
