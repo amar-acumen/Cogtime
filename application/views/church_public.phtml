@@ -107,56 +107,7 @@ $special_note = json_decode($church_arr[0]->ch_special_note);
   </div>
   <div class="church-right">
     <h3><?= $church_arr[0]->w_heading; ?> <?= $church_arr[0]->s_name; ?> 
-         <?php
-          
-        if($this->session->userdata('loggedin')!= '1'){ 
-        ?>
-        <a href="<?php echo base_url().'church_registration/'.$church_arr[0]->id?>">Join Now</a>
-    
-        <?php }else{
-            if(!empty($_GET['member_id'])){
-            ?>
-
- <a href="javascript:void(0)" onclick="send_inv(<?=$_GET['member_id'] ?>,<?= $church_arr[0]->id ?>);">Join Now</a>
-      <script type="text/javascript">
-        function send_inv(member_id,church_id){
-     showBusyScreen();
-    // var base_url = ;
-        $.ajax({
-                    type: "POST",
-                    url: base_url + "base_controller/send_member_inv/",
-                    data: { 'member_id':member_id ,'church_id':church_id },
-                    dataType: 'json',
-                    success: function(data,msg) {
-                         //alert(JSON.stringify(data));
-                         //alert(data.msg)
-                        if(data.msg == 'error'){
-                            showUIMsg("You already send join request , waiting for church admin approval");
-                            window.location.href='<?= base_url().'find-church.html'  ?>';
-//                            $('#err_email').css('display','block').html('Email id already exists.')
-//                            $('#success_ch_req').css('display','none');
-                        }else if(data.msg == 'ok'){
-                            //showUIMsg("Send join request successfully...");
-							showUIMsg("Join request sent successfully...");
-                            $('#send_inv_mem').css('display','none');
-                               window.location.href='<?= base_url().'find-church.html'  ?>';
-//                             $('#church_reg_new').slideUp();
-//                             $('#success_ch_req').slideDown();
-                        }
-                        hideBusyScreen();
-                        
-
-                        
-
-                    }
-                });
-}
         
-        </script>
-          <?php
-            }
-          
-            } ?>
     </h3>
     <p><?= $church_arr[0]->w_des; ?> </p>
      <ul class="church-gallery">
