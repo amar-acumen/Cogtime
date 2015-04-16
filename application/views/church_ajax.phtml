@@ -24,7 +24,7 @@ if($result_arr){
         </ul>
     <?php if($result_arr[0]->i_disabled == 1 && $result_arr[0]->ch_verification_code == '' && $result_arr[0]->ch_page_url == ''){ ?>
                           
-        <input type="button" name="" value="Create Church Space" id="crt-churchsp" class="chresend_btn" onclick="send_church_code('<?= $result_arr[0]->id ?>','<?= $result_arr[0]->ch_email ?>')">
+        <input type="button" name="" style="display: none;" value="Create Church Space" id="crt-churchsp" class="chresend_btn" onclick="send_church_code('<?= $result_arr[0]->id ?>','<?= $result_arr[0]->ch_email ?>')">
     <span style="display: none" class="send_success">
         Varification code for church space has been sent to church email id.
     </span>
@@ -57,7 +57,7 @@ if($result_arr){
     else if($result_arr[0]->i_disabled == 1 && $result_arr[0]->ch_verification_code != '' && $result_arr[0]->ch_page_url == ''){
         
         ?>
-    <input type="button" name="" value="Resend Code" class="chresend_btn" onclick="send_church_code1('<?= $result_arr[0]->id ?>','<?= $result_arr[0]->ch_email ?>')">
+    <input type="button" style="display:  none;" name="" value="Resend Code" class="chresend_btn" onclick="send_church_code1('<?= $result_arr[0]->id ?>','<?= $result_arr[0]->ch_email ?>')">
      <span style="display: none" class="send_success1">
         Varification code resend successfully..
     </span>
