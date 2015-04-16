@@ -22,25 +22,25 @@ $special_note = json_decode($church_arr[0]->ch_special_note);
               foreach ($ser_arr as $val){
 			  $time_interval = '';
 			  if($val->ch_service_week_day == 'Mon') { 
-				$time_interval_mon .=rtrim($val->c_start_time,':00' ).' - '. $val->c_end_time.' , ';
+				$time_interval_mon .=getShortDate($val->c_start_time,4).' - '. $val->c_end_time.' , ';
 			  }
 			  if($val->ch_service_week_day == 'Tue') { 
-				$time_interval_tue .=rtrim($val->c_start_time,':00' ).' - '. rtrim($val->c_end_time,':00') .' , ';
+				$time_interval_tue .=$val->c_start_time.' - '. $val->c_end_time.' , ';
 			  }
 			  if($val->ch_service_week_day == 'Wed') { 
-				$time_interval_wed .=rtrim($val->c_start_time,':00' ).' - '. rtrim($val->c_end_time,':00') .' , ';
+				$time_interval_wed .=$val->c_start_time.' - '. $val->c_end_time.' , ';
 			  }
 			  if($val->ch_service_week_day == 'Thurs') { 
-				$time_interval_thurs .= rtrim($val->c_start_time,':00' ).' - '. rtrim($val->c_end_time,':00') .' , ';
+				$time_interval_thurs .= $val->c_start_time.' - '. $val->c_end_time.' , ';
 			  }
 			  if($val->ch_service_week_day == 'Fri') { 
-				$time_interval_fri .= rtrim($val->c_start_time,':00' ).' - '. rtrim($val->c_end_time,':00') .' , ';
+				$time_interval_fri .= $val->c_start_time.' - '. $val->c_end_time.' , ';
 			  }
 			  if($val->ch_service_week_day == 'Sat') { 
-				$time_interval_sat .= rtrim($val->c_start_time,':00' ).' - '. rtrim($val->c_end_time,':00') .' , ';
+				$time_interval_sat .= $val->c_start_time.' - '. $val->c_end_time.' , ';
 			  }
 			  if($val->ch_service_week_day == 'Sun') { 
-				$time_interval_sun .= rtrim($val->c_start_time,':00' ).' - '. rtrim($val->c_end_time,':00') .' , ';
+				$time_interval_sun .= $val->c_start_time.' - '. $val->c_end_time.' , ';
 			  }
 		}
           ?>
