@@ -44,13 +44,13 @@ $special_note = json_decode($church_arr[0]->ch_special_note);
 			  }
 		}
           ?>
-       <?php if($time_interval_mon) { ?> <li> <span><?php  echo 'Mon : '.rtrim($time_interval_mon ,','); ?></span></li><?php } ?>
-	<?php if($time_interval_tue) { ?>	<li> <span> <?php echo 'Tue : '.rtrim($time_interval_tue ,','); ?> </span> </li><?php } ?>
-		<?php if ($time_interval_wed) { ?><li> <span>  <?php echo 'Wed : '.rtrim($time_interval_wed ,','); ?> </span> </li><?php } ?>
-		<?php if ($time_interval_thurs) { ?><li> <span> <?php  echo 'Thurs : '.rtrim($time_interval_thurs ,','); ?> </span> </li><?php } ?>
-		<?php if ($time_interval_fri) { ?><li> <span>  <?php echo 'Fri : '.rtrim($time_interval_fri ,','); ?></span> </li><?php } ?>
-        <?php if ($time_interval_sat) { ?>	<li> <span>  <?php echo 'Sat : '.rtrim($time_interval_sat ,',');  ?> </span> </li> <?php } ?>
-	<?php if ($time_interval_sun) { ?>	<li> <span>  <?php echo 'Sun : '.rtrim($time_interval_sun ,','); ?></span> </li><?php } ?>
+       <?php if($time_interval_mon) { ?> <li> <?php  echo '<span class="time-label">'.'Mon : '.'</span>'. '<span class="time-text">'.rtrim($time_interval_mon ,',').'</span>'; ?>'</li><?php } ?>
+	<?php if($time_interval_tue) { ?>	<li> <?php echo '<span class="time-label">'.'Tue : '.'</span>'. '<span class="time-text">'.rtrim($time_interval_tue ,',').'</span>'; ?>'</li><?php } ?>
+		<?php if ($time_interval_wed) { ?><li> <?php echo '<span class="time-label">'.'Wed : '.'</span>'. '<span class="time-text">'.rtrim($time_interval_wed ,',').'</span>'; ?>'</li><?php } ?>
+		<?php if ($time_interval_thurs) { ?><li> <?php  echo '<span class="time-label">'.'Thurs : '.'</span>'. '<span class="time-text">'.rtrim($time_interval_thurs ,',').'</span>'; ?>'</li><?php } ?>
+		<?php if ($time_interval_fri) { ?><li> <?php echo '<span class="time-label">'.'Fri : '.'</span>'. '<span class="time-text">'.rtrim($time_interval_fri ,',').'</span>'; ?>'</li><?php } ?>
+        <?php if ($time_interval_sat) { ?>	<li> <?php echo '<span class="time-label">'.'Sat : '.'</span>'. '<span class="time-text">'.rtrim($time_interval_sat ,',').'</span>'; ?>'</li><?php } ?>
+	<?php if ($time_interval_sun) { ?>	<li> <?php echo '<span class="time-label">'.'Sun : '.'</span>'. '<span class="time-text">'.rtrim($time_interval_sun ,',').'</span>'; ?>'</li><?php } ?>
           <?php 
               }
                else{?> 
@@ -62,7 +62,7 @@ $special_note = json_decode($church_arr[0]->ch_special_note);
     <div class="church-time">Office Hours 
 <ul class="ch-notification">
 	<?php foreach ($open_time As $openkey => $openval) { ?>
-	<li><?= $openkey; ?> : <?php if($openval == 'Closed') { ?> <?= $openval; ?> <? } else { ?> <?= $openval; ?> - <?= $close_time->$openkey;  } ?> <?php if($special_note->$openkey != '') { ?> (lunch <?=$special_note->$openkey;?> ) <?php } ?></li>
+    <li><span class="office-hours-label"><?= $openkey; ?> :</span> <span class="office-hours-text"><?php if($openval == 'Closed') { ?> <?= $openval; ?> <? } else { ?> <?= $openval; ?> - <?= $close_time->$openkey;  } ?> <?php if($special_note->$openkey != '') { ?> (lunch <?=$special_note->$openkey;?> ) <?php } ?></span></li>
 	<?php } ?>
     </ul>
 	</div>
