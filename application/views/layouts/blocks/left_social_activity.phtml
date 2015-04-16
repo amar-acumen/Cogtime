@@ -137,12 +137,19 @@
 </div>
                 <?php 
                 }
-                echo $cnt;
+                if($cnt > 0){
+                    $_SESSION['is_subadmin_of_any_church'] = 1;
+                }else{
+                    if($_SESSION['is_subadmin_of_any_church'] != ''){
+                        unset($_SESSION['is_subadmin_of_any_church']);
+                    }
+                }
+               // echo $cnt;
                 ?>    
 
 <?php
 //echo $numrow_superadmin;
-if($numrow_superadmin == 0 && $_SESSION['subadmin_role'] != 2){
+if($numrow_superadmin == 0 && $_SESSION['is_subadmin_of_any_church'] == 1){
 ?>
 <!--add new-->
 <li><a href="javascript:void(0)" class="" id="ch_vr1" onclick="$('.v-code').slideToggle();">Create Church Space<img src="images/icons/plus-ico-ch.png" alt="" class="add-new-church"/></a></li>
