@@ -155,13 +155,13 @@ select{ font-size:13px !important;}
 .church-time span.office-hours-label{
     float: left;
     font-size: 15px;
-    width: 63px;
+    width: 85px;
 }
 .church-time span.office-hours-text{
     float: left;
     font-size: 14px;
     line-height: 18px;
-    width: 180px;
+    width: 165x;
 }
 .ch-notification li{margin-bottom: 5px;}
 
