@@ -157,7 +157,7 @@ select{ font-size:13px !important;}
     font-size: 15px;
     width: 63px;
 }
-.church-time span.office-hours-label{
+.church-time span.office-hours-text{
     float: left;
     font-size: 14px;
     line-height: 18px;
