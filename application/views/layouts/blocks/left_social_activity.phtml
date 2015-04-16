@@ -140,11 +140,12 @@
                 if($cnt > 0){
                     $_SESSION['is_subadmin_of_any_church'] = 1;
                 }else{
+                    echo 'error';
                     if($_SESSION['is_subadmin_of_any_church'] != ''){
                         unset($_SESSION['is_subadmin_of_any_church']);
                     }
                 }
-               // echo $cnt;
+                echo $cnt;
                 ?>    
 
 <?php
