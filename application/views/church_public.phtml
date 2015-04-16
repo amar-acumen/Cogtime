@@ -126,12 +126,10 @@ $special_note = json_decode($church_arr[0]->ch_special_note);
             } ?>
     </h3>
       <p class="church-address-text02">
-10 Johnson Way
-London, England
-United Kingdom
+<?= $church_arr[0] ->s_address ?>
   <br>
-Tel : +442086582213<br>
-Email : <a href="mailto:robaghadiuno@hotmail.com ">robaghadiuno@hotmail.com </a>
+Tel : <?= $church_arr[0]->s_phone ?><br>
+Email : <a href="mailto:<?= $church_arr[0]->ch_email ?>"><?= $church_arr[0]->ch_email ?></a>
 </p>
     <p><?= $church_arr[0]->w_des; ?> </p>
      <ul class="church-gallery">
