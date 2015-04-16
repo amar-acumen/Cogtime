@@ -138,10 +138,9 @@ select{ font-size:13px !important;}
 }
 
 .church-service ul li span.church-address-text{
-    float: left;
     font-size: 14px;
     line-height: 18px;
-    width: 194px;
+    display: block;
 }
 
 
