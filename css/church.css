@@ -176,8 +176,20 @@ select{ font-size:13px !important;}
 
 
 .church-right h3{ color:#013d62; padding:0px 0 10px 0px; margin:0;  font-size:20px; font-weight:normal; text-transform:uppercase; }
-.church-right h3 a{ background:url(../images/join-now.png) 0 0 no-repeat; text-decoration:none; width:170px; height:48px; display:inline-block; text-align:center; color:#fff; line-height:48px; font-size:20px; text-transform:uppercase;}
 
+.church-right h3 a {
+    background: url("../images/join-now-small.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+    color: #fff;
+    display: inline-block;
+    font-size: 14px;
+    height: 29px;
+    line-height: 30px;
+    margin: -3px 0 0 8px;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    width: 100px;
+}
 .church-right h3 a:hover{ background-position:bottom center;}
 
 .church-right p{ font-size:15px; color:#48535a; line-height:19px; padding-bottom:30px;}
