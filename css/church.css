@@ -136,6 +136,8 @@ select{ font-size:13px !important;}
     line-height: 18px;
     width: 194px;
 }
+.church-service ul li span.time-text a{text-decoration: none; color:#48535a;}
+.church-service ul li span.time-text a:hover{text-decoration: underline;}
 
 .church-service ul li span.church-address-text{
     font-size: 14px;
