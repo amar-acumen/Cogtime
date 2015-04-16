@@ -23,27 +23,45 @@ $special_note = json_decode($church_arr[0]->ch_special_note);
 			  $time_interval = '';
 			  if($val->ch_service_week_day == 'Mon') { 
                                  $stat_time = explode(':',$val->c_start_time);
-                                 pr($stat_time);
+                                
                                  $end_time = explode(':',$val->c_end_time);
 				$time_interval_mon .=$stat_time[0].':'.$stat_time[1].' - '. $end_time[0].':'.$end_time[1].' , ';
 			  }
 			  if($val->ch_service_week_day == 'Tue') { 
-				$time_interval_tue .=$val->c_start_time.' - '. $val->c_end_time.' , ';
+                               $stat_time = explode(':',$val->c_start_time);
+                                
+                                 $end_time = explode(':',$val->c_end_time);
+				$time_interval_tue .=$stat_time[0].':'.$stat_time[1].' - '. $end_time[0].':'.$end_time[1].' , ';
 			  }
-			  if($val->ch_service_week_day == 'Wed') { 
-				$time_interval_wed .=$val->c_start_time.' - '. $val->c_end_time.' , ';
+			  if($val->ch_service_week_day == 'Wed') {
+                               $stat_time = explode(':',$val->c_start_time);
+                                
+                                 $end_time = explode(':',$val->c_end_time);
+				$time_interval_wed .=$stat_time[0].':'.$stat_time[1].' - '. $end_time[0].':'.$end_time[1].' , ';
 			  }
 			  if($val->ch_service_week_day == 'Thurs') { 
-				$time_interval_thurs .= $val->c_start_time.' - '. $val->c_end_time.' , ';
+                               $stat_time = explode(':',$val->c_start_time);
+                                
+                                 $end_time = explode(':',$val->c_end_time);
+				$time_interval_thurs .= $stat_time[0].':'.$stat_time[1].' - '. $end_time[0].':'.$end_time[1].' , ';
 			  }
 			  if($val->ch_service_week_day == 'Fri') { 
-				$time_interval_fri .= $val->c_start_time.' - '. $val->c_end_time.' , ';
+                               $stat_time = explode(':',$val->c_start_time);
+                                
+                                 $end_time = explode(':',$val->c_end_time);
+				$time_interval_fri .= $stat_time[0].':'.$stat_time[1].' - '. $end_time[0].':'.$end_time[1].' , ';
 			  }
 			  if($val->ch_service_week_day == 'Sat') { 
-				$time_interval_sat .= $val->c_start_time.' - '. $val->c_end_time.' , ';
+                               $stat_time = explode(':',$val->c_start_time);
+                                
+                                 $end_time = explode(':',$val->c_end_time);
+				$time_interval_sat .= $stat_time[0].':'.$stat_time[1].' - '. $end_time[0].':'.$end_time[1].' , ';
 			  }
-			  if($val->ch_service_week_day == 'Sun') { 
-				$time_interval_sun .= $val->c_start_time.' - '. $val->c_end_time.' , ';
+			  if($val->ch_service_week_day == 'Sun') {
+                               $stat_time = explode(':',$val->c_start_time);
+                                
+                                 $end_time = explode(':',$val->c_end_time);
+				$time_interval_sun .=$stat_time[0].':'.$stat_time[1].' - '. $end_time[0].':'.$end_time[1].' , ';
 			  }
 		}
           ?>
