@@ -58,7 +58,7 @@ if($result_arr){
     else if($val->i_disabled == 1 && $val->ch_verification_code != '' && $val->ch_page_url == ''){
         
         ?>
-    <input type="button" name="" value="Resend Code" class="chresend_btn" onclick="send_church_code1('<?= $val->id ?>','<?= $val->ch_email ?>')">
+    <input type="button" style="display: none;" name="" value="Resend Code" class="chresend_btn" onclick="send_church_code1('<?= $val->id ?>','<?= $val->ch_email ?>')">
      <span style="display: none" class="send_success1">
         Varification code resend successfully..
     </span>
@@ -94,8 +94,9 @@ if($result_arr){
     <h1 align="center"><a href="<?= $val->ch_public_url ?>" class="church-register"> View church Space</a> </h1>
             <?php
         
-    }?>
-    
+    } else if($val->ch_email == ''){?>
+    <h1 align="center"><a href="javascript:void(0)" onclick="church_eligibility()" class="church-register">Click</a> </h1>
+    <?php } ?>
     </div>
 </div>
 <?php
@@ -103,7 +104,7 @@ if($result_arr){
 }else{
     ?>
 
-<h1 id='no_res'>No church registered with this email id..</h1>
+<h1 id='no_res'>No church registered with this details</h1>
 <h2 align="center" style="display: none;"><a id="open_box" href="javascript:void(0)" class="church-register">Register a new church</a></h2>
 
 
@@ -317,7 +318,10 @@ function add_new_church(){
 
    // alert(datatosend);
 }
-
+function church_eligibility(){
+    var msg = 'This church is not eligible for creating church space, because church is not registed with spacific mail id';
+    showUIMsg(msg);
+}
 </script>
 <?php
 }
