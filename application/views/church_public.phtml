@@ -15,7 +15,7 @@ $special_note = json_decode($church_arr[0]->ch_special_note);
 <div class="container">
   <div class="church-left">
     <div class="church-service">
-      <h3>Services Today</h3>
+      <h3>Service Times</h3>
       <ul>
           <?php 
           if(!empty($ser_arr)){
@@ -44,13 +44,13 @@ $special_note = json_decode($church_arr[0]->ch_special_note);
 			  }
 		}
           ?>
-        <li> <span> <?php if($time_interval_mon) { echo 'Mon : '.rtrim($time_interval_mon ,','); } ?></span> </li>
-		<li> <span> <?php if($time_interval_tue) { echo 'Tue : '.rtrim($time_interval_tue ,','); } ?></span> </li>
-		<li> <span> <?php if ($time_interval_wed) { echo 'Wed : '.rtrim($time_interval_wed ,','); } ?></span> </li>
-		<li> <span> <?php if ($time_interval_thurs) { echo 'Thurs : '.rtrim($time_interval_thurs ,','); } ?></span> </li>
-		<li> <span> <?php if ($time_interval_fri) { echo 'Fri : '.rtrim($time_interval_fri ,','); } ?></span> </li>
-		<li> <span> <?php if ($time_interval_sat) { echo 'Sat : '.rtrim($time_interval_sat ,','); } ?></span> </li>
-		<li> <span> <?php if ($time_interval_sun) { echo 'Sun : '.rtrim($time_interval_sun ,','); } ?></span> </li>
+       <?php if($time_interval_mon) { ?> <li> <span><?php  echo 'Mon : '.rtrim($time_interval_mon ,','); ?></span></li><?php } ?>
+	<?php if($time_interval_tue) { ?>	<li> <span> <?php echo 'Tue : '.rtrim($time_interval_tue ,','); ?> </span> </li><?php } ?>
+		<?php if ($time_interval_wed) { ?><li> <span>  <?php echo 'Wed : '.rtrim($time_interval_wed ,','); ?> </span> </li><?php } ?>
+		<?php if ($time_interval_thurs) { ?><li> <span> <?php  echo 'Thurs : '.rtrim($time_interval_thurs ,','); ?> </span> </li><?php } ?>
+		<?php if ($time_interval_fri) { ?><li> <span>  <?php echo 'Fri : '.rtrim($time_interval_fri ,','); ?></span> </li><?php } ?>
+        <?php if ($time_interval_sat) { ?>	<li> <span>  <?php echo 'Sat : '.rtrim($time_interval_sat ,',');  ?> </span> </li> <?php } ?>
+	<?php if ($time_interval_sun) { ?>	<li> <span>  <?php echo 'Sun : '.rtrim($time_interval_sun ,','); ?></span> </li><?php } ?>
           <?php 
               }
                else{?> 
@@ -59,7 +59,7 @@ $special_note = json_decode($church_arr[0]->ch_special_note);
        
       </ul>
     </div>
-    <div class="church-time">The Church is open 
+    <div class="church-time">Office Hours 
 <ul class="ch-notification">
 	<?php foreach ($open_time As $openkey => $openval) { ?>
 	<li><?= $openkey; ?> : <?php if($openval == 'Closed') { ?> <?= $openval; ?> <? } else { ?> <?= $openval; ?> - <?= $close_time->$openkey;  } ?> <?php if($special_note->$openkey != '') { ?> (lunch <?=$special_note->$openkey;?> ) <?php } ?></li>
