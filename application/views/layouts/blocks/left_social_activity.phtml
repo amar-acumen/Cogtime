@@ -132,7 +132,7 @@
 
 <?php
 //echo $numrow_superadmin;
-if($numrow_superadmin == 0){
+if($numrow_superadmin == 0 && $role != 2){
 ?>
 <!--add new-->
 <li><a href="javascript:void(0)" class="" id="ch_vr1" onclick="$('.v-code').slideToggle();">Create Church Space<img src="images/icons/plus-ico-ch.png" alt="" class="add-new-church"/></a></li>
