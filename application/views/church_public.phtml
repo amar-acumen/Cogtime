@@ -91,9 +91,9 @@ $special_note = json_decode($church_arr[0]->ch_special_note);
       
       <!--Church Address-->
       <div class="church-service">
-      <h3>Church Address</h3>
+      <h3><?= $church_arr[0]->s_name; ?></h3>
         <ul>
-            <li> <span class="church-address-text"><?= $church_arr[0]->s_name; ?><br>
+            <li> <span class="church-address-text">
                     <?= $church_arr[0] ->s_address ?><br>
            <?= get_city_name_by_id($church_arr[0] ->i_city_id).', '.get_state_name_by_id($church_arr[0] ->i_state_id) ?><br>
          
