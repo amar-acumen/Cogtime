@@ -114,11 +114,13 @@ select{ font-size:13px !important;}
 
 .church-service h3{ color:#013d62; padding:16px 0 17px 21px; margin:0; font-family: 'GibsonRegular'; font-size:18px; font-weight:normal; border-bottom:1px solid #e7e7e7; }
 
-.church-service ul{ padding:16px 0 0px 21px; margin:0;}
+.church-service ul{ padding:16px 0 5px 21px; margin:0;}
 
-.church-service ul li{ list-style-type:none; font-size:15px; color:#48535a; font-family: 'GibsonRegular'; padding:0 0 0px 0; margin:0;}
+.church-service ul li{ list-style-type:none; font-size:15px; color:#48535a; font-family: 'GibsonRegular'; padding:0 0 10px 0; margin:0;}
 .church-service ul li:after,
-.church-service ul li:before{content: ""; display: table; clear: both;}
+.church-service ul li:before,
+.ch-notification li:after,
+.ch-notification li:before{content: ""; display: table; clear: both;}
 
 .church-service ul li span{min-width:67px; display:inline-block;}
 .church-service ul li span.time-label {
@@ -141,6 +143,27 @@ select{ font-size:13px !important;}
 .church-time{ background:#343434; color:#fff; font-size:16px; font-family: 'GibsonRegular'; width:251px; padding:15px 0px 15px 21px; margin-bottom:30px;}
 
 .church-time span{ display:block;}
+
+.church-time h3{
+    border-bottom: 1px solid #ccc;
+    font-size: 18px;
+    font-weight: normal;
+    margin: 0 0 15px -21px;
+    padding: 0 0 8px 21px;
+    color: #ffffff;
+}
+.church-time span.office-hours-label{
+    float: left;
+    font-size: 15px;
+    width: 63px;
+}
+.church-time span.office-hours-label{
+    float: left;
+    font-size: 14px;
+    line-height: 18px;
+    width: 180px;
+}
+.ch-notification li{margin-bottom: 5px;}
 
 
 
