@@ -31,7 +31,7 @@ $special_note = json_decode($church_arr[0]->ch_special_note);
 				$time_interval_wed .= $val->c_start_time .' - '.$val->c_end_time .' , ';
 			  }
 			  if($val->ch_service_week_day == 'Thurs') { 
-				$time_interval_thurs .= $val->c_start_time .' - '.$val->c_end_time .' , ';
+				$time_interval_thurs .= rtrim($val->c_start_time,':00' ).' - '. rtrim($val->c_end_time,':00') .' , ';
 			  }
 			  if($val->ch_service_week_day == 'Fri') { 
 				$time_interval_fri .= $val->c_start_time .' - '.$val->c_end_time .' , ';
