@@ -1,6 +1,6 @@
 <h6 class="adv_sr_res">Search Result:</h6>
 <?php
-pr($result_arr);
+//pr($result_arr);
 if($result_arr){
     foreach ($result_arr as $val){
     
@@ -23,7 +23,7 @@ if($result_arr){
             <li><span>Postcode : </span><?= $val->s_postcode ?></li>
     
         </ul>
-    <?php if($val->i_disabled == 1 && $val->ch_verification_code == '' && $val->ch_page_url == ''){ ?>
+    <?php if($val->i_disabled == 1 && $val->ch_verification_code == '' && $val->ch_page_url == '' && $val->ch_email !='' ){ ?>
                           
         <input type="button" name="" value="Create Church Space" id="crt-churchsp" class="chresend_btn" onclick="send_church_code('<?= $val->id ?>','<?= $val->ch_email ?>')">
     <span style="display: none" class="send_success">
@@ -55,7 +55,7 @@ if($result_arr){
     
     </script>
     <?php }
-    else if($val->i_disabled == 1 && $val->ch_verification_code != '' && $val->ch_page_url == ''){
+    else if($val->i_disabled == 1 && $val->ch_verification_code != '' && $val->ch_page_url == '' && $val->ch_email != '' ){
         
         ?>
     <input type="button" style="display: none;" name="" value="Resend Code" class="chresend_btn" onclick="send_church_code1('<?= $val->id ?>','<?= $val->ch_email ?>')">
