@@ -1539,7 +1539,7 @@ class Events_model extends Base_model {
     public function get_latest_admin_events() {
         $sql = $this->db->query('select s_title,s_desc,s_city,s_state,i_country_id,dt_start_time,dt_end_time from cg_events where  i_status="1" and  dt_end_time >  NOW() order by RAND() DESC limit 0,2 ');
         $res = $sql->result_array();
-       // echo $this->db->last_query();
+        echo $this->db->last_query();
         return $res;
     }
 
