@@ -20,8 +20,9 @@ if(count($arr_prayer_request)){
         tempor Lorem ipsum dolor sit amet.</p><?php */?>
                             <p class="date-time" style="padding-bottom: 5px; padding-top:3px;">Updated on: <?=get_time_elapsed($val['dt_insert_date'])?></p>
                             <!--<p class="location">Location: City, State, Country </p>-->
-                            
+                                             <?php if($val['s_country_name']){ ?>
                 			<p class="place" style="padding-bottom: 5px;  padding-top:3px; color:#013D62;"><?=$val['s_country_name']?></p>
+                                             <?php } ?>
                 			 
                 			
                 
