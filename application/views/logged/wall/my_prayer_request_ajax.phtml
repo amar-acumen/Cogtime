@@ -14,7 +14,7 @@ if(count($arr_prayer_request)){
         <div class="txt_content01"> <a href="<?=$profile_link?>"><div style="background:url('<?=$profile_image_filename?>') no-repeat center;width:60px; height:60px;" class="pro_photo"></div></a>
                       <div class="left_div01a">
                             <p class="blue_bold12"><a  href="<?=$profile_link?>"><?=$val['s_profile_name']?></a></p>
-                            <p class="date-time" style="padding-bottom: 5px;  padding-top:3px;">From:  <?=getShortDateWithTime($val['dt_start_date'], 6)?>  To:  <?=getShortDateWithTime($val['dt_end_date'], 6)?></p>
+                            <p class="date-time" style="padding-bottom: 5px;  padding-top:3px;">From:  <?=getShortDateWithTime($val['dt_start_date'], 6)?> &nbsp; To:  <?=getShortDateWithTime($val['dt_end_date'], 6)?></p>
                             <p ><?=$DESC?></p>
                            <?php /*?> <p class="light-grey">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eius
         tempor Lorem ipsum dolor sit amet.</p><?php */?>
