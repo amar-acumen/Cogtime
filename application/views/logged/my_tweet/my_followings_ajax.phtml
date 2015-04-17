@@ -19,7 +19,7 @@ if(count($arr_followings)){
                   <p><?=nl2br(my_substr($val['s_about_me'], 160))?></p>
                 	
                 </div>
-                <div class="follow-section" id="tweet_follow_status<?=$val['i_accepter_id']?>"  style=" margin-top: -45px;">
+                <div class="follow-section" id="tweet_follow_status<?=$val['i_accepter_id']?>" >
 					  <?php if($is_follow == false && intval(decrypt($this->session->userdata('user_id'))) != $val['i_accepter_id']){
                           
                       ?>
