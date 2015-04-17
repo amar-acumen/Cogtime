@@ -3876,7 +3876,7 @@ function get_friend_suggestion() {
         from cg_users u,cg_user_contacts e where 1 
         AND e.i_accepter_id=u.id AND e.s_status='accepted' 
     AND u.i_status=1 and u.i_isdeleted=1 ORDER BY RAND() LIMIT 2"); 
-    echo $ci->db->last_query();   die('d');
+   // echo $ci->db->last_query();   die('d');
     $res = $q->result_array();
     return $res;
 }
