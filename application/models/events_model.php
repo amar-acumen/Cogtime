@@ -1537,7 +1537,7 @@ class Events_model extends Base_model {
     }
 
     public function get_latest_admin_events() {
-        $sql = $this->db->query('select s_title,s_desc,s_city,s_state,i_country_id,dt_start_time,dt_end_time from cg_events where i_user_type = "2" and i_status="1" and  NOW() < dt_end_time order by dt_created_on DESC limit 0,2 ');
+       echo $sql = $this->db->query('select s_title,s_desc,s_city,s_state,i_country_id,dt_start_time,dt_end_time from cg_events where i_user_type = "2" and i_status="1" and  NOW() < dt_end_time order by dt_created_on DESC limit 0,2 ');
         $res = $sql->result_array();
         return $res;
     }
