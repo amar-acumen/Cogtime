@@ -12028,7 +12028,7 @@ font-size: 17px; float: none; height: 30px; font-weight: normal; text-align: lef
 .lightbox.salvation_prayer .mid p img{ width: 100%; height: auto;}
 
 
-.online-for{ float: left; color: #000; font-size: 12px; font-family:'GibsonRegular'; font-weight: normal; line-height: 11px; margin-right: 22px; }
+.online-for{ float: left; color: #000; font-size: 12px; font-family:'GibsonRegular'; font-weight: normal; line-height: 11px; margin-right: 22px; padding: 6px 0 0 0; }
 
 .left_div03 .top-section .text-part.events-text-part{ width:272px; float:left;}
 
