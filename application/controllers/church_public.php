@@ -343,7 +343,17 @@ class Church_public extends Base_controller
                                'is_deleted' => 0
                             );
                         }
-                         $this->db->insert('cg_church_member', $data); 
+                       $inset =  $this->db->insert('cg_church_member', $data); 
+                       if($inset){
+                           $data1 = array(
+                               'church_id' => $_SESSION['current_church_id'] ,
+                               'name' => get_formatted_string($posted['txt_first_name']).' '.get_formatted_string($posted['txt_last_name']),
+                               'email' => trim($posted['txt_email']),
+                               'status'=> 0,
+                               'invitation_sent_date' => get_db_datetime()
+                           );
+                           $this->db->insert('cg_church_member_invitation', $data); 
+                       }
 						if ($_SESSION['invited_member_id'] != null)
                                                      {
                                                     $data = array(
