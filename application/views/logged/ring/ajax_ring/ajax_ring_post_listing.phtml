@@ -53,9 +53,13 @@ $logged_id=intval(decrypt($_SESSION['user_id']));
               <ul>
 				<li class="first"><a href="javascript:void(0);" >Comment</a></li>
                   <li ><a  href="javascript:void(0);" id="like_count_<?=$val['id']?>"  >Like</a></li>
+                  <?php
+                   
+                  if($val['post_owner_user_id'] == $logged_id){
+                  ?>
                   <li ><a  href="javascript:void(0);" id="edit<?=$val['id']?>"  >Edit</a></li>
-                  <li ><a  href="javascript:void(0);" id="edit<?=$val['id']?>"  >Delete</a></li>
-				 
+                  <li ><a  href="javascript:void(0);" id="del<?=$val['id']?>"  >Delete</a></li>
+                  <?php } ?>	 
                   
 				
 
