@@ -71,7 +71,7 @@ $logged_id=intval(decrypt($_SESSION['user_id']));
        <?php 
 	   }
 	   }
-           if($val['post_owner_user_id'] == $logged_id || get_ring_owner_id($val['i_ring_id']) == $logged_id){ ?>
+           if(!(in_array(intval(decrypt($this->session->userdata('user_id'))),$ring_members_ajax) || $val['i_user_id'] == intval(decrypt($this->session->userdata('user_id')))) && ($val['post_owner_user_id'] == $logged_id || get_ring_owner_id($val['i_ring_id']) == $logged_id)){ ?>
              <li class="right">
               <ul>
 				<li class="first"><a href="javascript:void(0);" >Edit</a></li>
