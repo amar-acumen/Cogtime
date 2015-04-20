@@ -276,7 +276,7 @@ function report_abuse_profile(id)
                 <div class="write-text">
                     <input type="text" id="ring_post<?= $val['id'] ?>" value="<?=$val['s_post_title']?>">
                 <textarea onkeypress="return restrict_carrige(event);" onkeyup="limitTextarea(this.form.wall_msg,this.form.countdown,500);" onkeydown="limitTextarea(this.form.wall_msg,this.form.countdown,500);" maxlength="500" onblur="if(this.value=='')this.value='Max 500 Characters';" onfocus="if(this.value=='Max 500 Characters')this.value='';" id="wall_msg" name="wall_msg"><?=$val['s_post_description']?></textarea>
- <p style=" clear:both; float:left"> <span id="text_count">3</span> Characters</p>
+ <p style=" clear:both; float:left"> <span id="text_count"></span> Characters</p>
                 </div>
                <!-- text div end  -->
 			  
@@ -336,5 +336,8 @@ function report_abuse_profile(id)
   
   function show_edit_span(id){
       $('#edit-post-box'+id).slideDown();
+  }
+  function show_hidden(id){
+      $('#edit-post-box'+id).slideUp();
   }
   </script>
