@@ -352,7 +352,7 @@ class Church_public extends Base_controller
                                'status'=> 0,
                                'invitation_sent_date' => get_db_datetime()
                            );
-                           $this->db->insert('cg_church_member_invitation', $data); 
+                           $this->db->insert('cg_church_member_invitation', $data1); 
                        }
 						if ($_SESSION['invited_member_id'] != null)
                                                      {
