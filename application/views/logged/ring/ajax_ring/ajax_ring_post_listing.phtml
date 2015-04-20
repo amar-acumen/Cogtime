@@ -327,7 +327,7 @@ function report_abuse_profile(id)
   
   function show_edit_span(id){
       $('#edit-ring-post-box'+id).slideDown();
-     
+     $('#cmnt'+id).hide();
   }
   function show_hidden(id){
       $('#edit-ring-post-box'+id).slideUp();
@@ -343,6 +343,7 @@ function report_abuse_profile(id)
        success: function (data) {
                       if(data.status == 'ok'){
                          $('#edit-ring-post-box'+id).slideUp();
+                         
                           $('#rng_post_des'+id).html(data.rng_post_des);
                            $('#rng_post_title'+id).html(data.rng_post_title);
                       }  
