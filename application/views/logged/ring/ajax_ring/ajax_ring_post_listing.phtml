@@ -266,16 +266,16 @@ function report_abuse_profile(id)
                                         <img width="13" height="10" onclick="show_hidden('<?= $val['id'] ?>')" src="images/minus-white.png" alt="" class="wal-minus">
                                   </div>
                             </div>
-                              <div id="post_content_312" class="txt_content01 comments-number-content content-width"> 
+                            <div id="post_content_312" class="txt_content01 comments-number-content content-width" style="overflow-y: visible;"> 
                               
                               
       
 	 
               <!--  text div start -->
               <div class=" comment-content nw-comment-content">
-                <div class="write-text">
-                    <input type="text" id="ring_post<?= $val['id'] ?>" value="<?=$val['s_post_title']?>">
-                    <div class="clr"></div>
+                  <input type="text" id="ring_post<?= $val['id'] ?>" value="<?=$val['s_post_title']?>" style="margin-bottom: 10px;">
+                  <div class="clr"></div>
+                  <div class="write-text" style="width: auto;">
                     <textarea  maxlength="500"  id="ring_post_des<?= $val['id'] ?>" name="ring_post_des<?= $val['id'] ?>"><?=$val['s_post_description']?></textarea>
                     
                      <input type="submit" value="Post" class="wall-comment-submit-nw " name="" onclick="edit_ring_post('<?= $val['id'] ?>');">
