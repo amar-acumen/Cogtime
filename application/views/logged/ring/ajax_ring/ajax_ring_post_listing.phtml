@@ -24,7 +24,7 @@ $logged_id=intval(decrypt($_SESSION['user_id']));
            <li class="first left"><a  class="comments_div<?=$val['id']?>"  onclick="return show_comments(<?=$val['id']?>)" href="javascript:void(0);">Comments (<?=$val['total_comments']?>)</a><!--Comments (<span><a href="#">2</a></span>)--></li>
            <li class="left"><a onclick="return show_people_liked(<?=$val['id']?>); " class="liked_by_<?=$val['id']?>" href="javascript:void(0);">Liked By (<?=count_ring_post_like_link($val['id'])?>)</a></li> 
          
-                  <?php if($logged_id !=$val['i_user_id']):?> <li class="left"><a href="javascript:void(0);" >Report Abuse </a>&nbsp;|</li><?php endif;?>
+                  <?php if($logged_id !=$val['i_user_id']):?> <li class="left"><a href="javascript:void(0);" >Report Abuse </a><?php endif;?>
          
         <?php 
 	#pr($ring_members_ajax);echo intval(decrypt($this->session->userdata('user_id')));exit;
@@ -47,7 +47,7 @@ $logged_id=intval(decrypt($_SESSION['user_id']));
           </li>
                                
        <?php } 
-	   		else{ 
+	   		else if($val['post_owner_user_id'] == $logged_id || get_ring_owner_id($val['i_ring_id']) == $logged_id){ 
 	   ?>
              <li class="right">
               <ul>
