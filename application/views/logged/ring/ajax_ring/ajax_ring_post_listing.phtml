@@ -342,7 +342,7 @@ function report_abuse_profile(id)
        data: ({'id':id , 'post_title' : post_title , 'post_des' : post_des}),
        success: function (data) {
                       if(data.status == 'ok'){
-                          $('#edit-post-box'+id).slideUp();
+                         $('#edit-ring-post-box'+id).slideDown();
                           $('#rng_post_des'+id).html(data.rng_post_des);
                            $('#rng_post_title'+id).html(data.rng_post_title);
                       }  
