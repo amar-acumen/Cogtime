@@ -266,7 +266,7 @@ function report_abuse_profile(id)
   
   
   
-   <div id="edit-post-box<?= $val['id'] ?>" class="comments-number content-width" style="display: none;" >
+   <div id="edit-ring-post-box<?= $val['id'] ?>" class="comments-number content-width" style="display: none;" >
                         <div class="comments-number-mid content-width " style="overflow-y: visible; height: 19px;">
                             <div class="heading">
                                   <div class="left">
@@ -326,11 +326,11 @@ function report_abuse_profile(id)
     }
   
   function show_edit_span(id){
-      $('#edit-post-box'+id).slideDown();
+      $('#edit-ring-post-box'+id).slideDown();
      
   }
   function show_hidden(id){
-      $('#edit-post-box'+id).slideUp();
+      $('#edit-ring-post-box'+id).slideUp();
   }
   function edit_ring_post(id){
       var post_title = $('#ring_post'+id).val();
