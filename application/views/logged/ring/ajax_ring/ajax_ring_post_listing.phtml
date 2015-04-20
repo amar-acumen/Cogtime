@@ -272,22 +272,21 @@ function report_abuse_profile(id)
       
 	 
               <!--  text div start -->
-			   <div class=" comment-content nw-comment-content">
+              <div class=" comment-content nw-comment-content">
                 <div class="write-text">
                     <input type="text" id="ring_post<?= $val['id'] ?>" value="<?=$val['s_post_title']?>">
-                <textarea  maxlength="500"  id="ring_post_des<?= $val['id'] ?>" name="ring_post_des<?= $val['id'] ?>"><?=$val['s_post_description']?></textarea>
- <p style=" clear:both; float:left"> <span id="text_count"></span> Characters</p>
+                    <div class="clr"></div>
+                    <textarea  maxlength="500"  id="ring_post_des<?= $val['id'] ?>" name="ring_post_des<?= $val['id'] ?>"><?=$val['s_post_description']?></textarea>
+                    
+                     <input type="submit" value="Post" class="wall-comment-submit-nw " name="" onclick="edit_ring_post('<?= $val['id'] ?>');">
+                     <br class="clr">
                 </div>
                <!-- text div end  -->
 			  
-            </div>
-            <div class="tab_content button-set type-text">
+              </div>
+
             
-            </div>
-            
-              <input type="submit" value="Post" class="wall-comment-submit-nw " name="" onclick="edit_ring_post('<?= $val['id'] ?>');">
-      
-                              <br class="clr">
+              
                               </div>
                       </div>
                   </div>
