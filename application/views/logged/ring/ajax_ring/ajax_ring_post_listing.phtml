@@ -64,8 +64,9 @@ $logged_id=intval(decrypt($_SESSION['user_id']));
 				 
                   <?php 
                   if($val['post_owner_user_id'] == $logged_id || get_ring_owner_id($val['i_ring_id']) == $logged_id){
+                      echo 'ss';
                   ?>
-                  <li class="first"><a href="javascript:void(0);" >Edit</a></li>
+                  <li><a href="javascript:void(0);" >Edit</a></li>
                   <li ><a  href="javascript:void(0);" id="del<?=$val['id']?>"  >Delete</a></li>
                   <?php 
                   }
