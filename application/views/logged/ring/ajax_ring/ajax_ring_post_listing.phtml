@@ -36,21 +36,12 @@ $logged_id=intval(decrypt($_SESSION['user_id']));
 		if((show_ring_like_link($val['id']) == TRUE) ) { 
 		?>
                            
-           <li class="right">
+           <li class="right hh">
               <ul>
 			   <li class="first"><a href="javascript:void(0);" >Comment</a></li>
-                  <li ><a  href="javascript:void(0);" id="like_count_<?=$val['id']?>" onClick="windowLike(<?=$val['id']?>,'Like')" >Likess</a></li>
+                  <li ><a  href="javascript:void(0);" id="like_count_<?=$val['id']?>" onClick="windowLike(<?=$val['id']?>,'Like')" >Like</a></li>
                  
-			 <?php 
-                         echo 'ok';
-                  if($val['post_owner_user_id'] == $logged_id || get_ring_owner_id($val['i_ring_id']) == $logged_id){
-                      echo 'ss';
-                  ?>
-                  <li><a href="javascript:void(0);" >Edit</a></li>
-                  <li ><a  href="javascript:void(0);" id="del<?=$val['id']?>"  >Delete</a></li>
-                  <?php 
-                  }
-                  ?>	 
+			 
                  
 				  
 				 
@@ -67,7 +58,7 @@ $logged_id=intval(decrypt($_SESSION['user_id']));
 	   		else { 
                            
 	   ?>
-             <li class="right">
+             <li class="right ss">
               <ul>
 				<li class="first"><a href="javascript:void(0);" >Comment</a></li>
                   <li ><a  href="javascript:void(0);" id="like_count_<?=$val['id']?>"  >Like</a></li>
