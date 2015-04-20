@@ -42,6 +42,7 @@ $logged_id=intval(decrypt($_SESSION['user_id']));
                   <li ><a  href="javascript:void(0);" id="like_count_<?=$val['id']?>" onClick="windowLike(<?=$val['id']?>,'Like')" >Like</a></li>
                  
 			 <?php 
+                         echo 'ok';
                   if($val['post_owner_user_id'] == $logged_id || get_ring_owner_id($val['i_ring_id']) == $logged_id){
                       echo 'ss';
                   ?>
