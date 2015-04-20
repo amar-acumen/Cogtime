@@ -175,7 +175,7 @@ function approvedMember()
         type: 'post',
         url: base_url+'logged/church/approve_member/',
         dataType: 'json',
-        data:'mid='+id+'&status='+mstatus+'&memberid='+mid+'email='+email,
+        data:'mid='+id+'&status='+mstatus+'&memberid='+mid+'&email='+email,
         success: function (data, status) {
             hideUILoader_nodialog();
 			hide_dialog();
