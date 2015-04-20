@@ -1,4 +1,5 @@
 <?php #pr(($arr_rings));
+ echo $val['post_owner_user_id'].'=='.$logged_id.'////'.get_ring_owner_id($val['i_ring_id']).'==='.$logged_id;
 $logged_id=intval(decrypt($_SESSION['user_id']));
 	if(count($arr_rings)){
 		
@@ -48,7 +49,7 @@ $logged_id=intval(decrypt($_SESSION['user_id']));
                                
        <?php
        
-        echo $val['post_owner_user_id'].'=='.$logged_id.'////'.get_ring_owner_id($val['i_ring_id']).'==='.$logged_id;
+       
        
                 } 
        
