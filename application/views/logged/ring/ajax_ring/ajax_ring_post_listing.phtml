@@ -64,7 +64,7 @@ $logged_id=intval(decrypt($_SESSION['user_id']));
                   <li ><a  href="javascript:void(0);" id="like_count_<?=$val['id']?>"  >Like</a></li>
 				
                   <li><a href="javascript:void(0);" >Edit</a></li>
-                  <li ><a  href="javascript:void(0);" id="del<?=$val['id']?>"  >Delete</a></li>
+                  <li ><a  href="javascript:void(0);" id="del<?=$val['id']?>"  onclick="show_dialog('del<?=$val['id'] ?>')" >Delete</a></li>
                  	  
                  
 				
@@ -218,6 +218,36 @@ function report_abuse_profile(id)
   });
 }
   </script>
+  
+  <div class="lightbox del<?=$val['id']?>">
+      <div class="close"><a onclick="hide_dialog()" href="javascript:void(0)"><img width="24" height="24" alt="" src="<?= base_url() ?>images/close.png"></a></div>
+      <div class="top"><div>&nbsp;</div></div>
+      <div class="mid">
+            <div style="margin-bottom:0px;" class="heading">
+                  <div class="left">
+                        <h4>Delete Ring Post</h4>
+                  </div>
+            </div>
+               <div style="padding:8px 0px;" class="shade_box_white">
+               <div style="padding-bottom:10px;">
+               <p style="line-height:23px; color:#494949;" class="center-text">
+                  Do you want to delete Ring Post ?
+               </p>
+               </div>
+               <form id="delfrm" method="post">
+                  <input type="hidden" value="" id="i_del_id" name="i_del_id">
+                 <input type="button" onclick="delete_ring_post(<?=$val['id']?>)" style="margin-left:105px;" class="btn" value="Yes" name="">
+                 <input type="button" onclick="hide_dialog()" class="btn" value="No" name="">
+               </form>   
+               <div class="clr"></div>
+            </div>
+            
+      </div>
+      <div class="bot"><div>&nbsp;</div></div>
+</div>
+  
+  
+  
 <?php 
 		}
 	}
