@@ -328,7 +328,10 @@ function report_abuse_profile(id)
   function show_edit_span(id){
       alert(id)
       $('#edit-ring-post-box'+id).slideDown();
-     $('#cmnt65').css('display','none');
+      setTimeout(function(){ 
+         $('#cmnt65').css('display','none');  
+        alert("Hello"); }, 3000);
+    
   }
   function show_hidden(id){
       $('#edit-ring-post-box'+id).slideUp();
