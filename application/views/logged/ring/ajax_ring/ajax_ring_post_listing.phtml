@@ -147,6 +147,44 @@ $logged_id=intval(decrypt($_SESSION['user_id']));
 								<input type="button" class="yellow-btn" value="Send" onclick="report_abuse_profile(<?=$val['id']?>)"/>
 								</form>
 							</div>	*/?>
+                                                        
+                                                         <div id="edit-post-box<?= $val['id'] ?>" class="comments-number content-width" style="display: none;" >
+                        <div class="comments-number-mid content-width " style="overflow-y: visible; height: 19px;">
+                            <div class="heading">
+                                  <div class="left">
+                                        <h4><img width="21" height="19" class="cmnt" src="images/no.png" alt="">  POST </h4>
+                                        <img width="13" height="10" onclick="show_hidden('<?= $val['id'] ?>')" src="images/minus-white.png" alt="" class="wal-minus">
+                                  </div>
+                            </div>
+                            <div id="post_content_312" class="txt_content01 comments-number-content" style="border-bottom: none; margin-bottom: 0;"> 
+                              
+                              
+      
+	 
+              <!--  text div start -->
+              <div class=" comment-content nw-comment-content">
+                  <input type="text" id="ring_post<?= $val['id'] ?>" value="<?=$val['s_post_title']?>" style="margin-bottom: 10px;">
+                  <div class="clr"></div>
+                  <div class="write-text" style="width: auto;">
+                    <textarea  maxlength="500"  id="ring_post_des<?= $val['id'] ?>" name="ring_post_des<?= $val['id'] ?>"><?=$val['s_post_description']?></textarea>
+                    
+                     <input type="submit" value="Post" class="wall-comment-submit-nw " name="" onclick="edit_ring_post('<?= $val['id'] ?>');">
+                     <br class="clr">
+                </div>
+               <!-- text div end  -->
+			  
+              </div>
+
+            
+              
+                              </div>
+                      </div>
+                  </div>
+                                                        
+                                                        
+                                                        
+                                                        
+                                                        
                               <!--comment section start-->
                               <div  class="comments-number content-width" id="cmnt<?= $val['id'] ?>" >
                             
@@ -258,38 +296,7 @@ function report_abuse_profile(id)
   <!-- edit box -->
  
 				  				  <!-- edit post section -->
-                                                                  <div id="edit-post-box<?= $val['id'] ?>" class="comments-number content-width" style="display: none;" >
-                        <div class="comments-number-mid content-width " style="overflow-y: visible; height: 19px;">
-                            <div class="heading">
-                                  <div class="left">
-                                        <h4><img width="21" height="19" class="cmnt" src="images/no.png" alt="">  POST </h4>
-                                        <img width="13" height="10" onclick="show_hidden('<?= $val['id'] ?>')" src="images/minus-white.png" alt="" class="wal-minus">
-                                  </div>
-                            </div>
-                            <div id="post_content_312" class="txt_content01 comments-number-content" style="border-bottom: none; margin-bottom: 0;"> 
-                              
-                              
-      
-	 
-              <!--  text div start -->
-              <div class=" comment-content nw-comment-content">
-                  <input type="text" id="ring_post<?= $val['id'] ?>" value="<?=$val['s_post_title']?>" style="margin-bottom: 10px;">
-                  <div class="clr"></div>
-                  <div class="write-text" style="width: auto;">
-                    <textarea  maxlength="500"  id="ring_post_des<?= $val['id'] ?>" name="ring_post_des<?= $val['id'] ?>"><?=$val['s_post_description']?></textarea>
-                    
-                     <input type="submit" value="Post" class="wall-comment-submit-nw " name="" onclick="edit_ring_post('<?= $val['id'] ?>');">
-                     <br class="clr">
-                </div>
-               <!-- text div end  -->
-			  
-              </div>
-
-            
-              
-                              </div>
-                      </div>
-                  </div>
+                                                                 
 				
                   
 <?php 
@@ -313,7 +320,7 @@ function report_abuse_profile(id)
   
   function show_edit_span(id){
       $('#edit-post-box'+id).slideDown();
-      $('#cmnt'+id).hide();
+     
   }
   function show_hidden(id){
       $('#edit-post-box'+id).slideUp();
