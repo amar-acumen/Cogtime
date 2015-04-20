@@ -410,7 +410,7 @@ class Church extends Base_controller
     $mid = $_POST['mid'];
     $status = $_POST['status'];
     $memberid = $_POST['memberid'];
-
+     $email = $_POST['email'];
 
 
     $data = array(
@@ -420,7 +420,10 @@ class Church extends Base_controller
     $this->db->update('cg_church_member',$data); 
     
     /**update invite table*****/
-    //$this->db->update('cg_church_member_invitation', $data, array('id' => $id));
+    $data1 = array(
+        'status' => 1
+    );
+    $this->db->update('cg_church_member_invitation', $data1, array('email' => $email));
     
     /*****/
     
