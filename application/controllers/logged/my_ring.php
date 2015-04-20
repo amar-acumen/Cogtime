@@ -1409,7 +1409,10 @@ $this->email->message("$body");
  	 echo json_encode(array('room_arr'=>$room_arr, 'html'=>base64_encode($html))); 
 	 exit;
  }
- 
+ function delete_ring_post(){
+     $id = $this->input->post('id');
+     $this->db->delete('cg_user_ring_post', array('id' => $id)); 
+ }
  
 }   // end of controller...
 
