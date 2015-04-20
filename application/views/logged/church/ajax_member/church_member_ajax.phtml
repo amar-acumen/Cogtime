@@ -80,7 +80,7 @@ if(!($_SESSION['subadmin_role'] == 2 && $member->id == intval(decrypt($this->ses
 
                 ?>
 
-                <a style="margin-right:5px; float:left;" href="javascript:void(0);"  onclick="show_dialog('approved-group'); $('#i_del_id').val('<?=$member->cmid?>'); $('#i_mem_id').val('<?php echo $member->mid?>'); $('#i_mem_status').val('1');" class="approve">Approve</a>
+                <a style="margin-right:5px; float:left;" href="javascript:void(0);"  onclick="show_dialog('approved-group'); $('#i_del_id').val('<?=$member->cmid?>'); $('#i_mem_id').val('<?php echo $member->mid?>'); $('#i_mem_status').val('1');$('#i_mem_email').val('<?php echo $member->s_email?>');" class="approve">Approve</a>
                 <a href="javascript:void(0);" onclick="show_dialog('decline-group'); $('#i_del_id').val('<?=$member->cmid?>'); $('#i_mem_id').val('<?php echo $member->mid?>'); $('#i_mem_status').val('2');" class="decline">Decline</a>
                 <?php
 
@@ -174,6 +174,7 @@ else
                 <input type="hidden" name="i_del_id" id="i_del_id" value="" />
 				<input type="hidden" name="i_mem_id" id="i_mem_id" value="" />
 				<input type="hidden" name="i_mem_status" id="i_mem_status" value="" />
+                                <input type="hidden" name="i_mem_status" id="i_mem_email" value="" />
 
                 <input name="" type="button" value="Yes" class="post-btn"  onClick="approvedMember();"/>
 
@@ -228,6 +229,7 @@ else
                 <input type="hidden" name="i_del_id" id="i_del_id" value="" />
 				<input type="hidden" name="i_mem_id" id="i_mem_id" value="" />
 				<input type="hidden" name="i_mem_status" id="i_mem_status" value="" />
+                                  <input type="hidden" name="i_mem_status" id="i_mem_email" value="" />
 
                 <input name="" type="button" value="Yes" class="post-btn"  onClick="approvedMember();"/>
 

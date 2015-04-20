@@ -169,12 +169,13 @@ function approvedMember()
 	var id = $('#i_del_id').val();
 	var mid = $('#i_mem_id').val();
 	var mstatus = $('#i_mem_status').val();
+        var email = $('#i_mem_email').val();
 	var approvedStatus = $('#i_mem_approved_status').val();
     $.ajax({
         type: 'post',
         url: base_url+'logged/church/approve_member/',
         dataType: 'json',
-        data:'mid='+id+'&status='+mstatus+'&memberid='+mid,
+        data:'mid='+id+'&status='+mstatus+'&memberid='+mid+'email='+email,
         success: function (data, status) {
             hideUILoader_nodialog();
 			hide_dialog();

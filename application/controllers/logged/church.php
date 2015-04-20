@@ -418,6 +418,12 @@ class Church extends Base_controller
             );
     $this->db->where('id',$mid);
     $this->db->update('cg_church_member',$data); 
+    
+    /**update invite table*****/
+    //$this->db->update('cg_church_member_invitation', $data, array('id' => $id));
+    
+    /*****/
+    
     $s_qry = "SELECT s_email   "
                     . " FROM " . $this->db->USERS ." where id='".$memberid."'";
     $rs = $this->db->query($s_qry);
