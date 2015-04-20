@@ -1413,6 +1413,15 @@ $this->email->message("$body");
      $id = $this->input->post('id');
      $this->db->delete('cg_user_ring_post', array('id' => $id)); 
  }
+ function edit_ring_post(){
+    $id = $this->input->post('id');
+    $post_title = $this->input->post('post_title');
+    $post_des = $this->input->post('post_des');
+    $dt_updated_on = get_db_datetime();
+    $data = array('s_post_title' => $post_title , 's_post_description' => $post_des , 'dt_updated_on' => $dt_updated_on);
+    $this->db->update('cg_user_ring_post', $data, "id = $id");
+     echo json_encode(array('status'=>'ok', 'rng_post_des' => $post_des , 'rng_post_title' => $post_title )); 
+ }
  
 }   // end of controller...
 

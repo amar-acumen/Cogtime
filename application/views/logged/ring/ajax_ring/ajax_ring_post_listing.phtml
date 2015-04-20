@@ -17,9 +17,9 @@ $logged_id=intval(decrypt($_SESSION['user_id']));
   <!--my blog start -->
   <a name="<?='ring_post'.$val['id']?>"></a>
   <div class="blog">
-      <h2 style="max-height:60px; overflow:hidden;"><?=$val['s_post_title']?></h2>
+      <h2 style="max-height:60px; overflow:hidden;" id="rng_post_title<?= $val['id'] ?>"><?=$val['s_post_title']?></h2>
      <?php /* <p style="max-height:80px; overflow:hidden;"><?=my_substr(nl2br($val['s_post_description']) , 340)?></p> */?>
-	 <p style=""><?=$val['s_post_description']?></p>
+      <p style="" id="rng_post_des<?= $val['id'] ?>"><?=$val['s_post_description']?></p>
       <p class="time-posted">Posted  <?=get_time_elapsed_blog($val['dt_created_on'])?> by: <a href="<?=$profile_link?>"><?=$val['s_profile_name']?></a></p>
     
    		 <ul class="article-comment-block article-comment-block2">
@@ -275,7 +275,7 @@ function report_abuse_profile(id)
 			   <div class=" comment-content nw-comment-content">
                 <div class="write-text">
                     <input type="text" id="ring_post<?= $val['id'] ?>" value="<?=$val['s_post_title']?>">
-                <textarea onkeypress="return restrict_carrige(event);" onkeyup="limitTextarea(this.form.wall_msg,this.form.countdown,500);" onkeydown="limitTextarea(this.form.wall_msg,this.form.countdown,500);" maxlength="500" onblur="if(this.value=='')this.value='Max 500 Characters';" onfocus="if(this.value=='Max 500 Characters')this.value='';" id="wall_msg" name="wall_msg"><?=$val['s_post_description']?></textarea>
+                <textarea  maxlength="500"  id="ring_post_des<?= $val['id'] ?>" name="ring_post_des<?= $val['id'] ?>"><?=$val['s_post_description']?></textarea>
  <p style=" clear:both; float:left"> <span id="text_count"></span> Characters</p>
                 </div>
                <!-- text div end  -->
@@ -285,7 +285,7 @@ function report_abuse_profile(id)
             
             </div>
             
-            <input type="submit" value="Post" class="wall-comment-submit-nw " name="">
+              <input type="submit" value="Post" class="wall-comment-submit-nw " name="" onclick="edit_ring_post('<?= $val['id'] ?>');">
       
                               <br class="clr">
                               </div>
@@ -339,5 +339,22 @@ function report_abuse_profile(id)
   }
   function show_hidden(id){
       $('#edit-post-box'+id).slideUp();
+  }
+  function edit_ring_post(id){
+      var post_title = $('#ring_post'+id).val();
+      var post_des = $('#ring_post_des'+id).val();
+       $.ajax({
+       url : base_url+'logged/my_ring/edit_ring_post/',
+       dataType : 'json',
+       type: 'post',
+       data: ({'id':id , 'post_title' : post_title , 'post_des' : post_des}),
+       success: function (data) {
+                      if(data.status == 'ok'){
+                          $('#edit-post-box'+id).slideUp();
+                          $('#rng_post_des'+id).html(data.rng_post_des);
+                           $('#rng_post_title'+id).html(data.rng_post_title);
+                      }  
+                    }
+   });
   }
   </script>
