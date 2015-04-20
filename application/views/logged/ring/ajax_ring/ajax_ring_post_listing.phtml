@@ -36,7 +36,7 @@ $logged_id=intval(decrypt($_SESSION['user_id']));
 		if((show_ring_like_link($val['id']) == TRUE) ) { 
 		?>
                            
-           <li class="right">
+           <li class="right 1st">
               <ul>
 			   <li class="first"><a href="javascript:void(0);" >Comment</a></li>
                   <li ><a  href="javascript:void(0);" id="like_count_<?=$val['id']?>" onClick="windowLike(<?=$val['id']?>,'Like')" >Like</a></li>
@@ -58,7 +58,7 @@ $logged_id=intval(decrypt($_SESSION['user_id']));
 	   		else { 
                            
 	   ?>
-             <li class="right">
+             <li class="right 2nd">
               <ul>
 				<li class="first"><a href="javascript:void(0);" >Comment</a></li>
                   <li ><a  href="javascript:void(0);" id="like_count_<?=$val['id']?>"  >Like</a></li>
