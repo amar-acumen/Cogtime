@@ -242,7 +242,7 @@
  $(document).ready(function(){
     setTimeout(function(){ $('#vd').addClass("flex-active-slide"); }, 3000);
     
-   
+    setTimeout(function(){ $('#rd').removeClass("flex-active-slide"); }, 3000);
  })
  
  </script>
@@ -265,12 +265,12 @@
   <script type="text/javascript">
  $(document).ready(function(){
     setTimeout(function(){ $('#rd').addClass("flex-active-slide"); }, 3000);
-    
+     //setTimeout(function(){ $('#rd').removeClass("flex-active-slide"); }, 3000);
    
  })
  
  </script>
- <?php } else if(!count($is_feature_home_news) && !count($is_feature_home_video) && count($is_feature_home_listen)){?>
+ <?php } else if(count($is_feature_home_listen)){?>
   <script type="text/javascript">
  $(document).ready(function(){
     setTimeout(function(){ $('#ln').addClass("flex-active-slide"); }, 3000);
@@ -280,7 +280,7 @@
  
  </script>
  
- <?php }else if(!count($is_feature_home_news) && count($is_feature_home_video) && !count($is_feature_home_listen)){ ?>
+ <?php }else if(count($is_feature_home_video)){ ?>
  
   <script type="text/javascript">
  $(document).ready(function(){
@@ -291,7 +291,7 @@
  
  </script>
  
- <?php }else if(count($is_feature_home_news) && !count($is_feature_home_video) && !count($is_feature_home_listen)){ ?>
+ <?php }else if(count($is_feature_home_news)){ ?>
   <script type="text/javascript">
  $(document).ready(function(){
     setTimeout(function(){ $('#rd').addClass("flex-active-slide"); }, 3000);
