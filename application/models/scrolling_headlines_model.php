@@ -127,9 +127,10 @@ class Scrolling_headlines_model extends Base_model
 	
 	public function get_feed_url_by_id($id)
 	{
-	echo $sql= "select s_url from {$this->db->CHRISTIAN_HEADLINE} where id=".$id;
+      $sql= "select s_url from {$this->db->CHRISTIAN_HEADLINE} where id=".$id;
 	 $query     = $this->db->query($sql);
        $result_arr = $query->result_array();
+       pr($result_arr);
 	return $result_arr[0]['s_url'];
 	}
 		
