@@ -1171,7 +1171,7 @@ class Base_controller extends CI_Controller {
 		$this->rssparser->set_feed_url($this->scrolling_headlines_model->get_feed_url_by_id(3));  // get feed
         $this->rssparser->set_cache_life(30);                       // Set cache life time in minutes
         $rss[] = $this->rssparser->getFeed(2);
-		//pr($rss);
+		pr($rss);
 		$feeds=array();
 		foreach($rss as $val)
 		{

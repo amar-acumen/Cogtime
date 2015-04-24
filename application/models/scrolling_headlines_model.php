@@ -130,7 +130,7 @@ class Scrolling_headlines_model extends Base_model
       $sql= "select s_url from {$this->db->CHRISTIAN_HEADLINE} where id=".$id;
 	 $query     = $this->db->query($sql);
        $result_arr = $query->result_array();
-       pr($result_arr);
+      // pr($result_arr);
 	return $result_arr[0]['s_url'];
 	}
 		
