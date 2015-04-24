@@ -132,7 +132,7 @@
         }
       ?></p>
     </li>
-    <li>
+    <li class="vd">
       <span class="watch-media">&nbsp;</span>
       <h5 onclick="window.location='<?=base_url().'watch.html'?>';" style="cursor:pointer;">watch</h5>
       <p>
@@ -145,7 +145,7 @@
       ?>
       </p>
     </li>
-    <li>
+    <li class="ln">
       <span class="listen-media">&nbsp;</span>
       <h5 onclick="window.location='<?=base_url().'listen.html'?>';" style="cursor:pointer;">listen</h5>
       <p>
@@ -221,34 +221,35 @@
  
  
  <?php 
-  if(count($is_feature_home_news)){
+  if(!count($is_feature_home_news)){
  ?>
  <script type="text/javascript">
  $(document).ready(function(){
-     alert('news')
+    $('#rd').removeClass('flex-active-slide');
  })
  
  </script>
-  <?php }
-  if(count($is_feature_home_video)){
+  <?php }else{}
+  if(!count($is_feature_home_video)){
   ?>
   <script type="text/javascript">
  $(document).ready(function(){
-     alert('video')
+    // alert('video')
+    $('#vd').removeClass('flex-active-slide');
  })
  
  </script>
-  <?php } 
-  if(count($is_feature_home_listen)){
+  <?php } else{}
+  if(!count($is_feature_home_listen)){
       
   
   ?>
   <script type="text/javascript">
  $(document).ready(function(){
-     alert('listen')
+     $('#ln').removeClass('flex-active-slide');
  })
  
  </script>
-  <?php } ?>
+  <?php } else{} ?>
 
 
