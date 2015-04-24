@@ -31,7 +31,8 @@
 <div id="slider" class="flexslider">
   <ul class="slides">
   
-	<? 
+	<?php 
+        if(count($is_feature_home_news)){
 	foreach($is_feature_home_news as $val) 
 	{
 		$IMG = base_url() . 'uploads/media_center_article_featured_home/' . getThumbName($val['s_image_featured'], 'main');
@@ -51,12 +52,14 @@
           
       </div>
     </li>
-	<? 
+	<?php 
 	} 
+        }
 	?>
 	
 	
 	<?php 
+        if(count($is_feature_home_video)){
 	foreach($is_feature_home_video as $val) 
 	{
 		$IMG = base_url() . 'uploads/media_center_video_featured_home/' . getThumbName($val['s_image_featured'], 'main');
@@ -85,9 +88,11 @@
 	  
     </li>
 	
-	<?php } ?>
+	<?php } 
+        }?>
 	
 	<?php 
+        if(count($is_feature_home_listen)){
 	foreach($is_feature_home_listen as $val) 
 	{
            // pr($is_feature_home_listen);
@@ -106,7 +111,10 @@
 	  </div>
     </li>
  
- 	<?php } ?>
+ 	<?php
+        }
+        
+        } ?>
  
     <!-- items mirrored twice, total of 12 -->
   </ul>
