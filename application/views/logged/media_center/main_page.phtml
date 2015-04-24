@@ -123,7 +123,7 @@
   <ul class="slides">
       <li id="rd">
         <span class="read-media">&nbsp;</span>
-      <h5 onclick="window.location='<?=base_url().'christian-news/read.html'?>';" style="cursor:pointer;">Read1</h5>
+      <h5 onclick="window.location='<?=base_url().'christian-news/read.html'?>';" style="cursor:pointer;">Read</h5>
       <p><?php 
       $query = $this->db->get('cg_media_center_landing_page_text');
       foreach ($query->result() as $row)
@@ -219,20 +219,11 @@
 });
  </script>
  
+ <?php
+ if(count($is_feature_home_news) && count($is_feature_home_video) && count($is_feature_home_listen)){
  
- <?php 
-  if(!count($is_feature_home_news)){
  ?>
  <script type="text/javascript">
- $(document).ready(function(){
-    setTimeout(function(){ $('#rd').removeClass("flex-active-slide"); }, 3000);
-    
-   
- })
- 
- </script>
-  <?php }else if(count($is_feature_home_news)){ ?>
-       <script type="text/javascript">
  $(document).ready(function(){
     setTimeout(function(){ $('#rd').addClass("flex-active-slide"); }, 3000);
     
@@ -240,52 +231,79 @@
  })
  
  </script>
-      
-      <?php
-      
-  }
-  if(!count($is_feature_home_video)){
-  ?>
-  <script type="text/javascript">
+
+
+<?php
+ }  else if(count($is_feature_home_listen) && count($is_feature_home_video)){
+     
+ 
+?>
+ <script type="text/javascript">
  $(document).ready(function(){
-    // alert('video')
-    setTimeout(function(){  $('#vd').removeClass('flex-active-slide'); }, 3000);
+    setTimeout(function(){ $('#vd').addClass("flex-active-slide"); }, 3000);
+    
    
  })
  
  </script>
-  <?php } else if(count($is_feature_home_video)){
-      
-      ?>
-         <script type="text/javascript">
- $(document).ready(function(){
-    // alert('video')
-    setTimeout(function(){ $('#vd').addClass('flex-active-slide'); }, 3000);
-    
- })
  
- </script>  
-          <?php
-  }
-  if(!count($is_feature_home_listen)){
-      
-  
-  ?>
+ <?php
+ } else if(count($is_feature_home_news) && count($is_feature_home_listen)){
+     
+ 
+ ?>
   <script type="text/javascript">
  $(document).ready(function(){
-     setTimeout(function(){  $('#ln').removeClass('flex-active-slide'); }, 3000);
+    setTimeout(function(){ $('#rd').addClass("flex-active-slide"); }, 3000);
     
+   
  })
  
  </script>
-  <?php } else{ ?>
-       <script type="text/javascript">
+ 
+ <?php } else if(count($is_feature_home_news)  && count($is_feature_home_video) ){ ?>
+  <script type="text/javascript">
  $(document).ready(function(){
-     setTimeout(function(){  $('#ln').addClass('flex-active-slide'); }, 3000);
+    setTimeout(function(){ $('#rd').addClass("flex-active-slide"); }, 3000);
     
+   
  })
  
  </script>
-      <?php } ?>
+ <?php } else if(!count($is_feature_home_news) && !count($is_feature_home_video) && count($is_feature_home_listen)){?>
+  <script type="text/javascript">
+ $(document).ready(function(){
+    setTimeout(function(){ $('#ln').addClass("flex-active-slide"); }, 3000);
+    
+   
+ })
+ 
+ </script>
+ 
+ <?php }else if(!count($is_feature_home_news) && count($is_feature_home_video) && !count($is_feature_home_listen)){ ?>
+ 
+  <script type="text/javascript">
+ $(document).ready(function(){
+    setTimeout(function(){ $('#vd').addClass("flex-active-slide"); }, 3000);
+    
+   
+ })
+ 
+ </script>
+ 
+ <?php }else if(count($is_feature_home_news) && !count($is_feature_home_video) && !count($is_feature_home_listen)){ ?>
+  <script type="text/javascript">
+ $(document).ready(function(){
+    setTimeout(function(){ $('#rd').addClass("flex-active-slide"); }, 3000);
+    
+   
+ })
+ 
+ </script>
+ <?php } ?>
 
+
+
+
+ 
 
