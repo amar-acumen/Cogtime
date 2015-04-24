@@ -121,7 +121,7 @@
 </div>
 <div id="carousel-mdia" class="flexslider">
   <ul class="slides">
-    <li>
+      <li <?php if(count($is_feature_home_news)){ ?> class="flex-active-slide" <?php } else{ ?> class ="" <?php } ?>>
         <span class="read-media">&nbsp;</span>
       <h5 onclick="window.location='<?=base_url().'christian-news/read.html'?>';" style="cursor:pointer;">Read</h5>
       <p><?php 
