@@ -121,6 +121,7 @@
 </div>
 <div id="carousel-mdia" class="flexslider">
   <ul class="slides">
+      <?php  if(count($is_feature_home_news)){ ?>
       <li id="rd">
         <span class="read-media">&nbsp;</span>
       <h5 onclick="window.location='<?=base_url().'christian-news/read.html'?>';" style="cursor:pointer;">Read</h5>
@@ -132,6 +133,7 @@
         }
       ?></p>
     </li>
+      <?php } if(count($is_feature_home_video)){?>
     <li id="vd">
       <span class="watch-media">&nbsp;</span>
       <h5 onclick="window.location='<?=base_url().'watch.html'?>';" style="cursor:pointer;">watch</h5>
@@ -145,6 +147,9 @@
       ?>
       </p>
     </li>
+      <?php }
+       if(count($is_feature_home_listen)){
+      ?>
     <li id="ln" >
       <span class="listen-media">&nbsp;</span>
       <h5 onclick="window.location='<?=base_url().'listen.html'?>';" style="cursor:pointer;">listen</h5>
@@ -159,6 +164,7 @@
           
       </p>
     </li>
+       <?php } ?>
     <!-- items mirrored twice, total of 12 -->
   </ul>
 </div>
@@ -219,90 +225,7 @@
 });
  </script>
  
- <?php
- if(count($is_feature_home_news) && count($is_feature_home_video) && count($is_feature_home_listen)){
  
- ?>
- <script type="text/javascript">
- $(document).ready(function(){
-    setTimeout(function(){ $('#rd').addClass("flex-active-slide"); }, 3000);
-    
-   
- })
- 
- </script>
-
-
-<?php
- }  else if(count($is_feature_home_listen) && count($is_feature_home_video)){
-     
- 
-?>
- <script type="text/javascript">
- $(document).ready(function(){
-    setTimeout(function(){ $('#vd').addClass("flex-active-slide"); }, 3000);
-    
-    setTimeout(function(){ $('#rd').removeClass("flex-active-slide"); }, 3000);
- })
- 
- </script>
- 
- <?php
- } else if(count($is_feature_home_news) && count($is_feature_home_listen)){
-     
- 
- ?>
-  <script type="text/javascript">
- $(document).ready(function(){
-    setTimeout(function(){ $('#rd').addClass("flex-active-slide"); }, 3000);
-    
-   
- })
- 
- </script>
- 
- <?php } else if(count($is_feature_home_news)  && count($is_feature_home_video) ){ ?>
-  <script type="text/javascript">
- $(document).ready(function(){
-    setTimeout(function(){ $('#rd').addClass("flex-active-slide"); }, 3000);
-     //setTimeout(function(){ $('#rd').removeClass("flex-active-slide"); }, 3000);
-   
- })
- 
- </script>
- <?php } else if(count($is_feature_home_listen)){?>
-  <script type="text/javascript">
- $(document).ready(function(){
-    // alert('ol')
-    setTimeout(function(){ $('#ln').addClass("flex-active-slide"); }, 8000);
-     setTimeout(function(){ $('#rd').removeClass("flex-active-slide"); }, 8000);
-   
- })
- 
- </script>
- 
- <?php }else if(count($is_feature_home_video)){ ?>
- 
-  <script type="text/javascript">
- $(document).ready(function(){
-    setTimeout(function(){ $('#vd').addClass("flex-active-slide"); }, 3000);
-     setTimeout(function(){ $('#rd').removeClass("flex-active-slide"); }, 3000);
-   
- })
- 
- </script>
- 
- <?php }else if(count($is_feature_home_news)){ ?>
-  <script type="text/javascript">
- $(document).ready(function(){
-    setTimeout(function(){ $('#rd').addClass("flex-active-slide"); }, 3000);
-    
-   
- })
- 
- </script>
- <?php } ?>
-
 
 
 
