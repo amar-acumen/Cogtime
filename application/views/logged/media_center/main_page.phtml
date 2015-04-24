@@ -123,7 +123,7 @@
   <ul class="slides">
       <li <?php if(count($is_feature_home_news)){ ?> class="flex-active-slide" <?php } else{ ?> class ="" <?php } ?>>
         <span class="read-media">&nbsp;</span>
-      <h5 onclick="window.location='<?=base_url().'christian-news/read.html'?>';" style="cursor:pointer;">Read</h5>
+      <h5 onclick="window.location='<?=base_url().'christian-news/read.html'?>';" style="cursor:pointer;">Read1</h5>
       <p><?php 
       $query = $this->db->get('cg_media_center_landing_page_text');
       foreach ($query->result() as $row)
