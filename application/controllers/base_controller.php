@@ -1179,8 +1179,8 @@ class Base_controller extends CI_Controller {
 		$feeds[] = $val[1];
 		//$feeds[] = $val;
 		}
-                pr($feeds);
-		$this->data['scrolling_news']=array();//$feeds;
+                //pr($feeds);
+		$this->data['scrolling_news']=$feeds;//$feeds;
 		}
 		catch (Exception $err_obj) {
             
