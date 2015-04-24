@@ -57,7 +57,7 @@ class Base_controller extends CI_Controller {
                 $this->data['logged_in_state'] = 'Y';
 
                 # get scrolling news #
-                //$this->_set_latest_news();
+                $this->_set_latest_news();
 
 
                 # get total unread messages #
