@@ -231,27 +231,59 @@
  })
  
  </script>
-  <?php }else{}
+  <?php }else if(count($is_feature_home_news)){ ?>
+       <script type="text/javascript">
+ $(document).ready(function(){
+    setTimeout(function(){ $('#rd').addClass("flex-active-slide"); }, 3000);
+    
+   
+ })
+ 
+ </script>
+      
+      <?php}
   if(!count($is_feature_home_video)){
   ?>
   <script type="text/javascript">
  $(document).ready(function(){
     // alert('video')
-    $('#vd').removeClass('flex-active-slide');
+    setTimeout(function(){  $('#vd').removeClass('flex-active-slide'); }, 3000);
+   
  })
  
  </script>
-  <?php } else{}
+  <?php } else if(count($is_feature_home_video)){
+      
+      ?>
+         <script type="text/javascript">
+ $(document).ready(function(){
+    // alert('video')
+    setTimeout(function(){ $('#vd').addClass('flex-active-slide'); }, 3000);
+    
+ })
+ 
+ </script>  
+          <?php
+  }
   if(!count($is_feature_home_listen)){
       
   
   ?>
   <script type="text/javascript">
  $(document).ready(function(){
-     $('#ln').removeClass('flex-active-slide');
+     setTimeout(function(){  $('#ln').removeClass('flex-active-slide'); }, 3000);
+    
  })
  
  </script>
-  <?php } else{} ?>
+  <?php } else{ ?>
+       <script type="text/javascript">
+ $(document).ready(function(){
+     setTimeout(function(){  $('#ln').addClass('flex-active-slide'); }, 3000);
+    
+ })
+ 
+ </script>
+      <?php } ?>
 
 
